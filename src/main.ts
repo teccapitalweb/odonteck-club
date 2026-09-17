@@ -1,9 +1,10 @@
-import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/outfit/wght.css';
 import '@fontsource-variable/inter/opsz.css';
 import '@fontsource-variable/jetbrains-mono/index.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
+import './styles/active.css';
 import { createIcons, icons } from 'lucide';
 
 // ── Tema: claro por defecto, siempre. El cambio solo dura la sesión ──

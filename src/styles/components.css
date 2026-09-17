@@ -233,7 +233,7 @@
 .book__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin-top: 22px; }
 .book__facts h4 { font-size: var(--fs-sm); margin-bottom: 6px; }
 .book__facts p { font-size: var(--fs-sm); color: var(--text-2); }
-.shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 24px; }
+.shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 20px; }
 .shelf__item { display: grid; gap: 10px; }
 .shelf__cover { aspect-ratio: 3/4; border-radius: 4px 10px 10px 4px; overflow: hidden; box-shadow: var(--shadow-md); transition: transform var(--t-base), box-shadow var(--t-base); }
 .shelf__item:hover .shelf__cover { transform: translateY(-6px); box-shadow: var(--shadow-cover); }

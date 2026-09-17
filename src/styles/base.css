@@ -26,12 +26,13 @@ p { margin: 0; }
 /* Tipografía editorial */
 .display {
   font-family: var(--font-display);
-  font-weight: 500;
-  font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 0;
-  letter-spacing: -.025em;
-  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.04;
 }
-.display em { font-style: italic; font-weight: 400; color: var(--primary); }
+.display--black { font-weight: 800; letter-spacing: -.04em; }
+.display em { font-style: normal; color: var(--primary); }
+h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -.02em; }
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
