@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f5f1" />
+  <link rel="icon" type="image/png" href="/brand/isotipo.png" />
+  <title>OdonTeck Club · Sistema de diseño</title>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══════════ BARRA LATERAL (aprobada) ═══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar__logo"><img data-logo src="/brand/logo-horizontal.png" alt="OdonTeck" /></div>
+    <nav class="nav">
+      <a class="nav__item is-active" href="#"><i data-lucide="home" class="i"></i>Inicio</a>
+      <a class="nav__item" href="#"><i data-lucide="graduation-cap" class="i"></i>Cursos</a>
+      <a class="nav__item" href="#"><i data-lucide="library" class="i"></i>Materiales</a>
+      <a class="nav__item" href="#"><i data-lucide="radio" class="i"></i>En vivo <span class="badge">2</span></a>
+      <a class="nav__item" href="#"><i data-lucide="messages-square" class="i"></i>Comunidad</a>
+      <div class="nav__label eyebrow">Tu progreso</div>
+      <a class="nav__item" href="#"><i data-lucide="flame" class="i"></i>Logros</a>
+      <a class="nav__item" href="#"><i data-lucide="award" class="i"></i>Certificados</a>
+      <div class="nav__label eyebrow">Herramientas</div>
+      <a class="nav__item" href="#"><i data-lucide="stethoscope" class="i"></i>Prueba Praxia</a>
+    </nav>
+    <div class="sidebar__foot">
+      <div class="install-card">
+        <h4>Lleva OdonTeck en tu bolsillo</h4>
+        <p>Instálalo como app: abre más rápido y a pantalla completa.</p>
+        <button class="btn btn--sm"><i data-lucide="download" class="i"></i>Instalar app</button>
+      </div>
+      <a class="nav__item" href="#"><i data-lucide="settings" class="i"></i>Configuración</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="search"><i data-lucide="search" class="i"></i><input class="input" placeholder="Buscar cursos, clases o materiales…" /></div>
+      <div class="topbar__right">
+        <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
+        <button class="btn btn--ghost btn--icon" aria-label="Notificaciones"><i data-lucide="bell" class="i"></i></button>
+        <div class="avatar">FR</div>
+      </div>
+    </header>
+
+    <main class="content" style="display:grid;gap:72px">
+
+      <!-- ── INICIO · hero inmersivo ── -->
+      <section class="stack" style="gap:20px">
+        <div class="hero">
+          <div class="hero__bg"><img src="/fotos/hero.webp" alt=""></div>
+          <div class="hero__body">
+            <span class="hero__kicker"><i data-lucide="sparkles" class="i" style="width:14px;height:14px"></i>Buenas tardes, Dra. Ramírez · racha de 3 semanas</span>
+            <h1 class="display display--black hero__title">Continúa donde <em>te quedaste.</em></h1>
+            <p class="hero__lead">Diagnóstico en Ortodoncia para Odontólogos Generales · clase 3 de 5 · te faltan 12 minutos para terminarla.</p>
+            <div class="hero__actions">
+              <button class="btn btn--white btn--lg btn--pill-arrow">Reanudar clase <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></button>
+              <button class="btn btn--lg" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)">Ver mis cursos</button>
+            </div>
+            <div class="hero__stats">
+              <div><strong>46%</strong><span>progreso general</span></div>
+              <div><strong>4</strong><span>cursos en marcha</span></div>
+              <div><strong>2</strong><span>certificados</span></div>
+              <div><strong>1,240</strong><span>puntos</span></div>
+            </div>
+          </div>
+          <div class="hero__visual">
+            <img class="tooth" src="/fotos/tooth-3d.png" alt="">
+            <div class="glass glass--pin" style="top:44px;right:40px;--pin:40px"><span class="ic"><i data-lucide="radio" class="i"></i></span><div>Jueves 19:00<strong>Endodoncia en vivo</strong></div></div>
+            <div class="glass glass--pin" style="top:120px;left:36px;--pin:56px"><span class="ic"><i data-lucide="award" class="i"></i></span><div>Al terminar<strong>Certificado con folio</strong></div></div>
+            <div class="glass" style="position:absolute;bottom:44px;left:36px"><span class="ic"><i data-lucide="brain" class="i"></i></span><div>Quiz de la clase 2<strong>4 de 4 correctas</strong></div></div>
+          </div>
+        </div>
+        <div class="grid grid--3">
+          <div class="streak"><div class="ring" style="--p:46" data-label="46%"></div><div><strong style="font-size:var(--fs-sm)">Ortodoncia · 2 de 5</strong><br><span class="faint" style="font-size:var(--fs-xs)">Siguiente: Lectura de panorámica</span></div><button class="circle-btn" style="margin-left:auto;width:36px;height:36px"><i data-lucide="arrow-up-right" class="i" style="width:15px;height:15px"></i></button></div>
+          <div class="streak"><i data-lucide="flame" class="i" style="color:var(--warning)"></i><div><strong style="font-size:var(--fs-sm)">Racha de 3 semanas</strong><br><span class="faint" style="font-size:var(--fs-xs)">1 clase más y sigues</span></div><div class="streak__days" style="margin-left:auto"><span class="is-on">L</span><span class="is-on">M</span><span>M</span><span>J</span><span>V</span></div></div>
+          <div class="streak"><span class="chip chip--live">En vivo</span><div><strong style="font-size:var(--fs-sm)">Jueves 19:00 · Endodoncia</strong><br><span class="faint" style="font-size:var(--fs-xs)">Dra. Ana Torres</span></div><button class="btn btn--sm btn--brand" style="margin-left:auto">Reservar</button></div>
+        </div>
+      </section>
+
+      <!-- ── CURSOS · tarjetas con foto ── -->
+      <section class="stack" style="gap:24px">
+        <div class="section-head">
+          <div><span class="chip chip--primary">Recomendado para ti</span><h2 class="display">Tu siguiente paso en <em>ortodoncia</em> y endodoncia</h2></div>
+          <a class="section-head__cta" href="#">Ver los 18 cursos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>
+        </div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+          <a class="pcard" href="#"><img src="/cursos/curso-02.webp" alt=""><div class="pcard__top"><span class="chip" style="background:var(--glass);color:var(--brand-navy);backdrop-filter:blur(8px)"><i data-lucide="sparkles" class="i"></i>Nuevo</span><span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="arrow-up-right" class="i" style="width:15px;height:15px"></i></span></div>
+            <div class="pcard__body"><div class="pcard__title">Diagnóstico y Clasificación de la Caries Dental</div><div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>4 clases</span><span><i data-lucide="clock" class="i"></i>1 h 50</span></div></div></a>
+          <a class="pcard" href="#"><img src="/cursos/curso-03.webp" alt=""><div class="pcard__top"><span class="chip" style="background:var(--glass);color:var(--brand-navy);backdrop-filter:blur(8px)">72%</span><span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="play" class="i" style="width:15px;height:15px"></i></span></div>
+            <div class="pcard__body"><div class="pcard__title">Endodoncia Clínica: del Acceso a la Obturación</div><div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>6 clases</span><span><i data-lucide="clock" class="i"></i>3 h 05</span></div><div class="progress progress--thin"><span style="width:72%"></span></div></div></a>
+          <a class="pcard" href="#"><img src="/cursos/curso-09.webp" alt=""><div class="pcard__top"><span class="chip chip--accent"><i data-lucide="check" class="i"></i>Completado</span><span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="award" class="i" style="width:15px;height:15px"></i></span></div>
+            <div class="pcard__body"><div class="pcard__title">Fotografía Clínica para Odontólogos</div><div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>3 clases</span><span><i data-lucide="clock" class="i"></i>1 h 20</span></div></div></a>
+          <a class="pcard" href="#"><img src="/cursos/curso-05.webp" alt=""><div class="pcard__top"><span class="chip" style="background:var(--glass);color:var(--brand-navy);backdrop-filter:blur(8px)"><i data-lucide="lock" class="i"></i>VIP</span><span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="arrow-up-right" class="i" style="width:15px;height:15px"></i></span></div>
+            <div class="pcard__body"><div class="pcard__title">Implantología: Planeación Guiada</div><div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>5 clases</span><span><i data-lucide="clock" class="i"></i>2 h 30</span></div></div></a>
+        </div>
+      </section>
+
+      <!-- ── PÁGINA DE CURSO ── -->
+      <section class="stack" style="gap:24px">
+        <span class="eyebrow">Página de curso</span>
+        <div class="course-hero">
+          <img src="/cursos/curso-01.webp" alt="">
+          <div class="course-hero__body">
+            <div class="row"><span class="chip">Ortodoncia</span><span class="chip"><i data-lucide="signal" class="i"></i>Básico</span><span class="chip"><i data-lucide="play-circle" class="i"></i>5 clases</span><span class="chip"><i data-lucide="clock" class="i"></i>2 h 10 min</span></div>
+            <h2 class="display display--black course-hero__title">Diagnóstico en Ortodoncia para Odontólogos Generales</h2>
+            <div class="row" style="gap:14px"><div class="avatar" style="border:2px solid rgba(255,255,255,.5)">FE</div><div style="font-size:var(--fs-sm)"><strong>Dr. Felipe Estrada Ramírez</strong><br><span style="opacity:.75">Ortodoncista · 14 años de práctica</span></div>
+              <div class="row" style="margin-left:auto"><button class="btn btn--white btn--lg btn--pill-arrow">Continuar con la clase 3 <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></button><button class="circle-btn circle-btn--glass" aria-label="Guardar"><i data-lucide="bookmark" class="i"></i></button></div></div>
+          </div>
+        </div>
+        <div class="grid" style="grid-template-columns:1.6fr 1fr;align-items:start;gap:28px">
+          <div class="stack" style="gap:18px">
+            <p class="muted" style="font-size:var(--fs-md)">Aprende a identificar maloclusiones, leer una radiografía panorámica con criterio ortodóncico y decidir cuándo referir. Con casos reales de consultorio y los errores más comunes que vemos en primera consulta.</p>
+            <div class="row" style="gap:8px"><span class="chip chip--outline">Maloclusiones</span><span class="chip chip--outline">Panorámica</span><span class="chip chip--outline">Angle</span><span class="chip chip--outline">Referencia</span></div>
+            <h3 style="font-size:var(--fs-md);margin-top:8px">Temario</h3>
+            <div class="syllabus">
+              <div class="lesson is-done"><div class="lesson__num"><i data-lucide="check" class="i" style="width:14px;height:14px"></i></div><div class="lesson__thumb"><img src="/cursos/curso-01.webp" alt=""></div><div><div class="lesson__title">Qué mirar en la primera consulta</div><div class="lesson__dur">08:12 min</div></div></div>
+              <div class="lesson is-done"><div class="lesson__num"><i data-lucide="check" class="i" style="width:14px;height:14px"></i></div><div class="lesson__thumb"><img src="/cursos/curso-06.webp" alt=""></div><div><div class="lesson__title">Clasificación de Angle en la práctica</div><div class="lesson__dur">14:40 min</div></div></div>
+              <div class="lesson is-current"><div class="lesson__num">3</div><div class="lesson__thumb"><img src="/cursos/curso-02.webp" alt=""><i data-lucide="play" class="i"></i></div><div><div class="lesson__title">Lectura de panorámica con ojo ortodóncico</div><div class="lesson__dur">22:05 min</div></div></div>
+              <div class="lesson is-locked"><div class="lesson__num">4</div><div class="lesson__thumb"><img src="/cursos/curso-03.webp" alt=""><i data-lucide="lock" class="i"></i></div><div><div class="lesson__title">Cuándo referir y cómo explicarlo al paciente</div><div class="lesson__dur">17:30 min</div></div></div>
+              <div class="lesson is-locked"><div class="lesson__num">5</div><div class="lesson__thumb"><img src="/cursos/curso-04.webp" alt=""><i data-lucide="lock" class="i"></i></div><div><div class="lesson__title">Casos clínicos y examen final</div><div class="lesson__dur">26:10 min</div></div></div>
+            </div>
+          </div>
+          <div class="stack" style="position:sticky;top:88px">
+            <div class="card card--pad stack" style="gap:16px">
+              <div class="row" style="justify-content:space-between"><div><span class="eyebrow">Tu avance</span><div style="font-family:var(--font-display);font-size:var(--fs-xl);font-weight:700;margin-top:4px">2 de 5 clases</div></div><div class="ring" style="--p:40;--size:64px" data-label="40%"></div></div>
+              <div class="progress"><span style="width:40%"></span></div>
+              <div class="stack" style="gap:10px;font-size:var(--fs-sm)">
+                <div class="row" style="gap:10px"><span class="circle-btn" style="width:30px;height:30px;background:var(--accent-soft);color:var(--accent)"><i data-lucide="award" class="i" style="width:14px;height:14px"></i></span>Certificado con folio verificable</div>
+                <div class="row" style="gap:10px"><span class="circle-btn" style="width:30px;height:30px;background:var(--accent-soft);color:var(--accent)"><i data-lucide="file-text" class="i" style="width:14px;height:14px"></i></span>3 materiales descargables</div>
+                <div class="row" style="gap:10px"><span class="circle-btn" style="width:30px;height:30px;background:var(--accent-soft);color:var(--accent)"><i data-lucide="brain" class="i" style="width:14px;height:14px"></i></span>Quiz al final de cada clase</div>
+              </div>
+              <div class="divider"></div>
+              <div class="row" style="gap:12px"><div class="avatar" style="background:var(--surface-3);color:var(--text-2)">JL</div><div class="avatar" style="background:var(--surface-3);color:var(--text-2);margin-left:-22px">AM</div><div class="avatar" style="background:var(--surface-3);color:var(--text-2);margin-left:-22px">+41</div><span class="faint" style="font-size:var(--fs-xs)">44 colegas lo están cursando</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PÁGINA DE CLASE ── -->
+      <section class="stack" style="gap:20px">
+        <span class="eyebrow">Página de clase · video + temario + notas + quiz</span>
+        <div class="grid" style="grid-template-columns:1.7fr 1fr;align-items:start;gap:24px">
+          <div class="stack" style="gap:16px">
+            <div class="player"><img src="/cursos/curso-01.webp" alt="">
+              <div class="glass glass--dark" style="position:absolute;top:16px;left:16px"><span class="ic"><i data-lucide="captions" class="i"></i></span><div>Subtítulos<strong>Español · automático</strong></div></div>
+              <div class="player__controls"><i data-lucide="pause" class="i"></i><span class="mono" style="font-size:12px">08:24</span><div class="player__bar"></div><span class="mono" style="font-size:12px">22:05</span><i data-lucide="gauge" class="i"></i><i data-lucide="settings-2" class="i"></i><i data-lucide="maximize" class="i"></i></div>
+            </div>
+            <div class="row" style="justify-content:space-between">
+              <div><span class="eyebrow">Clase 3 de 5</span><h2 class="display" style="font-size:var(--fs-xl)">Lectura de panorámica con ojo ortodóncico</h2></div>
+              <div class="row"><button class="btn btn--secondary"><i data-lucide="chevron-left" class="i"></i>Anterior</button><button class="btn btn--brand btn--pill-arrow">Marcar vista y seguir <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button></div>
+            </div>
+          </div>
+          <div class="card card--pad stack" data-tabs style="gap:16px">
+            <div class="tabs"><button data-for="temario">Temario</button><button data-for="notas" class="is-active">Notas</button><button data-for="quiz">Quiz</button></div>
+            <div data-tab="temario" hidden class="stack" style="gap:6px;font-size:var(--fs-sm)"><div class="muted">1 · Qué mirar en la primera consulta</div><div class="muted">2 · Clasificación de Angle</div><div style="color:var(--primary);font-weight:600">3 · Lectura de panorámica</div><div class="faint">4 · Cuándo referir</div><div class="faint">5 · Casos clínicos</div></div>
+            <div data-tab="notas" class="stack" style="gap:12px">
+              <h4 style="font-size:var(--fs-sm)">Conceptos clave</h4>
+              <div class="stack" style="gap:10px;font-size:var(--fs-sm)">
+                <div class="row" style="gap:10px;align-items:flex-start;flex-wrap:nowrap"><span class="mono chip chip--primary" style="height:24px;flex-shrink:0">02:10</span><span>Los 5 puntos que revisar en toda panorámica antes de hablar de ortodoncia.</span></div>
+                <div class="row" style="gap:10px;align-items:flex-start;flex-wrap:nowrap"><span class="mono chip chip--primary" style="height:24px;flex-shrink:0">07:45</span><span>Signos de reabsorción radicular que cambian el plan.</span></div>
+                <div class="row" style="gap:10px;align-items:flex-start;flex-wrap:nowrap"><span class="mono chip chip--primary" style="height:24px;flex-shrink:0">15:20</span><span>Terceros molares: cuándo sí importan para el diagnóstico.</span></div>
+              </div>
+              <p class="faint" style="font-size:var(--fs-xs)">Generado de la transcripción y revisado por OdonTeck.</p>
+            </div>
+            <div data-tab="quiz" hidden class="stack" style="gap:12px">
+              <span class="eyebrow">Pregunta 1 de 4</span>
+              <p class="quiz__q">¿Cuál es el primer elemento a evaluar en una panorámica con enfoque ortodóncico?</p>
+              <div class="quiz__opt"><span class="k">A</span>Densidad ósea general</div>
+              <div class="quiz__opt"><span class="k">B</span>Simetría condilar y ramas</div>
+              <div class="quiz__opt"><span class="k">C</span>Presencia de terceros molares</div>
+              <button class="btn btn--primary">Comprobar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── MATERIALES ── -->
+      <section class="stack" style="gap:28px">
+        <div class="section-head">
+          <div><span class="chip chip--primary">Materiales</span><h2 class="display">Tu biblioteca clínica</h2></div>
+          <div class="row"><span class="chip chip--primary">Todo</span><span class="chip">PDF</span><span class="chip">Libros</span><span class="chip">Presentaciones</span></div>
+        </div>
+        <div class="book">
+          <div class="book__cover"><img src="/cursos/curso-06.webp" alt=""><span class="chip"><i data-lucide="file-text" class="i"></i>PDF · 48 págs</span></div>
+          <div>
+            <span class="eyebrow">Guía clínica · Ortodoncia</span>
+            <h2 class="display book__title" style="margin-top:8px">Protocolo de Diagnóstico Ortodóncico en Consulta General</h2>
+            <p class="book__author">Dr. Felipe Estrada Ramírez</p>
+            <p class="book__lead" style="font-family:var(--font-body);font-style:normal">La guía de bolsillo para no perderte nada en la primera consulta: qué preguntar, qué medir y cuándo referir.</p>
+            <div class="book__actions">
+              <button class="btn btn--brand btn--lg btn--pill-arrow">Abrir <span class="arrow"><i data-lucide="arrow-up-right" class="i"></i></span></button>
+              <div class="spacer"></div>
+              <button class="btn btn--secondary btn--icon" aria-label="Guardar"><i data-lucide="bookmark" class="i"></i></button>
+              <button class="btn btn--secondary btn--icon" aria-label="Compartir"><i data-lucide="share-2" class="i"></i></button>
+              <button class="btn btn--secondary btn--icon" aria-label="Descargar"><i data-lucide="download" class="i"></i></button>
+            </div>
+            <div class="book__facts">
+              <div><h4>Descripción</h4><p>Checklist de exploración, tabla de clasificación de Angle con ejemplos fotográficos y formato de nota clínica listo para imprimir.</p></div>
+              <div><h4>Del curso</h4><p>Diagnóstico en Ortodoncia para Odontólogos Generales · clase 1 y 3</p></div>
+              <div><h4>Formato</h4><p>PDF, 48 páginas, a color · 6.2 MB</p></div>
+              <div><h4>Actualizado</h4><p>Agosto 2026 · versión 2</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="shelf">
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-10.webp" alt=""></div><div class="shelf__title">Atlas de Caries: Clasificación ICDAS</div><div class="shelf__meta">Libro · 120 págs</div></a>
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-11.webp" alt=""></div><div class="shelf__title">Presentación · Endodoncia clase 2</div><div class="shelf__meta">Presentación · 42 láminas</div></a>
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-12.webp" alt=""></div><div class="shelf__title">Formato de consentimiento informado</div><div class="shelf__meta">PDF · 2 págs</div></a>
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-13.webp" alt=""></div><div class="shelf__title">Guía de fotografía clínica</div><div class="shelf__meta">PDF · 30 págs</div></a>
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-14.webp" alt=""></div><div class="shelf__title">Planeación guiada en implantes</div><div class="shelf__meta">Presentación · 58 láminas</div></a>
+          <a class="shelf__item" href="#"><div class="shelf__cover"><img src="/cursos/curso-15.webp" alt=""></div><div class="shelf__title">Tabla de dosis anestésicas</div><div class="shelf__meta">PDF · 1 pág</div></a>
+        </div>
+      </section>
+
+      <!-- ── LOGIN ── -->
+      <section class="stack" style="gap:20px">
+        <span class="eyebrow">Acceso · registro e inicio de sesión</span>
+        <div class="login">
+          <div class="login__form">
+            <img data-logo src="/brand/logo-horizontal.png" alt="OdonTeck" style="height:36px;width:auto;align-self:flex-start">
+            <div><h1 class="display display--black">Empieza tu <em>formación</em></h1><p class="muted" style="margin-top:8px">Tu primera clase de cada curso es gratis.</p></div>
+            <div class="login__social"><button aria-label="Google" style="gap:10px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:var(--fs-sm)"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.35 11.1H12v2.9h5.4c-.25 1.4-1 2.6-2.1 3.4v2.8h3.4c2-1.85 3.15-4.55 3.15-7.75 0-.65-.05-1.1-.5-1.35z"/><path fill="#34A853" d="M12 22c2.85 0 5.25-.95 7-2.55l-3.4-2.8c-.95.65-2.15 1.05-3.6 1.05-2.75 0-5.1-1.85-5.95-4.4H2.55v2.9C4.3 19.6 7.85 22 12 22z"/><path fill="#FBBC05" d="M6.05 13.3c-.2-.65-.35-1.3-.35-2s.15-1.35.35-2V6.4H2.55A9.9 9.9 0 0 0 2 11.3c0 1.6.4 3.1 1.05 4.5l3-2.5z"/><path fill="#EA4335" d="M12 5.9c1.55 0 2.95.55 4.05 1.6l3-3C17.25 2.85 14.85 2 12 2 7.85 2 4.3 4.4 2.55 7.9l3.5 2.9C6.9 8.25 9.25 5.9 12 5.9z"/></svg>Continuar con Google</button></div>
+            <div class="login__or">o con tu correo</div>
+            <input class="input" placeholder="Nombre completo"><input class="input" placeholder="Correo electrónico"><input class="input" type="password" placeholder="Contraseña">
+            <button class="btn btn--brand btn--lg btn--pill-arrow" style="justify-content:space-between">Crear mi cuenta <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button>
+            <p class="faint" style="font-size:var(--fs-sm);text-align:center">¿Ya tienes cuenta? <a href="#" style="font-weight:600">Inicia sesión</a></p>
+          </div>
+          <div class="login__visual">
+            <img src="/fotos/hero.webp" alt="">
+            <img class="tooth" src="/fotos/tooth-3d.png" alt="">
+            <div class="glass glass--pin" style="top:60px;left:50px;--pin:52px"><span class="ic"><i data-lucide="graduation-cap" class="i"></i></span><div>Catálogo<strong>18 cursos · 77 clases</strong></div></div>
+            <div class="glass glass--pin" style="top:150px;right:50px;--pin:70px"><span class="ic"><i data-lucide="award" class="i"></i></span><div>Certificados<strong>Con folio verificable</strong></div></div>
+            <div class="glass" style="position:absolute;bottom:50px;left:50px"><span class="ic"><i data-lucide="users" class="i"></i></span><div>Comunidad<strong>+500 odontólogos</strong></div></div>
+            <div class="glass glass--dark" style="position:absolute;bottom:50px;right:50px"><span class="ic"><i data-lucide="radio" class="i"></i></span><div>Cada semana<strong>Clases en vivo</strong></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LOGROS ── -->
+      <section class="stack" style="gap:24px">
+        <div class="section-head"><div><span class="chip chip--primary">Logros</span><h2 class="display">Tu camino en OdonTeck</h2></div><span class="chip chip--outline"><i data-lucide="flame" class="i"></i>1,240 puntos</span></div>
+        <div class="grid grid--4">
+          <div class="medal"><div class="medal__icon"><i data-lucide="footprints" class="i"></i></div><h4>Primer paso</h4><p>Completaste tu primera clase</p></div>
+          <div class="medal"><div class="medal__icon"><i data-lucide="flame" class="i"></i></div><h4>Constante</h4><p>3 semanas seguidas estudiando</p></div>
+          <div class="medal is-locked"><div class="medal__icon"><i data-lucide="award" class="i"></i></div><h4>Certificado</h4><p>Termina tu primer curso</p></div>
+          <div class="medal is-locked"><div class="medal__icon"><i data-lucide="crown" class="i"></i></div><h4>Maestro OdonTeck</h4><p>10 cursos certificados</p></div>
+        </div>
+      </section>
+
+      <!-- ── PRAXIA ── -->
+      <section class="stack" style="gap:20px">
+        <span class="eyebrow">Herramientas · Prueba Praxia</span>
+        <div class="card" style="overflow:hidden;display:grid;grid-template-columns:1fr 1.2fr;align-items:center;background:var(--hero-gradient);color:#fff;border:0">
+          <div class="card--pad stack" style="gap:16px;padding:44px">
+            <span class="chip" style="background:rgba(255,255,255,.14);color:#fff">Plataforma para consultorios</span>
+            <h2 class="display display--black" style="font-size:var(--fs-2xl)">Tu consultorio, <em style="color:var(--brand-teal)">en orden.</em></h2>
+            <p style="opacity:.85">Praxia es la plataforma de TEC Capital para doctores: expediente, recetas con folio, agenda, recordatorios y reportes. Lo que antes estaba disperso, ahora en un solo lugar.</p>
+            <div class="stack" style="gap:8px;font-size:var(--fs-sm)">
+              <div class="row" style="gap:8px"><i data-lucide="check-circle-2" class="i" style="color:var(--brand-teal)"></i>Recetas y documentos con folio y huella digital</div>
+              <div class="row" style="gap:8px"><i data-lucide="check-circle-2" class="i" style="color:var(--brand-teal)"></i>Agenda con recordatorios automáticos</div>
+              <div class="row" style="gap:8px"><i data-lucide="check-circle-2" class="i" style="color:var(--brand-teal)"></i>Expediente clínico seguro</div>
+            </div>
+            <div class="row"><button class="btn btn--white btn--lg btn--pill-arrow">Probar Praxia gratis <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="arrow-up-right" class="i"></i></span></button><span style="font-size:var(--fs-xs);opacity:.75">Sin tarjeta · miembros OdonTeck</span></div>
+          </div>
+          <div style="padding:28px 0 28px 0;transform:perspective(1200px) rotateY(-8deg) translateX(20px)"><img src="/praxia/captura-1.webp" alt="Praxia" style="border-radius:14px 0 0 14px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)"></div>
+        </div>
+      </section>
+
+      <!-- ── ESPECÍMENES ── -->
+      <section class="stack" style="gap:20px">
+        <span class="eyebrow">Especímenes</span>
+        <div class="grid grid--2">
+          <div class="card card--pad stack" style="gap:18px">
+            <div><span class="eyebrow">Outfit · títulos</span><p class="display display--black" style="font-size:var(--fs-2xl);margin-top:6px">Endodoncia <em>clínica</em></p></div>
+            <div><span class="eyebrow">Inter · cuerpo</span><p style="margin-top:6px">La lectura de una radiografía panorámica con criterio ortodóncico empieza por la simetría y termina en los terceros molares.</p></div>
+            <div><span class="eyebrow">JetBrains Mono · datos</span><p class="mono" style="margin-top:6px">ODT-2026-00417 · 22:05 · 46%</p></div>
+          </div>
+          <div class="card card--pad stack">
+            <span class="eyebrow">Color</span>
+            <div class="row" style="gap:8px">
+              <div style="width:56px;height:56px;border-radius:16px;background:var(--brand-navy)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--hero-gradient)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--brand-gradient)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--primary)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--accent)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--bg);border:1px solid var(--line)"></div><div style="width:56px;height:56px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line)"></div>
+            </div>
+            <div class="row"><button class="btn btn--primary">Primario</button><button class="btn btn--brand">Marino</button><button class="btn btn--gradient">Degradado</button><button class="btn btn--secondary">Secundario</button><button class="btn btn--ghost">Fantasma</button><span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></div>
+            <div class="row"><span class="chip">Neutro</span><span class="chip chip--primary">Primario</span><span class="chip chip--accent">Acento</span><span class="chip chip--outline">Contorno</span><span class="chip chip--live">En vivo</span><span class="badge">3</span></div>
+            <div class="row" style="gap:16px"><div class="field" style="flex:1"><label>Nombre completo</label><input class="input" placeholder="Como aparecerá en tu certificado"></div><div class="stack" style="gap:6px"><label style="font-size:var(--fs-xs);font-weight:600" class="muted">Avisos</label><button class="switch" role="switch" aria-checked="true"></button></div></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="faint" style="font-size:var(--fs-xs);padding:24px 0 48px;text-align:center">OdonTeck Club · sistema de diseño v0.2 · TEC Capital</footer>
+    </main>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a class="is-active" href="#"><i data-lucide="home" class="i"></i>Inicio</a>
+  <a href="#"><i data-lucide="graduation-cap" class="i"></i>Cursos</a>
+  <a href="#"><i data-lucide="library" class="i"></i>Materiales</a>
+  <a href="#"><i data-lucide="radio" class="i"></i>En vivo</a>
+  <a href="#"><i data-lucide="menu" class="i"></i>Más</a>
+</nav>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

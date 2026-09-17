@@ -1,0 +1,779 @@
+{
+  "libraryId": "725453",
+  "generado": "2026-09-17T15:41:35.040Z",
+  "cursos": [
+    {
+      "id": "diagnostico-en-ortodoncia-para-odontologos-generales",
+      "titulo": "Diagnóstico en Ortodoncia para Odontólogos Generales",
+      "area": "Ortodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-01.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Diagnóstico en Ortodoncia para Odontólogos Generales. 5 clases con casos reales de consultorio.",
+      "orden": 1,
+      "bunnyCollectionId": "3d0a8c29-536d-4c13-b9f8-42fc4681714f",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "56b5a950-60a5-4972-b974-d69bc991b447",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "d9611bfd-f835-4d90-a621-b83537e7bfcc",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "d6d60f9d-8788-4d4c-85f5-3862563cd486",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "4aa4578e-982a-4a8d-a3ab-dfb19636fd47",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "aefca140-1aab-4d67-a1b6-e6ab015d91aa",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "diagnostico-y-clasificacion-de-la-caries-dental",
+      "titulo": "Diagnóstico y Clasificación de la Caries Dental",
+      "area": "Cariología",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-02.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Diagnóstico y Clasificación de la Caries Dental. 5 clases con casos reales de consultorio.",
+      "orden": 2,
+      "bunnyCollectionId": "d4737d22-01fc-48a3-b263-65b2559abb6a",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "b622fb01-3fce-4f71-b271-4e05a6328ef9",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "03025923-0109-435a-a1a0-78db5a683594",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "bbe71b64-8134-4aa6-abca-7e2ea40a6825",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "ae7a48eb-1cbf-41f4-b384-c2fc2ab3ac60",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "e6cac368-61e9-4f8e-b483-27b002253ac9",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos",
+      "titulo": "Endodoncia Pediátrica Manejo de los Canales Radiculares en Niños",
+      "area": "Odontopediatría",
+      "nivel": "Básico",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-03.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Endodoncia Pediátrica Manejo de los Canales Radiculares en Niños. 3 clases con casos reales de consultorio.",
+      "orden": 3,
+      "bunnyCollectionId": "8fb78166-3d21-4f0e-90a5-c6d01083fcda",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "014d4830-df4e-4fb1-b910-646dfc8fe66d",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2 y 3",
+          "videoId": "3dc47289-be96-4cbf-a489-80d7e2ef4af9",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 4 y 5",
+          "videoId": "eadb58a0-71d4-466f-b2a2-f0f7e5ed3e75",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "extracciones-simples",
+      "titulo": "Extracciones Simples",
+      "area": "Cirugía",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-04.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Extracciones Simples. 5 clases con casos reales de consultorio.",
+      "orden": 4,
+      "bunnyCollectionId": "7e5cc91e-1207-4644-995b-887a699daec5",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "fe861c3c-5b80-4b59-90fa-68afaa229843",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "1522e987-12b8-48fa-bdab-01147c373c31",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "5903f147-3c7b-4c76-9f83-ef06bcb8e917",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "74db63ae-7b11-4857-9a9e-0da59e462edf",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "1d36f6c3-fd92-4c57-a831-1b253d8f63e6",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales",
+      "titulo": "Férulas de Contención en Odontopediatría Tipos, Tiempos y Materiales",
+      "area": "Odontopediatría",
+      "nivel": "Básico",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-05.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Férulas de Contención en Odontopediatría Tipos, Tiempos y Materiales. 3 clases con casos reales de consultorio.",
+      "orden": 5,
+      "bunnyCollectionId": "f96bbad0-7c1a-4dfa-8abb-0b7e68823ede",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1 y 2",
+          "videoId": "fb15e281-bbfe-45b3-b7ca-2a08fa0da60c",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 3 y 4",
+          "videoId": "0a782c7c-22ea-4ab4-bd0e-3b86ef2de71d",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 5",
+          "videoId": "af9c8c6e-199b-40e2-a80f-fbc0ec14b33c",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "manejo-de-abscesos-periodontales",
+      "titulo": "Manejo de Abscesos Periodontales",
+      "area": "Periodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-06.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Manejo de Abscesos Periodontales. 5 clases con casos reales de consultorio.",
+      "orden": 6,
+      "bunnyCollectionId": "657d2041-bc8b-462a-b2f1-edd50eca0ce6",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "d3e06e61-3b53-41d3-9091-45c2e5bc7696",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "e027ac12-bd23-4a2b-981d-9adfb2c0d52b",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "eeeb101e-dc66-4281-b38d-813d83bd9f31",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "8768948c-56da-4ec2-93a9-5ee50f3f7de7",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "a996a08f-a88b-46e1-9e53-b50121141d34",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "materiales-dentales-restauradores-indicaciones-y-usos",
+      "titulo": "Materiales Dentales Restauradores Indicaciones y Usos",
+      "area": "Materiales",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-07.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Materiales Dentales Restauradores Indicaciones y Usos. 4 clases con casos reales de consultorio.",
+      "orden": 7,
+      "bunnyCollectionId": "21be27bb-5673-4c2c-903f-fd9852336e95",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "fa308fcb-4168-4283-a421-7148b6bb9464",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "d1c382a8-50a2-43fe-a5d9-fc239d10c2dc",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "61ef3b83-d15f-4db5-98a7-b6da6a11779e",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4 y 5",
+          "videoId": "97839549-e318-4b14-ba4b-e6ea3e5a915e",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "ortodoncia-lingual-y-estetica",
+      "titulo": "Ortodoncia Lingual y Estética",
+      "area": "Ortodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-08.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Ortodoncia Lingual y Estética. 4 clases con casos reales de consultorio.",
+      "orden": 8,
+      "bunnyCollectionId": "4d80f182-0ce4-40a4-a589-9ba15d10a280",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "cb48abda-dee5-4e9c-9bec-b075aca914ca",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "ab0de553-7249-449f-9b89-62d73bc00a13",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3 y 4",
+          "videoId": "494c41bb-4785-4661-90dc-c20f2b6cd094",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 5",
+          "videoId": "46c005a1-862d-4cd0-9e9a-4b179e258a35",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "patologias-dentales-mas-comunes-en-la-infancia",
+      "titulo": "Patologías Dentales Más Comunes en la Infancia",
+      "area": "Odontopediatría",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-09.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Patologías Dentales Más Comunes en la Infancia. 4 clases con casos reales de consultorio.",
+      "orden": 9,
+      "bunnyCollectionId": "5aede94d-1a75-4b73-ba4c-8b1a74b62239",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "78a7f1dc-c958-49eb-911f-b16cb3a12ee9",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "043107a0-bec1-4f21-96be-dab0a3a68f43",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "3c4d013a-a8de-48af-8014-8ffb153c6c88",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4 y 5",
+          "videoId": "5e665c80-3ffc-4250-a37c-0834ad1aae13",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa",
+      "titulo": "Periodoncia Estética Manejo de Encía y Diseño de Sonrisa",
+      "area": "Periodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-10.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Periodoncia Estética Manejo de Encía y Diseño de Sonrisa. 5 clases con casos reales de consultorio.",
+      "orden": 10,
+      "bunnyCollectionId": "2d306d08-46ca-40c2-a6e2-2e27a33a67a7",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "092b300c-8f79-488b-9a3a-1db6cac46631",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "86a813da-9181-4ea4-9b3f-289f12998cd7",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "13b3f986-7db4-4fc9-94cf-b1b82b8c081b",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "abded854-bb1a-409f-9873-824de2401fd4",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "a044a820-2501-4ba6-9c0f-991d5d649249",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "periodoncia-estetica-y-plastica",
+      "titulo": "Periodoncia estética y plástica",
+      "area": "Periodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-11.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Periodoncia estética y plástica. 4 clases con casos reales de consultorio.",
+      "orden": 11,
+      "bunnyCollectionId": "88fbd011-8658-4b83-b83b-fa735f8a3895",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "31df895f-26bd-48ee-a13b-89a188711929",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "f70bfdc5-0e68-468d-a981-b5e0b217c119",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3 y 4",
+          "videoId": "09150bea-a21e-4a4d-85ae-9eb9491f3aa2",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 5",
+          "videoId": "08e2fd9c-0d7f-4603-9368-eec7c8054dd3",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "raspado-y-alisado-radicular",
+      "titulo": "Raspado y Alisado Radicular",
+      "area": "Periodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-12.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Raspado y Alisado Radicular. 5 clases con casos reales de consultorio.",
+      "orden": 12,
+      "bunnyCollectionId": "445daaed-8a70-4908-b474-71bb1c74ba19",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "07883ca5-01fa-47c9-9075-29d3ec59a050",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "3fcaa0e8-5299-4a41-9205-aead6a744d96",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "42599f47-1473-415f-bb55-f6b9ae3f58ce",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "1108cb6d-7dff-476d-b62f-bea9b0a1ab85",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "3499ce6f-d858-4e1f-bb18-a01d6065bd09",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "rehabilitacion-oral-estetica-con-coronas-y-puentes",
+      "titulo": "Rehabilitación Oral Estética con Coronas y Puentes",
+      "area": "Estética",
+      "nivel": "Básico",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-13.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Rehabilitación Oral Estética con Coronas y Puentes. 3 clases con casos reales de consultorio.",
+      "orden": 13,
+      "bunnyCollectionId": "0868ec87-fa43-4f89-98ff-298f688e2814",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1 y 2",
+          "videoId": "918b434c-10c4-48e2-8945-055625ea9c30",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 3 y 4",
+          "videoId": "b3d25bdd-ae75-45b7-b6d2-b3ad09d7020e",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "CLASE 5",
+          "videoId": "04fd2fb5-c257-4680-93a4-691d7286826e",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion",
+      "titulo": "Resinas Compuestas Selección, Manipulación y Técnicas de Estratificación",
+      "area": "Estética",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-14.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Resinas Compuestas Selección, Manipulación y Técnicas de Estratificación. 5 clases con casos reales de consultorio.",
+      "orden": 14,
+      "bunnyCollectionId": "470a3ec4-e5c3-44d4-8667-e352bb06bb26",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "55c270c3-34e8-4485-a7c6-51170f697242",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "2640a818-3aab-46cb-90a3-ab0eb257c98b",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "92eb5c79-7471-4fae-9ed9-5d7547127e3d",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "b8aeb085-f701-4a79-a405-1c9c0b6b8fd7",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "7a14170a-fd49-4d2d-aee7-3b94f676ab12",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "retroobturacion-en-endodoncia-tecnicas-y-materiales",
+      "titulo": "Retroobturación en Endodoncia Técnicas y Materiales",
+      "area": "Endodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-15.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Retroobturación en Endodoncia Técnicas y Materiales. 5 clases con casos reales de consultorio.",
+      "orden": 15,
+      "bunnyCollectionId": "6a3ee381-8e40-40c8-a5d5-d7993e90082d",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "d315eb19-42ec-4ca9-bba8-b4cde09882f1",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "eda1e5fb-c0cf-4bd3-ab96-82cb6dcfd180",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "cc342c87-16c7-4ab6-a346-f6ff0342986a",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "1e8b1b16-8715-4fd0-85fc-d32bc61d2d26",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "cc45cade-8592-4f4a-9f5a-5f93fe58aa16",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "salud-oral-en-pacientes-con-condiciones-sistemicas",
+      "titulo": "Salud Oral en Pacientes con Condiciones Sistémicas",
+      "area": "Medicina bucal",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-16.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Salud Oral en Pacientes con Condiciones Sistémicas. 4 clases con casos reales de consultorio.",
+      "orden": 16,
+      "bunnyCollectionId": "3c6a8571-db02-469f-bfbe-c33e2dbd4863",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "03f2701a-a00c-4938-8e81-bc114ef1f951",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "7e5d6a6b-5fb7-4f2d-a1c7-7d40599b688e",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "566819fe-c16d-4092-a7fe-cee91bfe5f62",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4 y 5",
+          "videoId": "c69094b6-637e-44bb-acd5-c85f62fb2091",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal",
+      "titulo": "Tratamientos Periodontales No Quirúrgicos Técnicas Clínicas para el Control de la Enfermedad Periodontal",
+      "area": "Periodoncia",
+      "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-17.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Tratamientos Periodontales No Quirúrgicos Técnicas Clínicas para el Control de la Enfermedad Periodontal. 5 clases con casos reales de consultorio.",
+      "orden": 17,
+      "bunnyCollectionId": "9fa116e3-8d3b-4cbd-b7e4-12996f13578a",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1",
+          "videoId": "ee093e87-d700-4ec8-9557-2af205dc88de",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 2",
+          "videoId": "3240de44-12d5-463a-b475-7ffc2a61c0b0",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 3",
+          "videoId": "5a518b6f-b9d9-4096-8a27-2845d67a21b5",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 4,
+          "titulo": "Clase 4",
+          "videoId": "52232044-db43-41f1-bc64-a98d9b870f42",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 5,
+          "titulo": "Clase 5",
+          "videoId": "30acf1f0-9844-406f-bd9b-f246552b3b12",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    },
+    {
+      "id": "traumatismos-dentales-en-ninos",
+      "titulo": "Traumatismos Dentales en Niños",
+      "area": "Odontopediatría",
+      "nivel": "Básico",
+      "instructor": "Equipo OdonTeck",
+      "portada": "/cursos/curso-18.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Traumatismos Dentales en Niños. 3 clases con casos reales de consultorio.",
+      "orden": 18,
+      "bunnyCollectionId": "3fc58e6c-7918-4f3c-b9fe-74c04bef810d",
+      "clases": [
+        {
+          "n": 1,
+          "titulo": "Clase 1 y 2",
+          "videoId": "c7f07a89-401c-47c8-bce3-382dc9346e3b",
+          "duracion": null,
+          "gratis": true
+        },
+        {
+          "n": 2,
+          "titulo": "Clase 3",
+          "videoId": "594ca606-eb5a-414f-8467-a0e89a9b7e95",
+          "duracion": null,
+          "gratis": false
+        },
+        {
+          "n": 3,
+          "titulo": "Clase 4 y 5",
+          "videoId": "4ee74a2c-f16d-414b-9b4b-733bf577a1d1",
+          "duracion": null,
+          "gratis": false
+        }
+      ]
+    }
+  ]
+}
