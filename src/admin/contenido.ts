@@ -76,7 +76,7 @@ export function adminCurso(params: Record<string, string>) {
         ${c.clases.map((k, i) => `<tr>
           <td class="mono faint">${i + 1}</td>
           <td><input class="input input--sm" name="clase-${i}-titulo" value="${esc(k.titulo)}" required>${/^Clase \d+$/.test(k.titulo) ? '<span class="faint" style="font-size:10px">Título genérico · se reemplaza con la transcripción</span>' : ''}</td>
-          <td><input class="input input--sm mono" name="clase-${i}-videoId" value="${esc(k.videoId)}" required pattern="[A-Za-z0-9-]+"></td>
+          <td><input class="input input--sm mono" name="clase-${i}-videoId" value="${esc(k.videoId)}" required></td>
           <td><input class="input input--sm mono" name="clase-${i}-duracion" type="number" min="0" value="${k.duracion ?? ''}"></td>
           <td style="text-align:center"><input type="checkbox" name="clase-${i}-gratis" ${k.gratis ? 'checked' : ''}></td>
           <td><div class="row" style="gap:2px;flex-wrap:nowrap">

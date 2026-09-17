@@ -1,0 +1,23 @@
+{
+  "name": "odonteck-club-pipeline",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pipeline de contenido del OdonTeck Club: inventario Bunny, transcripciones, notas y quizzes generados, publicación a Firestore v2_*.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\"",
+    "inventario": "node bunny-inventario.mjs",
+    "transcribir": "node bunny-transcribir.mjs",
+    "vtt": "node bunny-descargar-vtt.mjs",
+    "generar": "node generar-contenido.mjs",
+    "publicar": "node publicar-contenido.mjs",
+    "certificados": "node migrar-certificados.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.126.0",
+    "firebase-admin": "^14.4.0"
+  }
+}

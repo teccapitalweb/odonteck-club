@@ -1,0 +1,34 @@
+{
+  "name": "odonteck-club-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Backend del OdonTeck Club v2 (Express en Railway)",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "check": "node --check src/server.js && node --check src/app.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:rules": "npx --yes firebase-tools@15 --project demo-odonteck --config firebase.emuladores.json emulators:exec --only firestore,storage \"node --test test/rules.test.js\"",
+    "set-admin": "node scripts/set-admin.mjs",
+    "seed": "node scripts/seed-v2.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.22.1",
+    "firebase-admin": "^14.4.0",
+    "stripe": "^22.0.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "firebase": "^12.19.0",
+    "supertest": "^7.2.2"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}

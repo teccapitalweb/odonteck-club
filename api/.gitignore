@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+!.env.example
+# Cuentas de servicio descargadas: nunca al repo
+*service-account*.json
+*-firebase-adminsdk-*.json
+firebase-debug.log
+firestore-debug.log

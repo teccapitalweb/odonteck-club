@@ -1,0 +1,24 @@
+{
+  "libraryId": "725453",
+  "cursos": [
+    {
+      "id": "diagnostico-en-ortodoncia", "titulo": "Diagnóstico en Ortodoncia", "area": "Ortodoncia", "nivel": "Intermedio",
+      "instructor": "Equipo OdonTeck", "portada": "/cursos/curso-01.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Diagnóstico en Ortodoncia. 2 clases con casos reales de consultorio.",
+      "orden": 1, "bunnyCollectionId": "col-1",
+      "clases": [
+        { "n": 1, "titulo": "Clase 1", "videoId": "v-1", "duracion": null, "gratis": true },
+        { "n": 2, "titulo": "Clase 2", "videoId": "v-2", "duracion": null, "gratis": false }
+      ]
+    },
+    {
+      "id": "periodoncia-basica", "titulo": "Periodoncia Básica", "area": "Periodoncia", "nivel": "Básico",
+      "instructor": "Equipo OdonTeck", "portada": "/cursos/curso-02.webp",
+      "descripcion": "Curso grabado de la membresía OdonTeck: Periodoncia Básica. 1 clases con casos reales de consultorio.",
+      "orden": 2, "bunnyCollectionId": "col-2",
+      "clases": [
+        { "n": 1, "titulo": "Clase 1", "videoId": "v-3", "duracion": null, "gratis": true }
+      ]
+    }
+  ]
+}

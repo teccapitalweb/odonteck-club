@@ -1,0 +1,27 @@
+rules_version = '2';
+
+// ╔══════════════════════════════════════════════════════════════════════════════╗
+// ║  ⚠️  NO DESPLEGAR ESTE ARCHIVO TAL CUAL  ⚠️                                    ║
+// ║                                                                              ║
+// ║  Solo cubre la carpeta `materiales/` del club nuevo. El bucket               ║
+// ║  `club-odonteck.firebasestorage.app` puede tener reglas y archivos del club  ║
+// ║  viejo que NO están en este repositorio. Desplegar esto reemplaza todas las  ║
+// ║  reglas de Storage del proyecto. Fusionar primero con las vigentes.          ║
+// ╚══════════════════════════════════════════════════════════════════════════════╝
+//
+// Los PDF se descargan con URL firmada (10 min) que genera el backend solo para VIP,
+// y se suben con URL firmada que genera el backend solo para admins. Las URL firmadas
+// no pasan por estas reglas, así que desde el cliente no se permite nada directo.
+// Las portadas sí son públicas: se muestran en el catálogo a cualquier visitante.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /materiales/portadas/{archivo} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /materiales/{archivo} {
+      allow read, write: if false;
+    }
+  }
+}

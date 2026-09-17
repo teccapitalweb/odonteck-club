@@ -1,0 +1,54 @@
+rules_version = '2';
+
+// ╔══════════════════════════════════════════════════════════════════════════════╗
+// ║  ⚠️  NO DESPLEGAR ESTE ARCHIVO TAL CUAL  ⚠️                                    ║
+// ║                                                                              ║
+// ║  Estas reglas SOLO cubren las colecciones nuevas `v2_*` del OdonTeck Club.   ║
+// ║  El proyecto Firebase `club-odonteck` sigue sirviendo al club viejo          ║
+// ║  (vip-panel.html), cuyas reglas vigentes NO están en este repositorio.       ║
+// ║                                                                              ║
+// ║  Desplegar este archivo con `firebase deploy --only firestore:rules`         ║
+// ║  REEMPLAZA todas las reglas del proyecto y dejaría sin acceso al club viejo  ║
+// ║  (miembros, cursos, progreso, etc.).                                         ║
+// ║                                                                              ║
+// ║  Antes de desplegar:                                                         ║
+// ║   1. Descargar las reglas vigentes desde la consola de Firebase.             ║
+// ║   2. Copiar los bloques `match /v2_...` de abajo dentro de ellas.            ║
+// ║   3. Probar la fusión con `npm run test:rules` y con el panel viejo.         ║
+// ║                                                                              ║
+// ║  Aquí NO hay reglas para colecciones viejas a propósito (miembros incluida). ║
+// ╚══════════════════════════════════════════════════════════════════════════════╝
+//
+// Principio: el navegador no escribe datos de valor. Todo `v2_*` se lee y escribe
+// a través del backend (Firebase Admin SDK, que no está sujeto a estas reglas).
+// La única excepción es la verificación pública de certificados por folio.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Certificados: cualquiera puede verificar un folio concreto (get),
+    // pero nadie puede listar la colección ni escribir en ella.
+    match /v2_certificados/{folio} {
+      allow get: if true;
+      allow list, write: if false;
+    }
+
+    match /v2_perfiles/{id}       { allow read, write: if false; }
+    match /v2_cursos/{id}         { allow read, write: if false; }
+    match /v2_progreso/{id}       { allow read, write: if false; }
+    match /v2_materiales/{id}     { allow read, write: if false; }
+    match /v2_eventos/{id}        { allow read, write: if false; }
+    match /v2_foro/{hiloId} {
+      allow read, write: if false;
+      match /respuestas/{id}      { allow read, write: if false; }
+    }
+    match /v2_quizzes/{id}        { allow read, write: if false; }
+    match /v2_intentos/{id}       { allow read, write: if false; }
+    match /v2_cortesias/{id}      { allow read, write: if false; }
+    match /v2_avisos/{id}         { allow read, write: if false; }
+    match /v2_config/{id}         { allow read, write: if false; }
+    match /v2_suscripciones/{id}  { allow read, write: if false; }
+    match /v2_contadores/{id}     { allow read, write: if false; }
+    match /v2_stripe_eventos/{id} { allow read, write: if false; }
+  }
+}

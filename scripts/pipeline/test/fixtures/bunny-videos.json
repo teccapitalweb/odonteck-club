@@ -1,0 +1,8 @@
+[
+  { "guid": "v-1", "title": "Ortodoncia sesion 1.mp4", "length": 1830, "status": 4, "availableResolutions": "360p,720p,1080p",
+    "captions": [ { "srclang": "es", "label": "Español", "version": 1 } ], "collectionId": "col-1" },
+  { "guid": "v-2", "title": "Ortodoncia sesion 2.mp4", "length": 2405, "status": 4, "availableResolutions": "360p,720p",
+    "captions": [], "collectionId": "col-1" },
+  { "guid": "v-extra", "title": "Webinar suelto", "length": 600, "status": 3, "availableResolutions": "",
+    "captions": [ { "srclang": "en", "label": "English", "version": 1 } ], "collectionId": null }
+]
