@@ -110,7 +110,7 @@ def cover(canvas, doc):
     canvas.setFont('Mono', 9); canvas.drawString(18*mm, 120*mm, 'ODONTECK CLUB · IDENTIDAD VISUAL')
     canvas.setFont('Bold', 34); canvas.drawString(18*mm, 100*mm, 'Guía de imágenes'); canvas.drawString(18*mm, 86*mm, 'para cursos y biblioteca')
     canvas.setFont('Body', 12); canvas.setFillColor(colors.HexColor('#B6C2D8'))
-    for i, l in enumerate(['Prompts listos para generar las 18 portadas de curso, sus banners', 'y las portadas de la biblioteca de materiales, con formatos,', 'reglas de estilo y nombres de archivo para subirlas al admin.']):
+    for i, l in enumerate(['Prompts listos para Nano Banana Pro: 18 portadas de curso, sus banners', 'y las portadas de la biblioteca de materiales, con formatos,', 'reglas de estilo y nombres de archivo para subirlas al admin.']):
         canvas.drawString(18*mm, 70*mm - i*6.5*mm, l)
     canvas.setFont('Mono', 8.5); canvas.drawString(18*mm, 22*mm, 'TEC Capital · septiembre 2026 · v1')
     canvas.restoreState()
@@ -124,36 +124,36 @@ st.append(PageBreak())
 st += [P('1 · Cómo usar esta guía', 'h1'),
        P('Cada prompt está escrito en inglés porque los generadores de imagen responden mejor así. Copia el <b>prompt base</b>, pega dentro el <b>sujeto</b> del curso, añade el <b>prompt negativo</b> si tu herramienta lo admite y genera 4 variantes. Elige la que deje el tercio inferior más limpio: ahí va el título del curso en la app.', 'body'),
        Spacer(1, 8), P('Herramientas recomendadas', 'h3'),
-       P('• <b>Midjourney v7</b> (mejor fotografía editorial; usa <font name="Mono">--ar 4:5 --style raw --s 150</font>).<br/>• <b>Ideogram 3</b> o <b>Flux 1.1 Pro</b> (buen realismo, fácil de usar).<br/>• <b>ChatGPT / GPT Image</b> (el más cómodo: pega el prompt y pide el formato).', 'body'),
+       P('• <b>Nano Banana Pro</b> (la que usas): pega el prompt completo, elige la proporción con los botones y genera x2. No tiene campo de prompt negativo: por eso cada prompt ya trae al final la frase "No text, no letters, no logos…"; déjala siempre.<br/>• Alternativas si algún resultado no convence: <b>Midjourney v7</b> (<font name="Mono">--ar 3:4 --style raw --s 150</font>) o <b>ChatGPT / GPT Image</b>.', 'body'),
        Spacer(1, 8), P('Formatos y tamaños', 'h3')]
 tf = Table([[P('<b>Uso</b>', 'body'), P('<b>Proporción</b>', 'body'), P('<b>Tamaño mínimo</b>', 'body'), P('<b>Dónde se ve</b>', 'body')],
-            [P('Portada de curso', 'body'), P('<b>4:5</b> (vertical)', 'body'), P('2000 × 2500 px', 'body'), P('Tarjetas del catálogo, inicio y recomendados', 'muted')],
+            [P('Portada de curso', 'body'), P('<b>3:4</b> (vertical)', 'body'), P('1536 × 2048 px o más', 'body'), P('Tarjetas del catálogo, inicio y recomendados', 'muted')],
             [P('Banner de curso', 'body'), P('<b>16:9</b> (horizontal)', 'body'), P('2400 × 1350 px', 'body'), P('Cabecera grande de la página del curso y miniaturas de clase', 'muted')],
             [P('Portada de biblioteca', 'body'), P('<b>3:4</b> (libro)', 'body'), P('1800 × 2400 px', 'body'), P('Materiales: PDFs, libros, presentaciones', 'muted')]],
            colWidths=[38*mm, 34*mm, 34*mm, None])
 tf.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), PAPER), ('LINEBELOW', (0,0), (-1,-1), 0.5, LINE), ('VALIGN', (0,0), (-1,-1), 'TOP'),
                         ('TOPPADDING', (0,0), (-1,-1), 5), ('BOTTOMPADDING', (0,0), (-1,-1), 5)]))
 st += [tf, Spacer(1, 6),
-       P('<b>¿Por qué 4:5 y no 1:1?</b> Las tarjetas del club son verticales (como Instagram): 4:5 llena la tarjeta sin recortar y se convierte a 1:1 para redes sin perder el sujeto. El 1:1 obligaría a recortar arriba y abajo en la app. Para la cabecera del curso conviene un segundo archivo 16:9 con el mismo sujeto reencuadrado; si prefieres generar uno solo, genera el 16:9 con el sujeto centrado y yo recorto el 4:5 desde ahí.', 'muted'),
+       P('<b>Con Nano Banana Pro:</b> elige <b>Imagen → 3:4</b> para portadas de curso y de biblioteca (las tarjetas del club ya están en 3:4, así que no hay que recortar nada) e <b>Imagen → 16:9</b> para los banners. Genera en <b>x2</b> para tener dos opciones y quédate con la que deje el tercio inferior más limpio. No uses 1:1: obligaría a recortar en la app.', 'muted'),
        Spacer(1, 8), P('Reglas de estilo (no negociables)', 'h3'),
        P('1. <b>Sin texto ni logos</b> en la imagen: el título, el área y el logo los pone la app.<br/>2. <b>Sujeto en los dos tercios superiores</b>; tercio inferior limpio y algo más oscuro (ahí va el título en blanco).<br/>3. <b>Paleta fría</b>: marino, azul cielo, teal, blancos y grises claros. Nada de rojos ni amarillos dominantes.<br/>4. <b>Nada gráfico</b>: sin sangre, sin cirugías explícitas, sin caras de pacientes reconocibles. Modelos, instrumental, radiografías y manos con guantes.<br/>5. <b>Un solo sujeto por imagen</b>. Si el prompt te da un collage, descártalo.<br/>6. Exporta en <b>JPG calidad 90</b> o WebP; el admin las optimiza al subirlas.', 'body')]
 
 # ── 2. Prompt base ──
 st += [PageBreak(), P('2 · Prompt base y prompt negativo', 'h1'),
        P('Sustituye <font name="Mono">{subject}</font> por el sujeto de cada curso (sección 3).', 'muted'), Spacer(1, 6),
-       P('PROMPT BASE · PORTADA 4:5', 'eyebrow'), caja([P(MASTER.replace('{subject}', '<b>{subject}</b>'), 'prompt')]), Spacer(1, 6),
-       P('PROMPT NEGATIVO', 'eyebrow'), caja([P(NEG, 'prompt')], bg=colors.HexColor('#FBEFEE'), borde=colors.HexColor('#E8C9C6')), Spacer(1, 6),
+       P('PROMPT BASE · PORTADA 3:4', 'eyebrow'), caja([P(MASTER.replace('{subject}', '<b>{subject}</b>'), 'prompt')]), Spacer(1, 6),
+       P('EVITAR (si tu herramienta tiene prompt negativo; en Nano Banana no hace falta)', 'eyebrow'), caja([P(NEG, 'prompt')], bg=colors.HexColor('#FBEFEE'), borde=colors.HexColor('#E8C9C6')), Spacer(1, 6),
        P('BANNER 16:9 · MISMO SUJETO', 'eyebrow'),
-       caja([P('Añade al final del prompt base: <b>"wide cinematic composition, subject on the right half, left half calm and out of focus for a large title"</b> y cambia la proporción a 16:9 (<font name="Mono">--ar 16:9</font>).', 'body')]),
+       caja([P('Añade al final del prompt base: <b>"wide cinematic composition, subject on the right half, left half calm and out of focus for a large title"</b> y elige la proporción <b>16:9</b> en el generador.', 'body')]),
        Spacer(1, 6), P('Parámetros Midjourney sugeridos', 'h3'),
-       caja([P('/imagine [prompt base con sujeto] --ar 4:5 --style raw --s 150 --v 7 --no text,logo,watermark', 'prompt')])]
+       caja([P('/imagine [prompt base con sujeto] --ar 3:4 --style raw --s 150 --v 7 --no text,logo,watermark', 'prompt')])]
 
 # ── 3. Cursos ──
-st += [PageBreak(), P('3 · Portadas de los 18 cursos', 'h1'), P('Nombre de archivo para subir al admin: <font name="Mono">curso-&lt;slug&gt;.jpg</font> (4:5) y <font name="Mono">banner-&lt;slug&gt;.jpg</font> (16:9).', 'muted'), Spacer(1, 4)]
+st += [PageBreak(), P('3 · Portadas de los 18 cursos', 'h1'), P('Para cada curso: pega el prompt base con este sujeto, <b>3:4</b> para la portada y <b>16:9</b> para el banner. Nombre de archivo: <font name="Mono">curso-&lt;slug&gt;.jpg</font> (3:4) y <font name="Mono">banner-&lt;slug&gt;.jpg</font> (16:9).', 'muted'), Spacer(1, 4)]
 for i, c in enumerate(cat, 1):
     subj = subject_for(c)
     bloque = [P(f'{i:02d} · {c["area"].upper()} · {len(c["clases"])} CLASES', 'eyebrow'), P(c['titulo'], 'h3'),
-              P('SUJETO', 'eyebrow'), caja([P(subj, 'prompt')]), Spacer(1, 3),
+              P('PROMPT LISTO PARA PEGAR · 3:4', 'eyebrow'), caja([P(MASTER.replace('{subject}', subj), 'prompt')]), Spacer(1, 3),
               P(f'Archivos: <font name="Mono">curso-{c["id"]}.jpg</font> · <font name="Mono">banner-{c["id"]}.jpg</font>', 'small'), Spacer(1, 9)]
     st.append(KeepTogether(bloque))
 
@@ -169,7 +169,7 @@ for i, (titulo, tipo, subj, bg) in enumerate(LIBRARY, 1):
 
 # ── 5. Entrega ──
 st += [PageBreak(), P('5 · Checklist de entrega', 'h1'),
-       P('• 18 portadas 4:5 → <font name="Mono">curso-*.jpg</font><br/>• 18 banners 16:9 → <font name="Mono">banner-*.jpg</font> (opcional en la primera tanda; si no hay, uso la portada)<br/>• 10 portadas de biblioteca 3:4 → <font name="Mono">lib-*.jpg</font><br/>• Todo sin texto, sin logos, tercio inferior limpio<br/>• Carpeta única, me la pasas y las subo al admin o las cargas tú cuando esté listo', 'body'),
+       P('• 18 portadas 3:4 → <font name="Mono">curso-*.jpg</font><br/>• 18 banners 16:9 → <font name="Mono">banner-*.jpg</font> (opcional en la primera tanda; si no hay, uso la portada)<br/>• 10 portadas de biblioteca 3:4 → <font name="Mono">lib-*.jpg</font><br/>• Todo sin texto, sin logos, tercio inferior limpio<br/>• Carpeta única, me la pasas y las subo al admin o las cargas tú cuando esté listo', 'body'),
        Spacer(1, 10), P('Extras que elevan el club (cuando haya tiempo)', 'h3'),
        P('• <b>Fotos de instructores</b>: retrato de medio cuerpo, fondo liso claro, bata o uniforme, mirada a cámara, 1:1, 1200 px. Salen en la página de curso y en las tarjetas.<br/>• <b>Foto de portada del inicio</b>: 16:9, consultorio moderno con luz natural, sin personas reconocibles; hoy uso una foto pequeña del sitio viejo.<br/>• <b>Iconos de área</b> (9): línea fina, un solo color, 512 px SVG o PNG: Ortodoncia, Periodoncia, Endodoncia, Odontopediatría, Cirugía, Estética, Materiales, Cariología, Medicina bucal.', 'body')]
 

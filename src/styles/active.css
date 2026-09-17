@@ -63,7 +63,7 @@
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-4deg) } 50% { transform: translateY(-14px) rotate(2deg) } }
 
 /* Tarjeta de curso con foto a sangre */
-.pcard { position: relative; display: block; aspect-ratio: 4/5; border-radius: var(--r-xl); overflow: hidden; color: #fff; background: var(--surface-2); box-shadow: var(--shadow-md); transition: transform var(--t-base), box-shadow var(--t-base); }
+.pcard { position: relative; display: block; aspect-ratio: 3/4; border-radius: var(--r-xl); overflow: hidden; color: #fff; background: var(--surface-2); box-shadow: var(--shadow-md); transition: transform var(--t-base), box-shadow var(--t-base); }
 .pcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); text-decoration: none; }
 .pcard img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 .pcard:hover img { transform: scale(1.06); }
