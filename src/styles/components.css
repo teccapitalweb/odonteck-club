@@ -260,7 +260,8 @@
 .grid { display: grid; gap: 20px; }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shelf__item, .book, .book * { color: inherit; }
+.shelf__item { color: inherit; }
+.book__title a { color: inherit; }
 .shelf__item:hover { text-decoration: none; }
 .grid--4 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
 .stack { display: grid; gap: 12px; }
