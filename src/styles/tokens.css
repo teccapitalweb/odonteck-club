@@ -1,0 +1,125 @@
+/* ═══════════════════════════════════════════════════════════════
+   OdonTeck Club · tokens de diseño
+   Marca: marino #20254B (wordmark) · degradado azul #4A7FC1 → teal #6FBFB0
+   Modo claro es el principal. Oscuro con [data-theme="dark"].
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  color-scheme: light;
+
+  /* ── Marca ── */
+  --brand-navy: #20254b;
+  --brand-blue: #4a7fc1;
+  --brand-teal: #6fbfb0;
+  --brand-gradient: linear-gradient(120deg, var(--brand-blue), var(--brand-teal));
+
+  /* ── Escala azul (primario) ── */
+  --blue-50: #eef4fb;
+  --blue-100: #d9e6f6;
+  --blue-200: #b4cdee;
+  --blue-300: #86aee1;
+  --blue-400: #4a7fc1;
+  --blue-500: #2f6fb5;
+  --blue-600: #24599a;
+  --blue-700: #1c467a;
+  --blue-800: #163659;
+  --blue-900: #20254b;
+
+  /* ── Escala teal (acento / progreso) ── */
+  --teal-50: #edf8f6;
+  --teal-100: #d4efea;
+  --teal-300: #9bd9cc;
+  --teal-400: #6fbfb0;
+  --teal-500: #4fa899;
+  --teal-600: #3b8a7d;
+
+  /* ── Semánticos ── */
+  --primary: var(--blue-500);
+  --primary-hover: var(--blue-600);
+  --primary-soft: var(--blue-50);
+  --primary-ink: #ffffff;
+  --accent: var(--teal-500);
+  --accent-soft: var(--teal-50);
+  --success: #2e9e6b;
+  --warning: #c7871a;
+  --danger: #c9463d;
+  --danger-soft: #fbeceb;
+
+  /* ── Neutros "papel" ── */
+  --bg: #f6f5f1;
+  --bg-elev: #fbfaf7;
+  --surface: #ffffff;
+  --surface-2: #f1efe9;
+  --surface-3: #e9e7df;
+  --line: #e5e2da;
+  --line-strong: #d3cfc4;
+  --text: #1b1f33;
+  --text-2: #545a72;
+  --text-3: #8b90a5;
+  --text-inverse: #ffffff;
+
+  /* ── Tipografía ── */
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-body: 'Inter Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: clamp(2rem, 1.4rem + 2vw, 2.75rem);
+  --fs-3xl: clamp(2.5rem, 1.6rem + 3.4vw, 4.25rem);
+
+  /* ── Espaciado / forma ── */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 22px; --r-2xl: 28px; --r-full: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(27, 31, 51, .06), 0 1px 1px rgba(27, 31, 51, .04);
+  --shadow-md: 0 6px 18px -6px rgba(27, 31, 51, .14), 0 2px 6px rgba(27, 31, 51, .05);
+  --shadow-lg: 0 24px 48px -18px rgba(27, 31, 51, .28), 0 8px 20px -10px rgba(27, 31, 51, .12);
+  --shadow-cover: 0 30px 50px -20px rgba(27, 31, 51, .45), 0 10px 18px -8px rgba(27, 31, 51, .2);
+  --ring: 0 0 0 3px rgba(47, 111, 181, .28);
+
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t-fast: 140ms var(--ease);
+  --t-base: 220ms var(--ease);
+
+  --sidebar-w: 264px;
+  --topbar-h: 64px;
+  --content-max: 1240px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --primary: #7fb0e6;
+  --primary-hover: #96c0ee;
+  --primary-soft: rgba(127, 176, 230, .12);
+  --primary-ink: #0d1220;
+  --accent: #7bd0c0;
+  --accent-soft: rgba(123, 208, 192, .12);
+  --success: #5cc590;
+  --warning: #e0a63f;
+  --danger: #ef7d74;
+  --danger-soft: rgba(239, 125, 116, .14);
+
+  --bg: #0d1220;
+  --bg-elev: #111828;
+  --surface: #151c2e;
+  --surface-2: #1b2338;
+  --surface-3: #232d45;
+  --line: #262f47;
+  --line-strong: #344060;
+  --text: #f1f3f8;
+  --text-2: #aeb6cb;
+  --text-3: #7b849c;
+  --text-inverse: #0d1220;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-md: 0 8px 22px -8px rgba(0, 0, 0, .6);
+  --shadow-lg: 0 28px 56px -20px rgba(0, 0, 0, .75);
+  --shadow-cover: 0 30px 50px -18px rgba(0, 0, 0, .8);
+  --ring: 0 0 0 3px rgba(127, 176, 230, .35);
+}
