@@ -45,7 +45,10 @@ export const Datos = {
   modo: (import.meta.env.VITE_API_URL ? 'api' : 'demo') as 'api' | 'demo',
   libraryId: catalogoSeed.libraryId as string,
 
-  cursos: () => leer<Curso[]>('cursos', cursosSeed).sort((a, b) => a.orden - b.orden),
+  cursos: () => leer<Curso[]>('cursos', cursosSeed)
+    // Portadas nuevas: si el demo guardado conserva la portada provisional, se toma la del catálogo
+    .map((c) => { const s = cursosSeed.find((x) => x.id === c.id); return s && /^\/cursos\/curso-\d+\.webp$/.test(c.portada) && s.portada !== c.portada ? { ...c, portada: s.portada } : c; })
+    .sort((a, b) => a.orden - b.orden),
   guardarCurso(c: Curso) { const l = this.cursos(); const i = l.findIndex((x) => x.id === c.id); i >= 0 ? (l[i] = c) : l.push(c); escribir('cursos', l); },
   borrarCurso(id: string) { escribir('cursos', this.cursos().filter((c) => c.id !== id)); },
   reordenarCursos(ids: string[]) { const l = this.cursos(); ids.forEach((id, i) => { const c = l.find((x) => x.id === id); if (c) c.orden = i + 1; }); escribir('cursos', l); },

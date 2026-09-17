@@ -36,9 +36,12 @@ paginas = {}
 for mid, fn in DOCS.items():
     pdf = f'{OUT}/{mid}.pdf'
     meta, story = fn()
+    flow = f'scripts/materiales/portadas-flow/{mid}.jpg'
+    if os.path.exists(flow): meta['cover_image'] = flow
     build(pdf, meta, story)
     paginas[mid] = len(PdfReader(pdf).pages)
-    portada_desde(pdf, f'{COV}/{mid}.webp')
+    if os.path.exists(flow): Image.open(flow).convert('RGB').resize((720, 964), Image.LANCZOS).save(f'{COV}/{mid}.webp', quality=84)
+    else: portada_desde(pdf, f'{COV}/{mid}.webp')
     print(f'{mid}: {paginas[mid]} págs')
 
 # Presentación 16:9 + portada vertical aparte (la biblioteca muestra portadas 3:4)
@@ -46,8 +49,12 @@ mid = 'manual-estratificacion-resinas'
 meta, n = docs_b.presentacion_resinas(f'{OUT}/{mid}.pdf')
 paginas[mid] = n
 tmp = f'{COV}/_tmp_cover.pdf'
-c = pdfcanvas.Canvas(tmp, pagesize=letter); draw_cover(c, *letter, meta); c.showPage(); c.save()
-portada_desde(tmp, f'{COV}/{mid}.webp'); os.remove(tmp)
+flow = f'scripts/materiales/portadas-flow/{mid}.jpg'
+if os.path.exists(flow):
+    Image.open(flow).convert('RGB').resize((720, 964), Image.LANCZOS).save(f'{COV}/{mid}.webp', quality=84)
+else:
+    c = pdfcanvas.Canvas(tmp, pagesize=letter); draw_cover(c, *letter, meta); c.showPage(); c.save()
+    portada_desde(tmp, f'{COV}/{mid}.webp'); os.remove(tmp)
 print(f'{mid}: {n} láminas')
 
 # Actualizar catálogo de materiales

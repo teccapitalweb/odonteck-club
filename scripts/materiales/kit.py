@@ -151,7 +151,12 @@ def build(path, meta, story, landscape_size=None):
                           title=meta['title'].replace('<br/>', ' '), author='OdonTeck Consulting Group', subject=meta['eyebrow'])
     frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id='f', leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
 
-    def on_cover(c, d): draw_cover(c, w, h, meta)
+    def on_cover(c, d):
+        img = meta.get('cover_image')
+        if img:  # portada generada en Flow, a sangre
+            c.drawImage(img, 0, 0, width=w, height=h, preserveAspectRatio=False)
+        else:
+            draw_cover(c, w, h, meta)
 
     def on_page(c, d):
         c.saveState()

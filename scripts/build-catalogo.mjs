@@ -1,6 +1,6 @@
 // Genera src/data/catalogo.json a partir del catálogo Bunny del club actual.
 // Provisional hasta la Fase 2 (los datos reales de área/ponente/portada vienen de Firestore).
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 
 const src = readFileSync('C:/dev/Odonteck/assets/odonteck-bunny-catalog.js', 'utf8');
 globalThis.window = {};
@@ -29,7 +29,7 @@ const cursos = catalogo.map((c, i) => {
     area,
     nivel: NIVEL[c.sesiones.length] || 'Intermedio',
     instructor: 'Equipo OdonTeck',
-    portada: `/cursos/curso-${String((i % 18) + 1).padStart(2, '0')}.webp`,
+    portada: existsSync(`public/cursos/${slug(c.titulo)}.webp`) ? `/cursos/${slug(c.titulo)}.webp` : `/cursos/curso-${String((i % 18) + 1).padStart(2, '0')}.webp`,
     descripcion: `Curso grabado de la membresía OdonTeck: ${c.titulo}. ${c.sesiones.length} clases con casos reales de consultorio.`,
     orden: i + 1,
     bunnyCollectionId: c.collectionId,

@@ -23,28 +23,46 @@ document.querySelectorAll<HTMLAnchorElement>('[data-praxia]').forEach((a) => (a.
 document.querySelectorAll('[data-descuento]').forEach((e) => (e.textContent = String(cfg.descuentoVIP)));
 document.querySelector('[data-anio]')!.textContent = String(new Date().getFullYear());
 
-// ── Cursos en vivo con filtro por área ──
-type CursoVivo = (typeof cursos)[number];
-const areas = ['Todos', ...new Set(cursos.map((c) => c.area))];
+// ── Catálogo del club con filtro por área ──
+const club = Datos.cursos().filter((c) => c.publicado !== false);
+document.querySelectorAll('[data-precio-mensual]').forEach((e) => (e.textContent = `$${cfg.precioMensual.toLocaleString('es-MX')}`));
+const areas = ['Todos', ...new Set(club.map((c) => c.area))];
 let filtro = 'Todos';
 function pintarCursos() {
-  const lista = filtro === 'Todos' ? cursos : cursos.filter((c) => c.area === filtro);
+  const lista = filtro === 'Todos' ? club : club.filter((c) => c.area === filtro);
   document.querySelector('[data-filtros]')!.innerHTML = areas.map((a) => `<button class="chip ${a === filtro ? 'chip--primary' : 'chip--outline'}" data-area="${esc(a)}">${esc(a)}</button>`).join('');
   document.querySelector('[data-cursos]')!.innerHTML = lista.map((c, i) => `
     <article class="lp-curso" style="--i:${i}">
-      <button class="lp-curso__cover" data-temario="${c.id}" aria-label="Ver temario de ${esc(c.nombre)}"><img src="${c.img}" alt="" loading="lazy"><span class="chip chip--glass">${esc(c.area)}</span></button>
+      <a class="lp-curso__cover" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}" aria-label="${esc(c.titulo)}"><img src="${c.portada}" alt="" loading="lazy"><span class="chip chip--glass">${esc(c.area)}</span></a>
       <div class="lp-curso__body">
-        <h3>${esc(c.nombre)}</h3>
-        <p class="lp-curso__ponente"><i data-lucide="user-round" class="i"></i>${esc(c.ponente)}</p>
+        <h3>${esc(c.titulo)}</h3>
+        <p class="lp-curso__ponente"><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases · ${esc(c.nivel)}</p>
         <div class="lp-curso__foot">
-          <span class="lp-curso__precio"><small>Inversión</small>$${c.costo} MXN</span>
-          <div class="row" style="gap:6px"><button class="btn btn--secondary btn--sm" data-temario="${c.id}">Temario</button><a class="btn btn--brand btn--sm" href="${wa(`Hola OdonTeck, quiero inscribirme al curso "${c.nombre}".`)}" target="_blank" rel="noopener">Inscribirme</a></div>
+          <span class="lp-curso__gratis"><i data-lucide="gift" class="i"></i>Primera clase gratis</span>
+          <a class="btn btn--brand btn--sm" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}">Ver curso</a>
         </div>
       </div>
     </article>`).join('');
   createIcons({ icons });
 }
 pintarCursos();
+
+// ── Cursos en vivo (beneficio: descuento para miembros) ──
+type CursoVivo = (typeof cursos)[number];
+document.querySelector('[data-envivo-flyers]')!.innerHTML = cursos.slice(0, 3).map((c) =>
+  `<button class="lp-envivo__flyer" data-temario="${c.id}" aria-label="Ver ${esc(c.nombre)}"><img src="${c.img}" alt="" loading="lazy"></button>`).join('');
+function abrirEnVivo() {
+  document.querySelector('[data-modal-body]')!.innerHTML = `
+    <button class="lp-modal__close" data-cerrar aria-label="Cerrar"><i data-lucide="x" class="i"></i></button>
+    <div class="lp-modal__content">
+      <span class="chip chip--live">Cursos en vivo</span>
+      <h3 class="display" style="font-size:var(--fs-xl);margin:10px 0 6px">Cursos en vivo de OdonTeck</h3>
+      <p class="muted">Miembros del club: ${cfg.descuentoVIP}% de descuento. Toca un curso para ver su temario.</p>
+      <ul class="lp-envivo__lista">${cursos.map((c) => `<li><button data-temario="${c.id}"><img src="${c.img}" alt="" loading="lazy"><span><strong>${esc(c.nombre)}</strong><small>${esc(c.ponente)} · $${c.costo} MXN</small></span><i data-lucide="chevron-right" class="i"></i></button></li>`).join('')}</ul>
+    </div>`;
+  createIcons({ icons });
+  if (!modal.open) modal.showModal();
+}
 
 // ── Modal de temario ──
 const modal = document.querySelector<HTMLDialogElement>('[data-modal]')!;
@@ -65,7 +83,8 @@ function abrirTemario(c: CursoVivo) {
       <p class="faint" style="font-size:var(--fs-xs);margin-top:10px">Miembros del Club OdonTeck: ${cfg.descuentoVIP}% de descuento en cursos en vivo.</p>
     </div>`;
   createIcons({ icons });
-  modal.showModal();
+  if (!modal.open) modal.showModal();
+  modal.scrollTop = 0;
 }
 modal.addEventListener('click', (e) => { if (e.target === modal || (e.target as HTMLElement).closest('[data-cerrar]')) modal.close(); });
 
@@ -122,6 +141,7 @@ document.addEventListener('click', (e) => {
   if (area) { filtro = area.dataset.area!; pintarCursos(); }
   const t = el.closest<HTMLElement>('[data-temario]');
   if (t) { const c = cursos.find((x) => String(x.id) === t.dataset.temario); if (c) abrirTemario(c); }
+  if (el.closest('[data-ver-envivo]')) abrirEnVivo();
   const sc = el.closest<HTMLElement>('[data-scroll]');
   if (sc) { const [k, d] = sc.dataset.scroll!.split(':'); const box = document.querySelector<HTMLElement>(`[data-${k}]`)!; box.scrollBy({ left: Number(d) * box.clientWidth * 0.8, behavior: 'smooth' }); }
   if (el.closest('[data-burger]')) { const m = document.querySelector<HTMLElement>('[data-mobile-menu]')!; m.hidden = !m.hidden; }
