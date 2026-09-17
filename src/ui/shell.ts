@@ -1,4 +1,5 @@
 // Cascarón de la app: barra lateral, barra superior, barra inferior móvil, salida del router.
+import { Perfil } from '../core/perfil';
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
   { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
@@ -33,8 +34,8 @@ export function shellHTML() {
           <button class="btn btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar app</button>
         </div>
         <a class="user-card" href="#/perfil">
-          <div class="avatar">FR</div>
-          <div><div class="user-card__name">Dra. Fernanda Ramírez</div><div class="user-card__plan"><i data-lucide="crown" class="i"></i>VIP anual</div></div>
+          <div class="avatar">${Perfil.iniciales()}</div>
+          <div><div class="user-card__name">${Perfil.get().nombre}</div><div class="user-card__plan"><i data-lucide="crown" class="i"></i>VIP ${Perfil.get().plan}</div></div>
           <span class="btn btn--ghost btn--icon" aria-label="Configuración"><i data-lucide="settings" class="i"></i></span>
         </a>
       </div>
@@ -45,7 +46,7 @@ export function shellHTML() {
         <div class="topbar__right">
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" aria-label="Notificaciones"><i data-lucide="bell" class="i"></i></button>
-          <a class="avatar" href="#/perfil" aria-label="Mi perfil">FR</a>
+          <a class="avatar" href="#/perfil" aria-label="Mi perfil">${Perfil.iniciales()}</a>
         </div>
       </header>
       <main class="content" id="outlet" style="display:grid;gap:56px;align-content:start"></main>

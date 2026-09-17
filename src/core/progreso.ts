@@ -2,7 +2,7 @@
 // Firestore (progreso/{uid}_{cursoId}) a través del backend. La interfaz no cambia.
 import { cursos, type Curso } from './catalogo';
 
-interface ProgresoCurso { vistas: number[]; ultima: number; actualizado: string; }
+interface ProgresoCurso { vistas: number[]; ultima: number; actualizado: string; historial?: string[]; }
 const KEY = 'odonteck-club:progreso:v1';
 
 function leer(): Record<string, ProgresoCurso> {
@@ -14,7 +14,7 @@ export const Progreso = {
   de(cursoId: string): ProgresoCurso { return leer()[cursoId] || { vistas: [], ultima: 1, actualizado: '' }; },
   marcarVista(cursoId: string, n: number) {
     const all = leer(); const p = all[cursoId] || { vistas: [], ultima: n, actualizado: '' };
-    if (!p.vistas.includes(n)) p.vistas.push(n);
+    if (!p.vistas.includes(n)) { p.vistas.push(n); (p.historial ||= []).push(new Date().toISOString()); }
     p.vistas.sort((a, b) => a - b); p.ultima = n; p.actualizado = new Date().toISOString();
     all[cursoId] = p; escribir(all);
   },
@@ -35,4 +35,5 @@ export const Progreso = {
   completados(): Curso[] { return cursos.filter((c) => this.completado(c)); },
   reciente(): Curso | undefined { return this.enMarcha()[0]; },
   totalVistas() { return Object.values(leer()).reduce((a, p) => a + p.vistas.length, 0); },
+  fechas(): string[] { return Object.values(leer()).flatMap((p) => p.historial || []); },
 };
