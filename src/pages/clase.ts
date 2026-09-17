@@ -60,7 +60,7 @@ export function clase(params: Record<string, string>) {
     <div class="grid" style="grid-template-columns:1.7fr 1fr;align-items:start;gap:24px">
       <div class="stack" style="gap:16px">
         <div class="player" style="aspect-ratio:16/9;background:#0a0d18">
-          <iframe ${Datos.modo === 'demo' ? `src="${embed}"` : ''} data-video="${c.id}:${n}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+          <iframe ${Datos.modo === 'demo' ? `src="${embed}"` : ''} data-video="${c.id}:${n}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen></iframe>
         </div>
         <div class="row" style="justify-content:space-between;align-items:flex-start">
           <div><span class="eyebrow">Clase ${n} de ${c.clases.length}${k.duracion ? ' · ' + fmtMin(k.duracion) : ''}</span><h1 class="display" style="font-size:var(--fs-xl);margin-top:4px">${esc(k.titulo)}</h1>
