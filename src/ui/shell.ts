@@ -32,7 +32,11 @@ export function shellHTML() {
           <p>Instálalo como app: abre más rápido y a pantalla completa.</p>
           <button class="btn btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar app</button>
         </div>
-        <a class="nav__item" href="#/configuracion" data-nav><i data-lucide="settings" class="i"></i>Configuración</a>
+        <a class="user-card" href="#/perfil">
+          <div class="avatar">FR</div>
+          <div><div class="user-card__name">Dra. Fernanda Ramírez</div><div class="user-card__plan"><i data-lucide="crown" class="i"></i>VIP anual</div></div>
+          <span class="btn btn--ghost btn--icon" aria-label="Configuración"><i data-lucide="settings" class="i"></i></span>
+        </a>
       </div>
     </aside>
     <div class="main">

@@ -3,6 +3,9 @@ import { type Curso, duracionCurso } from '../core/catalogo';
 
 export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 
+export const iniciales = (nombre: string) =>
+  nombre.replace(/^(Dra?\.|Ing\.|Lic\.|Equipo)\s*/i, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'OT';
+
 export function tarjetaCurso(c: Curso) {
   const p = Progreso.porcentaje(c);
   const done = Progreso.completado(c);
@@ -19,6 +22,10 @@ export function tarjetaCurso(c: Curso) {
       <div class="pcard__title">${esc(c.titulo)}</div>
       <div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases</span><span><i data-lucide="signal" class="i"></i>${c.nivel}</span></div>
       ${p > 0 && !done ? `<div class="progress progress--thin"><span style="width:${p}%"></span></div>` : ''}
+    </div>
+    <div class="pcard__cta">
+      <span class="who"><span class="avatar">${iniciales(c.instructor)}</span>${esc(c.instructor)}</span>
+      <span class="btn btn--sm">${done ? 'Repasar' : p > 0 ? 'Continuar' : 'Ver curso'}</span>
     </div>
   </a>`;
 }

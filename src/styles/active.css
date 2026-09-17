@@ -67,7 +67,7 @@
 .pcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); text-decoration: none; }
 .pcard img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 .pcard:hover img { transform: scale(1.06); }
-.pcard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,42,92,0) 35%, rgba(20,42,92,.55) 70%, rgba(13,18,32,.92) 100%); }
+.pcard::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,42,92,0) 30%, rgba(20,42,92,.55) 62%, rgba(13,18,32,.94) 100%); }
 .pcard__top { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: center; z-index: 1; }
 .pcard__body { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1; display: grid; gap: 8px; }
 .pcard__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); line-height: 1.15; letter-spacing: -.02em; }
@@ -129,3 +129,51 @@
 .tabs a.chip--primary { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
 .tabs a:hover { text-decoration: none; }
 a.lesson:hover { text-decoration: none; }
+
+/* ═══ v0.3 · animaciones de entrada, tarjeta de usuario, "a continuación" ═══ */
+@keyframes reveal { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+#outlet > section { animation: reveal .5s var(--ease) both; }
+#outlet > section:nth-child(2) { animation-delay: .08s } #outlet > section:nth-child(3) { animation-delay: .16s } #outlet > section:nth-child(4) { animation-delay: .24s }
+.pcard, .lesson, .shelf__item, .medal { animation: reveal .55s var(--ease) both; }
+.pcard:nth-child(2), .lesson:nth-child(2) { animation-delay: .06s } .pcard:nth-child(3), .lesson:nth-child(3) { animation-delay: .12s }
+.pcard:nth-child(4), .lesson:nth-child(4) { animation-delay: .18s } .pcard:nth-child(5), .lesson:nth-child(5) { animation-delay: .24s }
+.pcard:nth-child(n+6), .lesson:nth-child(n+6) { animation-delay: .3s }
+
+/* Hover de tarjeta de curso: sube una píldora "Ver curso" */
+.pcard__cta { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 2; display: flex; justify-content: space-between; align-items: center;
+  opacity: 0; transform: translateY(10px); transition: opacity var(--t-base), transform var(--t-base); }
+.pcard:hover .pcard__cta { opacity: 1; transform: none; }
+.pcard:hover .pcard__body { transform: translateY(-48px); }
+.pcard__body { transition: opacity var(--t-base), transform var(--t-base); }
+.pcard__cta .btn { background: #fff; color: var(--brand-navy); }
+.pcard__cta .who { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); }
+.pcard__cta .who .avatar { width: 28px; height: 28px; font-size: 11px; border: 2px solid rgba(255,255,255,.6); }
+
+/* Tarjeta de usuario en la barra lateral */
+.user-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-elev); }
+.user-card__name { font-weight: 700; font-size: var(--fs-sm); line-height: 1.2; }
+.user-card__plan { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.user-card__plan .i { width: 11px; height: 11px; }
+.user-card .btn--icon { margin-left: auto; width: 34px; min-height: 34px; }
+
+/* "A continuación" bajo el video */
+.upnext { display: grid; grid-template-columns: 150px 1fr auto; gap: 16px; align-items: center; padding: 14px; border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.upnext__thumb { aspect-ratio: 16/10; border-radius: var(--r-md); overflow: hidden; position: relative; }
+.upnext__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.upnext__thumb .i { position: absolute; inset: 0; margin: auto; width: 18px; height: 18px; color: #fff; filter: drop-shadow(0 1px 2px rgba(0,0,0,.5)); }
+.upnext__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); line-height: 1.2; }
+@media (max-width: 640px) { .upnext { grid-template-columns: 1fr; } }
+
+/* Banda del catálogo */
+.catalog-band { position: relative; overflow: hidden; border-radius: var(--r-2xl); padding: 36px 40px; background: var(--hero-gradient); color: #fff; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; box-shadow: var(--shadow-lg); }
+.catalog-band::after { content: ''; position: absolute; right: -60px; top: -60px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(111,191,176,.45), transparent 65%); }
+.catalog-band h1 { font-size: var(--fs-2xl); position: relative; }
+.catalog-band .hero__stats { border-top: 0; padding-top: 0; position: relative; }
+.catalog-band .tabs { position: relative; background: rgba(255,255,255,.12); }
+.catalog-band .tabs a { color: rgba(255,255,255,.75); }
+.catalog-band .tabs a.chip--primary { background: #fff; color: var(--brand-navy); }
+@media (max-width: 1024px) { .catalog-band { grid-template-columns: 1fr; padding: 24px; } }
+
+/* Barra de progreso fina en la cabecera de clase */
+.lesson-progress { display: flex; align-items: center; gap: 10px; font-size: var(--fs-xs); color: var(--text-3); }
+.lesson-progress .progress { width: 120px; }
