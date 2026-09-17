@@ -1,9 +1,10 @@
-import data from '../data/materiales.json';
+import { Datos, type Material } from '../core/datos';
 import { curso as getCurso } from '../core/catalogo';
 import { esc, placeholder } from '../ui/partials';
 
-interface Material { id: string; titulo: string; tipo: string; categoria: string; area: string; autor: string; paginas: number; portada: string; cursoId: string | null; descripcion: string; estado: string; url?: string }
-export const materiales = data as Material[];
+export const materiales: Material[] = [];
+const recargar = () => materiales.splice(0, materiales.length, ...Datos.materiales().filter((m) => m.estado !== 'oculto'));
+recargar(); window.addEventListener('datos:cambio', recargar);
 const tipoIcon: Record<string, string> = { PDF: 'file-text', Libro: 'book-open', Presentación: 'presentation' };
 
 export function estante(items: Material[]) {

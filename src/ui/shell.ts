@@ -1,5 +1,8 @@
 // Cascarón de la app: barra lateral, barra superior, barra inferior móvil, salida del router.
 import { Perfil } from '../core/perfil';
+import { Auth } from '../core/auth';
+import { Datos } from '../core/datos';
+const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
   { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
@@ -17,7 +20,7 @@ export function shellHTML() {
   const items = NAV.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`
-      : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && n.badge ? `<span class="badge">${n.badge}</span>` : ''}</a>`
+      : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && proximos() ? `<span class="badge">${proximos()}</span>` : ''}</a>`
   ).join('');
   const bottom = NAV.filter((n) => 'href' in n).slice(0, 4).map((n: any) =>
     `<a href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}</a>`).join('') +
@@ -26,7 +29,7 @@ export function shellHTML() {
   <div class="app">
     <aside class="sidebar">
       <a class="sidebar__logo" href="#/"><img data-logo src="/brand/logo-horizontal.png" alt="OdonTeck" /></a>
-      <nav class="nav">${items}</nav>
+      <nav class="nav">${items}${Auth.usuario?.esAdmin ? `<div class="nav__label eyebrow">TEC Capital</div><a class="nav__item nav__item--admin" href="#/admin"><i data-lucide="shield-check" class="i"></i>Panel admin</a>` : ''}</nav>
       <div class="sidebar__foot">
         <div class="install-card" data-install>
           <h4>Lleva OdonTeck en tu bolsillo</h4>
@@ -45,7 +48,7 @@ export function shellHTML() {
         <form class="search" data-search><i data-lucide="search" class="i"></i><input class="input" name="q" placeholder="Buscar cursos, clases o materiales…" autocomplete="off" /></form>
         <div class="topbar__right">
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
-          <button class="btn btn--ghost btn--icon" aria-label="Notificaciones"><i data-lucide="bell" class="i"></i></button>
+          <div class="notifs"><button class="btn btn--ghost btn--icon" aria-label="Notificaciones" data-notifs><i data-lucide="bell" class="i"></i><span class="badge notifs__badge" data-notifs-badge hidden></span></button><div class="notifs__panel" data-notifs-panel hidden></div></div>
           <a class="avatar" href="#/perfil" aria-label="Mi perfil">${Perfil.iniciales()}</a>
         </div>
       </header>

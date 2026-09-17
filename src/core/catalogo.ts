@@ -1,14 +1,18 @@
-import data from '../data/catalogo.json';
+// Vista del catálogo para miembros: solo cursos publicados, en orden. Se recarga cuando el admin cambia algo.
+import { Datos, type Curso, type Clase } from './datos';
+export type { Curso, Clase };
 
-export interface Clase { n: number; titulo: string; videoId: string; duracion: number | null; gratis: boolean; }
-export interface Curso {
-  id: string; titulo: string; area: string; nivel: string; instructor: string; portada: string;
-  descripcion: string; orden: number; bunnyCollectionId: string; clases: Clase[];
+export const LIBRARY_ID: string = Datos.libraryId;
+export const cursos: Curso[] = [];
+export const areas: string[] = [];
+
+export function recargarCatalogo() {
+  const publicados = Datos.cursos().filter((c) => c.publicado !== false);
+  cursos.splice(0, cursos.length, ...publicados);
+  areas.splice(0, areas.length, ...[...new Set(publicados.map((c) => c.area))].sort((a, b) => a.localeCompare(b, 'es')));
 }
-
-export const LIBRARY_ID: string = data.libraryId;
-export const cursos: Curso[] = data.cursos as Curso[];
-export const areas: string[] = [...new Set(cursos.map((c) => c.area))].sort((a, b) => a.localeCompare(b, 'es'));
+recargarCatalogo();
+window.addEventListener('datos:cambio', recargarCatalogo);
 
 export const curso = (id: string) => cursos.find((c) => c.id === id);
 export const buscar = (q: string) => {

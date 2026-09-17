@@ -1,22 +1,21 @@
-import eventos from '../data/envivo.json';
+import { Datos, type Evento } from '../core/datos';
 import { cursos } from '../core/catalogo';
 import { BRAND } from '../core/brand';
 import { esc, tarjetaCurso } from '../ui/partials';
 
-interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string; cursoId?: string }
-const lista = eventos as Evento[];
+const eventosPublicados = (): Evento[] => Datos.eventos().filter((e) => e.publicado !== false);
 const KEY = 'odonteck-club:reservas:v1';
 const reservas = (): string[] => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
 export const toggleReserva = (id: string) => { const r = reservas(); const i = r.indexOf(id); i >= 0 ? r.splice(i, 1) : r.push(id); localStorage.setItem(KEY, JSON.stringify(r)); };
 
 const fmt = (iso: string) => new Date(iso).toLocaleString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
 
-export function proximoEvento() { return lista.filter((e) => new Date(e.fecha).getTime() > Date.now()).sort((a, b) => a.fecha.localeCompare(b.fecha))[0]; }
+export function proximoEvento() { return eventosPublicados().filter((e) => new Date(e.fecha).getTime() > Date.now()).sort((a, b) => a.fecha.localeCompare(b.fecha))[0]; }
 
 export function envivo() {
   const ahora = Date.now();
-  const proximos = lista.filter((e) => new Date(e.fecha).getTime() > ahora).sort((a, b) => a.fecha.localeCompare(b.fecha));
-  const pasados = lista.filter((e) => new Date(e.fecha).getTime() <= ahora);
+  const proximos = eventosPublicados().filter((e) => new Date(e.fecha).getTime() > ahora).sort((a, b) => a.fecha.localeCompare(b.fecha));
+  const pasados = eventosPublicados().filter((e) => new Date(e.fecha).getTime() <= ahora);
   const r = reservas();
   const prox = proximos[0];
 

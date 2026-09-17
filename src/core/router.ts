@@ -1,10 +1,11 @@
-// Router por hash: #/cursos, #/curso/:id, #/curso/:id/clase/:n
+// Router por hash: #/cursos, #/curso/:id, #/admin/cursos/:id …
 export type Params = Record<string, string>;
 export type Page = (params: Params, query: URLSearchParams) => string | Promise<string>;
 
 const routes: { pattern: RegExp; keys: string[]; page: Page }[] = [];
-let outlet: HTMLElement;
-let afterRender: (() => void)[] = [];
+const afterRender: (() => void)[] = [];
+let beforeRender: (path: string) => boolean | Promise<boolean> = () => true;
+let getOutlet: () => HTMLElement = () => document.getElementById('outlet')!;
 
 export function route(path: string, page: Page) {
   const keys: string[] = [];
@@ -13,6 +14,7 @@ export function route(path: string, page: Page) {
 }
 
 export function onRender(fn: () => void) { afterRender.push(fn); }
+export function onBeforeRender(fn: (path: string) => boolean | Promise<boolean>) { beforeRender = fn; }
 
 export function navigate(hash: string) { location.hash = hash.startsWith('#') ? hash : '#' + hash; }
 
@@ -22,14 +24,20 @@ export function current() {
   return { path, query: new URLSearchParams(qs) };
 }
 
-async function render() {
+let token = 0;
+export async function render() {
+  const mine = ++token;
   const { path, query } = current();
+  if (!(await beforeRender(path)) || mine !== token) return;
+  const outlet = getOutlet();
   for (const r of routes) {
     const m = path.match(r.pattern);
     if (!m) continue;
     const params: Params = {};
     r.keys.forEach((k, i) => (params[k] = decodeURIComponent(m[i + 1])));
-    outlet.innerHTML = await r.page(params, query);
+    const html = await r.page(params, query);
+    if (mine !== token) return;
+    outlet.innerHTML = html;
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     afterRender.forEach((fn) => fn());
     return;
@@ -38,8 +46,8 @@ async function render() {
   afterRender.forEach((fn) => fn());
 }
 
-export function startRouter(el: HTMLElement) {
-  outlet = el;
+export function startRouter(outletGetter?: () => HTMLElement) {
+  if (outletGetter) getOutlet = outletGetter;
   window.addEventListener('hashchange', render);
   render();
 }

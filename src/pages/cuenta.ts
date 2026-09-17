@@ -3,6 +3,7 @@ import { BRAND, wa } from '../core/brand';
 import { Progreso } from '../core/progreso';
 import { puntos } from '../core/logros';
 import { esc } from '../ui/partials';
+import { Auth } from '../core/auth';
 
 export function praxia() {
   return `
@@ -79,8 +80,8 @@ export function suscripcion() {
     </div>
     <div class="card card--pad stack" style="gap:10px">
       <h3 style="font-size:var(--fs-md)">Facturación y pagos</h3>
-      <p class="muted" style="font-size:var(--fs-sm)">Cambiar tarjeta, descargar recibos, cancelar o reactivar se hace en el portal seguro de Stripe. Se conecta en la Fase 2 con tu cuenta actual.</p>
-      <div class="row"><button class="btn btn--secondary" disabled><i data-lucide="credit-card" class="i"></i>Portal de facturación</button><a class="btn btn--ghost" href="${wa('Hola OdonTeck, tengo una duda sobre mi suscripción VIP.')}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Soporte por WhatsApp</a></div>
+      <p class="muted" style="font-size:var(--fs-sm)">Cambiar tarjeta, descargar recibos, cancelar o reactivar se hace en el portal seguro de Stripe. Tus pagos siempre se procesan en Stripe.</p>
+      <div class="row"><button class="btn btn--secondary" data-portal-stripe><i data-lucide="credit-card" class="i"></i>Portal de facturación</button><a class="btn btn--ghost" href="${wa('Hola OdonTeck, tengo una duda sobre mi suscripción VIP.')}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Soporte por WhatsApp</a></div>
     </div>
   </section>`;
 }
@@ -97,7 +98,7 @@ export function configuracion() {
     <div class="card card--pad stack" style="gap:10px"><span class="eyebrow">App</span>
       <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Instalar OdonTeck como app</strong><br><span class="faint" style="font-size:var(--fs-xs)">Pantalla completa, más rápido, acceso desde tu inicio</span></div><button class="btn btn--brand btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar</button></div></div>
     <div class="card card--pad stack" style="gap:10px"><span class="eyebrow">Cuenta</span>
-      <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Cerrar sesión</strong><br><span class="faint" style="font-size:var(--fs-xs)">Se conecta con Firebase en la Fase 2</span></div><button class="btn btn--danger btn--sm" disabled><i data-lucide="log-out" class="i"></i>Cerrar sesión</button></div>
+      <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Cerrar sesión</strong><br><span class="faint" style="font-size:var(--fs-xs)">Sales de este dispositivo</span></div><button class="btn btn--danger btn--sm" data-salir><i data-lucide="log-out" class="i"></i>Cerrar sesión</button></div>
       <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Legales</strong></div><div class="row"><a class="btn btn--ghost btn--sm" href="${BRAND.sitio}/pages/privacidad.html" target="_blank" rel="noopener">Privacidad</a><a class="btn btn--ghost btn--sm" href="${BRAND.sitio}/pages/terminos.html" target="_blank" rel="noopener">Términos</a></div></div>
     </div>
     <p class="faint" style="font-size:var(--fs-xs)">OdonTeck Club · versión 0.4 · TEC Capital</p>
@@ -105,7 +106,7 @@ export function configuracion() {
 }
 
 export function mas() {
-  const items = [['#/comunidad', 'messages-square', 'Comunidad'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
+  const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
   return `
   <section class="stack" style="gap:16px">
     <div class="row" style="gap:12px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>VIP ${Perfil.get().plan}</span></div></div>

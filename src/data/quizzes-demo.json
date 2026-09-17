@@ -1,0 +1,26 @@
+[
+  {
+    "id": "manejo-de-abscesos-periodontales_1",
+    "cursoId": "manejo-de-abscesos-periodontales",
+    "n": 1,
+    "estado": "borrador",
+    "actualizado": "2026-09-17T12:00:00Z",
+    "preguntas": [
+      { "q": "¿Qué hallazgo orienta a un absceso periodontal y no a uno periapical?", "opciones": ["Vitalidad pulpar negativa", "Bolsa periodontal profunda con vitalidad pulpar positiva", "Lesión radiolúcida en el ápice", "Caries profunda en el mismo diente"], "correcta": 1, "explicacion": "En el absceso periodontal la pulpa suele responder; la vitalidad negativa y la lesión apical orientan a origen endodóntico." },
+      { "q": "¿Cuál es el tratamiento principal de un absceso periodontal sin compromiso sistémico?", "opciones": ["Antibiótico sistémico solo", "Drenaje y desbridamiento local", "Extracción inmediata", "Enjuague de clorhexidina solo"], "correcta": 1, "explicacion": "El drenaje y el desbridamiento son el tratamiento; los antibióticos se reservan para compromiso sistémico o inmunodepresión." },
+      { "q": "¿Qué signo obliga a referir de inmediato?", "opciones": ["Supuración al presionar", "Movilidad grado I", "Celulitis facial que se extiende con dificultad para tragar", "Sensación de diente alto"], "correcta": 2, "explicacion": "La diseminación con disfagia o trismus puede comprometer la vía aérea y requiere atención de urgencia." }
+    ]
+  },
+  {
+    "id": "diagnostico-y-clasificacion-de-la-caries-dental_1",
+    "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-17T12:00:00Z",
+    "preguntas": [
+      { "q": "En ICDAS, ¿qué distingue al código 1 del código 2?", "opciones": ["El código 1 solo se ve con la superficie seca", "El código 2 tiene dentina visible", "El código 1 es una cavidad pequeña", "No hay diferencia clínica"], "correcta": 0, "explicacion": "El código 1 es visible solo tras secar con aire; el código 2 se aprecia incluso con la superficie húmeda." },
+      { "q": "¿Qué instrumento se recomienda para explorar sin dañar una lesión inicial?", "opciones": ["Explorador agudo con presión", "Sonda de punta roma", "Fresa de baja velocidad", "Cureta"], "correcta": 1, "explicacion": "La sonda de punta roma permite deslizar sin cavitar una lesión remineralizable." },
+      { "q": "Una lesión activa en esmalte suele verse…", "opciones": ["Brillante y lisa", "Blanca opaca y rugosa", "Negra y dura", "Sin cambios al secar"], "correcta": 1, "explicacion": "La opacidad sin brillo y la textura rugosa indican actividad." }
+    ]
+  }
+]

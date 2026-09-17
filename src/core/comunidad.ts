@@ -2,7 +2,7 @@
 import { Perfil } from './perfil';
 
 export interface Respuesta { id: string; autor: string; texto: string; fecha: string }
-export interface Hilo { id: string; titulo: string; texto: string; autor: string; fecha: string; cursoId: string | null; respuestas: Respuesta[]; util: number }
+export interface Hilo { id: string; titulo: string; texto: string; autor: string; fecha: string; cursoId: string | null; respuestas: Respuesta[]; util: number; oculto?: boolean }
 const KEY = 'odonteck-club:foro:v1';
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -15,10 +15,12 @@ function escribir(h: Hilo[]) { try { localStorage.setItem(KEY, JSON.stringify(h)
 
 export const Comunidad = {
   hilos(cursoId?: string | null): Hilo[] {
-    const h = leer().sort((a, b) => b.fecha.localeCompare(a.fecha));
+    const h = leer().filter((x) => !x.oculto).sort((a, b) => b.fecha.localeCompare(a.fecha));
     return cursoId === undefined ? h : h.filter((x) => x.cursoId === cursoId);
   },
-  hilo(id: string) { return leer().find((h) => h.id === id); },
+  hilo(id: string) { return leer().find((h) => h.id === id && !h.oculto); },
+  todos() { return leer().sort((a, b) => b.fecha.localeCompare(a.fecha)); },
+  alternarOculto(id: string) { const h = leer(); const t = h.find((x) => x.id === id); if (t) { t.oculto = !t.oculto; escribir(h); } },
   crear(titulo: string, texto: string, cursoId: string | null) {
     const h = leer(); const nuevo: Hilo = { id: uid(), titulo, texto, autor: Perfil.get().nombre, fecha: new Date().toISOString(), cursoId, respuestas: [], util: 0 };
     h.push(nuevo); escribir(h); return nuevo;

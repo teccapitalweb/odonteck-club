@@ -1,6 +1,31 @@
 import { curso as getCurso, LIBRARY_ID, fmtMin } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { esc, placeholder } from '../ui/partials';
+import { Datos, type Clase } from '../core/datos';
+
+const vacioTab = (icon: string, titulo: string, texto: string, color = 'primary') => `<div class="stack" style="gap:10px;text-align:center;padding:20px 0"><span class="circle-btn" style="width:48px;height:48px;background:var(--${color}-soft);color:var(--${color});margin:0 auto"><i data-lucide="${icon}" class="i"></i></span><strong>${titulo}</strong><p class="muted" style="font-size:var(--fs-sm)">${texto}</p></div>`;
+
+function notasHTML(k: Clase) {
+  if (!k.notas) return vacioTab('captions', 'Notas de la clase', 'Resumen y conceptos clave con marca de tiempo. Se generan de la transcripción del video y las revisa OdonTeck.');
+  return `<h4 style="font-size:var(--fs-sm)">Resumen</h4><p class="muted" style="font-size:var(--fs-sm)">${esc(k.notas.resumen)}</p>
+    <h4 style="font-size:var(--fs-sm)">Conceptos clave</h4>
+    ${k.notas.conceptos.map((x) => `<div class="row" style="gap:10px;align-items:flex-start;flex-wrap:nowrap;font-size:var(--fs-sm)"><span class="mono chip chip--primary" style="height:24px;flex-shrink:0">${esc(x.t)}</span><span>${esc(x.texto)}</span></div>`).join('')}`;
+}
+
+function quizHTML(cursoId: string, n: number) {
+  const q = Datos.quiz(cursoId, n);
+  if (!q || q.estado !== 'aprobado') return vacioTab('brain', 'Quiz de la clase', 'Preguntas cortas para reforzar lo aprendido. Aparecen aquí cuando OdonTeck las revisa y aprueba.', 'accent');
+  return `<form class="stack" style="gap:14px" data-quiz-miembro="${cursoId}:${n}">
+    ${q.preguntas.map((p, i) => `<fieldset class="quiz-q" data-pregunta="${i}">
+      <legend class="eyebrow">Pregunta ${i + 1} de ${q.preguntas.length}</legend>
+      <p class="quiz__q" style="font-size:var(--fs-md)">${esc(p.q)}</p>
+      ${p.opciones.map((o, j) => `<label class="quiz__opt"><input type="radio" name="r${i}" value="${j}" required hidden><span class="k">${'ABCD'[j]}</span>${esc(o)}</label>`).join('')}
+      <p class="quiz__exp" hidden>${esc(p.explicacion)}</p>
+    </fieldset>`).join('')}
+    <p class="quiz__resultado" hidden></p>
+    <button class="btn btn--brand">Comprobar respuestas</button>
+  </form>`;
+}
 
 export function clase(params: Record<string, string>) {
   const c = getCurso(params.id);
@@ -35,7 +60,7 @@ export function clase(params: Record<string, string>) {
     <div class="grid" style="grid-template-columns:1.7fr 1fr;align-items:start;gap:24px">
       <div class="stack" style="gap:16px">
         <div class="player" style="aspect-ratio:16/9;background:#0a0d18">
-          <iframe src="${embed}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+          <iframe ${Datos.modo === 'demo' ? `src="${embed}"` : ''} data-video="${c.id}:${n}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="row" style="justify-content:space-between;align-items:flex-start">
           <div><span class="eyebrow">Clase ${n} de ${c.clases.length}${k.duracion ? ' · ' + fmtMin(k.duracion) : ''}</span><h1 class="display" style="font-size:var(--fs-xl);margin-top:4px">${esc(k.titulo)}</h1>
@@ -58,19 +83,12 @@ export function clase(params: Record<string, string>) {
           <span class="circle-btn" style="background:var(--accent);width:56px;height:56px"><i data-lucide="award" class="i" style="width:24px;height:24px"></i></span>
           <div><span class="eyebrow">Última clase</span><div class="upnext__title">Al marcarla como vista, el curso queda completado y se emite tu certificado.</div></div>
         </div>`}
-        <p class="faint" style="font-size:var(--fs-xs)">Video servido desde Bunny (biblioteca ${LIBRARY_ID}). En la Fase 2 el enlace se firma desde el backend para que solo miembros puedan verlo.</p>
       </div>
       <div class="card card--pad stack" data-tabs style="gap:16px">
         <div class="tabs"><button data-for="temario" class="is-active">Temario</button><button data-for="notas">Notas</button><button data-for="quiz">Quiz</button></div>
         <div data-tab="temario" class="stack" style="gap:10px;font-size:var(--fs-sm)">${temario}</div>
-        <div data-tab="notas" hidden class="stack" style="gap:10px;text-align:center;padding:20px 0">
-          <span class="circle-btn" style="width:48px;height:48px;background:var(--primary-soft);color:var(--primary);margin:0 auto"><i data-lucide="captions" class="i"></i></span>
-          <strong>Notas de la clase</strong><p class="muted" style="font-size:var(--fs-sm)">Resumen, conceptos clave y marcas de tiempo. Se generan de la transcripción del video (Fase 5).</p>
-        </div>
-        <div data-tab="quiz" hidden class="stack" style="gap:10px;text-align:center;padding:20px 0">
-          <span class="circle-btn" style="width:48px;height:48px;background:var(--accent-soft);color:var(--accent);margin:0 auto"><i data-lucide="brain" class="i"></i></span>
-          <strong>Quiz de la clase</strong><p class="muted" style="font-size:var(--fs-sm)">3 a 5 preguntas para reforzar lo aprendido. Se generan de la transcripción y las revisa OdonTeck (Fase 5).</p>
-        </div>
+        <div data-tab="notas" hidden class="stack" style="gap:10px">${notasHTML(k)}</div>
+        <div data-tab="quiz" hidden class="stack" style="gap:12px">${quizHTML(c.id, n)}</div>
       </div>
     </div>
   </section>`;
