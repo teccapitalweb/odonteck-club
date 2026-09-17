@@ -212,3 +212,5 @@ select.input { appearance: none; background-image: linear-gradient(45deg, transp
 .toast { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: var(--r-lg); background: var(--brand-navy); color: #fff; box-shadow: var(--shadow-lg); font-size: var(--fs-sm); animation: reveal .3s var(--ease) both; }
 .toast .i { width: 16px; height: 16px; color: var(--brand-teal); }
 @media (max-width: 1024px) { .toast-host { bottom: 90px; left: 16px; right: 16px; } [style*="grid-template-columns:1fr 320px"] { grid-template-columns: 1fr !important; } }
+.hero .ring::before { color: var(--brand-navy); }
+.hero__stats .streak__days { display: flex; flex-direction: row; gap: 6px; }
