@@ -43,7 +43,7 @@ export function catalogo(_: Record<string, string>, query: URLSearchParams) {
     <div class="row" style="gap:8px">${chips}</div>
     ${q ? `<p class="muted">Resultados para <strong>"${esc(q)}"</strong> · <a href="${link({ q: '' })}">limpiar</a></p>` : ''}
     ${lista.length
-      ? `<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">${lista.map(tarjetaCurso).join('')}</div>`
+      ? `<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${lista.map(tarjetaCurso).join('')}</div>`
       : `<div class="card card--pad" style="text-align:center;padding:56px"><h3>Nada por aquí todavía</h3><p class="muted">Prueba con otra área o vuelve a "Todos".</p></div>`}
   </section>`;
 }

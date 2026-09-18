@@ -1,14 +1,126 @@
 [
   {
-    "id": "manejo-de-abscesos-periodontales_1",
-    "cursoId": "manejo-de-abscesos-periodontales",
+    "id": "diagnostico-en-ortodoncia-para-odontologos-generales_1",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
     "n": 1,
-    "estado": "borrador",
-    "actualizado": "2026-09-17T12:00:00Z",
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
     "preguntas": [
-      { "q": "¿Qué hallazgo orienta a un absceso periodontal y no a uno periapical?", "opciones": ["Vitalidad pulpar negativa", "Bolsa periodontal profunda con vitalidad pulpar positiva", "Lesión radiolúcida en el ápice", "Caries profunda en el mismo diente"], "correcta": 1, "explicacion": "En el absceso periodontal la pulpa suele responder; la vitalidad negativa y la lesión apical orientan a origen endodóntico." },
-      { "q": "¿Cuál es el tratamiento principal de un absceso periodontal sin compromiso sistémico?", "opciones": ["Antibiótico sistémico solo", "Drenaje y desbridamiento local", "Extracción inmediata", "Enjuague de clorhexidina solo"], "correcta": 1, "explicacion": "El drenaje y el desbridamiento son el tratamiento; los antibióticos se reservan para compromiso sistémico o inmunodepresión." },
-      { "q": "¿Qué signo obliga a referir de inmediato?", "opciones": ["Supuración al presionar", "Movilidad grado I", "Celulitis facial que se extiende con dificultad para tragar", "Sensación de diente alto"], "correcta": 2, "explicacion": "La diseminación con disfagia o trismus puede comprometer la vía aérea y requiere atención de urgencia." }
+      {
+        "q": "En la clasificación de Angle, ¿qué define una Clase I molar?",
+        "opciones": [
+          "La cúspide mesiovestibular del primer molar superior ocluye en el surco mesiovestibular del inferior",
+          "El molar inferior está distalizado",
+          "Hay mordida abierta anterior",
+          "El molar superior ocluye por delante del inferior"
+        ],
+        "correcta": 0,
+        "explicacion": "La Clase I se define por la relación de la cúspide mesiovestibular del primer molar superior con el surco mesiovestibular del primer molar inferior."
+      },
+      {
+        "q": "¿Qué mide el 'overjet'?",
+        "opciones": [
+          "La sobremordida vertical",
+          "El resalte horizontal entre incisivos",
+          "El apiñamiento total",
+          "La inclinación del molar"
+        ],
+        "correcta": 1,
+        "explicacion": "El overjet es el resalte horizontal; el overbite es la sobremordida vertical."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-en-ortodoncia-para-odontologos-generales_2",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es la radiografía de elección para una valoración ortodóncica inicial general?",
+        "opciones": [
+          "Periapical única",
+          "Aleta de mordida",
+          "Ortopantomografía (panorámica)",
+          "Oclusal"
+        ],
+        "correcta": 2,
+        "explicacion": "La panorámica ofrece una visión general de dientes, gérmenes, ATM y estructuras; se complementa con lateral de cráneo."
+      },
+      {
+        "q": "El apiñamiento dentario se determina con:",
+        "opciones": [
+          "El índice de placa",
+          "La discrepancia entre espacio disponible y espacio requerido",
+          "El sangrado gingival",
+          "La edad del paciente"
+        ],
+        "correcta": 1,
+        "explicacion": "El análisis de espacio compara el espacio disponible en la arcada con el que requieren los dientes."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-en-ortodoncia-para-odontologos-generales_3",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Que describe una mordida cruzada anterior?",
+        "opciones": [
+          "Los incisivos inferiores ocluyen por delante de los superiores",
+          "Sobremordida profunda",
+          "Diastema central",
+          "Molar en Clase II"
+        ],
+        "correcta": 0,
+        "explicacion": "En la mordida cruzada anterior los incisivos inferiores quedan por delante de los superiores."
+      },
+      {
+        "q": "El análisis de Bolton evalúa:",
+        "opciones": [
+          "La edad ósea",
+          "La discrepancia de tamaño dentario entre arcadas",
+          "El índice de placa",
+          "La profundidad de bolsa"
+        ],
+        "correcta": 1,
+        "explicacion": "Bolton compara la proporción de tamaño dentario superior/inferior para predecir buena intercuspidacion."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-en-ortodoncia-para-odontologos-generales_4",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El diastema interincisivo en dentición mixta (etapa del patito feo) suele ser:",
+        "opciones": [
+          "Patológico siempre",
+          "Una fase transitoria normal",
+          "Signo de caries",
+          "Indicacion de extracción"
+        ],
+        "correcta": 1,
+        "explicacion": "Es un fenomeno transitorio normal que suele cerrarse al erupcionar los caninos."
+      },
+      {
+        "q": "La succión digital prolongada puede provocar:",
+        "opciones": [
+          "Mordida abierta anterior y protrusion",
+          "Clase III",
+          "Mayor overbite",
+          "Anquilosis"
+        ],
+        "correcta": 0,
+        "explicacion": "La presion del dedo favorece mordida abierta anterior y protrusion de incisivos superiores."
+      }
     ]
   },
   {
@@ -16,11 +128,2071 @@
     "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
     "n": 1,
     "estado": "aprobado",
-    "actualizado": "2026-09-17T12:00:00Z",
+    "actualizado": "2026-09-18T00:00:00Z",
     "preguntas": [
-      { "q": "En ICDAS, ¿qué distingue al código 1 del código 2?", "opciones": ["El código 1 solo se ve con la superficie seca", "El código 2 tiene dentina visible", "El código 1 es una cavidad pequeña", "No hay diferencia clínica"], "correcta": 0, "explicacion": "El código 1 es visible solo tras secar con aire; el código 2 se aprecia incluso con la superficie húmeda." },
-      { "q": "¿Qué instrumento se recomienda para explorar sin dañar una lesión inicial?", "opciones": ["Explorador agudo con presión", "Sonda de punta roma", "Fresa de baja velocidad", "Cureta"], "correcta": 1, "explicacion": "La sonda de punta roma permite deslizar sin cavitar una lesión remineralizable." },
-      { "q": "Una lesión activa en esmalte suele verse…", "opciones": ["Brillante y lisa", "Blanca opaca y rugosa", "Negra y dura", "Sin cambios al secar"], "correcta": 1, "explicacion": "La opacidad sin brillo y la textura rugosa indican actividad." }
+      {
+        "q": "En ICDAS, ¿qué distingue al código 1 del código 2?",
+        "opciones": [
+          "El código 1 solo se ve con la superficie seca",
+          "El código 2 tiene dentina visible",
+          "El código 1 es una cavidad pequeña",
+          "No hay diferencia clínica"
+        ],
+        "correcta": 0,
+        "explicacion": "El código 1 es visible solo tras secar con aire; el código 2 se aprecia incluso con la superficie húmeda."
+      },
+      {
+        "q": "¿Qué instrumento se recomienda para explorar sin dañar una lesión inicial?",
+        "opciones": [
+          "Explorador agudo con presión",
+          "Sonda de punta roma",
+          "Fresa de baja velocidad",
+          "Cureta"
+        ],
+        "correcta": 1,
+        "explicacion": "La sonda de punta roma permite deslizar sin cavitar una lesión remineralizable."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-y-clasificacion-de-la-caries-dental_2",
+    "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Una lesión activa en esmalte suele verse…",
+        "opciones": [
+          "Brillante y lisa",
+          "Blanca opaca y rugosa",
+          "Negra y dura",
+          "Sin cambios al secar"
+        ],
+        "correcta": 1,
+        "explicacion": "La opacidad sin brillo y la textura rugosa indican actividad; la lesión inactiva suele ser brillante y dura."
+      },
+      {
+        "q": "¿Cuál es el principal factor etiológico de la caries?",
+        "opciones": [
+          "Herencia exclusivamente",
+          "Biofilm cariogénico junto con exposición frecuente a azúcares",
+          "Falta de flúor únicamente",
+          "Bruxismo"
+        ],
+        "correcta": 1,
+        "explicacion": "La caries es multifactorial: biofilm disbiótico + sustrato (azúcares frecuentes) + susceptibilidad del huésped y tiempo."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-y-clasificacion-de-la-caries-dental_3",
+    "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La remineralizacion del esmalte se favorece con:",
+        "opciones": [
+          "Dieta rica en azucar",
+          "Flúor, saliva y control de la dieta",
+          "Ausencia de higiene",
+          "Bebidas acidas"
+        ],
+        "correcta": 1,
+        "explicacion": "El flúor y la saliva, con menor exposicion a azucares, remineralizan lesiones incipientes."
+      },
+      {
+        "q": "La radiografía de aleta de mordida es especialmente util para detectar:",
+        "opciones": [
+          "Lesiones periapicales",
+          "Caries interproximales",
+          "Fracturas radiculares",
+          "Quistes"
+        ],
+        "correcta": 1,
+        "explicacion": "Las aletas de mordida muestran muy bien las superficies interproximales y crestas oseas."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-y-clasificacion-de-la-caries-dental_4",
+    "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La caries radicular es mas frecuente en:",
+        "opciones": [
+          "Ninos",
+          "Adultos mayores con recesión gingival",
+          "Dientes recien erupcionados",
+          "Esmalte sano"
+        ],
+        "correcta": 1,
+        "explicacion": "La exposicion radicular por recesión y menor flujo salival hace al adulto mayor mas susceptible."
+      },
+      {
+        "q": "El sellador de fosetas y fisuras esta indicado en:",
+        "opciones": [
+          "Superficies lisas sanas",
+          "Molares con fosas profundas y riesgo de caries",
+          "Dientes con caries cavitada",
+          "Raices expuestas"
+        ],
+        "correcta": 1,
+        "explicacion": "El sellador previene caries oclusal en fosas y fisuras retentivas de riesgo."
+      }
+    ]
+  },
+  {
+    "id": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos_1",
+    "cursoId": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es el objetivo de una pulpotomía en un molar primario?",
+        "opciones": [
+          "Extraer toda la pulpa",
+          "Retirar la pulpa cameral y preservar la vitalidad de la pulpa radicular",
+          "Blanquear el diente",
+          "Sellar solo la corona"
+        ],
+        "correcta": 1,
+        "explicacion": "La pulpotomía retira la pulpa coronal inflamada y conserva la radicular vital en dientes primarios restaurables."
+      },
+      {
+        "q": "¿Qué material de obturación se usa en la pulpectomía de un diente primario?",
+        "opciones": [
+          "Gutapercha convencional",
+          "Una pasta reabsorbible (p. ej. óxido de zinc-eugenol o hidróxido de calcio/yodoformo)",
+          "Amalgama",
+          "Resina fluida"
+        ],
+        "correcta": 1,
+        "explicacion": "Debe usarse una pasta reabsorbible para que se reabsorba junto con la raíz primaria y no interfiera con el permanente."
+      },
+      {
+        "q": "La pulpectomía en diente primario está indicada cuando:",
+        "opciones": [
+          "La pulpa cameral está sana",
+          "Hay necrosis o inflamación irreversible de la pulpa radicular en un diente restaurable",
+          "Solo hay caries de esmalte",
+          "El diente está por exfoliar"
+        ],
+        "correcta": 1,
+        "explicacion": "Cuando la pulpa radicular no es vital pero el diente es restaurable y mantenible, se indica pulpectomía."
+      }
+    ]
+  },
+  {
+    "id": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos_2",
+    "cursoId": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué hallazgo radiográfico contraindica conservar el diente primario?",
+        "opciones": [
+          "Cámara amplia",
+          "Reabsorción radicular patológica extensa o pérdida ósea que compromete el germen permanente",
+          "Ápice abierto",
+          "Corona intacta"
+        ],
+        "correcta": 1,
+        "explicacion": "La reabsorción patológica extensa o el compromiso del germen permanente indican extracción en lugar de tratamiento pulpar."
+      },
+      {
+        "q": "La apexogénesis busca:",
+        "opciones": [
+          "Cerrar el ápice de un diente no vital",
+          "Permitir que continue el desarrollo radicular en un diente vital inmaduro",
+          "Extraer la pulpa por completo",
+          "Blanquear el diente"
+        ],
+        "correcta": 1,
+        "explicacion": "En dientes vitales inmaduros se conserva pulpa vital para que la raiz siga formandose."
+      },
+      {
+        "q": "La apexificación se realiza en:",
+        "opciones": [
+          "Diente vital maduro",
+          "Diente no vital con ápice inmaduro, induciendo una barrera apical (MTA)",
+          "Caries de esmalte",
+          "Diente primario sano"
+        ],
+        "correcta": 1,
+        "explicacion": "En dientes permanentes jovenes no vitales se induce cierre apical, hoy con MTA/biocerámicos."
+      }
+    ]
+  },
+  {
+    "id": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos_3",
+    "cursoId": "endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El recubrimiento pulpar indirecto se indica en:",
+        "opciones": [
+          "Exposicion pulpar amplia",
+          "Caries profunda sin exposicion, con pulpa vital asintomática",
+          "Necrosis",
+          "Absceso"
+        ],
+        "correcta": 1,
+        "explicacion": "Se deja una capa de dentina afectada y se sella para estimular dentina reparativa sin exponer la pulpa."
+      },
+      {
+        "q": "La anatomia radicular del diente primario es tipicamente:",
+        "opciones": [
+          "Gruesa y recta",
+          "Mas delgada, curva y con conductos accesorios",
+          "Identica al permanente",
+          "Sin conductos"
+        ],
+        "correcta": 1,
+        "explicacion": "Las raices primarias son delgadas, divergentes/curvas y con mas conductos accesorios."
+      }
+    ]
+  },
+  {
+    "id": "extracciones-simples_1",
+    "cursoId": "extracciones-simples",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es el movimiento principal en una exodoncia simple con fórceps?",
+        "opciones": [
+          "Tracción vertical brusca",
+          "Luxación con expansión progresiva del alvéolo",
+          "Rotación rápida",
+          "Palanca sobre dientes vecinos"
+        ],
+        "correcta": 1,
+        "explicacion": "Se luxa con movimientos controlados para expandir el hueso alveolar; la tracción es el último paso, sin fuerza brusca."
+      },
+      {
+        "q": "¿Qué instrumento se usa para iniciar la luxación antes del fórceps?",
+        "opciones": [
+          "Cureta",
+          "Elevador (botador)",
+          "Sonda periodontal",
+          "Portaagujas"
+        ],
+        "correcta": 1,
+        "explicacion": "El elevador o botador inicia la luxación y amplía el espacio del ligamento periodontal."
+      }
+    ]
+  },
+  {
+    "id": "extracciones-simples_2",
+    "cursoId": "extracciones-simples",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué recomendación reduce el riesgo de alveolitis seca?",
+        "opciones": [
+          "Enjuagar enérgicamente el primer día",
+          "Fumar para 'desinfectar'",
+          "No enjuagar fuerte ni fumar las primeras 48–72 h",
+          "Aplicar calor local"
+        ],
+        "correcta": 2,
+        "explicacion": "Los enjuagues vigorosos y el tabaco desalojan el coágulo y favorecen la alveolitis seca."
+      },
+      {
+        "q": "La alveolitis seca se caracteriza por:",
+        "opciones": [
+          "Dolor intenso 2–4 días después con pérdida del coágulo",
+          "Sangrado abundante inmediato",
+          "Fiebre alta el mismo día",
+          "Movilidad de dientes vecinos"
+        ],
+        "correcta": 0,
+        "explicacion": "Es un dolor intenso diferido, con alvéolo vacío sin coágulo y a veces halitosis."
+      }
+    ]
+  },
+  {
+    "id": "extracciones-simples_3",
+    "cursoId": "extracciones-simples",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Una contraindicacion relativa para una exodoncia electiva es:",
+        "opciones": [
+          "Diente muy cariado",
+          "Infección aguda no controlada o paciente anticoagulado sin valorar",
+          "Movilidad grado III",
+          "Resto radicular"
+        ],
+        "correcta": 1,
+        "explicacion": "Conviene controlar la infección aguda y valorar comorbilidades/anticoagulacion antes de una extracción electiva."
+      },
+      {
+        "q": "El sindesmotomo sirve para:",
+        "opciones": [
+          "Suturar",
+          "Seccionar las fibras del ligamento periodontal",
+          "Pulir",
+          "Tomar impresión"
+        ],
+        "correcta": 1,
+        "explicacion": "El sindesmotomo desinserta el ligamento periodontal antes de luxar."
+      }
+    ]
+  },
+  {
+    "id": "extracciones-simples_4",
+    "cursoId": "extracciones-simples",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Tras la extracción, el legrado del alvéolo busca:",
+        "opciones": [
+          "Dejar tejido de granulacion",
+          "Remover tejido patológico o granuloma residual",
+          "Fracturar la tabla",
+          "Rellenar con resina"
+        ],
+        "correcta": 1,
+        "explicacion": "Se elimina tejido patológico para favorecer una correcta cicatrización."
+      },
+      {
+        "q": "El fórceps debe tomar el diente:",
+        "opciones": [
+          "Por la corona lo mas coronal posible",
+          "Lo mas apical posible sobre la raiz, bajo la línea amelocementaria",
+          "Sobre el diente vecino",
+          "Sin contacto oseo"
+        ],
+        "correcta": 1,
+        "explicacion": "Tomar apicalmente mejora el control y evita fracturar la corona."
+      }
+    ]
+  },
+  {
+    "id": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales_1",
+    "cursoId": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es el objetivo de un mantenedor de espacio?",
+        "opciones": [
+          "Mover dientes ortodóncicamente",
+          "Preservar el espacio tras la pérdida prematura de un diente primario",
+          "Blanquear dientes",
+          "Aumentar la mordida"
+        ],
+        "correcta": 1,
+        "explicacion": "Mantiene el espacio para el sucesor permanente y evita migraciones que causen apiñamiento."
+      },
+      {
+        "q": "El mantenedor fijo unilateral clásico es:",
+        "opciones": [
+          "Arco lingual",
+          "Banda-ansa (band and loop)",
+          "Placa Hawley",
+          "Botón de Nance"
+        ],
+        "correcta": 1,
+        "explicacion": "La banda-ansa se cementa en un diente pilar y mantiene el espacio de un solo diente perdido."
+      },
+      {
+        "q": "¿Cuándo NO suele requerirse un mantenedor de espacio?",
+        "opciones": [
+          "Cuando el diente permanente sucesor está por erupcionar pronto",
+          "Cuando se pierde un primer molar primario a los 4 años",
+          "Cuando hay pérdida bilateral",
+          "Nunca es necesario"
+        ],
+        "correcta": 0,
+        "explicacion": "Si el permanente erupcionará en poco tiempo, colocar mantenedor puede ser innecesario."
+      }
+    ]
+  },
+  {
+    "id": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales_2",
+    "cursoId": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El principal riesgo de no colocar un mantenedor indicado es:",
+        "opciones": [
+          "Aumento de caries en molares",
+          "Pérdida de espacio con apiñamiento o malposición del permanente",
+          "Mordida abierta anterior",
+          "Recesión gingival"
+        ],
+        "correcta": 1,
+        "explicacion": "La migración de dientes vecinos reduce el espacio y complica la erupción del sucesor."
+      },
+      {
+        "q": "Para mantener espacio bilateral en la arcada superior se usa:",
+        "opciones": [
+          "Banda-ansa",
+          "Arco transpalatino o boton de Nance",
+          "Zapatilla distal",
+          "Corona de acero"
+        ],
+        "correcta": 1,
+        "explicacion": "El arco transpalatino/boton de Nance mantiene espacio bilateral superior."
+      },
+      {
+        "q": "El arco lingual inferior es un mantenedor:",
+        "opciones": [
+          "Unilateral",
+          "Bilateral inferior",
+          "Removible estético",
+          "Solo estético"
+        ],
+        "correcta": 1,
+        "explicacion": "El arco lingual mantiene el espacio bilateral en la arcada inferior."
+      }
+    ]
+  },
+  {
+    "id": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales_3",
+    "cursoId": "ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La corona de acero-cromo se indica en:",
+        "opciones": [
+          "Incisivos estéticos",
+          "Molares primarios muy destruidos o post-pulpotomia",
+          "Dientes sanos",
+          "Carillas"
+        ],
+        "correcta": 1,
+        "explicacion": "Restaura molares primarios muy destruidos y protege los tratados pulparmente."
+      },
+      {
+        "q": "La zapatilla distal guia la erupción de:",
+        "opciones": [
+          "El canino",
+          "El primer molar permanente cuando se pierde el segundo molar primario antes de su erupción",
+          "El incisivo",
+          "El tercer molar"
+        ],
+        "correcta": 1,
+        "explicacion": "Guia al primer molar permanente aun no erupcionado tras pérdida temprana del segundo molar primario."
+      }
+    ]
+  },
+  {
+    "id": "manejo-de-abscesos-periodontales_1",
+    "cursoId": "manejo-de-abscesos-periodontales",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué hallazgo orienta a un absceso periodontal y no a uno periapical?",
+        "opciones": [
+          "Vitalidad pulpar negativa",
+          "Bolsa periodontal profunda con vitalidad pulpar positiva",
+          "Lesión radiolúcida en el ápice",
+          "Caries profunda en el mismo diente"
+        ],
+        "correcta": 1,
+        "explicacion": "En el absceso periodontal la pulpa suele responder; la vitalidad negativa y la lesión apical orientan a origen endodóntico."
+      },
+      {
+        "q": "¿Cuál es el tratamiento principal de un absceso periodontal sin compromiso sistémico?",
+        "opciones": [
+          "Antibiótico sistémico solo",
+          "Drenaje y desbridamiento local",
+          "Extracción inmediata",
+          "Enjuague de clorhexidina solo"
+        ],
+        "correcta": 1,
+        "explicacion": "El drenaje y el desbridamiento son el tratamiento; los antibióticos se reservan para compromiso sistémico o inmunodepresión."
+      }
+    ]
+  },
+  {
+    "id": "manejo-de-abscesos-periodontales_2",
+    "cursoId": "manejo-de-abscesos-periodontales",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué signo obliga a referir de inmediato?",
+        "opciones": [
+          "Supuración al presionar",
+          "Movilidad grado I",
+          "Celulitis facial que se extiende con dificultad para tragar",
+          "Sensación de diente alto"
+        ],
+        "correcta": 2,
+        "explicacion": "La diseminación con disfagia o trismus puede comprometer la vía aérea y requiere atención de urgencia."
+      },
+      {
+        "q": "El absceso periodontal aparece con más frecuencia en:",
+        "opciones": [
+          "Encías totalmente sanas",
+          "Bolsas periodontales preexistentes",
+          "Dientes recién erupcionados",
+          "Zonas edéntulas"
+        ],
+        "correcta": 1,
+        "explicacion": "Suele originarse en una bolsa periodontal profunda que se obstruye y acumula exudado."
+      }
+    ]
+  },
+  {
+    "id": "manejo-de-abscesos-periodontales_3",
+    "cursoId": "manejo-de-abscesos-periodontales",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El antibiótico sistémico en un absceso periodontal se justifica cuando hay:",
+        "opciones": [
+          "Solo dolor local",
+          "Fiebre, linfadenopatia o diseminación",
+          "Bolsa de 4 mm",
+          "Sangrado leve"
+        ],
+        "correcta": 1,
+        "explicacion": "El antibiótico es coadyuvante ante signos sistémicos o diseminación, no de rutina."
+      },
+      {
+        "q": "La prueba clave para diferenciar absceso periodontal de periapical es:",
+        "opciones": [
+          "Radiografía panorámica",
+          "La prueba de vitalidad pulpar",
+          "El índice de placa",
+          "La edad"
+        ],
+        "correcta": 1,
+        "explicacion": "En el periodontal la pulpa suele ser vital; en el periapical, no vital."
+      }
+    ]
+  },
+  {
+    "id": "manejo-de-abscesos-periodontales_4",
+    "cursoId": "manejo-de-abscesos-periodontales",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El compromiso de furca en el diente afectado implica:",
+        "opciones": [
+          "Mejor pronostico",
+          "Mayor complejidad y pronostico mas reservado",
+          "Nada relevante",
+          "Curacion espontanea"
+        ],
+        "correcta": 1,
+        "explicacion": "La afectacion de furca dificulta el desbridamiento y empeora el pronostico."
+      },
+      {
+        "q": "Un factor que favorece la recurrencia del absceso periodontal es:",
+        "opciones": [
+          "Buena higiene",
+          "Control de placa deficiente y bolsas residuales",
+          "Raspado adecuado",
+          "Dieta equilibrada"
+        ],
+        "correcta": 1,
+        "explicacion": "Sin control de placa y con bolsas residuales, el absceso tiende a recurrir."
+      }
+    ]
+  },
+  {
+    "id": "materiales-dentales-restauradores-indicaciones-y-usos_1",
+    "cursoId": "materiales-dentales-restauradores-indicaciones-y-usos",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué material se adhiere químicamente a la dentina y libera flúor?",
+        "opciones": [
+          "Amalgama",
+          "Ionómero de vidrio",
+          "Resina compuesta",
+          "Oro"
+        ],
+        "correcta": 1,
+        "explicacion": "El ionómero de vidrio se une químicamente al diente y libera flúor, útil en pacientes de alto riesgo de caries."
+      },
+      {
+        "q": "La resina compuesta requiere para adherirse:",
+        "opciones": [
+          "Solo condensación mecánica",
+          "Grabado ácido y sistema adhesivo",
+          "Cemento de fosfato",
+          "Retención con pines siempre"
+        ],
+        "correcta": 1,
+        "explicacion": "La adhesión de la resina depende del grabado ácido del esmalte/dentina y del adhesivo."
+      }
+    ]
+  },
+  {
+    "id": "materiales-dentales-restauradores-indicaciones-y-usos_2",
+    "cursoId": "materiales-dentales-restauradores-indicaciones-y-usos",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Qué caracteriza a la amalgama dental?",
+        "opciones": [
+          "Se adhiere químicamente al diente",
+          "Requiere retención mecánica en la preparación",
+          "Libera flúor",
+          "Es translúcida y estética"
+        ],
+        "correcta": 1,
+        "explicacion": "La amalgama no se adhiere; necesita una cavidad con retención mecánica."
+      },
+      {
+        "q": "Una indicación típica del ionómero de vidrio es:",
+        "opciones": [
+          "Carilla estética anterior",
+          "Lesiones cervicales y pacientes con alto riesgo de caries",
+          "Incrustación de oro",
+          "Corona total metálica"
+        ],
+        "correcta": 1,
+        "explicacion": "Su liberación de flúor y adhesión lo hacen útil en lesiones cervicales y alto riesgo cariogénico."
+      }
+    ]
+  },
+  {
+    "id": "materiales-dentales-restauradores-indicaciones-y-usos_3",
+    "cursoId": "materiales-dentales-restauradores-indicaciones-y-usos",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "En la técnica de grabado total (etch-and-rinse) se:",
+        "opciones": [
+          "Omite el grabado",
+          "Graba con acido, se enjuaga y luego se aplica el adhesivo",
+          "Usa solo autograbante",
+          "No usa adhesivo"
+        ],
+        "correcta": 1,
+        "explicacion": "Se graba con acido fosforico, se enjuaga y se aplica el sistema adhesivo."
+      },
+      {
+        "q": "El provisional de una corona se cementa idealmente con:",
+        "opciones": [
+          "Cemento definitivo de resina",
+          "Cemento temporal",
+          "Acido grabador",
+          "Composite fotocurado"
+        ],
+        "correcta": 1,
+        "explicacion": "Se usa cemento temporal para poder retirarlo; se evita eugenol si despues va adhesión con resina."
+      }
+    ]
+  },
+  {
+    "id": "materiales-dentales-restauradores-indicaciones-y-usos_4",
+    "cursoId": "materiales-dentales-restauradores-indicaciones-y-usos",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Una base cavitaria se coloca para:",
+        "opciones": [
+          "Aumentar la caries",
+          "Proteger el complejo pulpar de estímulos térmicos/químicos",
+          "Manchar el diente",
+          "Sustituir el esmalte"
+        ],
+        "correcta": 1,
+        "explicacion": "La base protege la pulpa en cavidades profundas."
+      },
+      {
+        "q": "Las incrustaciones (inlay/onlay) se indican cuando:",
+        "opciones": [
+          "La caries es minima",
+          "Hay destruccion moderada-amplia que supera una restauracion directa",
+          "No hay caries",
+          "Solo por estética del color"
+        ],
+        "correcta": 1,
+        "explicacion": "Restauran destruccion amplia con mejor ajuste y contactos que una directa grande."
+      }
+    ]
+  },
+  {
+    "id": "ortodoncia-lingual-y-estetica_1",
+    "cursoId": "ortodoncia-lingual-y-estetica",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es la principal ventaja de los brackets linguales?",
+        "opciones": [
+          "Menor costo",
+          "Son prácticamente invisibles (estética)",
+          "Más fáciles de higienizar",
+          "No requieren ajustes"
+        ],
+        "correcta": 1,
+        "explicacion": "Al ir por cara lingual/palatina no se ven; su gran atractivo es la estética."
+      },
+      {
+        "q": "Una desventaja frecuente de la ortodoncia lingual es:",
+        "opciones": [
+          "Mayor visibilidad",
+          "Dificultad de adaptación, higiene y fonación",
+          "Imposibilidad de mover dientes",
+          "No sirve en adultos"
+        ],
+        "correcta": 1,
+        "explicacion": "La cercanía a la lengua dificulta el habla y la higiene, con un periodo de adaptación."
+      }
+    ]
+  },
+  {
+    "id": "ortodoncia-lingual-y-estetica_2",
+    "cursoId": "ortodoncia-lingual-y-estetica",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Los alineadores transparentes son más predecibles en:",
+        "opciones": [
+          "Casos leves a moderados",
+          "Maloclusiones esqueléticas severas",
+          "Grandes rotaciones y extrusiones",
+          "Cirugía ortognática"
+        ],
+        "correcta": 0,
+        "explicacion": "Los alineadores funcionan mejor en apiñamientos y correcciones leves-moderadas; los casos severos suelen requerir aparatología fija o cirugía."
+      },
+      {
+        "q": "En comparación con los metálicos, los brackets cerámicos:",
+        "opciones": [
+          "Son más estéticos pero más frágiles y con más fricción",
+          "Son invisibles como los linguales",
+          "No manchan nunca",
+          "Aceleran el tratamiento"
+        ],
+        "correcta": 0,
+        "explicacion": "Los cerámicos mejoran la estética pero pueden fracturarse y generar más fricción con el arco."
+      }
+    ]
+  },
+  {
+    "id": "ortodoncia-lingual-y-estetica_3",
+    "cursoId": "ortodoncia-lingual-y-estetica",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El torque en ortodoncia controla:",
+        "opciones": [
+          "El color del bracket",
+          "La inclinación vestíbulo-lingual de la raiz/corona",
+          "La higiene",
+          "La fricción solamente"
+        ],
+        "correcta": 1,
+        "explicacion": "El torque maneja la inclinación en sentido vestíbulo-lingual."
+      },
+      {
+        "q": "Los attachments en alineadores sirven para:",
+        "opciones": [
+          "Decorar",
+          "Mejorar el agarre y lograr movimientos dificiles",
+          "Blanquear",
+          "Sustituir el arco"
+        ],
+        "correcta": 1,
+        "explicacion": "Los attachments dan retención al alineador para movimientos como rotaciones o extrusiones."
+      }
+    ]
+  },
+  {
+    "id": "ortodoncia-lingual-y-estetica_4",
+    "cursoId": "ortodoncia-lingual-y-estetica",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La retención tras el tratamiento ortodoncico:",
+        "opciones": [
+          "No es necesaria",
+          "Es esencial para evitar la recidiva",
+          "Solo se usa en ninos",
+          "Dura 1 día"
+        ],
+        "correcta": 1,
+        "explicacion": "El retenedor (fijo o removible) mantiene el resultado y evita la recidiva."
+      },
+      {
+        "q": "La recidiva es mas frecuente en:",
+        "opciones": [
+          "Molares alineados",
+          "Rotaciones y cierre de diastemas",
+          "Overjet corregido",
+          "Mordidas estables"
+        ],
+        "correcta": 1,
+        "explicacion": "Las rotaciones y diastemas tienden a recidivar; requieren buena retención."
+      }
+    ]
+  },
+  {
+    "id": "patologias-dentales-mas-comunes-en-la-infancia_1",
+    "cursoId": "patologias-dentales-mas-comunes-en-la-infancia",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La caries de la infancia temprana se asocia sobre todo a:",
+        "opciones": [
+          "Uso prolongado de biberón/lactancia nocturna con azúcares",
+          "Cepillado excesivo",
+          "Exceso de flúor",
+          "Bruxismo"
+        ],
+        "correcta": 0,
+        "explicacion": "La exposición nocturna prolongada a líquidos azucarados (biberón/pecho) sin higiene favorece la caries temprana."
+      },
+      {
+        "q": "¿Dónde aparecen primero las lesiones de la 'caries del biberón'?",
+        "opciones": [
+          "Molares inferiores",
+          "Incisivos superiores",
+          "Caninos inferiores",
+          "Superficies linguales inferiores"
+        ],
+        "correcta": 1,
+        "explicacion": "Los incisivos superiores se afectan primero; los inferiores suelen protegerse por la lengua y saliva."
+      }
+    ]
+  },
+  {
+    "id": "patologias-dentales-mas-comunes-en-la-infancia_2",
+    "cursoId": "patologias-dentales-mas-comunes-en-la-infancia",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La hipomineralización incisivo-molar (MIH) se ve como:",
+        "opciones": [
+          "Manchas blancas/amarillo-marrón demarcadas en molares e incisivos",
+          "Caries generalizada",
+          "Fluorosis simétrica leve",
+          "Desgaste por bruxismo"
+        ],
+        "correcta": 0,
+        "explicacion": "La MIH son opacidades demarcadas por defecto de mineralización, con esmalte frágil que se fractura con facilidad."
+      },
+      {
+        "q": "La prevención de patología en la infancia incluye:",
+        "opciones": [
+          "Solo pasta sin flúor",
+          "Higiene, flúor adecuado y control de la dieta azucarada",
+          "Enjuagues de clorhexidina diarios de por vida",
+          "Extraer los primarios cariados siempre"
+        ],
+        "correcta": 1,
+        "explicacion": "La base es higiene, flúor en dosis apropiadas para la edad y control de azúcares."
+      }
+    ]
+  },
+  {
+    "id": "patologias-dentales-mas-comunes-en-la-infancia_3",
+    "cursoId": "patologias-dentales-mas-comunes-en-la-infancia",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Los dientes natales son aquellos que:",
+        "opciones": [
+          "Erupcionan a los 6 anos",
+          "Están presentes al nacer",
+          "Nunca erupcionan",
+          "Son supernumerarios siempre"
+        ],
+        "correcta": 1,
+        "explicacion": "Los dientes natales están presentes al nacimiento; los neonatales aparecen en el primer mes."
+      },
+      {
+        "q": "La anquiloglosia (frenillo lingual corto) puede afectar:",
+        "opciones": [
+          "La visión",
+          "La lactancia y el habla",
+          "La audición",
+          "La erupción del molar"
+        ],
+        "correcta": 1,
+        "explicacion": "Puede dificultar la lactancia y ciertos sonidos del habla."
+      }
+    ]
+  },
+  {
+    "id": "patologias-dentales-mas-comunes-en-la-infancia_4",
+    "cursoId": "patologias-dentales-mas-comunes-en-la-infancia",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El primer diente primario suele erupcionar alrededor de:",
+        "opciones": [
+          "Los 2 anos",
+          "Los 6 meses",
+          "El nacimiento",
+          "Los 12 meses"
+        ],
+        "correcta": 1,
+        "explicacion": "El incisivo central inferior suele erupcionar cerca de los 6 meses."
+      },
+      {
+        "q": "Un quiste de erupción es:",
+        "opciones": [
+          "Un tumor maligno",
+          "Un acumulo de liquido/sangre sobre un diente por erupcionar que suele resolver solo",
+          "Una caries",
+          "Una fractura"
+        ],
+        "correcta": 1,
+        "explicacion": "Es benigno; generalmente se resuelve al erupcionar el diente."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa_1",
+    "cursoId": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La proporción ancho/largo ideal de un incisivo central suele rondar:",
+        "opciones": [
+          "30–40%",
+          "75–85%",
+          "100%",
+          "50%"
+        ],
+        "correcta": 1,
+        "explicacion": "Una relación ancho/largo cercana a 75–85% se percibe como estética y natural."
+      },
+      {
+        "q": "Se considera 'sonrisa gingival' cuando al sonreír se expone:",
+        "opciones": [
+          "Nada de encía",
+          "Más de 3–4 mm de encía",
+          "Solo el borde incisal",
+          "La mucosa labial"
+        ],
+        "correcta": 1,
+        "explicacion": "La exposición de más de 3–4 mm de encía se considera sonrisa gingival y puede tratarse según su causa."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa_2",
+    "cursoId": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El cenit gingival del incisivo central suele ubicarse:",
+        "opciones": [
+          "En el centro exacto del diente",
+          "Ligeramente hacia distal respecto al eje del diente",
+          "Hacia mesial",
+          "En el borde incisal"
+        ],
+        "correcta": 1,
+        "explicacion": "El punto más apical del margen (cenit) del central e incisivo lateral suele estar levemente distal al eje."
+      },
+      {
+        "q": "En el diseño de sonrisa, un objetivo clave del contorno gingival es:",
+        "opciones": [
+          "Márgenes asimétricos",
+          "Simetría y armonía de los márgenes gingivales",
+          "Encía lo más gruesa posible",
+          "Eliminar todas las papilas"
+        ],
+        "correcta": 1,
+        "explicacion": "La simetría de los márgenes y las papilas presentes son determinantes de una sonrisa estética."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa_3",
+    "cursoId": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Los corredores bucales son:",
+        "opciones": [
+          "Caries cervicales",
+          "Los espacios oscuros laterales entre dientes y mejillas al sonreir",
+          "Las papilas",
+          "Los frenillos"
+        ],
+        "correcta": 1,
+        "explicacion": "Son los espacios laterales visibles al sonreir; su manejo influye en la estética."
+      },
+      {
+        "q": "Idealmente, la línea media dental superior debe:",
+        "opciones": [
+          "Ignorarse",
+          "Coincidir con la línea media facial",
+          "Estar inclinada",
+          "Ser mas ancha"
+        ],
+        "correcta": 1,
+        "explicacion": "La coincidencia con la línea media facial aporta armonía; pequenas desviaciones se toleran."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa_4",
+    "cursoId": "periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La presencia de la papila interdental depende sobre todo de:",
+        "opciones": [
+          "El color del diente",
+          "La distancia entre el punto de contacto y la cresta ósea (~5 mm)",
+          "La edad",
+          "El tipo de cepillo"
+        ],
+        "correcta": 1,
+        "explicacion": "Si esa distancia supera ~5 mm, la papila no llena el espacio y aparecen triangulos negros."
+      },
+      {
+        "q": "Los triangulos negros interdentales se deben a:",
+        "opciones": [
+          "Exceso de encia",
+          "Pérdida de la papila interdental",
+          "Manchas",
+          "Caries oclusal"
+        ],
+        "correcta": 1,
+        "explicacion": "Son espacios abiertos por pérdida de papila, frecuentes tras enfermedad periodontal."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-y-plastica_1",
+    "cursoId": "periodoncia-estetica-y-plastica",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El 'gold standard' para cubrir recesiones gingivales unitarias es:",
+        "opciones": [
+          "Injerto gingival libre",
+          "Injerto de tejido conectivo subepitelial con colgajo",
+          "Gingivectomía",
+          "Frenectomía"
+        ],
+        "correcta": 1,
+        "explicacion": "El injerto de conectivo subepitelial combinado con colgajo ofrece el mejor recubrimiento radicular y estética."
+      },
+      {
+        "q": "El alargamiento de corona clínica está indicado para:",
+        "opciones": [
+          "Cubrir una recesión",
+          "Exponer más estructura dentaria o corregir sonrisa gingival respetando el espacio biológico",
+          "Cerrar un diastema",
+          "Blanquear la encía"
+        ],
+        "correcta": 1,
+        "explicacion": "Reposiciona el margen y el hueso para exponer estructura o mejorar proporciones sin invadir el espacio biológico."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-y-plastica_2",
+    "cursoId": "periodoncia-estetica-y-plastica",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Un biotipo periodontal fino se asocia a:",
+        "opciones": [
+          "Menor riesgo de recesión",
+          "Mayor riesgo de recesión y menor predictibilidad",
+          "Encía siempre gruesa",
+          "Ausencia de papilas"
+        ],
+        "correcta": 1,
+        "explicacion": "El biotipo fino y festoneado es más propenso a recesión ante trauma o inflamación."
+      },
+      {
+        "q": "La clasificación de recesiones de Cairo (RT1/RT2/RT3) se basa en:",
+        "opciones": [
+          "El color de la encía",
+          "La pérdida de inserción interproximal",
+          "El número de dientes",
+          "La edad del paciente"
+        ],
+        "correcta": 1,
+        "explicacion": "Cairo clasifica según la inserción interproximal, lo que predice el grado de recubrimiento posible."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-y-plastica_3",
+    "cursoId": "periodoncia-estetica-y-plastica",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La preservacion del reborde alveolar tras una extracción busca:",
+        "opciones": [
+          "Perder hueso",
+          "Mantener el volumen oseo para futura rehabilitacion/estética",
+          "Aumentar la movilidad",
+          "Provocar recesión"
+        ],
+        "correcta": 1,
+        "explicacion": "El injerto en el alvéolo reduce la reabsorción y conserva volumen."
+      },
+      {
+        "q": "La frenectomia esta indicada cuando:",
+        "opciones": [
+          "El frenillo es normal",
+          "Un frenillo con insercion alta ejerce tracción patológica (recesión/diastema)",
+          "Hay caries",
+          "Se quiere blanquear"
+        ],
+        "correcta": 1,
+        "explicacion": "Se retira el frenillo que causa tracción, recesión o mantiene un diastema."
+      }
+    ]
+  },
+  {
+    "id": "periodoncia-estetica-y-plastica_4",
+    "cursoId": "periodoncia-estetica-y-plastica",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El espacio biológico mide aproximadamente:",
+        "opciones": [
+          "0.5 mm",
+          "2-3 mm (insercion conectiva + epitelial)",
+          "6 mm",
+          "10 mm"
+        ],
+        "correcta": 1,
+        "explicacion": "Comprende la insercion conectiva y epitelial; invadirlo causa inflamacion y pérdida ósea."
+      },
+      {
+        "q": "El injerto gingival libre se usa principalmente para:",
+        "opciones": [
+          "Blanquear",
+          "Aumentar la banda de encia queratinizada",
+          "Cerrar diastemas",
+          "Endodoncia"
+        ],
+        "correcta": 1,
+        "explicacion": "Aporta encia queratinizada, aunque para recubrir raiz se prefiere el conectivo subepitelial."
+      }
+    ]
+  },
+  {
+    "id": "raspado-y-alisado-radicular_1",
+    "cursoId": "raspado-y-alisado-radicular",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es el objetivo principal del raspado y alisado radicular?",
+        "opciones": [
+          "Pulir el esmalte",
+          "Remover placa y cálculo subgingival y desorganizar el biofilm",
+          "Blanquear la raíz",
+          "Eliminar todo el cemento radicular"
+        ],
+        "correcta": 1,
+        "explicacion": "Busca eliminar depósitos subgingivales y biofilm; hoy se evita el alisado agresivo que sacrifica cemento sano."
+      },
+      {
+        "q": "Las curetas específicas por zona utilizadas son:",
+        "opciones": [
+          "Curetas Gracey",
+          "Fresas de diamante",
+          "Elevadores",
+          "Limas endodónticas"
+        ],
+        "correcta": 0,
+        "explicacion": "Las Gracey son curetas de área específica; también se usan ultrasónicos para el desbridamiento."
+      }
+    ]
+  },
+  {
+    "id": "raspado-y-alisado-radicular_2",
+    "cursoId": "raspado-y-alisado-radicular",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿En cuánto tiempo se realiza la reevaluación periodontal tras la fase inicial?",
+        "opciones": [
+          "A las 24 horas",
+          "A las 4–6 semanas",
+          "Al año",
+          "No se reevalúa"
+        ],
+        "correcta": 1,
+        "explicacion": "Se espera 4–6 semanas para permitir la cicatrización antes de reevaluar bolsas y sangrado."
+      },
+      {
+        "q": "El éxito de la terapia se mide principalmente por:",
+        "opciones": [
+          "Reducción de la profundidad de bolsa y del sangrado al sondaje",
+          "Blancura de los dientes",
+          "Ausencia de saliva",
+          "Aumento de la movilidad"
+        ],
+        "correcta": 0,
+        "explicacion": "La disminución de profundidad de sondaje y del sangrado indica control de la inflamación."
+      }
+    ]
+  },
+  {
+    "id": "raspado-y-alisado-radicular_3",
+    "cursoId": "raspado-y-alisado-radicular",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El afilado periódico de las curetas es importante porque:",
+        "opciones": [
+          "Cambia el color",
+          "Mantiene el filo para un desbridamiento eficaz y menos trauma",
+          "No influye",
+          "Aumenta el sangrado"
+        ],
+        "correcta": 1,
+        "explicacion": "Una cureta afilada trabaja mejor y con menos esfuerzo/trauma."
+      },
+      {
+        "q": "El índice de placa se utiliza para:",
+        "opciones": [
+          "Medir caries",
+          "Evaluar la higiene del paciente",
+          "Medir la oclusión",
+          "Detectar fracturas"
+        ],
+        "correcta": 1,
+        "explicacion": "Cuantifica la placa para motivar y monitorear la higiene."
+      }
+    ]
+  },
+  {
+    "id": "raspado-y-alisado-radicular_4",
+    "cursoId": "raspado-y-alisado-radicular",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El sangrado al sondaje indica:",
+        "opciones": [
+          "Salud gingival",
+          "Inflamacion activa",
+          "Exceso de flúor",
+          "Bruxismo"
+        ],
+        "correcta": 1,
+        "explicacion": "Es un signo de inflamacion; su ausencia se asocia a estabilidad periodontal."
+      },
+      {
+        "q": "Un objetivo de la fase de mantenimiento es:",
+        "opciones": [
+          "Suspender la higiene",
+          "Controlar la recolonizacion bacteriana y detectar recidivas a tiempo",
+          "Extraer dientes",
+          "Blanquear"
+        ],
+        "correcta": 1,
+        "explicacion": "El mantenimiento periódico controla el biofilm y vigila la estabilidad."
+      }
+    ]
+  },
+  {
+    "id": "rehabilitacion-oral-estetica-con-coronas-y-puentes_1",
+    "cursoId": "rehabilitacion-oral-estetica-con-coronas-y-puentes",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Al preparar un diente para corona, se debe respetar:",
+        "opciones": [
+          "El espacio biológico (no invadir la inserción)",
+          "Únicamente la estética",
+          "El color del diente vecino",
+          "La oclusión del antagonista solamente"
+        ],
+        "correcta": 0,
+        "explicacion": "Invadir el espacio biológico causa inflamación y pérdida ósea; la terminación debe ubicarse correctamente respecto a la encía."
+      },
+      {
+        "q": "Para una restauración anterior con máxima estética se prefiere:",
+        "opciones": [
+          "Zirconia monolítica opaca",
+          "Disilicato de litio (cerámica vítrea)",
+          "Metal-porcelana con collar metálico",
+          "Amalgama"
+        ],
+        "correcta": 1,
+        "explicacion": "El disilicato de litio ofrece translucidez y estética superior en el sector anterior; la zirconia destaca por resistencia."
+      },
+      {
+        "q": "El póntico ovoide se utiliza porque:",
+        "opciones": [
+          "Es más barato",
+          "Mejora la estética y el perfil de emergencia en zona anterior",
+          "No requiere higiene",
+          "Evita la caries del pilar"
+        ],
+        "correcta": 1,
+        "explicacion": "El póntico ovoide simula que el diente 'emerge' de la encía, mejorando la estética del reborde."
+      }
+    ]
+  },
+  {
+    "id": "rehabilitacion-oral-estetica-con-coronas-y-puentes_2",
+    "cursoId": "rehabilitacion-oral-estetica-con-coronas-y-puentes",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Una línea de terminación tipo chamfer es adecuada para:",
+        "opciones": [
+          "Coronas de cerámica y metal-cerámica",
+          "Solo amalgamas",
+          "Selladores de fosetas",
+          "Blanqueamiento"
+        ],
+        "correcta": 0,
+        "explicacion": "El chamfer da un límite definido y espacio adecuado para el material, común en coronas cerámicas y metal-cerámicas."
+      },
+      {
+        "q": "El material de impresión de alta precision mas usado es:",
+        "opciones": [
+          "Alginato",
+          "Silicona de adicion (polivinilsiloxano)",
+          "Yeso",
+          "Cera"
+        ],
+        "correcta": 1,
+        "explicacion": "La silicona de adicion ofrece gran precision y estabilidad dimensional para prótesis fija."
+      },
+      {
+        "q": "La restauracion provisional debe:",
+        "opciones": [
+          "Dejar la preparacion expuesta",
+          "Proteger la preparacion, la encia y mantener la oclusión/estética",
+          "Cementarse permanentemente",
+          "Invadir el espacio biológico"
+        ],
+        "correcta": 1,
+        "explicacion": "El provisional protege y mantiene la posicion mientras se fabrica la definitiva."
+      }
+    ]
+  },
+  {
+    "id": "rehabilitacion-oral-estetica-con-coronas-y-puentes_3",
+    "cursoId": "rehabilitacion-oral-estetica-con-coronas-y-puentes",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La Ley de Ante indica que:",
+        "opciones": [
+          "Los pónticos deben ser metalicos",
+          "La superficie radicular de los pilares debe ser igual o mayor a la de los dientes a reemplazar",
+          "Se usan 2 pilares siempre",
+          "No importa el número de pilares"
+        ],
+        "correcta": 1,
+        "explicacion": "Asegura soporte periodontal suficiente para el puente."
+      },
+      {
+        "q": "El póntico debe disenarse para:",
+        "opciones": [
+          "Retener placa",
+          "Permitir higiene y buen contacto con el reborde",
+          "Presionar la encia fuerte",
+          "Quedar despegado siempre"
+        ],
+        "correcta": 1,
+        "explicacion": "Un buen diseno de póntico favorece la higiene y la estética sin comprimir en exceso."
+      }
+    ]
+  },
+  {
+    "id": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion_1",
+    "cursoId": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Para reducir el estrés de contracción de polimerización se recomienda:",
+        "opciones": [
+          "Colocar la resina en un solo bloque grande",
+          "Usar incrementos pequeños y polimerizar por capas",
+          "No fotopolimerizar",
+          "Calentar el diente"
+        ],
+        "correcta": 1,
+        "explicacion": "Los incrementos pequeños reducen el factor C y el estrés de contracción, mejorando el sellado marginal."
+      },
+      {
+        "q": "El grabado ácido del esmalte se hace con ácido fosfórico al:",
+        "opciones": [
+          "10% por 2 minutos",
+          "37% por unos 15–30 segundos",
+          "50% por 5 minutos",
+          "No se graba el esmalte"
+        ],
+        "correcta": 1,
+        "explicacion": "El ácido fosfórico al ~37% durante 15–30 s crea microporosidades para la traba micromecánica del adhesivo."
+      }
+    ]
+  },
+  {
+    "id": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion_2",
+    "cursoId": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La estratificación estética natural imita al diente usando:",
+        "opciones": [
+          "Solo un color de esmalte",
+          "Capas de dentina más opaca y esmalte más translúcido",
+          "Únicamente resina fluida",
+          "Solo tinte blanco"
+        ],
+        "correcta": 1,
+        "explicacion": "Reproducir dentina (opaca/croma) y esmalte (translúcido) logra profundidad y naturalidad."
+      },
+      {
+        "q": "La toma de color idealmente se realiza:",
+        "opciones": [
+          "Con el diente deshidratado tras el aislamiento",
+          "Al inicio, con el diente húmedo y luz adecuada",
+          "Después de terminar la restauración",
+          "Con luz de la lámpara de fotocurado"
+        ],
+        "correcta": 1,
+        "explicacion": "El diente deshidratado se aclara; el color debe tomarse al inicio, húmedo y con buena luz."
+      }
+    ]
+  },
+  {
+    "id": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion_3",
+    "cursoId": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La lampara de fotocurado LED activa principalmente:",
+        "opciones": [
+          "El agua",
+          "La canforoquinona (~468 nm)",
+          "El flúor",
+          "El calcio"
+        ],
+        "correcta": 1,
+        "explicacion": "La luz azul (~468 nm) activa el fotoiniciador que polimeriza la resina."
+      },
+      {
+        "q": "El aislamiento absoluto con dique de goma sirve para:",
+        "opciones": [
+          "Manchar",
+          "Controlar la humedad y mejorar la adhesión",
+          "Blanquear",
+          "Anestesiar"
+        ],
+        "correcta": 1,
+        "explicacion": "El campo seco es clave para una adhesión predecible."
+      }
+    ]
+  },
+  {
+    "id": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion_4",
+    "cursoId": "resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Un exceso de resina en cervical (sobreobturacion) provoca:",
+        "opciones": [
+          "Mejor estética",
+          "Irritacion gingival y acumulo de placa",
+          "Mas adhesión",
+          "Remineralizacion"
+        ],
+        "correcta": 1,
+        "explicacion": "Los excesos cervicales inflaman la encia y retienen placa."
+      },
+      {
+        "q": "El pulido final de la resina busca:",
+        "opciones": [
+          "Opacar",
+          "Dar brillo y una superficie lisa que retiene menos placa",
+          "Aumentar rugosidad",
+          "Cambiar el color"
+        ],
+        "correcta": 1,
+        "explicacion": "El pulido mejora estética y salud gingival al reducir la retención de biofilm."
+      }
+    ]
+  },
+  {
+    "id": "retroobturacion-en-endodoncia-tecnicas-y-materiales_1",
+    "cursoId": "retroobturacion-en-endodoncia-tecnicas-y-materiales",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "¿Cuál es el material de retroobturación de elección actual?",
+        "opciones": [
+          "Amalgama",
+          "MTA (agregado de trióxido mineral) u otros biocerámicos",
+          "Gutapercha sola",
+          "Óxido de zinc-eugenol convencional"
+        ],
+        "correcta": 1,
+        "explicacion": "El MTA y los biocerámicos son biocompatibles y sellan bien incluso en presencia de humedad."
+      },
+      {
+        "q": "La cirugía apical (apicectomía) se indica cuando:",
+        "opciones": [
+          "El diente está sano",
+          "Persiste patología apical y el retratamiento no quirúrgico no es posible o ha fracasado",
+          "Hay caries de esmalte",
+          "El paciente lo pide sin patología"
+        ],
+        "correcta": 1,
+        "explicacion": "Es una opción cuando el retratamiento ortógrado no es viable o falló y persiste la lesión."
+      }
+    ]
+  },
+  {
+    "id": "retroobturacion-en-endodoncia-tecnicas-y-materiales_2",
+    "cursoId": "retroobturacion-en-endodoncia-tecnicas-y-materiales",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La preparación retrógrada del ápice se realiza idealmente:",
+        "opciones": [
+          "Con fresa a 10 mm",
+          "Con puntas ultrasónicas, unos 3 mm en el eje del conducto",
+          "Con lima manual sin irrigación",
+          "No se prepara"
+        ],
+        "correcta": 1,
+        "explicacion": "La preparación ultrasónica de ~3 mm sigue el eje del conducto y mejora el sellado retrógrado."
+      },
+      {
+        "q": "El objetivo final de la retroobturación es:",
+        "opciones": [
+          "Blanquear la raíz",
+          "Sellar herméticamente el extremo apical del sistema de conductos",
+          "Aumentar la movilidad",
+          "Reabsorber el hueso"
+        ],
+        "correcta": 1,
+        "explicacion": "Se busca un sellado apical que impida la salida de irritantes hacia los tejidos periapicales."
+      }
+    ]
+  },
+  {
+    "id": "retroobturacion-en-endodoncia-tecnicas-y-materiales_3",
+    "cursoId": "retroobturacion-en-endodoncia-tecnicas-y-materiales",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "En la cirugía apical se levanta un colgajo para:",
+        "opciones": [
+          "Blanquear",
+          "Acceder al ápice y la lesion periapical",
+          "Extraer el diente",
+          "Tomar impresión"
+        ],
+        "correcta": 1,
+        "explicacion": "El colgajo mucoperiostico da acceso al ápice para la resección y retroobturacion."
+      },
+      {
+        "q": "La tincion con azul de metileno durante la cirugía apical ayuda a:",
+        "opciones": [
+          "Anestesiar",
+          "Detectar istmos y microfracturas en la superficie resecada",
+          "Sellar",
+          "Pulir"
+        ],
+        "correcta": 1,
+        "explicacion": "Resalta istmos y fracturas que deben incluirse en la preparacion retrógrada."
+      }
+    ]
+  },
+  {
+    "id": "retroobturacion-en-endodoncia-tecnicas-y-materiales_4",
+    "cursoId": "retroobturacion-en-endodoncia-tecnicas-y-materiales",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El MTA tiene la ventaja de que:",
+        "opciones": [
+          "No fragua con humedad",
+          "Fragua y sella bien incluso en presencia de humedad/sangre",
+          "Es toxico",
+          "Se disuelve facil"
+        ],
+        "correcta": 1,
+        "explicacion": "Su fraguado en humedad y su biocompatibilidad lo hacen ideal en el ápice."
+      },
+      {
+        "q": "La resección apical se realiza para:",
+        "opciones": [
+          "Alargar la raiz",
+          "Eliminar el ápice con la ramificacion apical que alberga la infección",
+          "Blanquear",
+          "Aumentar hueso"
+        ],
+        "correcta": 1,
+        "explicacion": "Se resecan ~3 mm apicales que concentran conductos accesorios/istmos."
+      }
+    ]
+  },
+  {
+    "id": "salud-oral-en-pacientes-con-condiciones-sistemicas_1",
+    "cursoId": "salud-oral-en-pacientes-con-condiciones-sistemicas",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El paciente diabético mal controlado tiene mayor riesgo de:",
+        "opciones": [
+          "Menos caries",
+          "Enfermedad periodontal más severa y peor cicatrización",
+          "Fluorosis",
+          "Bruxismo"
+        ],
+        "correcta": 1,
+        "explicacion": "La hiperglucemia crónica agrava la periodontitis y retrasa la cicatrización; hay relación bidireccional."
+      },
+      {
+        "q": "La profilaxis antibiótica antes de procedimientos dentales se reserva para:",
+        "opciones": [
+          "Todos los pacientes",
+          "Condiciones cardiacas de alto riesgo de endocarditis (y ciertos casos)",
+          "Solo niños",
+          "Cualquier extracción"
+        ],
+        "correcta": 1,
+        "explicacion": "Las guías la limitan a pacientes de alto riesgo (p. ej. válvulas protésicas, endocarditis previa), no de forma rutinaria."
+      }
+    ]
+  },
+  {
+    "id": "salud-oral-en-pacientes-con-condiciones-sistemicas_2",
+    "cursoId": "salud-oral-en-pacientes-con-condiciones-sistemicas",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Los bifosfonatos (y antirresortivos) se asocian a riesgo de:",
+        "opciones": [
+          "Osteonecrosis de los maxilares (MRONJ) tras cirugía/extracción",
+          "Caries rampante",
+          "Fluorosis",
+          "Gingivitis descamativa"
+        ],
+        "correcta": 0,
+        "explicacion": "Existe riesgo de osteonecrosis maxilar relacionada a medicamentos, sobre todo tras extracciones; requiere valoración previa."
+      },
+      {
+        "q": "En el paciente hipertenso, una precaución razonable es:",
+        "opciones": [
+          "Usar la máxima dosis de vasoconstrictor",
+          "Controlar la presión y limitar/valorar el vasoconstrictor, citas sin estrés",
+          "Evitar toda anestesia",
+          "Suspender siempre sus fármacos"
+        ],
+        "correcta": 1,
+        "explicacion": "Se mide la presión, se controla el estrés y el dolor, y se usa el vasoconstrictor con criterio (no se suspende su medicación sin indicación médica)."
+      }
+    ]
+  },
+  {
+    "id": "salud-oral-en-pacientes-con-condiciones-sistemicas_3",
+    "cursoId": "salud-oral-en-pacientes-con-condiciones-sistemicas",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El periodo mas seguro para tratamiento dental de rutina en el embarazo es:",
+        "opciones": [
+          "Primer trimestre",
+          "Segundo trimestre",
+          "Tercer trimestre",
+          "Nunca"
+        ],
+        "correcta": 1,
+        "explicacion": "El segundo trimestre es el mas comodo y seguro; siempre con criterio y protección radiografica."
+      },
+      {
+        "q": "A un paciente en hemodiálisis conviene atenderlo:",
+        "opciones": [
+          "El mismo día de la diálisis",
+          "El día siguiente a la diálisis",
+          "Nunca",
+          "Sin consideraciones"
+        ],
+        "correcta": 1,
+        "explicacion": "Al día siguiente el paciente esta mas estable y sin el efecto de la heparina de la sesion."
+      }
+    ]
+  },
+  {
+    "id": "salud-oral-en-pacientes-con-condiciones-sistemicas_4",
+    "cursoId": "salud-oral-en-pacientes-con-condiciones-sistemicas",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Ante alergia a la penicilina, una alternativa antibiotica comun es:",
+        "opciones": [
+          "Amoxicilina",
+          "Clindamicina o un macrólido",
+          "Mas penicilina",
+          "Ninguna"
+        ],
+        "correcta": 1,
+        "explicacion": "La clindamicina (o macrólidos) son alternativas ante alergia a betalactamicos."
+      },
+      {
+        "q": "En un paciente epiléptico, es prioritario:",
+        "opciones": [
+          "Provocar la crisis",
+          "Conocer su control, evitar disparadores y saber manejar una crisis",
+          "Ignorar el antecedente",
+          "Suspender su medicacion"
+        ],
+        "correcta": 1,
+        "explicacion": "Se controla el entorno, se evitan disparadores y se esta preparado para una crisis."
+      }
+    ]
+  },
+  {
+    "id": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal_1",
+    "cursoId": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La base de la terapia periodontal no quirúrgica es:",
+        "opciones": [
+          "Cirugía de colgajo",
+          "Control de placa del paciente + raspado y alisado radicular",
+          "Antibiótico sistémico de rutina",
+          "Extracción de todos los molares"
+        ],
+        "correcta": 1,
+        "explicacion": "La instrucción de higiene y el desbridamiento mecánico son el pilar del tratamiento no quirúrgico."
+      },
+      {
+        "q": "El uso de antibióticos sistémicos como coadyuvante se justifica principalmente en:",
+        "opciones": [
+          "Toda gingivitis",
+          "Casos específicos (p. ej. periodontitis de progresión rápida), no de rutina",
+          "Profilaxis dental normal",
+          "Blanqueamiento"
+        ],
+        "correcta": 1,
+        "explicacion": "No son rutinarios; se valoran en casos específicos junto al desbridamiento, nunca como sustituto."
+      }
+    ]
+  },
+  {
+    "id": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal_2",
+    "cursoId": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Una limitación del uso prolongado de clorhexidina es:",
+        "opciones": [
+          "No tiene efecto antimicrobiano",
+          "Tinción dentaria y alteración del gusto",
+          "Provoca caries",
+          "Blanquea los dientes"
+        ],
+        "correcta": 1,
+        "explicacion": "Es eficaz a corto plazo, pero su uso prolongado mancha los dientes y altera el gusto."
+      },
+      {
+        "q": "El mantenimiento periodontal (terapia de soporte) se programa:",
+        "opciones": [
+          "Una sola vez",
+          "En intervalos individualizados, frecuentemente cada 3 meses",
+          "Solo si hay dolor",
+          "Cada 5 años"
+        ],
+        "correcta": 1,
+        "explicacion": "El intervalo se individualiza según el riesgo; cada ~3 meses es habitual para controlar la recolonización bacteriana."
+      }
+    ]
+  },
+  {
+    "id": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal_3",
+    "cursoId": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El monitoreo con índices de placa y sangrado sirve para:",
+        "opciones": [
+          "Cobrar mas",
+          "Evaluar la higiene y la respuesta al tratamiento",
+          "Blanquear",
+          "Medir caries"
+        ],
+        "correcta": 1,
+        "explicacion": "Los índices objetivan la higiene y la inflamacion para guiar el tratamiento."
+      },
+      {
+        "q": "Ante bolsas residuales tras la fase inicial se recomienda:",
+        "opciones": [
+          "Alta inmediata",
+          "Reinstrumentar y, si persisten, valorar cirugía",
+          "Extraer",
+          "Ignorarlas"
+        ],
+        "correcta": 1,
+        "explicacion": "Las bolsas residuales se reinstrumentan; si no responden, se considera terapia quirúrgica."
+      }
+    ]
+  },
+  {
+    "id": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal_4",
+    "cursoId": "tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal",
+    "n": 4,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El tabaquismo en la enfermedad periodontal:",
+        "opciones": [
+          "Mejora la respuesta",
+          "Empeora la respuesta al tratamiento y el pronostico",
+          "No influye",
+          "Cura la bolsa"
+        ],
+        "correcta": 1,
+        "explicacion": "El tabaco reduce la respuesta al tratamiento y agrava la enfermedad."
+      },
+      {
+        "q": "El factor mas determinante del exito a largo plazo es:",
+        "opciones": [
+          "La marca del cepillo",
+          "El control de placa del propio paciente",
+          "El color de la encia",
+          "La edad"
+        ],
+        "correcta": 1,
+        "explicacion": "Sin autocuidado eficaz, cualquier tratamiento periodontal fracasa a largo plazo."
+      }
+    ]
+  },
+  {
+    "id": "traumatismos-dentales-en-ninos_1",
+    "cursoId": "traumatismos-dentales-en-ninos",
+    "n": 1,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "Ante la avulsión de un diente PRIMARIO, la conducta correcta es:",
+        "opciones": [
+          "Reimplantarlo de inmediato",
+          "NO reimplantarlo (riesgo de dañar el germen del permanente)",
+          "Reimplantar y ferulizar 4 semanas",
+          "Endodonciarlo y reimplantar"
+        ],
+        "correcta": 1,
+        "explicacion": "Los dientes primarios avulsionados no se reimplantan por el riesgo de dañar al sucesor permanente."
+      },
+      {
+        "q": "Ante la avulsión de un diente PERMANENTE, lo ideal es:",
+        "opciones": [
+          "Dejarlo fuera y acudir en unos días",
+          "Reimplantarlo lo antes posible; si no, transportarlo en leche o solución salina",
+          "Guardarlo en agua",
+          "Limpiarlo frotando la raíz"
+        ],
+        "correcta": 1,
+        "explicacion": "El reimplante inmediato tiene mejor pronóstico; si no es posible, la leche o solución salina preservan las células del ligamento. Nunca se frota la raíz."
+      },
+      {
+        "q": "En una fractura coronaria complicada (con exposición pulpar) reciente, se puede optar por:",
+        "opciones": [
+          "Extracción siempre",
+          "Recubrimiento pulpar directo o pulpotomía según el tiempo y tamaño",
+          "Solo observación",
+          "Blanqueamiento"
+        ],
+        "correcta": 1,
+        "explicacion": "Con exposición pulpar reciente y pequeña, el recubrimiento directo o la pulpotomía conservan vitalidad."
+      }
+    ]
+  },
+  {
+    "id": "traumatismos-dentales-en-ninos_2",
+    "cursoId": "traumatismos-dentales-en-ninos",
+    "n": 2,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "El tiempo extraoral ideal para maximizar el éxito del reimplante de un permanente es:",
+        "opciones": [
+          "Menos de 60 minutos (y en medio adecuado)",
+          "Hasta 24 horas en seco",
+          "No importa el tiempo",
+          "Más de 6 horas"
+        ],
+        "correcta": 0,
+        "explicacion": "Mientras menor sea el tiempo extraoral (idealmente <60 min) y mejor el medio de conservación, mayor la supervivencia del ligamento."
+      },
+      {
+        "q": "La subluxación de un diente se caracteriza por:",
+        "opciones": [
+          "Desplazamiento evidente",
+          "Movilidad aumentada SIN desplazamiento",
+          "Avulsión",
+          "Fractura de corona"
+        ],
+        "correcta": 1,
+        "explicacion": "Hay lesion del ligamento con movilidad pero sin desplazamiento; dieta blanda y control."
+      },
+      {
+        "q": "Ante una luxación lateral de un diente permanente se debe:",
+        "opciones": [
+          "Extraer",
+          "Reposicionar y ferulizar",
+          "Dejar así",
+          "Endodonciar y esperar"
+        ],
+        "correcta": 1,
+        "explicacion": "Se reposiciona el diente y se feruliza para permitir la cicatrización."
+      }
+    ]
+  },
+  {
+    "id": "traumatismos-dentales-en-ninos_3",
+    "cursoId": "traumatismos-dentales-en-ninos",
+    "n": 3,
+    "estado": "aprobado",
+    "actualizado": "2026-09-18T00:00:00Z",
+    "preguntas": [
+      {
+        "q": "La concusión dental es:",
+        "opciones": [
+          "Pérdida del diente",
+          "Lesion sin movilidad ni desplazamiento, con dolor a la percusión",
+          "Fractura radicular",
+          "Intrusión"
+        ],
+        "correcta": 1,
+        "explicacion": "Es la lesion mas leve; solo hay sensibilidad a la percusión, se controla."
+      },
+      {
+        "q": "Una fractura radicular horizontal suele manejarse con:",
+        "opciones": [
+          "Extracción siempre",
+          "Reposicion y ferulización, con control de vitalidad",
+          "Blanqueamiento",
+          "Nada"
+        ],
+        "correcta": 1,
+        "explicacion": "Se reposiciona y feruliza; el pronostico depende del nivel de la fractura."
+      }
     ]
   }
 ]

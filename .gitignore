@@ -6,3 +6,7 @@ dist
 *.local
 .DS_Store
 Thumbs.db
+
+# PDFs de materiales: viven en la nube (Bunny/Firebase), no en el repo.
+# Se colocan en public/materiales/ solo para el demo local.
+public/materiales/*.pdf

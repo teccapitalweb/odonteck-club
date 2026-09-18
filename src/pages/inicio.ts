@@ -107,11 +107,11 @@ export function inicio() {
   ${enMarcha.length ? `
   <section class="stack" style="gap:20px">
     ${encabezado('En marcha', 'Tus cursos <em>en progreso</em>', `<a class="section-head__cta" href="#/cursos?tab=marcha">Ver todos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>`)}
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${enMarcha.slice(0, 4).map(tarjetaCurso).join('')}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${enMarcha.slice(0, 4).map(tarjetaCurso).join('')}</div>
   </section>` : ''}
 
   <section class="stack" style="gap:20px">
     ${encabezado('Recomendado para ti', reciente ? `Sigue con <em>${esc(reciente.area.toLowerCase())}</em> y más` : 'Empieza por <em>aquí</em>', `<a class="section-head__cta" href="#/cursos">Ver los ${cursos.length} cursos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>`)}
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${recomendados.map(tarjetaCurso).join('')}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${recomendados.map(tarjetaCurso).join('')}</div>
   </section>`;
 }

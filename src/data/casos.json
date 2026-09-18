@@ -1,0 +1,420 @@
+[
+  {
+    "id": "caso-caries-oculta",
+    "area": "Cariología",
+    "titulo": "Molar con dolor al frío",
+    "paciente": "Mujer, 28 años",
+    "presentacion": "Acude por sensibilidad al frío en el primer molar inferior derecho desde hace 3 semanas. El dolor cede al retirar el estímulo.",
+    "hallazgos": [
+      "Mancha grisácea en fosa oclusal",
+      "Sin dolor a la percusión",
+      "Radiografía: radiolucidez en dentina que no alcanza la pulpa",
+      "Prueba de vitalidad: positiva y no prolongada"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico más probable?",
+      "opciones": [
+        "Pulpitis irreversible",
+        "Caries dentinaria con pulpa vital (pulpitis reversible)",
+        "Necrosis pulpar",
+        "Absceso periapical"
+      ],
+      "correcta": 1,
+      "explicacion": "El dolor provocado que cede, la vitalidad positiva no prolongada y la lesión que no alcanza la pulpa indican caries dentinaria con pulpitis reversible."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el tratamiento indicado?",
+      "opciones": [
+        "Endodoncia inmediata",
+        "Remoción de caries y restauración con protección dentino-pulpar",
+        "Extracción",
+        "Solo observación"
+      ],
+      "correcta": 1,
+      "explicacion": "Al ser pulpitis reversible, se remueve la caries y se restaura protegiendo el complejo dentino-pulpar. La endodoncia no está justificada aún."
+    }
+  },
+  {
+    "id": "caso-absceso-periodontal",
+    "area": "Periodoncia",
+    "titulo": "Inflamación gingival localizada",
+    "paciente": "Hombre, 45 años, fumador",
+    "presentacion": "Presenta aumento de volumen doloroso en la encía vestibular del segundo premolar superior, con salida de exudado al presionar.",
+    "hallazgos": [
+      "Bolsa periodontal de 8 mm",
+      "Diente vital a las pruebas térmicas",
+      "Movilidad grado I",
+      "Radiografía: pérdida ósea angular, sin lesión periapical"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Qué diagnóstico es el correcto?",
+      "opciones": [
+        "Absceso periapical de origen endodóntico",
+        "Absceso periodontal",
+        "Quiste radicular",
+        "Pericoronaritis"
+      ],
+      "correcta": 1,
+      "explicacion": "Diente vital, bolsa profunda con exudado y pérdida ósea angular sin lesión periapical = absceso periodontal, no endodóntico."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el manejo inicial más adecuado?",
+      "opciones": [
+        "Endodoncia del premolar",
+        "Drenaje, desbridamiento de la bolsa y control de placa",
+        "Extracción inmediata",
+        "Solo antibiótico sistémico"
+      ],
+      "correcta": 1,
+      "explicacion": "El manejo del absceso periodontal es drenaje y desbridamiento mecánico de la bolsa; el antibiótico es coadyuvante, no el tratamiento principal."
+    }
+  },
+  {
+    "id": "caso-trauma-pediatrico",
+    "area": "Odontopediatría",
+    "titulo": "Golpe en incisivo primario",
+    "paciente": "Niño, 3 años",
+    "presentacion": "Caída con impacto en la boca. El incisivo central primario se ve intruido (hundido) en el alvéolo. Los padres preguntan si hay que 'bajarlo'.",
+    "hallazgos": [
+      "Intrusión de incisivo primario",
+      "Sin fractura coronaria",
+      "Radiografía: ápice desplazado hacia vestibular, sin contacto con el germen permanente"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es la conducta correcta ante la intrusión de un diente primario?",
+      "opciones": [
+        "Reposicionar y ferulizar de inmediato",
+        "Permitir la reerupción espontánea y vigilar",
+        "Extraer siempre el diente intruido",
+        "Endodoncia inmediata"
+      ],
+      "correcta": 1,
+      "explicacion": "En dientes primarios intruidos, si el ápice no compromete el germen permanente, se deja reerupcionar espontáneamente con vigilancia. La extracción solo si se desplaza hacia el germen."
+    },
+    "plan": {
+      "pregunta": "¿Qué seguimiento es el adecuado?",
+      "opciones": [
+        "Alta sin control",
+        "Controles clínicos y radiográficos periódicos",
+        "Antibiótico por 10 días",
+        "Ferulización por 4 semanas"
+      ],
+      "correcta": 1,
+      "explicacion": "Se realizan controles clínicos y radiográficos para vigilar reerupción, vitalidad y que no afecte al diente permanente."
+    }
+  },
+  {
+    "id": "caso-pulpitis-irreversible",
+    "area": "Endodoncia",
+    "titulo": "Dolor espontáneo nocturno",
+    "paciente": "Mujer, 34 años",
+    "presentacion": "Dolor intenso, espontáneo, que aumenta con el calor y la posición horizontal (al acostarse). Toma analgésicos con poco alivio.",
+    "hallazgos": [
+      "Dolor prolongado al calor, que cede con frío",
+      "Caries profunda con exposición cercana a pulpa",
+      "Dolor a la percusión leve",
+      "Vitalidad: respuesta exagerada y prolongada"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico?",
+      "opciones": [
+        "Pulpitis reversible",
+        "Pulpitis irreversible sintomática",
+        "Necrosis pulpar",
+        "Sensibilidad dentinaria"
+      ],
+      "correcta": 1,
+      "explicacion": "Dolor espontáneo, nocturno, prolongado y que el calor exacerba (aliviado por frío) es el cuadro clásico de pulpitis irreversible sintomática."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el tratamiento indicado?",
+      "opciones": [
+        "Restauración simple",
+        "Tratamiento de conductos (endodoncia)",
+        "Solo analgésicos",
+        "Fluorización"
+      ],
+      "correcta": 1,
+      "explicacion": "La pulpitis irreversible requiere endodoncia (o extracción si el diente no es restaurable). La restauración simple no resuelve la inflamación pulpar irreversible."
+    }
+  },
+  {
+    "id": "caso-oclusion-atm",
+    "area": "Oclusión / ATM",
+    "titulo": "Chasquido y dolor al abrir",
+    "paciente": "Mujer, 26 años, bruxista",
+    "presentacion": "Refiere chasquido en la articulación al abrir la boca y dolor muscular matutino. Reporta apretar los dientes al dormir.",
+    "hallazgos": [
+      "Chasquido recíproco en apertura y cierre",
+      "Dolor a la palpación del masetero",
+      "Facetas de desgaste",
+      "Apertura no limitada"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico más probable?",
+      "opciones": [
+        "Luxación discal sin reducción",
+        "Desplazamiento discal con reducción + dolor miofascial",
+        "Artritis reumatoide de la ATM",
+        "Fractura condilar"
+      ],
+      "correcta": 1,
+      "explicacion": "El chasquido recíproco con apertura conservada indica desplazamiento discal con reducción; el dolor muscular y las facetas apuntan a bruxismo asociado."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el manejo inicial conservador?",
+      "opciones": [
+        "Cirugía de ATM",
+        "Férula oclusal, control de hábitos y fisioterapia",
+        "Extracción de terceros molares",
+        "Ajuste oclusal irreversible inmediato"
+      ],
+      "correcta": 1,
+      "explicacion": "El manejo inicial es conservador y reversible: férula, educación/control de hábitos y fisioterapia. La cirugía es último recurso."
+    }
+  },
+  {
+    "id": "caso-medicina-anticoagulado",
+    "area": "Medicina bucal",
+    "titulo": "Extracción en paciente anticoagulado",
+    "paciente": "Hombre, 62 años, toma warfarina",
+    "presentacion": "Requiere extracción de un molar. Está en tratamiento con warfarina por fibrilación auricular. Pregunta si debe suspenderla.",
+    "hallazgos": [
+      "INR reciente (48 h): 2.3",
+      "Sin otras comorbilidades descompensadas",
+      "Extracción simple, un solo diente"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es la conducta correcta respecto a la warfarina?",
+      "opciones": [
+        "Suspender la warfarina 3 días antes",
+        "No suspender si el INR está en rango terapéutico (<3.5) y usar medidas hemostáticas locales",
+        "Duplicar la dosis el día del procedimiento",
+        "Cambiar a aspirina"
+      ],
+      "correcta": 1,
+      "explicacion": "Con INR en rango terapéutico (habitualmente <3.5) para extracciones simples, NO se suspende el anticoagulante; se controla con medidas hemostáticas locales. Suspenderlo aumenta el riesgo tromboembólico."
+    },
+    "plan": {
+      "pregunta": "¿Qué medidas locales son las adecuadas?",
+      "opciones": [
+        "Ninguna, cierra solo",
+        "Sutura, compresión con gasa y agente hemostático local (p. ej. ácido tranexámico)",
+        "Cauterización eléctrica amplia",
+        "Solo antibiótico"
+      ],
+      "correcta": 1,
+      "explicacion": "Sutura, compresión y hemostáticos locales (esponja de fibrina/ácido tranexámico) controlan el sangrado sin necesidad de suspender el anticoagulante."
+    }
+  },
+  {
+    "id": "caso-absceso-periapical",
+    "area": "Endodoncia",
+    "titulo": "Diente que no responde al frío",
+    "paciente": "Hombre, 39 años",
+    "presentacion": "Dolor a la masticación en un molar con corona antigua. Refiere que 'ya no le duele al frío como antes'.",
+    "hallazgos": [
+      "No responde a pruebas térmicas ni eléctricas (no vital)",
+      "Dolor marcado a la percusión vertical",
+      "Radiografía: radiolucidez periapical difusa",
+      "Ligera movilidad y sensación de diente 'alto'"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico?",
+      "opciones": [
+        "Pulpitis reversible",
+        "Periodontitis apical de origen endodóntico (necrosis pulpar)",
+        "Absceso periodontal",
+        "Sensibilidad dentinaria"
+      ],
+      "correcta": 1,
+      "explicacion": "La ausencia de respuesta a vitalidad + dolor a la percusión + lesión periapical indican necrosis pulpar con periodontitis apical."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el tratamiento indicado?",
+      "opciones": [
+        "Restauración simple",
+        "Tratamiento de conductos (o retratamiento) del molar",
+        "Solo antibiótico",
+        "Tartrectomía"
+      ],
+      "correcta": 1,
+      "explicacion": "El manejo es endodóntico: eliminar la infección del sistema de conductos; el antibiótico solo si hay compromiso sistémico."
+    }
+  },
+  {
+    "id": "caso-fluorosis",
+    "area": "Estética",
+    "titulo": "Manchas blancas simétricas",
+    "paciente": "Adolescente, 15 años",
+    "presentacion": "Consulta por manchas blancas en varios dientes anteriores, presentes 'desde que salieron'. Creció en zona con agua de pozo.",
+    "hallazgos": [
+      "Opacidades blancas difusas y simétricas en varios dientes",
+      "Superficie lisa y brillante (no rugosa)",
+      "Sin cavitación",
+      "Distribución bilateral"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Qué es lo más probable?",
+      "opciones": [
+        "Caries activas iniciales",
+        "Fluorosis dental",
+        "Hipoplasia por trauma",
+        "MIH severa"
+      ],
+      "correcta": 1,
+      "explicacion": "Opacidades difusas, simétricas, lisas y bilaterales, con antecedente de exceso de flúor, orientan a fluorosis (no a caries, que sería rugosa/asimétrica)."
+    },
+    "plan": {
+      "pregunta": "¿Qué manejo estético conservador es de primera elección en casos leves?",
+      "opciones": [
+        "Coronas en todos los dientes",
+        "Microabrasión y/o infiltración de resina, con vigilancia",
+        "Extracción",
+        "Endodoncia preventiva"
+      ],
+      "correcta": 1,
+      "explicacion": "En fluorosis leve se prefieren opciones mínimamente invasivas: microabrasión e infiltración de resina antes de carillas o coronas."
+    }
+  },
+  {
+    "id": "caso-pericoronaritis",
+    "area": "Cirugía",
+    "titulo": "Dolor detrás del último molar",
+    "paciente": "Mujer, 22 años",
+    "presentacion": "Dolor e inflamación en la zona del tercer molar inferior, dificultad para abrir la boca y mal sabor.",
+    "hallazgos": [
+      "Tercer molar parcialmente erupcionado con capuchón de encía (opérculo)",
+      "Enrojecimiento y dolor del tejido pericoronario",
+      "Trismus leve",
+      "Radiografía: molar semiincluido"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico?",
+      "opciones": [
+        "Absceso periapical del segundo molar",
+        "Pericoronaritis del tercer molar",
+        "Fractura mandibular",
+        "Sialoadenitis"
+      ],
+      "correcta": 1,
+      "explicacion": "La inflamación del tejido que cubre un molar parcialmente erupcionado, con trismus y mal sabor, es una pericoronaritis."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el manejo inicial?",
+      "opciones": [
+        "Extracción inmediata en fase aguda siempre",
+        "Irrigación/desbridamiento del capuchón y control; valorar exodoncia una vez controlada la infección",
+        "Endodoncia del tercer molar",
+        "Solo analgésico"
+      ],
+      "correcta": 1,
+      "explicacion": "Primero se controla la infección (irrigación, higiene, ± antibiótico si hay compromiso); la extracción del molar o del opérculo se valora después."
+    }
+  },
+  {
+    "id": "caso-gingivitis",
+    "area": "Periodoncia",
+    "titulo": "Encías que sangran al cepillar",
+    "paciente": "Mujer, 30 años",
+    "presentacion": "Refiere sangrado al cepillarse desde hace semanas. No ha notado movilidad ni retracción.",
+    "hallazgos": [
+      "Encía enrojecida e inflamada, sangra al sondaje",
+      "Placa y cálculo supragingival",
+      "Sin pérdida de inserción clínica",
+      "Radiografía: sin pérdida ósea"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico?",
+      "opciones": [
+        "Periodontitis avanzada",
+        "Gingivitis asociada a placa",
+        "Absceso periodontal",
+        "Recesión generalizada"
+      ],
+      "correcta": 1,
+      "explicacion": "Inflamación y sangrado SIN pérdida de inserción ni de hueso = gingitivis inducida por placa (reversible)."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el tratamiento?",
+      "opciones": [
+        "Cirugía de colgajo",
+        "Profilaxis, instrucción de higiene y control de placa",
+        "Antibiótico sistémico",
+        "Extracciones"
+      ],
+      "correcta": 1,
+      "explicacion": "La gingivitis se revierte con remoción de placa/cálculo e higiene adecuada; no requiere cirugía ni antibióticos."
+    }
+  },
+  {
+    "id": "caso-hipersensibilidad",
+    "area": "Estética",
+    "titulo": "Sensibilidad en cuellos dentales",
+    "paciente": "Hombre, 41 años",
+    "presentacion": "Dolor breve y agudo al frío y al cepillar en los cuellos de varios dientes. Cepilla fuerte con cerdas duras.",
+    "hallazgos": [
+      "Recesiones y abfracciones cervicales",
+      "Dolor breve que cede al retirar el estímulo",
+      "Sin caries ni fractura",
+      "Vitalidad normal"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Cuál es el diagnóstico?",
+      "opciones": [
+        "Pulpitis irreversible",
+        "Hipersensibilidad dentinaria cervical",
+        "Caries radicular",
+        "Necrosis pulpar"
+      ],
+      "correcta": 1,
+      "explicacion": "Dolor breve y agudo a estímulos, en cuellos expuestos, sin otra patología, corresponde a hipersensibilidad dentinaria."
+    },
+    "plan": {
+      "pregunta": "¿Cuál es el manejo inicial?",
+      "opciones": [
+        "Endodoncia de los dientes afectados",
+        "Técnica de cepillado suave, pasta desensibilizante y agentes con flúor/oxalatos",
+        "Extracción",
+        "Blanqueamiento"
+      ],
+      "correcta": 1,
+      "explicacion": "Se corrige el trauma del cepillado y se usan desensibilizantes (nitrato de potasio, flúor, oxalatos); tratamientos invasivos solo si falla."
+    }
+  },
+  {
+    "id": "caso-clase-ii",
+    "area": "Ortodoncia",
+    "titulo": "Dientes de arriba muy adelantados",
+    "paciente": "Niño, 10 años",
+    "presentacion": "Los padres consultan porque 'los dientes de arriba sobresalen mucho'. Respira por la boca con frecuencia.",
+    "hallazgos": [
+      "Resalte (overjet) aumentado",
+      "Relación molar Clase II",
+      "Perfil convexo",
+      "Etapa de dentición mixta"
+    ],
+    "diagnostico": {
+      "pregunta": "¿Qué maloclusión describe el cuadro?",
+      "opciones": [
+        "Clase III",
+        "Clase II (retrusión mandibular / protrusión superior)",
+        "Mordida cruzada posterior",
+        "Clase I ideal"
+      ],
+      "correcta": 1,
+      "explicacion": "Overjet aumentado, molar Clase II y perfil convexo describen una maloclusión Clase II, frecuentemente por retrusión mandibular."
+    },
+    "plan": {
+      "pregunta": "En dentición mixta con crecimiento activo, una opción es:",
+      "opciones": [
+        "Esperar a los 30 años",
+        "Tratamiento ortopédico/funcional aprovechando el crecimiento y referir a ortodoncia",
+        "Extraer los cuatro primeros molares",
+        "Solo carillas"
+      ],
+      "correcta": 1,
+      "explicacion": "La fase de crecimiento permite modular el desarrollo con aparatos funcionales/ortopédicos; conviene valoración ortodóncica oportuna."
+    }
+  }
+]

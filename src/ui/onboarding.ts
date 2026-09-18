@@ -1,0 +1,63 @@
+// Tour de bienvenida para nuevos miembros. Rápido (6 pasos), bonito y saltable.
+// Se muestra una vez (localStorage) y se puede reabrir con el botón de ayuda.
+import { createIcons, icons } from 'lucide';
+
+export const ONBOARDING_KEY = 'odonteck-club:bienvenida-vista';
+
+interface Paso { icon: string; color: string; titulo: string; texto: string }
+const PASOS: Paso[] = [
+  { icon: 'party-popper', color: '#4a7fc1', titulo: '¡Bienvenida a OdonTeck Club!',
+    texto: 'Tu formación odontológica en un solo lugar: cursos, biblioteca, clases en vivo, comunidad y retos. Te damos un recorrido de 30 segundos.' },
+  { icon: 'graduation-cap', color: '#4fa899', titulo: 'Cursos a tu ritmo',
+    texto: 'Cursos grabados por especialistas, con quiz por clase y avance guiado. La primera clase de cada curso es gratis para que los pruebes.' },
+  { icon: 'library', color: '#c98a5b', titulo: 'Biblioteca clínica',
+    texto: 'Guías, formatos, atlas y libros para consultar cuando los necesites. Un vistazo rápido a todo tu material de apoyo.' },
+  { icon: 'gamepad-2', color: '#7c5cbf', titulo: 'Retos: aprende jugando',
+    texto: 'Quiz Relámpago contra reloj, Detective Dental (diagnostica casos), Flashcards de repaso y niveles con XP. El contenido sale de tus cursos.' },
+  { icon: 'messages-square', color: '#e0a341', titulo: 'Comunidad y En vivo',
+    texto: 'Comparte casos y dudas con otros colegas, y cada mes hay clases en vivo con especialistas (con descuento para miembros).' },
+  { icon: 'crown', color: '#20254b', titulo: 'Certifícate y hazte VIP',
+    texto: 'Al terminar cada curso obtienes un certificado con folio verificable. Hazte VIP para desbloquear todos los cursos, la biblioteca y los retos.' },
+];
+
+let i = 0;
+
+export function mostrarOnboarding(forzar = false) {
+  try { if (!forzar && localStorage.getItem(ONBOARDING_KEY)) return; } catch {}
+  if (document.querySelector('.onb')) return;
+  try { localStorage.setItem(ONBOARDING_KEY, '1'); } catch {}
+  i = 0;
+  const el = document.createElement('div');
+  el.className = 'onb';
+  document.body.appendChild(el);
+  const cerrar = () => el.remove();
+  el.addEventListener('click', (e) => { if (e.target === el) cerrar(); });
+  pinta(el, cerrar);
+}
+
+function pinta(el: HTMLElement, cerrar: () => void) {
+  const p = PASOS[i];
+  const ultimo = i === PASOS.length - 1;
+  el.innerHTML = `
+    <div class="onb__card">
+      <button class="onb__x" aria-label="Cerrar"><i data-lucide="x" class="i"></i></button>
+      <div class="onb__head" style="--c:${p.color}">
+        <span class="onb__ic"><i data-lucide="${p.icon}" class="i"></i></span>
+      </div>
+      <div class="onb__body">
+        <span class="eyebrow">Paso ${i + 1} de ${PASOS.length}</span>
+        <h2>${p.titulo}</h2>
+        <p>${p.texto}</p>
+        <div class="onb__dots">${PASOS.map((_, j) => `<span class="${j === i ? 'on' : ''}"></span>`).join('')}</div>
+        <div class="onb__nav">
+          ${i > 0 ? `<button class="btn btn--secondary" data-prev><i data-lucide="arrow-left" class="i"></i>Atrás</button>` : `<button class="btn btn--ghost" data-skip>Saltar</button>`}
+          <button class="btn btn--brand btn--lg" data-next>${ultimo ? '¡Empezar!' : 'Siguiente'} <i data-lucide="${ultimo ? 'check' : 'arrow-right'}" class="i"></i></button>
+        </div>
+      </div>
+    </div>`;
+  createIcons({ icons });
+  el.querySelector('.onb__x')!.addEventListener('click', cerrar);
+  el.querySelector('[data-skip]')?.addEventListener('click', cerrar);
+  el.querySelector('[data-prev]')?.addEventListener('click', () => { i--; pinta(el, cerrar); });
+  el.querySelector('[data-next]')!.addEventListener('click', () => { if (ultimo) cerrar(); else { i++; pinta(el, cerrar); } });
+}

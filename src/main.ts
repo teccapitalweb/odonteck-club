@@ -6,6 +6,7 @@ import './styles/base.css';
 import './styles/components.css';
 import './styles/active.css';
 import './styles/admin.css';
+import './styles/arcade.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -26,6 +27,9 @@ import { biblioteca, material } from './pages/materiales';
 import { envivo, toggleReserva } from './pages/envivo';
 import { comunidad, hilo } from './pages/comunidad';
 import { paginaLogros } from './pages/logros';
+import { retos, montarArcade } from './pages/retos';
+import { Acceso, mostrarPaywall } from './core/acceso';
+import { mostrarOnboarding } from './ui/onboarding';
 import { certificados, certificado } from './pages/certificados';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
 import { login } from './pages/login';
@@ -91,6 +95,7 @@ route('/en-vivo', envivo);
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/logros', paginaLogros);
+route('/retos', retos);
 route('/certificados', certificados);
 route('/certificados/:id', certificado);
 route('/praxia', praxia);
@@ -119,7 +124,9 @@ onRender(() => {
   if (shellActual === 'admin') marcarAdminActivo(path); else marcarNavActivo(path);
   const crumb = document.querySelector('[data-crumb]'); if (crumb) crumb.textContent = document.querySelector('#outlet h1')?.textContent?.trim() || 'Administración';
   cargarVideos();
+  if (path.startsWith('/retos')) montarArcade();
   createIcons({ icons });
+  if (shellActual === 'miembro') mostrarOnboarding();
 });
 instalarAccionesAdmin(toast);
 startRouter();
@@ -156,6 +163,11 @@ function abrirNotifs(panel: HTMLElement) {
 // ── Interacciones globales del miembro ──
 document.addEventListener('click', async (e) => {
   const el = e.target as HTMLElement;
+  const pw = el.closest<HTMLElement>('[data-paywall]');
+  if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
+
+  if (el.closest('[data-guia]')) { mostrarOnboarding(true); return; }
+
   if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 
   const bell = el.closest('[data-notifs]');
@@ -185,10 +197,12 @@ document.addEventListener('click', async (e) => {
   const res = el.closest<HTMLElement>('[data-reservar]');
   if (res) { toggleReserva(res.dataset.reservar!); toast('Reserva actualizada · te avisamos antes de la clase', 'bell'); render(); }
 
-  if (el.closest('[data-nuevo-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
+  if (el.closest('[data-nuevo-hilo]')) {
+    if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
+    const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
   if (el.closest('[data-cancelar-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) f.hidden = true; }
   const util = el.closest<HTMLElement>('[data-util]');
-  if (util) { Comunidad.util(util.dataset.util!); render(); }
+  if (util) { if (!Acceso.puedeComunidad()) { mostrarPaywall('Reaccionar en la comunidad es para miembros VIP.'); return; } Comunidad.util(util.dataset.util!); render(); }
 
   const aviso = el.closest<HTMLElement>('[data-aviso]');
   if (aviso) { const p = Perfil.get(); const k = aviso.dataset.aviso as keyof typeof p.avisos; p.avisos[k] = !p.avisos[k]; Perfil.set({ avisos: p.avisos }); aviso.setAttribute('aria-checked', String(p.avisos[k])); }
@@ -258,12 +272,16 @@ document.addEventListener('submit', async (e) => {
     try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok, total: q.preguntas.length, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
   }
   if (f.matches('[data-form-hilo]')) {
-    e.preventDefault(); const d = new FormData(f);
+    e.preventDefault();
+    if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP.'); return; }
+    const d = new FormData(f);
     const h = Comunidad.crear(String(d.get('titulo')).trim(), String(d.get('texto')).trim(), (d.get('cursoId') as string) || null);
     toast('Tema publicado', 'message-circle'); navigate(`/comunidad/${h.id}`);
   }
   if (f.matches('[data-form-respuesta]')) {
-    e.preventDefault(); Comunidad.responder(f.dataset.formRespuesta!, String(new FormData(f).get('texto')).trim()); render();
+    e.preventDefault();
+    if (!Acceso.puedeComunidad()) { mostrarPaywall('Responder en la comunidad es para miembros VIP.'); return; }
+    Comunidad.responder(f.dataset.formRespuesta!, String(new FormData(f).get('texto')).trim()); render();
   }
   if (f.matches('[data-form-perfil]')) {
     e.preventDefault(); const d = new FormData(f);

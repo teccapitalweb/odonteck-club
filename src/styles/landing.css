@@ -93,7 +93,7 @@ html:has(.lp) { scroll-behavior: smooth; scroll-padding-top: 84px; }
 .lp-curso { display: grid; grid-template-rows: auto 1fr; border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow-sm);
   transition: transform var(--t-base), box-shadow var(--t-base); animation: reveal .5s var(--ease) both; animation-delay: calc(var(--i) * 40ms); }
 .lp-curso:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-.lp-curso__cover { position: relative; aspect-ratio: 1/1; overflow: hidden; background: var(--surface-2); display: block; width: 100%; }
+.lp-curso__cover { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--surface-2); display: block; width: 100%; }
 .lp-curso__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 .lp-curso:hover .lp-curso__cover img { transform: scale(1.05); }
 .lp-curso__cover .chip { position: absolute; top: 12px; left: 12px; }
@@ -251,7 +251,7 @@ html:has(.lp) { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 /* Catálogo del club */
 .lp-cursos--club { grid-template-columns: repeat(4, 1fr); }
-.lp-cursos--club .lp-curso__cover { aspect-ratio: 3/4; }
+.lp-cursos--club .lp-curso__cover { aspect-ratio: 16/9; }
 .lp-cursos--club .lp-curso h3 { font-size: var(--fs-base, 1rem); }
 .lp-curso__gratis { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); font-weight: 600; color: var(--accent); }
 .lp-curso__gratis .i { width: 15px; height: 15px; }

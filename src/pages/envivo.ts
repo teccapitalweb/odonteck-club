@@ -52,6 +52,6 @@ export function envivo() {
     <div class="section-head"><div><span class="chip chip--primary">Grabaciones</span><h2 class="display">Lo que ya se dio en vivo, <em>grabado</em></h2></div></div>
     <p class="muted">Cada curso del catálogo nació como un curso en vivo. Las grabaciones se suben aquí unas semanas después.</p>
     ${pasados.length ? `<div class="stack">${pasados.map((e) => `<div class="upnext"><div><span class="eyebrow">${fmt(e.fecha)}</span><div class="upnext__title">${esc(e.titulo)}</div></div>${e.cursoId ? `<a class="btn btn--brand btn--sm" href="#/curso/${e.cursoId}">Ver grabación</a>` : '<span class="chip">Pendiente de subir</span>'}</div>`).join('')}</div>` : ''}
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${cursos.slice(0, 4).map(tarjetaCurso).join('')}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${cursos.slice(0, 4).map(tarjetaCurso).join('')}</div>
   </section>`;
 }

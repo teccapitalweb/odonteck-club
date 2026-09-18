@@ -73,6 +73,6 @@ export function curso(params: Record<string, string>) {
 
   <section class="stack" style="gap:20px">
     <div class="section-head"><div><span class="chip chip--primary">Relacionados</span><h2 class="display">Más de <em>${esc(c.area.toLowerCase())}</em></h2></div></div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${otros.map(tarjetaCurso).join('')}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${otros.map(tarjetaCurso).join('')}</div>
   </section>`;
 }

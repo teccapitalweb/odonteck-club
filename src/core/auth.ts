@@ -35,7 +35,7 @@ export const Auth = {
     if (listo) return listo;
     listo = (async () => {
       if (Datos.modo === 'demo') {
-        usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', esAdmin: true, esVip: true } : null;
+        usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', esAdmin: true, esVip: !!localStorage.getItem('odonteck-club:vip-sim') } : null;
         return;
       }
       await cargarFirebase();

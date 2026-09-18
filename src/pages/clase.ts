@@ -2,14 +2,23 @@ import { curso as getCurso, LIBRARY_ID, fmtMin } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { esc, placeholder } from '../ui/partials';
 import { Datos, type Clase } from '../core/datos';
+import { Acceso } from '../core/acceso';
 
 const vacioTab = (icon: string, titulo: string, texto: string, color = 'primary') => `<div class="stack" style="gap:10px;text-align:center;padding:20px 0"><span class="circle-btn" style="width:48px;height:48px;background:var(--${color}-soft);color:var(--${color});margin:0 auto"><i data-lucide="${icon}" class="i"></i></span><strong>${titulo}</strong><p class="muted" style="font-size:var(--fs-sm)">${texto}</p></div>`;
 
 function notasHTML(k: Clase) {
   if (!k.notas) return vacioTab('captions', 'Notas de la clase', 'Resumen y conceptos clave con marca de tiempo. Se generan de la transcripción del video y las revisa OdonTeck.');
-  return `<h4 style="font-size:var(--fs-sm)">Resumen</h4><p class="muted" style="font-size:var(--fs-sm)">${esc(k.notas.resumen)}</p>
-    <h4 style="font-size:var(--fs-sm)">Conceptos clave</h4>
-    ${k.notas.conceptos.map((x) => `<div class="row" style="gap:10px;align-items:flex-start;flex-wrap:nowrap;font-size:var(--fs-sm)"><span class="mono chip chip--primary" style="height:24px;flex-shrink:0">${esc(x.t)}</span><span>${esc(x.texto)}</span></div>`).join('')}`;
+  return `<div class="notas">
+    <div class="notas__resumen">
+      <span class="notas__ic"><i data-lucide="sparkles" class="i"></i></span>
+      <div><span class="eyebrow">Resumen</span><p>${esc(k.notas.resumen)}</p></div>
+    </div>
+    ${k.notas.conceptos.length ? `<span class="eyebrow" style="margin-top:4px">Conceptos clave</span>
+    <ul class="notas__list">
+      ${k.notas.conceptos.map((x) => `<li><span class="notas__t"><i data-lucide="clock" class="i"></i>${esc(x.t)}</span><span>${esc(x.texto)}</span></li>`).join('')}
+    </ul>` : ''}
+    <p class="notas__pie"><i data-lucide="badge-check" class="i"></i>Material revisado por OdonTeck</p>
+  </div>`;
 }
 
 function quizHTML(cursoId: string, n: number) {
@@ -35,6 +44,21 @@ export function clase(params: Record<string, string>) {
   if (!Progreso.desbloqueada(c, n)) {
     return placeholder('Esta clase todavía está bloqueada', `Termina la clase ${n - 1} para desbloquearla. Así avanzas a tu ritmo y sin saltarte nada.`, 'lock')
       .replace('href="#/cursos">Ir a cursos', `href="#/curso/${c.id}/clase/${n - 1}">Ir a la clase ${n - 1}`);
+  }
+  if (!Acceso.claseAccesible(c, n)) {
+    return `<section class="stack" style="gap:20px">
+      <a class="section-head__cta" href="#/curso/${c.id}" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>${esc(c.titulo)}</a>
+      <div class="locked-hero">
+        <img src="${c.portada}" alt="">
+        <div class="locked-hero__body">
+          <span class="circle-btn" style="width:64px;height:64px;background:rgba(255,255,255,.15);color:#fff"><i data-lucide="crown" class="i" style="width:30px;height:30px"></i></span>
+          <span class="eyebrow" style="color:rgba(255,255,255,.75)">Clase ${n} de ${c.clases.length}</span>
+          <h1 class="display" style="font-size:var(--fs-2xl)">${esc(k.titulo)}</h1>
+          <p style="max-width:46ch;color:rgba(255,255,255,.9)">Esta clase es para miembros VIP. Hazte VIP y desbloquea todos los cursos, la biblioteca y los retos.</p>
+          <button class="btn btn--brand btn--lg" data-paywall="Esta clase es para miembros VIP.">Hazte VIP <i data-lucide="arrow-right" class="i"></i></button>
+        </div>
+      </div>
+    </section>`;
   }
   Progreso.abrirClase(c.id, n);
   const vista = Progreso.de(c.id).vistas.includes(n);
