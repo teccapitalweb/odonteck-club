@@ -43,11 +43,23 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="lp-hero">
-  <div class="lp-wrap lp-hero__grid">
-    <div class="lp-hero__copy" data-reveal>
-      <span class="lp-kicker"><span class="lp-dot"></span>Club OdonTeck · formación odontológica continua</span>
-      <h1 class="display display--black lp-hero__title">Tu formación odontológica, <em>en un solo lugar.</em></h1>
-      <p class="lp-hero__lead">Cursos grabados de especialistas, biblioteca clínica, clases en vivo y certificados con folio. Aprende a tu ritmo desde <strong data-precio-mensual>$199</strong> al mes.</p>
+  <div class="lp-hero__media lp-hero__media--poster">
+    <div class="lp-hero__slides" data-hero-slides></div>
+    <div class="lp-hero__scrim"></div>
+    <div class="lp-hero__side">
+      <span class="lp-hero__eyebrow">Club OdonTeck · Formación Odontológica</span>
+      <p class="lp-hero__kick">Tu formación odontológica, en un solo lugar.</p>
+      <a class="btn btn--brand btn--lg btn--pill-arrow" data-club-link="/#/login?modo=registro">Únete al club <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>
+    </div>
+    <a class="lp-hero__scroll" href="#intro" aria-label="Ver más"><i data-lucide="chevron-down" class="i"></i></a>
+    <svg class="lp-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path class="lp-wave__fill" d="M0,48 C240,92 480,8 720,38 C960,68 1200,18 1440,46 L1440,90 L0,90 Z"/></svg>
+  </div>
+
+  <div class="lp-wrap lp-intro" id="intro">
+    <div class="lp-intro__copy" data-reveal>
+      <span class="lp-kicker"><span class="lp-dot"></span>Club OdonTeck</span>
+      <h2 class="lp-intro__title">Formación odontológica continua, <em>a tu ritmo.</em></h2>
+      <p class="lp-intro__lead">Cursos grabados de especialistas, biblioteca clínica, clases en vivo y certificados con folio. Aprende a tu ritmo desde <strong data-precio-mensual>$199</strong> al mes.</p>
       <div class="lp-hero__actions">
         <a class="btn btn--brand btn--lg btn--pill-arrow" data-club-link="/#/login?modo=registro">Únete al club <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>
         <a class="btn btn--secondary btn--lg" href="#club"><i data-lucide="sparkles" class="i"></i>Ver qué incluye</a>
@@ -58,13 +70,8 @@
         <li><i data-lucide="calendar-x" class="i"></i>Cancela cuando quieras</li>
       </ul>
     </div>
-    <div class="lp-hero__visual" data-reveal>
-      <div class="lp-hero__card lp-hero__card--foto">
-        <img class="lp-hero__photo" src="/fotos/hero-club.webp" alt="Odontóloga tomando una clase del Club OdonTeck en su tableta" />
-        <div class="glass glass--pin lp-float" style="top:40px;left:-28px;--pin:44px"><span class="ic"><i data-lucide="play" class="i"></i></span><div>Continúa donde te quedaste<strong>Clase 3 de 5</strong></div></div>
-        <div class="glass lp-float lp-float--2" style="top:46%;left:-34px"><span class="ic"><i data-lucide="library" class="i"></i></span><div>Biblioteca clínica<strong>Guías y formatos</strong></div></div>
-        <div class="glass glass--dark lp-float lp-float--3" style="bottom:34px;right:-24px"><span class="ic"><i data-lucide="award" class="i"></i></span><div>Al terminar<strong>Certificado con QR</strong></div></div>
-      </div>
+    <div class="lp-intro__art" data-reveal>
+      <div class="lp-blob lp-blob--1"><img src="/fotos/hero-club.webp" alt="Odontóloga en clase" /></div>
     </div>
   </div>
   <div class="lp-wrap">

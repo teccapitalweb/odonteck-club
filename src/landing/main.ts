@@ -174,3 +174,34 @@ document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
 // Respaldo: si el navegador no reporta intersecciones, mostrar todo
 setTimeout(() => document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => { const r = el.getBoundingClientRect(); if (r.top < innerHeight) el.classList.add('is-in'); }), 1200);
 addEventListener('scroll', () => document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => { if (el.getBoundingClientRect().top < innerHeight * 0.92) el.classList.add('is-in'); }), { passive: true });
+
+// ── Hero carrusel ──
+{
+  const heroSlidesEl = document.querySelector<HTMLElement>('[data-hero-slides]');
+  if (heroSlidesEl) {
+    const HERO_IMGS = ['/fotos/hero-cirujano.webp', '/fotos/hero-consulta.webp', '/fotos/hero-instrumental.webp'];
+    heroSlidesEl.innerHTML = HERO_IMGS.map((s, i) => `<img class="lp-hero__slide ${i === 0 ? 'on' : ''}" src="${s}" alt="" ${i === 0 ? '' : 'loading="lazy"'}>`).join('');
+    const mediaEl = document.querySelector('.lp-hero__media');
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'lp-hero__dots';
+    dotsWrap.innerHTML = HERO_IMGS.map((_, i) => `<button class="lp-hero__dot ${i === 0 ? 'on' : ''}" data-hero-dot="${i}" aria-label="Portada ${i + 1}"></button>`).join('');
+    mediaEl?.appendChild(dotsWrap);
+    const slides = [...heroSlidesEl.querySelectorAll('.lp-hero__slide')];
+    const dots = [...dotsWrap.querySelectorAll<HTMLButtonElement>('.lp-hero__dot')];
+    let idx = 0;
+    let timer = 0;
+    const go = (n: number) => {
+      idx = ((n % slides.length) + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('on', i === idx));
+      dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+    };
+    const auto = () => { timer = window.setInterval(() => go(idx + 1), 5000); };
+    auto();
+    mediaEl?.addEventListener('mouseenter', () => clearInterval(timer));
+    mediaEl?.addEventListener('mouseleave', auto);
+    dotsWrap.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-hero-dot]');
+      if (b) { clearInterval(timer); go(Number(b.dataset.heroDot)); auto(); }
+    });
+  }
+}

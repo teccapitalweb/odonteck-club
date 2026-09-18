@@ -135,6 +135,8 @@ a.lesson:hover { text-decoration: none; }
 #outlet > section { animation: reveal .5s var(--ease) both; }
 #outlet > section:nth-child(2) { animation-delay: .08s } #outlet > section:nth-child(3) { animation-delay: .16s } #outlet > section:nth-child(4) { animation-delay: .24s }
 .pcard, .lesson, .shelf__item, .medal { animation: reveal .55s var(--ease) both; }
+/* Render silencioso (cambio de filtro en la misma ruta): sin animación de entrada, sin flasheo */
+#outlet[data-quiet] > section, #outlet[data-quiet] .pcard, #outlet[data-quiet] .lesson, #outlet[data-quiet] .shelf__item, #outlet[data-quiet] .medal { animation: none !important; }
 .pcard:nth-child(2), .lesson:nth-child(2) { animation-delay: .06s } .pcard:nth-child(3), .lesson:nth-child(3) { animation-delay: .12s }
 .pcard:nth-child(4), .lesson:nth-child(4) { animation-delay: .18s } .pcard:nth-child(5), .lesson:nth-child(5) { animation-delay: .24s }
 .pcard:nth-child(n+6), .lesson:nth-child(n+6) { animation-delay: .3s }

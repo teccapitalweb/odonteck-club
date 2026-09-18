@@ -25,6 +25,7 @@ export function current() {
 }
 
 let token = 0;
+let prevPath: string | null = null;
 export async function render() {
   const mine = ++token;
   const { path, query } = current();
@@ -37,8 +38,12 @@ export async function render() {
     r.keys.forEach((k, i) => (params[k] = decodeURIComponent(m[i + 1])));
     const html = await r.page(params, query);
     if (mine !== token) return;
+    // Render silencioso: si solo cambió el filtro (misma ruta), sin scroll ni animación de entrada.
+    const quiet = prevPath === path;
+    prevPath = path;
+    if (quiet) outlet.setAttribute('data-quiet', ''); else outlet.removeAttribute('data-quiet');
     outlet.innerHTML = html;
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    if (!quiet) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     afterRender.forEach((fn) => fn());
     return;
   }
