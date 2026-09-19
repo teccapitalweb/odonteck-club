@@ -20,7 +20,7 @@ export function tarjetaCurso(c: Curso) {
     <div class="pcard__top">${chip}<span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="${icon}" class="i" style="width:15px;height:15px"></i></span></div>
     <div class="pcard__body">
       <div class="pcard__title">${esc(c.titulo)}</div>
-      <div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases</span><span><i data-lucide="signal" class="i"></i>${c.nivel}</span></div>
+      <div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>${meta(c)}</span><span><i data-lucide="signal" class="i"></i>${c.nivel}</span></div>
       ${p > 0 && !done ? `<div class="progress progress--thin"><span style="width:${p}%"></span></div>` : ''}
     </div>
     <div class="pcard__cta">
