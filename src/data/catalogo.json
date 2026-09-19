@@ -1,6 +1,6 @@
 {
   "libraryId": "725453",
-  "generado": "2026-09-17T15:41:35.040Z",
+  "generado": "2026-09-19T14:19:43.091Z",
   "cursos": [
     {
       "id": "diagnostico-en-ortodoncia-para-odontologos-generales",
@@ -17,7 +17,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "56b5a950-60a5-4972-b974-d69bc991b447",
-          "duracion": null,
+          "duracion": 47,
           "gratis": true,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
@@ -37,7 +37,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "d9611bfd-f835-4d90-a621-b83537e7bfcc",
-          "duracion": null,
+          "duracion": 58,
           "gratis": false,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
@@ -57,7 +57,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "d6d60f9d-8788-4d4c-85f5-3862563cd486",
-          "duracion": null,
+          "duracion": 21,
           "gratis": false,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
@@ -77,7 +77,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "4aa4578e-982a-4a8d-a3ab-dfb19636fd47",
-          "duracion": null,
+          "duracion": 67,
           "gratis": false,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
@@ -93,7 +93,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "aefca140-1aab-4d67-a1b6-e6ab015d91aa",
-          "duracion": null,
+          "duracion": 65,
           "gratis": false,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
@@ -122,7 +122,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "b622fb01-3fce-4f71-b271-4e05a6328ef9",
-          "duracion": null,
+          "duracion": 42,
           "gratis": true,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
@@ -142,7 +142,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "03025923-0109-435a-a1a0-78db5a683594",
-          "duracion": null,
+          "duracion": 52,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
@@ -162,7 +162,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "bbe71b64-8134-4aa6-abca-7e2ea40a6825",
-          "duracion": null,
+          "duracion": 60,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
@@ -182,7 +182,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "ae7a48eb-1cbf-41f4-b384-c2fc2ab3ac60",
-          "duracion": null,
+          "duracion": 56,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
@@ -198,7 +198,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "e6cac368-61e9-4f8e-b483-27b002253ac9",
-          "duracion": null,
+          "duracion": 47,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
@@ -227,7 +227,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "014d4830-df4e-4fb1-b910-646dfc8fe66d",
-          "duracion": null,
+          "duracion": 48,
           "gratis": true,
           "notas": {
             "resumen": "Manejo pulpar en dientes primarios: diagnóstico de vitalidad, pulpotomia, pulpectomia y cuando conservar o extraer.",
@@ -247,7 +247,7 @@
           "n": 2,
           "titulo": "Clase 2 y 3",
           "videoId": "3dc47289-be96-4cbf-a489-80d7e2ef4af9",
-          "duracion": null,
+          "duracion": 107,
           "gratis": false,
           "notas": {
             "resumen": "Manejo pulpar en dientes primarios: diagnóstico de vitalidad, pulpotomia, pulpectomia y cuando conservar o extraer.",
@@ -267,7 +267,7 @@
           "n": 3,
           "titulo": "Clase 4 y 5",
           "videoId": "eadb58a0-71d4-466f-b2a2-f0f7e5ed3e75",
-          "duracion": null,
+          "duracion": 79,
           "gratis": false,
           "notas": {
             "resumen": "Manejo pulpar en dientes primarios: diagnóstico de vitalidad, pulpotomia, pulpectomia y cuando conservar o extraer.",
@@ -300,7 +300,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "fe861c3c-5b80-4b59-90fa-68afaa229843",
-          "duracion": null,
+          "duracion": 53,
           "gratis": true,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
@@ -320,7 +320,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "1522e987-12b8-48fa-bdab-01147c373c31",
-          "duracion": null,
+          "duracion": 70,
           "gratis": false,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
@@ -340,7 +340,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "5903f147-3c7b-4c76-9f83-ef06bcb8e917",
-          "duracion": null,
+          "duracion": 64,
           "gratis": false,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
@@ -360,7 +360,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "74db63ae-7b11-4857-9a9e-0da59e462edf",
-          "duracion": null,
+          "duracion": 69,
           "gratis": false,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
@@ -376,7 +376,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "1d36f6c3-fd92-4c57-a831-1b253d8f63e6",
-          "duracion": null,
+          "duracion": 58,
           "gratis": false,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
@@ -405,7 +405,7 @@
           "n": 1,
           "titulo": "Clase 1 y 2",
           "videoId": "fb15e281-bbfe-45b3-b7ca-2a08fa0da60c",
-          "duracion": null,
+          "duracion": 107,
           "gratis": true,
           "notas": {
             "resumen": "Mantenedores de espacio: indicaciones, tipos fijos y removibles, colocacion y seguimiento.",
@@ -425,7 +425,7 @@
           "n": 2,
           "titulo": "Clase 3 y 4",
           "videoId": "0a782c7c-22ea-4ab4-bd0e-3b86ef2de71d",
-          "duracion": null,
+          "duracion": 101,
           "gratis": false,
           "notas": {
             "resumen": "Mantenedores de espacio: indicaciones, tipos fijos y removibles, colocacion y seguimiento.",
@@ -445,7 +445,7 @@
           "n": 3,
           "titulo": "Clase 5",
           "videoId": "af9c8c6e-199b-40e2-a80f-fbc0ec14b33c",
-          "duracion": null,
+          "duracion": 44,
           "gratis": false,
           "notas": {
             "resumen": "Mantenedores de espacio: indicaciones, tipos fijos y removibles, colocacion y seguimiento.",
@@ -478,7 +478,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "d3e06e61-3b53-41d3-9091-45c2e5bc7696",
-          "duracion": null,
+          "duracion": 51,
           "gratis": true,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
@@ -498,7 +498,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "e027ac12-bd23-4a2b-981d-9adfb2c0d52b",
-          "duracion": null,
+          "duracion": 53,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
@@ -518,7 +518,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "eeeb101e-dc66-4281-b38d-813d83bd9f31",
-          "duracion": null,
+          "duracion": 63,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
@@ -538,7 +538,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "8768948c-56da-4ec2-93a9-5ee50f3f7de7",
-          "duracion": null,
+          "duracion": 69,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
@@ -554,7 +554,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "a996a08f-a88b-46e1-9e53-b50121141d34",
-          "duracion": null,
+          "duracion": 55,
           "gratis": false,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
@@ -583,7 +583,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "fa308fcb-4168-4283-a421-7148b6bb9464",
-          "duracion": null,
+          "duracion": 69,
           "gratis": true,
           "notas": {
             "resumen": "Materiales restauradores: propiedades, indicaciones y manipulación de ionomero, resina y amalgama.",
@@ -603,7 +603,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "d1c382a8-50a2-43fe-a5d9-fc239d10c2dc",
-          "duracion": null,
+          "duracion": 74,
           "gratis": false,
           "notas": {
             "resumen": "Materiales restauradores: propiedades, indicaciones y manipulación de ionomero, resina y amalgama.",
@@ -623,7 +623,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "61ef3b83-d15f-4db5-98a7-b6da6a11779e",
-          "duracion": null,
+          "duracion": 60,
           "gratis": false,
           "notas": {
             "resumen": "Materiales restauradores: propiedades, indicaciones y manipulación de ionomero, resina y amalgama.",
@@ -643,7 +643,7 @@
           "n": 4,
           "titulo": "Clase 4 y 5",
           "videoId": "97839549-e318-4b14-ba4b-e6ea3e5a915e",
-          "duracion": null,
+          "duracion": 78,
           "gratis": false,
           "notas": {
             "resumen": "Materiales restauradores: propiedades, indicaciones y manipulación de ionomero, resina y amalgama.",
@@ -672,7 +672,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "cb48abda-dee5-4e9c-9bec-b075aca914ca",
-          "duracion": null,
+          "duracion": 50,
           "gratis": true,
           "notas": {
             "resumen": "Alternativas estéticas en ortodoncia: brackets cerámicos, linguales y alineadores; ventajas, limites y retención.",
@@ -692,7 +692,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "ab0de553-7249-449f-9b89-62d73bc00a13",
-          "duracion": null,
+          "duracion": 41,
           "gratis": false,
           "notas": {
             "resumen": "Alternativas estéticas en ortodoncia: brackets cerámicos, linguales y alineadores; ventajas, limites y retención.",
@@ -712,7 +712,7 @@
           "n": 3,
           "titulo": "Clase 3 y 4",
           "videoId": "494c41bb-4785-4661-90dc-c20f2b6cd094",
-          "duracion": null,
+          "duracion": 68,
           "gratis": false,
           "notas": {
             "resumen": "Alternativas estéticas en ortodoncia: brackets cerámicos, linguales y alineadores; ventajas, limites y retención.",
@@ -732,7 +732,7 @@
           "n": 4,
           "titulo": "Clase 5",
           "videoId": "46c005a1-862d-4cd0-9e9a-4b179e258a35",
-          "duracion": null,
+          "duracion": 36,
           "gratis": false,
           "notas": {
             "resumen": "Alternativas estéticas en ortodoncia: brackets cerámicos, linguales y alineadores; ventajas, limites y retención.",
@@ -761,7 +761,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "78a7f1dc-c958-49eb-911f-b16cb3a12ee9",
-          "duracion": null,
+          "duracion": 40,
           "gratis": true,
           "notas": {
             "resumen": "Patologias frecuentes en la infancia: caries temprana, MIH, alteraciones de erupción y su prevencion.",
@@ -781,7 +781,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "043107a0-bec1-4f21-96be-dab0a3a68f43",
-          "duracion": null,
+          "duracion": 47,
           "gratis": false,
           "notas": {
             "resumen": "Patologias frecuentes en la infancia: caries temprana, MIH, alteraciones de erupción y su prevencion.",
@@ -801,7 +801,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "3c4d013a-a8de-48af-8014-8ffb153c6c88",
-          "duracion": null,
+          "duracion": 31,
           "gratis": false,
           "notas": {
             "resumen": "Patologias frecuentes en la infancia: caries temprana, MIH, alteraciones de erupción y su prevencion.",
@@ -821,7 +821,7 @@
           "n": 4,
           "titulo": "Clase 4 y 5",
           "videoId": "5e665c80-3ffc-4250-a37c-0834ad1aae13",
-          "duracion": null,
+          "duracion": 87,
           "gratis": false,
           "notas": {
             "resumen": "Patologias frecuentes en la infancia: caries temprana, MIH, alteraciones de erupción y su prevencion.",
@@ -850,7 +850,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "092b300c-8f79-488b-9a3a-1db6cac46631",
-          "duracion": null,
+          "duracion": 51,
           "gratis": true,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
@@ -870,7 +870,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "86a813da-9181-4ea4-9b3f-289f12998cd7",
-          "duracion": null,
+          "duracion": 59,
           "gratis": false,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
@@ -890,7 +890,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "13b3f986-7db4-4fc9-94cf-b1b82b8c081b",
-          "duracion": null,
+          "duracion": 47,
           "gratis": false,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
@@ -910,7 +910,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "abded854-bb1a-409f-9873-824de2401fd4",
-          "duracion": null,
+          "duracion": 50,
           "gratis": false,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
@@ -926,7 +926,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "a044a820-2501-4ba6-9c0f-991d5d649249",
-          "duracion": null,
+          "duracion": 53,
           "gratis": false,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
@@ -955,7 +955,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "31df895f-26bd-48ee-a13b-89a188711929",
-          "duracion": null,
+          "duracion": 53,
           "gratis": true,
           "notas": {
             "resumen": "Cirugía plastica periodontal: recubrimiento de recesiones, injertos, alargamiento coronario y espacio biológico.",
@@ -975,7 +975,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "f70bfdc5-0e68-468d-a981-b5e0b217c119",
-          "duracion": null,
+          "duracion": 55,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía plastica periodontal: recubrimiento de recesiones, injertos, alargamiento coronario y espacio biológico.",
@@ -995,7 +995,7 @@
           "n": 3,
           "titulo": "Clase 3 y 4",
           "videoId": "09150bea-a21e-4a4d-85ae-9eb9491f3aa2",
-          "duracion": null,
+          "duracion": 81,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía plastica periodontal: recubrimiento de recesiones, injertos, alargamiento coronario y espacio biológico.",
@@ -1015,7 +1015,7 @@
           "n": 4,
           "titulo": "Clase 5",
           "videoId": "08e2fd9c-0d7f-4603-9368-eec7c8054dd3",
-          "duracion": null,
+          "duracion": 74,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía plastica periodontal: recubrimiento de recesiones, injertos, alargamiento coronario y espacio biológico.",
@@ -1044,7 +1044,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "07883ca5-01fa-47c9-9075-29d3ec59a050",
-          "duracion": null,
+          "duracion": 72,
           "gratis": true,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
@@ -1064,7 +1064,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "3fcaa0e8-5299-4a41-9205-aead6a744d96",
-          "duracion": null,
+          "duracion": 59,
           "gratis": false,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
@@ -1084,7 +1084,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "42599f47-1473-415f-bb55-f6b9ae3f58ce",
-          "duracion": null,
+          "duracion": 73,
           "gratis": false,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
@@ -1104,7 +1104,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "1108cb6d-7dff-476d-b62f-bea9b0a1ab85",
-          "duracion": null,
+          "duracion": 48,
           "gratis": false,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
@@ -1120,7 +1120,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "3499ce6f-d858-4e1f-bb18-a01d6065bd09",
-          "duracion": null,
+          "duracion": 54,
           "gratis": false,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
@@ -1149,7 +1149,7 @@
           "n": 1,
           "titulo": "Clase 1 y 2",
           "videoId": "918b434c-10c4-48e2-8945-055625ea9c30",
-          "duracion": null,
+          "duracion": 131,
           "gratis": true,
           "notas": {
             "resumen": "Prótesis fija estética: preparacion, impresión, provisional, materiales y diseno del póntico.",
@@ -1169,7 +1169,7 @@
           "n": 2,
           "titulo": "Clase 3 y 4",
           "videoId": "b3d25bdd-ae75-45b7-b6d2-b3ad09d7020e",
-          "duracion": null,
+          "duracion": 68,
           "gratis": false,
           "notas": {
             "resumen": "Prótesis fija estética: preparacion, impresión, provisional, materiales y diseno del póntico.",
@@ -1189,7 +1189,7 @@
           "n": 3,
           "titulo": "CLASE 5",
           "videoId": "04fd2fb5-c257-4680-93a4-691d7286826e",
-          "duracion": null,
+          "duracion": 78,
           "gratis": false,
           "notas": {
             "resumen": "Prótesis fija estética: preparacion, impresión, provisional, materiales y diseno del póntico.",
@@ -1222,7 +1222,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "55c270c3-34e8-4485-a7c6-51170f697242",
-          "duracion": null,
+          "duracion": 55,
           "gratis": true,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
@@ -1242,7 +1242,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "2640a818-3aab-46cb-90a3-ab0eb257c98b",
-          "duracion": null,
+          "duracion": 54,
           "gratis": false,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
@@ -1262,7 +1262,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "92eb5c79-7471-4fae-9ed9-5d7547127e3d",
-          "duracion": null,
+          "duracion": 57,
           "gratis": false,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
@@ -1282,7 +1282,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "b8aeb085-f701-4a79-a405-1c9c0b6b8fd7",
-          "duracion": null,
+          "duracion": 55,
           "gratis": false,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
@@ -1298,7 +1298,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "7a14170a-fd49-4d2d-aee7-3b94f676ab12",
-          "duracion": null,
+          "duracion": 64,
           "gratis": false,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
@@ -1327,7 +1327,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "d315eb19-42ec-4ca9-bba8-b4cde09882f1",
-          "duracion": null,
+          "duracion": 28,
           "gratis": true,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
@@ -1347,7 +1347,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "eda1e5fb-c0cf-4bd3-ab96-82cb6dcfd180",
-          "duracion": null,
+          "duracion": 53,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
@@ -1367,7 +1367,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "cc342c87-16c7-4ab6-a346-f6ff0342986a",
-          "duracion": null,
+          "duracion": 52,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
@@ -1387,7 +1387,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "1e8b1b16-8715-4fd0-85fc-d32bc61d2d26",
-          "duracion": null,
+          "duracion": 42,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
@@ -1403,7 +1403,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "cc45cade-8592-4f4a-9f5a-5f93fe58aa16",
-          "duracion": null,
+          "duracion": 42,
           "gratis": false,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
@@ -1432,7 +1432,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "03f2701a-a00c-4938-8e81-bc114ef1f951",
-          "duracion": null,
+          "duracion": 44,
           "gratis": true,
           "notas": {
             "resumen": "Manejo del paciente médicamente comprometido: diabetes, anticoagulacion, antibióticos, embarazo e hipertensión.",
@@ -1452,7 +1452,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "7e5d6a6b-5fb7-4f2d-a1c7-7d40599b688e",
-          "duracion": null,
+          "duracion": 50,
           "gratis": false,
           "notas": {
             "resumen": "Manejo del paciente médicamente comprometido: diabetes, anticoagulacion, antibióticos, embarazo e hipertensión.",
@@ -1472,7 +1472,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "566819fe-c16d-4092-a7fe-cee91bfe5f62",
-          "duracion": null,
+          "duracion": 80,
           "gratis": false,
           "notas": {
             "resumen": "Manejo del paciente médicamente comprometido: diabetes, anticoagulacion, antibióticos, embarazo e hipertensión.",
@@ -1492,7 +1492,7 @@
           "n": 4,
           "titulo": "Clase 4 y 5",
           "videoId": "c69094b6-637e-44bb-acd5-c85f62fb2091",
-          "duracion": null,
+          "duracion": 70,
           "gratis": false,
           "notas": {
             "resumen": "Manejo del paciente médicamente comprometido: diabetes, anticoagulacion, antibióticos, embarazo e hipertensión.",
@@ -1521,7 +1521,7 @@
           "n": 1,
           "titulo": "Clase 1",
           "videoId": "ee093e87-d700-4ec8-9557-2af205dc88de",
-          "duracion": null,
+          "duracion": 63,
           "gratis": true,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
@@ -1541,7 +1541,7 @@
           "n": 2,
           "titulo": "Clase 2",
           "videoId": "3240de44-12d5-463a-b475-7ffc2a61c0b0",
-          "duracion": null,
+          "duracion": 71,
           "gratis": false,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
@@ -1561,7 +1561,7 @@
           "n": 3,
           "titulo": "Clase 3",
           "videoId": "5a518b6f-b9d9-4096-8a27-2845d67a21b5",
-          "duracion": null,
+          "duracion": 57,
           "gratis": false,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
@@ -1581,7 +1581,7 @@
           "n": 4,
           "titulo": "Clase 4",
           "videoId": "52232044-db43-41f1-bc64-a98d9b870f42",
-          "duracion": null,
+          "duracion": 60,
           "gratis": false,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
@@ -1597,7 +1597,7 @@
           "n": 5,
           "titulo": "Clase 5",
           "videoId": "30acf1f0-9844-406f-bd9b-f246552b3b12",
-          "duracion": null,
+          "duracion": 56,
           "gratis": false,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
@@ -1626,7 +1626,7 @@
           "n": 1,
           "titulo": "Clase 1 y 2",
           "videoId": "c7f07a89-401c-47c8-bce3-382dc9346e3b",
-          "duracion": null,
+          "duracion": 99,
           "gratis": true,
           "notas": {
             "resumen": "Urgencias por trauma dental: clasificación, manejo de avulsión/luxación, ferulización y seguimiento.",
@@ -1646,7 +1646,7 @@
           "n": 2,
           "titulo": "Clase 3",
           "videoId": "594ca606-eb5a-414f-8467-a0e89a9b7e95",
-          "duracion": null,
+          "duracion": 60,
           "gratis": false,
           "notas": {
             "resumen": "Urgencias por trauma dental: clasificación, manejo de avulsión/luxación, ferulización y seguimiento.",
@@ -1666,7 +1666,7 @@
           "n": 3,
           "titulo": "Clase 4 y 5",
           "videoId": "4ee74a2c-f16d-414b-9b4b-733bf577a1d1",
-          "duracion": null,
+          "duracion": 109,
           "gratis": false,
           "notas": {
             "resumen": "Urgencias por trauma dental: clasificación, manejo de avulsión/luxación, ferulización y seguimiento.",

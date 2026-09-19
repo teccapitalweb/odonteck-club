@@ -39,7 +39,7 @@ function escribir<T>(k: string, v: T) {
 }
 const hoy = () => new Date().toISOString();
 
-const cursosSeed: Curso[] = (catalogoSeed.cursos as Curso[]).map((c) => ({ ...c, publicado: true, aprenderas: [] }));
+const cursosSeed: Curso[] = (catalogoSeed.cursos as Curso[]).map((c) => ({ ...c, publicado: c.publicado ?? true, aprenderas: [] }));
 
 export const Datos = {
   modo: (import.meta.env.VITE_API_URL ? 'api' : 'demo') as 'api' | 'demo',
