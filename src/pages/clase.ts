@@ -46,16 +46,46 @@ export function clase(params: Record<string, string>) {
       .replace('href="#/cursos">Ir a cursos', `href="#/curso/${c.id}/clase/${n - 1}">Ir a la clase ${n - 1}`);
   }
   if (!Acceso.claseAccesible(c, n)) {
+    const totalClases = c.clases.length;
+    const restantes = totalClases - n + 1;
+    const iniciales = c.instructor.split(' ').filter((w) => /^[A-ZÁÉÍÓÚ]/.test(w)).slice(-2).map((w) => w[0]).join('');
+    const clasesVip = c.clases.filter((x) => !Acceso.claseLibre(c, x.n));
+    const durTotal = clasesVip.reduce((s, x) => s + (x.duracion || 0), 0);
+
     return `<section class="stack" style="gap:20px">
       <a class="section-head__cta" href="#/curso/${c.id}" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>${esc(c.titulo)}</a>
-      <div class="locked-hero">
+      <div class="locked-hero" style="min-height:480px">
         <img src="${c.portada}" alt="">
-        <div class="locked-hero__body">
-          <span class="circle-btn" style="width:64px;height:64px;background:rgba(255,255,255,.15);color:#fff"><i data-lucide="crown" class="i" style="width:30px;height:30px"></i></span>
-          <span class="eyebrow" style="color:rgba(255,255,255,.75)">Clase ${n} de ${c.clases.length}</span>
-          <h1 class="display" style="font-size:var(--fs-2xl)">${esc(k.titulo)}</h1>
-          <p style="max-width:46ch;color:rgba(255,255,255,.9)">Esta clase es para miembros VIP. Hazte VIP y desbloquea todos los cursos, la biblioteca y los retos.</p>
-          <button class="btn btn--brand btn--lg" data-paywall="Esta clase es para miembros VIP.">Hazte VIP <i data-lucide="arrow-right" class="i"></i></button>
+        <div class="locked-hero__body" style="padding:40px 44px;gap:24px;max-width:100%;display:grid;grid-template-columns:1fr auto auto;align-items:center">
+          <div style="display:grid;gap:14px;justify-items:start;align-self:center">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(111,191,176,.15);color:var(--brand-teal);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:99px;border:1px solid rgba(111,191,176,.25)"><i data-lucide="crown" class="i" style="width:13px;height:13px"></i>Contenido VIP</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:var(--fs-xs);padding:5px 12px;border-radius:99px"><i data-lucide="play-circle" class="i" style="width:12px;height:12px"></i>Clase ${n} de ${totalClases}</span>
+              ${k.duracion ? `<span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:var(--fs-xs);padding:5px 12px;border-radius:99px"><i data-lucide="clock" class="i" style="width:12px;height:12px"></i>${fmtMin(k.duracion)}</span>` : ''}
+            </div>
+            <h1 class="display" style="font-size:clamp(var(--fs-lg),2.5vw,var(--fs-2xl));line-height:1.15">${esc(k.titulo)}</h1>
+            <p style="max-width:40ch;color:rgba(255,255,255,.8);font-size:var(--fs-sm);line-height:1.6">Desbloquea esta clase${restantes > 1 ? ` y ${restantes - 1} más` : ''}, todo el catálogo de cursos, tu certificado con folio y la biblioteca completa.</p>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;border:2px solid rgba(255,255,255,.25)">${iniciales || 'OT'}</span>
+              <div style="font-size:var(--fs-xs)"><strong style="color:#fff">${esc(c.instructor)}</strong><div style="color:rgba(255,255,255,.5)">${esc(c.area)} · ${esc(c.nivel)}</div></div>
+            </div>
+            <a class="btn btn--lg" href="#/suscripcion" style="background:var(--brand-teal);color:var(--brand-navy);font-weight:700;margin-top:4px"><i data-lucide="crown" class="i"></i>Ver planes y precios <i data-lucide="arrow-right" class="i"></i></a>
+          </div>
+          <div style="width:240px;display:grid;gap:10px;background:rgba(255,255,255,.06);border-radius:var(--r-xl);padding:22px 20px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1)">
+            <span style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-sm);color:#fff">Con VIP desbloqueas</span>
+            <div style="display:grid;gap:8px;font-size:var(--fs-xs);color:rgba(255,255,255,.85)">
+              ${[['play-circle', 'Todos los cursos y clases'], ['award', 'Certificados con folio'], ['library', 'Biblioteca de materiales'], ['brain', 'Quizzes y retos clínicos'], ['messages-square', 'Comunidad profesional']].map(([ic, t]) => `<div style="display:flex;gap:8px;align-items:center"><span style="width:28px;height:28px;border-radius:50%;background:rgba(111,191,176,.15);display:grid;place-items:center;flex-shrink:0"><i data-lucide="${ic}" class="i" style="width:13px;height:13px;color:var(--brand-teal)"></i></span>${t}</div>`).join('')}
+            </div>
+          </div>
+          <div style="width:220px;display:grid;gap:8px;background:rgba(255,255,255,.06);border-radius:var(--r-xl);padding:22px 20px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);align-content:start">
+            <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em">Clases del curso</span>
+            ${c.clases.map((x) => {
+              const libre = Acceso.claseLibre(c, x.n);
+              const actual = x.n === n;
+              return `<div style="display:flex;gap:7px;align-items:center;font-size:var(--fs-xs);color:rgba(255,255,255,${actual ? '1' : libre ? '.7' : '.45'})${actual ? ';font-weight:600' : ''}"><i data-lucide="${libre ? 'check-circle' : actual ? 'circle-dot' : 'lock'}" class="i" style="width:12px;height:12px;flex-shrink:0;color:${actual ? 'var(--brand-teal)' : libre ? 'var(--brand-teal)' : 'rgba(255,255,255,.3)'}"></i><span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(x.titulo)}</span></div>`;
+            }).join('')}
+            ${durTotal ? `<span style="font-size:11px;color:rgba(255,255,255,.35);margin-top:2px">${fmtMin(durTotal)} de contenido VIP</span>` : ''}
+          </div>
         </div>
       </div>
     </section>`;

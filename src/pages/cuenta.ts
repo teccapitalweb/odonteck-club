@@ -1,6 +1,7 @@
 import { Perfil } from '../core/perfil';
 import { BRAND, wa } from '../core/brand';
 import { Progreso } from '../core/progreso';
+import { cursos } from '../core/catalogo';
 import { puntos } from '../core/logros';
 import { esc } from '../ui/partials';
 import { Auth } from '../core/auth';
@@ -34,6 +35,16 @@ export function praxia() {
 export function perfil() {
   const p = Perfil.get();
   const plan = BRAND.planes.find((x) => x.id === p.plan);
+  const esCortesia = p.plan === 'cortesia';
+  const esAdmin = p.plan === 'admin';
+  const membresia = plan?.nombre || (esCortesia ? 'VIP cortesía' : esAdmin ? 'VIP administrador' : 'Plan gratis');
+  const detalleMembresia = plan && p.vence
+    ? `Renueva el ${new Date(p.vence).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })} · $${plan.precio} MXN/${plan.periodo}`
+    : esCortesia && p.vence
+      ? `Acceso de cortesía hasta el ${new Date(p.vence).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })}.`
+      : esAdmin
+        ? 'Acceso administrativo con todos los beneficios VIP.'
+        : 'Activa tu membresía para ver todo el catálogo.';
   return `
   <section class="stack" style="gap:20px;max-width:900px">
     <div class="section-head"><div><span class="chip chip--primary">Mi perfil</span><h1 class="display" style="font-size:var(--fs-2xl)">Hola, <em>${esc(Perfil.primerNombre())}</em></h1></div></div>
@@ -51,8 +62,8 @@ export function perfil() {
       <div class="stack">
         <div class="card card--pad stack" style="gap:10px;background:var(--brand-navy);color:#fff;border:0">
           <span class="eyebrow" style="color:var(--brand-teal)">Tu membresía</span>
-          <div class="display" style="font-size:var(--fs-xl)">${plan ? plan.nombre : 'Invitado'}</div>
-          <p style="font-size:var(--fs-sm);opacity:.8">${plan ? `Renueva el ${new Date(p.vence).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })} · $${plan.precio} MXN/${plan.periodo}` : 'Activa tu membresía para ver todo el catálogo.'}</p>
+          <div class="display" style="font-size:var(--fs-xl)">${membresia}</div>
+          <p style="font-size:var(--fs-sm);opacity:.8">${detalleMembresia}</p>
           <a class="btn btn--white btn--sm" href="#/suscripcion">Gestionar suscripción</a>
         </div>
         <div class="card card--pad stack" style="gap:8px">
@@ -66,23 +77,90 @@ export function perfil() {
 
 export function suscripcion() {
   const p = Perfil.get();
+  const esVip = p.plan !== 'invitado';
+  const mensual = BRAND.planes.find((x) => x.id === 'mensual');
+  const anual = BRAND.planes.find((x) => x.id === 'anual');
+  const precioMesDesdAnual = anual ? Math.round(anual.precio / 12) : 0;
+  const totalCursos = cursos.length;
+  const totalClases = cursos.reduce((s, c) => s + c.clases.length, 0);
+
+  const beneficio = (ico: string, titulo: string, desc: string) =>
+    `<div style="display:flex;gap:14px;align-items:flex-start"><span style="width:40px;height:40px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex-shrink:0"><i data-lucide="${ico}" class="i" style="width:18px;height:18px"></i></span><div><strong style="font-size:var(--fs-sm)">${titulo}</strong><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">${desc}</p></div></div>`;
+
+  const planCard = (pl: typeof BRAND.planes[0], recomendado: boolean) => {
+    const activo = p.plan === pl.id;
+    const precioMes = pl.id === 'anual' ? precioMesDesdAnual : pl.precio;
+    const ico = recomendado ? 'crown' : 'zap';
+    const accent = recomendado ? 'var(--brand-navy)' : 'var(--brand-teal)';
+    const accentSoft = recomendado ? 'color-mix(in srgb,var(--brand-navy) 8%,transparent)' : 'color-mix(in srgb,var(--brand-teal) 10%,transparent)';
+    return `
+    <div class="plan-card" style="position:relative;border-radius:var(--r-2xl);overflow:hidden;border:2px solid ${activo || recomendado ? accent : 'var(--line)'};background:var(--surface);transition:border-color .2s,box-shadow .2s">
+      <div style="height:6px;background:${recomendado ? 'var(--brand-gradient)' : 'linear-gradient(90deg,var(--brand-teal),color-mix(in srgb,var(--brand-teal) 40%,#fff))'}"></div>
+      ${recomendado ? '<div style="position:absolute;top:6px;right:0;background:var(--brand-gradient);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 16px 5px 14px;border-radius:0 0 0 12px">Más popular</div>' : ''}
+      <div style="display:grid;gap:18px;padding:28px 26px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="width:44px;height:44px;border-radius:14px;background:${accentSoft};color:${accent};display:grid;place-items:center"><i data-lucide="${ico}" class="i" style="width:20px;height:20px"></i></span>
+          <div>
+            <span style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-md);display:block">${pl.nombre}</span>
+            ${activo ? '<span style="font-size:11px;color:var(--primary);font-weight:600">Tu plan actual</span>' : `<span style="font-size:11px;color:var(--text-3)">${pl.id === 'anual' ? 'El favorito de nuestros miembros' : 'Flexible, sin compromiso'}</span>`}
+          </div>
+        </div>
+        <div style="background:${accentSoft};border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:baseline;gap:6px;justify-content:center">
+          <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,5vw,2.5rem);color:${accent};line-height:1">$${precioMes.toLocaleString('es-MX')}</span>
+          <span style="font-size:var(--fs-xs);color:var(--text-3)">/mes</span>
+        </div>
+        <div style="text-align:center;font-size:var(--fs-xs);color:var(--text-3);margin-top:-10px">
+          ${pl.id === 'anual' ? `$${pl.precio.toLocaleString('es-MX')} MXN al año` : 'Sin contrato · cancela cuando quieras'}
+          ${pl.ahorro ? `<div style="margin-top:6px;display:inline-flex;align-items:center;gap:5px;background:color-mix(in srgb,var(--brand-teal) 12%,transparent);color:var(--brand-teal);font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px"><i data-lucide="badge-percent" class="i" style="width:12px;height:12px"></i>${pl.ahorro}</div>` : ''}
+        </div>
+        <div style="display:grid;gap:9px;font-size:var(--fs-sm)">
+          ${[['play-circle', `${totalCursos} cursos · ${totalClases}+ clases`], ['award', 'Certificados con folio'], ['library', 'Biblioteca y materiales'], ['brain', 'Quizzes y retos'], ['radio', 'En vivo y comunidad']].map(([ic, t]) => `<div style="display:flex;gap:9px;align-items:center"><i data-lucide="${ic}" class="i" style="width:15px;height:15px;color:var(--brand-teal);flex-shrink:0"></i>${t}</div>`).join('')}
+        </div>
+        ${activo
+          ? `<button class="btn btn--secondary" disabled style="width:100%;justify-content:center;opacity:.55;border-style:dashed">Plan activo <i data-lucide="check" class="i"></i></button>`
+          : `<button class="btn ${recomendado ? 'btn--brand' : ''}" data-cambiar-plan="${pl.id}" style="width:100%;justify-content:center;font-weight:700;${recomendado ? '' : 'background:var(--brand-teal);color:var(--brand-navy)'}">${esVip ? 'Cambiar a este plan' : 'Empezar ahora'} <i data-lucide="arrow-right" class="i"></i></button>`}
+      </div>
+    </div>`;
+  };
+
   return `
-  <section class="stack" style="gap:20px;max-width:900px">
-    <div class="section-head"><div><span class="chip chip--primary">Suscripción</span><h1 class="display" style="font-size:var(--fs-2xl)">Tu plan <em>VIP</em></h1></div></div>
-    <div class="grid grid--2">
-      ${BRAND.planes.map((pl) => `
-      <div class="card card--pad stack" style="gap:12px;${p.plan === pl.id ? 'border-color:var(--primary);box-shadow:var(--ring)' : ''}">
-        <div class="row" style="justify-content:space-between"><strong>${pl.nombre}</strong>${p.plan === pl.id ? '<span class="chip chip--primary">Tu plan</span>' : pl.id === 'anual' ? '<span class="chip chip--accent">Mejor precio</span>' : ''}</div>
-        <div class="display display--black" style="font-size:var(--fs-2xl)">$${pl.precio.toLocaleString('es-MX')} <span style="font-size:var(--fs-sm);font-weight:500;color:var(--text-3)">MXN / ${pl.periodo}</span></div>
-        <p class="muted" style="font-size:var(--fs-sm)">${pl.ahorro || 'Cancela cuando quieras'} · acceso a todos los cursos, materiales, en vivo y certificados.</p>
-        ${p.plan === pl.id ? `<button class="btn btn--secondary" disabled>Plan activo</button>` : `<button class="btn btn--brand" data-cambiar-plan="${pl.id}">${p.plan === 'invitado' ? 'Hazte VIP' : 'Cambiar a este plan'}</button>`}
-      </div>`).join('')}
+  <section class="stack" style="gap:24px;max-width:860px;margin:0 auto">
+    <div style="text-align:center;display:grid;gap:8px;justify-items:center">
+      <span class="chip chip--primary"><i data-lucide="crown" class="i"></i>Membresía VIP</span>
+      <h1 class="display display--black" style="font-size:clamp(var(--fs-xl),3.5vw,var(--fs-2xl))">Invierte en tu práctica profesional</h1>
+      <p class="muted" style="font-size:var(--fs-sm);max-width:50ch">Acceso ilimitado a cursos, certificados verificables, materiales descargables, retos clínicos y comunidad profesional.</p>
     </div>
-    <div class="card card--pad stack" style="gap:10px">
-      <h3 style="font-size:var(--fs-md)">Facturación y pagos</h3>
-      <p class="muted" style="font-size:var(--fs-sm)">Cambiar tarjeta, descargar recibos, cancelar o reactivar se hace en el portal seguro de Stripe. Tus pagos siempre se procesan en Stripe.</p>
-      <div class="row"><button class="btn btn--secondary" data-portal-stripe><i data-lucide="credit-card" class="i"></i>Portal de facturación</button><a class="btn btn--ghost" href="${wa('Hola OdonTeck, tengo una duda sobre mi suscripción VIP.')}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Soporte por WhatsApp</a></div>
+
+    <div class="grid grid--2" style="gap:20px;align-items:stretch">
+      ${mensual ? planCard(mensual, false) : ''}
+      ${anual ? planCard(anual, true) : ''}
     </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      ${beneficio('play-circle', 'Cursos completos', `${totalCursos} cursos con ${totalClases}+ clases en video HD.`)}
+      ${beneficio('award', 'Certificados oficiales', 'PDF con folio único verificable.')}
+      ${beneficio('library', 'Biblioteca', 'Guías, protocolos y recursos.')}
+      ${beneficio('brain', 'Quizzes y retos', 'Preguntas revisadas por profesionales.')}
+      ${beneficio('radio', 'En vivo', 'Sesiones con especialistas.')}
+      ${beneficio('messages-square', 'Comunidad', 'Foro exclusivo para dentistas.')}
+    </div>
+
+    <div style="text-align:center;display:grid;gap:10px;justify-items:center;padding:16px 0">
+      <div style="display:flex;justify-content:center">
+        ${['LD', 'MR', 'JV', 'AS', 'PC'].map((i) => `<span style="width:32px;height:32px;border-radius:50%;background:var(--brand-gradient);display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff;margin-left:-8px;border:3px solid var(--surface)">${i}</span>`).join('')}
+      </div>
+      <p style="font-size:var(--fs-xs);color:var(--text-3)">Dentistas de todo el país ya estudian con OdonTeck</p>
+    </div>
+
+    <div class="card card--pad" style="display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:color-mix(in srgb,var(--brand-navy) 4%,var(--surface));border-color:color-mix(in srgb,var(--brand-navy) 15%,var(--line))">
+      <div style="min-width:0"><h3 style="font-size:var(--fs-sm)">Facturación y pagos</h3><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">Cambiar tarjeta, recibos o cancelar desde el portal seguro de Stripe.</p></div>
+      <div class="row" style="gap:8px;flex-shrink:0">
+        <button class="btn btn--secondary btn--sm" data-portal-stripe><i data-lucide="credit-card" class="i"></i>Portal</button>
+        <a class="btn btn--ghost btn--sm" href="${wa('Hola OdonTeck, tengo una duda sobre mi suscripción VIP.')}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Soporte</a>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:var(--fs-xs);color:var(--text-3)">Pagos seguros con Stripe · Cancela en cualquier momento · Sin permanencia</p>
   </section>`;
 }
 
@@ -109,7 +187,7 @@ export function mas() {
   const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
   return `
   <section class="stack" style="gap:16px">
-    <div class="row" style="gap:12px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>VIP ${Perfil.get().plan}</span></div></div>
+    <div class="row" style="gap:12px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>${Perfil.planNombre()}</span></div></div>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">${items.map(([h, i, l]) => `<a class="card card--pad card--hover" href="${h}" style="display:flex;gap:12px;align-items:center;color:inherit;padding:16px"><span class="circle-btn" style="background:var(--primary-soft);color:var(--primary);width:38px;height:38px"><i data-lucide="${i}" class="i"></i></span><strong style="font-size:var(--fs-sm)">${l}</strong></a>`).join('')}</div>
     <a class="card card--pad" href="${BRAND.canalWhatsApp}" target="_blank" rel="noopener" style="display:flex;gap:12px;align-items:center;color:inherit;background:color-mix(in srgb,#25d366 10%,var(--surface))"><span class="circle-btn" style="background:#25d366"><i data-lucide="message-circle" class="i"></i></span><div><strong style="font-size:var(--fs-sm)">Grupo de WhatsApp</strong><br><span class="faint" style="font-size:var(--fs-xs)">Avisos y comunidad</span></div></a>
   </section>`;

@@ -14,9 +14,9 @@ export interface Curso {
 }
 export interface Material {
   id: string; titulo: string; tipo: string; categoria: string; area: string; autor: string; paginas: number; portada: string;
-  cursoId: string | null; descripcion: string; estado: 'disponible' | 'proximamente' | 'oculto' | string; url?: string;
+  cursoId: string | null; descripcion: string; estado: 'disponible' | 'proximamente' | 'oculto' | string; gratis?: boolean; url?: string;
 }
-export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string; cursoId?: string; publicado?: boolean; reservas?: number }
+export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string | null; cursoId?: string; publicado?: boolean; reservas?: number; reservado?: boolean }
 export interface Pregunta { q: string; opciones: string[]; correcta: number; explicacion: string }
 export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; preguntas: Pregunta[]; actualizado: string }
 export interface MiembroDemo { uid: string; nombre: string; email: string; plan: 'mensual' | 'anual' | 'cortesia' | 'ninguno'; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; cortesiaHasta?: string | null; cortesiaMotivo?: string }
@@ -53,7 +53,18 @@ export const Datos = {
   borrarCurso(id: string) { escribir('cursos', this.cursos().filter((c) => c.id !== id)); },
   reordenarCursos(ids: string[]) { const l = this.cursos(); ids.forEach((id, i) => { const c = l.find((x) => x.id === id); if (c) c.orden = i + 1; }); escribir('cursos', l); },
 
-  materiales: () => leer<Material[]>('materiales', materialesSeed as Material[]),
+  materiales: () => {
+    const guardados = leer<Material[]>('materiales', materialesSeed as Material[]);
+    if (Datos.modo === 'api') return guardados;
+    const semilla = materialesSeed as Material[];
+    const orden = new Map(semilla.map((m, i) => [m.id, i]));
+    return guardados
+      .map((m) => {
+        const actual = semilla.find((x) => x.id === m.id);
+        return actual ? { ...m, gratis: actual.gratis === true } : m;
+      })
+      .sort((a, b) => (orden.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (orden.get(b.id) ?? Number.MAX_SAFE_INTEGER));
+  },
   guardarMaterial(m: Material) { const l = this.materiales(); const i = l.findIndex((x) => x.id === m.id); i >= 0 ? (l[i] = m) : l.unshift(m); escribir('materiales', l); },
   borrarMaterial(id: string) { escribir('materiales', this.materiales().filter((m) => m.id !== id)); },
 
@@ -76,6 +87,9 @@ export const Datos = {
   guardarConfig(c: Config) { escribir('config', c); },
 
   restablecerDemo() { Object.keys(localStorage).filter((k) => k.startsWith(PREFIX)).forEach((k) => localStorage.removeItem(k)); window.dispatchEvent(new CustomEvent('datos:cambio', { detail: '*' })); },
+
+  hidratarAdmin(k: string, v: unknown) { escribir(k, v); },
+  invalidarAdmin(...keys: string[]) { for (const k of keys) { try { localStorage.removeItem(PREFIX + k); } catch {} window.dispatchEvent(new CustomEvent('datos:cambio', { detail: k })); } },
 };
 
 export const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'item';

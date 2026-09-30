@@ -1,6 +1,5 @@
 // Motor de "Retos" (arcade): XP, niveles, racha diaria, repetición espaciada,
-// mazo de flashcards y banco de preguntas — TODO alimentado por el contenido real
-// de los cursos (quizzes y notas). En modo demo el progreso vive en localStorage.
+// mazo de flashcards y banco de preguntas. En modo demo el progreso vive en localStorage.
 import { Datos } from './datos';
 import { cursos, curso as getCurso } from './catalogo';
 import { puntos as puntosProgreso } from './logros';
@@ -8,21 +7,42 @@ import casosSeed from '../data/casos.json';
 
 const KEY = 'odonteck-club:retos:v1';
 
-interface SR { due: string; reps: number } // repetición espaciada por tarjeta
+export interface SR { due: string; reps: number }
+export type Calidad = 'again' | 'hard' | 'easy';
+interface Semanal { sem: string; quiz: boolean; repaso: boolean }
 interface Estado {
-  xp: number;                       // XP ganado en juegos (se suma al de progreso)
-  quizBest: number;                 // mejor puntaje en Quiz Relámpago
-  casos: Record<string, boolean>;   // casos resueltos correctamente
-  sr: Record<string, SR>;           // estado de repetición espaciada de cada flashcard
-  diaria: { fecha: string; racha: number }; // reto diario
+  xp: number;
+  quizBest: number;
+  quizBestCombo: number;
+  quizJugados: number;
+  quizAciertos: number;
+  quizTotal: number;
+  casos: Record<string, boolean>;
+  sr: Record<string, SR>;
+  diaria: { fecha: string; racha: number };
+  semanal: Semanal;
 }
 
 const HOY = () => new Date().toISOString().slice(0, 10);
-const clon = <T>(v: T): T => JSON.parse(JSON.stringify(v));
+function semanaISO(): string {
+  const d = new Date(); const t = new Date(d.valueOf());
+  t.setDate(t.getDate() - ((d.getDay() + 6) % 7) + 3);
+  const first = new Date(t.getFullYear(), 0, 4);
+  const wk = 1 + Math.round(((t.getTime() - first.getTime()) / 86400000 - 3 + ((first.getDay() + 6) % 7)) / 7);
+  return `${t.getFullYear()}-W${String(wk).padStart(2, '0')}`;
+}
+
+function leerSemanal(e: Estado): Semanal {
+  const sem = semanaISO();
+  if (e.semanal?.sem === sem) return e.semanal;
+  return { sem, quiz: false, repaso: false };
+}
 
 function leer(): Estado {
-  const def: Estado = { xp: 0, quizBest: 0, casos: {}, sr: {}, diaria: { fecha: '', racha: 0 } };
-  try { return { ...def, ...(JSON.parse(localStorage.getItem(KEY) || '{}')) }; } catch { return clon(def); }
+  const def: Estado = { xp: 0, quizBest: 0, quizBestCombo: 0, quizJugados: 0, quizAciertos: 0, quizTotal: 0, casos: {}, sr: {}, diaria: { fecha: '', racha: 0 }, semanal: { sem: '', quiz: false, repaso: false } };
+  const e: Estado = { ...def, ...((() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } })()) };
+  e.semanal = leerSemanal(e);
+  return e;
 }
 function guardar(e: Estado) {
   try { localStorage.setItem(KEY, JSON.stringify(e)); } catch {}
@@ -108,7 +128,7 @@ export function mazoCompleto(): Flashcard[] {
       if (!k.notas) continue;
       k.notas.conceptos?.forEach((x, i) => cards.push({
         id: `n:${c.id}:${k.n}:${i}`, area: c.area, curso: c.titulo,
-        frente: `${x.texto}`, reverso: `<span class="faint">${c.titulo} · clase ${k.n} · ${x.t}</span>` }));
+        frente: `${x.texto}`, reverso: `${k.notas!.resumen ? `<p>${k.notas!.resumen}</p>` : ''}<span class="faint">${c.titulo} · clase ${k.n} · ${x.t}</span>` }));
     }
   }
   return cards;
@@ -118,31 +138,91 @@ export function mazoCompleto(): Flashcard[] {
 export function mazoDeHoy(limite = 15): Flashcard[] {
   const e = leer(); const ahora = Date.now();
   const todas = mazoCompleto();
-  const vencidas = todas.filter((c) => e.sr[c.id] && new Date(e.sr[c.id].due).getTime() <= ahora);
-  const nuevas = todas.filter((c) => !e.sr[c.id]);
+  const vencidas = barajar(todas.filter((c) => e.sr[c.id] && new Date(e.sr[c.id].due).getTime() <= ahora));
+  const nuevas = barajar(todas.filter((c) => !e.sr[c.id]));
   return [...vencidas, ...nuevas].slice(0, limite);
 }
 const INTERVALOS = [1, 3, 7, 16, 35]; // días
-export function repasarCarta(id: string, bien: boolean) {
+
+function diasParaRepaso(reps: number): number {
+  if (reps < INTERVALOS.length) return INTERVALOS[reps];
+  const extra = reps - INTERVALOS.length + 1;
+  return Math.min(INTERVALOS[INTERVALOS.length - 1] * Math.pow(2, extra), 365);
+}
+
+export function repasarCarta(id: string, cal: Calidad) {
   const e = leer();
   const prev = e.sr[id] || { due: '', reps: 0 };
-  const reps = bien ? Math.min(prev.reps + 1, INTERVALOS.length - 1) : 0;
-  const dias = bien ? INTERVALOS[reps] : 0; // si falla, vuelve hoy
+  let reps: number;
+  let dias: number;
+  let xp: number;
+  switch (cal) {
+    case 'again': reps = 0; dias = 0; xp = 0; break;
+    case 'hard':  reps = prev.reps; dias = Math.max(1, Math.round(diasParaRepaso(prev.reps) / 2)); xp = 1; break;
+    case 'easy':  reps = prev.reps + 1; dias = diasParaRepaso(prev.reps); xp = 3; break;
+  }
   e.sr[id] = { reps, due: new Date(Date.now() + dias * 86400000).toISOString() };
-  if (bien) e.xp += 3;
+  e.xp += xp;
+  e.semanal = leerSemanal(e); e.semanal.repaso = true;
   guardar(e);
 }
+
+export function obtenerSR(id: string): SR | null {
+  const e = leer();
+  return e.sr[id] ? { ...e.sr[id] } : null;
+}
+
+export function restaurarSR(id: string, sr: SR | null) {
+  const e = leer();
+  if (sr) e.sr[id] = sr; else delete e.sr[id];
+  guardar(e);
+}
+
 export function estatsMazo() {
   const e = leer(); const todas = mazoCompleto();
   const dominadas = todas.filter((c) => (e.sr[c.id]?.reps || 0) >= 3).length;
   return { total: todas.length, dominadas, estudiadas: Object.keys(e.sr).length };
 }
 
+export function pendientesHoy(): number {
+  const e = leer(); const ahora = Date.now();
+  const todas = mazoCompleto();
+  return todas.filter((c) => !e.sr[c.id] || new Date(e.sr[c.id].due).getTime() <= ahora).length;
+}
+
+export function proximoRepaso(): Date | null {
+  const e = leer();
+  let min = Infinity;
+  for (const c of mazoCompleto()) {
+    const sr = e.sr[c.id];
+    if (sr && new Date(sr.due).getTime() > Date.now()) min = Math.min(min, new Date(sr.due).getTime());
+  }
+  return min === Infinity ? null : new Date(min);
+}
+
 // ── Quiz Relámpago ──
-export function registrarQuiz(puntaje: number) {
-  const e = leer(); e.xp += Math.round(puntaje / 10); e.quizBest = Math.max(e.quizBest, puntaje); guardar(e);
+export function registrarQuiz(puntaje: number, aciertos: number, total: number, mejorCombo: number) {
+  const e = leer();
+  e.xp += Math.round(puntaje / 10);
+  e.quizBest = Math.max(e.quizBest, puntaje);
+  e.quizBestCombo = Math.max(e.quizBestCombo, mejorCombo);
+  e.quizJugados++;
+  e.quizAciertos += aciertos;
+  e.quizTotal += total;
+  e.semanal = leerSemanal(e); e.semanal.quiz = true;
+  guardar(e);
 }
 export const mejorQuiz = () => leer().quizBest;
+
+export function statsQuiz() {
+  const e = leer();
+  return {
+    mejor: e.quizBest,
+    mejorCombo: e.quizBestCombo,
+    jugados: e.quizJugados,
+    precision: e.quizTotal ? Math.round(e.quizAciertos / e.quizTotal * 100) : 0,
+  };
+}
 
 // ── Detective Dental (casos clínicos) ──
 export interface Caso {
@@ -157,5 +237,22 @@ export function resolverCaso(id: string, perfecto: boolean) {
   guardar(e);
 }
 export const casosResueltos = () => Object.values(leer().casos).filter(Boolean).length;
+export const casoResuelto = (id: string) => !!leer().casos[id];
+
+export function areasPreguntas(): string[] {
+  return [...new Set(bancoPreguntas().map((p) => p.area))].sort();
+}
+
+export interface Mision { titulo: string; desc: string; ok: boolean }
+export function misiones(): { items: Mision[]; pct: number } {
+  const e = leer();
+  const s = leerSemanal(e);
+  const items: Mision[] = [
+    { titulo: 'Reto diario', desc: 'Completa el reto de hoy', ok: e.diaria.fecha === HOY() },
+    { titulo: 'Quiz semanal', desc: 'Juega un quiz esta semana', ok: s.quiz },
+    { titulo: 'Repaso activo', desc: 'Repasa tus flashcards', ok: s.repaso },
+  ];
+  return { items, pct: Math.round(items.filter((m) => m.ok).length / items.length * 100) };
+}
 
 export const barajar = <T>(a: T[]): T[] => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };

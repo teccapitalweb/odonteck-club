@@ -45,6 +45,7 @@ export function mapearMaterial(m, actualizado) {
     cursoId: m.cursoId ?? null,
     descripcion: m.descripcion ?? '',
     estado: m.estado ?? 'proximamente',
+    gratis: m.gratis === true,
   });
   return { ...validado, archivo: `materiales/${validado.id}.pdf`, actualizado };
 }

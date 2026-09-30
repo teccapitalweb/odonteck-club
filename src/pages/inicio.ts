@@ -2,7 +2,7 @@ import { cursos } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { tarjetaCurso, encabezado, esc } from '../ui/partials';
 import { Perfil } from '../core/perfil';
-import { BRAND, wa } from '../core/brand';
+import { BRAND } from '../core/brand';
 import { proximoEvento } from './envivo';
 import { racha, puntos } from '../core/logros';
 import { Comunidad } from '../core/comunidad';
@@ -26,10 +26,10 @@ function widgets() {
       <a class="btn btn--sm" href="${BRAND.canalWhatsApp}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Abrir grupo</a>
     </div>
     <div class="widget">
-      <span class="eyebrow"><i data-lucide="percent" class="i"></i>Tu descuento VIP</span>
-      <div class="widget__big">${BRAND.descuentoVIP}%</div>
-      <p class="muted" style="font-size:var(--fs-sm)">En cursos en vivo de certificación con folio oficial OdonTeck.</p>
-      <a class="btn btn--sm btn--brand" href="${wa(`Hola OdonTeck, soy miembro VIP del club y quiero aplicar mi ${BRAND.descuentoVIP}% de descuento en un curso en vivo.`)}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Solicitar por WhatsApp</a>
+      <span class="eyebrow"><i data-lucide="brain" class="i"></i>Praxia Medical</span>
+      <div class="widget__title">Tu asistente clínico dental</div>
+      <p class="muted" style="font-size:var(--fs-sm)">Consulta protocolos, fármacos y casos clínicos al instante desde tu cuenta OdonTeck.</p>
+      <a class="btn btn--sm btn--brand" href="#/praxia"><i data-lucide="sparkles" class="i"></i>Probar Praxia</a>
     </div>
     <div class="widget">
       <span class="eyebrow"><i data-lucide="activity" class="i"></i>Tu actividad</span>
@@ -71,10 +71,10 @@ export function inicio() {
     const primero = cursos[0];
     hero = `
       <span class="hero__kicker"><i data-lucide="sparkles" class="i" style="width:14px;height:14px"></i>${saludo()}, ${esc(Perfil.tratamiento())} · bienvenida al club</span>
-      <h1 class="display display--black hero__title">Empieza tu <em>primera clase.</em></h1>
+      <h1 class="display display--black hero__title">Empieza tu <em>primer curso gratis.</em></h1>
       <p class="hero__lead">${cursos.length} cursos grabados con casos reales de consultorio. Te sugerimos empezar por ${esc(primero.titulo)}.</p>
       <div class="hero__actions">
-        <a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${primero.id}/clase/1">Ver la primera clase <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></a>
+        <a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${primero.id}">Empezar curso gratis <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></a>
         <a class="btn btn--lg" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)" href="#/cursos">Explorar el catálogo</a>
       </div>`;
   }

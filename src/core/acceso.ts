@@ -4,7 +4,7 @@
 import { createIcons, icons } from 'lucide';
 import { Auth } from './auth';
 import { Datos, type Material } from './datos';
-import { cursos, type Curso } from './catalogo';
+import type { Curso } from './catalogo';
 
 export const VIP_SIM = 'odonteck-club:vip-sim';
 
@@ -14,16 +14,15 @@ export const Acceso = {
   activarVipDemo() { try { localStorage.setItem(VIP_SIM, '1'); } catch {} },
   quitarVipDemo() { try { localStorage.removeItem(VIP_SIM); } catch {} },
 
-  // Clases: 1er curso todas menos la última · demás cursos solo la primera
+  cursoGratis(curso: Curso): boolean { return curso.orden === 1; },
   claseLibre(curso: Curso, n: number): boolean {
-    const esPrimerCurso = cursos[0]?.id === curso.id;
-    if (esPrimerCurso) return n < curso.clases.length;
-    return n === (curso.clases[0]?.n ?? 1);
+    if (curso.orden === 1) return n < curso.clases.length;
+    return false;
   },
   claseAccesible(curso: Curso, n: number) { return this.vip() || this.claseLibre(curso, n); },
 
-  // Materiales: solo el primero es gratis
-  materialLibre(m: Material): boolean { return Datos.materiales()[0]?.id === m.id; },
+  // Materiales: el recurso gratuito se declara explícitamente en el catálogo.
+  materialLibre(m: Material): boolean { return m.gratis === true; },
   materialAccesible(m: Material) { return this.vip() || this.materialLibre(m); },
 
   // Comunidad: ver es gratis, interactuar es VIP

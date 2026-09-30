@@ -110,6 +110,7 @@ export function validarMaterial(body, { parcial = false } = {}) {
     cursoId: b.cursoId === undefined ? (parcial ? undefined : null) : b.cursoId === null || b.cursoId === '' ? null : slug(b.cursoId, { campo: 'cursoId' }),
     descripcion: opc(b.descripcion, () => texto(b.descripcion, { campo: 'descripcion', max: LIMITES.largo, multilinea: true }), ''),
     estado: unoDe(b.estado, ESTADOS_MATERIAL, { campo: 'estado' }) ?? (parcial ? undefined : 'proximamente'),
+    gratis: opc(b.gratis, () => booleano(b.gratis, { campo: 'gratis' }), false),
   });
   // `archivo` no se recibe: siempre es materiales/<id>.pdf y lo fija el servidor.
   return out;

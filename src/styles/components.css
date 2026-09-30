@@ -207,8 +207,8 @@
 .player__controls .i { width: 20px; height: 20px; }
 .player__bar { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,.25); position: relative; }
 .player__bar::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 38%; background: var(--brand-teal); border-radius: inherit; }
-.tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: var(--r-md); }
-.tabs button { flex: 1; height: 36px; border-radius: 9px; font-size: var(--fs-sm); font-weight: 600; color: var(--text-2); transition: all var(--t-fast); }
+.tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface-2); border-radius: var(--r-lg); }
+.tabs button { flex: 1; height: 40px; border-radius: 10px; font-size: var(--fs-sm); font-weight: 600; color: var(--text-2); transition: all var(--t-fast); }
 .tabs button.is-active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
 .quiz__q { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 500; line-height: 1.3; }
 .quiz__opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: var(--r-md);
@@ -303,11 +303,20 @@
 .paywall__cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
 .paywall__nota { font-size: var(--fs-xs); color: var(--text-3); }
 
+/* Plan cards */
+.plan-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.plan-card { transition: border-color .2s, box-shadow .2s, transform .2s; cursor: default; }
+
 /* Vista de clase bloqueada */
-.locked-hero { position: relative; overflow: hidden; border-radius: var(--r-2xl); min-height: 420px; display: flex; align-items: center; box-shadow: var(--shadow-lg); background: var(--brand-navy); }
-.locked-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; }
-.locked-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(20,42,92,.92), rgba(13,18,32,.78)); }
+.locked-hero { position: relative; overflow: hidden; border-radius: var(--r-2xl); min-height: 420px; display: flex; align-items: center; box-shadow: var(--shadow-lg), 0 0 80px rgba(20,42,92,.3); background: var(--brand-navy); }
+.locked-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .3; filter: blur(2px); }
+.locked-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(20,42,92,.94) 0%, rgba(28,74,143,.82) 50%, rgba(47,143,176,.65) 100%); }
 .locked-hero__body { position: relative; z-index: 1; color: #fff; padding: 44px; display: grid; gap: 12px; justify-items: start; }
+@media (max-width: 900px) {
+  .locked-hero__body { grid-template-columns: 1fr !important; padding: 28px 24px !important; }
+  .locked-hero__body > div[style*="width:240px"],
+  .locked-hero__body > div[style*="width:220px"] { width: 100% !important; }
+}
 
 /* ═══ Notas de clase ═══ */
 .notas { display: grid; gap: 12px; }

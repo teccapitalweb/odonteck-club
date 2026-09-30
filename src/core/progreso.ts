@@ -2,7 +2,7 @@
 // Firestore (progreso/{uid}_{cursoId}) a través del backend. La interfaz no cambia.
 import { cursos, type Curso } from './catalogo';
 
-interface ProgresoCurso { vistas: number[]; ultima: number; actualizado: string; historial?: string[]; }
+export interface ProgresoCurso { vistas: number[]; ultima: number; actualizado: string; historial?: string[]; }
 const KEY = 'odonteck-club:progreso:v1';
 
 function leer(): Record<string, ProgresoCurso> {
@@ -36,4 +36,5 @@ export const Progreso = {
   reciente(): Curso | undefined { return this.enMarcha()[0]; },
   totalVistas() { return Object.values(leer()).reduce((a, p) => a + p.vistas.length, 0); },
   fechas(): string[] { return Object.values(leer()).flatMap((p) => p.historial || []); },
+  hidratar(data: Record<string, ProgresoCurso>) { escribir(data); },
 };

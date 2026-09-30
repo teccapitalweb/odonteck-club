@@ -12,6 +12,7 @@ export const TOKENS = {
   vip2: 'tk-vip2',
   free: 'tk-free',
   admin: 'tk-admin',
+  legacy: 'tk-legacy',
   revocado: 'tk-revocado',
 };
 
@@ -44,7 +45,8 @@ export function semillaBase() {
       id: 'curso-b', titulo: 'Borrador', area: 'Orto', nivel: 'Básico', orden: 2, publicado: false,
       clases: [{ n: 1, titulo: 'Clase 1', videoId: 'video-b-1', gratis: true }],
     },
-    'v2_materiales/guia': { id: 'guia', titulo: 'Guía', tipo: 'PDF', estado: 'disponible', archivo: 'materiales/guia.pdf' },
+    'v2_materiales/guia': { id: 'guia', titulo: 'Guía', tipo: 'PDF', estado: 'disponible', gratis: true, archivo: 'materiales/guia.pdf' },
+    'v2_materiales/manual-vip': { id: 'manual-vip', titulo: 'Manual VIP', tipo: 'PDF', estado: 'disponible', gratis: false, archivo: 'materiales/manual-vip.pdf' },
     'v2_materiales/secreto': { id: 'secreto', titulo: 'Oculto', tipo: 'PDF', estado: 'oculto', archivo: 'materiales/secreto.pdf' },
     'v2_eventos/ev1': { id: 'ev1', titulo: 'Sesión en vivo', ponente: 'Dr. X', fecha: '2026-10-01T18:00:00.000Z', duracionMin: 60, enlace: 'https://meet.example.com/x', publicado: true, reservas: ['otro-uid'] },
     'v2_eventos/ev-oculto': { id: 'ev-oculto', titulo: 'No publicado', fecha: '2026-10-01T18:00:00.000Z', publicado: false, reservas: [] },
@@ -64,12 +66,14 @@ export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinBu
       [TOKENS.vip2]: { uid: 'vip2', email: 'beto@example.com' },
       [TOKENS.free]: { uid: 'free1', email: 'carla@example.com' },
       [TOKENS.admin]: { uid: 'adm1', email: 'admin@example.com', admin: true },
+      [TOKENS.legacy]: { uid: 'legacy-auth-uid', email: 'legacy@example.com', name: 'Legado' },
       [TOKENS.revocado]: { uid: 'vip1', revocado: true },
     },
     usuarios: {
       vip1: { email: 'ana@example.com' },
       free1: { email: 'carla@example.com' },
       adm1: { email: 'admin@example.com', customClaims: { admin: true } },
+      'legacy-auth-uid': { email: 'legacy@example.com' },
       solo_auth: { email: 'nuevo@example.com' },
     },
   });

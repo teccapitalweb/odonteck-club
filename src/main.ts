@@ -24,13 +24,15 @@ import { catalogo } from './pages/cursos';
 import { curso } from './pages/curso';
 import { clase } from './pages/clase';
 import { biblioteca, material } from './pages/materiales';
-import { envivo, toggleReserva } from './pages/envivo';
+import { toggleReserva } from './pages/envivo';
 import { comunidad, hilo } from './pages/comunidad';
 import { paginaLogros } from './pages/logros';
 import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
+import { cargarClub } from './core/remoto';
 import { mostrarOnboarding } from './ui/onboarding';
-import { certificados, certificado } from './pages/certificados';
+import { certificados, certificado, verificar } from './pages/certificados';
+import { buscar } from './pages/buscar';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
 import { login } from './pages/login';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
@@ -71,11 +73,15 @@ function remontar() { const t = shellActual; shellActual = null; if (t) montar(t
 onBeforeRender(async (path) => {
   await Auth.iniciar();
   const u = Auth.usuario;
+  if (path.startsWith('/verificar')) { montar('solo'); return true; }
   if (path === '/login') {
     if (u) { navigate(sessionStorage.getItem('odt:volver') || '/'); return false; }
     montar('solo'); return true;
   }
   if (!u) { sessionStorage.setItem('odt:volver', location.hash.slice(1) || '/'); navigate('/login'); return false; }
+  if (Datos.modo === 'api' && path.startsWith('/retos')) { toast('Los retos volverán cuando la clasificación real esté conectada.', 'gamepad-2'); navigate('/'); return false; }
+  if (Datos.modo === 'api' && path.startsWith('/admin')) { location.assign('https://www.odonteckconsulting.com/vip-admin.html'); return false; }
+  try { await cargarClub(path); } catch {}
   if (path.startsWith('/admin')) {
     if (!u.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
     montar('admin'); return true;
@@ -91,13 +97,15 @@ route('/curso/:id', curso);
 route('/curso/:id/clase/:n', clase);
 route('/materiales', biblioteca);
 route('/materiales/:id', material);
-route('/en-vivo', envivo);
+route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/logros', paginaLogros);
 route('/retos', retos);
 route('/certificados', certificados);
 route('/certificados/:id', certificado);
+route('/verificar/:folio', verificar);
+route('/buscar', buscar);
 route('/praxia', praxia);
 route('/perfil', perfil);
 route('/suscripcion', suscripcion);
@@ -195,21 +203,65 @@ document.addEventListener('click', async (e) => {
   }
 
   const res = el.closest<HTMLElement>('[data-reservar]');
-  if (res) { toggleReserva(res.dataset.reservar!); toast('Reserva actualizada · te avisamos antes de la clase', 'bell'); render(); }
+  if (res) {
+    const id = res.dataset.reservar!;
+    try {
+      if (Datos.modo === 'api') {
+        const r = await api<{ reservado: boolean }>(`/eventos/${encodeURIComponent(id)}/reserva`, { method: 'POST' });
+        const evento = Datos.eventos().find((x) => x.id === id);
+        if (evento) Datos.guardarEvento({ ...evento, reservado: r.reservado, reservas: Math.max(0, Number(evento.reservas || 0) + (r.reservado ? 1 : -1)) });
+      } else toggleReserva(id);
+      toast('Reserva actualizada · te avisamos antes de la clase', 'bell'); render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+  }
 
+  const descargar = el.closest<HTMLButtonElement>('[data-descargar-material]');
+  if (descargar) {
+    descargar.disabled = true;
+    try {
+      const r = await api<{ url: string }>(`/materiales/${encodeURIComponent(descargar.dataset.descargarMaterial!)}/descarga`);
+      location.href = r.url;
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); descargar.disabled = false; }
+  }
+
+  if (el.closest('[data-pregunta-rapida]')) {
+    if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
+    navigate('/comunidad?tab=foro'); setTimeout(() => { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }, 100); return; }
   if (el.closest('[data-nuevo-hilo]')) {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
     const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
   if (el.closest('[data-cancelar-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) f.hidden = true; }
   const util = el.closest<HTMLElement>('[data-util]');
-  if (util) { if (!Acceso.puedeComunidad()) { mostrarPaywall('Reaccionar en la comunidad es para miembros VIP.'); return; } Comunidad.util(util.dataset.util!); render(); }
+  if (util) {
+    if (!Acceso.puedeComunidad()) { mostrarPaywall('Reaccionar en la comunidad es para miembros VIP.'); return; }
+    try {
+      if (Datos.modo === 'api') {
+        const r = await api<{ util: number }>(`/foro/${encodeURIComponent(util.dataset.util!)}/util`, { method: 'POST' });
+        Comunidad.utilRemoto(util.dataset.util!, r.util);
+      } else Comunidad.util(util.dataset.util!);
+      render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+  }
 
   const aviso = el.closest<HTMLElement>('[data-aviso]');
-  if (aviso) { const p = Perfil.get(); const k = aviso.dataset.aviso as keyof typeof p.avisos; p.avisos[k] = !p.avisos[k]; Perfil.set({ avisos: p.avisos }); aviso.setAttribute('aria-checked', String(p.avisos[k])); }
+  if (aviso) {
+    const p = Perfil.get(); const k = aviso.dataset.aviso as keyof typeof p.avisos; const anterior = p.avisos[k];
+    p.avisos[k] = !anterior;
+    try {
+      if (Datos.modo === 'api') {
+        const perfil = await api<Partial<ReturnType<typeof Perfil.get>>>('/me/perfil', { method: 'PATCH', json: { avisos: { [k]: p.avisos[k] } } });
+        Perfil.hidratar(perfil, p.plan, p.vence);
+      } else Perfil.set({ avisos: p.avisos });
+      aviso.setAttribute('aria-checked', String(p.avisos[k]));
+    } catch (err) { p.avisos[k] = anterior; aviso.setAttribute('aria-checked', String(anterior)); toast(mensajeError(err), 'alert-triangle'); }
+  }
 
   const plan = el.closest<HTMLElement>('[data-cambiar-plan]');
   if (plan) {
-    if (Datos.modo === 'api') { try { const r = await api<{ url: string }>('/stripe/checkout', { method: 'POST', json: { plan: plan.dataset.cambiarPlan } }); location.href = r.url; } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (Datos.modo === 'api' && import.meta.env.VITE_STRIPE_CHECKOUT_ENABLED !== 'true') {
+      location.href = 'https://www.odonteckconsulting.com/vip-auth.html?tab=register';
+    }
+    else if (Datos.modo === 'api') { try { const r = await api<{ url: string }>('/stripe/checkout', { method: 'POST', json: { plan: plan.dataset.cambiarPlan } }); location.href = r.url; } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     else toast('En el demo no se cobra. Con el backend conectado abre el pago seguro de Stripe.', 'credit-card');
   }
   if (el.closest('[data-portal-stripe]')) {
@@ -239,7 +291,7 @@ document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
   if (f.matches('[data-search]')) {
     e.preventDefault(); const q = new FormData(f).get('q') as string;
-    navigate('/cursos' + (q ? '?q=' + encodeURIComponent(q) : ''));
+    navigate('/buscar' + (q ? '?q=' + encodeURIComponent(q) : ''));
   }
   if (f.matches('[data-login-form]')) {
     e.preventDefault(); const d = new FormData(f); const btn = f.querySelector('button')!; btn.setAttribute('disabled', '');
@@ -253,40 +305,85 @@ document.addEventListener('submit', async (e) => {
   }
   if (f.matches('[data-quiz-miembro]')) {
     e.preventDefault();
-    const [cursoId, n] = f.dataset.quizMiembro!.split(':');
-    const q = Datos.quiz(cursoId, Number(n)); if (!q) return;
-    const d = new FormData(f); let ok = 0;
-    q.preguntas.forEach((p, i) => {
-      const r = Number(d.get(`r${i}`)); const fs = f.querySelector(`[data-pregunta="${i}"]`)!;
-      fs.querySelectorAll<HTMLLabelElement>('.quiz__opt').forEach((o, j) => { o.classList.toggle('is-correct', j === p.correcta); o.classList.toggle('is-wrong', j === r && r !== p.correcta); });
-      fs.querySelector<HTMLElement>('.quiz__exp')!.hidden = false;
-      if (r === p.correcta) ok++;
+    const [cursoId, nStr] = f.dataset.quizMiembro!.split(':');
+    const n = Number(nStr);
+    const q = Datos.quiz(cursoId, n); if (!q) return;
+    const d = new FormData(f);
+    const respuestas = q.preguntas.map((_, i) => Number(d.get(`r${i}`)));
+    const btn = f.querySelector<HTMLButtonElement>('button')!;
+    btn.setAttribute('disabled', '');
+
+    type Detalle = { correcta: number; explicacion: string };
+    let correctas: number, total: number, aprobado: boolean, detalle: Detalle[];
+
+    if (Datos.modo === 'api') {
+      try {
+        const r = await api<{ correctas: number; total: number; aprobado: boolean; detalle: Detalle[] }>(
+          `/quiz/${encodeURIComponent(cursoId)}/${n}`, { method: 'POST', json: { respuestas } });
+        ({ correctas, total, aprobado, detalle } = r);
+      } catch (err) { toast(mensajeError(err), 'alert-triangle'); btn.removeAttribute('disabled'); return; }
+    } else {
+      detalle = q.preguntas.map((p) => ({ correcta: p.correcta, explicacion: p.explicacion }));
+      correctas = respuestas.filter((r, i) => r === detalle[i].correcta).length;
+      total = q.preguntas.length;
+      aprobado = correctas / total >= 0.7;
+    }
+
+    q.preguntas.forEach((_, i) => {
+      const r = respuestas[i]; const det = detalle[i];
+      const fs = f.querySelector(`[data-pregunta="${i}"]`)!;
+      fs.querySelectorAll<HTMLLabelElement>('.quiz__opt').forEach((o, j) => {
+        o.classList.toggle('is-correct', j === det.correcta);
+        o.classList.toggle('is-wrong', j === r && r !== det.correcta);
+      });
+      const exp = fs.querySelector<HTMLElement>('.quiz__exp')!;
+      if (det.explicacion) exp.textContent = det.explicacion;
+      exp.hidden = false;
     });
-    const aprobado = ok / q.preguntas.length >= 0.7;
+
     const res = f.querySelector<HTMLElement>('.quiz__resultado')!;
     res.hidden = false; res.className = `quiz__resultado ${aprobado ? 'ok' : 'no'}`;
-    res.textContent = aprobado ? `¡Muy bien! ${ok} de ${q.preguntas.length} correctas.` : `${ok} de ${q.preguntas.length} correctas. Repasa la clase y vuelve a intentarlo.`;
+    res.textContent = aprobado ? `¡Muy bien! ${correctas} de ${total} correctas.` : `${correctas} de ${total} correctas. Repasa la clase y vuelve a intentarlo.`;
     f.dataset.calificado = '1';
-    const btn = f.querySelector<HTMLButtonElement>('button')!; btn.textContent = 'Intentar de nuevo'; btn.type = 'button';
+    btn.removeAttribute('disabled'); btn.textContent = 'Intentar de nuevo'; btn.type = 'button';
     btn.onclick = () => render();
-    try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok, total: q.preguntas.length, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
+    try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok: correctas, total, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
   }
   if (f.matches('[data-form-hilo]')) {
     e.preventDefault();
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP.'); return; }
     const d = new FormData(f);
-    const h = Comunidad.crear(String(d.get('titulo')).trim(), String(d.get('texto')).trim(), (d.get('cursoId') as string) || null);
-    toast('Tema publicado', 'message-circle'); navigate(`/comunidad/${h.id}`);
+    try {
+      const datos = { titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), cursoId: (d.get('cursoId') as string) || null };
+      const h = Datos.modo === 'api'
+        ? Comunidad.agregarRemoto(await api('/foro', { method: 'POST', json: datos }))
+        : Comunidad.crear(datos.titulo, datos.texto, datos.cursoId);
+      toast('Tema publicado', 'message-circle'); navigate(`/comunidad/${h.id}`);
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
   }
   if (f.matches('[data-form-respuesta]')) {
     e.preventDefault();
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Responder en la comunidad es para miembros VIP.'); return; }
-    Comunidad.responder(f.dataset.formRespuesta!, String(new FormData(f).get('texto')).trim()); render();
+    const id = f.dataset.formRespuesta!; const texto = String(new FormData(f).get('texto')).trim();
+    try {
+      if (Datos.modo === 'api') {
+        const respuesta = await api<Parameters<typeof Comunidad.responderRemoto>[1]>(`/foro/${encodeURIComponent(id)}/respuestas`, { method: 'POST', json: { texto } });
+        Comunidad.responderRemoto(id, respuesta);
+      } else Comunidad.responder(id, texto);
+      render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
   }
   if (f.matches('[data-form-perfil]')) {
     e.preventDefault(); const d = new FormData(f);
-    Perfil.set({ nombre: String(d.get('nombre')).trim(), whatsapp: String(d.get('whatsapp')).trim(), especialidad: String(d.get('especialidad')).trim(), ciudad: String(d.get('ciudad')).trim() });
-    remontar(); toast('Perfil guardado', 'check');
+    const cambios = { nombre: String(d.get('nombre')).trim(), whatsapp: String(d.get('whatsapp')).trim(), especialidad: String(d.get('especialidad')).trim(), ciudad: String(d.get('ciudad')).trim() };
+    try {
+      if (Datos.modo === 'api') {
+        const actual = Perfil.get();
+        const perfil = await api<Partial<ReturnType<typeof Perfil.get>>>('/me/perfil', { method: 'PATCH', json: cambios });
+        Perfil.hidratar(perfil, actual.plan, actual.vence);
+      } else Perfil.set(cambios);
+      remontar(); toast('Perfil guardado', 'check');
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
   }
 });
 

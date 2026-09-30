@@ -8,9 +8,8 @@ export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
   { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
   { href: '#/materiales', icon: 'library', label: 'Materiales', match: /^\/materiales/ },
-  { href: '#/en-vivo', icon: 'radio', label: 'En vivo', match: /^\/en-vivo/, badge: 2 },
-  { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/ },
-  { href: '#/retos', icon: 'gamepad-2', label: 'Retos', match: /^\/retos/ },
+  { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
+  ...(Datos.modo === 'demo' ? [{ href: '#/retos', icon: 'gamepad-2', label: 'Retos', match: /^\/retos/ }] : []),
   { group: 'Herramientas' },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
   { group: 'Tu progreso' },
@@ -40,7 +39,7 @@ export function shellHTML() {
         </div>`}
         <a class="user-card" href="#/perfil">
           <div class="avatar">${Perfil.iniciales()}</div>
-          <div><div class="user-card__name">${Perfil.get().nombre}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>VIP ${Perfil.get().plan}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
+          <div><div class="user-card__name">${Perfil.get().nombre}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
           <span class="btn btn--ghost btn--icon" aria-label="Configuración"><i data-lucide="settings" class="i"></i></span>
         </a>
       </div>

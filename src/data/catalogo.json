@@ -38,7 +38,7 @@
           "titulo": "Clase 2",
           "videoId": "d9611bfd-f835-4d90-a621-b83537e7bfcc",
           "duracion": 58,
-          "gratis": false,
+          "gratis": true,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
             "conceptos": [
@@ -58,7 +58,7 @@
           "titulo": "Clase 3",
           "videoId": "d6d60f9d-8788-4d4c-85f5-3862563cd486",
           "duracion": 21,
-          "gratis": false,
+          "gratis": true,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
             "conceptos": [
@@ -78,7 +78,7 @@
           "titulo": "Clase 4",
           "videoId": "4aa4578e-982a-4a8d-a3ab-dfb19636fd47",
           "duracion": 67,
-          "gratis": false,
+          "gratis": true,
           "notas": {
             "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
             "conceptos": [
@@ -123,7 +123,6 @@
           "titulo": "Clase 1",
           "videoId": "b622fb01-3fce-4f71-b271-4e05a6328ef9",
           "duracion": 42,
-          "gratis": true,
           "notas": {
             "resumen": "Diagnóstico moderno de caries: entenderla como enfermedad, clasificarla con ICDAS y decidir entre remineralizar u operar.",
             "conceptos": [
@@ -228,7 +227,6 @@
           "titulo": "Clase 1",
           "videoId": "014d4830-df4e-4fb1-b910-646dfc8fe66d",
           "duracion": 48,
-          "gratis": true,
           "notas": {
             "resumen": "Manejo pulpar en dientes primarios: diagnóstico de vitalidad, pulpotomia, pulpectomia y cuando conservar o extraer.",
             "conceptos": [
@@ -301,7 +299,6 @@
           "titulo": "Clase 1",
           "videoId": "fe861c3c-5b80-4b59-90fa-68afaa229843",
           "duracion": 53,
-          "gratis": true,
           "notas": {
             "resumen": "Exodoncia simple paso a paso: evaluacion, anestesia, luxación controlada, maniobra con fórceps y cuidados postoperatorios.",
             "conceptos": [
@@ -406,7 +403,6 @@
           "titulo": "Clase 1 y 2",
           "videoId": "fb15e281-bbfe-45b3-b7ca-2a08fa0da60c",
           "duracion": 107,
-          "gratis": true,
           "notas": {
             "resumen": "Mantenedores de espacio: indicaciones, tipos fijos y removibles, colocacion y seguimiento.",
             "conceptos": [
@@ -479,7 +475,6 @@
           "titulo": "Clase 1",
           "videoId": "d3e06e61-3b53-41d3-9091-45c2e5bc7696",
           "duracion": 51,
-          "gratis": true,
           "notas": {
             "resumen": "Diagnóstico diferencial y manejo del absceso periodontal: drenaje, desbridamiento y control de placa.",
             "conceptos": [
@@ -584,7 +579,6 @@
           "titulo": "Clase 1",
           "videoId": "fa308fcb-4168-4283-a421-7148b6bb9464",
           "duracion": 69,
-          "gratis": true,
           "notas": {
             "resumen": "Materiales restauradores: propiedades, indicaciones y manipulación de ionomero, resina y amalgama.",
             "conceptos": [
@@ -673,7 +667,6 @@
           "titulo": "Clase 1",
           "videoId": "cb48abda-dee5-4e9c-9bec-b075aca914ca",
           "duracion": 50,
-          "gratis": true,
           "notas": {
             "resumen": "Alternativas estéticas en ortodoncia: brackets cerámicos, linguales y alineadores; ventajas, limites y retención.",
             "conceptos": [
@@ -762,7 +755,6 @@
           "titulo": "Clase 1",
           "videoId": "78a7f1dc-c958-49eb-911f-b16cb3a12ee9",
           "duracion": 40,
-          "gratis": true,
           "notas": {
             "resumen": "Patologias frecuentes en la infancia: caries temprana, MIH, alteraciones de erupción y su prevencion.",
             "conceptos": [
@@ -851,7 +843,6 @@
           "titulo": "Clase 1",
           "videoId": "092b300c-8f79-488b-9a3a-1db6cac46631",
           "duracion": 51,
-          "gratis": true,
           "notas": {
             "resumen": "Principios del diseno de sonrisa: proporciones, contorno gingival, papilas y armonía facial.",
             "conceptos": [
@@ -956,7 +947,6 @@
           "titulo": "Clase 1",
           "videoId": "31df895f-26bd-48ee-a13b-89a188711929",
           "duracion": 53,
-          "gratis": true,
           "notas": {
             "resumen": "Cirugía plastica periodontal: recubrimiento de recesiones, injertos, alargamiento coronario y espacio biológico.",
             "conceptos": [
@@ -1045,7 +1035,6 @@
           "titulo": "Clase 1",
           "videoId": "07883ca5-01fa-47c9-9075-29d3ec59a050",
           "duracion": 72,
-          "gratis": true,
           "notas": {
             "resumen": "Terapia mecánica subgingival: objetivos, instrumentación, reevaluación y mantenimiento.",
             "conceptos": [
@@ -1150,7 +1139,6 @@
           "titulo": "Clase 1 y 2",
           "videoId": "918b434c-10c4-48e2-8945-055625ea9c30",
           "duracion": 131,
-          "gratis": true,
           "notas": {
             "resumen": "Prótesis fija estética: preparacion, impresión, provisional, materiales y diseno del póntico.",
             "conceptos": [
@@ -1223,7 +1211,6 @@
           "titulo": "Clase 1",
           "videoId": "55c270c3-34e8-4485-a7c6-51170f697242",
           "duracion": 55,
-          "gratis": true,
           "notas": {
             "resumen": "Restauraciones directas con resina: aislamiento, adhesión, estratificación y pulido.",
             "conceptos": [
@@ -1328,7 +1315,6 @@
           "titulo": "Clase 1",
           "videoId": "d315eb19-42ec-4ca9-bba8-b4cde09882f1",
           "duracion": 28,
-          "gratis": true,
           "notas": {
             "resumen": "Cirugía apical: indicaciones, acceso, resección, preparacion retrógrada y sellado con MTA.",
             "conceptos": [
@@ -1433,7 +1419,6 @@
           "titulo": "Clase 1",
           "videoId": "03f2701a-a00c-4938-8e81-bc114ef1f951",
           "duracion": 44,
-          "gratis": true,
           "notas": {
             "resumen": "Manejo del paciente médicamente comprometido: diabetes, anticoagulacion, antibióticos, embarazo e hipertensión.",
             "conceptos": [
@@ -1522,7 +1507,6 @@
           "titulo": "Clase 1",
           "videoId": "ee093e87-d700-4ec8-9557-2af205dc88de",
           "duracion": 63,
-          "gratis": true,
           "notas": {
             "resumen": "Control no quirúrgico de la enfermedad periodontal: fase inicial, monitoreo, coadyuvantes y mantenimiento.",
             "conceptos": [
@@ -1627,7 +1611,6 @@
           "titulo": "Clase 1 y 2",
           "videoId": "c7f07a89-401c-47c8-bce3-382dc9346e3b",
           "duracion": 99,
-          "gratis": true,
           "notas": {
             "resumen": "Urgencias por trauma dental: clasificación, manejo de avulsión/luxación, ferulización y seguimiento.",
             "conceptos": [

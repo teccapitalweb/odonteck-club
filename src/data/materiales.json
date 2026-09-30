@@ -1,19 +1,5 @@
 [
   {
-    "id": "guia-diagnostico-ortodoncico",
-    "titulo": "Guía de bolsillo · Diagnóstico ortodóncico",
-    "tipo": "PDF",
-    "categoria": "Guía clínica",
-    "area": "Ortodoncia",
-    "autor": "Equipo académico OdonTeck",
-    "paginas": 5,
-    "portada": "/materiales/portadas/guia-diagnostico-ortodoncico.webp",
-    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
-    "descripcion": "Checklist de exploración, tabla de clasificación de Angle con ejemplos fotográficos y formato de nota clínica listo para imprimir.",
-    "estado": "disponible",
-    "url": "/materiales/guia-diagnostico-ortodoncico.pdf"
-  },
-  {
     "id": "atlas-caries-icdas",
     "titulo": "Atlas de caries · Clasificación ICDAS",
     "tipo": "Libro",
@@ -25,7 +11,23 @@
     "cursoId": "diagnostico-y-clasificacion-de-la-caries-dental",
     "descripcion": "Códigos ICDAS 0–6 con fotografía clínica, radiografía y decisión de tratamiento por código.",
     "estado": "disponible",
+    "gratis": true,
     "url": "/materiales/atlas-caries-icdas.pdf"
+  },
+  {
+    "id": "guia-diagnostico-ortodoncico",
+    "titulo": "Guía de bolsillo · Diagnóstico ortodóncico",
+    "tipo": "PDF",
+    "categoria": "Guía clínica",
+    "area": "Ortodoncia",
+    "autor": "Equipo académico OdonTeck",
+    "paginas": 5,
+    "portada": "/materiales/portadas/guia-diagnostico-ortodoncico.webp",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
+    "descripcion": "Checklist de exploración, tabla de clasificación de Angle con ejemplos fotográficos y formato de nota clínica listo para imprimir.",
+    "estado": "disponible",
+    "gratis": false,
+    "url": "/materiales/guia-diagnostico-ortodoncico.pdf"
   },
   {
     "id": "consentimiento-informado",

@@ -9,7 +9,7 @@ const PASOS: Paso[] = [
   { icon: 'party-popper', color: '#4a7fc1', titulo: '¡Bienvenida a OdonTeck Club!',
     texto: 'Tu formación odontológica en un solo lugar: cursos, biblioteca, clases en vivo, comunidad y retos. Te damos un recorrido de 30 segundos.' },
   { icon: 'graduation-cap', color: '#4fa899', titulo: 'Cursos a tu ritmo',
-    texto: 'Cursos grabados por especialistas, con quiz por clase y avance guiado. La primera clase de cada curso es gratis para que los pruebes.' },
+    texto: 'Cursos grabados por especialistas, con quiz por clase y avance guiado. El primer curso es casi completo gratis y en los demás puedes probar la primera clase.' },
   { icon: 'library', color: '#c98a5b', titulo: 'Biblioteca clínica',
     texto: 'Guías, formatos, atlas y libros para consultar cuando los necesites. Un vistazo rápido a todo tu material de apoyo.' },
   { icon: 'gamepad-2', color: '#7c5cbf', titulo: 'Retos: aprende jugando',

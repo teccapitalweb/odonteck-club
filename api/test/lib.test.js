@@ -111,6 +111,70 @@ describe('desbloqueo secuencial y acceso a clase', () => {
   });
 });
 
+describe('regla freemium unificada', () => {
+  const primerCurso = {
+    orden: 1,
+    clases: [
+      { n: 1, gratis: true },
+      { n: 2, gratis: true },
+      { n: 3, gratis: true },
+      { n: 4, gratis: true },
+      { n: 5, gratis: false },
+    ],
+  };
+  const segundoCurso = {
+    orden: 2,
+    clases: [
+      { n: 1, gratis: true },
+      { n: 2, gratis: false },
+      { n: 3, gratis: false },
+    ],
+  };
+
+  const ahora = new Date('2026-09-24T12:00:00Z');
+  const futuro = new Date('2027-01-01T00:00:00Z').toISOString();
+  const pasado = new Date('2026-01-01T00:00:00Z').toISOString();
+
+  test('primer curso, primera clase: accesible sin VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso.clases[0], false), true);
+  });
+
+  test('primer curso, penúltima clase: accesible sin VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso.clases[3], false), true);
+  });
+
+  test('primer curso, última clase: requiere VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso.clases[4], false), false);
+    assert.equal(tieneAccesoAClase(primerCurso.clases[4], true), true);
+  });
+
+  test('segundo curso, primera clase: accesible sin VIP', () => {
+    assert.equal(tieneAccesoAClase(segundoCurso.clases[0], false), true);
+  });
+
+  test('segundo curso, segunda clase: requiere VIP', () => {
+    assert.equal(tieneAccesoAClase(segundoCurso.clases[1], false), false);
+    assert.equal(tieneAccesoAClase(segundoCurso.clases[1], true), true);
+  });
+
+  test('usuario sin membresía no es VIP', () => {
+    assert.equal(esVip(null, ahora), false);
+    assert.equal(esVip({ activa: false }, ahora), false);
+  });
+
+  test('VIP activo con membresía vigente', () => {
+    assert.equal(esVip({ activa: true, expiraEn: futuro }, ahora), true);
+  });
+
+  test('VIP vencido pierde acceso', () => {
+    assert.equal(esVip({ activa: true, expiraEn: pasado }, ahora), false);
+  });
+
+  test('admin siempre tiene acceso', () => {
+    assert.equal(esVip(null, ahora, { esAdmin: true }), true);
+  });
+});
+
 describe('firma de Bunny', () => {
   test('coincide con un vector calculado de antemano', () => {
     const r = firmarEmbedBunny({
@@ -222,10 +286,17 @@ describe('semilla v2', () => {
     assert.equal(c.clases[1].gratis, false);
   });
 
-  test('material: la ruta pública se convierte en archivo de Storage', () => {
-    const m = mapearMaterial({ id: 'guia', titulo: 'Guía', tipo: 'PDF', estado: 'disponible', url: '/materiales/guia.pdf', cursoId: null }, 'hoy');
+  test('material: la ruta pública se convierte en archivo de Storage y conserva el acceso gratuito', () => {
+    const m = mapearMaterial({ id: 'guia', titulo: 'Guía', tipo: 'PDF', estado: 'disponible', gratis: true, url: '/materiales/guia.pdf', cursoId: null }, 'hoy');
     assert.equal(m.archivo, 'materiales/guia.pdf');
+    assert.equal(m.gratis, true);
     assert.equal('url' in m, false);
+  });
+
+  test('compatibilidad: fechaProximaRenovacion y esRegalo conservan acceso heredado', () => {
+    assert.equal(esVip({ activa: true, fechaProximaRenovacion: '2026-09-18T00:00:00Z' }, AHORA), true);
+    assert.equal(esVip({ esRegalo: true, expiraEn: '2026-09-18T00:00:00Z' }, AHORA), true);
+    assert.equal(esVip({ esRegalo: true, expiraEn: '2026-09-16T00:00:00Z' }, AHORA), false);
   });
 });
 

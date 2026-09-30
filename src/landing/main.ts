@@ -19,7 +19,11 @@ const cfg = Datos.config();
 // ── Enlaces ──
 document.querySelectorAll<HTMLAnchorElement>('[data-wa]').forEach((a) => { a.href = wa(a.dataset.wa!); a.target = '_blank'; a.rel = 'noopener'; });
 document.querySelectorAll<HTMLAnchorElement>('[data-club-link]').forEach((a) => (a.href = CLUB + a.dataset.clubLink));
-document.querySelectorAll<HTMLAnchorElement>('[data-praxia]').forEach((a) => (a.href = cfg.praxiaUrl.replace('odonteck-club', 'odonteck-landing')));
+document.querySelectorAll<HTMLAnchorElement>('[data-praxia]').forEach((a) => {
+  const url = new URL(cfg.praxiaUrl);
+  url.searchParams.set('utm_source', 'odonteck-landing');
+  a.href = url.toString();
+});
 document.querySelectorAll('[data-descuento]').forEach((e) => (e.textContent = String(cfg.descuentoVIP)));
 document.querySelector('[data-anio]')!.textContent = String(new Date().getFullYear());
 
@@ -38,7 +42,7 @@ function pintarCursos() {
         <h3>${esc(c.titulo)}</h3>
         <p class="lp-curso__ponente"><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases · ${esc(c.nivel)}</p>
         <div class="lp-curso__foot">
-          <span class="lp-curso__gratis"><i data-lucide="gift" class="i"></i>Primera clase gratis</span>
+          <span class="lp-curso__gratis"><i data-lucide="gift" class="i"></i>Prueba gratis</span>
           <a class="btn btn--brand btn--sm" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}">Ver curso</a>
         </div>
       </div>
@@ -107,7 +111,7 @@ document.querySelector('[data-planes]')!.innerHTML = `
   <div class="lp-plan lp-plan--info" data-reveal>
     <i data-lucide="gift" class="i"></i>
     <strong>Prueba antes de decidir</strong>
-    <p>La primera clase de cada curso del club es gratis al crear tu cuenta.</p>
+    <p>El primer curso es casi completo gratis, y en los demás puedes probar la primera clase al crear tu cuenta.</p>
   </div>`;
 
 // ── Momentos (fotos reales de generaciones) ──

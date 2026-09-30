@@ -41,6 +41,35 @@ export async function leerDoc(db, coleccion, id) {
   return snap.exists ? snap.data() : null;
 }
 
+/**
+ * Compatibilidad con el club anterior: la mayoría de los miembros están en
+ * `miembros/{uid}`, pero algunas altas manuales/regalos quedaron como
+ * `miembros/email_...`. El correo procede del ID token de Firebase y por eso
+ * puede usarse como segundo identificador sin aceptar datos del cliente.
+ */
+export async function leerMiembroHeredado(ctx, usuario) {
+  const directo = await leerDoc(ctx.db, COL.miembros, usuario.uid);
+  const email = String(usuario.email ?? '').trim().toLowerCase();
+  if (!email) return directo;
+
+  const snap = await ctx.db.collection(COL.miembros).where('email', '==', email).limit(10).get();
+  const candidatos = [directo, ...snap.docs.map((d) => d.data())].filter(Boolean);
+  if (!candidatos.length) return null;
+
+  // Si quedaron dos documentos para el mismo correo, nunca degradar a alguien
+  // que todavía tenga una membresía vigente. En empate se conserva el UID.
+  const vigente = candidatos.find((m) => membresiaVigente(m, ctx.now()));
+  const elegido = vigente ?? directo ?? candidatos[0];
+  const conStripe = candidatos.find((m) => m.stripeCustomerId || m.stripeSubscriptionId);
+  return conStripe && conStripe !== elegido
+    ? {
+        ...elegido,
+        stripeCustomerId: elegido.stripeCustomerId ?? conStripe.stripeCustomerId,
+        stripeSubscriptionId: elegido.stripeSubscriptionId ?? conStripe.stripeSubscriptionId,
+      }
+    : elegido;
+}
+
 export async function leerConfig(db) {
   const guardada = (await leerDoc(db, COL.config, 'general')) ?? {};
   return {
@@ -57,7 +86,7 @@ export async function leerConfig(db) {
  */
 export async function estadoMembresia(ctx, usuario) {
   const [miembro, cortesia, suscripcion] = await Promise.all([
-    leerDoc(ctx.db, COL.miembros, usuario.uid),
+    leerMiembroHeredado(ctx, usuario),
     leerDoc(ctx.db, COL.cortesias, usuario.uid),
     leerDoc(ctx.db, COL.suscripciones, usuario.uid),
   ]);
@@ -99,7 +128,7 @@ export function perfilConDefectos(perfil, miembro, usuario) {
 /** Nombre que se muestra en foro y certificados. */
 export async function nombreVisible(ctx, usuario, miembro) {
   const perfil = await leerDoc(ctx.db, COL.perfiles, usuario.uid);
-  const m = miembro === undefined ? await leerDoc(ctx.db, COL.miembros, usuario.uid) : miembro;
+  const m = miembro === undefined ? await leerMiembroHeredado(ctx, usuario) : miembro;
   const candidato = [perfil?.nombre, m?.nombre, usuario.nombre].find((v) => typeof v === 'string' && v.trim());
   if (candidato) return candidato.trim().slice(0, 80);
   if (usuario.email) return usuario.email.split('@')[0];

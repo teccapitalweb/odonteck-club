@@ -25,7 +25,8 @@
   border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); cursor: pointer; transition: transform var(--t-base), box-shadow var(--t-base); }
 .ar-daily:not(.is-done):hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .ar-daily.is-done { opacity: .7; cursor: default; }
-.ar-daily__ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); flex-shrink: 0; }
+.ar-daily__ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); flex-shrink: 0; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(32,37,75,.15); }
 .ar-daily__tx { display: grid; gap: 2px; flex: 1; }
 .ar-daily__tx .faint { font-size: var(--fs-xs); }
 .ar-daily > .i:last-child { color: var(--text-3); }
@@ -39,6 +40,11 @@
 .ar-tile__ic { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 6px;
   background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--c); }
 .ar-tile__ic .i { width: 26px; height: 26px; }
+.ar-tile__icon { width: 56px; height: 56px; border-radius: 16px; object-fit: cover; margin-bottom: 6px;
+  background: #fff; padding: 3px;
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--c) 35%, transparent), 0 0 0 2.5px color-mix(in srgb, var(--c) 18%, transparent);
+  transition: box-shadow var(--t-base), transform var(--t-base); }
+.ar-tile:hover .ar-tile__icon { transform: scale(1.08); box-shadow: 0 5px 20px color-mix(in srgb, var(--c) 45%, transparent), 0 0 0 2.5px color-mix(in srgb, var(--c) 28%, transparent); }
 .ar-tile strong { font-family: var(--font-display); font-size: var(--fs-md); }
 .ar-tile .faint { font-size: var(--fs-xs); }
 .ar-tile__go { position: absolute; top: 18px; right: 18px; color: var(--text-3); transition: transform var(--t-base); }
@@ -111,17 +117,123 @@
 .ar-card.flip .ar-card__reverso { transform: rotateY(360deg); }
 .ar-card__hint { display: inline-flex; align-items: center; gap: 6px; justify-content: center; font-size: var(--fs-xs); color: var(--text-3); }
 .ar-card__hint .i { width: 14px; height: 14px; }
-.ar-flash__cal { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ar-flash__cal { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.ar-flash__resumen { display: flex; justify-content: center; gap: 32px; text-align: center; }
+.ar-flash__resumen div { display: grid; gap: 2px; }
+.ar-flash__resumen strong { font-size: var(--fs-xl); font-family: var(--font-display); }
+.arcade-page kbd { display: inline-block; padding: 1px 5px; font-size: 11px; border-radius: 4px; border: 1px solid rgba(0,0,0,.15); background: rgba(0,0,0,.06); font-family: inherit; vertical-align: 1px; margin-left: 4px; }
+.ar-opt kbd { margin-left: 0; margin-right: 6px; color: var(--text-3); }
 
-/* Confeti */
+/* Misiones semanales */
+.ar-misiones { padding: 20px; border-radius: var(--r-xl); color: #fff; border: 0; background: linear-gradient(145deg, #1a2647, var(--brand-navy, #20254b)); box-shadow: var(--shadow-sm); }
+.ar-misiones__head { display: flex; align-items: center; gap: 11px; }
+.ar-misiones__head > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: rgba(255,255,255,.12); color: #e0b341; }
+.ar-misiones__head > span .i { width: 22px; height: 22px; }
+.ar-misiones__head > div { display: grid; gap: 2px; }
+.ar-misiones__head small { color: rgba(255,255,255,.6); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.ar-misiones__head strong { font-family: var(--font-display); font-size: 16px; }
+.ar-misiones__bar { height: 6px; margin: 16px 0; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.13); }
+.ar-misiones__bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--brand-teal, #6fbfb0), #e0b341); transition: width .6s var(--ease); }
+.ar-misiones ul { display: grid; gap: 10px; padding: 0; list-style: none; margin: 0; }
+.ar-misiones li { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: 9px; opacity: .75; }
+.ar-misiones li > span { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; }
+.ar-misiones li > span .i { width: 13px; height: 13px; }
+.ar-misiones li > div { display: grid; gap: 1px; }
+.ar-misiones li strong { font-size: var(--fs-xs); }
+.ar-misiones li small { color: rgba(255,255,255,.62); font-size: 10px; }
+.ar-misiones li.is-done { opacity: 1; }
+.ar-misiones li.is-done > span { border-color: var(--brand-teal, #6fbfb0); background: var(--brand-teal, #6fbfb0); color: #153526; }
+.ar-misiones__reward { display: flex; align-items: center; gap: 6px; margin-top: 16px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: 10px; }
+.ar-misiones__reward .i { width: 14px; height: 14px; color: #e0b341; }
+
+/* Selector de modo quiz */
+.ar-mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ar-mode-card { display: grid; align-content: start; gap: 8px; min-height: 180px; padding: 22px; border: 1px solid var(--line); border-radius: var(--r-xl);
+  background: var(--surface); box-shadow: var(--shadow-sm); text-align: left; cursor: pointer; transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base); }
+.ar-mode-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--mode) 40%, var(--line)); box-shadow: var(--shadow-lg); }
+.ar-mode-card__ic { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: color-mix(in srgb, var(--mode) 14%, transparent); color: var(--mode); }
+.ar-mode-card__ic .i { width: 24px; height: 24px; }
+.ar-mode-card > strong { font-family: var(--font-display); font-size: var(--fs-md); }
+.ar-mode-card p { color: var(--text-2); font-size: var(--fs-xs); line-height: 1.5; }
+.ar-mode-card small { display: flex; align-items: center; justify-content: space-between; margin-top: auto; color: var(--mode); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.ar-mode-card small .i { width: 14px; height: 14px; }
+.ar-section-head { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; margin-bottom: 8px; }
+.ar-practice-banner { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-radius: var(--r-lg); background: var(--primary-soft); color: var(--primary); font-size: var(--fs-xs); font-weight: 700; }
+.ar-practice-banner .i { width: 17px; height: 17px; }
+
+/* Celebración */
 .ar-confeti { position: fixed; inset: 0; pointer-events: none; z-index: 50; overflow: hidden; }
 .ar-confeti span { position: absolute; top: -12px; width: 9px; height: 14px; border-radius: 2px; opacity: .9;
   animation: caer 1.3s var(--ease) forwards; }
+.ar-confeti--grande span { animation-duration: 2s; }
 @keyframes caer { to { transform: translateY(105vh) rotate(720deg); opacity: 0; } }
+
+/* Liga · mini-card en hub */
+.league-mini { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 16px 18px; border-radius: var(--r-xl); background: linear-gradient(135deg, #1a2647, var(--brand-navy, #20254b)); color: #fff;
+  border: 0; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform var(--t-base), box-shadow var(--t-base); }
+.league-mini:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.league-mini__head { display: flex; align-items: center; gap: 11px; }
+.league-mini__ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px;
+  background: rgba(255,255,255,.12); color: #e0b341; flex-shrink: 0; }
+.league-mini__ic .i { width: 22px; height: 22px; }
+.league-mini__head small { display: block; color: rgba(255,255,255,.6); font-size: 10px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.league-mini__head strong { font-family: var(--font-display); font-size: 15px; }
+.league-mini__podium { display: flex; gap: 10px; }
+.league-mini__slot { display: grid; justify-items: center; gap: 2px; }
+.league-mini__avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 11px;
+  background: rgba(255,255,255,.15); color: rgba(255,255,255,.85); }
+.league-mini__avatar.is-me { background: var(--brand-teal, #6fbfb0); color: #fff; }
+.league-mini__slot small { font-size: 10px; color: rgba(255,255,255,.5); }
+.league-mini__arr { color: rgba(255,255,255,.4); }
+
+/* Liga · vista completa */
+.league-view { display: grid; gap: 20px; }
+.league-hero { text-align: center; display: grid; gap: 6px; padding: 8px 0; }
+.league-podium { display: flex; justify-content: center; align-items: flex-end; gap: 12px; padding: 16px 0 0; }
+.league-podium__slot { display: grid; justify-items: center; gap: 6px; min-width: 100px; max-width: 140px; flex: 1; }
+.league-podium__medal { font-size: 28px; line-height: 1; }
+.league-podium__avatar { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--primary-soft); color: var(--primary); font-weight: 700; font-size: var(--fs-sm);
+  border: 3px solid var(--line); }
+.league-podium__avatar.is-me { background: var(--brand-teal, #6fbfb0); color: #fff; border-color: var(--brand-teal, #6fbfb0); }
+.league-podium__slot strong { font-size: var(--fs-xs); font-family: var(--font-display); text-align: center; line-height: 1.25; }
+.league-podium__slot .faint { font-size: 11px; }
+.league-podium__bar { width: 100%; border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--brand-teal, #6fbfb0) 70%, transparent), var(--brand-navy, #20254b)); }
+.league-podium__slot.is-me .league-podium__bar { background: linear-gradient(180deg, #e0b341, var(--brand-navy, #20254b)); }
+
+.league-ranking { display: grid; gap: 6px; }
+.league-row { display: grid; grid-template-columns: 36px 38px 1fr auto; align-items: center; gap: 10px;
+  padding: 12px 16px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line);
+  transition: border-color var(--t-fast); }
+.league-row.is-me { border-color: var(--brand-teal, #6fbfb0); background: color-mix(in srgb, var(--brand-teal, #6fbfb0) 8%, var(--surface));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand-teal, #6fbfb0) 20%, transparent); }
+.league-row__pos { font-weight: 700; font-size: var(--fs-md); text-align: center; font-family: var(--font-display); color: var(--text-2); }
+.league-row__avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--primary-soft); color: var(--primary); font-weight: 700; font-size: 12px; }
+.league-row.is-me .league-row__avatar { background: var(--brand-teal, #6fbfb0); color: #fff; }
+.league-row__info { display: grid; gap: 1px; min-width: 0; }
+.league-row__info strong { font-size: var(--fs-sm); font-family: var(--font-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.league-row__info strong small { font-weight: 400; color: var(--brand-teal, #6fbfb0); }
+.league-row__info .faint { font-size: 11px; }
+.league-row__xp { font-weight: 700; font-size: var(--fs-sm); color: var(--primary); white-space: nowrap; }
 
 @media (max-width: 720px) {
   .ar-hero { grid-template-columns: 1fr; }
   .ar-hero__stats { justify-content: space-between; }
   .ar-caso { grid-template-columns: 1fr; }
   .ar-caso__q { position: static; }
+  .ar-mode-grid { grid-template-columns: 1fr; }
+  .ar-mode-card { min-height: 0; grid-template-columns: 46px minmax(0,1fr); column-gap: 12px; }
+  .ar-mode-card__ic { grid-row: 1/4; width: 46px; height: 46px; }
+  .ar-mode-card > strong { margin: 0; }
+  .ar-mode-card small { grid-column: 2; }
+  .league-mini { grid-template-columns: 1fr auto; }
+  .league-mini__podium { display: none; }
+  .league-podium { gap: 8px; }
+  .league-podium__slot { min-width: 80px; }
+  .league-podium__avatar { width: 44px; height: 44px; font-size: 12px; }
+  .league-row { grid-template-columns: 32px 34px 1fr auto; gap: 8px; padding: 10px 12px; }
+  .league-row__avatar { width: 32px; height: 32px; font-size: 11px; }
 }

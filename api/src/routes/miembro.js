@@ -28,6 +28,7 @@ import {
   estadoMembresia,
   leerConfig,
   leerDoc,
+  leerMiembroHeredado,
   nombreVisible,
   perfilConDefectos,
   progresoPublico,
@@ -80,7 +81,7 @@ export function rutasMiembro(ctx) {
       });
       cambios.avisos = avisos;
     }
-    const [actual, miembro] = await Promise.all([leerDoc(db, COL.perfiles, u.uid), leerDoc(db, COL.miembros, u.uid)]);
+    const [actual, miembro] = await Promise.all([leerDoc(db, COL.perfiles, u.uid), leerMiembroHeredado(ctx, u)]);
     const base = perfilConDefectos(actual, miembro, u);
     const perfil = {
       ...base,
@@ -296,10 +297,10 @@ export function rutasMiembro(ctx) {
   r.get('/materiales/:id/descarga', auth, h(async (req, res) => {
     const id = idDocumento(req.params.id);
     const estado = await estadoMembresia(ctx, req.usuario);
-    if (!estado.esVip) throw requiereVip('Las descargas son exclusivas para miembros VIP.');
     const material = await leerDoc(db, COL.materiales, id);
     if (!material || material.estado === 'oculto') throw noEncontrado('Ese material no existe.');
     if (material.estado !== 'disponible') throw conflicto('Este material todavía no está disponible.', 'material_no_disponible');
+    if (!estado.esVip && material.gratis !== true) throw requiereVip('Este material es exclusivo para miembros VIP.');
     const archivo = typeof material.archivo === 'string' ? material.archivo : '';
     if (!archivo.startsWith('materiales/') || archivo.includes('..')) {
       throw conflicto('Este material no tiene archivo cargado.', 'sin_archivo');

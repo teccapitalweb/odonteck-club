@@ -193,6 +193,13 @@ describe('stripe', () => {
     assert.equal(env.stripe.creadas.portal.at(-1).customer, 'cus_123');
   });
 
+  test('portal reconoce el cliente Stripe de una membresía heredada por correo', async () => {
+    env.db.docs.set('miembros/email_legacy_example_com', { activa: true, email: 'legacy@example.com', stripeCustomerId: 'cus_legacy' });
+    const r = await request(env.app).post('/stripe/portal').set(bearer(TOKENS.legacy)).expect(200);
+    assert.match(r.body.url, /billing\.stripe\.test/);
+    assert.equal(env.stripe.creadas.portal.at(-1).customer, 'cus_legacy');
+  });
+
   function eventoFirmado(evento, secreto = WEBHOOK_SECRET) {
     const payload = JSON.stringify(evento);
     const firma = new Stripe('sk_test_x').webhooks.generateTestHeaderString({ payload, secret: secreto });

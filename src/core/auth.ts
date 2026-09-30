@@ -1,6 +1,7 @@
 // Autenticación. Modo api: Firebase Auth real (proyecto club-odonteck) + token para el backend.
 // Modo demo: sesión simulada en el navegador para poder recorrer la app y el admin sin credenciales.
 import { Datos } from './datos';
+import { Perfil, type Perfil as PerfilDatos } from './perfil';
 
 export interface Usuario { uid: string; email: string; nombre: string; esAdmin: boolean; esVip: boolean }
 
@@ -38,14 +39,22 @@ export const Auth = {
         usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', esAdmin: true, esVip: !!localStorage.getItem('odonteck-club:vip-sim') } : null;
         return;
       }
+      if (localStorage.getItem(DEMO_KEY)) localStorage.removeItem(DEMO_KEY);
       await cargarFirebase();
       await new Promise<void>((ok) => {
         fb!.onAuthStateChanged(authInst!, async (u) => {
           if (!u) { usuario = null; ok(); return; }
           const tok = await u.getIdTokenResult();
           let esVip = false;
-          try { const me = await api<{ esVip: boolean }>('/me'); esVip = me.esVip; } catch { /* el backend dirá si no hay acceso */ }
-          usuario = { uid: u.uid, email: u.email || '', nombre: u.displayName || u.email?.split('@')[0] || '', esAdmin: tok.claims.admin === true, esVip };
+          let esAdmin = tok.claims.admin === true;
+          let nombre = u.displayName || u.email?.split('@')[0] || '';
+          try {
+            const me = await api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me');
+            esVip = me.esVip;
+            esAdmin = me.esAdmin === true || esAdmin;
+            if (me.perfil) { Perfil.hidratar(me.perfil, me.plan, me.vence); nombre = me.perfil.nombre || nombre; }
+          } catch { /* el backend dirá si no hay acceso */ }
+          usuario = { uid: u.uid, email: u.email || '', nombre, esAdmin, esVip };
           ok();
         });
       });

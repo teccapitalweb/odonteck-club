@@ -2,7 +2,7 @@
 // IMPORTANTE: el webhook escribe SOLO en v2_suscripciones/{uid}; nunca en miembros/{uid}.
 // No se registra en Stripe hasta el cambio definitivo (el webhook viejo sigue activo).
 import express from 'express';
-import { COL, estadoMembresia, leerConfig, leerDoc } from '../datos.js';
+import { COL, estadoMembresia, leerConfig, leerDoc, leerMiembroHeredado } from '../datos.js';
 import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { cuerpo, unoDe } from '../lib/validacion.js';
 import { requireAuth } from '../middleware/auth.js';
@@ -73,7 +73,7 @@ export function rutasStripe(ctx) {
   r.post('/stripe/portal', auth, h(async (req, res) => {
     const stripe = exigirStripe(ctx);
     const u = req.usuario;
-    const miembro = await leerDoc(ctx.db, COL.miembros, u.uid);
+    const miembro = await leerMiembroHeredado(ctx, u);
     const customer = await customerIdDe(ctx, u.uid, miembro);
     if (!customer) throw noEncontrado('No encontramos una suscripción de Stripe asociada a tu cuenta.');
     const session = await stripe.billingPortal.sessions.create({

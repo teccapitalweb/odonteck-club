@@ -71,6 +71,16 @@ describe('/me y perfil', () => {
     assert.deepEqual(res.body.perfil.avisos, { enVivo: true, nuevos: true, comunidad: true });
   });
 
+  test('VIP heredado por correo conserva acceso aunque el documento anterior sea email_...', async () => {
+    env.db.docs.set('miembros/email_legacy_example_com', { uid: null, activa: true, plan: 'regalo', expiraEn: '2026-12-20T00:00:00.000Z', nombre: 'Dra. Legado', email: 'legacy@example.com', stripeCustomerId: 'cus_legacy' });
+    const res = await request(env.app).get('/me').set(bearer(TOKENS.legacy)).expect(200);
+    assert.equal(res.body.uid, 'legacy-auth-uid');
+    assert.equal(res.body.esVip, true);
+    assert.equal(res.body.plan, 'regalo');
+    assert.equal(res.body.vence, '2026-12-20T00:00:00.000Z');
+    assert.equal(res.body.perfil.nombre, 'Dra. Legado');
+  });
+
   test('no VIP y admin', async () => {
     const free = await request(env.app).get('/me').set(bearer(TOKENS.free)).expect(200);
     assert.equal(free.body.esVip, false);
@@ -102,7 +112,8 @@ describe('/catalogo', () => {
     assert.equal(JSON.stringify(res.body).includes('video-a-1'), false);
     assert.deepEqual(res.body.cursos.map((c) => c.id), ['curso-a']);
     assert.equal(res.body.cursos[0].clases.length, 3);
-    assert.deepEqual(res.body.materiales.map((m) => m.id), ['guia']);
+    assert.deepEqual(res.body.materiales.map((m) => m.id).sort(), ['guia', 'manual-vip']);
+    assert.equal(res.body.materiales.find((m) => m.id === 'guia').gratis, true);
     assert.deepEqual(res.body.eventos.map((e) => e.id), ['ev1']);
     assert.equal(res.body.config.precios.mensual, 199);
   });
@@ -238,11 +249,13 @@ describe('progreso y certificados', () => {
 });
 
 describe('materiales', () => {
-  test('descarga solo VIP, con URL firmada de 10 minutos', async () => {
-    const free = await request(env.app).get('/materiales/guia/descarga').set(bearer(TOKENS.free)).expect(403);
-    assert.equal(free.body.error, 'requiere_vip');
-    const ok = await request(env.app).get('/materiales/guia/descarga').set(bearer(TOKENS.vip)).expect(200);
-    assert.match(ok.body.url, /materiales\/guia\.pdf/);
+  test('permite el material gratuito y reserva los demás para VIP con URL firmada de 10 minutos', async () => {
+    const gratis = await request(env.app).get('/materiales/guia/descarga').set(bearer(TOKENS.free)).expect(200);
+    assert.match(gratis.body.url, /materiales\/guia\.pdf/);
+    const bloqueado = await request(env.app).get('/materiales/manual-vip/descarga').set(bearer(TOKENS.free)).expect(403);
+    assert.equal(bloqueado.body.error, 'requiere_vip');
+    const ok = await request(env.app).get('/materiales/manual-vip/descarga').set(bearer(TOKENS.vip)).expect(200);
+    assert.match(ok.body.url, /materiales\/manual-vip\.pdf/);
     const firma = env.storage.firmadas.at(-1);
     assert.equal(firma.action, 'read');
     assert.equal(firma.expires - Date.parse('2026-09-17T12:00:00Z'), 10 * 60 * 1000);

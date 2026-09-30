@@ -2,11 +2,11 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 24 de septiembre de 2026
+- **Actualizado:** 30 de septiembre de 2026 (liga, búsqueda global, verificación pública, iconos custom, flashcards mejoradas)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit auditado al redactar:** `b195b06` (`feat: mostrar duración total en tarjetas del catálogo`)
-- **Estado verificado:** frontend compila; API pasa 79 pruebas, 0 fallos y omite 1 prueba de reglas por requerir emuladores.
+- **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
+- **Estado verificado:** `tsc --noEmit` 0 errores; `vite build` limpio; API pasa 91 pruebas, 0 fallos y omite 1 prueba de reglas por requerir emuladores.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -37,7 +37,9 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Biblioteca de materiales y libros.
 - Sesiones en vivo y reservas.
 - Comunidad con temas, respuestas y reacciones.
-- Retos con Quiz Relámpago, flashcards, repetición espaciada y casos clínicos.
+- Retos con Quiz Relámpago, flashcards (3 niveles de calificación, undo, atajos de teclado, stats de sesión), repetición espaciada, casos clínicos y liga/clasificación del club.
+- Búsqueda global (`#/buscar?q=...`) que busca cursos, clases y materiales.
+- Verificación pública de certificados (`#/verificar/:folio`) sin requerir autenticación.
 - Logros, progreso y certificados.
 - Perfil, configuración, suscripción y promoción de Praxia.
 - PWA con manifest, service worker, iconos y acceso de instalación.
@@ -60,16 +62,33 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 
 ### Brecha principal
 
-La API está mucho más completa que su integración con el frontend. En este momento `src/core/datos.ts`, `src/core/progreso.ts`, `src/core/perfil.ts`, `src/core/comunidad.ts`, el panel admin y partes de quizzes/certificados siguen usando `localStorage` y semillas JSON.
+La experiencia de miembro ya consume la API en modo producción. La brecha principal quedó concentrada en el panel admin, los retos/liga y el corte público; en modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
 
-En modo API el frontend utiliza principalmente:
+En modo API el frontend utiliza:
 
 - `/me` para conocer identidad, VIP y admin;
+- `/catalogo` para hidratar cursos, materiales, eventos y config (`src/core/remoto.ts`);
+- `/progreso` para hidratar el progreso del miembro;
+- `/quiz/:cursoId/:n` para cargar quizzes por ruta (sin respuestas correctas);
+- `POST /quiz/:cursoId/:n` para calificar en servidor;
 - `/video/token` para reproducir Bunny;
-- `/progreso/:cursoId/vista` al marcar una clase;
-- `/stripe/checkout` y `/stripe/portal`.
+- `/progreso/:cursoId/abrir` y `/progreso/:cursoId/vista` para avance real;
+- `/foro`, respuestas y reacciones para comunidad;
+- `/certificados` y `/verificar/:folio` para certificados reales;
+- `/materiales/:id/descarga` para URLs firmadas;
+- `/eventos/:id/reservar` para reservaciones;
+- `PATCH /me/perfil` para perfil y avisos;
+- `/stripe/portal` para gestión de una suscripción existente.
 
-No existe todavía una capa equivalente a la integración remota completa de Visión Pecuaria. Por ello no debe publicarse como “100 % conectado” hasta completar y probar la hidratación remota.
+La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. El checkout nuevo está desactivado mientras no exista `STRIPE_WEBHOOK_SECRET`; las altas se envían temporalmente al portal anterior. Falta conectar el panel admin real.
+
+### Módulos nuevos incorporados (septiembre 2026)
+
+- **Liga / Clasificación** (`src/core/liga.ts`): ranking con podio (visual 2do-1ro-3er puesto), tabla completa, mini-card en hub de retos. Usa datos demo con 8 odontólogos + usuario actual. XP = clases×10 + cursos×50. En modo API consumirá un endpoint futuro.
+- **Búsqueda global** (`src/pages/buscar.ts`): busca en cursos (vía `buscar()` de catalogo.ts), clases dentro de cursos y materiales disponibles. Resultados agrupados por tipo con conteo. La barra de búsqueda del header redirige a `#/buscar?q=...`.
+- **Verificación pública** (`src/pages/certificados.ts → verificar()`): página pública sin login, usa `montar('solo')`. Muestra certificado válido (verde) o no encontrado (rojo). Auth bypass en `onBeforeRender`.
+- **Flashcards mejoradas** (`src/core/juegos.ts` + `src/pages/retos.ts`): motor SR corregido (bug off-by-one en intervalos), intervalos extendidos hasta 365 días, calificación de 3 niveles (otra vez / difícil / fácil), mazo barajado, undo con Ctrl+Z, atajos de teclado (Espacio, 1/2/3), estadísticas de sesión en pantalla final.
+- **Iconos custom**: Quiz, Detective Dental, Flashcards y Reto Diario usan imágenes generadas (`public/brand/icon-*.jpg`) con efecto glow CSS en lugar de iconos Lucide genéricos.
 
 ## 3. Arquitectura
 
@@ -95,6 +114,7 @@ Rutas de miembro:
 #/certificados/:id        #/praxia
 #/perfil                  #/suscripcion
 #/configuracion           #/mas
+#/buscar?q=...            #/verificar/:folio (pública, sin auth)
 ```
 
 Rutas admin:
@@ -110,7 +130,7 @@ Rutas admin:
 #/admin/ajustes
 ```
 
-Falta una ruta frontend pública `#/verificar/:folio`, aunque la API sí implementa la verificación y el certificado muestra un enlace conceptual. Esto es un pendiente de producción.
+La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa `montar('solo')`). En modo API llama a `GET /verificar/:folio`; en modo demo busca folios locales.
 
 ### Backend
 
@@ -120,6 +140,23 @@ Falta una ruta frontend pública `#/verificar/:folio`, aunque la API sí impleme
 - Stripe para membresías.
 - Contrato de datos y endpoints en [`contrato.md`](contrato.md).
 - Reglas en `api/firestore.rules` y `api/storage.rules`.
+
+### Entorno v2 paralelo (29 de septiembre de 2026)
+
+- Proyecto Railway: `odonteck-club-v2`, servicio `api`.
+- URL temporal: `https://api-production-db314.up.railway.app`.
+- `/health`, CORS desde `https://www.odonteckconsulting.com`, Firebase Auth, lectura de membresía, catálogo, video gratuito firmado con Bunny y quiz sin respuestas expuestas pasaron la prueba autenticada `api/scripts/smoke-v2.mjs`.
+- Se sembraron 18 documentos en `v2_cursos` y 68 en `v2_quizzes`; no se modificaron `miembros`, suscripciones ni el webhook anterior.
+- No se sembraron `v2_materiales`: el lote mezcla recursos propios con libros completos cuya licencia de distribución todavía no está confirmada.
+- `STRIPE_WEBHOOK_SECRET` no está definido en el servicio v2. El webhook viejo y el portal público continúan activos sin cambios.
+- Este API todavía no recibe tráfico del frontend público; no confundir el despliegue paralelo con el cambio definitivo.
+- El build con `VITE_API_URL` elimina libros/PDF y reemplaza semillas de cursos, materiales, miembros y quizzes por estructuras vacías; el contenido real se hidrata desde el API. El control redujo el artefacto de 3.36 GB a 10.74 MB y verificó 0 PDF, 0 libros y 0 referencias a miembros demo o `videoId`.
+- Compatibilidad heredada añadida: además de `miembros/{uid}`, la API busca el correo autenticado en los documentos `miembros/email_...`, reconoce `esRegalo` y las tres fechas históricas (`expiraEn`, `fechaFinAcceso`, `fechaProximaRenovacion`). El portal de Stripe también recupera el `stripeCustomerId` encontrado por correo.
+- Auditoría agregada de producción (sin PII): 86 cuentas Auth, 99 documentos de miembro, 14 documentos vigentes, 3 documentos `email_...` (2 vigentes). Stripe contiene 19 suscripciones OdonTeck identificadas: 9 en `active`/`trialing`/`past_due`; las 8 `active` tienen documento de miembro con acceso. Una `past_due` permanece inactiva igual que en el sistema anterior. Tres activas aún no tienen cuenta Auth resoluble, pero conservarán el reconocimiento por correo cuando se registren con el mismo correo.
+- `npm run audit:legacy` y `npm run audit:stripe` repiten estas verificaciones sin imprimir nombres, correos, UID ni IDs de Stripe.
+- El proyecto Firebase `club-odonteck` todavía no tiene un bucket de Storage existente (se probaron los nombres moderno y clásico). Por eso los 10 materiales propios no se escribieron en `v2_materiales`; el script `npm run publish:materials -- --apply` falla antes de escribir hasta que se habilite un bucket real.
+- Railway mantiene el despliegue anterior saludable, pero el 29 de septiembre rechazó una actualización con “Deploys have been paused temporarily”. La compatibilidad heredada nueva debe desplegarse y probarse antes de apuntar el portal público.
+- `npm run smoke:legacy` pasó contra la API v2 ejecutada localmente con producción: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
 
 ### Modos
 
@@ -148,19 +185,29 @@ Las portadas finales de cursos conviven con portadas numeradas antiguas en `publ
 
 ## 5. Reglas comerciales y contradicciones por resolver
 
-### Clases gratuitas
+### Clases gratuitas (resuelta)
 
-La intención pública dominante es **la primera clase de cada curso gratis**:
+La regla comercial unificada es:
 
-- la landing lo repite en varias secciones;
-- `src/data/catalogo.json` marca únicamente la clase 1 de cada curso como `gratis: true`;
-- la API usa el campo `gratis` y sus pruebas validan esa regla.
+- **Primer curso** (identificado por `orden === 1`, "Diagnóstico en Ortodoncia"): todas las clases gratuitas **excepto la última** (clase 5 requiere VIP).
+- **Demás cursos**: solo la **primera clase** es gratuita; el resto requiere VIP.
 
-Sin embargo, `src/core/acceso.ts` permite en el primer curso todas las clases excepto la última. Esto contradice la landing, las semillas y el backend. Debe elegirse una regla comercial única y actualizar frontend, backend, datos, textos y pruebas de forma coordinada. Hasta entonces, la API debe considerarse la autoridad de seguridad.
+Esta regla está implementada de forma coherente en:
+
+- `src/data/catalogo.json`: campo `gratis` por clase (clases 1–4 del primer curso son `true`, clase 5 es `false`; en los demás, solo clase 1 es `true`).
+- `src/core/acceso.ts`: `claseLibre()` usa `curso.orden === 1` para identificar el primer curso de forma estable.
+- API (`api/src/lib/acceso.js`): `tieneAccesoAClase()` usa `clase.gratis === true`.
+- Textos de landing, onboarding y login reflejan que el primer curso es casi completo gratis.
+- `api/test/lib.test.js`: 9 pruebas de límite validan los escenarios: primer curso primera/penúltima/última clase, segundo curso primera/segunda clase, sin membresía, VIP activo, VIP vencido, admin.
 
 ### Material gratuito
 
-El cliente trata el primer material como gratuito. La API actual exige VIP para cualquier descarga firmada. Esto también debe resolverse antes de producción: o la API permite explícitamente el primer material, o la UI deja de anunciarlo como accesible.
+La regla comercial unificada es explícita mediante `gratis: true`, sin depender de la posición del recurso en el catálogo:
+
+- **Gratuito:** “Atlas de caries · Clasificación ICDAS”.
+- **VIP:** “Guía de bolsillo · Diagnóstico ortodóncico” y todos los demás materiales.
+
+El frontend muestra la etiqueta “Gratis” y la API permite generar su URL firmada a una cuenta sin VIP. Los demás recursos exigen membresía. Para llevar esta regla a Firestore debe volver a sembrarse o actualizarse `v2_materiales` antes del despliegue.
 
 ### Comunidad y retos
 
@@ -184,16 +231,16 @@ No existe todavía el sistema de cupones cortos creado posteriormente para Visi�
 
 Ordenadas por prioridad:
 
-1. **Carga inicial real:** solicitar `/catalogo`, `/progreso`, `/certificados` y `/me`, y poblar un almacén remoto coherente antes de renderizar.
+1. ~~**Carga inicial real:**~~ Resuelto: `src/core/remoto.ts` solicita `/catalogo` y `/progreso` antes de cada ruta autenticada; `/quiz/:cursoId/:n` se carga por ruta de clase. `datos.ts` expone `hidratarAdmin`/`invalidarAdmin`; `progreso.ts` expone `hidratar`. En demo (sin `VITE_API_URL`) todo es no-op.
 2. **Panel admin real:** sustituir mutaciones de `localStorage` por endpoints `/admin/*`, incluidos uploads firmados.
-3. **Quizzes seguros:** obtener preguntas desde `/quiz/:cursoId/:n` y enviar respuestas al backend. No calificar con respuestas correctas incluidas en el bundle de producción.
-4. **Comunidad real:** usar `/foro`, respuestas y útil; no guardar actividad real en `localStorage`.
-5. **Perfil real:** usar `PATCH /me/perfil` y reflejar el perfil remoto.
-6. **Progreso real:** cargarlo al iniciar y usar `/abrir` además de `/vista`; fusionar una sola vez el avance demo anterior si se decide migrarlo.
-7. **Certificados reales:** listar desde la API y agregar la ruta pública de verificación.
-8. **Materiales seguros:** obtener la URL temporal desde `/materiales/:id/descarga`, respetando la regla comercial acordada.
-9. **Eventos reales:** cargar eventos remotos y reservar mediante la API.
-10. **Avisos/config real:** hidratar desde backend y evitar que el admin aparente guardar cuando solo modifica el navegador.
+3. ~~**Quizzes seguros:**~~ Resuelto: carga sin respuestas y calificación mediante el backend.
+4. ~~**Comunidad real:**~~ Resuelto: lista, detalle, respuestas, creación y útil usan `/foro` en modo API; las semillas solo aparecen en demo.
+5. ~~**Perfil real:**~~ Resuelto: `/me` hidrata nombre/plan/vencimiento y `PATCH /me/perfil` guarda perfil y avisos.
+6. ~~**Progreso real:**~~ Resuelto: se carga al iniciar y usa `/abrir` y `/vista`. Sigue pendiente decidir si se migra avance demo anterior.
+7. ~~**Certificados reales:**~~ Resuelto: lista folios emitidos por API y ofrece verificación pública `#/verificar/:folio`.
+8. ~~**Materiales seguros:**~~ Integración resuelta: obtiene URL temporal desde `/materiales/:id/descarga`. Falta sembrar/subir únicamente recursos autorizados.
+9. ~~**Eventos reales:**~~ Resuelto: catálogo remoto y reservas mediante API.
+10. **Avisos/config real:** el miembro guarda avisos por API; falta conectar la edición administrativa de configuración.
 
 Estas integraciones deben desarrollarse con estados de carga, error, sesión vencida y reintento. No dejar que las semillas oculten fallos de la API en producción.
 
@@ -244,12 +291,13 @@ El contenido odontológico puede afectar decisiones clínicas. Ningún quiz, pro
 
 ## 11. Estado de calidad comprobado
 
-Ejecutado el 24 de septiembre de 2026:
+Ejecutado el 30 de septiembre de 2026:
 
 ```text
+tsc --noEmit        PASS (0 errores)
 npm run build       PASS
 api/npm run check   PASS
-api/npm test        PASS: 80 pruebas totales, 79 aprobadas, 0 fallos, 1 omitida
+api/npm test        PASS: 92 pruebas totales, 91 aprobadas, 0 fallos, 1 omitida
 ```
 
 Fue necesario ejecutar `npm ci` en `api/` porque faltaban localmente `stripe` y `supertest`; ambas dependencias ya estaban declaradas en `api/package.json` y `api/package-lock.json`.
@@ -263,21 +311,23 @@ npm run test:rules
 
 Advertencias del build:
 
-- `vite.config.ts` usa `__dirname`, que Vite advierte como incompatible con el futuro `configLoader: native`; migrar a `import.meta.dirname`.
 - El chunk de datos supera 500 kB; conviene dividir carga de catálogos/quizzes y evitar incluir respuestas en el bundle de producción.
 
 ## 12. Pendientes priorizados
 
-1. Acordar y unificar las reglas de clase y material gratuitos.
-2. Crear la capa remota del frontend y completar hidratación inicial.
+1. ~~Acordar y unificar las reglas de clase y material gratuitos.~~ Resuelto: regla unificada en datos, frontend, API, textos y pruebas.
+2. ~~Crear la capa remota del frontend y completar hidratación inicial.~~ Resuelto: `src/core/remoto.ts` con `cargarClub()` hidrata catálogo, progreso y quizzes por ruta.
 3. Conectar el panel admin a los endpoints reales.
-4. Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.
-5. Agregar verificación pública de certificados en frontend.
-6. Configurar y probar el entorno de producción real sin tocar el club anterior prematuramente.
+4. ~~Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.~~ Resuelto en modo API; demo conserva datos locales deliberadamente.
+5. ~~Agregar verificación pública de certificados en frontend.~~ Resuelto con `#/verificar/:folio` (página pública sin auth).
+6. Completar el entorno v2 paralelo: API desplegada y prueba autenticada aprobada; faltan publicar el frontend, cargar materiales autorizados, configurar el webhook Stripe nuevo y probar el admin antes del corte.
+7. ~~Liga y clasificación del club.~~ Resuelto: podio, ranking, mini-card en hub de retos; datos demo, pendiente endpoint API.
+8. ~~Búsqueda global.~~ Resuelto: `#/buscar?q=...` busca cursos, clases y materiales.
+9. ~~Motor de flashcards mejorado.~~ Resuelto: 3 niveles, undo, atajos, stats, bug de intervalos corregido.
 7. Ejecutar pruebas de reglas con emuladores.
 8. Auditar libros locales por licencias y distribución.
 9. Revisar accesibilidad, móvil, estados de carga/error y funcionamiento PWA.
-10. Mejorar rendimiento y compatibilidad futura de Vite.
+10. ~~Mejorar compatibilidad futura de Vite.~~ `vite.config.ts` ya usa `import.meta.dirname`; sigue pendiente dividir el chunk de datos.
 
 ## 13. Orden recomendado para Claude
 

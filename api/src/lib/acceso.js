@@ -1,17 +1,17 @@
 // Reglas de acceso del club. Funciones puras: no tocan Firestore.
 import { aMillis } from './fechas.js';
 
-/** Fecha de expiración de la membresía vieja (`expiraEn` o `fechaFinAcceso`). */
+/** Fecha de expiración de la membresía vieja, incluidos sus nombres históricos. */
 export function expiracionMiembro(miembro) {
   if (!miembro) return null;
-  const valor = miembro.expiraEn ?? miembro.fechaFinAcceso;
+  const valor = miembro.expiraEn ?? miembro.fechaFinAcceso ?? miembro.fechaProximaRenovacion;
   return aMillis(valor);
 }
 
 /** true si la membresía del club viejo (`miembros/{uid}`) da acceso ahora. */
 export function membresiaVigente(miembro, ahora) {
   if (!miembro) return false;
-  const activa = miembro.activa === true || miembro.activo === true;
+  const activa = miembro.activa === true || miembro.activo === true || miembro.esRegalo === true;
   if (!activa) return false;
   const exp = expiracionMiembro(miembro);
   if (exp === null) return true;

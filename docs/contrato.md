@@ -35,14 +35,16 @@ appId: 1:306331582203:web:7d70e51f0180528ddffa5e
 
 ## Modelo de datos (Firestore)
 
-### `miembros/{uid}` (colección vieja, solo lectura hasta el cambio)
+### `miembros/{uid}` o `miembros/email_...` (colección vieja, solo lectura hasta el cambio)
 Campos que usa el panel actual para decidir acceso:
-- `activa` o `activo`: boolean
-- `expiraEn` o `fechaFinAcceso`: Timestamp o ISO (opcional; si existe y ya pasó, no hay acceso)
+- `activa`, `activo` o `esRegalo`: boolean
+- `expiraEn`, `fechaFinAcceso` o `fechaProximaRenovacion`: Timestamp o ISO (opcional; si existe y ya pasó, no hay acceso)
 - `plan`: `'mensual' | 'anual' | 'regalo' | ...`, `esRegalo`: boolean
 - `nombre`, `email`, `whatsapp` (pueden faltar)
 
-**Regla de acceso VIP** (backend, `esVip(miembro, ahora)`): `(activa === true || activo === true) && (!exp || exp > ahora)`,
+La API v2 busca primero por el UID autenticado y después por el correo verificado por Firebase. Este segundo paso conserva las altas manuales/regalos del portal anterior cuyos documentos quedaron identificados como `email_...`. Si hay duplicados, se elige cualquier registro vigente antes que uno vencido y se conservan los identificadores de Stripe disponibles.
+
+**Regla de acceso VIP** (backend, `esVip(miembro, ahora)`): `(activa === true || activo === true || esRegalo === true) && (!exp || exp > ahora)`,
 o bien una cortesía nueva vigente en `v2_cortesias/{uid}.hasta > ahora`, o claim `admin`.
 
 ### `v2_perfiles/{uid}`
@@ -65,7 +67,7 @@ El `videoId` **nunca** sale al cliente de miembros: `/catalogo` lo elimina.
 
 ### `v2_materiales/{id}`
 `{ id, titulo, tipo: 'PDF'|'Libro'|'Presentación', categoria, area, autor, paginas, portada, cursoId|null, descripcion,
-  estado: 'disponible'|'proximamente'|'oculto', archivo: 'materiales/<id>.pdf' (Storage), actualizado }`
+  estado: 'disponible'|'proximamente'|'oculto', gratis: boolean, archivo: 'materiales/<id>.pdf' (Storage), actualizado }`
 
 ### `v2_eventos/{id}`
 `{ id, titulo, ponente, fecha: ISO, duracionMin, enlace?, cursoId?, publicado, reservas: uid[] }`
@@ -105,7 +107,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
 | POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado? }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
-| GET | `/materiales/:id/descarga` | `{ url }` URL firmada de Storage, 10 min · solo VIP |
+| GET | `/materiales/:id/descarga` | `{ url }` URL firmada de Storage, 10 min · VIP o material con `gratis: true` |
 | GET | `/certificados` | `Certificado[]` del usuario |
 | GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }` |
 | GET | `/quiz/:cursoId/:n` | `{ preguntas: [{ q, opciones }] }` (solo aprobados, sin respuestas) |
