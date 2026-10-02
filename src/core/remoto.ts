@@ -33,7 +33,7 @@ const adaptarCurso = (v: any): Curso => ({
 
 const adaptarMaterial = (v: any): Material => ({
   ...v,
-  portada: v.portada || '/materiales/portadas/default.webp',
+  portada: v.portada || '/materiales/portadas/guia-diagnostico-ortodoncico.webp',
 });
 
 const adaptarEvento = (v: any): Evento => ({

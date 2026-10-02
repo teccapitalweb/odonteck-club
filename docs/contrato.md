@@ -88,6 +88,16 @@ Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 ### `v2_avisos/{id}`
 `{ id, titulo, texto, enlace?, fecha, autor }`
 
+### `v2_encuestas_estado/{uid}`
+`{ uid, primeraVista, ultimaConsulta, pospuestas: { [clave]: { hasta, veces } }, actualizado? }`
+
+Sirve para programar recordatorios sin bloquear el acceso. La entrevista inicial se puede posponer 3 días, la evaluación de curso 7 y el pulso de uso 14.
+
+### `v2_encuestas_respuestas/{uid}__{clave}`
+`{ uid, clave, encuestaId, version, tipo, cursoId?, cursoTitulo?, respuestas, enviado, avisoPrivacidad }`
+
+Las plantillas son versionadas en código para conservar preguntas comparables. La entrevista inicial vigente es `bienvenida-v2` (siete preguntas: `situacion`, `experiencia`, `como_conocio`, `objetivo`, `intereses` (hasta 3), `formato` (hasta 2) y `reto`); el cliente la presenta como página propia en `#/bienvenida`. Cambiar preguntas u opciones exige subir la versión en `api/src/lib/encuestas.js` y en su espejo demo `src/core/encuestas.ts`. El cliente nunca envía el UID. El panel administrativo sólo recibe agregados y comentarios sin UID, nombre ni correo.
+
 ### `v2_config/general`
 `{ precios: { mensual: 199, anual: 1899 }, descuentoVIP: 20, whatsappSoporte, canalWhatsApp, praxiaUrl, stripePriceMensual, stripePriceAnual }`
 
@@ -118,6 +128,9 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/foro/:id/respuestas` | `{ texto }` → Respuesta |
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
+| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y pulso a 21 días |
+| POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada |
+| POST | `/encuestas/:clave/posponer` | → difiere el recordatorio sin bloquear al miembro |
 | POST | `/stripe/checkout` | `{ plan: 'mensual'|'anual' }` → `{ url }` |
 | POST | `/stripe/portal` | → `{ url }` |
 | POST | `/stripe/webhook` **pública, firma Stripe** | Solo activo tras el cambio definitivo |
@@ -140,6 +153,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/admin/quizzes?estado=` | Lista |
 | PATCH | `/admin/quizzes/:id` | `{ preguntas?, estado? }` |
 | GET · POST | `/admin/avisos` | Lista · publicar |
+| GET | `/admin/encuestas/resumen` | Totales, distribuciones, promedios y comentarios anónimos; nunca UID ni correo |
 | GET · PATCH | `/admin/config` | Configuración general |
 
 ## Variables de entorno (backend)

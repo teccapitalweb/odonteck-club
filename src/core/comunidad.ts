@@ -57,6 +57,7 @@ export const Comunidad = {
 };
 
 export const hace = (iso: string) => {
+  if (!iso || Number.isNaN(new Date(iso).getTime())) return 'Sin actividad';
   const d = (Date.now() - new Date(iso).getTime()) / 60000;
   if (d < 60) return `hace ${Math.max(1, Math.round(d))} min`;
   if (d < 1440) return `hace ${Math.round(d / 60)} h`;

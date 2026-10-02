@@ -2,11 +2,11 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 30 de septiembre de 2026 (liga, búsqueda global, verificación pública, iconos custom, flashcards mejoradas)
+- **Actualizado:** 2 de octubre de 2026 (encuestas versionadas y página de bienvenida `#/bienvenida` implementadas y verificadas localmente; pendiente despliegue y smoke autenticado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
-- **Estado verificado:** `tsc --noEmit` 0 errores; `vite build` limpio; API pasa 91 pruebas, 0 fallos y omite 1 prueba de reglas por requerir emuladores.
+- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 97 pruebas (96 exitosas, 0 fallos y 1 omitida por requerir emuladores). La bienvenida se recorrió en demo en escritorio (1440 px) y móvil (375 px): flujo completo, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -43,7 +43,9 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Logros, progreso y certificados.
 - Perfil, configuración, suscripción y promoción de Praxia.
 - PWA con manifest, service worker, iconos y acceso de instalación.
-- Panel admin completo a nivel de pantallas: resumen, cursos, quizzes, materiales, en vivo, miembros, comunidad, avisos y ajustes.
+- Panel admin completo: en demo conserva `localStorage`; con `VITE_API_URL` usa los endpoints autenticados `/admin/*`.
+- Encuestas de entrevista inicial, fin de curso y pulso de valor a 21 días, con opción de posponer y panel de resultados agregados.
+- Página de bienvenida (`#/bienvenida`): la entrevista inicial (v2, siete preguntas) se presenta a pantalla completa, una pregunta a la vez, la primera vez que entra un miembro. Las encuestas de curso y de pulso siguen siendo un modal ligero.
 
 ### Lo que sí está implementado en la API
 
@@ -59,10 +61,11 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Eventos y reservas.
 - Stripe checkout, portal y webhook.
 - CRUD administrativo y autorización por custom claim.
+- Encuestas versionadas: pendientes y respuestas autenticadas, disparadores por primer ingreso/curso completado/21 días y resumen administrativo sin PII.
 
 ### Brecha principal
 
-La experiencia de miembro ya consume la API en modo producción. La brecha principal quedó concentrada en el panel admin, los retos/liga y el corte público; en modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
+La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Las brechas principales quedan en la liga real, los materiales autorizados/Storage y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
 
 En modo API el frontend utiliza:
 
@@ -79,8 +82,12 @@ En modo API el frontend utiliza:
 - `/eventos/:id/reservar` para reservaciones;
 - `PATCH /me/perfil` para perfil y avisos;
 - `/stripe/portal` para gestión de una suscripción existente.
+- `/encuestas/pendientes`, `/encuestas/:clave/responder` y `/encuestas/:clave/posponer` para el flujo de miembro;
+- `/admin/resumen`, CRUD de cursos/materiales/eventos, quizzes, miembros/cortesías, moderación, avisos y config cuando la ruta es administrativa;
+- `/admin/encuestas/resumen` para tendencias agregadas, promedios por curso y comentarios sin identidad;
+- `/admin/materiales/:id/subida` para subir PDF y portada directamente a Storage mediante URL firmada, sin exponer credenciales.
 
-La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. El checkout nuevo está desactivado mientras no exista `STRIPE_WEBHOOK_SECRET`; las altas se envían temporalmente al portal anterior. Falta conectar el panel admin real.
+La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. La capa administrativa (`src/core/admin.ts`) carga solo los recursos que necesita cada pantalla y conserva respuestas API en memoria, no en `localStorage`. El checkout nuevo está desactivado mientras no exista `STRIPE_WEBHOOK_SECRET`; las altas se envían temporalmente al portal anterior.
 
 ### Módulos nuevos incorporados (septiembre 2026)
 
@@ -88,6 +95,7 @@ La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso
 - **Búsqueda global** (`src/pages/buscar.ts`): busca en cursos (vía `buscar()` de catalogo.ts), clases dentro de cursos y materiales disponibles. Resultados agrupados por tipo con conteo. La barra de búsqueda del header redirige a `#/buscar?q=...`.
 - **Verificación pública** (`src/pages/certificados.ts → verificar()`): página pública sin login, usa `montar('solo')`. Muestra certificado válido (verde) o no encontrado (rojo). Auth bypass en `onBeforeRender`.
 - **Flashcards mejoradas** (`src/core/juegos.ts` + `src/pages/retos.ts`): motor SR corregido (bug off-by-one en intervalos), intervalos extendidos hasta 365 días, calificación de 3 niveles (otra vez / difícil / fácil), mazo barajado, undo con Ctrl+Z, atajos de teclado (Espacio, 1/2/3), estadísticas de sesión en pantalla final.
+- **Bienvenida** (`src/pages/bienvenida.ts` + `src/styles/bienvenida.css`, octubre 2026): mientras la entrevista `bienvenida-v2` esté pendiente, `onBeforeRender` redirige cualquier ruta de miembro a `#/bienvenida` (cascarón `solo`). Portada, siete pasos (etapa, experiencia, cómo conoció OdonTeck, objetivo, intereses, formato preferido y reto) y cierre con hasta tres cursos sugeridos según los intereses. Los logotipos de Instagram, Facebook, TikTok, Google y WhatsApp son SVG locales, sin peticiones externas. Guarda un borrador en `sessionStorage`, permite regresar, avanza sola al elegir una opción única y se puede posponer 3 días (“Responder después”). Las preguntas y opciones viven en la plantilla versionada (`api/src/lib/encuestas.js` y su espejo demo en `src/core/encuestas.ts`); la página sólo aporta presentación. Los administradores no la reciben en modo API. La v1 de cinco preguntas nunca se desplegó.
 - **Iconos custom**: Quiz, Detective Dental, Flashcards y Reto Diario usan imágenes generadas (`public/brand/icon-*.jpg`) con efecto glow CSS en lugar de iconos Lucide genéricos.
 
 ## 3. Arquitectura
@@ -115,6 +123,7 @@ Rutas de miembro:
 #/perfil                  #/suscripcion
 #/configuracion           #/mas
 #/buscar?q=...            #/verificar/:folio (pública, sin auth)
+#/bienvenida (entrevista inicial; sólo mientras esté pendiente)
 ```
 
 Rutas admin:
@@ -127,7 +136,7 @@ Rutas admin:
 #/admin/en-vivo           #/admin/en-vivo/:id
 #/admin/miembros          #/admin/miembros/:uid
 #/admin/comunidad         #/admin/avisos
-#/admin/ajustes
+#/admin/encuestas         #/admin/ajustes
 ```
 
 La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa `montar('solo')`). En modo API llama a `GET /verificar/:folio`; en modo demo busca folios locales.
@@ -232,7 +241,7 @@ No existe todavía el sistema de cupones cortos creado posteriormente para Visi�
 Ordenadas por prioridad:
 
 1. ~~**Carga inicial real:**~~ Resuelto: `src/core/remoto.ts` solicita `/catalogo` y `/progreso` antes de cada ruta autenticada; `/quiz/:cursoId/:n` se carga por ruta de clase. `datos.ts` expone `hidratarAdmin`/`invalidarAdmin`; `progreso.ts` expone `hidratar`. En demo (sin `VITE_API_URL`) todo es no-op.
-2. **Panel admin real:** sustituir mutaciones de `localStorage` por endpoints `/admin/*`, incluidos uploads firmados.
+2. ~~**Panel admin real:**~~ Integración resuelta en código: lecturas y mutaciones usan `/admin/*`; los materiales usan uploads firmados y el modo API no persiste estas respuestas en `localStorage`. Pendiente smoke autenticado con cuenta admin y Storage habilitado en el servicio desplegado.
 3. ~~**Quizzes seguros:**~~ Resuelto: carga sin respuestas y calificación mediante el backend.
 4. ~~**Comunidad real:**~~ Resuelto: lista, detalle, respuestas, creación y útil usan `/foro` en modo API; las semillas solo aparecen en demo.
 5. ~~**Perfil real:**~~ Resuelto: `/me` hidrata nombre/plan/vencimiento y `PATCH /me/perfil` guarda perfil y avisos.
@@ -240,7 +249,7 @@ Ordenadas por prioridad:
 7. ~~**Certificados reales:**~~ Resuelto: lista folios emitidos por API y ofrece verificación pública `#/verificar/:folio`.
 8. ~~**Materiales seguros:**~~ Integración resuelta: obtiene URL temporal desde `/materiales/:id/descarga`. Falta sembrar/subir únicamente recursos autorizados.
 9. ~~**Eventos reales:**~~ Resuelto: catálogo remoto y reservas mediante API.
-10. **Avisos/config real:** el miembro guarda avisos por API; falta conectar la edición administrativa de configuración.
+10. ~~**Avisos/config real:**~~ la edición administrativa de avisos y configuración usa la API. El contrato no incluye borrado de avisos, por lo que esa acción permanece solo en demo.
 
 Estas integraciones deben desarrollarse con estados de carga, error, sesión vencida y reintento. No dejar que las semillas oculten fallos de la API en producción.
 
@@ -300,9 +309,13 @@ api/npm run check   PASS
 api/npm test        PASS: 92 pruebas totales, 91 aprobadas, 0 fallos, 1 omitida
 ```
 
+También se recorrieron en navegador aislado todas las rutas de miembro y administración, junto con altas/ediciones demo de curso, material, evento, cortesía, aviso, configuración, moderación, quiz, perfil, reserva y comunidad. En viewport móvil de 390 x 844 no se detectó desbordamiento horizontal en las rutas representativas. Manifest, service worker, iconos PWA y entradas HTTP locales respondieron correctamente. Sigue pendiente asociar programáticamente varios `label` de formularios admin con sus controles.
+
+La API desplegada respondió `200 {"ok":true}` en `/health`, el preflight CORS del dominio oficial devolvió `204` y `/me` y `/admin/resumen` devolvieron `401` sin token. Esta comprobación es solo del perímetro público; no sustituye el smoke autenticado con una cuenta que tenga el claim `admin: true`.
+
 Fue necesario ejecutar `npm ci` en `api/` porque faltaban localmente `stripe` y `supertest`; ambas dependencias ya estaban declaradas en `api/package.json` y `api/package-lock.json`.
 
-La prueba omitida es la de reglas Firestore/Storage. Ejecutar con emuladores:
+La prueba omitida es la de reglas Firestore/Storage. El script oficial se intentó con Java 21, pero el emulador de Firestore no pudo abrir el selector loopback en este entorno antes de ejecutar las aserciones; no es un fallo confirmado de las reglas. Reintentar en un host donde el emulador pueda abrir puertos locales:
 
 ```bash
 cd api
@@ -312,15 +325,16 @@ npm run test:rules
 Advertencias del build:
 
 - El chunk de datos supera 500 kB; conviene dividir carga de catálogos/quizzes y evitar incluir respuestas en el bundle de producción.
+- El build con `VITE_API_URL` no incluyó correos demo, IDs de video conocidos, títulos de semilla, PDFs ni libros locales; su chunk de datos quedó por debajo de 500 kB. El warning de 530 kB corresponde al build demo sin API.
 
 ## 12. Pendientes priorizados
 
 1. ~~Acordar y unificar las reglas de clase y material gratuitos.~~ Resuelto: regla unificada en datos, frontend, API, textos y pruebas.
 2. ~~Crear la capa remota del frontend y completar hidratación inicial.~~ Resuelto: `src/core/remoto.ts` con `cargarClub()` hidrata catálogo, progreso y quizzes por ruta.
-3. Conectar el panel admin a los endpoints reales.
+3. ~~Conectar el panel admin a los endpoints reales.~~ Resuelto en código; pendiente verificación E2E contra el despliegue con claim admin.
 4. ~~Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.~~ Resuelto en modo API; demo conserva datos locales deliberadamente.
 5. ~~Agregar verificación pública de certificados en frontend.~~ Resuelto con `#/verificar/:folio` (página pública sin auth).
-6. Completar el entorno v2 paralelo: API desplegada y prueba autenticada aprobada; faltan publicar el frontend, cargar materiales autorizados, configurar el webhook Stripe nuevo y probar el admin antes del corte.
+6. Completar el entorno v2 paralelo: API desplegada y prueba autenticada de miembro aprobada; faltan publicar el frontend, cargar materiales autorizados, configurar el webhook Stripe nuevo y ejecutar el smoke del admin conectado antes del corte.
 7. ~~Liga y clasificación del club.~~ Resuelto: podio, ranking, mini-card en hub de retos; datos demo, pendiente endpoint API.
 8. ~~Búsqueda global.~~ Resuelto: `#/buscar?q=...` busca cursos, clases y materiales.
 9. ~~Motor de flashcards mejorado.~~ Resuelto: 3 niveles, undo, atajos, stats, bug de intervalos corregido.
@@ -335,8 +349,8 @@ Advertencias del build:
 2. Revisar `git status` y preservar los archivos sin seguimiento.
 3. Levantar el demo en el puerto 5173 y recorrer miembro y admin.
 4. No implementar inmediatamente: primero presentar al usuario la contradicción freemium y confirmar la regla definitiva.
-5. Implementar la integración remota por bloques pequeños, comenzando por bootstrap de datos y lectura.
-6. Después conectar mutaciones de miembro y, finalmente, administración.
+5. Verificar el panel admin conectado con una cuenta que tenga el claim `admin: true`: resumen, CRUD, quiz, cortesía, moderación, aviso, config y upload firmado.
+6. Conservar el modo demo separado; no usarlo como evidencia de la integración real.
 7. En cada bloque ejecutar build, pruebas API y revisión en móvil.
 8. Actualizar este documento cuando cambie el estado de integración.
 

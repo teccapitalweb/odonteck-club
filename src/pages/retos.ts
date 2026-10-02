@@ -94,12 +94,22 @@ function hub() {
   const totalCasos = casos().length;
   const banco = bancoPreguntas().length;
   pinta(`
+    <div class="ar-hub">
+    <header class="ar-intro">
+      <div class="ar-intro__copy">
+        <span class="ar-kicker"><i data-lucide="sparkles" class="i"></i> Centro de entrenamiento</span>
+        <h1>Entrena tu criterio clínico.</h1>
+        <p>Aprende jugando con preguntas, casos y repasos breves creados a partir de los cursos del Club.</p>
+      </div>
+      <span class="ar-streak"><i data-lucide="flame" class="i"></i><span><small>Racha actual</small><strong>${d.racha} ${d.racha === 1 ? 'día' : 'días'}</strong></span></span>
+    </header>
+
     <div class="ar-hero">
       <div class="ar-hero__lvl">
         <span class="ar-badge" style="--c:${nv.color}"><i data-lucide="${nv.icon}" class="i"></i></span>
         <div>
-          <div class="eyebrow">Nivel ${nv.indice + 1}</div>
-          <h1 class="display" style="font-size:var(--fs-2xl);margin:0">${nv.nombre}</h1>
+          <div class="eyebrow">Tu nivel · ${nv.indice + 1}</div>
+          <h2 class="display" style="font-size:var(--fs-2xl);margin:0">${nv.nombre}</h2>
           <div class="ar-xp"><div class="ar-xp__bar"><span style="width:${nv.pct}%"></span></div>
             <span class="faint">${nv.xp} XP${nv.siguiente ? ` · faltan ${nv.faltan} para ${nv.siguiente.nombre}` : ' · máximo nivel'}</span></div>
         </div>
@@ -111,6 +121,7 @@ function hub() {
       </div>
     </div>
 
+    <div class="ar-feature-row">
     ${(() => { const liga = Liga.resumen(); const yo = liga.yo; const top3 = liga.clasificacion.slice(0, 3); return `
     <button class="league-mini" data-a="ir-liga">
       <div class="league-mini__head">
@@ -131,12 +142,16 @@ function hub() {
       </span>
       ${d.hechoHoy ? '' : '<i data-lucide="arrow-right" class="i"></i>'}
     </button>
+    </div>
 
+    <section class="ar-training">
+    <header class="ar-section-intro"><div><span class="ar-kicker ar-kicker--light">Elige tu reto</span><h2>¿Qué quieres entrenar hoy?</h2></div><p>Sesiones cortas para avanzar a tu ritmo.</p></header>
     <div class="ar-grid">
       ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Quiz', `${banco} preguntas · relámpago o práctica`, '#4a7fc1')}
       ${tile('ir-caso', '/brand/icon-detective.jpg', 'Detective Dental', `Diagnostica ${totalCasos} casos clínicos paso a paso`, '#4fa899')}
       ${(() => { const pend = pendientesHoy(); const lim = Acceso.vip() ? 15 : 5; return tile('ir-flash', '/brand/icon-flashcards.jpg', 'Flashcards', pend ? `${Math.min(pend, lim)} para hoy · ${em.total} tarjetas` : `Todo repasado · ${em.dominadas} dominadas`, '#c98a5b'); })()}
     </div>
+    </section>
 
     ${(() => { const m = misiones(); return `
     <div class="ar-misiones">
@@ -146,14 +161,16 @@ function hub() {
       <span class="ar-misiones__reward"><i data-lucide="gift" class="i"></i>Completa las 3 para dominar la semana</span>
     </div>`; })()}
 
-    <p class="faint" style="font-size:var(--fs-xs);text-align:center">El contenido de los retos se genera de los cursos del club. Mientras más clases, quizzes y notas, más retos.</p>
+    <p class="ar-footnote"><i data-lucide="book-open-check" class="i"></i> El contenido de los retos se genera a partir de los cursos, quizzes y notas del Club.</p>
+    </div>
   `);
 }
 const tile = (a: string, img: string, tit: string, sub: string, color: string) => `
   <button class="ar-tile" data-a="${a}" style="--c:${color}">
-    <img class="ar-tile__icon" src="${img}" alt="${tit}">
+    <span class="ar-tile__visual"><img class="ar-tile__icon" src="${img}" alt=""><span>${String(['ir-quiz', 'ir-caso', 'ir-flash'].indexOf(a) + 1).padStart(2, '0')}</span></span>
+    <span class="ar-tile__tag">${a === 'ir-quiz' ? 'Velocidad y conocimiento' : a === 'ir-caso' ? 'Razonamiento clínico' : 'Repaso inteligente'}</span>
     <strong>${tit}</strong><span class="faint">${sub}</span>
-    <span class="ar-tile__go"><i data-lucide="arrow-up-right" class="i"></i></span>
+    <span class="ar-tile__action">${a === 'ir-quiz' ? 'Elegir modo' : a === 'ir-caso' ? 'Resolver casos' : 'Repasar tarjetas'}<i data-lucide="arrow-right" class="i"></i></span>
   </button>`;
 
 const barra = () => `<button class="btn btn--ghost btn--sm" data-a="hub"><i data-lucide="arrow-left" class="i"></i>Retos</button>`;

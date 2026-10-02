@@ -7,6 +7,8 @@ import './styles/components.css';
 import './styles/active.css';
 import './styles/admin.css';
 import './styles/arcade.css';
+import './styles/encuestas.css';
+import './styles/bienvenida.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -30,13 +32,17 @@ import { paginaLogros } from './pages/logros';
 import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub } from './core/remoto';
+import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
+import { cargarEncuestas, encuestaPendiente, reiniciarEncuestas } from './core/encuestas';
+import { mostrarEncuestaPendiente } from './ui/encuesta';
+import { bienvenida, montarBienvenida } from './pages/bienvenida';
 import { certificados, certificado, verificar } from './pages/certificados';
 import { buscar } from './pages/buscar';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
 import { login } from './pages/login';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
-import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes } from './admin/gestion';
+import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
 
 // ── Tema: claro por defecto, siempre. El cambio solo dura la sesión ──
 const root = document.documentElement;
@@ -80,17 +86,30 @@ onBeforeRender(async (path) => {
   }
   if (!u) { sessionStorage.setItem('odt:volver', location.hash.slice(1) || '/'); navigate('/login'); return false; }
   if (Datos.modo === 'api' && path.startsWith('/retos')) { toast('Los retos volverán cuando la clasificación real esté conectada.', 'gamepad-2'); navigate('/'); return false; }
-  if (Datos.modo === 'api' && path.startsWith('/admin')) { location.assign('https://www.odonteckconsulting.com/vip-admin.html'); return false; }
-  try { await cargarClub(path); } catch {}
   if (path.startsWith('/admin')) {
     if (!u.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
-    montar('admin'); return true;
+    montar('admin');
+    const outlet = document.getElementById('outlet');
+    if (outlet) outlet.innerHTML = '<div class="card card--pad row" style="justify-content:center;min-height:180px"><i data-lucide="loader-circle" class="i spin"></i><span>Cargando datos administrativos…</span></div>';
+    createIcons({ icons });
+    await cargarAdmin(path, current().query);
+    return true;
   }
+  try { await cargarClub(path); } catch {}
+  try { await cargarEncuestas(); } catch {}
+  // Primera entrada: la entrevista de bienvenida ocupa su propia página hasta responderla o posponerla.
+  const entrevista = encuestaPendiente()?.tipo === 'bienvenida';
+  if (path === '/bienvenida') {
+    if (!entrevista) { navigate('/'); return false; }
+    montar('solo'); return true;
+  }
+  if (entrevista) { navigate('/bienvenida'); return false; }
   montar('miembro'); return true;
 });
 
 // ── Rutas del miembro ──
 route('/login', login);
+route('/bienvenida', bienvenida);
 route('/', inicio);
 route('/cursos', catalogo);
 route('/curso/:id', curso);
@@ -112,20 +131,24 @@ route('/suscripcion', suscripcion);
 route('/configuracion', configuracion);
 route('/mas', mas);
 // ── Rutas del admin ──
-route('/admin', adminResumen);
-route('/admin/cursos', adminCursos);
-route('/admin/cursos/:id', adminCurso);
-route('/admin/quizzes', adminQuizzes);
-route('/admin/quizzes/:cursoId/:n', adminQuiz);
-route('/admin/materiales', adminMateriales);
-route('/admin/materiales/:id', adminMaterial);
-route('/admin/en-vivo', adminEnVivo);
-route('/admin/en-vivo/:id', adminEvento);
-route('/admin/miembros', adminMiembros);
-route('/admin/miembros/:uid', adminMiembro);
-route('/admin/comunidad', adminComunidad);
-route('/admin/avisos', adminAvisos);
-route('/admin/ajustes', adminAjustes);
+const paginaAdmin = (pagina: (params: Record<string, string>, query: URLSearchParams) => string) => (params: Record<string, string>, query: URLSearchParams) => Admin.error
+  ? `<div class="card card--pad stack" style="max-width:720px;margin:auto;text-align:center;gap:14px"><i data-lucide="server-off" class="i" style="width:34px;height:34px;margin:auto"></i><h1 class="display" style="font-size:var(--fs-xl)">No se pudo cargar el panel</h1><p class="muted">${esc(Admin.error)}</p><button class="btn btn--brand" style="justify-self:center" data-reintentar-admin><i data-lucide="refresh-cw" class="i"></i>Reintentar</button></div>`
+  : pagina(params, query);
+route('/admin', paginaAdmin(adminResumen));
+route('/admin/cursos', paginaAdmin(adminCursos));
+route('/admin/cursos/:id', paginaAdmin(adminCurso));
+route('/admin/quizzes', paginaAdmin(adminQuizzes));
+route('/admin/quizzes/:cursoId/:n', paginaAdmin(adminQuiz));
+route('/admin/materiales', paginaAdmin(adminMateriales));
+route('/admin/materiales/:id', paginaAdmin(adminMaterial));
+route('/admin/en-vivo', paginaAdmin(adminEnVivo));
+route('/admin/en-vivo/:id', paginaAdmin(adminEvento));
+route('/admin/miembros', paginaAdmin(adminMiembros));
+route('/admin/miembros/:uid', paginaAdmin(adminMiembro));
+route('/admin/comunidad', paginaAdmin(adminComunidad));
+route('/admin/avisos', paginaAdmin(adminAvisos));
+route('/admin/encuestas', paginaAdmin(adminEncuestas));
+route('/admin/ajustes', paginaAdmin(adminAjustes));
 
 onRender(() => {
   const { path } = current();
@@ -133,12 +156,14 @@ onRender(() => {
   const crumb = document.querySelector('[data-crumb]'); if (crumb) crumb.textContent = document.querySelector('#outlet h1')?.textContent?.trim() || 'Administración';
   cargarVideos();
   if (path.startsWith('/retos')) montarArcade();
+  if (path === '/bienvenida') montarBienvenida(toast);
   createIcons({ icons });
-  if (shellActual === 'miembro') mostrarOnboarding();
+  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast)) mostrarOnboarding();
 });
 instalarAccionesAdmin(toast);
 startRouter();
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
+window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
 
 // ── Video: en modo api el backend firma el enlace de Bunny ──
 async function cargarVideos() {
@@ -199,6 +224,7 @@ document.addEventListener('click', async (e) => {
     const c = getCurso(id);
     const hayNext = c && c.clases.some((k) => k.n === Number(n) + 1);
     if (c && !hayNext) toast('Curso completado · tu certificado ya está listo', 'award');
+    if (c && !hayNext) { try { await cargarEncuestas(true); } catch {} }
     navigate(hayNext ? `/curso/${id}/clase/${Number(n) + 1}` : `/curso/${id}`);
   }
 
@@ -277,7 +303,7 @@ document.addEventListener('click', async (e) => {
   // Login
   if (el.closest('[data-login-demo]')) { await Auth.entrarDemo(); remontarDesdeLogin(); }
   if (el.closest('[data-login-google]')) { try { await Auth.entrarGoogle(); remontarDesdeLogin(); } catch (err) { mostrarErrorLogin(err); } }
-  if (el.closest('[data-salir]')) { await Auth.salir(); shellActual = null; navigate('/login'); }
+  if (el.closest('[data-salir]')) { await Auth.salir(); reiniciarEncuestas(); shellActual = null; navigate('/login'); }
 
   // Opción de quiz marcada visualmente (el input está oculto)
   const opt = el.closest<HTMLLabelElement>('.quiz__opt');

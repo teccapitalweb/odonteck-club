@@ -12,6 +12,7 @@ const leer = (archivo) => readFileSync(new URL(`../${archivo}`, import.meta.url)
 const COLECCIONES_PRIVADAS = [
   'v2_perfiles', 'v2_cursos', 'v2_progreso', 'v2_materiales', 'v2_eventos', 'v2_foro', 'v2_quizzes',
   'v2_intentos', 'v2_cortesias', 'v2_avisos', 'v2_config', 'v2_suscripciones', 'v2_contadores', 'v2_stripe_eventos',
+  'v2_encuestas_estado', 'v2_encuestas_respuestas',
 ];
 
 if (!HAY_FIRESTORE) {

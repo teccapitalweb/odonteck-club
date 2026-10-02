@@ -31,6 +31,25 @@ describe('admin: autorización', () => {
     assert.equal(r.body.temasForo30d, 2);
     assert.deepEqual(r.body.cursosTop, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', vistas: 1 }]);
   });
+
+  test('encuestas: entrega agregados útiles sin UID ni correo', async () => {
+    env.db.docs.set('v2_encuestas_respuestas/u1__bienvenida-v2', {
+      uid: 'u1', clave: 'bienvenida-v2', encuestaId: 'bienvenida', version: 2, tipo: 'bienvenida',
+      respuestas: { situacion: 'estudiante', como_conocio: 'instagram', objetivo: 'practica', intereses: ['ortodoncia'], experiencia: 'aun_estudio', formato: ['video'], reto: 'tiempo' }, enviado: '2026-09-15T00:00:00Z',
+    });
+    env.db.docs.set('v2_encuestas_respuestas/u2__curso-final-v1--curso-a', {
+      uid: 'u2', clave: 'curso-final-v1--curso-a', encuestaId: 'curso-final', version: 1, tipo: 'curso', cursoId: 'curso-a', cursoTitulo: 'Endodoncia práctica',
+      respuestas: { utilidad: 5, claridad: 4, aplicacion: 'inmediato', recomendacion: 9, mejora: 'Más casos.' }, enviado: '2026-09-16T00:00:00Z',
+    });
+    const r = await admin('get', '/admin/encuestas/resumen').expect(200);
+    assert.equal(r.body.totalRespuestas, 2);
+    assert.equal(r.body.encuestas.find((x) => x.id === 'bienvenida').total, 1);
+    assert.equal(r.body.encuestas.find((x) => x.id === 'curso-final').preguntas.find((x) => x.id === 'utilidad').promedio, 5);
+    assert.deepEqual(r.body.cursos, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', total: 1, utilidad: 5, recomendacion: 9 }]);
+    assert.equal(JSON.stringify(r.body).includes('u1'), false);
+    assert.equal(JSON.stringify(r.body).includes('"uid":'), false);
+    assert.equal(JSON.stringify(r.body).includes('@'), false);
+  });
 });
 
 describe('admin: cursos', () => {

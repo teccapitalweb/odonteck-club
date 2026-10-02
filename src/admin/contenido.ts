@@ -65,9 +65,9 @@ export function adminCurso(params: Record<string, string>) {
       </div>
       <div class="card card--pad stack" style="gap:12px">
         <h3 class="admin-card-title">Portada 3:4</h3>
-        <div class="cover-drop"><img src="${c.portada}" alt="" data-preview="portada"><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>Subir imagen<input type="file" accept="image/*" hidden data-subir-imagen="portada"></label></div>
-        <input type="hidden" name="portada" value="${esc(c.portada)}">
-        <p class="faint" style="font-size:var(--fs-xs)">Usa las imágenes generadas con la guía de Flow. Se optimizan al subir.</p>
+        <div class="cover-drop"><img src="${c.portada}" alt="" data-preview="portada">${Datos.modo === 'demo' ? '<label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>Subir imagen<input type="file" accept="image/*" hidden data-subir-imagen="portada"></label>' : ''}</div>
+        ${Datos.modo === 'api' ? `<div class="field"><label>URL pública o ruta de la portada</label><input class="input" name="portada" value="${esc(c.portada)}" required placeholder="/cursos/portada.webp o https://…"></div>` : `<input type="hidden" name="portada" value="${esc(c.portada)}">`}
+        <p class="faint" style="font-size:var(--fs-xs)">${Datos.modo === 'demo' ? 'Usa las imágenes generadas con la guía de Flow. Se optimizan al subir.' : 'La API de cursos guarda una URL; no envía archivos ni secretos de Bunny desde el navegador.'}</p>
       </div>
     </div>
     <div class="card card--pad stack" style="gap:12px">
@@ -151,7 +151,7 @@ export function adminMateriales() {
 
 export function adminMaterial(params: Record<string, string>) {
   const nuevo = params.id === 'nuevo';
-  const m: Material = nuevo ? { id: '', titulo: '', tipo: 'PDF', categoria: 'Guía clínica', area: '', autor: 'Equipo académico OdonTeck', paginas: 1, portada: '/materiales/portadas/guia-diagnostico-ortodoncico.webp', cursoId: null, descripcion: '', estado: 'proximamente', url: '' }
+  const m: Material = nuevo ? { id: '', titulo: '', tipo: 'PDF', categoria: 'Guía clínica', area: '', autor: 'Equipo académico OdonTeck', paginas: 1, portada: '/materiales/portadas/guia-diagnostico-ortodoncico.webp', cursoId: null, descripcion: '', estado: 'proximamente', gratis: false, url: '' }
     : Datos.materiales().find((x) => x.id === params.id)!;
   if (!m) return vacio('Material no encontrado', '', '<a class="btn btn--brand" href="#/admin/materiales">Volver</a>');
   const cursos = Datos.cursos();
@@ -159,7 +159,7 @@ export function adminMaterial(params: Record<string, string>) {
   <a class="section-head__cta" href="#/admin/materiales" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>Materiales</a>
   <form class="stack" style="gap:20px" data-form="material" data-id="${m.id}">
     ${adminHead(nuevo ? 'Nuevo material' : esc(m.titulo), 'PDF, libro o presentación para la biblioteca de miembros.',
-      `${m.url ? `<a class="btn btn--secondary" href="${m.url}" target="_blank"><i data-lucide="file-text" class="i"></i>Abrir archivo</a>` : ''}<button class="btn btn--brand btn--pill-arrow">Guardar <span class="arrow"><i data-lucide="check" class="i"></i></span></button>`)}
+      `${Datos.modo === 'api' && !nuevo ? `<button type="button" class="btn btn--secondary" data-descargar-material="${m.id}"><i data-lucide="file-text" class="i"></i>Abrir archivo</button>` : m.url ? `<a class="btn btn--secondary" href="${m.url}" target="_blank"><i data-lucide="file-text" class="i"></i>Abrir archivo</a>` : ''}<button class="btn btn--brand btn--pill-arrow">Guardar <span class="arrow"><i data-lucide="check" class="i"></i></span></button>`)}
     <div class="admin-grid">
       <div class="card card--pad stack" style="gap:14px">
         <div class="field"><label>Título</label><input class="input" name="titulo" value="${esc(m.titulo)}" required maxlength="120"></div>
@@ -174,15 +174,16 @@ export function adminMaterial(params: Record<string, string>) {
         </div>
         <div class="field"><label>Curso relacionado</label><select class="input" name="cursoId"><option value="">Recurso general</option>${cursos.map((c) => `<option value="${c.id}" ${m.cursoId === c.id ? 'selected' : ''}>${esc(c.titulo)}</option>`).join('')}</select></div>
         <div class="field"><label>Descripción</label><textarea class="input" name="descripcion" rows="3">${esc(m.descripcion)}</textarea></div>
-        <div class="form-grid">
-          <div class="field"><label>Archivo</label><input class="input mono" name="url" value="${esc(m.url || '')}" placeholder="/materiales/archivo.pdf"></div>
+        <div class="form-grid form-grid--3">
+          <div class="field"><label>${Datos.modo === 'api' ? 'PDF' : 'Archivo'}</label>${Datos.modo === 'api' ? '<input class="input" type="file" name="archivoFile" accept="application/pdf"><span class="faint" style="font-size:var(--fs-xs)">Déjalo vacío para conservar el PDF actual.</span>' : `<input class="input mono" name="url" value="${esc(m.url || '')}" placeholder="/materiales/archivo.pdf">`}</div>
           <div class="field"><label>Estado</label><select class="input" name="estado">${[['disponible', 'Disponible'], ['proximamente', 'Próximamente'], ['oculto', 'Oculto']].map(([v, l]) => `<option value="${v}" ${m.estado === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+          <div class="field"><label>Acceso</label><select class="input" name="gratis"><option value="0" ${!m.gratis ? 'selected' : ''}>Solo VIP</option><option value="1" ${m.gratis ? 'selected' : ''}>Gratuito</option></select></div>
         </div>
         <p class="faint" style="font-size:var(--fs-xs)">${Datos.modo === 'demo' ? 'En modo demo el archivo se indica con su ruta. Con el backend conectado, aquí subes el PDF y se guarda en Firebase Storage con descarga solo para miembros.' : 'El PDF se guarda en Firebase Storage; la descarga es solo para miembros.'}</p>
       </div>
       <div class="card card--pad stack" style="gap:12px">
         <h3 class="admin-card-title">Portada 3:4</h3>
-        <div class="cover-drop cover-drop--book"><img src="${m.portada}" alt="" data-preview="portada"><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>Subir portada<input type="file" accept="image/*" hidden data-subir-imagen="portada"></label></div>
+        <div class="cover-drop cover-drop--book"><img src="${m.portada}" alt="" data-preview="portada"><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>Subir portada<input type="file" name="portadaFile" accept="image/*" hidden data-subir-imagen="portada"></label></div>
         <input type="hidden" name="portada" value="${esc(m.portada)}">
       </div>
     </div>

@@ -105,6 +105,66 @@ describe('/me y perfil', () => {
   });
 });
 
+describe('encuestas de miembro', () => {
+  const bienvenida = {
+    situacion: 'estudiante',
+    como_conocio: 'instagram',
+    objetivo: 'practica',
+    intereses: ['diagnostico', 'ortodoncia'],
+    experiencia: 'aun_estudio',
+    formato: ['video', 'casos'],
+    reto: 'tiempo',
+  };
+
+  test('entrevista inicial: aparece una vez, valida y guarda sin tocar miembros', async () => {
+    const antes = env.db.leer('miembros/free1');
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(pendientes.body.pendientes[0].clave, 'bienvenida-v2');
+    assert.equal(pendientes.body.pendientes[0].preguntas.length, 7);
+    assert.equal(JSON.stringify(pendientes.body).includes('uid'), false);
+
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: { ...bienvenida, intereses: ['ortodoncia', 'endodoncia', 'cirugia', 'periodoncia'] } }).expect(400);
+    const guardada = await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(201);
+    assert.equal(guardada.body.ok, true);
+    assert.deepEqual(env.db.leer('v2_encuestas_respuestas/free1__bienvenida-v2').respuestas, bienvenida);
+    assert.deepEqual(env.db.leer('miembros/free1'), antes);
+    const despues = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(despues.body.pendientes.some((x) => x.clave === 'bienvenida-v2'), false);
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(409);
+  });
+
+  test('se puede posponer sin perderla y no se muestra a administradores', async () => {
+    const r = await request(env.app).post('/encuestas/bienvenida-v2/posponer').set(bearer(TOKENS.vip)).send({}).expect(200);
+    assert.equal(r.body.dias, 3);
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === 'bienvenida-v2'), false);
+    assert.equal(env.db.leer('v2_encuestas_estado/vip1').pospuestas['bienvenida-v2'].veces, 1);
+    const admin = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.admin)).expect(200);
+    assert.deepEqual(admin.body.pendientes, []);
+  });
+
+  test('al terminar un curso aparece su evaluación una sola vez', async () => {
+    for (const n of [1, 2, 3]) await vista(TOKENS.vip, 'curso-a', n).expect(200);
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    const curso = pendientes.body.pendientes.find((x) => x.tipo === 'curso');
+    assert.equal(curso.clave, 'curso-final-v1--curso-a');
+    assert.equal(curso.cursoTitulo, 'Endodoncia práctica');
+    const respuestas = { utilidad: 5, claridad: 4, aplicacion: 'inmediato', recomendacion: 9, mejora: 'Agregar un caso final.' };
+    await request(env.app).post(`/encuestas/${curso.clave}/responder`).set(bearer(TOKENS.vip)).send({ respuestas }).expect(201);
+    const despues = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(despues.body.pendientes.some((x) => x.clave === curso.clave), false);
+  });
+
+  test('el pulso aparece después de 21 días de uso del club', async () => {
+    await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(201);
+    const estado = env.db.leer('v2_encuestas_estado/free1');
+    env.db.docs.set('v2_encuestas_estado/free1', { ...estado, primeraVista: '2026-08-20T12:00:00.000Z' });
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(pendientes.body.pendientes[0].clave, 'pulso-21-dias-v1');
+  });
+});
+
 describe('/catalogo', () => {
   test('nunca devuelve videoId y oculta lo no publicado', async () => {
     const res = await request(env.app).get('/catalogo').set(bearer(TOKENS.vip)).expect(200);

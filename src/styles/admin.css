@@ -120,3 +120,5 @@ textarea.input { padding: 10px 14px; resize: vertical; }
 @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .hbar { grid-template-columns: 1fr 80px 24px; } }
 .bottom-nav--admin { display: none; }
 @media (max-width: 1024px) { .bottom-nav--admin { display: flex; } }
+@keyframes admin-spin { to { transform: rotate(360deg); } }
+.spin { animation: admin-spin .8s linear infinite; }

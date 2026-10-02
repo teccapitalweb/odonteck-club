@@ -18,6 +18,8 @@ export const COL = Object.freeze({
   cortesias: 'v2_cortesias',
   avisos: 'v2_avisos',
   config: 'v2_config',
+  encuestasEstado: 'v2_encuestas_estado',
+  encuestasRespuestas: 'v2_encuestas_respuestas',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

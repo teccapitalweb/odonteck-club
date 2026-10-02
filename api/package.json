@@ -17,6 +17,7 @@
     "audit:legacy": "node scripts/audit-legacy-members.mjs",
     "audit:stripe": "node scripts/audit-legacy-stripe.mjs",
     "smoke:legacy": "node scripts/smoke-legacy-access.mjs",
+    "smoke:admin": "node scripts/smoke-admin-access.mjs",
     "publish:materials": "node scripts/publish-owned-materials.mjs",
     "storage:ensure": "node scripts/ensure-storage-bucket.mjs",
     "set-admin": "node scripts/set-admin.mjs",

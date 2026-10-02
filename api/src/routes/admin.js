@@ -10,6 +10,7 @@ import {
 import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMaterial, validarPreguntas } from '../lib/esquemas.js';
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
+import { resumirEncuestas } from '../lib/encuestas.js';
 import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, textoRequerido, unoDe, url } from '../lib/validacion.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -89,6 +90,12 @@ export function rutasAdmin(ctx) {
       temasForo30d: foroSnap.docs.filter((d) => (aMillis(d.data().fecha) ?? 0) >= desde).length,
       cursosTop,
     });
+  }));
+
+  // ---------- Encuestas (solo agregados; nunca expone UID ni correo) ----------
+  r.get('/admin/encuestas/resumen', h(async (req, res) => {
+    const snap = await db.collection(COL.encuestasRespuestas).get();
+    res.json(resumirEncuestas(snap.docs.map((d) => d.data())));
   }));
 
   // ---------- CRUD genérico (cursos, materiales, eventos) ----------

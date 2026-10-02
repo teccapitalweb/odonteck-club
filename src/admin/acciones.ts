@@ -1,9 +1,16 @@
 // Interacciones del panel de administración (formularios y botones).
 import { Datos, slug, imagenAWebp, type Curso, type Material, type Evento, type Quiz } from '../core/datos';
 import { Comunidad } from '../core/comunidad';
+import { mensajeError } from '../core/auth';
+import {
+  borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
+  guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, publicarAvisoAdmin,
+  reordenarCursosAdmin, revocarCortesiaAdmin,
+} from '../core/admin';
 import { navigate, render, current } from '../core/router';
 
 type Toast = (msg: string, icon?: string) => void;
+const cursosNuevos = new Set<string>();
 
 function cursoDesdeForm(f: HTMLFormElement): Curso {
   const d = new FormData(f);
@@ -43,12 +50,15 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (!tipo || !current().path.startsWith('/admin')) return;
     e.preventDefault();
     const d = new FormData(f);
+    const boton = (e as SubmitEvent).submitter as HTMLButtonElement | null;
+    if (boton) boton.disabled = true;
     try {
       if (tipo === 'curso') {
         const c = cursoDesdeForm(f);
         if (!f.dataset.id && Datos.cursos().some((x) => x.id === c.id)) { toast('Ya existe un curso con ese título', 'alert-triangle'); return; }
         if (!c.clases.length) { toast('Agrega al menos una clase', 'alert-triangle'); return; }
-        Datos.guardarCurso(c); toast('Curso guardado'); navigate(`/admin/cursos/${c.id}`); if (f.dataset.id) render();
+        const guardado = await guardarCursoAdmin(c, !f.dataset.id || cursosNuevos.has(c.id));
+        cursosNuevos.delete(c.id); toast('Curso guardado'); navigate(`/admin/cursos/${guardado.id}`); if (f.dataset.id) render();
       }
       if (tipo === 'quiz') {
         const q = quizDesdeForm(f);
@@ -58,16 +68,22 @@ export function instalarAccionesAdmin(toast: Toast) {
           if (q.preguntas.some((p) => new Set(p.opciones.map((o) => o.toLowerCase())).size < 4)) { toast('Hay opciones repetidas en alguna pregunta', 'alert-triangle'); return; }
           q.estado = 'aprobado';
         } else q.estado = 'borrador';
-        Datos.guardarQuiz(q); toast(q.estado === 'aprobado' ? 'Quiz aprobado · ya lo ven los miembros' : 'Borrador guardado'); render();
+        await guardarQuizAdmin(q); toast(q.estado === 'aprobado' ? 'Quiz aprobado · ya lo ven los miembros' : 'Borrador guardado'); render();
       }
       if (tipo === 'material') {
         const previo = Datos.materiales().find((m) => m.id === f.dataset.id);
         const titulo = String(d.get('titulo')).trim();
         const m: Material = { ...(previo || {}), id: f.dataset.id || slug(titulo), titulo, tipo: String(d.get('tipo')), categoria: String(d.get('categoria')).trim(),
-          area: String(d.get('area')).trim(), autor: String(d.get('autor')).trim(), paginas: Number(d.get('paginas')) || 1, portada: String(d.get('portada')),
-          cursoId: String(d.get('cursoId')) || null, descripcion: String(d.get('descripcion')).trim(), estado: String(d.get('estado')), url: String(d.get('url')).trim() };
-        if (m.estado === 'disponible' && !m.url) { toast('Para marcarlo disponible indica el archivo', 'alert-triangle'); return; }
-        Datos.guardarMaterial(m); toast('Material guardado'); navigate('/admin/materiales');
+           area: String(d.get('area')).trim(), autor: String(d.get('autor')).trim(), paginas: Number(d.get('paginas')) || 1, portada: String(d.get('portada')),
+          cursoId: String(d.get('cursoId')) || null, descripcion: String(d.get('descripcion')).trim(), estado: String(d.get('estado')), gratis: d.get('gratis') === '1', url: String(d.get('url') || '').trim() };
+        const archivo = f.querySelector<HTMLInputElement>('[name="archivoFile"]')?.files?.[0];
+        const portadaFile = f.querySelector<HTMLInputElement>('[name="portadaFile"]')?.files?.[0];
+        if (Datos.modo === 'demo' && m.estado === 'disponible' && !m.url) { toast('Para marcarlo disponible indica el archivo', 'alert-triangle'); return; }
+        if (Datos.modo === 'api' && !previo && m.estado === 'disponible' && !archivo) { toast('Sube el PDF antes de marcar el material disponible', 'alert-triangle'); return; }
+        let portada: Blob | undefined;
+        if (portadaFile) portada = await (await fetch(await imagenAWebp(portadaFile))).blob();
+        await guardarMaterialAdmin(m, !f.dataset.id, { archivo, portada });
+        toast('Material guardado'); navigate('/admin/materiales');
       }
       if (tipo === 'evento') {
         const previo = Datos.eventos().find((x) => x.id === f.dataset.id);
@@ -75,27 +91,26 @@ export function instalarAccionesAdmin(toast: Toast) {
         const ev: Evento = { ...(previo || {}), id: f.dataset.id || `${slug(titulo)}-${Date.now().toString(36)}`, titulo, ponente: String(d.get('ponente')).trim(),
           fecha: new Date(String(d.get('fecha'))).toISOString(), duracionMin: Number(d.get('duracionMin')) || 60, enlace: String(d.get('enlace')).trim(),
           cursoId: String(d.get('cursoId')) || undefined, publicado: d.get('publicado') === '1' };
-        Datos.guardarEvento(ev); toast('Clase en vivo guardada', 'radio'); navigate('/admin/en-vivo');
+        await guardarEventoAdmin(ev, !f.dataset.id); toast('Clase en vivo guardada', 'radio'); navigate('/admin/en-vivo');
       }
       if (tipo === 'cortesia') {
-        const m = Datos.miembros().find((x) => x.uid === f.dataset.uid)!;
-        const base = m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now() ? new Date(m.cortesiaHasta).getTime() : Date.now();
-        m.cortesiaHasta = new Date(base + Number(d.get('dias')) * 864e5).toISOString(); m.cortesiaMotivo = String(d.get('motivo')).trim();
-        Datos.guardarMiembro(m); toast('Cortesía otorgada', 'gift'); render();
+        await guardarCortesiaAdmin(f.dataset.uid!, Number(d.get('dias')), String(d.get('motivo')).trim());
+        await cargarAdmin(current().path, current().query, true); toast('Cortesía otorgada', 'gift'); render();
       }
       if (tipo === 'aviso') {
-        Datos.publicarAviso({ titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), enlace: String(d.get('enlace')).trim() || undefined });
+        await publicarAvisoAdmin({ titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), enlace: String(d.get('enlace')).trim() || undefined });
         toast('Aviso publicado', 'megaphone'); render();
       }
       if (tipo === 'config') {
-        Datos.guardarConfig({ precioMensual: Number(d.get('precioMensual')), precioAnual: Number(d.get('precioAnual')), descuentoVIP: Number(d.get('descuentoVIP')),
+        await guardarConfigAdmin({ precioMensual: Number(d.get('precioMensual')), precioAnual: Number(d.get('precioAnual')), descuentoVIP: Number(d.get('descuentoVIP')),
           whatsappSoporte: String(d.get('whatsappSoporte')).trim(), canalWhatsApp: String(d.get('canalWhatsApp')).trim(), praxiaUrl: String(d.get('praxiaUrl')).trim() });
         toast('Ajustes guardados');
       }
       if (tipo === 'buscar-miembro') {
         const p = current().query; p.set('q', String(d.get('q'))); navigate('/admin/miembros?' + p.toString());
       }
-    } catch (err) { console.error(err); }
+    } catch (err) { console.error(err); toast(mensajeError(err), 'alert-triangle'); }
+    finally { if (boton) boton.disabled = false; }
   });
 
   document.addEventListener('click', async (e) => {
@@ -103,11 +118,11 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (!current().path.startsWith('/admin')) return;
 
     const pub = el.closest<HTMLElement>('[data-toggle-publicado]');
-    if (pub) { const c = Datos.cursos().find((x) => x.id === pub.dataset.togglePublicado)!; c.publicado = c.publicado === false; Datos.guardarCurso(c); toast(c.publicado ? 'Curso publicado' : 'Curso oculto'); render(); }
+    if (pub) { const c = Datos.cursos().find((x) => x.id === pub.dataset.togglePublicado)!; c.publicado = c.publicado === false; try { await guardarCursoAdmin(c, false); toast(c.publicado ? 'Curso publicado' : 'Curso oculto'); render(); } catch (err) { c.publicado = !c.publicado; toast(mensajeError(err), 'alert-triangle'); } }
 
     const mov = el.closest<HTMLElement>('[data-mover-curso]');
     if (mov) { const [id, dir] = mov.dataset.moverCurso!.split(':'); const ids = Datos.cursos().map((c) => c.id); const i = ids.indexOf(id); const j = i + Number(dir);
-      if (j >= 0 && j < ids.length) { [ids[i], ids[j]] = [ids[j], ids[i]]; Datos.reordenarCursos(ids); render(); } }
+      if (j >= 0 && j < ids.length) { [ids[i], ids[j]] = [ids[j], ids[i]]; try { await reordenarCursosAdmin(ids); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } } }
 
     const ca = el.closest<HTMLElement>('[data-clase-accion]');
     if (ca) {
@@ -118,7 +133,7 @@ export function instalarAccionesAdmin(toast: Toast) {
       if (acc === 'bajar' && i < c.clases.length - 1) [c.clases[i + 1], c.clases[i]] = [c.clases[i], c.clases[i + 1]];
       c.clases.forEach((k, n) => (k.n = n + 1));
       if (!c.titulo) { toast('Escribe el título del curso primero', 'alert-triangle'); return; }
-      Datos.guardarCurso(c); if (!f.dataset.id) navigate(`/admin/cursos/${c.id}`); else render();
+      Datos.guardarCurso(c); if (!f.dataset.id) { cursosNuevos.add(c.id); navigate(`/admin/cursos/${c.id}`); } else render();
     }
 
     const qa = el.closest<HTMLElement>('[data-quiz-accion]');
@@ -133,19 +148,20 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (dias) { const inp = dias.closest('form')!.querySelector<HTMLInputElement>('[name="dias"]')!; inp.value = dias.dataset.dias!; }
 
     const rev = el.closest<HTMLElement>('[data-revocar-cortesia]');
-    if (rev && confirm('¿Revocar la cortesía ahora?')) { const m = Datos.miembros().find((x) => x.uid === rev.dataset.revocarCortesia)!; m.cortesiaHasta = null; m.cortesiaMotivo = ''; Datos.guardarMiembro(m); toast('Cortesía revocada'); render(); }
+    if (rev && confirm('¿Revocar la cortesía ahora?')) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
 
     const bc = el.closest<HTMLElement>('[data-borrar-curso]');
-    if (bc && confirm('¿Borrar este curso? No se puede deshacer.')) { Datos.borrarCurso(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); }
+    if (bc && confirm('¿Borrar este curso? No se puede deshacer.')) { try { await borrarCursoAdmin(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const bm = el.closest<HTMLElement>('[data-borrar-material]');
-    if (bm && confirm('¿Borrar este material?')) { Datos.borrarMaterial(bm.dataset.borrarMaterial!); toast('Material borrado', 'trash-2'); navigate('/admin/materiales'); }
+    if (bm && confirm('¿Borrar este material?')) { try { await borrarMaterialAdmin(bm.dataset.borrarMaterial!); toast('Material borrado', 'trash-2'); navigate('/admin/materiales'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const be = el.closest<HTMLElement>('[data-borrar-evento]');
-    if (be && confirm('¿Borrar esta clase en vivo?')) { Datos.borrarEvento(be.dataset.borrarEvento!); toast('Clase borrada', 'trash-2'); navigate('/admin/en-vivo'); }
+    if (be && confirm('¿Borrar esta clase en vivo?')) { try { await borrarEventoAdmin(be.dataset.borrarEvento!); toast('Clase borrada', 'trash-2'); navigate('/admin/en-vivo'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const ba = el.closest<HTMLElement>('[data-borrar-aviso]');
-    if (ba && confirm('¿Borrar este aviso?')) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
+    if (ba && Datos.modo === 'demo' && confirm('¿Borrar este aviso?')) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
     const oh = el.closest<HTMLElement>('[data-ocultar-hilo]');
-    if (oh) { Comunidad.alternarOculto(oh.dataset.ocultarHilo!); render(); }
+    if (oh) { const hilo = Comunidad.todos().find((h) => h.id === oh.dataset.ocultarHilo); try { await moderarHiloAdmin(oh.dataset.ocultarHilo!, !hilo?.oculto); await cargarAdmin(current().path, current().query, true); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     if (el.closest('[data-restablecer-demo]') && confirm('Esto borra todos los cambios hechos en el demo. ¿Continuar?')) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
+    if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
   });
 
   document.addEventListener('change', async (e) => {
@@ -155,7 +171,7 @@ export function instalarAccionesAdmin(toast: Toast) {
     const form = inp.closest('form')!;
     try {
       const url = await imagenAWebp(inp.files[0]);
-      form.querySelector<HTMLInputElement>(`input[name="${campo}"]`)!.value = url;
+      if (Datos.modo === 'demo') form.querySelector<HTMLInputElement>(`input[name="${campo}"]`)!.value = url;
       form.querySelector<HTMLImageElement>(`[data-preview="${campo}"]`)!.src = url;
       toast('Imagen lista · guarda para aplicar', 'image');
     } catch { toast('No se pudo leer la imagen', 'alert-triangle'); }

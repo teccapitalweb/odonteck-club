@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { manejarErrores, noEncontradoRuta } from './middleware/errores.js';
 import { rutasAdmin } from './routes/admin.js';
+import { rutasEncuestas } from './routes/encuestas.js';
 import { rutasMiembro } from './routes/miembro.js';
 import { rutasPublicas } from './routes/publicas.js';
 import { rutasStripe, webhookStripe } from './routes/stripe.js';
@@ -76,6 +77,7 @@ export function crearApp(deps) {
   app.use(express.json({ limit: '300kb' }));
 
   app.use(rutasPublicas(ctx));
+  app.use(rutasEncuestas(ctx));
   app.use(rutasAdmin(ctx));
   app.use(rutasStripe(ctx));
   app.use(rutasMiembro(ctx));

@@ -19,11 +19,12 @@ export interface Material {
 export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string | null; cursoId?: string; publicado?: boolean; reservas?: number; reservado?: boolean }
 export interface Pregunta { q: string; opciones: string[]; correcta: number; explicacion: string }
 export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; preguntas: Pregunta[]; actualizado: string }
-export interface MiembroDemo { uid: string; nombre: string; email: string; plan: 'mensual' | 'anual' | 'cortesia' | 'ninguno'; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; cortesiaHasta?: string | null; cortesiaMotivo?: string }
-export interface Aviso { id: string; titulo: string; texto: string; enlace?: string; fecha: string }
+export interface MiembroDemo { uid: string; nombre: string; email: string; plan: string | null; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; esVip?: boolean; esAdmin?: boolean; cortesiaHasta?: string | null; cortesiaMotivo?: string }
+export interface Aviso { id: string; titulo: string; texto: string; enlace?: string | null; fecha: string; autor?: string }
 export interface Config { precioMensual: number; precioAnual: number; descuentoVIP: number; whatsappSoporte: string; canalWhatsApp: string; praxiaUrl: string }
 
 const PREFIX = 'odonteck-club:datos:v1:';
+const remoto = new Map<string, unknown>();
 const CONFIG_DEF: Config = {
   precioMensual: 199, precioAnual: 1899, descuentoVIP: 20, whatsappSoporte: '5212361139827',
   canalWhatsApp: 'https://whatsapp.com/channel/0029VbCQbyVISTkPMfD7hz0N',
@@ -31,10 +32,12 @@ const CONFIG_DEF: Config = {
 };
 
 function leer<T>(k: string, semilla: T): T {
+  if (Datos.modo === 'api') return remoto.has(k) ? structuredClone(remoto.get(k) as T) : structuredClone(semilla);
   try { const v = localStorage.getItem(PREFIX + k); return v ? JSON.parse(v) : structuredClone(semilla); } catch { return structuredClone(semilla); }
 }
 function escribir<T>(k: string, v: T) {
-  try { localStorage.setItem(PREFIX + k, JSON.stringify(v)); } catch (e) { alert('No hay espacio en el navegador para guardar este cambio. Usa imágenes más ligeras.'); throw e; }
+  if (Datos.modo === 'api') remoto.set(k, structuredClone(v));
+  else try { localStorage.setItem(PREFIX + k, JSON.stringify(v)); } catch (e) { alert('No hay espacio en el navegador para guardar este cambio. Usa imágenes más ligeras.'); throw e; }
   window.dispatchEvent(new CustomEvent('datos:cambio', { detail: k }));
 }
 const hoy = () => new Date().toISOString();
@@ -89,7 +92,7 @@ export const Datos = {
   restablecerDemo() { Object.keys(localStorage).filter((k) => k.startsWith(PREFIX)).forEach((k) => localStorage.removeItem(k)); window.dispatchEvent(new CustomEvent('datos:cambio', { detail: '*' })); },
 
   hidratarAdmin(k: string, v: unknown) { escribir(k, v); },
-  invalidarAdmin(...keys: string[]) { for (const k of keys) { try { localStorage.removeItem(PREFIX + k); } catch {} window.dispatchEvent(new CustomEvent('datos:cambio', { detail: k })); } },
+  invalidarAdmin(...keys: string[]) { for (const k of keys) { if (Datos.modo === 'api') remoto.delete(k); else try { localStorage.removeItem(PREFIX + k); } catch {} window.dispatchEvent(new CustomEvent('datos:cambio', { detail: k })); } },
 };
 
 export const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'item';

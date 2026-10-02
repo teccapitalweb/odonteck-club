@@ -2,6 +2,8 @@
 import { Datos, type MiembroDemo } from '../core/datos';
 import { Comunidad, hace } from '../core/comunidad';
 import { Progreso } from '../core/progreso';
+import { Admin } from '../core/admin';
+import { resumenEncuestasDemo, type PreguntaResumenEncuesta } from '../core/encuestas';
 import { esc, iniciales } from '../ui/partials';
 import { adminHead } from './shell';
 import { vacio, callout } from './contenido';
@@ -9,6 +11,7 @@ import { vacio, callout } from './contenido';
 const DIA = 864e5;
 export function estadoMiembro(m: MiembroDemo, ahora = Date.now()) {
   if (m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > ahora) return { vip: true, etiqueta: 'Cortesía', chip: 'chip--primary' };
+  if (m.esVip === true) return { vip: true, etiqueta: m.esAdmin ? 'Administrador' : m.plan === 'anual' ? 'VIP anual' : m.plan === 'mensual' ? 'VIP mensual' : 'VIP activo', chip: 'chip--accent' };
   if ((m.plan === 'mensual' || m.plan === 'anual') && m.vence && new Date(m.vence).getTime() > ahora) return { vip: true, etiqueta: m.plan === 'anual' ? 'VIP anual' : 'VIP mensual', chip: 'chip--accent' };
   return { vip: false, etiqueta: 'Sin membresía', chip: '' };
 }
@@ -16,6 +19,7 @@ const fecha = (iso?: string | null) => iso ? new Date(iso.length === 10 ? iso + 
 
 // ═══ RESUMEN ═══
 export function adminResumen() {
+  if (Datos.modo === 'api' && Admin.resumen) return adminResumenReal(Admin.resumen);
   const cfg = Datos.config();
   const ms = Datos.miembros();
   const ahora = Date.now();
@@ -71,6 +75,35 @@ export function adminResumen() {
   </div>`;
 }
 
+function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
+  const cursos = Datos.cursos();
+  const qz = Datos.quizzes();
+  const genericos = cursos.reduce((a, c) => a + c.clases.filter((k) => /^Clase \d+$/.test(k.titulo)).length, 0);
+  const maxV = Math.max(1, ...r.cursosTop.map((t) => t.vistas));
+  const kpi = (icon: string, label: string, valor: number, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
+  return `
+  ${adminHead('Resumen', new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}
+  <div class="kpis">
+    ${kpi('users', 'Miembros activos', r.miembrosActivos, 'membresía, cortesía o admin vigente')}
+    ${kpi('user-plus', 'Altas en 30 días', r.altas30d, `${r.bajas30d} bajas registradas`)}
+    ${kpi('play-circle', 'Clases vistas', r.clasesVistas30d, 'durante los últimos 30 días')}
+    ${kpi('award', 'Certificados', r.certificados30d, `${r.temasForo30d} temas nuevos en comunidad`)}
+  </div>
+  <div class="admin-grid admin-grid--even">
+    <div class="card card--pad stack" style="gap:12px">
+      <h3 class="admin-card-title">Cursos más vistos · 30 días</h3>
+      ${r.cursosTop.length ? r.cursosTop.map((t) => `<div class="hbar"><span class="hbar__lbl">${esc(t.titulo)}</span><div class="progress"><span style="width:${(t.vistas / maxV) * 100}%"></span></div><span class="mono faint">${t.vistas}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Todavía no hay vistas en este periodo.</p>'}
+    </div>
+    <div class="card card--pad stack" style="gap:10px">
+      <h3 class="admin-card-title">Pendientes de contenido</h3>
+      <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico</span><i data-lucide="chevron-right" class="i"></i></a>
+      <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
+      <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
+      <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > Date.now()).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
+    </div>
+  </div>`;
+}
+
 // ═══ MIEMBROS ═══
 export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
   const q = (query.get('q') || '').toLowerCase();
@@ -96,7 +129,8 @@ export function adminMiembros(_: Record<string, string>, query: URLSearchParams)
 }
 
 export function adminMiembro(params: Record<string, string>) {
-  const m = Datos.miembros().find((x) => x.uid === params.uid);
+  const detalle = Datos.modo === 'api' && Admin.detalleMiembro?.uid === params.uid ? Admin.detalleMiembro : null;
+  const m = detalle || Datos.miembros().find((x) => x.uid === params.uid);
   if (!m) return vacio('Miembro no encontrado', '', '<a class="btn btn--brand" href="#/admin/miembros">Volver</a>');
   const e = estadoMiembro(m);
   const cortesiaVigente = m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now();
@@ -104,11 +138,11 @@ export function adminMiembro(params: Record<string, string>) {
   <a class="section-head__cta" href="#/admin/miembros" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>Miembros</a>
   <div class="card card--pad row" style="gap:18px;align-items:center">
     <div class="avatar avatar--lg">${iniciales(m.nombre)}</div>
-    <div style="flex:1"><h1 class="display" style="font-size:var(--fs-xl)">${esc(m.nombre)}</h1><p class="muted">${esc(m.email)} · alta ${fecha(m.alta)}</p></div>
+    <div style="flex:1"><h1 class="display" style="font-size:var(--fs-xl)">${esc(m.nombre)}</h1><p class="muted">${esc(m.email)}${m.alta ? ` · alta ${fecha(m.alta)}` : ''}</p></div>
     <span class="chip ${e.chip}" style="height:32px;font-size:var(--fs-sm)">${e.etiqueta}</span>
   </div>
   <div class="kpis">
-    <div class="kpi"><span class="kpi__label">Plan</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${({ mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan' } as Record<string, string>)[m.plan]}</strong><span class="kpi__nota">vence ${fecha(m.vence)}</span></div>
+    <div class="kpi"><span class="kpi__label">Plan</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${({ mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan', admin: 'Administrador', regalo: 'Regalo' } as Record<string, string>)[m.plan || 'ninguno'] || esc(m.plan || 'Sin plan')}</strong><span class="kpi__nota">vence ${fecha(m.vence)}</span></div>
     <div class="kpi"><span class="kpi__label">Clases vistas</span><strong class="kpi__val">${m.clasesVistas}</strong><span class="kpi__nota">de ${Datos.cursos().reduce((a, c) => a + c.clases.length, 0)}</span></div>
     <div class="kpi"><span class="kpi__label">Última actividad</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${hace(m.ultimaActividad)}</strong><span class="kpi__nota">${fecha(m.ultimaActividad)}</span></div>
   </div>
@@ -125,7 +159,11 @@ export function adminMiembro(params: Record<string, string>) {
       <p class="muted" style="font-size:var(--fs-sm)">Cancelar, reembolsar o cambiar de plan se hace desde Stripe para que los cobros y la membresía nunca se desincronicen. Con el backend conectado, aquí aparece el historial de pagos y el enlace directo al cliente en Stripe.</p>
       <div class="row"><button class="btn btn--secondary" disabled><i data-lucide="credit-card" class="i"></i>Ver en Stripe</button><button class="btn btn--secondary" disabled><i data-lucide="x-circle" class="i"></i>Cancelar al final del periodo</button></div>
     </div>
-  </div>`;
+  </div>
+  ${detalle ? `<div class="admin-grid admin-grid--even">
+    <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Progreso por curso</h3>${detalle.progreso.length ? detalle.progreso.map((p) => `<div class="hbar"><span class="hbar__lbl">${esc(p.titulo)}</span><div class="progress"><span style="width:${p.total ? Math.round((p.vistas.length / p.total) * 100) : 0}%"></span></div><span class="mono faint">${p.vistas.length}/${p.total}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Todavía no ha iniciado cursos.</p>'}</div>
+    <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Certificados</h3>${detalle.certificados.length ? detalle.certificados.map((c) => `<div class="todo"><i data-lucide="award" class="i"></i><span><strong>${esc(c.cursoTitulo)}</strong><br><span class="faint">${esc(c.folio)} · ${fecha(c.emitido)}</span></span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin certificados emitidos.</p>'}</div>
+  </div>` : ''}`;
 }
 
 // ═══ COMUNIDAD ═══
@@ -157,8 +195,32 @@ export function adminAvisos() {
   <div class="stack" style="gap:10px;max-width:820px">${l.map((a) => `
     <div class="card card--pad row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap">
       <div><strong>${esc(a.titulo)}</strong><p class="muted" style="font-size:var(--fs-sm)">${esc(a.texto)}</p><span class="faint" style="font-size:var(--fs-xs)">${hace(a.fecha)}${a.enlace ? ` · ${esc(a.enlace)}` : ''}</span></div>
-      <button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>
+      ${Datos.modo === 'demo' ? `<button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>` : ''}
     </div>`).join('') || vacio('Sin avisos publicados', 'El primero aparecerá en la campana de todos los miembros.')}</div>`;
+}
+
+// ═══ ENCUESTAS ═══
+function preguntaEncuesta(p: PreguntaResumenEncuesta) {
+  if (p.tipo === 'escala') return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4><div class="encuesta-dato__promedio"><strong>${p.promedio ?? '—'}</strong><span class="muted">de ${p.max} · ${p.total} respuestas</span></div></div>`;
+  if (p.tipo === 'texto') return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4>${p.comentarios?.length ? p.comentarios.map((c) => `<p class="encuesta-comentario">${esc(c)}</p>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin comentarios todavía.</p>'}</div>`;
+  return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4>${(p.opciones || []).map((o) => `<div class="encuesta-barra" title="${o.total} respuestas"><span>${esc(o.etiqueta)}</span><span class="encuesta-barra__pista"><i style="width:${Math.min(100, o.porcentaje)}%"></i></span><strong class="mono">${o.porcentaje}%</strong></div>`).join('')}</div>`;
+}
+
+export function adminEncuestas() {
+  const r = Datos.modo === 'api' ? Admin.encuestas : resumenEncuestasDemo();
+  if (!r) return vacio('Sin resultados disponibles', 'No se pudo preparar el resumen de encuestas.');
+  const porTipo = (tipo: string) => r.encuestas.find((e) => e.tipo === tipo)?.total || 0;
+  const kpi = (icon: string, label: string, valor: number, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
+  return `${adminHead('Encuestas', 'Conoce a la comunidad y mide el valor real de los cursos sin exponer datos personales.')}
+  <div class="card card--pad row" style="align-items:flex-start;flex-wrap:nowrap;background:var(--primary-soft)"><i data-lucide="shield-check" class="i" style="color:var(--primary);flex:0 0 20px"></i><p style="font-size:var(--fs-sm)"><strong>Privacidad por diseño.</strong> Aquí sólo se muestran tendencias agregadas y comentarios sin nombre ni correo. Las encuestas advierten que no se incluyan datos de pacientes.</p></div>
+  <div class="kpis encuestas-kpis">
+    ${kpi('messages-square', 'Respuestas totales', r.totalRespuestas, 'todas las encuestas')}
+    ${kpi('user-round-search', 'Entrevista inicial', porTipo('bienvenida'), 'perfil de la comunidad')}
+    ${kpi('graduation-cap', 'Fin de curso', porTipo('curso'), 'calidad y recomendación')}
+    ${kpi('activity', 'Pulso de 21 días', porTipo('pulso'), 'uso, fricción y satisfacción')}
+  </div>
+  ${r.totalRespuestas ? `<div class="stack" style="gap:18px">${r.encuestas.filter((e) => e.total > 0).map((e) => `<section class="card card--pad encuesta-resumen"><div class="encuesta-resumen__head"><div><span class="eyebrow">${esc(e.tipo === 'bienvenida' ? 'Primer ingreso' : e.tipo === 'curso' ? 'Curso completado' : 'Seguimiento')}</span><h3 class="admin-card-title" style="margin-top:4px">${esc(e.titulo)}</h3></div><span class="chip chip--primary">${e.total} respuestas</span></div><div class="encuesta-resumen__preguntas">${e.preguntas.map(preguntaEncuesta).join('')}</div></section>`).join('')}</div>` : vacio('Aún no hay respuestas', 'Los resultados aparecerán aquí cuando los miembros contesten. En modo demo, entra como miembro y completa la entrevista para probar el flujo.')}
+  ${r.cursos.length ? `<section class="card dtable-wrap"><table class="dtable"><thead><tr><th>Curso</th><th>Respuestas</th><th>Utilidad</th><th>Recomendación</th></tr></thead><tbody>${r.cursos.map((c) => `<tr><td><strong>${esc(c.titulo)}</strong></td><td class="mono">${c.total}</td><td>${c.utilidad ?? '—'} / 5</td><td>${c.recomendacion ?? '—'} / 10</td></tr>`).join('')}</tbody></table></section>` : ''}`;
 }
 
 // ═══ AJUSTES ═══

@@ -4,6 +4,7 @@ import { cursos } from '../core/catalogo';
 export function login(_: Record<string, string>, query: URLSearchParams) {
   const modo = query.get('modo') === 'registro' ? 'registro' : query.get('modo') === 'recuperar' ? 'recuperar' : 'entrar';
   const totalClases = cursos.reduce((a, c) => a + c.clases.length, 0);
+  const resumenCatalogo = cursos.length ? `${cursos.length} cursos · ${totalClases} clases` : 'Cursos y clases clínicas';
   const google = `<button type="button" class="login__google" data-login-google><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.35 11.1H12v2.9h5.4c-.25 1.4-1 2.6-2.1 3.4v2.8h3.4c2-1.85 3.15-4.55 3.15-7.75 0-.65-.05-1.1-.5-1.35z"/><path fill="#34A853" d="M12 22c2.85 0 5.25-.95 7-2.55l-3.4-2.8c-.95.65-2.15 1.05-3.6 1.05-2.75 0-5.1-1.85-5.95-4.4H2.55v2.9C4.3 19.6 7.85 22 12 22z"/><path fill="#FBBC05" d="M6.05 13.3c-.2-.65-.35-1.3-.35-2s.15-1.35.35-2V6.4H2.55A9.9 9.9 0 0 0 2 11.3c0 1.6.4 3.1 1.05 4.5l3-2.5z"/><path fill="#EA4335" d="M12 5.9c1.55 0 2.95.55 4.05 1.6l3-3C17.25 2.85 14.85 2 12 2 7.85 2 4.3 4.4 2.55 7.9l3.5 2.9C6.9 8.25 9.25 5.9 12 5.9z"/></svg>Continuar con Google</button>`;
   const titulo = { entrar: 'Qué bueno <em>verte</em>', registro: 'Empieza tu <em>formación</em>', recuperar: 'Recupera tu <em>acceso</em>' }[modo];
   const sub = { entrar: 'Entra para continuar donde te quedaste.', registro: 'Crea tu cuenta: el primer curso es casi completo gratis.', recuperar: 'Te enviamos un enlace para crear una contraseña nueva.' }[modo];
@@ -38,7 +39,7 @@ export function login(_: Record<string, string>, query: URLSearchParams) {
       <div class="login__visual">
         <img src="/fotos/hero.webp" alt="">
         <img class="tooth" src="/fotos/tooth-3d.png" alt="">
-        <div class="glass glass--pin" style="top:60px;left:50px;--pin:52px"><span class="ic"><i data-lucide="graduation-cap" class="i"></i></span><div>Catálogo<strong>${cursos.length} cursos · ${totalClases} clases</strong></div></div>
+        <div class="glass glass--pin" style="top:60px;left:50px;--pin:52px"><span class="ic"><i data-lucide="graduation-cap" class="i"></i></span><div>Catálogo<strong>${resumenCatalogo}</strong></div></div>
         <div class="glass glass--pin" style="top:150px;right:50px;--pin:70px"><span class="ic"><i data-lucide="award" class="i"></i></span><div>Certificados<strong>Con folio verificable</strong></div></div>
         <div class="glass" style="position:absolute;bottom:50px;left:50px"><span class="ic"><i data-lucide="library" class="i"></i></span><div>Biblioteca<strong>Guías y formatos clínicos</strong></div></div>
         <div class="glass glass--dark" style="position:absolute;bottom:50px;right:50px"><span class="ic"><i data-lucide="radio" class="i"></i></span><div>Cada mes<strong>Clases en vivo</strong></div></div>

@@ -12,6 +12,7 @@ export const ADMIN_NAV = [
   { href: '#/admin/miembros', icon: 'users', label: 'Miembros', match: /^\/admin\/miembros/ },
   { href: '#/admin/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/admin\/comunidad/ },
   { href: '#/admin/avisos', icon: 'megaphone', label: 'Avisos', match: /^\/admin\/avisos/ },
+  { href: '#/admin/encuestas', icon: 'clipboard-list', label: 'Encuestas', match: /^\/admin\/encuestas/ },
   { group: 'Sistema' },
   { href: '#/admin/ajustes', icon: 'sliders-horizontal', label: 'Ajustes', match: /^\/admin\/ajustes/ },
 ] as const;
