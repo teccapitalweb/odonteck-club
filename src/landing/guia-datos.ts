@@ -5,9 +5,9 @@ export const marcaGuia = {
   nombre: 'OdonTeck',
   asistente: 'Alexia',
   whatsapp: '5212381479365',
-  saludo: '/asistente/odonteck-guia-saludo-v03.png',
-  orientar: '/asistente/odonteck-guia-orientar-v03.png',
-  celebrar: '/asistente/odonteck-guia-celebrar-v03.png',
+  saludo: '/asistente/odonteck-guia-saludo-v04.png',
+  orientar: '/asistente/odonteck-guia-orientar-v04.png',
+  celebrar: '/asistente/odonteck-guia-celebrar-v04.png',
 };
 
 export interface CursoGuia {
