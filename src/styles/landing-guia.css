@@ -15,9 +15,9 @@
   position: fixed;
   right: max(20px, env(safe-area-inset-right));
   bottom: max(18px, env(safe-area-inset-bottom));
-  width: 302px;
-  height: 146px;
-  padding: 0 18px 0 132px;
+  width: 326px;
+  height: 158px;
+  padding: 0 18px 0 148px;
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 32px;
   overflow: visible;
@@ -44,13 +44,13 @@
 .oguia-launcher__copy > span svg { width: 13px; }
 
 .oguia-personaje {
-  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v02.png');
+  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v03.png');
   position: absolute;
   z-index: 3;
-  left: -13px;
+  left: -16px;
   bottom: -4px;
-  width: 155px;
-  height: 196px;
+  width: 176px;
+  height: 222px;
   pointer-events: none;
   background: var(--oguia-imagen) center bottom / contain no-repeat;
   filter: drop-shadow(0 14px 12px rgba(3, 23, 34, .24));
@@ -92,11 +92,11 @@
   filter: drop-shadow(var(--oguia-shadow));
 }
 .oguia-panel > .oguia-personaje--panel {
-  left: 15px;
-  top: -27px;
+  left: 8px;
+  top: -36px;
   bottom: auto;
-  width: 151px;
-  height: 193px;
+  width: 166px;
+  height: 212px;
   z-index: 4;
 }
 .oguia-superficie {
@@ -111,7 +111,7 @@
 }
 .oguia-header {
   min-height: 80px;
-  padding: 16px 14px 12px 154px;
+  padding: 16px 14px 12px 166px;
   display: grid;
   grid-template-columns: minmax(92px, 1fr) 38px 38px 38px;
   align-items: center;
@@ -175,21 +175,21 @@ body.oguia-scroll-lock { position: fixed; width: 100%; }
 [hidden] { display: none !important; }
 
 @media (max-width: 600px) {
-  .oguia-launcher { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: 255px; height: 126px; padding-left: 116px; border-radius: 27px; }
-  .oguia-launcher .oguia-personaje { width: 137px; height: 172px; left: -9px; }
+  .oguia-launcher { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: 270px; height: 136px; padding-left: 127px; border-radius: 27px; }
+  .oguia-launcher .oguia-personaje { width: 151px; height: 190px; left: -11px; }
   .oguia-launcher__copy strong { font-size: 17px; }
   .oguia-saludo { right: 12px; bottom: 148px; }
   .oguia-backdrop { background: rgba(4, 25, 38, .48); }
   .oguia-panel { inset: var(--oguia-top, 8px) 8px auto; width: auto; height: calc(var(--oguia-alto, 100dvh) - 16px); max-height: none; padding-top: 66px; border-radius: 24px; }
-  .oguia-panel > .oguia-personaje--panel { width: 127px; height: 163px; left: 4px; top: -2px; }
+  .oguia-panel > .oguia-personaje--panel { width: 112px; height: 142px; left: 4px; top: 0; }
   .oguia-superficie { border-radius: 23px; }
-  .oguia-header { min-height: 75px; padding: 13px 10px 10px 125px; grid-template-columns: minmax(76px,1fr) 36px 36px 36px; gap: 3px; }
+  .oguia-header { min-height: 75px; padding: 13px 10px 10px 112px; grid-template-columns: minmax(92px,1fr) 36px 36px 36px; gap: 3px; }
   .oguia-icono { width: 36px; height: 36px; }
   .oguia-mensajes { padding: 16px 13px 10px; }
   .oguia-burbuja { max-width: 94%; }
   .oguia-compositor { padding-bottom: max(9px, env(safe-area-inset-bottom)); }
   .oguia-panel.compacta { padding-top: 45px; }
-  .oguia-panel.compacta > .oguia-personaje--panel { width: 104px; height: 132px; top: -2px; }
+  .oguia-panel.compacta > .oguia-personaje--panel { width: 103px; height: 130px; top: 0; }
   .oguia-panel.compacta .oguia-header { min-height: 63px; padding-left: 103px; }
   .oguia-panel.compacta .oguia-aviso { padding-block: 6px; }
 }

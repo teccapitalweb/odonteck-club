@@ -2,11 +2,11 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 3 de octubre de 2026 (guía virtual Alexia integrada en la landing; pendiente despliegue y smoke autenticado)
+- **Actualizado:** 3 de octubre de 2026 (dirección artística editorial de Alexia v03 integrada; pendiente despliegue y smoke autenticado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
-- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía tiene 17 pruebas unitarias propias y fue recorrida en demo en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v02; la versión masculina v01 queda sólo como respaldo versionado. La bienvenida y la edición de intereses también se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía tiene 17 pruebas unitarias propias y fue recorrida en demo en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v03, con proporciones adultas y acabado editorial semirrealista; v01 y v02 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
