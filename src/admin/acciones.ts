@@ -2,8 +2,9 @@
 import { Datos, slug, imagenAWebp, type Curso, type Material, type Evento, type Quiz } from '../core/datos';
 import { Comunidad } from '../core/comunidad';
 import { mensajeError } from '../core/auth';
+import { resumenEncuestasDemo } from '../core/encuestas';
 import {
-  borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
+  Admin, borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, publicarAvisoAdmin,
   reordenarCursosAdmin, revocarCortesiaAdmin,
 } from '../core/admin';
@@ -41,6 +42,29 @@ function quizDesdeForm(f: HTMLFormElement): Quiz {
   }
   const previo = Datos.quiz(f.dataset.curso!, Number(f.dataset.n));
   return { id: f.dataset.id!, cursoId: f.dataset.curso!, n: Number(f.dataset.n), estado: previo?.estado || 'borrador', preguntas, actualizado: '' };
+}
+
+// Agregados de encuestas (lo mismo que ve el panel, sin PII) como CSV descargable.
+function exportarEncuestasCsv() {
+  const plan = current().query.get('plan');
+  const r = Datos.modo === 'api' ? Admin.encuestas : resumenEncuestasDemo(plan === 'vip' ? 'vip' : plan === 'gratis' ? 'gratis' : null);
+  if (!r) return;
+  const celda = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const filas: unknown[][] = [['encuesta', 'version', 'pregunta', 'tipo', 'opcion_o_metrica', 'total', 'porcentaje_o_valor']];
+  for (const e of r.encuestas) for (const p of e.preguntas) {
+    if (p.tipo === 'escala') {
+      filas.push([e.titulo, e.version, p.texto, p.tipo, 'promedio', p.total, p.promedio ?? '']);
+      if (p.nps !== undefined) filas.push([e.titulo, e.version, p.texto, p.tipo, 'nps', p.total, p.nps ?? ''], [e.titulo, e.version, p.texto, p.tipo, 'promotores', p.promotores ?? 0, ''], [e.titulo, e.version, p.texto, p.tipo, 'pasivos', p.pasivos ?? 0, ''], [e.titulo, e.version, p.texto, p.tipo, 'detractores', p.detractores ?? 0, '']);
+    } else if (p.tipo === 'texto') for (const c of p.comentarios || []) filas.push([e.titulo, e.version, p.texto, p.tipo, 'comentario', 1, c]);
+    else for (const o of p.opciones || []) filas.push([e.titulo, e.version, p.texto, p.tipo, o.etiqueta, o.total, o.porcentaje]);
+  }
+  for (const per of r.encuestas.find((e) => e.tipo === 'pulso')?.periodos || []) filas.push(['Experiencia por periodo', '', per.periodo, 'periodo', 'nps', per.total, per.nps ?? '']);
+  const csv = '﻿' + filas.map((f) => f.map(celda).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = `odonteck-encuestas${plan ? `-${plan}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 export function instalarAccionesAdmin(toast: Toast) {
@@ -162,6 +186,7 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (oh) { const hilo = Comunidad.todos().find((h) => h.id === oh.dataset.ocultarHilo); try { await moderarHiloAdmin(oh.dataset.ocultarHilo!, !hilo?.oculto); await cargarAdmin(current().path, current().query, true); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     if (el.closest('[data-restablecer-demo]') && confirm('Esto borra todos los cambios hechos en el demo. ¿Continuar?')) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
     if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
+    if (el.closest('[data-exportar-encuestas]')) { exportarEncuestasCsv(); toast('CSV descargado', 'download'); }
   });
 
   document.addEventListener('change', async (e) => {

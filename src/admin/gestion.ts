@@ -3,7 +3,7 @@ import { Datos, type MiembroDemo } from '../core/datos';
 import { Comunidad, hace } from '../core/comunidad';
 import { Progreso } from '../core/progreso';
 import { Admin } from '../core/admin';
-import { resumenEncuestasDemo, type PreguntaResumenEncuesta } from '../core/encuestas';
+import { contactosEncuestasDemo, resumenEncuestasDemo, type PreguntaResumenEncuesta } from '../core/encuestas';
 import { esc, iniciales } from '../ui/partials';
 import { adminHead } from './shell';
 import { vacio, callout } from './contenido';
@@ -200,26 +200,52 @@ export function adminAvisos() {
 }
 
 // ═══ ENCUESTAS ═══
+const colorNps = (nps: number | null | undefined) => nps === null || nps === undefined ? 'var(--text-3)' : nps >= 50 ? 'var(--success)' : nps >= 0 ? 'var(--warning)' : 'var(--danger)';
+const fmtNps = (nps: number | null | undefined) => nps === null || nps === undefined ? '—' : `${nps > 0 ? '+' : ''}${nps}`;
+
 function preguntaEncuesta(p: PreguntaResumenEncuesta) {
-  if (p.tipo === 'escala') return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4><div class="encuesta-dato__promedio"><strong>${p.promedio ?? '—'}</strong><span class="muted">de ${p.max} · ${p.total} respuestas</span></div></div>`;
-  if (p.tipo === 'texto') return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4>${p.comentarios?.length ? p.comentarios.map((c) => `<p class="encuesta-comentario">${esc(c)}</p>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin comentarios todavía.</p>'}</div>`;
-  return `<div class="encuesta-dato"><h4>${esc(p.texto)}</h4>${(p.opciones || []).map((o) => `<div class="encuesta-barra" title="${o.total} respuestas"><span>${esc(o.etiqueta)}</span><span class="encuesta-barra__pista"><i style="width:${Math.min(100, o.porcentaje)}%"></i></span><strong class="mono">${o.porcentaje}%</strong></div>`).join('')}</div>`;
+  const nota = p.condicional ? `<span class="encuesta-dato__nota"><i data-lucide="git-branch" class="i"></i>La vieron ${p.aplicables ?? 0}</span>` : '';
+  if (p.tipo === 'escala' && p.nps !== undefined) {
+    const n = (p.promotores ?? 0) + (p.pasivos ?? 0) + (p.detractores ?? 0);
+    const pct = (x: number) => n ? Math.round((x / n) * 100) : 0;
+    return `<div class="encuesta-dato encuesta-dato--nps"><h4>${esc(p.texto)}${nota}</h4>
+      <div class="encuesta-dato__promedio"><strong style="color:${colorNps(p.nps)}">${fmtNps(p.nps)}</strong><span class="muted">NPS · promedio ${p.promedio ?? '—'} de 10 · ${p.total} respuestas</span></div>
+      <div class="encuesta-nps" title="Promotores (9-10), pasivos (7-8) y detractores (0-6)"><i style="width:${pct(p.promotores ?? 0)}%;background:var(--success)"></i><i style="width:${pct(p.pasivos ?? 0)}%;background:var(--warning)"></i><i style="width:${pct(p.detractores ?? 0)}%;background:var(--danger)"></i></div>
+      <div class="encuesta-nps__leyenda"><span><b style="background:var(--success)"></b>${p.promotores ?? 0} promotores</span><span><b style="background:var(--warning)"></b>${p.pasivos ?? 0} pasivos</span><span><b style="background:var(--danger)"></b>${p.detractores ?? 0} detractores</span></div></div>`;
+  }
+  if (p.tipo === 'escala') return `<div class="encuesta-dato"><h4>${esc(p.texto)}${nota}</h4><div class="encuesta-dato__promedio"><strong>${p.promedio ?? '—'}</strong><span class="muted">de ${p.max} · ${p.total} respuestas</span></div></div>`;
+  if (p.tipo === 'texto') return `<div class="encuesta-dato"><h4>${esc(p.texto)}${nota}</h4>${p.comentarios?.length ? p.comentarios.map((c) => `<p class="encuesta-comentario">${esc(c)}</p>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin comentarios todavía.</p>'}</div>`;
+  return `<div class="encuesta-dato"><h4>${esc(p.texto)}${nota}</h4>${(p.opciones || []).map((o) => `<div class="encuesta-barra" title="${o.total} respuestas"><span>${esc(o.etiqueta)}</span><span class="encuesta-barra__pista"><i style="width:${Math.min(100, o.porcentaje)}%"></i></span><strong class="mono">${o.porcentaje}%</strong></div>`).join('')}</div>`;
 }
 
-export function adminEncuestas() {
-  const r = Datos.modo === 'api' ? Admin.encuestas : resumenEncuestasDemo();
+export function adminEncuestas(_: Record<string, string>, query: URLSearchParams) {
+  const plan = query.get('plan') === 'vip' ? 'vip' : query.get('plan') === 'gratis' ? 'gratis' : null;
+  const r = Datos.modo === 'api' ? Admin.encuestas : resumenEncuestasDemo(plan);
+  const contactos = Datos.modo === 'api' ? Admin.contactosEncuestas : contactosEncuestasDemo();
   if (!r) return vacio('Sin resultados disponibles', 'No se pudo preparar el resumen de encuestas.');
   const porTipo = (tipo: string) => r.encuestas.find((e) => e.tipo === tipo)?.total || 0;
-  const kpi = (icon: string, label: string, valor: number, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
-  return `${adminHead('Encuestas', 'Conoce a la comunidad y mide el valor real de los cursos sin exponer datos personales.')}
-  <div class="card card--pad row" style="align-items:flex-start;flex-wrap:nowrap;background:var(--primary-soft)"><i data-lucide="shield-check" class="i" style="color:var(--primary);flex:0 0 20px"></i><p style="font-size:var(--fs-sm)"><strong>Privacidad por diseño.</strong> Aquí sólo se muestran tendencias agregadas y comentarios sin nombre ni correo. Las encuestas advierten que no se incluyan datos de pacientes.</p></div>
+  const experiencia = r.encuestas.find((e) => e.tipo === 'pulso');
+  const rec = experiencia?.preguntas.find((p) => p.id === 'recomendacion');
+  const prom = (id: string) => experiencia?.preguntas.find((p) => p.id === id)?.promedio ?? null;
+  const kpi = (icon: string, label: string, valor: string | number, nota: string, color = '') => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val" ${color ? `style="color:${color}"` : ''}>${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
+  const filtro = (valor: string | null, etiqueta: string, n: number) => `<a class="chip ${plan === valor ? 'chip--primary' : 'chip--outline'}" href="#/admin/encuestas${valor ? `?plan=${valor}` : ''}" ${plan === valor ? 'aria-current="page"' : ''}>${etiqueta} <span class="mono">${n}</span></a>`;
+  const planes = r.planes ?? { vip: 0, gratis: 0, sinDato: 0 };
+  return `${adminHead('Encuestas', 'Conoce a la comunidad, mide el valor de los cursos y cómo le está funcionando el club a cada quien.', `<button class="btn btn--secondary" data-exportar-encuestas><i data-lucide="download" class="i"></i>Exportar CSV</button>`)}
+  <div class="card card--pad row" style="align-items:flex-start;flex-wrap:nowrap;background:var(--primary-soft)"><i data-lucide="shield-check" class="i" style="color:var(--primary);flex:0 0 20px"></i><p style="font-size:var(--fs-sm)"><strong>Privacidad por diseño.</strong> Aquí sólo se muestran tendencias agregadas y comentarios sin nombre ni correo. El único correo visible es el de quien calificó bajo y pidió expresamente que le escribiéramos.</p></div>
+  <div class="row" style="gap:8px;flex-wrap:wrap;align-items:center"><span class="muted" style="font-size:var(--fs-sm)">Ver respuestas de:</span>${filtro(null, 'Todos', planes.vip + planes.gratis + planes.sinDato)}${filtro('vip', 'Miembros VIP', planes.vip)}${filtro('gratis', 'Cuentas gratis', planes.gratis)}</div>
   <div class="kpis encuestas-kpis">
-    ${kpi('messages-square', 'Respuestas totales', r.totalRespuestas, 'todas las encuestas')}
-    ${kpi('user-round-search', 'Entrevista inicial', porTipo('bienvenida'), 'perfil de la comunidad')}
+    ${kpi('messages-square', 'Respuestas', r.totalRespuestas, plan ? `sólo ${plan === 'vip' ? 'VIP' : 'gratis'}` : 'todas las encuestas')}
+    ${kpi('user-round-search', 'Entrevista inicial', porTipo('bienvenida'), 'quién es y qué le gusta')}
     ${kpi('graduation-cap', 'Fin de curso', porTipo('curso'), 'calidad y recomendación')}
-    ${kpi('activity', 'Pulso de 21 días', porTipo('pulso'), 'uso, fricción y satisfacción')}
+    ${kpi('activity', 'Experiencia en el club', porTipo('pulso'), 'uso, facilidad y qué falta')}
+    ${kpi('thumbs-up', 'NPS del club', fmtNps(rec?.nps), rec?.total ? `${rec.promotores} promotores · ${rec.detractores} detractores` : 'sin respuestas de experiencia', colorNps(rec?.nps))}
+    ${kpi('compass', 'Facilidad de uso', prom('facilidad') ?? '—', 'de 5 estrellas')}
+    ${kpi('sparkles', 'Calidad percibida', prom('calidad') ?? '—', 'de 5 estrellas')}
+    ${kpi('mail', 'Quieren que les escribamos', contactos.length, 'calificaron bajo y dieron permiso')}
   </div>
-  ${r.totalRespuestas ? `<div class="stack" style="gap:18px">${r.encuestas.filter((e) => e.total > 0).map((e) => `<section class="card card--pad encuesta-resumen"><div class="encuesta-resumen__head"><div><span class="eyebrow">${esc(e.tipo === 'bienvenida' ? 'Primer ingreso' : e.tipo === 'curso' ? 'Curso completado' : 'Seguimiento')}</span><h3 class="admin-card-title" style="margin-top:4px">${esc(e.titulo)}</h3></div><span class="chip chip--primary">${e.total} respuestas</span></div><div class="encuesta-resumen__preguntas">${e.preguntas.map(preguntaEncuesta).join('')}</div></section>`).join('')}</div>` : vacio('Aún no hay respuestas', 'Los resultados aparecerán aquí cuando los miembros contesten. En modo demo, entra como miembro y completa la entrevista para probar el flujo.')}
+  ${experiencia?.periodos?.length ? `<section class="card dtable-wrap"><div class="card--pad" style="padding-bottom:0"><span class="eyebrow">Tendencia por trimestre</span><h3 class="admin-card-title" style="margin-top:4px">Experiencia en el club, periodo a periodo</h3></div><table class="dtable"><thead><tr><th>Periodo</th><th>Respuestas</th><th>NPS</th><th>Facilidad</th><th>Calidad</th></tr></thead><tbody>${experiencia.periodos.map((p) => `<tr><td><strong class="mono">${esc(p.periodo)}</strong></td><td class="mono">${p.total}</td><td><strong style="color:${colorNps(p.nps)}">${fmtNps(p.nps)}</strong></td><td>${p.facilidad ?? '—'} / 5</td><td>${p.calidad ?? '—'} / 5</td></tr>`).join('')}</tbody></table></section>` : ''}
+  ${contactos.length ? `<section class="card dtable-wrap"><div class="card--pad" style="padding-bottom:0"><span class="eyebrow">Con su permiso</span><h3 class="admin-card-title" style="margin-top:4px">Miembros que pidieron que les escribamos</h3><p class="muted" style="font-size:var(--fs-sm);margin-top:4px">Calificaron 6 o menos y aceptaron que los contactemos para entender qué mejorar.</p></div><table class="dtable"><thead><tr><th>Correo</th><th>Plan</th><th>Calificación</th><th>Motivo</th><th>Fecha</th></tr></thead><tbody>${contactos.map((c) => `<tr><td><a href="mailto:${esc(c.correo)}">${esc(c.correo)}</a></td><td>${c.vip === true ? 'VIP' : c.vip === false ? 'Gratis' : '—'}</td><td class="mono">${c.recomendacion ?? '—'} / 10</td><td>${esc(c.motivo || c.mejora || '—')}</td><td class="mono">${esc(c.enviado.slice(0, 10))}</td></tr>`).join('')}</tbody></table></section>` : ''}
+  ${r.totalRespuestas ? `<div class="stack" style="gap:18px">${r.encuestas.filter((e) => e.total > 0).map((e) => `<section class="card card--pad encuesta-resumen"><div class="encuesta-resumen__head"><div><span class="eyebrow">${esc(e.tipo === 'bienvenida' ? 'Primer ingreso · quién es y qué le gusta' : e.tipo === 'curso' ? 'Curso completado' : 'Experiencia en la plataforma')}</span><h3 class="admin-card-title" style="margin-top:4px">${esc(e.titulo)}</h3></div><span class="chip chip--primary">${e.total} respuestas</span></div><div class="encuesta-resumen__preguntas">${e.preguntas.map(preguntaEncuesta).join('')}</div></section>`).join('')}</div>` : vacio('Aún no hay respuestas', plan ? 'No hay respuestas de este tipo de miembro todavía.' : 'Los resultados aparecerán aquí cuando los miembros contesten. En modo demo, entra como miembro y completa la entrevista para probar el flujo.')}
   ${r.cursos.length ? `<section class="card dtable-wrap"><table class="dtable"><thead><tr><th>Curso</th><th>Respuestas</th><th>Utilidad</th><th>Recomendación</th></tr></thead><tbody>${r.cursos.map((c) => `<tr><td><strong>${esc(c.titulo)}</strong></td><td class="mono">${c.total}</td><td>${c.utilidad ?? '—'} / 5</td><td>${c.recomendacion ?? '—'} / 10</td></tr>`).join('')}</tbody></table></section>` : ''}`;
 }
 

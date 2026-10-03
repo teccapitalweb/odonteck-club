@@ -35,7 +35,7 @@ describe('admin: autorización', () => {
   test('encuestas: entrega agregados útiles sin UID ni correo', async () => {
     env.db.docs.set('v2_encuestas_respuestas/u1__bienvenida-v2', {
       uid: 'u1', clave: 'bienvenida-v2', encuestaId: 'bienvenida', version: 2, tipo: 'bienvenida',
-      respuestas: { situacion: 'estudiante', como_conocio: 'instagram', objetivo: 'practica', intereses: ['ortodoncia'], experiencia: 'aun_estudio', formato: ['video'], reto: 'tiempo' }, enviado: '2026-09-15T00:00:00Z',
+      respuestas: { situacion: 'estudiante', como_conocio: 'instagram', objetivo: 'practica', intereses: ['ortodoncia'], experiencia: 'sin_pacientes', formato: ['video'], reto: 'tiempo' }, enviado: '2026-09-15T00:00:00Z',
     });
     env.db.docs.set('v2_encuestas_respuestas/u2__curso-final-v1--curso-a', {
       uid: 'u2', clave: 'curso-final-v1--curso-a', encuestaId: 'curso-final', version: 1, tipo: 'curso', cursoId: 'curso-a', cursoTitulo: 'Endodoncia práctica',
@@ -49,6 +49,42 @@ describe('admin: autorización', () => {
     assert.equal(JSON.stringify(r.body).includes('u1'), false);
     assert.equal(JSON.stringify(r.body).includes('"uid":'), false);
     assert.equal(JSON.stringify(r.body).includes('@'), false);
+  });
+
+  test('encuestas de experiencia: NPS, bases condicionales, segmentación por plan, periodos y contactos con permiso', async () => {
+    const exp = (uid, periodo, vip, respuestas, extra = {}) => env.db.docs.set(`v2_encuestas_respuestas/${uid}__experiencia-v2--${periodo}`, {
+      uid, clave: `experiencia-v2--${periodo}`, encuestaId: 'experiencia', version: 2, tipo: 'pulso', vip, respuestas, enviado: `2026-0${periodo === '2026T2' ? '6' : '9'}-10T00:00:00Z`, ...extra,
+    });
+    const base = { uso: 'semanal', dispositivo: 'celular', facilidad: 4, tecnico: 'ninguno', calidad: 5, duracion: 'adecuada', nivel: 'adecuado', valor: ['cursos'], sin_usar: ['comunidad'], falta: ['casos'] };
+    exp('p1', '2026T3', true, { ...base, recomendacion: 10, renovar: 'si' });
+    exp('p2', '2026T3', true, { ...base, recomendacion: 9, renovar: 'si' });
+    exp('d1', '2026T3', false, { ...base, tecnico: 'video', tecnico_detalle: 'Safari', recomendacion: 3, motivo: 'Pocos cursos', vip_que: 'precio', contacto: 'si' }, { correoContacto: 'carla@example.com' });
+    exp('n1', '2026T3', false, { ...base, recomendacion: 7, vip_que: 'mas_cursos', contacto: 'no' });
+    exp('viejo', '2026T2', true, { ...base, recomendacion: 2, renovar: 'no', contacto: 'no' });
+
+    const todos = await admin('get', '/admin/encuestas/resumen').expect(200);
+    const pulso = todos.body.encuestas.find((x) => x.id === 'experiencia');
+    assert.equal(pulso.total, 5);
+    const rec = pulso.preguntas.find((p) => p.id === 'recomendacion');
+    // 2 promotores, 1 pasivo, 2 detractores de 5 → NPS 0.
+    assert.deepEqual({ nps: rec.nps, promotores: rec.promotores, pasivos: rec.pasivos, detractores: rec.detractores }, { nps: 0, promotores: 2, pasivos: 1, detractores: 2 });
+    // "renovar" sólo aplica a VIP (3 docs); "contacto" sólo a quien calificó 0-6 (2 docs).
+    assert.equal(pulso.preguntas.find((p) => p.id === 'renovar').aplicables, 3);
+    assert.equal(pulso.preguntas.find((p) => p.id === 'contacto').aplicables, 2);
+    assert.equal(pulso.preguntas.find((p) => p.id === 'tecnico_detalle').comentarios[0], 'Safari');
+    assert.deepEqual(pulso.periodos.map((p) => [p.periodo, p.total, p.nps]), [['2026T3', 4, 25], ['2026T2', 1, -100]]);
+    assert.deepEqual(todos.body.planes, { vip: 3, gratis: 2, sinDato: 0 });
+    assert.equal(JSON.stringify(todos.body).includes('@'), false, 'el resumen nunca trae correos');
+
+    const vip = await admin('get', '/admin/encuestas/resumen?plan=vip').expect(200);
+    assert.equal(vip.body.plan, 'vip');
+    assert.equal(vip.body.encuestas.find((x) => x.id === 'experiencia').total, 3);
+    const gratis = await admin('get', '/admin/encuestas/resumen?plan=gratis').expect(200);
+    assert.equal(gratis.body.encuestas.find((x) => x.id === 'experiencia').preguntas.find((p) => p.id === 'recomendacion').nps, -50);
+
+    const contactos = await admin('get', '/admin/encuestas/contactos').expect(200);
+    assert.deepEqual(contactos.body.map((c) => [c.correo, c.recomendacion, c.motivo]), [['carla@example.com', 3, 'Pocos cursos']]);
+    await request(env.app).get('/admin/encuestas/contactos').set(bearer(TOKENS.vip)).expect(403);
   });
 });
 

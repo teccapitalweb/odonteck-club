@@ -111,7 +111,7 @@ describe('encuestas de miembro', () => {
     como_conocio: 'instagram',
     objetivo: 'practica',
     intereses: ['diagnostico', 'ortodoncia'],
-    experiencia: 'aun_estudio',
+    experiencia: 'sin_pacientes',
     formato: ['video', 'casos'],
     reto: 'tiempo',
   };
@@ -130,6 +130,9 @@ describe('encuestas de miembro', () => {
     assert.deepEqual(env.db.leer('miembros/free1'), antes);
     const despues = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
     assert.equal(despues.body.pendientes.some((x) => x.clave === 'bienvenida-v2'), false);
+    // El perfil de la entrevista vuelve al cliente para personalizar el club, sin nada identificable.
+    assert.deepEqual(despues.body.perfil, { intereses: ['diagnostico', 'ortodoncia'], objetivo: 'practica', formato: ['video', 'casos'], situacion: 'estudiante', reto: 'tiempo' });
+    assert.equal(pendientes.body.perfil, null);
     await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(409);
   });
 
@@ -155,13 +158,77 @@ describe('encuestas de miembro', () => {
     assert.equal(despues.body.pendientes.some((x) => x.clave === curso.clave), false);
   });
 
-  test('el pulso aparece después de 21 días de uso del club', async () => {
-    await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
-    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(201);
-    const estado = env.db.leer('v2_encuestas_estado/free1');
-    env.db.docs.set('v2_encuestas_estado/free1', { ...estado, primeraVista: '2026-08-20T12:00:00.000Z' });
+  // El reloj de pruebas está en 2026-09-17: la clave del trimestre es experiencia-v2--2026T3.
+  const EXPERIENCIA = 'experiencia-v2--2026T3';
+  const experiencia = {
+    uso: 'semanal', dispositivo: 'celular', facilidad: 4, tecnico: 'ninguno', calidad: 5, duracion: 'adecuada', nivel: 'adecuado',
+    valor: ['cursos', 'quizzes'], sin_usar: ['comunidad'], falta: ['casos'], recomendacion: 9, mejora: 'Más casos.',
+  };
+  const prepararExperiencia = async (token, uid, primeraVista = '2026-08-20T12:00:00.000Z') => {
+    await request(env.app).get('/encuestas/pendientes').set(bearer(token)).expect(200);
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(token)).send({ respuestas: bienvenida }).expect(201);
+    env.db.docs.set(`v2_encuestas_estado/${uid}`, { ...env.db.leer(`v2_encuestas_estado/${uid}`), primeraVista });
+  };
+
+  test('experiencia: aparece a los 21 días, aplica condicionales por plan y guarda el plan sin correo', async () => {
+    await prepararExperiencia(TOKENS.free, 'free1');
     const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
-    assert.equal(pendientes.body.pendientes[0].clave, 'pulso-21-dias-v1');
+    assert.equal(pendientes.body.pendientes[0].clave, EXPERIENCIA);
+    assert.equal(pendientes.body.vip, false);
+    assert.deepEqual(pendientes.body.respondidas, ['bienvenida-v2']);
+    // Hasta 2 en "qué falta"; un promotor no debe contestar motivo ni contacto; una cuenta gratis no ve "renovar".
+    await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.free)).send({ respuestas: { ...experiencia, falta: ['casos', 'app', 'descargas'] } }).expect(400);
+    await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.free)).send({ respuestas: { ...experiencia, vip_que: 'precio', renovar: 'si', motivo: 'x', contacto: 'si' } }).expect(201);
+    const doc = env.db.leer(`v2_encuestas_respuestas/free1__${EXPERIENCIA}`);
+    assert.deepEqual(doc.respuestas, { ...experiencia, vip_que: 'precio' });
+    assert.equal(doc.vip, false);
+    assert.equal(doc.correoContacto, undefined);
+  });
+
+  test('experiencia: un detractor VIP contesta motivo y contacto; el correo sólo se guarda con permiso', async () => {
+    await prepararExperiencia(TOKENS.vip, 'vip1');
+    const detractor = { ...experiencia, tecnico: 'video', tecnico_detalle: 'No carga en Safari', recomendacion: 4, motivo: 'Faltan cursos de mi área', renovar: 'no_se', contacto: 'si' };
+    await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.vip)).send({ respuestas: { ...detractor, contacto: undefined } }).expect(400); // contacto es obligatorio para quien califica bajo
+    await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.vip)).send({ respuestas: detractor }).expect(201);
+    const doc = env.db.leer(`v2_encuestas_respuestas/vip1__${EXPERIENCIA}`);
+    assert.equal(doc.vip, true);
+    assert.equal(doc.correoContacto, 'ana@example.com');
+    assert.equal(doc.respuestas.renovar, 'no_se');
+    assert.equal(doc.respuestas.vip_que, undefined);
+    assert.equal(doc.respuestas.tecnico_detalle, 'No carga en Safari');
+    const despues = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(despues.body.pendientes.some((x) => x.clave === EXPERIENCIA), false);
+  });
+
+  test('experiencia: se adelanta al día 7 con 8 clases, nunca antes, y se repite hasta pasados 90 días', async () => {
+    await prepararExperiencia(TOKENS.vip, 'vip1', '2026-09-14T12:00:00.000Z');
+    const estado = env.db.leer('v2_encuestas_estado/vip1');
+    env.db.docs.set('v2_progreso/vip1_curso-x', { uid: 'vip1', cursoId: 'curso-x', vistas: [1, 2, 3, 4, 5, 6, 7, 8], historial: [] });
+    let pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === EXPERIENCIA), false, 'con 3 días no aparece aunque haya avanzado');
+    env.db.docs.set('v2_encuestas_estado/vip1', { ...estado, primeraVista: '2026-09-09T12:00:00.000Z' });
+    pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === EXPERIENCIA), true, 'con 8 días y 8 clases sí aparece');
+    // Respondió el trimestre pasado hace 40 días: todavía no se repite; hace 100 días: sí.
+    env.db.docs.set('v2_encuestas_respuestas/vip1__experiencia-v2--2026T2', { uid: 'vip1', clave: 'experiencia-v2--2026T2', encuestaId: 'experiencia', version: 2, tipo: 'pulso', vip: true, respuestas: { recomendacion: 8 }, enviado: '2026-08-08T12:00:00.000Z' });
+    pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === EXPERIENCIA), false, 'respondida hace 40 días: aún no');
+    env.db.docs.set('v2_encuestas_respuestas/vip1__experiencia-v2--2026T2', { ...env.db.leer('v2_encuestas_respuestas/vip1__experiencia-v2--2026T2'), enviado: '2026-06-09T12:00:00.000Z' });
+    pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === EXPERIENCIA), true, 'respondida hace 100 días: vuelve a salir');
+  });
+
+  test('experiencia: tras dos aplazamientos deja de insistir en el trimestre', async () => {
+    await prepararExperiencia(TOKENS.free, 'free1');
+    for (let i = 0; i < 2; i++) {
+      const r = await request(env.app).post(`/encuestas/${EXPERIENCIA}/posponer`).set(bearer(TOKENS.free)).send({}).expect(200);
+      assert.equal(r.body.dias, 14);
+      const estado = env.db.leer('v2_encuestas_estado/free1');
+      env.db.docs.set('v2_encuestas_estado/free1', { ...estado, pospuestas: { ...estado.pospuestas, [EXPERIENCIA]: { ...estado.pospuestas[EXPERIENCIA], hasta: '2026-09-01T00:00:00.000Z' } } });
+    }
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.clave === EXPERIENCIA), false, 'aplazada dos veces: ya no insiste');
+    await request(env.app).post(`/encuestas/${EXPERIENCIA}/posponer`).set(bearer(TOKENS.free)).send({}).expect(409);
   });
 });
 

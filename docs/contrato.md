@@ -91,12 +91,16 @@ Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 ### `v2_encuestas_estado/{uid}`
 `{ uid, primeraVista, ultimaConsulta, pospuestas: { [clave]: { hasta, veces } }, actualizado? }`
 
-Sirve para programar recordatorios sin bloquear el acceso. La entrevista inicial se puede posponer 3 días, la evaluación de curso 7 y el pulso de uso 14.
+Sirve para programar recordatorios sin bloquear el acceso. La entrevista inicial se puede posponer 3 días, la evaluación de curso 7 y la de experiencia en la plataforma 14 (máximo 2 veces por trimestre; después deja de insistir).
+
+La encuesta de experiencia (`experiencia-v2--<AAAA>T<n>`, una clave por trimestre) sale a los 21 días de la primera visita, o desde el día 7 si ya vio 8 clases, y se repite cuando pasan 90 días desde la última respuesta. Sus preguntas pueden llevar `mostrarSi` (`{ pregunta, valores | hasta }` o `{ vip }`): la API ignora respuestas a preguntas que no aplican y sólo exige las que sí.
 
 ### `v2_encuestas_respuestas/{uid}__{clave}`
-`{ uid, clave, encuestaId, version, tipo, cursoId?, cursoTitulo?, respuestas, enviado, avisoPrivacidad }`
+`{ uid, clave, encuestaId, version, tipo, cursoId?, cursoTitulo?, vip, respuestas, enviado, avisoPrivacidad, correoContacto? }`
 
-Las plantillas son versionadas en código para conservar preguntas comparables. La entrevista inicial vigente es `bienvenida-v2` (siete preguntas: `situacion`, `experiencia`, `como_conocio`, `objetivo`, `intereses` (hasta 3), `formato` (hasta 2) y `reto`); el cliente la presenta como página propia en `#/bienvenida`. Cambiar preguntas u opciones exige subir la versión en `api/src/lib/encuestas.js` y en su espejo demo `src/core/encuestas.ts`. El cliente nunca envía el UID. El panel administrativo sólo recibe agregados y comentarios sin UID, nombre ni correo.
+`vip` es el plan al responder (para segmentar agregados). `correoContacto` sólo existe si la persona calificó bajo en la encuesta de experiencia y eligió "Sí, escríbanme"; es el único dato con identidad que ve el admin.
+
+Las plantillas son versionadas en código para conservar preguntas comparables. La entrevista inicial vigente es `bienvenida-v2` (siete preguntas: `situacion`, `experiencia`, `como_conocio`, `objetivo`, `intereses` (hasta 3), `formato` (hasta 2) y `reto`); el cliente la presenta como página propia en `#/bienvenida`. Cambiar preguntas u opciones exige subir la versión en `api/src/lib/encuestas.js` y en su espejo demo `src/core/encuestas.ts` (la v2 se ajustó en sitio el 2 de octubre de 2026 porque aún no se había desplegado ni recibido respuestas reales). El cliente nunca envía el UID. El panel administrativo sólo recibe agregados y comentarios sin UID, nombre ni correo.
 
 ### `v2_config/general`
 `{ precios: { mensual: 199, anual: 1899 }, descuentoVIP: 20, whatsappSoporte, canalWhatsApp, praxiaUrl, stripePriceMensual, stripePriceAnual }`
@@ -128,7 +132,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/foro/:id/respuestas` | `{ texto }` → Respuesta |
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
-| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y pulso a 21 días |
+| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: intereses, objetivo, formato, situacion, reto) |
 | POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada |
 | POST | `/encuestas/:clave/posponer` | → difiere el recordatorio sin bloquear al miembro |
 | POST | `/stripe/checkout` | `{ plan: 'mensual'|'anual' }` → `{ url }` |
@@ -153,7 +157,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/admin/quizzes?estado=` | Lista |
 | PATCH | `/admin/quizzes/:id` | `{ preguntas?, estado? }` |
 | GET · POST | `/admin/avisos` | Lista · publicar |
-| GET | `/admin/encuestas/resumen` | Totales, distribuciones, promedios y comentarios anónimos; nunca UID ni correo |
+| GET | `/admin/encuestas/resumen?plan=vip|gratis` | Totales, distribuciones, promedios, NPS (0-10), bases de preguntas condicionales, `planes` y `periodos` por trimestre; nunca UID ni correo |
+| GET | `/admin/encuestas/contactos` | Correos de quienes calificaron 0-6 y pidieron que se les escriba (con su calificación y motivo) |
 | GET · PATCH | `/admin/config` | Configuración general |
 
 ## Variables de entorno (backend)

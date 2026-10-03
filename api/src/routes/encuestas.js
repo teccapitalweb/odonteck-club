@@ -1,5 +1,5 @@
 import express from 'express';
-import { COL, leerDoc } from '../datos.js';
+import { COL, estadoMembresia } from '../datos.js';
 import { DIA_MS, aMillis } from '../lib/fechas.js';
 import {
   ENCUESTAS,
@@ -7,6 +7,7 @@ import {
   claveCurso,
   clavePulso,
   encuestaPublica,
+  experienciaDisponible,
   plantillaPorClave,
   validarRespuestas,
 } from '../lib/encuestas.js';
@@ -44,14 +45,18 @@ const estaPospuesta = (estado, clave, ahoraMs) => {
 };
 
 async function calcularPendientes(ctx, usuario) {
-  if (usuario.esAdmin) return [];
+  if (usuario.esAdmin) return { pendientes: [], respondidas: [], vip: false, perfil: null };
   const estado = await estadoEncuestas(ctx, usuario.uid);
-  const [respuestasSnap, progresoSnap, cursosSnap] = await Promise.all([
+  const [respuestasSnap, progresoSnap, cursosSnap, membresia] = await Promise.all([
     ctx.db.collection(COL.encuestasRespuestas).where('uid', '==', usuario.uid).get(),
     ctx.db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
     ctx.db.collection(COL.cursos).get(),
+    estadoMembresia(ctx, usuario),
   ]);
   const respondidas = new Set(respuestasSnap.docs.map((d) => d.data().clave));
+  // Perfil de la entrevista inicial (sin PII) para personalizar el club: intereses, objetivo, formato, etapa y reto.
+  const docBienvenida = respuestasSnap.docs.map((d) => d.data()).filter((r) => r.encuestaId === ENCUESTAS.bienvenida.id).sort((a, b) => String(b.enviado).localeCompare(String(a.enviado)))[0];
+  const perfil = docBienvenida ? Object.fromEntries(['intereses', 'objetivo', 'formato', 'situacion', 'reto'].filter((k) => docBienvenida.respuestas?.[k] !== undefined).map((k) => [k, docBienvenida.respuestas[k]])) : null;
   const titulos = new Map(cursosSnap.docs.map((d) => [d.id, d.data().titulo || d.id]));
   const ahoraMs = ctx.now().getTime();
   const salida = [];
@@ -71,12 +76,21 @@ async function calcularPendientes(ctx, usuario) {
     salida.push({ ...encuestaPublica(ENCUESTAS.curso, { clave, cursoId: p.cursoId, cursoTitulo: titulos.get(p.cursoId) ?? p.cursoId }), prioridad: ENCUESTAS.curso.prioridad, disponibleDesde: p.actualizado ?? null });
   }
 
-  const pulso = clavePulso();
+  // Experiencia: una clave por trimestre; se repite cada 90 días y calla tras `maxPosponer` aplazamientos.
+  const pulso = clavePulso(ahoraMs);
   const primeraVista = aMillis(estado.primeraVista);
-  if (primeraVista !== null && !Number.isNaN(primeraVista) && ahoraMs - primeraVista >= ENCUESTAS.pulso.dias * DIA_MS && !respondidas.has(pulso) && !estaPospuesta(estado, pulso, ahoraMs)) {
-    salida.push({ ...encuestaPublica(ENCUESTAS.pulso, { clave: pulso }), prioridad: ENCUESTAS.pulso.prioridad, disponibleDesde: new Date(primeraVista + ENCUESTAS.pulso.dias * DIA_MS).toISOString() });
+  const clasesVistas = progresoSnap.docs.reduce((n, d) => n + (Array.isArray(d.data().vistas) ? d.data().vistas.length : 0), 0);
+  const ultimaExperiencia = respuestasSnap.docs.map((d) => d.data()).filter((r) => r.encuestaId === ENCUESTAS.pulso.id).map((r) => aMillis(r.enviado) ?? 0).reduce((a, b) => Math.max(a, b), 0) || null;
+  const silenciada = Number(estado?.pospuestas?.[pulso]?.veces ?? 0) >= ENCUESTAS.pulso.maxPosponer;
+  if (experienciaDisponible(primeraVista, clasesVistas, ahoraMs, ultimaExperiencia) && !respondidas.has(pulso) && !silenciada && !estaPospuesta(estado, pulso, ahoraMs)) {
+    salida.push({ ...encuestaPublica(ENCUESTAS.pulso, { clave: pulso }), prioridad: ENCUESTAS.pulso.prioridad, disponibleDesde: new Date(primeraVista + ENCUESTAS.pulso.diasMinimos * DIA_MS).toISOString() });
   }
-  return salida.sort((a, b) => b.prioridad - a.prioridad || String(b.disponibleDesde ?? '').localeCompare(String(a.disponibleDesde ?? '')));
+  return {
+    pendientes: salida.sort((a, b) => b.prioridad - a.prioridad || String(b.disponibleDesde ?? '').localeCompare(String(a.disponibleDesde ?? ''))),
+    respondidas: [...respondidas],
+    vip: membresia.esVip === true,
+    perfil,
+  };
 }
 
 export function rutasEncuestas(ctx) {
@@ -84,17 +98,17 @@ export function rutasEncuestas(ctx) {
   const auth = requireAuth(ctx);
 
   r.get('/encuestas/pendientes', auth, h(async (req, res) => {
-    res.json({ pendientes: await calcularPendientes(ctx, req.usuario) });
+    res.json(await calcularPendientes(ctx, req.usuario));
   }));
 
   r.post('/encuestas/:clave/responder', auth, h(async (req, res) => {
     const clave = claveValida(req.params.clave);
     const plantilla = plantillaPorClave(clave);
     if (!plantilla) throw invalido('Esa encuesta no existe o ya cambió de versión.');
-    const pendientes = await calcularPendientes(ctx, req.usuario);
+    const { pendientes, vip } = await calcularPendientes(ctx, req.usuario);
     const encuesta = pendientes.find((p) => p.clave === clave);
     if (!encuesta) throw conflicto('Esta encuesta ya fue respondida o todavía no está disponible.', 'encuesta_no_disponible');
-    const respuestas = validarRespuestas(plantilla, cuerpo(req).respuestas);
+    const respuestas = validarRespuestas(plantilla, cuerpo(req).respuestas, { vip });
     const ref = ctx.db.collection(COL.encuestasRespuestas).doc(idRespuesta(req.usuario.uid, clave));
     const doc = {
       uid: req.usuario.uid,
@@ -104,23 +118,27 @@ export function rutasEncuestas(ctx) {
       tipo: plantilla.tipo,
       cursoId: encuesta.cursoId ?? null,
       cursoTitulo: encuesta.cursoTitulo ?? null,
+      // Plan al responder, para segmentar agregados sin exponer identidad.
+      vip,
       respuestas,
       enviado: ctx.now().toISOString(),
       avisoPrivacidad: '2026-10-02',
     };
+    // El correo sólo se guarda si la persona pidió que le escribamos; es lo único con identidad que ve el admin.
+    if (respuestas.contacto === 'si' && req.usuario.email) doc.correoContacto = req.usuario.email;
     try { await ref.create(doc); }
     catch (e) {
       if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto('Esta encuesta ya fue respondida.', 'encuesta_respondida');
       throw e;
     }
-    res.status(201).json({ ok: true, clave, siguiente: (await calcularPendientes(ctx, req.usuario))[0] ?? null });
+    res.status(201).json({ ok: true, clave, siguiente: (await calcularPendientes(ctx, req.usuario)).pendientes[0] ?? null });
   }));
 
   r.post('/encuestas/:clave/posponer', auth, h(async (req, res) => {
     const clave = claveValida(req.params.clave);
     const plantilla = plantillaPorClave(clave);
     if (!plantilla) throw invalido('Esa encuesta no existe o ya cambió de versión.');
-    const pendientes = await calcularPendientes(ctx, req.usuario);
+    const { pendientes } = await calcularPendientes(ctx, req.usuario);
     if (!pendientes.some((p) => p.clave === clave)) throw conflicto('Esta encuesta ya fue respondida o no está disponible.', 'encuesta_no_disponible');
     if (plantilla.tipo === 'curso' && cuerpo(req).cursoId !== undefined) idDocumento(cuerpo(req).cursoId, 'cursoId');
     const ref = ctx.db.collection(COL.encuestasEstado).doc(req.usuario.uid);

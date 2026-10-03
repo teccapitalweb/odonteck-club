@@ -1,7 +1,7 @@
 import { api, mensajeError } from './auth';
 import { Comunidad } from './comunidad';
 import { Datos, type Aviso, type Config, type Curso, type Evento, type Material, type MiembroDemo, type Quiz } from './datos';
-import type { ResumenEncuestas } from './encuestas';
+import type { ContactoEncuesta, ResumenEncuestas } from './encuestas';
 
 export interface ResumenAdmin {
   miembrosActivos: number;
@@ -27,6 +27,7 @@ interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; 
 const estado = {
   resumen: null as ResumenAdmin | null,
   encuestas: null as ResumenEncuestas | null,
+  contactosEncuestas: [] as ContactoEncuesta[],
   detalleMiembro: null as DetalleMiembroAdmin | null,
   error: '' as string,
 };
@@ -92,6 +93,7 @@ const cargarQuizzes = (forzar = false) => cargar('quizzes', async () => {
 export const Admin = {
   get resumen() { return estado.resumen; },
   get encuestas() { return estado.encuestas; },
+  get contactosEncuestas() { return estado.contactosEncuestas; },
   get detalleMiembro() { return estado.detalleMiembro; },
   get error() { return estado.error; },
   limpiarError() { estado.error = ''; },
@@ -141,7 +143,9 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path === '/admin/avisos') {
       tareas.push(cargar('avisos', async () => { Datos.hidratarAdmin('avisos', await api<Aviso[]>('/admin/avisos')); }, forzar));
     } else if (path === '/admin/encuestas') {
-      tareas.push(cargar('encuestas', async () => { estado.encuestas = await api<ResumenEncuestas>('/admin/encuestas/resumen'); }, forzar));
+      const plan = query.get('plan') === 'vip' || query.get('plan') === 'gratis' ? query.get('plan') : '';
+      tareas.push(cargar(`encuestas:${plan}`, async () => { estado.encuestas = await api<ResumenEncuestas>(`/admin/encuestas/resumen${plan ? `?plan=${plan}` : ''}`); }, true));
+      tareas.push(cargar('encuestas:contactos', async () => { estado.contactosEncuestas = await api<ContactoEncuesta[]>('/admin/encuestas/contactos'); }, forzar));
     } else if (path === '/admin/ajustes') {
       tareas.push(cargar('config', async () => { Datos.hidratarAdmin('config', adaptarConfig(await api('/admin/config'))); }, forzar));
     }

@@ -2,11 +2,12 @@
 import { cursos } from './catalogo';
 import { Progreso } from './progreso';
 import { Comunidad } from './comunidad';
+import { encuestaRespondida } from './encuestas';
 
 export interface Logro { id: string; titulo: string; desc: string; icon: string; cat: string; ok: boolean; progreso?: string }
 
 export function puntos() {
-  return Progreso.totalVistas() * 10 + Progreso.completados().length * 50 + Comunidad.misHilos().length * 5;
+  return Progreso.totalVistas() * 10 + Progreso.completados().length * 50 + Comunidad.misHilos().length * 5 + (encuestaRespondida('experiencia') ? 40 : 0);
 }
 
 // Semanas consecutivas (hasta hoy) con al menos una clase vista
@@ -36,6 +37,7 @@ export function logros(): Logro[] {
     { id: 'multidisciplinar', titulo: 'Multidisciplinar', desc: 'Cursos completados en 3 áreas distintas', icon: 'layers', cat: 'Especialización', ok: areas >= 3, progreso: `${Math.min(areas, 3)}/3` },
     { id: 'maestro', titulo: 'Maestro OdonTeck', desc: '10 cursos certificados', icon: 'crown', cat: 'Maestría', ok: completos >= 10, progreso: `${Math.min(completos, 10)}/10` },
     { id: 'voz', titulo: 'Voz de la comunidad', desc: 'Abre tu primer tema en Comunidad', icon: 'message-circle', cat: 'Comunidad', ok: hilos >= 1, progreso: `${Math.min(hilos, 1)}/1` },
+    { id: 'voz-del-club', titulo: 'Voz del club', desc: 'Respondiste la encuesta de experiencia (+40 XP)', icon: 'megaphone', cat: 'Comunidad', ok: encuestaRespondida('experiencia'), progreso: encuestaRespondida('experiencia') ? '1/1' : '0/1' },
     { id: 'coleccionista', titulo: 'Coleccionista', desc: `Todos los cursos del catálogo (${cursos.length})`, icon: 'library', cat: 'Maestría', ok: completos >= cursos.length, progreso: `${completos}/${cursos.length}` },
   ];
 }

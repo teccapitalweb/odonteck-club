@@ -1,0 +1,115 @@
+/* ═══ Encuestas ligeras (fin de curso y pulso): modal por pasos ═══
+   Reutiliza de bienvenida.css: .bv__progreso, .bv-eti, .bv-q__meta/.bv-q__n, .bv-ayuda,
+   .bv-ops/.bv-op, .bv-q__limite, .bv-fin__sello y los keyframes bv-*. */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.encuesta-modal {
+  position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 22px;
+  background: rgba(13, 18, 32, .62); backdrop-filter: blur(10px); animation: reveal .25s var(--ease) both;
+}
+.encuesta-modal.is-cerrando { animation: enc-fuera .22s ease-in forwards; }
+.enc {
+  --bv-resorte: cubic-bezier(.34, 1.56, .64, 1);
+  display: flex; flex-direction: column; width: min(640px, 100%); max-height: calc(100dvh - 44px);
+  border: 1px solid var(--line); border-radius: var(--r-2xl); background: var(--surface); box-shadow: var(--shadow-lg);
+  animation: enc-entra .45s var(--bv-resorte) both;
+}
+.enc__cab { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 22px 22px 18px 24px; }
+.enc__portada { width: 72px; height: 52px; border-radius: var(--r-md); object-fit: cover; box-shadow: var(--shadow-md); }
+.enc__icono { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; color: #fff; background: var(--brand-gradient); box-shadow: var(--shadow-md); }
+.enc__icono .i { width: 24px; height: 24px; }
+.enc__cab-texto { min-width: 0; }
+.enc__cab h2 { margin-top: 4px; font-size: var(--fs-lg); line-height: 1.2; text-wrap: balance; }
+.enc__cerrar { display: grid; place-items: center; width: 38px; height: 38px; align-self: start; border-radius: var(--r-full); color: var(--text-3); transition: background var(--t-fast), color var(--t-fast); }
+.enc__cerrar:hover { background: var(--surface-2); color: var(--text); }
+.enc__cerrar .i { width: 18px; height: 18px; }
+.enc__avance { display: flex; align-items: center; gap: 14px; padding: 0 24px; }
+.enc__avance .bv__progreso { max-width: none; }
+
+.enc__escena { flex: 1; min-height: 240px; overflow: auto; overscroll-behavior: contain; padding: 22px 24px 8px; }
+.enc__escena.is-sale > * { animation: bv-sale .18s ease-in forwards; }
+.enc-q > :not(.enc-q__cuerpo) { animation: bv-entra .45s var(--ease) backwards; }
+.enc-q > :nth-child(2) { animation-delay: 40ms; }
+.enc-q > :nth-child(3) { animation-delay: 80ms; }
+.enc .bv-q__n { font-size: 2.6rem; }
+.enc-q__t { font-size: clamp(1.3rem, 1rem + 1vw, 1.6rem); text-wrap: balance; }
+.enc-q__t:focus-visible { box-shadow: none; }
+.enc .bv-ayuda { margin-top: 8px; font-size: var(--fs-base); }
+.enc-q__cuerpo { margin-top: 20px; }
+.enc-q__cuerpo.is-aviso { animation: bv-aviso .34s var(--ease); }
+
+/* Estrellas (escalas de 1 a 5) */
+.enc-estrellas { display: flex; gap: 6px; }
+.enc-estrella { position: relative; display: grid; place-items: center; flex: 1; max-width: 64px; aspect-ratio: 1; border-radius: var(--r-md); color: var(--line-strong); cursor: pointer; transition: transform .25s var(--bv-resorte), color var(--t-fast), background var(--t-fast); animation: bv-entra .4s var(--ease) backwards; animation-delay: calc(80ms + var(--i, 0) * 45ms); }
+.enc-estrella input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.enc-estrella svg { width: 34px; height: 34px; fill: transparent; transition: fill var(--t-fast); }
+.enc-estrella:has(input:focus-visible) { box-shadow: var(--ring); }
+/* Se pintan todas hasta la elegida (o hasta la que está bajo el cursor). */
+.enc-estrellas:has(input:checked) .enc-estrella, .enc-estrellas:hover .enc-estrella { color: var(--warning); }
+.enc-estrellas:has(input:checked) .enc-estrella svg, .enc-estrellas:hover .enc-estrella svg { fill: var(--warning); }
+.enc-estrellas:not(:hover) .enc-estrella:has(input:checked) ~ .enc-estrella, .enc-estrella:hover ~ .enc-estrella { color: var(--line-strong); }
+.enc-estrellas:not(:hover) .enc-estrella:has(input:checked) ~ .enc-estrella svg, .enc-estrella:hover ~ .enc-estrella svg { fill: transparent; }
+.enc-estrella:hover { transform: scale(1.12); }
+.enc-estrella:has(input:checked) { animation: bv-pop .45s var(--bv-resorte); }
+.enc-estrellas__sentido { display: flex; justify-content: space-between; min-height: 20px; margin-top: 10px; font-size: var(--fs-sm); font-weight: 600; color: var(--text-2); }
+.enc-estrellas__sentido span { font-weight: 500; color: var(--text-3); }
+
+/* Escala numérica (0 a 10) */
+.enc-nps { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 5px; }
+.enc-nps__n { position: relative; cursor: pointer; animation: bv-entra .4s var(--ease) backwards; animation-delay: calc(60ms + var(--i, 0) * 25ms); }
+.enc-nps__n input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.enc-nps__n span { display: grid; place-items: center; height: 46px; border: 1.5px solid var(--line); border-radius: var(--r-sm); background: var(--surface); font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 700; transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast), transform .25s var(--bv-resorte); }
+.enc-nps__n:hover span { border-color: var(--line-strong); transform: translateY(-2px); }
+.enc-nps__n:has(input:focus-visible) span { box-shadow: var(--ring); }
+.enc-nps__n:has(input:checked) span { border-color: var(--primary); background: var(--primary); color: var(--primary-ink); animation: bv-pop .4s var(--bv-resorte); }
+.enc-nps__extremos { display: flex; justify-content: space-between; margin-top: 8px; font-size: var(--fs-xs); color: var(--text-3); }
+
+/* Opciones: filas simples (sin icono) o chips, con las clases de la bienvenida. */
+.enc .bv-ops { margin-top: 0; }
+.enc .bv-ops--lista { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.bv-op--simple { grid-template-columns: minmax(0, 1fr) auto; min-height: 54px; padding: 8px 14px 8px 16px; }
+.enc .bv-op__ok b { display: none; }
+
+/* Texto libre */
+.enc-texto { width: 100%; min-height: 120px; padding: 12px 14px; resize: vertical; line-height: 1.5; }
+.enc-texto--corto { min-height: 50px; resize: none; }
+.enc-texto__pie { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; font-size: var(--fs-xs); color: var(--text-3); }
+
+/* Cierre */
+.enc-fin { display: grid; justify-items: start; padding: 10px 0 6px; }
+.enc-fin > * { animation: bv-sube .5s var(--ease) backwards; }
+.enc-fin > :nth-child(2) { animation-delay: 120ms; }
+.enc-fin > :nth-child(3) { animation-delay: 220ms; }
+.enc-fin .bv-fin__sello { width: 54px; height: 54px; margin-bottom: 16px; animation: bv-sello .6s var(--bv-resorte) backwards; }
+.enc-fin .bv-fin__sello svg { width: 24px; height: 24px; }
+@media (prefers-reduced-motion: no-preference) {
+  .enc-fin .bv-fin__sello svg path { stroke-dasharray: 23; stroke-dashoffset: 23; animation: bv-traza .5s var(--ease) .35s forwards; }
+}
+
+.enc__pie { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px 18px; border-top: 1px solid var(--line); }
+.enc__pie .btn--brand { margin-left: auto; }
+.enc__pie .btn:disabled { opacity: .42; cursor: not-allowed; }
+.enc__pie .btn--pill-arrow .arrow { overflow: hidden; }
+.enc__pie .btn--brand:not(:disabled):hover .arrow svg:not(.spin) { animation: bv-flecha .5s var(--ease); }
+
+@keyframes enc-entra { from { opacity: 0; transform: translateY(22px) scale(.97); } }
+@keyframes enc-fuera { to { opacity: 0; transform: translateY(12px) scale(.98); } }
+
+@media (max-width: 760px) {
+  .encuesta-modal { padding: 0; place-items: end stretch; }
+  .enc { width: 100%; max-height: 94dvh; border-radius: 22px 22px 0 0; animation-name: enc-sube; }
+  .enc__cab { gap: 12px; padding: 18px 16px 14px 18px; }
+  .enc__portada { width: 60px; height: 44px; }
+  .enc__avance, .enc__escena { padding-inline: 18px; }
+  .enc__pie { padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); }
+  .enc__pie .btn--brand { flex: 1; justify-content: space-between; }
+  .enc-estrella svg { width: 30px; height: 30px; }
+  .enc-nps { gap: 4px; }
+  .enc-nps__n span { height: 40px; font-size: var(--fs-xs); }
+  .enc .bv-op:hover { transform: none; box-shadow: none; }
+}
+@keyframes enc-sube { from { transform: translateY(100%); } }
+@media (max-width: 390px) {
+  .enc__portada, .enc__icono { display: none; }
+  .enc-nps { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}

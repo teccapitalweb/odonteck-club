@@ -10,7 +10,7 @@ import {
 import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMaterial, validarPreguntas } from '../lib/esquemas.js';
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
-import { resumirEncuestas } from '../lib/encuestas.js';
+import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
 import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, textoRequerido, unoDe, url } from '../lib/validacion.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -94,8 +94,15 @@ export function rutasAdmin(ctx) {
 
   // ---------- Encuestas (solo agregados; nunca expone UID ni correo) ----------
   r.get('/admin/encuestas/resumen', h(async (req, res) => {
+    const plan = req.query.plan === 'vip' || req.query.plan === 'gratis' ? req.query.plan : null;
     const snap = await db.collection(COL.encuestasRespuestas).get();
-    res.json(resumirEncuestas(snap.docs.map((d) => d.data())));
+    res.json(resumirEncuestas(snap.docs.map((d) => d.data()), { plan }));
+  }));
+
+  // Correos de quienes pidieron que les escribamos tras calificar bajo (único dato con identidad, con permiso explícito).
+  r.get('/admin/encuestas/contactos', h(async (req, res) => {
+    const snap = await db.collection(COL.encuestasRespuestas).get();
+    res.json(contactosEncuestas(snap.docs.map((d) => d.data())));
   }));
 
   // ---------- CRUD genérico (cursos, materiales, eventos) ----------

@@ -9,6 +9,7 @@ import './styles/admin.css';
 import './styles/arcade.css';
 import './styles/encuestas.css';
 import './styles/bienvenida.css';
+import './styles/encuesta-modal.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -36,7 +37,7 @@ import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { cargarEncuestas, encuestaPendiente, reiniciarEncuestas } from './core/encuestas';
 import { mostrarEncuestaPendiente } from './ui/encuesta';
-import { bienvenida, montarBienvenida } from './pages/bienvenida';
+import { bienvenida, montarBienvenida, DESTINO_KEY } from './pages/bienvenida';
 import { certificados, certificado, verificar } from './pages/certificados';
 import { buscar } from './pages/buscar';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
@@ -103,7 +104,10 @@ onBeforeRender(async (path) => {
     if (!entrevista) { navigate('/'); return false; }
     montar('solo'); return true;
   }
-  if (entrevista) { navigate('/bienvenida'); return false; }
+  if (entrevista) {
+    if (path !== '/') sessionStorage.setItem(DESTINO_KEY, location.hash.slice(1));
+    navigate('/bienvenida'); return false;
+  }
   montar('miembro'); return true;
 });
 
