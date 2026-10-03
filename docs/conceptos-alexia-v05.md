@@ -1,0 +1,36 @@
+# Alexia · conceptos de dirección artística v05
+
+Estas propuestas son exploratorias. Ninguna sustituye todavía a Alexia v04 en la landing.
+
+## A · Editorial dibujada
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-a-editorial-2d.png`
+- Sensación: humana, cálida, artesanal y confiable.
+- Técnica: línea de grafito, color tipo gouache y textura de papel.
+- Vestuario: cardigan marfil, blusa envolvente aqua, pantalón amplio azul marino y mocasines.
+- Fortaleza: es la que menos se siente como una imagen generada o una muñeca digital.
+
+## B · Mascota clay premium
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-b-clay-3d.png`
+- Sensación: adorable, accesible y muy fácil de reconocer en tamaños pequeños.
+- Técnica: personaje 3D de arcilla/vinilo mate con acabado de animación stop-motion.
+- Vestuario: jumpsuit teal, camiseta marfil, sobrecamisa corta y zapatos slip-on.
+- Fortaleza: es la opción más cute y con mayor potencial como mascota animada.
+
+## C · Anime editorial premium
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-c-anime-editorial.png`
+- Sensación: elegante, segura, moderna y más aspiracional.
+- Técnica: ilustración 2D con línea limpia, sombreado cel y textura de acuarela.
+- Vestuario: blazer azul marino corto, top marfil, pantalón verde agua y botines crema.
+- Fortaleza: tiene la personalidad visual más fuerte y funciona bien para una audiencia joven.
+
+## Invariantes compartidas
+
+Las tres propuestas representan a una mujer adulta joven, rubia de cabello corto, bonita,
+profesional y no sexualizada. Mantienen la paleta marfil, teal y azul marino de OdonTeck,
+un dispositivo azul marino, fondo transparente y una silueta legible para la interfaz.
+
+Cuando se elija una dirección se producirán las posturas finales de saludo, orientación y
+celebración, y sólo entonces se actualizarán las referencias activas de la landing.

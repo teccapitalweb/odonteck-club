@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conceptos de Alexia · OdonTeck</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #102f43; background: #edf5f3; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 50% 0, #fff 0, #edf5f3 45%, #dcecea 100%); }
+    main { width: min(1180px, calc(100% - 32px)); margin: auto; padding: 54px 0 70px; }
+    header { max-width: 720px; margin: 0 auto 32px; text-align: center; }
+    .eyebrow { margin: 0 0 9px; color: #168f8a; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(32px, 5vw, 58px); line-height: .98; letter-spacing: -.045em; }
+    header p:last-child { margin: 18px auto 0; color: #58707c; font-size: 17px; line-height: 1.55; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    article { position: relative; overflow: hidden; border: 1px solid rgba(16,47,67,.1); border-radius: 28px; background: rgba(255,255,255,.83); box-shadow: 0 20px 50px rgba(16,47,67,.1); }
+    .visual { height: min(58vw, 570px); min-height: 430px; display: grid; place-items: end center; background: linear-gradient(155deg, rgba(45,191,181,.13), rgba(16,47,67,.03)); }
+    img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 18px 20px rgba(16,47,67,.12)); }
+    .copy { padding: 22px 23px 25px; }
+    .tag { display: inline-flex; padding: 6px 10px; border-radius: 999px; background: #dff4f0; color: #087c77; font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+    h2 { margin: 13px 0 8px; font-size: 24px; letter-spacing: -.025em; }
+    .copy p { margin: 0; color: #5a6e78; line-height: 1.5; }
+    .recommendation { margin: 24px auto 0; padding: 18px 22px; max-width: 760px; border-radius: 20px; background: #102f43; color: #d9f5f1; text-align: center; line-height: 1.5; }
+    .recommendation strong { color: #fff; }
+    @media (max-width: 850px) {
+      main { padding-top: 38px; }
+      .grid { grid-template-columns: 1fr; max-width: 520px; margin: auto; }
+      .visual { height: 620px; }
+    }
+    @media (max-width: 520px) { .visual { height: 500px; min-height: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">OdonTeck · Exploración v05</p>
+      <h1>Tres maneras de ser Alexia.</h1>
+      <p>Ninguna está activa todavía. Compara qué tan humana, memorable y coherente con el club se siente cada dirección.</p>
+    </header>
+    <section class="grid" aria-label="Conceptos de Alexia">
+      <article>
+        <div class="visual"><img src="alexia-concepto-a-editorial-2d.png" alt="Alexia en estilo editorial dibujado"></div>
+        <div class="copy"><span class="tag">A · Más humana</span><h2>Editorial dibujada</h2><p>Cálida, artesanal y confiable. Es la que menos se siente como una muñeca digital.</p></div>
+      </article>
+      <article>
+        <div class="visual"><img src="alexia-concepto-b-clay-3d.png" alt="Alexia como mascota clay 3D"></div>
+        <div class="copy"><span class="tag">B · Más cute</span><h2>Mascota clay</h2><p>Amable, fácil de reconocer y con mucho potencial para animaciones y expresiones.</p></div>
+      </article>
+      <article>
+        <div class="visual"><img src="alexia-concepto-c-anime-editorial.png" alt="Alexia en estilo anime editorial"></div>
+        <div class="copy"><span class="tag">C · Más personalidad</span><h2>Anime editorial</h2><p>Elegante, juvenil y aspiracional. Es la dirección con mayor impacto visual.</p></div>
+      </article>
+    </section>
+    <p class="recommendation"><strong>Mi recomendación:</strong> A si quieres confianza premium; B si quieres una mascota adorable; C si quieres una identidad más atrevida.</p>
+  </main>
+</body>
+</html>
