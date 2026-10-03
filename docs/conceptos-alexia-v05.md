@@ -2,6 +2,15 @@
 
 Estas propuestas son exploratorias. Ninguna sustituye todavía a Alexia v04 en la landing.
 
+## D · Editorial híbrida · recomendada
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-d-hibrido-editorial.png`
+- Sensación: elegante y moderna, pero más humana que el concepto C original.
+- Técnica: cuerpo y vestuario anime editorial con rostro dibujado de anatomía natural.
+- Vestuario: conserva el blazer azul marino, top marfil, pantalón verde agua y botines de C.
+- Rostro: ojos almendrados a escala humana, nariz definida, mandíbula suave y pecas discretas.
+- Fortaleza: combina la personalidad de C con la calidez y credibilidad facial de A.
+
 ## A · Editorial dibujada
 
 - Archivo: `/public/asistente/conceptos/alexia-concepto-a-editorial-2d.png`
