@@ -142,7 +142,7 @@ document.querySelector('[data-opiniones]')!.innerHTML = OPINIONES.map((o, i) => 
 
 createIcons({ icons });
 
-// ── Alex, guía virtual de la landing ──
+// ── Alexia, guía virtual de la landing ──
 let datosGuia: DatosGuia | null = null;
 let estadoGuia: EstadoGuia = 'cargando';
 const guia = montarGuia(() => ({ datos: datosGuia, estado: estadoGuia }));

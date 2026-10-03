@@ -39,7 +39,7 @@ export function montarMovimientoGuia(root: HTMLElement) {
     repetir.disabled = !permiteMovimiento() || ocupada;
     pausa.disabled = !cargada || reducido.matches;
     pausa.setAttribute('aria-pressed', String(pausada));
-    pausa.setAttribute('aria-label', reducido.matches ? 'Movimiento desactivado por accesibilidad' : pausada ? 'Reanudar animación de Alex' : 'Pausar animación de Alex');
+    pausa.setAttribute('aria-label', reducido.matches ? 'Movimiento desactivado por accesibilidad' : pausada ? 'Reanudar animación de Alexia' : 'Pausar animación de Alexia');
     pausa.querySelector('[data-icono-pausa]')?.toggleAttribute('hidden', pausada);
     pausa.querySelector('[data-icono-play]')?.toggleAttribute('hidden', !pausada);
   }

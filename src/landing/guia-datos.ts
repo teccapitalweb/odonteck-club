@@ -3,11 +3,11 @@ import { Datos } from '../core/datos';
 export const marcaGuia = {
   id: 'odonteck',
   nombre: 'OdonTeck',
-  asistente: 'Alex',
+  asistente: 'Alexia',
   whatsapp: '5212381479365',
-  saludo: '/asistente/odonteck-guia-saludo-v01.png',
-  orientar: '/asistente/odonteck-guia-orientar-v01.png',
-  celebrar: '/asistente/odonteck-guia-celebrar-v01.png',
+  saludo: '/asistente/odonteck-guia-saludo-v02.png',
+  orientar: '/asistente/odonteck-guia-orientar-v02.png',
+  celebrar: '/asistente/odonteck-guia-celebrar-v02.png',
 };
 
 export interface CursoGuia {

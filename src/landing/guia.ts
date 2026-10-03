@@ -27,10 +27,10 @@ export function montarGuia(fuente: Fuente) {
   const root = document.querySelector<HTMLElement>('#assistant-root');
   if (!root) return { actualizar() {}, abrir() {} };
   const host = root;
-  const clave = `${marcaGuia.id}:guia-${ES_DEMO_GUIA ? 'demo' : 'publica'}:v1`;
+  const clave = `${marcaGuia.id}:guia-${ES_DEMO_GUIA ? 'demo' : 'publica'}:v2`;
   const bienvenida: Mensaje = {
     role: 'assistant',
-    text: 'Hola, soy Alex, tu guía de OdonTeck. Te ayudo a encontrar formación dentro del club. ¿Qué te gustaría explorar?',
+    text: 'Hola, soy Alexia, tu guía de OdonTeck. Te ayudo a encontrar formación dentro del club. ¿Qué te gustaría explorar?',
     opciones: INICIO,
     postura: 'saludo',
   };
@@ -51,17 +51,17 @@ export function montarGuia(fuente: Fuente) {
   const seguirPostura = crearSeguimientoRespuestas(mensajes.filter((m) => m.role === 'assistant').at(-1));
 
   root.innerHTML = `
-    <div class="oguia-saludo" hidden><button class="oguia-icono" data-guia-descartar aria-label="Descartar saludo"><i data-lucide="x"></i></button><p>Hola, soy Alex. Puedo ayudarte a elegir un curso.</p></div>
+    <div class="oguia-saludo" hidden><button class="oguia-icono" data-guia-descartar aria-label="Descartar saludo"><i data-lucide="x"></i></button><p>Hola, soy Alexia. Puedo ayudarte a elegir un curso.</p></div>
     <button class="oguia-launcher" aria-label="Abrir guía OdonTeck" aria-controls="oguia-panel" aria-expanded="false">
       <span class="oguia-personaje" aria-hidden="true"></span><span class="oguia-launcher__copy"><small><i data-lucide="sparkles"></i>Guía OdonTeck</small><strong>Te ayudo a elegir</strong><span>Cursos y membresía <i data-lucide="arrow-up-right"></i></span></span>
     </button>
     <div class="oguia-backdrop" hidden></div>
-    <section class="oguia-panel" id="oguia-panel" role="dialog" aria-label="Conversación con Alex, guía de OdonTeck" aria-modal="false" hidden>
+    <section class="oguia-panel" id="oguia-panel" role="dialog" aria-label="Conversación con Alexia, guía de OdonTeck" aria-modal="false" hidden>
       <span class="oguia-personaje oguia-personaje--panel" aria-hidden="true"></span>
       <div class="oguia-superficie">
-        <header class="oguia-header"><div><small>OdonTeck Club</small><strong>Alex</strong><span>Guía virtual de formación</span></div>
-          <button class="oguia-icono" data-guia-repetir aria-label="Repetir saludo de Alex"><i data-lucide="rotate-ccw"></i></button>
-          <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alex" aria-pressed="false"><i data-lucide="pause" data-icono-pausa></i><i data-lucide="play" data-icono-play hidden></i></button>
+        <header class="oguia-header"><div><small>OdonTeck Club</small><strong>Alexia</strong><span>Guía virtual de formación</span></div>
+          <button class="oguia-icono" data-guia-repetir aria-label="Repetir saludo de Alexia"><i data-lucide="rotate-ccw"></i></button>
+          <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alexia" aria-pressed="false"><i data-lucide="pause" data-icono-pausa></i><i data-lucide="play" data-icono-play hidden></i></button>
           <button class="oguia-icono" data-guia-cerrar aria-label="Minimizar y conservar conversación"><i data-lucide="chevron-down"></i></button>
         </header>
         <div class="oguia-aviso">Orientación sobre el club y su catálogo. No ofrece diagnóstico, tratamiento ni consejo clínico.</div>
@@ -89,7 +89,7 @@ export function montarGuia(fuente: Fuente) {
 
   function pintar() {
     const { datos } = fuente();
-    log.innerHTML = mensajes.map((mensaje) => `<div class="oguia-mensaje ${mensaje.role}"><small>${mensaje.role === 'user' ? 'TÚ' : 'ALEX · GUÍA ODONTECK'}</small><div class="oguia-burbuja" tabindex="-1">${esc(mensaje.text)}</div>
+    log.innerHTML = mensajes.map((mensaje) => `<div class="oguia-mensaje ${mensaje.role}"><small>${mensaje.role === 'user' ? 'TÚ' : 'ALEXIA · GUÍA ODONTECK'}</small><div class="oguia-burbuja" tabindex="-1">${esc(mensaje.text)}</div>
       ${mensaje.cursos?.map((id) => {
         const curso = datos?.cursos.find((c) => c.id === id);
         if (!curso) return '';
@@ -164,7 +164,7 @@ export function montarGuia(fuente: Fuente) {
         break;
       case 'planes': {
         const datos = datosDisponibles();
-        if (datos) responder('Estos son los planes disponibles. Si un importe aparece por confirmar, Alex no lo inventará: el equipo debe validarlo.', [opcion('Explorar cursos', 'buscar'), opcion('Hablar con el equipo', 'asesor')], undefined, 'planes', datos.fuente === 'api' ? 'celebrar' : 'orientar');
+        if (datos) responder('Estos son los planes disponibles. Si un importe aparece por confirmar, Alexia no lo inventará: el equipo debe validarlo.', [opcion('Explorar cursos', 'buscar'), opcion('Hablar con el equipo', 'asesor')], undefined, 'planes', datos.fuente === 'api' ? 'celebrar' : 'orientar');
         break;
       }
       case 'envivo':

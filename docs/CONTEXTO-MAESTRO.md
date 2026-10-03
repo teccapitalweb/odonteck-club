@@ -2,11 +2,11 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 3 de octubre de 2026 (guía virtual Alex integrada en la landing; pendiente despliegue y smoke autenticado)
+- **Actualizado:** 3 de octubre de 2026 (guía virtual Alexia integrada en la landing; pendiente despliegue y smoke autenticado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
-- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía tiene 17 pruebas unitarias propias y fue recorrida en demo en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La bienvenida y la edición de intereses también se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía tiene 17 pruebas unitarias propias y fue recorrida en demo en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v02; la versión masculina v01 queda sólo como respaldo versionado. La bienvenida y la edición de intereses también se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -32,7 +32,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 ### Lo que está construido visual y funcionalmente en demo
 
 - Landing pública con carrusel de tres portadas, catálogo, beneficios, planes, FAQ y llamadas a registro.
-- Guía virtual “Alex” en la landing: personaje original con tres posturas, movimiento SVG por capas, conversación guiada, catálogo y precios verificados, transferencia explícita a WhatsApp y límite visible contra diagnósticos, tratamientos o consejo clínico.
+- Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas, conversación guiada, catálogo y precios verificados, transferencia explícita a WhatsApp y límite visible contra diagnósticos, tratamientos o consejo clínico.
 - Login por correo, Google, registro y recuperación mediante Firebase cuando existe API.
 - Inicio, catálogo, ficha de curso y reproductor de clase.
 - Biblioteca de materiales y libros.
@@ -71,7 +71,7 @@ La experiencia de miembro ya consume la API en modo producción. El panel admin 
 
 En modo API el frontend utiliza:
 
-- `/landing/catalogo` para hidratar a Alex sin autenticación y sin reutilizar información privada del catálogo de miembro;
+- `/landing/catalogo` para hidratar a Alexia sin autenticación y sin reutilizar información privada del catálogo de miembro;
 - `/me` para conocer identidad, VIP y admin;
 - `/catalogo` para hidratar cursos, materiales, eventos y config (`src/core/remoto.ts`);
 - `/progreso` para hidratar el progreso del miembro;

@@ -44,7 +44,7 @@
 .oguia-launcher__copy > span svg { width: 13px; }
 
 .oguia-personaje {
-  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v01.png');
+  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v02.png');
   position: absolute;
   z-index: 3;
   left: -13px;
