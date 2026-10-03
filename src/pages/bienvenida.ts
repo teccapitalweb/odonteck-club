@@ -3,8 +3,9 @@
 // aquí sólo vive la presentación: iconos, logotipos de marca y el orden visual de cada paso.
 import { createIcons, icons } from 'lucide';
 import { Auth, mensajeError } from '../core/auth';
-import { cursos, type Curso } from '../core/catalogo';
+import type { Curso } from '../core/catalogo';
 import { cargarEncuestas, encuestaPendiente, posponerEncuesta, responderEncuesta, type OpcionEncuesta, type PreguntaEncuesta } from '../core/encuestas';
+import { cursosPorIntereses } from '../core/recomendaciones';
 import { navigate } from '../core/router';
 import { esc } from '../ui/partials';
 
@@ -13,8 +14,14 @@ type Respuestas = Record<string, string | string[]>;
 type Forma = 'lista' | 'marcas' | 'chips';
 
 const BORRADOR_KEY = 'odonteck-club:bienvenida-borrador';
+// Ruta que el miembro quería abrir cuando la entrevista lo interceptó (la guarda main.ts).
+export const DESTINO_KEY = 'odt:tras-bienvenida';
 const INTRO = -1;
 const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+// El lado visual cambia de foto por etapa: quién eres (0-1), qué buscas (2-4) y cómo aprendes (5-6).
+const FOTOS = ['/fotos/hero-club.webp', '/fotos/hero-consulta.webp', '/fotos/hero-instrumental.webp'];
+const LETRAS = 'ABCDEFGHIJ';
 
 const PASOS: Record<string, string> = {
   situacion: 'Tu etapa',
@@ -29,9 +36,9 @@ const PASOS: Record<string, string> = {
 const ICONOS: Record<string, string> = {
   'situacion.estudiante': 'graduation-cap', 'situacion.pasante': 'clipboard-list', 'situacion.general': 'stethoscope',
   'situacion.especialista': 'award', 'situacion.docente': 'presentation', 'situacion.otro': 'ellipsis',
-  'experiencia.aun_estudio': 'book-open', 'experiencia.menos_1': 'sprout', 'experiencia.1_3': 'footprints',
+  'experiencia.sin_pacientes': 'book-open', 'experiencia.menos_1': 'sprout', 'experiencia.1_3': 'footprints',
   'experiencia.4_7': 'trending-up', 'experiencia.8_mas': 'medal',
-  'como_conocio.colega': 'users', 'como_conocio.evento': 'calendar-days', 'como_conocio.otro': 'ellipsis',
+  'como_conocio.colega': 'users-round', 'como_conocio.evento': 'ticket', 'como_conocio.otro': 'compass',
   'objetivo.practica': 'activity', 'objetivo.actualizacion': 'refresh-cw', 'objetivo.certificacion': 'badge-check',
   'objetivo.posgrado': 'school', 'objetivo.comunidad': 'messages-square', 'objetivo.recursos': 'library',
   'formato.video': 'circle-play', 'formato.casos': 'scan-search', 'formato.en_vivo': 'radio',
@@ -49,14 +56,14 @@ const MARCAS: Record<string, string> = {
   whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>',
 };
 
-// Área del catálogo que corresponde a cada interés, para sugerir por dónde empezar.
-const AREAS: Record<string, string> = {
-  diagnostico: 'Cariología', ortodoncia: 'Ortodoncia', endodoncia: 'Endodoncia', restauradora: 'Materiales',
-  estetica: 'Estética', cirugia: 'Cirugía', periodoncia: 'Periodoncia', pediatria: 'Odontopediatría',
-  rehabilitacion: 'Estética', medicina_bucal: 'Medicina bucal',
-};
 
 const entrevista = () => { const e = encuestaPendiente(); return e?.tipo === 'bienvenida' ? e : null; };
+
+// Titulares que entran palabra por palabra: cada palabra sube detrás de su propia máscara.
+function levanta() {
+  let i = 0;
+  return (texto: string) => texto.split(' ').map((p) => `<span class="bv-pal"><span style="--p:${i++}">${esc(p)}</span></span>`).join(' ');
+}
 
 function primerNombre() {
   const nombre = (Auth.usuario?.nombre || '').trim();
@@ -69,19 +76,20 @@ export function bienvenida() {
   const encuesta = entrevista();
   if (!encuesta) return '';
   const total = encuesta.preguntas.length;
+  const pal = levanta();
   return `
   <div class="bv" data-bienvenida>
     <aside class="bv__lado">
-      <img class="bv__foto" src="/fotos/hero-club.webp" alt="">
+      ${FOTOS.map((f, i) => `<img class="bv__foto bv__foto--${i}" src="${f}" alt="">`).join('')}
       <img class="bv__logo" src="/brand/logo-horizontal-dark.png" alt="OdonTeck">
       <div class="bv__lema">
         <span class="bv__kicker">Tu club, a tu medida</span>
-        <h1 class="display">Antes de recomendarte algo, queremos <em>conocerte.</em></h1>
+        <h1 class="display">${pal('Antes de recomendarte algo, queremos')} <em>${pal('conocerte.')}</em></h1>
       </div>
       <div class="bv__perfil">
-        <span class="bv__perfil-t">Tu perfil en el club</span>
-        <ol data-bv-perfil></ol>
-        <p class="bv__privado"><i data-lucide="shield-check" class="i"></i>El equipo sólo ve tendencias, sin tu nombre ni tu correo.</p>
+        <span class="bv__perfil-t">Tu perfil en el club<span class="mono" data-bv-hechos></span></span>
+        <ol data-bv-perfil>${encuesta.preguntas.map((p, i) => `<li><button type="button" data-bv-ir="${i}" disabled><span class="bv__perfil-n">${i + 1}</span><span class="bv__perfil-k">${esc(PASOS[p.id] || p.texto)}</span><span class="bv__perfil-v"></span></button></li>`).join('')}</ol>
+        <p class="bv__privado"><i data-lucide="shield-check" class="i"></i>El panel del equipo sólo muestra tendencias, sin tu nombre ni tu correo.</p>
       </div>
     </aside>
     <section class="bv__panel">
@@ -109,15 +117,21 @@ export function montarBienvenida(toast: Toast) {
   const escena = raiz.querySelector<HTMLElement>('[data-bv-escena]')!;
   const pie = raiz.querySelector<HTMLElement>('[data-bv-pie]')!;
   const nombre = primerNombre();
+  const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const filasPerfil = [...raiz.querySelectorAll<HTMLElement>('[data-bv-perfil] li')];
+  const valoresPerfil = preguntas.map(() => '');
   let paso = INTRO;
   let respuestas: Respuestas = {};
   let enviando = false;
   let auto = 0;
+  let salida = 0;
 
   // ── Borrador: recargar la página no borra lo ya contestado ──
+  // Va atado a la cuenta: en un equipo compartido, otra persona no hereda respuestas ajenas.
+  const uid = Auth.usuario?.uid || '';
   try {
     const b = JSON.parse(sessionStorage.getItem(BORRADOR_KEY) || 'null');
-    if (b?.clave === encuesta.clave) {
+    if (b?.clave === encuesta.clave && b.uid === uid) {
       for (const p of preguntas) {
         const validas = new Set((p.opciones || []).map((o) => o.valor));
         const v = b.respuestas?.[p.id];
@@ -127,7 +141,7 @@ export function montarBienvenida(toast: Toast) {
       if (Number.isInteger(b.paso)) paso = Math.max(INTRO, Math.min(total - 1, b.paso));
     }
   } catch {}
-  const guardarBorrador = () => { try { sessionStorage.setItem(BORRADOR_KEY, JSON.stringify({ clave: encuesta.clave, paso, respuestas })); } catch {} };
+  const guardarBorrador = () => { try { sessionStorage.setItem(BORRADOR_KEY, JSON.stringify({ uid, clave: encuesta.clave, paso, respuestas })); } catch {} };
   const borrarBorrador = () => { try { sessionStorage.removeItem(BORRADOR_KEY); } catch {} };
 
   const elegidas = (p: PreguntaEncuesta) => { const v = respuestas[p.id]; return Array.isArray(v) ? v : v ? [v] : []; };
@@ -137,15 +151,16 @@ export function montarBienvenida(toast: Toast) {
 
   // ── Escenas ──
   function intro() {
+    const pal = levanta();
     return `<div class="bv-intro">
       <img class="bv-intro__foto" src="/fotos/hero-club.webp" alt="">
       <span class="bv-eti">Te damos la bienvenida</span>
-      <h2 class="bv-intro__t display" tabindex="-1">${nombre ? `Hola, ${esc(nombre)}.<br>` : ''}Armemos tu club <em>a tu medida.</em></h2>
-      <p class="bv-ayuda">Responde ${total} preguntas rápidas y te recomendaremos los cursos, materiales y retos que más te sirven. Sólo se hace una vez.</p>
+      <h2 class="bv-intro__t display" tabindex="-1">${nombre ? `${pal(`Hola, ${nombre}.`)}<br>` : ''}${pal('Armemos tu club')} <em>${pal('a tu medida.')}</em></h2>
+      <p class="bv-ayuda">Responde ${total} preguntas rápidas y tu inicio se acomodará a tus intereses. Sólo se hace una vez.</p>
       <ul class="bv-intro__datos">
         <li><i data-lucide="list-checks" class="i"></i><strong>${total} preguntas</strong><span>una a la vez</span></li>
         <li><i data-lucide="timer" class="i"></i><strong>Menos de un minuto</strong><span>sólo eliges opciones</span></li>
-        <li><i data-lucide="lock-keyhole" class="i"></i><strong>Privado</strong><span>sin datos de pacientes</span></li>
+        <li><i data-lucide="lock-keyhole" class="i"></i><strong>Uso interno</strong><span>nada de datos de pacientes</span></li>
       </ul>
     </div>`;
   }
@@ -153,17 +168,17 @@ export function montarBienvenida(toast: Toast) {
   function opcion(p: PreguntaEncuesta, o: OpcionEncuesta, i: number, f: Forma) {
     const multiple = p.tipo === 'multiple';
     const marca = f === 'marcas' ? MARCAS[o.valor] : '';
-    const grafico = f === 'chips' ? '' : `<span class="bv-op__ic${marca ? ` bv-op__ic--marca bv-op__ic--${o.valor}` : ''}">${marca || `<i data-lucide="${ICONOS[`${p.id}.${o.valor}`] || 'circle'}" class="i"></i>`}</span>`;
+    const grafico = f === 'chips' ? '' : `<span class="bv-op__ic${f === 'marcas' ? ` bv-op__ic--marca bv-op__ic--${o.valor}` : ''}">${marca || `<i data-lucide="${ICONOS[`${p.id}.${o.valor}`] || 'circle'}" class="i"></i>`}</span>`;
     return `<label class="bv-op" style="--i:${i}">
       <input type="${multiple ? 'checkbox' : 'radio'}" name="bv-${esc(p.id)}" value="${esc(o.valor)}" ${elegidas(p).includes(o.valor) ? 'checked' : ''}>
-      ${grafico}<span class="bv-op__t">${esc(o.etiqueta)}</span><span class="bv-op__ok">${CHECK}</span>
+      ${grafico}<span class="bv-op__t">${esc(o.etiqueta)}</span><span class="bv-op__ok">${LETRAS[i] ? `<b aria-hidden="true">${LETRAS[i]}</b>` : ''}${CHECK}</span>
     </label>`;
   }
 
   function pregunta(p: PreguntaEncuesta, i: number) {
     const f = forma(p);
     return `<div class="bv-q">
-      <div class="bv-q__meta"><span class="bv-q__n mono">${String(i + 1).padStart(2, '0')}</span><span class="bv-eti">${esc(PASOS[p.id] || 'Sobre ti')}</span></div>
+      <div class="bv-q__meta"><span class="bv-q__n" aria-hidden="true"><span>${String(i + 1).padStart(2, '0')}</span></span><span class="bv-eti">${esc(PASOS[p.id] || 'Sobre ti')}</span></div>
       <h2 class="bv-q__t display" id="bv-titulo" tabindex="-1">${esc(p.texto)}</h2>
       ${p.ayuda ? `<p class="bv-ayuda">${esc(p.ayuda)}</p>` : ''}
       <fieldset class="bv-ops bv-ops--${f}${p.tipo === 'multiple' ? ' bv-ops--multiple' : ''}" aria-labelledby="bv-titulo">${(p.opciones || []).map((o, j) => opcion(p, o, j, f)).join('')}</fieldset>
@@ -173,21 +188,17 @@ export function montarBienvenida(toast: Toast) {
 
   function recomendados(): Curso[] {
     const intereses = preguntas.find((p) => p.id === 'intereses');
-    const areas = [...new Set((intereses ? elegidas(intereses) : []).map((v) => AREAS[v]).filter(Boolean))];
-    const porArea = areas.map((a) => cursos.filter((c) => c.area === a));
-    const salida: Curso[] = [];
-    for (let ronda = 0; salida.length < 3 && porArea.some((l) => l[ronda]); ronda++) {
-      for (const l of porArea) if (l[ronda] && salida.length < 3) salida.push(l[ronda]);
-    }
-    return salida;
+    return cursosPorIntereses(intereses ? elegidas(intereses) : [], 3);
   }
 
   function cierre() {
     const recs = recomendados();
+    const pal = levanta();
     return `<div class="bv-fin">
       <span class="bv-fin__sello">${CHECK}</span>
-      <h2 class="bv-q__t display" tabindex="-1">Listo${nombre ? `, ${esc(nombre)}` : ''}. <em>Tu club ya te conoce.</em></h2>
-      <p class="bv-ayuda">Gracias por tomarte el minuto. Con tus respuestas ordenaremos lo que ves primero y decidiremos qué contenido producir.</p>
+      <h2 class="bv-q__t display" tabindex="-1">${pal(`Listo${nombre ? `, ${nombre}` : ''}.`)} <em>${pal('Tu club ya te conoce.')}</em></h2>
+      <p class="bv-ayuda">Gracias por tomarte el minuto. Tus respuestas ya ordenan tu inicio y el catálogo "Para ti", y nos ayudan a decidir qué contenido producir.</p>
+      <ul class="bv-fin__resumen" aria-label="Tus respuestas">${preguntas.flatMap((p) => etiquetas(p)).map((e, i) => `<li style="--i:${i}">${esc(e)}</li>`).join('')}</ul>
       ${recs.length ? `<div class="bv-recs">
         <span class="bv-eti">Para empezar, según tus intereses</span>
         ${recs.map((c, i) => `<a class="bv-rec" href="#/curso/${c.id}" style="--i:${i}"><img src="${esc(c.portada)}" alt="" loading="lazy"><span><small>${esc(c.area)} · ${esc(c.nivel)}</small><strong>${esc(c.titulo)}</strong></span><i data-lucide="arrow-up-right" class="i"></i></a>`).join('')}
@@ -196,18 +207,36 @@ export function montarBienvenida(toast: Toast) {
   }
 
   // ── Pintado ──
+  // Se actualiza fila por fila (sin repintar la lista) para animar sólo la respuesta que cambió.
   function pintarPerfil() {
-    raiz!.querySelector('[data-bv-perfil]')!.innerHTML = preguntas.map((p, i) => {
+    let hechos = 0;
+    // Se puede saltar a cualquier pregunta ya contestada y a la primera pendiente.
+    const pendiente = preguntas.findIndex((p) => !respondida(p));
+    const limite = pendiente === -1 ? total - 1 : pendiente;
+    preguntas.forEach((p, i) => {
+      const li = filasPerfil[i];
+      li.querySelector<HTMLButtonElement>('button')!.disabled = paso >= total || enviando || i > limite || i === paso;
       const l = etiquetas(p);
       const valor = l.length > 2 ? `${l.slice(0, 2).join(', ')} +${l.length - 2}` : l.join(', ');
-      return `<li class="${l.length ? 'is-hecho' : ''}${i === paso ? ' is-actual' : ''}"><span class="bv__perfil-n">${l.length ? CHECK : i + 1}</span><span class="bv__perfil-k">${esc(PASOS[p.id] || p.texto)}</span><span class="bv__perfil-v">${esc(valor)}</span></li>`;
-    }).join('');
+      if (valor) hechos++;
+      li.classList.toggle('is-hecho', !!valor);
+      li.classList.toggle('is-actual', i === paso);
+      if (valor === valoresPerfil[i]) return;
+      if (!valor !== !valoresPerfil[i]) li.querySelector('.bv__perfil-n')!.innerHTML = valor ? CHECK : String(i + 1);
+      valoresPerfil[i] = valor;
+      li.querySelector('.bv__perfil-v')!.textContent = valor;
+      li.classList.remove('is-nuevo');
+      if (valor) { void li.offsetWidth; li.classList.add('is-nuevo'); }
+    });
+    raiz!.querySelector('[data-bv-hechos]')!.textContent = `${hechos}/${total}`;
   }
 
   function pintarAvance() {
     const hechos = paso >= total ? total : Math.max(0, paso);
     const barra = raiz!.querySelector<HTMLElement>('[data-bv-progreso]')!;
     barra.setAttribute('aria-valuenow', String(hechos));
+    barra.setAttribute('aria-valuetext', paso === INTRO ? 'Sin empezar' : paso >= total ? 'Completado' : `Pregunta ${paso + 1} de ${total}`);
+    raiz!.dataset.foto = String(paso < 2 || paso >= total ? 0 : paso < 5 ? 1 : 2);
     [...barra.children].forEach((s, i) => s.className = i < hechos ? 'is-hecho' : i === paso ? 'is-actual' : '');
     raiz!.querySelector('[data-bv-cuenta]')!.textContent = paso === INTRO ? `${total} preguntas` : paso >= total ? 'Completado' : `${paso + 1} de ${total}`;
   }
@@ -219,6 +248,7 @@ export function montarBienvenida(toast: Toast) {
     else {
       const ultimo = paso === total - 1;
       pie.innerHTML = `<button class="btn btn--ghost" type="button" data-bv-accion="atras" ${enviando ? 'disabled' : ''}><i data-lucide="arrow-left" class="i"></i>Atrás</button>
+        <span class="bv__tecla" aria-hidden="true">o presiona <kbd>Enter ↵</kbd></span>
         <button class="btn btn--brand btn--lg btn--pill-arrow" type="button" data-bv-accion="seguir" ${enviando || !respondida(preguntas[paso]) ? 'disabled' : ''}>${enviando ? 'Guardando…' : ultimo ? 'Terminar' : 'Continuar'} ${flecha(enviando ? 'loader-circle' : ultimo ? 'check' : 'arrow-right')}</button>`;
     }
     createIcons({ icons });
@@ -235,20 +265,58 @@ export function montarBienvenida(toast: Toast) {
     if (limite) limite.textContent = n >= max ? `Listo, elegiste ${max}. Quita una si quieres cambiar.` : `Elige hasta ${max} · llevas ${n}`;
   }
 
+  function confeti() {
+    const sello = escena.querySelector<HTMLElement>('.bv-fin__sello');
+    if (quieto || !sello) return;
+    const colores = ['#4a7fc1', '#6fbfb0', '#20254b', '#e0a341', '#9bd9cc'];
+    const capa = document.createElement('span');
+    capa.className = 'bv-confeti';
+    capa.setAttribute('aria-hidden', 'true');
+    capa.innerHTML = Array.from({ length: 36 }, (_, i) => {
+      const angulo = (i / 36) * Math.PI * 2 + Math.random() * .5;
+      const distancia = 70 + Math.random() * 140;
+      return `<i style="--x:${Math.round(Math.cos(angulo) * distancia)}px;--y:${Math.round(Math.sin(angulo) * distancia - 30)}px;--r:${Math.round(Math.random() * 720 - 360)}deg;--c:${colores[i % colores.length]};--t:${(.9 + Math.random() * .7).toFixed(2)}s;--w:${Math.round(5 + Math.random() * 5)}px"></i>`;
+    }).join('');
+    sello.appendChild(capa);
+    setTimeout(() => capa.remove(), 2200);
+  }
+
+  // La escena anterior sale (hacia el lado contrario al avance) antes de que entre la nueva.
   function pintar(atras = false) {
-    clearTimeout(auto);
+    clearTimeout(auto); clearTimeout(salida);
     if (paso < total) guardarBorrador();
     raiz!.dataset.escena = paso === INTRO ? 'intro' : paso >= total ? 'cierre' : 'pregunta';
-    escena.classList.toggle('is-atras', atras);
-    escena.innerHTML = paso === INTRO ? intro() : paso >= total ? cierre() : pregunta(preguntas[paso], paso);
-    pintarPerfil(); pintarAvance(); pintarPie(); aplicarLimite();
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-    escena.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+    escena.style.setProperty('--dir', atras ? '-1' : '1');
+    pintarPerfil(); pintarAvance(); pintarPie();
+    const entrar = () => {
+      escena.classList.remove('is-sale'); escena.inert = false;
+      escena.innerHTML = paso === INTRO ? intro() : paso >= total ? cierre() : pregunta(preguntas[paso], paso);
+      createIcons({ icons }); aplicarLimite();
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+      escena.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+      if (paso >= total) confeti();
+    };
+    if (quieto || !escena.firstElementChild) { entrar(); return; }
+    escena.inert = true; escena.classList.add('is-sale');
+    salida = window.setTimeout(entrar, 190);
   }
 
   // ── Acciones ──
+  // La página se desvanece antes de entrar al club, en lugar de cortar en seco.
+  // Si llegó con un enlace directo (un curso, una clase en vivo), al terminar va a ese destino.
+  let saliendo = false;
+  function salir() {
+    if (saliendo) return;
+    saliendo = true; clearTimeout(auto); clearTimeout(salida);
+    let destino = '/';
+    try { destino = sessionStorage.getItem(DESTINO_KEY) || '/'; sessionStorage.removeItem(DESTINO_KEY); } catch {}
+    if (quieto) { navigate(destino); return; }
+    raiz!.classList.add('is-saliendo');
+    setTimeout(() => navigate(destino), 330);
+  }
+
   async function enviar() {
-    enviando = true; pintarPie();
+    enviando = true; pintarPie(); pintarPerfil();
     try {
       await responderEncuesta(encuesta!, respuestas);
       enviando = false; borrarBorrador(); paso = total; pintar();
@@ -256,15 +324,15 @@ export function montarBienvenida(toast: Toast) {
       enviando = false;
       // 409: ya se respondió desde otra sesión; no hay nada que repetir.
       if (e?.status === 409) { borrarBorrador(); try { await cargarEncuestas(true); } catch {} navigate('/'); return; }
-      pintarPie(); toast(mensajeError(e), 'alert-triangle');
+      pintarPie(); pintarPerfil(); toast(mensajeError(e), 'alert-triangle');
     }
   }
 
   function seguir() {
     clearTimeout(auto);
-    if (enviando) return;
+    if (enviando || saliendo) return;
     if (paso === INTRO) { paso = 0; pintar(); return; }
-    if (paso >= total) { navigate('/'); return; }
+    if (paso >= total) { salir(); return; }
     if (!respondida(preguntas[paso])) {
       const ops = escena.querySelector<HTMLElement>('.bv-ops');
       ops?.classList.remove('is-aviso'); void ops?.offsetWidth; ops?.classList.add('is-aviso');
@@ -282,6 +350,7 @@ export function montarBienvenida(toast: Toast) {
     else respuestas[p.id] = input.value;
     if (!elegidas(p).length) delete respuestas[p.id];
     guardarBorrador(); aplicarLimite(); pintarPerfil();
+    if (input.checked) try { navigator.vibrate?.(8); } catch {}
     const boton = pie.querySelector<HTMLButtonElement>('[data-bv-accion="seguir"]');
     if (boton) boton.disabled = !respondida(p);
   });
@@ -291,25 +360,53 @@ export function montarBienvenida(toast: Toast) {
     const accion = el.closest<HTMLElement>('[data-bv-accion]')?.dataset.bvAccion;
     if (accion === 'seguir') { seguir(); return; }
     if (accion === 'atras') { if (!enviando) { paso = Math.max(INTRO, paso - 1); pintar(true); } return; }
+    const ir = el.closest<HTMLButtonElement>('[data-bv-ir]');
+    if (ir && !ir.disabled) { const destino = Number(ir.dataset.bvIr); const atras = destino < paso; paso = destino; pintar(atras); return; }
     if (accion === 'posponer') {
       const boton = el.closest<HTMLButtonElement>('button')!; boton.disabled = true;
-      try { guardarBorrador(); await posponerEncuesta(encuesta!); toast('Te la recordaremos en unos días', 'clock-3'); navigate('/'); }
+      try { guardarBorrador(); await posponerEncuesta(encuesta!); toast('Te la recordaremos en unos días', 'clock-3'); salir(); }
       catch (err) { boton.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
       return;
     }
     // Opción única elegida con toque o clic: avanza sola (con teclado se usa Enter o Continuar).
     // El clic real cae en la etiqueta; el del input es el sintético que genera el navegador.
-    const p = preguntas[paso];
-    if (el.closest('.bv-op') && !(el instanceof HTMLInputElement) && p?.tipo === 'opcion' && paso < total - 1) {
-      clearTimeout(auto);
-      auto = window.setTimeout(() => { if (respondida(p)) seguir(); }, 420);
-    }
+    if (el.closest('.bv-op') && !(el instanceof HTMLInputElement)) avanzarSola();
   });
 
-  raiz.addEventListener('keydown', (e) => {
-    if (e.key !== 'Enter' || (e.target as HTMLElement).closest('button, a')) return;
-    e.preventDefault(); seguir();
+  function avanzarSola() {
+    const p = preguntas[paso];
+    if (p?.tipo !== 'opcion' || paso >= total - 1) return;
+    clearTimeout(auto);
+    auto = window.setTimeout(() => { if (respondida(p)) seguir(); }, 420);
+  }
+
+  // Reflejo que sigue al cursor dentro de cada opción.
+  raiz.addEventListener('pointermove', (e) => {
+    const op = (e.target as HTMLElement).closest<HTMLElement>('.bv-op');
+    if (!op || e.pointerType !== 'mouse') return;
+    const r = op.getBoundingClientRect();
+    op.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    op.style.setProperty('--my', `${e.clientY - r.top}px`);
   });
+
+  // Teclado: Enter continúa y las letras A, B, C… eligen la opción que las muestra.
+  // Vive en document para que funcione aunque el foco no esté dentro de la página; se retira sola al salir.
+  function teclas(e: KeyboardEvent) {
+    if (!raiz!.isConnected) { document.removeEventListener('keydown', teclas); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey || saliendo || escena.inert) return;
+    if (e.key === 'Enter') {
+      if ((e.target as HTMLElement).closest?.('button, a')) return;
+      e.preventDefault(); seguir(); return;
+    }
+    const n = e.key.length === 1 ? LETRAS.indexOf(e.key.toUpperCase()) : -1;
+    const input = n >= 0 ? escena.querySelectorAll<HTMLInputElement>('.bv-op input')[n] : null;
+    if (!input || input.disabled) return;
+    e.preventDefault();
+    input.checked = input.type === 'checkbox' ? !input.checked : true;
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    avanzarSola();
+  }
+  document.addEventListener('keydown', teclas);
 
   pintar();
 }
