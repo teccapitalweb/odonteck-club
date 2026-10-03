@@ -6,6 +6,7 @@ import { BRAND } from '../core/brand';
 import { proximoEvento } from './envivo';
 import { racha, puntos } from '../core/logros';
 import { Comunidad } from '../core/comunidad';
+import { cursosPorIntereses, etiquetaIntereses, interesesDelMiembro } from '../core/recomendaciones';
 
 function widgets() {
   const ev = proximoEvento();
@@ -79,8 +80,14 @@ export function inicio() {
       </div>`;
   }
 
-  const recomendados = cursos.filter((c) => !Progreso.completado(c) && Progreso.porcentaje(c) === 0)
-    .sort((a, b) => (reciente && a.area === reciente.area ? -1 : 0) - (reciente && b.area === reciente.area ? -1 : 0)).slice(0, 4);
+  // Primero lo que dijo en la entrevista inicial; si no la contestó (o ya agotó esas áreas), lo cercano a lo que estudia.
+  const intereses = interesesDelMiembro();
+  const sinEmpezar = (c: typeof cursos[number]) => !Progreso.completado(c) && Progreso.porcentaje(c) === 0;
+  const porIntereses = cursosPorIntereses(intereses, 4, { excluir: (c) => !sinEmpezar(c) });
+  const relleno = cursos.filter((c) => sinEmpezar(c) && !porIntereses.includes(c))
+    .sort((a, b) => (reciente && a.area === reciente.area ? -1 : 0) - (reciente && b.area === reciente.area ? -1 : 0));
+  const recomendados = [...porIntereses, ...relleno].slice(0, 4);
+  const tituloRecs = porIntereses.length ? `Según tus intereses: <em>${esc(etiquetaIntereses(intereses).toLowerCase())}</em>` : reciente ? `Sigue con <em>${esc(reciente.area.toLowerCase())}</em> y más` : 'Empieza por <em>aquí</em>';
 
   return `
   <section class="stack" style="gap:20px">
@@ -111,7 +118,7 @@ export function inicio() {
   </section>` : ''}
 
   <section class="stack" style="gap:20px">
-    ${encabezado('Recomendado para ti', reciente ? `Sigue con <em>${esc(reciente.area.toLowerCase())}</em> y más` : 'Empieza por <em>aquí</em>', `<a class="section-head__cta" href="#/cursos">Ver los ${cursos.length} cursos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>`)}
+    ${encabezado('Recomendado para ti', tituloRecs, `<a class="section-head__cta" href="${porIntereses.length ? '#/cursos?tab=para-ti' : '#/cursos'}">Ver los ${cursos.length} cursos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>`)}
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${recomendados.map(tarjetaCurso).join('')}</div>
   </section>`;
 }
