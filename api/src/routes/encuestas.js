@@ -1,5 +1,5 @@
 import express from 'express';
-import { COL, estadoMembresia } from '../datos.js';
+import { COL, estadoMembresia, leerDoc } from '../datos.js';
 import { DIA_MS, aMillis } from '../lib/fechas.js';
 import {
   ENCUESTAS,
@@ -47,16 +47,22 @@ const estaPospuesta = (estado, clave, ahoraMs) => {
 async function calcularPendientes(ctx, usuario) {
   if (usuario.esAdmin) return { pendientes: [], respondidas: [], vip: false, perfil: null };
   const estado = await estadoEncuestas(ctx, usuario.uid);
-  const [respuestasSnap, progresoSnap, cursosSnap, membresia] = await Promise.all([
+  const [respuestasSnap, progresoSnap, cursosSnap, membresia, perfilCuenta] = await Promise.all([
     ctx.db.collection(COL.encuestasRespuestas).where('uid', '==', usuario.uid).get(),
     ctx.db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
     ctx.db.collection(COL.cursos).get(),
     estadoMembresia(ctx, usuario),
+    leerDoc(ctx.db, COL.perfiles, usuario.uid),
   ]);
   const respondidas = new Set(respuestasSnap.docs.map((d) => d.data().clave));
   // Perfil de la entrevista inicial (sin PII) para personalizar el club: intereses, objetivo, formato, etapa y reto.
   const docBienvenida = respuestasSnap.docs.map((d) => d.data()).filter((r) => r.encuestaId === ENCUESTAS.bienvenida.id).sort((a, b) => String(b.enviado).localeCompare(String(a.enviado)))[0];
-  const perfil = docBienvenida ? Object.fromEntries(['intereses', 'objetivo', 'formato', 'situacion', 'reto'].filter((k) => docBienvenida.respuestas?.[k] !== undefined).map((k) => [k, docBienvenida.respuestas[k]])) : null;
+  const perfilInicial = docBienvenida ? Object.fromEntries(['intereses', 'objetivo', 'formato', 'situacion', 'reto'].filter((k) => docBienvenida.respuestas?.[k] !== undefined).map((k) => [k, docBienvenida.respuestas[k]])) : null;
+  // La entrevista conserva el dato histórico; el perfil puede guardar preferencias actuales editables.
+  const interesesActuales = Array.isArray(perfilCuenta?.intereses) && perfilCuenta.intereses.length ? perfilCuenta.intereses : null;
+  const perfil = perfilInicial || interesesActuales
+    ? { ...(perfilInicial ?? {}), ...(interesesActuales ? { intereses: interesesActuales } : {}) }
+    : null;
   const titulos = new Map(cursosSnap.docs.map((d) => [d.id, d.data().titulo || d.id]));
   const ahoraMs = ctx.now().getTime();
   const salida = [];

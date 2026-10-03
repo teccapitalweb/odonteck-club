@@ -134,6 +134,7 @@ export function preguntaAplica(p: PreguntaEncuesta, respuestas: Record<string, u
 
 const ESTADO_KEY = 'odonteck-club:encuestas-estado:v1';
 const RESPUESTAS_KEY = 'odonteck-club:encuestas-respuestas:v1';
+const INTERESES_KEY = 'odonteck-club:intereses:v1';
 const DIA = 864e5;
 interface EstadoDemo { primeraVista: string; respondidas: string[]; pospuestas: Record<string, string>; veces?: Record<string, number> }
 interface RespuestaDemo { clave: string; encuestaId: string; version: number; tipo: string; cursoId?: string | null; cursoTitulo?: string | null; vip?: boolean; correoContacto?: string; respuestas: Record<string, unknown>; enviado: string }
@@ -180,7 +181,11 @@ export async function cargarEncuestas(forzar = false) {
     estado.respondidas = estadoDemo().respondidas;
     estado.vip = Auth.usuario?.esVip ?? null;
     const bienvenida = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []).filter((d) => d.encuestaId === PLANTILLAS.bienvenida.id).sort((a, b) => b.enviado.localeCompare(a.enviado))[0];
-    estado.perfil = bienvenida ? Object.fromEntries(CAMPOS_PERFIL.filter((k) => bienvenida.respuestas[k] !== undefined).map((k) => [k, bienvenida.respuestas[k]])) as PerfilEncuesta : null;
+    const perfilInicial = bienvenida ? Object.fromEntries(CAMPOS_PERFIL.filter((k) => bienvenida.respuestas[k] !== undefined).map((k) => [k, bienvenida.respuestas[k]])) as PerfilEncuesta : null;
+    const interesesActuales = leer<string[] | null>(INTERESES_KEY, null);
+    estado.perfil = perfilInicial || interesesActuales
+      ? { ...(perfilInicial ?? {}), ...(interesesActuales?.length ? { intereses: interesesActuales } : {}) }
+      : null;
   }
   estado.cargado = true;
 }
@@ -191,6 +196,21 @@ export function esVipParaEncuestas() { return estado.vip ?? Auth.usuario?.esVip 
 /** Si ya respondió alguna versión/periodo de una encuesta (p. ej. 'experiencia'): alimenta el logro "Voz del club". */
 /** Perfil de la entrevista inicial, o null si no la ha contestado. */
 export function perfilEncuesta() { return estado.perfil; }
+export function opcionesIntereses() {
+  return PLANTILLAS.bienvenida.preguntas.find((p) => p.id === 'intereses')!.opciones!;
+}
+export async function guardarIntereses(intereses: string[]) {
+  const validos = new Set(opcionesIntereses().map((o) => o.valor));
+  if (intereses.length < 1 || intereses.length > 3) throw new Error('Elige entre 1 y 3 intereses.');
+  if (new Set(intereses).size !== intereses.length || intereses.some((valor) => !validos.has(valor))) throw new Error('Hay intereses no válidos o repetidos.');
+  let guardados = [...intereses];
+  if (Datos.modo === 'api') {
+    const r = await api<{ intereses: string[] }>('/me/intereses', { method: 'PATCH', json: { intereses } });
+    guardados = r.intereses;
+  } else guardar(INTERESES_KEY, guardados);
+  estado.perfil = { ...(estado.perfil ?? {}), intereses: guardados };
+  return guardados;
+}
 export function encuestaRespondida(id: string) { return estado.respondidas.some((c) => c === id || c.startsWith(`${id}-`)); }
 
 export async function responderEncuesta(encuesta: EncuestaPendiente, respuestas: Record<string, unknown>) {

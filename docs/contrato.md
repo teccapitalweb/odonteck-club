@@ -48,7 +48,9 @@ La API v2 busca primero por el UID autenticado y después por el correo verifica
 o bien una cortesía nueva vigente en `v2_cortesias/{uid}.hasta > ahora`, o claim `admin`.
 
 ### `v2_perfiles/{uid}`
-`{ nombre, whatsapp, especialidad, ciudad, avisos: { enVivo, nuevos, comunidad }, actualizado }`
+`{ nombre, whatsapp, especialidad, ciudad, intereses?: string[] (1 a 3 valores válidos de bienvenida-v2), avisos: { enVivo, nuevos, comunidad }, actualizado }`
+
+`intereses` representa la preferencia actual editable del miembro. No reescribe la respuesta histórica de `bienvenida-v2`, para conservar comparables los agregados de la entrevista inicial.
 
 ### `v2_cursos/{cursoId}`
 ```
@@ -116,6 +118,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/health` **pública** | `{ ok: true }` |
 | GET | `/me` | `{ uid, email, esVip, esAdmin, plan, vence, perfil }` |
 | PATCH | `/me/perfil` | `{ nombre?, whatsapp?, especialidad?, ciudad?, avisos? }` → perfil |
+| PATCH | `/me/intereses` | `{ intereses: string[] }` (1 a 3 valores únicos y válidos) → `{ intereses }`; guarda la preferencia actual sin alterar la entrevista inicial |
 | GET | `/catalogo` | `{ cursos: Curso[] (sin videoId), materiales: Material[], eventos: Evento[], config }` |
 | GET | `/progreso` | `{ [cursoId]: { vistas, ultima, historial, actualizado } }` |
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
@@ -132,7 +135,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/foro/:id/respuestas` | `{ texto }` → Respuesta |
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
-| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: intereses, objetivo, formato, situacion, reto) |
+| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
 | POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada |
 | POST | `/encuestas/:clave/posponer` | → difiere el recordatorio sin bloquear al miembro |
 | POST | `/stripe/checkout` | `{ plan: 'mensual'|'anual' }` → `{ url }` |

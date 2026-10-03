@@ -103,6 +103,22 @@ describe('/me y perfil', () => {
     await request(env.app).patch('/me/perfil').set(bearer(TOKENS.vip)).send({ nombre: '<img src=x>' }).expect(400);
     await request(env.app).patch('/me/perfil').set(bearer(TOKENS.vip)).send({ whatsapp: 'no es tel' }).expect(400);
   });
+
+  test('PATCH /me/intereses valida, guarda en v2_perfiles y sobrevive a otros cambios de perfil', async () => {
+    const antes = env.db.leer('miembros/vip1');
+    const res = await request(env.app).patch('/me/intereses').set(bearer(TOKENS.vip))
+      .send({ intereses: ['ortodoncia', 'endodoncia', 'cirugia'] }).expect(200);
+    assert.deepEqual(res.body, { intereses: ['ortodoncia', 'endodoncia', 'cirugia'] });
+    assert.deepEqual(env.db.leer('v2_perfiles/vip1').intereses, ['ortodoncia', 'endodoncia', 'cirugia']);
+
+    for (const intereses of [[], ['ortodoncia', 'ortodoncia'], ['ortodoncia', 'endodoncia', 'cirugia', 'periodoncia'], ['no-existe']]) {
+      await request(env.app).patch('/me/intereses').set(bearer(TOKENS.vip)).send({ intereses }).expect(400);
+    }
+
+    await request(env.app).patch('/me/perfil').set(bearer(TOKENS.vip)).send({ ciudad: 'Puebla' }).expect(200);
+    assert.deepEqual(env.db.leer('v2_perfiles/vip1').intereses, ['ortodoncia', 'endodoncia', 'cirugia']);
+    assert.deepEqual(env.db.leer('miembros/vip1'), antes);
+  });
 });
 
 describe('encuestas de miembro', () => {
@@ -133,6 +149,10 @@ describe('encuestas de miembro', () => {
     // El perfil de la entrevista vuelve al cliente para personalizar el club, sin nada identificable.
     assert.deepEqual(despues.body.perfil, { intereses: ['diagnostico', 'ortodoncia'], objetivo: 'practica', formato: ['video', 'casos'], situacion: 'estudiante', reto: 'tiempo' });
     assert.equal(pendientes.body.perfil, null);
+    await request(env.app).patch('/me/intereses').set(bearer(TOKENS.free)).send({ intereses: ['endodoncia'] }).expect(200);
+    const actualizado = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.deepEqual(actualizado.body.perfil.intereses, ['endodoncia']);
+    assert.deepEqual(env.db.leer('v2_encuestas_respuestas/free1__bienvenida-v2').respuestas.intereses, ['diagnostico', 'ortodoncia']);
     await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(409);
   });
 

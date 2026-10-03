@@ -10,6 +10,7 @@ import './styles/arcade.css';
 import './styles/encuestas.css';
 import './styles/bienvenida.css';
 import './styles/encuesta-modal.css';
+import './styles/perfil.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -35,7 +36,7 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub } from './core/remoto';
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
-import { cargarEncuestas, encuestaPendiente, reiniciarEncuestas } from './core/encuestas';
+import { cargarEncuestas, encuestaPendiente, guardarIntereses, reiniciarEncuestas } from './core/encuestas';
 import { mostrarEncuestaPendiente } from './ui/encuesta';
 import { bienvenida, montarBienvenida, DESTINO_KEY } from './pages/bienvenida';
 import { certificados, certificado, verificar } from './pages/certificados';
@@ -317,6 +318,26 @@ document.addEventListener('click', async (e) => {
 function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); navigate(v === '/login' ? '/' : v); render(); }
 function mostrarErrorLogin(err: unknown) { const p = document.querySelector<HTMLElement>('[data-login-error]'); if (p) { p.hidden = false; p.textContent = mensajeError(err); } else toast(mensajeError(err), 'alert-triangle'); }
 
+document.addEventListener('change', (e) => {
+  const input = e.target as HTMLInputElement;
+  if (!input.matches('[data-form-intereses] input[name="intereses"]')) return;
+  const form = input.closest<HTMLFormElement>('[data-form-intereses]')!;
+  let elegidos = [...form.querySelectorAll<HTMLInputElement>('input[name="intereses"]:checked')];
+  if (elegidos.length > 3) {
+    input.checked = false;
+    elegidos = elegidos.filter((x) => x !== input);
+    toast('Puedes elegir hasta 3 intereses.', 'alert-triangle');
+  }
+  const completo = elegidos.length >= 3;
+  form.querySelectorAll<HTMLInputElement>('input[name="intereses"]').forEach((opcion) => {
+    opcion.disabled = completo && !opcion.checked;
+    opcion.closest('label')?.querySelector('[data-lucide]')?.setAttribute('data-lucide', opcion.checked ? 'check' : 'plus');
+  });
+  const contador = form.querySelector<HTMLElement>('[data-intereses-contador]');
+  if (contador) contador.textContent = `${elegidos.length}/3`;
+  createIcons({ icons });
+});
+
 document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
   if (f.matches('[data-search]')) {
@@ -414,6 +435,20 @@ document.addEventListener('submit', async (e) => {
       } else Perfil.set(cambios);
       remontar(); toast('Perfil guardado', 'check');
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+  }
+  if (f.matches('[data-form-intereses]')) {
+    e.preventDefault();
+    const intereses = new FormData(f).getAll('intereses').map(String);
+    const btn = f.querySelector<HTMLButtonElement>('button[type="submit"], button:not([type])');
+    if (btn) btn.disabled = true;
+    try {
+      await guardarIntereses(intereses);
+      remontar();
+      toast('Tus intereses quedaron actualizados.', 'sparkles');
+    } catch (err) {
+      toast(mensajeError(err), 'alert-triangle');
+      if (btn) btn.disabled = false;
+    }
   }
 });
 

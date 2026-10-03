@@ -2,11 +2,11 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 2 de octubre de 2026 (encuestas versionadas y página de bienvenida `#/bienvenida` implementadas y verificadas localmente; pendiente despliegue y smoke autenticado)
+- **Actualizado:** 3 de octubre de 2026 (intereses editables conectados a recomendaciones; pendiente despliegue y smoke autenticado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
-- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 97 pruebas (96 exitosas, 0 fallos y 1 omitida por requerir emuladores). La bienvenida se recorrió en demo en escritorio (1440 px) y móvil (375 px): flujo completo, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 102 pruebas (101 exitosas, 0 fallos y 1 omitida por requerir emuladores). La bienvenida y la edición de intereses se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -41,7 +41,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Búsqueda global (`#/buscar?q=...`) que busca cursos, clases y materiales.
 - Verificación pública de certificados (`#/verificar/:folio`) sin requerir autenticación.
 - Logros, progreso y certificados.
-- Perfil, configuración, suscripción y promoción de Praxia.
+- Perfil con intereses editables, configuración, suscripción y promoción de Praxia.
 - PWA con manifest, service worker, iconos y acceso de instalación.
 - Panel admin completo: en demo conserva `localStorage`; con `VITE_API_URL` usa los endpoints autenticados `/admin/*`.
 - Encuestas de entrevista inicial (gustos y perfil), fin de curso y experiencia en la plataforma (`experiencia-v2`, 12 preguntas base más condicionales: uso, dispositivo, facilidad, problemas técnicos y su detalle, calidad, duración, nivel, qué sirve, qué no ha usado, qué falta, NPS 0-10 con motivo para 0-6, renovación para VIP o qué lo haría VIP para gratis, opt-in de contacto para 0-6 y comentario; sale a los 21 días o desde el día 7 con 8 clases, se repite cada trimestre y calla tras 2 aplazamientos), con opción de posponer y panel de resultados agregados.
@@ -81,6 +81,7 @@ En modo API el frontend utiliza:
 - `/materiales/:id/descarga` para URLs firmadas;
 - `/eventos/:id/reservar` para reservaciones;
 - `PATCH /me/perfil` para perfil y avisos;
+- `PATCH /me/intereses` para cambiar de uno a tres intereses sin reescribir la entrevista inicial;
 - `/stripe/portal` para gestión de una suscripción existente.
 - `/encuestas/pendientes`, `/encuestas/:clave/responder` y `/encuestas/:clave/posponer` para el flujo de miembro;
 - `/admin/resumen`, CRUD de cursos/materiales/eventos, quizzes, miembros/cortesías, moderación, avisos y config cuando la ruta es administrativa;
@@ -95,7 +96,7 @@ La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso
 - **Búsqueda global** (`src/pages/buscar.ts`): busca en cursos (vía `buscar()` de catalogo.ts), clases dentro de cursos y materiales disponibles. Resultados agrupados por tipo con conteo. La barra de búsqueda del header redirige a `#/buscar?q=...`.
 - **Verificación pública** (`src/pages/certificados.ts → verificar()`): página pública sin login, usa `montar('solo')`. Muestra certificado válido (verde) o no encontrado (rojo). Auth bypass en `onBeforeRender`.
 - **Flashcards mejoradas** (`src/core/juegos.ts` + `src/pages/retos.ts`): motor SR corregido (bug off-by-one en intervalos), intervalos extendidos hasta 365 días, calificación de 3 niveles (otra vez / difícil / fácil), mazo barajado, undo con Ctrl+Z, atajos de teclado (Espacio, 1/2/3), estadísticas de sesión en pantalla final.
-- **Bienvenida** (`src/pages/bienvenida.ts` + `src/styles/bienvenida.css`, octubre 2026): mientras la entrevista `bienvenida-v2` esté pendiente, `onBeforeRender` redirige cualquier ruta de miembro a `#/bienvenida` (cascarón `solo`). Portada, siete pasos (etapa, experiencia, cómo conoció OdonTeck, objetivo, intereses, formato preferido y reto) y cierre con hasta tres cursos sugeridos según los intereses. Los logotipos de Instagram, Facebook, TikTok, Google y WhatsApp son SVG locales, sin peticiones externas. Guarda un borrador en `sessionStorage`, permite regresar, avanza sola al elegir una opción única y se puede posponer 3 días (“Responder después”). Las preguntas y opciones viven en la plantilla versionada (`api/src/lib/encuestas.js` y su espejo demo en `src/core/encuestas.ts`); la página sólo aporta presentación. Los administradores no la reciben en modo API. La v1 de cinco preguntas nunca se desplegó. `/encuestas/pendientes` devuelve además `perfil` (intereses, objetivo, formato, etapa y reto, sin PII); `src/core/recomendaciones.ts` lo usa para la sección "Recomendado para ti" del inicio (según intereses, con relleno por área cercana) y la pestaña "Para ti" del catálogo (`#/cursos?tab=para-ti`).
+- **Bienvenida** (`src/pages/bienvenida.ts` + `src/styles/bienvenida.css`, octubre 2026): mientras la entrevista `bienvenida-v2` esté pendiente, `onBeforeRender` redirige cualquier ruta de miembro a `#/bienvenida` (cascarón `solo`). Portada, siete pasos (etapa, experiencia, cómo conoció OdonTeck, objetivo, intereses, formato preferido y reto) y cierre con hasta tres cursos sugeridos según los intereses. Los logotipos de Instagram, Facebook, TikTok, Google y WhatsApp son SVG locales, sin peticiones externas. Guarda un borrador en `sessionStorage`, permite regresar, avanza sola al elegir una opción única y se puede posponer 3 días (“Responder después”). Las preguntas y opciones viven en la plantilla versionada (`api/src/lib/encuestas.js` y su espejo demo en `src/core/encuestas.ts`); la página sólo aporta presentación. Los administradores no la reciben en modo API. La v1 de cinco preguntas nunca se desplegó. `/encuestas/pendientes` devuelve además `perfil` (intereses, objetivo, formato, etapa y reto, sin PII); `src/core/recomendaciones.ts` lo usa para la sección "Recomendado para ti" del inicio (según intereses, con relleno por área cercana) y la pestaña "Para ti" del catálogo (`#/cursos?tab=para-ti`). Desde `#/perfil`, el miembro puede cambiar de uno a tres intereses: en API se guardan en `v2_perfiles` y en demo en una clave separada de `localStorage`; la respuesta original de `bienvenida-v2` queda inmutable para conservar el valor histórico de la encuesta.
 - **Iconos custom**: Quiz, Detective Dental, Flashcards y Reto Diario usan imágenes generadas (`public/brand/icon-*.jpg`) con efecto glow CSS en lugar de iconos Lucide genéricos.
 
 ## 3. Arquitectura

@@ -5,6 +5,7 @@ import { cursos } from '../core/catalogo';
 import { puntos } from '../core/logros';
 import { esc } from '../ui/partials';
 import { Auth } from '../core/auth';
+import { opcionesIntereses, perfilEncuesta } from '../core/encuestas';
 
 export function praxia() {
   return `
@@ -34,6 +35,8 @@ export function praxia() {
 
 export function perfil() {
   const p = Perfil.get();
+  const intereses = perfilEncuesta()?.intereses ?? [];
+  const opciones = opcionesIntereses();
   const plan = BRAND.planes.find((x) => x.id === p.plan);
   const esCortesia = p.plan === 'cortesia';
   const esAdmin = p.plan === 'admin';
@@ -48,7 +51,8 @@ export function perfil() {
   return `
   <section class="stack" style="gap:20px;max-width:900px">
     <div class="section-head"><div><span class="chip chip--primary">Mi perfil</span><h1 class="display" style="font-size:var(--fs-2xl)">Hola, <em>${esc(Perfil.primerNombre())}</em></h1></div></div>
-    <div class="grid" style="grid-template-columns:1fr 320px;gap:20px;align-items:start">
+    <div class="grid perfil-grid">
+      <div class="stack" style="gap:20px;min-width:0">
       <form class="card card--pad stack" data-form-perfil style="gap:14px">
         <div class="row" style="gap:14px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><strong>Foto de perfil</strong><br><span class="faint" style="font-size:var(--fs-xs)">Se sube desde el admin en la Fase 2 · por ahora, iniciales</span></div></div>
         <div class="field"><label>Nombre completo (así saldrá en tus certificados)</label><input class="input" name="nombre" value="${esc(p.nombre)}" required maxlength="60" placeholder="Dra. Nombre Apellido Apellido"></div>
@@ -59,6 +63,20 @@ export function perfil() {
         <div class="field"><label>Ciudad</label><input class="input" name="ciudad" value="${esc(p.ciudad)}" placeholder="Puebla, Pue."></div>
         <div class="row" style="justify-content:flex-end"><button class="btn btn--brand btn--pill-arrow">Guardar cambios <span class="arrow"><i data-lucide="check" class="i"></i></span></button></div>
       </form>
+      <form class="card card--pad stack intereses-editor" data-form-intereses style="gap:16px">
+        <div class="row" style="align-items:flex-start;justify-content:space-between;gap:16px">
+          <div><span class="eyebrow">Personalización</span><h2 style="font-size:var(--fs-lg);margin-top:4px">Mis intereses</h2><p class="muted" style="font-size:var(--fs-sm);margin-top:5px">Actualiza lo que quieres ver primero en Inicio y en el catálogo “Para ti”.</p></div>
+          <span class="chip" data-intereses-contador>${intereses.length}/3</span>
+        </div>
+        <fieldset class="intereses-editor__opciones"><legend class="sr-only">Elige entre uno y tres intereses</legend>
+          ${opciones.map((o) => {
+            const activo = intereses.includes(o.valor);
+            return `<label class="interes-chip"><input type="checkbox" name="intereses" value="${esc(o.valor)}" ${activo ? 'checked' : ''} ${intereses.length >= 3 && !activo ? 'disabled' : ''}><span><i data-lucide="${activo ? 'check' : 'plus'}" class="i"></i>${esc(o.etiqueta)}</span></label>`;
+          }).join('')}
+        </fieldset>
+        <div class="row" style="justify-content:space-between;gap:12px;flex-wrap:wrap"><span class="faint" style="font-size:var(--fs-xs)">Elige de 1 a 3. Puedes cambiarlos cuando quieras.</span><button class="btn btn--brand btn--pill-arrow">Guardar intereses <span class="arrow"><i data-lucide="sparkles" class="i"></i></span></button></div>
+      </form>
+      </div>
       <div class="stack">
         <div class="card card--pad stack" style="gap:10px;background:var(--brand-navy);color:#fff;border:0">
           <span class="eyebrow" style="color:var(--brand-teal)">Tu membresía</span>

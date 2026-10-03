@@ -122,6 +122,7 @@ export function perfilConDefectos(perfil, miembro, usuario) {
     whatsapp: perfil?.whatsapp ?? miembro?.whatsapp ?? '',
     especialidad: perfil?.especialidad ?? '',
     ciudad: perfil?.ciudad ?? '',
+    intereses: Array.isArray(perfil?.intereses) ? perfil.intereses : [],
     avisos: { ...AVISOS_POR_DEFECTO, ...(perfil?.avisos ?? {}) },
     actualizado: perfil?.actualizado ?? null,
   };

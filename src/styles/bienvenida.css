@@ -6,7 +6,7 @@
 .bv {
   --bv-resorte: cubic-bezier(.34, 1.56, .64, 1);
   position: relative; isolation: isolate;
-  display: grid; grid-template-columns: minmax(340px, 5fr) 7fr; min-height: 100dvh; background: var(--bg);
+  display: grid; grid-template-columns: minmax(340px, 5fr) 7fr; min-height: 100dvh; overflow-x: clip; background: var(--bg);
 }
 .bv h2:focus-visible { box-shadow: none; }
 /* Luz ambiental: dos manchas de marca que derivan muy despacio detrás de las preguntas. */

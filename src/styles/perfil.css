@@ -1,0 +1,51 @@
+/* Perfil: preferencias editables que alimentan Inicio y el catálogo "Para ti". */
+.perfil-grid {
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.intereses-editor__opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.interes-chip { position: relative; cursor: pointer; }
+.interes-chip input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.interes-chip span {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast), transform var(--t-fast), opacity var(--t-fast);
+}
+.interes-chip .i { width: 15px; height: 15px; }
+.interes-chip:hover span { border-color: var(--line-strong); transform: translateY(-1px); }
+.interes-chip input:focus-visible + span { box-shadow: var(--ring); }
+.interes-chip input:checked + span { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); }
+.interes-chip input:disabled + span { opacity: .45; cursor: not-allowed; transform: none; }
+
+@media (max-width: 720px) {
+  .intereses-editor__opciones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .interes-chip span { width: 100%; justify-content: flex-start; border-radius: var(--r-md); }
+}
+
+@media (max-width: 900px) {
+  .perfil-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 420px) {
+  .intereses-editor__opciones { grid-template-columns: minmax(0, 1fr); }
+}

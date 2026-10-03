@@ -10,6 +10,7 @@ import { firmarEmbedBunny } from '../lib/bunny.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
+import { ENCUESTAS } from '../lib/encuestas.js';
 import {
   LIMITES,
   booleano,
@@ -39,6 +40,7 @@ import { h } from '../middleware/errores.js';
 const MAX_HISTORIAL = 500;
 const APROBATORIO = 0.7;
 const WHATSAPP = /^\+?[\d\s().-]{7,20}$/;
+const INTERESES_VALIDOS = new Set(ENCUESTAS.bienvenida.preguntas.find((p) => p.id === 'intereses').opciones.map((o) => o.valor));
 
 const requiereVip = (mensaje = 'Esta función es exclusiva para miembros VIP.') => new HttpError(403, 'requiere_vip', mensaje);
 
@@ -91,6 +93,24 @@ export function rutasMiembro(ctx) {
     };
     await db.collection(COL.perfiles).doc(u.uid).set(perfil);
     res.json(perfil);
+  }));
+
+  r.patch('/me/intereses', auth, h(async (req, res) => {
+    const u = req.usuario;
+    const intereses = cuerpo(req).intereses;
+    if (!Array.isArray(intereses) || intereses.length < 1 || intereses.length > 3) {
+      throw invalido('"intereses" debe incluir entre 1 y 3 opciones.');
+    }
+    if (intereses.some((valor) => typeof valor !== 'string' || !INTERESES_VALIDOS.has(valor))) {
+      throw invalido('"intereses" contiene una opción no válida.');
+    }
+    if (new Set(intereses).size !== intereses.length) throw invalido('"intereses" no debe contener opciones repetidas.');
+
+    const [actual, miembro] = await Promise.all([leerDoc(db, COL.perfiles, u.uid), leerMiembroHeredado(ctx, u)]);
+    const base = perfilConDefectos(actual, miembro, u);
+    const perfil = { ...base, intereses: [...intereses], actualizado: ctx.now().toISOString() };
+    await db.collection(COL.perfiles).doc(u.uid).set(perfil);
+    res.json({ intereses: perfil.intereses });
   }));
 
   // ---------- Catálogo ----------
