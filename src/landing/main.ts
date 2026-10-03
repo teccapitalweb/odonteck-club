@@ -6,9 +6,13 @@ import '../styles/base.css';
 import '../styles/components.css';
 import '../styles/active.css';
 import '../styles/landing.css';
+import '../styles/landing-guia.css';
 import { createIcons, icons } from 'lucide';
 import cursos from './cursos-en-vivo.json';
 import { Datos } from '../core/datos';
+import { cargarDatosGuia, type DatosGuia, type EstadoGuia } from './guia-datos';
+import { montarGuia } from './guia';
+import { montarMovimientoGuia } from './movimiento-guia';
 
 const WA_SITIO = '5212381479365';
 const CLUB = (import.meta.env.VITE_CLUB_URL as string | undefined)?.replace(/\/$/, '') || '';
@@ -137,6 +141,21 @@ document.querySelector('[data-opiniones]')!.innerHTML = OPINIONES.map((o, i) => 
   </figure>`).join('');
 
 createIcons({ icons });
+
+// ── Alex, guía virtual de la landing ──
+let datosGuia: DatosGuia | null = null;
+let estadoGuia: EstadoGuia = 'cargando';
+const guia = montarGuia(() => ({ datos: datosGuia, estado: estadoGuia }));
+const raizGuia = document.querySelector<HTMLElement>('#assistant-root');
+if (raizGuia) montarMovimientoGuia(raizGuia);
+void cargarDatosGuia().then((datos) => {
+  datosGuia = datos;
+  estadoGuia = 'listo';
+  guia.actualizar();
+}).catch(() => {
+  estadoGuia = 'error';
+  guia.actualizar();
+});
 
 // ── Interacciones ──
 document.addEventListener('click', (e) => {

@@ -61,6 +61,12 @@ o bien una cortesía nueva vigente en `v2_cortesias/{uid}.hasta > ahora`, o clai
 ```
 El `videoId` **nunca** sale al cliente de miembros: `/catalogo` lo elimina.
 
+La landing no consume `/catalogo` de miembro ni Firestore desde el navegador. Su ruta pública
+`/landing/catalogo` aplica una lista blanca propia, devuelve sólo cursos `publicado === true`,
+rechaza portadas externas y jamás expone `videoId`, IDs de Bunny, miembros, reservas ni IDs de Stripe.
+Los precios se confirman contra Stripe cuando está configurado; si no se pueden verificar, son `null`
+y el cliente muestra “Por confirmar” en lugar de inventar un importe.
+
 ### `v2_progreso/{uid}_{cursoId}`
 `{ uid, cursoId, vistas: number[], ultima: number, historial: ISO[], actualizado }`
 
@@ -116,6 +122,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | Método | Ruta | Cuerpo / respuesta |
 |---|---|---|
 | GET | `/health` **pública** | `{ ok: true }` |
+| GET | `/landing/catalogo` **pública** | `{ fuente:'api', verificadoEn, cursos:[{ id,titulo,area,imagen,nivel,instructor,descripcion,clases,accesoGratis }], planes:{ mensual,anual } }` |
 | GET | `/me` | `{ uid, email, esVip, esAdmin, plan, vence, perfil }` |
 | PATCH | `/me/perfil` | `{ nombre?, whatsapp?, especialidad?, ciudad?, avisos? }` → perfil |
 | PATCH | `/me/intereses` | `{ intereses: string[] }` (1 a 3 valores únicos y válidos) → `{ intereses }`; guarda la preferencia actual sin alterar la entrevista inicial |

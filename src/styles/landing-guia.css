@@ -1,0 +1,203 @@
+#assistant-root {
+  --oguia-navy: #102f43;
+  --oguia-navy-deep: #092333;
+  --oguia-teal: #13a89e;
+  --oguia-mint: #dff7f3;
+  --oguia-cream: #fffdf7;
+  --oguia-line: rgba(16, 47, 67, .12);
+  --oguia-shadow: 0 24px 70px rgba(5, 31, 45, .24);
+  position: relative;
+  z-index: 1000;
+  font-family: 'Inter Variable', Inter, sans-serif;
+}
+
+.oguia-launcher {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  width: 302px;
+  height: 146px;
+  padding: 0 18px 0 132px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 32px;
+  overflow: visible;
+  color: white;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(78, 215, 200, .25), transparent 42%),
+    linear-gradient(145deg, var(--oguia-navy) 0%, var(--oguia-navy-deep) 100%);
+  box-shadow: 0 20px 46px rgba(5, 31, 45, .3);
+  text-align: left;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.oguia-launcher:hover { transform: translateY(-4px); box-shadow: 0 26px 56px rgba(5, 31, 45, .36); }
+.oguia-launcher:focus-visible,
+.oguia-icono:focus-visible,
+.oguia-opciones :is(button, a):focus-visible,
+.oguia-compositor :is(input, button):focus-visible,
+.oguia-footer button:focus-visible { outline: 3px solid #5be4d5; outline-offset: 3px; }
+.oguia-launcher__copy { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
+.oguia-launcher__copy small { display: flex; align-items: center; gap: 5px; color: #91e9df; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.oguia-launcher__copy small svg { width: 13px; height: 13px; }
+.oguia-launcher__copy strong { font-family: 'Outfit Variable', sans-serif; font-size: 20px; line-height: 1.05; }
+.oguia-launcher__copy > span { display: flex; align-items: center; gap: 5px; color: rgba(255,255,255,.7); font-size: 12px; }
+.oguia-launcher__copy > span svg { width: 13px; }
+
+.oguia-personaje {
+  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v01.png');
+  position: absolute;
+  z-index: 3;
+  left: -13px;
+  bottom: -4px;
+  width: 155px;
+  height: 196px;
+  pointer-events: none;
+  background: var(--oguia-imagen) center bottom / contain no-repeat;
+  filter: drop-shadow(0 14px 12px rgba(3, 23, 34, .24));
+  transform-origin: center bottom;
+}
+.oguia-personaje.motion-ready { background-image: none; }
+.oguia-rig { display: block; width: 100%; height: 100%; overflow: visible; }
+.oguia-rig[hidden] { display: none; }
+.oguia-postura-salida .oguia-personaje { opacity: .35; transform: translateY(3px) scale(.985); }
+.oguia-postura-entrada .oguia-personaje { animation: oguia-entrada .28s ease-out both; }
+@keyframes oguia-entrada { from { opacity: .3; transform: translateY(5px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.oguia-saludo {
+  position: fixed;
+  right: 24px;
+  bottom: 180px;
+  width: 236px;
+  padding: 15px 42px 15px 17px;
+  border: 1px solid var(--oguia-line);
+  border-radius: 18px 18px 5px 18px;
+  background: rgba(255, 253, 247, .96);
+  box-shadow: 0 14px 36px rgba(5, 31, 45, .18);
+  color: var(--oguia-navy);
+  font-size: 13px;
+}
+.oguia-saludo p { margin: 0; }
+.oguia-saludo .oguia-icono { position: absolute; right: 7px; top: 7px; }
+
+.oguia-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(5, 25, 38, .28); backdrop-filter: blur(4px); }
+.oguia-panel {
+  position: fixed;
+  z-index: 1001;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  width: min(438px, calc(100vw - 40px));
+  height: min(724px, calc(100dvh - 60px));
+  padding-top: 88px;
+  border-radius: 32px;
+  filter: drop-shadow(var(--oguia-shadow));
+}
+.oguia-panel > .oguia-personaje--panel {
+  left: 15px;
+  top: -27px;
+  bottom: auto;
+  width: 151px;
+  height: 193px;
+  z-index: 4;
+}
+.oguia-superficie {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.74);
+  border-radius: 30px;
+  background: rgba(255, 253, 247, .97);
+  box-shadow: inset 0 1px rgba(255,255,255,.8);
+}
+.oguia-header {
+  min-height: 80px;
+  padding: 16px 14px 12px 154px;
+  display: grid;
+  grid-template-columns: minmax(92px, 1fr) 38px 38px 38px;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  background:
+    radial-gradient(circle at 20% -20%, rgba(67, 216, 200, .38), transparent 42%),
+    linear-gradient(135deg, var(--oguia-navy), var(--oguia-navy-deep));
+}
+.oguia-header > div { min-width: 0; display: flex; flex-direction: column; }
+.oguia-header small { color: #8ee4db; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.oguia-header strong { font-family: 'Outfit Variable', sans-serif; font-size: 19px; line-height: 1.1; }
+.oguia-header span { overflow: hidden; color: rgba(255,255,255,.68); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.oguia-icono { width: 38px; height: 38px; display: inline-grid; place-items: center; padding: 0; border: 0; border-radius: 12px; background: rgba(255,255,255,.1); color: currentColor; cursor: pointer; }
+.oguia-icono:hover { background: rgba(255,255,255,.18); }
+.oguia-icono:disabled { opacity: .42; cursor: not-allowed; }
+.oguia-icono svg { width: 16px; height: 16px; }
+.oguia-aviso { padding: 9px 16px; border-bottom: 1px solid var(--oguia-line); background: #effaf8; color: #44616e; font-size: 10px; line-height: 1.35; text-align: center; }
+
+.oguia-mensajes { overflow: auto; padding: 19px 16px 12px; scrollbar-width: thin; scrollbar-color: rgba(16,47,67,.2) transparent; }
+.oguia-mensaje { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 16px; }
+.oguia-mensaje.user { align-items: flex-end; }
+.oguia-mensaje > small { margin: 0 8px 5px; color: #71838b; font-size: 8px; font-weight: 800; letter-spacing: .1em; }
+.oguia-burbuja { max-width: 88%; padding: 11px 13px; border: 1px solid var(--oguia-line); border-radius: 7px 17px 17px; background: white; color: #183c4e; font-size: 13px; line-height: 1.48; white-space: pre-line; }
+.oguia-mensaje.user .oguia-burbuja { border: 0; border-radius: 17px 7px 17px 17px; background: var(--oguia-navy); color: white; }
+.oguia-opciones { width: 100%; display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+.oguia-opciones :is(button, a) { min-height: 36px; padding: 8px 11px; border: 1px solid rgba(19,168,158,.25); border-radius: 999px; background: var(--oguia-mint); color: #0b675f; font: inherit; font-size: 11px; font-weight: 750; text-decoration: none; cursor: pointer; }
+.oguia-opciones :is(button, a):hover { color: white; background: var(--oguia-teal); }
+.oguia-whatsapp { display: inline-flex; align-items: center; gap: 5px; }
+.oguia-whatsapp svg { width: 13px; }
+.oguia-curso { width: 100%; display: grid; grid-template-columns: 66px minmax(0,1fr); gap: 10px; margin-top: 9px; padding: 8px; border: 1px solid var(--oguia-line); border-radius: 15px; background: white; }
+.oguia-curso img { width: 66px; height: 70px; grid-row: 1 / 3; border-radius: 10px; object-fit: cover; background: #e8f5f3; }
+.oguia-curso div { min-width: 0; }
+.oguia-curso small { color: var(--oguia-teal); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.oguia-curso h4 { margin: 2px 0; color: var(--oguia-navy); font-size: 12px; line-height: 1.2; }
+.oguia-curso p { margin: 0; color: #6c7d84; font-size: 10px; }
+.oguia-curso a { justify-self: start; color: #087d74; font-size: 10px; font-weight: 800; text-decoration: none; }
+.oguia-curso a svg { width: 11px; vertical-align: middle; }
+.oguia-planes { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 9px; }
+.oguia-planes div { padding: 11px; border-radius: 13px; background: var(--oguia-navy); color: white; }
+.oguia-planes small { display: block; color: #8ee4db; font-size: 9px; text-transform: uppercase; }
+.oguia-planes strong { display: block; margin-top: 3px; font-size: 12px; }
+.oguia-planes > span { grid-column: 1 / -1; color: #74858c; font-size: 9px; text-align: right; }
+.oguia-nota { width: 100%; margin-top: 9px; padding: 10px; border-radius: 12px; background: #fff4dc; color: #73551b; font-size: 11px; }
+.oguia-escribiendo { display: inline-flex; align-items: center; gap: 4px; margin: 0 0 14px; padding: 9px 12px; border-radius: 14px; background: #edf5f4; color: #587078; font-size: 10px; }
+.oguia-escribiendo span { width: 4px; height: 4px; border-radius: 50%; background: var(--oguia-teal); animation: oguia-punto .9s infinite alternate; }
+.oguia-escribiendo span:nth-child(2) { animation-delay: .15s; }.oguia-escribiendo span:nth-child(3) { animation-delay: .3s; }
+@keyframes oguia-punto { to { transform: translateY(-4px); opacity: .4; } }
+
+.oguia-compositor { display: grid; grid-template-columns: 1fr 42px; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--oguia-line); background: white; }
+.oguia-compositor label { min-width: 0; }
+.oguia-compositor input { width: 100%; height: 42px; padding: 0 13px; border: 1px solid rgba(16,47,67,.15); border-radius: 13px; background: #f7faf9; color: var(--oguia-navy); font: inherit; font-size: 12px; }
+.oguia-compositor button { width: 42px; height: 42px; border: 0; border-radius: 13px; background: var(--oguia-teal); color: white; cursor: pointer; }
+.oguia-compositor button:disabled { opacity: .45; cursor: wait; }
+.oguia-compositor button svg { width: 17px; }
+.oguia-footer { display: flex; justify-content: space-between; padding: 0 13px 11px; background: white; }
+.oguia-footer button { padding: 5px; border: 0; background: transparent; color: #667b83; font: inherit; font-size: 9px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+.oguia-scroll-lock { overflow: hidden !important; }
+body.oguia-scroll-lock { position: fixed; width: 100%; }
+[hidden] { display: none !important; }
+
+@media (max-width: 600px) {
+  .oguia-launcher { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); width: 255px; height: 126px; padding-left: 116px; border-radius: 27px; }
+  .oguia-launcher .oguia-personaje { width: 137px; height: 172px; left: -9px; }
+  .oguia-launcher__copy strong { font-size: 17px; }
+  .oguia-saludo { right: 12px; bottom: 148px; }
+  .oguia-backdrop { background: rgba(4, 25, 38, .48); }
+  .oguia-panel { inset: var(--oguia-top, 8px) 8px auto; width: auto; height: calc(var(--oguia-alto, 100dvh) - 16px); max-height: none; padding-top: 66px; border-radius: 24px; }
+  .oguia-panel > .oguia-personaje--panel { width: 127px; height: 163px; left: 4px; top: -2px; }
+  .oguia-superficie { border-radius: 23px; }
+  .oguia-header { min-height: 75px; padding: 13px 10px 10px 125px; grid-template-columns: minmax(76px,1fr) 36px 36px 36px; gap: 3px; }
+  .oguia-icono { width: 36px; height: 36px; }
+  .oguia-mensajes { padding: 16px 13px 10px; }
+  .oguia-burbuja { max-width: 94%; }
+  .oguia-compositor { padding-bottom: max(9px, env(safe-area-inset-bottom)); }
+  .oguia-panel.compacta { padding-top: 45px; }
+  .oguia-panel.compacta > .oguia-personaje--panel { width: 104px; height: 132px; top: -2px; }
+  .oguia-panel.compacta .oguia-header { min-height: 63px; padding-left: 103px; }
+  .oguia-panel.compacta .oguia-aviso { padding-block: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oguia-launcher, .oguia-personaje, .oguia-escribiendo span { animation: none !important; transition: none !important; }
+}
+
+@supports not (backdrop-filter: blur(4px)) {
+  .oguia-superficie, .oguia-saludo { background: var(--oguia-cream); }
+}
