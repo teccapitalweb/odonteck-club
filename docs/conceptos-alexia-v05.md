@@ -2,6 +2,27 @@
 
 Estas propuestas son exploratorias. Ninguna sustituye todavía a Alexia v04 en la landing.
 
+## E · Gouache editorial
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-e-gouache-editorial.png`
+- Técnica: pintura digital tipo gouache, lápiz de color y textura de lienzo.
+- Vestuario: conserva el conjunto completo del concepto C.
+- Fortaleza: es la propuesta más equilibrada entre belleza, credibilidad y acabado premium.
+
+## F · Acuarela de moda
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-f-acuarela-moda.png`
+- Técnica: tinta expresiva, acuarela translúcida y acabado editorial de moda.
+- Vestuario: conserva el conjunto completo del concepto C.
+- Fortaleza: es la propuesta más delicada, luminosa y artística.
+
+## G · Collage de papel
+
+- Archivo: `/public/asistente/conceptos/alexia-concepto-g-collage-papel.png`
+- Técnica: capas de papel recortado, fibras visibles y sombras de serigrafía.
+- Vestuario: conserva el conjunto completo del concepto C.
+- Fortaleza: es la propuesta más original, táctil y fácil de distinguir del anime.
+
 ## D · Editorial híbrida · recomendada
 
 - Archivo: `/public/asistente/conceptos/alexia-concepto-d-hibrido-editorial.png`
