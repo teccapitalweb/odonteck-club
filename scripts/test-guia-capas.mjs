@@ -33,6 +33,8 @@ for (const postura of ['saludo', 'orientar', 'celebrar']) {
   const inicio = capas.poseGuia(0, 'saludo', postura);
   const fin = capas.poseGuia(3, 'saludo', postura);
   assert.ok(Math.abs(inicio.mano) < 1e-9 && Math.abs(fin.mano) < 1e-9);
+  const maximo = Math.max(...Array.from({ length: 72 }, (_, i) => Math.abs(capas.poseGuia(i / 24, 'saludo', postura).mano)));
+  assert.ok(maximo <= 2.61, `${postura} no debe abrir la unión del brazo: ${maximo}`);
   pruebas++;
 }
 

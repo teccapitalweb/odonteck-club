@@ -3,33 +3,33 @@ export type PosturaGuia = 'saludo' | 'orientar' | 'celebrar';
 export const FOTOGRAMAS_GUIA = 72;
 export const FPS_GUIA = 24;
 
-// Máscaras ajustadas a los tres PNG v05. La mano libre se separa del cuerpo y
-// vuelve a solaparse por el puño para que la rotación no abra una costura.
+// Máscaras ajustadas a los tres PNG v05. El pivote queda dentro del puño y la
+// solapa fija cubre ampliamente la unión para que el antebrazo nunca se separe.
 const POSTURAS = {
   saludo: {
     mano: 'M185 220H350L390 305L392 440L410 505L397 575L355 612L288 590L242 520L190 410Z',
-    puno: 'M285 515L408 492L430 575L382 625L282 600Z',
-    x: 351, y: 566, cuerpoX: 520,
+    puno: 'M238 414L378 407L420 472L423 568L382 625L258 610L232 517Z',
+    x: 319, y: 510, cuerpoX: 520,
   },
   orientar: {
     mano: 'M70 392H250L325 438L385 492L402 568L365 620L302 600L230 550L72 540Z',
-    puno: 'M305 518L405 495L430 590L368 635L300 592Z',
-    x: 358, y: 570, cuerpoX: 520,
+    puno: 'M244 442L374 450L416 508L420 594L366 638L260 610L236 520Z',
+    x: 320, y: 525, cuerpoX: 520,
   },
   celebrar: {
     mano: 'M265 270H395L424 352L416 478L400 558L360 602L302 570L276 500Z',
-    puno: 'M303 510L414 490L436 584L374 628L299 588Z',
-    x: 362, y: 565, cuerpoX: 520,
+    puno: 'M244 420L380 410L420 485L420 580L370 628L255 605L238 515Z',
+    x: 318, y: 514, cuerpoX: 520,
   },
 } satisfies Record<PosturaGuia, { mano: string; puno: string; x: number; y: number; cuerpoX: number }>;
 
 export function poseGuia(segundos: number, gesto: GestoGuia = 'saludo', postura: PosturaGuia = 'saludo') {
   const t = Math.max(0, Math.min(3, segundos));
   const envolvente = Math.sin(Math.PI * t / 3) ** 2;
-  const fuerza = gesto === 'reposo' ? .18 : gesto === 'espera' ? .24 : gesto === 'respuesta' ? .55 : 1;
-  if (postura === 'orientar') return { mano: -4 * envolvente * Math.sin(Math.PI * t) * fuerza, cuerpo: -1.1 * envolvente * fuerza, desplazamiento: 0 };
-  if (postura === 'celebrar') return { mano: 5 * envolvente * Math.sin(2 * Math.PI * t) * fuerza, cuerpo: .8 * envolvente * Math.sin(Math.PI * t) * fuerza, desplazamiento: -6 * envolvente * fuerza };
-  return { mano: 10 * envolvente * Math.sin(2 * Math.PI * t) * fuerza, cuerpo: -.65 * envolvente * fuerza, desplazamiento: 0 };
+  const fuerza = gesto === 'reposo' ? .12 : gesto === 'espera' ? .2 : gesto === 'respuesta' ? .5 : 1;
+  if (postura === 'orientar') return { mano: -1.6 * envolvente * Math.sin(Math.PI * t) * fuerza, cuerpo: -1.1 * envolvente * fuerza, desplazamiento: 0 };
+  if (postura === 'celebrar') return { mano: 2 * envolvente * Math.sin(2 * Math.PI * t) * fuerza, cuerpo: .8 * envolvente * Math.sin(Math.PI * t) * fuerza, desplazamiento: -6 * envolvente * fuerza };
+  return { mano: 2.6 * envolvente * Math.sin(2 * Math.PI * t) * fuerza, cuerpo: -.65 * envolvente * fuerza, desplazamiento: 0 };
 }
 
 export function dibujoGuia(imagen: string, id: string, postura: PosturaGuia = 'saludo') {
