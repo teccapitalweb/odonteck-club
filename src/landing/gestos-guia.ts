@@ -11,7 +11,8 @@ export interface RespuestaGuia {
 export function posturaRespuesta(respuesta: RespuestaGuia): PosturaGuia {
   if (respuesta.postura === 'saludo' || respuesta.postura === 'orientar' || respuesta.postura === 'celebrar') return respuesta.postura;
   if (respuesta.extra === 'whatsapp') return 'saludo';
-  if (respuesta.extra === 'planes' || respuesta.opciones?.length || respuesta.cursos?.length) return 'orientar';
+  if (respuesta.extra === 'planes' || (Array.isArray(respuesta.opciones) && respuesta.opciones.length > 0)
+    || (Array.isArray(respuesta.cursos) && respuesta.cursos.length > 0)) return 'orientar';
   return 'saludo';
 }
 

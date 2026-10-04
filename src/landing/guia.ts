@@ -11,6 +11,7 @@ interface Mensaje {
   cursos?: string[];
   extra?: 'planes' | 'whatsapp';
   postura?: PosturaGuia;
+  alternar?: boolean;
 }
 type Fuente = () => { datos: DatosGuia | null; estado: EstadoGuia };
 
@@ -33,6 +34,7 @@ export function montarGuia(fuente: Fuente) {
     text: 'Hola, soy Alexia, tu guía de OdonTeck. Te ayudo a encontrar formación dentro del club. ¿Qué te gustaría explorar?',
     opciones: INICIO,
     postura: 'saludo',
+    alternar: true,
   };
   let mensajes: Mensaje[] = [bienvenida];
   let area = '';
@@ -48,20 +50,24 @@ export function montarGuia(fuente: Fuente) {
       area = typeof guardado.area === 'string' ? guardado.area : '';
     }
   } catch { /* Una conversación nueva siempre queda disponible. */ }
-  const seguirPostura = crearSeguimientoRespuestas(mensajes.filter((m) => m.role === 'assistant').at(-1));
+  const respuestaAnterior = mensajes.filter((m) => m.role === 'assistant').at(-1);
+  const seguirPostura = crearSeguimientoRespuestas(respuestaAnterior);
+  root.dataset.guiaAlternancia = !respuestaAnterior || respuestaAnterior.text === bienvenida.text
+    || respuestaAnterior.alternar !== false && (respuestaAnterior.postura === 'orientar' || respuestaAnterior.postura === 'celebrar')
+    ? 'libre' : 'neutral';
 
   root.innerHTML = `
     <div class="oguia-saludo" hidden><button class="oguia-icono" data-guia-descartar aria-label="Descartar saludo"><i data-lucide="x"></i></button><p>Hola, soy Alexia. Puedo ayudarte a elegir un curso.</p></div>
     <button class="oguia-launcher" aria-label="Abrir guía OdonTeck" aria-controls="oguia-panel" aria-expanded="false">
-      <span class="oguia-personaje" aria-hidden="true"></span><span class="oguia-launcher__copy"><small><i data-lucide="sparkles"></i>Guía OdonTeck</small><strong>Te ayudo a elegir</strong><span>Cursos y membresía <i data-lucide="arrow-up-right"></i></span></span>
+      <span class="oguia-personaje mascot" aria-hidden="true"></span><span class="oguia-launcher__copy"><small><i data-lucide="sparkles"></i>Guía OdonTeck</small><strong>Te ayudo a elegir</strong><span>Cursos y membresía <i data-lucide="arrow-up-right"></i></span></span>
     </button>
     <div class="oguia-backdrop" hidden></div>
     <section class="oguia-panel" id="oguia-panel" role="dialog" aria-label="Conversación con Alexia, guía de OdonTeck" aria-modal="false" hidden>
-      <span class="oguia-personaje oguia-personaje--panel" aria-hidden="true"></span>
+      <span class="oguia-personaje mascot oguia-personaje--panel" aria-hidden="true"></span>
       <div class="oguia-superficie">
         <header class="oguia-header"><div><small>OdonTeck Club</small><strong>Alexia</strong><span>Guía virtual de formación</span></div>
-          <button class="oguia-icono" data-guia-repetir aria-label="Repetir saludo de Alexia"><i data-lucide="rotate-ccw"></i></button>
-          <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alexia" aria-pressed="false"><i data-lucide="pause" data-icono-pausa></i><i data-lucide="play" data-icono-play hidden></i></button>
+          <button class="oguia-icono" data-guia-repetir data-guia-saludo aria-label="Repetir saludo de Alexia"><i data-lucide="rotate-ccw"></i></button>
+          <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alexia" aria-pressed="false"><i data-lucide="pause" data-icono-pausa data-guia-icono="pause"></i><i data-lucide="play" data-icono-play data-guia-icono="play" hidden></i></button>
           <button class="oguia-icono" data-guia-cerrar aria-label="Minimizar y conservar conversación"><i data-lucide="chevron-down"></i></button>
         </header>
         <div class="oguia-aviso">Orientación sobre el club y su catálogo. No ofrece diagnóstico, tratamiento ni consejo clínico.</div>
@@ -103,14 +109,15 @@ export function montarGuia(fuente: Fuente) {
     log.setAttribute('aria-busy', String(ocupado));
     host.dispatchEvent(new CustomEvent('guia:estado', { detail: { ocupado } }));
     const postura = seguirPostura(mensajes.at(-1), ocupado);
-    if (postura) host.dispatchEvent(new CustomEvent('guia:postura', { detail: { postura } }));
+    if (postura) host.dispatchEvent(new CustomEvent('guia:postura', { detail: { postura, alternar: mensajes.at(-1)?.alternar } }));
     createIcons({ icons, root: host });
     log.scrollTop = log.scrollHeight;
   }
 
-  function responder(text: string, opciones?: Opcion[], cursos?: string[], extra?: Mensaje['extra'], postura?: PosturaGuia) {
-    const mensaje: Mensaje = { role: 'assistant', text, opciones, cursos, extra, postura };
+  function responder(text: string, opciones?: Opcion[], cursos?: string[], extra?: Mensaje['extra'], postura?: PosturaGuia, alternar?: boolean) {
+    const mensaje: Mensaje = { role: 'assistant', text, opciones, cursos, extra, postura, alternar };
     mensaje.postura = posturaRespuesta(mensaje);
+    mensaje.alternar ??= mensaje.postura !== 'saludo';
     mensajes.push(mensaje);
     guardar();
   }

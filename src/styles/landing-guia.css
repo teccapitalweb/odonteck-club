@@ -44,7 +44,7 @@
 .oguia-launcher__copy > span svg { width: 13px; }
 
 .oguia-personaje {
-  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v04.png');
+  --oguia-imagen: url('/asistente/odonteck-guia-saludo-v05.png');
   position: absolute;
   z-index: 3;
   left: -16px;
@@ -59,8 +59,9 @@
 .oguia-personaje.motion-ready { background-image: none; }
 .oguia-rig { display: block; width: 100%; height: 100%; overflow: visible; }
 .oguia-rig[hidden] { display: none; }
-.oguia-postura-salida .oguia-personaje { opacity: .35; transform: translateY(3px) scale(.985); }
-.oguia-postura-entrada .oguia-personaje { animation: oguia-entrada .28s ease-out both; }
+#assistant-root.guia-postura-salida .oguia-personaje.motion-ready .oguia-rig:not([hidden]) { animation: oguia-salida .11s ease-in both; }
+#assistant-root.guia-postura-entrada .oguia-personaje.motion-ready .oguia-rig:not([hidden]) { animation: oguia-entrada .11s ease-out both; }
+@keyframes oguia-salida { to { opacity: .32; transform: translateY(4px) scale(.982); } }
 @keyframes oguia-entrada { from { opacity: .3; transform: translateY(5px) scale(.98); } to { opacity: 1; transform: none; } }
 
 .oguia-saludo {

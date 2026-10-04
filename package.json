@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test:guia": "node scripts/test-guia-datos.mjs && node scripts/test-guia-capas.mjs"
+    "test:guia": "node scripts/test-guia-datos.mjs && node scripts/test-guia-capas.mjs && node scripts/test-movimiento-guia.mjs"
   },
   "devDependencies": {
     "typescript": "~6.0.2",

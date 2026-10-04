@@ -1,6 +1,6 @@
 # Alexia · conceptos de dirección artística v06
 
-Estas propuestas son exploratorias. Ninguna sustituye todavía a Alexia v04 en la landing.
+La opción H fue aprobada para sustituir a Alexia v04 en la landing. Las demás se conservan como exploraciones históricas.
 
 ## H · 3D editorial suave
 
@@ -8,6 +8,7 @@ Estas propuestas son exploratorias. Ninguna sustituye todavía a Alexia v04 en l
 - Técnica: personaje 3D pulido, con materiales suaves, cabello modelado y expresión cálida.
 - Vestuario: conserva el conjunto completo del concepto C: blazer azul marino corto, top marfil acanalado, pantalón verde agua amplio, botines crema, aretes teal, pin dental y tableta azul marino.
 - Fortaleza: combina la simpatía y legibilidad del estilo 3D de referencia con la identidad editorial de Alexia.
+- Estado: elegida e integrada como las posturas animadas v05; ver `alexia-asistente-animada-v07.md`.
 
 ## E · Gouache editorial
 

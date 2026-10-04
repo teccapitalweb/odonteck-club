@@ -37,7 +37,7 @@ let pruebas = 0;
   assert.equal(datos.fuente, 'api');
   assert.equal(datos.cursos[0].id, 'uno');
   assert.equal(api.marcaGuia.asistente, 'Alexia');
-  assert.match(api.marcaGuia.saludo, /v04\.png$/);
+  assert.match(api.marcaGuia.saludo, /v05\.png$/);
   pruebas++;
 }
 {
