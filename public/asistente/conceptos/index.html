@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conceptos de Alexia · OdonTeck</title>
+  <title>Alexia 3D · OdonTeck</title>
   <style>
     :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #102f43; background: #edf5f3; }
     * { box-sizing: border-box; }
@@ -14,6 +14,11 @@
     h1 { margin: 0; font-size: clamp(32px, 5vw, 58px); line-height: .98; letter-spacing: -.045em; }
     header p:last-child { margin: 18px auto 0; color: #58707c; font-size: 17px; line-height: 1.55; }
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .featured { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); align-items: center; overflow: hidden; border: 1px solid rgba(16,47,67,.1); border-radius: 32px; background: rgba(255,255,255,.9); box-shadow: 0 24px 60px rgba(16,47,67,.13); }
+    .featured .visual { height: 680px; min-height: 0; background: radial-gradient(circle at 50% 30%, rgba(45,191,181,.22), rgba(16,47,67,.04) 62%, transparent 63%); }
+    .featured .copy { padding: clamp(28px, 5vw, 58px); }
+    .featured h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1; }
+    .featured .copy p { font-size: 17px; }
     article { position: relative; overflow: hidden; border: 1px solid rgba(16,47,67,.1); border-radius: 28px; background: rgba(255,255,255,.83); box-shadow: 0 20px 50px rgba(16,47,67,.1); }
     .visual { height: min(58vw, 570px); min-height: 430px; display: grid; place-items: end center; background: linear-gradient(155deg, rgba(45,191,181,.13), rgba(16,47,67,.03)); }
     img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 18px 20px rgba(16,47,67,.12)); }
@@ -27,6 +32,8 @@
     .previous { opacity: .72; }
     @media (max-width: 850px) {
       main { padding-top: 38px; }
+      .featured { grid-template-columns: 1fr; max-width: 520px; margin: auto; }
+      .featured .visual { height: 600px; }
       .grid { grid-template-columns: 1fr; max-width: 520px; margin: auto; }
       .visual { height: 620px; }
     }
@@ -36,10 +43,19 @@
 <body>
   <main>
     <header>
-      <p class="eyebrow">OdonTeck · Exploración v05</p>
-      <h1>Tres estilos nuevos, el mismo outfit.</h1>
-      <p>Las tres conservan el blazer azul marino, top marfil, pantalón verde agua y botines del concepto C; sólo cambia la dirección artística.</p>
+      <p class="eyebrow">OdonTeck · Exploración v06</p>
+      <h1>El estilo 3D que elegiste, con el outfit correcto.</h1>
+      <p>Conserva el conjunto editorial completo de Alexia y adopta el acabado tridimensional suave, bonito y expresivo de tu referencia.</p>
     </header>
+    <section class="featured" aria-label="Nuevo concepto 3D de Alexia">
+      <div class="visual"><img src="alexia-concepto-h-3d-editorial.png" alt="Alexia en estilo 3D suave con outfit editorial azul marino, marfil y verde agua"></div>
+      <div class="copy">
+        <span class="tag">H · Nueva favorita</span>
+        <h2>3D editorial suave</h2>
+        <p>Rostro cálido, cabello con volumen y materiales tridimensionales, sin perder el blazer corto, el top acanalado, el pantalón amplio, los botines, el pin dental ni la tableta.</p>
+      </div>
+    </section>
+    <h2 class="section-title">Otras direcciones artísticas</h2>
     <section class="grid" aria-label="Nuevos conceptos de Alexia">
       <article>
         <div class="visual"><img src="alexia-concepto-e-gouache-editorial.png" alt="Alexia en pintura editorial gouache"></div>
@@ -54,7 +70,7 @@
         <div class="copy"><span class="tag">G · Más original</span><h2>Collage de papel</h2><p>Capas recortadas, fibras visibles y una identidad táctil diferente a cualquier estilo anime.</p></div>
       </article>
     </section>
-    <p class="recommendation"><strong>Mi lectura:</strong> E es la más equilibrada, F la más bonita y suave, y G la más distinta y memorable.</p>
+    <p class="recommendation"><strong>Mi lectura:</strong> H es la combinación más fuerte hasta ahora: conserva la identidad editorial del outfit y gana la calidez, volumen y simpatía del estilo 3D.</p>
     <h2 class="section-title">Exploraciones anteriores</h2>
     <section class="grid previous" aria-label="Conceptos anteriores de Alexia">
       <article>
