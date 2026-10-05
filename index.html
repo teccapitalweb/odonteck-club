@@ -11,6 +11,10 @@
   <meta name="apple-mobile-web-app-title" content="OdonTeck" />
   <meta name="description" content="Club OdonTeck: cursos odontológicos grabados, materiales clínicos, clases en vivo y certificados." />
   <title>OdonTeck Club</title>
+  <script>
+    // El dominio público abre la nueva landing; las rutas hash conservan el club.
+    if (!location.hash) location.replace('/landing/');
+  </script>
 </head>
 <body>
   <div id="app"></div>
