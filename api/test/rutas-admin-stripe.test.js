@@ -231,13 +231,16 @@ describe('stripe', () => {
     assert.equal(p.customer_email, 'carla@example.com');
   });
 
-  test('checkout: plan inválido 400, ya VIP 409, sin token 401, sin Stripe 503', async () => {
+  test('checkout: plan inválido 400, ya VIP 409, sin token 401, sin Stripe o webhook 503', async () => {
     await request(env.app).post('/stripe/checkout').set(bearer(TOKENS.free)).send({ plan: 'vitalicio' }).expect(400);
     const vip = await request(env.app).post('/stripe/checkout').set(bearer(TOKENS.vip)).send({ plan: 'mensual' }).expect(409);
     assert.equal(vip.body.error, 'ya_es_vip');
     await request(env.app).post('/stripe/checkout').send({ plan: 'mensual' }).expect(401);
     const sin = crearEntorno({ sinStripe: true });
     await request(sin.app).post('/stripe/checkout').set(bearer(TOKENS.free)).send({ plan: 'mensual' }).expect(503);
+    const sinWebhook = crearEntorno({ sinWebhook: true });
+    await request(sinWebhook.app).post('/stripe/checkout').set(bearer(TOKENS.free)).send({ plan: 'mensual' }).expect(503);
+    assert.equal(sinWebhook.stripe.creadas.checkout.length, 0);
   });
 
   test('portal requiere cliente de Stripe', async () => {

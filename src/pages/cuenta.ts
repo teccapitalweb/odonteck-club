@@ -5,6 +5,7 @@ import { cursos } from '../core/catalogo';
 import { puntos } from '../core/logros';
 import { esc } from '../ui/partials';
 import { Auth } from '../core/auth';
+import { Acceso } from '../core/acceso';
 import { opcionesIntereses, perfilEncuesta } from '../core/encuestas';
 
 export function praxia() {
@@ -95,7 +96,7 @@ export function perfil() {
 
 export function suscripcion() {
   const p = Perfil.get();
-  const esVip = p.plan !== 'invitado';
+  const esVip = Acceso.vip();
   const mensual = BRAND.planes.find((x) => x.id === 'mensual');
   const anual = BRAND.planes.find((x) => x.id === 'anual');
   const precioMesDesdAnual = anual ? Math.round(anual.precio / 12) : 0;
@@ -177,6 +178,11 @@ export function suscripcion() {
         <a class="btn btn--ghost btn--sm" href="${wa('Hola OdonTeck, tengo una duda sobre mi suscripción VIP.')}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Soporte</a>
       </div>
     </div>
+
+    ${esVip ? `<div class="card card--pad" style="display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:color-mix(in srgb,var(--brand-teal) 8%,var(--surface));border-color:color-mix(in srgb,var(--brand-teal) 24%,var(--line))">
+      <div style="min-width:0;max-width:58ch"><h3 style="font-size:var(--fs-sm)">Biblioteca y herramientas heredadas</h3><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">Tu membresía también conserva el contenido del portal anterior mientras terminamos de migrar materiales, grabaciones y herramientas al club nuevo.</p></div>
+      <a class="btn btn--brand btn--sm" href="/vip-panel.html" target="_blank" rel="noopener"><i data-lucide="external-link" class="i"></i>Abrir portal anterior</a>
+    </div>` : ''}
 
     <p style="text-align:center;font-size:var(--fs-xs);color:var(--text-3)">Pagos seguros con Stripe · Cancela en cualquier momento · Sin permanencia</p>
   </section>`;

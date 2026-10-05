@@ -37,6 +37,9 @@ export function rutasStripe(ctx) {
 
   r.post('/stripe/checkout', auth, h(async (req, res) => {
     const stripe = exigirStripe(ctx);
+    if (!ctx.config.stripeWebhookSecret) {
+      throw noConfigurado('El pago nuevo todavía no está habilitado. Usa el portal anterior de OdonTeck.');
+    }
     const u = req.usuario;
     const plan = unoDe(cuerpo(req).plan, ['mensual', 'anual'], { campo: 'plan', requerido: true });
     const precios = await preciosStripe(ctx);

@@ -2,7 +2,7 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 3 de octubre de 2026 (dirección artística juvenil y profesional de Alexia v04 integrada; pendiente despliegue y smoke autenticado)
+- **Actualizado:** 5 de octubre de 2026 (portal público migrado, compatibilidad heredada y acceso pagado validados; checkout v2 protegido hasta configurar su webhook)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
@@ -161,15 +161,16 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - `/health`, CORS desde `https://www.odonteckconsulting.com`, Firebase Auth, lectura de membresía, catálogo, video gratuito firmado con Bunny y quiz sin respuestas expuestas pasaron la prueba autenticada `api/scripts/smoke-v2.mjs`.
 - Se sembraron 18 documentos en `v2_cursos` y 68 en `v2_quizzes`; no se modificaron `miembros`, suscripciones ni el webhook anterior.
 - No se sembraron `v2_materiales`: el lote mezcla recursos propios con libros completos cuya licencia de distribución todavía no está confirmada.
-- `STRIPE_WEBHOOK_SECRET` no está definido en el servicio v2. El webhook viejo y el portal público continúan activos sin cambios.
-- Este API todavía no recibe tráfico del frontend público; no confundir el despliegue paralelo con el cambio definitivo.
+- `STRIPE_WEBHOOK_SECRET` no está definido en el servicio v2. El alta de pago sigue usando `vip-auth.html` y el webhook anterior; el API v2 rechaza además cualquier intento directo de crear un Checkout nuevo mientras falte ese secreto.
+- El frontend público nuevo ya consume este API. Se conservaron `vip-auth.html`, `vip-panel.html` y el sistema de membresías anterior para no cortar cobros ni beneficios existentes.
 - El build con `VITE_API_URL` elimina libros/PDF y reemplaza semillas de cursos, materiales, miembros y quizzes por estructuras vacías; el contenido real se hidrata desde el API. El control redujo el artefacto de 3.36 GB a 10.74 MB y verificó 0 PDF, 0 libros y 0 referencias a miembros demo o `videoId`.
 - Compatibilidad heredada añadida: además de `miembros/{uid}`, la API busca el correo autenticado en los documentos `miembros/email_...`, reconoce `esRegalo` y las tres fechas históricas (`expiraEn`, `fechaFinAcceso`, `fechaProximaRenovacion`). El portal de Stripe también recupera el `stripeCustomerId` encontrado por correo.
-- Auditoría agregada de producción (sin PII): 86 cuentas Auth, 99 documentos de miembro, 14 documentos vigentes, 3 documentos `email_...` (2 vigentes). Stripe contiene 19 suscripciones OdonTeck identificadas: 9 en `active`/`trialing`/`past_due`; las 8 `active` tienen documento de miembro con acceso. Una `past_due` permanece inactiva igual que en el sistema anterior. Tres activas aún no tienen cuenta Auth resoluble, pero conservarán el reconocimiento por correo cuando se registren con el mismo correo.
+- Auditoría agregada de producción del 5 de octubre (sin PII): 94 cuentas Auth, 107 documentos de miembro, 14 documentos vigentes y 3 documentos `email_...` (2 vigentes). Stripe contiene 20 suscripciones OdonTeck identificadas y 10 en `active`/`trialing`/`past_due`; 9 tienen al menos un cobro positivo registrado y la restante es una anual activa con factura pagada en cero por un descuento total, además de cancelación ya programada. Una `past_due` tiene la factura más reciente abierta y permanece inactiva, por lo que no recibe beneficios. Tres suscripciones activas aún no tienen cuenta Auth resoluble, pero su documento vigente será reconocido por correo verificado cuando se registren con la misma dirección.
 - `npm run audit:legacy` y `npm run audit:stripe` repiten estas verificaciones sin imprimir nombres, correos, UID ni IDs de Stripe.
 - El proyecto Firebase `club-odonteck` todavía no tiene un bucket de Storage existente (se probaron los nombres moderno y clásico). Por eso los 10 materiales propios no se escribieron en `v2_materiales`; el script `npm run publish:materials -- --apply` falla antes de escribir hasta que se habilite un bucket real.
-- Railway mantiene el despliegue anterior saludable, pero el 29 de septiembre rechazó una actualización con “Deploys have been paused temporarily”. La compatibilidad heredada nueva debe desplegarse y probarse antes de apuntar el portal público.
-- `npm run smoke:legacy` pasó contra la API v2 ejecutada localmente con producción: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
+- Railway mantiene el API público saludable; cada cambio de compatibilidad debe conservar un smoke autenticado antes y después del despliegue.
+- `npm run smoke:legacy` pasó contra la API v2 pública: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
+- Producción tiene 0 documentos en `v2_materiales` y 0 en `v2_eventos`. Mientras esos beneficios se migran, la pantalla de suscripción muestra únicamente a miembros VIP un acceso explícito a `vip-panel.html`, donde siguen disponibles la biblioteca, grabaciones y herramientas anteriores.
 
 ### Modos
 

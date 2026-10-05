@@ -57,7 +57,7 @@ export function semillaBase() {
   };
 }
 
-export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinBunny = false } = {}) {
+export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinWebhook = false, sinBunny = false } = {}) {
   const reloj = { ahora: new Date(AHORA_ISO) };
   const db = new FakeFirestore(semilla);
   const auth = crearAuthFalso({
@@ -92,7 +92,7 @@ export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinBu
       appUrl: ORIGEN_OK,
       allowedOrigins: ['http://localhost:5179', `${ORIGEN_OK}/`],
       storageBucket: 'club-odonteck.firebasestorage.app',
-      stripeWebhookSecret: WEBHOOK_SECRET,
+      stripeWebhookSecret: sinWebhook ? '' : WEBHOOK_SECRET,
       stripePrices: { mensual: 'price_mensual_test', anual: 'price_anual_test' },
     },
   });
