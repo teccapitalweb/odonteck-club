@@ -34,9 +34,21 @@ const signIn = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:s
 if (!signIn.ok) throw new Error(`Firebase rechazó el token efímero (${signIn.status}).`);
 const { idToken } = await signIn.json();
 const headers = { authorization: `Bearer ${idToken}` };
-const [meRes, catalogoRes] = await Promise.all([fetch(`${apiUrl}/me`, { headers }), fetch(`${apiUrl}/catalogo`, { headers })]);
+const [meRes, catalogoRes, checkoutRes] = await Promise.all([
+  fetch(`${apiUrl}/me`, { headers }),
+  fetch(`${apiUrl}/catalogo`, { headers }),
+  fetch(`${apiUrl}/stripe/checkout`, {
+    method: 'POST',
+    headers: { ...headers, 'content-type': 'application/json' },
+    body: JSON.stringify({ plan: 'mensual' }),
+  }),
+]);
 const me = await meRes.json();
 const catalogo = await catalogoRes.json();
+const checkout = await checkoutRes.json();
 if (!meRes.ok || me.esVip !== true) throw new Error(`La cuenta heredada no fue reconocida como VIP (${meRes.status}).`);
 if (!catalogoRes.ok || !Array.isArray(catalogo.cursos)) throw new Error(`El catálogo no cargó (${catalogoRes.status}).`);
-console.log(JSON.stringify({ ok: true, vipHeredado: true, planPresente: !!me.plan, cursos: catalogo.cursos.length, materiales: catalogo.materiales?.length ?? 0 }));
+if (checkoutRes.status !== 503 || checkout.error !== 'no_configurado') {
+  throw new Error(`El checkout nuevo no quedó bloqueado de forma segura (${checkoutRes.status}).`);
+}
+console.log(JSON.stringify({ ok: true, vipHeredado: true, planPresente: !!me.plan, cursos: catalogo.cursos.length, materiales: catalogo.materiales?.length ?? 0, checkoutNuevoBloqueado: true }));
