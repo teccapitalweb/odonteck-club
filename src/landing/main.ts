@@ -10,7 +10,7 @@ import '../styles/landing-guia.css';
 import { createIcons, icons } from 'lucide';
 import cursos from './cursos-en-vivo.json';
 import { Datos } from '../core/datos';
-import { cargarDatosGuia, type DatosGuia, type EstadoGuia } from './guia-datos';
+import { cargarDatosGuia, type CursoGuia, type DatosGuia, type EstadoGuia } from './guia-datos';
 import { montarGuia } from './guia';
 import { montarMovimientoGuia } from './movimiento-guia';
 
@@ -32,19 +32,29 @@ document.querySelectorAll('[data-descuento]').forEach((e) => (e.textContent = St
 document.querySelector('[data-anio]')!.textContent = String(new Date().getFullYear());
 
 // ── Catálogo del club con filtro por área ──
-const club = Datos.cursos().filter((c) => c.publicado !== false);
+let club: CursoGuia[] = Datos.cursos().filter((c) => c.publicado !== false).map((c) => ({
+  id: c.id,
+  titulo: c.titulo,
+  area: c.area,
+  imagen: c.portada,
+  nivel: c.nivel,
+  instructor: c.instructor,
+  descripcion: c.descripcion,
+  clases: c.clases.length,
+  accesoGratis: c.clases.some((clase) => clase.gratis === true),
+}));
 document.querySelectorAll('[data-precio-mensual]').forEach((e) => (e.textContent = `$${cfg.precioMensual.toLocaleString('es-MX')}`));
-const areas = ['Todos', ...new Set(club.map((c) => c.area))];
+let areas = ['Todos', ...new Set(club.map((c) => c.area))];
 let filtro = 'Todos';
 function pintarCursos() {
   const lista = filtro === 'Todos' ? club : club.filter((c) => c.area === filtro);
   document.querySelector('[data-filtros]')!.innerHTML = areas.map((a) => `<button class="chip ${a === filtro ? 'chip--primary' : 'chip--outline'}" data-area="${esc(a)}">${esc(a)}</button>`).join('');
   document.querySelector('[data-cursos]')!.innerHTML = lista.map((c, i) => `
     <article class="lp-curso" style="--i:${i}">
-      <a class="lp-curso__cover" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}" aria-label="${esc(c.titulo)}"><img src="${c.portada}" alt="" loading="lazy"><span class="chip chip--glass">${esc(c.area)}</span></a>
+      <a class="lp-curso__cover" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}" aria-label="${esc(c.titulo)}"><img src="${c.imagen}" alt="" loading="lazy"><span class="chip chip--glass">${esc(c.area)}</span></a>
       <div class="lp-curso__body">
         <h3>${esc(c.titulo)}</h3>
-        <p class="lp-curso__ponente"><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases · ${esc(c.nivel)}</p>
+        <p class="lp-curso__ponente"><i data-lucide="play-circle" class="i"></i>${c.clases} clases · ${esc(c.nivel)}</p>
         <div class="lp-curso__foot">
           <span class="lp-curso__gratis"><i data-lucide="gift" class="i"></i>Prueba gratis</span>
           <a class="btn btn--brand btn--sm" href="${CLUB}/#/curso/${encodeURIComponent(c.id)}">Ver curso</a>
@@ -151,6 +161,15 @@ if (raizGuia) montarMovimientoGuia(raizGuia);
 void cargarDatosGuia().then((datos) => {
   datosGuia = datos;
   estadoGuia = 'listo';
+  // En producción el catálogo sensible no viaja dentro del bundle. La misma
+  // fuente pública y validada de Alexia alimenta también las tarjetas visibles.
+  club = datos.cursos;
+  areas = ['Todos', ...new Set(club.map((curso) => curso.area))];
+  if (!areas.includes(filtro)) filtro = 'Todos';
+  pintarCursos();
+  if (datos.planes.mensual !== null) {
+    document.querySelectorAll('[data-precio-mensual]').forEach((e) => (e.textContent = `$${datos.planes.mensual!.toLocaleString('es-MX')}`));
+  }
   guia.actualizar();
 }).catch(() => {
   estadoGuia = 'error';
