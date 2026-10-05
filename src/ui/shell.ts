@@ -3,6 +3,7 @@ import { Perfil } from '../core/perfil';
 import { Auth } from '../core/auth';
 import { Datos } from '../core/datos';
 import { Acceso } from '../core/acceso';
+import { avatarUsuario, esc } from './partials';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
@@ -18,6 +19,8 @@ export const NAV = [
 ] as const;
 
 export function shellHTML() {
+  const foto = Auth.usuario?.foto;
+  const avatar = (clases = 'avatar') => avatarUsuario(foto, Perfil.iniciales(), clases);
   const items = NAV.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`
@@ -38,8 +41,8 @@ export function shellHTML() {
           <button class="btn btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar app</button>
         </div>`}
         <a class="user-card" href="#/perfil">
-          <div class="avatar">${Perfil.iniciales()}</div>
-          <div><div class="user-card__name">${Perfil.get().nombre}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
+          ${avatar('avatar user-card__avatar')}
+          <div class="user-card__identity"><div class="user-card__name">${esc(Perfil.get().nombre)}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
           <span class="btn btn--ghost btn--icon" aria-label="Configuración"><i data-lucide="settings" class="i"></i></span>
         </a>
       </div>
@@ -51,7 +54,7 @@ export function shellHTML() {
           <button class="btn btn--ghost btn--icon" data-guia aria-label="Guía de la plataforma"><i data-lucide="help-circle" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <div class="notifs"><button class="btn btn--ghost btn--icon" aria-label="Notificaciones" data-notifs><i data-lucide="bell" class="i"></i><span class="badge notifs__badge" data-notifs-badge hidden></span></button><div class="notifs__panel" data-notifs-panel hidden></div></div>
-          <a class="avatar" href="#/perfil" aria-label="Mi perfil">${Perfil.iniciales()}</a>
+          <a class="topbar__avatar" href="#/perfil" aria-label="Mi perfil">${avatar()}</a>
         </div>
       </header>
       <main class="content" id="outlet" style="display:grid;gap:56px;align-content:start"></main>

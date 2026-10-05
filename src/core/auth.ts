@@ -3,7 +3,7 @@
 import { Datos } from './datos';
 import { Perfil, type Perfil as PerfilDatos } from './perfil';
 
-export interface Usuario { uid: string; email: string; nombre: string; esAdmin: boolean; esVip: boolean }
+export interface Usuario { uid: string; email: string; nombre: string; foto: string; esAdmin: boolean; esVip: boolean }
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyA3xYpORcvvcXrhNaXOBBBPm19mxdIcNsU',
@@ -36,7 +36,7 @@ export const Auth = {
     if (listo) return listo;
     listo = (async () => {
       if (Datos.modo === 'demo') {
-        usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', esAdmin: true, esVip: !!localStorage.getItem('odonteck-club:vip-sim') } : null;
+        usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', foto: '', esAdmin: true, esVip: !!localStorage.getItem('odonteck-club:vip-sim') } : null;
         return;
       }
       if (localStorage.getItem(DEMO_KEY)) localStorage.removeItem(DEMO_KEY);
@@ -54,7 +54,7 @@ export const Auth = {
             esAdmin = me.esAdmin === true || esAdmin;
             if (me.perfil) { Perfil.hidratar(me.perfil, me.plan, me.vence); nombre = me.perfil.nombre || nombre; }
           } catch { /* el backend dirá si no hay acceso */ }
-          usuario = { uid: u.uid, email: u.email || '', nombre, esAdmin, esVip };
+          usuario = { uid: u.uid, email: u.email || '', nombre, foto: u.photoURL || '', esAdmin, esVip };
           ok();
         });
       });

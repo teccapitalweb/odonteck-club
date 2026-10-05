@@ -67,6 +67,13 @@ function toast(msg: string, icon = 'check') {
   host.appendChild(t); createIcons({ icons }); setTimeout(() => t.remove(), 3200);
 }
 
+// Si el proveedor deja de servir una foto, retiramos sólo la imagen y quedan
+// visibles las iniciales que ya están debajo como respaldo accesible.
+document.addEventListener('error', (e) => {
+  const img = e.target;
+  if (img instanceof HTMLImageElement && img.matches('[data-avatar-image]')) img.remove();
+}, true);
+
 // ── Cascarones: miembro, admin o pantalla sola (login) ──
 let shellActual: 'miembro' | 'admin' | 'solo' | null = null;
 function montar(tipo: 'miembro' | 'admin' | 'solo') {

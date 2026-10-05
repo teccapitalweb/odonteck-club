@@ -3,7 +3,7 @@ import { BRAND, wa } from '../core/brand';
 import { Progreso } from '../core/progreso';
 import { cursos } from '../core/catalogo';
 import { puntos } from '../core/logros';
-import { esc } from '../ui/partials';
+import { avatarUsuario, esc } from '../ui/partials';
 import { Auth } from '../core/auth';
 import { Acceso } from '../core/acceso';
 import { opcionesIntereses, perfilEncuesta } from '../core/encuestas';
@@ -55,7 +55,7 @@ export function perfil() {
     <div class="grid perfil-grid">
       <div class="stack" style="gap:20px;min-width:0">
       <form class="card card--pad stack" data-form-perfil style="gap:14px">
-        <div class="row" style="gap:14px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><strong>Foto de perfil</strong><br><span class="faint" style="font-size:var(--fs-xs)">Se sube desde el admin en la Fase 2 · por ahora, iniciales</span></div></div>
+        <div class="row" style="gap:14px">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}<div><strong>Foto de perfil</strong><br><span class="faint" style="font-size:var(--fs-xs)">${Auth.usuario?.foto ? 'Sincronizada con tu cuenta de Google.' : 'Si entras con Google, usaremos automáticamente tu foto.'}</span></div></div>
         <div class="field"><label>Nombre completo (así saldrá en tus certificados)</label><input class="input" name="nombre" value="${esc(p.nombre)}" required maxlength="60" placeholder="Dra. Nombre Apellido Apellido"></div>
         <div class="grid grid--2" style="gap:12px">
           <div class="field"><label>WhatsApp</label><input class="input" name="whatsapp" value="${esc(p.whatsapp)}" placeholder="+52 1 236 123 4567"></div>
@@ -211,7 +211,7 @@ export function mas() {
   const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
   return `
   <section class="stack" style="gap:16px">
-    <div class="row" style="gap:12px"><div class="avatar avatar--lg">${Perfil.iniciales()}</div><div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>${Perfil.planNombre()}</span></div></div>
+    <div class="row" style="gap:12px">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}<div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>${Perfil.planNombre()}</span></div></div>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">${items.map(([h, i, l]) => `<a class="card card--pad card--hover" href="${h}" style="display:flex;gap:12px;align-items:center;color:inherit;padding:16px"><span class="circle-btn" style="background:var(--primary-soft);color:var(--primary);width:38px;height:38px"><i data-lucide="${i}" class="i"></i></span><strong style="font-size:var(--fs-sm)">${l}</strong></a>`).join('')}</div>
     <a class="card card--pad" href="${BRAND.canalWhatsApp}" target="_blank" rel="noopener" style="display:flex;gap:12px;align-items:center;color:inherit;background:color-mix(in srgb,#25d366 10%,var(--surface))"><span class="circle-btn" style="background:#25d366"><i data-lucide="message-circle" class="i"></i></span><div><strong style="font-size:var(--fs-sm)">Grupo de WhatsApp</strong><br><span class="faint" style="font-size:var(--fs-xs)">Avisos y comunidad</span></div></a>
   </section>`;

@@ -6,6 +6,15 @@ export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', 
 export const iniciales = (nombre: string) =>
   nombre.replace(/^(Dra?\.|Ing\.|Lic\.|Equipo)\s*/i, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'OT';
 
+export function avatarUsuario(foto: string | null | undefined, letras: string, clases = 'avatar') {
+  let src = '';
+  try {
+    const url = new URL(foto || '');
+    if (url.protocol === 'https:') src = url.href;
+  } catch { /* Las iniciales quedan como respaldo. */ }
+  return `<span class="${esc(clases)}"><span class="avatar__fallback">${esc(letras)}</span>${src ? `<img data-avatar-image src="${esc(src)}" alt="" referrerpolicy="no-referrer">` : ''}</span>`;
+}
+
 export function tarjetaCurso(c: Curso) {
   const p = Progreso.porcentaje(c);
   const done = Progreso.completado(c);
