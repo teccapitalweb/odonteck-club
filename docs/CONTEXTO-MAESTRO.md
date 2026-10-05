@@ -2,11 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 5 de octubre de 2026 (portal público migrado, compatibilidad heredada y acceso pagado validados; checkout v2 protegido hasta configurar su webhook)
+- **Actualizado:** 5 de octubre de 2026, 11:47 h (portal público migrado; membresías y cobros heredados validados; checkout v2 protegido; foto de Google y tarjeta de perfil publicadas)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit auditado al redactar:** incluye todo el trabajo hasta esta fecha
-- **Estado verificado:** TypeScript 0 errores; `vite build` limpio en salida aislada; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía tiene 17 pruebas unitarias propias y fue recorrida en demo en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en demo en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
+- **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
+- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía pasa 59 comprobaciones (6 de datos, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -171,6 +172,18 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - Railway mantiene el API público saludable; cada cambio de compatibilidad debe conservar un smoke autenticado antes y después del despliegue.
 - `npm run smoke:legacy` pasó contra la API v2 pública: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
 - Producción tiene 0 documentos en `v2_materiales` y 0 en `v2_eventos`. Mientras esos beneficios se migran, la pantalla de suscripción muestra únicamente a miembros VIP un acceso explícito a `vip-panel.html`, donde siguen disponibles la biblioteca, grabaciones y herramientas anteriores.
+
+### Corte público y continuidad verificada (5 de octubre de 2026)
+
+- El dominio público `https://www.odonteckconsulting.com/` ya sirve la nueva experiencia desde el repositorio público `https://github.com/teccapitalweb/Odonteck`. El estado anterior quedó marcado con el tag recuperable `pre-club-relaunch-2026-10-05`.
+- Se conservaron las rutas heredadas `vip-auth.html`, `vip-panel.html` y las páginas legales. El alta o pago nuevo que todavía depende del sistema anterior se redirige a `vip-auth.html?tab=register`.
+- La API pública continúa en `https://api-production-db314.up.railway.app`. El despliegue activo verificado es `d62369e5-994b-4947-a01c-90efb2728dd4` (`SUCCESS`, no detenido). El despliegue fallido `030439d4...` es sólo historial y no reemplazó al activo.
+- Como `STRIPE_WEBHOOK_SECRET` no está configurado en v2, `/stripe/checkout` responde `503 no_configurado` antes de crear una sesión. El smoke real confirmó membresía heredada VIP, plan presente, 18 cursos y bloqueo del checkout nuevo.
+- Auditoría agregada de Stripe y membresías: 94 usuarios Auth, 107 documentos de miembros, 14 documentos actuales y 99 suscripciones revisadas; 20 se identificaron como OdonTeck, 10 están `active`, `trialing` o `past_due` y 9 tienen historial de pago positivo. Una suscripción anual activa quedó en $0 por descuento total y tiene cancelación programada; una `past_due` con factura abierta permanece inactiva en Firestore y no recibe VIP.
+- Hay 3 suscripciones activas sin cuenta Auth resoluble; sus documentos conservan el mismo correo y el sistema las reconocerá al registrarse con ese correo verificado. No se exponen aquí correos, UID ni datos personales.
+- La cuenta muestra ahora la foto de Google en barra lateral, barra superior y perfil. Sólo se acepta una URL HTTPS y siempre se conservan las iniciales como respaldo si la imagen no carga. La tarjeta lateral ganó altura, separación, sombra y un plan legible en dos líneas para evitar el aspecto aplanado.
+- El corte final corresponde a `f247983` en el repositorio fuente y `95364af` en el público. El bundle público respondió 200 y contiene la foto de Google, el fallback seguro y el relieve de la tarjeta.
+- Las auditorías fueron de lectura: no se crearon cargos, no se cancelaron suscripciones y no se modificaron clientes ni registros de miembros.
 
 ### Modos
 
