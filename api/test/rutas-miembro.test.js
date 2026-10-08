@@ -259,7 +259,12 @@ describe('/catalogo', () => {
     assert.equal(JSON.stringify(res.body).includes('video-a-1'), false);
     assert.deepEqual(res.body.cursos.map((c) => c.id), ['curso-a']);
     assert.equal(res.body.cursos[0].clases.length, 3);
-    assert.deepEqual(res.body.materiales.map((m) => m.id).sort(), ['guia', 'manual-vip']);
+    // El catálogo incluye los materiales de Firestore + el lote oficial pendiente
+    // (merged dedupeado por id). Mientras Storage no esté habilitado, los 10
+    // oficiales aparecen como "proximamente" para no dejar la biblioteca vacía.
+    const idsMateriales = res.body.materiales.map((m) => m.id);
+    assert.ok(idsMateriales.includes('guia'));
+    assert.ok(idsMateriales.includes('manual-vip'));
     assert.equal(res.body.materiales.find((m) => m.id === 'guia').gratis, true);
     assert.deepEqual(res.body.eventos.map((e) => e.id), ['ev1']);
     assert.equal(res.body.config.precios.mensual, 199);

@@ -131,16 +131,21 @@ export function rutasMiembro(ctx) {
       .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
       .map(cursoPublico);
 
-    // Si Firestore `v2_materiales` no tiene materiales visibles (Storage aún no
-    // habilitado y publish:materials no se ha corrido, o solo hay documentos
-    // ocultos), devolvemos el lote oficial como "proximamente" para que los
-    // miembros vean el inventario próximo sin exponer PDFs ni URLs sin firma.
-    const docsVisibles = materialesSnap.docs
-      .map((d) => ({ id: d.id, ...d.data() }))
-      .filter((m) => m.estado !== 'oculto');
-    const materiales = docsVisibles.length === 0
-      ? materialesOficialesComoProximamente()
-      : docsVisibles.sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
+    // Catálogo de materiales = lote oficial + lo que haya en Firestore.
+    // Garantiza que la biblioteca nunca aparezca vacía para los miembros.
+    //
+    // Dedupe por id: construye el set contra TODOS los docs de Firestore
+    // (incluyendo ocultos) para respetar la decisión del admin — si un admin
+    // ocultó deliberadamente un material oficial, no se reintroduce desde el
+    // fallback. Firestore gana en los visibles; los oficiales que no están en
+    // Firestore (de ninguna forma) aparecen como "proximamente".
+    const todosFirestore = materialesSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const idsEnFirestore = new Set(todosFirestore.map((m) => m.id));
+    const docsVisibles = todosFirestore.filter((m) => m.estado !== 'oculto');
+    const oficialesFaltantes = materialesOficialesComoProximamente()
+      .filter((m) => !idsEnFirestore.has(m.id));
+    const materiales = [...docsVisibles, ...oficialesFaltantes]
+      .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
 
     const eventos = eventosSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
