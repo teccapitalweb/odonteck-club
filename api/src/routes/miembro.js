@@ -131,16 +131,16 @@ export function rutasMiembro(ctx) {
       .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
       .map(cursoPublico);
 
-    // Si Firestore `v2_materiales` todavía está vacío (Storage aún no habilitado
-    // y publish:materials no se ha corrido), devolvemos el lote oficial como
-    // "proximamente" para que los miembros vean el inventario próximo sin
-    // exponer PDFs ni URLs sin firma.
-    const materiales = materialesSnap.empty
+    // Si Firestore `v2_materiales` no tiene materiales visibles (Storage aún no
+    // habilitado y publish:materials no se ha corrido, o solo hay documentos
+    // ocultos), devolvemos el lote oficial como "proximamente" para que los
+    // miembros vean el inventario próximo sin exponer PDFs ni URLs sin firma.
+    const docsVisibles = materialesSnap.docs
+      .map((d) => ({ id: d.id, ...d.data() }))
+      .filter((m) => m.estado !== 'oculto');
+    const materiales = docsVisibles.length === 0
       ? materialesOficialesComoProximamente()
-      : materialesSnap.docs
-          .map((d) => ({ id: d.id, ...d.data() }))
-          .filter((m) => m.estado !== 'oculto')
-          .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
+      : docsVisibles.sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
 
     const eventos = eventosSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
