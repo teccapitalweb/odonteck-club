@@ -94,7 +94,6 @@ onBeforeRender(async (path) => {
     montar('solo'); return true;
   }
   if (!u) { sessionStorage.setItem('odt:volver', location.hash.slice(1) || '/'); navigate('/login'); return false; }
-  if (Datos.modo === 'api' && path.startsWith('/retos')) { toast('Los retos volverán cuando la clasificación real esté conectada.', 'gamepad-2'); navigate('/'); return false; }
   if (path.startsWith('/admin')) {
     if (!u.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
     montar('admin');

@@ -2,7 +2,7 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 5 de octubre de 2026, 11:47 h (portal público migrado; membresías y cobros heredados validados; checkout v2 protegido; foto de Google y tarjeta de perfil publicadas)
+- **Actualizado:** 8 de octubre de 2026 (Retos habilitado en modo API y navegación de producción)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
@@ -69,6 +69,8 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 ### Brecha principal
 
 La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Las brechas principales quedan en la liga real, los materiales autorizados/Storage y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
+
+Desde el 8 de octubre de 2026, `#/retos` también está habilitado en modo API y aparece en la navegación de producción. Quiz Relámpago, flashcards, casos y la interfaz de liga quedan disponibles; mientras no exista el endpoint real de clasificación, `src/core/liga.ts` conserva su respaldo local sin convertirlo en evidencia de ranking real.
 
 En modo API el frontend utiliza:
 
