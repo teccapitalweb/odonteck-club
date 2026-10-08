@@ -102,16 +102,6 @@ textarea.input { padding: 10px 14px; resize: vertical; }
 .notif.is-new { box-shadow: inset 3px 0 0 var(--primary); }
 .notif p { color: var(--text-2); font-size: var(--fs-xs); margin-top: 2px; }
 
-/* Login */
-.login-page { min-height: 100dvh; display: grid; place-items: center; padding: 24px; background: var(--bg); }
-.login-page .login { width: min(1100px, 100%); }
-.login__google { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; border-radius: var(--r-full); border: 1px solid var(--line-strong); background: var(--surface); font-weight: 600; font-size: var(--fs-sm); }
-.login__google:hover { border-color: var(--text-3); }
-.login__error { color: var(--danger); font-size: var(--fs-sm); }
-.login__alt { font-size: var(--fs-sm); text-align: center; }
-.login__demo { display: flex; gap: 12px; padding: 14px; border-radius: var(--r-lg); background: var(--primary-soft); font-size: var(--fs-sm); line-height: 1.45; }
-.login__demo .i { color: var(--primary); flex-shrink: 0; }
-
 @media (max-width: 1024px) {
   .admin-grid, .admin-grid--even, .form-grid--3 { grid-template-columns: 1fr; }
   .bottom-nav--admin { display: flex; }

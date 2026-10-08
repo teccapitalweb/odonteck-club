@@ -6,6 +6,7 @@ import './styles/base.css';
 import './styles/components.css';
 import './styles/active.css';
 import './styles/admin.css';
+import './styles/login.css';
 import './styles/arcade.css';
 import './styles/encuestas.css';
 import './styles/bienvenida.css';
