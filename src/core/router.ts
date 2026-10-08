@@ -42,7 +42,19 @@ export async function render() {
     const quiet = prevPath === path;
     prevPath = path;
     if (quiet) outlet.setAttribute('data-quiet', ''); else outlet.removeAttribute('data-quiet');
-    outlet.innerHTML = html;
+    // En el acceso, cambiar de modo sólo sustituye el panel del formulario.
+    // Así se conserva la fotografía y no se reinicia la animación de toda la
+    // tarjeta, evitando el parpadeo que parecía una recarga completa.
+    if (quiet && path === '/login') {
+      const tpl = document.createElement('template');
+      tpl.innerHTML = html.trim();
+      const panelActual = outlet.querySelector('.login__form');
+      const panelNuevo = tpl.content.querySelector('.login__form');
+      if (panelActual && panelNuevo) panelActual.replaceWith(panelNuevo);
+      else outlet.innerHTML = html;
+    } else {
+      outlet.innerHTML = html;
+    }
     if (!quiet) window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     afterRender.forEach((fn) => fn());
     return;
