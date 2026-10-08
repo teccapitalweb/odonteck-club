@@ -11,6 +11,7 @@ import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../
 import { aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
+import { materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
 import {
   LIMITES,
   booleano,
@@ -130,10 +131,16 @@ export function rutasMiembro(ctx) {
       .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
       .map(cursoPublico);
 
-    const materiales = materialesSnap.docs
-      .map((d) => ({ id: d.id, ...d.data() }))
-      .filter((m) => m.estado !== 'oculto')
-      .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
+    // Si Firestore `v2_materiales` todavía está vacío (Storage aún no habilitado
+    // y publish:materials no se ha corrido), devolvemos el lote oficial como
+    // "proximamente" para que los miembros vean el inventario próximo sin
+    // exponer PDFs ni URLs sin firma.
+    const materiales = materialesSnap.empty
+      ? materialesOficialesComoProximamente()
+      : materialesSnap.docs
+          .map((d) => ({ id: d.id, ...d.data() }))
+          .filter((m) => m.estado !== 'oculto')
+          .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
 
     const eventos = eventosSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
