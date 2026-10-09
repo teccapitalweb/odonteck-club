@@ -1,6 +1,7 @@
 import { createIcons, icons } from 'lucide';
 import { CLUB_GUIA, ES_DEMO_GUIA, escaparGuia as esc, marcaGuia, pesosGuia, type DatosGuia, type EstadoGuia } from './guia-datos';
 import { crearSeguimientoRespuestas, posturaRespuesta } from './gestos-guia';
+import { areaDesdeConsulta, razonRecomendacion, recomendarCursos, type NivelGuia, type ObjetivoGuia, type PerfilGuia } from './guia-inteligencia';
 import type { PosturaGuia } from './guia-capas';
 
 interface Opcion { label: string; action: string }
@@ -12,10 +13,14 @@ interface Mensaje {
   extra?: 'planes' | 'whatsapp';
   postura?: PosturaGuia;
   alternar?: boolean;
+  destacada?: boolean;
+  razon?: string;
+  feedback?: boolean;
 }
 type Fuente = () => { datos: DatosGuia | null; estado: EstadoGuia };
 
 const INICIO: Opcion[] = [
+  { label: 'Recomiéndame un curso', action: 'recomendar' },
   { label: 'Encontrar un curso', action: 'buscar' },
   { label: 'Explorar lo gratuito', action: 'gratis' },
   { label: 'Conocer la membresía', action: 'membresia' },
@@ -28,16 +33,18 @@ export function montarGuia(fuente: Fuente) {
   const root = document.querySelector<HTMLElement>('#assistant-root');
   if (!root) return { actualizar() {}, abrir() {} };
   const host = root;
-  const clave = `${marcaGuia.id}:guia-${ES_DEMO_GUIA ? 'demo' : 'publica'}:v2`;
+  const clave = `${marcaGuia.id}:guia-${ES_DEMO_GUIA ? 'demo' : 'publica'}:v3`;
   const bienvenida: Mensaje = {
     role: 'assistant',
-    text: 'Hola, soy Alexia, tu guía de OdonTeck. Te ayudo a encontrar formación dentro del club. ¿Qué te gustaría explorar?',
+    text: 'Hola, soy Alexia. Cuéntame qué quieres mejorar y te ayudo a elegir una ruta de formación dentro de OdonTeck.',
     opciones: INICIO,
     postura: 'saludo',
     alternar: true,
+    destacada: true,
   };
   let mensajes: Mensaje[] = [bienvenida];
   let area = '';
+  let perfil: PerfilGuia = { area: '', objetivo: '', nivel: '' };
   let ocupado = false;
   let abierto = false;
   let focoPrevio: HTMLElement | null = null;
@@ -48,6 +55,11 @@ export function montarGuia(fuente: Fuente) {
       && guardado.mensajes.every((m: Mensaje) => m && (m.role === 'assistant' || m.role === 'user') && typeof m.text === 'string')) {
       mensajes = guardado.mensajes.slice(-60);
       area = typeof guardado.area === 'string' ? guardado.area : '';
+      if (guardado.perfil && typeof guardado.perfil === 'object') perfil = {
+        area: typeof guardado.perfil.area === 'string' ? guardado.perfil.area : '',
+        objetivo: ['actualizar', 'resolver', 'certificar', 'explorar'].includes(guardado.perfil.objetivo) ? guardado.perfil.objetivo : '',
+        nivel: ['Básico', 'Intermedio', 'Avanzado'].includes(guardado.perfil.nivel) ? guardado.perfil.nivel : '',
+      } as PerfilGuia;
     }
   } catch { /* Una conversación nueva siempre queda disponible. */ }
   const respuestaAnterior = mensajes.filter((m) => m.role === 'assistant').at(-1);
@@ -57,23 +69,26 @@ export function montarGuia(fuente: Fuente) {
     ? 'libre' : 'neutral';
 
   root.innerHTML = `
-    <div class="oguia-saludo" hidden><button class="oguia-icono" data-guia-descartar aria-label="Descartar saludo"><i data-lucide="x"></i></button><p>Hola, soy Alexia. Puedo ayudarte a elegir un curso.</p></div>
+    <div class="oguia-saludo" hidden><button class="oguia-icono" data-guia-descartar aria-label="Descartar saludo"><i data-lucide="x"></i></button><small><span></span> Alexia está disponible</small><p>¿Buscas un curso? Te recomiendo una ruta en menos de un minuto.</p></div>
     <button class="oguia-launcher" aria-label="Abrir guía OdonTeck" aria-controls="oguia-panel" aria-expanded="false">
-      <span class="oguia-personaje mascot" aria-hidden="true"></span><span class="oguia-launcher__copy"><small><i data-lucide="sparkles"></i>Guía OdonTeck</small><strong>Te ayudo a elegir</strong><span>Cursos y membresía <i data-lucide="arrow-up-right"></i></span></span>
+      <span class="oguia-launcher__halo" aria-hidden="true"></span><span class="oguia-personaje mascot" aria-hidden="true"></span><span class="oguia-launcher__copy"><small><span></span> Disponible ahora</small><strong>Habla con Alexia</strong><span>Tu concierge de formación <i data-lucide="arrow-up-right"></i></span></span>
     </button>
     <div class="oguia-backdrop" hidden></div>
     <section class="oguia-panel" id="oguia-panel" role="dialog" aria-label="Conversación con Alexia, guía de OdonTeck" aria-modal="false" hidden>
-      <span class="oguia-personaje mascot oguia-personaje--panel" aria-hidden="true"></span>
+      <div class="oguia-personaje-stage" aria-hidden="true"><span class="oguia-personaje mascot oguia-personaje--panel"></span></div>
       <div class="oguia-superficie">
-        <header class="oguia-header"><div><small>OdonTeck Club</small><strong>Alexia</strong><span>Guía virtual de formación</span></div>
-          <button class="oguia-icono" data-guia-repetir data-guia-saludo aria-label="Repetir saludo de Alexia"><i data-lucide="rotate-ccw"></i></button>
-          <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alexia" aria-pressed="false"><i data-lucide="pause" data-icono-pausa data-guia-icono="pause"></i><i data-lucide="play" data-icono-play data-guia-icono="play" hidden></i></button>
-          <button class="oguia-icono" data-guia-cerrar aria-label="Minimizar y conservar conversación"><i data-lucide="chevron-down"></i></button>
+        <header class="oguia-header"><div class="oguia-identidad"><small><i data-lucide="badge-check"></i> OdonTeck Concierge</small><strong>Alexia <span>En línea</span></strong><p>Tu guía personal de formación</p></div>
+          <div class="oguia-header__acciones">
+            <button class="oguia-icono" data-guia-repetir data-guia-saludo aria-label="Repetir saludo de Alexia"><i data-lucide="rotate-ccw"></i></button>
+            <button class="oguia-icono" data-guia-pausa aria-label="Pausar animación de Alexia" aria-pressed="false"><i data-lucide="pause" data-icono-pausa data-guia-icono="pause"></i><i data-lucide="play" data-icono-play data-guia-icono="play" hidden></i></button>
+            <button class="oguia-icono" data-guia-cerrar aria-label="Minimizar y conservar conversación"><i data-lucide="chevron-down"></i></button>
+          </div>
         </header>
-        <div class="oguia-aviso">Orientación sobre el club y su catálogo. No ofrece diagnóstico, tratamiento ni consejo clínico.</div>
+        <div class="oguia-status"><span class="oguia-status__dot"></span><strong data-guia-status>Conectando con el catálogo…</strong><span>Información oficial de OdonTeck</span></div>
+        <nav class="oguia-atajos" aria-label="Accesos rápidos de Alexia"><button data-guia-action="recomendar"><i data-lucide="wand-sparkles"></i> Para mí</button><button data-guia-action="buscar"><i data-lucide="search"></i> Cursos</button><button data-guia-action="gratis"><i data-lucide="gift"></i> Gratis</button><button data-guia-action="planes"><i data-lucide="crown"></i> Planes</button></nav>
         <div class="oguia-mensajes" role="log" aria-label="Historial de la conversación" aria-live="polite" aria-relevant="additions"></div>
-        <form class="oguia-compositor"><label><span class="sr-only">Escribe tu pregunta</span><input name="pregunta" placeholder="¿Qué te gustaría aprender?" maxlength="500" autocomplete="off" required></label><button type="submit" aria-label="Enviar pregunta"><i data-lucide="arrow-up"></i></button></form>
-        <div class="oguia-footer"><button data-guia-action="asesor">Hablar con el equipo</button><button data-guia-reset>Empezar de nuevo</button></div>
+        <form class="oguia-compositor"><label><span class="sr-only">Escribe tu pregunta</span><input name="pregunta" placeholder="Pregunta por un tema o especialidad…" maxlength="500" autocomplete="off" required></label><button type="submit" aria-label="Enviar pregunta"><i data-lucide="arrow-up"></i></button></form>
+        <div class="oguia-footer"><span><i data-lucide="shield-check"></i> No brinda consejo clínico</span><div><button data-guia-action="asesor">Equipo humano</button><button data-guia-reset>Reiniciar</button></div></div>
       </div>
     </section>`;
 
@@ -84,26 +99,31 @@ export function montarGuia(fuente: Fuente) {
   const log = root.querySelector<HTMLElement>('.oguia-mensajes')!;
   const input = root.querySelector<HTMLInputElement>('.oguia-compositor input')!;
   const enviarBtn = root.querySelector<HTMLButtonElement>('.oguia-compositor button')!;
-  const guardar = () => { try { sessionStorage.setItem(clave, JSON.stringify({ mensajes: mensajes.slice(-60), area })); } catch { /* No es crítico. */ } };
+  const status = root.querySelector<HTMLElement>('[data-guia-status]')!;
+  const guardar = () => { try { sessionStorage.setItem(clave, JSON.stringify({ mensajes: mensajes.slice(-60), area, perfil })); } catch { /* No es crítico. */ } };
 
   const cursoUrl = (id: string) => `${CLUB_GUIA}/#/curso/${encodeURIComponent(id)}`;
   function tarjetasPlanes(datos: DatosGuia | null) {
     if (!datos) return '<div class="oguia-nota">No pude verificar los planes. El equipo puede confirmarlos.</div>';
     const etiqueta = datos.fuente === 'demo' ? 'Ejemplo local' : 'Precio verificado';
-    return `<div class="oguia-planes"><div><small>Mensual</small><strong>${datos.planes.mensual === null ? 'Por confirmar' : `${pesosGuia(datos.planes.mensual)} / mes`}</strong></div><div><small>Anual</small><strong>${datos.planes.anual === null ? 'Por confirmar' : `${pesosGuia(datos.planes.anual)} / año`}</strong></div><span>${etiqueta}</span></div>`;
+    return `<div class="oguia-planes"><div><i data-lucide="calendar-days"></i><small>Mensual</small><strong>${datos.planes.mensual === null ? 'Por confirmar' : `${pesosGuia(datos.planes.mensual)} / mes`}</strong><span>Flexibilidad total</span></div><div class="recomendado"><i data-lucide="sparkles"></i><small>Anual · mejor valor</small><strong>${datos.planes.anual === null ? 'Por confirmar' : `${pesosGuia(datos.planes.anual)} / año`}</strong><span>Formación todo el año</span></div><p><i data-lucide="badge-check"></i> ${etiqueta}</p></div>`;
   }
 
   function pintar() {
-    const { datos } = fuente();
-    log.innerHTML = mensajes.map((mensaje) => `<div class="oguia-mensaje ${mensaje.role}"><small>${mensaje.role === 'user' ? 'TÚ' : 'ALEXIA · GUÍA ODONTECK'}</small><div class="oguia-burbuja" tabindex="-1">${esc(mensaje.text)}</div>
+    const { datos, estado } = fuente();
+    status.textContent = estado === 'cargando' ? 'Sincronizando catálogo…' : estado === 'error' ? 'Catálogo temporalmente no disponible' : datos?.fuente === 'api' ? 'Catálogo oficial verificado' : 'Vista de demostración';
+    status.parentElement?.classList.toggle('error', estado === 'error');
+    log.innerHTML = mensajes.map((mensaje, indice) => `<div class="oguia-mensaje ${mensaje.role}${mensaje.destacada ? ' destacada' : ''}"><small>${mensaje.role === 'user' ? 'TÚ' : '<i data-lucide="sparkles"></i> ALEXIA'}</small><div class="oguia-burbuja" tabindex="-1">${esc(mensaje.text)}</div>
+      ${mensaje.razon ? `<div class="oguia-razon"><i data-lucide="scan-search"></i><span>${esc(mensaje.razon)}</span></div>` : ''}
       ${mensaje.cursos?.map((id) => {
         const curso = datos?.cursos.find((c) => c.id === id);
         if (!curso) return '';
-        return `<article class="oguia-curso"><img src="${esc(curso.imagen)}" alt="" loading="lazy"><div><small>${esc(curso.area)}</small><h4>${esc(curso.titulo)}</h4><p>${curso.clases} clases · ${esc(curso.nivel || 'A tu ritmo')}</p></div><a href="${cursoUrl(curso.id)}">Ver curso <i data-lucide="arrow-up-right"></i></a></article>`;
+        return `<article class="oguia-curso"><div class="oguia-curso__imagen"><img src="${esc(curso.imagen)}" alt="" loading="lazy">${curso.accesoGratis ? '<span>Prueba gratis</span>' : ''}</div><div class="oguia-curso__contenido"><small>${esc(curso.area)}</small><h4>${esc(curso.titulo)}</h4><p><span><i data-lucide="layers-3"></i> ${curso.clases} clases</span><span><i data-lucide="gauge"></i> ${esc(curso.nivel || 'A tu ritmo')}</span></p><em>${esc(curso.instructor || 'Equipo OdonTeck')}</em></div><a href="${cursoUrl(curso.id)}" aria-label="Ver ${esc(curso.titulo)}">Ver curso <i data-lucide="arrow-up-right"></i></a></article>`;
       }).join('') || ''}
       ${mensaje.extra === 'planes' ? tarjetasPlanes(datos) : ''}
       ${mensaje.opciones?.length ? `<div class="oguia-opciones">${mensaje.opciones.map((o) => `<button data-guia-action="${esc(o.action)}">${esc(o.label)}</button>`).join('')}</div>` : ''}
-      ${mensaje.extra === 'whatsapp' ? `<div class="oguia-opciones"><a class="oguia-whatsapp" href="https://wa.me/${marcaGuia.whatsapp}?text=${encodeURIComponent('Hola OdonTeck, quisiera orientación sobre sus cursos y la membresía del club.')}" target="_blank" rel="noopener noreferrer">Abrir WhatsApp <i data-lucide="arrow-up-right"></i></a><button data-guia-copiar>Copiar resumen</button></div>` : ''}</div>`).join('');
+      ${mensaje.extra === 'whatsapp' ? `<div class="oguia-opciones"><a class="oguia-whatsapp" href="https://wa.me/${marcaGuia.whatsapp}?text=${encodeURIComponent('Hola OdonTeck, quisiera orientación sobre sus cursos y la membresía del club.')}" target="_blank" rel="noopener noreferrer">Abrir WhatsApp <i data-lucide="arrow-up-right"></i></a><button data-guia-copiar>Copiar resumen</button></div>` : ''}
+      ${mensaje.role === 'assistant' && mensaje.feedback !== false && indice > 0 ? `<div class="oguia-feedback"><span>¿Te sirvió?</span><button data-guia-feedback="si" aria-label="La respuesta me sirvió" aria-pressed="false"><i data-lucide="thumbs-up"></i></button><button data-guia-feedback="no" aria-label="La respuesta no me sirvió" aria-pressed="false"><i data-lucide="thumbs-down"></i></button></div>` : ''}</div>`).join('');
     if (ocupado) log.insertAdjacentHTML('beforeend', '<div class="oguia-escribiendo" role="status"><span></span><span></span><span></span> Consultando…</div>');
     enviarBtn.disabled = ocupado;
     log.setAttribute('aria-busy', String(ocupado));
@@ -114,8 +134,8 @@ export function montarGuia(fuente: Fuente) {
     log.scrollTop = log.scrollHeight;
   }
 
-  function responder(text: string, opciones?: Opcion[], cursos?: string[], extra?: Mensaje['extra'], postura?: PosturaGuia, alternar?: boolean) {
-    const mensaje: Mensaje = { role: 'assistant', text, opciones, cursos, extra, postura, alternar };
+  function responder(text: string, opciones?: Opcion[], cursos?: string[], extra?: Mensaje['extra'], postura?: PosturaGuia, alternar?: boolean, razon?: string) {
+    const mensaje: Mensaje = { role: 'assistant', text, opciones, cursos, extra, postura, alternar, razon };
     mensaje.postura = posturaRespuesta(mensaje);
     mensaje.alternar ??= mensaje.postura !== 'saludo';
     mensajes.push(mensaje);
@@ -146,9 +166,42 @@ export function montarGuia(fuente: Fuente) {
     responder(`${datos.fuente === 'demo' ? 'En esta demostración encontré' : 'Encontré'} ${lista.length} ${lista.length === 1 ? 'curso' : 'cursos'} para ${area || 'seguir explorando'}.`, [opcion('Elegir otra área', 'buscar'), opcion('Conocer la membresía', 'membresia')], lista.map((curso) => curso.id), undefined, datos.fuente === 'api' ? 'celebrar' : 'orientar');
   }
 
+  function recomendarPersonalizado(consulta = '') {
+    const datos = datosDisponibles();
+    if (!datos) return;
+    const lista = recomendarCursos(datos.cursos, perfil, consulta, 3);
+    if (!lista.length) {
+      responder('No encontré una coincidencia suficientemente clara. Puedo ayudarte a elegir por especialidad o conectarte con el equipo.', [opcion('Elegir especialidad', 'buscar'), opcion('Hablar con el equipo', 'asesor')], undefined, undefined, 'saludo');
+      return;
+    }
+    responder('Preparé una selección corta para que compares sin perderte en todo el catálogo.', [opcion('Ajustar recomendación', 'recomendar'), opcion('Ver otra especialidad', 'buscar')], lista.map((curso) => curso.id), undefined, 'celebrar', true, razonRecomendacion(perfil));
+  }
+
   function actuar(action: string) {
     if (action.startsWith('area:')) { area = action.slice(5); recomendar(); return; }
     switch (action) {
+      case 'recomendar':
+        perfil = { area: '', objetivo: '', nivel: '' };
+        responder('Para recomendarte bien necesito tres datos rápidos. ¿Qué quieres conseguir primero?', [opcion('Actualizarme', 'objetivo:actualizar'), opcion('Resolver temas clínicos', 'objetivo:resolver'), opcion('Sumar certificados', 'objetivo:certificar'), opcion('Explorar desde cero', 'objetivo:explorar')], undefined, undefined, 'orientar', false);
+        break;
+      case 'objetivo:actualizar':
+      case 'objetivo:resolver':
+      case 'objetivo:certificar':
+      case 'objetivo:explorar': {
+        perfil.objetivo = action.slice(9) as ObjetivoGuia;
+        const datos = datosDisponibles();
+        if (!datos) break;
+        const areas = [...new Set(datos.cursos.map((curso) => curso.area).filter(Boolean))];
+        responder('Perfecto. ¿En qué especialidad quieres enfocarte?', [...areas.map((valor) => opcion(valor, `perfil-area:${valor}`)), opcion('Sorpréndeme', 'perfil-area:')], undefined, undefined, 'orientar', false);
+        break;
+      }
+      case 'nivel:Básico':
+      case 'nivel:Intermedio':
+      case 'nivel:Avanzado':
+      case 'nivel:':
+        perfil.nivel = action.slice(6) as NivelGuia;
+        recomendarPersonalizado();
+        break;
       case 'buscar': {
         const datos = datosDisponibles();
         if (!datos) break;
@@ -187,6 +240,11 @@ export function montarGuia(fuente: Fuente) {
         responder('Puedes abrir WhatsApp para hablar con el equipo. La conversación no se envía automáticamente; si quieres compartir el contexto, copia el resumen y revísalo antes de pegarlo.', undefined, undefined, 'whatsapp', 'saludo');
         break;
       default: {
+        if (action.startsWith('perfil-area:')) {
+          perfil.area = action.slice(12);
+          responder('Último paso: ¿qué nivel te resulta más cómodo hoy?', [opcion('Básico', 'nivel:Básico'), opcion('Intermedio', 'nivel:Intermedio'), opcion('Avanzado', 'nivel:Avanzado'), opcion('Me da igual', 'nivel:')], undefined, undefined, 'orientar', false);
+          break;
+        }
         const texto = action.toLocaleLowerCase('es-MX').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         if (/paciente|diagnost|tratamiento|medicamento|farmaco|dosis|dolor|receta|protocolo/.test(texto)) responder('Puedo orientarte dentro del club, pero no evaluar casos, pacientes, diagnósticos, medicamentos ni tratamientos. Para formación, elige un área del catálogo.', [opcion('Buscar formación', 'buscar')], undefined, undefined, 'saludo');
         else if (/^(?:muchas\s+)?gracias/.test(texto)) responder('¡Con gusto! Aquí estoy si quieres seguir explorando.', INICIO, undefined, undefined, 'celebrar');
@@ -195,9 +253,11 @@ export function montarGuia(fuente: Fuente) {
         else if (/precio|costo|plan|membresia|vip/.test(texto)) actuar('planes');
         else if (/gratis|probar|atlas|icdas/.test(texto)) actuar('gratis');
         else {
-          const curso = fuente().datos?.cursos.find((c) => texto.includes(c.area.toLocaleLowerCase('es-MX').normalize('NFD').replace(/[\u0300-\u036f]/g, '')));
-          if (curso) actuar(`area:${curso.area}`);
-          else responder('Mis respuestas son guiadas. Puedo ayudarte a encontrar un curso, explicar la membresía, mostrar lo gratuito o contactar al equipo.', INICIO, undefined, undefined, 'orientar');
+          const cursos = fuente().datos?.cursos || [];
+          const areaDetectada = areaDesdeConsulta(action, cursos);
+          if (areaDetectada) { perfil = { ...perfil, area: areaDetectada }; recomendarPersonalizado(action); }
+          else if (recomendarCursos(cursos, perfil, action, 1).length) recomendarPersonalizado(action);
+          else responder('Puedo orientarte por objetivo, especialidad o nivel. También puedo explicar la membresía, lo gratuito y los certificados.', INICIO, undefined, undefined, 'orientar');
         }
       }
     }
@@ -282,7 +342,15 @@ export function montarGuia(fuente: Fuente) {
     const objetivo = evento.target as HTMLElement;
     const accion = objetivo.closest<HTMLElement>('[data-guia-action]');
     if (accion) void enviar(accion.dataset.guiaAction!, accion.textContent!.trim());
-    if (objetivo.closest('[data-guia-reset]') && !ocupado) { mensajes = [bienvenida]; area = ''; guardar(); pintar(); }
+    if (objetivo.closest('[data-guia-reset]') && !ocupado) { mensajes = [bienvenida]; area = ''; perfil = { area: '', objetivo: '', nivel: '' }; guardar(); pintar(); }
+    const feedback = objetivo.closest<HTMLButtonElement>('[data-guia-feedback]');
+    if (feedback) {
+      const bloque = feedback.closest('.oguia-feedback');
+      bloque?.querySelectorAll('button').forEach((boton) => boton.setAttribute('aria-pressed', String(boton === feedback)));
+      bloque?.classList.add('respondido');
+      const etiqueta = bloque?.querySelector('span');
+      if (etiqueta) etiqueta.textContent = feedback.dataset.guiaFeedback === 'si' ? 'Gracias por tu opinión' : 'Gracias, la mejoraré';
+    }
     if (objetivo.closest('[data-guia-copiar]')) {
       const resumen = `Consulta en OdonTeck:\n${mensajes.filter((m) => m.role === 'user').slice(-8).map((m) => `• ${m.text}`).join('\n')}\nRevisa este texto antes de compartirlo.`;
       void navigator.clipboard.writeText(resumen).then(() => { responder('Resumen copiado. Revísalo antes de pegarlo en WhatsApp.'); pintar(); }).catch(() => { responder('El navegador no permitió copiar. Puedes seleccionar el historial manualmente.'); pintar(); });

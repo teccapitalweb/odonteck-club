@@ -2,12 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 8 de octubre de 2026 (Recompensas + Retos V2 + Comunidad social local; pendiente desplegar API/web)
+- **Actualizado:** 9 de octubre de 2026 (Alexia Concierge v3 + Recompensas + Retos V2 + Comunidad social local; pendiente desplegar)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
 - **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
-- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 114 pruebas (113 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, canje de material, descarga gratuita tras el canje, rechazo del segundo canje y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 59 comprobaciones (6 de datos, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 114 pruebas (113 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, canje de material, descarga gratuita tras el canje, rechazo del segundo canje y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -33,7 +33,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 ### Lo que está construido visual y funcionalmente en demo
 
 - Landing pública con carrusel de tres portadas, catálogo, beneficios, planes, FAQ y llamadas a registro.
-- Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas, conversación guiada, catálogo y precios verificados, transferencia explícita a WhatsApp y límite visible contra diagnósticos, tratamientos o consejo clínico.
+- Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas y experiencia Concierge v3. Recomienda desde el catálogo por objetivo, especialidad y nivel, reconoce temas de búsqueda libre, explica por qué eligió cada resultado, muestra fuente verificada, conserva accesos rápidos y feedback, ofrece transferencia explícita a WhatsApp y mantiene un límite visible contra diagnósticos, tratamientos o consejo clínico. Esta evolución está validada localmente y todavía no se ha desplegado.
 - Login por correo, Google, registro y recuperación mediante Firebase cuando existe API.
 - Inicio, catálogo, ficha de curso y reproductor de clase.
 - Biblioteca de materiales y libros.
