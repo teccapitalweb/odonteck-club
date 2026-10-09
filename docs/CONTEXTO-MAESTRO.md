@@ -184,6 +184,8 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 
 ### Corte público y continuidad verificada (5 de octubre de 2026)
 
+- El 9 de octubre de 2026 se desplegó el sistema de materiales privados y recompensas del commit `b65cc46`: Railway quedó en `SUCCESS` con el despliegue `650dfed2-1df9-4e2e-b6d5-c794f1544eac` y Cloudflare Pages publicó `ed1e63e7`. El dominio oficial respondió 200 con `club-DbQiTgQ8.js`; el smoke autenticado confirmó VIP heredado, 18 cursos, 10 materiales y checkout nuevo bloqueado mientras falta el webhook. Los diez PDF propios se sirven desde la API mediante enlaces HMAC de 10 minutos; Atlas ICDAS es gratuito y los nueve premium se incluyen con VIP o se canjean permanentemente por puntos.
+
 - El 9 de octubre de 2026 se publicó Alexia Concierge v3 desde el commit fuente `b2be5e1` mediante Cloudflare Pages (`9097c24a`). `odonteck-club.pages.dev` y `www.odonteckconsulting.com` respondieron 200 con el bundle nuevo, el catálogo público mostró 18 cursos, Alexia reportó “Catálogo oficial verificado” y `/health` del API Railway respondió `200 {"ok":true}`.
 
 - El dominio público `https://www.odonteckconsulting.com/` ya sirve la nueva experiencia desde el repositorio público `https://github.com/teccapitalweb/Odonteck`. El estado anterior quedó marcado con el tag recuperable `pre-club-relaunch-2026-10-05`.
