@@ -7,7 +7,7 @@
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
 - **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
-- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 115 pruebas (114 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 115 pruebas (114 exitosas, 0 fallos y 1 omitida por requerir emuladores); `npm audit` reporta 0 vulnerabilidades. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -36,7 +36,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas y experiencia Concierge v3. Recomienda desde el catálogo por objetivo, especialidad y nivel, reconoce temas de búsqueda libre, explica por qué eligió cada resultado, muestra fuente verificada, conserva accesos rápidos y feedback, ofrece transferencia explícita a WhatsApp y mantiene un límite visible contra diagnósticos, tratamientos o consejo clínico. Esta evolución está desplegada y verificada en el dominio oficial.
 - Login por correo, Google, registro y recuperación mediante Firebase cuando existe API.
 - Inicio, catálogo, ficha de curso y reproductor de clase.
-- Biblioteca de materiales y libros.
+- Biblioteca de materiales y libros con lector inmersivo propio (`#/materiales/:id/visor`): doble página en escritorio, una página en móvil, zoom, arrastre, swipe, teclado, pantalla completa, salto de página y memoria de lectura. Renderiza el PDF autorizado con PDF.js desde la URL temporal de la API; no publica imágenes de cada página.
 - Sesiones en vivo y reservas.
 - Comunidad tipo red social clínica: feed visual, historias por especialidad, publicación, útil, respuestas, compartir, explorar y actividad; en producción sólo muestra datos reales del foro.
 - Retos con Quiz Relámpago, flashcards (3 niveles de calificación, undo, atajos de teclado, stats de sesión), repetición espaciada, casos clínicos y liga/clasificación del club.
@@ -129,6 +129,7 @@ Rutas de miembro:
 #/                         #/cursos
 #/curso/:id               #/curso/:id/clase/:n
 #/materiales              #/materiales/:id
+#/materiales/:id/visor
 #/recompensas
 #/en-vivo                 #/comunidad
 #/comunidad/:id           #/retos
@@ -278,7 +279,7 @@ Ordenadas por prioridad:
 5. ~~**Perfil real:**~~ Resuelto: `/me` hidrata nombre/plan/vencimiento y `PATCH /me/perfil` guarda perfil y avisos.
 6. ~~**Progreso real:**~~ Resuelto: se carga al iniciar y usa `/abrir` y `/vista`. Sigue pendiente decidir si se migra avance demo anterior.
 7. ~~**Certificados reales:**~~ Resuelto: lista folios emitidos por API y ofrece verificación pública `#/verificar/:folio`.
-8. ~~**Materiales seguros:**~~ Integración resuelta: obtiene URL temporal desde `/materiales/:id/descarga`. Falta sembrar/subir únicamente recursos autorizados.
+8. ~~**Materiales seguros:**~~ Integración resuelta: el lector obtiene una URL temporal desde `/materiales/:id/descarga`, descarga el archivo en memoria y lo renderiza en `canvas` con PDF.js. El backend vuelve a validar acceso gratuito, VIP o desbloqueo permanente por puntos; no se generan páginas públicas. Falta sembrar/subir únicamente recursos autorizados futuros.
 9. ~~**Eventos reales:**~~ Resuelto: catálogo remoto y reservas mediante API.
 10. ~~**Avisos/config real:**~~ la edición administrativa de avisos y configuración usa la API. El contrato no incluye borrado de avisos, por lo que esa acción permanece solo en demo.
 

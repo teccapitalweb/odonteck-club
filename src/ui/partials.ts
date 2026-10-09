@@ -43,12 +43,12 @@ export function encabezado(chip: string, titulo: string, cta = '') {
   return `<div class="section-head"><div><span class="chip chip--primary">${chip}</span><h2 class="display">${titulo}</h2></div>${cta}</div>`;
 }
 
-export function placeholder(titulo: string, texto: string, icon = 'construction') {
+export function placeholder(titulo: string, texto: string, icon = 'construction', enlace = '#/cursos', accion = 'Ir a cursos') {
   return `<section class="card card--pad" style="text-align:center;padding:64px 24px;display:grid;gap:12px;justify-items:center">
     <span class="circle-btn" style="width:56px;height:56px;background:var(--primary-soft);color:var(--primary)"><i data-lucide="${icon}" class="i" style="width:24px;height:24px"></i></span>
     <h1 class="display" style="font-size:var(--fs-xl)">${titulo}</h1>
     <p class="muted" style="max-width:48ch">${texto}</p>
-    <a class="btn btn--brand" href="#/cursos">Ir a cursos</a>
+    <a class="btn btn--brand" href="${enlace}">${accion}</a>
   </section>`;
 }
 

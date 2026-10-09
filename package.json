@@ -18,9 +18,11 @@
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/outfit": "^5.3.0",
     "firebase": "^12.19.0",
-    "lucide": "^1.47.0"
+    "lucide": "^1.47.0",
+    "pdfjs-dist": "^6.4.299"
   },
   "overrides": {
-    "@grpc/grpc-js": "^1.14.6"
+    "@grpc/grpc-js": "^1.14.6",
+    "source-map-js": "^1.2.2"
   }
 }

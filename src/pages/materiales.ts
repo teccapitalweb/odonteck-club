@@ -71,9 +71,7 @@ export function fichaLibro(m: Material, compacto: boolean) {
       <p class="book__lead" style="font-family:var(--font-body);font-style:normal">${esc(m.descripcion)}</p>
       <div class="book__actions">
         ${disponible
-          ? Datos.modo === 'api'
-            ? `<button class="btn btn--brand btn--lg btn--pill-arrow" data-descargar-material="${m.id}">${Acceso.materialLibre(m) ? 'Abrir gratis' : 'Abrir'} <span class="arrow"><i data-lucide="arrow-up-right" class="i"></i></span></button>`
-            : `<a class="btn btn--brand btn--lg btn--pill-arrow" href="${m.url}" target="_blank" rel="noopener">${Acceso.materialLibre(m) ? 'Abrir gratis' : 'Abrir'} <span class="arrow"><i data-lucide="arrow-up-right" class="i"></i></span></a>`
+          ? `<a class="btn btn--brand btn--lg btn--pill-arrow" href="#/materiales/${encodeURIComponent(m.id)}/visor">${Acceso.materialLibre(m) ? 'Leer gratis' : 'Leer ahora'} <span class="arrow"><i data-lucide="book-open" class="i"></i></span></a>`
           : m.estado === 'disponible' && !acc && puntos
             ? `<a class="btn btn--brand btn--lg" href="#/recompensas"><i data-lucide="sparkles" class="i"></i>Canjear por ${puntos} puntos</a>`
           : m.estado === 'disponible' && !acc
