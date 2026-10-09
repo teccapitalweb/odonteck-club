@@ -91,6 +91,7 @@ export function shellHTML() {
             <a href="#/configuracion"><span><i data-lucide="settings-2" class="i"></i></span><div><strong>Configuración</strong><small>Avisos y apariencia</small></div><i data-lucide="arrow-up-right" class="i"></i></a>
           </nav>
           <div class="account-quick__tip"><i data-lucide="lightbulb" class="i"></i><p><strong>Tu siguiente avance empieza aquí.</strong><span>Cada clase, reto y encuesta puede sumar a tu progreso.</span></p></div>
+          <button type="button" class="account-quick__logout" data-salir aria-label="Cerrar sesión en este dispositivo"><i data-lucide="log-out" class="i"></i>Cerrar sesión</button>
         </div>
       </aside>
       <main class="content" id="outlet" style="display:grid;gap:56px;align-content:start"></main>
