@@ -2,7 +2,7 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 9 de octubre de 2026 (Alexia Concierge v3 + Recompensas + Retos V2 + Comunidad social local; pendiente desplegar)
+- **Actualizado:** 9 de octubre de 2026 (Alexia Concierge v3 desplegada + Recompensas + Retos V2 + Comunidad social)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
@@ -33,7 +33,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 ### Lo que está construido visual y funcionalmente en demo
 
 - Landing pública con carrusel de tres portadas, catálogo, beneficios, planes, FAQ y llamadas a registro.
-- Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas y experiencia Concierge v3. Recomienda desde el catálogo por objetivo, especialidad y nivel, reconoce temas de búsqueda libre, explica por qué eligió cada resultado, muestra fuente verificada, conserva accesos rápidos y feedback, ofrece transferencia explícita a WhatsApp y mantiene un límite visible contra diagnósticos, tratamientos o consejo clínico. Esta evolución está validada localmente y todavía no se ha desplegado.
+- Guía virtual “Alexia” en la landing: personaje femenino original con tres posturas, movimiento SVG por capas y experiencia Concierge v3. Recomienda desde el catálogo por objetivo, especialidad y nivel, reconoce temas de búsqueda libre, explica por qué eligió cada resultado, muestra fuente verificada, conserva accesos rápidos y feedback, ofrece transferencia explícita a WhatsApp y mantiene un límite visible contra diagnósticos, tratamientos o consejo clínico. Esta evolución está desplegada y verificada en el dominio oficial.
 - Login por correo, Google, registro y recuperación mediante Firebase cuando existe API.
 - Inicio, catálogo, ficha de curso y reproductor de clase.
 - Biblioteca de materiales y libros.
@@ -183,6 +183,8 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - Producción tiene 0 documentos en `v2_materiales` y 0 en `v2_eventos`. Mientras esos beneficios se migran, la pantalla de suscripción muestra únicamente a miembros VIP un acceso explícito a `vip-panel.html`, donde siguen disponibles la biblioteca, grabaciones y herramientas anteriores.
 
 ### Corte público y continuidad verificada (5 de octubre de 2026)
+
+- El 9 de octubre de 2026 se publicó Alexia Concierge v3 desde el commit fuente `b2be5e1` mediante Cloudflare Pages (`9097c24a`). `odonteck-club.pages.dev` y `www.odonteckconsulting.com` respondieron 200 con el bundle nuevo, el catálogo público mostró 18 cursos, Alexia reportó “Catálogo oficial verificado” y `/health` del API Railway respondió `200 {"ok":true}`.
 
 - El dominio público `https://www.odonteckconsulting.com/` ya sirve la nueva experiencia desde el repositorio público `https://github.com/teccapitalweb/Odonteck`. El estado anterior quedó marcado con el tag recuperable `pre-club-relaunch-2026-10-05`.
 - Se conservaron las rutas heredadas `vip-auth.html`, `vip-panel.html` y las páginas legales. El alta o pago nuevo que todavía depende del sistema anterior se redirige a `vip-auth.html?tab=register`.
