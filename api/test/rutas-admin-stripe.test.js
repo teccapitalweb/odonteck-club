@@ -337,5 +337,8 @@ describe('stripe', () => {
     const sus = env.db.leer('v2_suscripciones/free1');
     assert.equal(sus.subscriptionId, 'sub_1');
     assert.equal(sus.email, 'carla@example.com');
+    const recompensas = env.db.leer('v2_recompensas_estado/free1');
+    assert.equal(recompensas.saldo, 300);
+    assert.equal(recompensas.contadores.membresias, 1);
   });
 });

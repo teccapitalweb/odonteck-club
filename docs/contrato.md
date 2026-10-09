@@ -90,6 +90,31 @@ Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 ### `v2_intentos/{uid}_{cursoId}_{n}`
 `{ uid, cursoId, n, correctas, total, aprobado, fecha }`
 
+### `v2_retos_estados/{uid}`
+Estado personal del entrenamiento clínico, escrito únicamente por la API:
+`{ uid, xp, quiz: { mejor, mejorCombo, jugados, aciertos, total }, preguntas, dominio, actividad, actualizado }`.
+
+- `preguntas[cursoId_n_indice]` conserva intentos, aciertos y última respuesta para priorizar refuerzos.
+- `dominio[area]` acumula aciertos/total y alimenta el mapa personal del hub.
+- `actividad` registra constancia y racha sin guardar correo, nombre ni otra PII.
+- La API limita XP a la primera respuesta de cada pregunta por día; repetir sigue sirviendo para practicar, pero no para inflar puntos.
+
+### `v2_recompensas_estado/{uid}`
+Saldo central y logros del miembro, escrito únicamente por la API:
+`{ uid, saldo, ganados, gastados, contadores, logros, desbloqueos: { materiales: id[] }, notificaciones, actualizado }`.
+
+- Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
+- Las clases suman 10, terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
+- La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
+- Sólo materiales propios incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse con puntos. Un canje no vuelve disponible un archivo que todavía no fue publicado en Storage.
+
+### `v2_recompensas_movimientos/{hash}`
+Libro mayor inmutable: `{ uid, clave, tipo, puntos, detalle, fecha }`. El ID es un hash de `uid + clave` para garantizar idempotencia.
+
+### `v2_recompensas_canjes/{hash}`
+`{ uid, recompensaId, titulo, puntos, tipo, estatus:'entregado'|'pendiente', solicitado }`.
+Los materiales se entregan automáticamente. Praxia se registra como `pendiente`; nunca se presenta como activado hasta que el equipo lo confirme.
+
 ### `v2_cortesias/{uid}`
 `{ uid, hasta: ISO, motivo, otorgadaPor, fecha }`
 
@@ -126,16 +151,22 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/me` | `{ uid, email, esVip, esAdmin, plan, vence, perfil }` |
 | PATCH | `/me/perfil` | `{ nombre?, whatsapp?, especialidad?, ciudad?, avisos? }` → perfil |
 | PATCH | `/me/intereses` | `{ intereses: string[] }` (1 a 3 valores únicos y válidos) → `{ intereses }`; guarda la preferencia actual sin alterar la entrevista inicial |
-| GET | `/catalogo` | `{ cursos: Curso[] (sin videoId), materiales: Material[], eventos: Evento[], config }` |
+| GET | `/catalogo` | `{ cursos: Curso[] (sin videoId), materiales: Material[] (incluye `desbloqueadoConPuntos` y `puntosRequeridos`), eventos: Evento[], config }` |
 | GET | `/progreso` | `{ [cursoId]: { vistas, ultima, historial, actualizado } }` |
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
-| POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado? }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
+| POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado?, recompensas }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
-| GET | `/materiales/:id/descarga` | `{ url }` URL firmada de Storage, 10 min · VIP o material con `gratis: true` |
+| GET | `/materiales/:id/descarga` | `{ url }` URL firmada de Storage, 10 min · VIP, material con `gratis: true` o desbloqueo permanente canjeado |
+| GET | `/recompensas/resumen` | Saldo, contadores, logros, catálogo de recompensas, movimientos y notificaciones no leídas; sincroniza actividad histórica |
+| POST | `/recompensas/canjear` | `{ recompensaId }` → descuenta una sola vez y entrega material o crea solicitud pendiente de Praxia |
+| POST | `/recompensas/notificaciones/leidas` | Marca como leídos los avisos personales de logros y canjes |
 | GET | `/certificados` | `Certificado[]` del usuario |
 | GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }` |
 | GET | `/quiz/:cursoId/:n` | `{ preguntas: [{ q, opciones }] }` (solo aprobados, sin respuestas) |
-| POST | `/quiz/:cursoId/:n` | `{ respuestas: number[] }` → `{ correctas, total, aprobado, detalle: [{ correcta, explicacion }] }` |
+| POST | `/quiz/:cursoId/:n` | `{ respuestas: number[] }` → `{ correctas, total, aprobado, detalle, recompensas }` |
+| GET | `/retos/resumen` | Estado, disponibilidad por área y sesión recomendada; sólo cuenta quizzes aprobados y clases accesibles |
+| POST | `/retos/sesion` | `{ modo:'practica'|'relampago', area?, limite? }` → preguntas adaptativas sin respuestas ni explicaciones |
+| POST | `/retos/responder` | `{ cursoId, n, indice, opcion:number|null }` → calificación, feedback, XP, recompensas y dominio actualizados en servidor |
 | GET | `/foro?cursoId=` | `Hilo[]` (sin ocultos) |
 | POST | `/foro` | `{ titulo, texto, cursoId? }` → Hilo |
 | GET | `/foro/:id` | `{ hilo, respuestas }` |
@@ -143,7 +174,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
 | GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
-| POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada |
+| POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada y su evento de puntos |
 | POST | `/encuestas/:clave/posponer` | → difiere el recordatorio sin bloquear al miembro |
 | POST | `/stripe/checkout` | `{ plan: 'mensual'|'anual' }` → `{ url }` |
 | POST | `/stripe/portal` | → `{ url }` |

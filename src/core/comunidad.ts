@@ -10,9 +10,19 @@ const uid = () => Math.random().toString(36).slice(2, 10);
 
 const SEMILLA: Hilo[] = [
   { id: 'bienvenida', titulo: 'Bienvenidos a la comunidad OdonTeck', texto: 'Este es el espacio para compartir casos, dudas y experiencias de consultorio. Abre un tema por curso o uno general. Sin pacientes identificables, por favor.', autor: 'Equipo OdonTeck', fecha: '2026-09-01T10:00:00.000Z', cursoId: null, respuestas: [], util: 12 },
+  { id: 'demo-caries-radiografia', titulo: '¿Lesión activa o detenida?', texto: 'Estoy repasando los criterios visuales y táctiles para caries oclusal. ¿Qué hallazgo pesa más en su decisión antes de intervenir?', autor: 'Dra. Ana Torres', fecha: '2026-09-26T18:20:00.000Z', cursoId: 'diagnostico-y-clasificacion-de-la-caries-dental', respuestas: [{ id: 'r-demo-1', autor: 'Dr. Carlos Mendoza', texto: 'Primero correlacionaría actividad, textura y control de placa; la imagen por sí sola no cuenta toda la historia.', fecha: '2026-09-26T19:05:00.000Z' }], util: 18 },
+  { id: 'demo-ortodoncia-registros', titulo: 'Los registros que más cambian una referencia', texto: 'Cuando el caso llega desde práctica general, fotografías consistentes, panorámica y análisis de espacio hacen una diferencia enorme. ¿Qué registro suelen echar de menos?', autor: 'Dr. Carlos Mendoza', fecha: '2026-09-25T15:40:00.000Z', cursoId: 'diagnostico-en-ortodoncia-para-odontologos-generales', respuestas: [{ id: 'r-demo-2', autor: 'Dra. Sofía Reyes', texto: 'Las fotografías extraorales de perfil bien estandarizadas; ayudan muchísimo a valorar crecimiento y armonía facial.', fecha: '2026-09-25T16:10:00.000Z' }], util: 24 },
+  { id: 'demo-pediatria-conductos', titulo: 'Un detalle que evita sorpresas en odontopediatría', texto: 'En molares temporales, anticipar la anatomía radicular y revisar la reabsorción fisiológica cambia por completo la planeación. Compartan sus puntos de control.', autor: 'Dra. Sofía Reyes', fecha: '2026-09-24T12:15:00.000Z', cursoId: 'endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos', respuestas: [], util: 15 },
 ];
 
-function leer(): Hilo[] { try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); return Array.isArray(v) ? v : SEMILLA; } catch { return SEMILLA; } }
+function leer(): Hilo[] {
+  try {
+    const v = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (!Array.isArray(v)) return SEMILLA;
+    const ids = new Set(v.map((h) => h?.id));
+    return [...v, ...SEMILLA.filter((h) => !ids.has(h.id))];
+  } catch { return SEMILLA; }
+}
 function escribir(h: Hilo[]) { try { localStorage.setItem(KEY, JSON.stringify(h)); } catch {} }
 let remotos: Hilo[] = [];
 const normalizar = (h: any, respuestas?: Respuesta[]): Hilo => ({

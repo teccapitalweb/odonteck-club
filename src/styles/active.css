@@ -149,7 +149,105 @@ a.lesson:hover { text-decoration: none; }
 .user-card__plan .i { width: 11px; height: 11px; }
 .user-card .user-card__action { position: relative; margin-left: 0; width: 36px; min-height: 36px; border: 1px solid color-mix(in srgb,var(--brand-blue) 15%,var(--line)); color: var(--text-2); background: linear-gradient(145deg,color-mix(in srgb,var(--surface) 94%,transparent),color-mix(in srgb,var(--primary-soft) 48%,var(--surface))); box-shadow: 0 8px 16px -12px rgba(20,42,92,.9), inset 0 1px 0 rgba(255,255,255,.8); transition: transform var(--t-base), color var(--t-base), border-color var(--t-base), box-shadow var(--t-base); }
 .user-card:hover .user-card__action { transform: rotate(8deg) scale(1.06); color: var(--primary); border-color: color-mix(in srgb,var(--brand-blue) 36%,var(--line)); box-shadow: 0 10px 18px -11px rgba(20,42,92,.92), inset 0 1px 0 rgba(255,255,255,.9); }
-.topbar__avatar { display: block; border-radius: 50%; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px color-mix(in srgb,var(--brand-teal) 45%,var(--line)); }
+.topbar__avatar { display: block; border-radius: 50%; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px color-mix(in srgb,var(--brand-teal) 45%,var(--line)); transition: transform var(--t-fast), box-shadow var(--t-fast); }
+.topbar__avatar:hover { transform: translateY(-1px); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px color-mix(in srgb,var(--brand-teal) 58%,var(--line)), 0 8px 18px -10px rgba(20,42,92,.75); }
+.topbar__avatar[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--brand-teal), 0 9px 20px -10px rgba(20,42,92,.9); }
+
+/* Resumen desplegable de cuenta desde el avatar superior. */
+@keyframes accountQuickIn { from { opacity: .35; transform: translate3d(100%,0,0) } to { opacity: 1; transform: none } }
+.account-quick__scrim { position: fixed; inset: 0; z-index: 38; background: rgba(20,42,92,.16); backdrop-filter: blur(2px); }
+.account-quick {
+  position: fixed;
+  z-index: 45;
+  inset: 0 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: min(410px, 100vw);
+  height: 100dvh;
+  overflow: hidden;
+  border-left: 1px solid color-mix(in srgb,var(--brand-blue) 18%,var(--line));
+  background: var(--surface);
+  box-shadow: -28px 0 70px -30px rgba(13,25,60,.5), -8px 0 24px -18px rgba(13,25,60,.28);
+  animation: accountQuickIn .32s cubic-bezier(.18,.78,.24,1) both;
+}
+.account-quick__hero { position: relative; overflow: hidden; flex-shrink: 0; padding: 24px 24px 26px; color: #fff; background: radial-gradient(circle at 92% 12%,rgba(111,191,176,.45),transparent 27%),linear-gradient(135deg,#17214a,#245184 72%,#28758f); }
+.account-quick__hero::after { content: ''; position: absolute; right: -38px; bottom: -70px; width: 145px; height: 145px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; box-shadow: 0 0 0 24px rgba(255,255,255,.025); }
+.account-quick__top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.account-quick__top > span { display: inline-flex; align-items: center; gap: 6px; color: #b9eee3; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .075em; text-transform: uppercase; }
+.account-quick__top > span .i { width: 13px; height: 13px; }
+.account-quick__top button { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; background: rgba(255,255,255,.08); color: #fff; transition: background var(--t-fast), transform var(--t-fast); }
+.account-quick__top button:hover { background: rgba(255,255,255,.17); transform: rotate(4deg); }
+.account-quick__top button .i { width: 15px; height: 15px; }
+.account-quick__identity { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 14px; margin-top: 16px; }
+.account-quick__avatar-wrap { position: relative; }
+.account-quick__avatar { width: 62px; height: 62px; border: 3px solid rgba(255,255,255,.94); font-size: 19px; box-shadow: 0 12px 24px -13px rgba(5,11,30,.9); }
+.account-quick__status { position: absolute; right: -1px; bottom: 1px; width: 21px; height: 21px; display: grid; place-items: center; border: 3px solid #234c7d; border-radius: 50%; background: var(--brand-teal); color: #fff; }
+.account-quick__status .i { width: 10px; height: 10px; stroke-width: 3; }
+.account-quick__identity > div:last-child { min-width: 0; }
+.account-quick__identity strong,
+.account-quick__identity small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-quick__identity strong { font-family: var(--font-display); font-size: var(--fs-lg); letter-spacing: -.025em; }
+.account-quick__identity small { margin-top: 2px; color: rgba(255,255,255,.6); font-size: 10px; }
+.account-quick__plan { width: fit-content; display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: 5px 8px; border: 1px solid rgba(185,238,227,.18); border-radius: 999px; background: rgba(111,191,176,.13); color: #b9eee3; font-size: 9px; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.account-quick__plan .i { width: 11px; height: 11px; }
+.account-quick__body { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 14px; overflow-y: auto; padding: 20px; scrollbar-width: thin; }
+.account-quick__stats { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--line); border-radius: 16px; background: color-mix(in srgb,var(--surface-2) 48%,var(--surface)); }
+.account-quick__stats > div { padding: 12px 8px; border-right: 1px solid var(--line); text-align: center; }
+.account-quick__stats > div:last-child { border-right: 0; }
+.account-quick__stats strong,
+.account-quick__stats span { display: block; }
+.account-quick__stats strong { font-family: var(--font-display); font-size: 1.08rem; color: var(--text); }
+.account-quick__stats span { margin-top: 2px; color: var(--text-3); font-size: 9px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
+.account-quick__reward { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 11px; padding: 13px; border: 1px solid color-mix(in srgb,var(--brand-teal) 28%,var(--line)); border-radius: 17px; color: var(--text); text-decoration: none; background: linear-gradient(135deg,color-mix(in srgb,var(--accent-soft) 72%,var(--surface)),var(--surface)); transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast); }
+.account-quick__reward:hover { transform: translateY(-1px); border-color: var(--accent); box-shadow: 0 10px 22px -17px rgba(59,138,125,.75); text-decoration: none; }
+.account-quick__reward-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--accent); color: #fff; }
+.account-quick__reward-icon .i { width: 18px; height: 18px; }
+.account-quick__reward > div { min-width: 0; }
+.account-quick__reward > div > span,
+.account-quick__reward > div > strong,
+.account-quick__reward > div > small { display: block; }
+.account-quick__reward > div > span { color: var(--accent); font-size: 9px; font-weight: 750; letter-spacing: .055em; text-transform: uppercase; }
+.account-quick__reward > div > strong { margin-top: 2px; font-size: var(--fs-xs); }
+.account-quick__reward > div > strong b { font-family: var(--font-mono); }
+.account-quick__reward > div > small { margin-top: 2px; color: var(--text-3); font-size: 9px; }
+.account-quick__reward > .i { width: 16px; height: 16px; color: var(--text-3); }
+.account-quick__links { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.account-quick__links > a { display: grid; grid-template-columns: 34px minmax(0,1fr); align-items: center; gap: 9px; min-height: 64px; padding: 10px; border: 1px solid var(--line); border-radius: 15px; color: var(--text); text-decoration: none; transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast); }
+.account-quick__links > a:hover { transform: translateY(-1px); border-color: color-mix(in srgb,var(--primary) 38%,var(--line)); background: var(--primary-soft); text-decoration: none; }
+.account-quick__links > a > span { width: 34px; height: 34px; display: grid; place-items: center; grid-row: 1; border-radius: 10px; background: var(--primary-soft); color: var(--primary); }
+.account-quick__links > a > span .i { width: 16px; height: 16px; }
+.account-quick__links > a > div { min-width: 0; }
+.account-quick__links > a strong,
+.account-quick__links > a small { display: block; white-space: nowrap; }
+.account-quick__links > a strong { font-size: 11px; }
+.account-quick__links > a small { margin-top: 2px; overflow: hidden; color: var(--text-3); font-size: 8px; text-overflow: ellipsis; }
+.account-quick__links > a > .i { display: none; }
+.account-quick__tip { display: flex; gap: 9px; margin-top: auto; padding: 11px 12px; border-radius: 14px; background: color-mix(in srgb,var(--brand-navy) 5%,var(--surface)); }
+.account-quick__tip > .i { width: 16px; height: 16px; flex-shrink: 0; color: var(--warning); }
+.account-quick__tip p strong,
+.account-quick__tip p span { display: block; }
+.account-quick__tip p strong { font-size: 10px; }
+.account-quick__tip p span { margin-top: 2px; color: var(--text-3); font-size: 9px; line-height: 1.35; }
+
+@media (max-width: 640px) {
+  .account-quick { width: min(410px, 100vw); }
+  .account-quick__hero { padding: 20px 20px 22px; }
+  .account-quick__body { padding: 18px; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 380px) {
+  .account-quick__links { grid-template-columns: 1fr; }
+  .account-quick__links > a { grid-template-columns: 34px minmax(0,1fr) auto; }
+  .account-quick__links > a > .i { display: block; width: 14px; height: 14px; color: var(--text-3); }
+}
+
+@media (min-width: 1025px) and (max-height: 820px) {
+  .user-card { grid-template-columns: 40px minmax(0,1fr) 32px; min-height: 66px; gap: 9px; padding: 9px; border-radius: 20px; }
+  .user-card__avatar { width: 40px; height: 40px; }
+  .user-card__name { -webkit-line-clamp: 1; font-size: 12.5px; }
+  .user-card__plan { margin-top: 4px; padding: 3px 7px; font-size: 8px; }
+  .user-card .user-card__action { width: 32px; min-height: 32px; }
+}
 
 /* "A continuación" bajo el video */
 .upnext { display: grid; grid-template-columns: 150px 1fr auto; gap: 16px; align-items: center; padding: 14px; border-radius: var(--r-xl); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }

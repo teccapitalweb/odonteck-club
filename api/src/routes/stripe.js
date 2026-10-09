@@ -4,6 +4,7 @@
 import express from 'express';
 import { COL, estadoMembresia, leerConfig, leerDoc, leerMiembroHeredado } from '../datos.js';
 import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errores.js';
+import { otorgarEventos, REGLAS_PUNTOS } from '../lib/recompensas.js';
 import { cuerpo, unoDe } from '../lib/validacion.js';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -138,7 +139,17 @@ async function procesarEvento(ctx, evento) {
         await ctx.db.collection(COL.suscripciones).doc(uid).set({ ...datos, actualizado: ctx.now().toISOString() }, { merge: true });
         return 'checkout_sin_suscripcion';
       }
-      return guardarSuscripcion(ctx, uid, sub, evento, datos);
+      const resultado = await guardarSuscripcion(ctx, uid, sub, evento, datos);
+      if (ESTADOS_ACTIVOS.includes(sub.status)) {
+        await otorgarEventos(ctx, COL, uid, [{
+          clave: `membresia:${obj.id || sub.id}`,
+          tipo: 'membresia',
+          puntos: REGLAS_PUNTOS.membresia,
+          contador: 'membresias',
+          detalle: 'Membresía OdonTeck activada',
+        }]);
+      }
+      return resultado;
     }
     case 'customer.subscription.created':
     case 'customer.subscription.updated':

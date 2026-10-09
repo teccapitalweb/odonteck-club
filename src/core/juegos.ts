@@ -61,8 +61,7 @@ export const NIVELES = [
 
 export const xpTotal = () => puntosProgreso() + leer().xp;
 
-export function nivel() {
-  const xp = xpTotal();
+export function nivelDesdeXP(xp: number) {
   let i = 0;
   for (let j = 0; j < NIVELES.length; j++) if (xp >= NIVELES[j].min) i = j;
   const actual = NIVELES[i];
@@ -70,6 +69,9 @@ export function nivel() {
   const pct = sig ? Math.round(((xp - actual.min) / (sig.min - actual.min)) * 100) : 100;
   return { ...actual, indice: i, xp, siguiente: sig || null, faltan: sig ? sig.min - xp : 0, pct };
 }
+
+export const nivel = () => nivelDesdeXP(xpTotal());
+export const nivelConXPJuegos = (xpJuegos: number) => nivelDesdeXP(puntosProgreso() + Math.max(0, Number(xpJuegos) || 0));
 
 export function ganarXP(n: number) { const e = leer(); e.xp += n; guardar(e); }
 

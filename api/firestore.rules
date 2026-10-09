@@ -52,5 +52,9 @@ service cloud.firestore {
     match /v2_stripe_eventos/{id} { allow read, write: if false; }
     match /v2_encuestas_estado/{id}     { allow read, write: if false; }
     match /v2_encuestas_respuestas/{id} { allow read, write: if false; }
+    match /v2_retos_estados/{id}        { allow read, write: if false; }
+    match /v2_recompensas_estado/{id}     { allow read, write: if false; }
+    match /v2_recompensas_movimientos/{id}{ allow read, write: if false; }
+    match /v2_recompensas_canjes/{id}     { allow read, write: if false; }
   }
 }

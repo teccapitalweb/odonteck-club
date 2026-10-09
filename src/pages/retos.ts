@@ -3,23 +3,26 @@
 import { createIcons, icons } from 'lucide';
 import { esc, iniciales } from '../ui/partials';
 import {
-  nivel, retoDiario, completarDiaria, bancoPreguntas, barajar, type Pregunta,
+  nivel, nivelConXPJuegos, retoDiario, completarDiaria, bancoPreguntas, barajar, type Pregunta,
   mazoDeHoy, repasarCarta, estatsMazo, type Flashcard, type Calidad, type SR,
   obtenerSR, restaurarSR, pendientesHoy, proximoRepaso, areasPreguntas, misiones,
   casos, resolverCaso, casosResueltos, casoResuelto, registrarQuiz, mejorQuiz, statsQuiz, type Caso,
 } from '../core/juegos';
 import { Acceso, mostrarPaywall } from '../core/acceso';
 import { Liga } from '../core/liga';
+import { Datos } from '../core/datos';
+import { RetosRemotos, type PreguntaSesionReto } from '../core/retos-remotos';
 
 type Vista = 'hub' | 'quiz' | 'caso' | 'flash' | 'diaria' | 'liga';
 let vista: Vista = 'hub';
 let timer: number | null = null;
+let globalesMontados = false;
 const parar = () => { if (timer) { clearInterval(timer); timer = null; } };
 
 // estados de cada juego
 type ModoQuiz = 'relampago' | 'practica';
 interface QuizState {
-  preguntas: Pregunta[];
+  preguntas: (Pregunta & { remota?: PreguntaSesionReto })[];
   idx: number;
   score: number;
   vidas: number;
@@ -30,6 +33,7 @@ interface QuizState {
   restante: number;
   modo: ModoQuiz;
   area: string;
+  xpGanado: number;
 }
 let Q: QuizState | null = null;
 interface CasoState {
@@ -64,8 +68,11 @@ export function montarArcade() {
   r.dataset.mounted = '1';
   vista = 'hub'; parar();
   r.addEventListener('click', onClick);
-  document.addEventListener('keydown', onKey);
-  window.addEventListener('retos:cambio', () => { if (vista === 'hub') hub(); });
+  if (!globalesMontados) {
+    document.addEventListener('keydown', onKey);
+    window.addEventListener('retos:cambio', () => { if (vista === 'hub') hub(); });
+    globalesMontados = true;
+  }
   hub();
 }
 
@@ -75,6 +82,7 @@ function onClick(e: Event) {
   const a = el.dataset.a!;
   const acciones: Record<string, () => void> = {
     hub: () => { parar(); vista = 'hub'; hub(); },
+    'retos-retry': () => { RetosRemotos.cargar(true).then(() => hub()); },
     'ir-liga': vistaLiga,
     'ir-quiz': bibliotecaQuiz, 'quiz-jugar': () => iniciarQuiz(el.dataset.area || 'Todas', (el.dataset.modo || 'relampago') as ModoQuiz), 'quiz-resp': () => respQuiz(+el.dataset.i!), 'quiz-sig': sigQuiz,
     'ir-caso': () => elegirCaso(), 'caso-jugar': () => iniciarCaso(el.dataset.id!),
@@ -88,41 +96,67 @@ function onClick(e: Event) {
 // ══════════════ HUB ══════════════
 function hub() {
   vista = 'hub';
-  const nv = nivel();
+  const remoto = RetosRemotos.resumen();
+  const esApi = Datos.modo === 'api';
+  const nv = esApi && remoto ? nivelConXPJuegos(remoto.estado.xp) : nivel();
   const d = retoDiario();
   const em = estatsMazo();
   const totalCasos = casos().length;
-  const banco = bancoPreguntas().length;
+  const banco = esApi ? (remoto?.disponibilidad.preguntas || 0) : bancoPreguntas().length;
+  const racha = esApi ? (remoto?.estado.racha || 0) : d.racha;
+  const recomendacion = remoto?.recomendacion || (!esApi && areasPreguntas()[0] ? { area: areasPreguntas()[0], preguntas: Acceso.vip() ? 8 : 3, minutos: 6, motivo: 'Una sesión breve para mantener activo tu criterio clínico.' } : null);
+  const dominio = remoto?.estado.dominio?.length
+    ? remoto.estado.dominio.slice(0, 4)
+    : (remoto?.disponibilidad.areas || []).slice(0, 4).map((item) => ({ area: item.area, aciertos: 0, total: 0, precision: 0, estado: 'Por explorar', ultima: null }));
+  const errorRemoto = esApi ? RetosRemotos.error() : null;
   pinta(`
     <div class="ar-hub">
     <header class="ar-intro">
       <div class="ar-intro__copy">
-        <span class="ar-kicker"><i data-lucide="sparkles" class="i"></i> Centro de entrenamiento</span>
-        <h1>Entrena tu criterio clínico.</h1>
-        <p>Aprende jugando con preguntas, casos y repasos breves creados a partir de los cursos del Club.</p>
+        <span class="ar-kicker"><i data-lucide="activity" class="i"></i> Entrenamiento clínico adaptativo</span>
+        <h1>Entrena lo que más te hará avanzar.</h1>
+        <p>Sesiones breves que convierten tus cursos, errores y repasos pendientes en práctica clínica útil.</p>
       </div>
-      <span class="ar-streak"><i data-lucide="flame" class="i"></i><span><small>Racha actual</small><strong>${d.racha} ${d.racha === 1 ? 'día' : 'días'}</strong></span></span>
+      <span class="ar-streak"><i data-lucide="flame" class="i"></i><span><small>Constancia actual</small><strong>${racha} ${racha === 1 ? 'día' : 'días'}</strong></span></span>
     </header>
 
-    <div class="ar-hero">
-      <div class="ar-hero__lvl">
-        <span class="ar-badge" style="--c:${nv.color}"><i data-lucide="${nv.icon}" class="i"></i></span>
-        <div>
-          <div class="eyebrow">Tu nivel · ${nv.indice + 1}</div>
-          <h2 class="display" style="font-size:var(--fs-2xl);margin:0">${nv.nombre}</h2>
-          <div class="ar-xp"><div class="ar-xp__bar"><span style="width:${nv.pct}%"></span></div>
-            <span class="faint">${nv.xp} XP${nv.siguiente ? ` · faltan ${nv.faltan} para ${nv.siguiente.nombre}` : ' · máximo nivel'}</span></div>
+    ${errorRemoto ? `<div class="ar-sync-error"><i data-lucide="cloud-off" class="i"></i><div><strong>No pudimos preparar tus datos de entrenamiento.</strong><span>${esc(errorRemoto)}</span></div><button class="btn btn--secondary btn--sm" data-a="retos-retry">Reintentar</button></div>` : ''}
+
+    <section class="ar-command-grid">
+      <article class="ar-prescription">
+        <div class="ar-prescription__head"><span><i data-lucide="crosshair" class="i"></i>Tu siguiente mejor paso</span><small>${recomendacion?.minutos || 5} min</small></div>
+        <div class="ar-prescription__copy">
+          <span class="eyebrow">Sesión recomendada</span>
+          <h2>${recomendacion ? `Refuerza ${esc(recomendacion.area)}` : 'Tu entrenamiento estará listo pronto'}</h2>
+          <p>${recomendacion ? esc(recomendacion.motivo) : 'Aún no hay preguntas aprobadas disponibles para tu acceso.'}</p>
         </div>
-      </div>
-      <div class="ar-hero__stats">
-        <div><strong>${mejorQuiz()}</strong><span>mejor quiz</span></div>
-        <div><strong>${casosResueltos()}/${totalCasos}</strong><span>casos</span></div>
-        <div><strong>${em.dominadas}</strong><span>tarjetas dominadas</span></div>
-      </div>
+        <div class="ar-prescription__meta">
+          <span><i data-lucide="list-checks" class="i"></i>${recomendacion?.preguntas || 0} preguntas</span>
+          <span><i data-lucide="graduation-cap" class="i"></i>Modo práctica</span>
+          <span><i data-lucide="shield-check" class="i"></i>Feedback clínico</span>
+        </div>
+        <button class="btn btn--brand btn--lg btn--pill-arrow" data-a="quiz-jugar" data-modo="practica" data-area="${esc(recomendacion?.area || 'Todas')}" ${recomendacion ? '' : 'disabled'}>Comenzar sesión <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button>
+      </article>
+
+      <aside class="ar-mastery">
+        <div class="ar-mastery__title"><div><span class="eyebrow">Mapa de dominio</span><h2>Tu criterio por área</h2></div><span class="ar-level-dot" style="--c:${nv.color}"><i data-lucide="${nv.icon}" class="i"></i></span></div>
+        ${dominio.length ? `<div class="ar-mastery__list">${dominio.map((item) => `<div class="ar-mastery__row"><div><strong>${esc(item.area)}</strong><small>${esc(item.estado)}</small></div><span>${item.total ? `${item.precision}%` : 'Nuevo'}</span><div class="ar-mastery__bar"><i style="width:${item.total ? Math.max(6, item.precision) : 3}%"></i></div></div>`).join('')}</div>` : '<div class="ar-mastery__empty"><i data-lucide="radar" class="i"></i><p>Completa tu primera sesión para construir tu mapa clínico.</p></div>'}
+        <div class="ar-mastery__level"><span>Nivel ${nv.indice + 1} · ${nv.nombre}</span><strong>${nv.xp} XP</strong><div><i style="width:${nv.pct}%"></i></div><small>${nv.siguiente ? `${nv.faltan} XP para ${nv.siguiente.nombre}` : 'Nivel máximo alcanzado'}</small></div>
+      </aside>
+    </section>
+
+    <div class="ar-evidence-strip">
+      <div><strong>${esApi && remoto ? `${remoto.estado.quiz.precision}%` : mejorQuiz()}</strong><span>${esApi ? 'precisión acumulada' : 'mejor quiz'}</span></div>
+      <div><strong>${casosResueltos()}/${totalCasos}</strong><span>casos resueltos</span></div>
+      <div><strong>${em.dominadas}</strong><span>tarjetas dominadas</span></div>
+      <div><strong>${banco}</strong><span>preguntas disponibles</span></div>
     </div>
 
     <div class="ar-feature-row">
-    ${(() => { const liga = Liga.resumen(); const yo = liga.yo; const top3 = liga.clasificacion.slice(0, 3); return `
+    ${esApi ? `<div class="league-mini league-mini--soon">
+      <div class="league-mini__head"><span class="league-mini__ic"><i data-lucide="users-round" class="i"></i></span><div><small>Ligas del Club</small><strong>Competencia real, justa y voluntaria</strong></div></div>
+      <span class="league-mini__soon">Próximamente</span>
+    </div>` : (() => { const liga = Liga.resumen(); const yo = liga.yo; const top3 = liga.clasificacion.slice(0, 3); return `
     <button class="league-mini" data-a="ir-liga">
       <div class="league-mini__head">
         <span class="league-mini__ic"><i data-lucide="trophy" class="i"></i></span>
@@ -134,26 +168,26 @@ function hub() {
       <i data-lucide="chevron-right" class="i league-mini__arr"></i>
     </button>`; })()}
 
-    <button class="ar-daily ${d.hechoHoy ? 'is-done' : ''}" data-a="ir-diaria" ${d.hechoHoy ? 'disabled' : ''}>
+    ${esApi ? `<div class="ar-daily ar-daily--insight"><span class="ar-daily__ic"><i data-lucide="calendar-check-2" class="i"></i></span><span class="ar-daily__tx"><strong>${racha ? `Llevas ${racha} ${racha === 1 ? 'día' : 'días'} entrenando` : 'Tu constancia empieza hoy'}</strong><span class="faint">Una sesión corta y bien elegida vale más que acumular puntos sin propósito.</span></span></div>` : `<button class="ar-daily ${d.hechoHoy ? 'is-done' : ''}" data-a="ir-diaria" ${d.hechoHoy ? 'disabled' : ''}>
       <span class="ar-daily__ic">${d.hechoHoy ? '<i data-lucide="check-check" class="i"></i>' : `<img src="/brand/icon-reto-diario.jpg" alt="Reto diario" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`}</span>
       <span class="ar-daily__tx">
         <strong>Reto diario ${d.racha > 0 ? `· racha ${d.racha}` : ''}</strong>
         <span class="faint">${d.hechoHoy ? '¡Listo por hoy! Vuelve mañana para mantener tu racha.' : 'Una pregunta rápida para sumar XP y racha.'}</span>
       </span>
       ${d.hechoHoy ? '' : '<i data-lucide="arrow-right" class="i"></i>'}
-    </button>
+    </button>`}
     </div>
 
     <section class="ar-training">
     <header class="ar-section-intro"><div><span class="ar-kicker ar-kicker--light">Elige tu reto</span><h2>¿Qué quieres entrenar hoy?</h2></div><p>Sesiones cortas para avanzar a tu ritmo.</p></header>
     <div class="ar-grid">
-      ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Quiz', `${banco} preguntas · relámpago o práctica`, '#4a7fc1')}
+      ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Banco clínico', `${banco} preguntas · estudio o simulación`, '#4a7fc1')}
       ${tile('ir-caso', '/brand/icon-detective.jpg', 'Detective Dental', `Diagnostica ${totalCasos} casos clínicos paso a paso`, '#4fa899')}
       ${(() => { const pend = pendientesHoy(); const lim = Acceso.vip() ? 15 : 5; return tile('ir-flash', '/brand/icon-flashcards.jpg', 'Flashcards', pend ? `${Math.min(pend, lim)} para hoy · ${em.total} tarjetas` : `Todo repasado · ${em.dominadas} dominadas`, '#c98a5b'); })()}
     </div>
     </section>
 
-    ${(() => { const m = misiones(); return `
+    ${esApi ? `<div class="ar-integrity"><span><i data-lucide="badge-check" class="i"></i></span><div><strong>Progreso clínico verificable</strong><p>Tus respuestas se califican en el servidor y construyen un mapa personal. Nunca mostramos soluciones antes de contestar ni participantes ficticios en producción.</p></div></div>` : (() => { const m = misiones(); return `
     <div class="ar-misiones">
       <div class="ar-misiones__head"><span><i data-lucide="target" class="i"></i></span><div><small>Misión semanal</small><strong>${m.pct}% completada</strong></div></div>
       <div class="ar-misiones__bar"><span style="width:${m.pct}%"></span></div>
@@ -231,31 +265,53 @@ const modoCard = (modo: string, area: string, icon: string, titulo: string, text
 
 function bibliotecaQuiz() {
   vista = 'quiz'; parar();
-  const preguntas = bancoPreguntas();
-  const areas = areasPreguntas();
+  const remoto = RetosRemotos.resumen();
+  const preguntas = Datos.modo === 'api' ? remoto?.disponibilidad.preguntas || 0 : bancoPreguntas().length;
+  const areas = Datos.modo === 'api' ? (remoto?.disponibilidad.areas || []).map((item) => item.area) : areasPreguntas();
   const sq = statsQuiz();
   pinta(`${barra()}
     <div class="ar-head" style="margin-bottom:8px">
-      <span class="chip chip--primary"><i data-lucide="zap" class="i"></i>Arena de conocimiento</span>
-      <h2 class="display" style="font-size:var(--fs-2xl)">Quiz</h2>
-      <p class="muted">${preguntas.length} preguntas · ${areas.length} áreas · récord ${sq.mejor}</p>
+      <span class="chip chip--primary"><i data-lucide="brain-circuit" class="i"></i>Banco clínico</span>
+      <h2 class="display" style="font-size:var(--fs-2xl)">Elige cómo quieres entrenar</h2>
+      <p class="muted">${preguntas} preguntas aprobadas · ${areas.length} áreas${Datos.modo === 'api' && remoto ? ` · ${remoto.estado.quiz.precision}% de precisión acumulada` : ` · récord ${sq.mejor}`}</p>
     </div>
     <div class="ar-mode-grid">
-      ${modoCard('relampago', 'Todas', 'timer', 'Relámpago', '15 seg por pregunta · vidas y combos', `${Acceso.vip() ? 8 : 3} preguntas`, '#4a7fc1')}
-      ${modoCard('practica', 'Todas', 'graduation-cap', 'Práctica', 'Sin reloj · aprende con cada explicación', `${Acceso.vip() ? 10 : 3} preguntas`, '#4fa899')}
+      ${modoCard('practica', 'Todas', 'graduation-cap', 'Estudio guiado', 'Sin reloj · feedback clínico después de cada respuesta', `${Acceso.vip() ? 10 : 3} preguntas`, '#4fa899')}
+      ${modoCard('relampago', 'Todas', 'timer', 'Simulación', '15 segundos · vidas y presión controlada', `${Acceso.vip() ? 8 : 3} preguntas`, '#4a7fc1')}
     </div>
-    <div class="ar-section-head"><span class="eyebrow">Por área</span><span class="faint">${preguntas.length} reactivos</span></div>
+    <div class="ar-section-head"><span class="eyebrow">Por área</span><span class="faint">${preguntas} reactivos</span></div>
     <div class="ar-grid">${areas.map((area) => {
-      const n = preguntas.filter((p) => p.area === area).length;
-      return `<button class="ar-tile" data-a="quiz-jugar" data-area="${esc(area)}" data-modo="relampago" style="--c:#4a7fc1"><span class="ar-tile__ic"><i data-lucide="${iconoArea(area)}" class="i"></i></span><strong>${esc(area)}</strong><span class="faint">${n} preguntas · contra reloj</span><span class="ar-tile__go"><i data-lucide="arrow-up-right" class="i"></i></span></button>`;
+      const n = Datos.modo === 'api' ? remoto?.disponibilidad.areas.find((item) => item.area === area)?.total || 0 : bancoPreguntas().filter((p) => p.area === area).length;
+      return `<button class="ar-tile" data-a="quiz-jugar" data-area="${esc(area)}" data-modo="practica" style="--c:#4a7fc1"><span class="ar-tile__ic"><i data-lucide="${iconoArea(area)}" class="i"></i></span><strong>${esc(area)}</strong><span class="faint">${n} preguntas · estudio guiado</span><span class="ar-tile__go"><i data-lucide="arrow-up-right" class="i"></i></span></button>`;
     }).join('')}</div>`);
 }
 
-function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
-  const pool = barajar(bancoPreguntas().filter((p) => area === 'Todas' || p.area === area));
+async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
+  let pool: (Pregunta & { remota?: PreguntaSesionReto })[];
+  if (Datos.modo === 'api') {
+    pinta(`${barra()}<div class="ar-loading"><i data-lucide="loader-circle" class="i spin"></i><strong>Preparando tu sesión</strong><span>Seleccionamos preguntas aprobadas según tu acceso y desempeño.</span></div>`);
+    try {
+      const sesion = await RetosRemotos.crearSesion(modo, area);
+      pool = sesion.preguntas.map((pregunta) => ({
+        id: pregunta.ref,
+        curso: pregunta.curso,
+        area: pregunta.area,
+        q: pregunta.q,
+        opciones: pregunta.opciones,
+        correcta: -1,
+        explicacion: '',
+        remota: pregunta,
+      }));
+    } catch (e) {
+      const mensaje = e instanceof Error ? e.message : 'No pudimos preparar el entrenamiento.';
+      return pinta(`${barra()}<div class="ar-empty"><i data-lucide="cloud-off" class="i"></i><strong>No se pudo iniciar la sesión</strong><span class="faint">${esc(mensaje)}</span><button class="btn btn--secondary" data-a="ir-quiz">Volver a intentarlo</button></div>`);
+    }
+  } else {
+    pool = barajar(bancoPreguntas().filter((p) => area === 'Todas' || p.area === area));
+  }
   if (!pool.length) return pinta(`${barra()}<div class="ar-empty">Aún no hay preguntas${area !== 'Todas' ? ` de ${area}` : ''} en los cursos.</div>`);
   const lim = Acceso.vip() ? (modo === 'practica' ? 10 : 8) : 3;
-  Q = { preguntas: pool.slice(0, lim), idx: 0, score: 0, vidas: 3, combo: 0, mejorCombo: 0, aciertos: 0, contestada: false, restante: TIEMPO, modo, area };
+  Q = { preguntas: pool.slice(0, lim), idx: 0, score: 0, vidas: 3, combo: 0, mejorCombo: 0, aciertos: 0, contestada: false, restante: TIEMPO, modo, area, xpGanado: 0 };
   vista = 'quiz';
   pintaQuiz();
 }
@@ -291,12 +347,32 @@ function pintaQuiz() {
     if (Q.restante <= 0) { parar(); respQuiz(-1); }
   }, 80);
 }
-function respQuiz(i: number) {
+async function respQuiz(i: number) {
   if (!Q || Q.contestada) return; Q.contestada = true; parar();
-  const p: Pregunta = Q.preguntas[Q.idx];
-  const ok = i === p.correcta;
+  const p = Q.preguntas[Q.idx];
   const opts = root()!.querySelectorAll<HTMLButtonElement>('.ar-opt');
-  opts.forEach((b, j) => { b.disabled = true; if (j === p.correcta) b.classList.add('ok'); if (j === i && !ok) b.classList.add('bad'); });
+  opts.forEach((b) => { b.disabled = true; });
+  let correcta = p.correcta;
+  let explicacion = p.explicacion;
+  if (Datos.modo === 'api' && p.remota) {
+    try {
+      const respuesta = await RetosRemotos.responder(p.remota, i >= 0 ? i : null);
+      correcta = respuesta.correcta;
+      explicacion = respuesta.explicacion;
+      Q.xpGanado += respuesta.xpGanado;
+    } catch (e) {
+      Q.contestada = false;
+      opts.forEach((b) => { b.disabled = false; });
+      const mensaje = e instanceof Error ? e.message : 'No pudimos calificar esta respuesta.';
+      document.getElementById('ar-fb')!.innerHTML = `<div class="ar-exp bad"><strong>No se guardó tu respuesta</strong><p>${esc(mensaje)}</p></div>`;
+      iconos();
+      return;
+    }
+  }
+  p.correcta = correcta;
+  p.explicacion = explicacion;
+  const ok = i === correcta;
+  opts.forEach((b, j) => { if (j === correcta) b.classList.add('ok'); if (j === i && !ok) b.classList.add('bad'); });
   if (ok) {
     const bonus = Q.modo === 'relampago' ? Math.round(Q.restante / TIEMPO * 100) : 40;
     const suma = Math.round((100 + bonus) * (1 + Q.combo * 0.1));
@@ -305,7 +381,7 @@ function respQuiz(i: number) {
   const fin = (Q.modo === 'relampago' && Q.vidas <= 0) || Q.idx >= Q.preguntas.length - 1;
   document.getElementById('ar-fb')!.innerHTML = `
     <div class="ar-exp ${ok ? 'ok' : 'bad'}">
-      <strong>${ok ? '¡Correcto! ⚡' : 'Casi…'}</strong><p>${esc(p.explicacion)}</p>
+      <strong>${ok ? '¡Correcto! ⚡' : 'Casi…'}</strong><p>${esc(explicacion || 'Revisa la respuesta correcta antes de continuar.')}</p>
       <button class="btn btn--brand" data-a="quiz-sig">${fin ? 'Ver resultado' : 'Siguiente'} <kbd>Enter</kbd> <i data-lucide="arrow-right" class="i"></i></button>
     </div>`;
   iconos();
@@ -320,8 +396,8 @@ function finQuiz() {
   if (!Q) return;
   parar();
   const prevBest = mejorQuiz();
-  registrarQuiz(Q.score, Q.aciertos, Q.preguntas.length, Q.mejorCombo);
-  const xpGan = Math.round(Q.score / 10);
+  if (Datos.modo === 'demo') registrarQuiz(Q.score, Q.aciertos, Q.preguntas.length, Q.mejorCombo);
+  const xpGan = Datos.modo === 'api' ? Q.xpGanado : Math.round(Q.score / 10);
   const precision = Math.round(Q.aciertos / Q.preguntas.length * 100);
   const sq = statsQuiz();
   pinta(`${barra()}
@@ -333,7 +409,7 @@ function finQuiz() {
         <div><strong>${precision}%</strong><span class="faint">Precisión</span></div>
         <div><strong>x${Q.mejorCombo}</strong><span class="faint">Mejor combo</span></div>
       </div>
-      <p class="muted">+${xpGan} XP${Q.score > prevBest ? ' · ¡nuevo récord!' : ''} · ${sq.jugados} partida${sq.jugados === 1 ? '' : 's'}</p>
+      <p class="muted">+${xpGan} XP${Datos.modo === 'api' ? ' · Tu mapa clínico ya se actualizó' : `${Q.score > prevBest ? ' · ¡nuevo récord!' : ''} · ${sq.jugados} partida${sq.jugados === 1 ? '' : 's'}`}</p>
       ${!Acceso.vip() ? '<p class="muted" style="max-width:40ch">Versión gratis: 3 preguntas. Hazte VIP para el quiz completo y todos los retos.</p><button class="btn btn--brand btn--lg" data-paywall="El quiz completo y todos los retos son para miembros VIP."><i data-lucide="crown" class="i"></i>Hazte VIP</button>' : ''}
       <div class="row" style="gap:10px;justify-content:center">
         <button class="btn btn--brand btn--lg" data-a="quiz-jugar" data-modo="${Q.modo}" data-area="${esc(Q.area)}"><i data-lucide="rotate-ccw" class="i"></i>Jugar de nuevo</button>

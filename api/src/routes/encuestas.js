@@ -12,6 +12,7 @@ import {
   validarRespuestas,
 } from '../lib/encuestas.js';
 import { conflicto, invalido } from '../lib/errores.js';
+import { otorgarEventos, REGLAS_PUNTOS } from '../lib/recompensas.js';
 import { cuerpo, idDocumento } from '../lib/validacion.js';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -137,7 +138,19 @@ export function rutasEncuestas(ctx) {
       if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto('Esta encuesta ya fue respondida.', 'encuesta_respondida');
       throw e;
     }
-    res.status(201).json({ ok: true, clave, siguiente: (await calcularPendientes(ctx, req.usuario)).pendientes[0] ?? null });
+    const puntos = plantilla.tipo === 'bienvenida'
+      ? REGLAS_PUNTOS.encuestaBienvenida
+      : plantilla.tipo === 'curso'
+        ? REGLAS_PUNTOS.encuestaCurso
+        : REGLAS_PUNTOS.encuestaExperiencia;
+    const recompensas = await otorgarEventos(ctx, COL, req.usuario.uid, [{
+      clave: `encuesta:${clave}`,
+      tipo: 'encuesta',
+      puntos,
+      contador: 'encuestas',
+      detalle: plantilla.tipo === 'bienvenida' ? 'Entrevista inicial respondida' : plantilla.tipo === 'curso' ? 'Encuesta de curso respondida' : 'Encuesta de experiencia respondida',
+    }]);
+    res.status(201).json({ ok: true, clave, recompensas, siguiente: (await calcularPendientes(ctx, req.usuario)).pendientes[0] ?? null });
   }));
 
   r.post('/encuestas/:clave/posponer', auth, h(async (req, res) => {

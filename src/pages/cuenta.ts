@@ -49,24 +49,64 @@ export function perfil() {
       : esAdmin
         ? 'Acceso administrativo con todos los beneficios VIP.'
         : 'Activa tu membresía para ver todo el catálogo.';
+  const perfilCompleto = [p.nombre, p.whatsapp, p.especialidad, p.ciudad, intereses.length ? 'intereses' : ''].filter(Boolean).length;
+  const completitud = Math.round((perfilCompleto / 5) * 100);
+  const identidad = [p.especialidad, p.ciudad].filter(Boolean).join(' · ') || 'Completa tu especialidad y ciudad';
+  const email = Auth.usuario?.email || 'Cuenta de demostración';
   return `
-  <section class="stack" style="gap:20px;max-width:900px">
-    <div class="section-head"><div><span class="chip chip--primary">Mi perfil</span><h1 class="display" style="font-size:var(--fs-2xl)">Hola, <em>${esc(Perfil.primerNombre())}</em></h1></div></div>
-    <div class="grid perfil-grid">
-      <div class="stack" style="gap:20px;min-width:0">
-      <form class="card card--pad stack" data-form-perfil style="gap:14px">
-        <div class="row" style="gap:14px">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}<div><strong>Foto de perfil</strong><br><span class="faint" style="font-size:var(--fs-xs)">${Auth.usuario?.foto ? 'Sincronizada con tu cuenta de Google.' : 'Si entras con Google, usaremos automáticamente tu foto.'}</span></div></div>
-        <div class="field"><label>Nombre completo (así saldrá en tus certificados)</label><input class="input" name="nombre" value="${esc(p.nombre)}" required maxlength="60" placeholder="Dra. Nombre Apellido Apellido"></div>
-        <div class="grid grid--2" style="gap:12px">
-          <div class="field"><label>WhatsApp</label><input class="input" name="whatsapp" value="${esc(p.whatsapp)}" placeholder="+52 1 236 123 4567"></div>
-          <div class="field"><label>Especialidad</label><input class="input" name="especialidad" value="${esc(p.especialidad)}" placeholder="Odontología general, Ortodoncia…"></div>
+  <section class="account-page">
+    <header class="account-hero">
+      <div class="account-hero__glow" aria-hidden="true"></div>
+      <div class="account-hero__top">
+        <span class="account-kicker"><i data-lucide="badge-check" class="i"></i> Perfil profesional</span>
+        <nav class="account-tabs" aria-label="Cuenta"><a class="is-active" href="#/perfil">Perfil</a><a href="#/configuracion">Configuración</a></nav>
+      </div>
+      <div class="account-hero__identity">
+        <div class="profile-avatar-wrap">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar profile-avatar')}<span class="profile-avatar__status" title="Cuenta activa"><i data-lucide="check" class="i"></i></span></div>
+        <div class="account-hero__copy">
+          <p>Bienvenido de nuevo</p>
+          <h1>${esc(p.nombre)}</h1>
+          <span>${esc(identidad)}</span>
         </div>
-        <div class="field"><label>Ciudad</label><input class="input" name="ciudad" value="${esc(p.ciudad)}" placeholder="Puebla, Pue."></div>
-        <div class="row" style="justify-content:flex-end"><button class="btn btn--brand btn--pill-arrow">Guardar cambios <span class="arrow"><i data-lucide="check" class="i"></i></span></button></div>
+        <a class="btn account-hero__settings" href="#/configuracion"><i data-lucide="settings-2" class="i"></i>Ajustes</a>
+      </div>
+      <div class="account-hero__footer">
+        <div class="profile-stats" aria-label="Actividad del perfil">
+          <div><strong>${Progreso.totalVistas()}</strong><span>Clases vistas</span></div>
+          <div><strong>${Progreso.completados().length}</strong><span>Cursos terminados</span></div>
+          <div><strong>${puntos()}</strong><span>Puntos</span></div>
+        </div>
+        <div class="profile-completion">
+          <span class="profile-completion__ring" style="--profile-complete:${completitud}" aria-label="Perfil ${completitud}% completo"><strong>${completitud}%</strong></span>
+          <div><strong>Perfil ${completitud === 100 ? 'completo' : 'en progreso'}</strong><span>${perfilCompleto} de 5 datos esenciales</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="perfil-grid">
+      <div class="account-main">
+      <form class="card account-card profile-form" data-form-perfil>
+        <div class="account-card__head">
+          <span class="account-card__icon"><i data-lucide="contact" class="i"></i></span>
+          <div><span class="eyebrow">Información profesional</span><h2>Datos de tu perfil</h2><p>Estos datos personalizan tu experiencia y el nombre aparecerá en tus certificados.</p></div>
+        </div>
+        <div class="profile-photo-row">
+          ${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}
+          <div><strong>Foto de perfil</strong><span>${Auth.usuario?.foto ? 'Sincronizada de forma segura con tu cuenta de Google.' : 'Al entrar con Google mostraremos automáticamente tu foto.'}</span></div>
+          <span class="source-badge"><i data-lucide="shield-check" class="i"></i>${Auth.usuario?.foto ? 'Google' : 'Iniciales'}</span>
+        </div>
+        <div class="profile-fields">
+          <div class="field field--wide"><label>Nombre completo <span>· para certificados</span></label><div class="input-wrap"><i data-lucide="user-round" class="i"></i><input class="input" name="nombre" value="${esc(p.nombre)}" required maxlength="60" placeholder="Dra. Nombre Apellido Apellido"></div></div>
+          <div class="field"><label>WhatsApp</label><div class="input-wrap"><i data-lucide="phone" class="i"></i><input class="input" name="whatsapp" value="${esc(p.whatsapp)}" placeholder="+52 1 236 123 4567"></div></div>
+          <div class="field"><label>Especialidad</label><div class="input-wrap"><i data-lucide="stethoscope" class="i"></i><input class="input" name="especialidad" value="${esc(p.especialidad)}" placeholder="Odontología general, Ortodoncia…"></div></div>
+          <div class="field field--wide"><label>Ciudad</label><div class="input-wrap"><i data-lucide="map-pin" class="i"></i><input class="input" name="ciudad" value="${esc(p.ciudad)}" placeholder="Puebla, Pue."></div></div>
+        </div>
+        <div class="account-card__actions"><span><i data-lucide="lock-keyhole" class="i"></i>Tu información personal permanece protegida.</span><button class="btn btn--brand btn--pill-arrow">Guardar cambios <span class="arrow"><i data-lucide="check" class="i"></i></span></button></div>
       </form>
-      <form class="card card--pad stack intereses-editor" data-form-intereses style="gap:16px">
-        <div class="row" style="align-items:flex-start;justify-content:space-between;gap:16px">
-          <div><span class="eyebrow">Personalización</span><h2 style="font-size:var(--fs-lg);margin-top:4px">Mis intereses</h2><p class="muted" style="font-size:var(--fs-sm);margin-top:5px">Actualiza lo que quieres ver primero en Inicio y en el catálogo “Para ti”.</p></div>
+      <form class="card account-card intereses-editor" data-form-intereses>
+        <div class="account-card__head account-card__head--counter">
+          <span class="account-card__icon account-card__icon--teal"><i data-lucide="sparkles" class="i"></i></span>
+          <div><span class="eyebrow">Personalización</span><h2>Temas que te interesan</h2><p>Usamos tu selección para ordenar Inicio y el catálogo “Para ti”.</p></div>
           <span class="chip" data-intereses-contador>${intereses.length}/3</span>
         </div>
         <fieldset class="intereses-editor__opciones"><legend class="sr-only">Elige entre uno y tres intereses</legend>
@@ -75,21 +115,25 @@ export function perfil() {
             return `<label class="interes-chip"><input type="checkbox" name="intereses" value="${esc(o.valor)}" ${activo ? 'checked' : ''} ${intereses.length >= 3 && !activo ? 'disabled' : ''}><span><i data-lucide="${activo ? 'check' : 'plus'}" class="i"></i>${esc(o.etiqueta)}</span></label>`;
           }).join('')}
         </fieldset>
-        <div class="row" style="justify-content:space-between;gap:12px;flex-wrap:wrap"><span class="faint" style="font-size:var(--fs-xs)">Elige de 1 a 3. Puedes cambiarlos cuando quieras.</span><button class="btn btn--brand btn--pill-arrow">Guardar intereses <span class="arrow"><i data-lucide="sparkles" class="i"></i></span></button></div>
+        <div class="account-card__actions"><span>Elige de 1 a 3. Puedes cambiarlos cuando quieras.</span><button class="btn btn--brand btn--pill-arrow">Guardar intereses <span class="arrow"><i data-lucide="sparkles" class="i"></i></span></button></div>
       </form>
       </div>
-      <div class="stack">
-        <div class="card card--pad stack" style="gap:10px;background:var(--brand-navy);color:#fff;border:0">
-          <span class="eyebrow" style="color:var(--brand-teal)">Tu membresía</span>
-          <div class="display" style="font-size:var(--fs-xl)">${membresia}</div>
-          <p style="font-size:var(--fs-sm);opacity:.8">${detalleMembresia}</p>
-          <a class="btn btn--white btn--sm" href="#/suscripcion">Gestionar suscripción</a>
+      <aside class="account-aside">
+        <div class="membership-card">
+          <span class="membership-card__orb" aria-hidden="true"></span>
+          <div class="membership-card__top"><span class="eyebrow">Tu membresía</span><i data-lucide="crown" class="i"></i></div>
+          <strong>${membresia}</strong>
+          <p>${detalleMembresia}</p>
+          <a class="btn btn--white btn--sm" href="#/suscripcion">Gestionar suscripción <i data-lucide="arrow-up-right" class="i"></i></a>
         </div>
-        <div class="card card--pad stack" style="gap:8px">
-          <span class="eyebrow">Tu actividad</span>
-          ${[['Clases vistas', Progreso.totalVistas()], ['Cursos completados', Progreso.completados().length], ['Cursos en marcha', Progreso.enMarcha().length], ['Puntos', puntos()]].map(([l, v]) => `<div class="row" style="justify-content:space-between;font-size:var(--fs-sm)"><span class="muted">${l}</span><strong class="mono">${v}</strong></div>`).join('')}
+        <div class="card account-card account-summary">
+          <div class="account-card__head account-card__head--compact"><span class="account-card__icon"><i data-lucide="shield-check" class="i"></i></span><div><span class="eyebrow">Cuenta</span><h2>Acceso protegido</h2></div></div>
+          <div class="account-detail"><span>Correo</span><strong title="${esc(email)}">${esc(email)}</strong></div>
+          <div class="account-detail"><span>Foto</span><strong>${Auth.usuario?.foto ? 'Sincronizada' : 'Sin vincular'}</strong></div>
+          <div class="account-detail"><span>Sesión</span><strong class="status-ok"><i data-lucide="circle-check" class="i"></i>Activa</strong></div>
+          <a class="account-link" href="#/configuracion"><span><i data-lucide="settings-2" class="i"></i>Preferencias y seguridad</span><i data-lucide="chevron-right" class="i"></i></a>
         </div>
-      </div>
+      </aside>
     </div>
   </section>`;
 }
@@ -190,20 +234,51 @@ export function suscripcion() {
 
 export function configuracion() {
   const p = Perfil.get();
-  const sw = (k: keyof typeof p.avisos, l: string, d: string) => `<div class="row" style="justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)"><div><strong style="font-size:var(--fs-sm)">${l}</strong><br><span class="faint" style="font-size:var(--fs-xs)">${d}</span></div><button class="switch" role="switch" aria-checked="${p.avisos[k]}" data-aviso="${k}"></button></div>`;
+  const sw = (k: keyof typeof p.avisos, icon: string, l: string, d: string) => `<div class="setting-row"><span class="setting-row__icon"><i data-lucide="${icon}" class="i"></i></span><div><strong>${l}</strong><span>${d}</span></div><button class="switch" type="button" role="switch" aria-label="${l}" aria-checked="${p.avisos[k]}" data-aviso="${k}"></button></div>`;
   return `
-  <section class="stack" style="gap:20px;max-width:760px">
-    <div class="section-head"><div><span class="chip chip--primary">Configuración</span><h1 class="display" style="font-size:var(--fs-2xl)">Ajustes</h1></div></div>
-    <div class="card card--pad"><span class="eyebrow">Apariencia</span>
-      <div class="row" style="justify-content:space-between;padding:12px 0"><div><strong style="font-size:var(--fs-sm)">Modo oscuro</strong><br><span class="faint" style="font-size:var(--fs-xs)">Solo para esta sesión; el club siempre abre en claro</span></div><button class="btn btn--secondary btn--sm" data-theme-toggle><i data-lucide="moon" class="i"></i>Cambiar</button></div></div>
-    <div class="card card--pad"><span class="eyebrow">Avisos</span>${sw('enVivo', 'Clases en vivo', 'Recordatorio antes de cada transmisión')}${sw('nuevos', 'Nuevos cursos y materiales', 'Cuando se publique algo nuevo')}${sw('comunidad', 'Comunidad', 'Respuestas a tus temas')}</div>
-    <div class="card card--pad stack" style="gap:10px"><span class="eyebrow">App</span>
-      <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Instalar OdonTeck como app</strong><br><span class="faint" style="font-size:var(--fs-xs)">Pantalla completa, más rápido, acceso desde tu inicio</span></div><button class="btn btn--brand btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar</button></div></div>
-    <div class="card card--pad stack" style="gap:10px"><span class="eyebrow">Cuenta</span>
-      <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Cerrar sesión</strong><br><span class="faint" style="font-size:var(--fs-xs)">Sales de este dispositivo</span></div><button class="btn btn--danger btn--sm" data-salir><i data-lucide="log-out" class="i"></i>Cerrar sesión</button></div>
-      <div class="row" style="justify-content:space-between"><div><strong style="font-size:var(--fs-sm)">Legales</strong></div><div class="row"><a class="btn btn--ghost btn--sm" href="${BRAND.sitio}/pages/privacidad.html" target="_blank" rel="noopener">Privacidad</a><a class="btn btn--ghost btn--sm" href="${BRAND.sitio}/pages/terminos.html" target="_blank" rel="noopener">Términos</a></div></div>
+  <section class="account-page settings-page">
+    <header class="settings-hero">
+      <div class="account-hero__top">
+        <span class="account-kicker"><i data-lucide="sliders-horizontal" class="i"></i> Centro de control</span>
+        <nav class="account-tabs" aria-label="Cuenta"><a href="#/perfil">Perfil</a><a class="is-active" href="#/configuracion">Configuración</a></nav>
+      </div>
+      <div class="settings-hero__copy"><h1>Tu cuenta, a tu manera</h1><p>Administra preferencias, avisos y acceso desde un solo lugar.</p></div>
+    </header>
+    <div class="settings-layout">
+      <aside class="settings-summary">
+        <div class="settings-person">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar settings-person__avatar')}<div><strong>${esc(p.nombre)}</strong><span>${esc(Auth.usuario?.email || 'Cuenta de demostración')}</span></div></div>
+        <nav class="settings-nav" aria-label="Secciones de configuración">
+          <a href="#ajustes-apariencia"><i data-lucide="palette" class="i"></i>Apariencia</a>
+          <a href="#ajustes-avisos"><i data-lucide="bell-ring" class="i"></i>Notificaciones</a>
+          <a href="#ajustes-app"><i data-lucide="smartphone" class="i"></i>Aplicación</a>
+          <a href="#ajustes-cuenta"><i data-lucide="shield-check" class="i"></i>Cuenta</a>
+        </nav>
+        <div class="settings-help"><i data-lucide="life-buoy" class="i"></i><div><strong>¿Necesitas ayuda?</strong><span>El equipo OdonTeck puede orientarte.</span><a href="${wa('Hola OdonTeck, necesito ayuda con la configuración de mi cuenta.')}" target="_blank" rel="noopener">Contactar soporte</a></div></div>
+      </aside>
+      <div class="settings-content">
+        <section class="card settings-card" id="ajustes-apariencia">
+          <div class="settings-card__head"><div><span class="eyebrow">Experiencia</span><h2>Apariencia</h2><p>Ajusta cómo se ve OdonTeck en este dispositivo.</p></div><span class="account-card__icon"><i data-lucide="palette" class="i"></i></span></div>
+          <div class="setting-row"><span class="setting-row__icon"><i data-lucide="moon-star" class="i"></i></span><div><strong>Modo oscuro</strong><span>Reduce el brillo durante esta sesión; la siguiente inicia en modo claro.</span></div><button class="btn btn--secondary btn--sm" type="button" data-theme-toggle><i data-lucide="moon" class="i"></i>Cambiar</button></div>
+        </section>
+        <section class="card settings-card" id="ajustes-avisos">
+          <div class="settings-card__head"><div><span class="eyebrow">Preferencias</span><h2>Notificaciones</h2><p>Elige qué novedades quieres recibir del club.</p></div><span class="account-card__icon account-card__icon--teal"><i data-lucide="bell-ring" class="i"></i></span></div>
+          ${sw('enVivo', 'radio', 'Clases en vivo', 'Recibe un recordatorio antes de cada transmisión.')}
+          ${sw('nuevos', 'sparkles', 'Nuevos cursos y materiales', 'Entérate cuando publiquemos contenido nuevo.')}
+          ${sw('comunidad', 'messages-square', 'Actividad en Comunidad', 'Avisos cuando respondan a tus publicaciones.')}
+        </section>
+        <section class="card settings-card" id="ajustes-app">
+          <div class="settings-card__head"><div><span class="eyebrow">Acceso rápido</span><h2>Aplicación</h2><p>Lleva tu aprendizaje contigo sin abrir primero el navegador.</p></div><span class="account-card__icon"><i data-lucide="smartphone" class="i"></i></span></div>
+          <div class="setting-row setting-row--feature"><span class="setting-row__icon"><i data-lucide="download" class="i"></i></span><div><strong>Instalar OdonTeck</strong><span>Acceso desde tu inicio, pantalla completa y una experiencia más rápida.</span></div><button class="btn btn--brand btn--sm" type="button" data-install-btn><i data-lucide="download" class="i"></i>Instalar</button></div>
+        </section>
+        <section class="card settings-card" id="ajustes-cuenta">
+          <div class="settings-card__head"><div><span class="eyebrow">Privacidad y acceso</span><h2>Cuenta</h2><p>Revisa tu sesión y los documentos legales.</p></div><span class="account-card__icon"><i data-lucide="shield-check" class="i"></i></span></div>
+          <div class="setting-row"><span class="setting-row__icon"><i data-lucide="mail" class="i"></i></span><div><strong>${esc(Auth.usuario?.email || 'Cuenta de demostración')}</strong><span>Correo vinculado a tu sesión actual.</span></div><span class="status-pill"><i data-lucide="circle-check" class="i"></i>Activa</span></div>
+          <div class="setting-row"><span class="setting-row__icon"><i data-lucide="file-lock-2" class="i"></i></span><div><strong>Privacidad y términos</strong><span>Consulta cómo protegemos y utilizamos tus datos.</span></div><div class="setting-actions"><a href="${BRAND.sitio}/pages/privacidad.html" target="_blank" rel="noopener">Privacidad</a><a href="${BRAND.sitio}/pages/terminos.html" target="_blank" rel="noopener">Términos</a></div></div>
+          <div class="setting-row setting-row--danger"><span class="setting-row__icon"><i data-lucide="log-out" class="i"></i></span><div><strong>Cerrar sesión</strong><span>Finaliza el acceso únicamente en este dispositivo.</span></div><button class="btn btn--danger btn--sm" type="button" data-salir>Cerrar sesión</button></div>
+        </section>
+        <p class="settings-version">OdonTeck Club · versión 0.4 · Desarrollado por TEC Capital</p>
+      </div>
     </div>
-    <p class="faint" style="font-size:var(--fs-xs)">OdonTeck Club · versión 0.4 · TEC Capital</p>
   </section>`;
 }
 

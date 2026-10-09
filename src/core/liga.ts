@@ -22,6 +22,7 @@ export interface ResumenLiga {
   clasificacion: FilaLiga[];
   yo: FilaLiga | null;
   esDemo?: boolean;
+  disponible?: boolean;
 }
 
 let cache: ResumenLiga | null = null;
@@ -58,13 +59,22 @@ function demo(): ResumenLiga {
   return { actualizado: new Date().toISOString(), participantes: clasificacion.length, clasificacion, yo: clasificacion.find((f) => f.esYo) || null, esDemo: true };
 }
 
+const noDisponible = (): ResumenLiga => ({
+  actualizado: '',
+  participantes: 0,
+  clasificacion: [],
+  yo: null,
+  esDemo: false,
+  disponible: false,
+});
+
 export const Liga = {
-  resumen(): ResumenLiga { return cache || demo(); },
+  resumen(): ResumenLiga { return cache || (Datos.modo === 'api' ? noDisponible() : demo()); },
   cargando() { return Datos.modo === 'api' && !cache; },
   async cargar(): Promise<ResumenLiga> {
     if (Datos.modo === 'demo' || !Auth.usuario) return (cache = demo());
     if (cache) return cache;
-    if (!carga) carga = api<ResumenLiga>('/liga').then((r) => (cache = r)).catch(() => (cache = demo())).finally(() => { carga = null; });
+    if (!carga) carga = api<ResumenLiga>('/liga').then((r) => (cache = { ...r, disponible: true })).catch(() => (cache = noDisponible())).finally(() => { carga = null; });
     return carga;
   },
   limpiar() { cache = null; carga = null; },

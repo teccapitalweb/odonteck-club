@@ -214,7 +214,12 @@ export async function guardarIntereses(intereses: string[]) {
 export function encuestaRespondida(id: string) { return estado.respondidas.some((c) => c === id || c.startsWith(`${id}-`)); }
 
 export async function responderEncuesta(encuesta: EncuestaPendiente, respuestas: Record<string, unknown>) {
-  if (Datos.modo === 'api') await api(`/encuestas/${encodeURIComponent(encuesta.clave)}/responder`, { method: 'POST', json: { respuestas } });
+  if (Datos.modo === 'api') {
+    const resultado = await api<{ recompensas?: { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] } }>(`/encuestas/${encodeURIComponent(encuesta.clave)}/responder`, { method: 'POST', json: { respuestas } });
+    if (resultado.recompensas?.puntosGanados || resultado.recompensas?.logrosNuevos?.length) {
+      window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: resultado.recompensas }));
+    }
+  }
   else {
     const todas = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []);
     const vip = Auth.usuario?.esVip ?? false;

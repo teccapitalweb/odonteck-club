@@ -5,13 +5,16 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/active.css';
+import './styles/inicio.css';
 import './styles/admin.css';
 import './styles/login.css';
 import './styles/arcade.css';
+import './styles/comunidad.css';
 import './styles/encuestas.css';
 import './styles/bienvenida.css';
 import './styles/encuesta-modal.css';
 import './styles/perfil.css';
+import './styles/recompensas.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -32,6 +35,7 @@ import { biblioteca, material } from './pages/materiales';
 import { toggleReserva } from './pages/envivo';
 import { comunidad, hilo } from './pages/comunidad';
 import { paginaLogros } from './pages/logros';
+import { paginaRecompensas } from './pages/recompensas';
 import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub } from './core/remoto';
@@ -44,6 +48,8 @@ import { certificados, certificado, verificar } from './pages/certificados';
 import { buscar } from './pages/buscar';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
 import { login } from './pages/login';
+import { Recompensas } from './core/recompensas';
+import { puntos } from './core/logros';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
 import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
 
@@ -66,6 +72,13 @@ function toast(msg: string, icon = 'check') {
   if (!host) { host = document.createElement('div'); host.className = 'toast-host'; document.body.appendChild(host); }
   const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = `<i data-lucide="${icon}" class="i"></i>${esc(msg)}`;
   host.appendChild(t); createIcons({ icons }); setTimeout(() => t.remove(), 3200);
+}
+
+type PremioActividad = { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] } | null | undefined;
+async function registrarPremio(premio: PremioActividad) {
+  if (!premio || (!premio.puntosGanados && !premio.logrosNuevos?.length)) return;
+  window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: premio }));
+  try { await Recompensas.cargar(true); } catch {}
 }
 
 // Si el proveedor deja de servir una foto, retiramos sólo la imagen y quedan
@@ -132,6 +145,7 @@ route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/logros', paginaLogros);
+route('/recompensas', paginaRecompensas);
 route('/retos', retos);
 route('/certificados', certificados);
 route('/certificados/:id', certificado);
@@ -175,6 +189,14 @@ onRender(() => {
 instalarAccionesAdmin(toast);
 startRouter();
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
+window.addEventListener('recompensas:cambio', actualizarNotifs);
+window.addEventListener('recompensas:ganadas', (e) => {
+  const puntos = Number((e as CustomEvent).detail?.puntosGanados || 0);
+  const logros = (e as CustomEvent).detail?.logrosNuevos || [];
+  if (puntos > 0) toast(`+${puntos} puntos añadidos a tus recompensas`, 'sparkles');
+  logros.forEach((logro: { titulo?: string }) => toast(`Logro desbloqueado: ${logro.titulo || 'nuevo logro'}`, 'trophy'));
+  void Recompensas.cargar(true).catch(() => {});
+});
 window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
 
 // ── Video: en modo api el backend firma el enlace de Bunny ──
@@ -192,17 +214,37 @@ const VISTO_KEY = 'odonteck-club:avisos-visto';
 function actualizarNotifs() {
   const badge = document.querySelector<HTMLElement>('[data-notifs-badge]'); if (!badge) return;
   const visto = localStorage.getItem(VISTO_KEY) || '';
-  const nuevos = Datos.avisos().filter((a) => a.fecha > visto).length;
+  const nuevos = Datos.avisos().filter((a) => a.fecha > visto).length + (Recompensas.resumen()?.notificaciones.length || 0);
   badge.hidden = !nuevos; badge.textContent = String(nuevos);
 }
 function abrirNotifs(panel: HTMLElement) {
   const visto = localStorage.getItem(VISTO_KEY) || '';
   const l = Datos.avisos();
-  panel.innerHTML = `<div class="row" style="justify-content:space-between;padding:6px 10px"><strong style="font-size:var(--fs-sm)">Avisos</strong><span class="faint" style="font-size:var(--fs-xs)">${l.length}</span></div>` +
-    (l.length ? l.map((a) => `<a class="notif ${a.fecha > visto ? 'is-new' : ''}" href="${esc(a.enlace || '#/')}"><strong>${esc(a.titulo)}</strong><p>${esc(a.texto)}</p></a>`).join('')
-              : '<p class="muted" style="padding:16px;font-size:var(--fs-sm);text-align:center">No tienes avisos nuevos.</p>');
+  const premios = Recompensas.resumen()?.notificaciones || [];
+  const itemsPremio = premios.map((n) => `<a class="notif is-new" href="${esc(n.enlace || '#/recompensas')}"><strong>${esc(n.titulo)}</strong><p>${esc(n.texto)}</p></a>`).join('');
+  const itemsAviso = l.map((a) => `<a class="notif ${a.fecha > visto ? 'is-new' : ''}" href="${esc(a.enlace || '#/')}"><strong>${esc(a.titulo)}</strong><p>${esc(a.texto)}</p></a>`).join('');
+  panel.innerHTML = `<div class="row" style="justify-content:space-between;padding:6px 10px"><strong style="font-size:var(--fs-sm)">Avisos y logros</strong><span class="faint" style="font-size:var(--fs-xs)">${l.length + premios.length}</span></div>` +
+    (itemsPremio || itemsAviso ? itemsPremio + itemsAviso : '<p class="muted" style="padding:16px;font-size:var(--fs-sm);text-align:center">No tienes avisos nuevos.</p>');
   localStorage.setItem(VISTO_KEY, new Date().toISOString());
+  void Recompensas.marcarLeidas().catch(() => {});
   actualizarNotifs();
+}
+
+function mostrarResumenCuenta(abierto: boolean) {
+  const drawer = document.querySelector<HTMLElement>('[data-account-drawer]');
+  const scrim = document.querySelector<HTMLElement>('[data-account-scrim]');
+  const toggle = document.querySelector<HTMLElement>('[data-account-toggle]');
+  if (!drawer || !scrim || !toggle) return;
+  if (abierto) {
+    document.querySelectorAll<HTMLElement>('[data-account-points]').forEach((x) => { x.textContent = String(puntos()); });
+    const vistas = document.querySelector<HTMLElement>('[data-account-views]');
+    const completos = document.querySelector<HTMLElement>('[data-account-courses]');
+    if (vistas) vistas.textContent = String(Progreso.totalVistas());
+    if (completos) completos.textContent = String(Progreso.completados().length);
+  }
+  drawer.hidden = !abierto;
+  scrim.hidden = !abierto;
+  toggle.setAttribute('aria-expanded', String(abierto));
 }
 
 // ── Interacciones globales del miembro ──
@@ -222,6 +264,19 @@ document.addEventListener('click', async (e) => {
     else if (!el.closest('[data-notifs-panel]')) panel.hidden = true;
   }
 
+  const accountToggle = el.closest('[data-account-toggle]');
+  const accountDrawer = document.querySelector<HTMLElement>('[data-account-drawer]');
+  if (accountToggle) {
+    if (panel) panel.hidden = true;
+    mostrarResumenCuenta(accountDrawer?.hasAttribute('hidden') ?? true);
+    return;
+  }
+  if (el.closest('[data-account-close], [data-account-scrim]')) { mostrarResumenCuenta(false); return; }
+  if (accountDrawer && !accountDrawer.hidden) {
+    if (el.closest('[data-account-drawer] a')) mostrarResumenCuenta(false);
+    else if (!el.closest('[data-account-drawer]')) mostrarResumenCuenta(false);
+  }
+
   const tab = el.closest<HTMLButtonElement>('.tabs button[data-for]');
   if (tab) {
     tab.parentElement!.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === tab));
@@ -231,7 +286,7 @@ document.addEventListener('click', async (e) => {
   const marcar = el.closest<HTMLElement>('[data-marcar-vista]');
   if (marcar) {
     const [id, n] = marcar.dataset.marcarVista!.split(':');
-    if (Datos.modo === 'api') { try { await api(`/progreso/${id}/vista`, { method: 'POST', json: { n: Number(n) } }); } catch (err) { toast(mensajeError(err), 'alert-triangle'); return; } }
+    if (Datos.modo === 'api') { try { const r = await api<{ recompensas?: PremioActividad }>(`/progreso/${id}/vista`, { method: 'POST', json: { n: Number(n) } }); await registrarPremio(r.recompensas); } catch (err) { toast(mensajeError(err), 'alert-triangle'); return; } }
     Progreso.marcarVista(id, Number(n));
     const c = getCurso(id);
     const hayNext = c && c.clases.some((k) => k.n === Number(n) + 1);
@@ -309,7 +364,27 @@ document.addEventListener('click', async (e) => {
 
   if (el.closest('[data-imprimir]')) window.print();
   const share = el.closest<HTMLElement>('[data-compartir-cert], [data-compartir]');
-  if (share) { try { if (navigator.share) await navigator.share({ title: 'OdonTeck Club', url: location.href }); else { await navigator.clipboard.writeText(location.href); toast('Enlace copiado', 'link'); } } catch {} }
+  if (share) {
+    const url = share.dataset.compartirUrl ? new URL(share.dataset.compartirUrl, location.href).href : location.href;
+    try { if (navigator.share) await navigator.share({ title: 'OdonTeck Club', url }); else { await navigator.clipboard.writeText(url); toast('Enlace copiado', 'link'); } } catch {}
+  }
+
+  const canje = el.closest<HTMLButtonElement>('[data-canjear-recompensa]');
+  if (canje) {
+    const id = canje.dataset.canjearRecompensa!;
+    const recompensa = Recompensas.resumen()?.recompensas.find((r) => r.id === id);
+    if (!recompensa || !confirm(`¿Canjear ${recompensa.puntos.toLocaleString('es-MX')} puntos por “${recompensa.titulo}”?`)) return;
+    canje.disabled = true;
+    try {
+      const resultado = await Recompensas.canjear(id);
+      if (Datos.modo === 'demo' && recompensa.materialId) {
+        const material = Datos.materiales().find((m) => m.id === recompensa.materialId);
+        if (material) Datos.guardarMaterial({ ...material, desbloqueadoConPuntos: true });
+      } else if (Datos.modo === 'api') await cargarClub(current().path, true);
+      toast(resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Te confirmaremos la activación.' : 'Recompensa desbloqueada en tu biblioteca', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
+      render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); canje.disabled = false; }
+  }
   if (el.closest('[data-guardar]')) toast('Guardado en tu biblioteca', 'bookmark');
 
   // Login
@@ -320,6 +395,10 @@ document.addEventListener('click', async (e) => {
   // Opción de quiz marcada visualmente (el input está oculto)
   const opt = el.closest<HTMLLabelElement>('.quiz__opt');
   if (opt && opt.closest('[data-quiz-miembro]') && !opt.closest('form')!.dataset.calificado) opt.querySelector('input')!.checked = true;
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') mostrarResumenCuenta(false);
 });
 
 function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); navigate(v === '/login' ? '/' : v); render(); }
@@ -373,12 +452,14 @@ document.addEventListener('submit', async (e) => {
 
     type Detalle = { correcta: number; explicacion: string };
     let correctas: number, total: number, aprobado: boolean, detalle: Detalle[];
+    let premio: PremioActividad = null;
 
     if (Datos.modo === 'api') {
       try {
-        const r = await api<{ correctas: number; total: number; aprobado: boolean; detalle: Detalle[] }>(
+        const r = await api<{ correctas: number; total: number; aprobado: boolean; detalle: Detalle[]; recompensas?: PremioActividad }>(
           `/quiz/${encodeURIComponent(cursoId)}/${n}`, { method: 'POST', json: { respuestas } });
         ({ correctas, total, aprobado, detalle } = r);
+        premio = r.recompensas;
       } catch (err) { toast(mensajeError(err), 'alert-triangle'); btn.removeAttribute('disabled'); return; }
     } else {
       detalle = q.preguntas.map((p) => ({ correcta: p.correcta, explicacion: p.explicacion }));
@@ -403,6 +484,7 @@ document.addEventListener('submit', async (e) => {
     res.hidden = false; res.className = `quiz__resultado ${aprobado ? 'ok' : 'no'}`;
     res.textContent = aprobado ? `¡Muy bien! ${correctas} de ${total} correctas.` : `${correctas} de ${total} correctas. Repasa la clase y vuelve a intentarlo.`;
     f.dataset.calificado = '1';
+    await registrarPremio(premio);
     btn.removeAttribute('disabled'); btn.textContent = 'Intentar de nuevo'; btn.type = 'button';
     btn.onclick = () => render();
     try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok: correctas, total, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
@@ -413,9 +495,12 @@ document.addEventListener('submit', async (e) => {
     const d = new FormData(f);
     try {
       const datos = { titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), cursoId: (d.get('cursoId') as string) || null };
-      const h = Datos.modo === 'api'
-        ? Comunidad.agregarRemoto(await api('/foro', { method: 'POST', json: datos }))
-        : Comunidad.crear(datos.titulo, datos.texto, datos.cursoId);
+      let h;
+      if (Datos.modo === 'api') {
+        const remoto = await api<any>('/foro', { method: 'POST', json: datos });
+        h = Comunidad.agregarRemoto(remoto);
+        await registrarPremio(remoto.recompensas);
+      } else h = Comunidad.crear(datos.titulo, datos.texto, datos.cursoId);
       toast('Tema publicado', 'message-circle'); navigate(`/comunidad/${h.id}`);
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
   }
@@ -425,8 +510,9 @@ document.addEventListener('submit', async (e) => {
     const id = f.dataset.formRespuesta!; const texto = String(new FormData(f).get('texto')).trim();
     try {
       if (Datos.modo === 'api') {
-        const respuesta = await api<Parameters<typeof Comunidad.responderRemoto>[1]>(`/foro/${encodeURIComponent(id)}/respuestas`, { method: 'POST', json: { texto } });
+        const respuesta = await api<Parameters<typeof Comunidad.responderRemoto>[1] & { recompensas?: PremioActividad }>(`/foro/${encodeURIComponent(id)}/respuestas`, { method: 'POST', json: { texto } });
         Comunidad.responderRemoto(id, respuesta);
+        await registrarPremio(respuesta.recompensas);
       } else Comunidad.responder(id, texto);
       render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }

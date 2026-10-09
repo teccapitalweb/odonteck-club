@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
 import request from 'supertest';
-import { ORIGEN_OK, TOKENS, bearer, crearEntorno } from './fakes/app.js';
+import { AHORA_ISO, ORIGEN_OK, TOKENS, bearer, crearEntorno } from './fakes/app.js';
 
 let env;
 beforeEach(() => {
@@ -415,6 +415,69 @@ describe('materiales', () => {
   });
 });
 
+describe('recompensas y puntos', () => {
+  test('reconoce una vez la membresía pagada de usuarios anteriores', async () => {
+    const primero = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(primero.body.saldo, 300);
+    assert.equal(primero.body.contadores.membresias, 1);
+    assert.equal(primero.body.logros.find((l) => l.id === 'miembro-club').logrado, true);
+    const segundo = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(segundo.body.saldo, 300);
+    assert.equal(segundo.body.movimientos.filter((m) => m.tipo === 'membresia').length, 1);
+  });
+
+  test('una clase suma una sola vez y crea el logro sin permitir puntos por recarga', async () => {
+    const primera = await vista(TOKENS.free, 'curso-a', 1).expect(200);
+    assert.equal(primera.body.recompensas.puntosGanados, 10);
+    assert.equal(primera.body.recompensas.saldo, 10);
+    assert.equal(primera.body.recompensas.logrosNuevos[0].id, 'primer-paso');
+
+    const repetida = await vista(TOKENS.free, 'curso-a', 1).expect(200);
+    assert.equal(repetida.body.recompensas.puntosGanados, 0);
+    assert.equal(repetida.body.recompensas.saldo, 10);
+
+    const resumen = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(resumen.body.saldo, 10);
+    assert.equal(resumen.body.ganados, 10);
+    assert.equal(resumen.body.logros.find((l) => l.id === 'primer-paso').logrado, true);
+    assert.equal(env.db.rutas('v2_recompensas_movimientos').filter((ruta) => env.db.leer(ruta).tipo === 'clase').length, 1);
+  });
+
+  test('un usuario gratis canjea una guía propia y obtiene acceso permanente; Praxia queda pendiente', async () => {
+    env.db.docs.set('v2_recompensas_estado/free1', {
+      uid: 'free1', saldo: 1750, ganados: 1750, gastados: 0, contadores: {}, logros: {},
+      desbloqueos: { materiales: [] }, notificaciones: [], actualizado: AHORA_ISO,
+    });
+
+    const noPublicado = await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'guia-diagnostico-ortodoncico' }).expect(409);
+    assert.equal(noPublicado.body.error, 'recompensa_no_disponible');
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 1750, 'un material no publicado no consume puntos');
+
+    env.db.docs.set('v2_materiales/guia-diagnostico-ortodoncico', {
+      id: 'guia-diagnostico-ortodoncico', titulo: 'Guía de diagnóstico', tipo: 'PDF', estado: 'disponible', gratis: false,
+      archivo: 'materiales/guia-diagnostico-ortodoncico.pdf',
+    });
+
+    await request(env.app).get('/materiales/guia-diagnostico-ortodoncico/descarga').set(bearer(TOKENS.free)).expect(403);
+    const guia = await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'guia-diagnostico-ortodoncico' }).expect(201);
+    assert.equal(guia.body.saldo, 1500);
+    assert.equal(guia.body.recompensa.estatus, 'entregado');
+    assert.equal(env.db.rutas('v2_recompensas_movimientos').map((ruta) => env.db.leer(ruta)).find((x) => x.tipo === 'canje').puntos, -250);
+    await request(env.app).get('/materiales/guia-diagnostico-ortodoncico/descarga').set(bearer(TOKENS.free)).expect(200);
+    await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'guia-diagnostico-ortodoncico' }).expect(409);
+
+    const praxia = await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'praxia-30-dias' }).expect(201);
+    assert.equal(praxia.body.saldo, 0);
+    assert.equal(praxia.body.recompensa.estatus, 'pendiente');
+    const canje = env.db.rutas('v2_recompensas_canjes').map((ruta) => env.db.leer(ruta)).find((x) => x.recompensaId === 'praxia-30-dias');
+    assert.equal(canje.estatus, 'pendiente');
+  });
+});
+
 describe('quizzes', () => {
   test('GET no incluye respuestas ni explicaciones; solo quizzes aprobados', async () => {
     const r = await request(env.app).get('/quiz/curso-a/1').set(bearer(TOKENS.free)).expect(200);
@@ -446,6 +509,71 @@ describe('quizzes', () => {
   test('quiz de una clase de pago exige VIP', async () => {
     env.db.docs.set('v2_quizzes/curso-a_2', { cursoId: 'curso-a', n: 2, estado: 'aprobado', preguntas: [{ q: 'x', opciones: ['a', 'b'], correcta: 0 }] });
     await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.free)).expect(403);
+  });
+});
+
+describe('Retos V2', () => {
+  test('resumen y sesión usan solo preguntas aprobadas y accesibles', async () => {
+    const resumen = await request(env.app).get('/retos/resumen').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(resumen.body.disponibilidad.preguntas, 3);
+    assert.deepEqual(resumen.body.disponibilidad.areas, [{ area: 'Endodoncia', total: 3 }]);
+    assert.equal(resumen.body.recomendacion.area, 'Endodoncia');
+    assert.equal(resumen.body.estado.xp, 0);
+
+    const sesion = await request(env.app).post('/retos/sesion').set(bearer(TOKENS.free))
+      .send({ modo: 'practica', area: 'Todas', limite: 3 }).expect(200);
+    assert.equal(sesion.body.total, 3);
+    assert.equal(JSON.stringify(sesion.body).includes('correcta'), false);
+    assert.equal(JSON.stringify(sesion.body).includes('explicacion'), false);
+    assert.deepEqual(Object.keys(sesion.body.preguntas[0]).sort(), ['area', 'clase', 'curso', 'cursoId', 'indice', 'n', 'opciones', 'q', 'ref']);
+
+    await request(env.app).post('/retos/sesion').set(bearer(TOKENS.free))
+      .send({ modo: 'practica', area: 'Todas', limite: 4 }).expect(400);
+  });
+
+  test('miembro gratis no recibe preguntas de clases VIP', async () => {
+    env.db.docs.set('v2_quizzes/curso-a_2', {
+      cursoId: 'curso-a', n: 2, estado: 'aprobado',
+      preguntas: [{ q: 'Pregunta VIP', opciones: ['A', 'B'], correcta: 1, explicacion: 'Solo VIP' }],
+    });
+    const gratis = await request(env.app).get('/retos/resumen').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(gratis.body.disponibilidad.preguntas, 3);
+    const vip = await request(env.app).get('/retos/resumen').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(vip.body.disponibilidad.preguntas, 4);
+  });
+
+  test('califica en servidor, acumula dominio y evita repetir XP el mismo día', async () => {
+    const primera = await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 0, opcion: 0 }).expect(200);
+    assert.equal(primera.body.acertada, true);
+    assert.equal(primera.body.correcta, 0);
+    assert.equal(primera.body.explicacion, 'Explicación de P1');
+    assert.equal(primera.body.xpGanado, 10);
+    assert.equal(primera.body.estado.racha, 1);
+    assert.deepEqual(primera.body.estado.dominio[0], {
+      area: 'Endodoncia', aciertos: 1, total: 1, precision: 100, estado: 'Por explorar', ultima: AHORA_ISO,
+    });
+
+    const repetida = await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 0, opcion: 2 }).expect(200);
+    assert.equal(repetida.body.acertada, false);
+    assert.equal(repetida.body.xpGanado, 0);
+    assert.equal(repetida.body.estado.xp, 10);
+    assert.equal(repetida.body.estado.quiz.precision, 50);
+
+    const guardado = env.db.leer('v2_retos_estados/free1');
+    assert.equal(guardado.uid, 'free1');
+    assert.equal(guardado.preguntas['curso-a_1_0'].intentos, 2);
+    assert.equal(JSON.stringify(guardado).includes('email'), false);
+  });
+
+  test('rechaza referencias y respuestas inválidas', async () => {
+    await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 99, opcion: 0 }).expect(404);
+    await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 0, opcion: 99 }).expect(400);
+    await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 2, indice: 0, opcion: 0 }).expect(403);
   });
 });
 

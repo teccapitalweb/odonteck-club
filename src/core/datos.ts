@@ -15,6 +15,7 @@ export interface Curso {
 export interface Material {
   id: string; titulo: string; tipo: string; categoria: string; area: string; autor: string; paginas: number; portada: string;
   cursoId: string | null; descripcion: string; estado: 'disponible' | 'proximamente' | 'oculto' | string; gratis?: boolean; url?: string;
+  desbloqueadoConPuntos?: boolean; puntosRequeridos?: number | null;
 }
 export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string | null; cursoId?: string; publicado?: boolean; reservas?: number; reservado?: boolean }
 export interface Pregunta { q: string; opciones: string[]; correcta: number; explicacion: string }

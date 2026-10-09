@@ -3,11 +3,12 @@ import { cursos } from './catalogo';
 import { Progreso } from './progreso';
 import { Comunidad } from './comunidad';
 import { encuestaRespondida } from './encuestas';
+import { Recompensas } from './recompensas';
 
 export interface Logro { id: string; titulo: string; desc: string; icon: string; cat: string; ok: boolean; progreso?: string }
 
 export function puntos() {
-  return Progreso.totalVistas() * 10 + Progreso.completados().length * 50 + Comunidad.misHilos().length * 5 + (encuestaRespondida('experiencia') ? 40 : 0);
+  return Recompensas.resumen()?.saldo ?? (Progreso.totalVistas() * 10 + Progreso.completados().length * 50 + Comunidad.misHilos().length * 10 + (encuestaRespondida('experiencia') ? 40 : 0));
 }
 
 // Semanas consecutivas (hasta hoy) con al menos una clase vista
@@ -22,6 +23,16 @@ export function racha() {
 }
 
 export function logros(): Logro[] {
+  const remotos = Recompensas.resumen()?.logros;
+  if (remotos?.length) return remotos.map((logro) => ({
+    id: logro.id,
+    titulo: logro.titulo,
+    desc: logro.descripcion,
+    icon: logro.icono,
+    cat: ['voz'].includes(logro.id) ? 'Comunidad' : ['retador', 'mente-clinica'].includes(logro.id) ? 'Práctica' : logro.id === 'miembro-club' ? 'Club' : 'Aprendizaje',
+    ok: logro.logrado,
+    progreso: `${logro.progreso}/${logro.meta}`,
+  }));
   const vistas = Progreso.totalVistas();
   const completos = Progreso.completados().length;
   const r = racha().semanas;

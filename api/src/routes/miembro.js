@@ -13,6 +13,24 @@ import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
 import { materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
 import {
+  estadoRetosPublico,
+  normalizarEstadoRetos,
+  prioridadPregunta,
+  refPregunta,
+  registrarActividad,
+} from '../lib/retos.js';
+import {
+  canjearRecompensa,
+  catalogoRecompensas,
+  logrosPublicos,
+  materialDesbloqueado,
+  normalizarEstadoRecompensas,
+  otorgarEventos,
+  otorgarEventosTx,
+  recompensaDeMaterial,
+  REGLAS_PUNTOS,
+} from '../lib/recompensas.js';
+import {
   LIMITES,
   booleano,
   cuerpo,
@@ -49,6 +67,62 @@ export function rutasMiembro(ctx) {
   const r = express.Router();
   const auth = requireAuth(ctx);
   const { db } = ctx;
+
+  async function sincronizarRecompensas(usuario) {
+    const [progresoSnap, intentosSnap, respuestasSnap, foroSnap, retos, actual, membresia] = await Promise.all([
+      db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
+      db.collection(COL.intentos).where('uid', '==', usuario.uid).get(),
+      db.collection(COL.encuestasRespuestas).where('uid', '==', usuario.uid).get(),
+      db.collection(COL.foro).where('autorUid', '==', usuario.uid).get(),
+      leerDoc(db, COL.retosEstado, usuario.uid),
+      leerDoc(db, COL.recompensasEstado, usuario.uid),
+      estadoMembresia(ctx, usuario),
+    ]);
+    const estadoActual = normalizarEstadoRecompensas(actual, usuario.uid);
+    const eventos = [];
+    progresoSnap.docs.forEach((doc) => {
+      const p = doc.data();
+      (Array.isArray(p.vistas) ? p.vistas : []).forEach((n) => eventos.push({
+        clave: `clase:${p.cursoId}:${Number(n)}`,
+        tipo: 'clase', puntos: REGLAS_PUNTOS.clase, contador: 'clases', detalle: `Clase ${Number(n)} completada`,
+      }));
+      if (p.certificado) eventos.push({
+        clave: `curso:${p.cursoId}`, tipo: 'curso', puntos: REGLAS_PUNTOS.curso, contador: 'cursos', detalle: 'Curso completado',
+      });
+    });
+    intentosSnap.docs.forEach((doc) => {
+      const intento = doc.data();
+      if (intento.aprobado) eventos.push({
+        clave: `quiz:${intento.cursoId}:${intento.n}`, tipo: 'quiz', puntos: REGLAS_PUNTOS.quiz, contador: 'quizzes', detalle: 'Evaluación aprobada',
+      });
+    });
+    respuestasSnap.docs.forEach((doc) => {
+      const respuesta = doc.data();
+      const puntos = respuesta.tipo === 'bienvenida' ? REGLAS_PUNTOS.encuestaBienvenida : respuesta.tipo === 'curso' ? REGLAS_PUNTOS.encuestaCurso : REGLAS_PUNTOS.encuestaExperiencia;
+      eventos.push({ clave: `encuesta:${respuesta.clave}`, tipo: 'encuesta', puntos, contador: 'encuestas', detalle: 'Encuesta respondida' });
+    });
+    foroSnap.docs.forEach((doc) => eventos.push({
+      clave: `tema:${doc.id}`, tipo: 'comunidad', puntos: REGLAS_PUNTOS.temaComunidad, contador: 'temas', detalle: 'Tema publicado en Comunidad',
+    }));
+    if (membresia.membresiaPagada && !estadoActual.contadores.membresias) {
+      eventos.push({
+        clave: 'membresia:historica:v1',
+        tipo: 'membresia',
+        puntos: REGLAS_PUNTOS.membresia,
+        contador: 'membresias',
+        detalle: 'Membresía activa reconocida del club anterior',
+      });
+    }
+    if (!estadoActual.contadores.retosMigrados && Number(retos?.xp) > 0) {
+      const xp = Math.min(5000, Math.max(0, Math.round(Number(retos.xp))));
+      eventos.push({ clave: 'retos:historico:v1', tipo: 'reto', puntos: xp, contador: 'puntosRetos', delta: xp, detalle: 'XP anterior de Retos migrado' });
+    }
+    if (!estadoActual.contadores.retosMigrados) {
+      eventos.push({ clave: 'retos:migracion:v1', tipo: 'sistema', puntos: 0, contador: 'retosMigrados', detalle: 'Migración de Retos completada' });
+    }
+    if (eventos.length) await otorgarEventos(ctx, COL, usuario.uid, eventos);
+    return normalizarEstadoRecompensas(await leerDoc(db, COL.recompensasEstado, usuario.uid), usuario.uid);
+  }
 
   // ---------- Perfil ----------
   r.get('/me', auth, h(async (req, res) => {
@@ -114,15 +188,67 @@ export function rutasMiembro(ctx) {
     res.json({ intereses: perfil.intereses });
   }));
 
+  // ---------- Puntos, logros y recompensas ----------
+  r.get('/recompensas/resumen', auth, h(async (req, res) => {
+    const estado = await sincronizarRecompensas(req.usuario);
+    const [membresia, movimientosSnap, materialesSnap] = await Promise.all([
+      estadoMembresia(ctx, req.usuario),
+      db.collection(COL.recompensasMovimientos).where('uid', '==', req.usuario.uid).get(),
+      db.collection(COL.materiales).get(),
+    ]);
+    const materialesDisponibles = new Set(materialesSnap.docs
+      .filter((doc) => doc.data().estado === 'disponible' && typeof doc.data().archivo === 'string' && doc.data().archivo)
+      .map((doc) => doc.id));
+    const movimientos = movimientosSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 25);
+    res.json({
+      saldo: estado.saldo,
+      ganados: estado.ganados,
+      gastados: estado.gastados,
+      contadores: estado.contadores,
+      logros: logrosPublicos(estado),
+      recompensas: catalogoRecompensas(estado, membresia.esVip, materialesDisponibles),
+      movimientos,
+      notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
+      actualizado: estado.actualizado,
+    });
+  }));
+
+  r.post('/recompensas/canjear', auth, h(async (req, res) => {
+    await sincronizarRecompensas(req.usuario);
+    const recompensaId = slug(cuerpo(req).recompensaId, { campo: 'recompensaId' });
+    const membresia = await estadoMembresia(ctx, req.usuario);
+    const resultado = await canjearRecompensa(ctx, COL, req.usuario, recompensaId, membresia.esVip);
+    res.status(201).json({
+      saldo: resultado.estado.saldo,
+      recompensa: resultado.recompensa,
+      notificacion: resultado.notificacion,
+    });
+  }));
+
+  r.post('/recompensas/notificaciones/leidas', auth, h(async (req, res) => {
+    const ref = db.collection(COL.recompensasEstado).doc(req.usuario.uid);
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) return;
+      const estado = normalizarEstadoRecompensas(snap.data(), req.usuario.uid);
+      estado.notificaciones = estado.notificaciones.map((n) => ({ ...n, leida: true }));
+      estado.actualizado = ctx.now().toISOString();
+      tx.set(ref, estado);
+    });
+    res.json({ ok: true });
+  }));
+
   // ---------- Catálogo ----------
   r.get('/catalogo', auth, h(async (req, res) => {
     const u = req.usuario;
-    const [cursosSnap, materialesSnap, eventosSnap, config, estado] = await Promise.all([
+    const [cursosSnap, materialesSnap, eventosSnap, config, estado, recompensasEstado] = await Promise.all([
       db.collection(COL.cursos).get(),
       db.collection(COL.materiales).get(),
       db.collection(COL.eventos).get(),
       leerConfig(db),
       estadoMembresia(ctx, u),
+      leerDoc(db, COL.recompensasEstado, u.uid),
     ]);
 
     const cursos = cursosSnap.docs
@@ -145,7 +271,15 @@ export function rutasMiembro(ctx) {
     const oficialesFaltantes = materialesOficialesComoProximamente()
       .filter((m) => !idsEnFirestore.has(m.id));
     const materiales = [...docsVisibles, ...oficialesFaltantes]
-      .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'));
+      .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'))
+      .map((material) => {
+        const recompensa = recompensaDeMaterial(material.id);
+        return {
+          ...material,
+          desbloqueadoConPuntos: materialDesbloqueado(recompensasEstado, material.id),
+          puntosRequeridos: recompensa?.puntos ?? null,
+        };
+      });
 
     const eventos = eventosSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
@@ -297,13 +431,37 @@ export function rutasMiembro(ctx) {
         progreso.certificado = previo.certificado;
       }
 
+      const eventosRecompensa = [];
+      if (!yaVista) eventosRecompensa.push({
+        clave: `clase:${curso.id}:${n}`,
+        tipo: 'clase',
+        puntos: REGLAS_PUNTOS.clase,
+        contador: 'clases',
+        detalle: `Clase completada: ${curso.titulo}, clase ${n}`,
+      });
+      if (cursoCompleto(curso, vistas)) eventosRecompensa.push({
+        clave: `curso:${curso.id}`,
+        tipo: 'curso',
+        puntos: REGLAS_PUNTOS.curso,
+        contador: 'cursos',
+        detalle: `Curso completado: ${curso.titulo}`,
+      });
+      const recompensas = await otorgarEventosTx({
+        tx,
+        db,
+        colecciones: COL,
+        uid: u.uid,
+        eventos: eventosRecompensa,
+        ahora,
+      });
+
       // --- Escrituras ---
       tx.set(progRef, progreso);
       escrituras.forEach((escribir) => escribir());
-      return { progreso, certificado };
+      return { progreso, certificado, recompensas };
     });
 
-    const salida = { progreso: progresoPublico(resultado.progreso) };
+    const salida = { progreso: progresoPublico(resultado.progreso), recompensas: resultado.recompensas };
     if (resultado.certificado) salida.certificado = resultado.certificado;
     res.json(salida);
   }));
@@ -328,11 +486,20 @@ export function rutasMiembro(ctx) {
   // ---------- Materiales ----------
   r.get('/materiales/:id/descarga', auth, h(async (req, res) => {
     const id = idDocumento(req.params.id);
-    const estado = await estadoMembresia(ctx, req.usuario);
-    const material = await leerDoc(db, COL.materiales, id);
+    const [estado, material, recompensasEstado] = await Promise.all([
+      estadoMembresia(ctx, req.usuario),
+      leerDoc(db, COL.materiales, id),
+      leerDoc(db, COL.recompensasEstado, req.usuario.uid),
+    ]);
     if (!material || material.estado === 'oculto') throw noEncontrado('Ese material no existe.');
     if (material.estado !== 'disponible') throw conflicto('Este material todavía no está disponible.', 'material_no_disponible');
-    if (!estado.esVip && material.gratis !== true) throw requiereVip('Este material es exclusivo para miembros VIP.');
+    if (!estado.esVip && material.gratis !== true && !materialDesbloqueado(recompensasEstado, id)) {
+      const recompensa = recompensaDeMaterial(id);
+      const mensaje = recompensa
+        ? `Este material requiere membresía VIP o un canje de ${recompensa.puntos} puntos.`
+        : 'Este material es exclusivo para miembros VIP.';
+      throw requiereVip(mensaje);
+    }
     const archivo = typeof material.archivo === 'string' ? material.archivo : '';
     if (!archivo.startsWith('materiales/') || archivo.includes('..')) {
       throw conflicto('Este material no tiene archivo cargado.', 'sin_archivo');
@@ -354,14 +521,18 @@ export function rutasMiembro(ctx) {
   }));
 
   // ---------- Quizzes ----------
-  async function cargarQuiz(req) {
-    const { curso, n } = await prepararClase(req, req.params.cursoId, req.params.n, { exigirDesbloqueo: false });
+  async function cargarQuizPor(req, cursoId, numero) {
+    const { curso, n } = await prepararClase(req, cursoId, numero, { exigirDesbloqueo: false });
     const quiz = await leerDoc(db, COL.quizzes, `${curso.id}_${n}`);
     const preguntas = Array.isArray(quiz?.preguntas) ? quiz.preguntas : [];
     if (!quiz || quiz.estado !== 'aprobado' || preguntas.length === 0) {
       throw new HttpError(404, 'quiz_no_disponible', 'Esta clase todavía no tiene quiz.');
     }
     return { curso, n, preguntas };
+  }
+
+  async function cargarQuiz(req) {
+    return cargarQuizPor(req, req.params.cursoId, req.params.n);
   }
 
   r.get('/quiz/:cursoId/:n', auth, h(async (req, res) => {
@@ -388,16 +559,191 @@ export function rutasMiembro(ctx) {
     const total = preguntas.length;
     const aprobado = correctas / total >= APROBATORIO;
     const u = req.usuario;
-    await db.collection(COL.intentos).doc(`${u.uid}_${curso.id}_${n}`).set({
-      uid: u.uid,
-      cursoId: curso.id,
-      n,
-      correctas,
-      total,
-      aprobado,
-      fecha: ctx.now().toISOString(),
+    const fecha = ctx.now();
+    const intentoRef = db.collection(COL.intentos).doc(`${u.uid}_${curso.id}_${n}`);
+    const recompensas = await db.runTransaction(async (tx) => {
+      const premio = aprobado ? await otorgarEventosTx({
+        tx,
+        db,
+        colecciones: COL,
+        uid: u.uid,
+        ahora: fecha,
+        eventos: [{
+          clave: `quiz:${curso.id}:${n}`,
+          tipo: 'quiz',
+          puntos: REGLAS_PUNTOS.quiz,
+          contador: 'quizzes',
+          detalle: `Evaluación aprobada: ${curso.titulo}, clase ${n}`,
+        }],
+      }) : { puntosGanados: 0, saldo: null, logrosNuevos: [], notificaciones: [] };
+      tx.set(intentoRef, {
+        uid: u.uid,
+        cursoId: curso.id,
+        n,
+        correctas,
+        total,
+        aprobado,
+        fecha: fecha.toISOString(),
+      });
+      return premio;
     });
-    res.json({ correctas, total, aprobado, detalle });
+    res.json({ correctas, total, aprobado, detalle, recompensas });
+  }));
+
+  // ---------- Retos V2 ----------
+  async function bancoRetos(req) {
+    const [estadoAcceso, cursosSnap, quizzesSnap] = await Promise.all([
+      estadoMembresia(ctx, req.usuario),
+      db.collection(COL.cursos).get(),
+      db.collection(COL.quizzes).get(),
+    ]);
+    const cursos = new Map(cursosSnap.docs
+      .map((d) => ({ id: d.id, ...d.data() }))
+      .filter((curso) => curso.publicado === true)
+      .map((curso) => [curso.id, curso]));
+    const preguntas = [];
+    for (const doc of quizzesSnap.docs) {
+      const quiz = doc.data();
+      if (quiz?.estado !== 'aprobado' || !Array.isArray(quiz.preguntas)) continue;
+      const curso = cursos.get(String(quiz.cursoId));
+      const n = Number(quiz.n);
+      const clase = curso?.clases?.find((item) => Number(item.n) === n);
+      if (!curso || !clase || !tieneAccesoAClase(clase, estadoAcceso.esVip)) continue;
+      quiz.preguntas.forEach((pregunta, indice) => {
+        if (!pregunta || typeof pregunta.q !== 'string' || !Array.isArray(pregunta.opciones) || pregunta.opciones.length < 2) return;
+        preguntas.push({
+          ref: refPregunta(curso.id, n, indice),
+          cursoId: curso.id,
+          curso: curso.titulo,
+          clase: clase.titulo,
+          n,
+          indice,
+          area: curso.area || 'General',
+          q: pregunta.q,
+          opciones: pregunta.opciones,
+        });
+      });
+    }
+    return { preguntas, estadoAcceso };
+  }
+
+  function disponibilidadRetos(preguntas) {
+    const areas = new Map();
+    preguntas.forEach((pregunta) => areas.set(pregunta.area, (areas.get(pregunta.area) || 0) + 1));
+    return {
+      preguntas: preguntas.length,
+      areas: [...areas.entries()].map(([area, total]) => ({ area, total })).sort((a, b) => b.total - a.total || a.area.localeCompare(b.area, 'es')),
+    };
+  }
+
+  r.get('/retos/resumen', auth, h(async (req, res) => {
+    const [{ preguntas }, guardado] = await Promise.all([
+      bancoRetos(req),
+      leerDoc(db, COL.retosEstado, req.usuario.uid),
+    ]);
+    const estado = estadoRetosPublico(guardado, req.usuario.uid);
+    const disponibilidad = disponibilidadRetos(preguntas);
+    const disponibles = new Set(disponibilidad.areas.map((item) => item.area));
+    const porReforzar = estado.dominio.find((item) => disponibles.has(item.area) && item.total >= 2);
+    const recomendada = porReforzar?.area || disponibilidad.areas[0]?.area || null;
+    res.json({
+      estado,
+      disponibilidad,
+      recomendacion: recomendada ? {
+        area: recomendada,
+        preguntas: Math.min(8, preguntas.filter((item) => item.area === recomendada).length),
+        minutos: Math.max(3, Math.ceil(Math.min(8, preguntas.filter((item) => item.area === recomendada).length) * 1.2)),
+        motivo: porReforzar ? 'Refuerza el área que más puede mejorar hoy.' : 'Empieza por el área con más práctica disponible.',
+      } : null,
+    });
+  }));
+
+  r.post('/retos/sesion', auth, h(async (req, res) => {
+    const b = cuerpo(req);
+    const modo = b.modo === 'relampago' ? 'relampago' : b.modo === 'practica' ? 'practica' : null;
+    if (!modo) throw invalido('"modo" debe ser "practica" o "relampago".');
+    const area = texto(b.area, { campo: 'area', max: 80 }) || 'Todas';
+    const { preguntas, estadoAcceso } = await bancoRetos(req);
+    const maximo = estadoAcceso.esVip ? (modo === 'practica' ? 10 : 8) : 3;
+    const limite = entero(b.limite ?? maximo, { campo: 'limite', min: 1, max: maximo });
+    const guardado = normalizarEstadoRetos(await leerDoc(db, COL.retosEstado, req.usuario.uid), req.usuario.uid);
+    const candidatas = preguntas.filter((item) => area === 'Todas' || item.area === area);
+    candidatas.sort((a, b) => prioridadPregunta(guardado, a) - prioridadPregunta(guardado, b) || a.ref.localeCompare(b.ref));
+    const seleccion = candidatas.slice(0, limite).map(({ ref, cursoId, curso, clase, n, indice, area: areaPregunta, q, opciones }) => ({
+      ref, cursoId, curso, clase, n, indice, area: areaPregunta, q, opciones,
+    }));
+    res.json({ modo, area, total: seleccion.length, preguntas: seleccion });
+  }));
+
+  r.post('/retos/responder', auth, h(async (req, res) => {
+    const b = cuerpo(req);
+    const cursoId = idDocumento(b.cursoId, 'cursoId');
+    const n = entero(b.n, { campo: 'n', min: 1, max: 999 });
+    const indice = entero(b.indice, { campo: 'indice', min: 0, max: 999 });
+    const opcion = b.opcion === null ? null : entero(b.opcion, { campo: 'opcion', min: 0, max: 99 });
+    const { curso, preguntas } = await cargarQuizPor(req, cursoId, n);
+    const pregunta = preguntas[indice];
+    if (!pregunta) throw noEncontrado('Esa pregunta ya no está disponible.');
+    if (opcion !== null && opcion >= pregunta.opciones.length) throw invalido('"opcion" no corresponde a una respuesta disponible.');
+    const acertada = opcion === pregunta.correcta;
+    const ahora = ctx.now();
+    const ahoraISO = ahora.toISOString();
+    const hoy = ahoraISO.slice(0, 10);
+    const ref = refPregunta(curso.id, n, indice);
+    const estadoRef = db.collection(COL.retosEstado).doc(req.usuario.uid);
+
+    const resultado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(estadoRef);
+      const estado = normalizarEstadoRetos(snap.exists ? snap.data() : null, req.usuario.uid);
+      const previa = estado.preguntas[ref] && typeof estado.preguntas[ref] === 'object' ? estado.preguntas[ref] : {};
+      const primerIntentoHoy = String(previa.ultima || '').slice(0, 10) !== hoy;
+      const xpGanado = primerIntentoHoy ? (acertada ? 10 : 2) : 0;
+      estado.preguntas[ref] = {
+        intentos: Number(previa.intentos || 0) + 1,
+        aciertos: Number(previa.aciertos || 0) + (acertada ? 1 : 0),
+        ultima: ahoraISO,
+        ultimaCorrecta: acertada,
+      };
+      const area = curso.area || 'General';
+      const dominio = estado.dominio[area] && typeof estado.dominio[area] === 'object' ? estado.dominio[area] : {};
+      estado.dominio[area] = {
+        total: Number(dominio.total || 0) + 1,
+        aciertos: Number(dominio.aciertos || 0) + (acertada ? 1 : 0),
+        ultima: ahoraISO,
+      };
+      estado.quiz.total += 1;
+      estado.quiz.aciertos += acertada ? 1 : 0;
+      estado.xp += xpGanado;
+      estado.actividad = registrarActividad(estado.actividad, ahora);
+      estado.actualizado = ahoraISO;
+      const recompensas = xpGanado > 0 ? await otorgarEventosTx({
+        tx,
+        db,
+        colecciones: COL,
+        uid: req.usuario.uid,
+        ahora,
+        eventos: [{
+          clave: `reto:${ref}:${hoy}`,
+          tipo: 'reto',
+          puntos: xpGanado,
+          contador: 'puntosRetos',
+          delta: xpGanado,
+          detalle: acertada ? 'Respuesta correcta en Retos' : 'Práctica completada en Retos',
+        }],
+      }) : { puntosGanados: 0, saldo: null, logrosNuevos: [], notificaciones: [] };
+      tx.set(estadoRef, estado);
+      return { estado: estadoRetosPublico(estado, req.usuario.uid), xpGanado, recompensas };
+    });
+
+    res.json({
+      ref,
+      acertada,
+      correcta: pregunta.correcta,
+      explicacion: pregunta.explicacion || '',
+      xpGanado: resultado.xpGanado,
+      estado: resultado.estado,
+      recompensas: resultado.recompensas,
+    });
   }));
 
   // ---------- Foro ----------
@@ -454,7 +800,14 @@ export function rutasMiembro(ctx) {
       oculto: false,
     };
     await ref.set(hilo);
-    res.status(201).json(hiloPublico(hilo, u.uid));
+    const recompensas = await otorgarEventos(ctx, COL, u.uid, [{
+      clave: `tema:${ref.id}`,
+      tipo: 'comunidad',
+      puntos: REGLAS_PUNTOS.temaComunidad,
+      contador: 'temas',
+      detalle: 'Tema publicado en Comunidad',
+    }]);
+    res.status(201).json({ ...hiloPublico(hilo, u.uid), recompensas });
   }));
 
   r.get('/foro/:id', auth, h(async (req, res) => {
@@ -485,7 +838,14 @@ export function rutasMiembro(ctx) {
       tx.create(respRef, respuesta);
       tx.update(hiloRef, { respuestas: (Number(hilo.data().respuestas) || 0) + 1 });
     });
-    res.status(201).json(respuesta);
+    const recompensas = await otorgarEventos(ctx, COL, u.uid, [{
+      clave: `respuesta:${id}:${respRef.id}`,
+      tipo: 'comunidad',
+      puntos: REGLAS_PUNTOS.respuestaComunidad,
+      contador: 'respuestas',
+      detalle: 'Respuesta publicada en Comunidad',
+    }]);
+    res.status(201).json({ ...respuesta, recompensas });
   }));
 
   r.post('/foro/:id/util', auth, h(async (req, res) => {

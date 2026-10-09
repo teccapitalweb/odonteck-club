@@ -11,7 +11,7 @@ const tipoIcon: Record<string, string> = { PDF: 'file-text', Libro: 'book-open',
 export function estante(items: Material[]) {
   return `<div class="shelf">${items.map((m) => `
     <a class="shelf__item" href="#/materiales/${m.id}">
-      <div class="shelf__cover"><img src="${m.portada}" alt="" loading="lazy">${m.estado !== 'disponible' ? '<span class="chip chip--glass" style="position:absolute;left:8px;bottom:8px;height:22px;font-size:10px">Próximamente</span>' : Acceso.materialLibre(m) ? '<span class="chip chip--accent" style="position:absolute;top:8px;right:8px;height:24px;font-size:10px">Gratis</span>' : !Acceso.materialAccesible(m) ? '<span class="chip chip--glass" style="position:absolute;top:8px;right:8px;height:24px;width:24px;padding:0;justify-content:center"><i data-lucide="lock" class="i" style="width:13px;height:13px"></i></span>' : ''}</div>
+      <div class="shelf__cover"><img src="${m.portada}" alt="" loading="lazy">${m.estado !== 'disponible' ? '<span class="chip chip--glass" style="position:absolute;left:8px;bottom:8px;height:22px;font-size:10px">Próximamente</span>' : Acceso.materialLibre(m) ? '<span class="chip chip--accent" style="position:absolute;top:8px;right:8px;height:24px;font-size:10px">Gratis</span>' : m.desbloqueadoConPuntos ? '<span class="chip chip--accent" style="position:absolute;top:8px;right:8px;height:24px;font-size:10px">Desbloqueado</span>' : !Acceso.materialAccesible(m) && m.puntosRequeridos ? `<span class="chip chip--glass" style="position:absolute;top:8px;right:8px;height:24px;font-size:10px"><i data-lucide="sparkles" class="i" style="width:12px;height:12px"></i>${m.puntosRequeridos} pts</span>` : !Acceso.materialAccesible(m) ? '<span class="chip chip--glass" style="position:absolute;top:8px;right:8px;height:24px;width:24px;padding:0;justify-content:center"><i data-lucide="lock" class="i" style="width:13px;height:13px"></i></span>' : ''}</div>
       <div class="shelf__title">${esc(m.titulo)}</div>
       <div class="shelf__meta">${m.tipo} · ${m.paginas} ${m.tipo === 'Presentación' ? 'láminas' : 'págs'}</div>
     </a>`).join('')}</div>`;
@@ -67,6 +67,8 @@ export function fichaLibro(m: Material, compacto: boolean) {
           ? Datos.modo === 'api'
             ? `<button class="btn btn--brand btn--lg btn--pill-arrow" data-descargar-material="${m.id}">${Acceso.materialLibre(m) ? 'Abrir gratis' : 'Abrir'} <span class="arrow"><i data-lucide="arrow-up-right" class="i"></i></span></button>`
             : `<a class="btn btn--brand btn--lg btn--pill-arrow" href="${m.url}" target="_blank" rel="noopener">${Acceso.materialLibre(m) ? 'Abrir gratis' : 'Abrir'} <span class="arrow"><i data-lucide="arrow-up-right" class="i"></i></span></a>`
+          : m.estado === 'disponible' && !acc && m.puntosRequeridos
+            ? `<a class="btn btn--brand btn--lg" href="#/recompensas"><i data-lucide="sparkles" class="i"></i>Canjear por ${m.puntosRequeridos} puntos</a>`
           : m.estado === 'disponible' && !acc
             ? `<button class="btn btn--brand btn--lg" data-paywall="Este material es exclusivo para miembros VIP."><i data-lucide="crown" class="i"></i>Desbloquear con VIP</button>`
             : `<span class="btn btn--secondary btn--lg" style="opacity:.7"><i data-lucide="clock" class="i"></i>Próximamente</span>`}
@@ -78,7 +80,7 @@ export function fichaLibro(m: Material, compacto: boolean) {
         <div><h4>Formato</h4><p>${m.tipo}, ${m.paginas} ${m.tipo === 'Presentación' ? 'láminas' : 'páginas'}</p></div>
         <div><h4>Del curso</h4><p>${c ? `<a href="#/curso/${c.id}">${esc(c.titulo)}</a>` : 'Recurso general de la biblioteca'}</p></div>
         <div><h4>Área</h4><p>${esc(m.area)}</p></div>
-        <div><h4>Estado</h4><p>${Acceso.materialLibre(m) ? 'Acceso gratuito' : m.estado === 'disponible' ? (acc ? 'Disponible para miembros VIP' : 'Requiere membresía VIP') : 'En preparación · se publica desde el admin'}</p></div>
+        <div><h4>Estado</h4><p>${Acceso.materialLibre(m) ? 'Acceso gratuito' : m.desbloqueadoConPuntos ? 'Desbloqueado permanentemente con puntos' : m.estado === 'disponible' ? (acc ? 'Disponible para miembros VIP' : m.puntosRequeridos ? `VIP o ${m.puntosRequeridos} puntos` : 'Requiere membresía VIP') : 'En preparación · se publica desde el admin'}</p></div>
       </div>
     </div>
   </div>`;

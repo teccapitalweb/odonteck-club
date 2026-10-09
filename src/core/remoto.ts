@@ -3,6 +3,8 @@ import { Datos, type Config, type Curso, type Evento, type Material, type Quiz }
 import { Progreso, type ProgresoCurso } from './progreso';
 import { Comunidad, type Hilo, type Respuesta } from './comunidad';
 import { Certificados, type CertificadoRemoto } from './certificados';
+import { RetosRemotos } from './retos-remotos';
+import { Recompensas } from './recompensas';
 
 interface CatalogoRemoto {
   cursos?: unknown[];
@@ -80,6 +82,8 @@ async function cargarExtrasDeRuta(path: string) {
     cargarQuizDeRuta(path),
     cargarComunidadDeRuta(path),
     path.startsWith('/certificados') ? api<CertificadoRemoto[]>('/certificados').then((lista) => Certificados.hidratar(lista)) : Promise.resolve(),
+    path === '/retos' ? RetosRemotos.cargar() : Promise.resolve(),
+    path === '/recompensas' || path === '/logros' || path.startsWith('/materiales') ? Recompensas.cargar().catch(() => null) : Promise.resolve(),
   ]);
 }
 
@@ -89,6 +93,9 @@ export async function cargarClub(path = '/', forzar = false) {
   if (pendiente) { await pendiente; return cargarExtrasDeRuta(path); }
 
   pendiente = (async () => {
+    // La sincronización conserva actividad histórica y debe terminar antes de
+    // pedir el catálogo para reflejar desbloqueos previos por puntos.
+    await Recompensas.cargar().catch(() => null);
     const [catalogo, progreso] = await Promise.all([
       api<CatalogoRemoto>('/catalogo'),
       api<Record<string, ProgresoCurso>>('/progreso').catch(() => null),
@@ -123,4 +130,6 @@ export function invalidarClub() {
   cargado = false;
   quizzesCargados.clear();
   Datos.invalidarAdmin('cursos', 'materiales', 'eventos', 'config');
+  RetosRemotos.limpiar();
+  Recompensas.limpiar();
 }

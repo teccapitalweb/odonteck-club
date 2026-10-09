@@ -10,11 +10,11 @@ export function paginaLogros() {
   const sigNivel = p < 100 ? 100 : p < 400 ? 400 : p < 1000 ? 1000 : 2000;
   return `
   <section class="stack" style="gap:20px">
-    <div class="section-head"><div><span class="chip chip--primary">Logros</span><h1 class="display" style="font-size:var(--fs-2xl)">Tu camino en <em>OdonTeck</em></h1></div></div>
+    <div class="section-head"><div><span class="chip chip--primary">Logros</span><h1 class="display" style="font-size:var(--fs-2xl)">Tu camino en <em>OdonTeck</em></h1></div><a class="btn btn--secondary" href="#/recompensas"><i data-lucide="gift" class="i"></i>Ver recompensas</a></div>
     <div class="hero" style="min-height:0;grid-template-columns:1fr">
       <div class="hero__body" style="padding:32px 40px;gap:14px">
         <div class="row" style="justify-content:space-between;align-items:flex-start">
-          <div><span class="hero__kicker"><i data-lucide="crown" class="i" style="width:14px;height:14px"></i>Nivel ${nivel}</span><h2 class="display display--black" style="font-size:var(--fs-2xl);margin-top:12px">${p.toLocaleString('es-MX')} puntos</h2><p style="opacity:.8">${sigNivel - p} puntos para el siguiente nivel · 10 por clase, 50 por curso, 5 por tema en comunidad</p></div>
+          <div><span class="hero__kicker"><i data-lucide="crown" class="i" style="width:14px;height:14px"></i>Nivel ${nivel}</span><h2 class="display display--black" style="font-size:var(--fs-2xl);margin-top:12px">${p.toLocaleString('es-MX')} puntos disponibles</h2><p style="opacity:.8">${Math.max(0, sigNivel - p)} puntos para el siguiente nivel · tus logros se validan con la actividad guardada</p></div>
           <div class="ring" style="--p:${Math.round((ok / L.length) * 100)};--size:84px;--accent:#7bd0c0" data-label="${ok}/${L.length}"></div>
         </div>
         <div class="progress" style="background:rgba(255,255,255,.18)"><span style="width:${Math.min(100, Math.round((p / sigNivel) * 100))}%"></span></div>

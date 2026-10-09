@@ -3,6 +3,8 @@ import { Perfil } from '../core/perfil';
 import { Auth } from '../core/auth';
 import { Datos } from '../core/datos';
 import { Acceso } from '../core/acceso';
+import { Progreso } from '../core/progreso';
+import { puntos } from '../core/logros';
 import { avatarUsuario, esc } from './partials';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
@@ -14,6 +16,7 @@ export const NAV = [
   { group: 'Herramientas' },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
   { group: 'Tu progreso' },
+  { href: '#/recompensas', icon: 'gift', label: 'Recompensas', match: /^\/recompensas/ },
   { href: '#/logros', icon: 'flame', label: 'Logros', match: /^\/logros/ },
   { href: '#/certificados', icon: 'award', label: 'Certificados', match: /^\/certificados/ },
 ] as const;
@@ -21,6 +24,10 @@ export const NAV = [
 export function shellHTML() {
   const foto = Auth.usuario?.foto;
   const avatar = (clases = 'avatar') => avatarUsuario(foto, Perfil.iniciales(), clases);
+  const perfil = Perfil.get();
+  const saldo = puntos();
+  const clasesVistas = Progreso.totalVistas();
+  const cursosCompletados = Progreso.completados().length;
   const items = NAV.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`
@@ -54,9 +61,38 @@ export function shellHTML() {
           <button class="btn btn--ghost btn--icon" data-guia aria-label="Guía de la plataforma"><i data-lucide="help-circle" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <div class="notifs"><button class="btn btn--ghost btn--icon" aria-label="Notificaciones" data-notifs><i data-lucide="bell" class="i"></i><span class="badge notifs__badge" data-notifs-badge hidden></span></button><div class="notifs__panel" data-notifs-panel hidden></div></div>
-          <a class="topbar__avatar" href="#/perfil" aria-label="Mi perfil">${avatar()}</a>
+          <button class="topbar__avatar" type="button" aria-label="Abrir resumen de mi cuenta" aria-controls="account-quick-panel" aria-expanded="false" data-account-toggle>${avatar()}</button>
         </div>
       </header>
+      <div class="account-quick__scrim" data-account-scrim hidden></div>
+      <aside class="account-quick" id="account-quick-panel" aria-label="Resumen de mi cuenta" data-account-drawer hidden>
+        <div class="account-quick__hero">
+          <div class="account-quick__top"><span><i data-lucide="sparkles" class="i"></i>Tu espacio OdonTeck</span><button type="button" data-account-close aria-label="Cerrar resumen"><i data-lucide="x" class="i"></i></button></div>
+          <div class="account-quick__identity">
+            <div class="account-quick__avatar-wrap">${avatar('avatar account-quick__avatar')}<span class="account-quick__status"><i data-lucide="check" class="i"></i></span></div>
+            <div><strong>${esc(perfil.nombre)}</strong><small>${esc(Auth.usuario?.email || 'Cuenta de demostración')}</small><span class="account-quick__plan"><i data-lucide="${Acceso.vip() ? 'crown' : 'user-round'}" class="i"></i>${esc(Perfil.planNombre())}</span></div>
+          </div>
+        </div>
+        <div class="account-quick__body">
+          <div class="account-quick__stats" aria-label="Actividad">
+            <div><strong data-account-points>${saldo}</strong><span>Puntos</span></div>
+            <div><strong data-account-views>${clasesVistas}</strong><span>Clases</span></div>
+            <div><strong data-account-courses>${cursosCompletados}</strong><span>Cursos</span></div>
+          </div>
+          <a class="account-quick__reward" href="#/recompensas">
+            <span class="account-quick__reward-icon"><i data-lucide="gift" class="i"></i></span>
+            <div><span>Saldo para recompensas</span><strong><b data-account-points>${saldo}</b> puntos disponibles</strong><small>Canjéalos por libros y beneficios.</small></div>
+            <i data-lucide="chevron-right" class="i"></i>
+          </a>
+          <nav class="account-quick__links" aria-label="Accesos de cuenta">
+            <a href="#/perfil"><span><i data-lucide="contact" class="i"></i></span><div><strong>Mi perfil</strong><small>Datos profesionales</small></div><i data-lucide="arrow-up-right" class="i"></i></a>
+            <a href="#/logros"><span><i data-lucide="badge-check" class="i"></i></span><div><strong>Mis logros</strong><small>Avances y medallas</small></div><i data-lucide="arrow-up-right" class="i"></i></a>
+            <a href="#/suscripcion"><span><i data-lucide="crown" class="i"></i></span><div><strong>Membresía</strong><small>Plan y beneficios</small></div><i data-lucide="arrow-up-right" class="i"></i></a>
+            <a href="#/configuracion"><span><i data-lucide="settings-2" class="i"></i></span><div><strong>Configuración</strong><small>Avisos y apariencia</small></div><i data-lucide="arrow-up-right" class="i"></i></a>
+          </nav>
+          <div class="account-quick__tip"><i data-lucide="lightbulb" class="i"></i><p><strong>Tu siguiente avance empieza aquí.</strong><span>Cada clase, reto y encuesta puede sumar a tu progreso.</span></p></div>
+        </div>
+      </aside>
       <main class="content" id="outlet" style="display:grid;gap:56px;align-content:start"></main>
     </div>
   </div>

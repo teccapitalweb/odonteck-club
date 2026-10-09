@@ -61,22 +61,18 @@ export function inicio() {
     const n = Progreso.siguiente(reciente);
     const clase = reciente.clases.find((k) => k.n === n)!;
     hero = `
-      <span class="hero__kicker"><i data-lucide="sparkles" class="i" style="width:14px;height:14px"></i>${saludo()}, ${esc(Perfil.tratamiento())}</span>
-      <h1 class="display display--black hero__title">Continúa donde <em>te quedaste.</em></h1>
-      <p class="hero__lead">${esc(reciente.titulo)} · clase ${n} de ${reciente.clases.length} · ${esc(clase.titulo)}</p>
-      <div class="hero__actions">
-        <a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${reciente.id}/clase/${n}">Reanudar clase <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></a>
-        <a class="btn btn--lg" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)" href="#/cursos">Ver mis cursos</a>
+      <div class="home-resume__copy">
+        <span class="home-resume__kicker"><i data-lucide="sparkles" class="i"></i>${saludo()}, ${esc(Perfil.tratamiento())}</span>
+        <div><span class="eyebrow">Continúa aprendiendo</span><h1>${esc(reciente.titulo)}</h1><p>Clase ${n} de ${reciente.clases.length} · ${esc(clase.titulo)}</p></div>
+        <div class="home-resume__actions"><a class="btn btn--white btn--pill-arrow" href="#/curso/${reciente.id}/clase/${n}">Reanudar clase <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a href="#/cursos">Ver mis cursos <i data-lucide="arrow-right" class="i"></i></a></div>
       </div>`;
   } else {
     const primero = cursos[0];
     hero = `
-      <span class="hero__kicker"><i data-lucide="sparkles" class="i" style="width:14px;height:14px"></i>${saludo()}, ${esc(Perfil.tratamiento())} · bienvenida al club</span>
-      <h1 class="display display--black hero__title">Empieza tu <em>primer curso gratis.</em></h1>
-      <p class="hero__lead">${cursos.length} cursos grabados con casos reales de consultorio. Te sugerimos empezar por ${esc(primero.titulo)}.</p>
-      <div class="hero__actions">
-        <a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${primero.id}">Empezar curso gratis <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></a>
-        <a class="btn btn--lg" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)" href="#/cursos">Explorar el catálogo</a>
+      <div class="home-resume__copy">
+        <span class="home-resume__kicker"><i data-lucide="sparkles" class="i"></i>${saludo()}, ${esc(Perfil.tratamiento())}</span>
+        <div><span class="eyebrow">Tu primer paso</span><h1>${esc(primero.titulo)}</h1><p>${cursos.length} cursos grabados con casos reales de consultorio.</p></div>
+        <div class="home-resume__actions"><a class="btn btn--white btn--pill-arrow" href="#/curso/${primero.id}">Empezar gratis <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a href="#/cursos">Explorar catálogo <i data-lucide="arrow-right" class="i"></i></a></div>
       </div>`;
   }
 
@@ -90,23 +86,15 @@ export function inicio() {
   const tituloRecs = porIntereses.length ? `Según tus intereses: <em>${esc(etiquetaIntereses(intereses).toLowerCase())}</em>` : reciente ? `Sigue con <em>${esc(reciente.area.toLowerCase())}</em> y más` : 'Empieza por <em>aquí</em>';
 
   return `
-  <section class="stack" style="gap:20px">
-    <div class="hero">
-      <div class="hero__bg"><img src="/fotos/hero.webp" alt=""></div>
-      <div class="hero__body">${hero}
-        <div class="hero__stats">
-          <div><strong>${general}%</strong><span>progreso general</span></div>
-          <div><strong>${enMarcha.length}</strong><span>cursos en marcha</span></div>
-          <div><strong>${completados.length}</strong><span>completados</span></div>
-          <div><strong>${vistas}</strong><span>clases vistas</span></div>
-        </div>
-      </div>
-      <div class="hero__visual">
-        <img class="tooth" src="/fotos/tooth-3d.png" alt="">
-        ${(()=>{const ev=proximoEvento();return `<div class="glass glass--pin" style="top:44px;right:40px;--pin:40px"><span class="ic"><i data-lucide="radio" class="i"></i></span><div>${ev?new Date(ev.fecha).toLocaleDateString('es-MX',{weekday:'long',hour:'2-digit',minute:'2-digit'}):'En vivo'}<strong>${ev?esc(ev.titulo):'Próximas clases en el canal'}</strong></div></div>`})()}
-        <div class="glass glass--pin" style="top:120px;left:36px;--pin:56px"><span class="ic"><i data-lucide="award" class="i"></i></span><div>Al terminar<strong>Certificado con folio</strong></div></div>
-        <div class="glass" style="position:absolute;bottom:44px;left:36px"><span class="ic"><i data-lucide="brain" class="i"></i></span><div>Quiz por clase<strong>Refuerza lo aprendido</strong></div></div>
-      </div>
+  <section class="home-top stack" style="gap:20px">
+    <div class="home-resume">
+      <div class="home-resume__texture" aria-hidden="true"></div>
+      ${hero}
+      <aside class="home-resume__summary">
+        <div class="home-resume__progress"><span>Progreso general</span><strong>${general}%</strong><div><i style="width:${general}%"></i></div></div>
+        <div class="home-resume__metrics"><span><strong>${enMarcha.length}</strong>en marcha</span><span><strong>${completados.length}</strong>completados</span><span><strong>${vistas}</strong>clases vistas</span></div>
+        <div class="home-resume__links"><a href="#/comunidad?tab=en-vivo"><i data-lucide="radio" class="i"></i><span>Clases en vivo<small>${proximoEvento() ? 'Próxima sesión disponible' : 'Consulta el calendario'}</small></span><i data-lucide="chevron-right" class="i"></i></a><a href="#/certificados"><i data-lucide="award" class="i"></i><span>Certificados<small>Consulta tus folios</small></span><i data-lucide="chevron-right" class="i"></i></a></div>
+      </aside>
     </div>
     ${widgets()}
   </section>

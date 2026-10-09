@@ -23,7 +23,7 @@ export const Acceso = {
 
   // Materiales: el recurso gratuito se declara explícitamente en el catálogo.
   materialLibre(m: Material): boolean { return m.gratis === true; },
-  materialAccesible(m: Material) { return this.vip() || this.materialLibre(m); },
+  materialAccesible(m: Material) { return this.vip() || this.materialLibre(m) || m.desbloqueadoConPuntos === true; },
 
   // Comunidad: ver es gratis, interactuar es VIP
   puedeComunidad(): boolean { return this.vip(); },

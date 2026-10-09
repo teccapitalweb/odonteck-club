@@ -20,6 +20,10 @@ export const COL = Object.freeze({
   config: 'v2_config',
   encuestasEstado: 'v2_encuestas_estado',
   encuestasRespuestas: 'v2_encuestas_respuestas',
+  retosEstado: 'v2_retos_estados',
+  recompensasEstado: 'v2_recompensas_estado',
+  recompensasMovimientos: 'v2_recompensas_movimientos',
+  recompensasCanjes: 'v2_recompensas_canjes',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

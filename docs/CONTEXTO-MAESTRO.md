@@ -2,12 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 8 de octubre de 2026 (Retos habilitado en modo API y navegación de producción)
+- **Actualizado:** 8 de octubre de 2026 (Recompensas + Retos V2 + Comunidad social local; pendiente desplegar API/web)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
 - **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
-- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 107 pruebas (106 exitosas, 0 fallos y 1 omitida por requerir emuladores). La guía pasa 59 comprobaciones (6 de datos, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 114 pruebas (113 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, canje de material, descarga gratuita tras el canje, rechazo del segundo canje y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 59 comprobaciones (6 de datos, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -38,7 +38,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Inicio, catálogo, ficha de curso y reproductor de clase.
 - Biblioteca de materiales y libros.
 - Sesiones en vivo y reservas.
-- Comunidad con temas, respuestas y reacciones.
+- Comunidad tipo red social clínica: feed visual, historias por especialidad, publicación, útil, respuestas, compartir, explorar y actividad; en producción sólo muestra datos reales del foro.
 - Retos con Quiz Relámpago, flashcards (3 niveles de calificación, undo, atajos de teclado, stats de sesión), repetición espaciada, casos clínicos y liga/clasificación del club.
 - Búsqueda global (`#/buscar?q=...`) que busca cursos, clases y materiales.
 - Verificación pública de certificados (`#/verificar/:folio`) sin requerir autenticación.
@@ -70,7 +70,13 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 
 La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Las brechas principales quedan en la liga real, los materiales autorizados/Storage y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
 
-Desde el 8 de octubre de 2026, `#/retos` también está habilitado en modo API y aparece en la navegación de producción. Quiz Relámpago, flashcards, casos y la interfaz de liga quedan disponibles; mientras no exista el endpoint real de clasificación, `src/core/liga.ts` conserva su respaldo local sin convertirlo en evidencia de ranking real.
+Desde el 8 de octubre de 2026, `#/retos` también está habilitado en modo API y aparece en la navegación de producción. La evolución local Retos V2 añade `/retos/resumen`, `/retos/sesion` y `/retos/responder`: arma sesiones únicamente con quizzes aprobados y clases accesibles, no expone soluciones antes de responder y guarda XP, constancia y dominio por área en `v2_retos_estados`. El nuevo hub prioriza una sesión recomendada y un mapa clínico en vez de puntos decorativos. Esta evolución todavía no está desplegada. Flashcards y casos conservan por ahora su motor local y forman la siguiente etapa de sincronización.
+
+También existe localmente `#/recompensas`, una economía central validada por la API. Clases, cursos, evaluaciones aprobadas, primer intento diario de Retos, encuestas, aportes de Comunidad y checkout confirmado generan movimientos idempotentes en `v2_recompensas_movimientos`; saldo, logros, desbloqueos y avisos personales viven en `v2_recompensas_estado`, y los canjes en `v2_recompensas_canjes`. La sincronización inicial conserva la actividad histórica de usuarios anteriores. Los materiales propios se desbloquean de forma permanente; el beneficio de 30 días de Praxia crea una solicitud `pendiente` y no se presenta como activación automática. Este sistema está implementado y probado localmente, pero todavía no está desplegado ni validado contra Firestore/Stripe reales.
+
+La liga de producción ya no debe recurrir a odontólogos ficticios: mientras no exista un endpoint real, consentimiento y reglas de privacidad, el hub la presenta como próxima función. Los datos demo siguen disponibles exclusivamente cuando no existe `VITE_API_URL`.
+
+La evolución local de Comunidad conserva el contrato actual del foro (`/foro`, respuestas y `util`) y transforma su presentación en un feed visual. Las publicaciones ligadas a un curso reutilizan su portada; esto permite una experiencia editorial sin depender todavía de Firebase Storage. La carga libre de fotos o video por miembros queda pendiente hasta que Storage esté habilitado y exista moderación específica para archivos. Las tres publicaciones editoriales de muestra existen sólo en modo demo; nunca se hidratan en modo API.
 
 En modo API el frontend utiliza:
 
@@ -123,6 +129,7 @@ Rutas de miembro:
 #/                         #/cursos
 #/curso/:id               #/curso/:id/clase/:n
 #/materiales              #/materiales/:id
+#/recompensas
 #/en-vivo                 #/comunidad
 #/comunidad/:id           #/retos
 #/logros                   #/certificados
