@@ -222,12 +222,32 @@ a.lesson:hover { text-decoration: none; }
 .account-quick__links > a strong { font-size: 11px; }
 .account-quick__links > a small { margin-top: 2px; overflow: hidden; color: var(--text-3); font-size: 8px; text-overflow: ellipsis; }
 .account-quick__links > a > .i { display: none; }
-.account-quick__tip { display: flex; gap: 9px; margin-top: auto; padding: 11px 12px; border-radius: 14px; background: color-mix(in srgb,var(--brand-navy) 5%,var(--surface)); }
+.account-quick__tip { display: flex; gap: 9px; padding: 11px 12px; border-radius: 14px; background: color-mix(in srgb,var(--brand-navy) 5%,var(--surface)); }
 .account-quick__tip > .i { width: 16px; height: 16px; flex-shrink: 0; color: var(--warning); }
 .account-quick__tip p strong,
 .account-quick__tip p span { display: block; }
 .account-quick__tip p strong { font-size: 10px; }
 .account-quick__tip p span { margin-top: 2px; color: var(--text-3); font-size: 9px; line-height: 1.35; }
+.account-quick__logout {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: auto;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--danger) 25%, var(--line));
+  background: color-mix(in srgb, var(--danger) 6%, var(--surface));
+  color: var(--danger);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.account-quick__logout:hover {
+  background: color-mix(in srgb, var(--danger) 14%, var(--surface));
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--line));
+}
+.account-quick__logout:active { transform: scale(.98); }
+.account-quick__logout .i { width: 16px; height: 16px; }
 
 @media (max-width: 640px) {
   .account-quick { width: min(410px, 100vw); }
