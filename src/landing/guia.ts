@@ -375,7 +375,13 @@ export function montarGuia(fuente: Fuente) {
   setTimeout(() => {
     try {
       const claveSaludo = `${clave}:saludo`;
-      if (!sessionStorage.getItem(claveSaludo) && scrollY < 20 && !abierto) { saludo.hidden = false; sessionStorage.setItem(claveSaludo, '1'); }
+      if (!sessionStorage.getItem(claveSaludo) && scrollY < 20 && !abierto) {
+        saludo.hidden = false;
+        sessionStorage.setItem(claveSaludo, '1');
+        // Auto-dismiss: en móvil el saludo puede competir con el CTA del hero;
+        // se oculta solo a los 7 segundos si el usuario no interactuó.
+        setTimeout(() => { if (!saludo.hidden) saludo.hidden = true; }, 7000);
+      }
     } catch { /* El acceso principal sigue visible. */ }
   }, 1500);
   pintar();
