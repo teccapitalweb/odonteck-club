@@ -105,8 +105,11 @@ Saldo central y logros del miembro, escrito únicamente por la API:
 
 - Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
 - Las clases suman 10, terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
+- Desglose vigente: clase vista 10; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
 - La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
 - Los nueve materiales propios premium incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
+- Cuando una respuesta autenticada incluye `recompensas`, `src/main.ts` dispara el evento `recompensas:ganadas`: muestra un aviso inmediato de puntos y otro por cada logro nuevo. La API guarda además los avisos no leídos en `notificaciones`; la campana los contabiliza y los marca como leídos al abrirla. La clave idempotente del movimiento evita avisos y puntos duplicados por recarga o reintento.
+- Logros vigentes: primer paso (1 clase), en marcha (5 clases), primer certificado (1 curso), mente clínica (3 quizzes), retador constante (100 puntos de Retos), voz de comunidad (primer tema), especialista (3 cursos), maestro (10 cursos) y miembro del club (membresía pagada).
 
 ### `v2_recompensas_movimientos/{hash}`
 Libro mayor inmutable: `{ uid, clave, tipo, puntos, detalle, fecha }`. El ID es un hash de `uid + clave` para garantizar idempotencia.

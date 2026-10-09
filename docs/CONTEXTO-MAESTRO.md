@@ -2,11 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 9 de octubre de 2026 (Alexia Concierge v3 desplegada + Recompensas + Retos V2 + Comunidad social)
+- **Actualizado:** 9 de octubre de 2026 (corte funcional `225ded8`: lector privado + Recompensas + Retos V2 + Comunidad + Alexia)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
-- **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
+- **Commit funcional auditado:** `225ded8` (`main`). El commit de este documento puede ser posterior sin cambiar el runtime.
+- **Web pública:** `https://www.odonteckconsulting.com/` mediante Cloudflare Pages (`odonteck-club`).
+- **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
 - **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 115 pruebas (114 exitosas, 0 fallos y 1 omitida por requerir emuladores); `npm audit` reporta 0 vulnerabilidades. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
@@ -18,6 +19,7 @@ docs/prompts-hero-carrusel.md
 docs/prompts-hero-expand.md
 docs/prompts-portadas-libros.md
 public/libros/
+public/fotos/inicio-aurora-odontologia-v1.png
 ```
 
 Son trabajo previo del usuario. Deben conservarse intactos hasta revisarlos y decidir explícitamente si se versionan.
@@ -70,13 +72,13 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 
 La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Los diez materiales propios aprobados ahora se incluyen en el despliegue privado de la API y se entregan mediante enlaces temporales después de validar acceso; Firebase Storage queda para cargas futuras del panel. Las brechas principales quedan en la liga real y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
 
-Desde el 8 de octubre de 2026, `#/retos` también está habilitado en modo API y aparece en la navegación de producción. La evolución local Retos V2 añade `/retos/resumen`, `/retos/sesion` y `/retos/responder`: arma sesiones únicamente con quizzes aprobados y clases accesibles, no expone soluciones antes de responder y guarda XP, constancia y dominio por área en `v2_retos_estados`. El nuevo hub prioriza una sesión recomendada y un mapa clínico en vez de puntos decorativos. Esta evolución todavía no está desplegada. Flashcards y casos conservan por ahora su motor local y forman la siguiente etapa de sincronización.
+Desde el 8 de octubre de 2026, `#/retos` está habilitado en modo API y aparece en la navegación de producción. Retos V2 usa `/retos/resumen`, `/retos/sesion` y `/retos/responder`: arma sesiones únicamente con quizzes aprobados y clases accesibles, no expone soluciones antes de responder y guarda XP, constancia y dominio por área en `v2_retos_estados`. El hub prioriza una sesión recomendada y un mapa clínico en vez de puntos decorativos. Este flujo ya forma parte del corte publicado `225ded8`. Flashcards y casos conservan por ahora su motor local y forman la siguiente etapa de sincronización.
 
 También existe `#/recompensas`, una economía central validada por la API. Clases, cursos, evaluaciones aprobadas, primer intento diario de Retos, encuestas, aportes de Comunidad y checkout confirmado generan movimientos idempotentes en `v2_recompensas_movimientos`; saldo, logros, desbloqueos y avisos personales viven en `v2_recompensas_estado`, y los canjes en `v2_recompensas_canjes`. La sincronización inicial conserva la actividad histórica de usuarios anteriores. Los nueve materiales premium propios se desbloquean de forma permanente por 250 a 600 puntos o vienen incluidos para VIP; Atlas ICDAS es gratuito. El beneficio de 30 días de Praxia crea una solicitud `pendiente` y no se presenta como activación automática.
 
 La liga de producción ya no debe recurrir a odontólogos ficticios: mientras no exista un endpoint real, consentimiento y reglas de privacidad, el hub la presenta como próxima función. Los datos demo siguen disponibles exclusivamente cuando no existe `VITE_API_URL`.
 
-La evolución local de Comunidad conserva el contrato actual del foro (`/foro`, respuestas y `util`) y transforma su presentación en un feed visual. Las publicaciones ligadas a un curso reutilizan su portada; esto permite una experiencia editorial sin depender todavía de Firebase Storage. La carga libre de fotos o video por miembros queda pendiente hasta que Storage esté habilitado y exista moderación específica para archivos. Las tres publicaciones editoriales de muestra existen sólo en modo demo; nunca se hidratan en modo API.
+La Comunidad publicada conserva el contrato del foro (`/foro`, respuestas y `util`) y lo presenta como feed visual. Las publicaciones ligadas a un curso reutilizan su portada; esto permite una experiencia editorial sin depender todavía de Firebase Storage. La carga libre de fotos o video por miembros queda pendiente hasta que Storage esté habilitado y exista moderación específica para archivos. Las tres publicaciones editoriales de muestra existen sólo en modo demo; nunca se hidratan en modo API.
 
 En modo API el frontend utiliza:
 
@@ -183,7 +185,13 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - `npm run smoke:legacy` pasó contra la API v2 pública: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
 - Producción tenía 0 documentos en `v2_materiales` y 0 en `v2_eventos` durante la auditoría. El catálogo de materiales propios ya no depende de esos documentos: la API los anuncia sólo cuando detecta el PDF empaquetado. El panel anterior continúa disponible para beneficios heredados aún no migrados.
 
-### Corte público y continuidad verificada (5 de octubre de 2026)
+### Corte público y continuidad verificada (9 de octubre de 2026)
+
+- **Corte vigente comprobado:** commit funcional `225ded8`; Cloudflare Pages `8e404a77-4afa-4cce-9a09-700d21cb9c6f` (`https://8e404a77.odonteck-club.pages.dev`); Railway `6c9283b5-0d0d-4c6f-9578-85cded5e1b87` en `SUCCESS`. El dominio oficial respondió 200 con `club-0TrxDrVt.js` y `club-DiBoZodq.css`; `/health` del API respondió 200. Estos identificadores describen el runtime funcional anterior a cualquier commit exclusivamente documental.
+- En ese corte están publicados el lector privado, la economía de puntos, notificaciones de logros, Retos V2, Comunidad visual, encuestas/bienvenida y Alexia. El visor fue comprobado a una página en móvil y dos en escritorio, con navegación, zoom, salto, memoria y bloqueo correcto de un material de 250 puntos.
+- El artefacto web de producción contiene 0 PDF y 0 directorios `libros`; sólo incluye el worker de PDF.js. El documento se obtiene después de validar acceso en `/materiales/:id/descarga`, se descarga a memoria y se dibuja en `canvas`.
+
+Historial reciente útil para rollback y auditoría:
 
 - El 9 de octubre de 2026 se desplegó el sistema de materiales privados y recompensas del commit `b65cc46`: Railway quedó en `SUCCESS` con el despliegue `650dfed2-1df9-4e2e-b6d5-c794f1544eac` y Cloudflare Pages publicó `ed1e63e7`. El dominio oficial respondió 200 con `club-DbQiTgQ8.js`; el smoke autenticado confirmó VIP heredado, 18 cursos, 10 materiales y checkout nuevo bloqueado mientras falta el webhook. Los diez PDF propios se sirven desde la API mediante enlaces HMAC de 10 minutos; Atlas ICDAS es gratuito y los nueve premium se incluyen con VIP o se canjean permanentemente por puntos.
 
@@ -191,17 +199,17 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 
 - El dominio público `https://www.odonteckconsulting.com/` ya sirve la nueva experiencia desde el repositorio público `https://github.com/teccapitalweb/Odonteck`. El estado anterior quedó marcado con el tag recuperable `pre-club-relaunch-2026-10-05`.
 - Se conservaron las rutas heredadas `vip-auth.html`, `vip-panel.html` y las páginas legales. El alta o pago nuevo que todavía depende del sistema anterior se redirige a `vip-auth.html?tab=register`.
-- La API pública continúa en `https://api-production-db314.up.railway.app`. El despliegue activo verificado es `d62369e5-994b-4947-a01c-90efb2728dd4` (`SUCCESS`, no detenido). El despliegue fallido `030439d4...` es sólo historial y no reemplazó al activo.
+- La API pública continúa en `https://api-production-db314.up.railway.app`. El despliegue activo verificado es `6c9283b5-0d0d-4c6f-9578-85cded5e1b87` (`SUCCESS`). Los despliegues anteriores de esta sección son historial y no describen el runtime actual.
 - Como `STRIPE_WEBHOOK_SECRET` no está configurado en v2, `/stripe/checkout` responde `503 no_configurado` antes de crear una sesión. El smoke real confirmó membresía heredada VIP, plan presente, 18 cursos y bloqueo del checkout nuevo.
 - Auditoría agregada de Stripe y membresías: 94 usuarios Auth, 107 documentos de miembros, 14 documentos actuales y 99 suscripciones revisadas; 20 se identificaron como OdonTeck, 10 están `active`, `trialing` o `past_due` y 9 tienen historial de pago positivo. Una suscripción anual activa quedó en $0 por descuento total y tiene cancelación programada; una `past_due` con factura abierta permanece inactiva en Firestore y no recibe VIP.
 - Hay 3 suscripciones activas sin cuenta Auth resoluble; sus documentos conservan el mismo correo y el sistema las reconocerá al registrarse con ese correo verificado. No se exponen aquí correos, UID ni datos personales.
 - La cuenta muestra ahora la foto de Google en barra lateral, barra superior y perfil. Sólo se acepta una URL HTTPS y siempre se conservan las iniciales como respaldo si la imagen no carga. La tarjeta lateral ganó altura, separación, sombra y un plan legible en dos líneas para evitar el aspecto aplanado.
-- El corte final corresponde a `f247983` en el repositorio fuente y `95364af` en el público. El bundle público respondió 200 y contiene la foto de Google, el fallback seguro y el relieve de la tarjeta.
+- La foto de Google, el fallback seguro y el relieve de la tarjeta permanecen incluidos en el corte funcional `225ded8`.
 - Las auditorías fueron de lectura: no se crearon cargos, no se cancelaron suscripciones y no se modificaron clientes ni registros de miembros.
 
 ### Modos
 
-- Con `VITE_API_URL`: Firebase Auth y algunas operaciones reales.
+- Con `VITE_API_URL`: Firebase Auth y la experiencia real de miembro consumen la API; el panel admin también está cableado a `/admin/*`, pendiente de smoke con un claim admin real.
 - Sin `VITE_API_URL`: demo completo con `localStorage`.
 
 Al momento de esta auditoría no hay `.env` ni `.env.production` local en la raíz. Por tanto, `npm run dev` arranca en modo demo. No agregar una URL de API sin verificar primero el servicio Railway correcto, CORS y el dominio final.
@@ -332,16 +340,17 @@ El contenido odontológico puede afectar decisiones clínicas. Ningún quiz, pro
 
 ## 11. Estado de calidad comprobado
 
-Ejecutado el 30 de septiembre de 2026:
+Última verificación integral: 9 de octubre de 2026.
 
 ```text
-tsc --noEmit        PASS (0 errores)
-npm run build       PASS
-api/npm run check   PASS
-api/npm test        PASS: 92 pruebas totales, 91 aprobadas, 0 fallos, 1 omitida
+frontend build de producción con VITE_API_URL  PASS
+api/npm run check                               PASS
+api/npm test                                    PASS: 115 totales, 114 aprobadas, 0 fallos, 1 omitida
+npm audit                                       PASS: 0 vulnerabilidades
+dist                                            PASS: 0 PDF, 0 directorios libros
 ```
 
-También se recorrieron en navegador aislado todas las rutas de miembro y administración, junto con altas/ediciones demo de curso, material, evento, cortesía, aviso, configuración, moderación, quiz, perfil, reserva y comunidad. En viewport móvil de 390 x 844 no se detectó desbordamiento horizontal en las rutas representativas. Manifest, service worker, iconos PWA y entradas HTTP locales respondieron correctamente. Sigue pendiente asociar programáticamente varios `label` de formularios admin con sus controles.
+El visor se recorrió con un PDF real en móvil (una página) y escritorio (dos páginas), incluyendo anterior/siguiente, zoom, salto a página 7, reanudación de lectura y bloqueo de un material de 250 puntos; no hubo errores de consola ni desbordamiento del documento. También se recorrieron `#/recompensas`, Retos V2, Comunidad, bienvenida e intereses en escritorio y móvil. Sigue pendiente asociar programáticamente varios `label` de formularios admin con sus controles y realizar el smoke admin autenticado en producción.
 
 La API desplegada respondió `200 {"ok":true}` en `/health`, el preflight CORS del dominio oficial devolvió `204` y `/me` y `/admin/resumen` devolvieron `401` sin token. Esta comprobación es solo del perímetro público; no sustituye el smoke autenticado con una cuenta que tenga el claim `admin: true`.
 
@@ -367,24 +376,24 @@ Advertencias del build:
 4. ~~Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.~~ Resuelto en modo API; demo conserva datos locales deliberadamente.
 5. ~~Agregar verificación pública de certificados en frontend.~~ Resuelto con `#/verificar/:folio` (página pública sin auth).
 6. Completar el entorno v2 paralelo: API y frontend publicados; los materiales propios aprobados se empaquetan de forma privada en la API. Faltan configurar el webhook Stripe nuevo y ejecutar el smoke del admin conectado antes del corte.
-7. ~~Liga y clasificación del club.~~ Resuelto: podio, ranking, mini-card en hub de retos; datos demo, pendiente endpoint API.
+7. ~~Liga y clasificación del club.~~ Resuelto visualmente: podio, ranking y mini-card; en producción permanece como próxima función hasta contar con endpoint, consentimiento y privacidad.
 8. ~~Búsqueda global.~~ Resuelto: `#/buscar?q=...` busca cursos, clases y materiales.
 9. ~~Motor de flashcards mejorado.~~ Resuelto: 3 niveles, undo, atajos, stats, bug de intervalos corregido.
-7. Ejecutar pruebas de reglas con emuladores.
-8. Auditar libros locales por licencias y distribución.
-9. Revisar accesibilidad, móvil, estados de carga/error y funcionamiento PWA.
-10. ~~Mejorar compatibilidad futura de Vite.~~ `vite.config.ts` ya usa `import.meta.dirname`; sigue pendiente dividir el chunk de datos.
+10. Ejecutar pruebas de reglas con emuladores.
+11. Auditar libros locales por licencias y distribución.
+12. Revisar accesibilidad, móvil, estados de carga/error y funcionamiento PWA.
+13. ~~Mejorar compatibilidad futura de Vite.~~ `vite.config.ts` ya usa `import.meta.dirname`; sigue pendiente dividir el chunk de datos.
 
 ## 13. Orden recomendado para Claude
 
-1. Leer este documento y `docs/contrato.md`.
+1. Leer `docs/RELEVO-CLAUDE.md`, este documento y `docs/contrato.md`.
 2. Revisar `git status` y preservar los archivos sin seguimiento.
-3. Levantar el demo en el puerto 5173 y recorrer miembro y admin.
-4. No implementar inmediatamente: primero presentar al usuario la contradicción freemium y confirmar la regla definitiva.
-5. Verificar el panel admin conectado con una cuenta que tenga el claim `admin: true`: resumen, CRUD, quiz, cortesía, moderación, aviso, config y upload firmado.
-6. Conservar el modo demo separado; no usarlo como evidencia de la integración real.
-7. En cada bloque ejecutar build, pruebas API y revisión en móvil.
-8. Actualizar este documento cuando cambie el estado de integración.
+3. Confirmar repositorio `teccapitalweb/odonteck-club`, rama `main`; no trabajar en copias históricas ni en el ZIP de Descargas.
+4. Usar el demo local sólo para revisión visual. Para afirmar algo sobre producción, compilar con `VITE_API_URL` y comprobar el API/despliegue correspondiente.
+5. Prioridad técnica: smoke del panel admin con un claim `admin: true` (resumen, CRUD, quiz, cortesía, moderación, aviso, config y upload firmado).
+6. No habilitar checkout v2 hasta configurar y probar `STRIPE_WEBHOOK_SECRET`; conservar los pagos y beneficios heredados.
+7. Después: pruebas de reglas en emuladores, endpoint/privacidad de liga y auditoría de licencias de futuros materiales.
+8. En cada bloque ejecutar build, pruebas API y revisión en móvil; actualizar ambos documentos de relevo si cambia el corte real.
 
 ## 14. Comandos
 
@@ -394,6 +403,14 @@ Frontend:
 npm install
 npm run dev -- --host 127.0.0.1 --port 5173
 npm run build
+```
+
+Build equivalente a producción en PowerShell:
+
+```powershell
+$env:VITE_API_URL='https://api-production-db314.up.railway.app'
+npm run build
+Remove-Item Env:VITE_API_URL
 ```
 
 API:
@@ -408,6 +425,15 @@ npm run test:rules
 ```
 
 La configuración local de Claude ya usa el puerto 5173. No sobrescribir `.claude/launch.json` sin necesidad.
+
+Inspección de despliegues (sólo lectura):
+
+```bash
+railway deployment list --service api --limit 3
+wrangler pages deployment list --project-name odonteck-club
+```
+
+No ejecutar un despliegue, cambiar DNS, aprobar un deploy de Railway ni tocar servicios reales sin autorización explícita del usuario. Un build local no demuestra que producción se haya actualizado.
 
 ## 15. Criterio para declarar producción lista
 
