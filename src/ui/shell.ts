@@ -47,11 +47,13 @@ export function shellHTML() {
           <p>Instálalo como app: abre más rápido y a pantalla completa.</p>
           <button class="btn btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar app</button>
         </div>`}
-        <a class="user-card" href="#/perfil" aria-label="Abrir mi perfil">
-          ${avatar('avatar user-card__avatar')}
-          <div class="user-card__identity"><div class="user-card__name">${esc(Perfil.get().nombre)}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
-          <span class="btn btn--ghost btn--icon user-card__action" aria-hidden="true"><i data-lucide="settings" class="i"></i></span>
-        </a>
+        <div class="user-card">
+          <a class="user-card__link" href="#/perfil" aria-label="Abrir mi perfil">
+            ${avatar('avatar user-card__avatar')}
+            <div class="user-card__identity"><div class="user-card__name">${esc(Perfil.get().nombre)}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
+          </a>
+          <button type="button" class="user-card__logout" data-salir aria-label="Cerrar sesión en este dispositivo" title="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button>
+        </div>
       </div>
     </aside>
     <div class="main">
