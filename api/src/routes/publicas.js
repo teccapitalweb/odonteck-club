@@ -2,6 +2,8 @@
 import express from 'express';
 import { COL, leerDoc } from '../datos.js';
 import { folioValido } from '../lib/folio.js';
+import { noEncontrado } from '../lib/errores.js';
+import { idDocumento } from '../lib/validacion.js';
 import { h } from '../middleware/errores.js';
 
 const FOLIO_VIEJO = /^odonteck-\d{4}-[a-z0-9]{4,12}$/i;
@@ -13,6 +15,16 @@ export function rutasPublicas(ctx) {
     res.set('Cache-Control', 'no-store');
     res.json({ ok: true });
   });
+
+  r.get('/materiales/:id/archivo', h(async (req, res) => {
+    const id = idDocumento(req.params.id);
+    const expira = Number(req.query.exp);
+    const token = String(req.query.token || '');
+    if (!ctx.materiales?.validar(id, expira, token)) {
+      throw noEncontrado('El enlace de descarga no existe o ya venció. Solicita uno nuevo desde tu biblioteca.');
+    }
+    if (!ctx.materiales.enviar(id, res)) throw noEncontrado('Ese material no está disponible.');
+  }));
 
   r.get('/verificar/:folio', h(async (req, res) => {
     // Respuesta corta en caché: el certificado no cambia una vez emitido.

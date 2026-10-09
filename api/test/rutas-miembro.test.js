@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
 import request from 'supertest';
+import { MATERIALES_OFICIALES } from '../src/lib/materiales-oficiales.js';
 import { AHORA_ISO, ORIGEN_OK, TOKENS, bearer, crearEntorno } from './fakes/app.js';
 
 let env;
@@ -475,6 +476,35 @@ describe('recompensas y puntos', () => {
     assert.equal(praxia.body.recompensa.estatus, 'pendiente');
     const canje = env.db.rutas('v2_recompensas_canjes').map((ruta) => env.db.leer(ruta)).find((x) => x.recompensaId === 'praxia-30-dias');
     assert.equal(canje.estatus, 'pendiente');
+  });
+
+  test('los diez materiales propios se publican desde la API privada y respetan gratis, VIP o canje', async () => {
+    env = crearEntorno({ materialesEmpaquetados: MATERIALES_OFICIALES.map((m) => m.id) });
+    const catalogo = await request(env.app).get('/catalogo').set(bearer(TOKENS.free)).expect(200);
+    const oficiales = catalogo.body.materiales.filter((m) => MATERIALES_OFICIALES.some((oficial) => oficial.id === m.id));
+    assert.equal(oficiales.length, 10);
+    assert.equal(oficiales.every((m) => m.estado === 'disponible'), true);
+    assert.equal(oficiales.find((m) => m.id === 'atlas-caries-icdas').gratis, true);
+    assert.equal(oficiales.filter((m) => m.id !== 'atlas-caries-icdas').every((m) => m.puntosRequeridos > 0), true);
+
+    const gratis = await request(env.app).get('/materiales/atlas-caries-icdas/descarga').set(bearer(TOKENS.free)).expect(200);
+    const enlace = new URL(gratis.body.url);
+    const pdf = await request(env.app).get(`${enlace.pathname}${enlace.search}`).expect(200);
+    assert.match(pdf.headers['content-type'], /application\/pdf/);
+    await request(env.app).get('/materiales/guia-diagnostico-ortodoncico/descarga').set(bearer(TOKENS.free)).expect(403);
+
+    env.db.docs.set('v2_recompensas_estado/free1', {
+      uid: 'free1', saldo: 250, ganados: 250, gastados: 0, contadores: {}, logros: {},
+      desbloqueos: { materiales: [] }, notificaciones: [], actualizado: AHORA_ISO,
+    });
+    await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'guia-diagnostico-ortodoncico' }).expect(201);
+    await request(env.app).get('/materiales/guia-diagnostico-ortodoncico/descarga').set(bearer(TOKENS.free)).expect(200);
+
+    const resumen = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
+    const materiales = resumen.body.recompensas.filter((r) => r.tipo === 'material');
+    assert.equal(materiales.length, 9);
+    assert.equal(materiales.every((r) => r.disponible === true), true);
   });
 });
 

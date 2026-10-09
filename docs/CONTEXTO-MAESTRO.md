@@ -7,7 +7,7 @@
 - **Rama:** `main`
 - **Commit fuente auditado:** `f247983` (`main`, repositorio privado).
 - **Commit web público auditado:** `95364af` (`teccapitalweb/Odonteck`).
-- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 114 pruebas (113 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, canje de material, descarga gratuita tras el canje, rechazo del segundo canje y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 115 pruebas (114 exitosas, 0 fallos y 1 omitida por requerir emuladores). La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -58,7 +58,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Progreso secuencial y certificados idempotentes.
 - Verificación pública de certificados.
 - Catálogo público mínimo para la guía de la landing (`GET /landing/catalogo`), con lista blanca, cursos publicados y precios verificados o nulos; no expone videos ni datos privados.
-- Descargas firmadas de Storage.
+- Descargas temporales desde el lote privado empaquetado en la API y, para materiales administrados futuros, desde Storage.
 - Quizzes aprobados y calificación en servidor.
 - Foro, respuestas y reacciones.
 - Eventos y reservas.
@@ -68,11 +68,11 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 
 ### Brecha principal
 
-La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Las brechas principales quedan en la liga real, los materiales autorizados/Storage y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
+La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Los diez materiales propios aprobados ahora se incluyen en el despliegue privado de la API y se entregan mediante enlaces temporales después de validar acceso; Firebase Storage queda para cargas futuras del panel. Las brechas principales quedan en la liga real y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
 
 Desde el 8 de octubre de 2026, `#/retos` también está habilitado en modo API y aparece en la navegación de producción. La evolución local Retos V2 añade `/retos/resumen`, `/retos/sesion` y `/retos/responder`: arma sesiones únicamente con quizzes aprobados y clases accesibles, no expone soluciones antes de responder y guarda XP, constancia y dominio por área en `v2_retos_estados`. El nuevo hub prioriza una sesión recomendada y un mapa clínico en vez de puntos decorativos. Esta evolución todavía no está desplegada. Flashcards y casos conservan por ahora su motor local y forman la siguiente etapa de sincronización.
 
-También existe localmente `#/recompensas`, una economía central validada por la API. Clases, cursos, evaluaciones aprobadas, primer intento diario de Retos, encuestas, aportes de Comunidad y checkout confirmado generan movimientos idempotentes en `v2_recompensas_movimientos`; saldo, logros, desbloqueos y avisos personales viven en `v2_recompensas_estado`, y los canjes en `v2_recompensas_canjes`. La sincronización inicial conserva la actividad histórica de usuarios anteriores. Los materiales propios se desbloquean de forma permanente; el beneficio de 30 días de Praxia crea una solicitud `pendiente` y no se presenta como activación automática. Este sistema está implementado y probado localmente, pero todavía no está desplegado ni validado contra Firestore/Stripe reales.
+También existe `#/recompensas`, una economía central validada por la API. Clases, cursos, evaluaciones aprobadas, primer intento diario de Retos, encuestas, aportes de Comunidad y checkout confirmado generan movimientos idempotentes en `v2_recompensas_movimientos`; saldo, logros, desbloqueos y avisos personales viven en `v2_recompensas_estado`, y los canjes en `v2_recompensas_canjes`. La sincronización inicial conserva la actividad histórica de usuarios anteriores. Los nueve materiales premium propios se desbloquean de forma permanente por 250 a 600 puntos o vienen incluidos para VIP; Atlas ICDAS es gratuito. El beneficio de 30 días de Praxia crea una solicitud `pendiente` y no se presenta como activación automática.
 
 La liga de producción ya no debe recurrir a odontólogos ficticios: mientras no exista un endpoint real, consentimiento y reglas de privacidad, el hub la presenta como próxima función. Los datos demo siguen disponibles exclusivamente cuando no existe `VITE_API_URL`.
 
@@ -170,17 +170,17 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - URL temporal: `https://api-production-db314.up.railway.app`.
 - `/health`, CORS desde `https://www.odonteckconsulting.com`, Firebase Auth, lectura de membresía, catálogo, video gratuito firmado con Bunny y quiz sin respuestas expuestas pasaron la prueba autenticada `api/scripts/smoke-v2.mjs`.
 - Se sembraron 18 documentos en `v2_cursos` y 68 en `v2_quizzes`; no se modificaron `miembros`, suscripciones ni el webhook anterior.
-- No se sembraron `v2_materiales`: el lote mezcla recursos propios con libros completos cuya licencia de distribución todavía no está confirmada.
+- No se sembraron `v2_materiales`: los diez recursos propios aprobados se sirven desde el lote privado de la API; los libros completos sin licencia confirmada continúan excluidos.
 - `STRIPE_WEBHOOK_SECRET` no está definido en el servicio v2. El alta de pago sigue usando `vip-auth.html` y el webhook anterior; el API v2 rechaza además cualquier intento directo de crear un Checkout nuevo mientras falte ese secreto.
 - El frontend público nuevo ya consume este API. Se conservaron `vip-auth.html`, `vip-panel.html` y el sistema de membresías anterior para no cortar cobros ni beneficios existentes.
 - El build con `VITE_API_URL` elimina libros/PDF y reemplaza semillas de cursos, materiales, miembros y quizzes por estructuras vacías; el contenido real se hidrata desde el API. El control redujo el artefacto de 3.36 GB a 10.74 MB y verificó 0 PDF, 0 libros y 0 referencias a miembros demo o `videoId`.
 - Compatibilidad heredada añadida: además de `miembros/{uid}`, la API busca el correo autenticado en los documentos `miembros/email_...`, reconoce `esRegalo` y las tres fechas históricas (`expiraEn`, `fechaFinAcceso`, `fechaProximaRenovacion`). El portal de Stripe también recupera el `stripeCustomerId` encontrado por correo.
 - Auditoría agregada de producción del 5 de octubre (sin PII): 94 cuentas Auth, 107 documentos de miembro, 14 documentos vigentes y 3 documentos `email_...` (2 vigentes). Stripe contiene 20 suscripciones OdonTeck identificadas y 10 en `active`/`trialing`/`past_due`; 9 tienen al menos un cobro positivo registrado y la restante es una anual activa con factura pagada en cero por un descuento total, además de cancelación ya programada. Una `past_due` tiene la factura más reciente abierta y permanece inactiva, por lo que no recibe beneficios. Tres suscripciones activas aún no tienen cuenta Auth resoluble, pero su documento vigente será reconocido por correo verificado cuando se registren con la misma dirección.
 - `npm run audit:legacy` y `npm run audit:stripe` repiten estas verificaciones sin imprimir nombres, correos, UID ni IDs de Stripe.
-- El proyecto Firebase `club-odonteck` todavía no tiene un bucket de Storage existente (se probaron los nombres moderno y clásico). Por eso los 10 materiales propios no se escribieron en `v2_materiales`; el script `npm run publish:materials -- --apply` falla antes de escribir hasta que se habilite un bucket real.
+- El proyecto Firebase `club-odonteck` todavía no tiene un bucket de Storage existente (se probaron los nombres moderno y clásico). Esto ya no bloquea los diez materiales propios empaquetados; sí bloquea nuevas cargas desde el panel hasta habilitar un bucket real.
 - Railway mantiene el API público saludable; cada cambio de compatibilidad debe conservar un smoke autenticado antes y después del despliegue.
 - `npm run smoke:legacy` pasó contra la API v2 pública: seleccionó una cuenta heredada vigente, generó un token efímero sin cambiar su contraseña y confirmó `esVip=true`, plan presente y 18 cursos. La prueba no imprime PII ni crea datos permanentes.
-- Producción tiene 0 documentos en `v2_materiales` y 0 en `v2_eventos`. Mientras esos beneficios se migran, la pantalla de suscripción muestra únicamente a miembros VIP un acceso explícito a `vip-panel.html`, donde siguen disponibles la biblioteca, grabaciones y herramientas anteriores.
+- Producción tenía 0 documentos en `v2_materiales` y 0 en `v2_eventos` durante la auditoría. El catálogo de materiales propios ya no depende de esos documentos: la API los anuncia sólo cuando detecta el PDF empaquetado. El panel anterior continúa disponible para beneficios heredados aún no migrados.
 
 ### Corte público y continuidad verificada (5 de octubre de 2026)
 
@@ -245,7 +245,7 @@ La regla comercial unificada es explícita mediante `gratis: true`, sin depender
 - **Gratuito:** “Atlas de caries · Clasificación ICDAS”.
 - **VIP:** “Guía de bolsillo · Diagnóstico ortodóncico” y todos los demás materiales.
 
-El frontend muestra la etiqueta “Gratis” y la API permite generar su URL firmada a una cuenta sin VIP. Los demás recursos exigen membresía. Para llevar esta regla a Firestore debe volver a sembrarse o actualizarse `v2_materiales` antes del despliegue.
+El frontend muestra la etiqueta “Gratis” y la API permite generar su URL temporal a una cuenta sin VIP. Los demás recursos se incluyen con VIP o se desbloquean permanentemente mediante sus costos de 250 a 600 puntos. Los documentos futuros administrados en Firestore conservan la misma validación del servidor.
 
 ### Comunidad y retos
 
@@ -363,7 +363,7 @@ Advertencias del build:
 3. ~~Conectar el panel admin a los endpoints reales.~~ Resuelto en código; pendiente verificación E2E contra el despliegue con claim admin.
 4. ~~Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.~~ Resuelto en modo API; demo conserva datos locales deliberadamente.
 5. ~~Agregar verificación pública de certificados en frontend.~~ Resuelto con `#/verificar/:folio` (página pública sin auth).
-6. Completar el entorno v2 paralelo: API desplegada y prueba autenticada de miembro aprobada; faltan publicar el frontend, cargar materiales autorizados, configurar el webhook Stripe nuevo y ejecutar el smoke del admin conectado antes del corte.
+6. Completar el entorno v2 paralelo: API y frontend publicados; los materiales propios aprobados se empaquetan de forma privada en la API. Faltan configurar el webhook Stripe nuevo y ejecutar el smoke del admin conectado antes del corte.
 7. ~~Liga y clasificación del club.~~ Resuelto: podio, ranking, mini-card en hub de retos; datos demo, pendiente endpoint API.
 8. ~~Búsqueda global.~~ Resuelto: `#/buscar?q=...` busca cursos, clases y materiales.
 9. ~~Motor de flashcards mejorado.~~ Resuelto: 3 niveles, undo, atajos, stats, bug de intervalos corregido.

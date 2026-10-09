@@ -1,7 +1,7 @@
 // Construye la app con dobles y datos de ejemplo para los tests de rutas.
 import { crearApp } from '../../src/app.js';
 import { FakeFirestore } from './firestore.js';
-import { crearAuthFalso, crearStorageFalso, crearStripeFalso } from './servicios.js';
+import { crearAuthFalso, crearMaterialesFalsos, crearStorageFalso, crearStripeFalso } from './servicios.js';
 
 export const AHORA_ISO = '2026-09-17T12:00:00.000Z';
 export const WEBHOOK_SECRET = 'whsec_prueba_local';
@@ -57,7 +57,7 @@ export function semillaBase() {
   };
 }
 
-export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinWebhook = false, sinBunny = false } = {}) {
+export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinWebhook = false, sinBunny = false, materialesEmpaquetados = [] } = {}) {
   const reloj = { ahora: new Date(AHORA_ISO) };
   const db = new FakeFirestore(semilla);
   const auth = crearAuthFalso({
@@ -78,12 +78,14 @@ export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinWe
     },
   });
   const storage = crearStorageFalso();
+  const materiales = crearMaterialesFalsos(materialesEmpaquetados);
   const stripe = sinStripe ? null : crearStripeFalso();
   const silencioso = { error() {}, warn() {}, info() {} };
   const app = crearApp({
     db,
     auth,
     storage,
+    materiales,
     stripe,
     bunny: sinBunny ? null : { libraryId: '725453', tokenAuthKey: 'llave-bunny-prueba', ttlSeconds: 300 },
     now: () => new Date(reloj.ahora),
@@ -96,7 +98,7 @@ export function crearEntorno({ semilla = semillaBase(), sinStripe = false, sinWe
       stripePrices: { mensual: 'price_mensual_test', anual: 'price_anual_test' },
     },
   });
-  return { app, db, auth, storage, stripe, reloj };
+  return { app, db, auth, storage, materiales, stripe, reloj };
 }
 
 export const bearer = (token) => ({ Authorization: `Bearer ${token}` });

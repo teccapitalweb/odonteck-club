@@ -143,3 +143,7 @@ export function materialesOficialesComoProximamente() {
     estado: 'proximamente',
   }));
 }
+
+export function materialOficialPorId(id) {
+  return MATERIALES_OFICIALES.find((material) => material.id === id) ?? null;
+}

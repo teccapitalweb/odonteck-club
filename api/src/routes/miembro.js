@@ -11,7 +11,7 @@ import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../
 import { aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
-import { materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
+import { materialOficialPorId, materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
 import {
   estadoRetosPublico,
   normalizarEstadoRetos,
@@ -199,6 +199,7 @@ export function rutasMiembro(ctx) {
     const materialesDisponibles = new Set(materialesSnap.docs
       .filter((doc) => doc.data().estado === 'disponible' && typeof doc.data().archivo === 'string' && doc.data().archivo)
       .map((doc) => doc.id));
+    for (const id of ctx.materiales?.ids?.() ?? []) materialesDisponibles.add(id);
     const movimientos = movimientosSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
       .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha))).slice(0, 25);
     res.json({
@@ -270,6 +271,12 @@ export function rutasMiembro(ctx) {
     const docsVisibles = todosFirestore.filter((m) => m.estado !== 'oculto');
     const oficialesFaltantes = materialesOficialesComoProximamente()
       .filter((m) => !idsEnFirestore.has(m.id));
+    for (const material of oficialesFaltantes) {
+      if (ctx.materiales?.tiene(material.id)) {
+        material.estado = 'disponible';
+        material.archivo = `materiales/${material.id}.pdf`;
+      }
+    }
     const materiales = [...docsVisibles, ...oficialesFaltantes]
       .sort((a, b) => String(a.titulo ?? '').localeCompare(String(b.titulo ?? ''), 'es'))
       .map((material) => {
@@ -486,11 +493,17 @@ export function rutasMiembro(ctx) {
   // ---------- Materiales ----------
   r.get('/materiales/:id/descarga', auth, h(async (req, res) => {
     const id = idDocumento(req.params.id);
-    const [estado, material, recompensasEstado] = await Promise.all([
+    const [estado, materialFirestore, recompensasEstado] = await Promise.all([
       estadoMembresia(ctx, req.usuario),
       leerDoc(db, COL.materiales, id),
       leerDoc(db, COL.recompensasEstado, req.usuario.uid),
     ]);
+    const oficialEmpaquetado = ctx.materiales?.tiene(id) ? materialOficialPorId(id) : null;
+    const material = materialFirestore ?? (oficialEmpaquetado ? {
+      ...oficialEmpaquetado,
+      estado: 'disponible',
+      archivo: `materiales/${id}.pdf`,
+    } : null);
     if (!material || material.estado === 'oculto') throw noEncontrado('Ese material no existe.');
     if (material.estado !== 'disponible') throw conflicto('Este material todavía no está disponible.', 'material_no_disponible');
     if (!estado.esVip && material.gratis !== true && !materialDesbloqueado(recompensasEstado, id)) {
@@ -503,6 +516,11 @@ export function rutasMiembro(ctx) {
     const archivo = typeof material.archivo === 'string' ? material.archivo : '';
     if (!archivo.startsWith('materiales/') || archivo.includes('..')) {
       throw conflicto('Este material no tiene archivo cargado.', 'sin_archivo');
+    }
+    if (ctx.materiales?.tiene(id)) {
+      const origen = `${req.protocol}://${req.get('host')}`;
+      const expira = ctx.now().getTime() + 10 * 60 * 1000;
+      return res.json({ url: ctx.materiales.urlFirmada(id, origen, expira) });
     }
     if (!ctx.storage) throw noConfigurado('El almacenamiento de archivos no está configurado en el servidor.');
     const [url] = await ctx.storage.bucket(ctx.config.storageBucket || undefined).file(archivo).getSignedUrl({

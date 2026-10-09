@@ -14,12 +14,13 @@ si el contrato cambia, cambia aquí también.
 ```
 api/
   src/
-    app.js            crea la app a partir de dependencias inyectadas { db, auth, storage, stripe, bunny, now, config }
+    app.js            crea la app a partir de dependencias inyectadas { db, auth, storage, materiales, stripe, bunny, now, config }
     server.js         arranque real: lee el entorno y crea las dependencias de Firebase/Stripe
     datos.js          nombres de colecciones y lecturas comunes (membresía, perfil, config)
     lib/              lógica pura: acceso (esVip, desbloqueo), firma Bunny, folio, validaciones, semilla
     middleware/       auth (token + admin) y manejo de errores { error, mensaje }
     routes/           publicas, miembro, admin, stripe
+  private/materiales/ diez PDF propios aprobados; Railway los sirve sólo mediante enlaces temporales
   scripts/            set-admin.mjs, seed-v2.mjs
   test/               node --test (fakes en test/fakes/: Firestore en memoria, Auth, Storage, Stripe)
   firestore.rules     reglas SOLO de v2_* (NO desplegar tal cual, ver abajo)
@@ -47,7 +48,7 @@ rutas responden `503 no_configurado`.
 | Variable | Para qué |
 |---|---|
 | `FIREBASE_SERVICE_ACCOUNT` | JSON de la cuenta de servicio de `club-odonteck`, en una línea o en base64. Obligatoria. |
-| `FIREBASE_STORAGE_BUCKET` | `club-odonteck.firebasestorage.app`. Sin ella no hay descargas ni subidas de materiales. |
+| `FIREBASE_STORAGE_BUCKET` | Bucket para materiales futuros del panel. Los diez PDF propios empaquetados no dependen de esta variable. |
 | `BUNNY_LIBRARY_ID` | `725453` |
 | `BUNNY_TOKEN_AUTH_KEY` | Token Authentication Key de la biblioteca (no la API key). |
 | `BUNNY_TOKEN_TTL_SECONDS` | Vida del embed firmado. Por defecto 300. |
@@ -81,8 +82,8 @@ node scripts/seed-v2.mjs --solo=materiales
 
 Lee `../src/data/catalogo.json` y `../src/data/materiales.json`, convierte `duracion` → `duracionMin`, marca los
 cursos como `publicado: true`, y cambia la `url` pública de cada material por `archivo: materiales/<id>.pdf`.
-Por defecto **no pisa** documentos existentes (para respetar ediciones hechas en el admin). Los PDF se suben aparte
-a Storage (o desde el admin con `/admin/materiales/:id/subida`).
+Por defecto **no pisa** documentos existentes (para respetar ediciones hechas en el admin). Los diez recursos propios
+del primer lanzamiento ya viven en `private/materiales/`; las cargas posteriores se suben a Storage desde el admin.
 
 ## Desplegar en Railway
 
@@ -133,7 +134,7 @@ fusionar los bloques `v2_*` / `materiales/` y probar. `firebase.emuladores.json`
 1. Obtener y fusionar las reglas vigentes de Firestore y Storage con `firestore.rules` / `storage.rules`; probar con
    el emulador y con el panel viejo; desplegar.
 2. Configurar CORS del bucket para permitir `PUT` desde el dominio del club (subidas firmadas del admin).
-3. Subir los PDF a `materiales/<id>.pdf` y quitar `public/materiales/*.pdf` del frontend (hoy son públicos).
+3. Verificar que los diez PDF de `private/materiales/` respondan mediante enlace temporal; habilitar Storage sólo para cargas futuras del admin.
 4. Poner el claim admin a las personas del equipo con `scripts/set-admin.mjs`.
 5. Sembrar `v2_cursos` y `v2_materiales` (`seed-v2.mjs --apply`) y revisar/aprobar quizzes en el admin.
 6. En Stripe (modo live): crear precios, registrar el endpoint `https://<api>/stripe/webhook` con los eventos

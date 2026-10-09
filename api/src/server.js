@@ -6,6 +6,7 @@ import { getStorage } from 'firebase-admin/storage';
 import Stripe from 'stripe';
 import { crearApp } from './app.js';
 import { leerCuentaDeServicio } from './lib/cuenta-servicio.js';
+import { crearMaterialesEmpaquetados } from './lib/materiales-empaquetados.js';
 
 function fallar(mensaje) {
   console.error(`[arranque] ${mensaje}`);
@@ -38,6 +39,10 @@ const app = crearApp({
   db: getFirestore(),
   auth: getAuth(),
   storage: env.FIREBASE_STORAGE_BUCKET ? getStorage() : null,
+  materiales: crearMaterialesEmpaquetados({
+    directorio: new URL('../private/materiales/', import.meta.url),
+    secreto: cuenta.private_key,
+  }),
   stripe: env.STRIPE_SECRET_KEY ? new Stripe(env.STRIPE_SECRET_KEY) : null,
   bunny: {
     libraryId: env.BUNNY_LIBRARY_ID || '725453',

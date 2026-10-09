@@ -26,6 +26,69 @@ export const RECOMPENSAS = Object.freeze([
     icono: 'book-open',
   },
   {
+    id: 'consentimiento-informado',
+    titulo: 'Formato de consentimiento informado',
+    descripcion: 'Desbloqueo permanente del formato clínico propio de OdonTeck.',
+    puntos: 300,
+    tipo: 'material',
+    materialId: 'consentimiento-informado',
+    icono: 'file-signature',
+  },
+  {
+    id: 'tabla-dosis-anestesicas',
+    titulo: 'Tabla de dosis anestésicas',
+    descripcion: 'Referencia rápida de dosis máximas para la práctica clínica.',
+    puntos: 350,
+    tipo: 'material',
+    materialId: 'tabla-dosis-anestesicas',
+    icono: 'syringe',
+  },
+  {
+    id: 'plantilla-nota-clinica-receta',
+    titulo: 'Plantilla de nota clínica y receta',
+    descripcion: 'Formato editable para documentar la consulta diaria.',
+    puntos: 400,
+    tipo: 'material',
+    materialId: 'plantilla-nota-clinica-receta',
+    icono: 'notebook-pen',
+  },
+  {
+    id: 'protocolo-abscesos',
+    titulo: 'Protocolo de manejo de abscesos',
+    descripcion: 'Desbloqueo permanente del protocolo clínico de OdonTeck.',
+    puntos: 450,
+    tipo: 'material',
+    materialId: 'protocolo-abscesos',
+    icono: 'clipboard-plus',
+  },
+  {
+    id: 'guia-materiales-restauradores',
+    titulo: 'Guía de materiales restauradores',
+    descripcion: 'Consulta rápida para seleccionar materiales por indicación.',
+    puntos: 500,
+    tipo: 'material',
+    materialId: 'guia-materiales-restauradores',
+    icono: 'layers-3',
+  },
+  {
+    id: 'checklist-urgencias-pediatricas',
+    titulo: 'Checklist de urgencias odontopediátricas',
+    descripcion: 'Lista práctica para orientar la atención inicial de urgencias.',
+    puntos: 500,
+    tipo: 'material',
+    materialId: 'checklist-urgencias-pediatricas',
+    icono: 'list-checks',
+  },
+  {
+    id: 'guia-instrumentacion-endodontica',
+    titulo: 'Guía de instrumentación endodóntica',
+    descripcion: 'Secuencia clínica propia para consulta permanente.',
+    puntos: 550,
+    tipo: 'material',
+    materialId: 'guia-instrumentacion-endodontica',
+    icono: 'route',
+  },
+  {
     id: 'manual-estratificacion-resinas',
     titulo: 'Manual de estratificación de resinas',
     descripcion: 'Desbloqueo permanente del manual clínico ilustrado de OdonTeck.',
@@ -208,7 +271,9 @@ export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId,
   const { db } = ctx;
   if (recompensa.tipo === 'material') {
     const materialSnap = await db.collection(colecciones.materiales).doc(recompensa.materialId).get();
-    if (!materialSnap.exists || materialSnap.data().estado !== 'disponible' || !materialSnap.data().archivo) {
+    const publicadoEnStorage = materialSnap.exists && materialSnap.data().estado === 'disponible' && !!materialSnap.data().archivo;
+    const publicadoEnApi = ctx.materiales?.tiene(recompensa.materialId) === true;
+    if (!publicadoEnStorage && !publicadoEnApi) {
       throw conflicto('Esta recompensa estará disponible cuando publiquemos el material autorizado.', 'recompensa_no_disponible');
     }
   }

@@ -106,7 +106,7 @@ Saldo central y logros del miembro, escrito únicamente por la API:
 - Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
 - Las clases suman 10, terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
 - La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
-- Sólo materiales propios incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse con puntos. Un canje no vuelve disponible un archivo que todavía no fue publicado en Storage.
+- Los nueve materiales propios premium incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
 
 ### `v2_recompensas_movimientos/{hash}`
 Libro mayor inmutable: `{ uid, clave, tipo, puntos, detalle, fecha }`. El ID es un hash de `uid + clave` para garantizar idempotencia.
@@ -156,7 +156,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
 | POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado?, recompensas }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
-| GET | `/materiales/:id/descarga` | `{ url }` URL firmada de Storage, 10 min · VIP, material con `gratis: true` o desbloqueo permanente canjeado |
+| GET | `/materiales/:id/descarga` | `{ url }` URL temporal de 10 min al PDF privado empaquetado o a Storage · VIP, material con `gratis: true` o desbloqueo permanente canjeado |
 | GET | `/recompensas/resumen` | Saldo, contadores, logros, catálogo de recompensas, movimientos y notificaciones no leídas; sincroniza actividad histórica |
 | POST | `/recompensas/canjear` | `{ recompensaId }` → descuenta una sola vez y entrega material o crea solicitud pendiente de Praxia |
 | POST | `/recompensas/notificaciones/leidas` | Marca como leídos los avisos personales de logros y canjes |

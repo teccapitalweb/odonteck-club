@@ -63,6 +63,13 @@ export interface ResumenRecompensas {
 const DEMO_KEY = 'odonteck-club:recompensas-demo:v1';
 const catalogoDemo: Omit<Recompensa, 'canjeada' | 'incluidaVip' | 'alcanza' | 'disponible'>[] = [
   { id: 'guia-diagnostico-ortodoncico', titulo: 'Guía de diagnóstico ortodóncico', descripcion: 'Desbloqueo permanente de una guía clínica propia de OdonTeck.', puntos: 250, tipo: 'material', materialId: 'guia-diagnostico-ortodoncico', icono: 'book-open' },
+  { id: 'consentimiento-informado', titulo: 'Formato de consentimiento informado', descripcion: 'Desbloqueo permanente del formato clínico propio de OdonTeck.', puntos: 300, tipo: 'material', materialId: 'consentimiento-informado', icono: 'file-signature' },
+  { id: 'tabla-dosis-anestesicas', titulo: 'Tabla de dosis anestésicas', descripcion: 'Referencia rápida de dosis máximas para la práctica clínica.', puntos: 350, tipo: 'material', materialId: 'tabla-dosis-anestesicas', icono: 'syringe' },
+  { id: 'plantilla-nota-clinica-receta', titulo: 'Plantilla de nota clínica y receta', descripcion: 'Formato editable para documentar la consulta diaria.', puntos: 400, tipo: 'material', materialId: 'plantilla-nota-clinica-receta', icono: 'notebook-pen' },
+  { id: 'protocolo-abscesos', titulo: 'Protocolo de manejo de abscesos', descripcion: 'Desbloqueo permanente del protocolo clínico de OdonTeck.', puntos: 450, tipo: 'material', materialId: 'protocolo-abscesos', icono: 'clipboard-plus' },
+  { id: 'guia-materiales-restauradores', titulo: 'Guía de materiales restauradores', descripcion: 'Consulta rápida para seleccionar materiales por indicación.', puntos: 500, tipo: 'material', materialId: 'guia-materiales-restauradores', icono: 'layers-3' },
+  { id: 'checklist-urgencias-pediatricas', titulo: 'Checklist de urgencias odontopediátricas', descripcion: 'Lista práctica para orientar la atención inicial de urgencias.', puntos: 500, tipo: 'material', materialId: 'checklist-urgencias-pediatricas', icono: 'list-checks' },
+  { id: 'guia-instrumentacion-endodontica', titulo: 'Guía de instrumentación endodóntica', descripcion: 'Secuencia clínica propia para consulta permanente.', puntos: 550, tipo: 'material', materialId: 'guia-instrumentacion-endodontica', icono: 'route' },
   { id: 'manual-estratificacion-resinas', titulo: 'Manual de estratificación de resinas', descripcion: 'Desbloqueo permanente del manual clínico ilustrado de OdonTeck.', puntos: 600, tipo: 'material', materialId: 'manual-estratificacion-resinas', icono: 'library' },
   { id: 'praxia-30-dias', titulo: '30 días de Praxia Medical', descripcion: 'Solicitud de activación. El equipo confirma el beneficio antes de iniciar los 30 días.', puntos: 1500, tipo: 'manual', icono: 'stethoscope' },
 ];

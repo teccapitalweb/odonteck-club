@@ -63,6 +63,27 @@ export function crearStorageFalso() {
   };
 }
 
+export function crearMaterialesFalsos(ids = []) {
+  const disponibles = new Set(ids);
+  return {
+    ids: () => new Set(disponibles),
+    tiene: (id) => disponibles.has(id),
+    urlFirmada(id, origen, expira) {
+      if (!disponibles.has(id)) return null;
+      return `${origen}/materiales/${id}/archivo?exp=${expira}&token=firma-falsa`;
+    },
+    validar(id, expira, token) {
+      return disponibles.has(id) && Number.isFinite(Number(expira)) && token === 'firma-falsa';
+    },
+    enviar(id, res) {
+      if (!disponibles.has(id)) return false;
+      res.set('Content-Type', 'application/pdf');
+      res.send(Buffer.from('%PDF-1.4\nmaterial de prueba'));
+      return true;
+    },
+  };
+}
+
 /**
  * Stripe falso para checkout/portal/retrieve. Para el webhook se usa la verificación
  * de firma REAL de la librería de Stripe (no hace red), así el test de firma es auténtico.
