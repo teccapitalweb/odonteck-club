@@ -76,9 +76,28 @@
   box-shadow: 0 14px 36px rgba(5, 31, 45, .18);
   color: var(--oguia-navy);
   font-size: 13px;
+  animation: oguia-saludo-entra .3s ease-out both;
+}
+.oguia-saludo[hidden] { display: none; }
+@keyframes oguia-saludo-entra {
+  from { opacity: 0; transform: translateY(8px) scale(.96); }
+  to { opacity: 1; transform: none; }
 }
 .oguia-saludo p { margin: 0; }
-.oguia-saludo .oguia-icono { position: absolute; right: 7px; top: 7px; }
+.oguia-saludo .oguia-icono {
+  position: absolute; right: 6px; top: 6px;
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--oguia-navy, #091d3a);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  opacity: .85;
+  transition: opacity .15s, transform .15s;
+}
+.oguia-saludo .oguia-icono:hover { opacity: 1; transform: scale(1.08); }
+.oguia-saludo .oguia-icono svg { width: 13px; height: 13px; }
 
 .oguia-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(5, 25, 38, .28); backdrop-filter: blur(4px); }
 .oguia-panel {

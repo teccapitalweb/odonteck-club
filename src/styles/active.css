@@ -160,6 +160,15 @@ a.lesson:hover { text-decoration: none; }
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--danger) 40%, transparent);
 }
 .user-card__logout .i { width: 15px; height: 15px; }
+
+/* Icono de logout en topbar: solo visible en móvil (<1024px). En escritorio
+   el logout vive en la user-card de la sidebar; en móvil la sidebar se oculta
+   así que este icono garantiza acceso directo sin ir a /mas o al drawer. */
+.topbar__logout { display: none; color: var(--text-3); }
+.topbar__logout:hover { color: var(--danger); background: color-mix(in srgb, var(--danger) 10%, transparent); }
+@media (max-width: 1024px) {
+  .topbar__logout { display: inline-flex; }
+}
 .user-card::before { content: ''; position: absolute; z-index: -1; width: 112px; height: 112px; left: -48px; top: -64px; border-radius: 50%; background: radial-gradient(circle,color-mix(in srgb,var(--brand-teal) 26%,transparent) 0%,transparent 70%); pointer-events: none; transition: transform .45s var(--ease), opacity var(--t-base); }
 .user-card::after { content: ''; position: absolute; z-index: -1; width: 92px; height: 92px; right: -52px; bottom: -66px; border-radius: 50%; background: radial-gradient(circle,color-mix(in srgb,var(--brand-blue) 18%,transparent) 0%,transparent 72%); pointer-events: none; transition: transform .45s var(--ease), opacity var(--t-base); }
 .user-card:has(.user-card__link:hover) { transform: translateY(-3px) scale(1.012); filter: saturate(1.04); box-shadow: 0 22px 38px -20px rgba(20,42,92,.88), 0 8px 16px -12px rgba(20,42,92,.42), inset 0 1px 0 rgba(255,255,255,.92); }

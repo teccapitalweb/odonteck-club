@@ -62,6 +62,7 @@ export function shellHTML() {
         <div class="topbar__right">
           <button class="btn btn--ghost btn--icon" data-guia aria-label="Guía de la plataforma"><i data-lucide="help-circle" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
+          <button class="btn btn--ghost btn--icon topbar__logout" type="button" data-salir aria-label="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button>
           <div class="notifs"><button class="btn btn--ghost btn--icon" aria-label="Notificaciones" data-notifs><i data-lucide="bell" class="i"></i><span class="badge notifs__badge" data-notifs-badge hidden></span></button><div class="notifs__panel" data-notifs-panel hidden></div></div>
           <button class="topbar__avatar" type="button" aria-label="Abrir resumen de mi cuenta" aria-controls="account-quick-panel" aria-expanded="false" data-account-toggle>${avatar()}</button>
         </div>
