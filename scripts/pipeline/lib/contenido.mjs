@@ -238,7 +238,7 @@ export async function generarClase(cliente, { curso, clase, totalClases, transcr
 }
 
 function limpiarPregunta(p) {
-  const base = { tipo: p.tipo, q: p.q.trim(), instruccion: p.instruccion.trim(), referenciaVideo: p.referenciaVideo.trim(), casoClinico: p.casoClinico.trim(), competencia: p.competencia.trim(), nivelCognitivo: p.nivelCognitivo, explicacion: p.explicacion.trim() };
+  const base = { tipo: p.tipo, q: p.q.trim(), instruccion: p.instruccion.trim(), referenciaVideo: p.referenciaVideo.trim(), casoClinico: p.casoClinico.trim(), competencia: p.competencia.trim(), nivelCognitivo: p.nivelCognitivo, compatibleRetos: true, explicacion: p.explicacion.trim() };
   if (p.tipo === 'seleccion') return { ...base, opciones: p.opciones.map((o) => o.trim()), correcta: p.correcta };
   if (p.tipo === 'seleccion_multiple') return { ...base, opciones: p.opciones.map((o) => o.trim()), correctas: p.correctas };
   if (p.tipo === 'ordenar') return { ...base, elementos: p.elementos.map((x) => ({ id: x.id.trim(), texto: x.texto.trim() })), ordenCorrecto: p.ordenCorrecto.map((x) => x.trim()) };

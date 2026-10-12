@@ -54,9 +54,9 @@ async function cargarQuizDeRuta(path: string) {
   if (quizzesCargados.has(id)) return;
   quizzesCargados.add(id);
   try {
-    const r = await api<{ preguntas: Partial<Quiz['preguntas'][number]>[] }>(`/quiz/${encodeURIComponent(cursoId)}/${n}`);
+    const r = await api<{ version?: number; preguntas: Partial<Quiz['preguntas'][number]>[] }>(`/quiz/${encodeURIComponent(cursoId)}/${n}`);
     const quiz: Quiz = {
-      id, cursoId, n, estado: 'aprobado', actualizado: '',
+      id, cursoId, n, estado: 'aprobado', version: Math.max(1, Number(r.version) || 1), actualizado: '',
       preguntas: r.preguntas.map((p) => ({ ...p, q: p.q || '', opciones: p.opciones || [], correcta: -1, explicacion: '' })),
     };
     Datos.hidratarAdmin('quizzes', [...Datos.quizzes().filter((q) => q.id !== id), quiz]);

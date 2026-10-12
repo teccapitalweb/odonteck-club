@@ -13,4 +13,5 @@ export const prohibido = (mensaje = 'No tienes permiso para esta acción.') => n
 export const noEncontrado = (mensaje = 'No encontramos lo que buscas.') => new HttpError(404, 'no_encontrado', mensaje);
 export const invalido = (mensaje, error = 'datos_invalidos') => new HttpError(400, error, mensaje);
 export const conflicto = (mensaje, error = 'conflicto') => new HttpError(409, error, mensaje);
+export const demasiadasSolicitudes = (mensaje = 'Has realizado demasiadas solicitudes. Intenta más tarde.') => new HttpError(429, 'limite_alcanzado', mensaje);
 export const noConfigurado = (mensaje) => new HttpError(503, 'no_configurado', mensaje);

@@ -33,6 +33,7 @@ const primeraFecha = (obj, campos) => {
 };
 
 const docs = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+const esIndiceFaltante = (error) => error?.code === 9 || error?.code === 'failed-precondition' || /index/i.test(String(error?.message ?? ''));
 
 export function rutasAdmin(ctx) {
   const r = express.Router();
@@ -387,6 +388,61 @@ export function rutasAdmin(ctx) {
     res.json({ id, oculto });
   }));
 
+  // ---------- Moderación del directorio ----------
+  r.get('/admin/directorio/reportes', h(async (req, res) => {
+    const estado = req.query.estado ? unoDe(String(req.query.estado), ['pendiente', 'revisado', 'descartado'], { campo: 'estado' }) : undefined;
+    let q = db.collection(COL.directorioReportes);
+    if (estado) q = q.where('estado', '==', estado);
+    let lista;
+    try { lista = docs(await q.orderBy('creado', 'desc').limit(100).get()); }
+    catch (error) {
+      if (!esIndiceFaltante(error)) throw error;
+      ctx.logger?.warn?.('Consulta administrativa sin índice compuesto; usando fallback acotado.', { error: error?.message });
+      lista = docs(await db.collection(COL.directorioReportes).get())
+        .filter((item) => !estado || item.estado === estado)
+        .sort((a, b) => String(b.creado).localeCompare(String(a.creado)))
+        .slice(0, 100);
+    }
+    res.json(lista.map((x) => ({
+      id: x.id, tipo: x.tipo, objetivoId: x.objetivoId, resumenObjetivo: x.resumenObjetivo,
+      motivo: x.motivo, detalle: x.detalle ?? '', estado: x.estado, creado: x.creado,
+      actualizado: x.actualizado, accion: x.accion ?? null,
+    })));
+  }));
+
+  r.patch('/admin/directorio/reportes/:id', h(async (req, res) => {
+    const id = idDocumento(req.params.id);
+    const b = cuerpo(req);
+    const estado = unoDe(b.estado, ['revisado', 'descartado'], { campo: 'estado', requerido: true });
+    const accion = unoDe(b.accion ?? 'ninguna', ['ninguna', 'ocultar', 'cerrar'], { campo: 'accion', requerido: true });
+    const ref = db.collection(COL.directorioReportes).doc(id);
+    const actualizado = ahoraISO();
+    const resultado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado('Esa denuncia no existe.');
+      const reporte = snap.data();
+      if (reporte.estado !== 'pendiente') throw conflicto('Esta denuncia ya fue revisada.');
+      let objetivoRef = null;
+      if (accion === 'ocultar') {
+        if (reporte.tipo !== 'perfil') throw invalido('La acción ocultar sólo aplica a perfiles.');
+        objetivoRef = db.collection(COL.directorioPerfiles).doc(reporte.objetivoId);
+      }
+      if (accion === 'cerrar') {
+        if (reporte.tipo !== 'oportunidad') throw invalido('La acción cerrar sólo aplica a oportunidades.');
+        objetivoRef = db.collection(COL.directorioOportunidades).doc(reporte.objetivoId);
+      }
+      if (objetivoRef) {
+        const objetivo = await tx.get(objetivoRef);
+        if (!objetivo.exists) throw noEncontrado('El contenido denunciado ya no existe.');
+        tx.update(objetivoRef, reporte.tipo === 'perfil' ? { visible: false, actualizado } : { estado: 'cerrada', actualizado });
+      }
+      const cambio = { estado, accion, actualizado, revisadoPor: req.usuario.email || req.usuario.uid };
+      tx.update(ref, cambio);
+      return { ...reporte, ...cambio, id };
+    });
+    res.json({ id: resultado.id, estado: resultado.estado, accion: resultado.accion, actualizado: resultado.actualizado });
+  }));
+
   // ---------- Quizzes ----------
   r.get('/admin/quizzes', h(async (req, res) => {
     const estado = req.query.estado ? unoDe(String(req.query.estado), ESTADOS_QUIZ, { campo: 'estado' }) : undefined;
@@ -417,10 +473,15 @@ export function rutasAdmin(ctx) {
           throw invalido('El curso o la clase del quiz no existen.', 'clase_no_encontrada');
         }
       }
+      const preguntasCambiaron = preguntas !== undefined
+        && JSON.stringify(preguntas) !== JSON.stringify(Array.isArray(actual?.preguntas) ? actual.preguntas : []);
+      const version = actual ? Math.max(1, Number(actual.version) || 1) + (preguntasCambiaron ? 1 : 0) : 1;
       const nuevo = {
         ...(actual ?? { cursoId: partes[1], n: Number(partes[2]), generado: ahoraISO(), estado: 'borrador', preguntas: [] }),
         ...(preguntas !== undefined ? { preguntas } : {}),
         ...(estado !== undefined ? { estado } : {}),
+        ...(preguntasCambiaron && estado === undefined ? { estado: 'borrador' } : {}),
+        version,
         actualizado: ahoraISO(),
       };
       if (nuevo.estado === 'aprobado') {

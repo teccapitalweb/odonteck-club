@@ -14,7 +14,7 @@ const COLECCIONES_PRIVADAS = [
   'v2_intentos', 'v2_cortesias', 'v2_avisos', 'v2_config', 'v2_suscripciones', 'v2_contadores', 'v2_stripe_eventos',
   'v2_encuestas_estado', 'v2_encuestas_respuestas', 'v2_retos_estados',
   'v2_recompensas_estado', 'v2_recompensas_movimientos', 'v2_recompensas_canjes',
-  'v2_directorio_perfiles', 'v2_directorio_oportunidades', 'v2_directorio_conexiones',
+  'v2_directorio_perfiles', 'v2_directorio_oportunidades', 'v2_directorio_conexiones', 'v2_directorio_reportes',
 ];
 
 if (!HAY_FIRESTORE) {

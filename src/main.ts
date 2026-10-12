@@ -69,6 +69,9 @@ const videosFinalizados = new Set<string>();
 const reproductoresVideo = new Map<string, PlayerJsInstance>();
 const NOTAS_REPASO_KEY = 'odonteck-club:notas-repaso:v1';
 const NOTAS_PERSONALES_KEY = 'odonteck-club:notas-personales:v1';
+const INTENTOS_QUIZ_KEY = 'odonteck-club:intentos:v2';
+
+type ResumenIntentoQuiz = { numero: number; mejorPuntaje: number; aprobadoAlgunaVez: boolean; versionQuiz: number; fecha: string };
 
 function leerNotasRepasadas(): Record<string, number[]> {
   try {
@@ -160,6 +163,28 @@ function calificarPreguntaDemo(p: Pregunta, respuesta: unknown) {
   }
   puntos = Math.round(Math.max(0, Math.min(1, puntos)) * 1000) / 1000;
   return { correcta: tipo === 'seleccion' ? p.correcta : undefined, respuestaCorrecta, acertada: puntos === 1, puntos, explicacion: p.explicacion, referenciaVideo: p.referenciaVideo };
+}
+
+function registrarIntentoQuizDemo(clave: string, versionQuiz: number, resultado: {
+  correctas: number; total: number; puntaje: number; aprobado: boolean; respuestas: unknown[]; confianzas: number[]; justificaciones: string[];
+}): ResumenIntentoQuiz {
+  const fecha = new Date().toISOString();
+  try {
+    const todo = JSON.parse(localStorage.getItem(INTENTOS_QUIZ_KEY) || '{}') as Record<string, any>;
+    const previo = todo[clave] && typeof todo[clave] === 'object' ? todo[clave] : {};
+    const numero = Math.max(Number(previo.intentos) || 0, Array.isArray(previo.historial) ? previo.historial.length : 0) + 1;
+    const mejorPuntaje = Math.max(Number(previo.mejorPuntaje) || 0, resultado.puntaje);
+    const aprobadoAlgunaVez = previo.aprobadoAlgunaVez === true || resultado.aprobado;
+    const confianzaPromedio = Math.round(resultado.confianzas.reduce((suma, valor) => suma + valor, 0) / Math.max(1, resultado.confianzas.length) * 100) / 100;
+    const historial = [...(Array.isArray(previo.historial) ? previo.historial : []), {
+      numero, versionQuiz, fecha, ...resultado, confianzaPromedio,
+    }].slice(-10);
+    todo[clave] = { intentos: numero, mejorPuntaje, aprobadoAlgunaVez, ultimoPuntaje: resultado.puntaje, fecha, historial };
+    localStorage.setItem(INTENTOS_QUIZ_KEY, JSON.stringify(todo));
+    return { numero, mejorPuntaje, aprobadoAlgunaVez, versionQuiz, fecha };
+  } catch {
+    return { numero: 1, mejorPuntaje: resultado.puntaje, aprobadoAlgunaVez: resultado.aprobado, versionQuiz, fecha };
+  }
 }
 
 function segundosDeMarca(marca: string) {
@@ -425,6 +450,8 @@ function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {})
   if (!herramientas || !boton) return false;
   boton.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === boton));
   herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
+  const espacio = herramientas.closest<HTMLElement>('[data-lesson-workspace]');
+  if (espacio) espacio.dataset.lessonMode = 'quiz';
   herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
   const form = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
   if (form) {
@@ -583,7 +610,10 @@ document.addEventListener('click', async (e) => {
   const tab = el.closest<HTMLButtonElement>('.tabs button[data-for]');
   if (tab) {
     tab.parentElement!.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === tab));
-    tab.closest('[data-tabs]')?.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => (p.hidden = p.dataset.tab !== tab.dataset.for));
+    const herramientas = tab.closest<HTMLElement>('[data-tabs]');
+    herramientas?.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => (p.hidden = p.dataset.tab !== tab.dataset.for));
+    const espacio = herramientas?.closest<HTMLElement>('[data-lesson-workspace]');
+    if (espacio) espacio.dataset.lessonMode = tab.dataset.for === 'quiz' ? 'quiz' : 'default';
   }
 
   const marcarNota = el.closest<HTMLButtonElement>('[data-nota-check]');
@@ -624,6 +654,8 @@ document.addEventListener('click', async (e) => {
     if (!herramientas || !botonQuiz) return;
     botonQuiz.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === botonQuiz));
     herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
+    const espacio = herramientas.closest<HTMLElement>('[data-lesson-workspace]');
+    if (espacio) espacio.dataset.lessonMode = 'quiz';
     herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const quiz = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
     if (quiz) mostrarPasoQuiz(quiz, Number(quiz.dataset.paso || 0));
@@ -802,6 +834,48 @@ document.addEventListener('click', async (e) => {
     catch (err) { toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
+  const cargarMas = el.closest<HTMLButtonElement>('[data-network-load-more]');
+  if (cargarMas) {
+    cargarMas.disabled = true;
+    try {
+      await Directorio.cargar(cargarMas.dataset.networkLoadMore as 'perfiles' | 'oportunidades');
+      render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); cargarMas.disabled = false; }
+    return;
+  }
+  const cerrarOportunidad = el.closest<HTMLButtonElement>('[data-network-close-job]');
+  if (cerrarOportunidad) {
+    const id = cerrarOportunidad.dataset.networkCloseJob!;
+    if (!confirm('¿Cerrar esta oportunidad? Dejará de aceptar nuevas solicitudes.')) return;
+    cerrarOportunidad.disabled = true;
+    try { await Directorio.cerrarOportunidad(id); toast('Oportunidad cerrada', 'archive'); render(); }
+    catch (err) { toast(mensajeError(err), 'alert-triangle'); cerrarOportunidad.disabled = false; }
+    return;
+  }
+  const eliminarPerfil = el.closest<HTMLButtonElement>('[data-network-delete-profile]');
+  if (eliminarPerfil) {
+    if (!confirm('¿Eliminar tu perfil del directorio? También se cerrarán tus oportunidades y solicitudes pendientes. Tus cursos y tu cuenta OdonTeck no se eliminarán.')) return;
+    eliminarPerfil.disabled = true;
+    try {
+      await Directorio.eliminarPerfil(); limpiarFotoDirectorioPendiente();
+      eliminarPerfil.closest<HTMLDialogElement>('dialog')?.close();
+      toast('Perfil retirado del directorio', 'user-round-x'); render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); eliminarPerfil.disabled = false; }
+    return;
+  }
+  const reportar = el.closest<HTMLElement>('[data-network-report]');
+  if (reportar) {
+    el.closest<HTMLDialogElement>('dialog')?.close();
+    const dialog = document.querySelector<HTMLDialogElement>('[data-network-report-dialog]');
+    if (!dialog) return;
+    const form = dialog.querySelector<HTMLFormElement>('[data-network-report-form]')!;
+    form.reset();
+    form.querySelector<HTMLInputElement>('input[name="tipo"]')!.value = reportar.dataset.type || '';
+    form.querySelector<HTMLInputElement>('input[name="objetivoId"]')!.value = reportar.dataset.id || '';
+    const nombre = dialog.querySelector<HTMLElement>('[data-network-report-name]');
+    if (nombre) nombre.textContent = reportar.dataset.name || 'contenido';
+    dialog.showModal(); return;
+  }
   const util = el.closest<HTMLElement>('[data-util]');
   if (util) {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Reaccionar en la comunidad es para miembros VIP.'); return; }
@@ -873,9 +947,9 @@ document.addEventListener('click', async (e) => {
   // Opción de quiz marcada visualmente (el input está oculto)
   const opt = el.closest<HTMLLabelElement>('.quiz__opt');
   if (opt && opt.closest('[data-quiz-miembro]') && !opt.closest('form')!.dataset.calificado) {
-    const input = opt.querySelector<HTMLInputElement>('input')!;
-    if (input.type === 'radio') input.checked = true;
     const form = opt.closest<HTMLFormElement>('[data-quiz-miembro]')!;
+    // La etiqueta ya activa el input de forma nativa. Forzarlo aquí hacía un
+    // doble cambio (marcar + desmarcar) en radios ocultos.
     setTimeout(() => mostrarPasoQuiz(form, Number(form.dataset.paso || 0)));
   }
 });
@@ -952,7 +1026,7 @@ document.addEventListener('submit', async (e) => {
     e.preventDefault(); const d = new FormData(f); const csv = (k: string) => String(d.get(k) || '').split(',').map((x) => x.trim()).filter(Boolean);
     const boton = f.querySelector<HTMLButtonElement>('footer button[type="submit"], footer button:not([type])'); if (boton) boton.disabled = true;
     try {
-      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), bio: String(d.get('bio') || '').trim(), visible: true, contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio);
+      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio);
       limpiarFotoDirectorioPendiente(); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Perfil profesional actualizado', 'badge-check'); render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
   }
@@ -965,6 +1039,16 @@ document.addEventListener('submit', async (e) => {
     e.preventDefault(); const d = new FormData(f);
     try { await Directorio.conectar(String(d.get('paraUid')), String(d.get('oportunidadId') || '') || null, String(d.get('mensaje') || '').trim()); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Solicitud enviada de forma privada', 'send'); navigate('/comunidad?tab=directorio&vista=conexiones'); }
     catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
+  }
+  if (f.matches('[data-network-report-form]')) {
+    e.preventDefault(); const d = new FormData(f); const boton = f.querySelector<HTMLButtonElement>('button[type="submit"], footer button:not([type])');
+    if (boton) boton.disabled = true;
+    try {
+      await Directorio.reportar(String(d.get('tipo')) as 'perfil' | 'oportunidad', String(d.get('objetivoId')), String(d.get('motivo')), String(d.get('detalle') || '').trim());
+      f.closest<HTMLDialogElement>('dialog')?.close(); toast('Denuncia enviada para revisión', 'shield-check');
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    finally { if (boton) boton.disabled = false; }
+    return;
   }
   if (f.matches('[data-search]')) {
     e.preventDefault(); const q = new FormData(f).get('q') as string;
@@ -1008,15 +1092,17 @@ document.addEventListener('submit', async (e) => {
 
     type Detalle = { correcta?: number; respuestaCorrecta?: unknown; acertada?: boolean; puntos?: number; explicacion: string; referenciaVideo?: string };
     let correctas: number, total: number, puntaje: number, aprobado: boolean, detalle: Detalle[];
+    let intentoResumen: ResumenIntentoQuiz | null = null;
     let premio: PremioActividad = null;
 
     if (Datos.modo === 'api') {
       try {
-        const r = await api<{ correctas: number; total: number; puntaje: number; aprobado: boolean; detalle: Detalle[]; recompensas?: PremioActividad }>(
-          `/quiz/${encodeURIComponent(cursoId)}/${n}`, { method: 'POST', json: { respuestas } });
+        const r = await api<{ correctas: number; total: number; puntaje: number; aprobado: boolean; detalle: Detalle[]; recompensas?: PremioActividad; intento?: ResumenIntentoQuiz }>(
+          `/quiz/${encodeURIComponent(cursoId)}/${n}`, { method: 'POST', json: { respuestas, confianzas, justificaciones } });
         ({ correctas, total, aprobado, detalle } = r);
         puntaje = Number.isFinite(r.puntaje) ? r.puntaje : Math.round((correctas / Math.max(1, total)) * 100);
         premio = r.recompensas;
+        intentoResumen = r.intento || null;
       } catch (err) { toast(mensajeError(err), 'alert-triangle'); btn.removeAttribute('disabled'); return; }
     } else {
       detalle = q.preguntas.map((p, i) => calificarPreguntaDemo(p, respuestas[i]));
@@ -1024,6 +1110,7 @@ document.addEventListener('submit', async (e) => {
       total = q.preguntas.length;
       puntaje = Math.round(detalle.reduce((s, x) => s + Number(x.puntos || 0), 0) / total * 100);
       aprobado = puntaje >= 70;
+      intentoResumen = registrarIntentoQuizDemo(`${cursoId}_${n}`, Math.max(1, Number(q.version) || 1), { correctas, total, puntaje, aprobado, respuestas, confianzas, justificaciones });
     }
 
     q.preguntas.forEach((p, i) => {
@@ -1077,7 +1164,7 @@ document.addEventListener('submit', async (e) => {
       const dominio = Math.round(Number(detalle[i]?.puntos || 0) * 100);
       return `<div class="quiz-report__row"><span class="quiz-report__index">${String(i + 1).padStart(2, '0')}</span><div><strong>${esc(p.competencia || p.q)}</strong><small>${esc(p.nivelCognitivo || 'Aplicar')} · ${esc((p.tipo || 'seleccion').replaceAll('_', ' '))}</small><span class="quiz-report__bar"><i style="width:${dominio}%"></i></span></div><b>${dominio}%</b></div>`;
     }).join('');
-    res.innerHTML = `<div class="quiz-score" style="--score:${puntaje}"><div class="quiz-score__ring"><strong>${puntaje}%</strong><span>dominio</span></div><div><span class="eyebrow">${aprobado ? 'Reto superado' : 'Sigue practicando'}</span><h3>${aprobado ? 'Criterio clínico consolidado' : 'Tu mapa de mejora está listo'}</h3><p>${correctas} de ${total} decisiones completamente correctas.${aprobado ? ' Tu avance quedó registrado.' : ' Revisa la evidencia de cada paso e inténtalo de nuevo.'}</p><div class="quiz-score__insights"><span><i data-lucide="gauge" class="i"></i>${calibradas}/${total} decisiones calibradas</span><span><i data-lucide="notebook-pen" class="i"></i>${bitacoras}/${total} razonamientos</span><span><i data-lucide="timer" class="i"></i>${tiempo}</span><span><i data-lucide="bookmark" class="i"></i>${marcadas} marcadas</span></div><small>La calibración orienta tu estudio y nunca modifica el puntaje.</small></div></div><section class="quiz-report"><div class="quiz-report__head"><div><span class="eyebrow">Informe de dominio</span><h4>Desempeño por competencia</h4></div><span><i data-lucide="shield-check" class="i"></i>Evidencia revisable</span></div><div class="quiz-report__list">${reporte}</div></section>`;
+    res.innerHTML = `<div class="quiz-score" style="--score:${puntaje}"><div class="quiz-score__ring"><strong>${puntaje}%</strong><span>dominio</span></div><div><span class="eyebrow">${aprobado ? 'Reto superado' : 'Sigue practicando'}</span><h3>${aprobado ? 'Criterio clínico consolidado' : 'Tu mapa de mejora está listo'}</h3><p>${correctas} de ${total} decisiones completamente correctas.${aprobado ? ' Tu avance quedó registrado.' : ' Revisa la evidencia de cada paso e inténtalo de nuevo.'}</p><div class="quiz-score__insights"><span><i data-lucide="history" class="i"></i>Intento ${intentoResumen?.numero || 1}</span><span><i data-lucide="trophy" class="i"></i>Mejor ${intentoResumen?.mejorPuntaje ?? puntaje}%</span><span><i data-lucide="gauge" class="i"></i>${calibradas}/${total} calibradas</span><span><i data-lucide="notebook-pen" class="i"></i>${bitacoras}/${total} razonamientos</span><span><i data-lucide="timer" class="i"></i>${tiempo}</span><span><i data-lucide="bookmark" class="i"></i>${marcadas} marcadas</span></div><small>La calibración orienta tu estudio y nunca modifica el puntaje. Este intento queda en tu historial de aprendizaje.</small></div></div><section class="quiz-report"><div class="quiz-report__head"><div><span class="eyebrow">Informe de dominio</span><h4>Desempeño por competencia</h4></div><span><i data-lucide="shield-check" class="i"></i>Evidencia revisable</span></div><div class="quiz-report__list">${reporte}</div></section>`;
     f.dataset.calificado = '1';
     f.classList.add('is-reviewed');
     f.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((x) => { x.disabled = true; });
@@ -1086,7 +1173,6 @@ document.addEventListener('submit', async (e) => {
     btn.removeAttribute('disabled'); btn.hidden = false; btn.innerHTML = '<i data-lucide="rotate-ccw" class="i"></i>Intentar de nuevo'; btn.type = 'button';
     btn.onclick = () => render();
     createIcons({ icons });
-    try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok: correctas, total, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
   }
   if (f.matches('[data-form-hilo]')) {
     e.preventDefault();

@@ -52,6 +52,7 @@ const nuevosQuizzes = contenido.clases.map((clase) => ({
   cursoId,
   n: clase.n,
   estado: 'borrador',
+  version: 1,
   actualizado,
   preguntas: clase.preguntas,
 }));

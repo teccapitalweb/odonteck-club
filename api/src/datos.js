@@ -27,6 +27,7 @@ export const COL = Object.freeze({
   directorioPerfiles: 'v2_directorio_perfiles',
   directorioOportunidades: 'v2_directorio_oportunidades',
   directorioConexiones: 'v2_directorio_conexiones',
+  directorioReportes: 'v2_directorio_reportes',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

@@ -171,6 +171,7 @@ export function adminQuiz(params: Record<string, string>) {
       <input type="hidden" name="p-${i}-id" value="${esc(p.id || `p${i + 1}`)}">
       <div class="field"><label>Pregunta</label><textarea class="input" name="p-${i}-q" rows="2" required>${esc(p.q)}</textarea></div>
       <div class="field"><label>Instrucción breve <span class="faint">(opcional)</span></label><input class="input" name="p-${i}-instruccion" value="${esc(p.instruccion || '')}" placeholder="Ej. Selecciona todas las que correspondan"></div>
+      <label class="check-row"><input type="checkbox" name="p-${i}-compatible-retos" value="1" ${p.compatibleRetos !== false ? 'checked' : ''}><span><strong>Disponible en Retos</strong><small>Puede aparecer en sesiones de práctica adaptativa. La solución permanece en el servidor.</small></span></label>
       ${editorInteraccion(p, i)}
       <div class="field"><label>Retroalimentación explicativa</label><textarea class="input" name="p-${i}-explicacion" rows="2" required placeholder="Explica por qué, no solo cuál es la respuesta.">${esc(p.explicacion)}</textarea></div>
     </div>`).join('') || vacio('Sin preguntas', 'Se generan de la transcripción del video. También puedes escribirlas a mano.')}

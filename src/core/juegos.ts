@@ -83,7 +83,7 @@ export function retoDiario() {
   const hechoHoy = e.diaria.fecha === hoy;
   const racha = e.diaria.fecha === hoy || e.diaria.fecha === ayer ? e.diaria.racha : 0;
   // pregunta del día: determinística por fecha
-  const banco = bancoPreguntas();
+  const banco = bancoPreguntas().filter((p) => p.tipo === 'seleccion' && Number.isInteger(p.correcta));
   const idx = banco.length ? hashFecha(hoy) % banco.length : 0;
   return { hechoHoy, racha, pregunta: banco[idx] || null };
 }
@@ -100,15 +100,65 @@ export function completarDiaria(acierto: boolean) {
 const hashFecha = (s: string) => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
 
 // ── Banco de preguntas (extraído de los quizzes reales de los cursos) ──
-export interface Pregunta { id: string; curso: string; area: string; q: string; opciones: string[]; correcta: number; explicacion: string }
+export type TipoPreguntaReto = 'seleccion' | 'seleccion_multiple' | 'ordenar' | 'relacionar' | 'completar';
+export interface Pregunta {
+  id: string; curso: string; area: string; tipo: TipoPreguntaReto; q: string; instruccion?: string; explicacion: string;
+  opciones: string[]; correcta?: number; correctas?: number[];
+  elementos?: { id: string; texto: string }[]; ordenCorrecto?: string[];
+  izquierda?: { id: string; texto: string }[]; derecha?: { id: string; texto: string }[]; pares?: Record<string, string>;
+  plantilla?: string; huecos?: { id: string; etiqueta?: string; respuestas?: string[] }[];
+}
+
+export interface ResultadoPreguntaReto { acertada: boolean; puntos: number; respuestaCorrecta: unknown }
+
+const normalizarRespuesta = (v: unknown) => String(v ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+
+export function calificarPreguntaReto(p: Pregunta, respuesta: unknown): ResultadoPreguntaReto {
+  let puntos = 0;
+  let respuestaCorrecta: unknown = null;
+  if (p.tipo === 'seleccion') {
+    respuestaCorrecta = p.correcta;
+    puntos = respuesta === p.correcta ? 1 : 0;
+  } else if (p.tipo === 'seleccion_multiple') {
+    const elegidas = Array.isArray(respuesta) ? [...new Set(respuesta.map(Number))] : [];
+    const correctas = new Set(p.correctas || []);
+    const aciertos = elegidas.filter((n) => correctas.has(n)).length;
+    const errores = elegidas.filter((n) => !correctas.has(n)).length;
+    puntos = Math.max(0, (aciertos / Math.max(1, correctas.size)) - (errores / Math.max(1, p.opciones.length - correctas.size)));
+    respuestaCorrecta = [...correctas];
+  } else if (p.tipo === 'ordenar') {
+    const orden = Array.isArray(respuesta) ? respuesta.map(String) : [];
+    const correcta = (p.ordenCorrecto || []).map(String);
+    const pares = correcta.slice(0, -1).map((id, i) => `${id}>${correcta[i + 1]}`);
+    const usuario = new Set(orden.slice(0, -1).map((id, i) => `${id}>${orden[i + 1]}`));
+    puntos = pares.length ? pares.filter((par) => usuario.has(par)).length / pares.length : Number(orden.join('|') === correcta.join('|'));
+    respuestaCorrecta = correcta;
+  } else if (p.tipo === 'relacionar') {
+    const valor = respuesta && typeof respuesta === 'object' && !Array.isArray(respuesta) ? respuesta as Record<string, unknown> : {};
+    const pares = p.pares || {};
+    const ids = Object.keys(pares);
+    puntos = ids.length ? ids.filter((id) => String(valor[id] ?? '') === String(pares[id])).length / ids.length : 0;
+    respuestaCorrecta = pares;
+  } else {
+    const valor = respuesta && typeof respuesta === 'object' && !Array.isArray(respuesta) ? respuesta as Record<string, unknown> : {};
+    const huecos = p.huecos || [];
+    const ok = huecos.filter((h) => (h.respuestas || []).some((r) => normalizarRespuesta(r) === normalizarRespuesta(valor[h.id]))).length;
+    puntos = huecos.length ? ok / huecos.length : 0;
+    respuestaCorrecta = Object.fromEntries(huecos.map((h) => [h.id, h.respuestas?.[0] || '']));
+  }
+  puntos = Math.round(Math.max(0, Math.min(1, puntos)) * 1000) / 1000;
+  return { acertada: puntos === 1, puntos, respuestaCorrecta };
+}
 
 export function bancoPreguntas(): Pregunta[] {
   const out: Pregunta[] = [];
   for (const qz of Datos.quizzes()) {
     const c = getCurso(qz.cursoId);
-    qz.preguntas.filter((p) => (p.tipo || 'seleccion') === 'seleccion' && Array.isArray(p.opciones) && p.correcta !== undefined).forEach((p, i) => out.push({
+    qz.preguntas.filter((p) => p.compatibleRetos !== false).forEach((p, i) => out.push({
       id: `${qz.id}#${i}`, curso: c?.titulo || qz.cursoId, area: c?.area || 'General',
-      q: p.q, opciones: p.opciones!, correcta: p.correcta!, explicacion: p.explicacion,
+      tipo: p.tipo || 'seleccion', q: p.q, instruccion: p.instruccion, opciones: p.opciones || [], correcta: p.correcta, correctas: p.correctas,
+      elementos: p.elementos, ordenCorrecto: p.ordenCorrecto, izquierda: p.izquierda, derecha: p.derecha, pares: p.pares,
+      plantilla: p.plantilla, huecos: p.huecos, explicacion: p.explicacion,
     }));
   }
   return out;
@@ -120,9 +170,9 @@ export interface Flashcard { id: string; area: string; curso: string; frente: st
 export function mazoCompleto(): Flashcard[] {
   const cards: Flashcard[] = [];
   // 1) De cada pregunta de quiz: frente = pregunta, reverso = respuesta + explicación
-  for (const p of bancoPreguntas()) {
+  for (const p of bancoPreguntas().filter((item) => item.tipo === 'seleccion' && Number.isInteger(item.correcta))) {
     cards.push({ id: 'q:' + p.id, area: p.area, curso: p.curso,
-      frente: p.q, reverso: `<strong>${p.opciones[p.correcta]}</strong><br>${p.explicacion}` });
+      frente: p.q, reverso: `<strong>${p.opciones[p.correcta!]}</strong><br>${p.explicacion}` });
   }
   // 2) De las notas de clase: concepto (con su marca de tiempo) como repaso
   for (const c of cursos) {

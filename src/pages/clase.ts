@@ -145,7 +145,7 @@ function quizInteraccion(p: ReturnType<typeof Datos.quizzes>[number]['preguntas'
 
 function razonamientoHTML(i: number) {
   return `<div class="quiz-reasoning">
-    <div class="quiz-reasoning__head"><span class="quiz-reasoning__icon"><i data-lucide="brain-cog" class="i"></i></span><div><strong>Bitácora de razonamiento</strong><p>Explica qué dato inclinó tu decisión. Es privada en esta sesión y no modifica tu puntaje.</p></div></div>
+    <div class="quiz-reasoning__head"><span class="quiz-reasoning__icon"><i data-lucide="brain-cog" class="i"></i></span><div><strong>Bitácora de razonamiento</strong><p>Explica qué dato inclinó tu decisión. Se guarda en tu historial privado y no modifica tu puntaje.</p></div></div>
     <textarea class="input quiz-reasoning__note" name="j${i}" maxlength="240" rows="2" placeholder="Ejemplo: elegí esta respuesta porque…" aria-label="Justificación opcional de la pregunta ${i + 1}"></textarea>
     <div class="quiz-confidence"><div><span class="eyebrow">Calibra tu criterio</span><strong>¿Qué tan segura es tu respuesta?</strong></div><input type="hidden" name="c${i}" data-confidence-input required><div class="quiz-confidence__options"><button type="button" data-quiz-confidence="1"><i data-lucide="circle-help" class="i"></i><span>Duda</span></button><button type="button" data-quiz-confidence="2"><i data-lucide="gauge" class="i"></i><span>Razonable</span></button><button type="button" data-quiz-confidence="3"><i data-lucide="badge-check" class="i"></i><span>Muy segura</span></button></div></div>
   </div>`;
@@ -227,8 +227,8 @@ export function clase(params: Record<string, string>) {
   return `
   <section class="stack" style="gap:20px">
     <a class="section-head__cta" href="#/curso/${c.id}" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>${esc(c.titulo)}</a>
-    <div class="grid" style="grid-template-columns:1.7fr 1fr;align-items:start;gap:24px">
-      <div class="stack" style="gap:16px">
+    <div class="grid lesson-workspace" data-lesson-workspace data-lesson-mode="default">
+      <div class="stack lesson-stage" style="gap:16px">
         <div class="player" style="aspect-ratio:16/9;background:#0a0d18">
           <iframe id="video-${esc(c.id)}-${n}" ${Datos.modo === 'demo' ? `src="${embed}"` : ''} data-video="${c.id}:${n}" title="${esc(k.titulo)}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen></iframe>
         </div>

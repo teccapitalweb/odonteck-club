@@ -205,6 +205,11 @@ describe('admin: foro, quizzes, avisos y config', () => {
       izquierda: [{ id: 'i1', texto: 'Uno' }, { id: 'i2', texto: 'Dos' }], derecha: [{ id: 'd1', texto: 'A' }, { id: 'd2', texto: 'B' }], pares: { i1: 'd2', i2: 'd1' },
     }] }).expect(200);
     assert.equal(interactivo.body.preguntas[0].tipo, 'relacionar');
+    assert.equal(interactivo.body.estado, 'borrador', 'editar contenido exige una nueva revisión');
+    assert.equal(interactivo.body.version, 2);
+    await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.vip)).expect(404);
+    const reaprobado = await admin('patch', '/admin/quizzes/curso-a_2').send({ estado: 'aprobado' }).expect(200);
+    assert.equal(reaprobado.body.version, 2);
     const publico = await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.vip)).expect(200);
     assert.equal(JSON.stringify(publico.body).includes('"pares"'), false);
     assert.equal(JSON.stringify(publico.body).includes('Relaciones revisadas'), false);

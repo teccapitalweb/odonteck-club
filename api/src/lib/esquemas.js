@@ -169,6 +169,7 @@ export function validarPreguntas(preguntas) {
       casoClinico: p.casoClinico === undefined ? undefined : textoRequerido(p.casoClinico, { campo: `${prefijo}.casoClinico`, max: 800, multilinea: true }),
       competencia: p.competencia === undefined ? undefined : textoRequerido(p.competencia, { campo: `${prefijo}.competencia`, max: 160 }),
       nivelCognitivo: p.nivelCognitivo === undefined ? undefined : unoDe(p.nivelCognitivo, NIVELES_COGNITIVOS, { campo: `${prefijo}.nivelCognitivo`, requerido: true }),
+      compatibleRetos: p.compatibleRetos === undefined ? true : booleano(p.compatibleRetos, { campo: `${prefijo}.compatibleRetos` }),
       explicacion: texto(p.explicacion, { campo: `${prefijo}.explicacion`, max: 1000, multilinea: true }) ?? '',
     });
     const listaElementos = (valor, campo, { min = 2, max = 10 } = {}) => {

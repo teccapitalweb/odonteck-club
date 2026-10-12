@@ -2,13 +2,13 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 9 de octubre de 2026 (corte funcional `225ded8`: lector privado + Recompensas + Retos V2 + Comunidad + Alexia)
+- **Actualizado:** 12 de octubre de 2026 (corte público `225ded8`; Directorio y evaluaciones avanzadas permanecen como trabajo local no desplegado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
 - **Commit funcional auditado:** `225ded8` (`main`). El commit de este documento puede ser posterior sin cambiar el runtime.
 - **Web pública:** `https://www.odonteckconsulting.com/` mediante Cloudflare Pages (`odonteck-club`).
 - **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado verificado:** TypeScript 0 errores; `vite build` de producción limpio; API pasa 115 pruebas (114 exitosas, 0 fallos y 1 omitida por requerir emuladores); `npm audit` reporta 0 vulnerabilidades. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado local verificado:** TypeScript 0 errores; `vite build` limpio; API pasa 138 pruebas (137 exitosas, 0 fallos y 1 omitida por requerir emuladores). El runtime público no incluye todavía el Directorio endurecido ni el resto de cambios locales. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -67,6 +67,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Stripe checkout, portal y webhook.
 - CRUD administrativo y autorización por custom claim.
 - Encuestas versionadas: pendientes y respuestas autenticadas, disparadores por primer ingreso/curso completado/21 días y resumen administrativo sin PII.
+- Directorio profesional opt-in: perfiles visibles, foto profesional, oportunidades VIP y conexiones privadas; el endurecimiento local añade ocultar/eliminar, cierre, paginación estable, límites anti-spam, idempotencia, denuncia y moderación administrativa sin exponer al reportante.
 
 ### Brecha principal
 
@@ -76,7 +77,7 @@ Desde el 8 de octubre de 2026, `#/retos` está habilitado en modo API y aparece 
 
 También existe `#/recompensas`, una economía central validada por la API. Clases, cursos, evaluaciones aprobadas, primer intento diario de Retos, encuestas, aportes de Comunidad y checkout confirmado generan movimientos idempotentes en `v2_recompensas_movimientos`; saldo, logros, desbloqueos y avisos personales viven en `v2_recompensas_estado`, y los canjes en `v2_recompensas_canjes`. La sincronización inicial conserva la actividad histórica de usuarios anteriores. Los nueve materiales premium propios se desbloquean de forma permanente por 250 a 600 puntos o vienen incluidos para VIP; Atlas ICDAS es gratuito. El beneficio de 30 días de Praxia crea una solicitud `pendiente` y no se presenta como activación automática.
 
-La siguiente etapa de aprendizaje ya tiene infraestructura local: el editor de administración, el contrato del API y el calificador soportan cinco interacciones (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`) sin enviar soluciones antes del intento. Cada clase muestra además una pestaña de ficha; una ficha `aprobada` se entrega desde `GET /clases/:cursoId/:n/ficha` mediante URL privada de diez minutos, mientras un borrador se presenta honestamente como “en revisión”. Esto no significa que las 77 fichas estén producidas: la auditoría actual sigue en 0 aprobadas y la publicación requiere fuente/transcripción y revisión odontológica.
+La siguiente etapa de aprendizaje ya tiene infraestructura local: el editor de administración, el contrato del API y el calificador soportan cinco interacciones (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`) sin enviar soluciones antes del intento. Retos también consume localmente este banco en modo práctica, conserva selección para el modo relámpago y registra crédito parcial sin exponer la solución antes de responder; `compatibleRetos: false` permite excluir un reactivo. Cada clase muestra además una pestaña de ficha; una ficha `aprobada` se entrega desde `GET /clases/:cursoId/:n/ficha` mediante URL privada de diez minutos, mientras un borrador se presenta honestamente como “en revisión”. El piloto de Ortodoncia tiene revisión editorial documentada en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md`, con 25 actividades auditadas y cuatro grupos de redacción clínica corregidos; sigue faltando la firma profesional sobre los cinco videos y fichas. Esto no significa que las 77 fichas estén producidas: la auditoría actual sigue en 0 aprobadas y la publicación requiere fuente/transcripción y revisión odontológica.
 
 La liga de producción ya no debe recurrir a odontólogos ficticios: mientras no exista un endpoint real, consentimiento y reglas de privacidad, el hub la presenta como próxima función. Los datos demo siguen disponibles exclusivamente cuando no existe `VITE_API_URL`.
 
@@ -89,7 +90,7 @@ En modo API el frontend utiliza:
 - `/catalogo` para hidratar cursos, materiales, eventos y config (`src/core/remoto.ts`);
 - `/progreso` para hidratar el progreso del miembro;
 - `/quiz/:cursoId/:n` para cargar quizzes por ruta (sin respuestas correctas);
-- `POST /quiz/:cursoId/:n` para calificar en servidor;
+- `POST /quiz/:cursoId/:n` para calificar en servidor y conservar hasta diez intentos versionados con respuestas, confianza, bitácora, mejor puntuación y aprobación histórica; la recompensa sigue siendo idempotente;
 - `/video/token` para reproducir Bunny;
 - `/progreso/:cursoId/abrir` y `/progreso/:cursoId/vista` para avance real;
 - `/foro`, respuestas y reacciones para comunidad;
@@ -347,7 +348,7 @@ El contenido odontológico puede afectar decisiones clínicas. Ningún quiz, pro
 ```text
 frontend build de producción con VITE_API_URL  PASS
 api/npm run check                               PASS
-api/npm test                                    PASS: 115 totales, 114 aprobadas, 0 fallos, 1 omitida
+api/npm test                                    PASS: 138 totales, 137 aprobadas, 0 fallos, 1 omitida
 npm audit                                       PASS: 0 vulnerabilidades
 dist                                            PASS: 0 PDF, 0 directorios libros
 ```

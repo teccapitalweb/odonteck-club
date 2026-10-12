@@ -16,7 +16,12 @@ export interface ConexionDirectorio {
   estado: string; creado: string; actualizado: string; esEntrante: boolean; otraPersona: string;
   contacto: { canal: string; valor: string } | null;
 }
-export interface EstadoDirectorio { perfiles: PerfilDirectorio[]; oportunidades: OportunidadDirectorio[]; conexiones: ConexionDirectorio[]; miPerfil: PerfilDirectorio | null }
+export interface PaginacionDirectorio {
+  perfiles: { hayMas: boolean; siguiente: string | null };
+  oportunidades: { hayMas: boolean; siguiente: string | null };
+  conexiones: { truncadas: boolean };
+}
+export interface EstadoDirectorio { perfiles: PerfilDirectorio[]; oportunidades: OportunidadDirectorio[]; conexiones: ConexionDirectorio[]; miPerfil: PerfilDirectorio | null; paginacion?: PaginacionDirectorio }
 export interface FotoPreparada { blob: Blob; preview: string }
 
 const KEY = 'odonteck-club:directorio:v1';
@@ -34,6 +39,7 @@ const DEMO: EstadoDirectorio = {
 };
 
 let estado: EstadoDirectorio = structuredClone(DEMO);
+const combinar = <T extends { id?: string; uid?: string }>(a: T[], b: T[]) => [...new Map([...a, ...b].map((v) => [v.id || v.uid, v])).values()];
 function guardar() { if (Datos.modo === 'demo') localStorage.setItem(KEY, JSON.stringify(estado)); }
 function cargarDemo() { try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v?.perfiles) estado = v; } catch {} }
 cargarDemo();
@@ -58,7 +64,21 @@ export async function prepararFotoDirectorio(file: File): Promise<FotoPreparada>
 export const Directorio = {
   get: () => estado,
   hidratar(v: EstadoDirectorio) { estado = v; },
-  async cargar() { if (Datos.modo === 'api') estado = await api<EstadoDirectorio>('/directorio'); return estado; },
+  async cargar(mas?: 'perfiles' | 'oportunidades') {
+    if (Datos.modo === 'api') {
+      const qs = new URLSearchParams({ limite: '24' });
+      const siguiente = mas ? estado.paginacion?.[mas]?.siguiente : null;
+      if (mas === 'perfiles' && siguiente) qs.set('perfilesAntes', siguiente);
+      if (mas === 'oportunidades' && siguiente) qs.set('oportunidadesAntes', siguiente);
+      const remoto = await api<EstadoDirectorio>(`/directorio?${qs}`);
+      estado = mas === 'perfiles'
+        ? { ...remoto, perfiles: combinar(estado.perfiles, remoto.perfiles), oportunidades: estado.oportunidades, paginacion: { ...remoto.paginacion!, oportunidades: estado.paginacion?.oportunidades ?? remoto.paginacion!.oportunidades } }
+        : mas === 'oportunidades'
+          ? { ...remoto, perfiles: estado.perfiles, oportunidades: combinar(estado.oportunidades, remoto.oportunidades), paginacion: { ...remoto.paginacion!, perfiles: estado.paginacion?.perfiles ?? remoto.paginacion!.perfiles } }
+          : remoto;
+    }
+    return estado;
+  },
   async guardarPerfil(v: Omit<PerfilDirectorio, 'uid' | 'nombre' | 'actualizado' | 'esMio' | 'foto'> & { contacto: { canal: string; valor?: string } }, foto?: FotoPreparada | null, quitarFoto = false) {
     if (Datos.modo === 'api') {
       if (quitarFoto) await api('/directorio/perfil/foto', { method: 'DELETE' });
@@ -80,6 +100,21 @@ export const Directorio = {
     if (Datos.modo === 'api') { await api('/directorio/oportunidades', { method: 'POST', json: v }); return this.cargar(); }
     const op = { ...v, id: `demo-op-${Date.now()}`, autorUid: 'demo', autor: 'Modo demo', estado: 'publicada', fecha: new Date().toISOString(), expira: new Date(Date.now() + 45 * 86400000).toISOString(), esMia: true } as OportunidadDirectorio;
     estado.oportunidades.unshift(op); guardar(); return estado;
+  },
+  async cerrarOportunidad(id: string) {
+    if (Datos.modo === 'api') { await api(`/directorio/oportunidades/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: 'cerrada' } }); return this.cargar(); }
+    const op = estado.oportunidades.find((x) => x.id === id); if (op) op.estado = 'cerrada'; guardar(); return estado;
+  },
+  async eliminarPerfil() {
+    if (Datos.modo === 'api') { await api('/directorio/perfil', { method: 'DELETE' }); return this.cargar(); }
+    estado.perfiles = estado.perfiles.filter((p) => !p.esMio && p.uid !== 'demo');
+    estado.oportunidades.forEach((o) => { if (o.esMia || o.autorUid === 'demo') o.estado = 'cerrada'; });
+    estado.conexiones = estado.conexiones.map((c) => c.estado === 'pendiente' ? { ...c, estado: 'rechazada' } : c);
+    estado.miPerfil = null; guardar(); return estado;
+  },
+  async reportar(tipo: 'perfil' | 'oportunidad', objetivoId: string, motivo: string, detalle: string) {
+    if (Datos.modo === 'api') return api<{ id: string; estado: string }>('/directorio/reportes', { method: 'POST', json: { tipo, objetivoId, motivo, detalle } });
+    return { id: `demo-reporte-${Date.now()}`, estado: 'pendiente' };
   },
   async conectar(paraUid: string, oportunidadId: string | null, mensaje: string) {
     if (Datos.modo === 'api') { await api('/directorio/conexiones', { method: 'POST', json: { paraUid, oportunidadId, mensaje } }); return this.cargar(); }

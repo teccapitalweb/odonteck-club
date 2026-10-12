@@ -169,8 +169,20 @@ export function adminMiembro(params: Record<string, string>) {
 // ═══ COMUNIDAD ═══
 export function adminComunidad() {
   const l = Comunidad.todos();
+  const reportes = Admin.reportesDirectorio;
+  const pendientes = reportes.filter((r) => r.estado === 'pendiente');
+  const motivos: Record<string, string> = { spam: 'Spam o publicidad engañosa', suplantacion: 'Suplantación', contenido_inapropiado: 'Contenido inapropiado', datos_falsos: 'Datos profesionales falsos', otro: 'Otro motivo' };
   return `
-  ${adminHead('Comunidad', `${l.length} temas · ${l.filter((h) => h.oculto).length} ocultos`)}
+  ${adminHead('Comunidad', `${l.length} temas · ${l.filter((h) => h.oculto).length} ocultos · ${pendientes.length} denuncias pendientes`)}
+  <section class="stack" style="gap:10px;margin-bottom:22px">
+    <div class="row" style="justify-content:space-between;align-items:end"><div><span class="eyebrow">Seguridad del directorio</span><h2 style="font-family:var(--font-display);font-size:var(--fs-lg)">Denuncias por revisar</h2></div><span class="chip ${pendientes.length ? 'chip--primary' : ''}">${pendientes.length} pendientes</span></div>
+    ${pendientes.length ? pendientes.map((r) => `<article class="card card--pad admin-directory-report">
+      <div class="avatar"><i data-lucide="${r.tipo === 'perfil' ? 'user-round-search' : 'briefcase-business'}" class="i"></i></div>
+      <div><div class="row" style="gap:8px"><span class="chip">${r.tipo === 'perfil' ? 'Perfil' : 'Oportunidad'}</span><strong style="font-size:var(--fs-sm)">${esc(motivos[r.motivo] || r.motivo)}</strong><span class="faint" style="font-size:var(--fs-xs)">${hace(r.creado)}</span></div><h3 style="margin-top:6px;font-family:var(--font-display);font-size:var(--fs-md)">${esc(r.resumenObjetivo)}</h3>${r.detalle ? `<p class="muted" style="font-size:var(--fs-sm)">${esc(r.detalle)}</p>` : '<p class="faint" style="font-size:var(--fs-xs)">Sin detalle adicional.</p>'}</div>
+      <div class="row admin-directory-report__actions">${r.tipo === 'perfil' ? `<button class="btn btn--danger btn--sm" data-directorio-reporte="${r.id}:revisado:ocultar">Ocultar perfil</button>` : `<button class="btn btn--danger btn--sm" data-directorio-reporte="${r.id}:revisado:cerrar">Cerrar oportunidad</button>`}<button class="btn btn--secondary btn--sm" data-directorio-reporte="${r.id}:descartado:ninguna">Descartar</button></div>
+    </article>`).join('') : vacio('Sin denuncias pendientes', 'El directorio está al día. Las nuevas denuncias aparecerán aquí sin revelar la identidad del miembro que reportó.')}
+  </section>
+  <div class="row" style="justify-content:space-between;align-items:end;margin-bottom:10px"><div><span class="eyebrow">Foro</span><h2 style="font-family:var(--font-display);font-size:var(--fs-lg)">Temas de la comunidad</h2></div></div>
   ${l.length ? `<div class="stack" style="gap:10px">${l.map((h) => `
     <div class="card card--pad" style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;${h.oculto ? 'opacity:.6' : ''}">
       <div class="avatar">${iniciales(h.autor)}</div>

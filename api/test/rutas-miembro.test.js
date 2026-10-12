@@ -531,21 +531,40 @@ describe('quizzes', () => {
   });
 
   test('POST califica con umbral de 70%', async () => {
-    const reprobado = await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [0, 1, 0] }).expect(200);
+    const reprobado = await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({
+      respuestas: [0, 1, 0], confianzas: [2, 3, 1], justificaciones: ['Comparé los hallazgos.', '', 'Me faltó revisar la evidencia.'],
+    }).expect(200);
     assert.equal(reprobado.body.correctas, 2);
     assert.equal(reprobado.body.total, 3);
     assert.equal(reprobado.body.aprobado, false, '66% no aprueba');
     assert.deepEqual(reprobado.body.detalle.map((d) => d.correcta), [0, 1, 2]);
     assert.equal(reprobado.body.detalle[2].explicacion, 'Explicación de P3');
 
-    const aprobado = await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [0, 1, 2] }).expect(200);
+    const aprobado = await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({
+      respuestas: [0, 1, 2], confianzas: [3, 3, 3], justificaciones: ['A', 'B', 'C'],
+    }).expect(200);
     assert.equal(aprobado.body.aprobado, true);
-    const intento = env.db.leer('v2_intentos/vip1_curso-a_1');
+    assert.deepEqual(aprobado.body.intento, { numero: 2, mejorPuntaje: 100, aprobadoAlgunaVez: true, versionQuiz: 1, fecha: AHORA_ISO });
+    let intento = env.db.leer('v2_intentos/vip1_curso-a_1');
     assert.equal(intento.correctas, 3);
     assert.equal(intento.aprobado, true);
+    assert.equal(intento.intentos, 2);
+    assert.equal(intento.historial.length, 2);
+    assert.equal(intento.historial[0].confianzaPromedio, 2);
+    assert.deepEqual(intento.historial[1].respuestas, [0, 1, 2]);
+    assert.deepEqual(intento.historial[1].justificaciones, ['A', 'B', 'C']);
+
+    await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [2, 2, 2] }).expect(200);
+    intento = env.db.leer('v2_intentos/vip1_curso-a_1');
+    assert.equal(intento.aprobado, false, 'el último intento conserva su resultado real');
+    assert.equal(intento.aprobadoAlgunaVez, true, 'un reintento no borra una aprobación anterior');
+    assert.equal(intento.mejorPuntaje, 100);
+    assert.equal(intento.historial.length, 3);
 
     await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [0, 1] }).expect(400);
     await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: ['a', 1, 2] }).expect(400);
+    await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [0, 1, 2], confianzas: [4, 2, 1] }).expect(400);
+    await request(env.app).post('/quiz/curso-a/1').set(bearer(TOKENS.vip)).send({ respuestas: [0, 1, 2], justificaciones: ['solo una'] }).expect(400);
   });
 
   test('quiz de una clase de pago exige VIP', async () => {
@@ -567,7 +586,7 @@ describe('Retos V2', () => {
     assert.equal(sesion.body.total, 3);
     assert.equal(JSON.stringify(sesion.body).includes('correcta'), false);
     assert.equal(JSON.stringify(sesion.body).includes('explicacion'), false);
-    assert.deepEqual(Object.keys(sesion.body.preguntas[0]).sort(), ['area', 'clase', 'curso', 'cursoId', 'indice', 'n', 'opciones', 'q', 'ref']);
+    assert.deepEqual(Object.keys(sesion.body.preguntas[0]).sort(), ['area', 'clase', 'curso', 'cursoId', 'id', 'indice', 'instruccion', 'n', 'opciones', 'q', 'ref', 'tipo']);
 
     await request(env.app).post('/retos/sesion').set(bearer(TOKENS.free))
       .send({ modo: 'practica', area: 'Todas', limite: 4 }).expect(400);
@@ -582,6 +601,39 @@ describe('Retos V2', () => {
     assert.equal(gratis.body.disponibilidad.preguntas, 3);
     const vip = await request(env.app).get('/retos/resumen').set(bearer(TOKENS.vip)).expect(200);
     assert.equal(vip.body.disponibilidad.preguntas, 4);
+  });
+
+  test('Retos sirve y califica interacciones avanzadas sin revelar soluciones antes de responder', async () => {
+    env.db.docs.set('v2_quizzes/curso-a_1', {
+      cursoId: 'curso-a', n: 1, estado: 'aprobado',
+      preguntas: [
+        { id: 'multi', tipo: 'seleccion_multiple', compatibleRetos: true, q: 'Selecciona dos', instruccion: 'Elige dos opciones', opciones: ['A', 'B', 'C'], correctas: [0, 2], explicacion: 'A y C forman el conjunto correcto.' },
+        { id: 'orden', tipo: 'ordenar', compatibleRetos: true, q: 'Ordena la secuencia', elementos: [{ id: 'a', texto: 'Primero' }, { id: 'b', texto: 'Después' }, { id: 'c', texto: 'Al final' }], ordenCorrecto: ['a', 'b', 'c'], explicacion: 'La secuencia respeta el flujo enseñado.' },
+        { id: 'fuera', tipo: 'seleccion', compatibleRetos: false, q: 'No usar', opciones: ['A', 'B'], correcta: 0, explicacion: 'Privada para la clase.' },
+      ],
+    });
+
+    const sesion = await request(env.app).post('/retos/sesion').set(bearer(TOKENS.free))
+      .send({ modo: 'practica', area: 'Todas', limite: 3 }).expect(200);
+    assert.equal(sesion.body.total, 2);
+    assert.deepEqual(sesion.body.preguntas.map((p) => p.tipo).sort(), ['ordenar', 'seleccion_multiple']);
+    assert.equal(JSON.stringify(sesion.body).includes('correctas'), false);
+    assert.equal(JSON.stringify(sesion.body).includes('ordenCorrecto'), false);
+
+    const multi = await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 0, respuesta: [0, 2] }).expect(200);
+    assert.equal(multi.body.acertada, true);
+    assert.equal(multi.body.puntos, 1);
+    assert.deepEqual(multi.body.respuestaCorrecta, [0, 2]);
+
+    const parcial = await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 1, respuesta: ['b', 'c', 'a'] }).expect(200);
+    assert.equal(parcial.body.acertada, false);
+    assert.equal(parcial.body.puntos, 0.5);
+    assert.deepEqual(parcial.body.respuestaCorrecta, ['a', 'b', 'c']);
+
+    await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
+      .send({ cursoId: 'curso-a', n: 1, indice: 2, respuesta: 0 }).expect(404);
   });
 
   test('califica en servidor, acumula dominio y evita repetir XP el mismo día', async () => {

@@ -8,7 +8,7 @@ import {
 } from '../lib/acceso.js';
 import { firmarEmbedBunny } from '../lib/bunny.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
-import { calificarEvaluacion, preguntaPublica } from '../lib/evaluaciones.js';
+import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
 import { aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
@@ -58,6 +58,8 @@ import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
 
 const MAX_HISTORIAL = 500;
+const MAX_HISTORIAL_QUIZ = 10;
+const MAX_BYTES_RESPUESTAS_QUIZ = 20_000;
 const APROBATORIO = 0.7;
 const WHATSAPP = /^\+?[\d\s().-]{7,20}$/;
 const INTERESES_VALIDOS = new Set(ENCUESTAS.bienvenida.preguntas.find((p) => p.id === 'intereses').opciones.map((o) => o.valor));
@@ -93,7 +95,7 @@ export function rutasMiembro(ctx) {
     });
     intentosSnap.docs.forEach((doc) => {
       const intento = doc.data();
-      if (intento.aprobado) eventos.push({
+      if (intento.aprobadoAlgunaVez || intento.aprobado) eventos.push({
         clave: `quiz:${intento.cursoId}:${intento.n}`, tipo: 'quiz', puntos: REGLAS_PUNTOS.quiz, contador: 'quizzes', detalle: 'Evaluación aprobada',
       });
     });
@@ -561,7 +563,8 @@ export function rutasMiembro(ctx) {
     if (!quiz || quiz.estado !== 'aprobado' || preguntas.length === 0) {
       throw new HttpError(404, 'quiz_no_disponible', 'Esta clase todavía no tiene quiz.');
     }
-    return { curso, n, preguntas };
+    const versionQuiz = Math.max(1, Number(quiz.version) || 1);
+    return { curso, n, preguntas, versionQuiz };
   }
 
   async function cargarQuiz(req) {
@@ -569,22 +572,39 @@ export function rutasMiembro(ctx) {
   }
 
   r.get('/quiz/:cursoId/:n', auth, h(async (req, res) => {
-    const { preguntas } = await cargarQuiz(req);
+    const { preguntas, versionQuiz } = await cargarQuiz(req);
     // Nunca se envían reglas de calificación ni explicaciones antes de responder.
-    res.json({ preguntas: preguntas.map(preguntaPublica) });
+    res.json({ version: versionQuiz, preguntas: preguntas.map(preguntaPublica) });
   }));
 
   r.post('/quiz/:cursoId/:n', auth, h(async (req, res) => {
-    const { curso, n, preguntas } = await cargarQuiz(req);
-    const { respuestas } = cuerpo(req);
+    const { curso, n, preguntas, versionQuiz } = await cargarQuiz(req);
+    const { respuestas, confianzas: confianzasEntrada, justificaciones: justificacionesEntrada } = cuerpo(req);
     if (!Array.isArray(respuestas) || respuestas.length !== preguntas.length) {
       throw invalido(`"respuestas" debe ser una lista con ${preguntas.length} elementos.`);
     }
+    if (JSON.stringify(respuestas).length > MAX_BYTES_RESPUESTAS_QUIZ) {
+      throw invalido('Las respuestas del quiz exceden el tamaño permitido.');
+    }
+    const confianzas = confianzasEntrada === undefined ? null : (() => {
+      if (!Array.isArray(confianzasEntrada) || confianzasEntrada.length !== preguntas.length) {
+        throw invalido(`"confianzas" debe ser una lista con ${preguntas.length} elementos.`);
+      }
+      return confianzasEntrada.map((valor, i) => entero(valor, { campo: `confianzas[${i}]`, min: 1, max: 3 }));
+    })();
+    const justificaciones = justificacionesEntrada === undefined ? null : (() => {
+      if (!Array.isArray(justificacionesEntrada) || justificacionesEntrada.length !== preguntas.length) {
+        throw invalido(`"justificaciones" debe ser una lista con ${preguntas.length} elementos.`);
+      }
+      return justificacionesEntrada.map((valor, i) => texto(valor, { campo: `justificaciones[${i}]`, max: 240, multilinea: true }) ?? '');
+    })();
     const { correctas, total, puntaje, aprobado, detalle } = calificarEvaluacion(preguntas, respuestas, APROBATORIO);
     const u = req.usuario;
     const fecha = ctx.now();
     const intentoRef = db.collection(COL.intentos).doc(`${u.uid}_${curso.id}_${n}`);
-    const recompensas = await db.runTransaction(async (tx) => {
+    const resultadoIntento = await db.runTransaction(async (tx) => {
+      const intentoSnap = await tx.get(intentoRef);
+      const anterior = intentoSnap.exists ? intentoSnap.data() : null;
       const premio = aprobado ? await otorgarEventosTx({
         tx,
         db,
@@ -599,19 +619,53 @@ export function rutasMiembro(ctx) {
           detalle: `Evaluación aprobada: ${curso.titulo}, clase ${n}`,
         }],
       }) : { puntosGanados: 0, saldo: null, logrosNuevos: [], notificaciones: [] };
-      tx.set(intentoRef, {
-        uid: u.uid,
-        cursoId: curso.id,
-        n,
+      const historialAnterior = Array.isArray(anterior?.historial) ? anterior.historial : anterior?.fecha ? [{
+        numero: 1,
+        versionQuiz: Math.max(1, Number(anterior.versionQuiz) || 1),
+        correctas: Number(anterior.correctas) || 0,
+        total: Number(anterior.total) || total,
+        puntaje: Number(anterior.puntaje) || 0,
+        aprobado: anterior.aprobado === true,
+        fecha: anterior.fecha,
+        migrado: true,
+      }] : [];
+      const intentosPrevios = Math.max(Number(anterior?.intentos) || 0, historialAnterior.length);
+      const numero = intentosPrevios + 1;
+      const confianzaPromedio = confianzas ? Math.round((confianzas.reduce((suma, valor) => suma + valor, 0) / Math.max(1, confianzas.length)) * 100) / 100 : null;
+      const entradaHistorial = sinIndefinidos({
+        numero,
+        versionQuiz,
         correctas,
         total,
         puntaje,
         aprobado,
         fecha: fecha.toISOString(),
+        respuestas,
+        confianzas: confianzas ?? undefined,
+        confianzaPromedio: confianzaPromedio ?? undefined,
+        justificaciones: justificaciones ?? undefined,
       });
-      return premio;
+      const mejorPuntaje = Math.max(Number(anterior?.mejorPuntaje ?? anterior?.puntaje) || 0, puntaje);
+      const aprobadoAlgunaVez = anterior?.aprobadoAlgunaVez === true || anterior?.aprobado === true || aprobado;
+      const historial = [...historialAnterior, entradaHistorial].slice(-MAX_HISTORIAL_QUIZ);
+      tx.set(intentoRef, {
+        uid: u.uid,
+        cursoId: curso.id,
+        n,
+        versionQuiz,
+        correctas,
+        total,
+        puntaje,
+        aprobado,
+        fecha: fecha.toISOString(),
+        intentos: numero,
+        mejorPuntaje,
+        aprobadoAlgunaVez,
+        historial,
+      });
+      return { premio, intento: { numero, mejorPuntaje, aprobadoAlgunaVez, versionQuiz, fecha: fecha.toISOString() } };
     });
-    res.json({ correctas, total, puntaje, aprobado, detalle, recompensas });
+    res.json({ correctas, total, puntaje, aprobado, detalle, recompensas: resultadoIntento.premio, intento: resultadoIntento.intento });
   }));
 
   // ---------- Retos V2 ----------
@@ -634,7 +688,9 @@ export function rutasMiembro(ctx) {
       const clase = curso?.clases?.find((item) => Number(item.n) === n);
       if (!curso || !clase || !tieneAccesoAClase(clase, estadoAcceso.esVip)) continue;
       quiz.preguntas.forEach((pregunta, indice) => {
-        if (!pregunta || typeof pregunta.q !== 'string' || !Array.isArray(pregunta.opciones) || pregunta.opciones.length < 2) return;
+        if (!pregunta || typeof pregunta.q !== 'string' || pregunta.compatibleRetos === false) return;
+        let publica;
+        try { publica = preguntaPublica(pregunta, indice); } catch { return; }
         preguntas.push({
           ref: refPregunta(curso.id, n, indice),
           cursoId: curso.id,
@@ -643,8 +699,7 @@ export function rutasMiembro(ctx) {
           n,
           indice,
           area: curso.area || 'General',
-          q: pregunta.q,
-          opciones: pregunta.opciones,
+          ...publica,
         });
       });
     }
@@ -691,11 +746,9 @@ export function rutasMiembro(ctx) {
     const maximo = estadoAcceso.esVip ? (modo === 'practica' ? 10 : 8) : 3;
     const limite = entero(b.limite ?? maximo, { campo: 'limite', min: 1, max: maximo });
     const guardado = normalizarEstadoRetos(await leerDoc(db, COL.retosEstado, req.usuario.uid), req.usuario.uid);
-    const candidatas = preguntas.filter((item) => area === 'Todas' || item.area === area);
+    const candidatas = preguntas.filter((item) => (area === 'Todas' || item.area === area) && (modo !== 'relampago' || item.tipo === 'seleccion'));
     candidatas.sort((a, b) => prioridadPregunta(guardado, a) - prioridadPregunta(guardado, b) || a.ref.localeCompare(b.ref));
-    const seleccion = candidatas.slice(0, limite).map(({ ref, cursoId, curso, clase, n, indice, area: areaPregunta, q, opciones }) => ({
-      ref, cursoId, curso, clase, n, indice, area: areaPregunta, q, opciones,
-    }));
+    const seleccion = candidatas.slice(0, limite);
     res.json({ modo, area, total: seleccion.length, preguntas: seleccion });
   }));
 
@@ -704,12 +757,15 @@ export function rutasMiembro(ctx) {
     const cursoId = idDocumento(b.cursoId, 'cursoId');
     const n = entero(b.n, { campo: 'n', min: 1, max: 999 });
     const indice = entero(b.indice, { campo: 'indice', min: 0, max: 999 });
-    const opcion = b.opcion === null ? null : entero(b.opcion, { campo: 'opcion', min: 0, max: 99 });
+    const respuesta = Object.prototype.hasOwnProperty.call(b, 'respuesta')
+      ? b.respuesta
+      : (b.opcion === null ? null : entero(b.opcion, { campo: 'opcion', min: 0, max: 99 }));
     const { curso, preguntas } = await cargarQuizPor(req, cursoId, n);
     const pregunta = preguntas[indice];
     if (!pregunta) throw noEncontrado('Esa pregunta ya no está disponible.');
-    if (opcion !== null && opcion >= pregunta.opciones.length) throw invalido('"opcion" no corresponde a una respuesta disponible.');
-    const acertada = opcion === pregunta.correcta;
+    if (pregunta.compatibleRetos === false) throw noEncontrado('Esa pregunta no está disponible en Retos.');
+    const detalle = calificarPregunta(pregunta, respuesta, indice);
+    const { acertada, puntos } = detalle;
     const ahora = ctx.now();
     const ahoraISO = ahora.toISOString();
     const hoy = ahoraISO.slice(0, 10);
@@ -725,6 +781,7 @@ export function rutasMiembro(ctx) {
       estado.preguntas[ref] = {
         intentos: Number(previa.intentos || 0) + 1,
         aciertos: Number(previa.aciertos || 0) + (acertada ? 1 : 0),
+        ultimaPuntuacion: puntos,
         ultima: ahoraISO,
         ultimaCorrecta: acertada,
       };
@@ -732,11 +789,11 @@ export function rutasMiembro(ctx) {
       const dominio = estado.dominio[area] && typeof estado.dominio[area] === 'object' ? estado.dominio[area] : {};
       estado.dominio[area] = {
         total: Number(dominio.total || 0) + 1,
-        aciertos: Number(dominio.aciertos || 0) + (acertada ? 1 : 0),
+        aciertos: Number(dominio.aciertos || 0) + puntos,
         ultima: ahoraISO,
       };
       estado.quiz.total += 1;
-      estado.quiz.aciertos += acertada ? 1 : 0;
+      estado.quiz.aciertos += puntos;
       estado.xp += xpGanado;
       estado.actividad = registrarActividad(estado.actividad, ahora);
       estado.actualizado = ahoraISO;
@@ -762,8 +819,12 @@ export function rutasMiembro(ctx) {
     res.json({
       ref,
       acertada,
-      correcta: pregunta.correcta,
-      explicacion: pregunta.explicacion || '',
+      puntos,
+      tipo: detalle.tipo,
+      correcta: detalle.correcta ?? null,
+      respuestaCorrecta: detalle.respuestaCorrecta,
+      explicacion: detalle.explicacion || '',
+      ...(detalle.referenciaVideo ? { referenciaVideo: detalle.referenciaVideo } : {}),
       xpGanado: resultado.xpGanado,
       estado: resultado.estado,
       recompensas: resultado.recompensas,

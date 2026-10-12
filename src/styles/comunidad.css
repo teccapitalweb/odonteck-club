@@ -241,8 +241,10 @@
 
 /* Directorio profesional: contacto protegido y oportunidades dentro de Comunidad. */
 .network-directory { display: grid; gap: 22px; }
-.network-hero { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: end; padding: clamp(25px, 4vw, 44px); border: 1px solid color-mix(in srgb, var(--brand-teal) 24%, var(--line)); border-radius: 28px; background: radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 34%), linear-gradient(135deg, var(--brand-navy), color-mix(in srgb, var(--brand-navy) 72%, var(--brand-teal))); color: #fff; box-shadow: var(--shadow-lg); }
-.network-hero::after { content: ''; position: absolute; right: -45px; bottom: -85px; width: 250px; height: 250px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 38px rgba(255,255,255,.035), 0 0 0 78px rgba(255,255,255,.025); pointer-events: none; }
+.network-hero { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: end; padding: clamp(25px, 4vw, 44px); border: 1px solid rgba(255,255,255,.15); border-radius: 28px; background: linear-gradient(135deg, var(--brand-navy), color-mix(in srgb, var(--brand-navy) 72%, var(--brand-teal))); color: #fff; box-shadow: 0 20px 42px -30px rgba(17,34,76,.8), 0 7px 18px -14px rgba(17,34,76,.48); }
+.network-hero::before { content: ''; position: absolute; top: -110%; right: -8%; z-index: 0; width: 62%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 110deg, transparent 0 19%, rgba(107,211,220,.3) 30%, transparent 44% 66%, rgba(118,207,185,.2) 78%, transparent 91%); filter: blur(24px); opacity: .8; animation: network-hero-aurora 18s ease-in-out infinite alternate; pointer-events: none; }
+.network-hero::after { content: ''; position: absolute; right: -55px; bottom: -105px; z-index: 0; width: 290px; height: 290px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 38px rgba(255,255,255,.035), 0 0 0 78px rgba(255,255,255,.025); animation: network-hero-orbit 14s ease-in-out infinite alternate; pointer-events: none; }
+.network-hero > .network-hero__texture { position: absolute; inset: -5%; z-index: -1; background: linear-gradient(95deg, rgba(8,24,55,.98) 0%, rgba(15,43,79,.82) 47%, rgba(8,55,76,.42) 100%), url('/fotos/inicio-esmalte-editorial-v2.png') 70% 50% / cover no-repeat; opacity: .96; transform: scale(1.04); transform-origin: 68% 50%; animation: network-hero-texture 12s ease-in-out infinite alternate; pointer-events: none; }
 .network-hero > * { position: relative; z-index: 1; }
 .network-hero .eyebrow { color: #91e5d6; }
 .network-hero h2 { max-width: 680px; margin: 10px 0 8px; font-family: var(--font-display); font-size: clamp(1.8rem, 3.2vw, 3.35rem); line-height: .98; letter-spacing: -.045em; }
@@ -254,6 +256,9 @@
 .network-hero__proof .network-avatar { margin-left: -8px; box-shadow: 0 0 0 3px rgba(17,46,80,.85); }
 .network-hero__proof p { font-size: 11px; line-height: 1.35; }
 .network-hero__proof strong { color: #fff; font-size: 12px; }
+@keyframes network-hero-aurora { from { opacity: .5; transform: translate3d(-5%, 1%, 0) rotate(-8deg) scale(.96); } to { opacity: .82; transform: translate3d(6%, 7%, 0) rotate(14deg) scale(1.08); } }
+@keyframes network-hero-orbit { from { opacity: .58; transform: translate3d(-7px, 5px, 0) scale(.98); } to { opacity: 1; transform: translate3d(10px, -9px, 0) scale(1.04); } }
+@keyframes network-hero-texture { from { transform: translate3d(-2.5%, .5%, 0) scale(1.04); } to { transform: translate3d(2.5%, -1.7%, 0) scale(1.075); } }
 .network-toolbar { display: flex; gap: 16px; justify-content: space-between; align-items: center; }
 .network-toolbar nav { display: flex; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .network-toolbar nav a { min-height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 14px; border-radius: 11px; color: var(--text-2); font-size: var(--fs-xs); font-weight: 700; }
@@ -317,6 +322,11 @@
 .network-availability .i { width: 11px; color: var(--accent); }
 .network-card__actions { display: flex; flex: 0 0 auto; align-items: center; gap: 7px; }
 .network-card__actions .btn--ghost { color: var(--primary); }
+.network-report { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--text-3); transition: .18s ease; }
+.network-report:hover { border-color: color-mix(in srgb, var(--danger) 35%, var(--line)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); transform: translateY(-1px); }
+.network-report .i { width: 14px; }
+.network-more { display: flex; justify-content: center; padding-top: 22px; }
+.network-more .btn { min-width: 210px; }
 .network-job__icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: var(--primary-soft); color: var(--primary); }
 .network-job__icon .i { width: 20px; }
 .network-request { grid-column: 1 / -1; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; }
@@ -358,6 +368,15 @@
 .network-photo-editor__copy label { cursor: pointer; }
 .network-photo-editor__privacy { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border-radius: 10px; background: color-mix(in srgb, var(--surface) 78%, transparent); color: var(--text-3); font-size: 9px; font-weight: 700; }
 .network-photo-editor__privacy .i { width: 12px; color: var(--primary); }
+.network-visibility { display: flex !important; grid-template-columns: none !important; flex-direction: row !important; align-items: flex-start; gap: 11px !important; padding: 13px 15px; border: 1px solid color-mix(in srgb, var(--primary) 18%, var(--line)); border-radius: 15px; background: color-mix(in srgb, var(--primary-soft) 48%, var(--surface)); cursor: pointer; }
+.network-visibility input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--primary); }
+.network-visibility span { display: grid; gap: 3px; }
+.network-visibility strong { color: var(--text); font-size: 11px; }
+.network-visibility small { color: var(--text-3); font-size: 9px; font-weight: 500; line-height: 1.45; }
+.network-profile-controls { display: grid; gap: 8px; }
+.network-delete-profile { width: fit-content; display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--danger); font-size: 9px; font-weight: 750; }
+.network-delete-profile:hover { text-decoration: underline; }
+.network-delete-profile .i { width: 13px; color: currentColor !important; }
 
 .network-profile-sheet { width: min(94vw, 820px); max-height: min(90vh, 860px); padding: 0; overflow: auto; border: 0; border-radius: 30px; background: var(--surface); color: var(--text); box-shadow: 0 34px 110px rgba(9,20,42,.42); }
 .network-profile-sheet::backdrop { background: rgba(9,18,36,.66); backdrop-filter: blur(8px); }
@@ -392,6 +411,7 @@
 .network-profile-sheet__content > aside > p .i { width: 14px; flex: 0 0 auto; color: var(--accent); }
 .network-profile-sheet__body > footer { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-top: 26px; padding: 18px 20px; border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--line)); border-radius: 19px; background: color-mix(in srgb, var(--primary-soft) 56%, var(--surface)); }
 .network-profile-sheet__body > footer p { margin-top: 3px; color: var(--text-3); font-size: 10px; }
+.network-profile-sheet__actions { display: flex; align-items: center; gap: 8px; }
 
 @media (min-width: 1260px) {
   .network-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -402,6 +422,7 @@
   .community-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; }
   .community-tabs a { gap: 4px; font-size: 10px; }
   .network-hero { grid-template-columns: 1fr; align-items: start; border-radius: 23px; }
+  .network-hero > .network-hero__texture { inset: -4%; background-position: 76% 50%; opacity: .84; }
   .network-hero__actions { justify-content: stretch; }
   .network-hero__actions .btn { flex: 1; }
   .network-toolbar { align-items: stretch; flex-direction: column; }
@@ -417,6 +438,12 @@
   .network-photo-editor { grid-template-columns: auto minmax(0, 1fr); }
   .network-photo-editor__privacy { grid-column: 1 / -1; width: fit-content; }
   .network-profile-sheet__content { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-hero::before,
+  .network-hero::after,
+  .network-hero > .network-hero__texture { animation: none; }
 }
 
 @media (max-width: 440px) {
@@ -445,4 +472,5 @@
   .network-profile-sheet__identity .network-meta { justify-content: center; }
   .network-profile-sheet__content { margin-top: 22px; }
   .network-profile-sheet__body > footer { align-items: stretch; flex-direction: column; text-align: center; }
+  .network-profile-sheet__actions { justify-content: center; }
 }

@@ -80,7 +80,7 @@ export function planPublicacion({ cursoDoc, catalogoCurso, contenido, inventario
     // Quiz
     const id = idQuiz(contenido.cursoId, c.n);
     const actual = quizzes.get(id);
-    const nuevo = { cursoId: contenido.cursoId, n: c.n, estado: 'borrador', preguntas: c.preguntas, generado: contenido.generado ?? iso };
+    const nuevo = { cursoId: contenido.cursoId, n: c.n, estado: 'borrador', version: 1, preguntas: c.preguntas, generado: contenido.generado ?? iso };
     if (validarPreguntas(c.preguntas).length) { plan.quizzes.push({ id, accion: 'omitir-invalido' }); continue; }
     if (!actual) plan.quizzes.push({ id, accion: 'crear', doc: nuevo });
     else if (actual.estado === 'aprobado') plan.quizzes.push({ id, accion: 'omitir-aprobado' });

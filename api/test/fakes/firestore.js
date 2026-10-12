@@ -104,23 +104,28 @@ class DocumentReference {
 }
 
 class Query {
-  constructor(db, path, filtros = [], orden = [], limite = null) {
+  constructor(db, path, filtros = [], orden = [], limite = null, despues = null) {
     this._db = db;
     this._path = path;
     this._filtros = filtros;
     this._orden = orden;
     this._limite = limite;
+    this._despues = despues;
   }
   where(campo, op, valor) {
     const ops = ['==', '!=', '<', '<=', '>', '>=', 'in', 'array-contains'];
     if (!ops.includes(op)) throw new Error(`Operador no soportado en el fake: ${op}`);
-    return new Query(this._db, this._path, [...this._filtros, { campo, op, valor }], this._orden, this._limite);
+    return new Query(this._db, this._path, [...this._filtros, { campo, op, valor }], this._orden, this._limite, this._despues);
   }
   orderBy(campo, direccion = 'asc') {
-    return new Query(this._db, this._path, this._filtros, [...this._orden, { campo, direccion }], this._limite);
+    return new Query(this._db, this._path, this._filtros, [...this._orden, { campo, direccion }], this._limite, this._despues);
   }
   limit(n) {
-    return new Query(this._db, this._path, this._filtros, this._orden, n);
+    return new Query(this._db, this._path, this._filtros, this._orden, n, this._despues);
+  }
+  startAfter(snapshot) {
+    if (!(snapshot instanceof DocumentSnapshot) || !snapshot.exists) throw new Error('startAfter requiere un DocumentSnapshot existente.');
+    return new Query(this._db, this._path, this._filtros, this._orden, this._limite, snapshot.ref.path);
   }
   async get() {
     return this._db._consultar(this);
@@ -299,6 +304,10 @@ export class FakeFirestore {
         }
         return 0;
       });
+    }
+    if (query._despues) {
+      const indice = docs.findIndex(({ ruta }) => ruta === query._despues);
+      docs = indice >= 0 ? docs.slice(indice + 1) : [];
     }
     if (query._limite !== null) docs = docs.slice(0, query._limite);
     return new QuerySnapshot(docs.map(({ ruta, data }) => new DocumentSnapshot(new DocumentReference(this, ruta), clonar(data))));

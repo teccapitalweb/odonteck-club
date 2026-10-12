@@ -6,10 +6,12 @@ en el admin antes de publicarse**. Se apega a `docs/contrato.md` (`v2_cursos`, `
 
 Tiene su propio `package.json` para no mezclar dependencias con el frontend. Node 22, ESM.
 
+El piloto de Ortodoncia cuenta con una revisión editorial trazable en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md`. Sus 25 actividades fueron comprobadas en estructura, evidencia y lenguaje de riesgo, pero **siguen en borrador** hasta que un odontólogo u ortodoncista firme las actividades y las cinco fichas. Este expediente no autoriza publicar ni ejecutar `--apply` contra producción.
+
 ```bash
 cd /c/dev/odonteck-club/scripts/pipeline
 npm install
-npm test          # 66 pruebas con fixtures y dobles: sin red ni credenciales
+npm test          # 67 pruebas con fixtures y dobles: sin red ni credenciales
 ```
 
 ## Reglas comunes
@@ -80,7 +82,7 @@ Modelo `claude-opus-5` con razonamiento adaptativo, salida JSON con esquema y *f
 Cada respuesta pasa por `lib/validador.mjs` (≤70 caracteres y sin "Clase N"; resumen ≤60 palabras; 3–6 conceptos con
 marcas `mm:ss` dentro de la duración y presentes en la transcripción; exactamente 5 interacciones por clase:
 `seleccion`, `seleccion_multiple`, `ordenar`, `relacionar` y `completar`). Cada interacción exige evidencia `mm:ss`,
-solución estructural válida y explicación razonada. Si falla, se reintenta **una vez** con la lista de errores. La ficha del curso (`descripcion` ≤50 palabras,
+solución estructural válida y explicación razonada. El contenido nuevo se marca `compatibleRetos: true`; un revisor puede desmarcarlo en el admin si no debe entrar al entrenamiento adaptativo. Si falla, se reintenta **una vez** con la lista de errores. La ficha del curso (`descripcion` ≤50 palabras,
 5 `aprenderas`, `nivel`) se genera cuando todas sus clases tienen contenido. Se guarda tras cada clase.
 
 ### 5. Publicar a Firestore (borradores)
@@ -93,7 +95,7 @@ node publicar-contenido.mjs --apply
   `clases[].notas` (solo si no hay), y `descripcion/aprenderas/nivel` (solo si siguen siendo los provisionales).
   Lo editado a mano se conserva salvo `--reemplazar-titulos`, `--reemplazar-notas`, `--reemplazar-curso`.
   Update parcial: no reescribe otros campos. Si el curso no existe se avisa; `--crear-faltantes` lo crea con `publicado: false`.
-- `v2_quizzes/{cursoId}_{n}`: `{ cursoId, n, estado: 'borrador', preguntas, generado }`.
+- `v2_quizzes/{cursoId}_{n}`: `{ cursoId, n, estado: 'borrador', version: 1, preguntas, generado }`.
   **Un quiz `aprobado` nunca se toca.** Un `borrador` existente solo se reemplaza con `--reemplazar-borradores`.
   Todo ocurre en una transacción por curso, que relee los quizzes antes de escribir.
 

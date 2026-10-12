@@ -45,7 +45,9 @@ Publicado y conectado en modo API:
 - entrevista inicial, encuestas posteriores e intereses editables;
 - landing y Alexia Concierge;
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
-- evaluaciones v2 con autoría administrativa y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La metacognición no cambia el puntaje;
+- evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje;
+- corte local posterior a producción: Retos reutiliza el banco v2 en modo práctica para selección múltiple, ordenar, relacionar y completar, con crédito parcial, controles accesibles y solución sólo después de responder. Simulación sigue limitada a selección. El admin controla la elegibilidad con `compatibleRetos`; todavía no está desplegado;
+- corte local posterior a producción: Comunidad incluye Directorio real opt-in con perfiles, foto, oportunidades y conexiones privadas. Se endureció con ocultar/eliminar perfil, cierre de oportunidades, cursores estables, límites anti-spam, conexiones idempotentes, bloqueo de vencidas, verificación real de foto en Storage y denuncia/moderación administrativa. La suite local pasa, pero reglas, índices y runtime todavía no están desplegados;
 - pestaña de ficha por clase y descarga privada firmada cuando la ficha está aprobada. Aún no hay fichas clínicas aprobadas: no confundir infraestructura lista con contenido revisado.
 
 Demo local sin `VITE_API_URL`:
@@ -130,12 +132,12 @@ No recrear estos avisos sólo en el cliente: el servidor y la idempotencia son l
 
 ## 7. Verificación del corte
 
-Comprobado el 9 de octubre de 2026:
+Comprobado localmente el 12 de octubre de 2026 (el runtime público sigue en el corte indicado arriba):
 
 ```text
 build frontend de producción       PASS
 api npm run check                  PASS
-api npm test                       115 totales; 114 pass; 0 fail; 1 skip
+api npm test                       138 totales; 137 pass; 0 fail; 1 skip
 npm audit                          0 vulnerabilidades
 dist                               0 PDF; 0 libros
 visor móvil/escritorio             PASS; sin errores de consola
@@ -143,18 +145,18 @@ dominio oficial                    HTTP 200
 API /health                        HTTP 200
 ```
 
-La prueba omitida requiere emuladores Firestore/Storage. No afirmar que las reglas están validadas en producción hasta completar `npm run test:rules` en un entorno donde los emuladores puedan abrir puertos.
+La prueba omitida requiere emuladores Firestore/Storage. El 12 de octubre se reintentó `npm run test:rules`, pero Java/Netty volvió a fallar antes de las aserciones con `Unable to establish loopback connection`; no es un fallo confirmado de las reglas. No afirmar que están validadas ni desplegadas hasta repetirlo en un host funcional.
 
 ## 8. Pendientes reales, por prioridad
 
 1. Smoke autenticado del panel admin con custom claim `admin: true`, incluido upload firmado cuando Storage exista.
 2. Configurar y validar `STRIPE_WEBHOOK_SECRET` en v2 antes de habilitar checkout nuevo. Mientras tanto, conservar el flujo anterior y los beneficios heredados.
 3. Ejecutar pruebas de reglas Firestore/Storage con emuladores.
-4. Implementar liga real sólo con endpoint, consentimiento y reglas de privacidad; no mostrar odontólogos ficticios en producción.
+4. Desplegar y hacer smoke autenticado del Directorio (reglas, índices, miembro y admin) antes de abrirlo masivamente. El código local ya incluye consentimiento opt-in, privacidad, anti-spam y moderación.
 5. Habilitar Storage para futuras cargas administradas; no es necesario para los diez PDF empaquetados actuales.
 6. Auditar licencias antes de publicar nuevos libros/materiales.
 7. Resolver accesibilidad pendiente y dividir el chunk grande del build demo.
-8. Migrar los 68 quizzes aprobados y regenerar/revisar el catálogo completo con el formato avanzado de 5 interacciones por clase. El pipeline ya exige evidencia `mm:ss` y diversidad (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`), pero `scripts/pipeline/out/` aún no existe y el entorno local no tiene llaves Bunny/Anthropic: no afirmar que los 77 videos fueron analizados. También faltan revisión odontológica y las 77 fichas PDF/Storage.
+8. Migrar los 68 quizzes aprobados y regenerar/revisar el catálogo completo con el formato avanzado de 5 interacciones por clase. El piloto local de Ortodoncia ya tiene revisión editorial documentada en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md` y cuatro grupos de redacción clínica corregidos, pero continúa en `borrador` hasta que un odontólogo u ortodoncista firme las 25 actividades y cinco fichas. El pipeline exige evidencia `mm:ss` y diversidad (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`); no afirmar que los 77 videos fueron analizados. También faltan revisión odontológica del resto del catálogo y las demás fichas PDF/Storage.
 9. El reproductor carga la API oficial Player.js de Bunny: al emitir `ended`, registra la vista una sola vez y abre el quiz de la clase. El botón “Finalizar y abrir reto” cubre bloqueadores de red/script y accesibilidad.
 
 ## 9. Flujo seguro de trabajo

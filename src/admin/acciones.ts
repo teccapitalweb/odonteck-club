@@ -5,7 +5,7 @@ import { mensajeError } from '../core/auth';
 import { resumenEncuestasDemo } from '../core/encuestas';
 import {
   Admin, borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
-  guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, publicarAvisoAdmin,
+  guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
   reordenarCursosAdmin, revocarCortesiaAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
@@ -41,7 +41,7 @@ function quizDesdeForm(f: HTMLFormElement): Quiz {
   for (let i = 0; d.has(`p-${i}-q`); i++) {
     const tipo = String(d.get(`p-${i}-tipo`) || 'seleccion') as NonNullable<Pregunta['tipo']>;
     const base = { id: String(d.get(`p-${i}-id`) || `p${i + 1}`), tipo, q: String(d.get(`p-${i}-q`)).trim(),
-      instruccion: String(d.get(`p-${i}-instruccion`) || '').trim(), explicacion: String(d.get(`p-${i}-explicacion`) || '').trim() };
+      instruccion: String(d.get(`p-${i}-instruccion`) || '').trim(), compatibleRetos: d.get(`p-${i}-compatible-retos`) === '1', explicacion: String(d.get(`p-${i}-explicacion`) || '').trim() };
     if (tipo === 'seleccion' || tipo === 'seleccion_multiple') {
       const opciones = Array.from({ length: 6 }, (_, o) => String(d.get(`p-${i}-o-${o}`) || '').trim()).filter(Boolean);
       preguntas.push(tipo === 'seleccion'
@@ -212,6 +212,15 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (ba && Datos.modo === 'demo' && confirm('¿Borrar este aviso?')) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
     const oh = el.closest<HTMLElement>('[data-ocultar-hilo]');
     if (oh) { const hilo = Comunidad.todos().find((h) => h.id === oh.dataset.ocultarHilo); try { await moderarHiloAdmin(oh.dataset.ocultarHilo!, !hilo?.oculto); await cargarAdmin(current().path, current().query, true); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    const rd = el.closest<HTMLButtonElement>('[data-directorio-reporte]');
+    if (rd) {
+      const [id, estado, accion] = rd.dataset.directorioReporte!.split(':') as [string, 'revisado' | 'descartado', 'ninguna' | 'ocultar' | 'cerrar'];
+      const mensaje = accion === 'ocultar' ? '¿Ocultar el perfil denunciado?' : accion === 'cerrar' ? '¿Cerrar la oportunidad denunciada?' : '¿Descartar esta denuncia sin retirar contenido?';
+      if (!confirm(mensaje)) return;
+      rd.disabled = true;
+      try { await moderarReporteDirectorioAdmin(id, estado, accion); await cargarAdmin(current().path, current().query, true); toast('Denuncia revisada', 'shield-check'); render(); }
+      catch (err) { toast(mensajeError(err), 'alert-triangle'); rd.disabled = false; }
+    }
     if (el.closest('[data-restablecer-demo]') && confirm('Esto borra todos los cambios hechos en el demo. ¿Continuar?')) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
     if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
     if (el.closest('[data-exportar-encuestas]')) { exportarEncuestasCsv(); toast('CSV descargado', 'download'); }

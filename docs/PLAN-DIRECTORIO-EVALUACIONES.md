@@ -1,6 +1,6 @@
 # OdonTeck Club · Directorio, evaluaciones interactivas y fichas por clase
 
-Estado: directorio implementado en local. El motor v2, el editor administrativo, la validación API y el demo ya soportan selección, selección múltiple, ordenar, relacionar y completar con compatibilidad hacia atrás. La clase ya muestra una pestaña de ficha con estado honesto y la API firma el PDF privado solo cuando está aprobado. Falta migrar/autorizar el contenido clínico y producir las fichas. No publicar contenido clínico generado sin revisión odontológica.
+Estado: directorio implementado en local. El motor v2, el editor administrativo, la validación API y el demo ya soportan selección, selección múltiple, ordenar, relacionar y completar con compatibilidad hacia atrás. La clase ya muestra una pestaña de ficha con estado honesto y la API firma el PDF privado solo cuando está aprobado. El piloto de Ortodoncia tiene revisión editorial y matriz de 25 actividades en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md`; falta la firma de un odontólogo u ortodoncista, migrar/autorizar el contenido clínico restante y producir las demás fichas. No publicar contenido clínico generado sin revisión odontológica.
 
 ## 1. Directorio profesional en Comunidad
 
@@ -18,7 +18,20 @@ Crear networking útil sin convertir Comunidad en una bolsa de spam ni exponer d
 6. Solicitudes privadas con estado pendiente, aceptada o rechazada.
 7. Contacto oculto en toda respuesta pública y revelado únicamente después de aceptar.
 
-No se otorgan puntos por enviar solicitudes o publicar oportunidades: así se evita incentivar spam. Moderación administrativa, denuncia, paginación e índices de búsqueda serán el siguiente endurecimiento antes de una apertura masiva.
+No se otorgan puntos por enviar solicitudes o publicar oportunidades: así se evita incentivar spam.
+
+### Endurecimiento local para apertura masiva
+
+- Paginación por cursor estable para perfiles y oportunidades; el cliente sólo agrega la página pedida.
+- Perfil ocultable y eliminable. Al eliminarlo se cierran oportunidades propias, se rechazan solicitudes pendientes y se retira la foto.
+- Máximo de tres oportunidades activas por autor y cierre explícito desde la interfaz.
+- Solicitudes idempotentes por remitente/destinatario/oportunidad, máximo de diez cada 24 horas y espera de 30 días tras un rechazo.
+- Oportunidades vencidas no aceptan nuevas conexiones.
+- Denuncia privada de perfiles y oportunidades, máximo de diez al día, con bandeja administrativa para ocultar/cerrar o descartar.
+- El cliente declara el tamaño de la foto para firmar la subida, pero la API vuelve a comprobar en Storage que el objeto real sea WebP y no exceda 2 MB.
+- Reglas del cliente niegan acceso directo a denuncias e índices compuestos quedan descritos en `api/firestore.indexes.json`.
+
+Este endurecimiento está implementado y probado **sólo en local**. Antes de abrirlo en producción faltan desplegar reglas e índices, ejecutar `npm run test:rules` en un host donde el emulador Firestore pueda abrir loopback y hacer un smoke autenticado con miembro y administrador reales.
 
 ## 2. Principios de las nuevas evaluaciones
 
@@ -72,12 +85,12 @@ Cada quiz generado tendrá cinco interacciones distintas —selección clínica,
 
 ## 4. Entregas seguras
 
-1. Directorio local completo, pruebas de privacidad y responsive.
+1. Directorio local completo, pruebas de privacidad, anti-spam, moderación, paginación y responsive. **Implementado en local; no desplegado.**
 2. Esquema v2 + calificadores puros y pruebas unitarias para selección múltiple, ordenar, relacionar y completar. **Implementado en local.**
-3. Render accesible de cada interacción en una clase demo, con teclado y alternativa por selección, más autoría de los cinco tipos en admin. **Implementado en local.** La experiencia de miembro usa un reto guiado de una pregunta por paso, progreso visible, descarte de distractores, bitácora privada de razonamiento, confianza obligatoria, calibración posterior, revisión por pregunta y resultado porcentual. La confianza y la bitácora no alteran el puntaje clínico. Ordenar usa tarjetas con botones subir/bajar para no depender de arrastrar. Falta migrar contenido aprobado para ver estas variantes en las 68 evaluaciones existentes.
-4. Adaptación de Retos al banco v2 sin romper XP, intentos ni logros previos.
+3. Render accesible de cada interacción en una clase demo, con teclado y alternativa por selección, más autoría de los cinco tipos en admin. **Implementado en local.** La experiencia de miembro usa un reto guiado de una pregunta por paso, progreso visible, descarte de distractores, bitácora privada de razonamiento, confianza obligatoria, calibración posterior, revisión por pregunta y resultado porcentual. La API conserva un historial acotado y versionado de respuestas, confianza, bitácora, mejor puntuación y aprobación previa; la confianza y la bitácora no alteran el puntaje clínico. Modificar preguntas devuelve el contenido a borrador salvo aprobación explícita. Ordenar usa tarjetas con botones subir/bajar para no depender de arrastrar. Falta migrar contenido aprobado para ver estas variantes en las 68 evaluaciones existentes.
+4. Adaptación de Retos al banco v2 sin romper XP, intentos ni logros previos. **Implementado en local.** El modo práctica sirve y califica selección múltiple, ordenar, relacionar y completar; el modo relámpago conserva únicamente selección por su límite de tiempo. `compatibleRetos: false` excluye una pregunta. La API entrega sólo configuración pública y devuelve solución, puntaje parcial y explicación después del intento.
 5. Generador de fichas, validador de cobertura y un solo curso piloto. La ruta privada, el estado de UI y el auditor de cobertura ya existen; faltan las fuentes del piloto y la plantilla final.
-6. Revisión odontológica del piloto.
+6. Revisión odontológica del piloto. La revisión editorial y el formato de firma ya están listos; falta que un odontólogo u ortodoncista contraste los cinco videos, 25 actividades y cinco fichas y autorice la versión.
 7. Procesamiento de las 77 clases, carga privada y comprobación de cobertura total.
 
 Bloqueos reales antes de los pasos 5–7: transcripciones/fuentes disponibles, aprobación del costo si se usa el modelo del pipeline, almacenamiento privado operativo y una persona odontóloga responsable de la revisión.

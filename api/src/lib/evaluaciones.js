@@ -33,7 +33,7 @@ export function calificarPregunta(p, respuesta, i = 0) {
   let puntos = 0;
   let respuestaCorrecta;
   if (tipo === 'seleccion') {
-    if (respuesta !== null && !Number.isInteger(respuesta)) throw invalido(`"respuestas[${i}]" debe ser un índice o null.`);
+    if (respuesta !== null && (!Number.isInteger(respuesta) || respuesta < 0 || respuesta >= (p.opciones?.length ?? 0))) throw invalido(`"respuestas[${i}]" debe ser un índice válido o null.`);
     puntos = respuesta === p.correcta ? 1 : 0;
     respuestaCorrecta = p.correcta;
   } else if (tipo === 'seleccion_multiple') {

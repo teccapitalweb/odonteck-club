@@ -20,12 +20,12 @@ export interface Material {
 export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string | null; cursoId?: string; publicado?: boolean; reservas?: number; reservado?: boolean }
 export interface Pregunta {
   id?: string; tipo?: 'seleccion' | 'seleccion_multiple' | 'ordenar' | 'relacionar' | 'completar';
-  q: string; instruccion?: string; referenciaVideo?: string; casoClinico?: string; competencia?: string; nivelCognitivo?: 'Aplicar' | 'Analizar' | 'Decidir'; opciones?: string[]; correcta?: number; correctas?: number[]; explicacion: string;
+  q: string; instruccion?: string; referenciaVideo?: string; casoClinico?: string; competencia?: string; nivelCognitivo?: 'Aplicar' | 'Analizar' | 'Decidir'; compatibleRetos?: boolean; opciones?: string[]; correcta?: number; correctas?: number[]; explicacion: string;
   elementos?: { id: string; texto: string }[]; ordenCorrecto?: string[];
   izquierda?: { id: string; texto: string }[]; derecha?: { id: string; texto: string }[]; pares?: Record<string, string>;
   plantilla?: string; huecos?: { id: string; etiqueta?: string; respuestas?: string[] }[];
 }
-export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; preguntas: Pregunta[]; actualizado: string }
+export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; version?: number; preguntas: Pregunta[]; actualizado: string }
 export interface MiembroDemo { uid: string; nombre: string; email: string; plan: string | null; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; esVip?: boolean; esAdmin?: boolean; cortesiaHasta?: string | null; cortesiaMotivo?: string }
 export interface Aviso { id: string; titulo: string; texto: string; enlace?: string | null; fecha: string; autor?: string }
 export interface Config { precioMensual: number; precioAnual: number; descuentoVIP: number; whatsappSoporte: string; canalWhatsApp: string; praxiaUrl: string }

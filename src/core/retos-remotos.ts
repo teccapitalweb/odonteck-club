@@ -33,8 +33,19 @@ export interface PreguntaSesionReto {
   n: number;
   indice: number;
   area: string;
+  id: string;
+  tipo: 'seleccion' | 'seleccion_multiple' | 'ordenar' | 'relacionar' | 'completar';
   q: string;
-  opciones: string[];
+  instruccion?: string;
+  casoClinico?: string;
+  competencia?: string;
+  nivelCognitivo?: string;
+  opciones?: string[];
+  elementos?: { id: string; texto: string }[];
+  izquierda?: { id: string; texto: string }[];
+  derecha?: { id: string; texto: string }[];
+  plantilla?: string;
+  huecos?: { id: string; etiqueta?: string }[];
 }
 
 interface SesionReto {
@@ -47,8 +58,12 @@ interface SesionReto {
 export interface RespuestaReto {
   ref: string;
   acertada: boolean;
-  correcta: number;
+  puntos: number;
+  tipo: PreguntaSesionReto['tipo'];
+  correcta: number | null;
+  respuestaCorrecta: unknown;
   explicacion: string;
+  referenciaVideo?: string;
   xpGanado: number;
   estado: ResumenRetos['estado'];
   recompensas?: { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] };
@@ -75,16 +90,16 @@ export const RetosRemotos = {
   async crearSesion(modo: ModoReto, area = 'Todas', limite?: number): Promise<SesionReto> {
     return api<SesionReto>('/retos/sesion', { method: 'POST', json: { modo, area, ...(limite ? { limite } : {}) } });
   },
-  async responder(pregunta: PreguntaSesionReto, opcion: number | null): Promise<RespuestaReto> {
-    const respuesta = await api<RespuestaReto>('/retos/responder', {
+  async responder(pregunta: PreguntaSesionReto, respuesta: unknown): Promise<RespuestaReto> {
+    const resultado = await api<RespuestaReto>('/retos/responder', {
       method: 'POST',
-      json: { cursoId: pregunta.cursoId, n: pregunta.n, indice: pregunta.indice, opcion },
+      json: { cursoId: pregunta.cursoId, n: pregunta.n, indice: pregunta.indice, respuesta },
     });
-    if (cache) cache = { ...cache, estado: respuesta.estado };
-    if (respuesta.recompensas?.puntosGanados || respuesta.recompensas?.logrosNuevos?.length) {
-      window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: respuesta.recompensas }));
+    if (cache) cache = { ...cache, estado: resultado.estado };
+    if (resultado.recompensas?.puntosGanados || resultado.recompensas?.logrosNuevos?.length) {
+      window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: resultado.recompensas }));
     }
-    return respuesta;
+    return resultado;
   },
   limpiar() { cache = null; error = null; pendiente = null; },
 };

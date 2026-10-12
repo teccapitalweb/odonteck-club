@@ -33,7 +33,7 @@ test('curso con datos provisionales: actualiza títulos, duración, notas y fich
   assert.equal(plan.actualizacion.actualizado, '2026-09-18T00:00:00.000Z');
   assert.equal(doc.clases[0].titulo, 'Clase 1', 'no muta el doc original');
   assert.deepEqual(plan.quizzes.map((q) => [q.id, q.accion]), [[`${cat.id}_1`, 'crear'], [`${cat.id}_2`, 'crear']]);
-  assert.deepEqual(plan.quizzes[0].doc, { cursoId: cat.id, n: 1, estado: 'borrador', preguntas: contenido.clases[0].preguntas, generado: contenido.generado });
+  assert.deepEqual(plan.quizzes[0].doc, { cursoId: cat.id, n: 1, estado: 'borrador', version: 1, preguntas: contenido.clases[0].preguntas, generado: contenido.generado });
   assert.match(formatearPlan(plan), /clases\[n=1\]\.titulo\n\s+- Clase 1\n\s+\+ Cefalometría lateral/);
 });
 

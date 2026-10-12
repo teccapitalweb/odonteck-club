@@ -59,5 +59,6 @@ service cloud.firestore {
     match /v2_directorio_perfiles/{id}     { allow read, write: if false; }
     match /v2_directorio_oportunidades/{id}{ allow read, write: if false; }
     match /v2_directorio_conexiones/{id}   { allow read, write: if false; }
+    match /v2_directorio_reportes/{id}     { allow read, write: if false; }
   }
 }

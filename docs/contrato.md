@@ -91,16 +91,20 @@ Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 - `v2_directorio_perfiles/{uid}`: perfil opt-in con titular, etapa, especialidades, ubicación, modalidades, disponibilidad, habilidades, bio, visibilidad, `foto` pública opcional y `contacto` privado.
 - `v2_directorio_oportunidades/{id}`: empleo, colaboración, mentoría, suplencia, prácticas o consultorio compartido; expira a los 45 días.
 - `v2_directorio_conexiones/{id}`: solicitud entre dos UID, mensaje y estado `pendiente|aceptada|rechazada`.
+- `v2_directorio_reportes/{hash}`: denuncia privada con tipo, objetivo, motivo, detalle, estado y acción administrativa. El hash estable evita duplicados; las reglas niegan lectura y escritura directa al cliente.
 
 La API nunca incluye `contacto` en la proyección pública del perfil. Solo lo entrega a las dos partes después de que la persona destinataria acepta la conexión. Crear perfil, explorar y conectar está disponible para cualquier usuario autenticado; publicar oportunidades requiere VIP o admin.
 
-La foto profesional se recorta en el navegador a un cuadrado de 720 px y se convierte a WebP antes de subirla. La API sólo firma durante 10 minutos la ruta exacta `directorio/perfiles/{uid}/avatar.webp`, con un máximo declarado de 2 MB; ningún cliente puede escribir directamente mediante las reglas de Storage. La foto sí es pública porque forma parte visible de la tarjeta del directorio.
+La foto profesional se recorta en el navegador a un cuadrado de 720 px y se convierte a WebP antes de subirla. La API sólo firma durante 10 minutos la ruta exacta `directorio/perfiles/{uid}/avatar.webp`, con un máximo declarado de 2 MB y, al guardar el perfil, comprueba nuevamente el `contentType` y tamaño reales en Storage; ningún cliente puede escribir directamente mediante las reglas de Storage. La foto sí es pública porque forma parte visible de la tarjeta del directorio.
 
 ### `v2_quizzes/{cursoId}_{n}`
-Los registros existentes `{ q, opciones, correcta, explicacion }` siguen siendo válidos y se interpretan como `tipo: 'seleccion'`. La v2 admite además `seleccion_multiple`, `ordenar`, `relacionar` y `completar`, con respuesta tipada y crédito parcial. GET solo entrega configuración pública; las reglas de calificación y explicaciones permanecen en servidor hasta contestar. El detalle técnico está en `docs/PLAN-DIRECTORIO-EVALUACIONES.md`.
+Los registros existentes `{ q, opciones, correcta, explicacion }` siguen siendo válidos y se interpretan como `tipo: 'seleccion'`. La v2 admite además `seleccion_multiple`, `ordenar`, `relacionar` y `completar`, con respuesta tipada y crédito parcial. `version` comienza en 1 y aumenta cuando cambia el contenido; editar preguntas sin aprobarlas explícitamente devuelve el quiz a `borrador`. GET solo entrega configuración pública; las reglas de calificación y explicaciones permanecen en servidor hasta contestar. El detalle técnico está en `docs/PLAN-DIRECTORIO-EVALUACIONES.md`.
 
 ### `v2_intentos/{uid}_{cursoId}_{n}`
-`{ uid, cursoId, n, correctas, total, puntaje: 0..100, aprobado, fecha }` (`puntaje` puede faltar en intentos anteriores).
+Conserva el último resultado y un historial privado acotado:
+`{ uid, cursoId, n, versionQuiz, correctas, total, puntaje: 0..100, aprobado, fecha, intentos, mejorPuntaje, aprobadoAlgunaVez, historial[] }`.
+
+Cada entrada de `historial` guarda número de intento, versión del quiz, respuestas, puntuación, confianza y bitácora opcional. Se retienen los diez intentos más recientes para no crecer sin límite. La confianza y la justificación nunca alteran la calificación. Los documentos anteriores se migran de forma compatible al siguiente intento; `puntaje`, `versionQuiz` e `historial` pueden faltar en datos heredados.
 
 ### `v2_retos_estados/{uid}`
 Estado personal del entrenamiento clínico, escrito únicamente por la API:
@@ -178,24 +182,26 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/recompensas/notificaciones/leidas` | Marca como leídos los avisos personales de logros y canjes |
 | GET | `/certificados` | `Certificado[]` del usuario |
 | GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }` |
-| GET | `/quiz/:cursoId/:n` | `{ preguntas: [{ q, opciones }] }` (solo aprobados, sin respuestas) |
-| POST | `/quiz/:cursoId/:n` | `{ respuestas: number[] }` → `{ correctas, total, aprobado, detalle, recompensas }` |
+| GET | `/quiz/:cursoId/:n` | `{ version, preguntas }` (solo aprobados; sin soluciones, explicaciones ni marcas de evidencia) |
+| POST | `/quiz/:cursoId/:n` | `{ respuestas, confianzas?: (1\|2\|3)[], justificaciones?: string[] }` → `{ correctas, total, puntaje, aprobado, detalle, recompensas, intento }`; conserva hasta diez intentos y premia una sola vez |
 | GET | `/retos/resumen` | Estado, disponibilidad por área y sesión recomendada; sólo cuenta quizzes aprobados y clases accesibles |
-| POST | `/retos/sesion` | `{ modo:'practica'|'relampago', area?, limite? }` → preguntas adaptativas sin respuestas ni explicaciones |
-| POST | `/retos/responder` | `{ cursoId, n, indice, opcion:number|null }` → calificación, feedback, XP, recompensas y dominio actualizados en servidor |
+| POST | `/retos/sesion` | `{ modo:'practica'|'relampago', area?, limite? }` → preguntas adaptativas con unión pública por `tipo`, sin respuestas ni explicaciones. `relampago` sirve sólo `seleccion` |
+| POST | `/retos/responder` | `{ cursoId, n, indice, respuesta }` (compatibilidad: `opcion`) → `{ acertada, puntos, tipo, respuestaCorrecta, explicacion, XP, recompensas, estado }`. La solución sólo aparece después del intento |
 | GET | `/foro?cursoId=` | `Hilo[]` (sin ocultos) |
 | POST | `/foro` | `{ titulo, texto, cursoId? }` → Hilo |
 | GET | `/foro/:id` | `{ hilo, respuestas }` |
 | POST | `/foro/:id/respuestas` | `{ texto }` → Respuesta |
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
-| GET | `/directorio` | Perfiles visibles, oportunidades activas y conexiones del usuario; sin contacto público |
+| GET | `/directorio?limite=&perfilesAntes=&oportunidadesAntes=` | Perfiles visibles y oportunidades activas paginados con cursores opacos, más conexiones del usuario; sin contacto público |
 | PUT | `/directorio/perfil` | Crea/actualiza el perfil profesional opt-in |
+| DELETE | `/directorio/perfil` | Retira el perfil, foto y cierra oportunidades/solicitudes pendientes propias |
 | POST | `/directorio/perfil/foto/subida` | Firma por 10 min la subida de la foto WebP optimizada a la ruta exclusiva del usuario |
 | DELETE | `/directorio/perfil/foto` | Elimina la foto propia y limpia su referencia del perfil |
 | POST | `/directorio/oportunidades` | Publica oportunidad por 45 días (VIP/admin) |
-| PATCH | `/directorio/oportunidades/:id` | Dueño/admin cambia `publicada|cerrada` |
-| POST | `/directorio/conexiones` | Envía solicitud privada a perfil u oportunidad |
+| PATCH | `/directorio/oportunidades/:id` | Dueño/admin cierra una oportunidad |
+| POST | `/directorio/conexiones` | Envía solicitud privada idempotente a perfil u oportunidad; máximo 10/24 h y sin reintento por 30 días tras rechazo |
 | PATCH | `/directorio/conexiones/:id` | Destinatario acepta o rechaza; aceptación habilita contacto |
+| POST | `/directorio/reportes` | Denuncia privada de perfil u oportunidad; deduplicada y limitada a 10/24 h |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
 | GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
 | POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada y su evento de puntos |
@@ -219,6 +225,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | DELETE | `/admin/miembros/:uid/cortesia` | Revoca |
 | GET | `/admin/foro` | Todos, incluidos ocultos |
 | PATCH | `/admin/foro/:id` | `{ oculto }` |
+| GET | `/admin/directorio/reportes?estado=` | Hasta 100 denuncias, sin exponer el UID del reportante |
+| PATCH | `/admin/directorio/reportes/:id` | `{ estado:'revisado'|'descartado', accion:'ninguna'|'ocultar'|'cerrar' }` |
 | GET | `/admin/quizzes?estado=` | Lista |
 | PATCH | `/admin/quizzes/:id` | `{ preguntas?, estado? }` |
 | GET · POST | `/admin/avisos` | Lista · publicar |

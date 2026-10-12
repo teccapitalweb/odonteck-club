@@ -240,6 +240,10 @@
 .quiz__interactive > label > span:not(.quiz-match__arrow) { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: var(--primary); color: #fff; font-family: var(--font-mono); font-weight: 800; }
 .quiz-q--ok .quiz__interactive { border-color: var(--success); }
 .quiz-q--partial .quiz__interactive { border-color: var(--warning); }
+.lesson-workspace { grid-template-columns: minmax(0, 1.7fr) minmax(330px, 1fr); align-items: start; gap: 24px; }
+.lesson-workspace[data-lesson-mode="quiz"] { grid-template-columns: minmax(0, 1fr); }
+.lesson-workspace[data-lesson-mode="quiz"] > .lesson-stage { display: none; }
+.lesson-workspace[data-lesson-mode="quiz"] > .lesson-tools { width: min(100%, 1100px); justify-self: center; }
 .lesson-tools { min-width: 0; }
 .lesson-tools__tabs { overflow-x: auto; scrollbar-width: none; }
 .lesson-tools__tabs::-webkit-scrollbar { display: none; }
@@ -444,9 +448,9 @@
   .lesson-tools__tabs button { min-width: 0; padding-inline: 5px; gap: 3px; font-size: 10px; }
   .lesson-tools__tabs .i { width: 13px; height: 13px; }
   .lesson-quiz__time, .quiz-nav__hint { display: none; }
-  .lesson-quiz__badges { margin-left: 0; justify-items: start; }
+  .lesson-quiz__badges { grid-column: 1 / -1; width: 100%; margin-left: 0; justify-items: start; }
   .lesson-quiz__draft { white-space: normal; }
-  .lesson-quiz__intro { padding: 14px; }
+  .lesson-quiz__intro { display: grid; grid-template-columns: 42px minmax(0, 1fr); padding: 14px; }
   .quiz-studio { grid-template-columns: 1fr; }
   .quiz-coach { position: static; order: -1; grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 10px; }
   .quiz-coach__head, .quiz-coach__checklist, .quiz-coach__safe { display: none; }
@@ -479,6 +483,10 @@
   .quiz-confidence__options button { min-width: 0; }
   .quiz-score { grid-template-columns: 68px minmax(0, 1fr); gap: 10px; padding: 12px; }
   .quiz-score__ring { width: 64px; height: 64px; }
+}
+
+@media (max-width: 1024px) {
+  .lesson-workspace { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ═══ Material (biblioteca) ═══ */

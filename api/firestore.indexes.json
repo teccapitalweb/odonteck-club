@@ -1,0 +1,69 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "v2_directorio_perfiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visible", "order": "ASCENDING" },
+        { "fieldPath": "actualizado", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_oportunidades",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "estado", "order": "ASCENDING" },
+        { "fieldPath": "fecha", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_oportunidades",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "autorUid", "order": "ASCENDING" },
+        { "fieldPath": "estado", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_oportunidades",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "autorUid", "order": "ASCENDING" },
+        { "fieldPath": "fecha", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_conexiones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "deUid", "order": "ASCENDING" },
+        { "fieldPath": "creado", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_conexiones",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "paraUid", "order": "ASCENDING" },
+        { "fieldPath": "creado", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_reportes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "estado", "order": "ASCENDING" },
+        { "fieldPath": "creado", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_directorio_reportes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "reportanteUid", "order": "ASCENDING" },
+        { "fieldPath": "creado", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

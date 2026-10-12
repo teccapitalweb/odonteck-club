@@ -22,12 +22,26 @@ export interface DetalleMiembroAdmin extends MiembroDemo {
   certificados: { folio: string; cursoTitulo: string; emitido: string }[];
 }
 
+export interface ReporteDirectorioAdmin {
+  id: string;
+  tipo: 'perfil' | 'oportunidad';
+  objetivoId: string;
+  resumenObjetivo: string;
+  motivo: 'spam' | 'suplantacion' | 'contenido_inapropiado' | 'datos_falsos' | 'otro';
+  detalle: string;
+  estado: 'pendiente' | 'revisado' | 'descartado';
+  creado: string;
+  actualizado: string;
+  accion: 'ninguna' | 'ocultar' | 'cerrar' | null;
+}
+
 interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; publicUrl?: string }
 
 const estado = {
   resumen: null as ResumenAdmin | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
+  reportesDirectorio: [] as ReporteDirectorioAdmin[],
   detalleMiembro: null as DetalleMiembroAdmin | null,
   error: '' as string,
 };
@@ -94,6 +108,7 @@ export const Admin = {
   get resumen() { return estado.resumen; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
+  get reportesDirectorio() { return estado.reportesDirectorio; },
   get detalleMiembro() { return estado.detalleMiembro; },
   get error() { return estado.error; },
   limpiarError() { estado.error = ''; },
@@ -140,6 +155,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
       }, true));
     } else if (path === '/admin/comunidad') {
       tareas.push(cargar('foro', async () => { Comunidad.hidratar(await api<any[]>('/admin/foro')); }, forzar));
+      tareas.push(cargar('directorio-reportes', async () => { estado.reportesDirectorio = await api<ReporteDirectorioAdmin[]>('/admin/directorio/reportes'); }, forzar));
     } else if (path === '/admin/avisos') {
       tareas.push(cargar('avisos', async () => { Datos.hidratarAdmin('avisos', await api<Aviso[]>('/admin/avisos')); }, forzar));
     } else if (path === '/admin/encuestas') {
@@ -267,6 +283,16 @@ export async function revocarCortesiaAdmin(uid: string) {
 export async function moderarHiloAdmin(id: string, oculto: boolean) {
   if (Datos.modo === 'demo') Comunidad.alternarOculto(id);
   else { await api(`/admin/foro/${encodeURIComponent(id)}`, { method: 'PATCH', json: { oculto } }); cargados.delete('foro'); }
+}
+
+export async function moderarReporteDirectorioAdmin(id: string, estadoReporte: 'revisado' | 'descartado', accion: 'ninguna' | 'ocultar' | 'cerrar') {
+  if (Datos.modo === 'demo') {
+    const reporte = estado.reportesDirectorio.find((x) => x.id === id);
+    if (reporte) { reporte.estado = estadoReporte; reporte.accion = accion; reporte.actualizado = new Date().toISOString(); }
+    return;
+  }
+  await api(`/admin/directorio/reportes/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: estadoReporte, accion } });
+  cargados.delete('directorio-reportes');
 }
 
 export async function publicarAvisoAdmin(aviso: Omit<Aviso, 'id' | 'fecha'>) {

@@ -3,7 +3,7 @@
 import { createIcons, icons } from 'lucide';
 import { esc, iniciales } from '../ui/partials';
 import {
-  nivel, nivelConXPJuegos, retoDiario, completarDiaria, bancoPreguntas, barajar, type Pregunta,
+  nivel, nivelConXPJuegos, retoDiario, completarDiaria, bancoPreguntas, barajar, calificarPreguntaReto, type Pregunta,
   mazoDeHoy, repasarCarta, estatsMazo, type Flashcard, type Calidad, type SR,
   obtenerSR, restaurarSR, pendientesHoy, proximoRepaso, areasPreguntas, misiones,
   casos, resolverCaso, casosResueltos, casoResuelto, registrarQuiz, mejorQuiz, statsQuiz, type Caso,
@@ -84,7 +84,7 @@ function onClick(e: Event) {
     hub: () => { parar(); vista = 'hub'; hub(); },
     'retos-retry': () => { RetosRemotos.cargar(true).then(() => hub()); },
     'ir-liga': vistaLiga,
-    'ir-quiz': bibliotecaQuiz, 'quiz-jugar': () => iniciarQuiz(el.dataset.area || 'Todas', (el.dataset.modo || 'relampago') as ModoQuiz), 'quiz-resp': () => respQuiz(+el.dataset.i!), 'quiz-sig': sigQuiz,
+    'ir-quiz': bibliotecaQuiz, 'quiz-jugar': () => iniciarQuiz(el.dataset.area || 'Todas', (el.dataset.modo || 'relampago') as ModoQuiz), 'quiz-resp': () => responderQuiz(+el.dataset.i!), 'quiz-enviar': enviarQuiz, 'quiz-move': () => moverQuiz(el), 'quiz-sig': sigQuiz,
     'ir-caso': () => elegirCaso(), 'caso-jugar': () => iniciarCaso(el.dataset.id!),
     'caso-resp': () => respCaso(+el.dataset.i!), 'caso-sig': sigCaso,
     'ir-flash': iniciarFlash, 'flash-flip': flipFlash, 'flash-cal': () => calFlash(el.dataset.cal as Calidad), 'flash-undo': undoFlash,
@@ -273,7 +273,7 @@ function bibliotecaQuiz() {
     <div class="ar-head" style="margin-bottom:8px">
       <span class="chip chip--primary"><i data-lucide="brain-circuit" class="i"></i>Banco clínico</span>
       <h2 class="display" style="font-size:var(--fs-2xl)">Elige cómo quieres entrenar</h2>
-      <p class="muted">${preguntas} preguntas aprobadas · ${areas.length} áreas${Datos.modo === 'api' && remoto ? ` · ${remoto.estado.quiz.precision}% de precisión acumulada` : ` · récord ${sq.mejor}`}</p>
+      <p class="muted">${preguntas} ${Datos.modo === 'api' ? 'preguntas aprobadas' : 'reactivos del demo'} · ${areas.length} áreas${Datos.modo === 'api' && remoto ? ` · ${remoto.estado.quiz.precision}% de precisión acumulada` : ` · récord ${sq.mejor}`}</p>
     </div>
     <div class="ar-mode-grid">
       ${modoCard('practica', 'Todas', 'graduation-cap', 'Estudio guiado', 'Sin reloj · feedback clínico después de cada respuesta', `${Acceso.vip() ? 10 : 3} preguntas`, '#4fa899')}
@@ -296,9 +296,15 @@ async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
         id: pregunta.ref,
         curso: pregunta.curso,
         area: pregunta.area,
+        tipo: pregunta.tipo,
         q: pregunta.q,
-        opciones: pregunta.opciones,
-        correcta: -1,
+        instruccion: pregunta.instruccion,
+        opciones: pregunta.opciones || [],
+        elementos: pregunta.elementos,
+        izquierda: pregunta.izquierda,
+        derecha: pregunta.derecha,
+        plantilla: pregunta.plantilla,
+        huecos: pregunta.huecos,
         explicacion: '',
         remota: pregunta,
       }));
@@ -307,7 +313,7 @@ async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
       return pinta(`${barra()}<div class="ar-empty"><i data-lucide="cloud-off" class="i"></i><strong>No se pudo iniciar la sesión</strong><span class="faint">${esc(mensaje)}</span><button class="btn btn--secondary" data-a="ir-quiz">Volver a intentarlo</button></div>`);
     }
   } else {
-    pool = barajar(bancoPreguntas().filter((p) => area === 'Todas' || p.area === area));
+    pool = barajar(bancoPreguntas().filter((p) => (area === 'Todas' || p.area === area) && (modo !== 'relampago' || p.tipo === 'seleccion')));
   }
   if (!pool.length) return pinta(`${barra()}<div class="ar-empty">Aún no hay preguntas${area !== 'Todas' ? ` de ${area}` : ''} en los cursos.</div>`);
   const lim = Acceso.vip() ? (modo === 'practica' ? 10 : 8) : 3;
@@ -330,11 +336,10 @@ function pintaQuiz() {
     </div>
     ${Q.modo === 'relampago' ? '<div class="ar-timer"><span id="ar-tbar" style="width:100%"></span></div>' : '<div class="ar-practice-banner"><i data-lucide="graduation-cap" class="i"></i>Modo práctica · piensa con calma</div>'}
     <div class="ar-q">
-      <span class="chip chip--primary">${esc(p.area)} · ${Q.idx + 1}/${Q.preguntas.length}</span>
+      <div class="ar-q__meta"><span class="chip chip--primary">${esc(p.area)} · ${Q.idx + 1}/${Q.preguntas.length}</span><span class="ar-q__type">${etiquetaTipo(p.tipo)}</span></div>
       <h2 class="display" style="font-size:var(--fs-xl)">${esc(p.q)}</h2>
-      <div class="ar-opts">
-        ${p.opciones.map((o, i) => `<button class="ar-opt" data-a="quiz-resp" data-i="${i}"><kbd>${i + 1}</kbd> ${esc(o)}</button>`).join('')}
-      </div>
+      ${p.instruccion ? `<p class="ar-q__instruction">${esc(p.instruccion)}</p>` : ''}
+      ${controlPregunta(p)}
       <div id="ar-fb"></div>
     </div>`);
   if (Q.modo !== 'relampago') return;
@@ -344,44 +349,101 @@ function pintaQuiz() {
     if (!Q) return;
     const pasado = (Date.now() - t0) / 1000; Q.restante = Math.max(0, TIEMPO - pasado);
     bar.style.width = (Q.restante / TIEMPO * 100) + '%';
-    if (Q.restante <= 0) { parar(); respQuiz(-1); }
+    if (Q.restante <= 0) { parar(); responderQuiz(null); }
   }, 80);
 }
-async function respQuiz(i: number) {
+const etiquetaTipo = (tipo: Pregunta['tipo']) => ({ seleccion: 'Una respuesta', seleccion_multiple: 'Varias respuestas', ordenar: 'Secuencia', relacionar: 'Relacionar', completar: 'Completar' }[tipo]);
+
+function controlPregunta(p: Pregunta) {
+  if (p.tipo === 'seleccion') return `<div class="ar-opts ar-answer">${p.opciones.map((o, i) => `<button class="ar-opt" data-a="quiz-resp" data-i="${i}"><kbd>${i + 1}</kbd> ${esc(o)}</button>`).join('')}</div>`;
+  if (p.tipo === 'seleccion_multiple') return `<form id="ar-answer" class="ar-answer ar-multi" onsubmit="return false">${p.opciones.map((o, i) => `<label><input type="checkbox" name="opcion" value="${i}"><span class="ar-answer__mark">${String.fromCharCode(65 + i)}</span><span>${esc(o)}</span></label>`).join('')}<button type="button" class="btn btn--brand" data-a="quiz-enviar">Comprobar selección</button></form>`;
+  if (p.tipo === 'ordenar') return `<div id="ar-answer" class="ar-answer ar-order"><p>Coloca los pasos en la secuencia correcta.</p><div class="ar-order__list">${(p.elementos || []).map((item, i, lista) => `<div class="ar-order__item" data-order-id="${esc(item.id)}"><span class="ar-order__pos">${i + 1}</span><strong>${esc(item.texto)}</strong><span><button type="button" data-a="quiz-move" data-dir="-1" aria-label="Subir" ${i === 0 ? 'disabled' : ''}><i data-lucide="chevron-up" class="i"></i></button><button type="button" data-a="quiz-move" data-dir="1" aria-label="Bajar" ${i === lista.length - 1 ? 'disabled' : ''}><i data-lucide="chevron-down" class="i"></i></button></span></div>`).join('')}</div><button type="button" class="btn btn--brand" data-a="quiz-enviar">Comprobar secuencia</button></div>`;
+  if (p.tipo === 'relacionar') return `<form id="ar-answer" class="ar-answer ar-relate" onsubmit="return false">${(p.izquierda || []).map((item) => `<label data-left-id="${esc(item.id)}"><strong>${esc(item.texto)}</strong><i data-lucide="arrow-right" class="i"></i><select class="input"><option value="">Elige la relación…</option>${(p.derecha || []).map((opcion) => `<option value="${esc(opcion.id)}">${esc(opcion.texto)}</option>`).join('')}</select></label>`).join('')}<button type="button" class="btn btn--brand" data-a="quiz-enviar">Comprobar relaciones</button></form>`;
+  return `<form id="ar-answer" class="ar-answer ar-complete" onsubmit="return false"><p>${esc(p.plantilla || 'Completa los espacios con el término correcto.')}</p>${(p.huecos || []).map((h, i) => `<label data-gap-id="${esc(h.id)}"><span>${i + 1}</span><strong>${esc(h.etiqueta || `Espacio ${i + 1}`)}</strong><input class="input" autocomplete="off" placeholder="Escribe tu respuesta"></label>`).join('')}<button type="button" class="btn btn--brand" data-a="quiz-enviar">Comprobar respuestas</button></form>`;
+}
+
+function moverQuiz(el: HTMLElement) {
+  const item = el.closest<HTMLElement>('[data-order-id]');
+  if (!item || !Q || Q.contestada) return;
+  const dir = Number(el.dataset.dir);
+  const lista = item.parentElement!;
+  if (dir < 0 && item.previousElementSibling) lista.insertBefore(item, item.previousElementSibling);
+  if (dir > 0 && item.nextElementSibling) lista.insertBefore(item.nextElementSibling, item);
+  [...lista.querySelectorAll<HTMLElement>('[data-order-id]')].forEach((fila, i, filas) => {
+    fila.querySelector<HTMLElement>('.ar-order__pos')!.textContent = String(i + 1);
+    const botones = fila.querySelectorAll<HTMLButtonElement>('button');
+    botones[0].disabled = i === 0; botones[1].disabled = i === filas.length - 1;
+  });
+}
+
+function enviarQuiz() {
+  if (!Q || Q.contestada) return;
+  const p = Q.preguntas[Q.idx];
+  const contenedor = document.getElementById('ar-answer');
+  if (!contenedor) return;
+  let respuesta: unknown;
+  if (p.tipo === 'seleccion_multiple') respuesta = [...contenedor.querySelectorAll<HTMLInputElement>('input:checked')].map((x) => Number(x.value));
+  else if (p.tipo === 'ordenar') respuesta = [...contenedor.querySelectorAll<HTMLElement>('[data-order-id]')].map((x) => x.dataset.orderId || '');
+  else if (p.tipo === 'relacionar') respuesta = Object.fromEntries([...contenedor.querySelectorAll<HTMLElement>('[data-left-id]')].map((fila) => [fila.dataset.leftId || '', fila.querySelector<HTMLSelectElement>('select')!.value]));
+  else respuesta = Object.fromEntries([...contenedor.querySelectorAll<HTMLElement>('[data-gap-id]')].map((fila) => [fila.dataset.gapId || '', fila.querySelector<HTMLInputElement>('input')!.value.trim()]));
+  const vacia = p.tipo === 'seleccion_multiple' ? !(respuesta as unknown[]).length : Object.values(respuesta as Record<string, unknown>).some((x) => !String(x));
+  if (vacia) {
+    document.getElementById('ar-fb')!.innerHTML = '<div class="ar-exp bad"><strong>Completa la interacción</strong><p>Responde todos los elementos antes de comprobar.</p></div>';
+    return;
+  }
+  responderQuiz(respuesta);
+}
+
+function textoSolucion(p: Pregunta, respuesta: unknown) {
+  if (p.tipo === 'seleccion') return p.opciones[Number(respuesta)] || '';
+  if (p.tipo === 'seleccion_multiple') return (Array.isArray(respuesta) ? respuesta : []).map((i) => p.opciones[Number(i)]).filter(Boolean).join(' · ');
+  if (p.tipo === 'ordenar') return (Array.isArray(respuesta) ? respuesta : []).map((id) => p.elementos?.find((x) => x.id === id)?.texto).filter(Boolean).join(' → ');
+  if (p.tipo === 'relacionar') return Object.entries((respuesta || {}) as Record<string, unknown>).map(([a, b]) => `${p.izquierda?.find((x) => x.id === a)?.texto}: ${p.derecha?.find((x) => x.id === b)?.texto}`).join(' · ');
+  return Object.entries((respuesta || {}) as Record<string, unknown>).map(([id, valor]) => `${p.huecos?.find((x) => x.id === id)?.etiqueta || id}: ${valor}`).join(' · ');
+}
+
+async function responderQuiz(respuesta: unknown) {
   if (!Q || Q.contestada) return; Q.contestada = true; parar();
   const p = Q.preguntas[Q.idx];
-  const opts = root()!.querySelectorAll<HTMLButtonElement>('.ar-opt');
-  opts.forEach((b) => { b.disabled = true; });
-  let correcta = p.correcta;
+  const controles = root()!.querySelectorAll<HTMLInputElement | HTMLButtonElement | HTMLSelectElement>('.ar-answer input, .ar-answer button, .ar-answer select, .ar-opt');
+  controles.forEach((control) => { control.disabled = true; });
   let explicacion = p.explicacion;
+  let puntos = 0;
+  let respuestaCorrecta: unknown = null;
   if (Datos.modo === 'api' && p.remota) {
     try {
-      const respuesta = await RetosRemotos.responder(p.remota, i >= 0 ? i : null);
-      correcta = respuesta.correcta;
-      explicacion = respuesta.explicacion;
-      Q.xpGanado += respuesta.xpGanado;
+      const resultado = await RetosRemotos.responder(p.remota, respuesta);
+      puntos = resultado.puntos;
+      respuestaCorrecta = resultado.respuestaCorrecta;
+      explicacion = resultado.explicacion;
+      Q.xpGanado += resultado.xpGanado;
     } catch (e) {
       Q.contestada = false;
-      opts.forEach((b) => { b.disabled = false; });
+      controles.forEach((control) => { control.disabled = false; });
       const mensaje = e instanceof Error ? e.message : 'No pudimos calificar esta respuesta.';
       document.getElementById('ar-fb')!.innerHTML = `<div class="ar-exp bad"><strong>No se guardó tu respuesta</strong><p>${esc(mensaje)}</p></div>`;
       iconos();
       return;
     }
+  } else {
+    const resultado = calificarPreguntaReto(p, respuesta);
+    puntos = resultado.puntos;
+    respuestaCorrecta = resultado.respuestaCorrecta;
   }
-  p.correcta = correcta;
   p.explicacion = explicacion;
-  const ok = i === correcta;
-  opts.forEach((b, j) => { if (j === correcta) b.classList.add('ok'); if (j === i && !ok) b.classList.add('bad'); });
+  const ok = puntos === 1;
+  const parcial = puntos > 0 && !ok;
+  if (p.tipo === 'seleccion') root()!.querySelectorAll<HTMLButtonElement>('.ar-opt').forEach((b, j) => { if (j === Number(respuestaCorrecta)) b.classList.add('ok'); if (j === Number(respuesta) && !ok) b.classList.add('bad'); });
   if (ok) {
     const bonus = Q.modo === 'relampago' ? Math.round(Q.restante / TIEMPO * 100) : 40;
     const suma = Math.round((100 + bonus) * (1 + Q.combo * 0.1));
     Q.score += suma; Q.combo++; Q.mejorCombo = Math.max(Q.mejorCombo, Q.combo); Q.aciertos++; celebrar('sutil');
-  } else { if (Q.modo === 'relampago') Q.vidas--; Q.combo = 0; }
+  } else { Q.score += Math.round(100 * puntos); if (Q.modo === 'relampago') Q.vidas--; Q.combo = 0; }
   const fin = (Q.modo === 'relampago' && Q.vidas <= 0) || Q.idx >= Q.preguntas.length - 1;
   document.getElementById('ar-fb')!.innerHTML = `
-    <div class="ar-exp ${ok ? 'ok' : 'bad'}">
-      <strong>${ok ? '¡Correcto! ⚡' : 'Casi…'}</strong><p>${esc(explicacion || 'Revisa la respuesta correcta antes de continuar.')}</p>
+    <div class="ar-exp ${ok ? 'ok' : parcial ? 'partial' : 'bad'}">
+      <strong>${ok ? '¡Dominado! ⚡' : parcial ? `Vas bien · ${Math.round(puntos * 100)}%` : 'Revisemos el criterio'}</strong><p>${esc(explicacion || 'Revisa la respuesta correcta antes de continuar.')}</p>
+      <div class="ar-solution"><span>Solución revisada</span><strong>${esc(textoSolucion(p, respuestaCorrecta))}</strong></div>
       <button class="btn btn--brand" data-a="quiz-sig">${fin ? 'Ver resultado' : 'Siguiente'} <kbd>Enter</kbd> <i data-lucide="arrow-right" class="i"></i></button>
     </div>`;
   iconos();
@@ -581,7 +643,7 @@ function onKey(e: KeyboardEvent) {
   if (vista === 'quiz' && Q) {
     if (!Q.contestada) {
       const n = parseInt(e.key);
-      if (n >= 1 && n <= Q.preguntas[Q.idx].opciones.length) { respQuiz(n - 1); return; }
+      if (Q.preguntas[Q.idx].tipo === 'seleccion' && n >= 1 && n <= Q.preguntas[Q.idx].opciones.length) { responderQuiz(n - 1); return; }
     }
     if (Q.contestada && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); sigQuiz(); return; }
   }

@@ -39,9 +39,11 @@ export function crearAuthFalso({ tokens = {}, usuarios = {} } = {}) {
 export function crearStorageFalso() {
   const firmadas = [];
   const borrados = [];
+  const metadatos = new Map();
   return {
     firmadas,
     borrados,
+    metadatos,
     bucket(nombre) {
       const bucketName = nombre ?? 'bucket-de-prueba';
       return {
@@ -51,10 +53,17 @@ export function crearStorageFalso() {
             name: path,
             async getSignedUrl(opciones) {
               firmadas.push({ path, ...opciones });
+              if (opciones.action === 'write') metadatos.set(path, { size: '125000', contentType: opciones.contentType });
               return [`https://storage.example.test/${bucketName}/${path}?accion=${opciones.action}&firma=falsa`];
+            },
+            async getMetadata() {
+              const metadata = metadatos.get(path);
+              if (!metadata) { const error = new Error('No existe el archivo.'); error.code = 404; throw error; }
+              return [structuredClone(metadata)];
             },
             async delete() {
               borrados.push(path);
+              metadatos.delete(path);
             },
           };
         },
