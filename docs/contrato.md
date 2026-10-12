@@ -56,7 +56,9 @@ o bien una cortesía nueva vigente en `v2_cortesias/{uid}.hasta > ahora`, o clai
 ```
 { id, titulo, area, nivel: 'Básico'|'Intermedio'|'Avanzado', instructor, portada, banner?, descripcion,
   aprenderas: string[], orden: number, publicado: boolean, bunnyCollectionId,
-  clases: [{ n, titulo, videoId, duracionMin: number|null, gratis: boolean, notas?: { resumen, conceptos: [{ t: 'mm:ss', texto }] } }],
+  clases: [{ n, titulo, videoId, duracionMin: number|null, gratis: boolean,
+    notas?: { resumen, conceptos: [{ t: 'mm:ss', texto }] },
+    ficha?: { estado: 'borrador'|'aprobada', archivo?: 'fichas/...pdf', version?, revisadaPor?, actualizada? } }],
   actualizado }
 ```
 El `videoId` **nunca** sale al cliente de miembros: `/catalogo` lo elimina.
@@ -84,11 +86,21 @@ y el cliente muestra “Por confirmar” en lugar de inventar un importe.
 Hilo: `{ id, titulo, texto, autorUid, autor, cursoId|null, fecha, util: number, utilPor: uid[], oculto: boolean }`
 Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 
+### Directorio profesional
+
+- `v2_directorio_perfiles/{uid}`: perfil opt-in con titular, etapa, especialidades, ubicación, modalidades, disponibilidad, habilidades, bio, visibilidad, `foto` pública opcional y `contacto` privado.
+- `v2_directorio_oportunidades/{id}`: empleo, colaboración, mentoría, suplencia, prácticas o consultorio compartido; expira a los 45 días.
+- `v2_directorio_conexiones/{id}`: solicitud entre dos UID, mensaje y estado `pendiente|aceptada|rechazada`.
+
+La API nunca incluye `contacto` en la proyección pública del perfil. Solo lo entrega a las dos partes después de que la persona destinataria acepta la conexión. Crear perfil, explorar y conectar está disponible para cualquier usuario autenticado; publicar oportunidades requiere VIP o admin.
+
+La foto profesional se recorta en el navegador a un cuadrado de 720 px y se convierte a WebP antes de subirla. La API sólo firma durante 10 minutos la ruta exacta `directorio/perfiles/{uid}/avatar.webp`, con un máximo declarado de 2 MB; ningún cliente puede escribir directamente mediante las reglas de Storage. La foto sí es pública porque forma parte visible de la tarjeta del directorio.
+
 ### `v2_quizzes/{cursoId}_{n}`
-`{ cursoId, n, estado: 'borrador'|'aprobado', preguntas: [{ q, opciones: string[], correcta: number, explicacion }], generado, revisadoPor? }`
+Los registros existentes `{ q, opciones, correcta, explicacion }` siguen siendo válidos y se interpretan como `tipo: 'seleccion'`. La v2 admite además `seleccion_multiple`, `ordenar`, `relacionar` y `completar`, con respuesta tipada y crédito parcial. GET solo entrega configuración pública; las reglas de calificación y explicaciones permanecen en servidor hasta contestar. El detalle técnico está en `docs/PLAN-DIRECTORIO-EVALUACIONES.md`.
 
 ### `v2_intentos/{uid}_{cursoId}_{n}`
-`{ uid, cursoId, n, correctas, total, aprobado, fecha }`
+`{ uid, cursoId, n, correctas, total, puntaje: 0..100, aprobado, fecha }` (`puntaje` puede faltar en intentos anteriores).
 
 ### `v2_retos_estados/{uid}`
 Estado personal del entrenamiento clínico, escrito únicamente por la API:
@@ -159,6 +171,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
 | POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado?, recompensas }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
+| GET | `/clases/:cursoId/:n/ficha` | `{ url }` temporal de 10 min al PDF privado; exige ficha `aprobada`, acceso a la clase y desbloqueo secuencial. La ruta interna `archivo` nunca sale en `/catalogo`. |
 | GET | `/materiales/:id/descarga` | `{ url }` URL temporal de 10 min al PDF privado empaquetado o a Storage · VIP, material con `gratis: true` o desbloqueo permanente canjeado. El frontend la consume desde `#/materiales/:id/visor` y renderiza el documento en memoria con PDF.js; la URL no se persiste. |
 | GET | `/recompensas/resumen` | Saldo, contadores, logros, catálogo de recompensas, movimientos y notificaciones no leídas; sincroniza actividad histórica |
 | POST | `/recompensas/canjear` | `{ recompensaId }` → descuenta una sola vez y entrega material o crea solicitud pendiente de Praxia |
@@ -175,6 +188,14 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/foro/:id` | `{ hilo, respuestas }` |
 | POST | `/foro/:id/respuestas` | `{ texto }` → Respuesta |
 | POST | `/foro/:id/util` | → `{ util }` (una vez por usuario) |
+| GET | `/directorio` | Perfiles visibles, oportunidades activas y conexiones del usuario; sin contacto público |
+| PUT | `/directorio/perfil` | Crea/actualiza el perfil profesional opt-in |
+| POST | `/directorio/perfil/foto/subida` | Firma por 10 min la subida de la foto WebP optimizada a la ruta exclusiva del usuario |
+| DELETE | `/directorio/perfil/foto` | Elimina la foto propia y limpia su referencia del perfil |
+| POST | `/directorio/oportunidades` | Publica oportunidad por 45 días (VIP/admin) |
+| PATCH | `/directorio/oportunidades/:id` | Dueño/admin cambia `publicada|cerrada` |
+| POST | `/directorio/conexiones` | Envía solicitud privada a perfil u oportunidad |
+| PATCH | `/directorio/conexiones/:id` | Destinatario acepta o rechaza; aceptación habilita contacto |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
 | GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
 | POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada y su evento de puntos |

@@ -3,12 +3,14 @@
 import { mmssASegundos } from './tiempo.mjs';
 
 export const NIVELES = ['Básico', 'Intermedio', 'Avanzado'];
+export const TIPOS_PREGUNTA = ['seleccion', 'seleccion_multiple', 'ordenar', 'relacionar', 'completar'];
+export const NIVELES_COGNITIVOS = ['Aplicar', 'Analizar', 'Decidir'];
 export const LIMITES = {
   tituloMaxCaracteres: 70,
   resumenMaxPalabras: 60,
   conceptosMin: 3,
   conceptosMax: 6,
-  preguntas: 4,
+  preguntas: 5,
   opciones: 4,
   descripcionCursoMaxPalabras: 50,
   aprenderas: 5,
@@ -70,34 +72,83 @@ export function validarClase(c, { duracionSeg = null, segmentos = [] } = {}) {
   if (!Array.isArray(c.preguntas)) e.push('preguntas: debe ser un arreglo');
   else {
     if (c.preguntas.length !== LIMITES.preguntas) e.push(`preguntas: hay ${c.preguntas.length} (deben ser exactamente ${LIMITES.preguntas})`);
-    e.push(...validarPreguntas(c.preguntas));
+    e.push(...validarPreguntas(c.preguntas, { duracionSeg, segmentos }));
   }
   return e;
 }
 
 /** Valida preguntas de quiz (reutilizable también al publicar). */
-export function validarPreguntas(preguntas) {
+export function validarPreguntas(preguntas, { duracionSeg = null, segmentos = [] } = {}) {
   const e = [];
   const vistas = new Set();
+  const tipos = new Set();
+  const validarElementos = (lista, campo, { min = 3, max = 6 } = {}) => {
+    if (!Array.isArray(lista) || lista.length < min || lista.length > max) { e.push(`${campo}: debe tener entre ${min} y ${max} elementos`); return [];
+    }
+    const ids = [];
+    lista.forEach((x, j) => {
+      if (!x || typeof x !== 'object' || !textoValido(x.id) || !textoValido(x.texto)) e.push(`${campo}[${j}]: requiere id y texto`);
+      else ids.push(String(x.id));
+    });
+    if (new Set(ids).size !== ids.length) e.push(`${campo}: contiene IDs repetidos`);
+    return ids;
+  };
   preguntas.forEach((p, i) => {
     if (!p || typeof p !== 'object') return e.push(`preguntas[${i}]: debe ser objeto`);
+    const tipo = p.tipo ?? 'seleccion';
+    if (!TIPOS_PREGUNTA.includes(tipo)) e.push(`preguntas[${i}].tipo: '${tipo}' no está soportado`);
+    else tipos.add(tipo);
     if (!textoValido(p.q)) e.push(`preguntas[${i}].q: vacía`);
     else {
       const n = normalizar(p.q);
       if (vistas.has(n)) e.push(`preguntas[${i}].q: pregunta repetida`);
       vistas.add(n);
     }
-    if (!Array.isArray(p.opciones) || p.opciones.length !== LIMITES.opciones) {
-      e.push(`preguntas[${i}].opciones: deben ser exactamente ${LIMITES.opciones}`);
-    } else {
-      if (p.opciones.some((o) => !textoValido(o))) e.push(`preguntas[${i}].opciones: hay opciones vacías`);
-      const norm = p.opciones.map(normalizar);
-      if (new Set(norm).size !== norm.length) e.push(`preguntas[${i}].opciones: hay opciones repetidas`);
+    if (!textoValido(p.casoClinico)) e.push(`preguntas[${i}].casoClinico: vacío`);
+    if (!textoValido(p.competencia)) e.push(`preguntas[${i}].competencia: vacía`);
+    if (!NIVELES_COGNITIVOS.includes(p.nivelCognitivo)) e.push(`preguntas[${i}].nivelCognitivo: debe ser Aplicar, Analizar o Decidir`);
+    const seg = mmssASegundos(p.referenciaVideo);
+    const fin = Number.isFinite(duracionSeg) && duracionSeg > 0 ? duracionSeg : (segmentos.at(-1)?.fin ?? null);
+    if (seg === null) e.push(`preguntas[${i}].referenciaVideo: debe tener formato mm:ss`);
+    else if (fin !== null && seg > fin) e.push(`preguntas[${i}].referenciaVideo: está fuera de la duración`);
+    else if (segmentos.length && !marcaEnTranscripcion(seg, segmentos)) e.push(`preguntas[${i}].referenciaVideo: no corresponde a texto de la transcripción`);
+
+    if (tipo === 'seleccion' || tipo === 'seleccion_multiple') {
+      if (!Array.isArray(p.opciones) || p.opciones.length !== LIMITES.opciones) e.push(`preguntas[${i}].opciones: deben ser exactamente ${LIMITES.opciones}`);
+      else {
+        if (p.opciones.some((o) => !textoValido(o))) e.push(`preguntas[${i}].opciones: hay opciones vacías`);
+        const norm = p.opciones.map(normalizar);
+        if (new Set(norm).size !== norm.length) e.push(`preguntas[${i}].opciones: hay opciones repetidas`);
+      }
+      const nOpc = Array.isArray(p.opciones) ? p.opciones.length : LIMITES.opciones;
+      if (tipo === 'seleccion' && (!Number.isInteger(p.correcta) || p.correcta < 0 || p.correcta >= nOpc)) e.push(`preguntas[${i}].correcta: índice inválido (${p.correcta}); debe ser entero 0–${nOpc - 1}`);
+      if (tipo === 'seleccion_multiple') {
+        if (!Array.isArray(p.correctas) || p.correctas.length < 2 || p.correctas.length >= nOpc) e.push(`preguntas[${i}].correctas: requiere entre 2 y ${Math.max(2, nOpc - 1)} índices`);
+        else if (new Set(p.correctas).size !== p.correctas.length || p.correctas.some((x) => !Number.isInteger(x) || x < 0 || x >= nOpc)) e.push(`preguntas[${i}].correctas: contiene índices inválidos o repetidos`);
+      }
+    } else if (tipo === 'ordenar') {
+      const ids = validarElementos(p.elementos, `preguntas[${i}].elementos`);
+      if (!Array.isArray(p.ordenCorrecto) || p.ordenCorrecto.length !== ids.length || new Set(p.ordenCorrecto).size !== ids.length || p.ordenCorrecto.some((id) => !ids.includes(String(id)))) e.push(`preguntas[${i}].ordenCorrecto: debe contener todos los IDs una sola vez`);
+    } else if (tipo === 'relacionar') {
+      const izq = validarElementos(p.izquierda, `preguntas[${i}].izquierda`, { min: 3, max: 5 });
+      const der = validarElementos(p.derecha, `preguntas[${i}].derecha`, { min: 3, max: 5 });
+      if (izq.length !== der.length) e.push(`preguntas[${i}]: ambos lados deben tener la misma cantidad`);
+      const respuestas = p.pares && typeof p.pares === 'object' && !Array.isArray(p.pares) ? izq.map((id) => String(p.pares[id] ?? '')) : [];
+      if (respuestas.length !== izq.length || respuestas.some((id) => !der.includes(id)) || new Set(respuestas).size !== respuestas.length) e.push(`preguntas[${i}].pares: debe relacionar cada ID una sola vez`);
+    } else if (tipo === 'completar') {
+      if (!textoValido(p.plantilla)) e.push(`preguntas[${i}].plantilla: vacía`);
+      if (!Array.isArray(p.huecos) || p.huecos.length < 2 || p.huecos.length > 4) e.push(`preguntas[${i}].huecos: debe tener entre 2 y 4 espacios`);
+      else {
+        const ids = p.huecos.map((h) => String(h?.id ?? ''));
+        if (ids.some((id) => !id) || new Set(ids).size !== ids.length) e.push(`preguntas[${i}].huecos: requiere IDs únicos`);
+        p.huecos.forEach((h, j) => { if (!Array.isArray(h?.respuestas) || !h.respuestas.length || h.respuestas.some((x) => !textoValido(x))) e.push(`preguntas[${i}].huecos[${j}].respuestas: requiere respuestas válidas`); });
+      }
     }
-    const nOpc = Array.isArray(p.opciones) ? p.opciones.length : LIMITES.opciones;
-    if (!Number.isInteger(p.correcta) || p.correcta < 0 || p.correcta >= nOpc) e.push(`preguntas[${i}].correcta: índice inválido (${p.correcta}); debe ser entero 0–${nOpc - 1}`);
     if (!textoValido(p.explicacion)) e.push(`preguntas[${i}].explicacion: vacía`);
   });
+  if (preguntas.length === LIMITES.preguntas) {
+    for (const tipo of TIPOS_PREGUNTA) if (!tipos.has(tipo)) e.push(`preguntas: falta una interacción de tipo '${tipo}'`);
+  }
   return e;
 }
 

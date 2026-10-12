@@ -19,6 +19,7 @@ npm test          # 66 pruebas con fixtures y dobles: sin red ni credenciales
   Única excepción: `migrar-certificados.mjs` deja su reporte local en `out/reportes/` también en dry-run.
 - Lo generado vive en `out/` (ignorado por git). Los scripts se pueden volver a correr: retoman lo pendiente.
 - Las llaves se leen de variables de entorno y nunca se imprimen.
+- La cobertura final se audita desde la raíz con `npm run audit:learning-packs`. El reporte no escribe nada y cuenta notas, quiz aprobado y PDF aprobado por cada una de las 77 clases. En CI usar `npm run audit:learning-packs -- --strict` para fallar mientras falte cualquier paquete.
 
 ## Variables de entorno
 
@@ -77,8 +78,9 @@ node generar-contenido.mjs --apply --presupuesto 40          # el resto, abortan
 ```
 Modelo `claude-opus-5` con razonamiento adaptativo, salida JSON con esquema y *fallback* del servidor ante negativas.
 Cada respuesta pasa por `lib/validador.mjs` (≤70 caracteres y sin "Clase N"; resumen ≤60 palabras; 3–6 conceptos con
-marcas `mm:ss` dentro de la duración y presentes en la transcripción; exactamente 4 preguntas con 4 opciones distintas e
-índice válido). Si falla, se reintenta **una vez** con la lista de errores. La ficha del curso (`descripcion` ≤50 palabras,
+marcas `mm:ss` dentro de la duración y presentes en la transcripción; exactamente 5 interacciones por clase:
+`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar` y `completar`). Cada interacción exige evidencia `mm:ss`,
+solución estructural válida y explicación razonada. Si falla, se reintenta **una vez** con la lista de errores. La ficha del curso (`descripcion` ≤50 palabras,
 5 `aprenderas`, `nivel`) se genera cuando todas sus clases tienen contenido. Se guarda tras cada clase.
 
 ### 5. Publicar a Firestore (borradores)
@@ -111,8 +113,10 @@ Ver mapeo abajo. Usa `create()` en lotes: nunca sobreescribe un `v2_certificados
   marcas), 77 clases + 18 fichas, con 30 % de reintentos y ~5 mil tokens de salida por clase (incluye razonamiento):
   **~$15–35 USD** en total. La cifra real sale de `node generar-contenido.mjs` (dry-run) una vez que hay transcripciones,
   y el costo real se imprime al terminar. Regenerar un curso cuesta lo mismo otra vez.
-- **Bunny Transcribe.** Tiene costo por minuto de video; revisa la tarifa vigente en el panel antes de lanzar los 77
-  (el dry-run de `bunny-transcribir.mjs` imprime los minutos totales).
+- **Bunny Transcribe.** La tarifa pública vigente es **$0.10 USD por minuto y por idioma**. El catálogo suma alrededor
+  de 4,714 minutos, así que el peor caso —si ningún video tuviera subtítulos reutilizables— sería **$471.40 USD** solo
+  por transcripción. Primero corre el inventario de solo lectura, calcula únicamente los videos sin `captions es` y no
+  lances los 77 sin presupuesto explícito. El dry-run de `bunny-transcribir.mjs` imprime los minutos totales.
 - **Firestore.** Despreciable (cientos de lecturas/escrituras).
 
 ## Advertencias

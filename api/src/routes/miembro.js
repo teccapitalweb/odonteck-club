@@ -8,6 +8,7 @@ import {
 } from '../lib/acceso.js';
 import { firmarEmbedBunny } from '../lib/bunny.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
+import { calificarEvaluacion, preguntaPublica } from '../lib/evaluaciones.js';
 import { aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
@@ -490,6 +491,20 @@ export function rutasMiembro(ctx) {
     res.json(firmado);
   }));
 
+  // ---------- Ficha de estudio por clase ----------
+  r.get('/clases/:cursoId/:n/ficha', auth, h(async (req, res) => {
+    const { clase } = await prepararClase(req, req.params.cursoId, req.params.n);
+    const ficha = clase.ficha;
+    if (!ficha || ficha.estado !== 'aprobada') throw conflicto('La ficha de esta clase todavía está en revisión.', 'ficha_no_disponible');
+    const archivo = typeof ficha.archivo === 'string' ? ficha.archivo : '';
+    if (!archivo.startsWith('fichas/') || archivo.includes('..') || !archivo.endsWith('.pdf')) throw conflicto('La ficha no tiene un archivo válido.', 'ficha_sin_archivo');
+    if (!ctx.storage) throw noConfigurado('El almacenamiento de fichas no está configurado en el servidor.');
+    const [url] = await ctx.storage.bucket(ctx.config.storageBucket || undefined).file(archivo).getSignedUrl({
+      version: 'v4', action: 'read', expires: ctx.now().getTime() + 10 * 60 * 1000,
+    });
+    res.json({ url });
+  }));
+
   // ---------- Materiales ----------
   r.get('/materiales/:id/descarga', auth, h(async (req, res) => {
     const id = idDocumento(req.params.id);
@@ -555,8 +570,8 @@ export function rutasMiembro(ctx) {
 
   r.get('/quiz/:cursoId/:n', auth, h(async (req, res) => {
     const { preguntas } = await cargarQuiz(req);
-    // Nunca se envían `correcta` ni `explicacion` antes de responder.
-    res.json({ preguntas: preguntas.map((p) => ({ q: p.q, opciones: p.opciones })) });
+    // Nunca se envían reglas de calificación ni explicaciones antes de responder.
+    res.json({ preguntas: preguntas.map(preguntaPublica) });
   }));
 
   r.post('/quiz/:cursoId/:n', auth, h(async (req, res) => {
@@ -565,17 +580,7 @@ export function rutasMiembro(ctx) {
     if (!Array.isArray(respuestas) || respuestas.length !== preguntas.length) {
       throw invalido(`"respuestas" debe ser una lista con ${preguntas.length} elementos.`);
     }
-    respuestas.forEach((v, i) => {
-      if (v !== null && !Number.isInteger(v)) throw invalido(`"respuestas[${i}]" debe ser el índice de la opción o null.`);
-    });
-    const detalle = preguntas.map((p, i) => ({
-      correcta: p.correcta,
-      acertada: respuestas[i] === p.correcta,
-      explicacion: p.explicacion ?? '',
-    }));
-    const correctas = detalle.filter((d) => d.acertada).length;
-    const total = preguntas.length;
-    const aprobado = correctas / total >= APROBATORIO;
+    const { correctas, total, puntaje, aprobado, detalle } = calificarEvaluacion(preguntas, respuestas, APROBATORIO);
     const u = req.usuario;
     const fecha = ctx.now();
     const intentoRef = db.collection(COL.intentos).doc(`${u.uid}_${curso.id}_${n}`);
@@ -600,12 +605,13 @@ export function rutasMiembro(ctx) {
         n,
         correctas,
         total,
+        puntaje,
         aprobado,
         fecha: fecha.toISOString(),
       });
       return premio;
     });
-    res.json({ correctas, total, aprobado, detalle, recompensas });
+    res.json({ correctas, total, puntaje, aprobado, detalle, recompensas });
   }));
 
   // ---------- Retos V2 ----------

@@ -7,7 +7,7 @@ import miembrosSeed from '../data/miembros-demo.json';
 import quizzesSeed from '../data/quizzes-demo.json';
 
 export interface Nota { resumen: string; conceptos: { t: string; texto: string }[] }
-export interface Clase { n: number; titulo: string; videoId: string; duracion: number | null; gratis: boolean; notas?: Nota }
+export interface Clase { n: number; titulo: string; videoId: string; duracion: number | null; gratis: boolean; notas?: Nota; ficha?: { estado: 'borrador' | 'aprobada'; archivo?: string; version?: string; revisadaPor?: string; actualizada?: string; vistaPreviaLocal?: string } }
 export interface Curso {
   id: string; titulo: string; area: string; nivel: string; instructor: string; portada: string; banner?: string;
   descripcion: string; aprenderas?: string[]; orden: number; publicado?: boolean; bunnyCollectionId: string; clases: Clase[];
@@ -18,7 +18,13 @@ export interface Material {
   desbloqueadoConPuntos?: boolean; puntosRequeridos?: number | null;
 }
 export interface Evento { id: string; titulo: string; ponente: string; fecha: string; duracionMin: number; enlace?: string | null; cursoId?: string; publicado?: boolean; reservas?: number; reservado?: boolean }
-export interface Pregunta { q: string; opciones: string[]; correcta: number; explicacion: string }
+export interface Pregunta {
+  id?: string; tipo?: 'seleccion' | 'seleccion_multiple' | 'ordenar' | 'relacionar' | 'completar';
+  q: string; instruccion?: string; referenciaVideo?: string; casoClinico?: string; competencia?: string; nivelCognitivo?: 'Aplicar' | 'Analizar' | 'Decidir'; opciones?: string[]; correcta?: number; correctas?: number[]; explicacion: string;
+  elementos?: { id: string; texto: string }[]; ordenCorrecto?: string[];
+  izquierda?: { id: string; texto: string }[]; derecha?: { id: string; texto: string }[]; pares?: Record<string, string>;
+  plantilla?: string; huecos?: { id: string; etiqueta?: string; respuestas?: string[] }[];
+}
 export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; preguntas: Pregunta[]; actualizado: string }
 export interface MiembroDemo { uid: string; nombre: string; email: string; plan: string | null; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; esVip?: boolean; esAdmin?: boolean; cortesiaHasta?: string | null; cortesiaMotivo?: string }
 export interface Aviso { id: string; titulo: string; texto: string; enlace?: string | null; fecha: string; autor?: string }
@@ -43,7 +49,7 @@ function escribir<T>(k: string, v: T) {
 }
 const hoy = () => new Date().toISOString();
 
-const cursosSeed: Curso[] = (catalogoSeed.cursos as Curso[]).map((c) => ({ ...c, publicado: c.publicado ?? true, aprenderas: [] }));
+const cursosSeed: Curso[] = (catalogoSeed.cursos as Curso[]).map((c) => ({ ...c, publicado: c.publicado ?? true, aprenderas: c.aprenderas ?? [] }));
 
 export const Datos = {
   modo: (import.meta.env.VITE_API_URL ? 'api' : 'demo') as 'api' | 'demo',
@@ -76,9 +82,11 @@ export const Datos = {
   guardarEvento(e: Evento) { const l = this.eventos(); const i = l.findIndex((x) => x.id === e.id); i >= 0 ? (l[i] = e) : l.push(e); escribir('eventos', l); },
   borrarEvento(id: string) { escribir('eventos', this.eventos().filter((e) => e.id !== id)); },
 
-  quizzes: () => leer<Quiz[]>('quizzes', quizzesSeed as Quiz[]),
+  // v3 renueva solamente la semilla local de evaluaciones para mostrar las
+  // interacciones avanzadas; no borra progreso, perfil ni datos del modo API.
+  quizzes: () => leer<Quiz[]>(Datos.modo === 'api' ? 'quizzes' : 'quizzes:v3', quizzesSeed as Quiz[]),
   quiz: (cursoId: string, n: number) => Datos.quizzes().find((q) => q.cursoId === cursoId && q.n === n),
-  guardarQuiz(q: Quiz) { const l = this.quizzes(); q.actualizado = hoy(); const i = l.findIndex((x) => x.id === q.id); i >= 0 ? (l[i] = q) : l.push(q); escribir('quizzes', l); },
+  guardarQuiz(q: Quiz) { const l = this.quizzes(); q.actualizado = hoy(); const i = l.findIndex((x) => x.id === q.id); i >= 0 ? (l[i] = q) : l.push(q); escribir(Datos.modo === 'api' ? 'quizzes' : 'quizzes:v3', l); },
 
   miembros: () => leer<MiembroDemo[]>('miembros', miembrosSeed as MiembroDemo[]),
   guardarMiembro(m: MiembroDemo) { const l = this.miembros(); const i = l.findIndex((x) => x.uid === m.uid); if (i >= 0) l[i] = m; escribir('miembros', l); },

@@ -8,6 +8,7 @@ import { Auth } from '../core/auth';
 import { iniciales, esc, placeholder, avatarUsuario } from '../ui/partials';
 import { envivoPanel } from './envivo';
 import { puntos } from '../core/logros';
+import { Directorio, type PerfilDirectorio, type OportunidadDirectorio } from '../core/directorio';
 
 // ── Miembros simulados (demo) ──────────────────────────────────────────────
 const MIEMBROS_DEMO = [
@@ -239,6 +240,107 @@ function foroPanel(filtro: string | null, areaFiltro: string | null, hilos: Hilo
     </div>`;
 }
 
+const etiqueta = (v: string) => esc(v.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()));
+const listaCSV = (v: string[]) => esc(v.join(', '));
+
+function avatarProfesional(p: Pick<PerfilDirectorio, 'nombre' | 'foto'>, clase = '') {
+  return `<span class="network-avatar ${clase}"><span aria-hidden="true">${ini(p.nombre)}</span>${p.foto ? `<img src="${esc(p.foto)}" alt="Foto de ${esc(p.nombre)}" data-avatar-image>` : ''}</span>`;
+}
+
+function tarjetaPersona(p: PerfilDirectorio) {
+  const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
+  const especialidad = p.especialidades[0] || etiqueta(p.etapa);
+  return `<article class="network-card network-person network-person--tone-${tono}">
+    <div class="network-person__cover"><span><i data-lucide="sparkles" class="i"></i>Disponible para ${etiqueta(p.disponibilidad[0] || 'conectar')}</span>${p.esMio ? '<b>Tu perfil</b>' : '<b><i data-lucide="badge-check" class="i"></i>Comunidad OdonTeck</b>'}</div>
+    <header>${avatarProfesional(p, 'network-avatar--profile')}<div><span class="network-person__specialty">${esc(especialidad)}</span><h3>${esc(p.nombre)}</h3><p>${esc(p.titular)}</p></div></header>
+    <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div>
+    <p class="network-bio">${esc(p.bio)}</p>
+    <div class="network-tags">${[...p.especialidades, ...p.habilidades.slice(0, 2)].map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+    <footer><div class="network-availability">${p.disponibilidad.slice(0, 2).map((x) => `<small><i data-lucide="check" class="i"></i>${etiqueta(x)}</small>`).join('')}</div><div class="network-card__actions"><button class="btn btn--ghost btn--sm" data-network-view data-uid="${esc(p.uid)}">Ver perfil</button>${p.esMio ? '<button class="btn btn--secondary btn--sm" data-network-profile><i data-lucide="pencil" class="i"></i>Editar</button>' : `<button class="btn btn--brand btn--sm" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div></footer>
+  </article>`;
+}
+
+function detallePersona(p: PerfilDirectorio) {
+  const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
+  const especialidad = p.especialidades[0] || etiqueta(p.etapa);
+  return `<dialog class="network-profile-sheet network-person--tone-${tono}" data-network-view-dialog="${esc(p.uid)}">
+    <button class="network-profile-sheet__close" type="button" data-network-close aria-label="Cerrar perfil"><i data-lucide="x" class="i"></i></button>
+    <div class="network-profile-sheet__cover"><span><i data-lucide="badge-check" class="i"></i>Miembro de la comunidad OdonTeck</span><b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b></div>
+    <div class="network-profile-sheet__body">
+      <div class="network-profile-sheet__identity">${avatarProfesional(p, 'network-avatar--sheet')}<div><span class="network-person__specialty">${esc(especialidad)}</span><h3>${esc(p.nombre)}</h3><p>${esc(p.titular)}</p><div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div></div></div>
+      <div class="network-profile-sheet__content">
+        <section><span class="eyebrow">Sobre su práctica</span><h4>Experiencia para compartir y crecer en red.</h4><p>${esc(p.bio)}</p><div class="network-profile-sheet__section"><strong>Áreas clínicas</strong><div class="network-tags">${p.especialidades.map((x) => `<span>${esc(x)}</span>`).join('')}</div></div><div class="network-profile-sheet__section"><strong>Habilidades</strong><div class="network-tags">${p.habilidades.map((x) => `<span>${esc(x)}</span>`).join('')}</div></div></section>
+        <aside><span class="eyebrow">Afinidad profesional</span><h4>Disponible para</h4><div class="network-profile-sheet__availability">${p.disponibilidad.map((x) => `<span><i data-lucide="check-circle-2" class="i"></i>${etiqueta(x)}</span>`).join('')}</div><h4>Modalidad</h4><div class="network-profile-sheet__availability">${p.modalidades.map((x) => `<span><i data-lucide="map" class="i"></i>${etiqueta(x)}</span>`).join('')}</div><p><i data-lucide="shield-check" class="i"></i>El contacto permanece privado hasta aceptar una conexión.</p></aside>
+      </div>
+      <footer><div><span class="eyebrow">Una buena red empieza con contexto</span><p>Preséntate y explica qué colaboración buscas.</p></div>${p.esMio ? '<button class="btn btn--brand" data-network-profile><i data-lucide="pencil" class="i"></i>Editar mi perfil</button>' : `<button class="btn btn--brand" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="send" class="i"></i>Enviar solicitud</button>`}</footer>
+    </div>
+  </dialog>`;
+}
+
+function tarjetaOportunidad(o: OportunidadDirectorio) {
+  return `<article class="network-card network-job">
+    <header><span class="network-job__icon"><i data-lucide="${o.tipo === 'empleo' ? 'briefcase-business' : o.tipo === 'mentoria' ? 'graduation-cap' : 'handshake'}" class="i"></i></span><div><span class="eyebrow">${etiqueta(o.tipo)} · ${etiqueta(o.modalidad)}</span><h3>${esc(o.titulo)}</h3><p>${esc(o.organizacion)} · ${esc([o.ciudad, o.entidad].filter(Boolean).join(', ') || 'Ubicación flexible')}</p></div></header>
+    <p class="network-bio">${esc(o.resumen)}</p>
+    <div class="network-tags">${o.especialidades.map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+    <footer><small>Publicado por ${esc(o.autor)}</small>${o.esMia ? '<span class="network-own">Tu oportunidad</span>' : `<button class="btn btn--brand btn--sm" data-network-connect data-uid="${esc(o.autorUid)}" data-opportunity="${esc(o.id)}" data-name="${esc(o.autor)}">Me interesa</button>`}</footer>
+  </article>`;
+}
+
+function directorioPanel(query: URLSearchParams) {
+  const data = Directorio.get();
+  const vista = query.get('vista') || 'personas';
+  const q = (query.get('q') || '').trim().toLocaleLowerCase('es-MX');
+  const coincide = (campos: unknown[]) => !q || campos.flat().join(' ').toLocaleLowerCase('es-MX').includes(q);
+  const perfiles = data.perfiles.filter((p) => coincide([p.nombre, p.titular, p.especialidades, p.ciudad, p.estado, p.habilidades]));
+  const oportunidades = data.oportunidades.filter((o) => coincide([o.titulo, o.tipo, o.organizacion, o.especialidades, o.ciudad, o.entidad]));
+  const afinidades = [...new Set(data.perfiles.flatMap((p) => p.especialidades))].slice(0, 5);
+  const pendientes = data.conexiones.filter((c) => c.estado === 'pendiente').length;
+  return `<section class="network-directory">
+    <div class="network-hero">
+      <div class="network-hero__copy"><span class="eyebrow"><i data-lucide="network" class="i"></i>Red profesional OdonTeck</span><h2>Tu siguiente oportunidad puede empezar con una conversación.</h2><p>Descubre talento odontológico, comparte experiencia y crea alianzas con privacidad desde el primer contacto.</p><div class="network-hero__proof"><span>${data.perfiles.slice(0, 3).map((p) => avatarProfesional(p, 'network-avatar--mini')).join('')}</span><p><strong>${data.perfiles.length} perfiles profesionales</strong><br>Una comunidad enfocada en crecer juntos.</p></div></div>
+      <div class="network-hero__actions"><button class="btn btn--secondary" data-network-profile><i data-lucide="contact" class="i"></i>${data.miPerfil ? 'Editar mi perfil' : 'Crear mi perfil'}</button><button class="btn btn--brand" data-network-job><i data-lucide="plus" class="i"></i>Publicar oportunidad</button></div>
+    </div>
+    <div class="network-toolbar">
+      <nav><a class="${vista === 'personas' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas">Personas <span>${data.perfiles.length}</span></a><a class="${vista === 'oportunidades' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=oportunidades">Oportunidades <span>${data.oportunidades.length}</span></a><a class="${vista === 'conexiones' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=conexiones">Mis conexiones ${pendientes ? `<span>${pendientes}</span>` : ''}</a></nav>
+      <form data-network-search><label><i data-lucide="search" class="i"></i><input name="q" value="${esc(query.get('q') || '')}" placeholder="Especialidad, ciudad o habilidad"><input type="hidden" name="vista" value="${esc(vista)}"></label></form>
+    </div>
+    ${vista === 'personas' ? `<div class="network-affinities"><span><i data-lucide="sparkles" class="i"></i>Explora por afinidad</span><a class="${!q ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas">Todo</a>${afinidades.map((x) => `<a class="${q === x.toLocaleLowerCase('es-MX') ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas&q=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>` : ''}
+    <div class="network-grid">
+      ${vista === 'personas' ? (perfiles.length ? perfiles.map(tarjetaPersona).join('') : '<div class="community-empty"><i data-lucide="search-x" class="i"></i><h3>No encontramos perfiles</h3><p>Prueba con otra especialidad o ciudad.</p></div>') : ''}
+      ${vista === 'oportunidades' ? (oportunidades.length ? oportunidades.map(tarjetaOportunidad).join('') : '<div class="community-empty"><i data-lucide="briefcase-business" class="i"></i><h3>No hay oportunidades con ese filtro</h3><p>Puedes publicar una nueva si eres miembro VIP.</p></div>') : ''}
+      ${vista === 'conexiones' ? (data.conexiones.length ? data.conexiones.map((c) => `<article class="network-card network-request"><span class="network-avatar">${ini(c.otraPersona)}</span><div><span class="eyebrow">${c.esEntrante ? 'Solicitud recibida' : 'Solicitud enviada'}</span><h3>${esc(c.otraPersona)}</h3><p>${esc(c.mensaje)}</p>${c.contacto ? `<a class="network-contact" href="${c.contacto.canal === 'correo' ? `mailto:${esc(c.contacto.valor)}` : `https://wa.me/${esc(c.contacto.valor.replace(/\D/g, ''))}`}" target="_blank" rel="noopener"><i data-lucide="message-circle" class="i"></i>Contactar por ${etiqueta(c.contacto.canal)}</a>` : ''}</div><aside><span class="network-status network-status--${esc(c.estado)}">${etiqueta(c.estado)}</span>${c.esEntrante && c.estado === 'pendiente' ? `<button class="btn btn--brand btn--sm" data-network-answer="aceptada" data-id="${esc(c.id)}">Aceptar</button><button class="btn btn--ghost btn--sm" data-network-answer="rechazada" data-id="${esc(c.id)}">Declinar</button>` : ''}</aside></article>`).join('') : '<div class="community-empty"><i data-lucide="handshake" class="i"></i><h3>Aún no tienes solicitudes</h3><p>Explora perfiles u oportunidades para crear tu red.</p></div>') : ''}
+    </div>
+    ${Datos.modo === 'demo' ? '<p class="community-demo-note"><i data-lucide="monitor" class="i"></i>Perfiles y oportunidades ficticios para visualizar el prototipo local.</p>' : ''}
+    ${vista === 'personas' ? perfiles.map(detallePersona).join('') : ''}
+    <dialog class="network-dialog" data-network-profile-dialog>
+      <form method="dialog" data-network-profile-form>
+        <header><div><span class="eyebrow">Perfil profesional</span><h3>Haz que te recuerden por lo que sabes hacer.</h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header>
+        <section class="network-photo-editor">
+          <div class="network-photo-editor__avatar" data-network-photo-frame><span data-network-photo-fallback>${ini(data.miPerfil?.nombre || Perfil.get().nombre)}</span>${data.miPerfil?.foto ? `<img src="${esc(data.miPerfil.foto)}" alt="Tu foto profesional" data-network-photo-preview>` : '<img alt="Tu foto profesional" data-network-photo-preview hidden>'}<b><i data-lucide="camera" class="i"></i></b></div>
+          <div class="network-photo-editor__copy"><span class="eyebrow">Tu imagen profesional</span><h4>Una foto cercana inspira confianza.</h4><p>La recortamos al centro y la optimizamos automáticamente. JPG, PNG o WebP de hasta 8 MB.</p><div><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>${data.miPerfil?.foto ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/jpeg,image/png,image/webp" data-network-photo-input hidden></label><button type="button" class="btn btn--ghost btn--sm" data-network-photo-remove ${data.miPerfil?.foto ? '' : 'hidden'}>Quitar</button></div></div>
+          <span class="network-photo-editor__privacy"><i data-lucide="eye" class="i"></i>Visible en tu tarjeta del directorio</span>
+        </section>
+        <div class="network-form-grid">
+          <label>Titular profesional<input class="input" name="titular" value="${esc(data.miPerfil?.titular || '')}" required maxlength="100" placeholder="Odontóloga general · rehabilitación oral"></label>
+          <label>Etapa<select class="input" name="etapa" required>${['estudiante','general','especialista','docente','investigador','otro'].map((x) => `<option value="${x}" ${data.miPerfil?.etapa === x ? 'selected' : ''}>${etiqueta(x)}</option>`).join('')}</select></label>
+          <label>Especialidades<input class="input" name="especialidades" value="${listaCSV(data.miPerfil?.especialidades || [])}" placeholder="Ortodoncia, Endodoncia"></label>
+          <label>Ciudad<input class="input" name="ciudad" value="${esc(data.miPerfil?.ciudad || '')}" placeholder="Puebla"></label>
+          <label>Estado<input class="input" name="estado" value="${esc(data.miPerfil?.estado || '')}" placeholder="Puebla"></label>
+          <label>Habilidades<input class="input" name="habilidades" value="${listaCSV(data.miPerfil?.habilidades || [])}" placeholder="Flujo digital, fotografía clínica"></label>
+          <label class="network-form-wide">Presentación<textarea class="input" name="bio" rows="4" minlength="30" maxlength="600" required placeholder="Cuenta brevemente tu experiencia y el tipo de colaboración que buscas.">${esc(data.miPerfil?.bio || '')}</textarea></label>
+          <fieldset class="network-form-wide"><legend>Disponible para</legend>${['empleo','colaboraciones','mentoria','suplencias','practicas','consultorio'].map((x) => `<label><input type="checkbox" name="disponibilidad" value="${x}" ${data.miPerfil?.disponibilidad.includes(x) ? 'checked' : ''}>${etiqueta(x)}</label>`).join('')}</fieldset>
+          <label>Modalidad<select class="input" name="modalidad">${['presencial','remoto','hibrido'].map((x) => `<option value="${x}" ${data.miPerfil?.modalidades.includes(x) ? 'selected' : ''}>${etiqueta(x)}</option>`).join('')}</select></label>
+          <label>Contacto privado<select class="input" name="contactoCanal"><option value="correo" ${data.miPerfil?.contacto?.canal !== 'whatsapp' ? 'selected' : ''}>Correo de mi cuenta</option><option value="whatsapp" ${data.miPerfil?.contacto?.canal === 'whatsapp' ? 'selected' : ''}>WhatsApp</option></select></label>
+          <label class="network-form-wide" data-network-whatsapp ${data.miPerfil?.contacto?.canal === 'whatsapp' ? '' : 'hidden'}>Número de WhatsApp<input class="input" name="contactoValor" value="${esc(data.miPerfil?.contacto?.canal === 'whatsapp' ? data.miPerfil.contacto.valor : '')}" placeholder="5212220000000"></label>
+        </div>
+        <footer><p><i data-lucide="shield-check" class="i"></i>Tu contacto solo se comparte tras aceptar una conexión.</p><button class="btn btn--brand"><i data-lucide="badge-check" class="i"></i>Guardar perfil</button></footer>
+      </form>
+    </dialog>
+    <dialog class="network-dialog" data-network-job-dialog><form method="dialog" data-network-job-form><header><div><span class="eyebrow">Nueva oportunidad</span><h3>Publica una propuesta clara y profesional.</h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><div class="network-form-grid"><label class="network-form-wide">Título<input class="input" name="titulo" required minlength="8" maxlength="120" placeholder="Odontólogo general para clínica multidisciplinaria"></label><label>Tipo<select class="input" name="tipo"><option value="empleo">Empleo</option><option value="colaboracion">Colaboración</option><option value="mentoria">Mentoría</option><option value="suplencia">Suplencia</option><option value="practicas">Prácticas</option><option value="consultorio">Compartir consultorio</option></select></label><label>Modalidad<select class="input" name="modalidad"><option value="presencial">Presencial</option><option value="remoto">Remoto</option><option value="hibrido">Híbrida</option></select></label><label>Organización<input class="input" name="organizacion" required maxlength="120"></label><label>Ciudad<input class="input" name="ciudad"></label><label>Estado<input class="input" name="entidad"></label><label>Especialidades<input class="input" name="especialidades" placeholder="Odontología general, Rehabilitación"></label><label class="network-form-wide">Descripción<textarea class="input" name="resumen" minlength="40" maxlength="1000" rows="4" required></textarea></label><label class="network-form-wide">Requisitos<textarea class="input" name="requisitos" maxlength="1000" rows="2"></textarea></label><label class="network-form-wide">Compensación o condiciones<input class="input" name="compensacion" maxlength="180" placeholder="Sé transparente; evita datos sensibles"></label></div><footer><p>Visible durante 45 días. Publicar requiere VIP.</p><button class="btn btn--brand">Publicar oportunidad</button></footer></form></dialog>
+    <dialog class="network-dialog network-dialog--small" data-network-connect-dialog><form method="dialog" data-network-connect-form><header><div><span class="eyebrow">Solicitud privada</span><h3>Conectar con <span data-network-name>Colega</span></h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><input type="hidden" name="paraUid"><input type="hidden" name="oportunidadId"><label>Mensaje<textarea class="input" name="mensaje" required minlength="20" maxlength="500" rows="5" placeholder="Preséntate y explica por qué te gustaría conversar."></textarea></label><footer><p>La otra persona decide si comparte su contacto.</p><button class="btn btn--brand">Enviar solicitud</button></footer></form></dialog>
+  </section>`;
+}
+
 // ── Página principal ────────────────────────────────────────────────────────
 
 export function comunidad(_: Record<string, string>, query: URLSearchParams) {
@@ -265,9 +367,10 @@ export function comunidad(_: Record<string, string>, query: URLSearchParams) {
       <a class="${tab === 'foro' ? 'is-active' : ''}" href="#/comunidad?tab=foro"><i data-lucide="layout-grid" class="i"></i>Feed</a>
       <a class="${tab === 'en-vivo' ? 'is-active' : ''}" href="#/comunidad?tab=en-vivo"><i data-lucide="radio" class="i"></i>En vivo</a>
       <a class="${tab === 'actividad' ? 'is-active' : ''}" href="#/comunidad?tab=actividad"><i data-lucide="activity" class="i"></i>Actividad</a>
+      <a class="${tab === 'directorio' ? 'is-active' : ''}" href="#/comunidad?tab=directorio"><i data-lucide="network" class="i"></i>Directorio</a>
     </nav>
     <div class="community-view">
-      ${tab === 'en-vivo' ? envivoPanel() : tab === 'foro' ? foroPanel(filtro, areaFiltro, hilos, opciones) : actividadPanel()}
+      ${tab === 'en-vivo' ? envivoPanel() : tab === 'directorio' ? directorioPanel(query) : tab === 'actividad' ? actividadPanel() : foroPanel(filtro, areaFiltro, hilos, opciones)}
     </div>
   </section>`;
 }

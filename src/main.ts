@@ -22,7 +22,7 @@ import { shellHTML, marcarNavActivo } from './ui/shell';
 import { adminShellHTML, marcarAdminActivo } from './admin/shell';
 import { instalarAccionesAdmin } from './admin/acciones';
 import { Auth, api, mensajeError } from './core/auth';
-import { Datos } from './core/datos';
+import { Datos, type Pregunta } from './core/datos';
 import { Progreso } from './core/progreso';
 import { Perfil } from './core/perfil';
 import { Comunidad } from './core/comunidad';
@@ -52,8 +52,215 @@ import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta'
 import { login } from './pages/login';
 import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
+import { Directorio, prepararFotoDirectorio, type FotoPreparada } from './core/directorio';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
 import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
+
+type PlayerJsInstance = {
+  on(evento: string, callback: (datos?: unknown) => void): void;
+  setCurrentTime(segundos: number): void;
+  play(): void;
+};
+declare global {
+  interface Window { playerjs?: { Player: new (elemento: HTMLIFrameElement | string) => PlayerJsInstance } }
+}
+
+const videosFinalizados = new Set<string>();
+const reproductoresVideo = new Map<string, PlayerJsInstance>();
+const NOTAS_REPASO_KEY = 'odonteck-club:notas-repaso:v1';
+const NOTAS_PERSONALES_KEY = 'odonteck-club:notas-personales:v1';
+
+function leerNotasRepasadas(): Record<string, number[]> {
+  try {
+    const valor = JSON.parse(localStorage.getItem(NOTAS_REPASO_KEY) || '{}');
+    return valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
+  } catch { return {}; }
+}
+
+function escribirNotasRepasadas(valor: Record<string, number[]>) {
+  try { localStorage.setItem(NOTAS_REPASO_KEY, JSON.stringify(valor)); } catch {}
+}
+
+function leerNotasPersonales(): Record<string, string> {
+  try {
+    const valor = JSON.parse(localStorage.getItem(NOTAS_PERSONALES_KEY) || '{}');
+    return valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
+  } catch { return {}; }
+}
+
+function escribirNotasPersonales(valor: Record<string, string>) {
+  try { localStorage.setItem(NOTAS_PERSONALES_KEY, JSON.stringify(valor)); } catch {}
+}
+
+function refrescarNotaPersonal(panel: HTMLElement) {
+  const clave = panel.dataset.notasBoard || '';
+  const textarea = panel.querySelector<HTMLTextAreaElement>('[data-notas-personal]');
+  if (!textarea) return;
+  textarea.value = leerNotasPersonales()[clave] || '';
+  const contador = panel.querySelector<HTMLElement>('[data-notas-characters]');
+  if (contador) contador.textContent = String(textarea.value.length);
+}
+
+function refrescarNotas(panel: HTMLElement) {
+  const clave = panel.dataset.notasBoard || '';
+  const total = Number(panel.dataset.notasTotal || 0);
+  const guardadas = new Set((leerNotasRepasadas()[clave] || []).map(Number));
+  panel.querySelectorAll<HTMLElement>('[data-nota-item]').forEach((item) => {
+    const indice = Number(item.dataset.notaItem);
+    const completada = guardadas.has(indice);
+    item.classList.toggle('is-done', completada);
+    const boton = item.querySelector<HTMLButtonElement>('[data-nota-check]');
+    if (!boton) return;
+    boton.classList.toggle('is-active', completada);
+    boton.setAttribute('aria-pressed', String(completada));
+    boton.setAttribute('aria-label', `${completada ? 'Marcar como pendiente' : 'Marcar como repasado'} el concepto ${indice + 1}`);
+    boton.innerHTML = completada
+      ? '<i data-lucide="badge-check" class="i"></i><span>Dominado</span>'
+      : '<i data-lucide="circle" class="i"></i><span>Repasar</span>';
+  });
+  const completadas = [...guardadas].filter((indice) => indice >= 0 && indice < total).length;
+  const porcentaje = total ? Math.round(completadas / total * 100) : 0;
+  const contador = panel.querySelector<HTMLElement>('[data-notas-done]');
+  const porcentajeEl = panel.querySelector<HTMLElement>('[data-notas-percent]');
+  const anillo = panel.querySelector<HTMLElement>('.notas-pro__ring');
+  if (contador) contador.textContent = String(completadas);
+  if (porcentajeEl) porcentajeEl.textContent = `${porcentaje}%`;
+  if (anillo) anillo.style.setProperty('--notes-progress', String(porcentaje));
+}
+
+function hidratarNotas() {
+  document.querySelectorAll<HTMLElement>('[data-notas-board]').forEach((panel) => {
+    refrescarNotas(panel);
+    refrescarNotaPersonal(panel);
+  });
+}
+
+const normalizarRespuesta = (v: unknown) => String(v ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+function calificarPreguntaDemo(p: Pregunta, respuesta: unknown) {
+  const tipo = p.tipo || 'seleccion';
+  let puntos = 0;
+  let respuestaCorrecta: unknown;
+  if (tipo === 'seleccion') {
+    puntos = respuesta === p.correcta ? 1 : 0; respuestaCorrecta = p.correcta;
+  } else if (tipo === 'seleccion_multiple') {
+    const elegidas = new Set(Array.isArray(respuesta) ? respuesta.map(Number) : []); const correctas = new Set(p.correctas || []);
+    const aciertos = [...elegidas].filter((x) => correctas.has(x)).length; const errores = [...elegidas].filter((x) => !correctas.has(x)).length;
+    puntos = Math.max(0, aciertos / Math.max(1, correctas.size) - errores / Math.max(1, (p.opciones?.length || 0) - correctas.size)); respuestaCorrecta = [...correctas];
+  } else if (tipo === 'ordenar') {
+    const orden = Array.isArray(respuesta) ? respuesta.map(String) : []; const correcta = p.ordenCorrecto || [];
+    const pares = correcta.slice(0, -1).map((id, j) => `${id}>${correcta[j + 1]}`); const delUsuario = new Set(orden.slice(0, -1).map((id, j) => `${id}>${orden[j + 1]}`));
+    puntos = pares.length ? pares.filter((x) => delUsuario.has(x)).length / pares.length : Number(orden.join('|') === correcta.join('|')); respuestaCorrecta = correcta;
+  } else if (tipo === 'relacionar') {
+    const r = respuesta && typeof respuesta === 'object' ? respuesta as Record<string, string> : {}; const pares = p.pares || {}; const ids = Object.keys(pares);
+    puntos = ids.length ? ids.filter((id) => r[id] === pares[id]).length / ids.length : 0; respuestaCorrecta = pares;
+  } else {
+    const r = respuesta && typeof respuesta === 'object' ? respuesta as Record<string, string> : {}; const huecos = p.huecos || [];
+    puntos = huecos.length ? huecos.filter((h) => (h.respuestas || []).some((x) => normalizarRespuesta(x) === normalizarRespuesta(r[h.id]))).length / huecos.length : 0;
+    respuestaCorrecta = Object.fromEntries(huecos.map((h) => [h.id, h.respuestas?.[0] || '']));
+  }
+  puntos = Math.round(Math.max(0, Math.min(1, puntos)) * 1000) / 1000;
+  return { correcta: tipo === 'seleccion' ? p.correcta : undefined, respuestaCorrecta, acertada: puntos === 1, puntos, explicacion: p.explicacion, referenciaVideo: p.referenciaVideo };
+}
+
+function segundosDeMarca(marca: string) {
+  const partes = marca.split(':').map(Number);
+  if (partes.some((n) => !Number.isFinite(n)) || partes.length < 2 || partes.length > 3) return null;
+  return partes.reduce((total, n) => total * 60 + n, 0);
+}
+
+function solucionEsperadaHTML(p: Pregunta, respuestaCorrecta: unknown) {
+  const tipo = p.tipo || 'seleccion';
+  let lineas: string[] = [];
+  if (tipo === 'seleccion') {
+    const indice = Number(respuestaCorrecta);
+    if (Number.isInteger(indice) && p.opciones?.[indice]) lineas = [p.opciones[indice]];
+  } else if (tipo === 'seleccion_multiple') {
+    lineas = (Array.isArray(respuestaCorrecta) ? respuestaCorrecta : []).map((indice) => p.opciones?.[Number(indice)]).filter((x): x is string => !!x);
+  } else if (tipo === 'ordenar') {
+    const mapa = new Map((p.elementos || []).map((x) => [x.id, x.texto]));
+    const orden = (Array.isArray(respuestaCorrecta) ? respuestaCorrecta : []).map((id) => mapa.get(String(id))).filter((x): x is string => !!x);
+    if (orden.length) return `<ol class="quiz-feedback__sequence">${orden.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>`;
+  } else if (tipo === 'relacionar' && respuestaCorrecta && typeof respuestaCorrecta === 'object') {
+    const izquierda = new Map((p.izquierda || []).map((x) => [x.id, x.texto]));
+    const derecha = new Map((p.derecha || []).map((x) => [x.id, x.texto]));
+    lineas = Object.entries(respuestaCorrecta as Record<string, unknown>).map(([a, b]) => `${izquierda.get(a) || a} → ${derecha.get(String(b)) || String(b)}`);
+  } else if (tipo === 'completar' && respuestaCorrecta && typeof respuestaCorrecta === 'object') {
+    const huecos = new Map((p.huecos || []).map((h) => [h.id, h.etiqueta || h.id]));
+    lineas = Object.entries(respuestaCorrecta as Record<string, unknown>).map(([id, valor]) => `${huecos.get(id) || id}: ${String(valor)}`);
+  }
+  return lineas.length ? `<ul>${lineas.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '<p>Consulta la explicación clínica para reconstruir la decisión.</p>';
+}
+
+function respuestaUsuarioHTML(p: Pregunta, respuesta: unknown) {
+  if (respuesta === null || respuesta === undefined || (Array.isArray(respuesta) && !respuesta.length)) return '<p class="quiz-feedback__empty">No se registró una respuesta.</p>';
+  return solucionEsperadaHTML(p, respuesta);
+}
+
+function preguntaQuizCompleta(fs: HTMLElement) {
+  const tipo = fs.dataset.tipo || 'seleccion';
+  let respuestaCompleta = false;
+  if (tipo === 'seleccion' || tipo === 'seleccion_multiple') respuestaCompleta = !!fs.querySelector<HTMLInputElement>('.quiz__opt input:checked');
+  else if (tipo === 'ordenar') {
+    const orden = [...fs.querySelectorAll<HTMLInputElement>('[data-sort-answer]')];
+    respuestaCompleta = orden.every((x) => x.value) && new Set(orden.map((x) => x.value)).size === orden.length;
+  } else respuestaCompleta = [...fs.querySelectorAll<HTMLInputElement | HTMLSelectElement>('.quiz__interactive input[required], .quiz__interactive select[required]')].every((x) => x.value.trim());
+  return respuestaCompleta && !!fs.querySelector<HTMLInputElement>('[data-confidence-input]')?.value;
+}
+
+function faltaPreguntaQuiz(fs: HTMLElement) {
+  const tipo = fs.dataset.tipo || 'seleccion';
+  const tieneRespuesta = tipo === 'seleccion' || tipo === 'seleccion_multiple'
+    ? !!fs.querySelector<HTMLInputElement>('.quiz__opt input:checked')
+    : tipo === 'ordenar'
+      ? !!fs.querySelector<HTMLInputElement>('[data-sort-answer]')
+      : [...fs.querySelectorAll<HTMLInputElement | HTMLSelectElement>('.quiz__interactive input[required], .quiz__interactive select[required]')].every((x) => x.value.trim());
+  return !tieneRespuesta ? 'Construye primero tu respuesta.' : 'Indica qué tan segura es tu decisión.';
+}
+
+function mostrarPasoQuiz(form: HTMLFormElement, paso: number) {
+  const preguntas = [...form.querySelectorAll<HTMLElement>('[data-pregunta]')];
+  if (!preguntas.length) return;
+  const actual = Math.max(0, Math.min(preguntas.length - 1, paso));
+  form.dataset.paso = String(actual);
+  preguntas.forEach((q, i) => {
+    q.hidden = i !== actual; q.classList.toggle('is-active', i === actual);
+    if (preguntaQuizCompleta(q)) q.classList.remove('quiz-q--attention');
+  });
+  form.querySelectorAll<HTMLButtonElement>('[data-quiz-ir]').forEach((b, i) => {
+    b.classList.toggle('is-active', i === actual);
+    b.classList.toggle('is-complete', preguntaQuizCompleta(preguntas[i]));
+    b.classList.toggle('is-flagged', preguntas[i].dataset.flagged === '1');
+    b.setAttribute('aria-current', i === actual ? 'step' : 'false');
+  });
+  const activada = preguntas[actual];
+  const competencia = form.querySelector<HTMLElement>('[data-coach-competencia]'); if (competencia) competencia.textContent = activada.dataset.competencia || 'Criterio clínico aplicado';
+  const nivel = form.querySelector<HTMLElement>('[data-coach-nivel]'); if (nivel) nivel.textContent = activada.dataset.nivel || 'Aplicar';
+  const completadas = preguntas.filter(preguntaQuizCompleta).length;
+  const porRevisar = preguntas.filter((q) => q.dataset.flagged === '1').length;
+  const completas = form.querySelector<HTMLElement>('[data-coach-complete]'); if (completas) completas.textContent = `${completadas}/${preguntas.length}`;
+  const flags = form.querySelector<HTMLElement>('[data-coach-flags]'); if (flags) flags.textContent = String(porRevisar);
+  const porcentaje = Math.round(((actual + 1) / preguntas.length) * 100);
+  const texto = form.querySelector<HTMLElement>('[data-quiz-progress-text]'); if (texto) texto.textContent = `Pregunta ${actual + 1} de ${preguntas.length}`;
+  const percent = form.querySelector<HTMLElement>('[data-quiz-progress-percent]'); if (percent) percent.textContent = `${porcentaje}%`;
+  const barra = form.querySelector<HTMLElement>('[data-quiz-progress-fill]'); if (barra) barra.style.width = `${porcentaje}%`;
+  const anterior = form.querySelector<HTMLButtonElement>('[data-quiz-nav="-1"]'); if (anterior) anterior.hidden = actual === 0;
+  const siguiente = form.querySelector<HTMLButtonElement>('[data-quiz-nav="1"]'); if (siguiente) siguiente.hidden = actual === preguntas.length - 1;
+  const enviar = form.querySelector<HTMLButtonElement>('[data-quiz-submit]'); if (enviar) enviar.hidden = actual !== preguntas.length - 1;
+  preguntas[actual].focus({ preventScroll: true });
+}
+
+function renumerarOrdenQuiz(lista: HTMLElement) {
+  const quiz = lista.closest<HTMLElement>('[data-quiz-sort]'); if (!quiz) return;
+  const indice = quiz.dataset.quizSort;
+  const filas = [...lista.querySelectorAll<HTMLElement>('[data-sort-item]')];
+  filas.forEach((fila, pos) => {
+    const numero = fila.querySelector<HTMLElement>('[data-sort-position]'); if (numero) numero.textContent = String(pos + 1);
+    const input = fila.querySelector<HTMLInputElement>('input[type="hidden"]'); if (input) input.name = `r${indice}-${pos}`;
+    const botones = fila.querySelectorAll<HTMLButtonElement>('[data-quiz-move]');
+    if (botones[0]) botones[0].disabled = pos === 0;
+    if (botones[1]) botones[1].disabled = pos === filas.length - 1;
+  });
+}
 
 // ── Tema: claro por defecto, siempre. El cambio solo dura la sesión ──
 const root = document.documentElement;
@@ -92,6 +299,13 @@ document.addEventListener('error', (e) => {
 
 // ── Cascarones: miembro, admin o pantalla sola (login) ──
 let shellActual: 'miembro' | 'admin' | 'solo' | null = null;
+let fotoDirectorioPendiente: FotoPreparada | null = null;
+let quitarFotoDirectorio = false;
+function limpiarFotoDirectorioPendiente() {
+  if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
+  fotoDirectorioPendiente = null;
+  quitarFotoDirectorio = false;
+}
 function montar(tipo: 'miembro' | 'admin' | 'solo') {
   if (shellActual === tipo) return;
   shellActual = tipo;
@@ -187,6 +401,7 @@ onRender(() => {
   if (path.startsWith('/retos')) montarArcade();
   if (path.endsWith('/visor')) montarVisor();
   if (path === '/bienvenida') montarBienvenida(toast);
+  hidratarNotas();
   createIcons({ icons });
   if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast)) mostrarOnboarding();
 });
@@ -203,10 +418,79 @@ window.addEventListener('recompensas:ganadas', (e) => {
 });
 window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
 
+function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {}) {
+  const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(`${cursoId}:${n}`)}"]`);
+  const herramientas = iframe?.closest('section')?.querySelector<HTMLElement>('[data-tabs]');
+  const boton = herramientas?.querySelector<HTMLButtonElement>('.tabs button[data-for="quiz"]');
+  if (!herramientas || !boton) return false;
+  boton.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === boton));
+  herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
+  herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const form = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
+  if (form) {
+    if (!form.dataset.quizInicio) form.dataset.quizInicio = String(Date.now());
+    mostrarPasoQuiz(form, Number(form.dataset.paso || 0));
+    if (anunciar) toast('Video terminado · tu reto clínico está listo', 'brain-circuit');
+  } else if (anunciar) toast('Video terminado · la evaluación está en revisión clínica', 'shield-check');
+  return !!form;
+}
+
+function refrescarYAbrirQuiz(cursoId: string, n: number, { anunciar = false } = {}) {
+  render();
+  requestAnimationFrame(() => abrirQuizDeClase(cursoId, n, { anunciar }));
+}
+
+async function registrarVistaClase(cursoId: string, n: number) {
+  const yaVista = Progreso.de(cursoId).vistas.includes(n);
+  if (!yaVista && Datos.modo === 'api') {
+    const r = await api<{ recompensas?: PremioActividad }>(`/progreso/${cursoId}/vista`, { method: 'POST', json: { n } });
+    await registrarPremio(r.recompensas);
+  }
+  if (!yaVista) Progreso.marcarVista(cursoId, n);
+  const c = getCurso(cursoId);
+  const hayNext = !!c?.clases.some((k) => k.n === n + 1);
+  if (c && !hayNext && !yaVista) {
+    toast('Curso completado · tu certificado ya está listo', 'award');
+    try { await cargarEncuestas(true); } catch {}
+  }
+  return { c, hayNext };
+}
+
+async function finalizarVideo(cursoId: string, n: number) {
+  const clave = `${cursoId}:${n}`;
+  if (videosFinalizados.has(clave)) return;
+  videosFinalizados.add(clave);
+  try {
+    await registrarVistaClase(cursoId, n);
+    refrescarYAbrirQuiz(cursoId, n, { anunciar: true });
+  } catch (err) {
+    videosFinalizados.delete(clave);
+    toast(mensajeError(err), 'alert-triangle');
+  }
+}
+
+function montarSeguimientoVideo(iframe: HTMLIFrameElement) {
+  if (iframe.dataset.playerSeguimiento) return;
+  iframe.dataset.playerSeguimiento = 'pendiente';
+  iframe.addEventListener('load', () => {
+    if (iframe.dataset.playerSeguimiento === 'activo') return;
+    const Player = window.playerjs?.Player;
+    if (!Player) { iframe.dataset.playerSeguimiento = 'sin-api'; return; }
+    const player = new Player(iframe);
+    if (iframe.dataset.video) reproductoresVideo.set(iframe.dataset.video, player);
+    player.on('ended', () => {
+      const [cursoId, n] = (iframe.dataset.video || '').split(':');
+      if (cursoId && Number.isInteger(Number(n))) void finalizarVideo(cursoId, Number(n));
+    });
+    iframe.dataset.playerSeguimiento = 'activo';
+  }, { once: true });
+}
+
 // ── Video: en modo api el backend firma el enlace de Bunny ──
 async function cargarVideos() {
-  if (Datos.modo === 'demo') return;
-  for (const f of document.querySelectorAll<HTMLIFrameElement>('iframe[data-video]:not([src])')) {
+  for (const f of document.querySelectorAll<HTMLIFrameElement>('iframe[data-video]')) {
+    montarSeguimientoVideo(f);
+    if (Datos.modo === 'demo' || f.src) continue;
     const [cursoId, n] = f.dataset.video!.split(':');
     try { const r = await api<{ embedUrl: string }>('/video/token', { method: 'POST', json: { cursoId, n: Number(n) } }); f.src = r.embedUrl; }
     catch (e: any) { f.replaceWith(Object.assign(document.createElement('div'), { className: 'player__error', textContent: e.status === 403 ? 'Esta clase es para miembros VIP.' : 'No se pudo cargar el video. Intenta de nuevo.' })); }
@@ -261,6 +545,21 @@ document.addEventListener('click', async (e) => {
 
   if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 
+  const repasarVideo = el.closest<HTMLButtonElement>('[data-video-seek]');
+  if (repasarVideo) {
+    const clave = repasarVideo.dataset.videoKey || '';
+    const marca = repasarVideo.dataset.videoSeek || '';
+    const segundos = segundosDeMarca(marca);
+    const player = reproductoresVideo.get(clave);
+    const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(clave)}"]`);
+    if (player && segundos !== null) {
+      player.setCurrentTime(segundos); player.play();
+      iframe?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      toast(`Repasando la evidencia en ${marca}`, 'play-circle');
+    } else toast('El video todavía se está preparando. Intenta de nuevo en un momento.', 'loader-circle');
+    return;
+  }
+
   const bell = el.closest('[data-notifs]');
   const panel = document.querySelector<HTMLElement>('[data-notifs-panel]');
   if (panel) {
@@ -287,17 +586,138 @@ document.addEventListener('click', async (e) => {
     tab.closest('[data-tabs]')?.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => (p.hidden = p.dataset.tab !== tab.dataset.for));
   }
 
+  const marcarNota = el.closest<HTMLButtonElement>('[data-nota-check]');
+  if (marcarNota) {
+    const tablero = marcarNota.closest<HTMLElement>('[data-notas-board]'); if (!tablero) return;
+    const clave = tablero.dataset.notasBoard || '';
+    const indice = Number(marcarNota.dataset.notaCheck);
+    const estado = leerNotasRepasadas();
+    const repasadas = new Set((estado[clave] || []).map(Number));
+    if (repasadas.has(indice)) repasadas.delete(indice); else repasadas.add(indice);
+    const dominada = repasadas.has(indice);
+    estado[clave] = [...repasadas].sort((a, b) => a - b);
+    escribirNotasRepasadas(estado);
+    refrescarNotas(tablero);
+    createIcons({ icons });
+    toast(dominada ? 'Concepto marcado como dominado' : 'Concepto pendiente de repaso', dominada ? 'badge-check' : 'rotate-ccw');
+    return;
+  }
+
+  const copiarNotas = el.closest<HTMLButtonElement>('[data-notas-copy]');
+  if (copiarNotas) {
+    const tablero = copiarNotas.closest<HTMLElement>('[data-notas-board]'); if (!tablero) return;
+    const resumen = tablero.querySelector<HTMLElement>('.notas-pro__summary p')?.textContent?.trim() || '';
+    const conceptos = [...tablero.querySelectorAll<HTMLElement>('.notas-timeline__text p')].map((x, i) => `${i + 1}. ${x.textContent?.trim() || ''}`);
+    const practicas = [...tablero.querySelectorAll<HTMLElement>('.notas-recall__item summary strong')].map((x, i) => `${i + 1}. ${x.textContent?.trim() || ''}`);
+    const personal = tablero.querySelector<HTMLTextAreaElement>('[data-notas-personal]')?.value.trim() || '';
+    try {
+      await navigator.clipboard.writeText(`Resumen\n${resumen}\n\nConceptos clave\n${conceptos.join('\n')}\n\nPreguntas de recuperación\n${practicas.join('\n')}${personal ? `\n\nMi bitácora\n${personal}` : ''}`);
+      toast('Cuaderno completo copiado', 'copy');
+    } catch { toast('No se pudieron copiar las notas en este navegador', 'circle-alert'); }
+    return;
+  }
+
+  const irQuizDesdeNotas = el.closest<HTMLButtonElement>('[data-notas-go-quiz]');
+  if (irQuizDesdeNotas) {
+    const herramientas = irQuizDesdeNotas.closest<HTMLElement>('[data-tabs]');
+    const botonQuiz = herramientas?.querySelector<HTMLButtonElement>('.tabs button[data-for="quiz"]');
+    if (!herramientas || !botonQuiz) return;
+    botonQuiz.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === botonQuiz));
+    herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
+    herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const quiz = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
+    if (quiz) mostrarPasoQuiz(quiz, Number(quiz.dataset.paso || 0));
+    createIcons({ icons });
+    return;
+  }
+
+  const descartarQuiz = el.closest<HTMLButtonElement>('[data-quiz-exclude]');
+  if (descartarQuiz) {
+    const form = descartarQuiz.closest<HTMLFormElement>('[data-quiz-miembro]'); if (!form || form.dataset.calificado) return;
+    const fila = descartarQuiz.closest<HTMLElement>('.quiz-choice-row'); if (!fila) return;
+    const descartada = !fila.classList.contains('is-excluded');
+    fila.classList.toggle('is-excluded', descartada);
+    descartarQuiz.setAttribute('aria-pressed', String(descartada));
+    descartarQuiz.innerHTML = descartada ? '<i data-lucide="undo-2" class="i"></i><span>Recuperar</span>' : '<i data-lucide="eye-off" class="i"></i><span>Descartar</span>';
+    if (descartada) { const input = fila.querySelector<HTMLInputElement>('input'); if (input) input.checked = false; }
+    mostrarPasoQuiz(form, Number(form.dataset.paso || 0)); createIcons({ icons });
+    return;
+  }
+
+  const marcarQuiz = el.closest<HTMLButtonElement>('[data-quiz-flag]');
+  if (marcarQuiz) {
+    const form = marcarQuiz.closest<HTMLFormElement>('[data-quiz-miembro]'); if (!form || form.dataset.calificado) return;
+    const pregunta = marcarQuiz.closest<HTMLElement>('[data-pregunta]'); if (!pregunta) return;
+    const marcada = pregunta.dataset.flagged !== '1';
+    pregunta.dataset.flagged = marcada ? '1' : '0';
+    marcarQuiz.classList.toggle('is-active', marcada);
+    marcarQuiz.setAttribute('aria-pressed', String(marcada));
+    marcarQuiz.querySelector('span')!.textContent = marcada ? 'Marcada' : 'Revisar';
+    mostrarPasoQuiz(form, Number(form.dataset.paso || 0));
+    toast(marcada ? 'Pregunta marcada para revisar' : 'Pregunta retirada de revisión', marcada ? 'bookmark-check' : 'bookmark');
+    return;
+  }
+
+  const confianzaQuiz = el.closest<HTMLButtonElement>('[data-quiz-confidence]');
+  if (confianzaQuiz) {
+    const form = confianzaQuiz.closest<HTMLFormElement>('[data-quiz-miembro]'); if (!form || form.dataset.calificado) return;
+    const bloque = confianzaQuiz.closest<HTMLElement>('.quiz-confidence');
+    const input = bloque?.querySelector<HTMLInputElement>('[data-confidence-input]'); if (!input) return;
+    input.value = confianzaQuiz.dataset.quizConfidence || '';
+    bloque!.querySelectorAll<HTMLButtonElement>('[data-quiz-confidence]').forEach((b) => { const activo = b === confianzaQuiz; b.classList.toggle('is-active', activo); b.setAttribute('aria-pressed', String(activo)); });
+    mostrarPasoQuiz(form, Number(form.dataset.paso || 0));
+    return;
+  }
+
+  const moverQuiz = el.closest<HTMLButtonElement>('[data-quiz-move]');
+  if (moverQuiz) {
+    const form = moverQuiz.closest<HTMLFormElement>('[data-quiz-miembro]');
+    if (!form || form.dataset.calificado) return;
+    const fila = moverQuiz.closest<HTMLElement>('[data-sort-item]');
+    const lista = fila?.parentElement;
+    if (!fila || !lista) return;
+    const filas = [...lista.querySelectorAll<HTMLElement>('[data-sort-item]')];
+    const pos = filas.indexOf(fila); const destino = pos + Number(moverQuiz.dataset.quizMove);
+    if (destino < 0 || destino >= filas.length) return;
+    if (destino > pos) lista.insertBefore(filas[destino], fila); else lista.insertBefore(fila, filas[destino]);
+    renumerarOrdenQuiz(lista);
+    fila.animate([{ transform: 'translateY(0)', background: 'var(--primary-soft)' }, { transform: 'translateY(0)', background: 'var(--surface)' }], { duration: 360 });
+    return;
+  }
+
+  const irQuiz = el.closest<HTMLButtonElement>('[data-quiz-ir]');
+  if (irQuiz) {
+    const form = irQuiz.closest<HTMLFormElement>('[data-quiz-miembro]');
+    if (form) mostrarPasoQuiz(form, Number(irQuiz.dataset.quizIr));
+    return;
+  }
+
+  const navegarQuiz = el.closest<HTMLButtonElement>('[data-quiz-nav]');
+  if (navegarQuiz) {
+    const form = navegarQuiz.closest<HTMLFormElement>('[data-quiz-miembro]'); if (!form) return;
+    const actual = Number(form.dataset.paso || 0);
+    const pregunta = form.querySelector<HTMLElement>(`[data-pregunta="${actual}"]`);
+    if (Number(navegarQuiz.dataset.quizNav) > 0 && !form.dataset.calificado && pregunta && !preguntaQuizCompleta(pregunta)) {
+      pregunta.classList.remove('quiz-q--attention'); void pregunta.offsetWidth; pregunta.classList.add('quiz-q--attention');
+      toast(faltaPreguntaQuiz(pregunta), 'circle-alert'); return;
+    }
+    mostrarPasoQuiz(form, actual + Number(navegarQuiz.dataset.quizNav));
+    return;
+  }
+
   const marcar = el.closest<HTMLElement>('[data-marcar-vista]');
   if (marcar) {
     const [id, n] = marcar.dataset.marcarVista!.split(':');
-    if (Datos.modo === 'api') { try { const r = await api<{ recompensas?: PremioActividad }>(`/progreso/${id}/vista`, { method: 'POST', json: { n: Number(n) } }); await registrarPremio(r.recompensas); } catch (err) { toast(mensajeError(err), 'alert-triangle'); return; } }
-    Progreso.marcarVista(id, Number(n));
-    const c = getCurso(id);
-    const hayNext = c && c.clases.some((k) => k.n === Number(n) + 1);
-    if (c && !hayNext) toast('Curso completado · tu certificado ya está listo', 'award');
-    if (c && !hayNext) { try { await cargarEncuestas(true); } catch {} }
-    navigate(hayNext ? `/curso/${id}/clase/${Number(n) + 1}` : `/curso/${id}`);
+    try {
+      const { hayNext } = await registrarVistaClase(id, Number(n));
+      if (marcar.hasAttribute('data-abrir-quiz-al-final')) refrescarYAbrirQuiz(id, Number(n), { anunciar: true });
+      else navigate(hayNext ? `/curso/${id}/clase/${Number(n) + 1}` : `/curso/${id}`);
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    return;
   }
+
+  const abrirQuiz = el.closest<HTMLElement>('[data-abrir-quiz]');
+  if (abrirQuiz) { const [id, n] = abrirQuiz.dataset.abrirQuiz!.split(':'); abrirQuizDeClase(id, Number(n)); return; }
 
   const res = el.closest<HTMLElement>('[data-reservar]');
   if (res) {
@@ -321,6 +741,23 @@ document.addEventListener('click', async (e) => {
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); descargar.disabled = false; }
   }
 
+  const ficha = el.closest<HTMLButtonElement>('[data-descargar-ficha]');
+  if (ficha) {
+    ficha.disabled = true;
+    try {
+      const [cursoId, n] = ficha.dataset.descargarFicha!.split(':');
+      if (Datos.modo === 'api') {
+        const r = await api<{ url: string }>(`/clases/${encodeURIComponent(cursoId)}/${Number(n)}/ficha`);
+        window.open(r.url, '_blank', 'noopener,noreferrer');
+      } else {
+        const archivo = Datos.cursos().find((c) => c.id === cursoId)?.clases.find((k) => k.n === Number(n))?.ficha?.archivo;
+        if (!archivo) throw new Error('La ficha todavía no tiene un PDF asociado.');
+        window.open(archivo, '_blank', 'noopener,noreferrer');
+      }
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    finally { ficha.disabled = false; }
+  }
+
   if (el.closest('[data-pregunta-rapida]')) {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
     navigate('/comunidad?tab=foro'); setTimeout(() => { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }, 100); return; }
@@ -328,6 +765,43 @@ document.addEventListener('click', async (e) => {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
     const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
   if (el.closest('[data-cancelar-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) f.hidden = true; }
+  const verPerfil = el.closest<HTMLElement>('[data-network-view]');
+  if (verPerfil) {
+    const dialog = [...document.querySelectorAll<HTMLDialogElement>('[data-network-view-dialog]')].find((d) => d.dataset.networkViewDialog === verPerfil.dataset.uid);
+    dialog?.showModal(); return;
+  }
+  if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]')?.showModal(); return; }
+  if (el.closest('[data-network-job]')) {
+    if (!Auth.usuario?.esVip && Datos.modo === 'api') { mostrarPaywall('Publicar oportunidades es un beneficio VIP. Puedes explorar perfiles y conectar gratis.'); return; }
+    document.querySelector<HTMLDialogElement>('[data-network-job-dialog]')?.showModal(); return;
+  }
+  if (el.closest('[data-network-close]')) { el.closest<HTMLDialogElement>('dialog')?.close(); return; }
+  if (el.closest('[data-network-photo-remove]')) {
+    if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
+    fotoDirectorioPendiente = null; quitarFotoDirectorio = true;
+    const dialog = el.closest<HTMLDialogElement>('dialog');
+    const preview = dialog?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
+    if (preview) { preview.hidden = true; preview.removeAttribute('src'); }
+    const boton = dialog?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = true;
+    toast('La foto se quitará al guardar el perfil', 'image-minus'); return;
+  }
+  const connect = el.closest<HTMLElement>('[data-network-connect]');
+  if (connect) {
+    el.closest<HTMLDialogElement>('dialog')?.close();
+    const dialog = document.querySelector<HTMLDialogElement>('[data-network-connect-dialog]');
+    if (!dialog) return;
+    const form = dialog.querySelector<HTMLFormElement>('[data-network-connect-form]')!;
+    form.querySelector<HTMLInputElement>('input[name="paraUid"]')!.value = connect.dataset.uid || '';
+    form.querySelector<HTMLInputElement>('input[name="oportunidadId"]')!.value = connect.dataset.opportunity || '';
+    const name = dialog.querySelector<HTMLElement>('[data-network-name]'); if (name) name.textContent = connect.dataset.name || 'Colega';
+    dialog.showModal(); return;
+  }
+  const answer = el.closest<HTMLElement>('[data-network-answer]');
+  if (answer) {
+    try { await Directorio.responder(answer.dataset.id!, answer.dataset.networkAnswer as 'aceptada' | 'rechazada'); toast(answer.dataset.networkAnswer === 'aceptada' ? 'Conexión aceptada · ya pueden contactarse' : 'Solicitud declinada', answer.dataset.networkAnswer === 'aceptada' ? 'handshake' : 'x'); render(); }
+    catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
   const util = el.closest<HTMLElement>('[data-util]');
   if (util) {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Reaccionar en la comunidad es para miembros VIP.'); return; }
@@ -398,7 +872,12 @@ document.addEventListener('click', async (e) => {
 
   // Opción de quiz marcada visualmente (el input está oculto)
   const opt = el.closest<HTMLLabelElement>('.quiz__opt');
-  if (opt && opt.closest('[data-quiz-miembro]') && !opt.closest('form')!.dataset.calificado) opt.querySelector('input')!.checked = true;
+  if (opt && opt.closest('[data-quiz-miembro]') && !opt.closest('form')!.dataset.calificado) {
+    const input = opt.querySelector<HTMLInputElement>('input')!;
+    if (input.type === 'radio') input.checked = true;
+    const form = opt.closest<HTMLFormElement>('[data-quiz-miembro]')!;
+    setTimeout(() => mostrarPasoQuiz(form, Number(form.dataset.paso || 0)));
+  }
 });
 
 document.addEventListener('keydown', (e) => {
@@ -408,8 +887,43 @@ document.addEventListener('keydown', (e) => {
 function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); navigate(v === '/login' ? '/' : v); render(); }
 function mostrarErrorLogin(err: unknown) { const p = document.querySelector<HTMLElement>('[data-login-error]'); if (p) { p.hidden = false; p.textContent = mensajeError(err); } else toast(mensajeError(err), 'alert-triangle'); }
 
-document.addEventListener('change', (e) => {
+document.addEventListener('input', (e) => {
+  const textarea = e.target as HTMLTextAreaElement;
+  if (!textarea.matches('[data-notas-personal]')) return;
+  const tablero = textarea.closest<HTMLElement>('[data-notas-board]'); if (!tablero) return;
+  const clave = tablero.dataset.notasBoard || '';
+  const estado = leerNotasPersonales();
+  if (textarea.value) estado[clave] = textarea.value; else delete estado[clave];
+  escribirNotasPersonales(estado);
+  const contador = tablero.querySelector<HTMLElement>('[data-notas-characters]');
+  const guardado = tablero.querySelector<HTMLElement>('[data-notas-save-state]');
+  if (contador) contador.textContent = String(textarea.value.length);
+  if (guardado) guardado.textContent = textarea.value ? 'Cambios guardados automáticamente' : 'Guardado sólo en este dispositivo';
+});
+
+document.addEventListener('change', async (e) => {
   const input = e.target as HTMLInputElement;
+  const quiz = input.closest<HTMLFormElement>('[data-quiz-miembro]');
+  if (quiz && !quiz.dataset.calificado) mostrarPasoQuiz(quiz, Number(quiz.dataset.paso || 0));
+  if (input.matches('[data-network-photo-input]')) {
+    const file = input.files?.[0]; if (!file) return;
+    try {
+      const preparada = await prepararFotoDirectorio(file);
+      if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
+      fotoDirectorioPendiente = preparada; quitarFotoDirectorio = false;
+      const dialog = input.closest<HTMLDialogElement>('dialog');
+      const preview = dialog?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
+      if (preview) { preview.src = preparada.preview; preview.hidden = false; }
+      const boton = dialog?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = false;
+      toast('Foto lista · la optimizamos para tu perfil', 'wand-sparkles');
+    } catch (err) { input.value = ''; toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
+  if (input.matches('[data-network-profile-form] select[name="contactoCanal"]')) {
+    const fila = input.closest('form')?.querySelector<HTMLElement>('[data-network-whatsapp]');
+    if (fila) fila.hidden = input.value !== 'whatsapp';
+    return;
+  }
   if (!input.matches('[data-form-intereses] input[name="intereses"]')) return;
   const form = input.closest<HTMLFormElement>('[data-form-intereses]')!;
   let elegidos = [...form.querySelectorAll<HTMLInputElement>('input[name="intereses"]:checked')];
@@ -430,6 +944,28 @@ document.addEventListener('change', (e) => {
 
 document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
+  if (f.matches('[data-network-search]')) {
+    e.preventDefault(); const d = new FormData(f); const q = String(d.get('q') || '').trim(); const vista = String(d.get('vista') || 'personas');
+    navigate(`/comunidad?tab=directorio&vista=${encodeURIComponent(vista)}${q ? `&q=${encodeURIComponent(q)}` : ''}`); return;
+  }
+  if (f.matches('[data-network-profile-form]')) {
+    e.preventDefault(); const d = new FormData(f); const csv = (k: string) => String(d.get(k) || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const boton = f.querySelector<HTMLButtonElement>('footer button[type="submit"], footer button:not([type])'); if (boton) boton.disabled = true;
+    try {
+      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), bio: String(d.get('bio') || '').trim(), visible: true, contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio);
+      limpiarFotoDirectorioPendiente(); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Perfil profesional actualizado', 'badge-check'); render();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
+  }
+  if (f.matches('[data-network-job-form]')) {
+    e.preventDefault(); const d = new FormData(f); const especialidades = String(d.get('especialidades') || '').split(',').map((x) => x.trim()).filter(Boolean);
+    try { await Directorio.publicar({ titulo: String(d.get('titulo')), tipo: String(d.get('tipo')), organizacion: String(d.get('organizacion')), modalidad: String(d.get('modalidad')), ciudad: String(d.get('ciudad') || ''), entidad: String(d.get('entidad') || ''), especialidades, resumen: String(d.get('resumen')), requisitos: String(d.get('requisitos') || ''), compensacion: String(d.get('compensacion') || '') }); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Oportunidad publicada por 45 días', 'briefcase-business'); navigate('/comunidad?tab=directorio&vista=oportunidades'); }
+    catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
+  }
+  if (f.matches('[data-network-connect-form]')) {
+    e.preventDefault(); const d = new FormData(f);
+    try { await Directorio.conectar(String(d.get('paraUid')), String(d.get('oportunidadId') || '') || null, String(d.get('mensaje') || '').trim()); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Solicitud enviada de forma privada', 'send'); navigate('/comunidad?tab=directorio&vista=conexiones'); }
+    catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
+  }
   if (f.matches('[data-search]')) {
     e.preventDefault(); const q = new FormData(f).get('q') as string;
     navigate('/buscar' + (q ? '?q=' + encodeURIComponent(q) : ''));
@@ -449,48 +985,107 @@ document.addEventListener('submit', async (e) => {
     const [cursoId, nStr] = f.dataset.quizMiembro!.split(':');
     const n = Number(nStr);
     const q = Datos.quiz(cursoId, n); if (!q) return;
+    const incompleta = [...f.querySelectorAll<HTMLElement>('[data-pregunta]')].findIndex((fs) => !preguntaQuizCompleta(fs));
+    if (incompleta >= 0) {
+      mostrarPasoQuiz(f, incompleta);
+      const fs = f.querySelector<HTMLElement>(`[data-pregunta="${incompleta}"]`); fs?.classList.add('quiz-q--attention');
+      toast(fs ? faltaPreguntaQuiz(fs) : 'Aún falta completar esta interacción.', 'circle-alert'); return;
+    }
     const d = new FormData(f);
-    const respuestas = q.preguntas.map((_, i) => Number(d.get(`r${i}`)));
-    const btn = f.querySelector<HTMLButtonElement>('button')!;
+    const respuestas = q.preguntas.map((p, i) => {
+      const tipo = p.tipo || 'seleccion';
+      if (tipo === 'seleccion') { const v = d.get(`r${i}`); return v === null ? null : Number(v); }
+      if (tipo === 'seleccion_multiple') return d.getAll(`r${i}`).map(Number);
+      if (tipo === 'ordenar') return (p.elementos || []).map((_, pos) => String(d.get(`r${i}-${pos}`) || ''));
+      if (tipo === 'relacionar') return Object.fromEntries((p.izquierda || []).map((x) => [x.id, String(d.get(`r${i}-${x.id}`) || '')]));
+      if (tipo === 'completar') return Object.fromEntries((p.huecos || []).map((h) => [h.id, String(d.get(`r${i}-${h.id}`) || '')]));
+      return null;
+    });
+    const confianzas = q.preguntas.map((_, i) => Number(d.get(`c${i}`) || 0));
+    const justificaciones = q.preguntas.map((_, i) => String(d.get(`j${i}`) || '').trim());
+    const btn = f.querySelector<HTMLButtonElement>('[data-quiz-submit]')!;
     btn.setAttribute('disabled', '');
 
-    type Detalle = { correcta: number; explicacion: string };
-    let correctas: number, total: number, aprobado: boolean, detalle: Detalle[];
+    type Detalle = { correcta?: number; respuestaCorrecta?: unknown; acertada?: boolean; puntos?: number; explicacion: string; referenciaVideo?: string };
+    let correctas: number, total: number, puntaje: number, aprobado: boolean, detalle: Detalle[];
     let premio: PremioActividad = null;
 
     if (Datos.modo === 'api') {
       try {
-        const r = await api<{ correctas: number; total: number; aprobado: boolean; detalle: Detalle[]; recompensas?: PremioActividad }>(
+        const r = await api<{ correctas: number; total: number; puntaje: number; aprobado: boolean; detalle: Detalle[]; recompensas?: PremioActividad }>(
           `/quiz/${encodeURIComponent(cursoId)}/${n}`, { method: 'POST', json: { respuestas } });
         ({ correctas, total, aprobado, detalle } = r);
+        puntaje = Number.isFinite(r.puntaje) ? r.puntaje : Math.round((correctas / Math.max(1, total)) * 100);
         premio = r.recompensas;
       } catch (err) { toast(mensajeError(err), 'alert-triangle'); btn.removeAttribute('disabled'); return; }
     } else {
-      detalle = q.preguntas.map((p) => ({ correcta: p.correcta, explicacion: p.explicacion }));
-      correctas = respuestas.filter((r, i) => r === detalle[i].correcta).length;
+      detalle = q.preguntas.map((p, i) => calificarPreguntaDemo(p, respuestas[i]));
+      correctas = detalle.filter((x) => x.acertada).length;
       total = q.preguntas.length;
-      aprobado = correctas / total >= 0.7;
+      puntaje = Math.round(detalle.reduce((s, x) => s + Number(x.puntos || 0), 0) / total * 100);
+      aprobado = puntaje >= 70;
     }
 
-    q.preguntas.forEach((_, i) => {
+    q.preguntas.forEach((p, i) => {
       const r = respuestas[i]; const det = detalle[i];
       const fs = f.querySelector(`[data-pregunta="${i}"]`)!;
+      fs.classList.toggle('quiz-q--ok', det.acertada === true);
+      fs.classList.toggle('quiz-q--partial', !det.acertada && Number(det.puntos) > 0);
       fs.querySelectorAll<HTMLLabelElement>('.quiz__opt').forEach((o, j) => {
-        o.classList.toggle('is-correct', j === det.correcta);
-        o.classList.toggle('is-wrong', j === r && r !== det.correcta);
+        const correctas: number[] = Array.isArray(det.respuestaCorrecta) ? det.respuestaCorrecta.map(Number) : det.correcta === undefined ? [] : [det.correcta];
+        if (!correctas.length) return;
+        o.classList.toggle('is-correct', correctas.includes(j));
+        o.classList.toggle('is-wrong', (Array.isArray(r) ? (r as unknown[]).some((x) => Number(x) === j) : j === r) && !correctas.includes(j));
       });
       const exp = fs.querySelector<HTMLElement>('.quiz__exp')!;
-      if (det.explicacion) exp.textContent = det.explicacion;
+      const porcentajePregunta = Math.round(Number(det.puntos || 0) * 100);
+      const estadoPregunta = porcentajePregunta === 100 ? 'Decisión correcta' : porcentajePregunta > 0 ? 'Crédito parcial' : 'Punto por reforzar';
+      exp.innerHTML = `<div class="quiz-feedback">
+        <div class="quiz-feedback__top"><span class="quiz-feedback__status"><i data-lucide="${porcentajePregunta === 100 ? 'badge-check' : porcentajePregunta > 0 ? 'pie-chart' : 'scan-search'}" class="i"></i>${estadoPregunta}</span><strong>${porcentajePregunta}%</strong></div>
+        <div class="quiz-feedback__reason"><span class="eyebrow">Razonamiento clínico</span><p>${esc(det.explicacion || 'Revisa la solución esperada y contrástala con tu razonamiento.')}</p></div>
+        <div class="quiz-feedback__compare">
+          <div><span class="eyebrow">Tu respuesta</span>${respuestaUsuarioHTML(p, r)}</div>
+          <div class="is-expected"><span class="eyebrow">Criterio esperado</span>${solucionEsperadaHTML(p, det.respuestaCorrecta)}</div>
+        </div>
+        ${det.referenciaVideo ? `<div class="quiz-feedback__actions"><button type="button" class="btn btn--secondary" data-video-key="${esc(`${cursoId}:${n}`)}" data-video-seek="${esc(det.referenciaVideo)}"><i data-lucide="play-circle" class="i"></i>Repasar en el video · ${esc(det.referenciaVideo)}</button><small>Te lleva al momento exacto que sustenta la respuesta.</small></div>` : ''}
+      </div>`;
       exp.hidden = false;
+      const confianza = confianzas[i]; const puntos = Number(det.puntos || 0);
+      const calibracion = fs.querySelector<HTMLElement>('.quiz__calibration')!;
+      const mensajeCalibracion = puntos === 1 && confianza === 3
+        ? 'Criterio bien calibrado: decisión correcta con confianza alta.'
+        : puntos === 1
+          ? 'La decisión fue correcta. Revisa la explicación para convertir esa duda en criterio sólido.'
+          : confianza === 3
+            ? 'Punto de revisión: tu confianza fue alta, pero el resultado no fue completo. Compara tu justificación con la explicación.'
+            : puntos > 0
+              ? 'Vas bien encaminada: hubo crédito parcial y tu nivel de confianza invita a revisar el paso que faltó.'
+              : 'Detectaste incertidumbre. Usa la explicación para identificar la señal que faltó en tu razonamiento.';
+      calibracion.className = `quiz__calibration ${puntos === 1 ? 'is-aligned' : confianza === 3 ? 'is-alert' : 'is-learning'}`;
+      calibracion.innerHTML = `<i data-lucide="${puntos === 1 ? 'badge-check' : confianza === 3 ? 'scan-search' : 'lightbulb'}" class="i"></i><span><strong>Calibración de criterio</strong>${mensajeCalibracion}</span>`;
+      calibracion.hidden = false;
     });
 
     const res = f.querySelector<HTMLElement>('.quiz__resultado')!;
     res.hidden = false; res.className = `quiz__resultado ${aprobado ? 'ok' : 'no'}`;
-    res.textContent = aprobado ? `¡Muy bien! ${correctas} de ${total} correctas.` : `${correctas} de ${total} correctas. Repasa la clase y vuelve a intentarlo.`;
+    const calibradas = detalle.filter((det, i) => (Number(det.puntos || 0) === 1 && confianzas[i] >= 2) || (Number(det.puntos || 0) < 1 && confianzas[i] === 1)).length;
+    const bitacoras = justificaciones.filter(Boolean).length;
+    const transcurridos = Math.max(1, Math.round((Date.now() - Number(f.dataset.quizInicio || Date.now())) / 1000));
+    const tiempo = transcurridos < 60 ? `${transcurridos} s` : `${Math.floor(transcurridos / 60)} min ${transcurridos % 60} s`;
+    const marcadas = f.querySelectorAll<HTMLElement>('[data-pregunta][data-flagged="1"]').length;
+    const reporte = q.preguntas.map((p, i) => {
+      const dominio = Math.round(Number(detalle[i]?.puntos || 0) * 100);
+      return `<div class="quiz-report__row"><span class="quiz-report__index">${String(i + 1).padStart(2, '0')}</span><div><strong>${esc(p.competencia || p.q)}</strong><small>${esc(p.nivelCognitivo || 'Aplicar')} · ${esc((p.tipo || 'seleccion').replaceAll('_', ' '))}</small><span class="quiz-report__bar"><i style="width:${dominio}%"></i></span></div><b>${dominio}%</b></div>`;
+    }).join('');
+    res.innerHTML = `<div class="quiz-score" style="--score:${puntaje}"><div class="quiz-score__ring"><strong>${puntaje}%</strong><span>dominio</span></div><div><span class="eyebrow">${aprobado ? 'Reto superado' : 'Sigue practicando'}</span><h3>${aprobado ? 'Criterio clínico consolidado' : 'Tu mapa de mejora está listo'}</h3><p>${correctas} de ${total} decisiones completamente correctas.${aprobado ? ' Tu avance quedó registrado.' : ' Revisa la evidencia de cada paso e inténtalo de nuevo.'}</p><div class="quiz-score__insights"><span><i data-lucide="gauge" class="i"></i>${calibradas}/${total} decisiones calibradas</span><span><i data-lucide="notebook-pen" class="i"></i>${bitacoras}/${total} razonamientos</span><span><i data-lucide="timer" class="i"></i>${tiempo}</span><span><i data-lucide="bookmark" class="i"></i>${marcadas} marcadas</span></div><small>La calibración orienta tu estudio y nunca modifica el puntaje.</small></div></div><section class="quiz-report"><div class="quiz-report__head"><div><span class="eyebrow">Informe de dominio</span><h4>Desempeño por competencia</h4></div><span><i data-lucide="shield-check" class="i"></i>Evidencia revisable</span></div><div class="quiz-report__list">${reporte}</div></section>`;
     f.dataset.calificado = '1';
+    f.classList.add('is-reviewed');
+    f.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((x) => { x.disabled = true; });
+    f.querySelectorAll<HTMLButtonElement>('[data-quiz-move], [data-quiz-flag], [data-quiz-confidence], [data-quiz-exclude]').forEach((x) => { x.disabled = true; });
     await registrarPremio(premio);
-    btn.removeAttribute('disabled'); btn.textContent = 'Intentar de nuevo'; btn.type = 'button';
+    btn.removeAttribute('disabled'); btn.hidden = false; btn.innerHTML = '<i data-lucide="rotate-ccw" class="i"></i>Intentar de nuevo'; btn.type = 'button';
     btn.onclick = () => render();
+    createIcons({ icons });
     try { const k = 'odonteck-club:intentos:v1'; const h = JSON.parse(localStorage.getItem(k) || '{}'); h[`${cursoId}_${n}`] = { ok: correctas, total, aprobado, fecha: new Date().toISOString() }; localStorage.setItem(k, JSON.stringify(h)); } catch {}
   }
   if (f.matches('[data-form-hilo]')) {

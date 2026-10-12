@@ -95,8 +95,17 @@ export function adminQuizzes() {
   const qz = Datos.quizzes();
   const cursos = Datos.cursos();
   const aprob = qz.filter((q) => q.estado === 'aprobado').length;
+  const clases = cursos.flatMap((c) => c.clases.map((k) => ({ cursoId: c.id, ...k })));
+  const total = clases.length;
+  const notas = clases.filter((k) => !!k.notas).length;
+  const fichas = clases.filter((k) => k.ficha?.estado === 'aprobada').length;
+  const completos = clases.filter((k) => !!k.notas && k.ficha?.estado === 'aprobada' && qz.some((q) => q.cursoId === k.cursoId && q.n === k.n && q.estado === 'aprobado')).length;
+  const cobertura = (valor: number) => total ? Math.round(valor / total * 100) : 0;
   return `
   ${adminHead('Quizzes', `${aprob} aprobados · ${qz.length - aprob} en borrador · ${cursos.reduce((a, c) => a + c.clases.length, 0) - qz.length} clases sin quiz`)}
+  <div class="learning-coverage" aria-label="Cobertura de paquetes por clase">
+    ${[[notas, 'Notas', 'notebook-tabs'], [aprob, 'Quiz aprobado', 'brain'], [fichas, 'Ficha PDF', 'file-check-2'], [completos, 'Paquete completo', 'badge-check']].map(([valor, etiqueta, icono]) => `<article class="learning-coverage__item"><span class="learning-coverage__icon"><i data-lucide="${icono}" class="i"></i></span><div><strong>${valor}/${total}</strong><span>${etiqueta}</span></div><div class="learning-coverage__bar"><i style="width:${cobertura(Number(valor))}%"></i></div><small>${cobertura(Number(valor))}%</small></article>`).join('')}
+  </div>
   ${callout('Cómo se generan', 'Los quizzes salen de la transcripción de cada video (scripts/pipeline) y entran como <b>borrador</b>. Un odontólogo los revisa, corrige y aprueba aquí. Solo los aprobados los ven los miembros.')}
   <div class="stack" style="gap:12px">${cursos.map((c) => `
     <details class="card acc" ${qz.some((q) => q.cursoId === c.id) ? 'open' : ''}>
@@ -107,6 +116,37 @@ export function adminQuizzes() {
         return `<a class="acc__row" href="#/admin/quizzes/${c.id}/${k.n}"><span class="mono faint">${k.n}</span><span>${esc(k.titulo)}</span>${chip}${q ? `<span class="faint" style="font-size:var(--fs-xs)">${q.preguntas.length} preguntas</span>` : ''}<i data-lucide="chevron-right" class="i"></i></a>`;
       }).join('')}</div>
     </details>`).join('')}</div>`;
+}
+
+const TIPOS_QUIZ = [
+  ['seleccion', 'Una respuesta'], ['seleccion_multiple', 'Varias respuestas'], ['ordenar', 'Ordenar pasos'],
+  ['relacionar', 'Relacionar conceptos'], ['completar', 'Completar espacios'],
+];
+
+function editorInteraccion(p: Quiz['preguntas'][number], i: number) {
+  const tipo = p.tipo || 'seleccion';
+  if (tipo === 'seleccion' || tipo === 'seleccion_multiple') {
+    const total = Math.max(4, Math.min(6, p.opciones?.length || 4));
+    return `<div class="stack quiz-author__body" style="gap:7px">${Array.from({ length: total }, (_, o) => `
+      <label class="quiz-edit-opt"><input type="${tipo === 'seleccion' ? 'radio' : 'checkbox'}" name="p-${i}-${tipo === 'seleccion' ? 'correcta' : 'correctas'}" value="${o}" ${(tipo === 'seleccion' ? p.correcta === o : p.correctas?.includes(o)) ? 'checked' : ''} ${tipo === 'seleccion' ? 'required' : ''}>
+      <span class="k">${'ABCDEF'[o]}</span><input class="input input--sm" name="p-${i}-o-${o}" value="${esc(p.opciones?.[o] || '')}" placeholder="Opción ${o + 1}" required></label>`).join('')}</div>`;
+  }
+  if (tipo === 'ordenar') {
+    const elementos = (p.elementos || []).map((x) => `${x.id} | ${x.texto}`).join('\n');
+    return `<div class="quiz-author__body form-grid">
+      <div class="field"><label>Elementos disponibles</label><textarea class="input mono" name="p-${i}-elementos" rows="5" placeholder="e1 | Primer paso&#10;e2 | Segundo paso" required>${esc(elementos)}</textarea><span class="faint">Un elemento por línea: ID | texto.</span></div>
+      <div class="field"><label>Orden correcto</label><input class="input mono" name="p-${i}-orden" value="${esc((p.ordenCorrecto || []).join(', '))}" placeholder="e2, e1, e3" required><span class="faint">IDs separados por coma. El alumno nunca recibe esta secuencia.</span></div>
+    </div>`;
+  }
+  if (tipo === 'relacionar') {
+    const pares = (p.izquierda || []).map((x) => { const derId = p.pares?.[x.id] || ''; const der = p.derecha?.find((y) => y.id === derId); return `${x.id} | ${x.texto} | ${derId} | ${der?.texto || ''}`; }).join('\n');
+    return `<div class="field quiz-author__body"><label>Pares correctos</label><textarea class="input mono" name="p-${i}-pares" rows="6" placeholder="i1 | Concepto | d1 | Definición" required>${esc(pares)}</textarea><span class="faint">Una relación por línea: ID izquierdo | concepto | ID derecho | respuesta.</span></div>`;
+  }
+  const huecos = (p.huecos || []).map((h) => `${h.id} | ${h.etiqueta || ''} | ${(h.respuestas || []).join(' | ')}`).join('\n');
+  return `<div class="stack quiz-author__body" style="gap:10px">
+    <div class="field"><label>Texto o consigna</label><textarea class="input" name="p-${i}-plantilla" rows="2" placeholder="Completa los términos clave de la clase." required>${esc(p.plantilla || '')}</textarea></div>
+    <div class="field"><label>Espacios y respuestas aceptadas</label><textarea class="input mono" name="p-${i}-huecos" rows="5" placeholder="h1 | Término 1 | respuesta | alias aceptado" required>${esc(huecos)}</textarea><span class="faint">ID | etiqueta | respuesta principal | alias opcionales.</span></div>
+  </div>`;
 }
 
 export function adminQuiz(params: Record<string, string>) {
@@ -123,12 +163,16 @@ export function adminQuiz(params: Record<string, string>) {
        <button class="btn btn--secondary" name="accion" value="borrador">Guardar borrador</button>
        <button class="btn btn--brand btn--pill-arrow" name="accion" value="aprobar">Aprobar y publicar <span class="arrow"><i data-lucide="check" class="i"></i></span></button>`)}
     ${q.preguntas.map((p, i) => `
-    <div class="card card--pad stack" style="gap:10px">
-      <div class="row" style="justify-content:space-between"><span class="eyebrow">Pregunta ${i + 1}</span><button type="button" class="btn btn--ghost btn--icon btn--xs" data-quiz-accion="quitar:${i}"><i data-lucide="trash-2" class="i"></i></button></div>
-      <textarea class="input" name="p-${i}-q" rows="2" required>${esc(p.q)}</textarea>
-      <div class="stack" style="gap:6px">${[0, 1, 2, 3].map((o) => `
-        <label class="quiz-edit-opt"><input type="radio" name="p-${i}-correcta" value="${o}" ${p.correcta === o ? 'checked' : ''} required><span class="k">${'ABCD'[o]}</span><input class="input input--sm" name="p-${i}-o-${o}" value="${esc(p.opciones[o] || '')}" required></label>`).join('')}</div>
-      <div class="field"><label>Explicación que ve el miembro al responder</label><input class="input" name="p-${i}-explicacion" value="${esc(p.explicacion)}"></div>
+    <div class="card card--pad stack quiz-author" style="gap:12px">
+      <div class="row quiz-author__head" style="justify-content:space-between">
+        <div><span class="eyebrow">Pregunta ${i + 1}</span><p class="faint">La respuesta se califica en el servidor.</p></div>
+        <div class="row" style="flex-wrap:nowrap"><select class="input input--sm quiz-author__type" name="p-${i}-tipo" data-quiz-tipo aria-label="Tipo de interacción">${TIPOS_QUIZ.map(([v, l]) => `<option value="${v}" ${(p.tipo || 'seleccion') === v ? 'selected' : ''}>${l}</option>`).join('')}</select><button type="button" class="btn btn--ghost btn--icon btn--xs" data-quiz-accion="quitar:${i}" aria-label="Quitar pregunta"><i data-lucide="trash-2" class="i"></i></button></div>
+      </div>
+      <input type="hidden" name="p-${i}-id" value="${esc(p.id || `p${i + 1}`)}">
+      <div class="field"><label>Pregunta</label><textarea class="input" name="p-${i}-q" rows="2" required>${esc(p.q)}</textarea></div>
+      <div class="field"><label>Instrucción breve <span class="faint">(opcional)</span></label><input class="input" name="p-${i}-instruccion" value="${esc(p.instruccion || '')}" placeholder="Ej. Selecciona todas las que correspondan"></div>
+      ${editorInteraccion(p, i)}
+      <div class="field"><label>Retroalimentación explicativa</label><textarea class="input" name="p-${i}-explicacion" rows="2" required placeholder="Explica por qué, no solo cuál es la respuesta.">${esc(p.explicacion)}</textarea></div>
     </div>`).join('') || vacio('Sin preguntas', 'Se generan de la transcripción del video. También puedes escribirlas a mano.')}
     <button type="button" class="btn btn--secondary" style="justify-self:start" data-quiz-accion="agregar"><i data-lucide="plus" class="i"></i>Agregar pregunta</button>
   </form>`;

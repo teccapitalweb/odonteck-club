@@ -164,7 +164,7 @@ function reemplazar<T extends { id: string }>(lista: T[], valor: T) {
 const cursoParaApi = (c: Curso) => ({
   id: c.id, titulo: c.titulo, area: c.area, nivel: c.nivel, instructor: c.instructor, portada: c.portada || null,
   banner: c.banner || null, descripcion: c.descripcion, aprenderas: c.aprenderas || [], orden: c.orden, publicado: c.publicado !== false,
-  bunnyCollectionId: c.bunnyCollectionId, clases: c.clases.map((k) => ({ n: k.n, titulo: k.titulo, videoId: k.videoId, duracionMin: k.duracion, gratis: k.gratis, ...(k.notas ? { notas: k.notas } : {}) })),
+  bunnyCollectionId: c.bunnyCollectionId, clases: c.clases.map((k) => ({ n: k.n, titulo: k.titulo, videoId: k.videoId, duracionMin: k.duracion, gratis: k.gratis, ...(k.notas ? { notas: k.notas } : {}), ...(k.ficha ? { ficha: k.ficha } : {}) })),
 });
 
 export async function guardarCursoAdmin(c: Curso, nuevo: boolean) {

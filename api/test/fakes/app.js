@@ -36,7 +36,7 @@ export function semillaBase() {
       publicado: true,
       bunnyCollectionId: 'col-a',
       clases: [
-        { n: 1, titulo: 'Clase 1', videoId: 'video-a-1', duracionMin: 10, gratis: true },
+        { n: 1, titulo: 'Clase 1', videoId: 'video-a-1', duracionMin: 10, gratis: true, ficha: { estado: 'aprobada', archivo: 'fichas/curso-a/1.pdf', version: '1.0', revisadaPor: 'Equipo OdonTeck', actualizada: '2026-09-16T00:00:00.000Z' } },
         { n: 2, titulo: 'Clase 2', videoId: 'video-a-2', duracionMin: 12, gratis: false },
         { n: 3, titulo: 'Clase 3', videoId: 'video-a-3', duracionMin: null, gratis: false },
       ],

@@ -45,6 +45,8 @@ Publicado y conectado en modo API:
 - entrevista inicial, encuestas posteriores e intereses editables;
 - landing y Alexia Concierge;
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
+- evaluaciones v2 con autoría administrativa y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La metacognición no cambia el puntaje;
+- pestaña de ficha por clase y descarga privada firmada cuando la ficha está aprobada. Aún no hay fichas clínicas aprobadas: no confundir infraestructura lista con contenido revisado.
 
 Demo local sin `VITE_API_URL`:
 
@@ -152,6 +154,8 @@ La prueba omitida requiere emuladores Firestore/Storage. No afirmar que las regl
 5. Habilitar Storage para futuras cargas administradas; no es necesario para los diez PDF empaquetados actuales.
 6. Auditar licencias antes de publicar nuevos libros/materiales.
 7. Resolver accesibilidad pendiente y dividir el chunk grande del build demo.
+8. Migrar los 68 quizzes aprobados y regenerar/revisar el catálogo completo con el formato avanzado de 5 interacciones por clase. El pipeline ya exige evidencia `mm:ss` y diversidad (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`), pero `scripts/pipeline/out/` aún no existe y el entorno local no tiene llaves Bunny/Anthropic: no afirmar que los 77 videos fueron analizados. También faltan revisión odontológica y las 77 fichas PDF/Storage.
+9. El reproductor carga la API oficial Player.js de Bunny: al emitir `ended`, registra la vista una sola vez y abre el quiz de la clase. El botón “Finalizar y abrir reto” cubre bloqueadores de red/script y accesibilidad.
 
 ## 9. Flujo seguro de trabajo
 

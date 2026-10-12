@@ -1,5 +1,5 @@
 // Interacciones del panel de administración (formularios y botones).
-import { Datos, slug, imagenAWebp, type Curso, type Material, type Evento, type Quiz } from '../core/datos';
+import { Datos, slug, imagenAWebp, type Curso, type Material, type Evento, type Quiz, type Pregunta } from '../core/datos';
 import { Comunidad } from '../core/comunidad';
 import { mensajeError } from '../core/auth';
 import { resumenEncuestasDemo } from '../core/encuestas';
@@ -35,10 +35,29 @@ function cursoDesdeForm(f: HTMLFormElement): Curso {
 
 function quizDesdeForm(f: HTMLFormElement): Quiz {
   const d = new FormData(f);
-  const preguntas = [];
+  const preguntas: Pregunta[] = [];
+  const lineas = (nombre: string) => String(d.get(nombre) || '').split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  const partes = (linea: string) => linea.split('|').map((x) => x.trim());
   for (let i = 0; d.has(`p-${i}-q`); i++) {
-    preguntas.push({ q: String(d.get(`p-${i}-q`)).trim(), opciones: [0, 1, 2, 3].map((o) => String(d.get(`p-${i}-o-${o}`) || '').trim()),
-                     correcta: Number(d.get(`p-${i}-correcta`) ?? 0), explicacion: String(d.get(`p-${i}-explicacion`) || '').trim() });
+    const tipo = String(d.get(`p-${i}-tipo`) || 'seleccion') as NonNullable<Pregunta['tipo']>;
+    const base = { id: String(d.get(`p-${i}-id`) || `p${i + 1}`), tipo, q: String(d.get(`p-${i}-q`)).trim(),
+      instruccion: String(d.get(`p-${i}-instruccion`) || '').trim(), explicacion: String(d.get(`p-${i}-explicacion`) || '').trim() };
+    if (tipo === 'seleccion' || tipo === 'seleccion_multiple') {
+      const opciones = Array.from({ length: 6 }, (_, o) => String(d.get(`p-${i}-o-${o}`) || '').trim()).filter(Boolean);
+      preguntas.push(tipo === 'seleccion'
+        ? { ...base, opciones, correcta: Number(d.get(`p-${i}-correcta`) ?? 0) }
+        : { ...base, opciones, correctas: d.getAll(`p-${i}-correctas`).map(Number) });
+    } else if (tipo === 'ordenar') {
+      const elementos = lineas(`p-${i}-elementos`).map((linea, j) => { const [id, ...texto] = partes(linea); return { id: id || `e${j + 1}`, texto: texto.join(' | ') }; });
+      const ordenCorrecto = String(d.get(`p-${i}-orden`) || '').split(',').map((x) => x.trim()).filter(Boolean);
+      preguntas.push({ ...base, opciones: [], elementos, ordenCorrecto });
+    } else if (tipo === 'relacionar') {
+      const filas = lineas(`p-${i}-pares`).map((linea, j) => { const [izqId, izqTexto, derId, ...derTexto] = partes(linea); return { izqId: izqId || `i${j + 1}`, izqTexto, derId: derId || `d${j + 1}`, derTexto: derTexto.join(' | ') }; });
+      preguntas.push({ ...base, opciones: [], izquierda: filas.map((x) => ({ id: x.izqId, texto: x.izqTexto })), derecha: filas.map((x) => ({ id: x.derId, texto: x.derTexto })), pares: Object.fromEntries(filas.map((x) => [x.izqId, x.derId])) });
+    } else {
+      const huecos = lineas(`p-${i}-huecos`).map((linea, j) => { const [id, etiqueta, ...respuestas] = partes(linea); return { id: id || `h${j + 1}`, etiqueta, respuestas: respuestas.filter(Boolean) }; });
+      preguntas.push({ ...base, opciones: [], plantilla: String(d.get(`p-${i}-plantilla`) || '').trim(), huecos });
+    }
   }
   const previo = Datos.quiz(f.dataset.curso!, Number(f.dataset.n));
   return { id: f.dataset.id!, cursoId: f.dataset.curso!, n: Number(f.dataset.n), estado: previo?.estado || 'borrador', preguntas, actualizado: '' };
@@ -89,7 +108,16 @@ export function instalarAccionesAdmin(toast: Toast) {
         const accion = (e as SubmitEvent).submitter?.getAttribute('value');
         if (accion === 'aprobar') {
           if (!q.preguntas.length) { toast('Agrega al menos una pregunta', 'alert-triangle'); return; }
-          if (q.preguntas.some((p) => new Set(p.opciones.map((o) => o.toLowerCase())).size < 4)) { toast('Hay opciones repetidas en alguna pregunta', 'alert-triangle'); return; }
+          const incompleta = q.preguntas.some((p) => {
+            const tipoPregunta = p.tipo || 'seleccion';
+            if (!p.q || !p.explicacion) return true;
+            if (tipoPregunta === 'seleccion') return !p.opciones || p.opciones.length < 2 || p.correcta === undefined;
+            if (tipoPregunta === 'seleccion_multiple') return !p.opciones || p.opciones.length < 2 || !p.correctas?.length;
+            if (tipoPregunta === 'ordenar') return !p.elementos || p.elementos.length < 2 || p.ordenCorrecto?.length !== p.elementos.length;
+            if (tipoPregunta === 'relacionar') return !p.izquierda || p.izquierda.length < 2 || p.derecha?.length !== p.izquierda.length;
+            return !p.plantilla || !p.huecos?.length || p.huecos.some((h) => !h.respuestas?.length);
+          });
+          if (incompleta) { toast('Completa la pregunta, su solución y la explicación antes de aprobar', 'alert-triangle'); return; }
           q.estado = 'aprobado';
         } else q.estado = 'borrador';
         await guardarQuizAdmin(q); toast(q.estado === 'aprobado' ? 'Quiz aprobado · ya lo ven los miembros' : 'Borrador guardado'); render();
@@ -163,7 +191,7 @@ export function instalarAccionesAdmin(toast: Toast) {
     const qa = el.closest<HTMLElement>('[data-quiz-accion]');
     if (qa) {
       const f = qa.closest('form') as HTMLFormElement; const q = quizDesdeForm(f); const [acc, idx] = qa.dataset.quizAccion!.split(':');
-      if (acc === 'agregar') q.preguntas.push({ q: '', opciones: ['', '', '', ''], correcta: 0, explicacion: '' });
+      if (acc === 'agregar') q.preguntas.push({ id: `p${Date.now().toString(36)}`, tipo: 'seleccion', q: '', opciones: ['', '', '', ''], correcta: 0, explicacion: '' });
       if (acc === 'quitar') q.preguntas.splice(Number(idx), 1);
       q.estado = 'borrador'; Datos.guardarQuiz(q); render();
     }
@@ -191,6 +219,10 @@ export function instalarAccionesAdmin(toast: Toast) {
 
   document.addEventListener('change', async (e) => {
     const inp = e.target as HTMLInputElement;
+    if (inp.matches('[data-quiz-tipo]')) {
+      const f = inp.closest('form') as HTMLFormElement;
+      const q = quizDesdeForm(f); q.estado = 'borrador'; Datos.guardarQuiz(q); render(); return;
+    }
     if (!inp.matches('[data-subir-imagen]') || !inp.files?.[0]) return;
     const campo = inp.dataset.subirImagen!;
     const form = inp.closest('form')!;

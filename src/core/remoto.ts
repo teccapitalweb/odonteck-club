@@ -5,6 +5,7 @@ import { Comunidad, type Hilo, type Respuesta } from './comunidad';
 import { Certificados, type CertificadoRemoto } from './certificados';
 import { RetosRemotos } from './retos-remotos';
 import { Recompensas } from './recompensas';
+import { Directorio } from './directorio';
 
 interface CatalogoRemoto {
   cursos?: unknown[];
@@ -53,10 +54,10 @@ async function cargarQuizDeRuta(path: string) {
   if (quizzesCargados.has(id)) return;
   quizzesCargados.add(id);
   try {
-    const r = await api<{ preguntas: { q: string; opciones: string[] }[] }>(`/quiz/${encodeURIComponent(cursoId)}/${n}`);
+    const r = await api<{ preguntas: Partial<Quiz['preguntas'][number]>[] }>(`/quiz/${encodeURIComponent(cursoId)}/${n}`);
     const quiz: Quiz = {
       id, cursoId, n, estado: 'aprobado', actualizado: '',
-      preguntas: r.preguntas.map((p) => ({ ...p, correcta: -1, explicacion: '' })),
+      preguntas: r.preguntas.map((p) => ({ ...p, q: p.q || '', opciones: p.opciones || [], correcta: -1, explicacion: '' })),
     };
     Datos.hidratarAdmin('quizzes', [...Datos.quizzes().filter((q) => q.id !== id), quiz]);
   } catch (e: any) {
@@ -75,6 +76,7 @@ async function cargarComunidadDeRuta(path: string) {
     return;
   }
   Comunidad.hidratar(await api<Hilo[]>('/foro'));
+  await Directorio.cargar();
 }
 
 async function cargarExtrasDeRuta(path: string) {

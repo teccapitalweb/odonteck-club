@@ -56,5 +56,8 @@ service cloud.firestore {
     match /v2_recompensas_estado/{id}     { allow read, write: if false; }
     match /v2_recompensas_movimientos/{id}{ allow read, write: if false; }
     match /v2_recompensas_canjes/{id}     { allow read, write: if false; }
+    match /v2_directorio_perfiles/{id}     { allow read, write: if false; }
+    match /v2_directorio_oportunidades/{id}{ allow read, write: if false; }
+    match /v2_directorio_conexiones/{id}   { allow read, write: if false; }
   }
 }

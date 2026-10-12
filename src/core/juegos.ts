@@ -106,9 +106,9 @@ export function bancoPreguntas(): Pregunta[] {
   const out: Pregunta[] = [];
   for (const qz of Datos.quizzes()) {
     const c = getCurso(qz.cursoId);
-    qz.preguntas.forEach((p, i) => out.push({
+    qz.preguntas.filter((p) => (p.tipo || 'seleccion') === 'seleccion' && Array.isArray(p.opciones) && p.correcta !== undefined).forEach((p, i) => out.push({
       id: `${qz.id}#${i}`, curso: c?.titulo || qz.cursoId, area: c?.area || 'General',
-      q: p.q, opciones: p.opciones, correcta: p.correcta, explicacion: p.explicacion,
+      q: p.q, opciones: p.opciones!, correcta: p.correcta!, explicacion: p.explicacion,
     }));
   }
   return out;

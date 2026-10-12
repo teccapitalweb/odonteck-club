@@ -47,6 +47,8 @@ describe('públicas, autenticación y cabeceras', () => {
     assert.equal(ok.headers['access-control-allow-origin'], ORIGEN_OK);
     const local = await request(env.app).options('/me').set('Origin', 'http://localhost:5179').set('Access-Control-Request-Method', 'GET');
     assert.equal(local.headers['access-control-allow-origin'], 'http://localhost:5179');
+    const put = await request(env.app).options('/directorio/perfil').set('Origin', 'http://localhost:5179').set('Access-Control-Request-Method', 'PUT');
+    assert.match(put.headers['access-control-allow-methods'], /PUT/);
     const malo = await request(env.app).get('/health').set('Origin', 'https://malicioso.example').expect(200);
     assert.equal(malo.headers['access-control-allow-origin'], undefined);
   });
@@ -260,6 +262,8 @@ describe('/catalogo', () => {
     assert.equal(JSON.stringify(res.body).includes('video-a-1'), false);
     assert.deepEqual(res.body.cursos.map((c) => c.id), ['curso-a']);
     assert.equal(res.body.cursos[0].clases.length, 3);
+    assert.equal(res.body.cursos[0].clases[0].ficha.estado, 'aprobada');
+    assert.equal(JSON.stringify(res.body).includes('fichas/curso-a/1.pdf'), false, 'la ruta privada del PDF no sale en el catálogo');
     // El catálogo incluye los materiales de Firestore + el lote oficial pendiente
     // (merged dedupeado por id). Mientras Storage no esté habilitado, los 10
     // oficiales aparecen como "proximamente" para no dejar la biblioteca vacía.
@@ -283,6 +287,14 @@ describe('/catalogo', () => {
 });
 
 describe('acceso a clases', () => {
+  test('firma la ficha aprobada y conserva el mismo acceso secuencial de la clase', async () => {
+    const ok = await request(env.app).get('/clases/curso-a/1/ficha').set(bearer(TOKENS.free)).expect(200);
+    assert.match(ok.body.url, /fichas%?\/?curso-a%?\/?1\.pdf|fichas\/curso-a\/1\.pdf/);
+    const firma = env.storage.firmadas.at(-1);
+    assert.equal(firma.action, 'read');
+    assert.equal(firma.expires - Date.parse('2026-09-17T12:00:00Z'), 10 * 60 * 1000);
+    await request(env.app).get('/clases/curso-a/2/ficha').set(bearer(TOKENS.free)).expect(403);
+  });
   test('clase gratis sin VIP: se puede ver; clase de pago: 403 requiere_vip', async () => {
     const ok = await request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId: 'curso-a', n: 1 }).expect(200);
     assert.match(ok.body.embedUrl, /^https:\/\/iframe\.mediadelivery\.net\/embed\/725453\/video-a-1\?token=[0-9a-f]{64}&expires=\d+$/);
@@ -512,7 +524,7 @@ describe('quizzes', () => {
   test('GET no incluye respuestas ni explicaciones; solo quizzes aprobados', async () => {
     const r = await request(env.app).get('/quiz/curso-a/1').set(bearer(TOKENS.free)).expect(200);
     assert.equal(r.body.preguntas.length, 3);
-    for (const p of r.body.preguntas) assert.deepEqual(Object.keys(p).sort(), ['opciones', 'q']);
+    for (const p of r.body.preguntas) assert.deepEqual(Object.keys(p).sort(), ['id', 'instruccion', 'opciones', 'q', 'tipo']);
     assert.equal(JSON.stringify(r.body).includes('correcta'), false);
     const borrador = await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.vip)).expect(404);
     assert.equal(borrador.body.error, 'quiz_no_disponible');

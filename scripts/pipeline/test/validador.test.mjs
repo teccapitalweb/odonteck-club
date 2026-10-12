@@ -35,12 +35,12 @@ test('sin segmentos ni duración solo valida formato', () => {
   assert.deepEqual(validarClase(claseValida(), {}), []);
 });
 
-test('preguntas: cantidad exacta de 4', () => {
+test('preguntas: cantidad exacta de 5', () => {
   const c = claseValida();
-  conError(validarClase({ ...c, preguntas: c.preguntas.slice(0, 3) }, ctx), /exactamente 4/);
+  conError(validarClase({ ...c, preguntas: c.preguntas.slice(0, 4) }, ctx), /exactamente 5/);
 });
 
-test('preguntas: opciones, índice, repetidas, explicación', () => {
+test('preguntas: selección, evidencia, diversidad y explicación', () => {
   const p = claseValida().preguntas[0];
   conError(validarPreguntas([{ ...p, opciones: ['a', 'b', 'c'] }]), /exactamente 4/);
   conError(validarPreguntas([{ ...p, opciones: ['Origen dental', 'origen  DENTAL.', 'c', 'd'] }]), /opciones repetidas/);
@@ -49,7 +49,18 @@ test('preguntas: opciones, índice, repetidas, explicación', () => {
   conError(validarPreguntas([{ ...p, correcta: 1.5 }]), /índice inválido/);
   conError(validarPreguntas([{ ...p, correcta: '1' }]), /índice inválido/);
   conError(validarPreguntas([{ ...p, explicacion: '' }]), /explicacion: vacía/);
+  conError(validarPreguntas([{ ...p, referenciaVideo: '99:00' }], ctx), /fuera de la duración/);
   conError(validarPreguntas([p, { ...p, q: p.q.toUpperCase() }]), /pregunta repetida/);
+  const c = claseValida();
+  conError(validarClase({ ...c, preguntas: c.preguntas.map((x, i) => i === 4 ? { ...p, q: 'Otra pregunta', referenciaVideo: '06:00' } : x) }, ctx), /falta una interacción de tipo 'completar'/);
+});
+
+test('preguntas: valida estructuras interactivas', () => {
+  const [, multiple, ordenar, relacionar, completar] = claseValida().preguntas;
+  conError(validarPreguntas([{ ...multiple, correctas: [0] }]), /requiere entre 2/);
+  conError(validarPreguntas([{ ...ordenar, ordenCorrecto: ['a', 'a', 'c'] }]), /todos los IDs/);
+  conError(validarPreguntas([{ ...relacionar, pares: { a: 'x', b: 'x', c: 'z' } }]), /cada ID una sola vez/);
+  conError(validarPreguntas([{ ...completar, huecos: [{ id: '1', respuestas: [] }] }]), /entre 2 y 4 espacios/);
 });
 
 test('entradas que no son objeto', () => {

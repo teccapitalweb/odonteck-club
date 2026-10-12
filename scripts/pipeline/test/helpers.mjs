@@ -21,12 +21,13 @@ export function claseValida(extra = {}) {
       { t: '02:00', texto: 'Ángulo ANB como referencia' },
       { t: '05:30', texto: 'Criterios de derivación' },
     ],
-    preguntas: [0, 1, 2, 3].map((i) => ({
-      q: `¿Qué indica el hallazgo clínico ${i + 1} descrito en clase?`,
-      opciones: ['Origen esquelético', 'Origen dental', 'Hábito de succión', 'Erupción ectópica'],
-      correcta: i,
-      explicacion: 'Así se explicó al comparar los trazos cefalométricos.',
-    })),
+    preguntas: [
+      { tipo: 'seleccion', q: '¿Qué hallazgo orienta primero a un origen esquelético?', instruccion: 'Elige una respuesta.', referenciaVideo: '00:30', casoClinico: 'La exploración plantea diferenciar un componente dental de uno esquelético.', competencia: 'Discriminar el origen de la maloclusión', nivelCognitivo: 'Aplicar', opciones: ['Relación de bases óseas', 'Color dental', 'Edad del expediente', 'Orden de fotografías'], correcta: 0, explicacion: 'La relación entre bases óseas permite diferenciar el componente esquelético del dental.' },
+      { tipo: 'seleccion_multiple', q: '¿Qué datos deben integrarse antes de decidir la derivación?', instruccion: 'Elige todas las respuestas correctas.', referenciaVideo: '02:00', casoClinico: 'Debes integrar los datos disponibles antes de decidir una derivación.', competencia: 'Integrar evidencia diagnóstica', nivelCognitivo: 'Decidir', opciones: ['Hallazgo cefalométrico', 'Exploración clínica', 'Color del uniforme', 'Nombre del archivo'], correctas: [0, 1], explicacion: 'La decisión combina los hallazgos del estudio con la exploración clínica.' },
+      { tipo: 'ordenar', q: 'Ordena la secuencia diagnóstica explicada.', instruccion: 'Coloca los pasos en orden.', referenciaVideo: '02:30', casoClinico: 'Organiza el flujo de valoración antes de emitir una conducta.', competencia: 'Secuenciar el razonamiento diagnóstico', nivelCognitivo: 'Analizar', elementos: [{ id: 'a', texto: 'Explorar al paciente' }, { id: 'b', texto: 'Interpretar el trazo' }, { id: 'c', texto: 'Decidir la derivación' }], ordenCorrecto: ['a', 'b', 'c'], explicacion: 'La secuencia parte de la exploración, integra el trazo y termina en la decisión.' },
+      { tipo: 'relacionar', q: 'Relaciona cada elemento con su función clínica.', instruccion: 'Forma tres pares.', referenciaVideo: '05:30', casoClinico: 'Distingue la contribución de cada elemento al proceso diagnóstico.', competencia: 'Relacionar herramientas y funciones', nivelCognitivo: 'Analizar', izquierda: [{ id: 'a', texto: 'Exploración' }, { id: 'b', texto: 'Cefalometría' }, { id: 'c', texto: 'Derivación' }], derecha: [{ id: 'x', texto: 'Hallazgos clínicos' }, { id: 'y', texto: 'Relación esquelética' }, { id: 'z', texto: 'Manejo interdisciplinario' }], pares: { a: 'x', b: 'y', c: 'z' }, explicacion: 'Cada herramienta cumple una función distinta dentro de la decisión diagnóstica.' },
+      { tipo: 'completar', q: 'Completa la síntesis del criterio diagnóstico.', instruccion: 'Escribe los conceptos faltantes.', referenciaVideo: '06:00', casoClinico: 'Sintetiza los componentes de una valoración integrada.', competencia: 'Construir una síntesis diagnóstica', nivelCognitivo: 'Aplicar', plantilla: 'La valoración integra [1] y [2].', huecos: [{ id: '1', etiqueta: 'Fuente clínica', respuestas: ['exploración clínica', 'exploracion clinica'] }, { id: '2', etiqueta: 'Estudio', respuestas: ['cefalometría', 'cefalometria'] }], explicacion: 'La valoración no depende de un dato aislado: integra exploración y cefalometría.' },
+    ],
     ...extra,
   };
 }

@@ -24,6 +24,9 @@ export const COL = Object.freeze({
   recompensasEstado: 'v2_recompensas_estado',
   recompensasMovimientos: 'v2_recompensas_movimientos',
   recompensasCanjes: 'v2_recompensas_canjes',
+  directorioPerfiles: 'v2_directorio_perfiles',
+  directorioOportunidades: 'v2_directorio_oportunidades',
+  directorioConexiones: 'v2_directorio_conexiones',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',
@@ -156,6 +159,9 @@ export function cursoPublico(curso) {
   const { clases = [], ...resto } = curso;
   return {
     ...resto,
-    clases: (Array.isArray(clases) ? clases : []).map(({ videoId, ...clase }) => clase),
+    clases: (Array.isArray(clases) ? clases : []).map(({ videoId, ficha, ...clase }) => ({
+      ...clase,
+      ...(ficha ? { ficha: { estado: ficha.estado, version: ficha.version, revisadaPor: ficha.revisadaPor, actualizada: ficha.actualizada } } : {}),
+    })),
   };
 }

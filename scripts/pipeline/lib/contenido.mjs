@@ -24,10 +24,18 @@ Qué producir:
 - titulo: máximo ${LIMITES.tituloMaxCaracteres} caracteres, específico del tema de esta clase. Nada de "Clase N", ni repetir el nombre del curso, ni comillas o punto final.
 - resumen: máximo ${LIMITES.resumenMaxPalabras} palabras. Qué se enseña y para qué le sirve al odontólogo en consulta.
 - conceptos: entre ${LIMITES.conceptosMin} y ${LIMITES.conceptosMax} ideas clave en orden cronológico. "t" es la marca mm:ss donde se explica, copiada de una de las marcas [mm:ss] que preceden cada línea de la transcripción. "texto" en una frase breve.
-- preguntas: exactamente ${LIMITES.preguntas}, de comprensión útil para la práctica clínica: criterios de decisión, interpretación de hallazgos, el porqué de un paso, qué hacer ante una situación descrita en clase. Evita memoria trivial (nombres propios, cifras sueltas, qué se dijo al inicio, anécdotas).
-  - "opciones": exactamente ${LIMITES.opciones}, plausibles, distintas entre sí, de largo y estilo parecidos. Sin "todas las anteriores" ni "ninguna de las anteriores".
-  - "correcta": índice (0 a ${LIMITES.opciones - 1}) de la única opción correcta según lo dicho en clase. Varía la posición entre preguntas.
-  - "explicacion": una o dos frases que justifiquen la respuesta con lo explicado en la clase.
+- preguntas: exactamente ${LIMITES.preguntas}, una por cada tipo y en este orden: seleccion, seleccion_multiple, ordenar, relacionar y completar. Deben evaluar razonamiento clínico, no memoria trivial.
+  - Cada pregunta debe partir de un caso, decisión, secuencia, comparación o criterio explicado de forma inequívoca en la clase.
+  - "casoClinico": una situación breve de una a tres frases, construida solo con hechos presentes en la transcripción. Si no hay paciente, formula una situación de decisión profesional sin inventar edad, signos, antecedentes ni resultados.
+  - "competencia": habilidad clínica concreta que se evalúa, en una frase breve.
+  - "nivelCognitivo": usa exactamente Aplicar, Analizar o Decidir. No redactes reactivos de simple recuerdo.
+  - "referenciaVideo": marca mm:ss exacta de una línea de la transcripción que contiene la evidencia principal. No uses una marca aproximada ni inventada.
+  - seleccion: cuatro opciones plausibles, una correcta. Evita pistas de redacción, absolutos, "todas" y "ninguna".
+  - seleccion_multiple: cuatro opciones plausibles y dos o tres correctas. La consigna debe decir explícitamente que pueden elegirse varias.
+  - ordenar: entre tres y seis pasos realmente secuenciales. No fuerces una secuencia cuando la clase no la establece.
+  - relacionar: entre tres y cinco pares uno a uno, útiles para discriminar conceptos clínicos.
+  - completar: dos a cuatro huecos con términos o criterios inequívocos. Incluye variantes de respuesta aceptables solo si significan lo mismo.
+  - "explicacion": dos o tres frases: justifica la solución, contrasta el error más probable y remite al criterio enseñado, sin añadir conocimiento externo.
 
 Escribe en español de México con terminología clínica correcta. Responde solo con el JSON pedido.`;
 
@@ -43,6 +51,16 @@ Reglas:
 Escribe en español de México. Responde solo con el JSON pedido.`;
 
 // Esquemas JSON para structured outputs (solo tipos/requeridos/enums; los límites finos los revisa el validador).
+const propiedadesBasePregunta = {
+  tipo: { type: 'string' }, q: { type: 'string' }, instruccion: { type: 'string' }, referenciaVideo: { type: 'string' }, casoClinico: { type: 'string' }, competencia: { type: 'string' }, nivelCognitivo: { type: 'string', enum: ['Aplicar', 'Analizar', 'Decidir'] }, explicacion: { type: 'string' },
+};
+const elemento = { type: 'object', additionalProperties: false, required: ['id', 'texto'], properties: { id: { type: 'string' }, texto: { type: 'string' } } };
+const pregunta = (tipo, requeridos, properties) => ({
+  type: 'object', additionalProperties: false,
+  required: ['tipo', 'q', 'instruccion', 'referenciaVideo', 'casoClinico', 'competencia', 'nivelCognitivo', 'explicacion', ...requeridos],
+  properties: { ...propiedadesBasePregunta, tipo: { type: 'string', enum: [tipo] }, ...properties },
+});
+
 export const ESQUEMA_CLASE = {
   type: 'object',
   additionalProperties: false,
@@ -56,17 +74,13 @@ export const ESQUEMA_CLASE = {
     },
     preguntas: {
       type: 'array',
-      items: {
-        type: 'object',
-        additionalProperties: false,
-        required: ['q', 'opciones', 'correcta', 'explicacion'],
-        properties: {
-          q: { type: 'string' },
-          opciones: { type: 'array', items: { type: 'string' } },
-          correcta: { type: 'integer', enum: [0, 1, 2, 3] },
-          explicacion: { type: 'string' },
-        },
-      },
+      items: { oneOf: [
+        pregunta('seleccion', ['opciones', 'correcta'], { opciones: { type: 'array', items: { type: 'string' } }, correcta: { type: 'integer', enum: [0, 1, 2, 3] } }),
+        pregunta('seleccion_multiple', ['opciones', 'correctas'], { opciones: { type: 'array', items: { type: 'string' } }, correctas: { type: 'array', items: { type: 'integer', enum: [0, 1, 2, 3] } } }),
+        pregunta('ordenar', ['elementos', 'ordenCorrecto'], { elementos: { type: 'array', items: elemento }, ordenCorrecto: { type: 'array', items: { type: 'string' } } }),
+        pregunta('relacionar', ['izquierda', 'derecha', 'pares'], { izquierda: { type: 'array', items: elemento }, derecha: { type: 'array', items: elemento }, pares: { type: 'object', additionalProperties: { type: 'string' } } }),
+        pregunta('completar', ['plantilla', 'huecos'], { plantilla: { type: 'string' }, huecos: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['id', 'etiqueta', 'respuestas'], properties: { id: { type: 'string' }, etiqueta: { type: 'string' }, respuestas: { type: 'array', items: { type: 'string' } } } } } }),
+      ] },
     },
   },
 };
@@ -215,12 +229,21 @@ export async function generarClase(cliente, { curso, clase, totalClases, transcr
       titulo: d.titulo.trim(),
       resumen: d.resumen.trim(),
       conceptos: d.conceptos.map((k) => ({ t: k.t.trim(), texto: k.texto.trim() })),
-      preguntas: d.preguntas.map((p) => ({ q: p.q.trim(), opciones: p.opciones.map((o) => o.trim()), correcta: p.correcta, explicacion: p.explicacion.trim() })),
+      preguntas: d.preguntas.map(limpiarPregunta),
     },
     uso: r.uso,
     intentos: r.intentos,
     modelo: r.modelo,
   };
+}
+
+function limpiarPregunta(p) {
+  const base = { tipo: p.tipo, q: p.q.trim(), instruccion: p.instruccion.trim(), referenciaVideo: p.referenciaVideo.trim(), casoClinico: p.casoClinico.trim(), competencia: p.competencia.trim(), nivelCognitivo: p.nivelCognitivo, explicacion: p.explicacion.trim() };
+  if (p.tipo === 'seleccion') return { ...base, opciones: p.opciones.map((o) => o.trim()), correcta: p.correcta };
+  if (p.tipo === 'seleccion_multiple') return { ...base, opciones: p.opciones.map((o) => o.trim()), correctas: p.correctas };
+  if (p.tipo === 'ordenar') return { ...base, elementos: p.elementos.map((x) => ({ id: x.id.trim(), texto: x.texto.trim() })), ordenCorrecto: p.ordenCorrecto.map((x) => x.trim()) };
+  if (p.tipo === 'relacionar') return { ...base, izquierda: p.izquierda.map((x) => ({ id: x.id.trim(), texto: x.texto.trim() })), derecha: p.derecha.map((x) => ({ id: x.id.trim(), texto: x.texto.trim() })), pares: Object.fromEntries(Object.entries(p.pares).map(([k, v]) => [k.trim(), String(v).trim()])) };
+  return { ...base, plantilla: p.plantilla.trim(), huecos: p.huecos.map((h) => ({ id: h.id.trim(), etiqueta: h.etiqueta.trim(), respuestas: h.respuestas.map((r) => r.trim()) })) };
 }
 
 /** Genera descripción, "aprenderás" y nivel de un curso a partir de los resúmenes de sus clases. */

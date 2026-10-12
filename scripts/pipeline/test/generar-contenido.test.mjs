@@ -42,7 +42,9 @@ test('generarClase: petición bien formada y contenido limpio', async () => {
   assert.equal(r.intentos, 1);
   assert.equal(r.contenido.titulo, 'Cefalometría lateral en la consulta general');
   assert.equal(r.contenido.videoId, 'v-1');
-  assert.equal(r.contenido.preguntas.length, 4);
+  assert.equal(r.contenido.preguntas.length, 5);
+  assert.deepEqual(r.contenido.preguntas.map((p) => p.tipo), ['seleccion', 'seleccion_multiple', 'ordenar', 'relacionar', 'completar']);
+  assert.equal(r.contenido.preguntas[0].referenciaVideo, '00:30');
   assert.deepEqual(r.uso, { entrada: 1000, salida: 500, llamadas: 1 });
 
   const p = cliente.peticiones[0];

@@ -9,102 +9,237 @@
       "nivel": "Intermedio",
       "instructor": "Equipo OdonTeck",
       "portada": "/cursos/diagnostico-en-ortodoncia-para-odontologos-generales.webp",
-      "descripcion": "Curso grabado de la membresía OdonTeck: Diagnóstico en Ortodoncia para Odontólogos Generales. 5 clases con casos reales de consultorio.",
+      "descripcion": "Integra historia clínica, exploración, fotografías y estudios de imagen para reconocer maloclusiones, seleccionar registros, anticipar mecánicas y decidir cuándo referir. El curso cierra con trazado cefalométrico y análisis guiado de casos.",
       "orden": 1,
       "bunnyCollectionId": "3d0a8c29-536d-4c13-b9f8-42fc4681714f",
       "clases": [
         {
           "n": 1,
-          "titulo": "Clase 1",
+          "titulo": "Diagnóstico integral y selección inicial del tratamiento",
           "videoId": "56b5a950-60a5-4972-b974-d69bc991b447",
           "duracion": 47,
           "gratis": true,
           "notas": {
-            "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
+            "resumen": "La clase presenta el diagnóstico como base del tratamiento ortodóncico: integra antecedentes, exploración, fotografías y radiografías; relaciona discrepancias de tamaño, espacio y oclusión con las expectativas del paciente; y explica cómo elegir entre brackets, alineadores o referencia antes de documentar el consentimiento.",
             "conceptos": [
               {
-                "t": "02:00",
-                "texto": "Clasificación de Angle (Clase I, II y III) según la relación del primer molar."
+                "t": "02:14",
+                "texto": "La valoración ortodóncica debe considerar estética, función masticatoria, salud periodontal y bienestar, no solo alineación anterior."
               },
               {
-                "t": "05:17",
-                "texto": "Overjet (resalte horizontal) vs overbite (sobremordida vertical): como medirlos."
+                "t": "09:20",
+                "texto": "El diagnóstico inicial integra historia médica, examen clínico, fotografías y estudios radiográficos seleccionados para cada caso."
+              },
+              {
+                "t": "17:42",
+                "texto": "La discrepancia de tamaño dentario puede dejar espacios residuales y exigir una rehabilitación posterior explicada desde la primera cita."
+              },
+              {
+                "t": "24:30",
+                "texto": "Las extracciones no son universales: se plantean según espacio, apiñamiento y relación oclusal, dentro de un plan individualizado."
+              },
+              {
+                "t": "31:01",
+                "texto": "La selección entre alineadores, brackets o mecánicas combinadas depende del diagnóstico, la complejidad de los movimientos y la colaboración esperada; no se decide solo por estética."
+              },
+              {
+                "t": "37:17",
+                "texto": "El consentimiento informado documenta objetivos, alternativas, riesgos, límites y tratamientos complementarios previsibles antes de iniciar."
               }
             ]
+          },
+          "ficha": {
+            "estado": "borrador",
+            "archivo": "fichas/diagnostico-en-ortodoncia-para-odontologos-generales/clase-1.pdf",
+            "version": "0.9",
+            "revisadaPor": "Pendiente de revisión clínica",
+            "actualizada": "2026-10-10T00:00:00.000Z",
+            "vistaPreviaLocal": "/output/pdf/ortodoncia-clase-1-ficha-estudio.pdf"
           }
         },
         {
           "n": 2,
-          "titulo": "Clase 2",
+          "titulo": "Historia clínica, fotografías y registros para decidir",
           "videoId": "d9611bfd-f835-4d90-a621-b83537e7bfcc",
           "duracion": 58,
           "gratis": true,
           "notas": {
-            "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
+            "resumen": "La clase organiza la primera valoración: anamnesis, exploración extraoral e intraoral, fotografías, crecimiento craneofacial, modelos y pruebas complementarias. El objetivo es integrar los datos en un plan personalizado, documentar expectativas y reconocer cuándo el caso necesita ortopedia, ortodoncia, rehabilitación o trabajo multidisciplinario.",
             "conceptos": [
               {
-                "t": "02:00",
-                "texto": "Análisis de espacio: espacio disponible frente al requerido para detectar apiñamiento."
+                "t": "00:59",
+                "texto": "La historia clínica es un registro secuencial, permanente y médico-legal que sostiene las decisiones del tratamiento."
               },
               {
-                "t": "05:17",
-                "texto": "Registros diagnósticos: fotografias, modelos, panorámica y lateral de cráneo."
+                "t": "02:04",
+                "texto": "La anamnesis reúne datos personales, motivo de consulta, antecedentes médicos y odontológicos, medicamentos, alergias y hábitos."
+              },
+              {
+                "t": "05:43",
+                "texto": "La exploración combina análisis facial, ATM y tejidos orales con la revisión de caries, periodonto, dolor y rehabilitaciones existentes."
+              },
+              {
+                "t": "17:14",
+                "texto": "Las vistas faciales e intraorales documentan simetría, perfil, línea media, relación oclusal, apiñamiento y rotaciones."
+              },
+              {
+                "t": "22:09",
+                "texto": "El crecimiento craneofacial, los hábitos y la etapa de dentición cambian el momento y el tipo de intervención."
+              },
+              {
+                "t": "45:22",
+                "texto": "Los registros se analizan en conjunto para formular diagnóstico, pendientes previos, alternativas, seguimiento y consentimiento."
               }
             ]
+          },
+          "ficha": {
+            "estado": "borrador",
+            "archivo": "fichas/diagnostico-en-ortodoncia-para-odontologos-generales/clase-2.pdf",
+            "version": "0.9",
+            "revisadaPor": "Pendiente de revisión clínica",
+            "actualizada": "2026-10-10T00:00:00.000Z",
+            "vistaPreviaLocal": "/output/pdf/ortodoncia-clase-2-ficha-estudio.pdf"
           }
         },
         {
           "n": 3,
-          "titulo": "Clase 3",
+          "titulo": "Radiología y cefalometría para la valoración ortodóncica",
           "videoId": "d6d60f9d-8788-4d4c-85f5-3862563cd486",
           "duracion": 21,
           "gratis": true,
           "notas": {
-            "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
+            "resumen": "La clase compara la panorámica, la lateral de cráneo, las periapicales, las oclusales y la tomografía según la pregunta diagnóstica. Explica qué estructuras y alteraciones buscar, cómo justificar estudios complementarios y para qué sirven la cefalometría y los puntos de referencia antes de planificar.",
             "conceptos": [
               {
-                "t": "02:00",
-                "texto": "Hábitos (succión digital, deglución atipica, respiración bucal) y su efecto en la maloclusión."
+                "t": "00:23",
+                "texto": "En el caso presentado, la panorámica aporta una visión general de dentición, raíces y hueso; su indicación debe justificarse después de la historia clínica, la exploración y la revisión de imágenes previas."
               },
               {
-                "t": "05:17",
-                "texto": "Criterios para tratar en consulta general o referir al ortodoncista."
+                "t": "03:10",
+                "texto": "En una panorámica diagnóstica pueden revisarse ambas arcadas, dientes presentes o impactados, supernumerarios, lesiones visibles, hueso y morfología condilar, reconociendo las limitaciones de la proyección."
+              },
+              {
+                "t": "04:05",
+                "texto": "La lateral de cráneo permite valorar la posición de los maxilares y realizar trazados cefalométricos."
+              },
+              {
+                "t": "07:31",
+                "texto": "La cefalometría integra crecimiento, relaciones esqueléticas y dentales, planos oclusales y perfil de tejidos blandos."
+              },
+              {
+                "t": "08:54",
+                "texto": "Las periapicales y oclusales se seleccionan cuando una pregunta clínica o radiográfica requiere detalle localizado; no dependen siempre de una panorámica previa."
+              },
+              {
+                "t": "11:53",
+                "texto": "La CBCT aporta información tridimensional solo cuando una pregunta diagnóstica justificada no puede resolverse con exploración e imágenes de menor exposición y el resultado puede cambiar el manejo."
               }
             ]
+          },
+          "ficha": {
+            "estado": "borrador",
+            "archivo": "fichas/diagnostico-en-ortodoncia-para-odontologos-generales/clase-3.pdf",
+            "version": "0.9",
+            "revisadaPor": "Pendiente de revisión clínica",
+            "actualizada": "2026-10-10T00:00:00.000Z",
+            "vistaPreviaLocal": "/output/pdf/ortodoncia-clase-3-ficha-estudio.pdf"
           }
         },
         {
           "n": 4,
-          "titulo": "Clase 4",
+          "titulo": "Integración diagnóstica y selección de mecánicas",
           "videoId": "4aa4578e-982a-4a8d-a3ab-dfb19636fd47",
           "duracion": 67,
           "gratis": true,
           "notas": {
-            "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
+            "resumen": "La clase conecta hallazgos clínicos y radiográficos con decisiones de tratamiento. Revisa cuándo complementar imágenes, cómo anticipar rotaciones, reducción interproximal y topes de resina, qué casos pueden pasar a alineadores y qué hallazgos justifican referencia, interconsulta o consentimiento específico.",
             "conceptos": [
               {
-                "t": "02:00",
-                "texto": "Registros diagnósticos: fotografias, modelos, panorámica y lateral de cráneo."
+                "t": "03:33",
+                "texto": "El diagnóstico preciso combina examen clínico e imagen para construir una visión integral y un plan personalizado."
+              },
+              {
+                "t": "16:27",
+                "texto": "La cupla usa fuerzas opuestas para rotar un diente y puede requerir botones y elásticos además de brackets o alineadores."
+              },
+              {
+                "t": "19:00",
+                "texto": "El IPR es una reducción interproximal controlada que puede crear una cantidad limitada de espacio en casos seleccionados tras medir discrepancia, anatomía y esmalte disponible."
+              },
+              {
+                "t": "22:59",
+                "texto": "Los topes de resina desocluyen la mordida, protegen brackets inferiores y facilitan movimientos en casos seleccionados."
+              },
+              {
+                "t": "32:18",
+                "texto": "Cambiar de brackets a alineadores depende de la etapa, complejidad, espacio pendiente, raíces y compromiso del paciente."
+              },
+              {
+                "t": "51:59",
+                "texto": "La referencia se sustenta en maloclusión, hábitos, anomalías, espacio, ATM, necesidades restauradoras y condiciones sistémicas."
               }
             ]
+          },
+          "ficha": {
+            "estado": "borrador",
+            "archivo": "fichas/diagnostico-en-ortodoncia-para-odontologos-generales/clase-4.pdf",
+            "version": "0.9",
+            "revisadaPor": "Pendiente de revisión clínica",
+            "actualizada": "2026-10-10T00:00:00.000Z",
+            "vistaPreviaLocal": "/output/pdf/ortodoncia-clase-4-ficha-estudio.pdf"
           }
         },
         {
           "n": 5,
-          "titulo": "Clase 5",
+          "titulo": "Trazado cefalométrico y decisiones clínicas con casos",
           "videoId": "aefca140-1aab-4d67-a1b6-e6ab015d91aa",
           "duracion": 65,
           "gratis": false,
           "notas": {
-            "resumen": "Como diagnosticar en ortodoncia desde la práctica general: clasificar la maloclusión, analizar el espacio y decidir cuando tratar o referir.",
+            "resumen": "La clase desarrolla un trazado básico sobre lateral de cráneo: localiza N, S, A y B, construye SNA, SNB y ANB e interpreta relaciones esqueléticas. Después aplica el razonamiento a casos con canino ectópico, mordida profunda, diastemas y decisiones de extracción individualizadas.",
             "conceptos": [
               {
-                "t": "02:00",
-                "texto": "Hábitos (succión digital, deglución atipica, respiración bucal) y su efecto en la maloclusión."
+                "t": "00:41",
+                "texto": "La cefalometría estudia relaciones dentales y esqueléticas sobre una radiografía lateral estandarizada para apoyar diagnóstico y planeación."
+              },
+              {
+                "t": "02:08",
+                "texto": "Los puntos N, S, A y B ubican base craneal anterior, silla turca, maxilar y mandíbula."
+              },
+              {
+                "t": "03:53",
+                "texto": "SNA, SNB y ANB aportan información sobre posición maxilar, posición mandibular y relación anteroposterior, pero deben interpretarse junto con crecimiento, geometría craneofacial y otros hallazgos."
+              },
+              {
+                "t": "07:00",
+                "texto": "Antes de medir se trazan estructuras óseas y se localizan los puntos anatómicos para reducir errores de colocación."
+              },
+              {
+                "t": "24:00",
+                "texto": "El trazado manual sigue siendo una referencia de control cuando una herramienta automática no localiza los puntos con precisión."
+              },
+              {
+                "t": "45:39",
+                "texto": "Las decisiones de extracción se individualizan con relación canina, lado afectado, línea media, espacio y complejidad del movimiento."
               }
             ]
+          },
+          "ficha": {
+            "estado": "borrador",
+            "archivo": "fichas/diagnostico-en-ortodoncia-para-odontologos-generales/clase-5.pdf",
+            "version": "0.9",
+            "revisadaPor": "Pendiente de revisión clínica",
+            "actualizada": "2026-10-10T00:00:00.000Z",
+            "vistaPreviaLocal": "/output/pdf/ortodoncia-clase-5-ficha-estudio.pdf"
           }
         }
+      ],
+      "aprenderas": [
+        "Integrar historia clínica, exploración y registros diagnósticos",
+        "Seleccionar estudios de imagen según el hallazgo clínico",
+        "Reconocer relaciones oclusales y necesidades de espacio",
+        "Comparar brackets y alineadores según la complejidad del caso",
+        "Fundamentar la derivación y el plan inicial con evidencia"
       ]
     },
     {

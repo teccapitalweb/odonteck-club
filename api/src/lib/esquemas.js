@@ -21,6 +21,8 @@ export const NIVELES = ['Básico', 'Intermedio', 'Avanzado'];
 export const TIPOS_MATERIAL = ['PDF', 'Libro', 'Presentación'];
 export const ESTADOS_MATERIAL = ['disponible', 'proximamente', 'oculto'];
 export const ESTADOS_QUIZ = ['borrador', 'aprobado'];
+export const TIPOS_PREGUNTA = ['seleccion', 'seleccion_multiple', 'ordenar', 'relacionar', 'completar'];
+export const NIVELES_COGNITIVOS = ['Aplicar', 'Analizar', 'Decidir'];
 
 const VIDEO_ID = /^[A-Za-z0-9-]{1,80}$/;
 const MARCA_TIEMPO = /^(\d{1,2}:)?\d{1,2}:\d{2}$/;
@@ -50,6 +52,23 @@ function validarNotas(notas, campo) {
   };
 }
 
+function validarFicha(ficha, campo) {
+  if (ficha === undefined) return undefined;
+  if (ficha === null) return null;
+  if (!esObjeto(ficha)) throw invalido(`El campo "${campo}" debe ser un objeto.`);
+  const estado = unoDe(ficha.estado, ['borrador', 'aprobada'], { campo: `${campo}.estado`, requerido: true });
+  const archivo = texto(ficha.archivo, { campo: `${campo}.archivo`, max: 300 });
+  if (archivo && (!archivo.startsWith('fichas/') || archivo.includes('..') || !archivo.endsWith('.pdf'))) throw invalido(`"${campo}.archivo" debe ser una ruta PDF privada dentro de fichas/.`);
+  if (estado === 'aprobada' && !archivo) throw invalido(`"${campo}.archivo" es obligatorio para una ficha aprobada.`);
+  return sinIndefinidos({
+    estado,
+    archivo: archivo || undefined,
+    version: texto(ficha.version, { campo: `${campo}.version`, max: 40 }),
+    revisadaPor: texto(ficha.revisadaPor, { campo: `${campo}.revisadaPor`, max: LIMITES.corto }),
+    actualizada: ficha.actualizada === undefined ? undefined : fechaISO(ficha.actualizada, { campo: `${campo}.actualizada` }),
+  });
+}
+
 export function validarClases(clases) {
   if (!Array.isArray(clases) || clases.length > 300) throw invalido('"clases" debe ser una lista (máx. 300).');
   const vistos = new Set();
@@ -70,6 +89,7 @@ export function validarClases(clases) {
         duracionMin: numeroONulo(c.duracionMin === undefined ? null : c.duracionMin, { campo: `clases[${i}].duracionMin`, max: 1000 }),
         gratis: c.gratis === undefined ? false : booleano(c.gratis, { campo: `clases[${i}].gratis` }),
         notas: validarNotas(c.notas, `clases[${i}].notas`),
+        ficha: validarFicha(c.ficha, `clases[${i}].ficha`),
       });
     })
     .sort((a, b) => a.n - b.n);
@@ -136,16 +156,76 @@ export function validarPreguntas(preguntas) {
   if (!Array.isArray(preguntas) || preguntas.length > 50) throw invalido('"preguntas" debe ser una lista (máx. 50).');
   return preguntas.map((p, i) => {
     if (!esObjeto(p)) throw invalido(`"preguntas[${i}]" debe ser un objeto.`);
-    if (!Array.isArray(p.opciones) || p.opciones.length < 2 || p.opciones.length > 6) {
-      throw invalido(`"preguntas[${i}].opciones" debe tener entre 2 y 6 opciones.`);
-    }
-    const opciones = p.opciones.map((o, j) => textoRequerido(o, { campo: `preguntas[${i}].opciones[${j}]`, max: LIMITES.medio }));
-    return {
+    const prefijo = `preguntas[${i}]`;
+    const tipo = unoDe(p.tipo ?? 'seleccion', TIPOS_PREGUNTA, { campo: `${prefijo}.tipo`, requerido: true });
+    const referenciaVideo = p.referenciaVideo === undefined ? undefined : textoRequerido(p.referenciaVideo, { campo: `${prefijo}.referenciaVideo`, max: 8 });
+    if (referenciaVideo !== undefined && !MARCA_TIEMPO.test(referenciaVideo)) throw invalido(`"${prefijo}.referenciaVideo" debe tener formato mm:ss o h:mm:ss.`);
+    const base = sinIndefinidos({
+      id: p.id === undefined ? undefined : textoRequerido(p.id, { campo: `${prefijo}.id`, max: 60 }),
+      tipo,
       q: textoRequerido(p.q, { campo: `preguntas[${i}].q`, max: 500, multilinea: true }),
-      opciones,
-      correcta: entero(p.correcta, { campo: `preguntas[${i}].correcta`, min: 0, max: opciones.length - 1 }),
-      explicacion: texto(p.explicacion, { campo: `preguntas[${i}].explicacion`, max: 1000, multilinea: true }) ?? '',
+      instruccion: texto(p.instruccion, { campo: `${prefijo}.instruccion`, max: 500, multilinea: true }) ?? '',
+      referenciaVideo,
+      casoClinico: p.casoClinico === undefined ? undefined : textoRequerido(p.casoClinico, { campo: `${prefijo}.casoClinico`, max: 800, multilinea: true }),
+      competencia: p.competencia === undefined ? undefined : textoRequerido(p.competencia, { campo: `${prefijo}.competencia`, max: 160 }),
+      nivelCognitivo: p.nivelCognitivo === undefined ? undefined : unoDe(p.nivelCognitivo, NIVELES_COGNITIVOS, { campo: `${prefijo}.nivelCognitivo`, requerido: true }),
+      explicacion: texto(p.explicacion, { campo: `${prefijo}.explicacion`, max: 1000, multilinea: true }) ?? '',
+    });
+    const listaElementos = (valor, campo, { min = 2, max = 10 } = {}) => {
+      if (!Array.isArray(valor) || valor.length < min || valor.length > max) throw invalido(`"${campo}" debe tener entre ${min} y ${max} elementos.`);
+      const elementos = valor.map((x, j) => {
+        if (!esObjeto(x)) throw invalido(`"${campo}[${j}]" debe ser un objeto.`);
+        return {
+          id: textoRequerido(x.id, { campo: `${campo}[${j}].id`, max: 60 }),
+          texto: textoRequerido(x.texto, { campo: `${campo}[${j}].texto`, max: LIMITES.medio }),
+        };
+      });
+      if (new Set(elementos.map((x) => x.id)).size !== elementos.length) throw invalido(`"${campo}" contiene IDs repetidos.`);
+      return elementos;
     };
+    if (tipo === 'seleccion' || tipo === 'seleccion_multiple') {
+      if (!Array.isArray(p.opciones) || p.opciones.length < 2 || p.opciones.length > 6) throw invalido(`"${prefijo}.opciones" debe tener entre 2 y 6 opciones.`);
+      const opciones = p.opciones.map((o, j) => textoRequerido(o, { campo: `${prefijo}.opciones[${j}]`, max: LIMITES.medio }));
+      if (new Set(opciones.map((o) => o.toLocaleLowerCase('es'))).size !== opciones.length) throw invalido(`"${prefijo}.opciones" contiene opciones repetidas.`);
+      if (tipo === 'seleccion') return { ...base, opciones, correcta: entero(p.correcta, { campo: `${prefijo}.correcta`, min: 0, max: opciones.length - 1 }) };
+      if (!Array.isArray(p.correctas) || !p.correctas.length) throw invalido(`"${prefijo}.correctas" debe incluir al menos una respuesta.`);
+      const correctas = p.correctas.map((v, j) => entero(v, { campo: `${prefijo}.correctas[${j}]`, min: 0, max: opciones.length - 1 }));
+      if (new Set(correctas).size !== correctas.length) throw invalido(`"${prefijo}.correctas" contiene índices repetidos.`);
+      return { ...base, opciones, correctas };
+    }
+    if (tipo === 'ordenar') {
+      const elementos = listaElementos(p.elementos, `${prefijo}.elementos`);
+      if (!Array.isArray(p.ordenCorrecto) || p.ordenCorrecto.length !== elementos.length) throw invalido(`"${prefijo}.ordenCorrecto" debe incluir todos los elementos.`);
+      const ordenCorrecto = p.ordenCorrecto.map(String);
+      const ids = new Set(elementos.map((x) => x.id));
+      if (new Set(ordenCorrecto).size !== elementos.length || ordenCorrecto.some((id) => !ids.has(id))) throw invalido(`"${prefijo}.ordenCorrecto" no coincide con los elementos.`);
+      return { ...base, elementos, ordenCorrecto };
+    }
+    if (tipo === 'relacionar') {
+      const izquierda = listaElementos(p.izquierda, `${prefijo}.izquierda`);
+      const derecha = listaElementos(p.derecha, `${prefijo}.derecha`);
+      if (!esObjeto(p.pares)) throw invalido(`"${prefijo}.pares" debe ser un objeto.`);
+      const idsDerecha = new Set(derecha.map((x) => x.id));
+      const pares = Object.fromEntries(izquierda.map((x) => {
+        const valor = String(p.pares[x.id] ?? '');
+        if (!idsDerecha.has(valor)) throw invalido(`"${prefijo}.pares.${x.id}" no apunta a una opción válida.`);
+        return [x.id, valor];
+      }));
+      return { ...base, izquierda, derecha, pares };
+    }
+    const plantilla = textoRequerido(p.plantilla, { campo: `${prefijo}.plantilla`, max: 1000, multilinea: true });
+    if (!Array.isArray(p.huecos) || p.huecos.length < 1 || p.huecos.length > 10) throw invalido(`"${prefijo}.huecos" debe tener entre 1 y 10 elementos.`);
+    const huecos = p.huecos.map((h, j) => {
+      if (!esObjeto(h)) throw invalido(`"${prefijo}.huecos[${j}]" debe ser un objeto.`);
+      if (!Array.isArray(h.respuestas) || h.respuestas.length < 1 || h.respuestas.length > 8) throw invalido(`"${prefijo}.huecos[${j}].respuestas" debe tener entre 1 y 8 respuestas.`);
+      return {
+        id: textoRequerido(h.id, { campo: `${prefijo}.huecos[${j}].id`, max: 60 }),
+        etiqueta: texto(h.etiqueta, { campo: `${prefijo}.huecos[${j}].etiqueta`, max: LIMITES.corto }) ?? '',
+        respuestas: h.respuestas.map((r, k) => textoRequerido(r, { campo: `${prefijo}.huecos[${j}].respuestas[${k}]`, max: LIMITES.medio })),
+      };
+    });
+    if (new Set(huecos.map((h) => h.id)).size !== huecos.length) throw invalido(`"${prefijo}.huecos" contiene IDs repetidos.`);
+    return { ...base, plantilla, huecos };
   });
 }
 

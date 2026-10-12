@@ -8,6 +8,7 @@ Este es el punto de entrada del repositorio definitivo de **OdonTeck Club**.
 2. Ejecuta `git status --short --branch` y conserva todo cambio local o archivo sin seguimiento que no hayas creado tú. En este repositorio existen activos y documentos locales todavía no versionados; no los borres, restaures ni sobrescribas.
 3. Confirma que trabajas en `teccapitalweb/odonteck-club`, rama `main`. No uses una copia histórica como fuente de verdad.
 4. Antes de tocar datos o backend, lee [`docs/contrato.md`](docs/contrato.md). Para contenidos, transcripciones o quizzes, lee [`scripts/pipeline/README.md`](scripts/pipeline/README.md).
+5. Para continuar el directorio profesional o migrar evaluaciones/PDF por clase, lee [`docs/PLAN-DIRECTORIO-EVALUACIONES.md`](docs/PLAN-DIRECTORIO-EVALUACIONES.md). No expongas contactos antes de aceptar ni publiques contenido clínico generado sin revisión.
 5. Si trabajas con imágenes, revisa los documentos de prompts en `docs/` y los PDF de dirección visual ya existentes. No regeneres ni reemplaces lotes sin inventariar primero los archivos locales no versionados.
 
 ## Reglas no negociables

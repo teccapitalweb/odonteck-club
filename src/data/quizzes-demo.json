@@ -3,30 +3,160 @@
     "id": "diagnostico-en-ortodoncia-para-odontologos-generales_1",
     "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
     "n": 1,
-    "estado": "aprobado",
-    "actualizado": "2026-09-18T00:00:00Z",
+    "estado": "borrador",
+    "actualizado": "2026-10-10T00:00:00.000Z",
     "preguntas": [
       {
-        "q": "En la clasificación de Angle, ¿qué define una Clase I molar?",
+        "tipo": "seleccion",
+        "q": "¿Qué recomendación está mejor sustentada por la valoración presentada?",
+        "instruccion": "Elige la alternativa que responde a la complejidad mecánica, no solo a la preferencia estética.",
+        "referenciaVideo": "31:01",
+        "casoClinico": "Una persona solicita alineadores porque busca discreción. En la valoración se observa un canino ectópico y apiñamiento complejo que exigirían tracción y creación de espacio.",
+        "competencia": "Seleccionar una modalidad ortodóncica inicial",
+        "nivelCognitivo": "Decidir",
         "opciones": [
-          "La cúspide mesiovestibular del primer molar superior ocluye en el surco mesiovestibular del inferior",
-          "El molar inferior está distalizado",
-          "Hay mordida abierta anterior",
-          "El molar superior ocluye por delante del inferior"
+          "Explicar que la complejidad exige valorar brackets u otras mecánicas auxiliares antes de elegir alineadores",
+          "Indicar alineadores únicamente porque son la preferencia del paciente",
+          "Omitir el apiñamiento y corregir solo el sector anterior visible",
+          "Iniciar cualquier aparato sin completar la valoración diagnóstica"
         ],
         "correcta": 0,
-        "explicacion": "La Clase I se define por la relación de la cúspide mesiovestibular del primer molar superior con el surco mesiovestibular del primer molar inferior."
+        "explicacion": "Un canino ectópico y un apiñamiento complejo pueden requerir tracción, creación de espacio y auxiliares. La respuesta correcta no prescribe un aparato universal: exige comparar la predictibilidad y los límites de cada mecánica con el diagnóstico completo, la experiencia del tratante y las preferencias del paciente."
       },
       {
-        "q": "¿Qué mide el 'overjet'?",
+        "tipo": "seleccion_multiple",
+        "q": "¿Qué componentes deben integrarse antes de formular el plan inicial?",
+        "instruccion": "Selecciona las tres fuentes de información clínica descritas en la clase.",
+        "referenciaVideo": "09:20",
+        "casoClinico": "Antes de referir a una persona con expectativas estéticas altas, necesitas reunir información suficiente para explicar alcances y límites del tratamiento.",
+        "competencia": "Integrar registros diagnósticos",
+        "nivelCognitivo": "Analizar",
         "opciones": [
-          "La sobremordida vertical",
-          "El resalte horizontal entre incisivos",
-          "El apiñamiento total",
-          "La inclinación del molar"
+          "Historia médica y antecedentes relevantes",
+          "Exploración de salud oral, ATM y musculatura facial",
+          "Fotografías y radiografías seleccionadas según el caso",
+          "Promesa de una duración basada en el tratamiento de otro paciente"
         ],
-        "correcta": 1,
-        "explicacion": "El overjet es el resalte horizontal; el overbite es la sobremordida vertical."
+        "correctas": [
+          0,
+          1,
+          2
+        ],
+        "explicacion": "La clase combina antecedentes, exploración, fotografías y estudios de imagen para construir un diagnóstico individual. Comparar con otra persona o prometer la misma duración contradice el principio de que no existe una solución de talla única."
+      },
+      {
+        "tipo": "ordenar",
+        "q": "Ordena el flujo digital descrito para preparar una planeación con alineadores",
+        "instruccion": "Organiza los pasos desde la captura clínica hasta la planeación de movimientos.",
+        "referenciaVideo": "32:29",
+        "casoClinico": "El equipo decidió documentar digitalmente ambas arcadas antes de que el ortodoncista construya la secuencia de movimientos.",
+        "competencia": "Estructurar un flujo de registros digitales",
+        "nivelCognitivo": "Aplicar",
+        "elementos": [
+          {
+            "id": "mordida",
+            "texto": "Registrar la mordida"
+          },
+          {
+            "id": "plan",
+            "texto": "Enviar el caso para la planeación de movimientos"
+          },
+          {
+            "id": "escanear",
+            "texto": "Escanear arcada superior e inferior"
+          },
+          {
+            "id": "stl",
+            "texto": "Subir los archivos STL del escaneo"
+          }
+        ],
+        "ordenCorrecto": [
+          "escanear",
+          "mordida",
+          "stl",
+          "plan"
+        ],
+        "explicacion": "La secuencia inicia con el escaneo de ambas arcadas y el registro de mordida. Después se cargan los STL y el caso pasa a la planeación de los movimientos."
+      },
+      {
+        "tipo": "relacionar",
+        "q": "Relaciona cada hallazgo con la implicación comunicada en la clase",
+        "instruccion": "Construye las tres relaciones antes de confirmar.",
+        "referenciaVideo": "17:42",
+        "casoClinico": "Durante la primera cita aparecen tres causas distintas de espacios o desarmonía oclusal; cada una cambia la conversación con el paciente.",
+        "competencia": "Diferenciar implicaciones de hallazgos dentarios",
+        "nivelCognitivo": "Analizar",
+        "izquierda": [
+          {
+            "id": "tamano",
+            "texto": "Discrepancia de tamaño dentario"
+          },
+          {
+            "id": "supernumerario",
+            "texto": "Diente supernumerario"
+          },
+          {
+            "id": "ausencia",
+            "texto": "Ausencia dentaria"
+          }
+        ],
+        "derecha": [
+          {
+            "id": "rehabilitar",
+            "texto": "Puede requerir volumen o rehabilitación al finalizar"
+          },
+          {
+            "id": "extraer",
+            "texto": "Puede requerir extracción para favorecer la oclusión"
+          },
+          {
+            "id": "limite",
+            "texto": "Obliga a explicar límites de línea media o reposición"
+          }
+        ],
+        "pares": {
+          "tamano": "rehabilitar",
+          "supernumerario": "extraer",
+          "ausencia": "limite"
+        },
+        "explicacion": "La clase distingue la discrepancia de tamaño, la presencia de piezas extra y la ausencia dentaria porque no se resuelven de la misma forma. Reconocer la causa permite anticipar rehabilitación, extracción o límites del resultado."
+      },
+      {
+        "tipo": "completar",
+        "q": "Completa el alcance clínico de la ortodoncia descrito al inicio",
+        "instruccion": "Escribe los tres ámbitos que complementan la estética.",
+        "referenciaVideo": "02:14",
+        "casoClinico": "Una persona piensa que la ortodoncia solo cambia la apariencia de los dientes anteriores. Necesitas explicarle el alcance presentado en la clase.",
+        "competencia": "Comunicar objetivos funcionales del tratamiento",
+        "nivelCognitivo": "Aplicar",
+        "plantilla": "Además de la estética, la ortodoncia influye en la {{funcion}}, la {{periodonto}} y el {{bienestar}} del paciente.",
+        "huecos": [
+          {
+            "id": "funcion",
+            "etiqueta": "Función",
+            "respuestas": [
+              "función masticatoria",
+              "funcion masticatoria"
+            ]
+          },
+          {
+            "id": "periodonto",
+            "etiqueta": "Salud",
+            "respuestas": [
+              "salud periodontal",
+              "periodontal"
+            ]
+          },
+          {
+            "id": "bienestar",
+            "etiqueta": "Impacto general",
+            "respuestas": [
+              "bienestar general",
+              "bienestar"
+            ]
+          }
+        ],
+        "explicacion": "El docente amplía el objetivo más allá de alinear la sonrisa y menciona función masticatoria, salud periodontal y bienestar general. Esa explicación ayuda a ajustar expectativas desde la primera cita."
       }
     ]
   },
@@ -34,30 +164,174 @@
     "id": "diagnostico-en-ortodoncia-para-odontologos-generales_2",
     "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
     "n": 2,
-    "estado": "aprobado",
-    "actualizado": "2026-09-18T00:00:00Z",
+    "estado": "borrador",
+    "actualizado": "2026-10-10T00:00:00.000Z",
     "preguntas": [
       {
-        "q": "¿Cuál es la radiografía de elección para una valoración ortodóncica inicial general?",
+        "tipo": "seleccion",
+        "q": "¿Cuál es el siguiente paso antes de presentar una propuesta de tratamiento?",
+        "instruccion": "Elige la acción que convierte registros aislados en una decisión clínica.",
+        "referenciaVideo": "45:22",
+        "casoClinico": "Ya cuentas con anamnesis, exploración, fotografías y modelos; además registraste tratamientos previos y expectativas.",
+        "competencia": "Integrar datos para formular un diagnóstico",
+        "nivelCognitivo": "Decidir",
         "opciones": [
-          "Periapical única",
-          "Aleta de mordida",
-          "Ortopantomografía (panorámica)",
-          "Oclusal"
+          "Analizar todos los datos en conjunto y definir pendientes y objetivos",
+          "Elegir el aparato únicamente por la preferencia estética",
+          "Prometer el mismo tiempo que tuvo un familiar",
+          "Omitir los hallazgos que requieren atención antes de la ortodoncia"
         ],
-        "correcta": 2,
-        "explicacion": "La panorámica ofrece una visión general de dientes, gérmenes, ATM y estructuras; se complementa con lateral de cráneo."
+        "correcta": 0,
+        "explicacion": "La clase indica que anamnesis, exploración y pruebas complementarias deben integrarse para comprender el caso de manera holística. El aparato y la duración se discuten después de esa síntesis."
       },
       {
-        "q": "El apiñamiento dentario se determina con:",
+        "tipo": "seleccion_multiple",
+        "q": "¿Qué registros complementarios aportan evidencia al diagnóstico inicial?",
+        "instruccion": "Selecciona las tres fuentes descritas en la clase.",
+        "referenciaVideo": "09:32",
+        "casoClinico": "La exploración clínica muestra apiñamiento y una relación oclusal dudosa; necesitas documentar estructuras, posición dentaria y mordida.",
+        "competencia": "Seleccionar registros diagnósticos complementarios",
+        "nivelCognitivo": "Aplicar",
         "opciones": [
-          "El índice de placa",
-          "La discrepancia entre espacio disponible y espacio requerido",
-          "El sangrado gingival",
-          "La edad del paciente"
+          "Radiografía panorámica",
+          "Fotografías intraorales y extraorales",
+          "Modelos físicos o escaneo 3D",
+          "Una fotografía casual sin protocolo ni consentimiento"
         ],
-        "correcta": 1,
-        "explicacion": "El análisis de espacio compara el espacio disponible en la arcada con el que requieren los dientes."
+        "correctas": [
+          0,
+          1,
+          2
+        ],
+        "explicacion": "La panorámica, las fotografías clínicas y los modelos aportan información distinta y complementaria. Una imagen casual sin protocolo no sustituye un registro diagnóstico."
+      },
+      {
+        "tipo": "ordenar",
+        "q": "Ordena la ruta de valoración desarrollada durante la clase",
+        "instruccion": "Construye el flujo desde la primera entrevista hasta la propuesta explicada.",
+        "referenciaVideo": "02:04",
+        "casoClinico": "Debes estandarizar la primera valoración para no saltar de una fotografía aislada directamente a indicar un aparato.",
+        "competencia": "Estructurar una valoración ortodóncica inicial",
+        "nivelCognitivo": "Aplicar",
+        "elementos": [
+          {
+            "id": "integrar",
+            "texto": "Integrar los hallazgos y formular el diagnóstico"
+          },
+          {
+            "id": "anamnesis",
+            "texto": "Realizar anamnesis y precisar el motivo de consulta"
+          },
+          {
+            "id": "propuesta",
+            "texto": "Explicar objetivos, alternativas y pendientes al paciente"
+          },
+          {
+            "id": "explorar",
+            "texto": "Completar exploración clínica extraoral e intraoral"
+          },
+          {
+            "id": "registros",
+            "texto": "Obtener fotografías, imágenes y modelos indicados"
+          }
+        ],
+        "ordenCorrecto": [
+          "anamnesis",
+          "explorar",
+          "registros",
+          "integrar",
+          "propuesta"
+        ],
+        "explicacion": "La clase avanza desde la entrevista y la exploración hacia los registros complementarios. Solo después integra la información para construir y explicar una propuesta personalizada."
+      },
+      {
+        "tipo": "relacionar",
+        "q": "Relaciona cada vista fotográfica con su aporte principal",
+        "instruccion": "Asocia las cuatro vistas con el aspecto que permiten analizar.",
+        "referenciaVideo": "17:14",
+        "casoClinico": "El expediente debe documentar cara, sonrisa y oclusión sin repetir imágenes que aporten la misma información.",
+        "competencia": "Interpretar el protocolo fotográfico",
+        "nivelCognitivo": "Analizar",
+        "izquierda": [
+          {
+            "id": "frontal",
+            "texto": "Fotografía facial frontal"
+          },
+          {
+            "id": "perfil",
+            "texto": "Fotografía facial de perfil"
+          },
+          {
+            "id": "laterales",
+            "texto": "Fotografías intraorales laterales"
+          },
+          {
+            "id": "oclusales",
+            "texto": "Fotografías oclusales"
+          }
+        ],
+        "derecha": [
+          {
+            "id": "simetria",
+            "texto": "Simetría facial"
+          },
+          {
+            "id": "convexidad",
+            "texto": "Perfil y convexidad"
+          },
+          {
+            "id": "clase",
+            "texto": "Relación oclusal derecha e izquierda"
+          },
+          {
+            "id": "apinamiento",
+            "texto": "Apiñamiento, rotaciones y espacio de arcada"
+          }
+        ],
+        "pares": {
+          "frontal": "simetria",
+          "perfil": "convexidad",
+          "laterales": "clase",
+          "oclusales": "apinamiento"
+        },
+        "explicacion": "Cada vista responde una pregunta distinta: la frontal documenta simetría, el perfil aporta la convexidad, las laterales muestran la relación oclusal y las oclusales revelan espacio y rotaciones. Juntas evitan interpretar la mordida desde una sola imagen."
+      },
+      {
+        "tipo": "completar",
+        "q": "Completa la función documental de la historia clínica",
+        "instruccion": "Escribe los términos usados para describir el registro.",
+        "referenciaVideo": "00:59",
+        "casoClinico": "El equipo quiere reducir omisiones y conservar evidencia clara de lo observado y explicado en cada etapa.",
+        "competencia": "Reconocer el valor clínico y legal del expediente",
+        "nivelCognitivo": "Aplicar",
+        "plantilla": "La historia clínica es un registro {{secuencia}}, {{permanencia}} y una herramienta {{legal}} indispensable.",
+        "huecos": [
+          {
+            "id": "secuencia",
+            "etiqueta": "Organización",
+            "respuestas": [
+              "secuencial"
+            ]
+          },
+          {
+            "id": "permanencia",
+            "etiqueta": "Conservación",
+            "respuestas": [
+              "permanente"
+            ]
+          },
+          {
+            "id": "legal",
+            "etiqueta": "Valor",
+            "respuestas": [
+              "médico-legal",
+              "medico-legal",
+              "médico legal",
+              "medico legal"
+            ]
+          }
+        ],
+        "explicacion": "El docente define la historia clínica como un registro secuencial y permanente, además de una herramienta médico-legal. Esa cualidad exige documentar de forma consistente, no solo llenar un formulario."
       }
     ]
   },
@@ -65,30 +339,180 @@
     "id": "diagnostico-en-ortodoncia-para-odontologos-generales_3",
     "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
     "n": 3,
-    "estado": "aprobado",
-    "actualizado": "2026-09-18T00:00:00Z",
+    "estado": "borrador",
+    "actualizado": "2026-10-10T00:00:00.000Z",
     "preguntas": [
       {
-        "q": "Que describe una mordida cruzada anterior?",
+        "tipo": "seleccion",
+        "q": "¿Qué estudio utiliza la clase para obtener una visión radiográfica general del caso descrito?",
+        "instruccion": "Elige el estudio presentado en el video; su indicación clínica sigue siendo individualizada.",
+        "referenciaVideo": "02:00",
+        "casoClinico": "La exploración clínica terminó, pero aún necesitas revisar raíces, piezas no erupcionadas, hueso y posibles alteraciones antes de decidir estudios localizados.",
+        "competencia": "Reconocer el alcance de una imagen panorámica",
+        "nivelCognitivo": "Decidir",
         "opciones": [
-          "Los incisivos inferiores ocluyen por delante de los superiores",
-          "Sobremordida profunda",
-          "Diastema central",
-          "Molar en Clase II"
+          "Radiografía panorámica",
+          "Radiografía periapical de una pieza elegida al azar",
+          "Fotografía facial frontal",
+          "Modelo de estudio sin imagen radiográfica"
         ],
         "correcta": 0,
-        "explicacion": "En la mordida cruzada anterior los incisivos inferiores quedan por delante de los superiores."
+        "explicacion": "La panorámica ofrece en este caso una visión general de dientes, raíces y hueso. Esto no significa solicitarla de rutina a toda persona: la exploración, los antecedentes, las imágenes previas y la pregunta diagnóstica determinan si está justificada."
       },
       {
-        "q": "El análisis de Bolton evalúa:",
+        "tipo": "seleccion_multiple",
+        "q": "¿Qué hallazgos pueden revisarse en la panorámica según la clase?",
+        "instruccion": "Selecciona las tres opciones respaldadas por la explicación.",
+        "referenciaVideo": "03:20",
+        "casoClinico": "Recibes una panorámica de primera valoración y debes hacer una lectura sistemática antes de pedir imágenes adicionales.",
+        "competencia": "Extraer información de una panorámica",
+        "nivelCognitivo": "Analizar",
         "opciones": [
-          "La edad ósea",
-          "La discrepancia de tamaño dentario entre arcadas",
-          "El índice de placa",
-          "La profundidad de bolsa"
+          "Número y posición de los dientes",
+          "Supernumerarios, lesiones o reabsorciones visibles",
+          "Cantidad de hueso y morfología general de los cóndilos",
+          "La medida cefalométrica final sin una lateral de cráneo"
         ],
-        "correcta": 1,
-        "explicacion": "Bolton compara la proporción de tamaño dentario superior/inferior para predecir buena intercuspidacion."
+        "correctas": [
+          0,
+          1,
+          2
+        ],
+        "explicacion": "El docente usa la panorámica para revisar dentición, anomalías, raíces, hueso y morfología condilar general. La proyección panorámica no determina por sí sola la posición funcional de la ATM, y el trazado cefalométrico requiere la lateral correspondiente."
+      },
+      {
+        "tipo": "ordenar",
+        "q": "Ordena la respuesta ante un hallazgo localizado sospechoso",
+        "instruccion": "Organiza la ruta desde el hallazgo general hasta su documentación.",
+        "referenciaVideo": "16:43",
+        "casoClinico": "En la panorámica observas una pequeña alteración alrededor de una pieza y necesitas precisar su estado antes de iniciar movimientos.",
+        "competencia": "Escalar un hallazgo radiográfico",
+        "nivelCognitivo": "Decidir",
+        "elementos": [
+          {
+            "id": "explicar",
+            "texto": "Explicar al paciente el hallazgo y por qué debe aclararse"
+          },
+          {
+            "id": "localizar",
+            "texto": "Identificar el hallazgo en la panorámica"
+          },
+          {
+            "id": "integrar",
+            "texto": "Integrar el resultado al expediente y al consentimiento"
+          },
+          {
+            "id": "pedir",
+            "texto": "Solicitar una radiografía localizada cuando corresponda"
+          }
+        ],
+        "ordenCorrecto": [
+          "localizar",
+          "explicar",
+          "pedir",
+          "integrar"
+        ],
+        "explicacion": "La panorámica detecta la señal inicial; después se comunica la razón del estudio complementario y se solicita una imagen localizada. El resultado se incorpora al expediente antes de decidir movimientos."
+      },
+      {
+        "tipo": "relacionar",
+        "q": "Relaciona cada estudio con la pregunta que ayuda a resolver",
+        "instruccion": "Asocia las cinco modalidades con su uso descrito.",
+        "referenciaVideo": "03:10",
+        "casoClinico": "El expediente contiene varias dudas diagnósticas y debes evitar pedir estudios sin una finalidad clara.",
+        "competencia": "Elegir imágenes según la pregunta diagnóstica",
+        "nivelCognitivo": "Analizar",
+        "izquierda": [
+          {
+            "id": "panoramica",
+            "texto": "Panorámica"
+          },
+          {
+            "id": "lateral",
+            "texto": "Lateral de cráneo"
+          },
+          {
+            "id": "periapical",
+            "texto": "Periapical"
+          },
+          {
+            "id": "oclusal",
+            "texto": "Oclusal"
+          },
+          {
+            "id": "tomografia",
+            "texto": "CBCT indicada"
+          }
+        ],
+        "derecha": [
+          {
+            "id": "general",
+            "texto": "Visión general de dentición, raíces y hueso"
+          },
+          {
+            "id": "cefalometria",
+            "texto": "Relaciones maxilares y trazado cefalométrico"
+          },
+          {
+            "id": "pieza",
+            "texto": "Detalle de una pieza o tratamiento endodóncico"
+          },
+          {
+            "id": "ubicacion",
+            "texto": "Ubicación vestibular, palatina o lingual de una pieza"
+          },
+          {
+            "id": "tridimensional",
+            "texto": "Detalle 3D cuando la pregunta no se resuelve con menor exposición"
+          }
+        ],
+        "pares": {
+          "panoramica": "general",
+          "lateral": "cefalometria",
+          "periapical": "pieza",
+          "oclusal": "ubicacion",
+          "tomografia": "tridimensional"
+        },
+        "explicacion": "Cada modalidad responde a una pregunta distinta. La selección debe partir de la historia clínica, la exploración, las imágenes previas y del impacto esperado sobre el manejo; pedir todos los estudios sin propósito añade exposición sin mejorar la ruta diagnóstica."
+      },
+      {
+        "tipo": "completar",
+        "q": "Completa las tres relaciones básicas del trazado cefalométrico",
+        "instruccion": "Escribe las estructuras que se analizan.",
+        "referenciaVideo": "13:10",
+        "casoClinico": "Antes de interpretar una lateral de cráneo necesitas distinguir qué relación anatómica representa cada parte del análisis básico presentado.",
+        "competencia": "Reconocer objetivos del análisis cefalométrico",
+        "nivelCognitivo": "Aplicar",
+        "plantilla": "El trazado revisa la posición {{maxilar}}, la posición {{mandibular}} y la relación {{relacion}}.",
+        "huecos": [
+          {
+            "id": "maxilar",
+            "etiqueta": "Estructura superior",
+            "respuestas": [
+              "maxilar",
+              "maxilar superior"
+            ]
+          },
+          {
+            "id": "mandibular",
+            "etiqueta": "Estructura inferior",
+            "respuestas": [
+              "mandibular",
+              "mandíbula",
+              "mandibula"
+            ]
+          },
+          {
+            "id": "relacion",
+            "etiqueta": "Relación conjunta",
+            "respuestas": [
+              "maxilomandibular",
+              "maxilo-mandibular",
+              "maxilar-mandibular"
+            ]
+          }
+        ],
+        "explicacion": "La clase resume el análisis en posición maxilar, posición mandibular y relación maxilomandibular. Separar las tres evita confundir una discrepancia esquelética con una observación solo dentaria."
       }
     ]
   },
@@ -96,30 +520,352 @@
     "id": "diagnostico-en-ortodoncia-para-odontologos-generales_4",
     "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
     "n": 4,
-    "estado": "aprobado",
-    "actualizado": "2026-09-18T00:00:00Z",
+    "estado": "borrador",
+    "actualizado": "2026-10-10T00:00:00.000Z",
     "preguntas": [
       {
-        "q": "El diastema interincisivo en dentición mixta (etapa del patito feo) suele ser:",
+        "tipo": "seleccion",
+        "q": "¿Qué recurso responde al problema mecánico descrito?",
+        "instruccion": "Elige la intervención que evita el contacto sobre los brackets inferiores.",
+        "referenciaVideo": "22:59",
+        "casoClinico": "Una mordida profunda hace que los dientes superiores contacten los brackets inferiores y éstos se desprendan repetidamente.",
+        "competencia": "Seleccionar una ayuda de desoclusión",
+        "nivelCognitivo": "Decidir",
         "opciones": [
-          "Patológico siempre",
-          "Una fase transitoria normal",
-          "Signo de caries",
-          "Indicacion de extracción"
-        ],
-        "correcta": 1,
-        "explicacion": "Es un fenomeno transitorio normal que suele cerrarse al erupcionar los caninos."
-      },
-      {
-        "q": "La succión digital prolongada puede provocar:",
-        "opciones": [
-          "Mordida abierta anterior y protrusion",
-          "Clase III",
-          "Mayor overbite",
-          "Anquilosis"
+          "Topes de resina para levantar temporalmente la mordida",
+          "IPR generalizado sin valorar el espacio",
+          "Cambiar a alineadores sin revisar la complejidad",
+          "Retirar todos los registros del expediente"
         ],
         "correcta": 0,
-        "explicacion": "La presion del dedo favorece mordida abierta anterior y protrusion de incisivos superiores."
+        "explicacion": "La clase explica que los topes de resina desocluyen y evitan que la mordida profunda golpee los brackets inferiores. El IPR y los alineadores responden a problemas diferentes."
+      },
+      {
+        "tipo": "seleccion_multiple",
+        "q": "¿Qué datos favorecen considerar alineadores en el escenario descrito?",
+        "instruccion": "Selecciona las tres condiciones compatibles con la alternativa removible.",
+        "referenciaVideo": "34:04",
+        "casoClinico": "Una persona con brackets solicita cambiar a alineadores por comodidad. Antes de aceptar, revisas la etapa y complejidad del caso.",
+        "competencia": "Valorar candidatura para alineadores",
+        "nivelCognitivo": "Analizar",
+        "opciones": [
+          "Relación Clase I y movimientos restantes leves",
+          "Espacios por cerrar pequeños y controlables",
+          "Compromiso para usar un aparato removible con constancia",
+          "Canino ectópico que exige tracción compleja"
+        ],
+        "correctas": [
+          0,
+          1,
+          2
+        ],
+        "explicacion": "La clase asocia la candidatura con una etapa favorable, movimientos limitados y disciplina. El caso del canino ectópico ilustra por qué deben valorarse tracción, espacio y auxiliares; no establece que todos los caninos ectópicos deban tratarse con el mismo aparato."
+      },
+      {
+        "tipo": "ordenar",
+        "q": "Ordena la ruta para valorar un cambio de brackets a alineadores",
+        "instruccion": "Organiza la decisión antes de ofrecer la alternativa removible.",
+        "referenciaVideo": "32:18",
+        "casoClinico": "El paciente desea cambiar de aparato, pero todavía no sabes cuánto espacio queda ni qué movimientos faltan.",
+        "competencia": "Estructurar una decisión de cambio de modalidad",
+        "nivelCognitivo": "Decidir",
+        "elementos": [
+          {
+            "id": "compromiso",
+            "texto": "Confirmar el compromiso de uso y cuidado"
+          },
+          {
+            "id": "etapa",
+            "texto": "Revisar la etapa actual del tratamiento"
+          },
+          {
+            "id": "imagen",
+            "texto": "Verificar raíces y estructuras con los registros indicados"
+          },
+          {
+            "id": "complejidad",
+            "texto": "Valorar espacio pendiente y complejidad de los movimientos"
+          },
+          {
+            "id": "explicar",
+            "texto": "Explicar viabilidad, límites y costo de la alternativa"
+          }
+        ],
+        "ordenCorrecto": [
+          "etapa",
+          "complejidad",
+          "imagen",
+          "compromiso",
+          "explicar"
+        ],
+        "explicacion": "El cambio no se decide por comodidad únicamente: primero se revisan etapa y complejidad, luego los registros y el compromiso del paciente. Con esa información se explican los límites reales de la alternativa."
+      },
+      {
+        "tipo": "relacionar",
+        "q": "Relaciona cada recurso con su objetivo clínico",
+        "instruccion": "Asocia las cuatro herramientas con el problema que ayudan a resolver.",
+        "referenciaVideo": "16:27",
+        "casoClinico": "En la planeación aparecen rotación, falta leve de espacio, mordida profunda y riesgo de recidiva; no todos se resuelven con el mismo recurso.",
+        "competencia": "Diferenciar auxiliares y objetivos",
+        "nivelCognitivo": "Analizar",
+        "izquierda": [
+          {
+            "id": "cupla",
+            "texto": "Cupla con botones y elásticos"
+          },
+          {
+            "id": "ipr",
+            "texto": "IPR o stripping"
+          },
+          {
+            "id": "topes",
+            "texto": "Topes de resina"
+          },
+          {
+            "id": "retenedor",
+            "texto": "Retenedor postratamiento"
+          }
+        ],
+        "derecha": [
+          {
+            "id": "rotar",
+            "texto": "Generar rotación controlada"
+          },
+          {
+            "id": "espacio",
+            "texto": "Crear espacio interproximal seleccionado"
+          },
+          {
+            "id": "desocluir",
+            "texto": "Desocluir y proteger brackets"
+          },
+          {
+            "id": "estabilizar",
+            "texto": "Mantener la posición obtenida"
+          }
+        ],
+        "pares": {
+          "cupla": "rotar",
+          "ipr": "espacio",
+          "topes": "desocluir",
+          "retenedor": "estabilizar"
+        },
+        "explicacion": "La clase asigna un propósito distinto a cada auxiliar: rotar, ganar espacio, desocluir o conservar el resultado. Confundirlos impide explicar al paciente por qué se añade cada elemento."
+      },
+      {
+        "tipo": "completar",
+        "q": "Completa los criterios que activan una referencia ortodóncica",
+        "instruccion": "Escribe tres grupos de hallazgos mencionados al cierre.",
+        "referenciaVideo": "52:10",
+        "casoClinico": "Después de completar fotografías y radiografías debes decidir si el caso requiere participación del ortodoncista u otra interconsulta.",
+        "competencia": "Reconocer criterios de referencia",
+        "nivelCognitivo": "Decidir",
+        "plantilla": "La referencia puede justificarse por problemas de {{oclusion}}, anomalías o falta de {{espacio}}, y necesidades {{restauradoras}} previas.",
+        "huecos": [
+          {
+            "id": "oclusion",
+            "etiqueta": "Relación",
+            "respuestas": [
+              "oclusión",
+              "oclusion",
+              "mordida"
+            ]
+          },
+          {
+            "id": "espacio",
+            "etiqueta": "Arcada",
+            "respuestas": [
+              "espacio"
+            ]
+          },
+          {
+            "id": "restauradoras",
+            "etiqueta": "Interdisciplina",
+            "respuestas": [
+              "restauradoras",
+              "protésicas",
+              "protesicas"
+            ]
+          }
+        ],
+        "explicacion": "Al cierre se mencionan maloclusiones, hábitos, anomalías, problemas de espacio, ATM y preparación para tratamientos restauradores o protésicos. La referencia surge de integrar esos hallazgos, no de un solo dato aislado."
+      }
+    ]
+  },
+  {
+    "id": "diagnostico-en-ortodoncia-para-odontologos-generales_5",
+    "cursoId": "diagnostico-en-ortodoncia-para-odontologos-generales",
+    "n": 5,
+    "estado": "borrador",
+    "actualizado": "2026-10-10T00:00:00.000Z",
+    "preguntas": [
+      {
+        "tipo": "seleccion",
+        "q": "¿Qué alternativa responde mejor a la complejidad del caso mostrado?",
+        "instruccion": "Elige el enfoque que reconoce la necesidad de tracción y movimientos controlados sin convertir el ejemplo en una regla universal.",
+        "referenciaVideo": "26:58",
+        "casoClinico": "Un paciente busca una opción discreta, pero presenta un canino ectópico que debe descender, rotaciones y falta de espacio en la arcada inferior.",
+        "competencia": "Elegir una modalidad a partir de un caso",
+        "nivelCognitivo": "Decidir",
+        "opciones": [
+          "Explicar por qué el caso exige comparar brackets y auxiliares con la predictibilidad real de los alineadores",
+          "Ofrecer alineadores sin valorar tracción, expansión ni espacio",
+          "Tratar únicamente el diente que se ve fuera de posición",
+          "Posponer todos los registros porque la relación parece Clase I"
+        ],
+        "correcta": 0,
+        "explicacion": "En el caso del video se eligen brackets por la combinación de tracción, rotaciones y creación de espacio. Eso describe el razonamiento del caso, no una regla para todos los caninos ectópicos; la decisión definitiva exige diagnóstico completo, experiencia del tratante y discusión de alternativas."
+      },
+      {
+        "tipo": "seleccion_multiple",
+        "q": "¿Qué datos deben revisarse antes de discutir una posible estrategia de extracciones?",
+        "instruccion": "Selecciona los tres criterios utilizados en los casos de la clase.",
+        "referenciaVideo": "45:39",
+        "casoClinico": "La relación canina no es igual en ambos lados y el paciente pregunta por qué no se indican automáticamente cuatro premolares.",
+        "competencia": "Analizar una indicación de extracción",
+        "nivelCognitivo": "Analizar",
+        "opciones": [
+          "Relación oclusal en cada lado",
+          "Línea media y distribución del espacio",
+          "Apiñamiento y movimientos necesarios",
+          "La cantidad de extracciones de un familiar"
+        ],
+        "correctas": [
+          0,
+          1,
+          2
+        ],
+        "explicacion": "Los casos comparan lado derecho e izquierdo, línea media, espacio y apiñamiento antes de discutir extracciones. La actividad comprueba integración de datos; no autoriza indicar una extracción sin evaluación clínica completa y consentimiento informado."
+      },
+      {
+        "tipo": "ordenar",
+        "q": "Ordena el flujo del trazado cefalométrico básico",
+        "instruccion": "Organiza la secuencia desde la identificación anatómica hasta la interpretación.",
+        "referenciaVideo": "07:00",
+        "casoClinico": "Tienes una lateral de cráneo y necesitas evitar colocar puntos de referencia sin haber delimitado las estructuras.",
+        "competencia": "Ejecutar una secuencia de trazado básico",
+        "nivelCognitivo": "Aplicar",
+        "elementos": [
+          {
+            "id": "puntos",
+            "texto": "Localizar los puntos N, S, A y B"
+          },
+          {
+            "id": "interpretar",
+            "texto": "Interpretar la relación esquelética obtenida"
+          },
+          {
+            "id": "estructuras",
+            "texto": "Delimitar las estructuras óseas relevantes"
+          },
+          {
+            "id": "sn",
+            "texto": "Trazar la línea de referencia S–N"
+          },
+          {
+            "id": "angulos",
+            "texto": "Construir SNA, SNB y la relación ANB"
+          }
+        ],
+        "ordenCorrecto": [
+          "estructuras",
+          "puntos",
+          "sn",
+          "angulos",
+          "interpretar"
+        ],
+        "explicacion": "La demostración primero reconoce huesos y luego ubica N, S, A y B. Con esos puntos se construye la referencia S–N, se miden los ángulos y finalmente se interpreta la relación esquelética."
+      },
+      {
+        "tipo": "relacionar",
+        "q": "Relaciona cada punto cefalométrico con su referencia anatómica",
+        "instruccion": "Asocia los cuatro puntos antes de continuar con los ángulos.",
+        "referenciaVideo": "02:08",
+        "casoClinico": "Durante un trazado, una identificación anatómica incorrecta desplazaría todas las mediciones posteriores.",
+        "competencia": "Localizar referencias cefalométricas",
+        "nivelCognitivo": "Aplicar",
+        "izquierda": [
+          {
+            "id": "n",
+            "texto": "N (Nasion)"
+          },
+          {
+            "id": "s",
+            "texto": "S (Silla)"
+          },
+          {
+            "id": "a",
+            "texto": "Punto A"
+          },
+          {
+            "id": "b",
+            "texto": "Punto B"
+          }
+        ],
+        "derecha": [
+          {
+            "id": "frontonasal",
+            "texto": "Unión de frontal y nasal"
+          },
+          {
+            "id": "silla",
+            "texto": "Centro de la silla turca"
+          },
+          {
+            "id": "maxilar",
+            "texto": "Concavidad anterior del maxilar"
+          },
+          {
+            "id": "mandibula",
+            "texto": "Concavidad anterior de la mandíbula"
+          }
+        ],
+        "pares": {
+          "n": "frontonasal",
+          "s": "silla",
+          "a": "maxilar",
+          "b": "mandibula"
+        },
+        "explicacion": "La clase define N en la unión frontonasal, S en la silla turca, A en la concavidad maxilar y B en la concavidad mandibular. La precisión anatómica precede a cualquier interpretación angular."
+      },
+      {
+        "tipo": "completar",
+        "q": "Completa lo que representa cada medición angular",
+        "instruccion": "Escribe la estructura o relación evaluada.",
+        "referenciaVideo": "03:53",
+        "casoClinico": "Ya trazaste los puntos, pero necesitas distinguir qué pregunta responde cada ángulo antes de interpretar una discrepancia.",
+        "competencia": "Interpretar mediciones cefalométricas básicas",
+        "nivelCognitivo": "Analizar",
+        "plantilla": "SNA valora la posición del {{sna}}, SNB la del {{snb}} y ANB la {{anb}} entre ambos.",
+        "huecos": [
+          {
+            "id": "sna",
+            "etiqueta": "SNA",
+            "respuestas": [
+              "maxilar",
+              "maxilar superior"
+            ]
+          },
+          {
+            "id": "snb",
+            "etiqueta": "SNB",
+            "respuestas": [
+              "mandíbula",
+              "mandibula"
+            ]
+          },
+          {
+            "id": "anb",
+            "etiqueta": "ANB",
+            "respuestas": [
+              "relación anteroposterior",
+              "relacion anteroposterior",
+              "relación maxilomandibular",
+              "relacion maxilomandibular"
+            ]
+          }
+        ],
+        "explicacion": "SNA sitúa el maxilar respecto de la base craneal, SNB hace lo propio con la mandíbula y ANB resume una estimación de la relación anteroposterior. Ninguna cifra debe interpretarse aislada: crecimiento, posición de Nasion, rotaciones y otros análisis pueden modificar la lectura clínica."
       }
     ]
   },

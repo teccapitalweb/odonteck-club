@@ -23,5 +23,11 @@ service firebase.storage {
     match /materiales/{archivo} {
       allow read, write: if false;
     }
+    // Las fotos del directorio son públicas porque el perfil es opt-in. La
+    // escritura sólo ocurre con URL firmada por la API para el UID autenticado.
+    match /directorio/perfiles/{uid}/{archivo} {
+      allow read: if true;
+      allow write: if false;
+    }
   }
 }

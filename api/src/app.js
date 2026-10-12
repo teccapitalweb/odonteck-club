@@ -4,6 +4,7 @@ import express from 'express';
 import { manejarErrores, noEncontradoRuta } from './middleware/errores.js';
 import { rutasAdmin } from './routes/admin.js';
 import { rutasEncuestas } from './routes/encuestas.js';
+import { rutasDirectorio } from './routes/directorio.js';
 import { rutasLanding } from './routes/landing.js';
 import { rutasMiembro } from './routes/miembro.js';
 import { rutasPublicas } from './routes/publicas.js';
@@ -68,7 +69,7 @@ export function crearApp(deps) {
       // Sin Origin (curl, Stripe, servidores) no aplica CORS. Un origen fuera de la lista
       // simplemente no recibe cabeceras CORS y el navegador bloquea la respuesta.
       origin: (origin, cb) => cb(null, !origin || permitidos.has(normalizarOrigen(origin))),
-      methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Authorization', 'Content-Type'],
       maxAge: 600,
     }),
@@ -82,6 +83,7 @@ export function crearApp(deps) {
   app.use(rutasLanding(ctx));
   app.use(rutasPublicas(ctx));
   app.use(rutasEncuestas(ctx));
+  app.use(rutasDirectorio(ctx));
   app.use(rutasAdmin(ctx));
   app.use(rutasStripe(ctx));
   app.use(rutasMiembro(ctx));
