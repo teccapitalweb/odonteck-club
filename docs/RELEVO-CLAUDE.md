@@ -145,14 +145,29 @@ dominio oficial                    HTTP 200
 API /health                        HTTP 200
 ```
 
-La prueba omitida requiere emuladores Firestore/Storage. El 12 de octubre se reintentó `npm run test:rules`, pero Java/Netty volvió a fallar antes de las aserciones con `Unable to establish loopback connection`; no es un fallo confirmado de las reglas. No afirmar que están validadas ni desplegadas hasta repetirlo en un host funcional.
+La prueba omitida en `npm test` (`reglas de Firestore y Storage`) es un *skip* intencional: se ejecuta aparte con `npm run test:rules`.
+
+### Verificación local en vivo · 2026-10-12
+
+Salidas reales ejecutadas en este host (no citas), con los 11 archivos locales sin seguimiento preservados:
+
+```text
+entorno            Node v24.18.0; npm 11.16.0; Temurin JDK 24.0.2; Windows 11
+build frontend     PASS (tsc && vite build; modo DEMO, sin VITE_API_URL)
+api npm run check  PASS
+api npm test       138 totales; 137 pass; 1 skip intencional; 0 fail
+npm ci (raíz/api)  0 vulnerabilidades
+api test:rules     PASS 3/3 con emuladores Firestore+Storage (exit 0)
+```
+
+Corrección a la nota previa: el fallo `Unable to establish loopback connection` de Java/Netty **ya no ocurre en este host**. El 2026-10-12 los emuladores Firestore y Storage arrancaron y `npm run test:rules` pasó localmente (3/3). Matiz honesto: esto valida las reglas **localmente contra emuladores**, no en producción; el despliegue y la validación de reglas en el runtime público siguen pendientes (ver §8.4).
 
 ## 8. Pendientes reales, por prioridad
 
 1. Smoke autenticado del panel admin con custom claim `admin: true`, incluido upload firmado cuando Storage exista.
 2. Configurar y validar `STRIPE_WEBHOOK_SECRET` en v2 antes de habilitar checkout nuevo. Mientras tanto, conservar el flujo anterior y los beneficios heredados.
-3. Ejecutar pruebas de reglas Firestore/Storage con emuladores.
-4. Desplegar y hacer smoke autenticado del Directorio (reglas, índices, miembro y admin) antes de abrirlo masivamente. El código local ya incluye consentimiento opt-in, privacidad, anti-spam y moderación.
+3. Ejecutar pruebas de reglas Firestore/Storage con emuladores. **CUMPLIDO LOCALMENTE el 2026-10-12** (`npm run test:rules` PASS 3/3 con emuladores en este host; ver §7). La validación en producción no está incluida aquí: sigue abierta como parte de #4.
+4. Desplegar y hacer smoke autenticado del Directorio (reglas, índices, miembro y admin) antes de abrirlo masivamente, incluyendo el **despliegue y la validación de reglas Firestore/Storage en el runtime público** (local ≠ producción). El código local ya incluye consentimiento opt-in, privacidad, anti-spam y moderación.
 5. Habilitar Storage para futuras cargas administradas; no es necesario para los diez PDF empaquetados actuales.
 6. Auditar licencias antes de publicar nuevos libros/materiales.
 7. Resolver accesibilidad pendiente y dividir el chunk grande del build demo.
