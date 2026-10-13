@@ -1,0 +1,81 @@
+name: Pages
+
+# Publica el frontend (club + landing) en GitHub Pages reproduciendo el build que hoy
+# sirve Cloudflare: `npm run build` con VITE_API_URL inyectada, de modo que el bundle
+# vacía las semillas demo e hidrata desde la API de Railway. Los assets públicos de
+# `public/` (cursos, fotos, brand, asistente, praxia, materiales, CNAME, sw.js, manifest)
+# los copia Vite a `dist/` por su `copyPublicDir` por defecto.
+#
+# No hace nada en producción por sí solo: Pages debe habilitarse en Settings y el dominio
+# apunta por DNS. Mientras Pages no esté habilitado, este workflow solo construye y sube el
+# artefacto.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permisos mínimos para el despliegue de Pages vía OIDC.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo despliegue de Pages a la vez; no cancelar uno en curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - run: npm ci
+
+      # VITE_API_URL llega desde la variable del repo (Settings -> Secrets and variables
+      # -> Actions -> Variables). Sin ella, el build caería a modo demo; el paso de
+      # verificación de abajo lo impide.
+      - name: Build (modo producción con API)
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: |
+          if [ -z "$VITE_API_URL" ]; then
+            echo "::error::Falta la variable del repo VITE_API_URL. Define Settings -> Variables -> VITE_API_URL antes de publicar."
+            exit 1
+          fi
+          npm run build
+
+      # Garantiza que el artefacto reproduce lo que sirve Cloudflare: entradas del club y la
+      # landing, assets compilados, assets públicos same-origin y el CNAME del dominio.
+      - name: Verificar dist completo
+        run: |
+          set -e
+          for ruta in index.html landing/index.html assets CNAME cursos fotos brand asistente praxia manifest.webmanifest sw.js; do
+            if [ ! -e "dist/$ruta" ]; then
+              echo "::error::Falta dist/$ruta en el artefacto de Pages"; exit 1
+            fi
+          done
+          echo "dist/CNAME -> $(cat dist/CNAME)"
+          echo "dist completo verificado."
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
