@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>OdonTeck · Odontograma digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root[data-theme="night"]{
+  --bg:#0F1626; --surface:#18233A; --surface-2:#1E2A42; --surface-3:#27344F; --line:rgba(150,185,230,0.14); --line-2:rgba(150,185,230,0.22);
+  --text:#F0F4FA; --text-2:#B6C2D8; --text-3:#8997B0;
+  --primary:#5B92C8; --primary-deep:#3E6FA8; --highlight:#6FB8B0;
+  --glow:rgba(91,146,200,0.64); --danger:#F2779A; --field-shadow:none;
+  --tooth-base:#27344F; --tooth-line:rgba(150,185,230,0.30);
+}
+:root[data-theme="day"]{
+  --bg:#EEF3F9; --surface:#FFFFFF; --surface-2:#F7FAFD; --surface-3:#EDF3F9; --line:rgba(20,35,70,0.10); --line-2:rgba(20,35,70,0.16);
+  --text:#16203F; --text-2:#49556E; --text-3:#7A8599;
+  --primary:#5B92C8; --primary-deep:#3E6FA8; --highlight:#4FA39B;
+  --glow:rgba(91,146,200,0.18); --danger:#D84A72; --field-shadow:0 1px 2px rgba(20,35,70,0.06);
+  --tooth-base:#FFFFFF; --tooth-line:rgba(20,35,70,0.22);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;padding:28px 16px;transition:background .3s,color .3s;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand__logo{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#5B92C8,#6FB8B0);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 34px var(--glow)}
+.brand__logo svg{width:27px;height:27px}
+.brand__t{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.2px}
+.brand__s{font-size:11px;color:var(--text-3);letter-spacing:.3px}
+.toggle{background:var(--surface);border:1px solid var(--line);color:var(--text-2);border-radius:11px;
+  height:40px;padding:0 13px;font-size:12.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;
+  font-family:inherit;transition:background .2s,border-color .2s,transform .15s}
+.toggle:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.toggle svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;margin-bottom:16px}
+:root[data-theme="night"] .card{box-shadow:0 0 50px rgba(91,146,200,0.10)}
+:root[data-theme="day"] .card{box-shadow:0 12px 34px rgba(62,111,168,0.10),0 2px 8px rgba(62,111,168,0.06)}
+.h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:21px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.sub{font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:20px}
+label{display:block;font-size:12px;color:var(--text-2);margin:0 0 8px;font-weight:500}
+.field{margin-bottom:16px}
+.control{position:relative}
+.control svg.ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--text-3);fill:none;stroke-width:2;pointer-events:none;transition:stroke .2s}
+input{width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:13px 15px;color:var(--text);font-size:15px;font-family:inherit;font-weight:500;box-shadow:var(--field-shadow);transition:border-color .18s,box-shadow .18s,background .2s;appearance:none;-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;appearance:none;margin:0}
+.control.has-ic input{padding-left:42px}
+input::placeholder{color:var(--text-3);font-weight:400}
+input:hover{border-color:var(--line-2)}
+input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--glow);background:var(--surface)}
+.control:focus-within svg.ic{stroke:var(--primary)}
+
+/* paleta de condiciones */
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.cond{display:flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:11px;padding:8px 12px;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--text-2);
+  transition:border-color .15s,background .15s,transform .12s}
+.cond:hover{border-color:var(--line-2)}
+.cond.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--text);box-shadow:0 0 16px var(--glow)}
+.cond .sw{width:14px;height:14px;border-radius:5px;flex-shrink:0;border:1.5px solid var(--tooth-line)}
+
+/* arcadas */
+.arch{margin-bottom:8px}
+.arch__lbl{font-size:11px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;margin:10px 0 7px;text-align:center;font-weight:600}
+.teeth{display:flex;justify-content:center;gap:3px;overflow-x:auto;padding-bottom:6px}
+.quad{display:flex;gap:3px}
+.quad + .quad{margin-left:12px;padding-left:12px;border-left:1px dashed var(--line)}
+.tooth{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0;
+  border:none;background:none;padding:2px;font-family:inherit;transition:transform .12s}
+.tooth:hover{transform:translateY(-3px)}
+.tooth__svg{width:26px;height:26px}
+.tooth__svg path{fill:var(--tooth-base);stroke:var(--tooth-line);stroke-width:1.4;transition:fill .15s,stroke .15s}
+.tooth.s-caries  .tooth__svg path{fill:#E5604D;stroke:#E5604D}
+.tooth.s-rest    .tooth__svg path{fill:#5B92C8;stroke:#5B92C8}
+.tooth.s-corona  .tooth__svg path{fill:#C9A961;stroke:#C9A961}
+.tooth.s-endo    .tooth__svg path{fill:#9B7EDE;stroke:#9B7EDE}
+.tooth.s-implante .tooth__svg path{fill:#4FA39B;stroke:#4FA39B}
+.tooth.s-sellante .tooth__svg path{fill:#6FB8B0;stroke:#6FB8B0}
+.tooth.s-ausente .tooth__svg{opacity:.32}
+.tooth.s-ausente .tooth__svg path{stroke-dasharray:2 2}
+.tooth.s-extraer .tooth__svg path{fill:none;stroke:#E5604D;stroke-width:2}
+.tooth.s-extraer{position:relative}
+.tooth.s-extraer::after{content:"";position:absolute;top:9px;left:50%;width:24px;height:2px;background:#E5604D;transform:translateX(-50%) rotate(45deg)}
+.tooth__n{font-size:10px;color:var(--text-3);font-weight:600;font-family:'JetBrains Mono',monospace}
+.tooth.marked .tooth__n{color:var(--text)}
+
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{flex:1;min-width:140px;border:none;border-radius:13px;padding:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2}
+.btn--primary{background:linear-gradient(135deg,var(--primary),var(--primary-deep));color:#fff;box-shadow:0 0 30px var(--glow)}
+.btn--primary:hover{transform:translateY(-2px)}
+.btn--ghost{background:var(--surface-2);color:var(--text-2);border:1px solid var(--line)}
+.btn--ghost:hover{border-color:var(--line-2);color:var(--text)}
+
+.summary{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:12px;color:var(--text-2)}
+.chip .sw{width:11px;height:11px;border-radius:4px;flex-shrink:0}
+.chip b{color:var(--text);font-weight:700}
+.quote{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.quote__head{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;background:var(--surface-2);cursor:pointer}
+.quote__head .lbl{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600}
+.quote__head .lbl svg{width:17px;height:17px;stroke:var(--primary);fill:none;stroke-width:2}
+.sw-toggle{width:42px;height:24px;border-radius:100px;background:var(--surface-3);border:1px solid var(--line);position:relative;transition:background .2s;flex-shrink:0}
+.sw-toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--text-3);transition:transform .2s,background .2s}
+.quote.on .sw-toggle{background:var(--primary)}
+.quote.on .sw-toggle::after{transform:translateX(18px);background:#fff}
+.quote__body{padding:0 15px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
+.quote.on .quote__body{max-height:680px;padding:14px 15px}
+.qrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.qrow:last-of-type{border-bottom:none}
+.qrow .qsw{width:12px;height:12px;border-radius:4px;flex-shrink:0}
+.qrow .qn{flex:1;font-size:13px;color:var(--text-2);min-width:0}
+.qrow .qn b{color:var(--text);font-weight:600}
+.qrow .qcount{font-size:11px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-left:4px}
+.qprice{position:relative;width:115px;flex-shrink:0}
+.qprice>span{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text-3)}
+.qprice input{width:100%;padding:9px 11px 9px 22px;font-size:13px;border-radius:10px}
+.qsub{width:86px;text-align:right;font-size:12.5px;font-weight:600;color:var(--primary);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.qtotal{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:13px;border-top:1.5px solid var(--line-2)}
+.qtotal .t1{font-size:14px;font-weight:600}
+.qtotal .t2{font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:var(--primary)}
+.qempty{font-size:12.5px;color:var(--text-3);padding:6px 0;text-align:center}
+.foot{font-size:11px;color:var(--text-3);text-align:center;line-height:1.6;margin-top:10px}
+</style>
+
+<!-- Instalable como app (manifest.json / sw.js / pwa.js) -->
+<meta name="theme-color" content="#0c223d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OdonTeck">
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <div class="brand__logo"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C10 4 6 7 6 12c0 4 1.5 7 2.2 11c.4 2.3 .8 4 2 4 1.3 0 1.4 -2 1.8 -4 .3 -1.6 .6 -3 2 -3s1.7 1.4 2 3c.4 2 .5 4 1.8 4 1.2 0 1.6 -1.7 2.2 -4 .7 -4 2.2 -7 2.2 -11 0 -5 -4 -8 -10 -8z" fill="#fff"/></svg></div>
+      <div><div class="brand__t">OdonTeck</div><div class="brand__s">Herramienta Pro</div></div>
+    </div>
+    <button class="toggle" id="tgl"><svg id="tglIc" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span id="tglTxt">Noche</span></button>
+  </div>
+
+  <div class="card">
+    <div class="h1">Odontograma digital</div>
+    <div class="sub">Elige una condición y toca los dientes para marcarla (notación FDI). Vuelve a tocar para quitarla. Exporta el registro a PDF.</div>
+
+    <div class="field">
+      <label>Paciente</label>
+      <div class="control has-ic">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input id="paciente" type="text" placeholder="Nombre del paciente">
+      </div>
+    </div>
+
+    <label>Condición activa</label>
+    <div class="tools" id="tools"></div>
+
+    <div class="arch">
+      <div class="arch__lbl">Superior</div>
+      <div class="teeth" id="archTop"></div>
+    </div>
+    <div class="arch">
+      <div class="arch__lbl">Inferior</div>
+      <div class="teeth" id="archBot"></div>
+    </div>
+
+    <div class="summary" id="summary"></div>
+
+    <div class="quote" id="quote">
+      <div class="quote__head" id="quoteHead">
+        <span class="lbl"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Cotización (opcional)</span>
+        <span class="sw-toggle"></span>
+      </div>
+      <div class="quote__body" id="quoteBody"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn--ghost" id="btnClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Limpiar todo</button>
+      <button class="btn btn--primary" id="btnPdf"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Exportar PDF</button>
+    </div>
+  </div>
+
+  <div class="foot">Registro clínico de apoyo · no sustituye la exploración ni el expediente oficial · OdonTeck Consulting Group</div>
+</div>
+
+<script>
+var TOOTH_PATH="M16 4C10 4 6 7 6 12c0 4 1.5 7 2.2 11c.4 2.3 .8 4 2 4 1.3 0 1.4 -2 1.8 -4 .3 -1.6 .6 -3 2 -3s1.7 1.4 2 3c.4 2 .5 4 1.8 4 1.2 0 1.6 -1.7 2.2 -4 .7 -4 2.2 -7 2.2 -11 0 -5 -4 -8 -10 -8z";
+var CONDICIONES=[
+  {k:'sano',     n:'Sano',         color:'#FFFFFF', rgb:[255,255,255]},
+  {k:'caries',   n:'Caries',       color:'#E5604D', rgb:[229,96,77]},
+  {k:'rest',     n:'Restaurado',   color:'#5B92C8', rgb:[91,146,200]},
+  {k:'corona',   n:'Corona',       color:'#C9A961', rgb:[201,169,97]},
+  {k:'endo',     n:'Endodoncia',   color:'#9B7EDE', rgb:[155,126,222]},
+  {k:'implante', n:'Implante',     color:'#4FA39B', rgb:[79,163,155]},
+  {k:'sellante', n:'Sellante',     color:'#6FB8B0', rgb:[111,184,176]},
+  {k:'ausente',  n:'Ausente',      color:'#C8D0DC', rgb:[200,208,220]},
+  {k:'extraer',  n:'A extraer',    color:'#E5604D', rgb:[229,96,77]}
+];
+// FDI
+var TOP=[18,17,16,15,14,13,12,11, 21,22,23,24,25,26,27,28];
+var BOT=[48,47,46,45,44,43,42,41, 31,32,33,34,35,36,37,38];
+var estado={}; // fdi -> condicion key
+var activa='caries';
+var precios={}, cotizOn=false;
+
+// paleta
+var tools=document.getElementById('tools');
+CONDICIONES.forEach(function(c){
+  if(c.k==='sano') return; // sano = quitar, no botón
+  var b=document.createElement('button'); b.className='cond'+(c.k===activa?' on':''); b.dataset.k=c.k; b.type='button';
+  b.innerHTML='<span class="sw" style="background:'+c.color+'"></span>'+c.n;
+  b.addEventListener('click',function(){ activa=c.k; document.querySelectorAll('.cond').forEach(function(x){x.classList.toggle('on',x.dataset.k===activa);}); });
+  tools.appendChild(b);
+});
+
+function makeArch(arr,cont){
+  // dos cuadrantes separados por línea media (mitad y mitad)
+  var q1=document.createElement('div'); q1.className='quad';
+  var q2=document.createElement('div'); q2.className='quad';
+  arr.forEach(function(fdi,i){
+    var t=document.createElement('button'); t.className='tooth'; t.dataset.fdi=fdi; t.type='button';
+    t.innerHTML='<svg class="tooth__svg" viewBox="0 0 32 32"><path d="'+TOOTH_PATH+'"/></svg><span class="tooth__n">'+fdi+'</span>';
+    t.addEventListener('click',function(){ toggle(fdi,t); });
+    (i<8?q1:q2).appendChild(t);
+  });
+  cont.appendChild(q1); cont.appendChild(q2);
+}
+makeArch(TOP,document.getElementById('archTop'));
+makeArch(BOT,document.getElementById('archBot'));
+
+function toggle(fdi,el){
+  if(estado[fdi]===activa){ delete estado[fdi]; }
+  else { estado[fdi]=activa; }
+  CONDICIONES.forEach(function(c){ el.classList.remove('s-'+c.k); });
+  el.classList.remove('marked');
+  if(estado[fdi]){ el.classList.add('s-'+estado[fdi],'marked'); }
+  resumen();
+}
+function resumen(){
+  var cont={}; Object.keys(estado).forEach(function(f){ cont[estado[f]]=(cont[estado[f]]||0)+1; });
+  var s=document.getElementById('summary'); s.innerHTML='';
+  CONDICIONES.forEach(function(c){
+    if(c.k==='sano'||!cont[c.k]) return;
+    var ch=document.createElement('div'); ch.className='chip';
+    ch.innerHTML='<span class="sw" style="background:'+c.color+'"></span>'+c.n+' <b>'+cont[c.k]+'</b>';
+    s.appendChild(ch);
+  });
+  if(!s.innerHTML){ s.innerHTML='<div class="chip">Sin hallazgos registrados</div>'; }
+  if(cotizOn) renderCotizacion();
+}
+function fmtMXN(n){ return '$'+Math.round(n||0).toLocaleString('es-MX'); }
+function conteo(){ var c={}; Object.keys(estado).forEach(function(f){ c[estado[f]]=(c[estado[f]]||0)+1; }); return c; }
+function totalCotiz(){ var c=conteo(),t=0; CONDICIONES.forEach(function(x){ if(x.k==='sano'||x.k==='ausente')return; t+=(precios[x.k]||0)*(c[x.k]||0); }); return t; }
+function renderCotizacion(){
+  var body=document.getElementById('quoteBody'), c=conteo(), rows='', any=false;
+  CONDICIONES.forEach(function(x){
+    if(x.k==='sano'||x.k==='ausente')return; var n=c[x.k]||0; if(!n)return; any=true;
+    var p=precios[x.k]||0;
+    rows+='<div class="qrow"><span class="qsw" style="background:'+x.color+'"></span>'
+      +'<span class="qn"><b>'+x.n+'</b><span class="qcount">x'+n+'</span></span>'
+      +'<span class="qprice"><span>$</span><input type="number" inputmode="numeric" min="0" data-k="'+x.k+'" value="'+(p||'')+'" placeholder="0"></span>'
+      +'<span class="qsub" data-sub="'+x.k+'">'+fmtMXN(p*n)+'</span></div>';
+  });
+  if(!any){ body.innerHTML='<div class="qempty">Marca tratamientos en el odontograma para cotizarlos.</div>'; return; }
+  rows+='<div class="qtotal"><span class="t1">Total estimado</span><span class="t2" id="qTotal">'+fmtMXN(totalCotiz())+'</span></div>';
+  body.innerHTML=rows;
+  body.querySelectorAll('.qprice input').forEach(function(inp){
+    inp.addEventListener('input',function(){
+      precios[inp.dataset.k]=parseFloat(inp.value)||0;
+      var cc=conteo();
+      CONDICIONES.forEach(function(x){ if(x.k==='sano'||x.k==='ausente')return; var nn=cc[x.k]||0; if(!nn)return;
+        var el=body.querySelector('[data-sub="'+x.k+'"]'); if(el) el.textContent=fmtMXN((precios[x.k]||0)*nn); });
+      var tot=document.getElementById('qTotal'); if(tot) tot.textContent=fmtMXN(totalCotiz());
+    });
+  });
+}
+document.getElementById('quoteHead').addEventListener('click',function(){
+  cotizOn=!cotizOn; document.getElementById('quote').classList.toggle('on',cotizOn); if(cotizOn) renderCotizacion();
+});
+resumen();
+
+document.getElementById('btnClear').addEventListener('click',function(){
+  estado={}; document.querySelectorAll('.tooth').forEach(function(t){
+    CONDICIONES.forEach(function(c){ t.classList.remove('s-'+c.k); }); t.classList.remove('marked');
+  }); resumen();
+});
+
+// ---------- PDF (dibujado desde cero) ----------
+function condName(k){ for(var i=0;i<CONDICIONES.length;i++) if(CONDICIONES[i].k===k) return CONDICIONES[i]; return null; }
+document.getElementById('btnPdf').addEventListener('click',function(){
+  var jsPDF=window.jspdf.jsPDF; var doc=new jsPDF({unit:'mm',format:'a4'});
+  var W=210, mx=16, y=18;
+  // encabezado
+  doc.setFillColor(91,146,200); doc.roundedRect(mx,y-6,9,9,2,2,'F');
+  doc.setTextColor(30,32,72); doc.setFont('helvetica','bold'); doc.setFontSize(16);
+  doc.text('Odontograma',mx+13,y); 
+  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(120,130,150);
+  doc.text('OdonTeck Consulting Group',mx+13,y+5);
+  var fecha=new Date().toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+  doc.text(fecha, W-mx, y, {align:'right'});
+  y+=14;
+  doc.setDrawColor(220,228,240); doc.setLineWidth(.4); doc.line(mx,y,W-mx,y); y+=8;
+  // paciente
+  var pac=document.getElementById('paciente').value||'—';
+  doc.setTextColor(30,32,72); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.text('Paciente: ',mx,y); var pw=doc.getTextWidth('Paciente: ');
+  doc.setFont('helvetica','normal'); doc.text(pac,mx+pw,y); y+=10;
+
+  // dibujar arcadas
+  function fillFor(fdi){ var k=estado[fdi]; if(!k) return [255,255,255]; var c=condName(k); return c?c.rgb:[255,255,255]; }
+  var cell=10, gap=1.4, midGap=6;
+  function drawArch(arr,labY){
+    doc.setFontSize(7); doc.setTextColor(120,130,150);
+    var totalW=16*cell+15*gap+midGap;
+    var startX=(W-totalW)/2;
+    var x=startX;
+    arr.forEach(function(fdi,i){
+      if(i===8) x+=midGap;
+      var rgb=fillFor(fdi);
+      doc.setFillColor(rgb[0],rgb[1],rgb[2]);
+      doc.setDrawColor(170,180,195); doc.setLineWidth(.3);
+      doc.roundedRect(x,labY,cell,cell,1.5,1.5, estado[fdi]?'FD':'D');
+      // numero
+      doc.setTextColor( estado[fdi] && estado[fdi]!=='ausente' ? 255 : 90, estado[fdi]&&estado[fdi]!=='ausente'?255:98, estado[fdi]&&estado[fdi]!=='ausente'?255:112);
+      doc.text(String(fdi), x+cell/2, labY+cell/2+1.2, {align:'center'});
+      x+=cell+gap;
+    });
+  }
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(120,130,150);
+  doc.text('Superior',W/2,y,{align:'center'}); y+=3;
+  drawArch(TOP,y); y+=cell+6;
+  doc.text('Inferior',W/2,y,{align:'center'}); y+=3;
+  drawArch(BOT,y); y+=cell+12;
+
+  // leyenda
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(30,32,72);
+  doc.text('Leyenda',mx,y); y+=6;
+  var lx=mx, lyc=y;
+  CONDICIONES.forEach(function(c,i){
+    if(c.k==='sano') return;
+    if(lx>W-mx-40){ lx=mx; lyc+=8; }
+    doc.setFillColor(c.rgb[0],c.rgb[1],c.rgb[2]); doc.setDrawColor(170,180,195); doc.setLineWidth(.3);
+    doc.roundedRect(lx,lyc-3.2,4,4,.8,.8,'FD');
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(70,85,110);
+    doc.text(c.n,lx+6,lyc); lx+=6+doc.getTextWidth(c.n)+10;
+  });
+  y=lyc+12;
+
+  // resumen
+  var cont={}; Object.keys(estado).forEach(function(f){ cont[estado[f]]=(cont[estado[f]]||0)+1; });
+  var keys=Object.keys(cont);
+  doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(30,32,72);
+  doc.text('Resumen de hallazgos',mx,y); y+=6;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(70,85,110);
+  if(!keys.length){ doc.text('Sin hallazgos registrados.',mx,y); y+=6; }
+  else { keys.forEach(function(k){ var c=condName(k); doc.text('• '+c.n+': '+cont[k]+' diente(s)',mx,y); y+=5.5; }); }
+
+  // cotización (si está activa y hay precios)
+  if(cotizOn){
+    var cQ=conteo(), totalP=0, hayP=false;
+    CONDICIONES.forEach(function(x){ if(x.k==='sano'||x.k==='ausente')return; if((cQ[x.k]||0)&&(precios[x.k]||0)) hayP=true; });
+    if(hayP){
+      if(y>250){ doc.addPage(); y=20; }
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(30,32,72);
+      doc.text('Cotización estimada',mx,y); y+=6;
+      doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(120,130,150);
+      doc.text('Tratamiento',mx,y); doc.text('Cant.',mx+92,y,{align:'right'}); doc.text('P. unitario',mx+132,y,{align:'right'}); doc.text('Subtotal',W-mx,y,{align:'right'}); y+=2;
+      doc.setDrawColor(220,228,240); doc.line(mx,y,W-mx,y); y+=5;
+      doc.setTextColor(70,85,110);
+      CONDICIONES.forEach(function(x){
+        if(x.k==='sano'||x.k==='ausente')return; var n=cQ[x.k]||0, p=precios[x.k]||0; if(!n||!p)return;
+        var sub=n*p; totalP+=sub;
+        doc.text(x.n,mx,y); doc.text(String(n),mx+92,y,{align:'right'});
+        doc.text('$'+Math.round(p).toLocaleString('es-MX'),mx+132,y,{align:'right'});
+        doc.text('$'+Math.round(sub).toLocaleString('es-MX'),W-mx,y,{align:'right'}); y+=5.5;
+      });
+      y+=1; doc.setDrawColor(200,210,225); doc.line(mx,y,W-mx,y); y+=6;
+      doc.setFont('helvetica','bold'); doc.setFontSize(11.5); doc.setTextColor(30,32,72);
+      doc.text('Total estimado',mx,y); doc.text('$'+Math.round(totalP).toLocaleString('es-MX')+' MXN',W-mx,y,{align:'right'}); y+=9;
+    }
+  }
+  // disclaimer
+  y+=6; doc.setDrawColor(220,228,240); doc.setLineWidth(.3); doc.line(mx,y,W-mx,y); y+=5;
+  doc.setFontSize(7.5); doc.setTextColor(140,150,168);
+  doc.text('Documento de apoyo clínico generado en OdonTeck. No sustituye la exploración profesional ni el expediente oficial.',mx,y,{maxWidth:W-mx*2});
+
+  var nombre=(document.getElementById('paciente').value||'paciente').replace(/[^a-z0-9]/gi,'_');
+  doc.save('odontograma_'+nombre+'.pdf');
+});
+
+// tema
+var SUN='<path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/>';
+var MOON='<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+document.getElementById('tgl').addEventListener('click',function(){
+  var d=document.documentElement,ic=document.getElementById('tglIc'),tx=document.getElementById('tglTxt');
+  if(d.getAttribute('data-theme')==='night'){d.setAttribute('data-theme','day');ic.innerHTML=SUN;tx.textContent='Día';}
+  else{d.setAttribute('data-theme','night');ic.innerHTML=MOON;tx.textContent='Noche';}
+});
+/* === integración panel OdonTeck (tema + auto-altura) === */
+(function(){
+  var qp=new URLSearchParams(location.search), th=qp.get('theme');
+  if(th==='day'){ document.documentElement.setAttribute('data-theme','day');
+    var ic=document.getElementById('tglIc'),tx=document.getElementById('tglTxt');
+    if(ic) ic.innerHTML='<path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/>';
+    if(tx) tx.textContent='Día';
+  }
+  var SLUG='odontograma';
+  function postH(){ try{ parent.postMessage({odtTool:1,slug:SLUG,h:Math.ceil(document.body.scrollHeight)},'*'); }catch(e){} }
+  window.addEventListener('load',postH);
+  if(window.ResizeObserver){ try{ new ResizeObserver(postH).observe(document.body); }catch(e){} }
+  setInterval(postH,1500);
+})();
+</script>
+</body>
+</html>

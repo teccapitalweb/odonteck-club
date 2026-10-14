@@ -1,0 +1,16 @@
+/* ═══ Herramientas Pro · hub y marco del tool ═══ */
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.tool-card { position: relative; display: grid; gap: 8px; padding: 22px; color: inherit; text-decoration: none; }
+.tool-card__ic { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); margin-bottom: 4px; }
+.tool-card__ic .i { width: 26px; height: 26px; }
+.tool-card strong { font-family: var(--font-display); font-size: var(--fs-md); }
+.tool-card .faint { font-size: var(--fs-xs); }
+.tool-card__go { position: absolute; top: 18px; right: 18px; color: var(--text-3); transition: transform var(--t-base); }
+.tool-card:hover .tool-card__go { transform: translate(2px, -2px); color: var(--primary); }
+.tool-frame { overflow: hidden; padding: 0; }
+.tool-frame__iframe { display: block; width: 100%; border: 0; height: 70vh; min-height: 480px; }
+
+@media (max-width: 600px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-frame__iframe { height: 75vh; }
+}

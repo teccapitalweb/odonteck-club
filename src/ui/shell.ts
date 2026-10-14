@@ -15,6 +15,7 @@ export const NAV = [
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
   { href: '#/retos', icon: 'gamepad-2', label: 'Retos', match: /^\/retos/ },
   { group: 'Herramientas' },
+  { href: '#/herramientas', icon: 'wrench', label: 'Herramientas Pro', match: /^\/herramientas/ },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
   { group: 'Tu progreso' },
   { href: '#/recompensas', icon: 'gift', label: 'Recompensas', match: /^\/recompensas/ },
