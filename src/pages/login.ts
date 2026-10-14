@@ -40,10 +40,9 @@ export function login(_: Record<string, string>, query: URLSearchParams) {
         <div class="login__brand"><img data-logo src="/brand/logo-horizontal.png" alt="OdonTeck"><span><i data-lucide="shield-check" class="i"></i>Acceso seguro</span></div>
         ${modo === 'recuperar' ? '' : `<nav class="login__mode" aria-label="Tipo de acceso"><a class="${modo === 'entrar' ? 'is-active' : ''}" href="#/login">Iniciar sesión</a><a class="${modo === 'registro' ? 'is-active' : ''}" href="#/login?modo=registro">Crear cuenta gratis</a></nav>`}
         <div class="login__intro"><span class="eyebrow">Club OdonTeck</span><h1 id="login-title" class="display display--black">${titulo}</h1><p>${sub}</p></div>
-        ${Datos.modo === 'api' && modo !== 'recuperar' ? `<div class="login__legacy"><span class="login__legacy-icon"><i data-lucide="badge-check" class="i"></i></span><div><strong>¿Ya eras miembro?</strong><p>Usa el mismo correo del portal anterior. Si aún no tenías contraseña, crea tu cuenta con ese correo y conservaremos tu acceso.</p></div></div>` : ''}
-        ${Datos.modo === 'demo' ? `
-          <div class="login__demo"><i data-lucide="flask-conical" class="i"></i><div><strong>Versión de demostración</strong><br>El inicio de sesión real se activa al conectar el backend. Entra al demo para recorrer el club y el admin.</div></div>
-          <button class="btn btn--gradient btn--lg btn--pill-arrow login__submit" data-login-demo>Entrar al demo <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button>` : form}
+        ${modo !== 'recuperar' ? `<div class="login__legacy"><span class="login__legacy-icon"><i data-lucide="badge-check" class="i"></i></span><div><strong>¿Ya eras miembro?</strong><p>Usa el mismo correo del portal anterior. Si aún no tenías contraseña, crea tu cuenta con ese correo y conservaremos tu acceso.</p></div></div>` : ''}
+        ${form}
+        ${Datos.modo === 'demo' ? `<p class="login__demo-quick"><button type="button" class="login__demo-pill" data-login-demo title="Entrar directo sin rellenar datos"><i data-lucide="flask-conical" class="i"></i> Entrar directo al demo (1 clic)</button></p>` : ''}
         <div class="login__trust"><span><i data-lucide="lock" class="i"></i>Conexión protegida</span><span><i data-lucide="heart-handshake" class="i"></i>Tu acceso, siempre contigo</span></div>
       </section>
       <aside class="login__visual" aria-label="Beneficios de OdonTeck Club">
