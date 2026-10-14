@@ -58,7 +58,7 @@ jobs:
       - name: Verificar dist completo
         run: |
           set -e
-          for ruta in index.html landing/index.html assets CNAME cursos fotos brand asistente praxia manifest.webmanifest sw.js; do
+          for ruta in index.html landing/index.html assets CNAME cursos fotos brand asistente praxia herramientas manifest.webmanifest sw.js; do
             if [ ! -e "dist/$ruta" ]; then
               echo "::error::Falta dist/$ruta en el artefacto de Pages"; exit 1
             fi

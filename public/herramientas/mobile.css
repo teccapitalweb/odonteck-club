@@ -1,0 +1,147 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   OdonTeck · CAPA MÓVIL Y APP
+   Se carga DESPUÉS de styles.css y premium.css. Solo AÑADE ajustes: quitar
+   este archivo devuelve el sitio a como estaba.
+
+   El punto de corte móvil del sitio es 820px, así que se respeta ese mismo.
+
+     0. Base           · <picture> sin efectos de layout
+     1. Táctil         · zonas de toque, resaltado, zoom en formularios
+     2. Áreas seguras  · notch y barra de gestos
+     3. Toques ≥44px   · enlaces y botones que eran muy chicos
+     4. Imágenes       · proporción estable, sin saltos al cargar
+     5. Modo app       · ajustes cuando corre instalada
+     6. Movimiento     · respeto a prefers-reduced-motion
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 0. Base ──────────────────────────────────────────────────────────────── */
+
+/* script.js ahora envuelve las imágenes en <picture> para servir WebP. Con
+   display:contents el <img> sigue siendo el hijo directo de su contenedor,
+   así que todas las reglas existentes le siguen aplicando igual. */
+picture { display: contents; }
+
+/* La barra superior es fija: sin esto los saltos a #anclas dejan el título
+   escondido debajo. */
+html { scroll-padding-top: 88px; }
+
+
+/* ── 1. Comportamiento táctil ─────────────────────────────────────────────── */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+a, button, [role="button"], input, select, textarea {
+  -webkit-tap-highlight-color: rgba(11, 16, 24, .12);
+}
+
+a, button, .btn, [role="button"] { touch-action: manipulation; }
+
+/* Por debajo de 16px iOS hace zoom solo al enfocar un campo y descuadra
+   la página. */
+@media (max-width: 820px) {
+  input, select, textarea { font-size: 16px; }
+}
+
+
+/* ── 2. Áreas seguras (notch / barra de gestos) ───────────────────────────── */
+
+@supports (padding: env(safe-area-inset-left)) {
+  .container {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  .site-footer, footer { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+}
+
+
+/* ── 3. Zonas de toque de 44px ────────────────────────────────────────────── */
+
+@media (max-width: 820px) {
+  /* Menú desplegable: fila completa, cómoda de acertar */
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 44px;
+  }
+
+  #hamburger,
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .nav-cta,
+  .mobile-vip-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Enlaces del pie: medían 14-15px de alto (correo, teléfono, redes y el
+     menú de abajo). */
+  .footer-grid a,
+  .footer-bottom a,
+  .footer-text a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Correo y teléfono de la franja superior: medían 15px de alto. Aquí no
+     conviene estirar el enlace, porque la franja crecería y comería pantalla;
+     ampliamos solo la zona sensible con un pseudo-elemento invisible. */
+  .topbar a { position: relative; }
+  .topbar a::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 44px;
+    transform: translateY(-50%);
+  }
+}
+
+
+/* ── 4. Imágenes: proporción estable ──────────────────────────────────────── */
+
+/* Las <img> no declaran width/height, así que la página “salta” mientras
+   cargan. Los cursos y los alumnos son todos cuadrados (lo verifiqué sobre
+   los 26 archivos), de modo que se puede reservar el hueco con seguridad. */
+.course-card img,
+.gallery-grid img,
+#galleryPageGrid img,
+#homeGalleryTrack img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Red de seguridad: si alguna imagen llega a declarar alto, que mande la
+   proporción y no se deforme al limitarse el ancho. */
+img { height: auto; }
+
+
+/* ── 5. Modo app (instalada en la pantalla de inicio) ─────────────────────── */
+
+@media (display-mode: standalone), (display-mode: minimal-ui) {
+  body { overscroll-behavior-y: contain; }
+  .topbar, .site-header { padding-top: env(safe-area-inset-top); }
+}
+
+
+/* ── 6. Movimiento reducido ───────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gallery-track, .reviews-track { animation: none !important; }
+}
