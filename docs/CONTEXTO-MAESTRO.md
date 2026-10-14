@@ -67,7 +67,7 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Stripe checkout, portal y webhook.
 - CRUD administrativo y autorización por custom claim.
 - Encuestas versionadas: pendientes y respuestas autenticadas, disparadores por primer ingreso/curso completado/21 días y resumen administrativo sin PII.
-- Directorio profesional opt-in como módulo principal en `#/directorio`: perfiles visibles con tarjeta editorial centrada en la foto, oportunidades VIP y conexiones privadas; el endurecimiento local añade ocultar/eliminar, cierre, paginación estable, límites anti-spam, idempotencia, denuncia y moderación administrativa sin exponer al reportante. La URL anterior dentro de Comunidad redirige para conservar compatibilidad.
+- Directorio profesional opt-in como módulo principal en `#/directorio`: perfiles visibles con tarjeta editorial y ficha tipo CV, foto y portada propias, resumen, años de experiencia, idiomas, trayectoria, formación y credenciales; oportunidades VIP y conexiones privadas. El editor permite agregar/quitar registros repetibles, mantiene compatibilidad con perfiles anteriores y conserva el contacto fuera de toda proyección pública. El endurecimiento local añade ocultar/eliminar, cierre, paginación estable, límites anti-spam, idempotencia, validación real de foto/portada en Storage, denuncia y moderación administrativa sin exponer al reportante. La URL anterior dentro de Comunidad redirige para conservar compatibilidad.
 
 ### Brecha principal
 

@@ -47,7 +47,7 @@ Publicado y conectado en modo API:
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
 - evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje;
 - corte local posterior a producción: Retos reutiliza el banco v2 en modo práctica para selección múltiple, ordenar, relacionar y completar, con crédito parcial, controles accesibles y solución sólo después de responder. Simulación sigue limitada a selección. El admin controla la elegibilidad con `compatibleRetos`; todavía no está desplegado;
-- corte local posterior a producción: Directorio es un módulo principal independiente en `#/directorio` (la URL anterior dentro de Comunidad redirige), con perfiles visuales, foto, oportunidades y conexiones privadas. Se endureció con ocultar/eliminar perfil, cierre de oportunidades, cursores estables, límites anti-spam, conexiones idempotentes, bloqueo de vencidas, verificación real de foto en Storage y denuncia/moderación administrativa. La suite local pasa, pero reglas, índices y runtime todavía no están desplegados;
+- corte local posterior a producción: Directorio es un módulo principal independiente en `#/directorio` (la URL anterior dentro de Comunidad redirige), con perfiles visuales tipo CV, foto, portada, años de experiencia, idiomas, trayectoria, formación, credenciales, oportunidades y conexiones privadas. La configuración admite listas repetibles y la ficha pública muestra métricas y línea de tiempo sin exponer contacto. Se endureció con ocultar/eliminar perfil, cierre de oportunidades, cursores estables, límites anti-spam, conexiones idempotentes, bloqueo de vencidas, verificación real de foto/portada en Storage y denuncia/moderación administrativa. La suite local pasa, pero reglas, índices y runtime todavía no están desplegados;
 - pestaña de ficha por clase y descarga privada firmada cuando la ficha está aprobada. Aún no hay fichas clínicas aprobadas: no confundir infraestructura lista con contenido revisado.
 
 Demo local sin `VITE_API_URL`:
@@ -147,6 +147,18 @@ API /health                        HTTP 200
 
 La prueba omitida en `npm test` (`reglas de Firestore y Storage`) es un *skip* intencional: se ejecuta aparte con `npm run test:rules`.
 
+### Verificación local del perfil tipo CV · 2026-10-14
+
+```text
+build frontend                     PASS
+api npm run check                 PASS
+api npm test                      140 totales; 139 pass; 0 fail; 1 skip
+directorio escritorio 1440×900    PASS; sin overflow ni errores de consola
+directorio móvil 390×844          PASS; sin overflow ni errores de consola
+```
+
+La suite específica del Directorio pasa 15/15, incluidos privacidad, payload CV, portada WebP, foto, anti-spam y moderación. El reintento de `npm run test:rules` de este corte no alcanzó las aserciones porque el emulador Firestore volvió a fallar al crear el selector loopback de Java (`Unable to establish loopback connection`); no se cambiaron las reglas, cuyo comodín existente ya cubre `avatar.webp` y `banner.webp`. Esto no sustituye el test 3/3 previamente exitoso ni una validación en producción.
+
 ### Verificación local en vivo · 2026-10-12
 
 Salidas reales ejecutadas en este host (no citas), con los 11 archivos locales sin seguimiento preservados:
@@ -198,6 +210,7 @@ Antes de afirmar que algo está en producción, comprobar el commit fuente, el d
 
 - `CLAUDE.md`: reglas de entrada.
 - `docs/RELEVO-CLAUDE.md`: corte operativo vigente.
+- `docs/HANDOFF-DIRECTORIO-CV-2026-10-14.md`: estado exacto del perfil tipo CV, diff local, privacidad, QA y secuencia segura de continuación.
 - `docs/CONTEXTO-MAESTRO.md`: contexto completo, historia y decisiones.
 - `docs/contrato.md`: esquema y contrato API.
 - `scripts/pipeline/README.md`: contenido, transcripciones y revisión clínica.

@@ -11,6 +11,10 @@ const perfil = (token, datos = {}) => request(env.app).put('/directorio/perfil')
   especialidades: ['Odontología general'], ciudad: 'Puebla', estado: 'Puebla',
   modalidades: ['presencial'], disponibilidad: ['empleo', 'colaboraciones'],
   habilidades: ['Fotografía clínica'], bio: 'Profesional interesada en colaborar con equipos clínicos responsables y aprender en comunidad.',
+  anosExperiencia: 4, idiomas: ['Español', 'Inglés'],
+  experiencia: [{ puesto: 'Odontóloga general', organizacion: 'Clínica de prueba', periodo: '2022 · Actualidad', descripcion: 'Atención preventiva y restauradora con documentación clínica.' }],
+  formacion: [{ programa: 'Licenciatura en Cirugía Dental', institucion: 'Universidad de prueba', periodo: '2017 · 2022' }],
+  credenciales: [{ nombre: 'Fotografía clínica', emisor: 'Programa de prueba', anio: '2025' }],
   visible: true, contacto: { canal: 'correo' }, ...datos,
 });
 
@@ -27,6 +31,8 @@ describe('directorio profesional', () => {
     const res = await perfil(TOKENS.free).expect(200);
     assert.equal(res.body.uid, 'free1');
     assert.equal(res.body.visible, true);
+    assert.equal(res.body.anosExperiencia, 4);
+    assert.equal(res.body.experiencia[0].organizacion, 'Clínica de prueba');
     assert.equal(res.body.contacto, undefined);
     assert.equal(env.db.leer('v2_directorio_perfiles/free1').contacto.valor, 'carla@example.com');
   });
@@ -81,6 +87,26 @@ describe('directorio profesional', () => {
     await request(env.app).delete('/directorio/perfil/foto').set(bearer(TOKENS.free)).expect(200);
     assert.equal(env.db.leer('v2_directorio_perfiles/free1').foto, null);
     assert.deepEqual(env.storage.borrados, ['directorio/perfiles/free1/avatar.webp']);
+  });
+
+  test('firma, valida y retira una portada WebP profesional', async () => {
+    await perfil(TOKENS.free).expect(200);
+    const firma = await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/webp', bytes: 250000 }).expect(200);
+    assert.equal(firma.body.path, 'directorio/perfiles/free1/banner.webp');
+    assert.match(firma.body.publicUrl, /directorio%2Fperfiles%2Ffree1%2Fbanner\.webp/);
+    await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/png', bytes: 10 }).expect(400);
+    await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/webp', bytes: 3_000_001 }).expect(400);
+    await perfil(TOKENS.free, { banner: 'propio' }).expect(200);
+    const listado = await request(env.app).get('/directorio').set(bearer(TOKENS.vip)).expect(200);
+    assert.match(listado.body.perfiles.find((p) => p.uid === 'free1').banner, /banner\.webp/);
+    await request(env.app).delete('/directorio/perfil/banner').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(env.db.leer('v2_directorio_perfiles/free1').banner, null);
+  });
+
+  test('valida límites y texto seguro del CV profesional', async () => {
+    await perfil(TOKENS.free, { anosExperiencia: 71 }).expect(400);
+    await perfil(TOKENS.free, { experiencia: [{ puesto: '<b>Dueña</b>', organizacion: 'Clínica', periodo: '2024', descripcion: '' }] }).expect(400);
+    await perfil(TOKENS.free, { formacion: Array.from({ length: 9 }, (_, i) => ({ programa: `Programa ${i}`, institucion: 'Institución', periodo: '2024' })) }).expect(400);
   });
 
   test('pagina perfiles y oportunidades sin repetir resultados', async () => {

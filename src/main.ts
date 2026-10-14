@@ -52,7 +52,7 @@ import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta'
 import { login } from './pages/login';
 import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
-import { Directorio, prepararFotoDirectorio, type FotoPreparada } from './core/directorio';
+import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type ImagenDirectorioPreparada } from './core/directorio';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
 import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
 
@@ -324,12 +324,17 @@ document.addEventListener('error', (e) => {
 
 // ── Cascarones: miembro, admin o pantalla sola (login) ──
 let shellActual: 'miembro' | 'admin' | 'solo' | null = null;
-let fotoDirectorioPendiente: FotoPreparada | null = null;
+let fotoDirectorioPendiente: ImagenDirectorioPreparada | null = null;
 let quitarFotoDirectorio = false;
+let bannerDirectorioPendiente: ImagenDirectorioPreparada | null = null;
+let quitarBannerDirectorio = false;
 function limpiarFotoDirectorioPendiente() {
   if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
+  if (bannerDirectorioPendiente) URL.revokeObjectURL(bannerDirectorioPendiente.preview);
   fotoDirectorioPendiente = null;
+  bannerDirectorioPendiente = null;
   quitarFotoDirectorio = false;
+  quitarBannerDirectorio = false;
 }
 function montar(tipo: 'miembro' | 'admin' | 'solo') {
   if (shellActual === tipo) return;
@@ -801,9 +806,9 @@ document.addEventListener('click', async (e) => {
   const verPerfil = el.closest<HTMLElement>('[data-network-view]');
   if (verPerfil) {
     const dialog = [...document.querySelectorAll<HTMLDialogElement>('[data-network-view-dialog]')].find((d) => d.dataset.networkViewDialog === verPerfil.dataset.uid);
-    dialog?.showModal(); return;
+    if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return;
   }
-  if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]')?.showModal(); return; }
+  if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); const dialog = document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]'); if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return; }
   if (el.closest('[data-network-job]')) {
     if (!Auth.usuario?.esVip && Datos.modo === 'api') { mostrarPaywall('Publicar oportunidades es un beneficio VIP. Puedes explorar perfiles y conectar gratis.'); return; }
     document.querySelector<HTMLDialogElement>('[data-network-job-dialog]')?.showModal(); return;
@@ -818,6 +823,30 @@ document.addEventListener('click', async (e) => {
     const boton = dialog?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = true;
     toast('La foto se quitará al guardar el perfil', 'image-minus'); return;
   }
+  if (el.closest('[data-network-banner-remove]')) {
+    if (bannerDirectorioPendiente) URL.revokeObjectURL(bannerDirectorioPendiente.preview);
+    bannerDirectorioPendiente = null; quitarBannerDirectorio = true;
+    const dialog = el.closest<HTMLDialogElement>('dialog');
+    const preview = dialog?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
+    if (preview) { preview.hidden = true; preview.removeAttribute('src'); }
+    dialog?.querySelector('[data-network-banner-frame]')?.classList.remove('has-banner');
+    const boton = dialog?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = true;
+    toast('La portada se quitará al guardar el perfil', 'image-minus'); return;
+  }
+  const agregarFila = el.closest<HTMLButtonElement>('[data-network-add-row]');
+  if (agregarFila) {
+    const form = agregarFila.closest<HTMLFormElement>('[data-network-profile-form]');
+    const tipo = agregarFila.dataset.networkAddRow || '';
+    const lista = form?.querySelector<HTMLElement>(`[data-network-repeat-list="${tipo}"]`);
+    const plantilla = form?.querySelector<HTMLTemplateElement>(`template[data-network-template="${tipo}"]`);
+    const maximos: Record<string, number> = { experiencia: 8, formacion: 8, credenciales: 12 };
+    if (!lista || !plantilla) return;
+    if (lista.querySelectorAll('[data-network-repeat-row]').length >= (maximos[tipo] || 8)) { toast('Llegaste al máximo de registros de esta sección.', 'alert-triangle'); return; }
+    lista.append(plantilla.content.cloneNode(true)); createIcons({ icons });
+    lista.querySelectorAll<HTMLElement>('[data-network-repeat-row]')[lista.querySelectorAll('[data-network-repeat-row]').length - 1]?.querySelector<HTMLInputElement>('input')?.focus(); return;
+  }
+  const quitarFila = el.closest<HTMLButtonElement>('[data-network-remove-row]');
+  if (quitarFila) { quitarFila.closest('[data-network-repeat-row]')?.remove(); return; }
   const connect = el.closest<HTMLElement>('[data-network-connect]');
   if (connect) {
     el.closest<HTMLDialogElement>('dialog')?.close();
@@ -942,7 +971,10 @@ document.addEventListener('click', async (e) => {
 
   // Login
   if (el.closest('[data-login-demo]')) { await Auth.entrarDemo(); remontarDesdeLogin(); }
-  if (el.closest('[data-login-google]')) { try { await Auth.entrarGoogle(); remontarDesdeLogin(); } catch (err) { mostrarErrorLogin(err); } }
+  if (el.closest('[data-login-google]')) {
+    if (Datos.modo === 'demo') { await Auth.entrarDemo(); remontarDesdeLogin(); return; }
+    try { await Auth.entrarGoogle(); remontarDesdeLogin(); } catch (err) { mostrarErrorLogin(err); }
+  }
   if (el.closest('[data-salir]')) { await Auth.salir(); reiniciarEncuestas(); shellActual = null; navigate('/login'); }
 
   // Opción de quiz marcada visualmente (el input está oculto)
@@ -994,6 +1026,21 @@ document.addEventListener('change', async (e) => {
     } catch (err) { input.value = ''; toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
+  if (input.matches('[data-network-banner-input]')) {
+    const file = input.files?.[0]; if (!file) return;
+    try {
+      const preparada = await prepararBannerDirectorio(file);
+      if (bannerDirectorioPendiente) URL.revokeObjectURL(bannerDirectorioPendiente.preview);
+      bannerDirectorioPendiente = preparada; quitarBannerDirectorio = false;
+      const dialog = input.closest<HTMLDialogElement>('dialog');
+      const preview = dialog?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
+      if (preview) { preview.src = preparada.preview; preview.hidden = false; }
+      dialog?.querySelector('[data-network-banner-frame]')?.classList.add('has-banner');
+      const boton = dialog?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = false;
+      toast('Portada lista · la ajustamos al formato de tu perfil', 'wand-sparkles');
+    } catch (err) { input.value = ''; toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
   if (input.matches('[data-network-profile-form] select[name="contactoCanal"]')) {
     const fila = input.closest('form')?.querySelector<HTMLElement>('[data-network-whatsapp]');
     if (fila) fila.hidden = input.value !== 'whatsapp';
@@ -1025,9 +1072,17 @@ document.addEventListener('submit', async (e) => {
   }
   if (f.matches('[data-network-profile-form]')) {
     e.preventDefault(); const d = new FormData(f); const csv = (k: string) => String(d.get(k) || '').split(',').map((x) => x.trim()).filter(Boolean);
+    const todos = (k: string) => d.getAll(k).map((x) => String(x).trim());
+    const experienciaPuestos = todos('experienciaPuesto'); const experienciaOrganizaciones = todos('experienciaOrganizacion'); const experienciaPeriodos = todos('experienciaPeriodo'); const experienciaDescripciones = todos('experienciaDescripcion');
+    const experiencia = experienciaPuestos.map((puesto, i) => ({ puesto, organizacion: experienciaOrganizaciones[i] || '', periodo: experienciaPeriodos[i] || '', descripcion: experienciaDescripciones[i] || '' }));
+    const formacionProgramas = todos('formacionPrograma'); const formacionInstituciones = todos('formacionInstitucion'); const formacionPeriodos = todos('formacionPeriodo');
+    const formacion = formacionProgramas.map((programa, i) => ({ programa, institucion: formacionInstituciones[i] || '', periodo: formacionPeriodos[i] || '' }));
+    const credencialNombres = todos('credencialNombre'); const credencialEmisores = todos('credencialEmisor'); const credencialAnios = todos('credencialAnio');
+    const credenciales = credencialNombres.map((nombre, i) => ({ nombre, emisor: credencialEmisores[i] || '', anio: credencialAnios[i] || '' }));
+    const anosExperiencia = String(d.get('anosExperiencia') || '').trim();
     const boton = f.querySelector<HTMLButtonElement>('footer button[type="submit"], footer button:not([type])'); if (boton) boton.disabled = true;
     try {
-      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio);
+      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), idiomas: csv('idiomas'), anosExperiencia: anosExperiencia ? Number(anosExperiencia) : null, experiencia, formacion, credenciales, bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio, bannerDirectorioPendiente, quitarBannerDirectorio);
       limpiarFotoDirectorioPendiente(); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Perfil profesional actualizado', 'badge-check'); render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
   }
@@ -1059,6 +1114,10 @@ document.addEventListener('submit', async (e) => {
     e.preventDefault(); const d = new FormData(f); const btn = f.querySelector('button')!; btn.setAttribute('disabled', '');
     try {
       const modo = f.dataset.loginForm;
+      if (Datos.modo === 'demo') {
+        if (modo === 'recuperar') { toast('En modo demo: enlace simulado para ' + (d.get('email') || 'tu correo'), 'mail'); navigate('/login'); return; }
+        await Auth.entrarDemo(); remontarDesdeLogin(); return;
+      }
       if (modo === 'entrar') await Auth.entrarCorreo(String(d.get('email')), String(d.get('pass')));
       if (modo === 'registro') await Auth.registrar(String(d.get('nombre')).trim(), String(d.get('email')), String(d.get('pass')));
       if (modo === 'recuperar') { await Auth.recuperar(String(d.get('email'))); toast('Te enviamos un correo para crear tu contraseña', 'mail'); navigate('/login'); return; }

@@ -13,7 +13,7 @@ Crear networking útil sin convertir el Club en una bolsa de spam ni exponer dat
 1. Navegación principal → Directorio (`#/directorio`). La URL anterior `#/comunidad?tab=directorio` redirige para conservar enlaces guardados.
 2. Personas, Oportunidades y Mis conexiones.
 3. Búsqueda por nombre, especialidad, habilidad, ciudad u organización.
-4. Perfil opt-in con etapa, especialidades, habilidades, disponibilidad y modalidad.
+4. Perfil opt-in tipo CV con foto, portada, etapa, especialidades, habilidades, idiomas, años de experiencia, presentación, experiencia laboral, formación, credenciales, disponibilidad y modalidad. La vista pública usa una cabecera visual, métricas y línea de tiempo; los perfiles anteriores siguen siendo válidos aunque no tengan los campos nuevos.
 5. Oportunidades con vigencia de 45 días; publicarlas requiere VIP, explorarlas y conectar no.
 6. Solicitudes privadas con estado pendiente, aceptada o rechazada.
 7. Contacto oculto en toda respuesta pública y revelado únicamente después de aceptar.
@@ -28,7 +28,7 @@ No se otorgan puntos por enviar solicitudes o publicar oportunidades: así se ev
 - Solicitudes idempotentes por remitente/destinatario/oportunidad, máximo de diez cada 24 horas y espera de 30 días tras un rechazo.
 - Oportunidades vencidas no aceptan nuevas conexiones.
 - Denuncia privada de perfiles y oportunidades, máximo de diez al día, con bandeja administrativa para ocultar/cerrar o descartar.
-- El cliente declara el tamaño de la foto para firmar la subida, pero la API vuelve a comprobar en Storage que el objeto real sea WebP y no exceda 2 MB.
+- El cliente declara el tamaño de la foto y la portada para firmar la subida, pero la API vuelve a comprobar en Storage que los objetos reales sean WebP y no excedan 2 MB y 3 MB respectivamente. Las rutas están fijadas por UID y la escritura directa desde el navegador sigue denegada.
 - Reglas del cliente niegan acceso directo a denuncias e índices compuestos quedan descritos en `api/firestore.indexes.json`.
 
 Este endurecimiento está implementado y probado **sólo en local**. Antes de abrirlo en producción faltan desplegar reglas e índices, ejecutar `npm run test:rules` en un host donde el emulador Firestore pueda abrir loopback y hacer un smoke autenticado con miembro y administrador reales.

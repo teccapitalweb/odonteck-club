@@ -11,6 +11,8 @@ const MODALIDADES = ['presencial', 'remoto', 'hibrido'];
 const DISPONIBILIDAD = ['empleo', 'colaboraciones', 'mentoria', 'suplencias', 'practicas', 'consultorio'];
 const TIPOS = ['empleo', 'colaboracion', 'mentoria', 'suplencia', 'practicas', 'consultorio'];
 const FOTO_CONTENT_TYPE = 'image/webp';
+const FOTO_MAX_BYTES = 2_000_000;
+const BANNER_MAX_BYTES = 3_000_000;
 const LIMITE_PAGINA = 24;
 const LIMITE_CONEXIONES = 100;
 const MAX_CONEXIONES_DIA = 10;
@@ -19,12 +21,14 @@ const MAX_REPORTES_DIA = 10;
 const REINTENTO_RECHAZADO_MS = 30 * 86400000;
 const MOTIVOS_REPORTE = ['spam', 'suplantacion', 'contenido_inapropiado', 'datos_falsos', 'otro'];
 const fotoPath = (uid) => `directorio/perfiles/${uid}/avatar.webp`;
-const fotoUrl = (bucket, uid) => `https://firebasestorage.googleapis.com/v0/b/${bucket}/o/${encodeURIComponent(fotoPath(uid))}?alt=media`;
+const bannerPath = (uid) => `directorio/perfiles/${uid}/banner.webp`;
+const assetUrl = (bucket, path) => `https://firebasestorage.googleapis.com/v0/b/${bucket}/o/${encodeURIComponent(path)}?alt=media`;
 const idEstable = (...partes) => createHash('sha256').update(partes.join('|')).digest('hex').slice(0, 40);
 const unicoPorId = (lista) => [...new Map(lista.map((v) => [v.id ?? v.uid, v])).values()];
 const cursor = (valor, campo) => valor === undefined ? null : idDocumento(String(valor), campo);
 const esIndiceFaltante = (error) => error?.code === 9 || error?.code === 'failed-precondition' || /index/i.test(String(error?.message ?? ''));
 const ordenarDocs = (snap, campo) => [...snap.docs].sort((a, b) => String(b.data()?.[campo] ?? '').localeCompare(String(a.data()?.[campo] ?? '')) || a.id.localeCompare(b.id));
+const assetVersionado = (url, actualizado) => url ? `${url}${url.includes('?') ? '&' : '?'}v=${encodeURIComponent(actualizado ?? '')}` : null;
 const limitarTrasCursor = (docs, cursorId, limite) => {
   const inicio = cursorId ? docs.findIndex((doc) => doc.id === cursorId) + 1 : 0;
   return docs.slice(Math.max(0, inicio), Math.max(0, inicio) + limite);
@@ -43,7 +47,9 @@ const perfilPublico = (p, uid) => ({
   uid: p.uid, nombre: p.nombre, titular: p.titular, etapa: p.etapa,
   especialidades: p.especialidades ?? [], ciudad: p.ciudad ?? '', estado: p.estado ?? '',
   modalidades: p.modalidades ?? [], disponibilidad: p.disponibilidad ?? [],
-  habilidades: p.habilidades ?? [], bio: p.bio ?? '', foto: p.foto ?? null, actualizado: p.actualizado,
+  habilidades: p.habilidades ?? [], bio: p.bio ?? '', foto: assetVersionado(p.foto, p.actualizado), banner: assetVersionado(p.banner, p.actualizado),
+  anosExperiencia: p.anosExperiencia ?? null, idiomas: p.idiomas ?? [], experiencia: p.experiencia ?? [],
+  formacion: p.formacion ?? [], credenciales: p.credenciales ?? [], actualizado: p.actualizado,
   esMio: p.uid === uid,
 });
 
@@ -71,23 +77,59 @@ function validarPerfil(body, anterior, usuario, nombre, bucket) {
     modalidades: (listaDeTextos(body.modalidades, { campo: 'modalidades', maxItems: 3, maxLargo: 20 }) ?? []).map((v) => unoDe(v, MODALIDADES, { campo: 'modalidades', requerido: true })),
     disponibilidad: (listaDeTextos(body.disponibilidad, { campo: 'disponibilidad', maxItems: 6, maxLargo: 30 }) ?? []).map((v) => unoDe(v, DISPONIBILIDAD, { campo: 'disponibilidad', requerido: true })),
     habilidades: listaDeTextos(body.habilidades, { campo: 'habilidades', maxItems: 10, maxLargo: 60 }) ?? [],
+    idiomas: listaDeTextos(body.idiomas, { campo: 'idiomas', maxItems: 6, maxLargo: 40 }) ?? anterior?.idiomas ?? [],
+    anosExperiencia: body.anosExperiencia === null ? null : entero(body.anosExperiencia, { campo: 'anosExperiencia', min: 0, max: 70, requerido: false }) ?? anterior?.anosExperiencia ?? null,
+    experiencia: validarExperiencia(body.experiencia ?? anterior?.experiencia ?? []),
+    formacion: validarFormacion(body.formacion ?? anterior?.formacion ?? []),
+    credenciales: validarCredenciales(body.credenciales ?? anterior?.credenciales ?? []),
     bio: textoRequerido(body.bio, { campo: 'bio', min: 30, max: 600, multilinea: true }),
     visible: booleano(body.visible, { campo: 'visible' }) ?? true,
     contacto: { canal: contactoCanal, valor: contactoValor },
-    foto: body.foto === null ? null : body.foto === 'propia' && bucket ? fotoUrl(bucket, usuario.uid) : anterior?.foto ?? null,
+    foto: body.foto === null ? null : body.foto === 'propia' && bucket ? assetUrl(bucket, fotoPath(usuario.uid)) : anterior?.foto ?? null,
+    banner: body.banner === null ? null : body.banner === 'propio' && bucket ? assetUrl(bucket, bannerPath(usuario.uid)) : anterior?.banner ?? null,
   });
 }
 
-async function validarFotoSubida(ctx, uid) {
+function listaEstructurada(valor, campo, maxItems, normalizar) {
+  if (!Array.isArray(valor) || valor.length > maxItems) throw invalido(`El campo "${campo}" debe ser una lista de hasta ${maxItems} registros.`);
+  return valor.map((item, indice) => {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) throw invalido(`El registro "${campo}[${indice}]" no es válido.`);
+    return normalizar(item, `${campo}[${indice}]`);
+  });
+}
+
+const validarExperiencia = (valor) => listaEstructurada(valor, 'experiencia', 8, (item, campo) => ({
+  puesto: textoRequerido(item.puesto, { campo: `${campo}.puesto`, max: 100 }),
+  organizacion: textoRequerido(item.organizacion, { campo: `${campo}.organizacion`, max: 120 }),
+  periodo: textoRequerido(item.periodo, { campo: `${campo}.periodo`, max: 60 }),
+  descripcion: texto(item.descripcion, { campo: `${campo}.descripcion`, max: 500, multilinea: true }) ?? '',
+}));
+
+const validarFormacion = (valor) => listaEstructurada(valor, 'formacion', 8, (item, campo) => ({
+  programa: textoRequerido(item.programa, { campo: `${campo}.programa`, max: 120 }),
+  institucion: textoRequerido(item.institucion, { campo: `${campo}.institucion`, max: 120 }),
+  periodo: textoRequerido(item.periodo, { campo: `${campo}.periodo`, max: 60 }),
+}));
+
+const validarCredenciales = (valor) => listaEstructurada(valor, 'credenciales', 12, (item, campo) => ({
+  nombre: textoRequerido(item.nombre, { campo: `${campo}.nombre`, max: 120 }),
+  emisor: texto(item.emisor, { campo: `${campo}.emisor`, max: 120 }) ?? '',
+  anio: texto(item.anio, { campo: `${campo}.anio`, max: 20 }) ?? '',
+}));
+
+async function validarAssetSubido(ctx, uid, tipo) {
   if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de fotos no está configurado en el servidor.');
-  const archivo = ctx.storage.bucket(ctx.config.storageBucket).file(fotoPath(uid));
+  const esBanner = tipo === 'banner';
+  const path = esBanner ? bannerPath(uid) : fotoPath(uid);
+  const maxBytes = esBanner ? BANNER_MAX_BYTES : FOTO_MAX_BYTES;
+  const archivo = ctx.storage.bucket(ctx.config.storageBucket).file(path);
   let metadata;
   try { [metadata] = await archivo.getMetadata(); }
   catch { throw invalido('No encontramos la foto subida. Vuelve a seleccionarla.', 'foto_no_subida'); }
   const bytes = Number(metadata?.size);
-  if (metadata?.contentType !== FOTO_CONTENT_TYPE || !Number.isFinite(bytes) || bytes < 1 || bytes > 2_000_000) {
+  if (metadata?.contentType !== FOTO_CONTENT_TYPE || !Number.isFinite(bytes) || bytes < 1 || bytes > maxBytes) {
     await archivo.delete({ ignoreNotFound: true });
-    throw invalido('La foto subida no es un WebP válido de hasta 2 MB.', 'foto_invalida');
+    throw invalido(`La ${esBanner ? 'portada' : 'foto'} subida no es un WebP válido de hasta ${maxBytes / 1_000_000} MB.`, esBanner ? 'banner_invalido' : 'foto_invalida');
   }
 }
 
@@ -188,7 +230,8 @@ export function rutasDirectorio(ctx) {
     const estado = await estadoMembresia(ctx, req.usuario);
     const nombre = await nombreVisible(ctx, req.usuario, estado.miembro);
     const body = cuerpo(req);
-    if (body.foto === 'propia') await validarFotoSubida(ctx, req.usuario.uid);
+    if (body.foto === 'propia') await validarAssetSubido(ctx, req.usuario.uid, 'foto');
+    if (body.banner === 'propio') await validarAssetSubido(ctx, req.usuario.uid, 'banner');
     const datos = validarPerfil(body, previo.exists ? previo.data() : null, req.usuario, nombre, ctx.config.storageBucket);
     const guardado = { ...datos, actualizado: ctx.now().toISOString() };
     await ref.set(guardado);
@@ -211,7 +254,10 @@ export function rutasDirectorio(ctx) {
     batch.delete(ref);
     await batch.commit();
     if (ctx.storage && ctx.config.storageBucket) {
-      try { await ctx.storage.bucket(ctx.config.storageBucket).file(fotoPath(uid)).delete({ ignoreNotFound: true }); }
+      try {
+        const bucket = ctx.storage.bucket(ctx.config.storageBucket);
+        await Promise.all([bucket.file(fotoPath(uid)).delete({ ignoreNotFound: true }), bucket.file(bannerPath(uid)).delete({ ignoreNotFound: true })]);
+      }
       catch (error) { ctx.logger?.warn?.('No se pudo retirar la foto del perfil eliminado.', { uid, error: error?.message }); }
     }
     res.json({ ok: true });
@@ -221,12 +267,12 @@ export function rutasDirectorio(ctx) {
     if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de fotos no está configurado en el servidor.');
     const b = cuerpo(req);
     if (b.contentType !== FOTO_CONTENT_TYPE) throw invalido('La foto debe procesarse como WebP.', 'tipo_no_permitido');
-    const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: 2_000_000 });
+    const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: FOTO_MAX_BYTES });
     const bucket = ctx.storage.bucket(ctx.config.storageBucket);
     const path = fotoPath(req.usuario.uid);
     const expires = ctx.now().getTime() + 10 * 60 * 1000;
     const [uploadUrl] = await bucket.file(path).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE });
-    res.json({ uploadUrl, path, publicUrl: fotoUrl(bucket.name, req.usuario.uid), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
+    res.json({ uploadUrl, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
   }));
 
   r.delete('/directorio/perfil/foto', auth, h(async (req, res) => {
@@ -235,6 +281,27 @@ export function rutasDirectorio(ctx) {
     const ref = ctx.db.collection(COL.directorioPerfiles).doc(req.usuario.uid);
     const snap = await ref.get();
     if (snap.exists) await ref.update({ foto: null, actualizado: ctx.now().toISOString() });
+    res.json({ ok: true });
+  }));
+
+  r.post('/directorio/perfil/banner/subida', auth, h(async (req, res) => {
+    if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de portadas no está configurado en el servidor.');
+    const b = cuerpo(req);
+    if (b.contentType !== FOTO_CONTENT_TYPE) throw invalido('La portada debe procesarse como WebP.', 'tipo_no_permitido');
+    const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: BANNER_MAX_BYTES });
+    const bucket = ctx.storage.bucket(ctx.config.storageBucket);
+    const path = bannerPath(req.usuario.uid);
+    const expires = ctx.now().getTime() + 10 * 60 * 1000;
+    const [uploadUrl] = await bucket.file(path).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE });
+    res.json({ uploadUrl, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
+  }));
+
+  r.delete('/directorio/perfil/banner', auth, h(async (req, res) => {
+    if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de portadas no está configurado en el servidor.');
+    await ctx.storage.bucket(ctx.config.storageBucket).file(bannerPath(req.usuario.uid)).delete({ ignoreNotFound: true });
+    const ref = ctx.db.collection(COL.directorioPerfiles).doc(req.usuario.uid);
+    const snap = await ref.get();
+    if (snap.exists) await ref.update({ banner: null, actualizado: ctx.now().toISOString() });
     res.json({ ok: true });
   }));
 

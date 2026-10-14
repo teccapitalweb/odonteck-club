@@ -88,14 +88,14 @@ Respuesta: `{ id, autorUid, autor, texto, fecha, oculto }`
 
 ### Directorio profesional
 
-- `v2_directorio_perfiles/{uid}`: perfil opt-in con titular, etapa, especialidades, ubicación, modalidades, disponibilidad, habilidades, bio, visibilidad, `foto` pública opcional y `contacto` privado.
+- `v2_directorio_perfiles/{uid}`: perfil opt-in con titular, etapa, especialidades, ubicación, modalidades, disponibilidad, habilidades, idiomas, años de experiencia, bio, experiencia laboral, formación, credenciales, visibilidad, `foto` y `banner` públicos opcionales y `contacto` privado. Los registros de experiencia guardan `{ puesto, organizacion, periodo, descripcion }`; formación `{ programa, institucion, periodo }`; credenciales `{ nombre, emisor, anio }`.
 - `v2_directorio_oportunidades/{id}`: empleo, colaboración, mentoría, suplencia, prácticas o consultorio compartido; expira a los 45 días.
 - `v2_directorio_conexiones/{id}`: solicitud entre dos UID, mensaje y estado `pendiente|aceptada|rechazada`.
 - `v2_directorio_reportes/{hash}`: denuncia privada con tipo, objetivo, motivo, detalle, estado y acción administrativa. El hash estable evita duplicados; las reglas niegan lectura y escritura directa al cliente.
 
 La API nunca incluye `contacto` en la proyección pública del perfil. Solo lo entrega a las dos partes después de que la persona destinataria acepta la conexión. Crear perfil, explorar y conectar está disponible para cualquier usuario autenticado; publicar oportunidades requiere VIP o admin.
 
-La foto profesional se recorta en el navegador a un cuadrado de 720 px y se convierte a WebP antes de subirla. La API sólo firma durante 10 minutos la ruta exacta `directorio/perfiles/{uid}/avatar.webp`, con un máximo declarado de 2 MB y, al guardar el perfil, comprueba nuevamente el `contentType` y tamaño reales en Storage; ningún cliente puede escribir directamente mediante las reglas de Storage. La foto sí es pública porque forma parte visible de la tarjeta del directorio.
+La foto profesional se recorta en el navegador a un cuadrado de 720 px y la portada a 1600×560 px; ambas se convierten a WebP antes de subirlas. La API sólo firma durante 10 minutos las rutas exactas `directorio/perfiles/{uid}/avatar.webp` (máximo 2 MB) y `directorio/perfiles/{uid}/banner.webp` (máximo 3 MB). Al guardar el perfil comprueba nuevamente `contentType` y tamaño reales en Storage; ningún cliente puede escribir directamente mediante las reglas de Storage. Ambos recursos son públicos porque forman parte del perfil opt-in.
 
 ### `v2_quizzes/{cursoId}_{n}`
 Los registros existentes `{ q, opciones, correcta, explicacion }` siguen siendo válidos y se interpretan como `tipo: 'seleccion'`. La v2 admite además `seleccion_multiple`, `ordenar`, `relacionar` y `completar`, con respuesta tipada y crédito parcial. `version` comienza en 1 y aumenta cuando cambia el contenido; editar preguntas sin aprobarlas explícitamente devuelve el quiz a `borrador`. GET solo entrega configuración pública; las reglas de calificación y explicaciones permanecen en servidor hasta contestar. El detalle técnico está en `docs/PLAN-DIRECTORIO-EVALUACIONES.md`.
@@ -197,6 +197,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | DELETE | `/directorio/perfil` | Retira el perfil, foto y cierra oportunidades/solicitudes pendientes propias |
 | POST | `/directorio/perfil/foto/subida` | Firma por 10 min la subida de la foto WebP optimizada a la ruta exclusiva del usuario |
 | DELETE | `/directorio/perfil/foto` | Elimina la foto propia y limpia su referencia del perfil |
+| POST | `/directorio/perfil/banner/subida` | Firma por 10 min la subida de la portada WebP optimizada a la ruta exclusiva del usuario |
+| DELETE | `/directorio/perfil/banner` | Elimina la portada propia y limpia su referencia del perfil |
 | POST | `/directorio/oportunidades` | Publica oportunidad por 45 días (VIP/admin) |
 | PATCH | `/directorio/oportunidades/:id` | Dueño/admin cierra una oportunidad |
 | POST | `/directorio/conexiones` | Envía solicitud privada idempotente a perfil u oportunidad; máximo 10/24 h y sin reintento por 30 días tras rechazo |
