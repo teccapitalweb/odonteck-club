@@ -7,12 +7,14 @@
 - Checkout de trabajo: `C:\dev\02_CLIENTES\OdonTeck\odonteck-club-release-20261014`
 - Repositorio remoto: `https://github.com/teccapitalweb/odonteck-club.git`
 - Rama local: `release/directorio-responsive-20261014`
-- Upstream observado: `origin/main`
-- HEAD observado: `e3fc6d7` (`feat: publicar directorio profesional responsive`)
-- URL local usada para QA: `http://127.0.0.1:5197/#/directorio`
-- Modo de esa URL: demo, porque no se configuró `VITE_API_URL`.
+- Upstream: `origin/main`
+- HEAD observado: `39366a7` (Merge PR #9 de commit `cb971fb`)
+- Despliegue en Cloudflare Pages: `2107ce7a` (`https://2107ce7a.odonteck-club.pages.dev`)
+- Dominios activos sirviendo el nuevo bundle: `https://odonteck-club.pages.dev/` y `https://www.odonteckconsulting.com/`
+- Bundle publicado: `club-CBvNtOGq.js` y `club-DiP9g7Jt.css`
+- URL local usada para QA: `http://127.0.0.1:5197/#/directorio` y `http://127.0.0.1:5197/#/login`
 
-El commit `e3fc6d7` ya contiene el Directorio como módulo principal, sus fotografías demostrativas y el diseño responsive base. Los cambios tipo CV descritos abajo permanecen **modificados localmente, sin commit ni push**. No afirmar que esa ampliación está en producción.
+El commit `cb971fb` (PR #9) unifica la ampliación tipo CV del Directorio y el nuevo login split-screen full bleed (pantalla completa 100vw × 100dvh, sin barras de scroll, responsivo y con el formulario completo siempre visible). Ha sido desplegado a producción en Cloudflare Pages con autorización explícita del usuario.
 
 Estado Git observado antes de crear este handoff:
 
