@@ -1,7 +1,7 @@
 // OdonTeck Club · service worker
 // Navegación: red primero, sin red la última copia. Estáticos propios: responde con caché y actualiza por detrás.
 // Nunca toca el backend, Firebase, Stripe ni Bunny.
-const VERSION = 'odonteck-club-v2';
+const VERSION = 'odonteck-club-v3';
 const SHELL = ['/', '/manifest.webmanifest', '/brand/icon-192.png', '/brand/logo-horizontal.png', '/offline.html'];
 
 self.addEventListener('install', (e) => {
@@ -23,8 +23,12 @@ self.addEventListener('fetch', (e) => {
   if (url.pathname.startsWith('/@') || url.pathname.startsWith('/src/') || url.pathname.startsWith('/node_modules/')) return; // servidor de desarrollo
 
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).then((r) => { const copia = r.clone(); caches.open(VERSION).then((c) => c.put('/', copia)); return r; })
-      .catch(() => caches.match('/').then((r) => r || caches.match('/offline.html'))));
+    // Las herramientas cargan en un iframe: nunca deben servirse ni cachearse como el cascarón del club.
+    if (url.pathname.startsWith('/herramientas/')) { e.respondWith(fetch(req).catch(() => caches.match('/offline.html'))); return; }
+    e.respondWith(fetch(req).then((r) => {
+      if (url.pathname === '/' || url.pathname === '/index.html') { const copia = r.clone(); caches.open(VERSION).then((c) => c.put('/', copia)); }
+      return r;
+    }).catch(() => caches.match('/').then((r) => r || caches.match('/offline.html'))));
     return;
   }
   if (estatico(url)) {
