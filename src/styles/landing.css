@@ -224,7 +224,7 @@ html:has(.lp) { scroll-behavior: smooth; scroll-padding-top: 84px; }
 .lp-footer__grid a:not(.circle-btn) { color: var(--text-2); font-size: var(--fs-sm); }
 .lp-footer__bottom { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 50px; padding-top: 24px; border-top: 1px solid var(--line); font-size: var(--fs-xs); color: var(--text-3); }
 
-.lp-wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 30; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 14px 30px -8px rgba(37,211,102,.6); transition: transform var(--t-fast); }
+.lp-wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 30; width: 58px; height: 58px; border-radius: 50%; background: #075e54; color: #fff; display: grid; place-items: center; box-shadow: 0 14px 30px -8px rgba(7,94,84,.52); transition: transform var(--t-fast); }
 .lp-wa-fab:hover { transform: scale(1.06); }
 .lp-wa-fab .i { width: 26px; height: 26px; }
 

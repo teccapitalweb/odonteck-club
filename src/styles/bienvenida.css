@@ -218,7 +218,7 @@
 .bv-op__ic--google { --halo: #4285f4; }
 .bv-op__ic--tiktok { --halo: #fe2c55; background: #010101; }
 .bv-op__ic--tiktok svg { width: 34px; height: 34px; }
-.bv-op__ic--whatsapp { --halo: #25d366; background: #25d366; }
+.bv-op__ic--whatsapp { --halo: #25d366; background: #075e54; }
 /* Medios sin logotipo: mosaicos propios con la paleta de OdonTeck, al mismo nivel visual que las marcas. */
 .bv-op__ic--colega, .bv-op__ic--evento, .bv-op__ic--otro { color: #fff; }
 .bv-ops--marcas .bv-op__ic--marca .i { width: 28px; height: 28px; fill: rgba(255, 255, 255, .22); stroke-width: 1.9; }

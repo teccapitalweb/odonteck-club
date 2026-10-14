@@ -37,10 +37,10 @@
   --primary-hover: var(--blue-600);
   --primary-soft: var(--blue-50);
   --primary-ink: #ffffff;
-  --accent: var(--teal-500);
+  --accent: #2f786d;
   --accent-soft: var(--teal-50);
-  --success: #2e9e6b;
-  --warning: #c7871a;
+  --success: #237a52;
+  --warning: #966100;
   --danger: #c9463d;
   --danger-soft: #fbeceb;
 
@@ -54,7 +54,7 @@
   --line-strong: #d3cfc4;
   --text: #1b1f33;
   --text-2: #545a72;
-  --text-3: #8b90a5;
+  --text-3: #687087;
   --text-inverse: #ffffff;
 
   /* ── Tipografía ── */

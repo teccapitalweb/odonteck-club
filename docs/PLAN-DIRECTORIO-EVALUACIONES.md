@@ -2,15 +2,15 @@
 
 Estado: directorio implementado en local. El motor v2, el editor administrativo, la validación API y el demo ya soportan selección, selección múltiple, ordenar, relacionar y completar con compatibilidad hacia atrás. La clase ya muestra una pestaña de ficha con estado honesto y la API firma el PDF privado solo cuando está aprobado. El piloto de Ortodoncia tiene revisión editorial y matriz de 25 actividades en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md`; falta la firma de un odontólogo u ortodoncista, migrar/autorizar el contenido clínico restante y producir las demás fichas. No publicar contenido clínico generado sin revisión odontológica.
 
-## 1. Directorio profesional en Comunidad
+## 1. Directorio profesional como módulo principal
 
 ### Objetivo
 
-Crear networking útil sin convertir Comunidad en una bolsa de spam ni exponer datos personales. El miembro elige participar, publica un perfil profesional, explora personas y oportunidades y envía una solicitud privada. El correo o WhatsApp solo se comparte si la persona destinataria acepta.
+Crear networking útil sin convertir el Club en una bolsa de spam ni exponer datos personales. El miembro elige participar, publica un perfil profesional, explora personas y oportunidades y envía una solicitud privada. El correo o WhatsApp solo se comparte si la persona destinataria acepta.
 
 ### Flujo implementado
 
-1. Comunidad → Directorio.
+1. Navegación principal → Directorio (`#/directorio`). La URL anterior `#/comunidad?tab=directorio` redirige para conservar enlaces guardados.
 2. Personas, Oportunidades y Mis conexiones.
 3. Búsqueda por nombre, especialidad, habilidad, ciudad u organización.
 4. Perfil opt-in con etapa, especialidades, habilidades, disponibilidad y modalidad.
