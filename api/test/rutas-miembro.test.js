@@ -748,6 +748,21 @@ describe('escoge tu curso gratis', () => {
     assert.equal(env.db.leer('v2_curso_gratis/free1').cambios, 1);
   });
 
+  test('abrir contenido y cambiar de curso a la vez no deja usar el curso anterior', async () => {
+    await elegir('curso-c').expect(201);
+    await vista(TOKENS.free, 'curso-c', 1).expect(200);
+    const [abrir, cambio] = await Promise.all([request(env.app).get('/quiz/curso-c/2').set(bearer(TOKENS.free)), elegir('curso-a')]);
+    const final = env.db.leer('v2_curso_gratis/free1');
+    if (cambio.status === 201) {
+      assert.equal(final.cursoId, 'curso-a');
+      assert.notEqual(abrir.status, 200, 'si el cambio ganó, el curso anterior ya no se abre');
+      assert.equal(final.maxAbierta ?? 0, 0, 'lo abierto del curso anterior no se anota en el nuevo');
+    } else {
+      assert.equal(cambio.status, 409);
+      assert.equal(final.cursoId, 'curso-c');
+    }
+  });
+
   test('no permite cambiar tras 24 horas ni tras avanzar dos clases', async () => {
     await elegir('curso-c').expect(201);
     env.reloj.ahora = new Date(Date.parse('2026-09-18T12:00:01Z'));

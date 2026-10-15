@@ -388,16 +388,23 @@ export function rutasMiembro(ctx) {
     const clase = (curso.clases ?? []).find((c) => Number(c.n) === n);
     if (!clase) throw new HttpError(404, 'clase_no_encontrada', 'Esa clase no existe en el curso.');
     const estado = await estadoP;
-    const eleccion = estado.esVip ? null : await leerCursoGratis(ctx, u.uid);
-    if (!tieneAccesoAClase(curso, cursoId, n, estado.esVip, eleccion?.cursoId)) {
-      throw requiereVip(eleccion?.cursoId === cursoId
-        ? 'La última clase de tu curso gratis es para miembros VIP. Hazte VIP para terminarlo y obtener tu certificado.'
-        : 'Este curso es para miembros VIP. Tu curso gratis es el que elegiste; hazte VIP para abrir todos.');
-    }
-    // Registra hasta qué clase del curso gratis ya se abrió (video, ficha, quiz o vista),
-    // para que el cambio único no permita aprovechar un curso y luego cambiarse.
-    if (!estado.esVip && eleccion?.cursoId === cursoId && n > (eleccion.maxAbierta ?? 0)) {
-      await db.collection(COL.cursoGratis).doc(u.uid).update({ maxAbierta: n });
+    if (!estado.esVip) {
+      await leerCursoGratis(ctx, u.uid); // migración perezosa, si aplica
+      // Acceso y registro de lo abierto en la MISMA transacción que usa el cambio de curso:
+      // si el miembro cambia de curso a la vez, una de las dos operaciones ve a la otra y
+      // no puede abrir el curso anterior ni cambiarse tras haberlo aprovechado.
+      const gratisRef = db.collection(COL.cursoGratis).doc(u.uid);
+      const elegido = await db.runTransaction(async (tx) => {
+        const snap = await tx.get(gratisRef);
+        const actual = snap.exists ? snap.data() : null;
+        if (tieneAccesoAClase(curso, cursoId, n, false, actual?.cursoId) && n > (actual.maxAbierta ?? 0)) tx.update(gratisRef, { maxAbierta: n });
+        return actual?.cursoId ?? null;
+      });
+      if (!tieneAccesoAClase(curso, cursoId, n, false, elegido)) {
+        throw requiereVip(elegido === cursoId
+          ? 'La última clase de tu curso gratis es para miembros VIP. Hazte VIP para terminarlo y obtener tu certificado.'
+          : 'Este curso es para miembros VIP. Tu curso gratis es el que elegiste; hazte VIP para abrir todos.');
+      }
     }
     const progSnap = await progP;
     const progreso = progSnap?.exists ? progSnap.data() : null;
