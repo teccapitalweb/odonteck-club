@@ -40,7 +40,8 @@ import { clase } from './pages/clase';
 import { biblioteca, material } from './pages/materiales';
 import { visor, montarVisor } from './pages/visor';
 import { toggleReserva } from './pages/envivo';
-import { comunidad, directorio, hilo } from './pages/comunidad';
+import { comunidad, directorio, hilo, perfilDirectorio } from './pages/comunidad';
+import { abrirVisorDocumento, montarDocumentosDirectorio, prepararDocumento } from './core/directorio-docs';
 import { paginaLogros } from './pages/logros';
 import { paginaRecompensas } from './pages/recompensas';
 import { retos, montarArcade } from './pages/retos';
@@ -64,7 +65,7 @@ import { herramientas, herramienta } from './pages/herramientas';
 import { login } from './pages/login';
 import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
-import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type ImagenDirectorioPreparada } from './core/directorio';
+import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type DocumentoPreparado, type ImagenDirectorioPreparada, type TipoDocumento, type VisibilidadDocumento } from './core/directorio';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
 import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas, adminCupones } from './admin/gestion';
 
@@ -567,6 +568,7 @@ route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/directorio', directorio);
+route('/directorio/perfil/:uid', perfilDirectorio);
 route('/curso-gratis', cursoGratisPagina);
 route('/logros', paginaLogros);
 route('/recompensas', paginaRecompensas);
@@ -611,6 +613,7 @@ onRender(() => {
   cargarVideos();
   if (path.startsWith('/retos')) montarArcade();
   if (path.endsWith('/visor')) montarVisor();
+  if (path.startsWith('/directorio/perfil/')) montarDocumentosDirectorio();
   if (path.startsWith('/curso-gratis')) montarCursoGratis(toast); else desmontarCursoGratis();
   if (path === '/bienvenida') montarBienvenida(toast);
   if (path === '/brujula') montarBrujula(toast);
@@ -1069,9 +1072,34 @@ document.addEventListener('click', async (e) => {
     const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
   if (el.closest('[data-cancelar-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) f.hidden = true; }
   // Toda la tarjeta de una persona abre su ficha, salvo sus botones (conectar, denunciar, editar).
+  // Toda la tarjeta de una persona lleva a su página, salvo sus botones (conectar, denunciar, editar).
   const tarjetaRed = el.closest<HTMLElement>('[data-network-card]');
-  const verPerfil = el.closest<HTMLElement>('[data-network-view]') || (tarjetaRed && !el.closest('button, a, input, select, textarea, label') ? tarjetaRed : null);
-  if (verPerfil) { abrirFichaDirectorio(verPerfil.dataset.uid || ''); return; }
+  if (tarjetaRed && !el.closest('button, a, input, select, textarea, label')) { location.hash = tarjetaRed.dataset.href || '#/directorio'; return; }
+  const abrirDoc = el.closest<HTMLElement>('[data-doc-open]');
+  if (abrirDoc) { void abrirVisorDocumento(abrirDoc.dataset.uid || '', abrirDoc.dataset.id || ''); return; }
+  const visDoc = el.closest<HTMLButtonElement>('[data-doc-visibilidad]');
+  if (visDoc) {
+    visDoc.disabled = true;
+    try { await Directorio.editarDocumento(visDoc.dataset.id || '', { visibilidad: visDoc.dataset.valor as VisibilidadDocumento }); toast(visDoc.dataset.valor === 'conexiones' ? 'Ahora solo lo ven tus conexiones' : 'Ahora lo ven todos los miembros', visDoc.dataset.valor === 'conexiones' ? 'lock' : 'users'); await refrescarFichaDirectorio(); }
+    catch (err) { visDoc.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
+  const quitarDoc = el.closest<HTMLButtonElement>('[data-doc-quitar]');
+  if (quitarDoc) {
+    if (!confirm(`¿Quitar «${quitarDoc.dataset.name || 'este documento'}» de tu perfil?`)) return;
+    quitarDoc.disabled = true;
+    try { await Directorio.quitarDocumento(quitarDoc.dataset.id || ''); toast('Documento retirado', 'trash-2'); await refrescarFichaDirectorio(); }
+    catch (err) { quitarDoc.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
+  const quitarImagen = el.closest<HTMLButtonElement>('[data-dir-photo-quitar], [data-dir-banner-quitar]');
+  if (quitarImagen) {
+    const tipo = quitarImagen.matches('[data-dir-photo-quitar]') ? 'foto' : 'banner';
+    quitarImagen.disabled = true;
+    try { await Directorio.actualizarImagen(tipo, null); toast(tipo === 'foto' ? 'Foto retirada' : 'Portada retirada', 'image-minus'); await refrescarFichaDirectorio(); }
+    catch (err) { quitarImagen.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
   if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); const dialog = document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]'); if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return; }
   if (el.closest('[data-network-job]')) {
     if (!Auth.usuario?.esVip && Datos.modo === 'api') { mostrarPaywall('Publicar oportunidades es un beneficio VIP. Puedes explorar perfiles y conectar gratis.'); return; }
@@ -1278,15 +1306,18 @@ document.addEventListener('click', async (e) => {
   }
 });
 
-function abrirFichaDirectorio(uid: string) {
-  const dialog = [...document.querySelectorAll<HTMLDialogElement>('[data-network-view-dialog]')].find((d) => d.dataset.networkViewDialog === uid);
-  if (dialog) { dialog.scrollTop = 0; dialog.showModal(); }
+/** Tras un cambio en la página de un perfil: en modo API vuelve a pedir la ficha antes de repintar. */
+async function refrescarFichaDirectorio() {
+  const uid = decodeURIComponent(current().path.replace(/^\/directorio\/perfil\//, ''));
+  if (Datos.modo === 'api') { await Promise.all([Directorio.cargar(), uid ? Directorio.cargarFicha(uid).catch(() => null) : null]); }
+  render();
 }
+let documentoPendiente: DocumentoPreparado | null = null;
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') mostrarResumenCuenta(false);
   const objetivo = e.target as HTMLElement | null;
-  if (objetivo?.matches?.('[data-network-card]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); abrirFichaDirectorio(objetivo.dataset.uid || ''); }
+  if (objetivo?.matches?.('[data-network-card]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); location.hash = objetivo.dataset.href || '#/directorio'; }
 });
 
 function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); const antes = location.hash; navigate(v === '/login' ? '/' : v); if (location.hash === antes) render(); }
@@ -1310,6 +1341,34 @@ document.addEventListener('change', async (e) => {
   const input = e.target as HTMLInputElement;
   const quiz = input.closest<HTMLFormElement>('[data-quiz-miembro]');
   if (quiz && !quiz.dataset.calificado) mostrarPasoQuiz(quiz, Number(quiz.dataset.paso || 0));
+  if (input.matches('[data-doc-input]')) {
+    const file = input.files?.[0]; input.value = ''; if (!file) return;
+    toast('Preparando la vista previa…', 'loader-circle');
+    try {
+      const prep = await prepararDocumento(file);
+      if (documentoPendiente) URL.revokeObjectURL(documentoPendiente.preview);
+      documentoPendiente = prep;
+      const dialog = document.querySelector<HTMLDialogElement>('[data-doc-dialog]'); if (!dialog) return;
+      const img = dialog.querySelector<HTMLImageElement>('[data-doc-preview]'); if (img) img.src = prep.preview;
+      const info = dialog.querySelector<HTMLElement>('[data-doc-preview-info]');
+      if (info) info.textContent = `${prep.mime === 'application/pdf' ? `PDF · ${prep.paginas} ${prep.paginas === 1 ? 'página' : 'páginas'}` : 'Imagen optimizada'} · ${(prep.archivo.size / 1_000_000).toFixed(1)} MB`;
+      const nombre = dialog.querySelector<HTMLInputElement>('[data-doc-nombre]'); if (nombre) nombre.value = prep.nombreSugerido;
+      const tipo = dialog.querySelector<HTMLSelectElement>('select[name="tipo"]'); if (tipo) tipo.value = /cv|curr/i.test(file.name) ? 'cv' : prep.mime === 'application/pdf' ? 'constancia' : 'certificado';
+      dialog.showModal();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
+  if (input.matches('[data-dir-photo-inline], [data-dir-banner-inline]')) {
+    const file = input.files?.[0]; input.value = ''; if (!file) return;
+    const tipo = input.matches('[data-dir-photo-inline]') ? 'foto' : 'banner';
+    toast(tipo === 'foto' ? 'Subiendo tu foto…' : 'Subiendo tu portada…', 'loader-circle');
+    try {
+      const prep = await (tipo === 'foto' ? prepararFotoDirectorio(file) : prepararBannerDirectorio(file));
+      await Directorio.actualizarImagen(tipo, prep); URL.revokeObjectURL(prep.preview);
+      toast(tipo === 'foto' ? 'Foto actualizada' : 'Portada actualizada', 'badge-check'); await refrescarFichaDirectorio();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    return;
+  }
   if (input.matches('[data-network-photo-input]')) {
     const file = input.files?.[0]; if (!file) return;
     try {
@@ -1396,6 +1455,16 @@ document.addEventListener('submit', async (e) => {
       await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), idiomas: csv('idiomas'), anosExperiencia: anosExperiencia ? Number(anosExperiencia) : null, experiencia, formacion, credenciales, bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio, bannerDirectorioPendiente, quitarBannerDirectorio);
       limpiarFotoDirectorioPendiente(); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Perfil profesional actualizado', 'badge-check'); render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
+  }
+  if (f.matches('[data-doc-form]')) {
+    e.preventDefault(); if (!documentoPendiente) return;
+    const d = new FormData(f); const boton = f.querySelector<HTMLButtonElement>('footer .btn--brand'); if (boton) boton.disabled = true;
+    try {
+      await Directorio.adjuntarDocumento(documentoPendiente, { nombre: String(d.get('nombre') || '').trim(), tipo: String(d.get('tipo')) as TipoDocumento, visibilidad: String(d.get('visibilidad')) as VisibilidadDocumento });
+      URL.revokeObjectURL(documentoPendiente.preview); documentoPendiente = null;
+      f.closest<HTMLDialogElement>('dialog')?.close(); toast('Documento adjunto a tu perfil', 'paperclip'); await refrescarFichaDirectorio();
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; }
+    return;
   }
   if (f.matches('[data-network-job-form]')) {
     e.preventDefault(); const d = new FormData(f); const especialidades = String(d.get('especialidades') || '').split(',').map((x) => x.trim()).filter(Boolean);
