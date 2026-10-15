@@ -1,0 +1,74 @@
+[
+  {
+    "id": "obturacion-tridimensional",
+    "titulo": "Técnicas de obturación tridimensional",
+    "subtitulo": "Endodoncia moderna paso a paso",
+    "area": "Endodoncia",
+    "ponente": "Dra. María Elena Castañeda Romero",
+    "inicio": "2027-03-23T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 21,
+    "flyer": "/cursos-en-vivo/obturacion-tridimensional.webp"
+  },
+  {
+    "id": "abscesos-periodontales",
+    "titulo": "Manejo de abscesos periodontales",
+    "subtitulo": "Diagnóstico y tratamiento",
+    "area": "Periodoncia",
+    "ponente": "Dr. Víctor Martínez Ruiz",
+    "inicio": "2027-03-23T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 17,
+    "flyer": "/cursos-en-vivo/abscesos-periodontales.webp"
+  },
+  {
+    "id": "carillas-ultrafinas",
+    "titulo": "Carillas ultrafinas",
+    "subtitulo": "Diseño, tallado y cementado",
+    "area": "Estética dental",
+    "ponente": "Dra. Mariana Cruz Martínez",
+    "inicio": "2027-03-16T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 26,
+    "flyer": "/cursos-en-vivo/carillas-ultrafinas.webp"
+  },
+  {
+    "id": "mih",
+    "titulo": "Hipomineralización incisivo-molar (MIH)",
+    "subtitulo": "Diagnóstico y manejo en niños",
+    "area": "Odontopediatría",
+    "ponente": "Dra. María Elena Rescalvo",
+    "inicio": "2027-03-16T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 12,
+    "flyer": "/cursos-en-vivo/mih.webp"
+  },
+  {
+    "id": "frenectomias-pediatricas",
+    "titulo": "Frenectomías pediátricas avanzadas",
+    "subtitulo": "Odontopediatría · diagnóstico y técnica",
+    "area": "Odontopediatría",
+    "ponente": "Dra. María Fernanda Bello Borrego",
+    "inicio": "2027-03-23T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 9,
+    "flyer": "/cursos-en-vivo/frenectomias-pediatricas.webp"
+  },
+  {
+    "id": "minima-invasion-odontopediatria",
+    "titulo": "Mínima invasión en odontopediatría",
+    "subtitulo": "Tratamientos amigables para niños",
+    "area": "Odontopediatría",
+    "ponente": "Dra. Anahí Zamudio Sarmina",
+    "inicio": "2027-03-16T19:00:00-06:00",
+    "precio": 650,
+    "cupo": 30,
+    "inscritos": 14,
+    "flyer": "/cursos-en-vivo/minima-invasion-odontopediatria.webp"
+  }
+]

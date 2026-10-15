@@ -5,6 +5,7 @@ import { cursos } from '../core/catalogo';
 import { puntos } from '../core/logros';
 import { avatarUsuario, esc } from '../ui/partials';
 import { Auth } from '../core/auth';
+import { Datos } from '../core/datos';
 import { Acceso } from '../core/acceso';
 import { opcionesIntereses, perfilEncuesta } from '../core/encuestas';
 
@@ -283,7 +284,7 @@ export function configuracion() {
 }
 
 export function mas() {
-  const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/directorio', 'contact-round', 'Directorio'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/herramientas', 'wrench', 'Herramientas Pro'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
+  const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/directorio', 'contact-round', 'Directorio'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ...(Datos.modo === 'demo' ? [['#/cursos-en-vivo', 'radio', 'Cursos en vivo']] : []), ['#/herramientas', 'wrench', 'Herramientas Pro'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
   return `
   <section class="stack" style="gap:16px">
     <div class="row" style="gap:12px">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}<div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>${Perfil.planNombre()}</span></div></div>

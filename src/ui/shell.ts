@@ -9,11 +9,12 @@ import { avatarUsuario, esc } from './partials';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
-  { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
+  { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/(cursos$|curso(\/|$))/ },
   { href: '#/materiales', icon: 'library', label: 'Materiales', match: /^\/materiales/ },
   { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
   { href: '#/retos', icon: 'gamepad-2', label: 'Retos', match: /^\/retos/ },
+  { href: '#/cursos-en-vivo', icon: 'radio', label: 'Cursos en vivo', match: /^\/cursos-en-vivo/, soloDemo: true },
   { group: 'Herramientas' },
   { href: '#/herramientas', icon: 'wrench', label: 'Herramientas Pro', match: /^\/herramientas/ },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
@@ -30,12 +31,14 @@ export function shellHTML() {
   const saldo = puntos();
   const clasesVistas = Progreso.totalVistas();
   const cursosCompletados = Progreso.completados().length;
-  const items = NAV.map((n) =>
+  // «Cursos en vivo» es un prototipo local: solo aparece en modo demo.
+  const nav = NAV.filter((n) => !('soloDemo' in n) || Datos.modo === 'demo');
+  const items = nav.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`
       : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && proximos() ? `<span class="badge">${proximos()}</span>` : ''}</a>`
   ).join('');
-  const bottom = NAV.filter((n) => 'href' in n).slice(0, 4).map((n: any) =>
+  const bottom = nav.filter((n) => 'href' in n).slice(0, 4).map((n: any) =>
     `<a href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}</a>`).join('') +
     `<a href="#/mas" data-nav><i data-lucide="menu" class="i"></i>Más</a>`;
   return `
