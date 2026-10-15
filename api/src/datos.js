@@ -58,11 +58,13 @@ export async function leerDoc(db, coleccion, id) {
  * puede usarse como segundo identificador sin aceptar datos del cliente.
  */
 export async function leerMiembroHeredado(ctx, usuario) {
-  const directo = await leerDoc(ctx.db, COL.miembros, usuario.uid);
   const email = String(usuario.email ?? '').trim().toLowerCase();
+  const [directo, snap] = await Promise.all([
+    leerDoc(ctx.db, COL.miembros, usuario.uid),
+    email ? ctx.db.collection(COL.miembros).where('email', '==', email).limit(10).get() : null,
+  ]);
   if (!email) return directo;
 
-  const snap = await ctx.db.collection(COL.miembros).where('email', '==', email).limit(10).get();
   const candidatos = [directo, ...snap.docs.map((d) => d.data())].filter(Boolean);
   if (!candidatos.length) return null;
 

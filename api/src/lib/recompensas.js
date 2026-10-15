@@ -176,17 +176,19 @@ function evaluarLogros(estado, ahoraISO) {
 /**
  * Registra eventos dentro de una transacción ya abierta. Todas las lecturas se
  * hacen antes de escribir para cumplir la regla de transacciones de Firestore.
+ * Devuelve el resultado público y el estado completo que queda guardado.
  */
-export async function otorgarEventosTx({ tx, db, colecciones, uid, eventos, ahora }) {
+async function registrarEventosTx({ tx, db, colecciones, uid, eventos, ahora }) {
   const lista = eventos.filter((e) => e && typeof e.clave === 'string' && e.clave && Number.isFinite(Number(e.puntos)));
   const estadoRef = db.collection(colecciones.recompensasEstado).doc(uid);
   if (!lista.length) {
     const estadoSnap = await tx.get(estadoRef);
     const estado = normalizarEstadoRecompensas(estadoSnap.exists ? estadoSnap.data() : null, uid);
-    return { puntosGanados: 0, saldo: estado.saldo, logrosNuevos: [], notificaciones: estado.notificaciones.filter((n) => n.leida !== true) };
+    return { estado, resultado: { puntosGanados: 0, saldo: estado.saldo, logrosNuevos: [], notificaciones: estado.notificaciones.filter((n) => n.leida !== true) } };
   }
   const movimientos = lista.map((evento) => ({ evento, ref: db.collection(colecciones.recompensasMovimientos).doc(idMovimiento(uid, evento.clave)) }));
-  const [estadoSnap, ...movSnaps] = await Promise.all([tx.get(estadoRef), ...movimientos.map(({ ref }) => tx.get(ref))]);
+  // Una sola lectura por lotes: dentro de una transacción, tx.get en paralelo se encola de todos modos.
+  const [estadoSnap, ...movSnaps] = await tx.getAll(estadoRef, ...movimientos.map(({ ref }) => ref));
   const estado = normalizarEstadoRecompensas(estadoSnap.exists ? estadoSnap.data() : null, uid);
   const ahoraISO = ahora.toISOString();
   let puntosGanados = 0;
@@ -210,21 +212,29 @@ export async function otorgarEventosTx({ tx, db, colecciones, uid, eventos, ahor
     });
   });
   if (!puntosGanados && movimientos.every((_, i) => movSnaps[i].exists)) {
-    return { puntosGanados: 0, saldo: estado.saldo, logrosNuevos: [], notificaciones: [] };
+    return { estado, resultado: { puntosGanados: 0, saldo: estado.saldo, logrosNuevos: [], notificaciones: [] } };
   }
   const logrosNuevos = evaluarLogros(estado, ahoraISO);
   estado.actualizado = ahoraISO;
   tx.set(estadoRef, estado);
   return {
-    puntosGanados,
-    saldo: estado.saldo,
-    logrosNuevos,
-    notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
+    estado,
+    resultado: {
+      puntosGanados,
+      saldo: estado.saldo,
+      logrosNuevos,
+      notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
+    },
   };
 }
 
-export async function otorgarEventos(ctx, colecciones, uid, eventos) {
-  return ctx.db.runTransaction((tx) => otorgarEventosTx({
+export async function otorgarEventosTx(opciones) {
+  return (await registrarEventosTx(opciones)).resultado;
+}
+
+/** Como otorgarEventos, pero entrega también el estado guardado para no releerlo. */
+export async function registrarEventos(ctx, colecciones, uid, eventos) {
+  return ctx.db.runTransaction((tx) => registrarEventosTx({
     tx,
     db: ctx.db,
     colecciones,
@@ -232,6 +242,10 @@ export async function otorgarEventos(ctx, colecciones, uid, eventos) {
     eventos,
     ahora: ctx.now(),
   }));
+}
+
+export async function otorgarEventos(ctx, colecciones, uid, eventos) {
+  return (await registrarEventos(ctx, colecciones, uid, eventos)).resultado;
 }
 
 export function logrosPublicos(estado) {

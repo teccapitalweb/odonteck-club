@@ -197,10 +197,10 @@ export function rutasDirectorio(ctx) {
       .sort((a, b) => String(b.creado).localeCompare(String(a.creado)))
       .slice(0, LIMITE_CONEXIONES);
     const uidsOtraPersona = [...new Set(conexionesBase.map((c) => c.deUid === uid ? c.paraUid : c.deUid))];
-    const otros = await Promise.all(uidsOtraPersona.map(async (id) => {
-      const snap = await ctx.db.collection(COL.directorioPerfiles).doc(id).get();
-      return snap.exists ? [id, snap.data()] : [id, null];
-    }));
+    const otrosSnaps = uidsOtraPersona.length
+      ? await ctx.db.getAll(...uidsOtraPersona.map((id) => ctx.db.collection(COL.directorioPerfiles).doc(id)), { fieldMask: ['nombre', 'contacto'] })
+      : [];
+    const otros = otrosSnaps.map((snap, i) => [uidsOtraPersona[i], snap.exists ? snap.data() : null]);
     const mapa = new Map([...otros, ...(propiaSnap.exists ? [[uid, propiaSnap.data()]] : [])]);
     const conexiones = conexionesBase
       .map((c) => {

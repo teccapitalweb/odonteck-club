@@ -14,9 +14,11 @@ import { firmarEmbedBunny } from '../src/lib/bunny.js';
 import { leerCuentaDeServicio } from '../src/lib/cuenta-servicio.js';
 import { aMillis } from '../src/lib/fechas.js';
 import { FOLIO_REGEX, folioValido, formatearFolio } from '../src/lib/folio.js';
+import { otorgarEventos } from '../src/lib/recompensas.js';
 import { validarClases, validarCurso, validarPreguntas } from '../src/lib/esquemas.js';
 import { texto } from '../src/lib/validacion.js';
 import { mapearCurso, mapearMaterial } from '../src/lib/semilla.js';
+import { FakeFirestore } from './fakes/firestore.js';
 
 const AHORA = new Date('2026-09-17T12:00:00Z');
 const AYER = '2026-09-16T12:00:00Z';
@@ -321,5 +323,33 @@ describe('suscripcionVigente (checkout nuevo)', () => {
   });
   test('esVip considera la suscripción nueva', () => {
     assert.equal(esVip(null, ahora, { suscripcion: { estado: 'active', periodoFin: '2026-10-17T12:00:00Z' } }), true);
+  });
+});
+
+describe('recompensas en transacción (tx.getAll)', () => {
+  const colecciones = { recompensasEstado: 'v2_recompensas_estado', recompensasMovimientos: 'v2_recompensas_movimientos' };
+  const evento = (clave, puntos, contador) => ({ clave, tipo: 'prueba', puntos, contador, detalle: clave });
+
+  test('lee estado y movimientos en un lote y no repite eventos ya otorgados', async () => {
+    const db = new FakeFirestore();
+    const ctx = { db, now: () => AHORA };
+    const primero = await otorgarEventos(ctx, colecciones, 'u1', [evento('clase:a:1', 10, 'clases'), evento('clase:a:2', 10, 'clases')]);
+    assert.equal(primero.puntosGanados, 20);
+    const segundo = await otorgarEventos(ctx, colecciones, 'u1', [evento('clase:a:1', 10, 'clases'), evento('quiz:a:1', 5, 'quizzes'), evento('clase:a:2', 10, 'clases')]);
+    assert.equal(segundo.puntosGanados, 5);
+    assert.equal(segundo.saldo, 25);
+    assert.equal(db.rutas(colecciones.recompensasMovimientos).length, 3);
+    assert.deepEqual(db.leer(`${colecciones.recompensasEstado}/u1`).contadores, { clases: 2, quizzes: 1 });
+  });
+
+  test('tx.getAll del fake conserva el orden y exige leer antes de escribir', async () => {
+    const db = new FakeFirestore({ 'c/a': { v: 1 }, 'c/b': { v: 2 } });
+    await db.runTransaction(async (tx) => {
+      const snaps = await tx.getAll(db.collection('c').doc('b'), db.collection('c').doc('x'), db.collection('c').doc('a'));
+      assert.deepEqual(snaps.map((s) => [s.id, s.exists, s.data()?.v]), [['b', true, 2], ['x', false, undefined], ['a', true, 1]]);
+      tx.set(db.collection('c').doc('a'), { v: 3 });
+      await assert.rejects(tx.getAll(db.collection('c').doc('b')), /reads to be executed before all writes/);
+    });
+    assert.deepEqual(db.leer('c/a'), { v: 3 });
   });
 });

@@ -72,6 +72,7 @@ export interface RespuestaReto {
 let cache: ResumenRetos | null = null;
 let error: string | null = null;
 let pendiente: Promise<ResumenRetos | null> | null = null;
+let generacion = 0;
 
 export const RetosRemotos = {
   resumen: () => cache,
@@ -81,11 +82,16 @@ export const RetosRemotos = {
     if (cache && !forzar) return cache;
     if (pendiente) return pendiente;
     error = null;
-    pendiente = api<ResumenRetos>('/retos/resumen')
-      .then((valor) => (cache = valor))
-      .catch((e) => { error = e?.message || 'No pudimos preparar tu entrenamiento.'; return null; })
-      .finally(() => { pendiente = null; });
-    return pendiente;
+    const gen = generacion;
+    const carga: Promise<ResumenRetos | null> = api<ResumenRetos>('/retos/resumen')
+      .then((valor) => (gen === generacion ? (cache = valor) : null))
+      .catch((e) => { if (gen === generacion) error = e?.message || 'No pudimos preparar tu entrenamiento.'; return null; })
+      .finally(() => {
+        if (pendiente === carga) pendiente = null;
+        if (gen === generacion) window.dispatchEvent(new CustomEvent('retos:cambio'));
+      });
+    pendiente = carga;
+    return carga;
   },
   async crearSesion(modo: ModoReto, area = 'Todas', limite?: number): Promise<SesionReto> {
     return api<SesionReto>('/retos/sesion', { method: 'POST', json: { modo, area, ...(limite ? { limite } : {}) } });
@@ -101,5 +107,5 @@ export const RetosRemotos = {
     }
     return resultado;
   },
-  limpiar() { cache = null; error = null; pendiente = null; },
+  limpiar() { generacion++; cache = null; error = null; pendiente = null; },
 };

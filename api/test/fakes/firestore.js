@@ -1,6 +1,6 @@
 // Firestore falso en memoria con el subconjunto de la API de firebase-admin que usa el backend:
 // collection/doc/get/set(merge)/create/update/delete, where/orderBy/limit, subcolecciones,
-// runTransaction (lecturas antes que escrituras, igual que Firestore) y batch.
+// getAll (con fieldMask), runTransaction (get/getAll; lecturas antes que escrituras, igual que Firestore) y batch.
 // Rechaza `undefined` como Firestore real para que los tests detecten ese error.
 
 let contadorIds = 0;
@@ -159,6 +159,10 @@ class Transaction {
     if (this._escrituras.length) throw new Error('Firestore transactions require all reads to be executed before all writes.');
     return refOQuery instanceof DocumentReference ? this._db._snapshot(refOQuery) : this._db._consultar(refOQuery);
   }
+  async getAll(...refsYOpciones) {
+    if (this._escrituras.length) throw new Error('Firestore transactions require all reads to be executed before all writes.');
+    return this._db.getAll(...refsYOpciones);
+  }
   set(ref, data, opciones) {
     verificarSinUndefined(data);
     this._escrituras.push(() => this._db._set(ref, data, opciones));
@@ -204,6 +208,26 @@ export class FakeFirestore {
   /** Atajo para tests: rutas de documentos directos de una colección. */
   rutas(coleccion) {
     return [...this.docs.keys()].filter((r) => r.split('/').slice(0, -1).join('/') === coleccion);
+  }
+
+  async getAll(...args) {
+    // Como el SDK: sólo un objeto plano al final cuenta como ReadOptions; undefined, una Query u otro valor es un error.
+    const ultimo = args.at(-1);
+    const opciones = ultimo !== null && typeof ultimo === 'object' && Object.getPrototypeOf(ultimo) === Object.prototype ? args.pop() : null;
+    if (!args.length) throw new Error('Function "Firestore.getAll()" requires at least 1 argument.');
+    const mascara = opciones?.fieldMask;
+    return args.map((ref) => {
+      if (!(ref instanceof DocumentReference)) throw new Error('getAll solo acepta DocumentReference y, al final, ReadOptions.');
+      const data = this.docs.get(ref.path);
+      if (data === undefined || !mascara) return this._snapshot(ref);
+      // Como Firestore: con fieldMask sólo llegan los campos pedidos.
+      const parcial = {};
+      for (const campo of mascara) {
+        const valor = leerCampo(data, campo);
+        if (valor !== undefined) escribirCampo(parcial, campo, clonar(valor));
+      }
+      return new DocumentSnapshot(ref, parcial);
+    });
   }
 
   async runTransaction(fn) {

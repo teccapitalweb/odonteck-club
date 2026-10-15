@@ -56,6 +56,16 @@ Demo local sin `VITE_API_URL`:
 - puede contener ranking, publicaciones editoriales, casos o flashcards que aún no son datos remotos;
 - sirve para diseño, no como prueba de producción.
 
+### Rendimiento (rama perf/arranque-cache-directorio)
+
+Trabajo local, sin fusionar ni desplegar:
+
+- **Caché de verificación de token** (`api/src/middleware/auth.js`): sólo para `GET` de miembro; dura como máximo 5 minutos o hasta el `exp` del token. Nunca se usa para escrituras, `/admin/*`, `GET /materiales/:id/descarga` ni `GET /clases/:cursoId/:n/ficha` (emiten URLs firmadas), ni para usuarios con claim admin. Un rechazo en vivo deja una lápida para que una verificación más antigua no vuelva a cachear un token revocado, y los `GET` simultáneos del mismo token comparten una sola verificación.
+- **API**: `compression` y CORS `maxAge` de 7200 s; lecturas independientes en paralelo (en `prepararClase` se esperan en orden para conservar 404 > 403 > 500) y `tx.getAll` en las recompensas transaccionales. `GET /foro` sin filtro conserva el tope de 300 temas.
+- **Cliente**: arranque en paralelo y caché de 60 s de Directorio y Comunidad (`src/core/remoto.ts`).
+- **Índices**: los compuestos del Directorio (`api/firestore.indexes.json`) siguen pendientes de crear en la consola de Firebase; mientras falten, la API hace un escaneo de respaldo acotado, más lento pero con el mismo resultado.
+- **Estáticos**: `public/_headers` sirve `/assets/*` como inmutables (un año); `/`, `index.html` y `sw.js` van con `no-cache`.
+
 ## 4. Materiales y lector
 
 Archivos principales:

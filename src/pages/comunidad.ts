@@ -148,7 +148,7 @@ function tarjetaHilo(h: HiloComunidad, destacado = false) {
       ${destacado ? '<span class="community-post__pin"><i data-lucide="pin" class="i"></i>Fijado</span>' : '<button class="community-icon-btn" aria-label="Más opciones"><i data-lucide="ellipsis" class="i"></i></button>'}
     </header>
     <a href="#/comunidad/${h.id}" class="community-post__visual ${portada ? '' : 'community-post__visual--brand'}">
-      ${portada ? `<img src="${esc(portada)}" alt="${esc(c?.titulo || h.titulo)}" loading="lazy">` : '<span class="community-post__mark"><i data-lucide="messages-square" class="i"></i>ODONTECK CLUB</span>'}
+      ${portada ? `<img src="${esc(portada)}" alt="${esc(c?.titulo || h.titulo)}" loading="lazy" decoding="async">` : '<span class="community-post__mark"><i data-lucide="messages-square" class="i"></i>ODONTECK CLUB</span>'}
       <span class="community-post__shade"></span>
       <span class="community-post__visual-copy"><small>${esc(area)}</small><strong>${esc(h.titulo)}</strong></span>
     </a>
@@ -245,7 +245,7 @@ const etiqueta = (v: string) => esc(v.replace(/_/g, ' ').replace(/^./, (c) => c.
 const listaCSV = (v: string[]) => esc(v.join(', '));
 
 function avatarProfesional(p: Pick<PerfilDirectorio, 'nombre' | 'foto'>, clase = '') {
-  return `<span class="network-avatar ${clase}"><span aria-hidden="true">${ini(p.nombre)}</span>${p.foto ? `<img src="${esc(p.foto)}" alt="Foto de ${esc(p.nombre)}" data-avatar-image>` : ''}</span>`;
+  return `<span class="network-avatar ${clase}"><span aria-hidden="true">${ini(p.nombre)}</span>${p.foto ? `<img src="${esc(p.foto)}" alt="Foto de ${esc(p.nombre)}" width="720" height="720" loading="lazy" decoding="async" data-avatar-image>` : ''}</span>`;
 }
 
 const botonReportar = (tipo: 'perfil' | 'oportunidad', id: string, nombre: string) => `<button class="network-report" type="button" data-network-report data-type="${tipo}" data-id="${esc(id)}" data-name="${esc(nombre)}" aria-label="Denunciar ${tipo === 'perfil' ? 'perfil' : 'oportunidad'}"><i data-lucide="flag" class="i"></i></button>`;
@@ -280,7 +280,7 @@ function detallePersona(p: PerfilDirectorio) {
   const idiomas = p.idiomas ?? [];
   return `<dialog class="network-profile-sheet network-person--tone-${tono}" data-network-view-dialog="${esc(p.uid)}">
     <button class="network-profile-sheet__close" type="button" data-network-close aria-label="Cerrar perfil"><i data-lucide="x" class="i"></i></button>
-    <div class="network-profile-sheet__cover ${p.banner ? 'has-banner' : ''}">${p.banner ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}">` : ''}<span><i data-lucide="badge-check" class="i"></i>Perfil profesional OdonTeck</span><b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b></div>
+    <div class="network-profile-sheet__cover ${p.banner ? 'has-banner' : ''}">${p.banner ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}" width="1600" height="560" loading="lazy" decoding="async">` : ''}<span><i data-lucide="badge-check" class="i"></i>Perfil profesional OdonTeck</span><b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b></div>
     <div class="network-profile-sheet__body">
       <div class="network-profile-sheet__identity">${avatarProfesional(p, 'network-avatar--sheet')}<div><span class="network-person__specialty">${esc(especialidad)}</span><h3>${esc(p.nombre)}</h3><p>${esc(p.titular)}</p><div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div></div></div>
       <div class="network-profile-sheet__metrics"><span><strong>${p.anosExperiencia ?? '—'}</strong><small>años de experiencia</small></span><span><strong>${experiencia.length}</strong><small>experiencias</small></span><span><strong>${formacion.length + credenciales.length}</strong><small>formaciones y credenciales</small></span></div>
@@ -356,11 +356,11 @@ function directorioPanel(query: URLSearchParams) {
       <form method="dialog" data-network-profile-form>
         <header><div><span class="eyebrow">Perfil profesional</span><h3>Construye una presencia que cuente tu trayectoria.</h3><p>Tu ficha funcionará como un CV visual dentro de la red OdonTeck.</p></div><div class="network-profile-progress"><span><b>${completitudPerfil(data.miPerfil)}%</b> completo</span><i><b style="width:${completitudPerfil(data.miPerfil)}%"></b></i></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header>
         <section class="network-banner-editor ${data.miPerfil?.banner ? 'has-banner' : ''}" data-network-banner-frame>
-          ${data.miPerfil?.banner ? `<img src="${esc(data.miPerfil.banner)}" alt="Tu portada profesional" data-network-banner-preview>` : '<img alt="Tu portada profesional" data-network-banner-preview hidden>'}
+          ${data.miPerfil?.banner ? `<img src="${esc(data.miPerfil.banner)}" alt="Tu portada profesional" width="1600" height="560" loading="lazy" decoding="async" data-network-banner-preview>` : '<img alt="Tu portada profesional" data-network-banner-preview hidden>'}
           <div><span class="eyebrow"><i data-lucide="panel-top" class="i"></i>Portada de tu perfil</span><h4>Dale identidad a tu trayectoria.</h4><p>Usa una imagen horizontal de tu consultorio, espacio de trabajo o una composición profesional sin datos de pacientes.</p><span><label class="btn btn--secondary btn--sm"><i data-lucide="image-up" class="i"></i>${data.miPerfil?.banner ? 'Cambiar portada' : 'Subir portada'}<input type="file" accept="image/jpeg,image/png,image/webp" data-network-banner-input hidden></label><button type="button" class="btn btn--ghost btn--sm" data-network-banner-remove ${data.miPerfil?.banner ? '' : 'hidden'}>Quitar</button></span></div>
         </section>
         <section class="network-photo-editor">
-          <div class="network-photo-editor__avatar" data-network-photo-frame><span data-network-photo-fallback>${ini(data.miPerfil?.nombre || Perfil.get().nombre)}</span>${data.miPerfil?.foto ? `<img src="${esc(data.miPerfil.foto)}" alt="Tu foto profesional" data-network-photo-preview>` : '<img alt="Tu foto profesional" data-network-photo-preview hidden>'}<b><i data-lucide="camera" class="i"></i></b></div>
+          <div class="network-photo-editor__avatar" data-network-photo-frame><span data-network-photo-fallback>${ini(data.miPerfil?.nombre || Perfil.get().nombre)}</span>${data.miPerfil?.foto ? `<img src="${esc(data.miPerfil.foto)}" alt="Tu foto profesional" width="720" height="720" loading="lazy" decoding="async" data-network-photo-preview>` : '<img alt="Tu foto profesional" data-network-photo-preview hidden>'}<b><i data-lucide="camera" class="i"></i></b></div>
           <div class="network-photo-editor__copy"><span class="eyebrow">Tu imagen profesional</span><h4>Una foto cercana inspira confianza.</h4><p>La recortamos al centro y la optimizamos automáticamente. JPG, PNG o WebP de hasta 8 MB.</p><div><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>${data.miPerfil?.foto ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/jpeg,image/png,image/webp" data-network-photo-input hidden></label><button type="button" class="btn btn--ghost btn--sm" data-network-photo-remove ${data.miPerfil?.foto ? '' : 'hidden'}>Quitar</button></div></div>
           <span class="network-photo-editor__privacy"><i data-lucide="eye" class="i"></i>Visible en tu tarjeta del directorio</span>
         </section>

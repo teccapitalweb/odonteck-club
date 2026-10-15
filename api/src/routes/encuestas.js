@@ -23,21 +23,32 @@ const claveValida = (valor) => {
   return valor;
 };
 const idRespuesta = (uid, clave) => `${uid}__${clave}`;
+const yaExiste = (e) => e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '');
 
 async function estadoEncuestas(ctx, uid) {
   const ref = ctx.db.collection(COL.encuestasEstado).doc(uid);
-  return ctx.db.runTransaction(async (tx) => {
-    const snap = await tx.get(ref);
-    const ahora = ctx.now().toISOString();
-    if (snap.exists) {
-      const estado = snap.data();
-      tx.set(ref, { ultimaConsulta: ahora }, { merge: true });
-      return estado;
-    }
-    const estado = { uid, primeraVista: ahora, ultimaConsulta: ahora, pospuestas: {} };
-    tx.set(ref, estado);
+  const ahora = ctx.now().toISOString();
+  const snap = await ref.get();
+  if (snap.exists) {
+    void ref.set({ ultimaConsulta: ahora }, { merge: true }).catch(() => {});
+    return snap.data();
+  }
+  const estado = { uid, primeraVista: ahora, ultimaConsulta: ahora, pospuestas: {} };
+  try {
+    await ref.create(estado);
     return estado;
-  });
+  } catch (e) {
+    if (!yaExiste(e)) throw e;
+    // Otra petición simultánea lo creó primero: su primeraVista es la que vale.
+    return (await ref.get()).data() ?? estado;
+  }
+}
+
+async function titulosCursos(db, ids) {
+  const unicos = [...new Set(ids)];
+  if (!unicos.length) return new Map();
+  const snaps = await db.getAll(...unicos.map((id) => db.collection(COL.cursos).doc(id)), { fieldMask: ['titulo'] });
+  return new Map(snaps.filter((s) => s.exists).map((s) => [s.id, s.data().titulo || s.id]));
 }
 
 const estaPospuesta = (estado, clave, ahoraMs) => {
@@ -47,11 +58,10 @@ const estaPospuesta = (estado, clave, ahoraMs) => {
 
 async function calcularPendientes(ctx, usuario) {
   if (usuario.esAdmin) return { pendientes: [], respondidas: [], vip: false, perfil: null };
-  const estado = await estadoEncuestas(ctx, usuario.uid);
-  const [respuestasSnap, progresoSnap, cursosSnap, membresia, perfilCuenta] = await Promise.all([
+  const [estado, respuestasSnap, progresoSnap, membresia, perfilCuenta] = await Promise.all([
+    estadoEncuestas(ctx, usuario.uid),
     ctx.db.collection(COL.encuestasRespuestas).where('uid', '==', usuario.uid).get(),
     ctx.db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
-    ctx.db.collection(COL.cursos).get(),
     estadoMembresia(ctx, usuario),
     leerDoc(ctx.db, COL.perfiles, usuario.uid),
   ]);
@@ -64,7 +74,6 @@ async function calcularPendientes(ctx, usuario) {
   const perfil = perfilInicial || interesesActuales
     ? { ...(perfilInicial ?? {}), ...(interesesActuales ? { intereses: interesesActuales } : {}) }
     : null;
-  const titulos = new Map(cursosSnap.docs.map((d) => [d.id, d.data().titulo || d.id]));
   const ahoraMs = ctx.now().getTime();
   const salida = [];
 
@@ -75,12 +84,11 @@ async function calcularPendientes(ctx, usuario) {
 
   const completos = progresoSnap.docs
     .map((d) => d.data())
-    .filter((p) => p.certificado && p.cursoId)
+    .filter((p) => p.certificado && p.cursoId && !respondidas.has(claveCurso(p.cursoId)) && !estaPospuesta(estado, claveCurso(p.cursoId), ahoraMs))
     .sort((a, b) => (aMillis(b.actualizado) ?? 0) - (aMillis(a.actualizado) ?? 0));
+  const titulos = await titulosCursos(ctx.db, completos.map((p) => p.cursoId));
   for (const p of completos) {
-    const clave = claveCurso(p.cursoId);
-    if (respondidas.has(clave) || estaPospuesta(estado, clave, ahoraMs)) continue;
-    salida.push({ ...encuestaPublica(ENCUESTAS.curso, { clave, cursoId: p.cursoId, cursoTitulo: titulos.get(p.cursoId) ?? p.cursoId }), prioridad: ENCUESTAS.curso.prioridad, disponibleDesde: p.actualizado ?? null });
+    salida.push({ ...encuestaPublica(ENCUESTAS.curso, { clave: claveCurso(p.cursoId), cursoId: p.cursoId, cursoTitulo: titulos.get(p.cursoId) ?? p.cursoId }), prioridad: ENCUESTAS.curso.prioridad, disponibleDesde: p.actualizado ?? null });
   }
 
   // Experiencia: una clave por trimestre; se repite cada 90 días y calla tras `maxPosponer` aplazamientos.
@@ -135,7 +143,7 @@ export function rutasEncuestas(ctx) {
     if (respuestas.contacto === 'si' && req.usuario.email) doc.correoContacto = req.usuario.email;
     try { await ref.create(doc); }
     catch (e) {
-      if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto('Esta encuesta ya fue respondida.', 'encuesta_respondida');
+      if (yaExiste(e)) throw conflicto('Esta encuesta ya fue respondida.', 'encuesta_respondida');
       throw e;
     }
     const puntos = plantilla.tipo === 'bienvenida'
@@ -150,7 +158,8 @@ export function rutasEncuestas(ctx) {
       contador: 'encuestas',
       detalle: plantilla.tipo === 'bienvenida' ? 'Entrevista inicial respondida' : plantilla.tipo === 'curso' ? 'Encuesta de curso respondida' : 'Encuesta de experiencia respondida',
     }]);
-    res.status(201).json({ ok: true, clave, recompensas, siguiente: (await calcularPendientes(ctx, req.usuario)).pendientes[0] ?? null });
+    // Responder sólo retira esta clave de la lista: el resto de las condiciones no cambia.
+    res.status(201).json({ ok: true, clave, recompensas, siguiente: pendientes.find((p) => p.clave !== clave) ?? null });
   }));
 
   r.post('/encuestas/:clave/posponer', auth, h(async (req, res) => {

@@ -303,6 +303,7 @@ Estas integraciones deben desarrollarse con estados de carga, error, sesión ven
 - Las respuestas correctas de quizzes no deben incluirse en la respuesta GET para miembros.
 - Progreso, certificados y membresías deben validarse en servidor.
 - Admin real: custom claim `admin: true`; no listas de correos.
+- Revocación de sesión (rama `perf/arranque-cache-directorio`, no desplegada): los `GET` de miembro pueden reutilizar hasta 5 minutos (o hasta el `exp` del token) una verificación previa del ID token, así que una revocación o cuenta deshabilitada puede tardar ese plazo en reflejarse en esas lecturas, salvo que antes la detecte una verificación en vivo (deja una lápida y el siguiente `GET` vuelve a verificar). Siempre verifican en vivo con `checkRevoked`: escrituras, `/admin/*`, `GET /materiales/:id/descarga`, `GET /clases/:cursoId/:n/ficha` y cualquier usuario con claim admin.
 - Las colecciones nuevas usan `v2_`; `miembros/{uid}` se lee por compatibilidad.
 - No modificar el webhook viejo de Stripe hasta validar completamente el nuevo.
 - Verificar CORS contra el dominio final antes de activar `VITE_API_URL`.

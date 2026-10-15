@@ -46,7 +46,10 @@ const DEMO: EstadoDirectorio = {
 };
 
 let estado: EstadoDirectorio = structuredClone(DEMO);
+let cargadoEn = 0;
 const combinar = <T extends { id?: string; uid?: string }>(a: T[], b: T[]) => [...new Map([...a, ...b].map((v) => [v.id || v.uid, v])).values()];
+const alInicio = <T extends { id: string }>(lista: T[], v: T) => [v, ...lista.filter((x) => x.id !== v.id)];
+const reemplazar = <T extends { id: string }>(lista: T[], v: T) => lista.map((x) => x.id === v.id ? v : x);
 function guardar() { if (Datos.modo === 'demo') localStorage.setItem(KEY, JSON.stringify(estado)); }
 function cargarDemo() { try { const v = JSON.parse(localStorage.getItem(KEY) || 'null'); if (v?.perfiles) estado = v; } catch {} }
 cargarDemo();
@@ -76,6 +79,9 @@ export const prepararBannerDirectorio = (file: File) => prepararImagenDirectorio
 
 export const Directorio = {
   get: () => estado,
+  cargado: () => cargadoEn > 0,
+  vigente: (ttl: number) => Date.now() - cargadoEn < ttl,
+  invalidar() { cargadoEn = 0; },
   hidratar(v: EstadoDirectorio) { estado = v; },
   async cargar(mas?: 'perfiles' | 'oportunidades') {
     if (Datos.modo === 'api') {
@@ -89,6 +95,7 @@ export const Directorio = {
         : mas === 'oportunidades'
           ? { ...remoto, perfiles: estado.perfiles, oportunidades: combinar(estado.oportunidades, remoto.oportunidades), paginacion: { ...remoto.paginacion!, perfiles: estado.paginacion?.perfiles ?? remoto.paginacion!.perfiles } }
           : remoto;
+      cargadoEn = Date.now();
     }
     return estado;
   },
@@ -110,7 +117,8 @@ export const Directorio = {
         if (!subida.ok) throw new Error(`No pudimos subir la portada (${subida.status}).`);
         bannerPropio = true;
       }
-      await api('/directorio/perfil', { method: 'PUT', json: { ...v, ...(fotoPropia ? { foto: 'propia' } : quitarFoto ? { foto: null } : {}), ...(bannerPropio ? { banner: 'propio' } : quitarBanner ? { banner: null } : {}) } }); return this.cargar();
+      await api('/directorio/perfil', { method: 'PUT', json: { ...v, ...(fotoPropia ? { foto: 'propia' } : quitarFoto ? { foto: null } : {}), ...(bannerPropio ? { banner: 'propio' } : quitarBanner ? { banner: null } : {}) } });
+      this.invalidar(); return estado;
     }
     const fotoFinal = quitarFoto ? null : foto ? await blobADataUrl(foto.blob) : estado.miPerfil?.foto ?? null;
     const bannerFinal = quitarBanner ? null : banner ? await blobADataUrl(banner.blob) : estado.miPerfil?.banner ?? null;
@@ -119,16 +127,24 @@ export const Directorio = {
     estado.perfiles = [...estado.perfiles.filter((p) => p.uid !== 'demo'), perfil]; estado.miPerfil = { ...perfil, contacto: { canal: v.contacto.canal, valor: v.contacto.valor || '' } }; guardar(); return estado;
   },
   async publicar(v: Record<string, unknown>) {
-    if (Datos.modo === 'api') { await api('/directorio/oportunidades', { method: 'POST', json: v }); return this.cargar(); }
+    if (Datos.modo === 'api') {
+      const op = await api<OportunidadDirectorio>('/directorio/oportunidades', { method: 'POST', json: v });
+      if (op?.id) estado = { ...estado, oportunidades: alInicio(estado.oportunidades, op) }; else this.invalidar();
+      return estado;
+    }
     const op = { ...v, id: `demo-op-${Date.now()}`, autorUid: 'demo', autor: 'Modo demo', estado: 'publicada', fecha: new Date().toISOString(), expira: new Date(Date.now() + 45 * 86400000).toISOString(), esMia: true } as OportunidadDirectorio;
     estado.oportunidades.unshift(op); guardar(); return estado;
   },
   async cerrarOportunidad(id: string) {
-    if (Datos.modo === 'api') { await api(`/directorio/oportunidades/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: 'cerrada' } }); return this.cargar(); }
+    if (Datos.modo === 'api') {
+      const op = await api<OportunidadDirectorio>(`/directorio/oportunidades/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: 'cerrada' } });
+      if (op?.id) estado = { ...estado, oportunidades: reemplazar(estado.oportunidades, op) }; else this.invalidar();
+      return estado;
+    }
     const op = estado.oportunidades.find((x) => x.id === id); if (op) op.estado = 'cerrada'; guardar(); return estado;
   },
   async eliminarPerfil() {
-    if (Datos.modo === 'api') { await api('/directorio/perfil', { method: 'DELETE' }); return this.cargar(); }
+    if (Datos.modo === 'api') { await api('/directorio/perfil', { method: 'DELETE' }); this.invalidar(); return estado; }
     estado.perfiles = estado.perfiles.filter((p) => !p.esMio && p.uid !== 'demo');
     estado.oportunidades.forEach((o) => { if (o.esMia || o.autorUid === 'demo') o.estado = 'cerrada'; });
     estado.conexiones = estado.conexiones.map((c) => c.estado === 'pendiente' ? { ...c, estado: 'rechazada' } : c);
@@ -139,12 +155,20 @@ export const Directorio = {
     return { id: `demo-reporte-${Date.now()}`, estado: 'pendiente' };
   },
   async conectar(paraUid: string, oportunidadId: string | null, mensaje: string) {
-    if (Datos.modo === 'api') { await api('/directorio/conexiones', { method: 'POST', json: { paraUid, oportunidadId, mensaje } }); return this.cargar(); }
+    if (Datos.modo === 'api') {
+      const c = await api<ConexionDirectorio>('/directorio/conexiones', { method: 'POST', json: { paraUid, oportunidadId, mensaje } });
+      if (c?.id) estado = { ...estado, conexiones: alInicio(estado.conexiones, c) }; else this.invalidar();
+      return estado;
+    }
     const persona = estado.perfiles.find((p) => p.uid === paraUid)?.nombre || estado.oportunidades.find((o) => o.id === oportunidadId)?.autor || 'Colega';
     estado.conexiones.unshift({ id: `demo-cn-${Date.now()}`, deUid: 'demo', paraUid, oportunidadId, mensaje, estado: 'pendiente', creado: new Date().toISOString(), actualizado: new Date().toISOString(), esEntrante: false, otraPersona: persona, contacto: null }); guardar(); return estado;
   },
   async responder(id: string, respuesta: 'aceptada' | 'rechazada') {
-    if (Datos.modo === 'api') { await api(`/directorio/conexiones/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: respuesta } }); return this.cargar(); }
+    if (Datos.modo === 'api') {
+      const c = await api<ConexionDirectorio>(`/directorio/conexiones/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado: respuesta } });
+      if (c?.id) estado = { ...estado, conexiones: reemplazar(estado.conexiones, c) }; else this.invalidar();
+      return estado;
+    }
     const c = estado.conexiones.find((x) => x.id === id); if (c) c.estado = respuesta; guardar(); return estado;
   },
 };

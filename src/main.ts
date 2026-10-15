@@ -41,7 +41,7 @@ import { paginaLogros } from './pages/logros';
 import { paginaRecompensas } from './pages/recompensas';
 import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
-import { cargarClub } from './core/remoto';
+import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { cargarEncuestas, encuestaPendiente, guardarIntereses, reiniciarEncuestas } from './core/encuestas';
@@ -311,10 +311,9 @@ function toast(msg: string, icon = 'check') {
 }
 
 type PremioActividad = { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] } | null | undefined;
-async function registrarPremio(premio: PremioActividad) {
+function registrarPremio(premio: PremioActividad) {
   if (!premio || (!premio.puntosGanados && !premio.logrosNuevos?.length)) return;
   window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: premio }));
-  try { await Recompensas.cargar(true); } catch {}
 }
 
 // Si el proveedor deja de servir una foto, retiramos sólo la imagen y quedan
@@ -347,7 +346,31 @@ function montar(tipo: 'miembro' | 'admin' | 'solo') {
 }
 function remontar() { const t = shellActual; shellActual = null; if (t) montar(t); render(); }
 
+const MARCA_BIENVENIDA = 'odt:bienvenida-ok:';
+let esqueletoPendiente = 0;
+let rutaPintada: string | null = null;
+let cascaronProvisional = false;
+function bienvenidaResuelta(uid: string) {
+  try { return localStorage.getItem(MARCA_BIENVENIDA + uid) === '1'; } catch { return false; }
+}
+function recordarBienvenida(uid: string, resuelta: boolean) {
+  try { if (resuelta) localStorage.setItem(MARCA_BIENVENIDA + uid, '1'); else localStorage.removeItem(MARCA_BIENVENIDA + uid); } catch {}
+}
+function pintarEsqueleto(uid: string) {
+  if (shellActual !== 'miembro') {
+    // Sin la marca no sabemos si la entrevista de bienvenida va a redirigir: se espera como antes.
+    if (shellActual || !bienvenidaResuelta(uid) || !Auth.perfilResuelto()) return;
+    montar('miembro');
+    cascaronProvisional = true;
+  }
+  const outlet = document.getElementById('outlet');
+  if (!outlet) return;
+  outlet.innerHTML = '<div class="card card--pad row" style="justify-content:center;min-height:180px"><i data-lucide="loader-circle" class="i spin"></i><span>Cargando…</span></div>';
+  createIcons({ icons });
+}
+
 onBeforeRender(async (path) => {
+  clearTimeout(esqueletoPendiente);
   await Auth.iniciar();
   const u = Auth.usuario;
   if (path.startsWith('/verificar')) { montar('solo'); return true; }
@@ -357,7 +380,10 @@ onBeforeRender(async (path) => {
   }
   if (!u) { sessionStorage.setItem('odt:volver', location.hash.slice(1) || '/'); navigate('/login'); return false; }
   if (path.startsWith('/admin')) {
-    if (!u.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
+    await Auth.perfil();
+    if (!Auth.usuario?.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
+    // El panel hidrata el foro con su propia vista y modera el directorio: al volver se recargan.
+    invalidarComunidad(); invalidarDirectorio();
     montar('admin');
     const outlet = document.getElementById('outlet');
     if (outlet) outlet.innerHTML = '<div class="card card--pad row" style="justify-content:center;min-height:180px"><i data-lucide="loader-circle" class="i spin"></i><span>Cargando datos administrativos…</span></div>';
@@ -365,10 +391,21 @@ onBeforeRender(async (path) => {
     await cargarAdmin(path, current().query);
     return true;
   }
-  try { await cargarClub(path); } catch {}
-  try { await cargarEncuestas(); } catch {}
+  clearTimeout(esqueletoPendiente);
+  const esqueleto = path !== '/bienvenida' && path !== rutaPintada
+    ? window.setTimeout(() => { if (current().path === path && rutaPintada !== path) pintarEsqueleto(u.uid); }, 150)
+    : 0;
+  esqueletoPendiente = esqueleto;
+  // Auth.perfil() trae esVip desde /me: los paywalls del render dependen de él.
+  const [, , encuestasListas] = await Promise.all([Auth.perfil(), cargarClub(path, false, path === rutaPintada).catch(() => {}), cargarEncuestas().then(() => true, () => false)]);
+  clearTimeout(esqueleto);
+  // Render superado (cierre de sesión, otra ruta o el admin) mientras se cargaba: no montar nada desde aquí.
+  if (Auth.usuario?.uid !== u.uid || current().path !== path) return false;
+  // El cascarón montado antes de tener catálogo y puntos se vuelve a pintar con los datos ya cargados.
+  if (cascaronProvisional) { cascaronProvisional = false; if (shellActual === 'miembro') shellActual = null; }
   // Primera entrada: la entrevista de bienvenida ocupa su propia página hasta responderla o posponerla.
   const entrevista = encuestaPendiente()?.tipo === 'bienvenida';
+  if (encuestasListas) recordarBienvenida(u.uid, !entrevista);
   if (path === '/bienvenida') {
     if (!entrevista) { navigate('/'); return false; }
     montar('solo'); return true;
@@ -430,6 +467,7 @@ route('/admin/ajustes', paginaAdmin(adminAjustes));
 
 onRender(() => {
   const { path } = current();
+  rutaPintada = path;
   if (shellActual === 'admin') marcarAdminActivo(path); else marcarNavActivo(path);
   const crumb = document.querySelector('[data-crumb]'); if (crumb) crumb.textContent = document.querySelector('#outlet h1')?.textContent?.trim() || 'Administración';
   cargarVideos();
@@ -445,11 +483,12 @@ startRouter();
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
 window.addEventListener('recompensas:cambio', actualizarNotifs);
 window.addEventListener('recompensas:ganadas', (e) => {
-  const puntos = Number((e as CustomEvent).detail?.puntosGanados || 0);
-  const logros = (e as CustomEvent).detail?.logrosNuevos || [];
+  const detalle = (e as CustomEvent).detail;
+  const puntos = Number(detalle?.puntosGanados || 0);
+  const logros = detalle?.logrosNuevos || [];
   if (puntos > 0) toast(`+${puntos} puntos añadidos a tus recompensas`, 'sparkles');
   logros.forEach((logro: { titulo?: string }) => toast(`Logro desbloqueado: ${logro.titulo || 'nuevo logro'}`, 'trophy'));
-  void Recompensas.cargar(true).catch(() => {});
+  Recompensas.aplicarPremio(detalle);
 });
 window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
 
@@ -481,7 +520,7 @@ async function registrarVistaClase(cursoId: string, n: number) {
   const yaVista = Progreso.de(cursoId).vistas.includes(n);
   if (!yaVista && Datos.modo === 'api') {
     const r = await api<{ recompensas?: PremioActividad }>(`/progreso/${cursoId}/vista`, { method: 'POST', json: { n } });
-    await registrarPremio(r.recompensas);
+    registrarPremio(r.recompensas);
   }
   if (!yaVista) Progreso.marcarVista(cursoId, n);
   const c = getCurso(cursoId);
@@ -917,6 +956,7 @@ document.addEventListener('click', async (e) => {
       if (Datos.modo === 'api') {
         const r = await api<{ util: number }>(`/foro/${encodeURIComponent(util.dataset.util!)}/util`, { method: 'POST' });
         Comunidad.utilRemoto(util.dataset.util!, r.util);
+        if (current().path.startsWith('/comunidad/')) marcarHiloFresco(util.dataset.util!);
       } else Comunidad.util(util.dataset.util!);
       render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
@@ -995,7 +1035,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') mostrarResumenCuenta(false);
 });
 
-function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); navigate(v === '/login' ? '/' : v); render(); }
+function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); const antes = location.hash; navigate(v === '/login' ? '/' : v); if (location.hash === antes) render(); }
 function mostrarErrorLogin(err: unknown) { const p = document.querySelector<HTMLElement>('[data-login-error]'); if (p) { p.hidden = false; p.textContent = mensajeError(err); } else toast(mensajeError(err), 'alert-triangle'); }
 
 document.addEventListener('input', (e) => {
@@ -1092,7 +1132,7 @@ document.addEventListener('submit', async (e) => {
   }
   if (f.matches('[data-network-job-form]')) {
     e.preventDefault(); const d = new FormData(f); const especialidades = String(d.get('especialidades') || '').split(',').map((x) => x.trim()).filter(Boolean);
-    try { await Directorio.publicar({ titulo: String(d.get('titulo')), tipo: String(d.get('tipo')), organizacion: String(d.get('organizacion')), modalidad: String(d.get('modalidad')), ciudad: String(d.get('ciudad') || ''), entidad: String(d.get('entidad') || ''), especialidades, resumen: String(d.get('resumen')), requisitos: String(d.get('requisitos') || ''), compensacion: String(d.get('compensacion') || '') }); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Oportunidad publicada por 45 días', 'briefcase-business'); navigate('/directorio?vista=oportunidades'); }
+    try { await Directorio.publicar({ titulo: String(d.get('titulo')), tipo: String(d.get('tipo')), organizacion: String(d.get('organizacion')), modalidad: String(d.get('modalidad')), ciudad: String(d.get('ciudad') || ''), entidad: String(d.get('entidad') || ''), especialidades, resumen: String(d.get('resumen')), requisitos: String(d.get('requisitos') || ''), compensacion: String(d.get('compensacion') || '') }); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Oportunidad publicada por 45 días', 'briefcase-business'); if (location.hash === '#/directorio?vista=oportunidades') render(); else navigate('/directorio?vista=oportunidades'); }
     catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
   }
   if (f.matches('[data-network-connect-form]')) {
@@ -1233,7 +1273,7 @@ document.addEventListener('submit', async (e) => {
     f.classList.add('is-reviewed');
     f.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((x) => { x.disabled = true; });
     f.querySelectorAll<HTMLButtonElement>('[data-quiz-move], [data-quiz-flag], [data-quiz-confidence], [data-quiz-exclude]').forEach((x) => { x.disabled = true; });
-    await registrarPremio(premio);
+    registrarPremio(premio);
     btn.removeAttribute('disabled'); btn.hidden = false; btn.innerHTML = '<i data-lucide="rotate-ccw" class="i"></i>Intentar de nuevo'; btn.type = 'button';
     btn.onclick = () => render();
     createIcons({ icons });
@@ -1248,7 +1288,8 @@ document.addEventListener('submit', async (e) => {
       if (Datos.modo === 'api') {
         const remoto = await api<any>('/foro', { method: 'POST', json: datos });
         h = Comunidad.agregarRemoto(remoto);
-        await registrarPremio(remoto.recompensas);
+        invalidarComunidad();
+        registrarPremio(remoto.recompensas);
       } else h = Comunidad.crear(datos.titulo, datos.texto, datos.cursoId);
       toast('Tema publicado', 'message-circle'); navigate(`/comunidad/${h.id}`);
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
@@ -1261,7 +1302,8 @@ document.addEventListener('submit', async (e) => {
       if (Datos.modo === 'api') {
         const respuesta = await api<Parameters<typeof Comunidad.responderRemoto>[1] & { recompensas?: PremioActividad }>(`/foro/${encodeURIComponent(id)}/respuestas`, { method: 'POST', json: { texto } });
         Comunidad.responderRemoto(id, respuesta);
-        await registrarPremio(respuesta.recompensas);
+        marcarHiloFresco(id);
+        registrarPremio(respuesta.recompensas);
       } else Comunidad.responder(id, texto);
       render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
