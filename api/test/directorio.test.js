@@ -192,4 +192,92 @@ describe('directorio profesional', () => {
     assert.equal(env.db.leer('v2_directorio_perfiles/vip1').visible, false);
     await request(env.app).patch(`/admin/directorio/reportes/${reporte.body.id}`).set(bearer(TOKENS.admin)).send({ estado: 'descartado', accion: 'ninguna' }).expect(409);
   });
+  describe('documentos del perfil', () => {
+    const subir = async (token, datos = {}, firmaDatos = {}) => {
+      const firma = await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(token)).send({ contentType: 'application/pdf', bytes: 400000, miniaturaBytes: 30000, ...firmaDatos }).expect(200);
+      const doc = await request(env.app).post('/directorio/perfil/documentos').set(bearer(token)).send({ id: firma.body.id, nombre: 'CV 2026', tipo: 'cv', visibilidad: 'miembros', paginas: 2, ...datos }).expect(201);
+      return { firma: firma.body, doc: doc.body };
+    };
+
+    test('adjunta un PDF con miniatura fuera de la carpeta pública y lo conserva al editar el perfil', async () => {
+      await perfil(TOKENS.free).expect(200);
+      const { firma, doc } = await subir(TOKENS.free);
+      assert.match(firma.id, /^[a-f0-9]{24}$/);
+      const rutas = env.storage.firmadas.slice(-2).map((f) => f.path);
+      assert.deepEqual(rutas, [`directorio-documentos/free1/${firma.id}/archivo`, `directorio-documentos/free1/${firma.id}/miniatura.webp`]);
+      assert.equal(doc.mime, 'application/pdf');
+      assert.equal(doc.paginas, 2);
+      await perfil(TOKENS.free, { titular: 'Titular actualizado sin perder documentos' }).expect(200);
+      assert.equal(env.db.leer('v2_directorio_perfiles/free1').documentos.length, 1);
+      const listado = await request(env.app).get('/directorio').set(bearer(TOKENS.vip)).expect(200);
+      const publico = listado.body.perfiles.find((p) => p.uid === 'free1');
+      assert.equal(publico.documentos[0].nombre, 'CV 2026');
+      assert.equal(publico.documentos[0].url, undefined, 'el listado no expone enlaces');
+    });
+
+    test('el cliente no puede inyectar documentos al guardar el perfil', async () => {
+      await perfil(TOKENS.free, { documentos: [{ id: 'x', nombre: 'falso', url: 'https://evil.test' }] }).expect(200);
+      assert.deepEqual(env.db.leer('v2_directorio_perfiles/free1').documentos, []);
+    });
+
+    test('solo entrega enlaces firmados de documentos para conexiones tras aceptar la conexión', async () => {
+      await perfil(TOKENS.vip).expect(200);
+      await perfil(TOKENS.free).expect(200);
+      await subir(TOKENS.vip, { nombre: 'Título profesional', tipo: 'titulo', visibilidad: 'miembros' });
+      await subir(TOKENS.vip, { nombre: 'CV con contacto', tipo: 'cv', visibilidad: 'conexiones' });
+      const antes = await request(env.app).get('/directorio/perfiles/vip1/documentos').set(bearer(TOKENS.free)).expect(200);
+      const [titulo, cv] = antes.body.documentos;
+      assert.equal(antes.body.perfil.uid, 'vip1');
+      assert.equal(antes.body.perfil.contacto, undefined, 'la ficha nunca expone el contacto');
+      await request(env.app).get('/directorio/perfiles/nadie/documentos').set(bearer(TOKENS.free)).expect(404);
+      assert.equal(titulo.accesible, true);
+      assert.match(titulo.url, /accion=read/);
+      assert.match(titulo.miniatura, /miniatura\.webp/);
+      assert.equal(cv.accesible, false);
+      assert.equal(cv.url, null);
+      assert.equal(cv.miniatura, null);
+      const propio = await request(env.app).get('/directorio/perfiles/vip1/documentos').set(bearer(TOKENS.vip)).expect(200);
+      assert.equal(propio.body.documentos[1].accesible, true);
+      const solicitud = await request(env.app).post('/directorio/conexiones').set(bearer(TOKENS.free)).send({ paraUid: 'vip1', mensaje: 'Hola, me interesa conversar sobre una colaboración clínica responsable.' }).expect(201);
+      await request(env.app).patch(`/directorio/conexiones/${solicitud.body.id}`).set(bearer(TOKENS.vip)).send({ estado: 'aceptada' }).expect(200);
+      const despues = await request(env.app).get('/directorio/perfiles/vip1/documentos').set(bearer(TOKENS.free)).expect(200);
+      assert.equal(despues.body.documentos[1].accesible, true);
+      assert.match(despues.body.documentos[1].url, /accion=read/);
+    });
+
+    test('valida formato, tamaño, archivo realmente subido y el máximo de documentos', async () => {
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/pdf', bytes: 10, miniaturaBytes: 10 }).expect(409);
+      await perfil(TOKENS.free).expect(200);
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/zip', bytes: 10, miniaturaBytes: 10 }).expect(400);
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/pdf', bytes: 10_000_001, miniaturaBytes: 10 }).expect(400);
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/png', bytes: 6_000_001, miniaturaBytes: 10 }).expect(400);
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/pdf', bytes: 10, miniaturaBytes: 400_001 }).expect(400);
+      await request(env.app).post('/directorio/perfil/documentos').set(bearer(TOKENS.free)).send({ id: 'a'.repeat(24), nombre: 'Sin subir', tipo: 'cv', visibilidad: 'miembros' }).expect(400);
+      await request(env.app).post('/directorio/perfil/documentos').set(bearer(TOKENS.free)).send({ id: '../otro', nombre: 'Ruta', tipo: 'cv', visibilidad: 'miembros' }).expect(400);
+      const firma = await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/pdf', bytes: 1000, miniaturaBytes: 1000 }).expect(200);
+      await request(env.app).post('/directorio/perfil/documentos').set(bearer(TOKENS.free)).send({ id: firma.body.id, nombre: '<b>x</b>', tipo: 'cv', visibilidad: 'miembros' }).expect(400);
+      env.storage.metadatos.set(`directorio-documentos/free1/${firma.body.id}/archivo`, { size: '10000001', contentType: 'application/pdf' });
+      await request(env.app).post('/directorio/perfil/documentos').set(bearer(TOKENS.free)).send({ id: firma.body.id, nombre: 'Muy grande', tipo: 'cv', visibilidad: 'miembros' }).expect(400);
+      assert.equal(env.storage.borrados.includes(`directorio-documentos/free1/${firma.body.id}/archivo`), true);
+      for (let i = 0; i < 6; i++) await subir(TOKENS.free, { nombre: `Constancia ${i + 1}`, tipo: 'constancia' });
+      await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free)).send({ contentType: 'application/pdf', bytes: 10, miniaturaBytes: 10 }).expect(409);
+    });
+
+    test('permite renombrar, cambiar visibilidad y retirar documentos, también al eliminar el perfil', async () => {
+      await perfil(TOKENS.free).expect(200);
+      const { doc } = await subir(TOKENS.free);
+      const editado = await request(env.app).patch(`/directorio/perfil/documentos/${doc.id}`).set(bearer(TOKENS.free)).send({ nombre: 'Currículum', visibilidad: 'conexiones' }).expect(200);
+      assert.equal(editado.body.nombre, 'Currículum');
+      assert.equal(editado.body.visibilidad, 'conexiones');
+      await request(env.app).patch(`/directorio/perfil/documentos/${doc.id}`).set(bearer(TOKENS.free)).send({ visibilidad: 'todos' }).expect(400);
+      await request(env.app).patch(`/directorio/perfil/documentos/${doc.id}`).set(bearer(TOKENS.vip)).send({ nombre: 'Ajeno' }).expect(404);
+      await request(env.app).delete(`/directorio/perfil/documentos/${doc.id}`).set(bearer(TOKENS.free)).expect(200);
+      assert.deepEqual(env.db.leer('v2_directorio_perfiles/free1').documentos, []);
+      assert.equal(env.storage.borrados.includes(`directorio-documentos/free1/${doc.id}/archivo`), true);
+      assert.equal(env.storage.borrados.includes(`directorio-documentos/free1/${doc.id}/miniatura.webp`), true);
+      const otro = await subir(TOKENS.free, { nombre: 'Portafolio', tipo: 'portafolio' });
+      await request(env.app).delete('/directorio/perfil').set(bearer(TOKENS.free)).expect(200);
+      assert.equal(env.storage.borrados.includes(`directorio-documentos/free1/${otro.doc.id}/archivo`), true);
+    });
+  });
 });
