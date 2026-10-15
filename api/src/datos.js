@@ -32,6 +32,7 @@ export const COL = Object.freeze({
   academiaIntentos: 'v2_academia_intentos',
   academiaCertificados: 'v2_academia_certificados',
   academiaRevisiones: 'v2_academia_revisiones',
+  cursoGratis: 'v2_curso_gratis',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

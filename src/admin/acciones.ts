@@ -6,7 +6,7 @@ import { resumenEncuestasDemo } from '../core/encuestas';
 import {
   Admin, borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
-  reordenarCursosAdmin, revocarCortesiaAdmin,
+  reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
 
@@ -199,6 +199,8 @@ export function instalarAccionesAdmin(toast: Toast) {
     const dias = el.closest<HTMLElement>('[data-dias]');
     if (dias) { const inp = dias.closest('form')!.querySelector<HTMLInputElement>('[name="dias"]')!; inp.value = dias.dataset.dias!; }
 
+    const rcg = el.closest<HTMLElement>('[data-reiniciar-curso-gratis]');
+    if (rcg && confirm('¿Reiniciar la elección de curso gratis? El miembro volverá a elegir.')) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
     const rev = el.closest<HTMLElement>('[data-revocar-cortesia]');
     if (rev && confirm('¿Revocar la cortesía ahora?')) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
 

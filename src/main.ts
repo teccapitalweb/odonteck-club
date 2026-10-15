@@ -6,6 +6,7 @@ import './styles/base.css';
 import './styles/components.css';
 import './styles/active.css';
 import './styles/inicio.css';
+import './styles/curso-gratis.css';
 import './styles/admin.css';
 import './styles/login.css';
 import './styles/arcade.css';
@@ -48,6 +49,8 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
+import { mostrarEleccionCursoGratis } from './ui/curso-gratis';
+import { CursoGratis } from './core/curso-gratis';
 import { cargarEncuestas, encuestaPendiente, guardarIntereses, reiniciarEncuestas } from './core/encuestas';
 import { mostrarEncuestaPendiente } from './ui/encuesta';
 import { bienvenida, montarBienvenida, DESTINO_KEY } from './pages/bienvenida';
@@ -502,7 +505,8 @@ onRender(() => {
   if (path === '/bienvenida') montarBienvenida(toast);
   hidratarNotas();
   createIcons({ icons });
-  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast)) mostrarOnboarding();
+  // Primera entrada: encuesta inicial → anuncio «Escoge tu curso gratis» → recorrido.
+  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding();
 });
 instalarAccionesAdmin(toast);
 startRouter();
@@ -516,7 +520,8 @@ window.addEventListener('recompensas:ganadas', (e) => {
   logros.forEach((logro: { titulo?: string }) => toast(`Logro desbloqueado: ${logro.titulo || 'nuevo logro'}`, 'trophy'));
   Recompensas.aplicarPremio(detalle);
 });
-window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
+window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro' && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding(); });
+window.addEventListener('curso-gratis:elegido', () => { if (shellActual === 'miembro') render(); });
 
 function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {}) {
   const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(`${cursoId}:${n}`)}"]`);
@@ -644,6 +649,9 @@ document.addEventListener('click', async (e) => {
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
 
   if (el.closest('[data-guia]')) { mostrarOnboarding(true); return; }
+  const abrirCursoGratis = el.closest<HTMLElement>('[data-curso-gratis-abrir]');
+  if (abrirCursoGratis) { mostrarEleccionCursoGratis(toast, { forzar: true, cursoId: abrirCursoGratis.dataset.cursoGratisAbrir || undefined }); return; }
+  if (el.closest('[data-curso-gratis-reiniciar-demo]')) { CursoGratis.reiniciarDemo(); toast('Listo: verás de nuevo el anuncio para elegir tu curso gratis', 'gift'); navigate('/'); return; }
 
   if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 

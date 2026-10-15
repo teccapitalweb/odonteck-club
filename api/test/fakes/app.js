@@ -50,6 +50,8 @@ export function semillaBase() {
     'v2_materiales/secreto': { id: 'secreto', titulo: 'Oculto', tipo: 'PDF', estado: 'oculto', archivo: 'materiales/secreto.pdf' },
     'v2_eventos/ev1': { id: 'ev1', titulo: 'Sesión en vivo', ponente: 'Dr. X', fecha: '2026-10-01T18:00:00.000Z', duracionMin: 60, enlace: 'https://meet.example.com/x', publicado: true, reservas: ['otro-uid'] },
     'v2_eventos/ev-oculto': { id: 'ev-oculto', titulo: 'No publicado', fecha: '2026-10-01T18:00:00.000Z', publicado: false, reservas: [] },
+    // Carla eligió «Endodoncia práctica» como su curso gratis: abre las clases 1 y 2; la 3 (última) es VIP.
+    'v2_curso_gratis/free1': { uid: 'free1', cursoId: 'curso-a', origen: 'eleccion', elegido: AHORA_ISO, cambios: 0 },
     'v2_quizzes/curso-a_1': { cursoId: 'curso-a', n: 1, estado: 'aprobado', preguntas: [pregunta('P1', 0), pregunta('P2', 1), pregunta('P3', 2)], generado: AHORA_ISO },
     'v2_quizzes/curso-a_2': { cursoId: 'curso-a', n: 2, estado: 'borrador', preguntas: [pregunta('P1', 0)], generado: AHORA_ISO },
     'v2_foro/hilo1': { id: 'hilo1', titulo: 'Duda de conductos', texto: 'Texto', autorUid: 'vip2', autor: 'Dr. Beto VIP', cursoId: null, fecha: '2026-09-15T10:00:00.000Z', util: 0, utilPor: [], oculto: false },

@@ -293,17 +293,20 @@ describe('acceso a clases', () => {
     const firma = env.storage.firmadas.at(-1);
     assert.equal(firma.action, 'read');
     assert.equal(firma.expires - Date.parse('2026-09-17T12:00:00Z'), 10 * 60 * 1000);
-    await request(env.app).get('/clases/curso-a/2/ficha').set(bearer(TOKENS.free)).expect(403);
+    await request(env.app).get('/clases/curso-a/3/ficha').set(bearer(TOKENS.free)).expect(403);
   });
-  test('clase gratis sin VIP: se puede ver; clase de pago: 403 requiere_vip', async () => {
+  test('curso gratis elegido: se ve sin VIP excepto la última clase (403 requiere_vip)', async () => {
     const ok = await request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId: 'curso-a', n: 1 }).expect(200);
     assert.match(ok.body.embedUrl, /^https:\/\/iframe\.mediadelivery\.net\/embed\/725453\/video-a-1\?token=[0-9a-f]{64}&expires=\d+$/);
     assert.equal(ok.body.expires, Math.floor(Date.parse('2026-09-17T12:00:00Z') / 1000) + 300);
 
     await vista(TOKENS.free, 'curso-a', 1).expect(200);
-    const bloqueada = await request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId: 'curso-a', n: 2 }).expect(403);
+    await request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId: 'curso-a', n: 2 }).expect(200);
+    await vista(TOKENS.free, 'curso-a', 2).expect(200);
+    const bloqueada = await request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId: 'curso-a', n: 3 }).expect(403);
     assert.equal(bloqueada.body.error, 'requiere_vip');
-    await vista(TOKENS.free, 'curso-a', 2).expect(403);
+    assert.match(bloqueada.body.mensaje ?? bloqueada.body.message ?? JSON.stringify(bloqueada.body), /última clase/);
+    await vista(TOKENS.free, 'curso-a', 3).expect(403);
   });
 
   test('clase bloqueada hasta ver la anterior (video, abrir y vista)', async () => {
@@ -568,8 +571,8 @@ describe('quizzes', () => {
   });
 
   test('quiz de una clase de pago exige VIP', async () => {
-    env.db.docs.set('v2_quizzes/curso-a_2', { cursoId: 'curso-a', n: 2, estado: 'aprobado', preguntas: [{ q: 'x', opciones: ['a', 'b'], correcta: 0 }] });
-    await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.free)).expect(403);
+    env.db.docs.set('v2_quizzes/curso-a_3', { cursoId: 'curso-a', n: 3, estado: 'aprobado', preguntas: [{ q: 'x', opciones: ['a', 'b'], correcta: 0 }] });
+    await request(env.app).get('/quiz/curso-a/3').set(bearer(TOKENS.free)).expect(403);
   });
 
   test('si falla la lectura del quiz, el 404 del curso y el 403 de VIP conservan su prioridad', async () => {
@@ -582,7 +585,7 @@ describe('quizzes', () => {
     assert.equal(inexistente.body.error, 'curso_no_encontrado');
     const sinClase = await request(env.app).get('/quiz/curso-a/9').set(bearer(TOKENS.free)).expect(404);
     assert.equal(sinClase.body.error, 'clase_no_encontrada');
-    const vip = await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.free)).expect(403);
+    const vip = await request(env.app).get('/quiz/curso-a/3').set(bearer(TOKENS.free)).expect(403);
     assert.equal(vip.body.error, 'requiere_vip');
     const accesible = await request(env.app).get('/quiz/curso-a/1').set(bearer(TOKENS.free)).expect(500);
     assert.equal(accesible.body.error, 'error_interno');
@@ -609,8 +612,8 @@ describe('Retos V2', () => {
   });
 
   test('miembro gratis no recibe preguntas de clases VIP', async () => {
-    env.db.docs.set('v2_quizzes/curso-a_2', {
-      cursoId: 'curso-a', n: 2, estado: 'aprobado',
+    env.db.docs.set('v2_quizzes/curso-a_3', {
+      cursoId: 'curso-a', n: 3, estado: 'aprobado',
       preguntas: [{ q: 'Pregunta VIP', opciones: ['A', 'B'], correcta: 1, explicacion: 'Solo VIP' }],
     });
     const gratis = await request(env.app).get('/retos/resumen').set(bearer(TOKENS.free)).expect(200);
@@ -683,7 +686,81 @@ describe('Retos V2', () => {
     await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
       .send({ cursoId: 'curso-a', n: 1, indice: 0, opcion: 99 }).expect(400);
     await request(env.app).post('/retos/responder').set(bearer(TOKENS.free))
-      .send({ cursoId: 'curso-a', n: 2, indice: 0, opcion: 0 }).expect(403);
+      .send({ cursoId: 'curso-a', n: 3, indice: 0, opcion: 0 }).expect(403);
+  });
+});
+
+describe('escoge tu curso gratis', () => {
+  const cursoC = { id: 'curso-c', titulo: 'Periodoncia esencial', area: 'Periodoncia', orden: 3, publicado: true, clases: [{ n: 1, titulo: 'C1', videoId: 'v-c-1' }, { n: 2, titulo: 'C2', videoId: 'v-c-2' }, { n: 3, titulo: 'C3', videoId: 'v-c-3' }] };
+  const token = (cursoId, n) => request(env.app).post('/video/token').set(bearer(TOKENS.free)).send({ cursoId, n });
+  const elegir = (cursoId, tk = TOKENS.free) => request(env.app).post('/curso-gratis').set(bearer(tk)).send({ cursoId });
+  beforeEach(() => { env.db.docs.delete('v2_curso_gratis/free1'); env.db.docs.set('v2_cursos/curso-c', cursoC); });
+
+  test('sin elegir no hay contenido abierto; al elegir se abre ese curso menos su última clase', async () => {
+    const antes = await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200);
+    assert.deepEqual({ cursoId: antes.body.cursoId, esVip: antes.body.esVip }, { cursoId: null, esVip: false });
+    await token('curso-a', 1).expect(403);
+    const elegido = await elegir('curso-c').expect(201);
+    assert.equal(elegido.body.cursoId, 'curso-c');
+    assert.equal(elegido.body.puedeCambiar, true);
+    assert.equal(env.db.leer('v2_curso_gratis/free1').origen, 'eleccion');
+    await token('curso-c', 1).expect(200);
+    await token('curso-c', 3).expect(403);
+    await token('curso-a', 1).expect(403);
+  });
+
+  test('valida el curso y no deja elegir a VIP', async () => {
+    await elegir('no-existe').expect(404);
+    await elegir('curso-b').expect(404);
+    await elegir('../x').expect(400);
+    const vip = await elegir('curso-c', TOKENS.vip).expect(409);
+    assert.equal(vip.body.error, 'es_vip');
+  });
+
+  test('permite un único cambio en 24 h si no avanzó más de una clase; después es definitivo', async () => {
+    await elegir('curso-c').expect(201);
+    await vista(TOKENS.free, 'curso-c', 1).expect(200);
+    const cambio = await elegir('curso-a').expect(201);
+    assert.equal(cambio.body.cursoId, 'curso-a');
+    assert.equal(cambio.body.puedeCambiar, false);
+    assert.equal(env.db.leer('v2_curso_gratis/free1').anterior, 'curso-c');
+    const otra = await elegir('curso-c').expect(409);
+    assert.equal(otra.body.error, 'eleccion_definitiva');
+    await elegir('curso-a').expect(200);
+  });
+
+  test('no permite cambiar tras 24 horas ni tras avanzar dos clases', async () => {
+    await elegir('curso-c').expect(201);
+    env.reloj.ahora = new Date(Date.parse('2026-09-18T12:00:01Z'));
+    assert.equal((await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200)).body.puedeCambiar, false);
+    await elegir('curso-a').expect(409);
+    env.db.docs.delete('v2_curso_gratis/free1');
+    env.reloj.ahora = new Date(Date.parse('2026-09-17T12:00:00Z'));
+    await elegir('curso-c').expect(201);
+    await vista(TOKENS.free, 'curso-c', 1).expect(200);
+    await vista(TOKENS.free, 'curso-c', 2).expect(200);
+    await elegir('curso-a').expect(409);
+  });
+
+  test('quien ya avanzó en el curso gratis anterior lo conserva sin elegir', async () => {
+    env.db.docs.set('v2_progreso/free1_curso-a', { uid: 'free1', cursoId: 'curso-a', vistas: [1] });
+    const r = await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(r.body.cursoId, 'curso-a');
+    assert.equal(r.body.origen, 'migracion');
+    assert.equal(r.body.puedeCambiar, false);
+    await token('curso-a', 2).expect(200);
+  });
+
+  test('administración reinicia la elección y la migración no la vuelve a asignar', async () => {
+    env.db.docs.set('v2_progreso/free1_curso-a', { uid: 'free1', cursoId: 'curso-a', vistas: [1] });
+    await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200);
+    const detalle = await request(env.app).get('/admin/miembros/free1').set(bearer(TOKENS.admin)).expect(200);
+    assert.equal(detalle.body.cursoGratis.cursoId, 'curso-a');
+    await request(env.app).delete('/admin/miembros/free1/curso-gratis').set(bearer(TOKENS.free)).expect(403);
+    await request(env.app).delete('/admin/miembros/free1/curso-gratis').set(bearer(TOKENS.admin)).expect(200);
+    const r = await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(r.body.cursoId, null);
+    await elegir('curso-c').expect(201);
   });
 });
 

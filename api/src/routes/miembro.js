@@ -7,6 +7,7 @@ import {
   tieneAccesoAClase,
 } from '../lib/acceso.js';
 import { firmarEmbedBunny } from '../lib/bunny.js';
+import { CAMBIO_GRATIS_MS, MAX_VISTAS_PARA_CAMBIAR, estadoCursoGratis, leerCursoGratis, leerVistas } from '../lib/curso-gratis.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
 import { aMillis } from '../lib/fechas.js';
@@ -329,6 +330,40 @@ export function rutasMiembro(ctx) {
     res.json(salida);
   }));
 
+  // ── «Escoge tu curso gratis» ──
+  r.get('/curso-gratis', auth, h(async (req, res) => {
+    const estado = await estadoMembresia(ctx, req.usuario);
+    const eleccion = await leerCursoGratis(ctx, req.usuario.uid);
+    res.json({ ...(await estadoCursoGratis(ctx, req.usuario.uid, eleccion)), esVip: estado.esVip === true });
+  }));
+
+  r.post('/curso-gratis', auth, h(async (req, res) => {
+    const uid = req.usuario.uid;
+    const cursoId = idDocumento(String(cuerpo(req).cursoId ?? ''), 'cursoId');
+    const estado = await estadoMembresia(ctx, req.usuario);
+    if (estado.esVip) throw conflicto('Como miembro VIP ya tienes todos los cursos abiertos.', 'es_vip');
+    const curso = await leerDoc(db, COL.cursos, cursoId);
+    if (!curso || curso.publicado !== true) throw noEncontrado('Ese curso no existe o no está publicado.');
+    if (numerosDeClase(curso).length < 2) throw conflicto('Ese curso todavía no tiene clases suficientes para elegirlo.', 'curso_incompleto');
+    const ref = db.collection(COL.cursoGratis).doc(uid);
+    const previa = await leerCursoGratis(ctx, uid);
+    const ahora = ctx.now();
+    let datos;
+    if (!previa?.cursoId) {
+      datos = { uid, cursoId, origen: 'eleccion', elegido: ahora.toISOString(), cambios: 0 };
+    } else if (previa.cursoId === cursoId) {
+      datos = previa;
+    } else {
+      const enVentana = previa.origen === 'eleccion' && (previa.cambios ?? 0) === 0 && ahora.getTime() < new Date(previa.elegido).getTime() + CAMBIO_GRATIS_MS;
+      if (!enVentana || (await leerVistas(ctx, uid, previa.cursoId)) > MAX_VISTAS_PARA_CAMBIAR) {
+        throw conflicto('Tu curso gratis ya está definido. Hazte VIP para abrir todos los cursos.', 'eleccion_definitiva');
+      }
+      datos = { ...previa, cursoId, cambios: 1, anterior: previa.cursoId, cambiadoEn: ahora.toISOString() };
+    }
+    await ref.set(datos);
+    res.status(previa?.cursoId === cursoId ? 200 : 201).json({ ...(await estadoCursoGratis(ctx, uid, datos)), esVip: false });
+  }));
+
   /** Carga curso + clase y verifica acceso (VIP o gratis) y, opcionalmente, desbloqueo secuencial. */
   async function prepararClase(req, cursoId, nCrudo, { exigirDesbloqueo = true, conQuiz = false } = {}) {
     const u = req.usuario;
@@ -346,8 +381,11 @@ export function rutasMiembro(ctx) {
     const clase = (curso.clases ?? []).find((c) => Number(c.n) === n);
     if (!clase) throw new HttpError(404, 'clase_no_encontrada', 'Esa clase no existe en el curso.');
     const estado = await estadoP;
-    if (!tieneAccesoAClase(clase, estado.esVip)) {
-      throw requiereVip('Esta clase es exclusiva para miembros VIP. Hazte VIP para continuar.');
+    const eleccion = estado.esVip ? null : await leerCursoGratis(ctx, u.uid);
+    if (!tieneAccesoAClase(curso, cursoId, n, estado.esVip, eleccion?.cursoId)) {
+      throw requiereVip(eleccion?.cursoId === cursoId
+        ? 'La última clase de tu curso gratis es para miembros VIP. Hazte VIP para terminarlo y obtener tu certificado.'
+        : 'Este curso es para miembros VIP. Tu curso gratis es el que elegiste; hazte VIP para abrir todos.');
     }
     const progSnap = await progP;
     const progreso = progSnap?.exists ? progSnap.data() : null;
@@ -682,6 +720,7 @@ export function rutasMiembro(ctx) {
       db.collection(COL.cursos).get(),
       db.collection(COL.quizzes).get(),
     ]);
+    const cursoGratisId = estadoAcceso.esVip ? null : (await leerCursoGratis(ctx, req.usuario.uid))?.cursoId ?? null;
     const cursos = new Map(cursosSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
       .filter((curso) => curso.publicado === true)
@@ -693,7 +732,7 @@ export function rutasMiembro(ctx) {
       const curso = cursos.get(String(quiz.cursoId));
       const n = Number(quiz.n);
       const clase = curso?.clases?.find((item) => Number(item.n) === n);
-      if (!curso || !clase || !tieneAccesoAClase(clase, estadoAcceso.esVip)) continue;
+      if (!curso || !clase || !tieneAccesoAClase(curso, curso.id, n, estadoAcceso.esVip, cursoGratisId)) continue;
       quiz.preguntas.forEach((pregunta, indice) => {
         if (!pregunta || typeof pregunta.q !== 'string' || pregunta.compatibleRetos === false) return;
         let publica;
