@@ -509,7 +509,9 @@ onRender(() => {
   hidratarNotas();
   createIcons({ icons });
   // Primera entrada: encuesta inicial → anuncio «Escoge tu curso gratis» → recorrido.
-  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding();
+  // El recorrido no interrumpe una clase ni la elección del curso gratis: aparece en la siguiente pantalla.
+  const sinRecorrido = /\/clase\/|^\/curso-gratis/.test(path);
+  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !mostrarEleccionCursoGratis(toast) && !sinRecorrido) mostrarOnboarding();
 });
 instalarAccionesAdmin(toast);
 startRouter();
@@ -524,7 +526,7 @@ window.addEventListener('recompensas:ganadas', (e) => {
   Recompensas.aplicarPremio(detalle);
 });
 window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro' && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding(); });
-window.addEventListener('curso-gratis:elegido', () => { if (shellActual === 'miembro') render(); });
+window.addEventListener('curso-gratis:elegido', () => { document.querySelectorAll('.nav__new').forEach((e) => e.remove()); if (shellActual === 'miembro') render(); });
 
 function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {}) {
   const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(`${cursoId}:${n}`)}"]`);
@@ -654,6 +656,11 @@ document.addEventListener('click', async (e) => {
   if (el.closest('[data-guia]')) { mostrarOnboarding(true); return; }
   const abrirCursoGratis = el.closest<HTMLElement>('[data-curso-gratis-abrir]');
   if (abrirCursoGratis) { mostrarEleccionCursoGratis(toast, { forzar: true, cursoId: abrirCursoGratis.dataset.cursoGratisAbrir || undefined }); return; }
+  if (el.closest('[data-demo-reiniciar-todo]') && Datos.modo === 'demo') {
+    if (!confirm('¿Empezar el prototipo como un usuario nuevo? Se borra todo lo guardado en este navegador para el demo.')) return;
+    try { Object.keys(localStorage).filter((k) => k.startsWith('odonteck-club:')).forEach((k) => localStorage.removeItem(k)); sessionStorage.clear(); indexedDB.deleteDatabase('odonteck-club-directorio-docs'); } catch {}
+    location.replace(`${location.pathname}#/login`); location.reload(); return;
+  }
   if (el.closest('[data-curso-gratis-reiniciar-demo]')) { CursoGratis.reiniciarDemo(); toast('Listo: verás de nuevo el anuncio para elegir tu curso gratis', 'gift'); navigate('/'); return; }
 
   if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
