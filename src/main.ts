@@ -620,8 +620,8 @@ function abrirNotifs(panel: HTMLElement) {
 function mostrarResumenCuenta(abierto: boolean) {
   const drawer = document.querySelector<HTMLElement>('[data-account-drawer]');
   const scrim = document.querySelector<HTMLElement>('[data-account-scrim]');
-  const toggle = document.querySelector<HTMLElement>('[data-account-toggle]');
-  if (!drawer || !scrim || !toggle) return;
+  const toggles = document.querySelectorAll<HTMLElement>('[data-account-toggle]');
+  if (!drawer || !scrim) return;
   if (abierto) {
     document.querySelectorAll<HTMLElement>('[data-account-points]').forEach((x) => { x.textContent = String(puntos()); });
     const vistas = document.querySelector<HTMLElement>('[data-account-views]');
@@ -631,7 +631,7 @@ function mostrarResumenCuenta(abierto: boolean) {
   }
   drawer.hidden = !abierto;
   scrim.hidden = !abierto;
-  toggle.setAttribute('aria-expanded', String(abierto));
+  toggles.forEach((t) => t.setAttribute('aria-expanded', String(abierto)));
 }
 
 // ── Interacciones globales del miembro ──

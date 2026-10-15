@@ -55,10 +55,10 @@ export function shellHTML() {
           <button class="btn btn--sm" data-install-btn><i data-lucide="download" class="i"></i>Instalar app</button>
         </div>`}
         <div class="user-card">
-          <a class="user-card__link" href="#/perfil" aria-label="Abrir mi perfil">
+          <button type="button" class="user-card__link" aria-label="Abrir el resumen de mi cuenta" aria-controls="account-quick-panel" aria-expanded="false" data-account-toggle>
             ${avatar('avatar user-card__avatar')}
             <div class="user-card__identity"><div class="user-card__name" title="${esc(Perfil.get().nombre)}">${esc(Perfil.get().nombre)}</div><div class="user-card__plan">${Acceso.vip() ? `<i data-lucide="crown" class="i"></i>${Perfil.planNombre()}` : `<i data-lucide="user" class="i"></i>Plan gratis`}</div></div>
-          </a>
+          </button>
           <button type="button" class="user-card__logout" data-salir aria-label="Cerrar sesión en este dispositivo" title="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button>
         </div>
       </div>
@@ -80,7 +80,7 @@ export function shellHTML() {
           <div class="account-quick__top"><span><i data-lucide="sparkles" class="i"></i>Tu espacio OdonTeck</span><button type="button" data-account-close aria-label="Cerrar resumen"><i data-lucide="x" class="i"></i></button></div>
           <div class="account-quick__identity">
             <div class="account-quick__avatar-wrap">${avatar('avatar account-quick__avatar')}<span class="account-quick__status"><i data-lucide="check" class="i"></i></span></div>
-            <div><strong>${esc(perfil.nombre)}</strong><small>${esc(Auth.usuario?.email || 'Cuenta de demostración')}</small><span class="account-quick__plan"><i data-lucide="${Acceso.vip() ? 'crown' : 'user-round'}" class="i"></i>${esc(Perfil.planNombre())}</span></div>
+            <div><strong>${esc(perfil.nombre)}</strong><small>${esc(Auth.usuario?.email || 'Cuenta de demostración')}</small><span class="account-quick__plan"><i data-lucide="${Acceso.vip() ? 'crown' : 'user-round'}" class="i"></i>${Acceso.vip() ? esc(Perfil.planNombre()) : 'Plan gratis'}</span></div>
           </div>
         </div>
         <div class="account-quick__body">
