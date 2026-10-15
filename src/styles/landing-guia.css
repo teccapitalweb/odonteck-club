@@ -99,7 +99,7 @@
 .oguia-saludo .oguia-icono:hover { opacity: 1; transform: scale(1.08); }
 .oguia-saludo .oguia-icono svg { width: 13px; height: 13px; }
 
-.oguia-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(5, 25, 38, .28); backdrop-filter: blur(4px); }
+.oguia-backdrop { position: fixed; inset: 0; z-index: 1000; background: rgba(5, 25, 38, .28); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); touch-action: none; overscroll-behavior: contain; }
 .oguia-panel {
   position: fixed;
   z-index: 1001;
@@ -151,7 +151,7 @@
 .oguia-icono svg { width: 16px; height: 16px; }
 .oguia-aviso { padding: 9px 16px; border-bottom: 1px solid var(--oguia-line); background: #effaf8; color: #44616e; font-size: 10px; line-height: 1.35; text-align: center; }
 
-.oguia-mensajes { overflow: auto; padding: 19px 16px 12px; scrollbar-width: thin; scrollbar-color: rgba(16,47,67,.2) transparent; }
+.oguia-mensajes { overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 19px 16px 12px; scrollbar-width: thin; scrollbar-color: rgba(16,47,67,.2) transparent; }
 .oguia-mensaje { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 16px; }
 .oguia-mensaje.user { align-items: flex-end; }
 .oguia-mensaje > small { margin: 0 8px 5px; color: #71838b; font-size: 8px; font-weight: 800; letter-spacing: .1em; }

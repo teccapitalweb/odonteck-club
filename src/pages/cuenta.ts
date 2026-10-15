@@ -199,7 +199,7 @@ export function suscripcion() {
       ${anual ? planCard(anual, true) : ''}
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px">
       ${beneficio('play-circle', 'Cursos completos', `${totalCursos} cursos con ${totalClases}+ clases en video HD.`)}
       ${beneficio('award', 'Certificados oficiales', 'PDF con folio único verificable.')}
       ${beneficio('library', 'Biblioteca', 'Guías, protocolos y recursos.')}
