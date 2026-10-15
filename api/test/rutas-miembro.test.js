@@ -729,6 +729,25 @@ describe('escoge tu curso gratis', () => {
     await elegir('curso-a').expect(200);
   });
 
+  test('no permite cambiarse después de abrir contenido de más de una clase aunque no lo marque como visto', async () => {
+    await elegir('curso-c').expect(201);
+    await vista(TOKENS.free, 'curso-c', 1).expect(200);
+    await request(env.app).get('/quiz/curso-c/2').set(bearer(TOKENS.free));
+    await token('curso-c', 2).expect(200);
+    assert.equal(env.db.leer('v2_curso_gratis/free1').maxAbierta, 2);
+    assert.equal((await request(env.app).get('/curso-gratis').set(bearer(TOKENS.free)).expect(200)).body.puedeCambiar, false);
+    const r = await elegir('curso-a').expect(409);
+    assert.equal(r.body.error, 'eleccion_definitiva');
+  });
+
+  test('dos cambios simultáneos solo gastan el cambio único una vez', async () => {
+    await elegir('curso-c').expect(201);
+    env.db.docs.set('v2_cursos/curso-d', { ...cursoC, id: 'curso-d', titulo: 'Otro' });
+    const [a, b] = await Promise.all([elegir('curso-a'), elegir('curso-d')]);
+    assert.deepEqual([a.status, b.status].sort(), [201, 409]);
+    assert.equal(env.db.leer('v2_curso_gratis/free1').cambios, 1);
+  });
+
   test('no permite cambiar tras 24 horas ni tras avanzar dos clases', async () => {
     await elegir('curso-c').expect(201);
     env.reloj.ahora = new Date(Date.parse('2026-09-18T12:00:01Z'));
