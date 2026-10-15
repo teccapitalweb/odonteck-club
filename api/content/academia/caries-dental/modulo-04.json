@@ -1,0 +1,1197 @@
+{
+  "programa": "caries-dental",
+  "modulo": 4,
+  "titulo": "Diagnóstico de la caries: examen visual-táctil, ICDAS II y radiografías",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "En este módulo aprendes a encontrar y describir lesiones de caries con el rigor de un examen moderno. Verás cómo preparar el diente para mirarlo bien, cómo usar los siete códigos de ICDAS II, cómo distinguir una lesión activa de una detenida y cómo agruparlas en los estadios de ICCMS. También aprenderás a pedir e interpretar radiografías de aleta de mordida con criterios de protección radiológica, a valorar los métodos complementarios y a registrar todo en el expediente. Un buen diagnóstico es la base para no sobretratar ni dejar avanzar una lesión.",
+  "objetivos": [
+    "Distinguir entre detección, valoración y diagnóstico de la caries dental.",
+    "Preparar las condiciones de un examen visual-táctil confiable: limpieza, secado, iluminación y sonda de punta roma.",
+    "Asignar códigos ICDAS II de caries y de restauración a superficies dentales.",
+    "Clasificar una lesión como activa o inactiva y ubicarla en un estadio ICCMS.",
+    "Interpretar radiografías de aleta de mordida con la escala radiográfica ICCMS, aplicando criterios de selección y protección radiológica.",
+    "Registrar el diagnóstico de caries en el expediente clínico de forma que permita darle seguimiento."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m04/portada",
+    "proporcion": "16:9",
+    "alt": "Odontóloga con equipo de protección examina con espejo y sonda los molares de un paciente bajo la luz de la unidad dental.",
+    "prompt": "Fotografía clínica realista en formato panorámico de un consultorio dental moderno y luminoso. Una odontóloga con guantes de nitrilo, cubrebocas, lentes de protección y bata clara examina los molares inferiores de un paciente adulto recostado en la unidad, usando espejo bucal y sonda periodontal de punta roma. El encuadre muestra solo la boca abierta del paciente y las manos de la profesional, con baberos desechables y rollos de algodón visibles. Luz blanca de la lámpara dental, fondo desenfocado en tonos azul y blanco, colores naturales. Evitar: texto, logotipos, marcas de agua, sangre, rostro identificable del paciente, guantes ausentes, dientes deformes o en número incorrecto."
+  },
+  "temas": [
+    {
+      "n": "4.1",
+      "titulo": "Detectar, valorar y diagnosticar: el examen clínico de caries",
+      "minutos": 13,
+      "enPocasPalabras": "Para saber si un diente tiene caries, el dentista primero lo limpia, lo seca y lo mira con buena luz. Así puede ver hasta las manchas más pequeñas, que todavía se pueden detener sin hacer un empaste. Un buen examen evita tanto que una caries avance como que se trate algo que no lo necesita.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En los módulos anteriores viste que la caries es una enfermedad dinámica, mediada por la biopelícula y los azúcares, y que el esmalte pierde y recupera mineral muchas veces al día. Ahora toca la parte clínica: **¿cómo sabes, sentado frente a tu paciente, qué está pasando en cada superficie?** La respuesta no es tan simple como «tiene caries» o «no tiene caries». La odontología actual pide un examen que describa con precisión qué tan avanzada está cada lesión, si sigue activa y qué riesgo tiene la persona, porque de eso dependerá el manejo.\n\nPara ordenar el pensamiento conviene separar tres conceptos que a menudo se usan como sinónimos y no lo son:"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "**Detección:** reconocer que existe un cambio en el diente compatible con caries, por ejemplo una opacidad blanca en una fisura.",
+            "**Valoración (o evaluación) de la lesión:** describir sus características, sobre todo su **severidad** (qué tan profunda o extensa es) y su **actividad** (si está progresando o detenida).",
+            "**Diagnóstico:** el juicio clínico que integra los hallazgos de todas las lesiones con la historia, el riesgo y el contexto de la persona. Se diagnostica a un paciente, no solo a una superficie."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Esta distinción tiene consecuencias prácticas. Un estudiante puede detectar diez manchas blancas y, sin valorarlas, proponer diez restauraciones. Un clínico que valora y diagnostica sabe que varias de esas manchas pueden estar inactivas desde hace años y que lo que realmente necesita ese paciente es control de biopelícula, flúor y seguimiento."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m04/d1",
+          "pie": "El iceberg de la caries: los métodos tradicionales solo registraban la parte visible de la enfermedad.",
+          "descripcion": "Iceberg dibujado sobre una línea de agua. Por encima del agua, la punta pequeña representa las lesiones cavitadas que se registran con criterios tradicionales. Por debajo, capas más anchas de arriba hacia abajo: lesiones en dentina sin cavidad clara, lesiones de esmalte visibles con el diente seco y, en la base, lesiones subclínicas que no se ven a simple vista. A la derecha, una flecha vertical indica que los sistemas modernos como ICDAS II registran desde las lesiones iniciales.",
+          "elementos": [
+            "Lesiones cavitadas en dentina",
+            "Lesiones en dentina sin cavidad clara",
+            "Lesiones iniciales de esmalte",
+            "Lesiones subclínicas",
+            "Umbral de criterios tradicionales",
+            "Umbral de ICDAS II"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué cambió la forma de examinar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Durante buena parte del siglo XX el examen de caries se hizo con un objetivo casi único: encontrar cavidades para restaurarlas. El instrumento emblemático era el explorador puntiagudo, que se presionaba en las fisuras para ver si «se atoraba». Con el tiempo, la investigación demostró tres problemas de ese enfoque. Primero, que el atoramiento del explorador depende más de la forma de la fisura y de la fuerza que se aplica que de la presencia de caries. Segundo, que presionar una lesión no cavitada puede romper su capa superficial y crear la cavidad que se quería evitar. Tercero, que el umbral de «solo cavidades» deja sin registrar la mayor parte de la enfermedad, justo la que se puede detener sin fresa.\n\nEsta idea se representa con la imagen del **iceberg de la caries**, popularizada por el investigador británico Nigel Pitts: lo que ves a simple vista y con el diente húmedo es apenas la punta; debajo quedan lesiones de esmalte y de dentina que solo aparecen si examinas en condiciones adecuadas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/01",
+          "proporcion": "4:3",
+          "alt": "Bandeja de examen con espejo bucal, sonda de punta roma, pinzas, rollos de algodón y jeringa triple.",
+          "pie": "Instrumental básico para el examen de caries: espejo, sonda de punta roma, pinzas, rollos de algodón y jeringa triple para secar.",
+          "prompt": "Fotografía de producto realista vista desde arriba de una bandeja metálica de examen dental sobre un campo desechable azul claro. Sobre la bandeja, alineados con orden: un espejo bucal plano, una sonda periodontal con punta esférica roma, unas pinzas de curación, cuatro rollos de algodón blancos y la punta de una jeringa triple de aire y agua. Iluminación suave y uniforme de consultorio, sombras ligeras, metal con brillo natural, enfoque nítido en todo el instrumental, colores limpios. Evitar: texto, logotipos, marcas comerciales, marcas de agua, sangre, instrumental oxidado, manos sin guantes, objetos ajenos al consultorio."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las condiciones de un buen examen"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un examen visual-táctil confiable depende menos de la experiencia «de ojo» que de preparar bien el diente. Las condiciones mínimas son cuatro y conviene que se vuelvan rutina en tu práctica:\n\n**1. Diente limpio.** La biopelícula y los restos de alimento esconden los cambios de color y textura del esmalte. Antes de examinar, pide al paciente que se cepille o realiza una limpieza con cepillo profiláctico. Las pastas profilácticas con partículas abrasivas no son necesarias para el examen; basta con retirar la biopelícula.\n\n**2. Buena iluminación.** La lámpara de la unidad debe estar bien dirigida y el espejo limpio y sin rayones. La magnificación con lupas mejora la observación de detalles finos, aunque no sustituye a las demás condiciones.\n\n**3. Control de la humedad y secado.** Con rollos de algodón aislas el cuadrante; con la jeringa triple secas cada superficie unos cinco segundos. El esmalte desmineralizado es más poroso: cuando está húmedo, el agua llena los poros y la lesión se disimula; cuando lo secas, el aire ocupa ese espacio y la opacidad blanca aparece. Por eso una lesión que solo se ve tras secar suele ser más superficial que una que ya se ve con el diente húmedo.\n\n**4. Sonda de punta roma y presión suave.** Se usa una sonda con punta esférica, como la sonda periodontal de la OMS, para retirar restos, sentir la textura de la superficie (lisa o rugosa) y confirmar con delicadeza una pequeña discontinuidad del esmalte. No se usa para «picar» ni para buscar si se atora."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El explorador puntiagudo no es un detector de caries",
+          "md": "Presionar con fuerza la punta afilada de un explorador sobre una lesión no cavitada puede fracturar la capa superficial del esmalte, que todavía es capaz de remineralizarse, y convertir una lesión controlable en una cavidad. Además, no mejora la exactitud del examen. Reserva la sonda de punta roma para valorar textura y discontinuidades, siempre con presión ligera."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/02",
+          "proporcion": "4:3",
+          "alt": "Manos con guantes secan con jeringa triple la cara oclusal de un molar aislado con rollos de algodón.",
+          "pie": "El secado con aire durante unos segundos hace visibles las opacidades que el agua disimula.",
+          "prompt": "Fotografía clínica macro realista de la arcada inferior de un adolescente, encuadre cerrado solo de la boca: un primer molar permanente aislado con rollos de algodón blancos en vestibular y lingual, la punta de una jeringa triple dirigida a la cara oclusal y un espejo bucal sostenido por una mano con guante de nitrilo morado. Superficie dental limpia y brillante, encía rosa pálido sana, iluminación blanca intensa de lámpara dental, profundidad de campo corta con enfoque en el molar. Evitar: texto, logotipos, marcas de agua, sangre, rostro visible, labios deformes, número incorrecto de cúspides, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un examen sistemático, superficie por superficie"
+        },
+        {
+          "tipo": "texto",
+          "md": "La causa más frecuente de lesiones no registradas no es la falta de conocimiento, sino el desorden. Define una ruta fija y respétala siempre: por ejemplo, empezar en el segundo molar superior derecho, avanzar por la arcada superior hasta el lado izquierdo, bajar a la arcada inferior y regresar. En cada diente revisa todas las superficies: oclusal, vestibular, lingual o palatina, mesial y distal. Las superficies proximales de los molares y premolares son las más difíciles, porque el punto de contacto impide verlas directamente; para ellas recurrirás a la radiografía de aleta de mordida, que estudiarás en el tema 4.4.\n\nCuando una superficie proximal sigue en duda, existe una técnica conservadora llamada **separación temporal**: se coloca un separador elástico entre los dientes y, en una cita posterior, el pequeño espacio abierto permite ver directamente si hay cavidad o tomar una impresión del contorno. Es una decisión clínica que se explica al paciente y se usa en casos seleccionados."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Condiciones del examen y por qué importan",
+          "columnas": ["Condición", "Cómo se logra", "Qué evita"],
+          "filas": [
+            ["Superficie limpia", "Cepillado del paciente o cepillo profiláctico", "Que la biopelícula oculte manchas y cambios de textura"],
+            ["Iluminación adecuada", "Lámpara bien dirigida, espejo en buen estado, lupas si están disponibles", "Pasar por alto cambios sutiles de color"],
+            ["Superficie seca", "Rollos de algodón y aire de la jeringa triple durante unos segundos", "Subestimar lesiones iniciales que el agua disimula"],
+            ["Sonda de punta roma", "Deslizar con presión ligera", "Romper la superficie de lesiones no cavitadas"],
+            ["Ruta sistemática", "Orden fijo de dientes y superficies", "Omitir superficies, sobre todo proximales"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El examen también protege al paciente del sobretratamiento",
+          "md": "Las lesiones iniciales son muy frecuentes y muchas nunca progresan si la persona mejora su higiene y su exposición a flúor. Cuando el examen no distingue entre lesiones activas y detenidas, aumenta el riesgo de restaurar dientes que podían conservarse intactos. Cada restauración inicia un ciclo de reemplazos a lo largo de la vida, así que un diagnóstico cuidadoso es también una medida preventiva."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la secuencia del examen visual-táctil",
+          "instruccion": "Coloca los pasos en el orden en que los harías al examinar un cuadrante en busca de lesiones de caries.",
+          "elementos": [
+            "Revisar el motivo de consulta y la historia clínica",
+            "Retirar la biopelícula de las superficies",
+            "Aislar el cuadrante con rollos de algodón",
+            "Observar cada superficie todavía húmeda",
+            "Secar con aire unos cinco segundos y volver a observar",
+            "Deslizar con suavidad la sonda de punta roma para valorar la textura",
+            "Registrar el código y la actividad de cada lesión"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/03",
+          "proporcion": "3:4",
+          "alt": "Odontólogo con lupas de magnificación y equipo de protección completo examina a un paciente en la unidad dental.",
+          "pie": "La magnificación y una postura ergonómica ayudan a sostener un examen sistemático de todas las superficies.",
+          "prompt": "Fotografía vertical realista de un odontólogo sentado en posición ergonómica junto a la unidad dental, con lupas de magnificación sobre lentes de protección, cubrebocas quirúrgico, gorro, bata desechable azul y guantes de nitrilo, sosteniendo espejo y sonda. El paciente está recostado con lentes de protección y babero; solo se ve su mentón y la boca abierta desde un ángulo lateral, sin rostro identificable. Consultorio limpio y moderno, luz natural suave desde una ventana y luz blanca de la lámpara, colores neutros. Evitar: texto, logotipos, marcas de agua, sangre, rostro del paciente, postura encorvada, falta de equipo de protección."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu siguiente consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de tu próxima jornada clínica, prepara una bandeja de examen sin explorador puntiagudo: espejo, sonda de punta roma, pinzas y rollos de algodón. Examina un solo cuadrante dos veces, primero húmedo y luego tras secar cinco segundos cada superficie, y anota cuántas lesiones aparecieron solo con el secado. Ese pequeño ejercicio te mostrará, con tus propios pacientes, por qué las condiciones del examen cambian el diagnóstico."
+        }
+      ],
+      "glosario": [
+        { "termino": "Detección de caries", "definicion": "Reconocimiento de un cambio en el diente compatible con una lesión de caries, sin describir todavía su severidad ni su actividad." },
+        { "termino": "Valoración de la lesión", "definicion": "Descripción de las características de una lesión detectada, en especial su severidad y su actividad." },
+        { "termino": "Diagnóstico de caries", "definicion": "Juicio clínico que integra los hallazgos de las lesiones con la historia, el riesgo y el contexto del paciente." },
+        { "termino": "Sonda de punta roma", "definicion": "Instrumento con extremo esférico, como la sonda periodontal de la OMS, que permite valorar textura sin dañar el esmalte." },
+        { "termino": "Separación temporal", "definicion": "Técnica que abre un pequeño espacio entre dos dientes con un separador elástico para observar directamente una superficie proximal dudosa." }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.1-1",
+          "q": "¿Qué diferencia hay entre detectar y diagnosticar caries?",
+          "opciones": [
+            "Son sinónimos y se usan indistintamente",
+            "Detectar es reconocer un cambio en el diente; diagnosticar es integrar los hallazgos con la historia y el riesgo del paciente",
+            "Detectar se hace con radiografías y diagnosticar con el espejo",
+            "Diagnosticar es solo asignar un código a cada superficie"
+          ],
+          "correcta": 1,
+          "explicacion": "La detección reconoce un cambio; el diagnóstico es un juicio clínico sobre la persona que integra lesiones, historia y riesgo."
+        },
+        {
+          "id": "t4.1-2",
+          "q": "¿Por qué se seca la superficie con aire antes de examinarla?",
+          "opciones": [
+            "Para que la sonda se deslice mejor",
+            "Para eliminar bacterias de la superficie",
+            "Porque el agua llena los poros del esmalte desmineralizado y disimula la opacidad de la lesión",
+            "Para endurecer el esmalte antes del examen"
+          ],
+          "correcta": 2,
+          "explicacion": "Al secar, el aire sustituye al agua en los poros de la lesión y la opacidad blanca se hace visible."
+        },
+        {
+          "id": "t4.1-3",
+          "q": "¿Cuál es el uso correcto de la sonda durante el examen de caries?",
+          "opciones": [
+            "Presionar con fuerza las fisuras para ver si la punta se atora",
+            "Raspar las manchas para saber si se desprenden",
+            "Introducirla en la lesión hasta sentir dentina blanda",
+            "Deslizar una sonda de punta roma con presión ligera para valorar textura y pequeñas discontinuidades"
+          ],
+          "correcta": 3,
+          "explicacion": "La sonda de punta roma con presión suave valora textura sin romper la superficie; el explorador puntiagudo puede crear cavidades."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "The International Caries Detection and Assessment System (ICDAS): an integrated system for measuring dental caries", "autor": "Ismail A. I., Sohn W., Tellez M., Amaya A., Sen A., Hasson H., Pitts N. B. (Community Dentistry and Oral Epidemiology)", "anio": 2007 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los criterios ICDAS/ICCMS y el concepto del iceberg de la caries descrito por N. B. Pitts", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "4.2",
+      "titulo": "El sistema ICDAS II: los siete códigos de caries",
+      "minutos": 14,
+      "enPocasPalabras": "ICDAS II es una forma ordenada de describir qué tan avanzada está una caries, con números del 0 al 6. El 0 es un diente sano y el 6 una cavidad grande. Gracias a estos códigos, cualquier dentista puede entender lo que otro anotó y seguir la lesión con el tiempo.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **Sistema Internacional para la Detección y Evaluación de Caries**, conocido por sus siglas en inglés ICDAS, nació a inicios de la década de 2000 cuando un grupo internacional de cariólogos se propuso unificar los muchos criterios que existían para registrar caries. Cada estudio usaba su propia escala y era casi imposible comparar resultados. Tras una primera versión, en 2005 se acordó la versión revisada, **ICDAS II**, que es la que se usa hoy en la enseñanza, la investigación y la práctica clínica. Su validez frente a cortes histológicos de dientes extraídos y su utilidad práctica se describieron en 2007 en la revista *Community Dentistry and Oral Epidemiology*.\n\nLo valioso de ICDAS II es que describe la lesión **por lo que se ve**, en una escala ordenada que va desde el primer cambio visible en el esmalte hasta una cavidad extensa con dentina expuesta. Así, el registro deja de ser «sí o no» y se convierte en una descripción que permite decidir y dar seguimiento."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un código de dos dígitos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada superficie recibe un código de **dos dígitos**. El primero describe si la superficie está restaurada o sellada; el segundo describe la caries. Por ejemplo, **02** significa una superficie sin restauración (0) con un cambio visual evidente en el esmalte (2), y **34** significa una superficie con restauración del color del diente (3) junto a la cual hay una sombra oscura de dentina (4). Existen además códigos especiales para dientes ausentes o superficies que no pueden examinarse."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Primer dígito: restauraciones y selladores",
+          "columnas": ["Código", "Significado"],
+          "filas": [
+            ["0", "Superficie sin restaurar ni sellar"],
+            ["1", "Sellador parcial"],
+            ["2", "Sellador completo"],
+            ["3", "Restauración del color del diente"],
+            ["4", "Restauración de amalgama"],
+            ["5", "Corona de acero inoxidable"],
+            ["6", "Corona o carilla de porcelana, oro o metal-porcelana"],
+            ["7", "Restauración perdida o fracturada"],
+            ["8", "Restauración temporal"]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los siete códigos de caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "El segundo dígito es el corazón del sistema. Apréndelo describiendo lo que observas, en este orden: ¿hay cambio con el diente seco?, ¿se ve también húmedo?, ¿hay ruptura del esmalte?, ¿hay sombra de dentina?, ¿hay cavidad con dentina visible?, ¿qué tan extensa es?"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Segundo dígito: códigos de caries ICDAS II",
+          "columnas": ["Código", "Nombre", "Qué observas"],
+          "filas": [
+            ["0", "Superficie sana", "Sin evidencia de caries tras secar unos cinco segundos. Defectos de desarrollo, fluorosis, desgaste o tinciones extrínsecas no se consideran caries."],
+            ["1", "Primer cambio visual en esmalte", "Opacidad o cambio de color que solo se ve tras secado prolongado, o que en fosetas y fisuras queda confinado al fondo de la fisura."],
+            ["2", "Cambio visual evidente en esmalte", "Opacidad blanca o coloración marrón que ya se ve con el diente húmedo y se extiende más allá de los confines de la fisura."],
+            ["3", "Ruptura localizada del esmalte", "Pérdida de integridad superficial o microcavidad, sin dentina visible. La sonda de punta roma puede confirmar la discontinuidad."],
+            ["4", "Sombra oscura subyacente de dentina", "Sombra gris, azulada o marrón vista a través del esmalte, con o sin ruptura localizada, sin dentina expuesta."],
+            ["5", "Cavidad evidente con dentina visible", "Cavidad clara en esmalte opaco o teñido con dentina expuesta, en menos de la mitad de la superficie."],
+            ["6", "Cavidad extensa con dentina visible", "Cavidad amplia y profunda con dentina visible que abarca más de la mitad de la superficie."]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/04",
+          "proporcion": "4:3",
+          "alt": "Vista oclusal de un molar inferior con opacidades blancas en el fondo de las fisuras tras el secado.",
+          "pie": "Lesión compatible con código 1 o 2: opacidad blanca en fisuras, sin ruptura del esmalte. Se ve mejor con la superficie seca.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar inferior permanente de un adolescente, con cinco cúspides bien formadas y fisuras en patrón correcto. Superficie limpia y seca con opacidades blancas tenues y yesosas en el fondo de las fisuras, sin cavidad, esmalte de las cúspides con brillo natural. Borde de encía sana rosa pálido en el contorno, rollos de algodón desenfocados a los lados, iluminación uniforme de lámpara dental, colores naturales, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, número incorrecto de cúspides, cavidades, restauraciones."
+        },
+        {
+          "tipo": "texto",
+          "md": "Observa que los códigos 3 y 4 no siguen un orden estricto de profundidad. Una lesión con sombra de dentina (código 4) puede ser más profunda que una con microcavidad en esmalte (código 3), porque la sombra indica que el proceso ya alcanzó la dentina bajo un esmalte que conserva cierta continuidad. Por eso el código 4 merece especial atención y, con frecuencia, una radiografía para estimar su profundidad.\n\nEn superficies lisas, como las caras vestibulares y linguales, el código 1 se asigna cuando la opacidad solo aparece tras el secado y el código 2 cuando ya se ve húmeda. En superficies proximales vistas desde vestibular o lingual, las lesiones suelen ubicarse justo por debajo del punto de contacto, que es donde se estanca la biopelícula."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/05",
+          "proporcion": "4:3",
+          "alt": "Molar superior con una sombra grisácea bajo el esmalte de la fosa central, sin cavidad abierta.",
+          "pie": "Lesión compatible con código 4: sombra oscura de dentina que se transparenta a través del esmalte.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar superior permanente de un adulto joven, con cuatro cúspides y anatomía correcta. En la fosa central se aprecia una sombra gris azulada difusa bajo el esmalte, que conserva su superficie casi continua, sin cavidad abierta. Superficie limpia y seca, encía sana alrededor, iluminación uniforme y neutra de lámpara dental, fondo de campo oscuro desenfocado, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, restauraciones metálicas, cavidades profundas abiertas, anatomía incorrecta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Validez histológica y calibración de examinadores",
+          "md": "Los estudios de validación de ICDAS compararon los códigos clínicos con cortes histológicos de dientes extraídos y encontraron que, en general, a mayor código mayor profundidad histológica: los códigos 1 y 2 se asocian sobre todo a lesiones confinadas al esmalte o a la dentina más externa, mientras que los códigos 4 a 6 se asocian con mayor frecuencia a lesiones en dentina. La relación no es perfecta, y por eso ICDAS se combina con radiografías en superficies proximales y en lesiones con sombra.\n\nLa **confiabilidad** de un sistema depende de que distintos examinadores, y el mismo examinador en momentos distintos, asignen el mismo código. En investigación y en programas de salud pública se mide con el **coeficiente kappa** tras un entrenamiento de calibración con imágenes y dientes de referencia. La Fundación ICDAS ofrece materiales de aprendizaje en línea para este fin. Si trabajas en un programa comunitario o en una clínica universitaria, calibrarte con tus compañeros es la mejor forma de que los registros sean comparables."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Códigos especiales y errores frecuentes"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Códigos especiales para dientes y superficies",
+          "items": [
+            "**96:** la superficie no puede examinarse, por ejemplo por una banda de ortodoncia.",
+            "**97:** diente ausente por caries.",
+            "**98:** diente ausente por otras razones.",
+            "**99:** diente no erupcionado."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los errores más comunes al aprender ICDAS II son tres. El primero es **confundir manchas que no son caries** con lesiones: las opacidades difusas y simétricas de la fluorosis, las manchas de hipomineralización y las tinciones extrínsecas por café o clorhexidina tienen otra distribución y otro aspecto. El segundo es **saltarse el secado**, lo que hace que lesiones de código 1 se registren como sanas. El tercero es **sobrestimar** una tinción marrón en el fondo de una fisura: una pigmentación oscura, brillante y dura puede ser una lesión detenida, no una cavidad activa. Ese último punto lo resolverás con la valoración de actividad del siguiente tema."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m04/d2",
+          "pie": "Ruta de decisión para asignar el código ICDAS II de caries a una superficie.",
+          "descripcion": "Diagrama de flujo vertical con preguntas en rombos y respuestas en rectángulos. Pregunta 1: ¿cambio visible tras secar? No lleva a código 0. Sí lleva a pregunta 2: ¿se ve también húmedo? No lleva a código 1. Sí lleva a pregunta 3: ¿ruptura del esmalte o sombra? Ninguna lleva a código 2; microcavidad sin dentina lleva a código 3; sombra de dentina lleva a código 4. Pregunta 4: ¿cavidad con dentina visible? Menos de la mitad de la superficie lleva a código 5; más de la mitad lleva a código 6.",
+          "elementos": [
+            "¿Cambio visible tras secar?",
+            "¿Visible con el diente húmedo?",
+            "¿Ruptura del esmalte o sombra?",
+            "¿Cavidad con dentina visible?",
+            "Código 0",
+            "Código 1",
+            "Código 2",
+            "Código 3",
+            "Código 4",
+            "Código 5",
+            "Código 6"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/06",
+          "proporcion": "1:1",
+          "alt": "Modelo tipodonto con molares que muestran distintos grados de lesión, desde mancha blanca hasta cavidad.",
+          "pie": "Los tipodontos con lesiones simuladas son útiles para calibrarse en ICDAS II antes de examinar pacientes.",
+          "prompt": "Fotografía de estudio realista de un modelo tipodonto de arcada inferior permanente sobre una mesa blanca de laboratorio de enseñanza. Los molares y premolares muestran lesiones simuladas de distinta severidad: una opacidad blanca en fisura, una mancha marrón en fosa, una pequeña microcavidad y una cavidad con dentina amarillenta visible, todo limpio y sin aspecto desagradable. Junto al modelo, una mano con guante de nitrilo sostiene una sonda de punta roma. Luz suave de estudio, fondo neutro, enfoque nítido en las superficies oclusales. Evitar: texto, números, etiquetas, logotipos, marcas de agua, sangre, encía inflamada, número incorrecto de dientes, manos sin guantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Un código no es una indicación de tratamiento",
+          "md": "ICDAS II describe severidad, no decide por ti. Un código 2 puede requerir solo seguimiento si la lesión está inactiva, y un código 4 puede manejarse de formas distintas según su actividad, su profundidad radiográfica y el riesgo del paciente. Usa el código como dato de partida y no como receta."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada código ICDAS II con lo que se observa",
+          "instruccion": "Une cada código de caries con su descripción clínica.",
+          "pares": [
+            { "a": "Código 1", "b": "Opacidad que solo aparece tras secar la superficie" },
+            { "a": "Código 2", "b": "Opacidad o coloración visible con el diente húmedo" },
+            { "a": "Código 3", "b": "Microcavidad en esmalte sin dentina visible" },
+            { "a": "Código 4", "b": "Sombra oscura de dentina vista a través del esmalte" },
+            { "a": "Código 5", "b": "Cavidad con dentina visible en menos de la mitad de la superficie" },
+            { "a": "Código 6", "b": "Cavidad con dentina visible en más de la mitad de la superficie" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el estudio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Imprime o guarda en tu teléfono la tabla de los siete códigos y, durante una semana, asigna un código ICDAS II a cada superficie oclusal que examines, aunque tu historia clínica institucional use otro formato. Al final de la semana compara tus registros con los de un compañero o tu profesor en dos o tres pacientes: así empiezas tu propia calibración."
+        }
+      ],
+      "glosario": [
+        { "termino": "ICDAS II", "definicion": "Sistema Internacional para la Detección y Evaluación de Caries, versión revisada en 2005, que registra la severidad de las lesiones con códigos del 0 al 6." },
+        { "termino": "Microcavidad", "definicion": "Pequeña ruptura localizada de la superficie del esmalte sin dentina visible; corresponde al código 3 de ICDAS II." },
+        { "termino": "Sombra de dentina", "definicion": "Coloración gris, azulada o marrón que se transparenta a través del esmalte cuando la lesión alcanza la dentina; corresponde al código 4." },
+        { "termino": "Calibración", "definicion": "Entrenamiento con casos de referencia para que distintos examinadores asignen los mismos códigos a las mismas lesiones." },
+        { "termino": "Coeficiente kappa", "definicion": "Medida estadística del acuerdo entre examinadores que corrige el acuerdo esperado por azar." }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.2-1",
+          "q": "Una opacidad blanca en una fisura solo se ve después de secar la superficie. ¿Qué código ICDAS II le corresponde?",
+          "opciones": [
+            "Código 1",
+            "Código 0",
+            "Código 3",
+            "Código 2"
+          ],
+          "correcta": 0,
+          "explicacion": "El código 1 es el primer cambio visual en esmalte, visible solo tras secado prolongado o confinado al fondo de la fisura."
+        },
+        {
+          "id": "t4.2-2",
+          "q": "¿Qué describe el primer dígito del código ICDAS II?",
+          "opciones": [
+            "La actividad de la lesión",
+            "La profundidad radiográfica",
+            "Si la superficie está restaurada o sellada y con qué",
+            "El riesgo de caries del paciente"
+          ],
+          "correcta": 2,
+          "explicacion": "El primer dígito registra restauraciones y selladores; el segundo, la severidad de la caries."
+        },
+        {
+          "id": "t4.2-3",
+          "q": "¿Por qué el código 4 merece especial atención?",
+          "opciones": [
+            "Porque siempre indica una cavidad abierta",
+            "Porque la sombra indica que la lesión ya alcanzó la dentina y puede ser más profunda que un código 3",
+            "Porque corresponde a fluorosis",
+            "Porque se asigna solo a dientes temporales"
+          ],
+          "correcta": 1,
+          "explicacion": "La sombra de dentina significa afectación dentinaria bajo un esmalte relativamente continuo; a menudo se complementa con radiografía."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "The International Caries Detection and Assessment System (ICDAS): an integrated system for measuring dental caries", "autor": "Ismail A. I., Sohn W., Tellez M., Amaya A., Sen A., Hasson H., Pitts N. B. (Community Dentistry and Oral Epidemiology)", "anio": 2007 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los criterios de ICDAS II y los materiales de la Fundación ICDAS", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "4.3",
+      "titulo": "Actividad de la lesión y estadios ICCMS",
+      "minutos": 13,
+      "enPocasPalabras": "No todas las manchas de caries siguen creciendo: algunas se detuvieron hace tiempo. El dentista las distingue por su brillo, su textura y el lugar donde están. Saber si una lesión está activa ayuda a decidir si basta con cuidarla o si hay que intervenir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Dos lesiones con el mismo código ICDAS II pueden tener historias opuestas. Una mancha blanca junto a la encía de un adolescente que no se cepilla bien probablemente está perdiendo mineral hoy mismo. Una mancha marrón brillante en la cara vestibular de un adulto que mejoró su higiene hace años puede ser una **cicatriz** de un proceso que ya se detuvo. La diferencia entre ambas no es la severidad, sino la **actividad**, y tratarlas igual sería un error clínico.\n\nRecuerda del módulo 2 que la caries es un balance entre desmineralización y remineralización. Una lesión **activa** es aquella en la que, en este periodo, predomina la pérdida de mineral. Una lesión **inactiva o detenida** es aquella en la que el balance se inclinó hacia la remineralización o al menos hacia la estabilidad, y que ya no progresa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se reconoce la actividad"
+        },
+        {
+          "tipo": "texto",
+          "md": "No hay un instrumento que mida la actividad directamente. Se infiere a partir de signos clínicos que se han estudiado y validado, entre los que destacan los **criterios de Nyvad**, publicados por la investigadora danesa Bente Nyvad y su equipo en 1999, y la valoración de actividad asociada a ICDAS. Ambos se basan en tres preguntas: **¿cómo se ve?**, **¿cómo se siente al deslizar la sonda?** y **¿dónde está?**"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Signos de actividad en lesiones de esmalte y de dentina",
+          "columnas": ["Rasgo", "Lesión probablemente activa", "Lesión probablemente inactiva"],
+          "filas": [
+            ["Aspecto del esmalte", "Blanco o amarillento opaco, sin brillo, de aspecto yesoso", "Blanco, marrón o negro, con superficie brillante"],
+            ["Textura al deslizar la sonda roma", "Rugosa", "Lisa y dura"],
+            ["Ubicación", "Zona de estancamiento de biopelícula: fondo de fisuras, cerca del margen gingival, bajo el punto de contacto", "Alejada del margen gingival o en zonas que hoy se limpian bien"],
+            ["Biopelícula", "Cubierta con biopelícula gruesa antes de la limpieza", "Sin acumulación relevante"],
+            ["Encía vecina", "Con frecuencia inflamada por la biopelícula", "Sana"],
+            ["Dentina en cavidades", "Blanda o correosa al deslizar la sonda", "Brillante y dura"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "En las **cavidades abiertas** la actividad se juzga sobre todo por la dentina del fondo. Una dentina amarillenta, blanda o de consistencia correosa al deslizar con suavidad la sonda indica que el proceso sigue activo. Una dentina oscura, dura y brillante, en una cavidad amplia y fácil de limpiar, sugiere una lesión detenida: es frecuente en caras vestibulares o en lesiones que quedaron expuestas cuando se perdió el diente vecino. En las **superficies proximales** la actividad es difícil de valorar porque no se ven; ahí ayudan la presencia de biopelícula e inflamación gingival en la papila, la comparación de radiografías en el tiempo y, en casos seleccionados, la separación temporal.\n\nLa actividad también se interpreta **a nivel de la persona**. Varias lesiones activas al mismo tiempo, o lesiones nuevas desde la última cita, indican que el balance de la enfermedad está inclinado hacia la desmineralización en toda la boca. Ese dato es uno de los indicadores de riesgo que estudiaste en el módulo 3 y orienta la intensidad del plan preventivo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/07",
+          "proporcion": "4:3",
+          "alt": "Incisivos y caninos inferiores con manchas blancas opacas a lo largo del margen de la encía.",
+          "pie": "Lesiones de mancha blanca probablemente activas: opacas, sin brillo y junto al margen gingival, donde se acumula la biopelícula.",
+          "prompt": "Fotografía clínica intraoral realista, vista frontal de los dientes anteriores inferiores de un adolescente, encuadre cerrado solo de dientes y encía, labios retraídos con separadores plásticos transparentes. A lo largo del tercio cervical de caninos e incisivos se ven bandas de manchas blancas opacas y mate siguiendo el contorno de la encía, que se nota ligeramente enrojecida. Superficie limpia y seca, iluminación clínica uniforme, colores naturales, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, brackets, cavidades profundas, dientes deformes o apiñamiento extremo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/08",
+          "proporcion": "4:3",
+          "alt": "Premolar con una mancha marrón brillante y lisa en la superficie vestibular, alejada de la encía.",
+          "pie": "Lesión probablemente inactiva: mancha marrón con brillo y superficie dura, sin biopelícula ni inflamación vecina.",
+          "prompt": "Fotografía clínica macro realista de la cara vestibular de un primer premolar superior de un adulto, encuadre cerrado de dos o tres dientes con labio retraído por un separador transparente. En el tercio medio de la superficie se observa una mancha marrón claro bien delimitada, con superficie lisa y brillante que refleja la luz, sin cavidad. Encía sana, firme y rosa pálido, sin biopelícula visible. Iluminación clínica uniforme, colores naturales, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, restauraciones, cálculo dental, aspecto descuidado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué una lesión detenida brilla",
+          "md": "En una lesión activa, la superficie del esmalte presenta microporosidades y una ligera disolución de los extremos de los prismas, lo que dispersa la luz y produce el aspecto mate y yesoso. Cuando el ambiente cambia y la biopelícula deja de acumularse, el desgaste mecánico del cepillado y la masticación pule esa superficie y el mineral que se deposita en la zona más externa reduce la porosidad superficial. El resultado es una superficie lisa y brillante, aunque el cuerpo de la lesión conserve su opacidad. La coloración marrón de muchas lesiones detenidas se debe a la incorporación de pigmentos exógenos en esa zona porosa a lo largo del tiempo. Por esto el color por sí solo no indica actividad: una lesión marrón puede estar activa si es rugosa y está cubierta de biopelícula, y una blanca puede estar detenida si es lisa y brillante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "De los códigos a los estadios ICCMS"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **Sistema Internacional de Clasificación y Manejo de Caries (ICCMS)**, desarrollado por el mismo grupo que creó ICDAS, agrupa los siete códigos en estadios que facilitan la toma de decisiones. La agrupación clínica es sencilla: código 0, **sano**; códigos 1 y 2, **inicial**; códigos 3 y 4, **moderado**; códigos 5 y 6, **extenso**. A cada estadio se le añade la actividad, de modo que una lesión puede describirse, por ejemplo, como «moderada activa» o «inicial inactiva».\n\nLa Asociación Dental Americana publicó en 2015 su propio Sistema de Clasificación de Caries con categorías equivalentes (sana, inicial, moderada y avanzada), lo que confirma que la tendencia internacional es hablar de estadios y actividad en lugar de una sola etiqueta de «caries». ICCMS integra además la evaluación del riesgo, que estudiaste en el módulo 3, y orienta el plan de manejo, que verás con detalle en el módulo 8 sobre odontología mínimamente invasiva."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m04/d3",
+          "pie": "Matriz de severidad y actividad: cada lesión se describe por su estadio ICCMS y por si está activa o inactiva.",
+          "descripcion": "Cuadrícula de dos filas por tres columnas. Las columnas, de izquierda a derecha, son los estadios inicial (códigos 1 y 2), moderado (códigos 3 y 4) y extenso (códigos 5 y 6), con un degradado de color de claro a intenso. Las filas son activa (arriba) e inactiva (abajo). En cada celda, un pequeño corte esquemático del diente muestra la profundidad aproximada de la lesión; en la fila activa la lesión es opaca y rugosa, en la fila inactiva es brillante. A la izquierda, fuera de la cuadrícula, una columna aparte indica el estadio sano, código 0.",
+          "elementos": [
+            "Sano: código 0",
+            "Inicial: códigos 1 y 2",
+            "Moderado: códigos 3 y 4",
+            "Extenso: códigos 5 y 6",
+            "Activa",
+            "Inactiva"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Dos manchas, dos historias",
+          "md": "Una mujer de 34 años acude a revisión. En el segundo premolar inferior derecho tiene una mancha blanca opaca, rugosa y cubierta de biopelícula junto al margen gingival, que está enrojecido. En el canino superior izquierdo tiene una mancha marrón, lisa y brillante, lejos de la encía. Ambas reciben código 2, pero la primera se registra como **inicial activa** y la segunda como **inicial inactiva**. La primera necesita intervención no invasiva y seguimiento cercano; la segunda solo registro y vigilancia."
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando dudas sobre la actividad, el tiempo es tu aliado. Registra la lesión con detalle, mejora el control de la biopelícula y vuelve a valorarla en la siguiente cita. Una lesión que en ese lapso se vuelve más lisa y brillante o que no cambia de tamaño confirma un comportamiento inactivo; una que aumenta de extensión o se cavita confirma actividad. Las fotografías intraorales tomadas con la misma técnica en cada cita hacen esta comparación mucho más objetiva.\n\nEl intervalo para revalorar no es fijo: depende del riesgo de la persona y de cuántas lesiones activas tenga. En alguien con riesgo elevado y varias lesiones iniciales activas conviene revisar antes que en un adulto con riesgo bajo y una sola mancha dudosa. Lo importante es que la duda quede escrita y la fecha de revaloración, acordada con el paciente."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/09",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección muestra al paciente, en una pantalla, una fotografía intraoral de sus dientes.",
+          "pie": "Compartir con el paciente las fotografías intraorales facilita explicar la diferencia entre lesiones activas y detenidas.",
+          "prompt": "Fotografía realista en un consultorio dental moderno: una odontóloga con cubrebocas, lentes de protección, bata y guantes de nitrilo señala con un dedo una pantalla junto a la unidad, donde se ve una fotografía intraoral ampliada de dientes posteriores sanos con una pequeña mancha blanca. El paciente, sentado en la unidad y visto de espaldas o de perfil parcial con babero, observa la pantalla. Luz natural suave mezclada con luz de consultorio, colores neutros y limpios. Evitar: texto en la pantalla, logotipos, marcas de agua, sangre, rostro identificable del paciente, equipo de protección incompleto."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: una mancha en el primer molar",
+          "situacion": "Un niño de 8 años tiene el primer molar inferior permanente recién erupcionado. Tras limpiar y secar, observas una opacidad blanca yesosa, rugosa al deslizar la sonda roma, que sigue el fondo de las fisuras y se ve también con el diente húmedo, sin ruptura del esmalte. Había biopelícula abundante en la superficie. ¿Cómo describes esta lesión?",
+          "opciones": [
+            { "texto": "Código 2, estadio inicial, lesión activa", "correcta": true, "retro": "Correcto. Se ve húmeda y no hay ruptura (código 2, inicial), y su aspecto opaco, rugoso, con biopelícula y en un molar en erupción indica actividad." },
+            { "texto": "Código 1, estadio inicial, lesión inactiva", "correcta": false, "retro": "La opacidad ya se ve con el diente húmedo, lo que corresponde a código 2, y los signos clínicos apuntan a actividad, no a detención." },
+            { "texto": "Código 3, estadio moderado, lesión activa", "correcta": false, "retro": "No hay ruptura del esmalte ni microcavidad, así que no corresponde a código 3." },
+            { "texto": "Superficie sana con tinción extrínseca", "correcta": false, "retro": "Una opacidad blanca, rugosa y confinada a una zona de estancamiento no es una tinción extrínseca; es una lesión de caries inicial." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "En tu siguiente revisión, agrega a cada lesión que registres una letra: **A** si es activa y **I** si es inactiva, junto a su código ICDAS II. Cuando dudes, escribe «duda» y programa una revaloración con fotografía. En pocas semanas notarás que tus planes de tratamiento se vuelven más conservadores y mejor justificados."
+        }
+      ],
+      "glosario": [
+        { "termino": "Lesión activa", "definicion": "Lesión de caries en la que, en el periodo actual, predomina la pérdida de mineral y que tiende a progresar." },
+        { "termino": "Lesión inactiva", "definicion": "Lesión de caries detenida, en la que el balance se inclinó hacia la estabilidad o la remineralización; también llamada lesión detenida." },
+        { "termino": "Criterios de Nyvad", "definicion": "Sistema clínico publicado en 1999 que clasifica las lesiones de caries según su severidad y su actividad a partir del aspecto, la textura y la ubicación." },
+        { "termino": "ICCMS", "definicion": "Sistema Internacional de Clasificación y Manejo de Caries, que agrupa los códigos ICDAS en estadios e integra actividad, riesgo y manejo." },
+        { "termino": "Estadio de caries", "definicion": "Agrupación de la severidad de una lesión en sana, inicial, moderada o extensa." }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.3-1",
+          "q": "¿Qué rasgo sugiere que una lesión de esmalte está inactiva?",
+          "opciones": [
+            "Superficie opaca y yesosa",
+            "Textura rugosa al deslizar la sonda",
+            "Ubicación junto al margen gingival inflamado",
+            "Superficie lisa, dura y brillante"
+          ],
+          "correcta": 3,
+          "explicacion": "Las lesiones detenidas suelen ser brillantes, lisas y duras; las activas son opacas, rugosas y están en zonas de estancamiento de biopelícula."
+        },
+        {
+          "id": "t4.3-2",
+          "q": "En ICCMS, ¿a qué estadio corresponden los códigos ICDAS 3 y 4?",
+          "opciones": [
+            "Inicial",
+            "Moderado",
+            "Extenso",
+            "Sano"
+          ],
+          "correcta": 1,
+          "explicacion": "ICCMS agrupa 1 y 2 como inicial, 3 y 4 como moderado y 5 y 6 como extenso."
+        },
+        {
+          "id": "t4.3-3",
+          "q": "¿Por qué el color de una lesión no basta para decidir si está activa?",
+          "opciones": [
+            "Porque todas las lesiones marrones están activas",
+            "Porque el color solo depende de la edad del paciente",
+            "Porque una lesión marrón puede estar activa y una blanca puede estar detenida; se requieren textura, brillo y ubicación",
+            "Porque el color solo se ve en radiografías"
+          ],
+          "correcta": 2,
+          "explicacion": "El color se debe en parte a pigmentos incorporados con el tiempo; la actividad se infiere integrando aspecto, textura, ubicación y biopelícula."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Reliability of a new caries diagnostic system differentiating between active and inactive caries lesions", "autor": "Nyvad B., Machiulskiene V., Baelum V. (Caries Research)", "anio": 1999 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 },
+        { "tipo": "academica", "titulo": "The American Dental Association Caries Classification System for clinical practice", "autor": "Young D. A., Nový B. B., Zeller G. G. y cols. (Journal of the American Dental Association)", "anio": 2015 }
+      ]
+    },
+    {
+      "n": "4.4",
+      "titulo": "Radiografías en el diagnóstico de caries",
+      "minutos": 14,
+      "enPocasPalabras": "Entre diente y diente hay caries que no se ven a simple vista, y para encontrarlas sirve una radiografía pequeña llamada de aleta de mordida. Solo se toma cuando realmente ayuda y con la menor radiación posible. La radiografía complementa la revisión, no la sustituye.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El examen visual-táctil es excelente para superficies oclusales y lisas, pero tiene un límite claro: las **superficies proximales** de premolares y molares quedan ocultas por el punto de contacto con el diente vecino. Una lesión puede avanzar ahí durante meses sin dar ninguna señal visible. Por eso la radiografía es parte del diagnóstico de caries en adolescentes y adultos con dientes posteriores en contacto.\n\nEn este tema aprenderás qué radiografía conviene, qué puedes y qué no puedes concluir de ella, cómo se clasifica la profundidad de la lesión y cómo se protege al paciente y al equipo de radiación innecesaria. No verás parámetros de exposición: esos dependen de cada equipo, de su manual y de la regulación aplicable."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La radiografía de aleta de mordida"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **radiografía de aleta de mordida** (en inglés, *bitewing*) muestra en una sola imagen las coronas de los dientes posteriores superiores e inferiores de un lado, con el haz dirigido de forma que los puntos de contacto se vean abiertos, sin superposición. Es la proyección de elección para detectar caries proximales y caries junto a restauraciones. La radiografía periapical muestra el diente completo con su raíz y tejidos de soporte y se usa cuando interesa el estado pulpar o periapical. La radiografía panorámica, útil para una visión general de los maxilares, **no** tiene la nitidez necesaria para diagnosticar caries proximales iniciales.\n\nPara que la aleta de mordida sea útil se usan **posicionadores** que mantienen el receptor paralelo a los dientes y alinean el tubo. Si la angulación horizontal es incorrecta, los contactos se superponen y una lesión puede quedar escondida o aparecer una falsa sombra."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/10",
+          "proporcion": "4:3",
+          "alt": "Maniquí de simulación radiológica con un posicionador de aleta de mordida colocado entre los dientes posteriores.",
+          "pie": "Posicionador de aleta de mordida en un maniquí de enseñanza: el receptor queda paralelo a las coronas y el anillo guía la alineación del tubo.",
+          "prompt": "Fotografía realista de un maniquí de simulación de radiología dental con arcadas de tipodonto en una sala de enseñanza, visto de lado. Entre los dientes posteriores sostiene un posicionador de aleta de mordida de plástico con su anillo guía azul, y el cono rectangular del equipo de rayos X intraoral está alineado con el anillo. Una mano con guante de nitrilo ajusta el posicionador. Luz clínica blanca y uniforme, paredes claras, colores naturales, enfoque nítido en el posicionador. Evitar: texto, logotipos, marcas comerciales, marcas de agua, sangre, personas sin guantes, rostro humano real, cables desordenados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se ve una lesión proximal"
+        },
+        {
+          "tipo": "texto",
+          "md": "La caries disminuye el contenido mineral del tejido y, por eso, absorbe menos rayos X: en la imagen aparece como una zona **radiolúcida**, más oscura que el esmalte y la dentina sanos. En las superficies proximales la lesión de esmalte suele verse como un triángulo con la base hacia la superficie externa, justo por debajo del punto de contacto. Cuando alcanza la unión amelodentinaria tiende a extenderse lateralmente y a avanzar en dentina con otra forma triangular, ahora con la base en la unión.\n\nHay tres limitaciones que debes tener siempre presentes. La radiografía **subestima la profundidad** real de la lesión, porque se necesita una pérdida de mineral considerable para que el cambio sea visible. **No muestra la actividad** de la lesión. Y **no confirma por sí misma si hay cavidad**: la probabilidad de que la superficie esté cavitada aumenta a medida que la radiolucidez avanza en la dentina, pero no es una regla fija. Por eso la decisión de intervenir integra la imagen con el examen clínico y el riesgo."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Escala radiográfica de ICCMS para lesiones proximales y oclusales",
+          "columnas": ["Código", "Estadio", "Extensión de la radiolucidez"],
+          "filas": [
+            ["0", "Sin lesión", "Sin radiolucidez"],
+            ["RA1", "Inicial", "Mitad externa del esmalte"],
+            ["RA2", "Inicial", "Mitad interna del esmalte, hasta la unión amelodentinaria"],
+            ["RA3", "Inicial", "Tercio externo de la dentina"],
+            ["RB4", "Moderado", "Tercio medio de la dentina"],
+            ["RC5", "Extenso", "Tercio interno de la dentina; clínicamente cavitada"],
+            ["RC6", "Extenso", "Hasta la pulpa; clínicamente cavitada"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m04/d4",
+          "pie": "Escala radiográfica ICCMS: profundidad de la radiolucidez proximal en esmalte y dentina.",
+          "descripcion": "Corte esquemático de dos molares en contacto, como se ven en una aleta de mordida. En la superficie proximal de uno de ellos, bandas verticales sucesivas marcan la mitad externa del esmalte, la mitad interna del esmalte, y los tercios externo, medio e interno de la dentina hasta la cámara pulpar. Cada banda lleva su código a la derecha, con color de verde (inicial) a amarillo (moderado) y rojo (extenso). Se dibujan la unión amelodentinaria y el punto de contacto.",
+          "elementos": [
+            "Esmalte",
+            "Unión amelodentinaria",
+            "Dentina",
+            "Pulpa",
+            "Punto de contacto",
+            "RA1",
+            "RA2",
+            "RA3",
+            "RB4",
+            "RC5",
+            "RC6"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Imágenes que engañan",
+          "md": "No toda zona oscura es caries. La **radiolucidez cervical** (o *burnout*) es una banda oscura en el cuello del diente, entre el borde del esmalte y la cresta ósea, causada por el menor espesor de tejido en esa zona; aparece en varios dientes de forma simétrica. El **efecto de banda de Mach** es una ilusión óptica que oscurece el borde de la dentina junto al esmalte. Las bases cavitarias radiolúcidas bajo restauraciones también pueden confundirse con caries secundaria. Compara siempre con los dientes vecinos y con el examen clínico."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/11",
+          "proporcion": "16:9",
+          "alt": "Monitor de consultorio con una radiografía digital de aleta de mordida de dientes posteriores.",
+          "pie": "La radiografía digital de aleta de mordida permite ajustar brillo y contraste, pero la interpretación sigue exigiendo conocer sus limitaciones.",
+          "prompt": "Fotografía realista de un monitor sobre un escritorio de consultorio dental, mostrando a pantalla completa una radiografía digital de aleta de mordida en escala de grises de premolares y molares superiores e inferiores de un adulto, con anatomía correcta, cámaras pulpares visibles y puntos de contacto abiertos. Una mano con guante de nitrilo sostiene un mouse en primer plano desenfocado. Iluminación tenue del entorno para que destaque la pantalla, colores neutros. Evitar: texto, números, nombres, interfaz de programa visible, logotipos, marcas de agua, sangre, rostro, dientes en número incorrecto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seleccionar, justificar y proteger"
+        },
+        {
+          "tipo": "texto",
+          "md": "La protección radiológica se apoya en dos principios. **Justificación:** solo se toma una radiografía cuando el beneficio diagnóstico esperado supera el riesgo, es decir, cuando la información que aportará puede cambiar la decisión clínica. **Optimización:** cuando se toma, se hace con la menor exposición que permita una imagen útil, principio conocido como ALARA (tan baja como sea razonablemente posible) y, en su formulación más reciente para odontología, ALADA (tan baja como sea diagnósticamente aceptable).\n\nEn la práctica esto significa no tomar radiografías por calendario ni de forma rutinaria a todos los pacientes. Las recomendaciones de selección de pacientes de la Asociación Dental Americana y la Administración de Alimentos y Medicamentos de Estados Unidos (ADA/FDA) indican que la frecuencia de las aletas de mordida depende del riesgo de caries y de la edad: más frecuentes en quien tiene riesgo elevado y más espaciadas en quien tiene riesgo bajo. Además, revisa si el paciente trae radiografías recientes de otra clínica antes de pedir nuevas."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Medidas de optimización que reducen la dosis",
+          "items": [
+            "Receptores digitales o películas de alta sensibilidad.",
+            "Colimación rectangular, que limita el haz al tamaño del receptor.",
+            "Posicionadores que evitan repeticiones por errores de técnica.",
+            "Técnica correcta desde el primer intento y control de calidad del equipo.",
+            "El operador fuera del haz primario, a distancia y detrás de una barrera; nunca sostiene el receptor."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "En 2024, la ADA publicó en su revista científica recomendaciones actualizadas de seguridad radiológica, elaboradas por un panel de expertos, que dejaron de recomendar el uso rutinario del mandil plomado y del collarín tiroideo en pacientes, incluidas embarazadas y niños, porque con equipos modernos y colimación adecuada su beneficio es despreciable y pueden interponerse en el haz y obligar a repetir la toma. La propia ADA aclara que cada profesional debe cumplir la regulación de su jurisdicción."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Lo que dicen las normas mexicanas",
+          "md": "La **NOM-229-SSA1-2002**, sobre requisitos técnicos y protección radiológica en establecimientos de diagnóstico médico con rayos X, incluye en su campo de aplicación los estudios panorámicos dentales y **excluye las aplicaciones odontológicas convencionales**. Por su parte, la **NOM-013-SSA2-2015**, para la prevención y control de enfermedades bucales, indica colocar al paciente un mandil protector para tomar radiografías y limpiarlo después de su uso, y evitar la exposición del personal usando portarradiografías o colimadores. Mientras esa disposición siga vigente, en México debes cumplirla aunque las guías internacionales hayan cambiado. Consulta el DOF ante cualquier actualización."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/12",
+          "proporcion": "3:4",
+          "alt": "Cabezal de rayos X intraoral con cono de colimación rectangular junto a la unidad dental.",
+          "pie": "El colimador rectangular reduce la superficie irradiada a la del receptor y, con ello, la dosis al paciente.",
+          "prompt": "Fotografía vertical realista del cabezal de un equipo de rayos X intraoral montado en brazo articulado de pared, con un cono de colimación rectangular de color gris claro, en un consultorio dental limpio y luminoso. Al fondo desenfocado se ve la unidad dental vacía con su lámpara apagada. Iluminación suave natural, colores neutros blancos y grises, enfoque nítido en el colimador. Evitar: texto, logotipos, marcas comerciales, etiquetas de advertencia legibles, marcas de agua, personas, pacientes, cables sueltos, ambiente sucio."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Radiografías: verdadero o falso",
+          "afirmaciones": [
+            { "texto": "La radiografía de aleta de mordida es la proyección de elección para detectar caries proximales.", "verdadero": true, "explicacion": "Muestra las coronas posteriores con los contactos abiertos, ideal para superficies proximales." },
+            { "texto": "Una radiolucidez en la mitad externa del esmalte confirma que la superficie está cavitada.", "verdadero": false, "explicacion": "La radiografía no confirma la cavitación; las lesiones RA1 suelen ser no cavitadas." },
+            { "texto": "La radiografía tiende a subestimar la profundidad real de la lesión.", "verdadero": true, "explicacion": "Se necesita una pérdida considerable de mineral para que el cambio sea visible." },
+            { "texto": "Conviene tomar aletas de mordida a todos los pacientes cada seis meses, sin importar su riesgo.", "verdadero": false, "explicacion": "La frecuencia se justifica según el riesgo y la edad de cada persona, no por calendario." },
+            { "texto": "La radiografía panorámica es suficiente para diagnosticar caries proximales iniciales.", "verdadero": false, "explicacion": "La panorámica no tiene la nitidez necesaria; para caries proximales se usa la aleta de mordida." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de indicar una radiografía, escribe en una línea del expediente la pregunta clínica que esperas responder, por ejemplo: «descartar lesión proximal en distal de 46». Si no puedes formular la pregunta, probablemente la radiografía no está justificada. Al interpretarla, anota el código radiográfico ICCMS de cada lesión junto a su código clínico."
+        }
+      ],
+      "glosario": [
+        { "termino": "Aleta de mordida", "definicion": "Radiografía intraoral que muestra las coronas de los dientes posteriores superiores e inferiores con los contactos abiertos; en inglés, bitewing." },
+        { "termino": "Radiolucidez", "definicion": "Zona oscura en la radiografía que corresponde a un tejido que absorbe menos rayos X, como el tejido desmineralizado por caries." },
+        { "termino": "Justificación", "definicion": "Principio de protección radiológica según el cual solo se expone al paciente cuando el beneficio diagnóstico supera el riesgo." },
+        { "termino": "ALADA", "definicion": "Principio de optimización que busca una exposición tan baja como sea diagnósticamente aceptable." },
+        { "termino": "Colimación rectangular", "definicion": "Restricción del haz de rayos X a una forma rectangular del tamaño del receptor, que reduce la dosis al paciente." },
+        { "termino": "Radiolucidez cervical", "definicion": "Banda oscura en el cuello del diente causada por menor espesor de tejido, que puede confundirse con caries; también llamada burnout." }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.4-1",
+          "q": "En la escala radiográfica ICCMS, ¿qué código corresponde a una radiolucidez en el tercio medio de la dentina?",
+          "opciones": [
+            "RA3",
+            "RA2",
+            "RC5",
+            "RB4"
+          ],
+          "correcta": 3,
+          "explicacion": "RB4 es el estadio moderado con radiolucidez en el tercio medio de la dentina; RA3 es el tercio externo y RC5 el interno."
+        },
+        {
+          "id": "t4.4-2",
+          "q": "¿Qué limitación tiene la radiografía en el diagnóstico de caries?",
+          "opciones": [
+            "No muestra la actividad de la lesión y subestima su profundidad",
+            "Muestra siempre la cavitación con certeza",
+            "Solo sirve para dientes temporales",
+            "Detecta mejor las lesiones oclusales iniciales que el examen visual"
+          ],
+          "correcta": 0,
+          "explicacion": "La radiografía no informa la actividad, subestima la profundidad y no confirma por sí sola la cavitación."
+        },
+        {
+          "id": "t4.4-3",
+          "q": "¿Qué medida reduce la dosis de radiación al paciente sin perder calidad diagnóstica?",
+          "opciones": [
+            "Tomar más radiografías para comparar",
+            "Que el operador sostenga el receptor",
+            "Usar colimación rectangular y receptores digitales",
+            "Usar la radiografía panorámica para todo"
+          ],
+          "correcta": 2,
+          "explicacion": "La colimación rectangular y los receptores sensibles optimizan la exposición; el operador nunca sostiene el receptor."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Dental radiographic examinations: recommendations for patient selection and limiting radiation exposure", "autor": "American Dental Association y U.S. Food and Drug Administration", "anio": 2012 },
+        { "tipo": "academica", "titulo": "Optimizing radiation safety in dentistry: clinical recommendations and regulatory considerations", "autor": "Benavides E. y cols., Council on Scientific Affairs de la ADA (Journal of the American Dental Association)", "anio": 2024 },
+        { "tipo": "oficial", "titulo": "NOM-229-SSA1-2002, Salud ambiental. Requisitos técnicos para las instalaciones, responsabilidades sanitarias, especificaciones técnicas para los equipos y protección radiológica en establecimientos de diagnóstico médico con rayos X", "autor": "Secretaría de Salud", "anio": 2006 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 }
+      ]
+    },
+    {
+      "n": "4.5",
+      "titulo": "Métodos complementarios, lesiones junto a restauraciones y registro",
+      "minutos": 13,
+      "enPocasPalabras": "Además de mirar y de tomar radiografías, existen aparatos con luz que ayudan a encontrar caries, aunque a veces dan falsas alarmas. También hay que revisar con cuidado los bordes de los empastes. Todo lo que se encuentra se anota en el expediente para comparar en cada visita.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El examen visual-táctil y la aleta de mordida son la base del diagnóstico de caries. Alrededor de ellos se han desarrollado **métodos complementarios** que usan luz, fluorescencia o corriente eléctrica para detectar cambios en el tejido dental. Algunos ya forman parte de equipos de uso diario, como los escáneres intraorales con transiluminación infrarroja. Conocerlos te ayuda a usarlos con criterio y a explicar a tus pacientes qué pueden y qué no pueden aportar."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Luz y fluorescencia al servicio del diagnóstico"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Principales métodos complementarios",
+          "columnas": ["Método", "Principio", "Aporte", "Limitación"],
+          "filas": [
+            ["Transiluminación con fibra óptica (FOTI y su versión digital)", "Una luz intensa atraviesa el diente; la lesión dispersa la luz y se ve como una sombra", "Lesiones proximales y oclusales sin radiación", "Depende de la interpretación y del grosor del diente"],
+            ["Transiluminación con infrarrojo cercano", "Luz infrarroja que el esmalte sano deja pasar y la lesión dispersa; integrada en algunos escáneres intraorales", "Imágenes de superficies proximales sin radiación durante el escaneo", "Menor información sobre lesiones profundas en dentina"],
+            ["Fluorescencia láser", "Mide la fluorescencia de productos bacterianos en la lesión y la expresa con un número", "Seguimiento de lesiones oclusales en el tiempo", "Falsos positivos por tinciones, biopelícula, cálculo o restos de pasta"],
+            ["Fluorescencia cuantitativa inducida por luz", "Cuantifica la pérdida de fluorescencia del esmalte desmineralizado", "Muy sensible a cambios minerales tempranos; útil en investigación", "Equipo especializado y poco disponible"],
+            ["Medición de conductancia eléctrica", "El esmalte poroso conduce más corriente que el sano", "Lesiones oclusales", "Sensible a la humedad de la superficie"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/13",
+          "proporcion": "4:3",
+          "alt": "Punta de un escáner intraoral dirigida a los molares de un modelo tipodonto, sostenida por una mano con guante.",
+          "pie": "Algunos escáneres intraorales incorporan transiluminación con infrarrojo cercano para complementar la detección de lesiones proximales.",
+          "prompt": "Fotografía realista y cercana de la punta de un escáner intraoral moderno de color blanco, sostenido por una mano con guante de nitrilo azul, colocado sobre los molares de un modelo tipodonto de arcada superior con dientes de anatomía correcta. Ambiente de consultorio limpio, fondo desenfocado en tonos claros, iluminación suave y uniforme, ligera luz azulada saliendo de la punta del escáner. Evitar: texto, logotipos, marcas comerciales, pantallas con interfaz, marcas de agua, sangre, rostro, manos sin guantes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Un número no decide un tratamiento",
+          "md": "Los dispositivos que entregan una cifra pueden dar una falsa sensación de precisión. Una tinción, un resto de pasta profiláctica o un sellador pueden elevar la lectura de un equipo de fluorescencia sin que exista una lesión que requiera intervención. Usa estos métodos como apoyo para detectar y, sobre todo, para **vigilar la misma lesión en el tiempo**, siempre junto con el examen visual y la valoración de actividad."
+        },
+        {
+          "tipo": "texto",
+          "md": "¿Cuándo aportan más estos métodos? En pacientes con riesgo elevado a quienes conviene vigilar lesiones iniciales con más detalle, en personas con aparatos de ortodoncia fija en las que el examen es más difícil, y como apoyo educativo, porque ver la imagen de su propia lesión motiva mucho al paciente. También son útiles cuando el paciente prefiere evitar una exposición radiográfica que no es imprescindible, aunque no sustituyen a la aleta de mordida cuando hay sospecha de una lesión proximal profunda. Si tu consultorio cuenta con alguno de estos equipos, aprende sus causas de error y usa siempre la misma técnica para que las lecturas de distintas citas sean comparables."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Sensibilidad y especificidad: cómo se mide un método"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para saber qué tan bueno es un método diagnóstico se compara con una referencia, por ejemplo la histología de dientes extraídos. Dos medidas resumen el resultado. La **sensibilidad** es la proporción de lesiones reales que el método detecta: un método muy sensible deja pocas lesiones sin encontrar. La **especificidad** es la proporción de superficies sanas que el método reconoce como sanas: un método muy específico produce pocas falsas alarmas.\n\nEn caries, la especificidad tiene un peso especial, porque un falso positivo puede llevar a abrir un diente sano o a restaurar una lesión que podía detenerse. Por eso se acepta que el examen visual detallado sea la base y que los métodos complementarios sumen información sin convertirse en el único criterio."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Calcula la sensibilidad de un método diagnóstico",
+          "instruccion": "En un estudio, la histología confirmó lesiones en dentina en 50 superficies. Un método las detectó en 40 casos (verdaderos positivos) y no las detectó en 10 (falsos negativos). Modifica los valores para ver cómo cambia la sensibilidad.",
+          "formula": "Sensibilidad = verdaderos positivos ÷ (verdaderos positivos + falsos negativos) × 100",
+          "variables": [
+            { "id": "verdaderosPositivos", "etiqueta": "Verdaderos positivos", "valor": 40, "unidad": "superficies" },
+            { "id": "falsosNegativos", "etiqueta": "Falsos negativos", "valor": 10, "unidad": "superficies" }
+          ],
+          "resultado": {
+            "expresion": "verdaderosPositivos / (verdaderosPositivos + falsosNegativos) * 100",
+            "etiqueta": "Sensibilidad",
+            "unidad": "%",
+            "decimales": 1
+          }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Caries junto a restauraciones y selladores"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una parte importante del trabajo restaurador en adultos es el reemplazo de restauraciones, y con frecuencia el motivo registrado es la «caries secundaria». ICDAS II tiene criterios específicos para la **caries asociada a restauraciones y selladores**, conocida por sus siglas en inglés como CARS, que siguen la misma lógica de severidad: cambio visual en el margen, ruptura localizada, sombra de dentina y cavidad franca.\n\nAquí es fácil sobrediagnosticar. Una **línea de tinción** en el margen de una resina o un pequeño escalón sin dentina blanda no equivalen a caries. Las lesiones verdaderas junto a restauraciones suelen aparecer en el margen gingival, que es donde se acumula la biopelícula, y se reconocen por los mismos signos de actividad que ya conoces. Ante la duda, valora el margen con sonda roma, revisa la aleta de mordida y considera reparar o sellar el margen antes que reemplazar toda la restauración.\n\nRecuerda también que el primer dígito del código ICDAS II ya te dice qué tipo de restauración hay. Así, un registro como «31» describe una resina con un primer cambio visual en su margen, mientras que «45» describe una amalgama con una cavidad franca y dentina visible junto a ella. Registrar ambos dígitos permite seguir la evolución del margen en cada cita sin depender de la memoria del examinador ni de impresiones generales como «restauración desajustada»."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/14",
+          "proporcion": "4:3",
+          "alt": "Molar con una restauración de resina que presenta una fina línea de tinción en su margen oclusal.",
+          "pie": "Una tinción marginal no es sinónimo de caries: hay que valorar el margen, la textura y la actividad antes de reemplazar.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar inferior permanente de un adulto con una restauración de resina del color del diente bien adaptada en la fosa central. En parte del margen se aprecia una fina línea marrón de tinción, sin cavidad ni dentina visible. Superficie limpia y seca, encía sana en el borde del encuadre, rollos de algodón desenfocados, iluminación uniforme de lámpara dental, colores naturales. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, amalgamas, fracturas dramáticas, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Registrar para dar seguimiento"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un diagnóstico que no se registra con detalle no se puede seguir. El registro de caries útil incluye, para cada superficie afectada: el **código ICDAS II** (restauración y caries), la **actividad**, el **código radiográfico** cuando exista aleta de mordida, la **fecha** y, de ser posible, una **fotografía intraoral** tomada siempre con la misma técnica. Con estos datos, en la siguiente cita podrás afirmar si una lesión se detuvo, se mantuvo o progresó, y ajustar el plan.\n\nEl registro también debe incluir el juicio diagnóstico global: cuántas lesiones activas tiene la persona, su riesgo de caries y el plan acordado. Este resumen es lo que permite a otro colega retomar el caso sin repetir todo el examen."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m04/d5",
+          "pie": "Flujo del diagnóstico de caries, del motivo de consulta al registro y la revaloración.",
+          "descripcion": "Diagrama de flujo horizontal con cajas unidas por flechas: historia clínica y motivo de consulta; examen visual-táctil con superficie limpia y seca; código ICDAS II y actividad; aleta de mordida si está justificada; métodos complementarios si aportan; diagnóstico integrado con estadio, actividad y riesgo; registro en el expediente. Desde la última caja, una flecha curva regresa al inicio con la leyenda revaloración en la siguiente cita.",
+          "elementos": [
+            "Historia clínica",
+            "Examen visual-táctil",
+            "Código ICDAS II y actividad",
+            "Aleta de mordida justificada",
+            "Métodos complementarios",
+            "Diagnóstico integrado",
+            "Registro en el expediente",
+            "Revaloración"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "El expediente clínico en México",
+          "md": "La **NOM-004-SSA3-2012, Del expediente clínico**, establece los criterios obligatorios para elaborar, integrar, usar y archivar el expediente. Los hallazgos del examen bucal, los estudios de imagen que se solicitan y su interpretación, y el plan de tratamiento forman parte de él. Las fotografías intraorales son datos personales de salud: obtén el consentimiento del paciente, guárdalas de forma segura y úsalas solo para su atención o, con autorización expresa, para docencia."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m04/15",
+          "proporcion": "16:9",
+          "alt": "Asistente dental con equipo de protección registra hallazgos en un odontograma digital mientras el odontólogo dicta.",
+          "pie": "El trabajo en equipo agiliza el registro: el odontólogo examina y dicta, y la asistente anota códigos, actividad y fecha.",
+          "prompt": "Fotografía realista en un consultorio dental moderno: un odontólogo con cubrebocas, lentes de protección, bata y guantes examina con espejo la boca de un paciente recostado, del que solo se ve el mentón y el babero. A su lado, una asistente dental con cubrebocas, lentes y bata escribe en una tableta montada junto a la unidad, cuya pantalla está desenfocada y sin texto legible. Luz clínica blanca y luz natural suave, colores limpios y neutros. Evitar: texto legible, logotipos, marcas de agua, sangre, rostro identificable del paciente, equipo de protección incompleto, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consultorio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Revisa el formato de odontograma que usas hoy y verifica si permite anotar código ICDAS II, actividad y código radiográfico por superficie. Si no lo permite, agrega una columna de observaciones con esa información en tus próximos diez pacientes. Y antes de reemplazar una restauración por «caries secundaria», escribe qué signo concreto la confirma: sombra, cavidad o dentina blanda en el margen."
+        }
+      ],
+      "glosario": [
+        { "termino": "Sensibilidad", "definicion": "Proporción de lesiones reales que un método diagnóstico detecta correctamente." },
+        { "termino": "Especificidad", "definicion": "Proporción de superficies sanas que un método diagnóstico identifica correctamente como sanas." },
+        { "termino": "Transiluminación", "definicion": "Técnica que hace pasar luz a través del diente; las lesiones dispersan la luz y aparecen como sombras." },
+        { "termino": "Fluorescencia láser", "definicion": "Método que mide la fluorescencia de productos bacterianos en una lesión y la expresa como un valor numérico." },
+        { "termino": "CARS", "definicion": "Caries asociada a restauraciones y selladores, registrada en ICDAS II con criterios de severidad propios." },
+        { "termino": "Expediente clínico", "definicion": "Conjunto de documentos y registros sobre la atención de un paciente, regulado en México por la NOM-004-SSA3-2012." }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.5-1",
+          "q": "¿Qué mide la especificidad de un método diagnóstico de caries?",
+          "opciones": [
+            "La proporción de superficies sanas que reconoce como sanas",
+            "La proporción de lesiones reales que detecta",
+            "La rapidez con que se obtiene el resultado",
+            "La dosis de radiación que evita"
+          ],
+          "correcta": 0,
+          "explicacion": "La especificidad refleja cuántas superficies sanas se identifican como sanas; una baja especificidad produce falsas alarmas y sobretratamiento."
+        },
+        {
+          "id": "t4.5-2",
+          "q": "Un equipo de fluorescencia láser da una lectura alta en una fisura con tinción marrón, lisa y brillante. ¿Qué haces?",
+          "opciones": [
+            "Restaurar de inmediato porque el número es alto",
+            "Ignorar el examen visual",
+            "Tomar una radiografía panorámica",
+            "Integrar la lectura con el examen visual, la actividad y la radiografía antes de decidir"
+          ],
+          "correcta": 3,
+          "explicacion": "Las tinciones elevan la lectura; el número es un apoyo y la decisión integra examen visual, actividad y, si se justifica, aleta de mordida."
+        },
+        {
+          "id": "t4.5-3",
+          "q": "¿Qué dato NO es indispensable en el registro de una lesión de caries para darle seguimiento?",
+          "opciones": [
+            "El código ICDAS II",
+            "La actividad de la lesión",
+            "La marca del espejo bucal usado",
+            "La fecha del examen"
+          ],
+          "correcta": 2,
+          "explicacion": "Para el seguimiento importan código, actividad, código radiográfico si existe, fecha y, de ser posible, fotografía; la marca del instrumental no aporta."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-004-SSA3-2012, Del expediente clínico", "autor": "Secretaría de Salud", "anio": 2012 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de cariología sobre métodos complementarios de detección y en los criterios CARS de ICDAS II", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el examen de caries",
+    "palabras": ["ICDAS", "ESMALTE", "DENTINA", "FISURA", "SONDA", "SECADO", "ACTIVIDAD", "SOMBRA", "MICROCAVIDAD", "RADIOLUCIDEZ", "ALETA", "EXPEDIENTE"]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m04-p01",
+        "q": "¿Cuál es la diferencia principal entre detección y diagnóstico de caries?",
+        "opciones": [
+          "La detección reconoce un cambio en el diente; el diagnóstico integra hallazgos, historia y riesgo del paciente",
+          "La detección requiere radiografías y el diagnóstico no",
+          "Son el mismo proceso con distinto nombre",
+          "El diagnóstico se limita a contar cavidades"
+        ],
+        "correcta": 0,
+        "explicacion": "El diagnóstico es un juicio clínico sobre la persona; la detección solo reconoce un cambio compatible con caries."
+      },
+      {
+        "id": "m04-p02",
+        "q": "¿Por qué no se recomienda presionar con un explorador puntiagudo las fisuras para buscar caries?",
+        "opciones": [
+          "Porque es más lento que la sonda roma",
+          "Porque puede romper la superficie de una lesión no cavitada y no mejora la exactitud",
+          "Porque solo funciona en dientes temporales",
+          "Porque mancha el esmalte"
+        ],
+        "correcta": 1,
+        "explicacion": "La presión de una punta afilada puede cavitar una lesión que podía remineralizarse y no aumenta la exactitud del examen."
+      },
+      {
+        "id": "m04-p03",
+        "q": "¿Qué condición del examen hace visibles las lesiones iniciales que el agua disimula?",
+        "opciones": [
+          "La anestesia local",
+          "El uso de pasta profiláctica abrasiva",
+          "El secado de la superficie con aire unos segundos",
+          "El uso de explorador puntiagudo"
+        ],
+        "correcta": 2,
+        "explicacion": "Al secar, el aire ocupa los poros del esmalte desmineralizado y la opacidad se hace evidente."
+      },
+      {
+        "id": "m04-p04",
+        "q": "Una superficie presenta una microcavidad en esmalte sin dentina visible. ¿Qué código ICDAS II le corresponde?",
+        "opciones": [
+          "Código 2",
+          "Código 4",
+          "Código 5",
+          "Código 3"
+        ],
+        "correcta": 3,
+        "explicacion": "El código 3 es la ruptura localizada del esmalte sin dentina visible."
+      },
+      {
+        "id": "m04-p05",
+        "q": "¿Qué significa el código ICDAS II 34?",
+        "opciones": [
+          "Restauración de color del diente con sombra de dentina subyacente",
+          "Amalgama con microcavidad",
+          "Sellador completo con cavidad extensa",
+          "Diente ausente por caries"
+        ],
+        "correcta": 0,
+        "explicacion": "El primer dígito 3 es restauración del color del diente y el segundo dígito 4 es sombra oscura de dentina."
+      },
+      {
+        "id": "m04-p06",
+        "q": "¿Qué diferencia al código 6 del código 5 en ICDAS II?",
+        "opciones": [
+          "El código 6 no tiene dentina visible",
+          "El código 6 es una cavidad con dentina visible que abarca más de la mitad de la superficie",
+          "El código 6 se usa solo en superficies lisas",
+          "El código 6 indica una lesión inactiva"
+        ],
+        "correcta": 1,
+        "explicacion": "Ambos tienen dentina visible; el código 6 es extenso, con más de la mitad de la superficie afectada."
+      },
+      {
+        "id": "m04-p07",
+        "q": "¿Qué combinación de signos sugiere una lesión activa?",
+        "opciones": [
+          "Marrón, brillante y alejada de la encía",
+          "Lisa, dura y sin biopelícula",
+          "Opaca, rugosa, cubierta de biopelícula y junto al margen gingival",
+          "Negra y brillante en una fisura"
+        ],
+        "correcta": 2,
+        "explicacion": "La opacidad sin brillo, la rugosidad y la ubicación en zonas de estancamiento de biopelícula indican actividad."
+      },
+      {
+        "id": "m04-p08",
+        "q": "En ICCMS, ¿qué estadio agrupa los códigos ICDAS 5 y 6?",
+        "opciones": [
+          "Inicial",
+          "Moderado",
+          "Sano",
+          "Extenso"
+        ],
+        "correcta": 3,
+        "explicacion": "ICCMS agrupa 0 como sano, 1 y 2 como inicial, 3 y 4 como moderado, y 5 y 6 como extenso."
+      },
+      {
+        "id": "m04-p09",
+        "q": "¿Qué proyección radiográfica es la de elección para detectar caries proximales en dientes posteriores?",
+        "opciones": [
+          "Aleta de mordida",
+          "Panorámica",
+          "Lateral de cráneo",
+          "Oclusal"
+        ],
+        "correcta": 0,
+        "explicacion": "La aleta de mordida muestra las coronas posteriores con los contactos abiertos."
+      },
+      {
+        "id": "m04-p10",
+        "q": "Una radiolucidez proximal llega al tercio externo de la dentina. ¿Qué código radiográfico ICCMS le corresponde?",
+        "opciones": [
+          "RA2",
+          "RA3",
+          "RB4",
+          "RC5"
+        ],
+        "correcta": 1,
+        "explicacion": "RA3 corresponde al tercio externo de la dentina y todavía se agrupa como estadio inicial."
+      },
+      {
+        "id": "m04-p11",
+        "q": "¿Cuál de las siguientes afirmaciones sobre la radiografía en caries es correcta?",
+        "opciones": [
+          "Muestra con precisión si la lesión está activa",
+          "Sobrestima la profundidad de las lesiones",
+          "Tiende a subestimar la profundidad real y no confirma por sí sola la cavitación",
+          "Sustituye al examen visual en superficies oclusales"
+        ],
+        "correcta": 2,
+        "explicacion": "La radiografía necesita una pérdida considerable de mineral para mostrar la lesión, por lo que la subestima, y no informa actividad ni cavitación con certeza."
+      },
+      {
+        "id": "m04-p12",
+        "q": "¿Qué es la radiolucidez cervical o burnout?",
+        "opciones": [
+          "Una caries radicular avanzada",
+          "Una lesión periapical",
+          "Un defecto del receptor digital",
+          "Una banda oscura en el cuello del diente por menor espesor de tejido, que puede confundirse con caries"
+        ],
+        "correcta": 3,
+        "explicacion": "Es un efecto de la anatomía y la exposición, aparece en varios dientes y no corresponde a caries."
+      },
+      {
+        "id": "m04-p13",
+        "q": "¿Qué principio de protección radiológica exige que la radiografía pueda cambiar la decisión clínica para tomarla?",
+        "opciones": [
+          "Justificación",
+          "Optimización",
+          "Limitación de dosis del personal",
+          "Blindaje"
+        ],
+        "correcta": 0,
+        "explicacion": "La justificación pide que el beneficio diagnóstico supere el riesgo; la optimización busca la menor exposición útil."
+      },
+      {
+        "id": "m04-p14",
+        "q": "Según su campo de aplicación, ¿qué estudios dentales incluye la NOM-229-SSA1-2002?",
+        "opciones": [
+          "Todas las radiografías intraorales",
+          "Los estudios panorámicos dentales, excluyendo las aplicaciones odontológicas convencionales",
+          "Solo la tomografía de haz cónico",
+          "Ningún estudio dental"
+        ],
+        "correcta": 1,
+        "explicacion": "La norma incluye los estudios panorámicos dentales y excluye las aplicaciones odontológicas convencionales y la densitometría ósea."
+      },
+      {
+        "id": "m04-p15",
+        "q": "Un equipo de fluorescencia láser tiende a dar falsos positivos cuando hay…",
+        "opciones": [
+          "Esmalte sano y seco",
+          "Superficies proximales cerradas",
+          "Tinciones, biopelícula o restos de pasta profiláctica",
+          "Dientes temporales"
+        ],
+        "correcta": 2,
+        "explicacion": "Los pigmentos y restos orgánicos emiten fluorescencia y elevan la lectura sin que haya una lesión relevante."
+      },
+      {
+        "id": "m04-p16",
+        "q": "En un estudio, un método detectó 45 de 60 lesiones confirmadas por histología. ¿Cuál es su sensibilidad?",
+        "opciones": [
+          "45 %",
+          "60 %",
+          "25 %",
+          "75 %"
+        ],
+        "correcta": 3,
+        "explicacion": "Sensibilidad = 45 ÷ 60 × 100 = 75 %."
+      },
+      {
+        "id": "m04-p17",
+        "q": "Caso clínico: un adulto tiene una resina oclusal con una fina línea marrón en el margen, lisa, sin escalón ni dentina blanda, y la aleta de mordida no muestra radiolucidez. ¿Qué es lo más adecuado?",
+        "opciones": [
+          "Registrar la tinción marginal, vigilarla y, si molesta estéticamente, considerar pulir o reparar el margen",
+          "Reemplazar toda la restauración por caries secundaria",
+          "Indicar una radiografía panorámica",
+          "Colocar un sellador sobre todo el diente sin valorar el margen"
+        ],
+        "correcta": 0,
+        "explicacion": "Una tinción marginal sin signos de lesión no equivale a caries; reemplazar la restauración sacrificaría tejido sano."
+      },
+      {
+        "id": "m04-p18",
+        "q": "Caso clínico: en la cara vestibular de un canino de un adulto hay una mancha marrón, lisa y brillante, lejos de la encía, sin biopelícula. Se ve con el diente húmedo y no hay ruptura del esmalte. ¿Cómo la registras?",
+        "opciones": [
+          "Código 4, moderada, activa",
+          "Código 2, inicial, inactiva",
+          "Código 0, superficie sana",
+          "Código 5, extensa, activa"
+        ],
+        "correcta": 1,
+        "explicacion": "Es visible húmeda sin ruptura (código 2, inicial) y su brillo, dureza y ubicación indican que está detenida."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "The International Caries Detection and Assessment System (ICDAS): an integrated system for measuring dental caries", "autor": "Ismail A. I., Sohn W., Tellez M., Amaya A., Sen A., Hasson H., Pitts N. B. (Community Dentistry and Oral Epidemiology)", "anio": 2007 },
+    { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 },
+    { "tipo": "academica", "titulo": "Reliability of a new caries diagnostic system differentiating between active and inactive caries lesions", "autor": "Nyvad B., Machiulskiene V., Baelum V. (Caries Research)", "anio": 1999 },
+    { "tipo": "academica", "titulo": "Optimizing radiation safety in dentistry: clinical recommendations and regulatory considerations", "autor": "Benavides E. y cols., Council on Scientific Affairs de la ADA (Journal of the American Dental Association)", "anio": 2024 },
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "oficial", "titulo": "NOM-229-SSA1-2002, Requisitos técnicos para las instalaciones, responsabilidades sanitarias, especificaciones técnicas para los equipos y protección radiológica en establecimientos de diagnóstico médico con rayos X", "autor": "Secretaría de Salud", "anio": 2006 },
+    { "tipo": "oficial", "titulo": "NOM-004-SSA3-2012, Del expediente clínico", "autor": "Secretaría de Salud", "anio": 2012 }
+  ]
+}

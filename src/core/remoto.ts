@@ -6,6 +6,7 @@ import { Certificados, type CertificadoRemoto } from './certificados';
 import { RetosRemotos } from './retos-remotos';
 import { Recompensas } from './recompensas';
 import { Directorio } from './directorio';
+import { cargarAcademiaDeRuta } from './academia';
 
 interface CatalogoRemoto {
   cursos?: unknown[];
@@ -98,6 +99,7 @@ async function cargarExtrasDeRuta(path: string, mismaRuta: boolean) {
   await Promise.all([
     cargarQuizDeRuta(path, mismaRuta),
     cargarComunidadDeRuta(path, mismaRuta),
+    path.startsWith('/academia') ? cargarAcademiaDeRuta(path) : path.startsWith('/certificados') ? cargarAcademiaDeRuta('/academia') : Promise.resolve(),
     path === '/directorio' && !(Directorio.cargado() && (mismaRuta || Directorio.vigente(TTL))) ? Directorio.cargar() : Promise.resolve(),
     path.startsWith('/certificados') ? api<CertificadoRemoto[]>('/certificados').then((lista) => Certificados.hidratar(lista)) : Promise.resolve(),
     path === '/' || path === '/perfil' || path === '/logros' || path === '/recompensas' || path === '/retos' || path.startsWith('/comunidad') || path.startsWith('/materiales') ? Recompensas.cargar().catch(() => null) : Promise.resolve(),

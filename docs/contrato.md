@@ -154,6 +154,13 @@ La encuesta de experiencia (`experiencia-v2--<AAAA>T<n>`, una clave por trimestr
 
 Las plantillas son versionadas en código para conservar preguntas comparables. La entrevista inicial vigente es `bienvenida-v2` (siete preguntas: `situacion`, `experiencia`, `como_conocio`, `objetivo`, `intereses` (hasta 3), `formato` (hasta 2) y `reto`); el cliente la presenta como página propia en `#/bienvenida`. Cambiar preguntas u opciones exige subir la versión en `api/src/lib/encuestas.js` y en su espejo demo `src/core/encuestas.ts` (la v2 se ajustó en sitio el 2 de octubre de 2026 porque aún no se había desplegado ni recibido respuestas reales). El cliente nunca envía el UID. El panel administrativo sólo recibe agregados y comentarios sin UID, nombre ni correo.
 
+### Academia (`api/content/academia` + `v2_academia_*`)
+El contenido de lectura vive versionado en `api/content/academia/<programa>/modulo-NN.json` y `catalogo.json` (formato en `docs/ACADEMIA-FORMATO.md`); la API lo lee del disco y nunca viaja en el bundle de producción (el build con `VITE_API_URL` no incluye ningún JSON de módulo). Las carpetas que empiezan con `_` se ignoran.
+- `v2_academia_progreso/{uid}`: `{ uid, actualizado, programas: { [programa]: { certificado?: folio, modulos: { [n]: { temas: { [tema]: ISO }, mejor, intentos, aprobado, aprobadoEn? } } } } }`. La aprobación es permanente; `mejor` nunca baja.
+- `v2_academia_intentos/{uid}_{programa}_{n}`: examen emitido `{ ids[], emitido, calificado }` y último resultado `{ correctas, total, porcentaje, aprobado, fecha, intentos }`. Tras reprobar hay que esperar 3 minutos para recibir otro examen (`429 espera_examen`).
+- `v2_academia_certificados/{folio}`: `{ folio, tipo:'academia', uid, nombre, programaId, programaTitulo, area, modulos, emitido }`. Se emite dentro de la transacción que califica el examen cuando todos los módulos del programa están aprobados; es idempotente (el folio queda en el progreso) y usa el mismo contador `v2_contadores/certificados-AAAA` que los cursos, así que `/verificar/:folio` lo encuentra.
+- `v2_academia_revisiones/{programa}_{n}`: `{ programa, modulo, estado:'borrador'|'revision'|'aprobado', revisor (uid), revisorEmail, fecha, nota }`. Si existe, manda sobre el `estado` del JSON. Solo el estado efectivo `aprobado` es visible para miembros (admin ve todo; `ACADEMIA_MOSTRAR_BORRADORES=true` los muestra a todos para revisión).
+
 ### `v2_config/general`
 `{ precios: { mensual: 199, anual: 1899 }, descuentoVIP: 20, whatsappSoporte, canalWhatsApp, praxiaUrl, stripePriceMensual, stripePriceAnual }`
 
@@ -181,7 +188,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/recompensas/canjear` | `{ recompensaId }` → descuenta una sola vez y entrega material o crea solicitud pendiente de Praxia |
 | POST | `/recompensas/notificaciones/leidas` | Marca como leídos los avisos personales de logros y canjes |
 | GET | `/certificados` | `Certificado[]` del usuario |
-| GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }` |
+| GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }`; si es de Academia añade `tipo:'academia'` y `programaTitulo` |
 | GET | `/quiz/:cursoId/:n` | `{ version, preguntas }` (solo aprobados; sin soluciones, explicaciones ni marcas de evidencia) |
 | POST | `/quiz/:cursoId/:n` | `{ respuestas, confianzas?: (1\|2\|3)[], justificaciones?: string[] }` → `{ correctas, total, puntaje, aprobado, detalle, recompensas, intento }`; conserva hasta diez intentos y premia una sola vez |
 | GET | `/retos/resumen` | Estado, disponibilidad por área y sesión recomendada; sólo cuenta quizzes aprobados y clases accesibles |
@@ -204,6 +211,12 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/directorio/conexiones` | Envía solicitud privada idempotente a perfil u oportunidad; máximo 10/24 h y sin reintento por 30 días tras rechazo |
 | PATCH | `/directorio/conexiones/:id` | Destinatario acepta o rechaza; aceptación habilita contacto |
 | POST | `/directorio/reportes` | Denuncia privada de perfil u oportunidad; deduplicada y limitada a 10/24 h |
+| GET | `/academia` | `{ programas (con disponible, estado, temas, duracionMin por módulo), progreso, certificados: { [programa]: Certificado } }` |
+| GET | `/academia/progreso` | Avance por programa |
+| GET | `/academia/:programa/:n` | Módulo sin banco de examen (`examen: { aprobar, mostrar, total }`). Errores en orden: 404 `no_encontrado`, 404 `modulo_en_preparacion`, 402 `requiere_vip` (módulo > 1 sin VIP), 403 `modulo_bloqueado` (anterior sin aprobar; admin lo salta) |
+| POST | `/academia/:programa/:n/tema` | `{ tema: '3.1' }` → marca el tema leído |
+| GET | `/academia/:programa/:n/examen` | `{ aprobar, preguntas: [{ id, q, opciones }] }` al azar (`mostrar`), sin respuestas; registra el intento emitido |
+| POST | `/academia/:programa/:n/examen` | `{ respuestas: { id: índice } }` → `{ correctas, total, porcentaje, aprobado, mejor, detalle, siguiente, programaCompleto, certificado? }`; solo califica lo emitido (409 `examen_no_emitido` / `examen_desactualizado`), 70 % aprueba |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
 | GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
 | POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada y su evento de puntos |
@@ -234,6 +247,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET · POST | `/admin/avisos` | Lista · publicar |
 | GET | `/admin/encuestas/resumen?plan=vip|gratis` | Totales, distribuciones, promedios, NPS (0-10), bases de preguntas condicionales, `planes` y `periodos` por trimestre; nunca UID ni correo |
 | GET | `/admin/encuestas/contactos` | Correos de quienes calificaron 0-6 y pidieron que se les escriba (con su calificación y motivo) |
+| GET | `/admin/academia` | Programas y módulos con `estadoJson`, `estado` efectivo, `revision`, palabras, figuras, actividades, temas y preguntas |
+| PATCH | `/admin/academia/:programa/:n` | `{ estado:'borrador'|'revision'|'aprobado', nota? }` → guarda la revisión (409 `modulo_sin_contenido` si no hay JSON) |
 | GET · PATCH | `/admin/config` | Configuración general |
 
 ## Variables de entorno (backend)
@@ -251,6 +266,7 @@ STRIPE_PRICE_ANUAL=
 APP_URL=https://club.odonteckconsulting.com
 ALLOWED_ORIGINS=http://localhost:5179,https://club.odonteckconsulting.com
 PORT=8080
+ACADEMIA_MOSTRAR_BORRADORES=false
 ```
 
 ## Firma de Bunny (Token Authentication del embed)

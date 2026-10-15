@@ -1,0 +1,1518 @@
+{
+  "programa": "caries-dental",
+  "modulo": 3,
+  "titulo": "Factores de riesgo y evaluación del riesgo de caries con CAMBRA e ICCMS",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "No todos los pacientes necesitan lo mismo. Evaluar el riesgo de caries permite decidir cuánta prevención requiere cada persona, cada cuándo revisarla y cómo explicarle lo que está en juego. En este módulo distinguirás entre riesgo, actividad y experiencia de caries; clasificarás indicadores de enfermedad, factores de riesgo y factores protectores; aplicarás la lógica de CAMBRA, incluido su método cuantitativo, y conocerás el sistema ICCMS y su ciclo práctico CariesCare 4D. Al final sabrás convertir una evaluación en un plan personalizado y documentado.",
+  "objetivos": [
+    "Distinguir entre riesgo de caries, actividad de las lesiones y experiencia de caries.",
+    "Clasificar los datos de un paciente en indicadores de enfermedad, factores de riesgo biológicos y factores protectores.",
+    "Calcular e interpretar una puntuación de riesgo con el método cuantitativo de CAMBRA.",
+    "Describir los componentes de ICCMS y las cuatro etapas del ciclo CariesCare 4D.",
+    "Proponer un plan preventivo y un intervalo de revisión coherentes con el nivel de riesgo, y documentarlos en el expediente."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m03/portada",
+    "proporcion": "16:9",
+    "alt": "Odontólogo con equipo de protección revisa un formulario en una tableta junto a la unidad dental mientras un paciente espera reclinado.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental moderno y ordenado en México: un odontólogo con bata, guantes de nitrilo, cubrebocas y lentes de protección revisa una tableta con una pantalla de formulario borrosa e ilegible, sentado junto a la unidad dental donde un paciente adulto está reclinado y visto desde atrás de la cabecera, bandeja con espejo y sonda sobre campo desechable, luz natural de ventana mezclada con luz de consultorio, colores naturales, profundidad de campo media, composición horizontal con espacio libre a la derecha. Evitar: texto legible, logotipos, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes."
+  },
+  "temas": [
+    {
+      "n": "3.1",
+      "titulo": "Riesgo, actividad y experiencia: tres preguntas distintas",
+      "minutos": 13,
+      "enPocasPalabras": "Evaluar el riesgo de caries es calcular qué tan probable es que una persona tenga caries nuevas en el futuro. No es lo mismo que contar cuántas caries ha tenido ni que saber si hoy tiene alguna activa, aunque esas tres cosas se relacionan. Conocer el riesgo ayuda a decidir cuánta prevención necesita cada quien.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Durante mucho tiempo, la prevención en odontología fue igual para todos: la misma limpieza, la misma aplicación de flúor y la misma cita cada seis meses, sin importar si la persona nunca había tenido una caries o si cada año aparecían lesiones nuevas. Ese enfoque desperdicia recursos en quienes no los necesitan y se queda corto con quienes más los requieren.\n\nLa **evaluación del riesgo de caries** propone algo distinto: estimar, para cada paciente, la probabilidad de que desarrolle lesiones nuevas o de que las existentes progresen en un periodo determinado, y ajustar la intensidad de la prevención a esa probabilidad. Organizaciones como la Asociación Dental Americana (ADA), la Academia Americana de Odontología Pediátrica (AAPD) y los sistemas CAMBRA e ICCMS la consideran parte del examen de rutina."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/01",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con equipo de protección conversa con un paciente adulto sentado en la unidad dental, vista desde detrás del paciente.",
+          "pie": "La evaluación del riesgo empieza con una conversación: hábitos, salud general, medicamentos y experiencias previas con la caries.",
+          "prompt": "Fotografía realista en un consultorio dental luminoso: una odontóloga con bata, cubrebocas, lentes de protección y guantes de nitrilo sostiene una tabla con hojas en blanco mientras conversa con un paciente adulto sentado en la unidad dental, el paciente se ve de espaldas y de perfil lejano sin rostro identificable, gesto de escucha atenta, bandeja de instrumental cubierta al fondo, luz natural suave, colores cálidos y naturales, encuadre horizontal medio. Evitar: texto legible, logotipos, marcas de agua, rostro del paciente, sangre, manos sin guantes, ambiente desordenado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres conceptos que no conviene mezclar"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la consulta se manejan tres ideas relacionadas pero distintas, y confundirlas lleva a malas decisiones:\n\n**Experiencia de caries.** Es la historia acumulada: dientes cariados, obturados o perdidos por caries a lo largo de la vida. Se resume con índices como el CPOD en dientes permanentes y el ceod en temporales. Describe el pasado.\n\n**Actividad de caries.** Indica si hoy hay lesiones que están progresando. Una persona con muchas restauraciones antiguas puede no tener ninguna lesión activa, y un niño sin restauraciones puede tener varias lesiones activas. Describe el presente.\n\n**Riesgo de caries.** Es la probabilidad de que aparezcan lesiones nuevas o progresen las actuales en el futuro cercano. Se estima combinando la experiencia, la actividad, los factores de riesgo y los factores protectores. Mira hacia adelante y es el que guía la prevención."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m03/d1",
+          "pie": "Experiencia, actividad y riesgo: pasado, presente y futuro de la caries en un paciente.",
+          "descripcion": "Línea de tiempo horizontal dividida en tres segmentos de izquierda a derecha. En el segmento del pasado se ve un diente con restauración y el rótulo experiencia de caries con los índices CPOD y ceod. El segmento del presente muestra un diente con mancha blanca opaca y el rótulo actividad. El segmento del futuro muestra un diente con un signo de interrogación y el rótulo riesgo. Debajo, flechas que convergen desde los tres segmentos hacia un recuadro final rotulado plan preventivo personalizado.",
+          "elementos": [
+            "Pasado: experiencia de caries",
+            "CPOD y ceod",
+            "Presente: actividad de las lesiones",
+            "Futuro: riesgo de caries",
+            "Plan preventivo personalizado"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Un índice con más de 80 años",
+          "md": "El índice CPO, en inglés DMF, fue propuesto en 1938 por Henry Klein, Carroll Palmer y John Knutson en estudios de salud pública en Estados Unidos. Su sencillez explica que siga usándose en encuestas epidemiológicas de todo el mundo. Su limitación es que solo registra lesiones cavitadas o tratadas y no distingue lesiones iniciales ni su actividad; por eso, para decidir el manejo de un paciente, se complementa con sistemas como ICDAS e ICCMS."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El mejor predictor: la historia reciente"
+        },
+        {
+          "tipo": "texto",
+          "md": "De todos los datos que se pueden reunir, el que mejor predice caries futuras es la **experiencia de caries reciente**, en especial la presencia de lesiones activas o de restauraciones colocadas por caries en los últimos años. Tiene lógica: si las condiciones que causaron esas lesiones siguen presentes, lo más probable es que sigan actuando. Por eso los sistemas de evaluación dan tanto peso a los indicadores de enfermedad.\n\nEsto tiene una limitación evidente en niñas y niños pequeños, o en cualquier persona que todavía no ha desarrollado lesiones: no tienen historia que analizar. En ellos cobran más importancia los factores de riesgo, como la dieta, la higiene, la exposición a flúor y las condiciones familiares y sociales, que permiten anticiparse antes de que aparezca la primera lesión."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Una herramienta para pensar, no un oráculo",
+          "md": "Los instrumentos de evaluación del riesgo tienen una capacidad predictiva **moderada**: aciertan en muchos casos, pero clasifican mal a una parte de los pacientes. Por eso ninguno sustituye al juicio clínico. Úsalos para ordenar la información, no para etiquetar a una persona de por vida. El riesgo cambia cuando cambian los hábitos, la salud o los medicamentos, y debe reevaluarse en cada revisión."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuándo evaluar el riesgo"
+        },
+        {
+          "tipo": "texto",
+          "md": "La primera evaluación se hace en la **primera consulta**, como parte de la historia clínica. Después, se repite en cada revisión periódica, para comprobar si el plan funcionó. Pero hay momentos de la vida en los que el riesgo puede cambiar de forma brusca y conviene reevaluar aunque no toque cita: el inicio de un tratamiento de ortodoncia, el embarazo, la prescripción de medicamentos nuevos que reducen la saliva, un tratamiento contra el cáncer de cabeza y cuello, una enfermedad o discapacidad que dificulta la higiene, el ingreso a una residencia para personas mayores o cambios importantes en la rutina, como un trabajo nocturno o una etapa de estudio intenso con bebidas azucaradas.\n\nEn la infancia, el riesgo debe evaluarse desde la primera visita, idealmente con la erupción de los primeros dientes, y repetirse con cada etapa del desarrollo. La caries de la infancia temprana puede avanzar con rapidez, y una evaluación oportuna permite intervenir antes de que aparezcan lesiones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Riesgo individual y riesgo poblacional"
+        },
+        {
+          "tipo": "texto",
+          "md": "La evaluación del riesgo se hace persona por persona, pero conviene recordar que la caries tiene una distribución social marcada. En una comunidad con poco acceso a agua potable, alto consumo de bebidas azucaradas y escasos servicios preventivos, la mayoría de las personas tendrá un riesgo elevado aunque individualmente no lo parezca. Por eso la prevención funciona mejor cuando combina dos estrategias: la **individual**, que ajusta el plan a cada paciente, y la **poblacional**, que mejora las condiciones de todos, como la educación en escuelas, el acceso a pasta fluorada o las políticas sobre azúcares.\n\nEn la práctica clínica cotidiana, sea en un consultorio privado, en un centro de salud o en una clínica del IMSS o del ISSSTE, la evaluación del riesgo también ayuda a priorizar: con agendas saturadas, saber qué pacientes necesitan citas más frecuentes y medidas profesionales más intensas permite usar mejor el tiempo disponible."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Para qué sirve evaluar el riesgo",
+          "columnas": [
+            "Decisión clínica",
+            "Cómo la orienta el riesgo"
+          ],
+          "filas": [
+            [
+              "Intensidad de la prevención en casa",
+              "Más medidas y más apoyo cuanto mayor es el riesgo"
+            ],
+            [
+              "Medidas preventivas profesionales",
+              "Se indican con más frecuencia en riesgo alto, según criterio del odontólogo"
+            ],
+            [
+              "Intervalo entre revisiones",
+              "Más corto en riesgo alto y más largo en riesgo bajo"
+            ],
+            [
+              "Frecuencia de radiografías de aleta de mordida",
+              "Se ajusta al riesgo y a la edad, siempre con justificación clínica"
+            ],
+            [
+              "Decisiones restauradoras",
+              "En riesgo alto se prioriza controlar la enfermedad y se vigilan de cerca las lesiones dudosas"
+            ]
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Verdadero o falso: el riesgo de caries",
+          "afirmaciones": [
+            {
+              "texto": "Una persona con muchas restauraciones antiguas siempre tiene riesgo alto de caries.",
+              "verdadero": false,
+              "explicacion": "La experiencia antigua no equivale a actividad actual; si las condiciones cambiaron y no hay lesiones nuevas, el riesgo puede ser menor."
+            },
+            {
+              "texto": "La experiencia de caries reciente es uno de los mejores predictores de caries futuras.",
+              "verdadero": true,
+              "explicacion": "Lesiones activas o restauraciones recientes por caries indican que las condiciones causales probablemente siguen presentes."
+            },
+            {
+              "texto": "El nivel de riesgo de un paciente se asigna una vez y no cambia.",
+              "verdadero": false,
+              "explicacion": "El riesgo cambia con los hábitos, la salud y los medicamentos, y debe reevaluarse en cada revisión."
+            },
+            {
+              "texto": "Las herramientas de evaluación del riesgo sustituyen al juicio clínico.",
+              "verdadero": false,
+              "explicacion": "Su capacidad predictiva es moderada; ordenan la información, pero la decisión final es del profesional."
+            },
+            {
+              "texto": "En niños pequeños sin lesiones, los factores de riesgo cobran más peso en la evaluación.",
+              "verdadero": true,
+              "explicacion": "Sin historia de caries que analizar, la dieta, la higiene, el flúor y el contexto familiar orientan la estimación."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/02",
+          "proporcion": "16:9",
+          "alt": "Dos arcadas en modelos de estudio, una con varias restauraciones antiguas y otra sin restauraciones pero con manchas blancas.",
+          "pie": "Muchas restauraciones no significan enfermedad activa, y una boca sin restauraciones puede tener lesiones activas: experiencia y actividad son cosas distintas.",
+          "prompt": "Fotografía realista de estudio sobre fondo gris claro: dos modelos de arcada inferior permanente tipo tipodonto colocados lado a lado, el de la izquierda con varias restauraciones antiguas de amalgama y resina en molares y premolares pero superficies limpias y brillantes, el de la derecha sin restauraciones pero con manchas blancas opacas junto al margen gingival de varios dientes, anatomía dental correcta, iluminación difusa uniforme, enfoque nítido, composición horizontal simétrica. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/03",
+          "proporcion": "3:4",
+          "alt": "Promotora de salud con cubrebocas enseña cepillado con un modelo dental a un grupo de niños de espaldas en un aula.",
+          "pie": "La prevención poblacional, como la educación en escuelas, complementa la evaluación individual del riesgo.",
+          "prompt": "Fotografía documental realista vertical en un aula de primaria pública en México con luz natural: una promotora de salud con bata blanca y cubrebocas sostiene un modelo dental grande y un cepillo de dientes, mostrando el movimiento del cepillado a un grupo de niñas y niños sentados en pupitres que se ven de espaldas, sin rostros visibles, pizarrón verde vacío al fondo, colores naturales, ambiente alegre y ordenado. Evitar: texto, letreros, logotipos, marcas de agua, rostros identificables de menores, desorden, aspecto de publicidad."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en tus notas de cada paciente escribe tres líneas separadas: experiencia («CPOD 9, última restauración hace cuatro años»), actividad («sin lesiones activas» o «dos lesiones activas en cervicales») y riesgo estimado con su justificación. Separarlas por escrito obliga a pensar en cada una y evita el error frecuente de deducir el riesgo solo por el número de restauraciones. Cuando revises el expediente meses después, esas tres líneas te dirán en segundos si la situación del paciente mejoró, empeoró o se mantiene igual."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Riesgo de caries",
+          "definicion": "Probabilidad de que una persona desarrolle lesiones nuevas o de que progresen las existentes en un periodo determinado."
+        },
+        {
+          "termino": "Actividad de caries",
+          "definicion": "Presencia actual de lesiones que están perdiendo mineral y progresando."
+        },
+        {
+          "termino": "Experiencia de caries",
+          "definicion": "Historia acumulada de dientes cariados, obturados o perdidos por caries."
+        },
+        {
+          "termino": "CPOD",
+          "definicion": "Índice que suma dientes permanentes cariados, perdidos y obturados por caries; en temporales se usa el ceod."
+        },
+        {
+          "termino": "Estrategia poblacional",
+          "definicion": "Acciones que mejoran las condiciones de toda una comunidad, como la educación en escuelas o el acceso a fluoruro."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.1-1",
+          "q": "¿Qué describe el riesgo de caries?",
+          "opciones": [
+            "El número de restauraciones que tiene el paciente",
+            "Si hoy hay lesiones activas",
+            "La probabilidad de que aparezcan o progresen lesiones en el futuro cercano",
+            "El número de dientes perdidos"
+          ],
+          "correcta": 2,
+          "explicacion": "La experiencia describe el pasado, la actividad el presente y el riesgo el futuro."
+        },
+        {
+          "id": "t3.1-2",
+          "q": "¿Cuál es uno de los mejores predictores de caries futuras?",
+          "opciones": [
+            "El color de los dientes",
+            "La edad del paciente por sí sola",
+            "El tipo de cepillo que usa",
+            "La experiencia de caries reciente, como lesiones activas o restauraciones recientes por caries"
+          ],
+          "correcta": 3,
+          "explicacion": "La historia reciente indica que las condiciones causales probablemente siguen presentes."
+        },
+        {
+          "id": "t3.1-3",
+          "q": "¿Cómo deben usarse las herramientas de evaluación del riesgo?",
+          "opciones": [
+            "Como apoyo para ordenar la información, reevaluando el riesgo en cada revisión",
+            "Como diagnóstico definitivo que no cambia",
+            "Solo en pacientes con muchas restauraciones",
+            "Para sustituir el examen clínico"
+          ],
+          "correcta": 0,
+          "explicacion": "Tienen capacidad predictiva moderada; complementan el juicio clínico y el riesgo cambia con el tiempo."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Evidence-Based Caries Management for All Ages-Practical Guidelines",
+          "autor": "Featherstone J. D. B., Crystal Y. O., Alston P. et al. (Frontiers in Oral Health)",
+          "anio": 2021
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Caries-risk Assessment and Management for Infants, Children, and Adolescents (Reference Manual)",
+          "autor": "American Academy of Pediatric Dentistry"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental caries",
+          "autor": "Pitts N. B., Zero D. T., Marsh P. D. et al. (Nature Reviews Disease Primers)",
+          "anio": 2017
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en literatura sobre evaluación del riesgo de caries",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "3.2",
+      "titulo": "Indicadores de enfermedad, factores de riesgo y factores protectores",
+      "minutos": 14,
+      "enPocasPalabras": "Para estimar el riesgo se juntan tres tipos de datos: señales de que la enfermedad ya está activa, factores que empujan hacia la caries y factores que protegen. Por ejemplo, picar dulces seguido empuja hacia la caries y usar pasta con flúor protege. Lo que importa es hacia dónde se inclina la balanza.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Para que la evaluación del riesgo sea útil, necesitas organizar la información del paciente en categorías claras. El sistema **CAMBRA** (*Caries Management by Risk Assessment*), desarrollado en la Universidad de California en San Francisco y actualizado por Featherstone y colaboradores en 2021, propone tres grupos de datos: **indicadores de enfermedad**, **factores de riesgo biológicos y ambientales** y **factores protectores**. Su fundamento es la **balanza de la caries**: la enfermedad progresa cuando los factores patológicos superan a los protectores y se detiene cuando la balanza se inclina al otro lado.\n\nEn este tema verás los elementos de cada grupo para personas de seis años en adelante. El formulario para niñas y niños de cero a seis años tiene elementos propios, que revisarás en el tema siguiente."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m03/d2",
+          "pie": "La balanza de la caries según CAMBRA: indicadores de enfermedad y factores de riesgo contra factores protectores.",
+          "descripcion": "Balanza de dos platos sobre un fulcro. En el plato izquierdo, más cargado, dos bloques apilados rotulados como indicadores de enfermedad y factores de riesgo biológicos y ambientales. En el plato derecho, un bloque rotulado como factores protectores. Debajo de la balanza, una flecha doble con los extremos rotulados progresión de la enfermedad y salud o detención, y un rótulo central que indica que el plan busca inclinar la balanza hacia la protección.",
+          "elementos": [
+            "Indicadores de enfermedad",
+            "Factores de riesgo biológicos y ambientales",
+            "Factores protectores",
+            "Progresión de la enfermedad",
+            "Salud o detención"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Indicadores de enfermedad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Son señales clínicas de que la enfermedad está o ha estado activa recientemente. En el formulario CAMBRA para seis años en adelante son cuatro:\n\n- Cavidades observadas o lesiones que en la radiografía penetran en la dentina.\n- Lesiones de mancha blanca nuevas o activas en superficies lisas.\n- Lesiones de esmalte no cavitadas detectadas en la radiografía, por lo general en caras proximales.\n- Restauraciones colocadas por caries en los últimos tres años en un paciente nuevo, o en el último año en un paciente que ya se atiende en la consulta.\n\nCuando hay uno o más indicadores, la enfermedad está presente y el riesgo es, como mínimo, alto, salvo que los factores protectores sean muy sólidos y la situación haya cambiado de forma demostrable."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/04",
+          "proporcion": "4:3",
+          "alt": "Incisivos y caninos superiores con manchas blancas opacas en el tercio cervical de la cara vestibular.",
+          "pie": "Las manchas blancas activas en superficies lisas son uno de los indicadores de enfermedad que más pesan en la evaluación.",
+          "prompt": "Fotografía clínica macro de los incisivos y caninos superiores permanentes de un adolescente, vista frontal con labio superior retraído por un retractor transparente, manchas blancas opacas, mate y bien delimitadas en el tercio cervical de la cara vestibular de varios dientes, con una película tenue de placa cerca de la encía, encía ligeramente enrojecida en el margen, iluminación de flash anular uniforme, colores naturales, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, cavidades grandes, brackets, rostro visible, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Factores de riesgo biológicos y ambientales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Son condiciones que favorecen la aparición o el avance de lesiones. El formulario CAMBRA para seis años en adelante incluye:\n\n- Consumo frecuente de carbohidratos fermentables entre comidas.\n- Medicamentos que reducen la saliva.\n- Consumo regular de drogas recreativas, muchas de las cuales provocan boca seca y se acompañan de hábitos de alto riesgo.\n- Biopelícula abundante sobre los dientes.\n- Función salival reducida, medida u observada.\n- Fosetas y fisuras profundas.\n- Raíces expuestas.\n- Aparatos de ortodoncia.\n\nEn versiones anteriores de CAMBRA se incluían pruebas para contar bacterias como *S. mutans* y lactobacilos. La actualización de 2021 las retiró de los formularios porque no hay disponible una prueba validada en el consultorio para estos recuentos; los autores proponen reincorporarla solo si aparece una prueba confiable."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Medir la biopelícula: el índice de O'Leary",
+          "md": "Para registrar con objetividad la biopelícula, muchos consultorios usan el **índice de placa de O'Leary**: se aplica un revelador y se anota, diente por diente, cuántas de las cuatro superficies lisas tienen placa teñida en el margen gingival. El resultado se expresa como porcentaje de superficies con placa sobre el total examinado. No mide riesgo por sí solo, pero permite comparar entre citas y demostrar al paciente su progreso."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Factores protectores"
+        },
+        {
+          "tipo": "texto",
+          "md": "Son condiciones o medidas que inclinan la balanza hacia la remineralización y la salud. El formulario CAMBRA para seis años en adelante considera: vivir, estudiar o trabajar en una zona con agua fluorada; usar pasta dental con flúor una o dos veces al día; usar pasta de alta concentración de fluoruro indicada por el odontólogo; haber recibido barniz de flúor en los últimos seis meses; usar enjuague de fluoruro de sodio; usar enjuague de clorhexidina según indicación profesional, y tener un flujo salival adecuado.\n\nObserva que varios de estos factores son **medidas que el equipo dental puede indicar o aplicar**. Esto convierte a la evaluación en algo dinámico: la intervención agrega factores protectores y, con el tiempo, debe modificar la clasificación. Qué productos, concentraciones y frecuencias corresponden a cada paciente es una decisión profesional que se estudia en el módulo 5."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué pesan más los indicadores que los factores",
+          "md": "Los factores de riesgo son **probabilísticos**: aumentan la posibilidad de caries, pero su efecto depende de cómo interactúan. Una persona con fisuras profundas, pero con buena higiene, pocos azúcares y exposición a fluoruro, puede no desarrollar nunca lesiones. Los indicadores de enfermedad, en cambio, son **evidencia directa** de que, en esa boca y en ese periodo, la combinación de factores fue suficiente para producir pérdida neta de mineral. Por eso los sistemas les dan más peso: en el método cuantitativo de CAMBRA, cada indicador suma tres puntos, cada factor de riesgo dos y cada factor protector resta uno. Esta jerarquía refleja una idea epidemiológica general: el mejor predictor de un evento es su ocurrencia reciente en condiciones que no han cambiado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que el formulario no pregunta, pero conviene saber"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los formularios resumen los factores con más respaldo, pero la historia clínica completa aporta otros datos que modifican el riesgo en la práctica. Vale la pena considerarlos al aplicar el juicio clínico:\n\n- **Capacidad para realizar la higiene:** discapacidad motora o intelectual, artritis en las manos o dependencia de otra persona para el cepillado.\n- **Defectos del esmalte:** hipoplasias o hipomineralización incisivo-molar, que crean superficies porosas y retentivas.\n- **Medicamentos líquidos o masticables con azúcar** de uso prolongado, frecuentes en niñas y niños con enfermedades crónicas.\n- **Trastornos de la conducta alimentaria** y vómito frecuente, que se asocian con erosión y con patrones de alimentación irregulares.\n- **Embarazo**, por cambios en la dieta, náuseas y dificultad para cepillarse.\n- **Contexto social:** acceso a pasta fluorada, agua potable y servicios de salud, horarios de trabajo y nivel de alfabetización en salud.\n\nNinguno de estos datos sustituye a los indicadores de enfermedad, pero ayudan a entender **por qué** existe el riesgo y a diseñar un plan que la persona realmente pueda cumplir.\n\nPor ejemplo, a un adulto mayor con artritis en las manos no basta con pedirle que se cepille mejor: quizá necesite un cepillo de mango engrosado o eléctrico, y la ayuda de un familiar. Del mismo modo, a una familia sin acceso estable a agua potable no se le puede recomendar sin más que cambie el refresco por agua; hay que buscar alternativas viables con ella."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Clasifica cada dato del paciente",
+          "instruccion": "Relaciona cada hallazgo con la categoría de CAMBRA a la que pertenece.",
+          "pares": [
+            {
+              "a": "Mancha blanca activa en la cara vestibular de un premolar",
+              "b": "Indicador de enfermedad"
+            },
+            {
+              "a": "Toma refresco entre comidas cuatro veces al día",
+              "b": "Factor de riesgo: consumo frecuente de carbohidratos fermentables"
+            },
+            {
+              "a": "Usa pasta dental con flúor dos veces al día",
+              "b": "Factor protector"
+            },
+            {
+              "a": "Toma un antidepresivo que le seca la boca",
+              "b": "Factor de riesgo: medicamento que reduce la saliva"
+            },
+            {
+              "a": "Resina colocada por caries hace ocho meses en un paciente de la consulta",
+              "b": "Indicador de enfermedad: restauración reciente por caries"
+            },
+            {
+              "a": "Brackets en ambas arcadas",
+              "b": "Factor de riesgo: aparatos de ortodoncia"
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/05",
+          "proporcion": "1:1",
+          "alt": "Arcada superior con brackets metálicos y placa acumulada alrededor de algunos de ellos.",
+          "pie": "Los aparatos de ortodoncia crean nuevas zonas de retención de biopelícula y son un factor de riesgo en CAMBRA.",
+          "prompt": "Fotografía clínica macro cuadrada de los premolares y caninos superiores permanentes de un adolescente con brackets metálicos y arco de alambre, vista vestibular con labio retraído por retractor transparente, acumulación visible de placa blanquecina alrededor de la base de algunos brackets cerca de la encía, encía ligeramente inflamada en el margen, iluminación uniforme de flash anular, colores naturales, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, rostro visible, alambres deformes, dientes deformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/06",
+          "proporcion": "16:9",
+          "alt": "Manos con guantes aplican revelador de placa con un hisopo en los dientes de un paciente, encuadre cerrado de la boca.",
+          "pie": "El revelador de placa permite registrar la biopelícula de manera objetiva y compararla entre citas.",
+          "prompt": "Fotografía clínica realista horizontal, encuadre cerrado de la boca de un paciente adulto con labios separados por retractor transparente, una mano con guante de nitrilo azul aplica con un hisopo líquido revelador de color magenta sobre las caras vestibulares de los dientes anteriores inferiores, otra mano con guante sostiene un espejo bucal, dientes permanentes sanos, encía rosa, luz de lámpara dental uniforme, colores naturales, enfoque nítido. Evitar: texto, logotipos, marcas de agua, sangre, rostro completo, manos sin guantes, tinción derramada fuera de la boca."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** imprime o ten a mano en tu tableta una hoja con las tres columnas de CAMBRA y llénala con el paciente presente, preguntando en voz alta cada factor. Además de ordenar tu evaluación, el paciente ve con claridad qué está empujando su balanza hacia la caries y qué la protege, lo que facilita acordar cambios concretos."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "CAMBRA",
+          "definicion": "Caries Management by Risk Assessment: sistema de manejo de la caries basado en la evaluación del riesgo, desarrollado en la Universidad de California en San Francisco."
+        },
+        {
+          "termino": "Indicador de enfermedad",
+          "definicion": "Signo clínico o radiográfico de que la caries está o estuvo activa recientemente, como una cavidad o una mancha blanca activa."
+        },
+        {
+          "termino": "Factor de riesgo",
+          "definicion": "Condición que aumenta la probabilidad de que aparezcan o progresen lesiones, como el consumo frecuente de azúcares."
+        },
+        {
+          "termino": "Factor protector",
+          "definicion": "Condición o medida que favorece la remineralización y reduce la probabilidad de lesiones, como el uso de pasta fluorada."
+        },
+        {
+          "termino": "Índice de placa de O'Leary",
+          "definicion": "Porcentaje de superficies dentales con placa teñida en el margen gingival respecto al total de superficies examinadas."
+        },
+        {
+          "termino": "Balanza de la caries",
+          "definicion": "Modelo que representa la caries como el resultado del equilibrio entre factores patológicos y protectores."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.2-1",
+          "q": "¿Cuál de estos datos es un indicador de enfermedad en CAMBRA?",
+          "opciones": [
+            "Fosetas y fisuras profundas",
+            "Lesiones de mancha blanca activas en superficies lisas",
+            "Uso de pasta fluorada",
+            "Aparatos de ortodoncia"
+          ],
+          "correcta": 1,
+          "explicacion": "Las manchas blancas activas son evidencia directa de enfermedad; las fisuras profundas y los aparatos son factores de riesgo."
+        },
+        {
+          "id": "t3.2-2",
+          "q": "¿Por qué la actualización de CAMBRA de 2021 retiró los recuentos bacterianos de los formularios?",
+          "opciones": [
+            "Porque las bacterias ya no se consideran parte de la caries",
+            "Porque eran demasiado caros",
+            "Porque no hay una prueba validada disponible en el consultorio para esos recuentos",
+            "Porque estaban prohibidos"
+          ],
+          "correcta": 2,
+          "explicacion": "Los autores señalan la falta de una prueba validada en el consultorio y proponen reincorporarla si surge una confiable."
+        },
+        {
+          "id": "t3.2-3",
+          "q": "En el método cuantitativo de CAMBRA, ¿cuánto vale cada elemento?",
+          "opciones": [
+            "Todos valen un punto",
+            "Indicadores +1, factores de riesgo +2, protectores −3",
+            "Indicadores −3, factores de riesgo −2, protectores +1",
+            "Indicadores +3, factores de riesgo +2, protectores −1"
+          ],
+          "correcta": 3,
+          "explicacion": "Los indicadores pesan más porque son evidencia directa de enfermedad; los protectores restan."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Evidence-Based Caries Management for All Ages-Practical Guidelines",
+          "autor": "Featherstone J. D. B., Crystal Y. O., Alston P. et al. (Frontiers in Oral Health)",
+          "anio": 2021,
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8757692/"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The plaque control record",
+          "autor": "O'Leary T. J., Drake R. B., Naylor J. E. (Journal of Periodontology)",
+          "anio": 1972
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en los formularios CAMBRA y literatura de cariología",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "3.3",
+      "titulo": "CAMBRA en la práctica: niveles de riesgo y método cuantitativo",
+      "minutos": 14,
+      "enPocasPalabras": "CAMBRA clasifica a cada paciente en riesgo bajo, moderado, alto o extremo sumando puntos por las señales de enfermedad y los factores de riesgo, y restando por los factores que protegen. Con ese nivel se decide cada cuándo revisarlo y cuánta prevención necesita. Hay un formulario para niños pequeños y otro para mayores de seis años.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Una vez reunidos los datos, CAMBRA asigna un **nivel de riesgo**. Durante años esa asignación se hacía solo por juicio clínico, a partir de la balanza. La actualización publicada por Featherstone y colaboradores en *Frontiers in Oral Health* en 2021 conservó ese juicio, pero añadió un **método cuantitativo** que ayuda a hacerlo más consistente entre profesionales: se asignan puntos a cada elemento del formulario y la suma total se ubica en un rango que corresponde a un nivel.\n\nExisten dos formularios: uno para **niñas y niños de cero a seis años**, que se completa con la madre, el padre o la persona cuidadora, y otro para **personas de seis años en adelante**. Ambos parten de la misma lógica, pero cambian los elementos que se evalúan."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/07",
+          "proporcion": "4:3",
+          "alt": "Odontopediatra con equipo de protección revisa los dientes de un niño pequeño sentado en el regazo de su madre, en posición rodilla con rodilla.",
+          "pie": "En menores de seis años, la evaluación se hace junto con la persona cuidadora, que aporta la información sobre dieta, higiene y antecedentes familiares.",
+          "prompt": "Fotografía clínica realista en un consultorio odontopediátrico luminoso: una odontopediatra con bata de color claro, guantes de nitrilo, cubrebocas y lentes de protección sentada frente a una madre, ambas rodilla con rodilla, con un niño de unos dos años recostado sobre sus piernas con la cabeza hacia la odontóloga, que levanta suavemente su labio superior para observar los dientes temporales anteriores, rostros fuera de cuadro o de perfil lejano, luz cálida, colores naturales. Evitar: texto, logotipos, marcas de agua, rostros identificables, llanto, sangre, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El formulario de cero a seis años"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la primera infancia, la mayor parte de la información proviene de la familia. Los **factores de riesgo** del formulario incluyen el consumo frecuente de carbohidratos fermentables, el uso del biberón o del vaso entrenador con líquidos distintos del agua, la caries actual o reciente en la madre, la persona cuidadora principal o algún hermano, el nivel socioeconómico bajo o la baja alfabetización en salud, los medicamentos que reducen la saliva y la placa abundante. Los **indicadores de enfermedad** son las lesiones evidentes o las manchas blancas, y las restauraciones existentes. Los **factores protectores** son vivir en una zona con agua fluorada, beber agua fluorada, usar pasta con flúor al menos dos veces al día y haber recibido barniz de flúor en los últimos seis meses.\n\nLos niveles para esta edad son **bajo, moderado, alto y muy alto**; el nivel muy alto corresponde a riesgo alto con caries extensa o grave."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Rangos de puntuación de CAMBRA (método cuantitativo, 2021)",
+          "columnas": [
+            "Nivel",
+            "0 a 6 años",
+            "6 años en adelante"
+          ],
+          "filas": [
+            [
+              "Bajo",
+              "−4 a −1",
+              "−8 a −2"
+            ],
+            [
+              "Moderado",
+              "0 a +3",
+              "−1 a +2"
+            ],
+            [
+              "Alto",
+              "+4 a +13",
+              "+3 a +17"
+            ],
+            [
+              "Muy alto (0 a 6) o extremo (6 en adelante)",
+              "+14 a +18, o riesgo alto con caries extensa o grave",
+              "+18 a +30, o riesgo alto con hiposalivación medida u observada"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se calcula la puntuación"
+        },
+        {
+          "tipo": "texto",
+          "md": "El método es sencillo: cada **indicador de enfermedad** presente suma **tres puntos**, cada **factor de riesgo** presente suma **dos puntos** y cada **factor protector** presente resta **un punto**. La suma final se ubica en la tabla de rangos. Por ejemplo, un adulto con una mancha blanca activa (+3), consumo frecuente de refrescos entre comidas (+2) y biopelícula abundante (+2), que usa pasta fluorada dos veces al día (−1), obtiene +6 puntos: riesgo alto.\n\nEl nivel **extremo** tiene una particularidad: no solo se alcanza con puntuaciones muy altas, sino también cuando un paciente de riesgo alto presenta **hiposalivación** medida u observada. La razón es clínica: sin saliva suficiente, la defensa natural falla y las lesiones progresan con gran rapidez, por lo que estos pacientes necesitan la estrategia más intensiva y el seguimiento más cercano."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Calcula la puntuación CAMBRA de un paciente",
+          "instruccion": "Cuenta cuántos indicadores de enfermedad, factores de riesgo y factores protectores tiene el paciente y escríbelo en cada casilla. Ubica el resultado en la tabla de rangos según su edad. Recuerda que el nivel extremo también se asigna si hay riesgo alto con hiposalivación, y que la puntuación apoya, no sustituye, tu juicio clínico.",
+          "formula": "Puntuación = (indicadores × 3) + (factores de riesgo × 2) − (factores protectores × 1)",
+          "variables": [
+            {
+              "id": "indicadores",
+              "etiqueta": "Indicadores de enfermedad presentes",
+              "valor": 1,
+              "unidad": "indicadores"
+            },
+            {
+              "id": "riesgos",
+              "etiqueta": "Factores de riesgo presentes",
+              "valor": 2,
+              "unidad": "factores"
+            },
+            {
+              "id": "protectores",
+              "etiqueta": "Factores protectores presentes",
+              "valor": 1,
+              "unidad": "factores"
+            }
+          ],
+          "resultado": {
+            "expresion": "indicadores * 3 + riesgos * 2 - protectores * 1",
+            "etiqueta": "Puntuación CAMBRA",
+            "unidad": "puntos",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Lo que la puntuación no dice",
+          "md": "El método cuantitativo pondera todos los factores de riesgo por igual, aunque en un paciente concreto no pesan lo mismo: un consumo de azúcares muy frecuente no equivale a unas fisuras profundas bien selladas. Tampoco distingue entre un indicador con una sola lesión y otro con diez. Por eso los autores insisten en que el nivel final se decide con la puntuación **y** el juicio clínico. Hay otro matiz importante: como los factores protectores restan, un paciente puede bajar su puntuación al recibir medidas profesionales sin que hayan cambiado sus hábitos. Si en la siguiente cita aparecen lesiones nuevas, el indicador de enfermedad lo devolverá a un nivel alto. La reevaluación periódica corrige estas distorsiones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Reconocer la boca seca en el examen"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como la hiposalivación cambia por completo la clasificación, vale la pena buscarla de forma activa, además de medir el flujo cuando hay sospecha. Durante el examen, varios signos sencillos sugieren que la saliva es insuficiente:"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "El espejo bucal se pega a la mucosa de la mejilla o de la lengua al retirarlo.",
+            "La saliva se ve espumosa o filante, y no se acumula en el piso de la boca.",
+            "La mucosa luce seca, opaca o sin brillo, y la lengua puede verse lisa o fisurada.",
+            "Hay restos de alimento adheridos a dientes y mucosas poco después de comer.",
+            "Aparecen lesiones nuevas en sitios atípicos, como bordes incisales o cervicales de dientes inferiores.",
+            "El paciente necesita beber agua para tragar alimentos secos o hablar durante mucho tiempo."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Estos signos no reemplazan a la medición, pero permiten registrar una hiposalivación **observada**, que el formulario CAMBRA también considera. Anótalos en el expediente para comparar en las siguientes citas. Si los signos aparecen en un paciente que antes no los tenía, pregunta de inmediato por medicamentos nuevos, tratamientos recientes o enfermedades diagnosticadas desde la última visita."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Del nivel al intervalo de revisión"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada nivel se asocia con una intensidad de manejo y con un **intervalo sugerido de revisión y reevaluación**. Para personas de seis años en adelante, la guía de 2021 propone aproximadamente cada doce meses en riesgo bajo, cada seis meses en moderado, cada cuatro a seis meses en alto y cada tres a cuatro meses en extremo. Para niñas y niños de cero a seis años, los intervalos son más cortos en los niveles altos, hasta revisiones mensuales en el nivel muy alto. Estos intervalos son referencias para planear; el odontólogo los ajusta según la evolución del paciente y las posibilidades reales de acudir a consulta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "No confundas evaluación con prescripción",
+          "md": "La guía CAMBRA asocia cada nivel con recomendaciones de productos con fluoruro y otros agentes. Este módulo no reproduce esos esquemas porque la elección del producto, la concentración y la frecuencia depende de la edad, el estado de salud, la exposición total a fluoruro y otros factores que valora el odontólogo en cada caso. Los fundamentos del uso de fluoruro se estudian en el módulo 5."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: ¿qué nivel de riesgo?",
+          "situacion": "Un hombre de 52 años sin lesiones activas ni restauraciones recientes acude a revisión. Toma tres medicamentos para la presión y la depresión, refiere boca seca y en la consulta se mide un flujo salival en reposo muy bajo. Cuenta que para aliviar la sequedad chupa caramelos durante la tarde. Tiene biopelícula abundante en cervicales y usa pasta fluorada una vez al día. ¿Cómo lo clasificas?",
+          "opciones": [
+            {
+              "texto": "Riesgo bajo, porque no tiene lesiones activas ni restauraciones recientes.",
+              "correcta": false,
+              "retro": "La ausencia de indicadores no basta: acumula varios factores de riesgo y tiene hiposalivación documentada."
+            },
+            {
+              "texto": "Riesgo moderado, porque solo usa pasta fluorada una vez al día.",
+              "correcta": false,
+              "retro": "La frecuencia de pasta es un detalle menor frente a la combinación de hiposalivación, azúcares frecuentes y biopelícula abundante."
+            },
+            {
+              "texto": "Riesgo alto por sus factores de riesgo y, con la hiposalivación medida, riesgo extremo.",
+              "correcta": true,
+              "retro": "Correcto. Medicamentos que secan la boca, azúcares frecuentes, biopelícula y función salival reducida lo ubican en riesgo alto; la hiposalivación medida lo lleva a extremo y justifica un seguimiento cercano."
+            },
+            {
+              "texto": "No se puede clasificar sin un recuento de S. mutans.",
+              "correcta": false,
+              "retro": "La versión 2021 de CAMBRA ya no utiliza recuentos bacterianos por falta de una prueba validada en el consultorio."
+            }
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m03/d3",
+          "pie": "Flujo de trabajo de CAMBRA: de la recolección de datos a la reevaluación.",
+          "descripcion": "Diagrama de flujo circular con cinco pasos unidos por flechas en sentido horario: recolectar datos con el formulario adecuado a la edad; sumar la puntuación con indicadores, factores de riesgo y protectores; asignar el nivel de riesgo con juicio clínico; definir plan preventivo e intervalo de revisión; reevaluar en la siguiente cita, que regresa al primer paso. Al centro, una balanza pequeña como símbolo del sistema.",
+          "elementos": [
+            "Recolectar datos",
+            "Calcular puntuación",
+            "Asignar nivel con juicio clínico",
+            "Plan e intervalo de revisión",
+            "Reevaluar"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/08",
+          "proporcion": "16:9",
+          "alt": "Mano con guante sostiene una tableta con un formulario clínico ilegible junto a una bandeja de exploración dental.",
+          "pie": "Llenar el formulario en cada revisión permite comparar la puntuación en el tiempo y documentar los cambios.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental: primer plano de una mano con guante de nitrilo azul que sostiene un lápiz digital sobre una tableta cuya pantalla muestra un formulario con casillas borrosas e ilegibles, al lado una bandeja de acero con espejo bucal, sonda de punta roma y pinzas sobre campo desechable azul, fondo desenfocado con la unidad dental, luz blanca uniforme, colores limpios, profundidad de campo corta. Evitar: texto legible, números legibles, logotipos, marcas de agua, rostros, manos sin guantes, sangre."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/09",
+          "proporcion": "3:4",
+          "alt": "Vista oclusal de molares inferiores con fisuras profundas y pigmentadas sin cavidades.",
+          "pie": "Las fosetas y fisuras profundas son un factor de riesgo, pero no indican por sí solas que la enfermedad esté activa.",
+          "prompt": "Fotografía clínica macro vertical de los molares inferiores permanentes de un adolescente vistos desde oclusal con espejo bucal sostenido por mano con guante, fosetas y fisuras profundas y estrechas con ligera pigmentación marrón en el fondo, sin cavidades ni opacidades, esmalte limpio y brillante en las cúspides, saliva natural, iluminación de lámpara dental uniforme, colores naturales, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, cavidades, restauraciones, rostro, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** guarda la puntuación CAMBRA de cada paciente con la fecha y muéstrale la evolución en cada revisión. Pasar de +6 a +1 en un año es una meta concreta, fácil de entender y muy motivadora. Si la puntuación baja pero aparecen lesiones nuevas, no te quedes con el número: revisa qué factor se te escapó: muchas veces es un medicamento nuevo, una bebida que el paciente no consideraba azucarada o una zona de la boca que no alcanza a limpiar."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Método cuantitativo de CAMBRA",
+          "definicion": "Sistema de puntos publicado en 2021: cada indicador de enfermedad suma 3, cada factor de riesgo suma 2 y cada factor protector resta 1."
+        },
+        {
+          "termino": "Riesgo extremo",
+          "definicion": "Nivel de CAMBRA para seis años en adelante con puntuación muy alta o con riesgo alto más hiposalivación medida u observada."
+        },
+        {
+          "termino": "Riesgo muy alto",
+          "definicion": "Nivel de CAMBRA para cero a seis años con puntuación muy alta o riesgo alto con caries extensa o grave."
+        },
+        {
+          "termino": "Intervalo de revisión",
+          "definicion": "Tiempo recomendado entre una evaluación y la siguiente, ajustado al nivel de riesgo."
+        },
+        {
+          "termino": "Reevaluación",
+          "definicion": "Nueva evaluación del riesgo en una cita posterior para comprobar si el plan funcionó y ajustar el nivel."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.3-1",
+          "q": "Un paciente de 30 años tiene 1 indicador de enfermedad, 3 factores de riesgo y 2 factores protectores. ¿Cuál es su puntuación CAMBRA?",
+          "opciones": [
+            "+7",
+            "+2",
+            "+9",
+            "+11"
+          ],
+          "correcta": 0,
+          "explicacion": "(1 × 3) + (3 × 2) − (2 × 1) = 3 + 6 − 2 = +7, que corresponde a riesgo alto en el formulario de seis años en adelante."
+        },
+        {
+          "id": "t3.3-2",
+          "q": "Además de una puntuación muy alta, ¿qué situación lleva a un paciente de seis años o más a riesgo extremo?",
+          "opciones": [
+            "Tener más de diez restauraciones",
+            "Usar aparatos de ortodoncia",
+            "Riesgo alto con hiposalivación medida u observada",
+            "Vivir en una zona sin agua fluorada"
+          ],
+          "correcta": 2,
+          "explicacion": "La hiposalivación anula una defensa clave y convierte el riesgo alto en extremo."
+        },
+        {
+          "id": "t3.3-3",
+          "q": "¿Qué intervalo de revisión sugiere la guía CAMBRA de 2021 para un adulto de riesgo bajo?",
+          "opciones": [
+            "Cada mes",
+            "Cada tres meses",
+            "Cada seis meses",
+            "Cada doce meses"
+          ],
+          "correcta": 3,
+          "explicacion": "Para seis años en adelante sugiere doce meses en riesgo bajo; el odontólogo lo ajusta según la evolución."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Evidence-Based Caries Management for All Ages-Practical Guidelines",
+          "autor": "Featherstone J. D. B., Crystal Y. O., Alston P. et al. (Frontiers in Oral Health)",
+          "anio": 2021,
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8757692/"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en la actualización 2021 de CAMBRA y su método cuantitativo",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "3.4",
+      "titulo": "ICCMS y el ciclo CariesCare 4D",
+      "minutos": 13,
+      "enPocasPalabras": "ICCMS es un sistema internacional que junta en un solo proceso la revisión de las caries, el riesgo del paciente y el plan de tratamiento. Su versión práctica se resume en cuatro pasos: conocer el riesgo, encontrar y valorar las lesiones, decidir el plan y hacerlo. El objetivo es cuidar la salud y conservar la mayor cantidad posible de diente.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si CAMBRA nació como un sistema centrado en el riesgo, el **Sistema Internacional de Clasificación y Manejo de Caries**, conocido por sus siglas en inglés **ICCMS**, nació como un sistema que integra todo el proceso: la historia del paciente, la detección y clasificación de las lesiones, la valoración de su actividad, el riesgo y, a partir de todo ello, un plan personalizado. Fue desarrollado por un grupo internacional de cariólogos a partir del sistema de detección ICDAS, y su guía para clínicos y docentes se publicó en 2014 con Nigel Pitts como autor principal.\n\nEl principio rector de ICCMS es **mantener la salud y preservar la estructura dental**: prevenir lesiones nuevas, detener las iniciales sin intervención operatoria y reservar la restauración para las lesiones que realmente la necesitan, con la técnica más conservadora posible."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/10",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección examina con espejo y sonda roma los molares de un paciente, con jeringa triple a la mano.",
+          "pie": "ICCMS se apoya en un examen visual minucioso, sobre dientes limpios y secos, para clasificar cada lesión por etapa y actividad.",
+          "prompt": "Fotografía clínica realista horizontal en un consultorio moderno: una odontóloga con bata, guantes de nitrilo, cubrebocas, gorro y careta transparente examina con espejo bucal y sonda de punta roma los molares inferiores de un paciente adulto reclinado, mientras una asistente con el mismo equipo de protección sostiene la jeringa triple y el eyector, encuadre cercano en el que del paciente solo se ve la boca abierta con aislamiento relativo de algodón, luz de lámpara dental intensa, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los componentes de ICCMS"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Elementos que integra ICCMS",
+          "ordenada": true,
+          "items": [
+            "**Historia clínica y evaluación del riesgo** del paciente, con factores de riesgo y protectores.",
+            "**Detección y clasificación de las lesiones** con criterios visuales derivados de ICDAS, agrupadas en etapas: sano, inicial, moderado y extenso.",
+            "**Valoración de la actividad** de cada lesión, activa o inactiva.",
+            "**Síntesis y diagnóstico**: integración de las etapas, la actividad y el riesgo en una estimación de la probabilidad de lesiones nuevas o de progresión.",
+            "**Plan de manejo personalizado** con prevención, control no operatorio de lesiones y tratamiento operatorio conservador cuando hace falta.",
+            "**Reevaluación** en intervalos acordes al riesgo y a la actividad."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La agrupación en etapas simplifica la toma de decisiones. Las lesiones **iniciales** corresponden a cambios visibles en esmalte sin pérdida de estructura; las **moderadas**, a una ruptura localizada del esmalte o una sombra de dentina; y las **extensas**, a cavidades con dentina visible. Los códigos de detección y sus criterios exactos los estudiarás con detalle en el módulo 4. En este tema lo importante es entender cómo la etapa y la actividad se combinan con el riesgo para orientar el manejo.\n\nICCMS clasifica el riesgo del paciente en **bajo, moderado o alto**. Después lo cruza con el estado de sus lesiones en una matriz que estima la **probabilidad** de que aparezcan o progresen lesiones, representada con colores tipo semáforo. Una persona con riesgo alto y lesiones activas tiene alta probabilidad de progresión y necesita el manejo más intensivo; una persona con riesgo bajo y solo lesiones inactivas, la menor."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m03/d4",
+          "pie": "Matriz de ICCMS: el riesgo del paciente y el estado de sus lesiones definen la probabilidad de progresión.",
+          "descripcion": "Cuadrícula de tres columnas por tres filas. Las columnas representan el riesgo del paciente: bajo, moderado y alto. Las filas representan el estado de las lesiones: sin lesiones o solo inactivas, lesiones iniciales activas y lesiones moderadas o extensas activas. Las celdas están coloreadas como semáforo, de verde en la esquina inferior izquierda, pasando por amarillo, hasta rojo en la esquina superior derecha. Debajo de la matriz, tres flechas conducen a los niveles de manejo: prevención personalizada, control no operatorio y tratamiento operatorio conservador.",
+          "elementos": [
+            "Riesgo del paciente: bajo, moderado, alto",
+            "Estado de las lesiones",
+            "Probabilidad baja",
+            "Probabilidad moderada",
+            "Probabilidad alta",
+            "Prevención personalizada",
+            "Control no operatorio",
+            "Tratamiento operatorio conservador"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Del estado de la lesión a la decisión"
+        },
+        {
+          "tipo": "texto",
+          "md": "ICCMS orienta el manejo de cada lesión según su etapa y su actividad, siempre dentro del plan general del paciente. Como lógica general, las **lesiones inactivas**, sea cual sea su etapa, no requieren tratamiento operatorio mientras no causen problemas funcionales, estéticos o de retención de biopelícula; basta con mantener las condiciones y vigilarlas. Las **lesiones iniciales activas** se manejan de forma no operatoria: control de la biopelícula y de los azúcares, medidas con fluoruro y, en fosetas y fisuras, selladores cuando el odontólogo lo considera indicado.\n\nEn las **lesiones moderadas activas**, la decisión depende de si hay cavitación, de la accesibilidad para la limpieza y del riesgo del paciente: algunas pueden controlarse sin retirar tejido o sellarse, y otras requieren una intervención mínima. Las **lesiones extensas activas** suelen necesitar tratamiento operatorio conservador de la estructura dental. En todos los casos, el control de la enfermedad continúa, porque sin él cualquier tratamiento de la lesión fracasará a la larga. Estas opciones se estudian en los módulos 6 y 8.\n\nObserva que la misma lesión puede manejarse de manera distinta en dos pacientes: una lesión moderada dudosa puede vigilarse en una persona de riesgo bajo con buena higiene, y requerir una intervención más temprana en otra de riesgo alto que acude poco a consulta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Del sistema a la práctica: CariesCare International",
+          "md": "Aplicar ICCMS completo en una consulta con poco tiempo puede resultar complejo. Por eso un consenso de cariólogos coordinado por Stefania Martignon y Nigel Pitts publicó en 2019, en el *British Dental Journal*, la **guía práctica CariesCare**, derivada de ICCMS y diseñada para la consulta general. Organiza el manejo en un ciclo de cuatro etapas, el **ciclo 4D**, por sus nombres en inglés: *Determine*, *Detect*, *Decide* y *Do*. La guía busca un enfoque centrado en el paciente y basado en el riesgo, con el objetivo de mantener la salud bucal y preservar la estructura dental a largo plazo, y propone convertir al paciente en un socio de largo plazo de su consultorio. Sus autores señalan además beneficios para la práctica profesional, incluida una mejor documentación de las decisiones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El ciclo 4D, paso a paso"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Las cuatro D de CariesCare (concepto)",
+          "pasos": [
+            {
+              "titulo": "Determinar el riesgo",
+              "md": "Se evalúa el riesgo individual de caries del paciente a partir de su historia, sus hábitos, su salud general y los factores protectores con que cuenta. Este paso marca la dirección de todo lo que sigue."
+            },
+            {
+              "titulo": "Detectar y valorar las lesiones",
+              "md": "Se detectan las lesiones, se clasifica su etapa de gravedad y se valora su actividad, con un examen visual sobre dientes limpios y secos y, cuando está indicado, radiografías."
+            },
+            {
+              "titulo": "Decidir el plan",
+              "md": "El profesional y el paciente acuerdan un plan adecuado para esa persona en ese momento, que combina prevención acorde al riesgo con el manejo de cada lesión según su etapa y actividad."
+            },
+            {
+              "titulo": "Hacer el tratamiento",
+              "md": "Se lleva a cabo la atención preventiva y conservadora de la estructura dental: prevención adecuada al riesgo, control no operatorio de las lesiones iniciales y restauración conservadora de las lesiones profundas o cavitadas. Después se programa la reevaluación y el ciclo vuelve a empezar."
+            }
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena el ciclo CariesCare 4D",
+          "instruccion": "Coloca las acciones en el orden en que se recorren dentro del ciclo de CariesCare.",
+          "elementos": [
+            "Determinar el riesgo de caries del paciente",
+            "Detectar las lesiones, clasificar su etapa y valorar su actividad",
+            "Decidir con el paciente un plan personalizado",
+            "Realizar la prevención y el tratamiento conservador",
+            "Reevaluar en la cita de control e iniciar un nuevo ciclo"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "CAMBRA e ICCMS no compiten",
+          "md": "Aunque nacieron en contextos distintos, CAMBRA en Estados Unidos e ICCMS con un grupo internacional, ambos comparten la misma base: la caries es un proceso dinámico, el riesgo debe evaluarse de forma individual y el manejo debe ser lo más conservador posible. CAMBRA ofrece formularios concretos y un método de puntuación; ICCMS ofrece un marco integral que une la detección por etapas con el plan de manejo. Muchos clínicos usan los formularios de uno dentro del marco del otro."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/11",
+          "proporcion": "4:3",
+          "alt": "Odontólogo con cubrebocas y una paciente adulta revisan juntos una pantalla con fotografías intraorales borrosas.",
+          "pie": "Decidir el plan con el paciente, mostrándole sus propias imágenes, es parte central del ciclo 4D.",
+          "prompt": "Fotografía realista en un consultorio dental moderno: un odontólogo con bata, cubrebocas y lentes de protección y una paciente adulta sentada en la unidad dental, vista de espaldas y de perfil lejano, observan juntos un monitor montado en la unidad que muestra fotografías intraorales de dientes desenfocadas y sin detalles legibles, el odontólogo señala la pantalla con la mano, ambiente de conversación tranquila, luz natural y de consultorio, colores naturales. Evitar: texto legible, logotipos, marcas de agua, rostro identificable de la paciente, sangre, desorden."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/12",
+          "proporcion": "1:1",
+          "alt": "Bandeja de exploración con espejo, sonda de punta roma, pinzas y rollos de algodón sobre campo desechable.",
+          "pie": "El examen para ICCMS requiere poco instrumental: espejo, sonda de punta roma, aire, buena luz y aislamiento relativo.",
+          "prompt": "Fotografía realista cuadrada vista desde arriba de una bandeja de acero inoxidable sobre campo desechable azul claro en un consultorio dental: espejo bucal plano, sonda periodontal de punta roma, pinzas de curación, varios rollos de algodón y gasas dobladas, todo ordenado en paralelo, iluminación blanca uniforme y suave, sombras ligeras, colores limpios, alta nitidez. Evitar: texto, etiquetas, logotipos, marcas de agua, sangre, instrumental oxidado o sucio, exploradores puntiagudos, desorden."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** organiza tus notas clínicas con las cuatro D como encabezados: riesgo determinado y por qué, lesiones detectadas con su etapa y actividad, decisión acordada con el paciente y lo que se hizo en la cita. Esa estructura simple te obliga a no saltarte pasos, facilita que otro colega entienda tu razonamiento y deja un registro claro de que el plan se decidió en conjunto."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "ICCMS",
+          "definicion": "Sistema Internacional de Clasificación y Manejo de Caries: marco que integra riesgo, detección por etapas, actividad y plan de manejo personalizado."
+        },
+        {
+          "termino": "ICDAS",
+          "definicion": "Sistema Internacional de Detección y Valoración de Caries, base de los criterios visuales que usa ICCMS."
+        },
+        {
+          "termino": "CariesCare 4D",
+          "definicion": "Ciclo práctico derivado de ICCMS que organiza la atención en determinar, detectar, decidir y hacer."
+        },
+        {
+          "termino": "Control no operatorio",
+          "definicion": "Manejo de una lesión sin retirar tejido, mediante control de biopelícula, azúcares, fluoruro u otras medidas."
+        },
+        {
+          "termino": "Etapas de la lesión",
+          "definicion": "Agrupación de las lesiones en ICCMS como sana, inicial, moderada o extensa según su gravedad."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.4-1",
+          "q": "¿Cuál es el principio rector de ICCMS?",
+          "opciones": [
+            "Restaurar toda lesión visible lo antes posible",
+            "Mantener la salud y preservar la estructura dental",
+            "Realizar recuentos bacterianos en cada paciente",
+            "Aplicar el mismo protocolo a todos los pacientes"
+          ],
+          "correcta": 1,
+          "explicacion": "ICCMS busca prevenir, detener lesiones iniciales y restaurar solo lo necesario con la técnica más conservadora."
+        },
+        {
+          "id": "t3.4-2",
+          "q": "¿Qué significa la segunda D del ciclo CariesCare 4D?",
+          "opciones": [
+            "Detectar las lesiones, clasificar su etapa y valorar su actividad",
+            "Documentar el pago",
+            "Derivar al especialista",
+            "Desinfectar el consultorio"
+          ],
+          "correcta": 0,
+          "explicacion": "Las cuatro D son determinar el riesgo, detectar y valorar las lesiones, decidir el plan y hacer el tratamiento."
+        },
+        {
+          "id": "t3.4-3",
+          "q": "En la matriz de ICCMS, ¿qué combinación indica la mayor probabilidad de progresión?",
+          "opciones": [
+            "Riesgo bajo con lesiones inactivas",
+            "Riesgo moderado sin lesiones",
+            "Riesgo bajo con una lesión inicial inactiva",
+            "Riesgo alto con lesiones activas moderadas o extensas"
+          ],
+          "correcta": 3,
+          "explicacion": "El riesgo alto combinado con lesiones activas avanzadas ocupa la zona roja de la matriz."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "CariesCare practice guide: consensus on evidence into practice",
+          "autor": "Martignon S., Pitts N. B., Goffin G. et al. (British Dental Journal)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "International Caries Classification and Management System (ICCMS) Guide for Practitioners and Educators",
+          "autor": "Pitts N. B., Ismail A. I., Martignon S. et al. (ICDAS Foundation)",
+          "anio": 2014
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The International Caries Classification and Management System (ICCMS™): An Example of a Caries Management Pathway",
+          "autor": "Ismail A. I., Pitts N. B., Tellez M. et al. (BMC Oral Health)",
+          "anio": 2015,
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4580843/"
+        }
+      ]
+    },
+    {
+      "n": "3.5",
+      "titulo": "Del nivel de riesgo al plan preventivo personalizado",
+      "minutos": 13,
+      "enPocasPalabras": "Saber el riesgo solo sirve si se convierte en un plan: qué hará el paciente en casa, qué hará el dentista en la consulta y cada cuándo se volverán a revisar. El plan se acuerda con el paciente y se anota en su expediente. En cada cita se revisa si funcionó y se ajusta.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Una evaluación del riesgo que termina en una casilla marcada no cambia nada. Su valor está en lo que provoca: un plan preventivo distinto para cada nivel, acordado con el paciente y revisado con el tiempo. En este tema verás cómo traducir el nivel de riesgo en decisiones concretas, cómo documentarlas conforme a la normativa mexicana y cómo evitar los errores más frecuentes.\n\nUn buen plan preventivo responde a cuatro preguntas: **qué hará la persona en casa**, **qué medidas profesionales recibirá**, **cómo se manejará cada lesión** y **cuándo se volverá a evaluar**. Las respuestas cambian según el nivel de riesgo, pero también según la edad, la salud general, las preferencias y las posibilidades reales del paciente."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Cómo cambia el plan según el nivel de riesgo (orientación general)",
+          "columnas": [
+            "Componente",
+            "Riesgo bajo",
+            "Riesgo moderado",
+            "Riesgo alto o extremo"
+          ],
+          "filas": [
+            [
+              "Cuidado en casa",
+              "Mantener cepillado con pasta fluorada y hábitos actuales",
+              "Reforzar técnica, limpieza interproximal y reducir azúcares entre comidas",
+              "Plan detallado de dieta e higiene, con metas concretas y apoyo de la familia"
+            ],
+            [
+              "Medidas profesionales",
+              "Según criterio del odontólogo",
+              "Medidas preventivas adicionales según criterio del odontólogo",
+              "Medidas preventivas intensivas indicadas por el odontólogo"
+            ],
+            [
+              "Lesiones",
+              "Vigilancia de lesiones inactivas",
+              "Control no operatorio de lesiones iniciales activas",
+              "Control no operatorio y tratamiento conservador de las lesiones que lo requieran"
+            ],
+            [
+              "Seguimiento",
+              "Intervalos largos",
+              "Intervalos intermedios",
+              "Intervalos cortos y reevaluación frecuente"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El plan se construye con el paciente"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las recomendaciones genéricas, como «cepíllese mejor y coma menos dulces», rara vez cambian conductas. Lo que funciona mejor es identificar con el paciente **uno o dos cambios concretos**, factibles y medibles, relacionados con los factores que más pesan en su caso. Si el principal factor es el refresco a media tarde, la meta puede ser sustituirlo por agua tres días a la semana durante el primer mes. Si es la biopelícula interproximal, la meta puede ser usar hilo o cepillo interdental cada noche.\n\nLos planes que se acuerdan, en lugar de imponerse, tienen más probabilidad de cumplirse, y los cambios pequeños sostenidos producen más beneficio que los cambios grandes que se abandonan. Las técnicas de comunicación y entrevista motivacional se estudian en el módulo 12."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/13",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con cubrebocas entrega a una paciente un cepillo interdental y le muestra cómo usarlo en un modelo dental.",
+          "pie": "Las metas concretas, como usar un cepillo interdental cada noche, funcionan mejor que las recomendaciones generales.",
+          "prompt": "Fotografía realista en un consultorio dental luminoso: una odontóloga con bata, cubrebocas y lentes de protección muestra en un modelo tipodonto de arcada completa cómo introducir un cepillo interdental entre dos premolares, frente a una paciente adulta que observa de espaldas a la cámara con un cepillo interdental en la mano, primer plano de manos y modelo, luz natural suave, colores naturales, profundidad de campo corta. Evitar: texto, logotipos, marcas comerciales, marcas de agua, rostro identificable de la paciente, sangre, modelo con dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La evaluación del riesgo en el expediente clínico",
+          "md": "En México, la **NOM-004-SSA3-2012**, *Del expediente clínico*, publicada en el Diario Oficial de la Federación el 15 de octubre de 2012 y vigente según el Catálogo Mexicano de Normas, establece los criterios para integrar y conservar el expediente en los establecimientos de atención médica públicos, sociales y privados, incluidos los consultorios dentales. Registrar la evaluación del riesgo, los factores identificados, el plan acordado y su seguimiento forma parte de una historia clínica completa. La **NOM-013-SSA2-2015**, de prevención y control de enfermedades bucales, también remite al expediente clínico para el registro de la atención bucal. Antes de usarlas en un documento formal, verifica en el DOF si tienen modificaciones recientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Radiografías y revisiones según el riesgo"
+        },
+        {
+          "tipo": "texto",
+          "md": "El riesgo también orienta **cada cuándo** conviene tomar radiografías de aleta de mordida para vigilar las caras proximales. Las guías internacionales de selección de pacientes para radiografía dental, como las de la ADA y la FDA de Estados Unidos, recomiendan intervalos más cortos para personas con riesgo alto y más largos para quienes tienen riesgo bajo, siempre con una justificación clínica individual y aplicando el principio de mantener la dosis tan baja como sea razonablemente posible. Ninguna radiografía debe tomarse solo por rutina.\n\nLo mismo ocurre con las citas de revisión. El intervalo de seis meses para todos es una costumbre, no una regla basada en evidencia. Un adulto de riesgo bajo, estable durante años, puede revisarse con menos frecuencia, mientras que un paciente de riesgo extremo necesita citas cada pocos meses para reforzar medidas y detectar a tiempo cualquier progresión."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Señales para reevaluar antes de la fecha prevista",
+          "items": [
+            "Aparecen lesiones nuevas o una lesión vigilada cambia de aspecto.",
+            "El paciente inicia medicamentos que reducen la saliva o recibe radioterapia de cabeza y cuello.",
+            "Comienza un tratamiento de ortodoncia o se coloca una prótesis removible.",
+            "Hay un embarazo, una enfermedad nueva o una discapacidad que dificulta la higiene.",
+            "Cambia de forma importante la rutina de alimentación, por ejemplo por un trabajo nocturno o una etapa de mucho estrés.",
+            "En niñas y niños, erupcionan los primeros molares permanentes."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando alguna de estas situaciones se presenta, adelantar la revisión permite ajustar el plan antes de que se acumulen lesiones. En los servicios públicos, donde las agendas suelen estar saturadas, dejar anotadas estas señales en el expediente ayuda a que cualquier profesional que atienda al paciente reconozca la necesidad de una evaluación nueva. También conviene explicarle al propio paciente estas señales, para que sepa cuándo pedir una cita sin esperar a la fecha programada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Errores frecuentes al aplicar el riesgo",
+          "md": "Evita estos errores: clasificar el riesgo solo por el número de restauraciones; olvidar preguntar por medicamentos y boca seca; asignar el riesgo una vez y no volver a revisarlo; usar el nivel para justificar tratamientos restauradores innecesarios en lugar de prevención; y entregar recomendaciones idénticas a todos los pacientes con independencia de su nivel. Recuerda también que el riesgo es del paciente, pero la actividad es de cada lesión: un paciente de riesgo bajo puede tener una lesión activa que requiere atención."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m03/d5",
+          "pie": "Los cuatro componentes de un plan preventivo personalizado y su revisión periódica.",
+          "descripcion": "Diagrama con un círculo central rotulado nivel de riesgo y actividad, rodeado por cuatro recuadros unidos a él: cuidado en casa, medidas profesionales, manejo de cada lesión y fecha de reevaluación. Una flecha circular exterior conecta los cuatro recuadros y regresa al centro con la leyenda de ajustar el plan en cada cita.",
+          "elementos": [
+            "Nivel de riesgo y actividad",
+            "Cuidado en casa",
+            "Medidas profesionales",
+            "Manejo de cada lesión",
+            "Reevaluación",
+            "Ajustar el plan"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Caso ilustrativo: un plan que se ajusta",
+          "md": "Una estudiante universitaria de 20 años tiene dos manchas blancas activas en cervicales, toma bebidas energéticas mientras estudia y se cepilla solo por la mañana. Su puntuación CAMBRA es alta. Acuerdan dos metas: cepillarse también por la noche con pasta fluorada y cambiar la bebida energética de la tarde por agua. Su odontóloga indica además medidas profesionales de fluoruro y una revisión en cuatro meses. En la revisión, las lesiones se ven más brillantes y no hay lesiones nuevas; la biopelícula disminuyó. Se mantiene el plan y se alarga un poco el intervalo. Si las lesiones hubieran progresado, el plan se habría intensificado."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: elegir el plan",
+          "situacion": "Una mujer de 40 años acude a revisión. No tiene lesiones activas; su última restauración fue hace siete años. Usa pasta fluorada dos veces al día, limpia entre sus dientes cada noche, toma café sin azúcar y bebe agua. Su flujo salival es normal y la biopelícula es escasa. ¿Qué plan es el más adecuado?",
+          "opciones": [
+            {
+              "texto": "Plan de riesgo extremo con citas mensuales y medidas profesionales intensivas.",
+              "correcta": false,
+              "retro": "No hay indicadores de enfermedad ni factores de riesgo relevantes; un plan intensivo sería innecesario y costoso."
+            },
+            {
+              "texto": "Reconocer sus hábitos protectores, mantener su cuidado en casa, vigilar en intervalos largos según criterio del odontólogo y reevaluar en cada visita.",
+              "correcta": true,
+              "retro": "Correcto. Es un perfil de riesgo bajo; el plan consiste en reforzar lo que ya hace bien y reevaluar periódicamente."
+            },
+            {
+              "texto": "Reemplazar sus restauraciones antiguas para prevenir caries.",
+              "correcta": false,
+              "retro": "Reemplazar restauraciones en buen estado sin indicación clínica sacrifica tejido y no reduce el riesgo."
+            },
+            {
+              "texto": "Tomar radiografías de aleta de mordida cada tres meses.",
+              "correcta": false,
+              "retro": "En riesgo bajo, las radiografías se espacian según las guías y siempre con justificación clínica."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/14",
+          "proporcion": "16:9",
+          "alt": "Recepción de un consultorio dental con una agenda en pantalla borrosa y una tarjeta de cita sobre el mostrador.",
+          "pie": "El intervalo de revisión se programa según el riesgo: más corto en riesgo alto y más largo en riesgo bajo.",
+          "prompt": "Fotografía realista horizontal de la recepción de un consultorio dental moderno y limpio en México: mostrador de madera clara con una computadora cuya pantalla muestra un calendario desenfocado e ilegible, una tarjeta de cita en blanco y una planta pequeña, al fondo una sala de espera con sillas vacías y luz natural de ventana, colores cálidos y naturales, profundidad de campo media, ambiente ordenado. Evitar: texto legible, números legibles, logotipos, marcas de agua, personas con rostro identificable, desorden."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m03/15",
+          "proporcion": "3:4",
+          "alt": "Familia en casa: manos de un adulto y de un niño cepillándose juntos frente al lavabo.",
+          "pie": "En niñas y niños, el plan preventivo se diseña con la familia y se cumple en casa.",
+          "prompt": "Fotografía realista vertical en un baño doméstico iluminado con luz natural: encuadre de las manos y antebrazos de un adulto y de un niño de unos seis años frente a un lavabo blanco, cada uno con un cepillo dental de cerdas suaves con una pequeña cantidad de pasta, el adulto guía la mano del niño, dos vasos de colores sobre el lavabo, ambiente cálido y familiar, colores naturales, sin rostros visibles. Evitar: texto, logotipos, marcas comerciales, marcas de agua, rostros, espuma exagerada, sangre."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** al terminar cada evaluación, escribe en una sola frase el plan acordado y entrégasela al paciente por escrito: «Riesgo alto. Metas: pasta fluorada mañana y noche, agua en lugar de refresco por la tarde. Revisión en cuatro meses». Esa frase sencilla, que también queda en el expediente, convierte la evaluación en un compromiso compartido y hace fácil comprobar en la siguiente cita qué se cumplió. Si el paciente lo prefiere, puede tomarle una fotografía con su teléfono y tenerla a la mano como recordatorio."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Plan preventivo personalizado",
+          "definicion": "Conjunto de medidas en casa y en la consulta, adaptado al riesgo y a las características de cada paciente, con fecha de reevaluación."
+        },
+        {
+          "termino": "Radiografía de aleta de mordida",
+          "definicion": "Radiografía intraoral que muestra las coronas de dientes superiores e inferiores y sirve para vigilar las caras proximales."
+        },
+        {
+          "termino": "Principio ALARA",
+          "definicion": "Criterio de protección radiológica que pide mantener la dosis tan baja como sea razonablemente posible."
+        },
+        {
+          "termino": "Expediente clínico",
+          "definicion": "Conjunto de documentos que registran la atención de un paciente, regulado en México por la NOM-004-SSA3-2012."
+        },
+        {
+          "termino": "Meta conductual",
+          "definicion": "Cambio de hábito concreto, factible y medible que el paciente acuerda realizar."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.5-1",
+          "q": "¿Qué preguntas debe responder un plan preventivo personalizado?",
+          "opciones": [
+            "Solo qué restauraciones se harán",
+            "Qué producto comercial comprará el paciente",
+            "Qué hará el paciente en casa, qué medidas profesionales recibirá, cómo se manejará cada lesión y cuándo se reevaluará",
+            "Cuánto costará el tratamiento completo"
+          ],
+          "correcta": 2,
+          "explicacion": "Un plan completo incluye cuidado en casa, medidas profesionales, manejo de lesiones y fecha de reevaluación."
+        },
+        {
+          "id": "t3.5-2",
+          "q": "¿Qué norma mexicana regula el expediente clínico?",
+          "opciones": [
+            "NOM-004-SSA3-2012",
+            "NOM-013-SSA2-2015",
+            "NOM-087-SEMARNAT-SSA1-2002",
+            "NOM-229-SSA1-2002"
+          ],
+          "correcta": 0,
+          "explicacion": "La NOM-004-SSA3-2012 trata del expediente clínico; la NOM-013-SSA2-2015, de la prevención y control de enfermedades bucales."
+        },
+        {
+          "id": "t3.5-3",
+          "q": "¿Cómo debe definirse la frecuencia de radiografías de aleta de mordida?",
+          "opciones": [
+            "Cada seis meses para todos los pacientes",
+            "Solo cuando el paciente lo pida",
+            "Nunca, porque el examen visual es suficiente",
+            "Según el riesgo y la edad, con justificación clínica individual"
+          ],
+          "correcta": 3,
+          "explicacion": "Las guías de selección recomiendan intervalos según el riesgo, siempre justificados y con la menor dosis razonable."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-004-SSA3-2012, Del expediente clínico",
+          "autor": "Secretaría de Salud",
+          "anio": 2012
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+          "autor": "Secretaría de Salud",
+          "anio": 2016
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Dental Radiographic Examinations: Recommendations for Patient Selection and Limiting Radiation Exposure",
+          "autor": "American Dental Association y U.S. Food and Drug Administration"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Evidence-Based Caries Management for All Ages-Practical Guidelines",
+          "autor": "Featherstone J. D. B., Crystal Y. O., Alston P. et al. (Frontiers in Oral Health)",
+          "anio": 2021
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: riesgo de caries",
+    "pares": [
+      {
+        "a": "Indicador de enfermedad",
+        "b": "Mancha blanca activa en superficie lisa"
+      },
+      {
+        "a": "Factor de riesgo",
+        "b": "Refresco entre comidas varias veces al día"
+      },
+      {
+        "a": "Factor protector",
+        "b": "Pasta dental con flúor dos veces al día"
+      },
+      {
+        "a": "Riesgo extremo",
+        "b": "Riesgo alto con hiposalivación"
+      },
+      {
+        "a": "CAMBRA 2021",
+        "b": "Indicadores +3, factores +2, protectores −1"
+      },
+      {
+        "a": "CariesCare 4D",
+        "b": "Determinar, detectar, decidir y hacer"
+      },
+      {
+        "a": "ICCMS",
+        "b": "Une etapas de lesión, actividad y riesgo en un plan"
+      },
+      {
+        "a": "NOM-004-SSA3-2012",
+        "b": "Expediente clínico"
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m03-p01",
+        "q": "¿Qué diferencia hay entre experiencia y actividad de caries?",
+        "opciones": [
+          "Son lo mismo",
+          "La experiencia es la historia acumulada y la actividad indica si hoy hay lesiones progresando",
+          "La actividad describe el pasado y la experiencia el futuro",
+          "La experiencia solo se mide en niños"
+        ],
+        "correcta": 1,
+        "explicacion": "La experiencia describe el pasado; la actividad, el presente; el riesgo, el futuro."
+      },
+      {
+        "id": "m03-p02",
+        "q": "¿Qué índice resume la experiencia de caries en dientes permanentes?",
+        "opciones": [
+          "CPOD",
+          "Índice de O'Leary",
+          "Índice gingival",
+          "ICDAS"
+        ],
+        "correcta": 0,
+        "explicacion": "El CPOD suma dientes cariados, perdidos y obturados por caries."
+      },
+      {
+        "id": "m03-p03",
+        "q": "¿Cuál es la capacidad predictiva de las herramientas de evaluación del riesgo?",
+        "opciones": [
+          "Perfecta, nunca se equivocan",
+          "Nula, no sirven",
+          "Moderada, por lo que complementan pero no sustituyen al juicio clínico",
+          "Solo predicen la caries en adultos mayores"
+        ],
+        "correcta": 2,
+        "explicacion": "Aciertan en muchos casos pero clasifican mal a una parte de los pacientes."
+      },
+      {
+        "id": "m03-p04",
+        "q": "¿Cuál de estos es un factor de riesgo en el formulario CAMBRA para seis años en adelante?",
+        "opciones": [
+          "Usar pasta con flúor dos veces al día",
+          "Flujo salival adecuado",
+          "Barniz de flúor en los últimos seis meses",
+          "Raíces expuestas"
+        ],
+        "correcta": 3,
+        "explicacion": "Las raíces expuestas son un factor de riesgo; las otras opciones son factores protectores."
+      },
+      {
+        "id": "m03-p05",
+        "q": "¿Cuál de estos es un factor protector en CAMBRA?",
+        "opciones": [
+          "Vivir, estudiar o trabajar en una zona con agua fluorada",
+          "Fosetas y fisuras profundas",
+          "Consumo regular de drogas recreativas",
+          "Aparatos de ortodoncia"
+        ],
+        "correcta": 0,
+        "explicacion": "El agua fluorada es protectora; las demás opciones son factores de riesgo."
+      },
+      {
+        "id": "m03-p06",
+        "q": "Según la actualización de CAMBRA de 2021, ¿qué ocurrió con los recuentos de S. mutans y lactobacilos?",
+        "opciones": [
+          "Se volvieron obligatorios",
+          "Se retiraron de los formularios porque no hay una prueba validada en el consultorio",
+          "Se convirtieron en el principal indicador de enfermedad",
+          "Se usan solo en niños"
+        ],
+        "correcta": 1,
+        "explicacion": "Se retiraron hasta que exista una prueba validada disponible en el consultorio."
+      },
+      {
+        "id": "m03-p07",
+        "q": "En el método cuantitativo de CAMBRA, ¿cuántos puntos suma cada indicador de enfermedad?",
+        "opciones": [
+          "1",
+          "2",
+          "5",
+          "3"
+        ],
+        "correcta": 3,
+        "explicacion": "Indicadores +3, factores de riesgo +2 y factores protectores −1."
+      },
+      {
+        "id": "m03-p08",
+        "q": "Un paciente de 25 años tiene 2 indicadores de enfermedad, 2 factores de riesgo y 3 factores protectores. ¿Cuál es su puntuación y nivel?",
+        "opciones": [
+          "+1, riesgo moderado",
+          "+13, riesgo alto",
+          "+7, riesgo alto",
+          "−3, riesgo bajo"
+        ],
+        "correcta": 2,
+        "explicacion": "(2 × 3) + (2 × 2) − 3 = 6 + 4 − 3 = +7, dentro del rango de riesgo alto (+3 a +17)."
+      },
+      {
+        "id": "m03-p09",
+        "q": "¿Qué niveles de riesgo usa el formulario CAMBRA de cero a seis años?",
+        "opciones": [
+          "Bajo, moderado, alto y muy alto",
+          "Solo bajo y alto",
+          "Verde, amarillo y rojo",
+          "Bajo, moderado, alto y extremo"
+        ],
+        "correcta": 0,
+        "explicacion": "En cero a seis años el nivel más alto se llama muy alto; en seis años en adelante, extremo."
+      },
+      {
+        "id": "m03-p10",
+        "q": "¿Qué elemento del formulario de cero a seis años NO aparece en el de seis años en adelante?",
+        "opciones": [
+          "Biopelícula abundante",
+          "Caries actual o reciente en la madre, la persona cuidadora o un hermano",
+          "Consumo frecuente de carbohidratos fermentables",
+          "Medicamentos que reducen la saliva"
+        ],
+        "correcta": 1,
+        "explicacion": "La caries en la familia es un factor específico de la primera infancia; los demás aparecen en ambos formularios."
+      },
+      {
+        "id": "m03-p11",
+        "q": "¿Qué intervalo de revisión sugiere la guía CAMBRA de 2021 para un adulto en riesgo extremo?",
+        "opciones": [
+          "Cada doce meses",
+          "Cada seis meses",
+          "Cada tres a cuatro meses",
+          "Solo cuando haya dolor"
+        ],
+        "correcta": 2,
+        "explicacion": "El riesgo extremo requiere seguimiento cercano, aproximadamente cada tres a cuatro meses."
+      },
+      {
+        "id": "m03-p12",
+        "q": "¿En qué etapas agrupa ICCMS las lesiones cariosas?",
+        "opciones": [
+          "Leve y grave",
+          "Esmalte, dentina y pulpa",
+          "Clases I a V",
+          "Sano, inicial, moderado y extenso"
+        ],
+        "correcta": 3,
+        "explicacion": "ICCMS agrupa los códigos de detección en etapas inicial, moderada y extensa, además de sano."
+      },
+      {
+        "id": "m03-p13",
+        "q": "¿Cuál es el orden correcto del ciclo CariesCare 4D?",
+        "opciones": [
+          "Determinar el riesgo, detectar y valorar las lesiones, decidir el plan, hacer el tratamiento",
+          "Detectar, hacer, decidir, determinar",
+          "Decidir, determinar, hacer, detectar",
+          "Hacer, detectar, determinar, decidir"
+        ],
+        "correcta": 0,
+        "explicacion": "El ciclo empieza por el riesgo, sigue con las lesiones, el plan acordado y la atención, y vuelve a empezar."
+      },
+      {
+        "id": "m03-p14",
+        "q": "¿Qué combina la matriz de ICCMS para estimar la probabilidad de progresión?",
+        "opciones": [
+          "La edad y el sexo del paciente",
+          "El número de restauraciones y el costo",
+          "El riesgo del paciente y el estado y actividad de sus lesiones",
+          "El color de los dientes y la marca de la pasta"
+        ],
+        "correcta": 2,
+        "explicacion": "La matriz cruza el riesgo con las lesiones y usa colores tipo semáforo."
+      },
+      {
+        "id": "m03-p15",
+        "q": "Caso: un paciente de 60 años sin lesiones activas toma cuatro medicamentos que secan la boca, tiene flujo salival muy bajo medido y chupa caramelos. ¿Cómo lo clasificas?",
+        "opciones": [
+          "Riesgo bajo, porque no tiene lesiones activas",
+          "Riesgo moderado, porque es adulto mayor",
+          "No se puede clasificar sin cultivo bacteriano",
+          "Riesgo extremo, por riesgo alto con hiposalivación medida"
+        ],
+        "correcta": 3,
+        "explicacion": "Varios factores de riesgo más hiposalivación medida lo ubican en riesgo extremo según CAMBRA."
+      },
+      {
+        "id": "m03-p16",
+        "q": "Caso: una paciente de riesgo bajo, estable desde hace años, pide que le reemplacen sus restauraciones antiguas en buen estado «para prevenir caries». ¿Qué le recomiendas?",
+        "opciones": [
+          "Reemplazarlas todas en una sola cita",
+          "Explicarle que reemplazar restauraciones sanas sacrifica tejido sin reducir el riesgo, y mantener vigilancia",
+          "Cambiarlas por coronas",
+          "Tomar radiografías cada tres meses"
+        ],
+        "correcta": 1,
+        "explicacion": "Sin indicación clínica, el reemplazo agranda las preparaciones y no mejora el riesgo; lo indicado es vigilar."
+      },
+      {
+        "id": "m03-p17",
+        "q": "Caso: tras cuatro meses, la puntuación CAMBRA de un paciente bajó de +6 a +1 porque recibió medidas profesionales, pero aparecieron dos lesiones nuevas. ¿Qué haces?",
+        "opciones": [
+          "Reclasificar en riesgo alto por los indicadores nuevos y revisar qué factor no se corrigió",
+          "Mantenerlo en riesgo moderado porque la puntuación bajó",
+          "Suspender las medidas preventivas",
+          "Alargar el intervalo de revisión a doce meses"
+        ],
+        "correcta": 0,
+        "explicacion": "Las lesiones nuevas son indicadores de enfermedad: la puntuación no debe ocultar que el plan no está funcionando."
+      },
+      {
+        "id": "m03-p18",
+        "q": "¿Qué norma establece los criterios del expediente clínico donde se documenta el plan preventivo?",
+        "opciones": [
+          "NOM-087-SEMARNAT-SSA1-2002",
+          "NOM-229-SSA1-2002",
+          "NOM-004-SSA3-2012",
+          "NOM-013-SSA2-2015"
+        ],
+        "correcta": 2,
+        "explicacion": "La NOM-004-SSA3-2012 regula el expediente clínico en México."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Evidence-Based Caries Management for All Ages-Practical Guidelines",
+      "autor": "Featherstone J. D. B., Crystal Y. O., Alston P. et al. (Frontiers in Oral Health)",
+      "anio": 2021,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8757692/"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "CariesCare practice guide: consensus on evidence into practice",
+      "autor": "Martignon S., Pitts N. B., Goffin G. et al. (British Dental Journal)",
+      "anio": 2019
+    },
+    {
+      "tipo": "academica",
+      "titulo": "International Caries Classification and Management System (ICCMS) Guide for Practitioners and Educators",
+      "autor": "Pitts N. B., Ismail A. I., Martignon S. et al. (ICDAS Foundation)",
+      "anio": 2014
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "NOM-004-SSA3-2012, Del expediente clínico",
+      "autor": "Secretaría de Salud",
+      "anio": 2012
+    }
+  ]
+}

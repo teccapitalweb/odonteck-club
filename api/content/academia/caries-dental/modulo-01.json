@@ -1,0 +1,1423 @@
+{
+  "programa": "caries-dental",
+  "modulo": 1,
+  "titulo": "Qué es la caries: biopelícula, azúcares y la hipótesis de la placa ecológica",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "La caries es la enfermedad más común del mundo y, al mismo tiempo, una de las más prevenibles. En este módulo aprenderás qué es realmente la caries según los consensos actuales, cómo se forma y se organiza la biopelícula dental, por qué los azúcares, y sobre todo la frecuencia con que se consumen, son el motor de la enfermedad, y cómo la explicación científica evolucionó desde Miller hasta la hipótesis de la placa ecológica. Es la base conceptual de todo el programa: entender el proceso te permite controlarlo, no solo reparar sus consecuencias.",
+  "objetivos": [
+    "Definir la caries dental con base en los consensos internacionales actuales y distinguir entre enfermedad, lesión y cavidad.",
+    "Describir las etapas de formación de la biopelícula dental y las propiedades que la hacen resistente.",
+    "Explicar la curva de Stephan y relacionar la frecuencia de consumo de azúcares con el tiempo de desmineralización.",
+    "Comparar las hipótesis de la placa específica, no específica y ecológica, y justificar por qué hoy se habla de disbiosis.",
+    "Argumentar por qué restaurar una cavidad no controla la enfermedad y qué factores sí la controlan."
+  ],
+  "duracionMin": 95,
+  "portada": {
+    "id": "caries-dental/m01/portada",
+    "proporcion": "16:9",
+    "alt": "Odontóloga con equipo de protección completo examina con espejo bucal los molares de un paciente reclinado, del que solo se ve la boca.",
+    "prompt": "Fotografía clínica realista de gran formato en un consultorio dental moderno y luminoso de México: una odontóloga con guantes de nitrilo, cubrebocas, careta transparente, gorro y bata desechable examina con espejo bucal y sonda de punta roma los molares inferiores de un paciente adulto reclinado en la unidad dental; encuadre lateral cercano en el que del paciente solo se ven los labios entreabiertos y la mejilla con babero, lámpara dental encendida, bandeja de instrumental ordenada al fondo, colores naturales, profundidad de campo corta. Evitar: texto, logotipos, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes, dientes deformes, instrumental oxidado."
+  },
+  "temas": [
+    {
+      "n": "1.1",
+      "titulo": "La caries como enfermedad: definición actual y magnitud del problema",
+      "minutos": 13,
+      "enPocasPalabras": "La caries es una enfermedad que daña los dientes poco a poco cuando las bacterias de la placa convierten el azúcar en ácido muchas veces al día. No aparece de un día para otro: empieza con manchas que todavía se pueden detener. Es la enfermedad más frecuente del mundo, pero también una de las más fáciles de prevenir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Casi todas las personas que llegan a tu consultorio han tenido caries en algún momento de su vida. Es tan común que muchas veces se le trata como algo inevitable, un desgaste natural de los dientes. No lo es. La caries es una **enfermedad** con causas conocidas, un mecanismo bien estudiado y herramientas eficaces para prevenirla y detenerla. Entenderla bien es el primer paso para dejar de tratarla solo con la fresa.\n\nDurante buena parte del siglo XX, la odontología se enfocó en la **cavidad**: detectar el agujero, retirar el tejido dañado y obturar. Ese enfoque resolvía el daño visible, pero no cambiaba lo que lo había provocado. Hoy la cariología entiende la caries como un proceso que ocurre en la superficie del diente durante meses o años, mucho antes de que exista un agujero, y que puede frenarse si se actúa sobre sus causas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/01",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas de un odontólogo sostienen espejo bucal y sonda frente a los dientes de un paciente adulto, en encuadre cerrado de la boca.",
+          "pie": "El examen clínico es el punto de partida: antes de pensar en restaurar, hay que entender en qué etapa del proceso está cada superficie.",
+          "prompt": "Fotografía clínica realista, encuadre cerrado de la boca de un paciente adulto con los labios separados por un retractor suave, dientes permanentes completos y bien alineados, un odontólogo con guantes de nitrilo azul sostiene un espejo bucal y una sonda de punta roma junto a los premolares superiores, luz blanca uniforme de la lámpara dental, encía rosa pálido sana, saliva natural, fondo desenfocado de la unidad dental, colores naturales y nitidez alta. Evitar: texto, logotipos, marcas de agua, sangre, rostro completo del paciente, manos sin guantes, número incorrecto de dientes, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se define hoy la caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los consensos internacionales más recientes, como la revisión de Pitts y colaboradores publicada en *Nature Reviews Disease Primers* en 2017 y el consenso de terminología de la Organización Europea para la Investigación en Caries (ORCA) y el Grupo de Investigación en Cariología de la IADR publicado en 2020, coinciden en describir la caries con estas características:\n\n- Está **mediada por la biopelícula**: sin la comunidad de bacterias adherida al diente no hay caries.\n- Está **modulada por la dieta**, en especial por los azúcares libres.\n- Es **multifactorial**: influyen la saliva, el flúor, los hábitos, el entorno social y la propia anatomía del diente.\n- Es **dinámica**: alterna fases de pérdida y de ganancia de mineral a lo largo del día.\n- Es **no transmisible** en el sentido epidemiológico: no se contagia como una gripe; se desarrolla por desequilibrio de una comunidad microbiana que todos tenemos.\n- Su resultado es una **pérdida neta de mineral** de los tejidos duros del diente.\n\nCada una de estas palabras tiene consecuencias prácticas. Si la caries depende de la biopelícula, removerla con regularidad es parte del tratamiento. Si la modula la dieta, hablar de azúcares no es un consejo de cortesía sino una intervención clínica. Si es dinámica, las lesiones iniciales pueden detenerse y en parte revertirse."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Caries no es lo mismo que cavidad",
+          "md": "En cariología se distingue entre la **caries**, que es la enfermedad o el proceso, la **lesión cariosa**, que es el signo visible de ese proceso en un diente concreto, y la **cavidad**, que es solo una etapa avanzada de algunas lesiones. Una persona puede tener la enfermedad activa sin una sola cavidad, por ejemplo con varias manchas blancas recientes junto a la encía. Y una persona con muchas restauraciones puede tener hoy la enfermedad controlada."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m01/d1",
+          "pie": "La caries como continuo: la lesión avanza o retrocede según el balance entre pérdida y ganancia de mineral.",
+          "descripcion": "Línea horizontal con cuatro cortes esquemáticos de una corona dental de izquierda a derecha: superficie sana, lesión inicial en esmalte (mancha blanca), lesión que alcanza dentina sin cavidad franca y lesión cavitada. Sobre la línea, una flecha hacia la derecha en color cálido rotulada como desmineralización; debajo, una flecha hacia la izquierda en color frío rotulada como remineralización, que llega hasta la lesión inicial, para mostrar que las primeras etapas pueden detenerse o revertirse.",
+          "elementos": [
+            "Superficie sana",
+            "Lesión inicial en esmalte",
+            "Lesión en dentina",
+            "Cavidad",
+            "Desmineralización",
+            "Remineralización",
+            "Etapas que pueden detenerse"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La enfermedad más común del planeta"
+        },
+        {
+          "tipo": "texto",
+          "md": "La Organización Mundial de la Salud (OMS) publicó en 2022 su *Informe sobre la situación mundial de la salud bucodental*. Ahí estimó que las enfermedades bucales afectan a cerca de 3,500 millones de personas y que la caries no tratada de los dientes permanentes es la condición de salud más frecuente del mundo. La nota descriptiva vigente de la OMS, actualizada con datos del estudio de Carga Global de la Enfermedad 2021, eleva la cifra de personas con enfermedades bucales a casi 3,700 millones. La misma organización calcula que alrededor de 2,000 millones de personas tienen caries en dientes permanentes y unos 514 millones de niñas y niños, en dientes temporales.\n\nDetrás de esas cifras hay dolor, infecciones, noches sin dormir, días de escuela y de trabajo perdidos, dificultades para comer y gasto de bolsillo para las familias. La caries también es profundamente **desigual**: se concentra en los grupos con menos ingresos, menor acceso a servicios y mayor exposición a bebidas y alimentos azucarados baratos. Tres de cada cuatro personas con enfermedades bucales viven en países de ingresos bajos y medianos, según la propia OMS."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La caries en la norma mexicana",
+          "md": "La **NOM-013-SSA2-2015**, *Para la prevención y control de enfermedades bucales*, publicada en el Diario Oficial de la Federación el 23 de noviembre de 2016 y vigente según el Catálogo Mexicano de Normas, establece los criterios para prevenir, detectar, diagnosticar y tratar las enfermedades bucales más frecuentes del país, entre ellas la caries, y obliga a registrar la información en el expediente clínico. La vigilancia nacional de las patologías bucales se apoya en el **SIVEPAB** (Sistema de Vigilancia Epidemiológica de Patologías Bucales) de la Secretaría de Salud. Antes de citar la norma en un documento formal, revisa siempre el DOF por si hubo modificaciones."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/02",
+          "proporcion": "16:9",
+          "alt": "Sala de espera de un centro de salud con familias sentadas, vistas de espaldas y sin rostros visibles.",
+          "pie": "La caries afecta a personas de todas las edades y se concentra donde hay menos acceso a prevención; por eso es un problema de salud pública, no solo de la consulta privada.",
+          "prompt": "Fotografía documental realista de la sala de espera de un centro de salud público en México, luz natural de mañana que entra por ventanas amplias, sillas de plástico en fila, varias familias con niñas y niños pequeños y personas adultas mayores sentadas vistas de espaldas o de perfil lejano, sin rostros reconocibles, paredes claras y limpias, piso de loseta, ambiente ordenado y tranquilo, colores naturales, encuadre amplio. Evitar: texto, carteles legibles, logotipos, marcas de agua, rostros identificables, personas en situación de angustia, desorden exagerado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una enfermedad de muchos factores"
+        },
+        {
+          "tipo": "texto",
+          "md": "Que la caries sea multifactorial no significa que todos los factores pesen igual. El consenso actual reconoce a los **azúcares libres** como el factor dietético determinante y a la **biopelícula** como el escenario donde ocurre todo. A partir de ahí, otros elementos modifican la velocidad del proceso: la cantidad y calidad de la saliva, la exposición regular a flúor, la anatomía de fosetas y fisuras, la presencia de aparatos de ortodoncia o de raíces expuestas, y algunos medicamentos.\n\nPor encima de estos factores biológicos están los **determinantes sociales**: el nivel educativo, el ingreso, el acceso a agua potable, la publicidad de alimentos, la disponibilidad de pasta dental con flúor y de servicios de salud. Por eso la caries se considera una enfermedad no transmisible que comparte causas con la obesidad y la diabetes tipo 2, en particular el consumo elevado de azúcares. En los módulos 3 y 7 estudiarás estos factores con detalle."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Lo que cambió en la forma de entender la caries",
+          "columnas": [
+            "Aspecto",
+            "Visión tradicional",
+            "Visión actual"
+          ],
+          "filas": [
+            [
+              "Qué es",
+              "Un agujero en el diente",
+              "Un proceso dinámico de pérdida y ganancia de mineral"
+            ],
+            [
+              "Causa",
+              "Una bacteria específica",
+              "Desequilibrio de la biopelícula impulsado por azúcares"
+            ],
+            [
+              "Contagio",
+              "Infección que se transmite",
+              "Enfermedad no transmisible con causas compartidas"
+            ],
+            [
+              "Tratamiento",
+              "Retirar tejido y obturar",
+              "Controlar causas, detener lesiones y restaurar solo lo necesario"
+            ],
+            [
+              "Éxito",
+              "Cavidades obturadas",
+              "Ausencia de lesiones activas nuevas a lo largo del tiempo"
+            ]
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad sobre la caries",
+          "afirmaciones": [
+            {
+              "texto": "La caries empieza cuando aparece un agujero en el diente.",
+              "verdadero": false,
+              "explicacion": "El proceso inicia mucho antes, con pérdida de mineral bajo una superficie todavía íntegra. La cavidad es una etapa avanzada."
+            },
+            {
+              "texto": "Una persona puede tener caries activa sin tener ninguna cavidad.",
+              "verdadero": true,
+              "explicacion": "Las lesiones iniciales activas, como las manchas blancas recientes, ya indican enfermedad activa."
+            },
+            {
+              "texto": "La caries se clasifica hoy como una enfermedad no transmisible.",
+              "verdadero": true,
+              "explicacion": "Los consensos actuales la describen así: depende del desequilibrio de una biopelícula que todos tenemos, modulado por la dieta."
+            },
+            {
+              "texto": "Si se obturan todas las cavidades, la enfermedad queda controlada.",
+              "verdadero": false,
+              "explicacion": "La restauración repara el daño, pero si siguen la biopelícula acumulada y los azúcares frecuentes, aparecerán lesiones nuevas."
+            },
+            {
+              "texto": "La caries afecta más a los grupos con menos ingresos y menor acceso a servicios.",
+              "verdadero": true,
+              "explicacion": "La OMS documenta una fuerte desigualdad social en la carga de enfermedades bucales."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/03",
+          "proporcion": "1:1",
+          "alt": "Vista oclusal de un modelo de molar inferior con una mancha blanca opaca junto a otra pieza con cavidad marrón.",
+          "pie": "Dos momentos del mismo proceso: una lesión inicial sin cavidad y una lesión cavitada en dentina.",
+          "prompt": "Fotografía macro de estudio sobre fondo gris neutro de dos molares inferiores permanentes extraídos y limpios, montados lado a lado en un soporte, vista oclusal: el de la izquierda con opacidades blancas tenues en el fondo de las fisuras y superficie íntegra, el de la derecha con una cavidad oclusal pequeña de bordes marrones y dentina oscura en el fondo, ambos con anatomía correcta de cinco cúspides, iluminación difusa uniforme, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, restos de tejido blando, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué significa esto en tu práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pensar la caries como enfermedad cambia la primera pregunta que te haces frente a un paciente. Ya no es solo «¿cuántas cavidades tiene?», sino también «¿la enfermedad está activa?, ¿qué la está impulsando?, ¿qué puede hacer esta persona en casa y qué puedo hacer yo en la consulta para inclinar la balanza?». Las respuestas a esas preguntas definen un plan que combina control de la biopelícula, orientación sobre azúcares, uso de flúor y, solo cuando hace falta, restauración.\n\n**Idea práctica:** en tu próxima consulta, cuando expliques un diagnóstico, separa en voz alta la enfermedad de sus lesiones. Por ejemplo: «Tienes dos manchas que todavía podemos detener y una cavidad que hay que restaurar, pero lo más importante es lo que causa las tres». Esa frase sencilla ayuda al paciente a entender que su participación es indispensable."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Caries dental",
+          "definicion": "Enfermedad dinámica, mediada por la biopelícula y modulada por la dieta, que produce pérdida neta de mineral de los tejidos duros del diente."
+        },
+        {
+          "termino": "Lesión cariosa",
+          "definicion": "Cambio detectable en la estructura del diente causado por el proceso de caries; puede estar activa o detenida y tener o no cavidad."
+        },
+        {
+          "termino": "Cavidad",
+          "definicion": "Pérdida de continuidad de la superficie del diente en una lesión cariosa avanzada."
+        },
+        {
+          "termino": "Enfermedad no transmisible",
+          "definicion": "Enfermedad que no se contagia de persona a persona como una infección clásica y se relaciona con hábitos, ambiente y factores sociales."
+        },
+        {
+          "termino": "Determinantes sociales de la salud",
+          "definicion": "Condiciones en las que las personas nacen, viven, trabajan y envejecen, como el ingreso, la educación o el acceso a servicios, que influyen en su salud."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.1-1",
+          "q": "Según los consensos actuales, ¿cuál es la mejor descripción de la caries dental?",
+          "opciones": [
+            "Una infección causada por una sola bacteria que se contagia por la saliva",
+            "Una enfermedad dinámica mediada por la biopelícula y modulada por la dieta",
+            "Un desgaste natural del esmalte que aparece con la edad",
+            "Una cavidad en el diente que debe obturarse"
+          ],
+          "correcta": 1,
+          "explicacion": "La caries es un proceso dinámico que depende de la biopelícula y de los azúcares; no es una infección de una sola bacteria ni un desgaste natural, y la cavidad es solo una etapa avanzada."
+        },
+        {
+          "id": "t1.1-2",
+          "q": "¿Qué diferencia hay entre caries y lesión cariosa?",
+          "opciones": [
+            "Son sinónimos exactos",
+            "La lesión es la enfermedad y la caries es su signo",
+            "La caries es la enfermedad y la lesión es su signo en un diente concreto",
+            "La caries solo afecta la dentina y la lesión solo el esmalte"
+          ],
+          "correcta": 2,
+          "explicacion": "La caries es el proceso o enfermedad; la lesión es la manifestación detectable de ese proceso en una superficie dental."
+        },
+        {
+          "id": "t1.1-3",
+          "q": "¿Qué norma mexicana establece criterios para la prevención y control de enfermedades bucales?",
+          "opciones": [
+            "NOM-087-SEMARNAT-SSA1-2002",
+            "NOM-004-SSA3-2012",
+            "NOM-229-SSA1-2002",
+            "NOM-013-SSA2-2015"
+          ],
+          "correcta": 3,
+          "explicacion": "La NOM-013-SSA2-2015 trata la prevención y control de enfermedades bucales. Las otras regulan residuos biológico-infecciosos, el expediente clínico y los rayos X."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Dental caries",
+          "autor": "Pitts N. B., Zero D. T., Marsh P. D. et al. (Nature Reviews Disease Primers)",
+          "anio": 2017
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Terminology of Dental Caries and Dental Caries Management: Consensus Report of a Workshop Organized by ORCA and Cariology Research Group of IADR",
+          "autor": "Machiulskiene V., Campus G., Carvalho J. C. et al. (Caries Research)",
+          "anio": 2020
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Global oral health status report: towards universal health coverage for oral health by 2030",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2022
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Oral health (nota descriptiva)",
+          "autor": "Organización Mundial de la Salud",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/oral-health"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+          "autor": "Secretaría de Salud",
+          "anio": 2016
+        }
+      ]
+    },
+    {
+      "n": "1.2",
+      "titulo": "La biopelícula dental: cómo se forma y cómo funciona",
+      "minutos": 13,
+      "enPocasPalabras": "La placa dental es una capa pegajosa formada por millones de bacterias que viven juntas sobre los dientes, protegidas por una especie de gel que ellas mismas fabrican. Se vuelve a formar todos los días, por eso hay que retirarla con el cepillo y el hilo. Mientras más tiempo se queda, más dañina se vuelve.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La boca es uno de los ambientes más poblados del cuerpo humano. Se han identificado alrededor de 700 especies de microorganismos orales, la mayoría bacterias, aunque en una persona concreta conviven solo una parte de ellas. Casi todas viven en armonía con nosotros y cumplen funciones útiles: ocupan espacio que de otro modo aprovecharían microorganismos dañinos y participan en el equilibrio de las mucosas.\n\nSobre el diente, estas bacterias no flotan sueltas. Se organizan en una **biopelícula**: una comunidad estructurada de microorganismos adherida a una superficie y envuelta en una matriz extracelular que ellas mismas producen. Lo que en la consulta llamamos **placa dental** es precisamente esa biopelícula. El término «placa» sigue usándose, pero «biopelícula» describe mejor lo que es: un sistema vivo y organizado, no una simple capa de restos de comida."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/04",
+          "proporcion": "4:3",
+          "alt": "Dientes anteriores inferiores con placa teñida de color rosa intenso cerca de la encía tras aplicar un revelador.",
+          "pie": "Un revelador de placa hace visible la biopelícula, que se acumula sobre todo cerca del margen de la encía y entre los dientes.",
+          "prompt": "Fotografía clínica macro de los incisivos y caninos inferiores permanentes de un adulto joven, labios separados con retractor transparente, tras aplicar un revelador de placa: zonas teñidas de color rosa magenta concentradas en el tercio cervical cerca de la encía y en los espacios entre dientes, el resto del esmalte blanco y limpio, encía sana rosa pálido, luz de lámpara dental uniforme, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, encía inflamada exagerada, rostro visible, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Todo empieza con una película invisible"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pocos segundos después de limpiar un diente, su superficie se cubre con la **película adquirida**: una capa delgadísima, sin bacterias, formada por proteínas y glucoproteínas de la saliva que se adsorben al esmalte. Entre sus componentes están las mucinas, las proteínas ricas en prolina, la estaterina y la amilasa. La película protege al esmalte, porque lubrica y frena el paso de ácidos, pero también ofrece sitios de unión específicos que reconocen las primeras bacterias.\n\nEsas **colonizadoras primarias** son sobre todo estreptococos del grupo mitis, como *Streptococcus sanguinis*, *S. oralis* y *S. mitis*, además de especies de *Actinomyces*. Al principio su unión es débil y reversible, mediada por fuerzas físicas; después se vuelve firme gracias a adhesinas, moléculas de la superficie bacteriana que se acoplan a receptores de la película."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "De unas cuantas células a una comunidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una vez adheridas, las colonizadoras primarias se multiplican y ofrecen a su vez nuevos sitios de unión. Otras especies se suman por **coagregación**, es decir, reconociendo y uniéndose a bacterias que ya están ahí. Así la biopelícula gana grosor y diversidad en cuestión de horas y días. Las bacterias producen una **matriz extracelular** de polisacáridos, proteínas y ADN que las mantiene unidas y regula lo que entra y lo que sale.\n\nLa biopelícula madura no es una masa uniforme. Tiene microcolonias separadas por canales por donde circulan líquido y nutrientes, y presenta **gradientes**: zonas con más o menos oxígeno, más o menos azúcar y distinto pH. Las bacterias se comunican mediante señales químicas, un fenómeno llamado *quorum sensing*, que les permite ajustar su comportamiento según la densidad de la población. Con el tiempo, parte de la comunidad se desprende y coloniza otras superficies."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m01/d2",
+          "pie": "Etapas de formación de la biopelícula sobre el esmalte.",
+          "descripcion": "Secuencia horizontal de cinco recuadros que muestran un corte de la superficie del esmalte con capas crecientes encima: primero una línea delgada de película adquirida sin bacterias; luego unas pocas bacterias en forma de cocos adheridas; después microcolonias que crecen; luego una comunidad gruesa y diversa con matriz y canales; y al final células que se desprenden hacia arriba. Flechas entre recuadros indican el paso del tiempo, de minutos a días.",
+          "elementos": [
+            "Película adquirida",
+            "Adhesión inicial reversible",
+            "Adhesión firme y colonizadoras primarias",
+            "Coagregación y maduración",
+            "Matriz extracelular",
+            "Desprendimiento"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la formación de la biopelícula",
+          "instruccion": "Coloca las etapas en el orden en que ocurren sobre una superficie de esmalte recién limpia.",
+          "elementos": [
+            "Se forma la película adquirida con proteínas de la saliva",
+            "Las colonizadoras primarias se unen de forma débil y reversible",
+            "Las adhesinas fijan a las bacterias de forma firme",
+            "Otras especies se integran por coagregación",
+            "La comunidad madura produce matriz y canales internos",
+            "Algunas células se desprenden y colonizan otras superficies"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La sacarosa, materia prima de la matriz",
+          "md": "*Streptococcus mutans* y otras especies poseen **glucosiltransferasas**, enzimas que usan la sacarosa para fabricar glucanos, polisacáridos que se depositan fuera de la célula. Una parte de ellos son glucanos insolubles, ricos en enlaces α-1,3, que dan a la matriz consistencia pegajosa y la hacen más porosa y voluminosa. Esa arquitectura favorece la adhesión de más bacterias y crea microambientes donde el ácido producido en lo profundo de la biopelícula queda atrapado junto al esmalte y se neutraliza con dificultad. Por eso la sacarosa no solo es un sustrato para fermentar: también modifica la estructura de la biopelícula y la vuelve más cariogénica. Revisiones como la de Bowen y Koo (2011) en *Caries Research* describen este papel de la matriz extracelular."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La biopelícula también protege"
+        },
+        {
+          "tipo": "texto",
+          "md": "Sería un error pensar que la biopelícula es un enemigo que hay que exterminar. La microbiota residente ocupa los sitios de adhesión y consume nutrientes que de otro modo aprovecharían microorganismos externos, un efecto conocido como **resistencia a la colonización**. Algunas bacterias orales, como *Streptococcus sanguinis* y *S. gordonii*, metabolizan la arginina de la saliva mediante el sistema de la arginina desiminasa y liberan **amoniaco**, que eleva el pH de la placa y contrarresta parte del ácido. Otras degradan la urea con el mismo efecto alcalinizante. Las personas cuya placa produce más álcali tienden a tener menos caries.\n\nPor eso el objetivo clínico no es esterilizar la boca, sino mantener una comunidad **equilibrada**: desorganizarla con frecuencia y quitarle el exceso de azúcar que favorece a las especies productoras de ácido."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué cuesta tanto eliminarla"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las bacterias que viven en una biopelícula toleran mucho mejor los antimicrobianos que las mismas bacterias sueltas. La matriz dificulta que los compuestos penetren, algunas células crecen muy despacio y son menos sensibles, y la comunidad comparte mecanismos de defensa. En la práctica, esto significa que **ningún enjuague sustituye a la remoción mecánica**. El cepillo, el hilo y los auxiliares interproximales desorganizan la estructura y obligan a la biopelícula a empezar de nuevo.\n\nComo la biopelícula se vuelve a formar continuamente, el objetivo realista no es mantener los dientes estériles, sino **desorganizarla con frecuencia** para que no alcance la madurez ni el desequilibrio que favorecen la caries. Por eso la constancia diaria del cepillado importa más que cepillar con fuerza una vez a la semana."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Zonas donde la biopelícula se estanca",
+          "md": "Hay superficies donde la biopelícula queda protegida de la lengua, las mejillas y el cepillo: el fondo de fosetas y fisuras, las caras proximales por debajo del punto de contacto, el margen cervical junto a la encía, los bordes de restauraciones desajustadas y el entorno de brackets y aparatos removibles. Son justamente los sitios donde aparecen las lesiones. Al examinar a un paciente, revisa primero esas zonas de estancamiento."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/05",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de una biopelícula vista al microscopio, con bacterias en forma de cocos y bacilos envueltas en una matriz.",
+          "pie": "La biopelícula madura es una comunidad organizada, con microcolonias, matriz extracelular y canales internos.",
+          "prompt": "Ilustración científica realista estilo micrografía electrónica de barrido coloreada en tonos suaves, vista en corte de una biopelícula dental madura sobre una superficie de esmalte con textura de prismas: grupos densos de bacterias en forma de cocos y algunos bacilos alargados, envueltos en una matriz extracelular translúcida y fibrosa, con canales abiertos entre microcolonias, profundidad de campo marcada, iluminación lateral suave, composición vertical. Evitar: texto, escalas, etiquetas, flechas, logotipos, marcas de agua, colores fluorescentes estridentes, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Biopelícula, materia alba y cálculo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Conviene no confundir la biopelícula con otros depósitos. La **materia alba** es un material blando y blanquecino, con restos de alimentos, células descamadas y bacterias poco organizadas, que se retira con un chorro de agua. La biopelícula, en cambio, está firmemente adherida y no se va con un enjuague. El **cálculo** o sarro es biopelícula mineralizada por el calcio y el fosfato de la saliva; es duro, solo se retira con instrumentos y su superficie rugosa favorece que se acumule más biopelícula encima. El cálculo tiene mayor relevancia en la enfermedad periodontal, que se estudia en otro programa de la Academia."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/06",
+          "proporcion": "16:9",
+          "alt": "Manos de una persona usando hilo dental entre los dientes anteriores frente a un espejo, encuadre cerrado sin rostro completo.",
+          "pie": "La remoción mecánica diaria, con cepillo e hilo o auxiliares interproximales, es la herramienta más eficaz para desorganizar la biopelícula.",
+          "prompt": "Fotografía realista en un baño doméstico bien iluminado, encuadre cerrado de la parte baja del rostro de un adulto joven visto de perfil, solo labios, mentón y manos visibles, pasando hilo dental entre los incisivos superiores con un movimiento suave en forma de C, dientes permanentes sanos, encía rosa, luz natural difusa desde una ventana, colores cálidos y naturales, fondo desenfocado con azulejos claros. Evitar: texto, logotipos, marcas de productos, marcas de agua, ojos o rostro completo, sangre, encía lastimada, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando apliques un revelador de placa, no te limites a mostrarle al paciente lo teñido. Pídele que tome el cepillo y retire él mismo la tinción frente al espejo. Descubrir con sus propias manos qué zonas le cuestan más, casi siempre las caras linguales inferiores y las proximales, enseña más que cualquier explicación y te da un punto de partida concreto para el siguiente control."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Biopelícula",
+          "definicion": "Comunidad estructurada de microorganismos adherida a una superficie y envuelta en una matriz extracelular que ellos mismos producen."
+        },
+        {
+          "termino": "Película adquirida",
+          "definicion": "Capa delgada y sin bacterias de proteínas salivales que cubre el esmalte segundos después de limpiarlo."
+        },
+        {
+          "termino": "Colonizadoras primarias",
+          "definicion": "Primeras bacterias que se adhieren a la película adquirida, sobre todo estreptococos del grupo mitis y especies de Actinomyces."
+        },
+        {
+          "termino": "Coagregación",
+          "definicion": "Unión específica entre bacterias de especies distintas que permite a nuevas especies integrarse a la biopelícula."
+        },
+        {
+          "termino": "Glucosiltransferasa",
+          "definicion": "Enzima bacteriana que transforma la sacarosa en glucanos extracelulares que forman parte de la matriz de la biopelícula."
+        },
+        {
+          "termino": "Materia alba",
+          "definicion": "Depósito blando y poco organizado de restos de alimentos, células y bacterias que se retira con agua."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.2-1",
+          "q": "¿Qué es lo primero que se forma sobre un esmalte recién limpio?",
+          "opciones": [
+            "Una capa de Streptococcus mutans",
+            "La película adquirida de proteínas salivales",
+            "Cálculo dental",
+            "Matriz de glucanos insolubles"
+          ],
+          "correcta": 1,
+          "explicacion": "La película adquirida, sin bacterias, se forma en segundos; sobre ella se adhieren después las colonizadoras primarias."
+        },
+        {
+          "id": "t1.2-2",
+          "q": "¿Por qué un enjuague antimicrobiano no sustituye al cepillado?",
+          "opciones": [
+            "Porque los enjuagues no tienen ningún efecto sobre las bacterias",
+            "Porque el cepillado aporta flúor y el enjuague no",
+            "Porque la saliva neutraliza todos los enjuagues",
+            "Porque la matriz de la biopelícula dificulta la penetración y la remoción mecánica la desorganiza"
+          ],
+          "correcta": 3,
+          "explicacion": "Las bacterias en biopelícula toleran mejor los antimicrobianos; desorganizarla mecánicamente es la forma más eficaz de controlarla."
+        },
+        {
+          "id": "t1.2-3",
+          "q": "¿Qué papel tiene la sacarosa en la estructura de la biopelícula?",
+          "opciones": [
+            "Las glucosiltransferasas la usan para fabricar glucanos que vuelven la matriz más pegajosa y porosa",
+            "Disuelve la matriz y facilita su remoción",
+            "Solo sirve como fuente de energía, sin efecto sobre la estructura",
+            "Inhibe la adhesión de las colonizadoras primarias"
+          ],
+          "correcta": 0,
+          "explicacion": "Además de fermentarse, la sacarosa es sustrato para fabricar glucanos extracelulares que hacen a la biopelícula más cariogénica."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Dental plaque as a microbial biofilm",
+          "autor": "Marsh P. D. (Caries Research)",
+          "anio": 2004
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Biology of Streptococcus mutans-derived glucosyltransferases: role in extracellular matrix formation of cariogenic biofilms",
+          "autor": "Bowen W. H., Koo H. (Caries Research)",
+          "anio": 2011
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The human oral microbiome",
+          "autor": "Dewhirst F. E., Chen T., Izard J. et al. (Journal of Bacteriology)",
+          "anio": 2010
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de cariología y microbiología oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.3",
+      "titulo": "Azúcares, ácidos y la curva de Stephan",
+      "minutos": 14,
+      "enPocasPalabras": "Cada vez que comes o bebes algo con azúcar, las bacterias de la placa lo convierten en ácido y el diente pierde un poco de mineral durante varios minutos. Lo que más daño hace no es la cantidad total de azúcar, sino cuántas veces al día lo consumes. Picar dulces o dar sorbos a un refresco toda la tarde mantiene al diente bajo ataque casi todo el tiempo.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las bacterias de la biopelícula necesitan energía, y la obtienen sobre todo de los **carbohidratos fermentables** que llegan a la boca con los alimentos. Al degradarlos mediante la glucólisis producen ácidos orgánicos, principalmente **ácido láctico**, junto con ácido acético y fórmico. Esos ácidos se difunden hacia la superficie del diente y disuelven parte de su mineral.\n\nNo todos los carbohidratos son iguales. La **sacarosa**, el azúcar de mesa, es el más cariogénico porque se fermenta con rapidez y además sirve para fabricar la matriz de glucanos que estudiaste en el tema anterior. La glucosa, la fructosa y la maltosa también se fermentan con facilidad. La lactosa de la leche es menos acidogénica. Los almidones crudos se fermentan poco, pero los almidones cocidos y muy procesados, como el pan blanco o las frituras de harina, pueden degradarse en la boca por la amilasa salival y aportar azúcares fermentables, sobre todo si se quedan pegados a los dientes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/07",
+          "proporcion": "16:9",
+          "alt": "Mesa con alimentos y bebidas comunes con azúcar: refresco, jugo envasado, pan dulce, dulces y galletas.",
+          "pie": "Bebidas azucaradas, pan dulce, galletas y dulces son fuentes frecuentes de azúcares libres en la dieta cotidiana.",
+          "prompt": "Fotografía realista de bodegón sobre una mesa de madera clara con luz natural lateral: un vaso de refresco oscuro con burbujas, un vaso de jugo de naranja envasado, una concha de pan dulce, galletas con relleno, dulces de colores sin envoltura y una taza de café con terrones de azúcar al lado, composición ordenada y horizontal, colores naturales y apetitosos, fondo de pared blanca desenfocada. Evitar: texto, etiquetas de marca, logotipos, empaques reconocibles, marcas de agua, personas, aspecto de publicidad exagerada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La curva de Stephan"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la década de 1940, el investigador estadounidense Robert M. Stephan midió el pH de la placa dental de sus voluntarios antes y después de enjuagarse con soluciones de azúcar. Publicó sus hallazgos en el *Journal of Dental Research* en 1944, y la gráfica que describió se conoce desde entonces como **curva de Stephan**.\n\nLa curva muestra tres momentos. Antes de comer, el pH de la placa está cerca de la neutralidad. A los pocos minutos de consumir azúcar, el pH **cae con rapidez** porque las bacterias producen ácido. Después, poco a poco, la saliva diluye y neutraliza los ácidos y el pH **regresa** a su valor inicial, en un lapso que suele ir de unos 30 a 60 minutos según la persona, el alimento y la biopelícula. Mientras el pH está por debajo del llamado **pH crítico**, que para el esmalte se sitúa de forma aproximada alrededor de 5.5, el diente pierde mineral."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m01/d3",
+          "pie": "Curva de Stephan: caída y recuperación del pH de la placa después de un consumo de azúcar.",
+          "descripcion": "Gráfica de línea con el pH de la placa en el eje vertical (de 4 a 7.5) y el tiempo en minutos en el eje horizontal (de 0 a 60). La curva parte cerca de 7, cae en pocos minutos hasta cerca de 5 y vuelve gradualmente a 7 hacia el minuto 40 a 60. Una línea horizontal punteada marca el pH crítico aproximado del esmalte en 5.5; el área de la curva por debajo de esa línea aparece sombreada como zona de desmineralización y el área por encima como zona de remineralización.",
+          "elementos": [
+            "pH de la placa",
+            "Tiempo (minutos)",
+            "Consumo de azúcar",
+            "pH crítico del esmalte ~5.5",
+            "Zona de desmineralización",
+            "Recuperación por la saliva"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El pH crítico no es un número fijo",
+          "md": "El pH crítico es el valor por debajo del cual el líquido de la placa deja de estar saturado respecto al mineral del diente y este empieza a disolverse. Depende de las concentraciones de calcio y fosfato en la saliva y en la placa: con más calcio y fosfato disponibles, el pH crítico baja; con menos, sube. Por eso el valor de 5.5 para el esmalte es una referencia didáctica, no una constante. La dentina y el cemento, más ricos en carbonato y con cristales más pequeños, se disuelven a pH más alto, lo que explica que las raíces expuestas sean tan vulnerables. En el módulo 2 estudiarás esta química con detalle."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Frecuencia, más que cantidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si cada consumo de azúcar abre una ventana de desmineralización, lo que más importa es **cuántas ventanas se abren al día**. Una persona que come un postre al terminar la comida tiene un descenso de pH que la saliva corrige en poco tiempo. Otra que da sorbos a un refresco durante toda la tarde, o que chupa caramelos uno tras otro, mantiene su placa ácida durante horas, sin tiempo para que el esmalte recupere mineral.\n\nLa evidencia histórica más citada sobre este punto es el **estudio de Vipeholm**, realizado en Suecia entre 1945 y 1953 en una institución para personas con discapacidad intelectual y publicado por Gustafsson y colaboradores en 1954. Mostró que el azúcar consumido entre comidas y en formas pegajosas, como caramelos masticables, aumentaba la caries mucho más que la misma cantidad de azúcar ingerida con las comidas. Hoy ese estudio se considera **éticamente inaceptable**, porque se expuso a personas vulnerables a un daño sin su consentimiento, y se enseña también como ejemplo de lo que la investigación en salud no debe hacer."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Exposiciones que pasan desapercibidas",
+          "md": "Al preguntar por la dieta, no basta con «¿come muchos dulces?». Pregunta por el café o el té endulzado a sorbos durante la jornada, las bebidas deportivas y energéticas, los jarabes y medicamentos líquidos con azúcar, las pastillas para la garganta, el biberón o el vaso entrenador con leche o jugo para dormir, y las frutas secas o deshidratadas, muy adherentes. Estas exposiciones repetidas suelen pesar más que un postre ocasional."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "¿Cuánto tiempo al día pasa tu placa en zona ácida?",
+          "instruccion": "Estima el tiempo diario que la placa podría pasar por debajo del pH crítico. Usa el número de veces que se consumen alimentos o bebidas con azúcar y un tiempo de recuperación ilustrativo por exposición. Compara un patrón de tres comidas con uno de picoteo frecuente; recuerda que es una aproximación didáctica, no una medición clínica.",
+          "formula": "Tiempo en zona ácida = exposiciones al día × minutos de pH bajo por exposición",
+          "variables": [
+            {
+              "id": "exposiciones",
+              "etiqueta": "Exposiciones a azúcar al día",
+              "valor": 8,
+              "unidad": "veces"
+            },
+            {
+              "id": "minutos",
+              "etiqueta": "Minutos de pH bajo por exposición (ilustrativo)",
+              "valor": 30,
+              "unidad": "minutos"
+            }
+          ],
+          "resultado": {
+            "expresion": "exposiciones * minutos",
+            "etiqueta": "Tiempo estimado con la placa en zona ácida",
+            "unidad": "minutos al día",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/08",
+          "proporcion": "4:3",
+          "alt": "Mano de un adulto sostiene una botella de refresco junto a un escritorio de oficina con computadora, sin rostro visible.",
+          "pie": "Dar sorbos a una bebida azucarada durante horas multiplica las caídas de pH aunque la cantidad total parezca pequeña.",
+          "prompt": "Fotografía realista de estilo documental en una oficina con luz natural de tarde: sobre un escritorio de madera con teclado y libreta, la mano de un adulto sostiene una botella de vidrio con refresco oscuro a medio consumir, junto a una taza de café y un plato con galletas, encuadre horizontal desde arriba en diagonal, solo se ven manos y antebrazos con camisa, colores naturales, profundidad de campo media. Evitar: texto, etiquetas de marca, logotipos, pantallas con contenido legible, marcas de agua, rostro de la persona."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Factores que alargan o acortan el ataque ácido",
+          "items": [
+            "**Forma del alimento:** los alimentos pegajosos o que se quedan entre los dientes prolongan la exposición más que los líquidos que se tragan de inmediato.",
+            "**Momento:** el azúcar consumido con las comidas coincide con mayor flujo de saliva por la masticación; el de los intervalos encuentra menos defensa.",
+            "**Saliva:** con poca saliva, la recuperación del pH es más lenta; durante el sueño el flujo baja mucho, por eso el azúcar antes de dormir es especialmente dañino.",
+            "**Secuencia:** terminar una comida con alimentos que estimulan la saliva o con queso, que tiende a elevar el pH de la placa, ayuda a acortar la caída.",
+            "**Madurez de la biopelícula:** una placa gruesa y no removida produce más ácido y lo retiene más tiempo junto al esmalte."
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Azúcares libres y la recomendación de la OMS"
+        },
+        {
+          "tipo": "texto",
+          "md": "La OMS usa el término **azúcares libres** para referirse a los monosacáridos y disacáridos añadidos a alimentos y bebidas por el fabricante, quien cocina o el consumidor, más los azúcares presentes de forma natural en la miel, los jarabes, los jugos de fruta y los concentrados de jugo. No incluye los azúcares intrínsecos de las frutas y verduras enteras ni los de la leche. Su guía de 2015 recomienda reducir los azúcares libres a **menos del 10 % de la energía total** a lo largo de la vida, y sugiere como meta condicional bajar a **menos del 5 %**, en parte por la relación de los azúcares con la caries. En el módulo 7 aprenderás a aplicar esta guía en la consulta.\n\nLos **sustitutos no fermentables**, como el xilitol y otros polioles, o los edulcorantes no calóricos, no se convierten en ácido por las bacterias de la placa en cantidades relevantes, por lo que no generan la caída de pH de la curva de Stephan. Eso no los convierte en solución mágica: el objetivo sigue siendo reducir la frecuencia de azúcares libres."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/09",
+          "proporcion": "1:1",
+          "alt": "Vaso de agua natural junto a una fruta entera y un plato con verduras en una mesa familiar.",
+          "pie": "El agua como bebida principal y la fruta entera en lugar de jugos reducen las exposiciones a azúcares libres.",
+          "prompt": "Fotografía realista cuadrada sobre una mesa de cocina mexicana con mantel de algodón claro: un vaso de vidrio con agua natural fresca, una naranja entera, un plátano y un plato pequeño con pepino y jícama en bastones, luz natural suave de ventana, colores frescos y naturales, composición sencilla y ordenada, profundidad de campo corta, fondo de cocina desenfocado. Evitar: texto, etiquetas, logotipos, marcas de agua, personas, bebidas azucaradas, alimentos en mal estado."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** pide a tu paciente que anote durante tres días todo lo que come y bebe, con la hora. Al revisar el registro juntos, marquen con un color cada exposición a azúcares libres. Contar las marcas y ver cuántas ocurren fuera de las comidas suele ser más revelador para la persona que cualquier cifra en gramos, y te permite proponer un solo cambio concreto, como agrupar el café endulzado con el desayuno."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Carbohidrato fermentable",
+          "definicion": "Azúcar o almidón que las bacterias de la placa pueden degradar para producir ácidos."
+        },
+        {
+          "termino": "Curva de Stephan",
+          "definicion": "Gráfica que muestra la caída rápida del pH de la placa tras consumir azúcar y su recuperación gradual en los minutos siguientes."
+        },
+        {
+          "termino": "pH crítico",
+          "definicion": "Valor de pH por debajo del cual el mineral del diente empieza a disolverse; para el esmalte se sitúa de forma aproximada alrededor de 5.5."
+        },
+        {
+          "termino": "Azúcares libres",
+          "definicion": "Azúcares añadidos a alimentos y bebidas más los presentes de forma natural en miel, jarabes y jugos de fruta."
+        },
+        {
+          "termino": "Ácido láctico",
+          "definicion": "Principal ácido que producen las bacterias de la placa al fermentar azúcares."
+        },
+        {
+          "termino": "Poliol",
+          "definicion": "Edulcorante de tipo alcohol de azúcar, como el xilitol, que las bacterias de la placa fermentan poco o nada."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.3-1",
+          "q": "¿Qué describe la curva de Stephan?",
+          "opciones": [
+            "La velocidad a la que avanza una lesión en dentina",
+            "La cantidad de saliva producida durante el día",
+            "La caída del pH de la placa tras consumir azúcar y su recuperación posterior",
+            "El número de bacterias en la placa según la edad"
+          ],
+          "correcta": 2,
+          "explicacion": "Stephan describió cómo el pH de la placa cae en minutos tras un consumo de azúcar y regresa poco a poco gracias a la saliva."
+        },
+        {
+          "id": "t1.3-2",
+          "q": "Dos personas consumen la misma cantidad de azúcar al día. ¿Cuál tiene más riesgo de caries?",
+          "opciones": [
+            "La que lo consume en sorbos y bocados repartidos durante toda la tarde",
+            "La que lo consume como postre al terminar la comida",
+            "Ambas tienen exactamente el mismo riesgo",
+            "La que lo consume por la mañana"
+          ],
+          "correcta": 0,
+          "explicacion": "La frecuencia de exposición determina cuánto tiempo pasa la placa por debajo del pH crítico."
+        },
+        {
+          "id": "t1.3-3",
+          "q": "¿Cuál de estos se considera azúcar libre según la OMS?",
+          "opciones": [
+            "El azúcar intrínseco de una manzana entera",
+            "La lactosa de la leche natural",
+            "El almidón de una papa cruda",
+            "El azúcar presente en un jugo de naranja"
+          ],
+          "correcta": 3,
+          "explicacion": "Los azúcares de los jugos de fruta se consideran libres; los de la fruta entera y los de la leche, no."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Intra-oral hydrogen-ion concentrations associated with dental caries activity",
+          "autor": "Stephan R. M. (Journal of Dental Research)",
+          "anio": 1944
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Vipeholm dental caries study: the effect of different levels of carbohydrate intake on caries activity in 436 individuals observed for five years",
+          "autor": "Gustafsson B. E., Quensel C. E., Lanke L. S. et al. (Acta Odontologica Scandinavica)",
+          "anio": 1954
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Guideline: sugars intake for adults and children",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2015
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Diet and dental caries: the pivotal role of free sugars reconsidered",
+          "autor": "Sheiham A., James W. P. T. (Journal of Dental Research)",
+          "anio": 2015
+        }
+      ]
+    },
+    {
+      "n": "1.4",
+      "titulo": "De Miller a Marsh: cómo cambió la explicación de la caries",
+      "minutos": 14,
+      "enPocasPalabras": "Durante mucho tiempo se pensó que la caries la causaba una sola bacteria. Hoy sabemos que el problema es un desequilibrio: cuando comemos azúcar muy seguido, la placa se llena de bacterias que soportan y producen mucho ácido. Si se reduce el azúcar y se limpia bien, la placa vuelve a equilibrarse.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las ideas sobre la causa de la caries han cambiado mucho en poco más de un siglo, y cada cambio trajo consecuencias para la forma de prevenirla y tratarla. Conocer esta historia no es un ejercicio de memoria: te ayuda a entender por qué algunas recomendaciones antiguas, como la búsqueda de una vacuna contra una sola bacteria, quedaron atrás, y por qué hoy el énfasis está en la dieta y en el control de la biopelícula."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La teoría quimioparasitaria de Miller"
+        },
+        {
+          "tipo": "texto",
+          "md": "En 1890, Willoughby Dayton Miller, un dentista estadounidense que trabajaba en Berlín, publicó *Los microorganismos de la boca humana*. Propuso que las bacterias orales fermentan los carbohidratos de la dieta y producen ácidos que disuelven el mineral del diente, y que después otras bacterias degradan la parte orgánica. Esta **teoría quimioparasitaria** fue revolucionaria porque unía dieta, bacterias y ácido, y en lo esencial sigue siendo válida.\n\nLo que Miller no pudo precisar fue qué bacterias participaban. En 1924, J. Kilian Clarke aisló de lesiones cariosas un estreptococo al que llamó *Streptococcus mutans*. Décadas después, en 1960, Paul Keyes y Robert Fitzgerald demostraron en hámsteres que la caries podía transmitirse entre animales junto con ciertos estreptococos. Ese mismo año Keyes representó la caries con tres círculos que se cruzan, **huésped, microorganismos y dieta**, al que más tarde Ernest Newbrun añadió el **tiempo** como cuarto factor."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/10",
+          "proporcion": "4:3",
+          "alt": "Microscopio óptico antiguo de latón junto a cajas de Petri y un cuaderno de notas sobre una mesa de laboratorio de época.",
+          "pie": "La microbiología de finales del siglo XIX permitió a Miller relacionar bacterias, azúcares y ácidos con la caries.",
+          "prompt": "Fotografía realista de ambientación histórica, mesa de laboratorio de madera oscura de finales del siglo diecinueve con un microscopio óptico antiguo de latón, varias cajas de Petri de vidrio, frascos de reactivos con tapón de corcho sin etiquetas legibles, una pluma y un cuaderno abierto con páginas en blanco, luz cálida lateral de ventana, atmósfera sobria, encuadre horizontal, colores sepia suaves y naturales. Evitar: texto legible, etiquetas, logotipos, marcas de agua, personas, objetos modernos, aspecto de caricatura."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Una línea de tiempo breve",
+          "ordenada": true,
+          "items": [
+            "**1890:** Miller publica la teoría quimioparasitaria.",
+            "**1924:** Clarke aísla Streptococcus mutans de lesiones cariosas.",
+            "**1960:** Keyes y Fitzgerald demuestran en hámsteres la transmisión experimental; Keyes propone su triada.",
+            "**Década de 1970:** Loesche formula la hipótesis de la placa específica.",
+            "**1994:** Marsh propone la hipótesis de la placa ecológica.",
+            "**2008 y 2011:** Takahashi y Nyvad describen la hipótesis ecológica extendida.",
+            "**2017 y 2020:** los consensos internacionales definen la caries como enfermedad dinámica, mediada por biopelícula y modulada por la dieta."
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Placa específica contra placa no específica"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la década de 1970, el microbiólogo Walter Loesche formuló la **hipótesis de la placa específica**: la caries sería causada por unas pocas especies, sobre todo *S. mutans* y los lactobacilos. Si era así, bastaría con eliminar o neutralizar esas especies, y se invirtió mucho esfuerzo en buscar antimicrobianos dirigidos e incluso vacunas.\n\nFrente a ella, la **hipótesis de la placa no específica** sostenía que la enfermedad resultaba de la actividad del conjunto de la placa, no de especies concretas, y que por tanto lo importante era la cantidad total de placa. Ninguna de las dos explicaba todo lo observado: hay personas con muchos *S. mutans* y poca caries, y lesiones en las que *S. mutans* casi no aparece; pero tampoco toda la placa es igual de dañina."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "¿Por qué no hay vacuna contra la caries?",
+          "md": "Durante décadas se investigaron vacunas contra *S. mutans*, y algunas funcionaron en modelos animales. Sin embargo, no llegaron a la práctica clínica. Una razón de fondo es que la caries no depende de una sola especie: si se elimina un microorganismo acidogénico pero se mantiene el consumo frecuente de azúcar, otras especies con capacidades similares ocupan su lugar. Por eso la estrategia actual se dirige a las causas del desequilibrio, no a un solo microbio."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La hipótesis de la placa ecológica"
+        },
+        {
+          "tipo": "texto",
+          "md": "En 1994, Philip D. Marsh propuso la **hipótesis de la placa ecológica**, que integra lo mejor de las anteriores. Según Marsh, las especies asociadas a la caries forman parte de la flora normal, pero en condiciones de salud son minoritarias y no compiten bien. Lo que cambia la composición de la comunidad es el **ambiente**. Cuando los azúcares llegan con frecuencia, el pH de la placa permanece bajo durante más tiempo; eso favorece a las bacterias **acidogénicas**, que producen ácido, y **acidúricas**, que toleran y prosperan en el ácido, y perjudica a las especies sensibles al ácido. La comunidad se desplaza hacia un perfil cada vez más cariogénico.\n\nLa consecuencia práctica es poderosa: la enfermedad se puede prevenir **cambiando las condiciones** que provocan el desequilibrio, sobre todo reduciendo la frecuencia de azúcares, favoreciendo la saliva, usando flúor y desorganizando la biopelícula, sin necesidad de eliminar a ningún microorganismo concreto."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m01/d4",
+          "pie": "Hipótesis de la placa ecológica: el estrés ambiental desplaza el equilibrio de la biopelícula.",
+          "descripcion": "Diagrama circular de tres nodos unidos por flechas en ciclo: «Azúcares frecuentes» lleva a «pH bajo prolongado», que lleva a «Aumento de bacterias acidogénicas y acidúricas», que regresa a «pH bajo prolongado» reforzando el ciclo. De este ciclo sale una flecha hacia «Desmineralización y lesión». A la izquierda, un recuadro de salud muestra una biopelícula equilibrada con predominio de especies sensibles al ácido, y una flecha de retorno con la leyenda de intervenciones que rompen el ciclo.",
+          "elementos": [
+            "Azúcares frecuentes",
+            "pH bajo prolongado",
+            "Bacterias acidogénicas y acidúricas",
+            "Biopelícula en equilibrio",
+            "Desmineralización",
+            "Reducir azúcares, flúor y remoción de biopelícula"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La hipótesis ecológica extendida de Takahashi y Nyvad",
+          "md": "Nobuhiro Takahashi y Bente Nyvad ampliaron la propuesta de Marsh en trabajos publicados en *Caries Research* (2008) y *Journal of Dental Research* (2011). Describen tres etapas reversibles. En la **etapa de estabilidad dinámica**, sobre esmalte sano predominan estreptococos no mutans y *Actinomyces*; la acidificación es leve e infrecuente y el balance mineral se mantiene o favorece la ganancia. En la **etapa acidogénica**, el azúcar frecuente provoca acidificación moderada y repetida; las bacterias no mutans se adaptan, aumentan su capacidad de producir y tolerar ácido, y se seleccionan cepas de «pH bajo», lo que desplaza el balance hacia la pérdida neta de mineral. En la **etapa acidúrica**, con acidificación intensa y prolongada, ganan terreno especies muy acidúricas como *S. mutans*, lactobacilos y bifidobacterias. Lo novedoso es el papel de la **adaptación** de bacterias no mutans y la idea de que el proceso puede revertirse si cambian las condiciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que sabemos hoy: disbiosis"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las técnicas de secuenciación genética han confirmado que la biopelícula asociada a la caries es **polimicrobiana**. Además de *S. mutans* y los lactobacilos, se han asociado con lesiones activas otras bacterias como *Scardovia wiggsiae*, especies de *Bifidobacterium*, *Propionibacterium* y algunas especies de *Actinomyces* y estreptococos no mutans, e incluso hongos como *Candida albicans* en la caries de la infancia temprana. Más que la presencia de una especie, lo que caracteriza a la enfermedad es una **disbiosis**: la pérdida del equilibrio de la comunidad, con predominio de funciones acidogénicas y acidúricas.\n\nEste marco explica por qué la caries se clasifica como una enfermedad no transmisible y por qué la prevención se centra en factores modificables. También advierte contra el uso indiscriminado de antimicrobianos: alterar toda la comunidad sin cambiar el ambiente no resuelve el problema y puede afectar a las especies que nos protegen."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada idea con su autor o propuesta",
+          "instruccion": "Une cada propuesta histórica con la idea central que la caracteriza.",
+          "pares": [
+            {
+              "a": "Teoría quimioparasitaria (Miller, 1890)",
+              "b": "Las bacterias fermentan carbohidratos y sus ácidos disuelven el mineral"
+            },
+            {
+              "a": "Hipótesis de la placa específica (Loesche)",
+              "b": "Unas pocas especies, como S. mutans, causan la enfermedad"
+            },
+            {
+              "a": "Hipótesis de la placa no específica",
+              "b": "Lo que importa es la cantidad total de placa"
+            },
+            {
+              "a": "Hipótesis de la placa ecológica (Marsh, 1994)",
+              "b": "El ambiente, sobre todo el pH bajo frecuente, desplaza la composición de la comunidad"
+            },
+            {
+              "a": "Hipótesis ecológica extendida (Takahashi y Nyvad)",
+              "b": "Etapas reversibles con adaptación de bacterias no mutans al ácido"
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/11",
+          "proporcion": "3:4",
+          "alt": "Investigadora con bata, guantes y lentes de seguridad trabaja con placas de cultivo en una campana de flujo laminar.",
+          "pie": "La secuenciación genética de la biopelícula mostró que la caries es polimicrobiana y se explica mejor como disbiosis.",
+          "prompt": "Fotografía realista vertical en un laboratorio de microbiología moderno y luminoso: una investigadora vista de perfil y de espaldas, con bata blanca, guantes de nitrilo, lentes de seguridad, cubrebocas y cabello recogido, trabaja dentro de una campana de flujo laminar con placas de cultivo y una micropipeta, al fondo un secuenciador genético y estanterías ordenadas, luz blanca fría uniforme, colores naturales, profundidad de campo media. Evitar: texto legible, logotipos, marcas de agua, rostro identificable, manos sin guantes, desorden, aspecto de ciencia ficción."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/12",
+          "proporcion": "16:9",
+          "alt": "Dos cajas de Petri lado a lado, una con colonias variadas y otra dominada por un solo tipo de colonia.",
+          "pie": "Representación de una comunidad diversa y equilibrada frente a una comunidad desplazada hacia pocas especies tolerantes al ácido.",
+          "prompt": "Fotografía macro de laboratorio sobre fondo negro mate: dos cajas de Petri de vidrio colocadas lado a lado con agar claro; la de la izquierda muestra muchas colonias bacterianas pequeñas de distintos tamaños, formas y tonos crema, blanco y amarillo pálido; la de la derecha muestra colonias más numerosas pero casi todas del mismo tipo, pequeñas y blanquecinas, iluminación lateral suave que resalta el relieve, enfoque nítido, composición simétrica. Evitar: texto, etiquetas, marcadores escritos, logotipos, marcas de agua, manos sin guantes, colores artificiales."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** si un paciente te pregunta si la caries «se contagia» de la madre al bebé, explica que sí se comparten bacterias a través de la saliva, pero que lo que provoca la enfermedad es el ambiente que se repite en casa: azúcares frecuentes, poca higiene y poca exposición a flúor. Cambiar esos hábitos en toda la familia protege más que evitar a toda costa compartir una cuchara."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Teoría quimioparasitaria",
+          "definicion": "Propuesta de Miller (1890) según la cual las bacterias orales fermentan carbohidratos y producen ácidos que disuelven el diente."
+        },
+        {
+          "termino": "Hipótesis de la placa ecológica",
+          "definicion": "Propuesta de Marsh (1994): los cambios del ambiente, sobre todo el pH bajo frecuente, desplazan la composición de la biopelícula hacia especies cariogénicas."
+        },
+        {
+          "termino": "Acidogénico",
+          "definicion": "Capaz de producir ácido a partir de los carbohidratos."
+        },
+        {
+          "termino": "Acidúrico",
+          "definicion": "Capaz de sobrevivir y mantener su metabolismo en un medio ácido."
+        },
+        {
+          "termino": "Disbiosis",
+          "definicion": "Pérdida del equilibrio de una comunidad microbiana que favorece funciones asociadas con enfermedad."
+        },
+        {
+          "termino": "Triada de Keyes",
+          "definicion": "Representación de la caries como resultado de la interacción entre huésped, microorganismos y dieta; Newbrun añadió el tiempo."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.4-1",
+          "q": "¿Qué plantea la hipótesis de la placa ecológica?",
+          "opciones": [
+            "Que S. mutans es la única causa de la caries",
+            "Que la cantidad total de placa es lo único relevante",
+            "Que la caries se debe a un defecto genético del esmalte",
+            "Que los cambios del ambiente, como el pH bajo frecuente, desplazan la comunidad hacia especies cariogénicas"
+          ],
+          "correcta": 3,
+          "explicacion": "Marsh propuso que el estrés ambiental, sobre todo por azúcares frecuentes, selecciona bacterias acidogénicas y acidúricas."
+        },
+        {
+          "id": "t1.4-2",
+          "q": "¿Qué significa que una bacteria sea acidúrica?",
+          "opciones": [
+            "Que tolera y prospera en un medio ácido",
+            "Que neutraliza los ácidos de la placa",
+            "Que solo vive en la dentina",
+            "Que produce flúor"
+          ],
+          "correcta": 0,
+          "explicacion": "Acidúrico se refiere a la tolerancia al ácido; acidogénico, a la capacidad de producirlo."
+        },
+        {
+          "id": "t1.4-3",
+          "q": "¿Qué aportó la hipótesis ecológica extendida de Takahashi y Nyvad?",
+          "opciones": [
+            "La demostración de que la caries es contagiosa",
+            "El papel de la adaptación al ácido de bacterias no mutans en etapas reversibles",
+            "Una vacuna eficaz contra S. mutans",
+            "La idea de que el flúor no influye en la caries"
+          ],
+          "correcta": 1,
+          "explicacion": "Describieron etapas reversibles y la adaptación acidogénica y acidúrica de bacterias no mutans como motor inicial del desequilibrio."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Microbial ecology of dental plaque and its significance in health and disease",
+          "autor": "Marsh P. D. (Advances in Dental Research)",
+          "anio": 1994
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Caries ecology revisited: microbial dynamics and the caries process",
+          "autor": "Takahashi N., Nyvad B. (Caries Research)",
+          "anio": 2008
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The role of bacteria in the caries process: ecological perspectives",
+          "autor": "Takahashi N., Nyvad B. (Journal of Dental Research)",
+          "anio": 2011
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The infectious and transmissible nature of experimental dental caries",
+          "autor": "Keyes P. H. (Archives of Oral Biology)",
+          "anio": 1960
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en la historia de la cariología y revisiones sobre el microbioma de la caries",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.5",
+      "titulo": "De la biopelícula a la lesión: una enfermedad que se puede controlar",
+      "minutos": 13,
+      "enPocasPalabras": "Las manchas de caries pueden estar «activas», cuando siguen avanzando, o «detenidas», cuando el proceso se frenó. Lo que decide si avanzan es lo que pasa todos los días en la boca: la placa, el azúcar y el flúor. Por eso una obturación repara el diente, pero solo los hábitos y la prevención controlan la enfermedad.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Ya sabes que la biopelícula, alimentada con azúcares frecuentes, produce ácidos que disuelven mineral. Ahora toca unir las piezas: ¿cómo se traduce ese proceso químico en algo que puedas ver en la boca?, ¿por qué algunas lesiones avanzan y otras se quedan igual durante años?, ¿y qué consecuencias tiene esto para tu forma de tratar?\n\nLa lesión cariosa es el **reflejo acumulado** de miles de ciclos de pérdida y ganancia de mineral en una superficie concreta. Si durante semanas predomina la pérdida, la lesión progresa; si predomina la ganancia, se detiene, y en etapas iniciales puede incluso recuperar parte del mineral perdido. La lesión, entonces, es como un registro de la historia reciente de esa superficie."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lesiones activas y lesiones detenidas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una de las distinciones más útiles de la cariología moderna es la **actividad** de la lesión. Una lesión **activa** está perdiendo mineral en este momento; una lesión **inactiva** o **detenida** dejó de progresar porque cambiaron las condiciones locales. En el esmalte, las lesiones activas suelen verse blanco-amarillentas, opacas, sin brillo, con textura rugosa al deslizar suavemente una sonda de punta roma, y casi siempre están cubiertas de biopelícula y ubicadas en zonas de estancamiento. Las lesiones detenidas tienden a ser brillantes, lisas y duras, a veces de color marrón por la incorporación de pigmentos, y a menudo se encuentran en zonas que ya se limpian bien.\n\nLos criterios detallados para registrar la actividad, como los de Nyvad o los asociados al sistema ICDAS, se estudian en el módulo 4. Aquí lo importante es la idea: **el color oscuro no significa necesariamente actividad**, y una mancha blanca no es siempre una lesión inofensiva."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/13",
+          "proporcion": "4:3",
+          "alt": "Superficie vestibular de un premolar con mancha blanca opaca junto a la encía, al lado de otro con mancha marrón brillante.",
+          "pie": "Lesión activa, opaca y rugosa junto al margen gingival, frente a una lesión detenida, brillante y pigmentada.",
+          "prompt": "Fotografía clínica macro de dos premolares superiores permanentes vistos desde vestibular en la boca de un adulto, labio retraído con retractor: el primero con una mancha blanca opaca, mate y sin brillo, en forma de media luna junto al margen de la encía con una capa tenue de placa; el segundo con una mancha marrón claro, lisa y brillante en el tercio cervical, encía sana rosa pálido, iluminación uniforme de lámpara dental, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, encía inflamada exagerada, rostro visible, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Explora con suavidad",
+          "md": "Presionar con fuerza una lesión no cavitada con un explorador puntiagudo puede romper la capa superficial del esmalte, que aún conserva mineral, y convertir una lesión que podía detenerse en una microcavidad. Para valorar textura, usa una sonda de punta roma con presión ligera, sobre la superficie limpia y seca."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dónde y a qué velocidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las lesiones aparecen donde la biopelícula se estanca: fosetas y fisuras, caras proximales por debajo del punto de contacto y superficies lisas junto al margen gingival. En personas con recesión de encía o en adultos mayores, la superficie radicular expuesta es otro sitio frecuente. La velocidad de avance es muy variable: en el esmalte de dientes permanentes suele ser lenta, de meses a años, mientras que en la dentina, en dientes temporales y en personas con poca saliva o consumo muy frecuente de azúcar puede ser mucho más rápida.\n\nEsto tiene una consecuencia directa: casi siempre hay **tiempo para intervenir** antes de que una lesión inicial se convierta en cavidad. Ese tiempo se aprovecha con control de la biopelícula, flúor, selladores cuando están indicados y vigilancia periódica, temas que desarrollarás en los módulos 5, 6 y 8."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m01/d5",
+          "pie": "Controlar la enfermedad y tratar la lesión son dos tareas distintas que se complementan.",
+          "descripcion": "Diagrama de dos columnas. A la izquierda, «Control de la enfermedad», con iconos y rótulos para reducción de azúcares libres, remoción diaria de biopelícula, exposición a flúor y revisión del riesgo. A la derecha, «Manejo de la lesión», con tres ramas según la etapa: lesión inicial (detener y remineralizar), lesión moderada (sellar o intervención mínima) y lesión cavitada extensa (restaurar). Una flecha horizontal une ambas columnas con la leyenda de que sin control de la enfermedad las lesiones reaparecen.",
+          "elementos": [
+            "Control de la enfermedad",
+            "Reducir azúcares libres",
+            "Remover biopelícula",
+            "Flúor",
+            "Manejo de la lesión",
+            "Detener y remineralizar",
+            "Restaurar solo lo necesario"
+          ]
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cuatro preguntas frente a cada lesión (concepto)",
+          "pasos": [
+            {
+              "titulo": "¿Dónde está?",
+              "md": "Fosetas y fisuras, cara proximal, superficie lisa o raíz. La ubicación indica qué tan fácil es limpiarla y qué opciones de manejo existen."
+            },
+            {
+              "titulo": "¿Qué tan avanzada está?",
+              "md": "Solo esmalte, dentina sin cavidad franca o cavidad. La etapa se determina con examen visual sobre superficie limpia y seca y, cuando hace falta, con radiografías."
+            },
+            {
+              "titulo": "¿Está activa?",
+              "md": "Brillo, textura, color, presencia de biopelícula y ubicación en zona de estancamiento ayudan a decidir si la lesión progresa o está detenida."
+            },
+            {
+              "titulo": "¿Qué la impulsa?",
+              "md": "Frecuencia de azúcares, calidad de la higiene, saliva, exposición a flúor y contexto de vida. Sin responder esta pregunta, cualquier tratamiento de la lesión será incompleto."
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Restaurar no es curar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una obturación sustituye el tejido perdido, devuelve la función y elimina la zona de retención de una cavidad, pero **no cambia la boca en la que está**. Si persisten los azúcares frecuentes y la biopelícula, pronto aparecerán lesiones en otras superficies o en los márgenes de la propia restauración. Con cada reemplazo la preparación se agranda y el diente se debilita; este patrón se conoce como **ciclo restaurador repetitivo** y puede terminar en endodoncias, coronas o extracciones que se habrían evitado.\n\nPor eso el manejo actual de la caries tiene dos partes que deben ir juntas: el **control de la enfermedad**, que actúa sobre las causas, y el **manejo de la lesión**, que decide qué hacer con cada superficie según su etapa y actividad. Los sistemas como ICCMS y CAMBRA, que conocerás en el módulo 3, organizan precisamente estas dos tareas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Caso ilustrativo: muchas restauraciones, la misma enfermedad",
+          "md": "Un hombre de 34 años acude porque se le cayó una resina. En su historia hay doce restauraciones colocadas en los últimos cinco años, varias ya reemplazadas. En la exploración se observan dos manchas blancas opacas nuevas junto a la encía y biopelícula abundante. Al conversar, cuenta que trabaja de noche y toma café endulzado y refresco a sorbos durante el turno. Reponer la resina es necesario, pero si el plan termina ahí, el ciclo continuará. El cambio decisivo está en agrupar las bebidas dulces, cambiar a agua durante el turno, reforzar la higiene y usar flúor según indique el odontólogo."
+        },
+        {
+          "tipo": "texto",
+          "md": "La caries también comparte causas con otras enfermedades crónicas. El llamado **enfoque de factores de riesgo comunes**, propuesto por Aubrey Sheiham y Richard Watt en el año 2000, recuerda que el consumo elevado de azúcares, el tabaco y el alcohol afectan a la vez la boca y el resto del cuerpo. Hablar de azúcares en la consulta dental contribuye también a la prevención de la obesidad y la diabetes tipo 2, problemas de enorme peso en México."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Quién controla qué",
+          "items": [
+            "**La persona y su familia:** cepillado diario con pasta fluorada, limpieza interproximal, frecuencia de azúcares libres y agua como bebida principal.",
+            "**El equipo dental:** detección temprana, registro de la actividad de cada lesión, aplicación profesional de medidas preventivas según su criterio, selladores cuando están indicados y restauración mínima cuando es necesaria.",
+            "**La comunidad y el sistema de salud:** acceso a flúor, a agua potable y a servicios preventivos, y regulación de la publicidad y el etiquetado de productos azucarados."
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: la lesión que no avanza",
+          "situacion": "Una mujer de 45 años acude a revisión. En la cara vestibular del primer molar inferior derecho, cerca de la encía, tiene una mancha marrón claro, lisa, brillante y dura al deslizar suavemente la sonda roma. La zona está limpia y la paciente refiere que desde hace dos años usa cepillo eléctrico y redujo mucho el refresco. Las radiografías previas no muestran cambios. ¿Qué es lo más adecuado?",
+          "opciones": [
+            {
+              "texto": "Preparar y restaurar la lesión de inmediato porque es de color oscuro.",
+              "correcta": false,
+              "retro": "El color oscuro no indica actividad. Restaurar una lesión detenida sin cavidad sacrifica tejido sano y no aporta beneficio."
+            },
+            {
+              "texto": "Registrarla como lesión probablemente detenida, reforzar los hábitos que la frenaron y vigilarla en las siguientes citas.",
+              "correcta": true,
+              "retro": "Correcto. Brillo, dureza, superficie lisa y ausencia de biopelícula sugieren inactividad; lo indicado es mantener las condiciones y vigilar."
+            },
+            {
+              "texto": "Explorarla con fuerza con un explorador puntiagudo para comprobar si es blanda.",
+              "correcta": false,
+              "retro": "La presión fuerte puede dañar la superficie; la textura se evalúa con sonda roma y presión ligera."
+            },
+            {
+              "texto": "Indicar un enjuague antimicrobiano diario de forma indefinida.",
+              "correcta": false,
+              "retro": "Si la lesión está detenida y la paciente controla bien la biopelícula, no hay justificación para un antimicrobiano indefinido; cualquier indicación es decisión profesional."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/14",
+          "proporcion": "3:4",
+          "alt": "Odontólogo con equipo de protección conversa con un paciente sentado en la unidad dental mientras le muestra un modelo de dientes.",
+          "pie": "Explicar al paciente la diferencia entre controlar la enfermedad y reparar el daño es parte del tratamiento.",
+          "prompt": "Fotografía realista vertical en un consultorio dental luminoso: un odontólogo con bata, guantes de nitrilo, cubrebocas y lentes de protección, sentado de frente a un paciente adulto que está en la unidad dental de espaldas a la cámara, muestra con la mano un modelo tipodonto de arcada completa, ambiente de conversación tranquila, luz natural mezclada con luz de consultorio, colores naturales, profundidad de campo media, encuadre desde atrás del hombro del paciente. Evitar: texto, logotipos, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes, modelos con dientes deformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m01/15",
+          "proporcion": "16:9",
+          "alt": "Cepillo dental con pasta, vaso de agua y fruta entera sobre un lavabo limpio.",
+          "pie": "El control de la enfermedad ocurre sobre todo en casa: cepillado con pasta fluorada, agua como bebida y menos azúcares libres.",
+          "prompt": "Fotografía realista horizontal de un lavabo blanco limpio en un baño doméstico con luz natural suave: un cepillo dental de cerdas suaves con una pequeña cantidad de pasta blanca, un vaso de vidrio con agua y, al lado, una manzana roja entera sobre una toalla doblada de color claro, composición ordenada con espacio vacío a la derecha, colores frescos y naturales, profundidad de campo corta. Evitar: texto, logotipos, marcas comerciales, empaques reconocibles, marcas de agua, personas, desorden."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en tus notas clínicas, junto a cada lesión registra si te parece activa o detenida y por qué. En la siguiente cita, compara. Con el tiempo esa costumbre te permitirá demostrarle al paciente, con hechos de su propia boca, que sus cambios de hábitos están funcionando, y te ayudará a decidir con más seguridad cuándo restaurar y cuándo solo vigilar."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Lesión activa",
+          "definicion": "Lesión cariosa que está perdiendo mineral; en esmalte suele verse opaca, mate y rugosa, cubierta de biopelícula."
+        },
+        {
+          "termino": "Lesión detenida",
+          "definicion": "Lesión cariosa que dejó de progresar; suele ser brillante, lisa y dura, a veces pigmentada."
+        },
+        {
+          "termino": "Ciclo restaurador repetitivo",
+          "definicion": "Secuencia de reemplazos de restauraciones cada vez más grandes que debilita progresivamente al diente."
+        },
+        {
+          "termino": "Control de la enfermedad",
+          "definicion": "Conjunto de acciones sobre las causas de la caries, como azúcares, biopelícula y flúor, para evitar lesiones nuevas."
+        },
+        {
+          "termino": "Factores de riesgo comunes",
+          "definicion": "Enfoque que reconoce que hábitos como el consumo de azúcar o tabaco causan a la vez enfermedades bucales y generales."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.5-1",
+          "q": "¿Qué característica sugiere que una lesión de esmalte está activa?",
+          "opciones": [
+            "Superficie brillante y dura",
+            "Color marrón oscuro y liso",
+            "Aspecto opaco, mate y rugoso con biopelícula encima",
+            "Ubicación en una zona que se limpia muy bien"
+          ],
+          "correcta": 2,
+          "explicacion": "La opacidad sin brillo, la rugosidad y la biopelícula en zonas de estancamiento son signos típicos de actividad."
+        },
+        {
+          "id": "t1.5-2",
+          "q": "¿Por qué una restauración no controla por sí sola la caries?",
+          "opciones": [
+            "Porque los materiales restauradores producen ácido",
+            "Porque repara el daño pero no cambia la biopelícula ni los azúcares que causan la enfermedad",
+            "Porque las restauraciones siempre fracasan en menos de un año",
+            "Porque impide el paso de la saliva"
+          ],
+          "correcta": 1,
+          "explicacion": "La restauración resuelve la lesión, no las causas; sin control de la enfermedad aparecen lesiones nuevas."
+        },
+        {
+          "id": "t1.5-3",
+          "q": "¿Cómo se debe valorar la textura de una lesión no cavitada?",
+          "opciones": [
+            "Con una sonda de punta roma y presión ligera sobre la superficie limpia y seca",
+            "Con un explorador puntiagudo y presión firme",
+            "Con la fresa a baja velocidad",
+            "No se valora; solo se mira el color"
+          ],
+          "correcta": 0,
+          "explicacion": "La presión fuerte con un explorador puntiagudo puede romper la superficie de una lesión que aún puede detenerse."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+          "anio": 2015
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The common risk factor approach: a rational basis for promoting oral health",
+          "autor": "Sheiham A., Watt R. G. (Community Dentistry and Oral Epidemiology)",
+          "anio": 2000
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Terminology of Dental Caries and Dental Caries Management: Consensus Report of a Workshop Organized by ORCA and Cariology Research Group of IADR",
+          "autor": "Machiulskiene V., Campus G., Carvalho J. C. et al. (Caries Research)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en los principios de la odontología mínimamente invasiva y el manejo de la caries por riesgo",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el origen de la caries",
+    "palabras": [
+      "BIOPELICULA",
+      "SACAROSA",
+      "ESMALTE",
+      "DISBIOSIS",
+      "GLUCANOS",
+      "LACTOBACILO",
+      "PELICULA",
+      "ACIDURICO",
+      "STEPHAN",
+      "MUTANS"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m01-p01",
+        "q": "¿Cuál de estas características forma parte de la definición actual de caries dental?",
+        "opciones": [
+          "Es una infección aguda causada por una sola bacteria",
+          "Es un desgaste mecánico del esmalte",
+          "Es una enfermedad dinámica mediada por la biopelícula y modulada por la dieta",
+          "Es una alteración genética del desarrollo dental"
+        ],
+        "correcta": 2,
+        "explicacion": "Los consensos describen la caries como dinámica, mediada por biopelícula, modulada por la dieta, multifactorial y no transmisible."
+      },
+      {
+        "id": "m01-p02",
+        "q": "Según la OMS, ¿qué condición de salud es la más frecuente en el mundo?",
+        "opciones": [
+          "La caries no tratada de los dientes permanentes",
+          "La periodontitis grave",
+          "La pérdida total de dientes",
+          "El cáncer de boca"
+        ],
+        "correcta": 0,
+        "explicacion": "La caries no tratada de dientes permanentes es la condición de salud más común a nivel mundial."
+      },
+      {
+        "id": "m01-p03",
+        "q": "¿Qué capa se forma primero sobre un esmalte recién limpio?",
+        "opciones": [
+          "Una capa de lactobacilos",
+          "Cálculo supragingival",
+          "Materia alba",
+          "La película adquirida de proteínas salivales"
+        ],
+        "correcta": 3,
+        "explicacion": "La película adquirida, sin bacterias, se forma en segundos y sirve de base para la adhesión bacteriana."
+      },
+      {
+        "id": "m01-p04",
+        "q": "¿Qué bacterias predominan entre las colonizadoras primarias del esmalte?",
+        "opciones": [
+          "Lactobacilos y bifidobacterias",
+          "Estreptococos del grupo mitis y especies de Actinomyces",
+          "Porphyromonas gingivalis",
+          "Candida albicans"
+        ],
+        "correcta": 1,
+        "explicacion": "Estreptococos como S. sanguinis, S. oralis y S. mitis, junto con Actinomyces, son los primeros en adherirse."
+      },
+      {
+        "id": "m01-p05",
+        "q": "¿Por qué la sacarosa es especialmente cariogénica?",
+        "opciones": [
+          "Porque se fermenta con rapidez y sirve para fabricar glucanos de la matriz",
+          "Porque no puede ser fermentada por las bacterias",
+          "Porque eleva el pH de la placa",
+          "Porque estimula la producción de saliva"
+        ],
+        "correcta": 0,
+        "explicacion": "La sacarosa se fermenta rápido y es sustrato de las glucosiltransferasas que producen glucanos extracelulares."
+      },
+      {
+        "id": "m01-p06",
+        "q": "¿Cuál es el principal ácido producido por las bacterias de la placa al fermentar azúcares?",
+        "opciones": [
+          "Ácido clorhídrico",
+          "Ácido cítrico",
+          "Ácido láctico",
+          "Ácido fosfórico"
+        ],
+        "correcta": 2,
+        "explicacion": "El ácido láctico es el principal producto de la fermentación de azúcares en la placa."
+      },
+      {
+        "id": "m01-p07",
+        "q": "En la curva de Stephan, ¿qué ocurre en los primeros minutos después de consumir azúcar?",
+        "opciones": [
+          "El pH sube por encima de 8",
+          "El pH no cambia",
+          "La saliva deja de producirse",
+          "El pH de la placa cae con rapidez"
+        ],
+        "correcta": 3,
+        "explicacion": "La fermentación bacteriana produce ácido y el pH cae en minutos; luego la saliva lo recupera gradualmente."
+      },
+      {
+        "id": "m01-p08",
+        "q": "¿Cuál es el valor de referencia aproximado del pH crítico del esmalte?",
+        "opciones": [
+          "7.5",
+          "5.5",
+          "6.8",
+          "3.0"
+        ],
+        "correcta": 1,
+        "explicacion": "Se usa 5.5 como referencia didáctica; el valor real depende del calcio y fosfato disponibles."
+      },
+      {
+        "id": "m01-p09",
+        "q": "¿Qué concluyó el estudio de Vipeholm sobre los azúcares?",
+        "opciones": [
+          "Que el azúcar entre comidas y en formas pegajosas aumenta mucho más la caries",
+          "Que el azúcar no tiene relación con la caries",
+          "Que solo la cantidad total de azúcar importa, no el momento",
+          "Que el azúcar con las comidas es más dañino que entre comidas"
+        ],
+        "correcta": 0,
+        "explicacion": "El estudio mostró el peso de la frecuencia y la adherencia; hoy se considera éticamente inaceptable por su diseño."
+      },
+      {
+        "id": "m01-p10",
+        "q": "¿Qué recomienda la guía de la OMS de 2015 sobre azúcares libres?",
+        "opciones": [
+          "Eliminar por completo todos los carbohidratos",
+          "Consumir azúcar solo en la noche",
+          "Reducirlos a menos del 10 % de la energía total, con meta condicional de menos del 5 %",
+          "Reemplazar el agua por jugos naturales"
+        ],
+        "correcta": 2,
+        "explicacion": "La OMS recomienda menos del 10 % y sugiere bajar a menos del 5 % de la energía total."
+      },
+      {
+        "id": "m01-p11",
+        "q": "¿Quién propuso en 1890 la teoría quimioparasitaria de la caries?",
+        "opciones": [
+          "Philip D. Marsh",
+          "Paul Keyes",
+          "Robert M. Stephan",
+          "Willoughby D. Miller"
+        ],
+        "correcta": 3,
+        "explicacion": "Miller relacionó la fermentación bacteriana de carbohidratos con la disolución ácida del diente."
+      },
+      {
+        "id": "m01-p12",
+        "q": "¿Qué propone la hipótesis de la placa ecológica de Marsh?",
+        "opciones": [
+          "Que la caries la causa solo S. mutans",
+          "Que el pH bajo frecuente selecciona bacterias acidogénicas y acidúricas y desequilibra la comunidad",
+          "Que la cantidad de placa es lo único relevante",
+          "Que la caries es una enfermedad hereditaria"
+        ],
+        "correcta": 1,
+        "explicacion": "El estrés ambiental, sobre todo los azúcares frecuentes, desplaza la composición de la biopelícula."
+      },
+      {
+        "id": "m01-p13",
+        "q": "¿Por qué no existe hoy una vacuna útil contra la caries?",
+        "opciones": [
+          "Porque la caries es polimicrobiana y otras especies ocupan el lugar de la eliminada si persisten los azúcares",
+          "Porque nunca se ha investigado",
+          "Porque la caries es causada por virus",
+          "Porque las vacunas están prohibidas en odontología"
+        ],
+        "correcta": 0,
+        "explicacion": "La enfermedad depende del ambiente y de la comunidad completa, no de una sola especie."
+      },
+      {
+        "id": "m01-p14",
+        "q": "Caso: un adolescente tiene manchas blancas opacas y rugosas junto a la encía de varios dientes, con biopelícula abundante, pero ninguna cavidad. ¿Cómo interpretas la situación?",
+        "opciones": [
+          "No tiene caries porque no hay cavidades",
+          "Tiene lesiones detenidas que no requieren atención",
+          "Debe restaurarse cada mancha de inmediato",
+          "Tiene enfermedad activa con lesiones iniciales que pueden detenerse"
+        ],
+        "correcta": 3,
+        "explicacion": "Las manchas opacas y rugosas con biopelícula indican actividad; al no estar cavitadas, pueden detenerse con control de causas y flúor."
+      },
+      {
+        "id": "m01-p15",
+        "q": "Caso: una paciente trabaja en oficina y toma café endulzado a sorbos de 9 a 14 horas. ¿Qué cambio tiene más impacto sobre su riesgo de caries?",
+        "opciones": [
+          "Usar un popote para el café",
+          "Cambiar la marca de café",
+          "Concentrar el café endulzado en un momento o sustituirlo por café sin azúcar o agua",
+          "Enjuagarse con agua una vez al terminar la jornada"
+        ],
+        "correcta": 2,
+        "explicacion": "Reducir el número de exposiciones acorta el tiempo total por debajo del pH crítico."
+      },
+      {
+        "id": "m01-p16",
+        "q": "Caso: un paciente con doce restauraciones en cinco años pide solo reponer una resina caída. ¿Qué enfoque es el más adecuado?",
+        "opciones": [
+          "Reponer la resina y citarlo hasta que se caiga otra",
+          "Reponer la resina y, además, identificar y controlar los factores que mantienen activa la enfermedad",
+          "Sustituir todas sus restauraciones por coronas",
+          "Indicar un antimicrobiano de forma indefinida sin revisar la dieta"
+        ],
+        "correcta": 1,
+        "explicacion": "Restaurar no es curar: sin control de la enfermedad, el ciclo restaurador repetitivo continuará."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Dental caries",
+      "autor": "Pitts N. B., Zero D. T., Marsh P. D. et al. (Nature Reviews Disease Primers)",
+      "anio": 2017
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Dental Caries: The Disease and its Clinical Management",
+      "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+      "anio": 2015
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "Global oral health status report: towards universal health coverage for oral health by 2030",
+      "autor": "Organización Mundial de la Salud",
+      "anio": 2022
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+      "autor": "Secretaría de Salud",
+      "anio": 2016
+    }
+  ]
+}

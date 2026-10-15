@@ -1,0 +1,1125 @@
+{
+  "programa": "caries-dental",
+  "modulo": 5,
+  "titulo": "Flúor y remineralización: mecanismos, vehículos y uso seguro",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "El flúor es la herramienta preventiva más estudiada de la odontología, y también una de las más malinterpretadas. En este módulo entiendes cómo actúa realmente sobre el esmalte y la biopelícula, por qué su efecto es sobre todo tópico y cómo se organiza su uso en México: la sal fluorurada como único vehículo masivo, las pastas dentales y otros productos de autocuidado, y las aplicaciones profesionales como el barniz. Cierras con el uso seguro: fluorosis, prevención de intoxicaciones en niños y lo que dice la evidencia más reciente, para orientar a tus pacientes con datos y no con mitos.",
+  "objetivos": [
+    "Explicar los mecanismos por los que el fluoruro reduce la desmineralización y favorece la remineralización.",
+    "Describir los vehículos comunitarios de fluoruro y el modelo mexicano basado en la sal fluorurada.",
+    "Interpretar la concentración de fluoruro de una pasta dental y orientar su uso según la edad, conforme a la NOM-013-SSA2-2015.",
+    "Comparar los agentes fluorurados de aplicación profesional y el diamino fluoruro de plata, sus indicaciones y sus precauciones.",
+    "Reconocer la fluorosis dental y aplicar medidas para un uso seguro del fluoruro, sobre todo en la infancia."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m05/portada",
+    "proporcion": "16:9",
+    "alt": "Cepillo dental infantil con una pequeña cantidad de pasta junto a un salero y un vaso de agua sobre una mesa de cocina luminosa.",
+    "prompt": "Fotografía realista en formato panorámico de una mesa de cocina mexicana luminosa por la mañana. En primer plano, un cepillo dental infantil de colores suaves con una cantidad muy pequeña de pasta blanca sobre las cerdas, junto a un salero de vidrio sin etiqueta y un vaso de agua transparente. Al fondo, desenfocados, un frutero con plátanos y manzanas y una ventana con luz natural cálida. Colores naturales, ambiente doméstico limpio y acogedor, profundidad de campo corta. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, personas, dulces o refrescos, exceso de pasta en el cepillo."
+  },
+  "temas": [
+    {
+      "n": "5.1",
+      "titulo": "Cómo actúa el flúor sobre el diente y la biopelícula",
+      "minutos": 13,
+      "enPocasPalabras": "El flúor protege los dientes sobre todo cuando está presente en la boca en pequeñas cantidades, todos los días. Ayuda a que el esmalte pierda menos mineral cuando hay ácidos y a que lo recupere después. Por eso cepillarse con pasta con flúor cada día es tan importante.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La historia del flúor en odontología empezó con una observación curiosa. A inicios del siglo XX, el dentista estadounidense Frederick McKay notó que muchos habitantes de Colorado Springs tenían manchas marrones en el esmalte, a las que llamaban «mancha de Colorado», y que esos mismos dientes manchados tenían sorprendentemente poca caries. Décadas después se identificó al fluoruro presente de forma natural en el agua como responsable de ambas cosas, y el investigador H. Trendley Dean describió la relación entre la concentración de fluoruro en el agua, la fluorosis y la caries. En 1945, Grand Rapids, en Michigan, se convirtió en la primera ciudad en ajustar el fluoruro de su agua para prevenir la caries.\n\nDurante muchos años se pensó que el flúor actuaba sobre todo **antes de la erupción**, incorporándose a los cristales del esmalte en formación y volviéndolo «más resistente». Hoy sabemos que ese efecto es pequeño. El beneficio principal es **tópico y posterior a la erupción**: depende de que haya fluoruro en la saliva, en el líquido de la biopelícula y en la superficie del esmalte justo cuando ocurre el ataque ácido."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres mecanismos que se suman"
+        },
+        {
+          "tipo": "texto",
+          "md": "Recuerda del módulo 2 que, cada vez que la biopelícula fermenta azúcares, el pH baja y el esmalte pierde mineral; cuando la saliva neutraliza el ácido, parte de ese mineral se recupera. El fluoruro interviene en este ciclo de tres maneras:\n\n**1. Reduce la desmineralización.** El fluoruro presente en el líquido de la biopelícula se adsorbe a la superficie de los cristales de esmalte y los protege de la disolución. Aun cuando el pH baja por debajo del punto en que la hidroxiapatita empieza a disolverse, la presencia de fluoruro limita la pérdida de mineral.\n\n**2. Favorece la remineralización.** Cuando el pH se recupera, el fluoruro atrae iones de calcio y fosfato y acelera su depósito en los cristales parcialmente disueltos. El mineral que se forma se parece a la **fluorapatita** o a la **fluorhidroxiapatita**, menos soluble que la hidroxiapatita original, de modo que la superficie remineralizada resiste mejor el siguiente ataque ácido.\n\n**3. Interfiere con el metabolismo bacteriano.** En ambiente ácido, una parte del fluoruro forma ácido fluorhídrico, que atraviesa la membrana de las bacterias y, ya dentro, inhibe enzimas de la glucólisis como la **enolasa**. El resultado es una menor producción de ácido. Este efecto requiere concentraciones más altas y se considera secundario frente a los dos primeros."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/01",
+          "proporcion": "4:3",
+          "alt": "Ilustración realista de cristales alargados de esmalte agrupados en prismas, vistos a gran aumento.",
+          "pie": "Los cristales de apatita del esmalte, agrupados en prismas, son el escenario donde el fluoruro reduce la pérdida y favorece la recuperación de mineral.",
+          "prompt": "Ilustración científica realista en estilo de microscopía electrónica de barrido coloreada en tonos marfil y azul muy suave, que muestra a gran aumento los prismas del esmalte dental como haces ordenados de cristales alargados y hexagonales, algunos con bordes ligeramente erosionados en la superficie y otros intactos en la profundidad. Iluminación lateral suave que resalta el relieve tridimensional, fondo oscuro neutro, composición limpia y educativa. Evitar: texto, etiquetas, flechas, escalas numéricas, logotipos, marcas de agua, colores saturados artificiales, aspecto de caricatura."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La química de la fluorhidroxiapatita y el reservorio de fluoruro de calcio",
+          "md": "La hidroxiapatita tiene la fórmula Ca10(PO4)6(OH)2. Cuando un ion fluoruro sustituye a un grupo hidroxilo, se forma fluorhidroxiapatita y, si la sustitución es completa, fluorapatita, Ca10(PO4)6F2. El fluoruro encaja mejor en la red cristalina que el hidroxilo, lo que vuelve al cristal más estable y menos soluble en ácido. Por eso el pH crítico de la fluorapatita es más bajo que el de la hidroxiapatita: hace falta un ambiente más ácido para disolverla.\n\nTras la exposición a productos de concentración elevada, como el barniz o el gel, se forman en la superficie del esmalte y en la biopelícula depósitos de un material semejante al **fluoruro de calcio**. A pH neutro, estos glóbulos quedan estabilizados por fosfatos y proteínas salivales y se disuelven lentamente; cuando el pH baja, se disuelven más rápido y liberan fluoruro justo cuando más se necesita. Funcionan como un **reservorio** que prolonga la presencia de fluoruro en la boca. Este concepto explica por qué la frecuencia de exposición importa tanto como la concentración."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m05/d1",
+          "pie": "El fluoruro actúa en el ciclo diario de desmineralización y remineralización.",
+          "descripcion": "Gráfica de línea del pH de la biopelícula (eje vertical, de 4 a 7) contra el tiempo (eje horizontal, en minutos tras comer azúcar). La curva desciende rápidamente por debajo de una línea horizontal punteada que marca el pH crítico de la hidroxiapatita y luego se recupera lentamente. Debajo de la línea, una zona sombreada dice desmineralización; por encima, durante la recuperación, otra zona dice remineralización. Dos recuadros laterales señalan dónde actúa el fluoruro: reduce la pérdida de mineral en la fase ácida y favorece el depósito de mineral en la fase de recuperación.",
+          "elementos": [
+            "pH de la biopelícula",
+            "Tiempo tras el consumo de azúcar",
+            "pH crítico de la hidroxiapatita",
+            "Desmineralización",
+            "Remineralización",
+            "El fluoruro reduce la pérdida de mineral",
+            "El fluoruro favorece el depósito de mineral"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Poco y frecuente: la lógica del uso tópico"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si el beneficio depende de que haya fluoruro en la boca durante los ataques ácidos, la conclusión práctica es clara: importa más tener **niveles bajos y constantes** que exposiciones esporádicas muy altas. Por eso el cepillado diario con pasta fluorurada es el pilar de la prevención en todo el mundo: deja pequeñas cantidades de fluoruro en la saliva y en la biopelícula varias veces al día. Las aplicaciones profesionales de alta concentración complementan ese pilar en personas con mayor riesgo, porque forman reservorios que se liberan durante días, pero no lo sustituyen.\n\nEste enfoque también cambia el mensaje para los pacientes. No se trata de «fortalecer» los dientes una vez al año en el consultorio, sino de mantener una presencia diaria de fluoruro, controlar la biopelícula y moderar la frecuencia de azúcares. El fluoruro inclina la balanza hacia la remineralización, pero no puede compensar una exposición a azúcares muy frecuente ni una biopelícula que nunca se retira."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que el fluoruro puede y no puede hacer"
+        },
+        {
+          "tipo": "texto",
+          "md": "Después de cepillarte, la concentración de fluoruro en la saliva sube y en las horas siguientes vuelve poco a poco a su nivel basal, a medida que la saliva lo diluye y lo elimina. Una parte queda retenida en la biopelícula, en la mucosa y en la superficie del esmalte, desde donde sigue actuando. Durante el sueño el flujo salival disminuye y el fluoruro permanece más tiempo en la boca; por eso el cepillado nocturno es el más valioso del día.\n\nEl fluoruro también tiene límites claros. Favorece la remineralización de **lesiones no cavitadas**, en las que la capa superficial del esmalte todavía sirve de andamio para el depósito de mineral, y puede ayudar a detener lesiones cavitadas que se mantienen limpias. Pero **no reconstruye** el tejido perdido en una cavidad: el diente no «regenera» esmalte. Tampoco protege por igual todas las superficies; su efecto es mayor en superficies lisas que en fosetas y fisuras profundas, donde la biopelícula queda protegida de la remoción mecánica. Esa es una de las razones por las que existen los selladores, que estudiarás en el módulo 6."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/02",
+          "proporcion": "3:4",
+          "alt": "Manos de una madre ayudan a un niño a cepillarse los dientes frente al lavabo, vistos desde atrás.",
+          "pie": "La presencia diaria de fluoruro en la boca, gracias al cepillado, es la base de su efecto preventivo.",
+          "prompt": "Fotografía vertical realista en un baño doméstico limpio y luminoso: un niño de unos seis años, visto de espaldas y de perfil parcial sin rostro identificable, se cepilla los dientes frente al lavabo mientras la mano de una madre guía la suya sobre el mango del cepillo. En el lavabo blanco hay un vaso con otro cepillo y una toalla doblada. Luz natural suave de la mañana, colores cálidos y neutros, ambiente tranquilo. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, rostro identificable, espuma excesiva, desorden, tubos de pasta con rótulos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una de las grandes medidas de salud pública del siglo XX",
+          "md": "Los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC) incluyeron la fluoruración del agua de consumo entre los diez grandes logros de salud pública del siglo XX en ese país, junto con la vacunación y la seguridad en el trabajo. El hallazgo que dio origen a esa medida fue, curiosamente, una mancha en los dientes que nadie buscaba."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena lo que pasa durante un ataque ácido cuando hay fluoruro",
+          "instruccion": "Coloca los eventos en el orden en que ocurren después de consumir un alimento con azúcar, en una boca donde hay fluoruro en la saliva y la biopelícula.",
+          "elementos": [
+            "Se consume un alimento con azúcar",
+            "Las bacterias de la biopelícula producen ácidos",
+            "El pH de la biopelícula baja",
+            "El fluoruro del reservorio se libera y limita la disolución del esmalte",
+            "La saliva neutraliza los ácidos y el pH se recupera",
+            "Calcio, fosfato y fluoruro se depositan como fluorhidroxiapatita"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/03",
+          "proporcion": "1:1",
+          "alt": "Superficie vestibular de dientes anteriores sanos con brillo natural vista de cerca.",
+          "pie": "Un esmalte sano y brillante es el resultado de miles de ciclos diarios en los que la remineralización compensa la pérdida de mineral.",
+          "prompt": "Fotografía clínica macro realista de las caras vestibulares de los incisivos centrales y laterales superiores sanos de un adulto joven, encuadre cerrado solo de dientes y encía, labios retraídos con separadores plásticos transparentes. Esmalte translúcido en los bordes incisales, superficie lisa con brillo natural, encía rosa pálido firme con contorno festoneado sano. Iluminación clínica uniforme con flash anular suave, colores naturales, alta nitidez. Evitar: texto, logotipos, marcas de agua, sangre, rostro, labios visibles en exceso, manchas, restauraciones, dientes de forma artificial o demasiado blancos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para explicar el flúor"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando un paciente te pregunte «¿para qué sirve el flúor?», evita la frase «endurece los dientes». Prueba con esta explicación: «Cada vez que comes azúcar, tus dientes pierden un poco de mineral; el flúor que deja la pasta en tu boca hace que pierdan menos y que lo recuperen mejor. Por eso funciona cuando lo usas todos los días». Es exacta, breve y conduce de forma natural al hábito que quieres reforzar."
+        }
+      ],
+      "glosario": [
+        { "termino": "Fluoruro", "definicion": "Forma iónica del flúor, presente en el agua, la sal fluorurada, las pastas dentales y los productos de uso profesional." },
+        { "termino": "Fluorhidroxiapatita", "definicion": "Mineral en el que parte de los hidroxilos de la hidroxiapatita fue sustituida por fluoruro; es menos soluble en ácido." },
+        { "termino": "Efecto tópico", "definicion": "Acción del fluoruro presente en la saliva, la biopelícula y la superficie del esmalte después de la erupción; es su principal mecanismo preventivo." },
+        { "termino": "Reservorio de fluoruro", "definicion": "Depósitos semejantes al fluoruro de calcio que se forman tras exposiciones concentradas y liberan fluoruro cuando baja el pH." },
+        { "termino": "Enolasa", "definicion": "Enzima de la glucólisis bacteriana que el fluoruro inhibe, con lo que disminuye la producción de ácido." }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.1-1",
+          "q": "Según el conocimiento actual, ¿cuál es el principal mecanismo preventivo del fluoruro?",
+          "opciones": [
+            "Su incorporación al esmalte antes de la erupción",
+            "Su efecto tópico en la saliva, la biopelícula y la superficie del esmalte",
+            "La eliminación completa de las bacterias de la boca",
+            "La neutralización directa de los azúcares de la dieta"
+          ],
+          "correcta": 1,
+          "explicacion": "El efecto preeruptivo es pequeño; el beneficio principal es tópico, al estar presente durante los ataques ácidos."
+        },
+        {
+          "id": "t5.1-2",
+          "q": "¿Por qué la fluorhidroxiapatita resiste mejor el ataque ácido?",
+          "opciones": [
+            "Porque es más blanda",
+            "Porque contiene más agua",
+            "Porque es menos soluble que la hidroxiapatita y requiere un pH más bajo para disolverse",
+            "Porque no contiene calcio"
+          ],
+          "correcta": 2,
+          "explicacion": "El fluoruro estabiliza la red cristalina y baja el pH crítico de disolución."
+        },
+        {
+          "id": "t5.1-3",
+          "q": "¿Qué conclusión práctica se desprende del efecto tópico del fluoruro?",
+          "opciones": [
+            "Basta una aplicación profesional al año",
+            "Conviene evitar el fluoruro en adultos",
+            "Lo más eficaz es ingerir fluoruro en tabletas",
+            "Importa mantener niveles bajos y frecuentes de fluoruro en la boca, como con el cepillado diario"
+          ],
+          "correcta": 3,
+          "explicacion": "La presencia diaria y constante de fluoruro durante los ataques ácidos es la base de su efecto."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Prevention and reversal of dental caries: role of low level fluoride", "autor": "Featherstone J. D. B. (Community Dentistry and Oral Epidemiology)", "anio": 1999 },
+        { "tipo": "oficial", "titulo": "Recommendations for using fluoride to prevent and control dental caries in the United States", "autor": "Centers for Disease Control and Prevention, MMWR Recommendations and Reports", "anio": 2001 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de cariología sobre mecanismos de acción del fluoruro e historia de la fluoruración", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "5.2",
+      "titulo": "Flúor comunitario: agua, sal y el modelo mexicano",
+      "minutos": 13,
+      "enPocasPalabras": "En México, el flúor para toda la población llega a través de la sal de mesa, y no se agrega al agua. En algunas regiones el agua ya trae mucho flúor natural, y ahí no se vende sal con flúor. Tu dentista puede decirte qué sal conviene según dónde vives.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las medidas preventivas más poderosas son las que llegan a toda la población sin que cada persona tenga que hacer algo distinto. A eso se le llama **protección específica masiva**. En el caso del fluoruro, los vehículos masivos más estudiados son el agua de consumo y la sal de mesa; en algunos países se ha usado también la leche. Su gran ventaja es la **equidad**: benefician igual a quien tiene acceso al dentista que a quien no, y a menudo reducen las diferencias de caries entre grupos sociales.\n\nLa fluoruración del agua es el modelo predominante en países como Estados Unidos, Canadá, Australia o Irlanda. México eligió otro camino: la **sal yodada fluorurada**. Entender por qué y cómo funciona es indispensable para orientar bien a tus pacientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué la sal y no el agua"
+        },
+        {
+          "tipo": "texto",
+          "md": "Fluorurar el agua requiere redes de abastecimiento centralizadas y control técnico constante en cada planta. En un país con muchas comunidades rurales, fuentes de agua diversas y amplias zonas donde el agua subterránea ya contiene fluoruro natural, ese modelo era difícil de aplicar. La sal, en cambio, se produce en pocas plantas, se distribuye en todo el territorio y ya se adicionaba con yodo para prevenir el bocio, por lo que agregar fluoruro aprovechó una infraestructura existente. Desde inicios de la década de 1990, la sal fluorurada se distribuye a escala nacional, con exclusión de las zonas con alto fluoruro natural en el agua.\n\nLa **NOM-013-SSA2-2015** lo establece con claridad: la protección específica masiva contra la caries en México queda establecida mediante la adición de fluoruro a la sal para consumo humano, y para evitar la sobreexposición se limita a **un solo medio de adición de flúor sistémico**. Por eso no debe adicionarse fluoruro a ningún otro condimento, alimento, agua de redes o envasada, golosina, refresco o goma de mascar."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Lo que establecen las normas sobre la sal fluorurada",
+          "md": "La **NOM-040-SSA1-1993**, sobre sal yodada y sal yodada fluorurada, especifica que la sal yodada fluorurada debe contener **250 ± 50 mg/kg de ion flúor**, que puede aportarse como fluoruro de sodio o de potasio. La misma norma exceptúa de agregar fluoruro a la sal destinada a poblaciones cuya agua de consumo tenga una concentración natural de flúor mayor de 0.7 mg/L, y obliga a que el envase advierta que el producto no debe comercializarse en esas poblaciones. La **NOM-013-SSA2-2015** añade que el estomatólogo debe informar a sus pacientes qué tipo de sal, con o sin fluoruro, deben consumir según su lugar de residencia. Ante cualquier modificación, consulta la versión vigente en el DOF."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/04",
+          "proporcion": "4:3",
+          "alt": "Salero de vidrio y un plato de comida casera mexicana sobre una mesa de madera.",
+          "pie": "La sal de mesa fluorurada es el vehículo de protección masiva contra la caries que eligió México.",
+          "prompt": "Fotografía realista de una mesa de madera en una cocina familiar mexicana: un salero de vidrio transparente con sal fina blanca y tapa metálica, junto a un plato de frijoles caseros, tortillas en un tortillero de tela bordada y un vaso de agua. Luz natural lateral cálida de mediodía, colores naturales, composición sencilla y cotidiana, profundidad de campo media con el salero enfocado. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, personas, refrescos, comida poco apetitosa, exceso de objetos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El flúor que ya trae el agua"
+        },
+        {
+          "tipo": "texto",
+          "md": "En buena parte del centro y norte de México el agua subterránea contiene fluoruro de origen geológico, liberado por la interacción del agua con rocas volcánicas. Estudios nacionales han documentado que en entidades como **Durango, Zacatecas, Aguascalientes y San Luis Potosí** la fluorosis dental es un problema de salud pública, y otros estados tienen localidades afectadas. En esas zonas, el riesgo no es la falta de fluoruro sino su exceso durante la formación de los dientes.\n\nLa **NOM-127-SSA1-2021**, de agua para uso y consumo humano, fija el límite permisible de fluoruros y establece que se reducirá de 1.5 a **1.0 mg/L** con plazos escalonados según el tamaño de la localidad: primero las de más de 500,000 habitantes y al final las de menos de 50,000. Que el agua de la red cumpla el límite no garantiza lo mismo para pozos particulares, norias o agua de pipas, que pueden tener concentraciones distintas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Pregunta siempre de dónde viene el agua",
+          "md": "En la historia clínica de niñas y niños pequeños, pregunta en qué localidad viven, qué agua beben y cocinan (red, pozo, garrafón) y qué sal se usa en casa. En zonas con alto fluoruro natural, la sal fluorurada no debería estar a la venta, pero puede llegar desde otras regiones. Si tienes dudas sobre el contenido de fluoruro del agua de una localidad, consulta a la jurisdicción sanitaria o a la Secretaría de Salud estatal."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m05/d2",
+          "pie": "Los tres niveles de uso de fluoruros que describe la NOM-013-SSA2-2015: masivo, grupal e individual.",
+          "descripcion": "Tres círculos concéntricos. El círculo exterior, el más grande, representa el nivel masivo, con el ícono de un salero. El círculo intermedio representa el nivel grupal, con el ícono de una escuela. El círculo central representa el nivel individual, con los íconos de un cepillo dental y de un pincel de aplicación profesional. Cada nivel lleva a un lado ejemplos breves del tipo de acción.",
+          "elementos": [
+            "Masivo: sal yodada fluorurada",
+            "Grupal: programas escolares supervisados",
+            "Individual: pasta dental y autocuidado",
+            "Individual: aplicación profesional según riesgo"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Entre el nivel masivo y el individual se encuentran los **programas grupales**, como los enjuagatorios con fluoruro supervisados en escuelas o las autoaplicaciones de gel bajo vigilancia de personal capacitado, que la NOM-013-SSA2-2015 contempla para población escolar. Estos programas se diseñan y supervisan desde los servicios de salud, con productos, frecuencias y edades definidos por la norma y por los responsables del programa; no son decisiones que deban improvisarse en casa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Sal fluorurada sin comer más sal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una duda frecuente es si recomendar sal fluorurada contradice la recomendación de reducir el consumo de sal para prevenir la hipertensión. No hay contradicción. La sal fluorurada se diseñó para que la cantidad habitual de sal aporte fluoruro; el mensaje correcto es **sustituir** la sal sin fluoruro por la fluorurada cuando corresponde a la localidad, no consumir más sal. Una persona que reduce su consumo de sal por indicación médica sigue obteniendo la mayor parte de su protección contra la caries de la pasta dental fluorurada.\n\nLa vigilancia sanitaria de la fluoruración de la sal es responsabilidad de la Secretaría de Salud, que verifica que el producto cumpla con la norma y que se distribuya conforme a las zonas establecidas. Al consultorio le corresponde la parte individual: saber dónde vive el paciente, qué sal y qué agua consume, y ajustar sus recomendaciones a ese contexto. Esa combinación de política pública y orientación personal es lo que hace eficaz y seguro el modelo."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Vehículos comunitarios de fluoruro",
+          "columnas": ["Vehículo", "Ventajas", "Retos", "Situación en México"],
+          "filas": [
+            ["Agua de consumo", "Exposición constante sin esfuerzo individual; amplia evidencia", "Requiere redes centralizadas y control técnico continuo", "No se adiciona; la NOM-013 limita el fluoruro sistémico a la sal"],
+            ["Sal de mesa", "Producción concentrada, distribución nacional, bajo costo", "Consumo variable de sal; debe excluirse en zonas de alto flúor natural", "Vehículo masivo oficial, regulado por la NOM-040"],
+            ["Leche", "Útil en programas escolares de algunos países", "Logística de distribución y control", "No es un vehículo oficial"],
+            ["Agua con flúor natural alto", "No aplica como medida preventiva", "Riesgo de fluorosis en la infancia", "Presente en varias entidades; regulada por la NOM-127"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/05",
+          "proporcion": "16:9",
+          "alt": "Paisaje semiárido del norte de México con un pozo de agua y un tanque elevado de una comunidad rural.",
+          "pie": "En varias regiones del centro y norte de México, el agua subterránea contiene fluoruro natural en concentraciones que pueden causar fluorosis.",
+          "prompt": "Fotografía realista de paisaje en formato panorámico de una comunidad rural en una zona semiárida del altiplano mexicano: un pozo de agua con bomba y tubería metálica, un tanque elevado de concreto, nopales y mezquites alrededor, casas sencillas al fondo y montañas volcánicas en el horizonte. Cielo azul con pocas nubes, luz de media tarde cálida, colores naturales de tierra y verde seco. Evitar: texto, letreros, logotipos, marcas de agua, personas identificables, basura, imágenes de pobreza extrema o dramatizadas."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada elemento con su papel en el modelo mexicano",
+          "instruccion": "Une cada elemento con la descripción que le corresponde.",
+          "pares": [
+            { "a": "Sal yodada fluorurada", "b": "Vehículo de protección específica masiva contra la caries en México" },
+            { "a": "NOM-040-SSA1-1993", "b": "Especifica el contenido de yodo y flúor de la sal" },
+            { "a": "Agua con más de 0.7 mg/L de flúor natural", "b": "Su población no debe recibir sal fluorurada" },
+            { "a": "NOM-127-SSA1-2021", "b": "Fija el límite permisible de fluoruros en el agua de consumo" },
+            { "a": "Programas escolares supervisados", "b": "Nivel grupal de uso de fluoruros" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/06",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con cubrebocas conversa con una madre en el consultorio mientras revisan juntas una historia clínica.",
+          "pie": "Preguntar por el agua y la sal que se consumen en casa forma parte de la historia clínica en odontología.",
+          "prompt": "Fotografía realista en un consultorio dental luminoso: una odontóloga con cubrebocas, bata blanca y lentes de protección sobre la cabeza conversa sentada con una madre que lleva cubrebocas, ambas inclinadas sobre una tabla con hojas de historia clínica sin texto legible. Al fondo, desenfocada, la unidad dental. Luz natural suave, ambiente cálido y profesional, colores neutros con toques de azul. Evitar: texto legible, logotipos, marcas de agua, sangre, rostros identificables sin cubrebocas, instrumental en uso, gestos de preocupación exagerada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Agrega a tu historia clínica tres preguntas breves: «¿En qué localidad vive?», «¿Qué agua beben y usan para cocinar?» y «¿Qué sal usan en casa?». Con esas respuestas podrás aplicar lo que pide la NOM-013-SSA2-2015, orientar sobre la sal adecuada y estimar mejor el riesgo de fluorosis antes de recomendar cualquier otro producto con fluoruro."
+        }
+      ],
+      "glosario": [
+        { "termino": "Protección específica masiva", "definicion": "Medida preventiva que llega a toda la población sin requerir acciones individuales, como la fluoruración de la sal." },
+        { "termino": "Sal yodada fluorurada", "definicion": "Sal de mesa adicionada con yodo y fluoruro conforme a la NOM-040-SSA1-1993; vehículo masivo de fluoruro en México." },
+        { "termino": "Fluoruro sistémico", "definicion": "Fluoruro que ingresa al organismo por vía oral u otra vía y se distribuye por el cuerpo, como el de la sal o el agua." },
+        { "termino": "Fluorosis endémica", "definicion": "Presencia frecuente de fluorosis dental en una región, asociada sobre todo a fluoruro natural elevado en el agua." },
+        { "termino": "Límite permisible", "definicion": "Concentración máxima de una sustancia que una norma admite en el agua para uso y consumo humano." }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.2-1",
+          "q": "¿Cuál es el vehículo de protección específica masiva contra la caries en México?",
+          "opciones": [
+            "El agua de la red pública",
+            "La leche escolar",
+            "La sal para consumo humano",
+            "Las tabletas de fluoruro"
+          ],
+          "correcta": 2,
+          "explicacion": "La NOM-013-SSA2-2015 establece la adición de fluoruro a la sal como medida masiva y limita el fluoruro sistémico a ese único medio."
+        },
+        {
+          "id": "t5.2-2",
+          "q": "Según la NOM-040-SSA1-1993, ¿en qué poblaciones no debe comercializarse sal fluorurada?",
+          "opciones": [
+            "En aquellas cuya agua de consumo tiene más de 0.7 mg/L de flúor natural",
+            "En las ciudades de más de un millón de habitantes",
+            "En las comunidades costeras",
+            "En todas las zonas rurales"
+          ],
+          "correcta": 0,
+          "explicacion": "La norma exceptúa la fluoruración de la sal destinada a poblaciones con agua de flúor natural mayor de 0.7 mg/L."
+        },
+        {
+          "id": "t5.2-3",
+          "q": "¿Por qué la NOM-013-SSA2-2015 prohíbe añadir fluoruro a refrescos, golosinas o agua envasada?",
+          "opciones": [
+            "Porque el fluoruro altera su sabor",
+            "Porque se limita a un solo medio de fluoruro sistémico, la sal, para evitar la sobreexposición",
+            "Porque esos productos ya traen yodo",
+            "Porque el fluoruro solo funciona en la sal"
+          ],
+          "correcta": 1,
+          "explicacion": "Limitar el fluoruro sistémico a un solo vehículo evita sumar fuentes y reduce el riesgo de fluorosis."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-040-SSA1-1993, Productos y servicios. Sal yodada y sal yodada fluorurada. Especificaciones sanitarias", "autor": "Secretaría de Salud", "anio": 1995 },
+        { "tipo": "oficial", "titulo": "NOM-127-SSA1-2021, Agua para uso y consumo humano. Límites permisibles de la calidad del agua", "autor": "Secretaría de Salud", "anio": 2022 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en estudios nacionales sobre fluorosis dental y fluoruro natural en el agua subterránea de México", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "5.3",
+      "titulo": "Flúor de uso personal: pastas, enjuagues y geles",
+      "minutos": 14,
+      "enPocasPalabras": "La pasta dental con flúor es la forma más importante de proteger los dientes en casa. En los niños pequeños hay que usar muy poca pasta y ayudarles a escupirla. Los enjuagues y geles con flúor solo se usan a ciertas edades y cuando el dentista lo indica.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si tuvieras que elegir una sola medida para prevenir la caries en el mundo, la evidencia apunta a la **pasta dental con fluoruro**. Combina la remoción mecánica de la biopelícula con una exposición tópica diaria, es barata y está disponible casi en todas partes. En 2021 la Organización Mundial de la Salud la incluyó en su **Lista Modelo de Medicamentos Esenciales**, en una nueva sección de preparaciones dentales, con una concentración de 1,000 a 1,500 ppm de fluoruro.\n\nUna revisión sistemática Cochrane publicada en 2019 confirmó que el beneficio frente a pastas sin fluoruro es claro a partir de 1,000 ppm y que aumenta con la concentración, a la vez que señaló que en menores de seis años la elección debe equilibrar el beneficio con el riesgo de fluorosis leve. Ese equilibrio es justamente el centro de este tema."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo leer la concentración de una pasta"
+        },
+        {
+          "tipo": "texto",
+          "md": "La concentración de fluoruro se expresa en **partes por millón (ppm)**, que equivalen a miligramos de fluoruro por kilogramo de producto. Una pasta de 1,000 ppm contiene 1 mg de fluoruro por cada gramo, es decir, 0.1 % de fluoruro. El empaque puede indicar la concentración de fluoruro o el porcentaje del compuesto que lo aporta, y conviene saber convertir uno en otro.\n\nLos compuestos más usados son el **fluoruro de sodio**, el **monofluorofosfato de sodio**, el **fluoruro estañoso** y los **fluoruros de amina**. Cada uno se combina con abrasivos compatibles: por ejemplo, el fluoruro de sodio se formula con abrasivos de sílice, porque el carbonato de calcio reaccionaría con él y lo inactivaría, mientras que el monofluorofosfato sí es compatible con el carbonato de calcio. El fluoruro estañoso añade un efecto antibacteriano y es útil contra la hipersensibilidad, aunque puede pigmentar. Para la prevención de caries, lo decisivo es la concentración de fluoruro disponible y el uso diario."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Convierte el porcentaje de fluoruro de sodio a ppm de fluoruro",
+          "instruccion": "Algunas pastas indican el porcentaje de fluoruro de sodio en lugar de las ppm de fluoruro. El fluoruro representa cerca del 45.24 % de la masa del fluoruro de sodio (19 de 42 unidades de masa). Escribe el porcentaje del empaque y calcula su equivalente.",
+          "formula": "ppm de fluoruro = % de fluoruro de sodio × 10,000 × 0.4524",
+          "variables": [
+            { "id": "porcentajeNaF", "etiqueta": "Fluoruro de sodio declarado", "valor": 0.32, "unidad": "%" }
+          ],
+          "resultado": {
+            "expresion": "porcentajeNaF * 10000 * 0.4524",
+            "etiqueta": "Concentración de fluoruro",
+            "unidad": "ppm",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Pasta dental según la edad"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **NOM-013-SSA2-2015** orienta el uso de pastas por edad: en menores de seis años indica pastas de **550 ppm** de fluoruro, y reserva las de 551 a 1,500 ppm para mayores de seis años; si un menor de esa edad usa una pasta de mayor concentración, debe ser solo bajo supervisión de un adulto, evitando su ingestión y con una cantidad máxima del tamaño de un chícharo. En su apéndice, la norma también describe cepillar sin pasta al inicio de la erupción hasta los tres años.\n\nLas guías internacionales más recientes han tomado otro camino. Desde 2014, la Asociación Dental Americana recomienda usar pasta fluorurada desde la erupción del primer diente: una **embarradita del tamaño de un grano de arroz** hasta los tres años y una cantidad del **tamaño de un chícharo** de los tres a los seis años, porque esas cantidades ofrecen beneficio preventivo con bajo riesgo de fluorosis. La Academia Americana de Odontología Pediátrica coincide en ese enfoque."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Norma y evidencia: cómo conciliarlas",
+          "md": "En México, la NOM-013-SSA2-2015 es la referencia obligatoria para los servicios de salud. Las guías internacionales posteriores muestran que la evidencia sobre la pasta fluorurada en la primera infancia se ha actualizado. La decisión sobre la concentración y la cantidad para cada niña o niño es del odontólogo, con base en su riesgo de caries, la exposición a otras fuentes de fluoruro en su localidad y la capacidad de los cuidadores para supervisar el cepillado. Lo que no cambia en ningún escenario es que la cantidad debe ser pequeña, el cepillado supervisado y la pasta fuera del alcance de los niños."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/07",
+          "proporcion": "4:3",
+          "alt": "Dos cepillos infantiles sobre una superficie blanca: uno con una embarradita de pasta del tamaño de un grano de arroz y otro con una porción del tamaño de un chícharo.",
+          "pie": "Comparación de las cantidades de pasta que recomiendan las guías internacionales para la primera infancia: grano de arroz y chícharo.",
+          "prompt": "Fotografía de producto realista vista desde arriba de dos cepillos dentales infantiles de mango corto y cerdas suaves, colocados en paralelo sobre una superficie blanca mate. El primero tiene una capa mínima de pasta blanca del tamaño de un grano de arroz extendida sobre las cerdas; el segundo tiene una pequeña porción redonda de pasta del tamaño de un chícharo. Junto a ellos, como referencia, un grano de arroz y un chícharo verde reales. Iluminación suave de estudio, sombras ligeras, colores limpios. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, tubos de pasta con rótulos, exceso de pasta."
+        },
+        {
+          "tipo": "texto",
+          "md": "La técnica también influye en el efecto. Se recomienda cepillar **al menos dos veces al día**, una de ellas antes de dormir, porque durante el sueño disminuye el flujo salival. Al terminar, conviene **escupir el exceso sin enjuagar abundantemente con agua**, para que permanezca más fluoruro en la boca. En niñas y niños, un adulto debe poner la pasta, supervisar el cepillado y enseñarles a escupir.\n\nAl elegir una pasta en el supermercado, muchas personas se guían por promesas de blanqueamiento, sabor o ingredientes «naturales». Enséñales a buscar primero la concentración de fluoruro en el empaque. Las pastas sin fluoruro pueden limpiar y refrescar, pero no ofrecen el beneficio preventivo contra la caries que demuestra la evidencia; si un paciente prefiere usarlas, conviene explicarle con claridad lo que deja de recibir."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Enjuagues, geles y otros productos"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Productos fluorurados de autocuidado",
+          "columnas": ["Producto", "Uso principal", "Precaución según la NOM-013-SSA2-2015"],
+          "filas": [
+            ["Pasta dental fluorurada", "Base de la prevención diaria en todas las edades", "Concentración y cantidad según la edad; supervisión en menores de 6 años"],
+            ["Enjuague bucal fluorurado", "Complemento en personas con mayor riesgo y en programas escolares supervisados", "No debe usarse en menores de 6 años"],
+            ["Gel fluorurado de uso en casa", "Complemento por indicación profesional", "No debe usarse en menores de 3 años"],
+            ["Saliva artificial fluorurada", "Pacientes con xerostomía por enfermedades sistémicas, síndrome de Sjögren, radioterapia o quimioterapia, entre otros", "Por indicación profesional"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Las restricciones por edad tienen una razón sencilla: los niños pequeños todavía no controlan bien el reflejo de deglución y pueden tragar enjuagues y geles. Un enjuague fluorurado tampoco sustituye al cepillado: no retira la biopelícula y su aporte de fluoruro es un complemento, útil sobre todo cuando se usa en un momento distinto al cepillado para sumar exposiciones a lo largo del día. En adultos con riesgo elevado, como personas con boca seca, con aparatos de ortodoncia o con caries radicular, el odontólogo puede indicar productos de mayor concentración o uso más frecuente. En varios países existen pastas de alta concentración que se venden por indicación profesional; su uso en personas mayores se estudia en el módulo 11. La elección del producto, su concentración y su frecuencia es una decisión clínica individualizada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Productos fluorurados fuera del alcance de los niños",
+          "md": "Pastas, enjuagues y geles deben guardarse en un lugar alto o cerrado. Las pastas con sabores dulces o personajes infantiles pueden invitar a comerlas. Enseña a las familias que la pasta no es un alimento y que el cepillado de los más pequeños siempre lo hace o supervisa un adulto."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m05/d3",
+          "pie": "Concentraciones de referencia de distintos vehículos de fluoruro, en escala logarítmica.",
+          "descripcion": "Barra horizontal en escala logarítmica de 0.1 a 100,000 partes por millón. Sobre la barra se ubican, de izquierda a derecha, marcadores con su vehículo: límite de fluoruro en agua de consumo según la NOM-127 (1.0 a 1.5 mg/L), sal yodada fluorurada según la NOM-040 (250 mg/kg), pasta infantil según la NOM-013 (550 ppm), pasta de uso general (1,000 a 1,500 ppm) y, al extremo derecho, una zona sombreada sin cifra con la leyenda productos de aplicación profesional de alta concentración.",
+          "elementos": [
+            "Agua de consumo: 1.0 a 1.5 mg/L",
+            "Sal fluorurada: 250 mg/kg",
+            "Pasta infantil NOM-013: 550 ppm",
+            "Pasta de uso general: 1,000 a 1,500 ppm",
+            "Productos profesionales de alta concentración"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/08",
+          "proporcion": "3:4",
+          "alt": "Adulto se cepilla los dientes frente al espejo del baño, visto de espaldas.",
+          "pie": "Cepillarse antes de dormir y escupir el exceso sin enjuagar abundantemente ayuda a que el fluoruro permanezca en la boca.",
+          "prompt": "Fotografía vertical realista de un adulto joven visto de espaldas frente al espejo de un baño doméstico iluminado con luz cálida de noche, cepillándose los dientes; en el reflejo del espejo solo se distingue de forma desenfocada su silueta, sin rostro identificable. Sobre el lavabo, un vaso, un cepillo de repuesto y una toalla doblada. Ambiente limpio y sereno, colores cálidos, enfoque en la mano y el cepillo. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, rostro identificable, espuma excesiva, desorden."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/09",
+          "proporcion": "1:1",
+          "alt": "Estante alto de un baño con productos de higiene bucal guardados fuera del alcance de un niño.",
+          "pie": "Guardar pastas, enjuagues y geles en un lugar alto o cerrado previene ingestiones accidentales en la infancia.",
+          "prompt": "Fotografía cuadrada realista del interior de un baño doméstico limpio: en un estante alto de madera clara, por encima del lavabo, se ven ordenados un vaso con cepillos, frascos de enjuague sin etiqueta y tubos de pasta blancos sin rótulos. En la parte baja del encuadre, desenfocada, la mano de un niño pequeño apoyada en el borde del lavabo sin alcanzar el estante. Luz natural suave, colores cálidos y neutros. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, rostros, medicamentos, desorden, situaciones de peligro dramatizadas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para casa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pide a tus pacientes que traigan a la siguiente cita la pasta que usa cada miembro de la familia. Revisa con ellos la concentración de fluoruro en el empaque, conviertan juntos el porcentaje a ppm si hace falta y muéstrales con un cepillo la cantidad adecuada para cada edad. Diez minutos de esta práctica evitan años de dudas y de exceso de pasta en los cepillos infantiles."
+        }
+      ],
+      "glosario": [
+        { "termino": "Partes por millón (ppm)", "definicion": "Unidad de concentración equivalente a miligramos de fluoruro por kilogramo de producto; 1,000 ppm equivalen a 0.1 %." },
+        { "termino": "Fluoruro de sodio", "definicion": "Compuesto fluorurado muy usado en pastas, enjuagues y barnices; se formula con abrasivos compatibles como la sílice." },
+        { "termino": "Monofluorofosfato de sodio", "definicion": "Compuesto que libera fluoruro en la boca y es compatible con abrasivos de carbonato de calcio." },
+        { "termino": "Fluoruro estañoso", "definicion": "Compuesto fluorurado con efecto antibacteriano adicional y utilidad en la hipersensibilidad; puede pigmentar los dientes." },
+        { "termino": "Xerostomía", "definicion": "Sensación de boca seca, a menudo por disminución del flujo salival, que aumenta el riesgo de caries." }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.3-1",
+          "q": "Una pasta declara 0.243 % de fluoruro de sodio. ¿Aproximadamente cuántas ppm de fluoruro contiene?",
+          "opciones": [
+            "550 ppm",
+            "2,430 ppm",
+            "243 ppm",
+            "1,100 ppm"
+          ],
+          "correcta": 3,
+          "explicacion": "0.243 × 10,000 × 0.4524 ≈ 1,099 ppm, es decir, unas 1,100 ppm de fluoruro."
+        },
+        {
+          "id": "t5.3-2",
+          "q": "Según la NOM-013-SSA2-2015, ¿a partir de qué edad pueden usarse enjuagues bucales fluorurados?",
+          "opciones": [
+            "Desde el primer diente",
+            "A partir de los 6 años",
+            "A partir de los 3 años",
+            "Solo en adultos mayores"
+          ],
+          "correcta": 1,
+          "explicacion": "La norma indica que los enjuagues fluorurados no deben usarse en menores de 6 años, por el riesgo de ingestión."
+        },
+        {
+          "id": "t5.3-3",
+          "q": "¿Qué consejo ayuda a que el fluoruro de la pasta permanezca más tiempo en la boca?",
+          "opciones": [
+            "Escupir el exceso sin enjuagar abundantemente con agua",
+            "Enjuagarse varias veces con agua al terminar",
+            "Comer inmediatamente después de cepillarse",
+            "Cepillarse solo por la mañana"
+          ],
+          "correcta": 0,
+          "explicacion": "Enjuagar con mucha agua diluye y elimina el fluoruro; escupir sin enjuagar mantiene niveles más altos."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Fluoride toothpastes of different concentrations for preventing dental caries", "autor": "Walsh T., Worthington H. V., Glenny A. M., Marinho V. C. C., Jeroncic A. (Cochrane Database of Systematic Reviews)", "anio": 2019 },
+        { "tipo": "oficial", "titulo": "WHO Model List of Essential Medicines, 22nd List", "autor": "Organización Mundial de la Salud", "anio": 2021 },
+        { "tipo": "oficial", "titulo": "Recomendación de pasta dental fluorurada desde el primer diente: cantidad de un grano de arroz hasta los 3 años y de un chícharo de 3 a 6 años", "autor": "American Dental Association, Council on Scientific Affairs", "anio": 2014 }
+      ]
+    },
+    {
+      "n": "5.4",
+      "titulo": "Aplicación profesional de fluoruros y diamino fluoruro de plata",
+      "minutos": 13,
+      "enPocasPalabras": "En el consultorio, el dentista puede aplicar productos con mucho flúor, como el barniz, que se pinta sobre los dientes y protege durante días. También existe un líquido que detiene caries ya abiertas, aunque las deja negras. El dentista decide cuál conviene y cada cuánto, según el riesgo de cada persona.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los productos de aplicación profesional contienen concentraciones de fluoruro mucho más altas que las pastas de uso diario. Por esa razón, la **NOM-013-SSA2-2015** establece que solo el estomatólogo, el pasante de estomatología en servicio social o el personal técnico o auxiliar de salud bucal capacitado está autorizado para aplicar soluciones, geles, pastas profilácticas, barnices y agentes de liberación lenta. Deben aplicarse en el consultorio, **bajo aislamiento, con eyector de saliva y vigilancia permanente** durante el procedimiento, a intervalos definidos por el diagnóstico del estomatólogo.\n\nEn este tema conocerás los agentes principales, qué dice la evidencia de cada uno y cómo se decide su uso. No encontrarás cantidades ni frecuencias cerradas: dependen del producto, del riesgo de cada paciente y del juicio clínico."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Barniz de fluoruro"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **barniz** es una suspensión viscosa de fluoruro, generalmente fluoruro de sodio, en una base de resina que se adhiere a la superficie dental y endurece al contacto con la saliva. Se aplica con un pequeño pincel en capa delgada, no requiere cubetas ni secado perfecto y permanece en contacto con el esmalte durante horas, lo que favorece la formación de reservorios semejantes al fluoruro de calcio. Por su seguridad y facilidad de aplicación es el agente profesional preferido en niños pequeños y en programas comunitarios.\n\nUna revisión sistemática Cochrane de 2013 sobre barnices en niños y adolescentes estimó una reducción de alrededor del **43 %** en las superficies cariadas, perdidas y obturadas de la dentición permanente y de alrededor del **37 %** en la dentición temporal, con evidencia de calidad moderada. La NOM-013-SSA2-2015 permite su aplicación profesional desde los 12 meses de edad y señala que los barnices se aplican de acuerdo con el riesgo de caries, con base en el diagnóstico y el plan de tratamiento."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/10",
+          "proporcion": "4:3",
+          "alt": "Manos con guantes aplican barniz de fluoruro con un pequeño pincel sobre los molares de un niño.",
+          "pie": "El barniz de fluoruro se aplica en capa delgada con un pincel y endurece al contacto con la saliva.",
+          "prompt": "Fotografía clínica realista en encuadre cerrado de la boca abierta de un niño de unos cinco años con dentición temporal completa y sana, sin rostro visible más allá de los labios. Una mano con guante de nitrilo sostiene un microaplicador con punta de pincel y aplica una capa delgada y amarillenta de barniz sobre las caras de los molares inferiores temporales, mientras otra mano con guante retrae suavemente la mejilla con un espejo. Rollos de algodón en vestibular, luz clínica uniforme, colores naturales. Evitar: texto, logotipos, marcas de agua, sangre, rostro identificable, dientes permanentes en posición incorrecta, manos sin guantes, llanto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Geles y espumas fluorurados"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **geles** de fluoruro de fosfato acidulado o de fluoruro de sodio se aplican con cubetas o con cepillo y fueron durante décadas el estándar profesional. Su principal desventaja es el riesgo de deglución, sobre todo en niños, por lo que su aplicación exige que el paciente esté sentado erguido, cubetas de tamaño adecuado, succión eficiente y vigilancia constante. La NOM-013-SSA2-2015 indica que los geles fluorurados se apliquen a partir de los 3 años de edad, de acuerdo con los factores de riesgo y bajo vigilancia de personal capacitado. Los geles de fosfato acidulado pueden opacar restauraciones de porcelana o resina, por lo que se valora el tipo de restauraciones presentes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Diamino fluoruro de plata"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **diamino fluoruro de plata** es una solución que combina iones de plata, con efecto antibacteriano, y fluoruro, que favorece la remineralización. Se aplica con un microaplicador sobre lesiones cavitadas y su principal indicación es **detener lesiones activas**, en especial en dientes temporales, en personas que no pueden recibir tratamiento restaurador convencional y en caries radicular. La guía de tratamientos no restauradores de la Asociación Dental Americana publicada en 2018 lo incluyó entre las intervenciones más eficaces para detener lesiones cavitadas, y en 2021 la OMS lo incorporó a su Lista Modelo de Medicamentos Esenciales para el **tratamiento** de la caries; el comité no lo recomendó para la prevención por la incertidumbre en su beneficio con ese fin.\n\nSu efecto secundario más importante es estético: la lesión tratada se **tiñe de negro** de forma permanente. También puede manchar la piel, la ropa y las superficies del consultorio, y está contraindicado en personas con alergia a la plata. Por eso requiere una explicación clara a la persona o a sus cuidadores, con fotografías de casos tratados, y su **consentimiento informado** por escrito."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/11",
+          "proporcion": "4:3",
+          "alt": "Microaplicador junto a un pequeño recipiente de vidrio y un modelo tipodonto de dientes temporales en una mesa de enseñanza.",
+          "pie": "El diamino fluoruro de plata se aplica con microaplicador solo sobre la lesión, con protección de la mucosa y de las superficies vecinas.",
+          "prompt": "Fotografía realista en una mesa de enseñanza de odontopediatría: un modelo tipodonto de dentición temporal completa con anatomía correcta, a su lado un pequeño vaso dappen de vidrio con unas gotas de líquido transparente, dos microaplicadores de punta fina, rollos de algodón y vaselina en un recipiente pequeño. Una mano con guante de nitrilo sostiene un microaplicador sobre un molar temporal del modelo. Luz suave de estudio, fondo claro y limpio, colores naturales. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, sangre, rostros, manchas negras exageradas, manos sin guantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Cómo detiene la caries el diamino fluoruro de plata",
+          "md": "Los iones de plata se unen a proteínas y ácidos nucleicos bacterianos, alteran la membrana y las enzimas de los microorganismos de la lesión y tienen un efecto antibacteriano que persiste en la dentina tratada. El fluoruro y los iones de la solución favorecen la formación de fosfato de plata y de fluorhidroxiapatita en la dentina desmineralizada, que se vuelve más dura y menos susceptible a la degradación del colágeno por las enzimas de la propia dentina. La tinción negra se debe a la precipitación de compuestos de plata en el tejido. La detención de la lesión se reconoce clínicamente porque la dentina pasa de blanda a dura y brillante, criterio que estudiaste en el módulo 4. El seguimiento periódico permite confirmar que la lesión sigue detenida y decidir si conviene reaplicar o restaurar con fines estéticos o funcionales."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Agentes de aplicación profesional",
+          "columnas": ["Agente", "Indicación principal", "Ventaja", "Precaución"],
+          "filas": [
+            ["Barniz de fluoruro", "Prevención y control de lesiones no cavitadas según el riesgo", "Seguro y fácil de aplicar, incluso en niños pequeños", "Pigmentación amarillenta transitoria; aplicación profesional desde los 12 meses según la NOM-013"],
+            ["Gel fluorurado", "Prevención en personas con mayor riesgo", "Cubre toda la arcada en una aplicación", "Riesgo de deglución; desde los 3 años según la NOM-013; puede opacar restauraciones"],
+            ["Diamino fluoruro de plata", "Detención de lesiones cavitadas activas", "No requiere remoción de tejido ni anestesia", "Tinción negra permanente de la lesión; consentimiento informado; alergia a la plata"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Bioseguridad y registro sanitario",
+          "md": "Aplica cualquier agente profesional con equipo de protección completo, protección ocular para el paciente, aislamiento y succión. Usa presentaciones de dosis única cuando existan, para evitar la contaminación cruzada. Antes de incorporar un producto a tu consultorio, verifica que cuente con registro sanitario de COFEPRIS y sigue las instrucciones del fabricante. La cantidad y el intervalo de aplicación son una decisión profesional para cada paciente."
+        },
+        {
+          "tipo": "texto",
+          "md": "Ningún agente profesional funciona aislado. Una aplicación de barniz en una persona que sigue consumiendo azúcares con mucha frecuencia y no retira la biopelícula tendrá un efecto limitado. Por eso, cada aplicación es también una oportunidad educativa: revisa con el paciente su técnica de cepillado, la pasta que usa y sus hábitos de consumo, y registra en el expediente el agente aplicado, la fecha y las lesiones que se busca controlar. Así, en la siguiente cita podrás evaluar si las lesiones activas se detuvieron y ajustar la intensidad de las medidas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/12",
+          "proporcion": "1:1",
+          "alt": "Bandeja con presentación de dosis única de barniz, microaplicadores y rollos de algodón.",
+          "pie": "Las presentaciones de dosis única facilitan la bioseguridad en la aplicación de barniz.",
+          "prompt": "Fotografía de producto cuadrada y realista vista desde arriba de una bandeja de consultorio dental cubierta con un campo desechable azul: un pequeño contenedor de dosis única abierto sin etiquetas, dos microaplicadores con punta de pincel, rollos de algodón blancos, un espejo bucal y gasas dobladas. Iluminación suave y uniforme de consultorio, sombras ligeras, colores limpios y ordenados. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, sangre, instrumental sucio, manos sin guantes, objetos ajenos al consultorio."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m05/d4",
+          "pie": "La intensidad de las medidas con fluoruro se ajusta al riesgo y a la actividad de las lesiones.",
+          "descripcion": "Escalera de tres peldaños ascendentes de izquierda a derecha, con colores de claro a intenso. Primer peldaño, riesgo bajo: pasta fluorurada diaria y sal adecuada a la localidad. Segundo peldaño, riesgo moderado: lo anterior más aplicaciones profesionales según el criterio del odontólogo. Tercer peldaño, riesgo alto o lesiones activas: lo anterior más aplicaciones profesionales más frecuentes, productos de autocuidado adicionales por indicación y, en lesiones cavitadas seleccionadas, detención con diamino fluoruro de plata. Una flecha bajo la escalera indica seguimiento y revaloración periódica.",
+          "elementos": [
+            "Riesgo bajo",
+            "Riesgo moderado",
+            "Riesgo alto o lesiones activas",
+            "Pasta fluorurada diaria",
+            "Aplicación profesional según criterio",
+            "Diamino fluoruro de plata en lesiones seleccionadas",
+            "Revaloración periódica"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: preescolar con lesiones activas",
+          "situacion": "Una niña de 4 años llega con su madre. Tiene lesiones de mancha blanca activas en los incisivos superiores temporales y dos molares temporales con cavidades activas pequeñas. Consume jugos varias veces al día y se cepilla sin supervisión. La familia vive en una localidad sin flúor natural elevado en el agua. ¿Cuál es el plan más adecuado respecto al fluoruro?",
+          "opciones": [
+            { "texto": "Indicar que la madre aplique un gel fluorurado en casa con cubetas todos los días", "correcta": false, "retro": "La NOM-013 no permite geles en menores de 3 años y, en preescolares, un gel diario en casa conlleva riesgo de deglución. No es la opción adecuada." },
+            { "texto": "Supervisar el cepillado con pasta fluorurada en cantidad adecuada, aplicar barniz en el consultorio según su riesgo y valorar con la familia la detención de las cavidades, por ejemplo con diamino fluoruro de plata y consentimiento informado", "correcta": true, "retro": "Correcto. Combina la base diaria supervisada, la aplicación profesional según el riesgo y una opción para detener las lesiones cavitadas, junto con el trabajo sobre la dieta." },
+            { "texto": "Indicar un enjuague fluorurado diario para que ella lo use sola", "correcta": false, "retro": "Los enjuagues fluorurados no deben usarse en menores de 6 años porque pueden tragarse." },
+            { "texto": "Esperar a que caigan los dientes temporales, porque no vale la pena tratarlos", "correcta": false, "retro": "Las lesiones activas en dientes temporales causan dolor e infección y reflejan un riesgo que afectará a los permanentes. Hay que intervenir." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el consultorio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Prepara un formato breve de consentimiento informado para el diamino fluoruro de plata que incluya una fotografía de antes y después de un caso tratado, la explicación de la tinción negra y las alternativas. Mostrar la imagen antes de aplicar evita sorpresas y mejora la confianza de las familias en el tratamiento."
+        }
+      ],
+      "glosario": [
+        { "termino": "Barniz de fluoruro", "definicion": "Suspensión viscosa de fluoruro en base de resina que se aplica con pincel y permanece adherida al diente durante horas." },
+        { "termino": "Gel fluorurado", "definicion": "Producto de aplicación profesional que se coloca con cubetas o cepillo; requiere succión y vigilancia por el riesgo de deglución." },
+        { "termino": "Diamino fluoruro de plata", "definicion": "Solución de plata y fluoruro que detiene lesiones de caries cavitadas y tiñe de negro el tejido tratado." },
+        { "termino": "Consentimiento informado", "definicion": "Autorización que da el paciente o su responsable tras recibir información clara sobre un procedimiento, sus efectos y sus alternativas." },
+        { "termino": "Detención de la lesión", "definicion": "Cambio de una lesión activa a inactiva; en dentina se reconoce porque pasa de blanda a dura y brillante." }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.4-1",
+          "q": "Según la NOM-013-SSA2-2015, ¿quién está autorizado para aplicar barnices y geles fluorurados de uso profesional?",
+          "opciones": [
+            "Cualquier persona con un instructivo",
+            "Solo especialistas en odontopediatría",
+            "Los padres de familia en casa",
+            "El estomatólogo, el pasante de estomatología en servicio social o el personal técnico o auxiliar capacitado"
+          ],
+          "correcta": 3,
+          "explicacion": "La norma restringe la aplicación profesional a ese personal, en el consultorio, con aislamiento, eyector y vigilancia."
+        },
+        {
+          "id": "t5.4-2",
+          "q": "¿Cuál es el principal efecto secundario del diamino fluoruro de plata que debe explicarse antes de usarlo?",
+          "opciones": [
+            "Tinción negra permanente de la lesión tratada",
+            "Sensibilidad dental de por vida",
+            "Fluorosis en los dientes permanentes",
+            "Desgaste del esmalte sano"
+          ],
+          "correcta": 0,
+          "explicacion": "La precipitación de compuestos de plata tiñe de negro la lesión; por eso se requiere consentimiento informado."
+        },
+        {
+          "id": "t5.4-3",
+          "q": "¿Por qué el barniz es el agente profesional preferido en niños pequeños?",
+          "opciones": [
+            "Porque no contiene fluoruro",
+            "Porque se aplica en capa delgada con pincel, se adhiere al diente y tiene menor riesgo de deglución que los geles",
+            "Porque se aplica en casa sin supervisión",
+            "Porque blanquea los dientes"
+          ],
+          "correcta": 1,
+          "explicacion": "Su forma de aplicación y su adherencia reducen la cantidad que puede tragarse y prolongan el contacto con el esmalte."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Fluoride varnishes for preventing dental caries in children and adolescents", "autor": "Marinho V. C. C., Worthington H. V., Walsh T., Clarkson J. E. (Cochrane Database of Systematic Reviews)", "anio": 2013 },
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline on nonrestorative treatments for carious lesions", "autor": "Slayton R. L., Urquhart O., Araujo M. W. B. y cols. (Journal of the American Dental Association)", "anio": 2018 },
+        { "tipo": "oficial", "titulo": "WHO Model List of Essential Medicines, 22nd List", "autor": "Organización Mundial de la Salud", "anio": 2021 }
+      ]
+    },
+    {
+      "n": "5.5",
+      "titulo": "Uso seguro: fluorosis, toxicidad y el debate actual",
+      "minutos": 13,
+      "enPocasPalabras": "Si un niño pequeño traga mucho flúor por años mientras se forman sus dientes, pueden salirle manchas blancas o cafés llamadas fluorosis. Por eso en la infancia se usa poca pasta y se cuida de dónde viene el agua. Usado como se recomienda, el flúor de la pasta dental es seguro y muy útil.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El fluoruro tiene un rasgo que lo distingue de muchas otras medidas preventivas: la diferencia entre la exposición que protege y la que puede causar efectos no deseados no es enorme, sobre todo en la infancia. Por eso, usar bien el flúor no es solo recomendarlo, sino **ajustar la exposición total** de cada persona. En este tema estudiarás la fluorosis dental, el riesgo de intoxicación aguda en niños y el debate científico y regulatorio más reciente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué es la fluorosis dental"
+        },
+        {
+          "tipo": "texto",
+          "md": "La NOM-013-SSA2-2015 define la **fluorosis dental** como una hipoplasia o hipomaduración del esmalte o la dentina producida por la ingestión crónica y excesiva de fluoruro durante el periodo de formación de los dientes. El fluoruro en exceso interfiere con la maduración del esmalte y deja una matriz con más proteína y mayor porosidad bajo la superficie.\n\nDos ideas son clave. Primera: la fluorosis solo se produce **mientras el diente se está formando**, es decir, en la infancia, antes de la erupción. Un adulto no puede desarrollar fluorosis dental por usar pasta con flúor. Segunda: depende de la **exposición total y prolongada**, sumando agua, sal, pasta tragada y cualquier otra fuente. Los primeros años de vida son especialmente importantes para los incisivos permanentes, cuya apariencia es la que más preocupa a las familias."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Categorías del índice de Dean para fluorosis",
+          "columnas": ["Categoría", "Aspecto clínico"],
+          "filas": [
+            ["Normal", "Esmalte translúcido, liso y brillante"],
+            ["Cuestionable", "Ligeras alteraciones de la translucidez, con algunas manchas blancas"],
+            ["Muy leve", "Pequeñas áreas blancas opacas que afectan menos de una cuarta parte de la superficie"],
+            ["Leve", "Áreas blancas opacas más extensas, sin llegar a la mitad de la superficie"],
+            ["Moderada", "Todas las superficies afectadas; puede haber desgaste y manchas marrones"],
+            ["Severa", "Hipoplasia marcada con fositas confluentes, manchas marrones y aspecto corroído"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/13",
+          "proporcion": "4:3",
+          "alt": "Incisivos superiores con finas líneas blancas horizontales y pequeñas áreas opacas simétricas.",
+          "pie": "Fluorosis muy leve a leve: líneas y áreas blancas opacas, simétricas en dientes homólogos.",
+          "prompt": "Fotografía clínica realista de las caras vestibulares de los incisivos centrales y laterales superiores permanentes de un adolescente, encuadre cerrado solo de dientes y encía, labios retraídos con separadores plásticos transparentes. El esmalte muestra finas líneas blancas horizontales y pequeñas áreas opacas difusas en las puntas incisales, distribuidas de forma simétrica en los dientes homólogos, sin cavidades ni manchas marrones. Encía sana rosa pálido, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, brackets, restauraciones, aspecto artificial."
+        },
+        {
+          "tipo": "texto",
+          "md": "En la práctica conviene distinguir la fluorosis de otras manchas. La fluorosis es **difusa y simétrica**: afecta dientes homólogos que se formaron al mismo tiempo, con líneas o nubes blancas que siguen las líneas de crecimiento del esmalte. La **hipomineralización incisivo-molar** produce opacidades **bien delimitadas y asimétricas**, blancas, amarillas o marrones, en primeros molares e incisivos. Las **lesiones de caries iniciales** se ubican en zonas de estancamiento de biopelícula, como el tercio cervical o el fondo de las fisuras, y cambian con la higiene. Este diagnóstico diferencial, que se profundiza en el programa de odontopediatría, evita tratar como caries lo que no lo es."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Flúor tópico en zonas de fluorosis endémica",
+          "md": "La NOM-013-SSA2-2015 establece que, en zonas geográficas con fluorosis dental endémica, **no está contraindicado el uso de fluoruros tópicos**. También indica que antes de recomendar o implementar fluoruros sistémicos se debe conocer la concentración de fluoruro en el agua, el tipo de sal que se consume y valorar el riesgo de fluorosis. En otras palabras: en esas regiones se controla la ingestión, pero no se priva a la población del beneficio de la pasta fluorurada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Intoxicación aguda: prevenir es sencillo"
+        },
+        {
+          "tipo": "texto",
+          "md": "La ingestión de una cantidad grande de un producto fluorurado concentrado de una sola vez, por ejemplo cuando un niño pequeño se come un tubo de pasta o bebe un enjuague, puede causar náusea, vómito y dolor abdominal, y en casos graves comprometer su salud. El riesgo depende de la cantidad ingerida y del peso del niño, por lo que es mayor cuanto más pequeño es.\n\nLa prevención se basa en medidas simples: guardar los productos fuera del alcance de los niños, que un adulto ponga la pasta en el cepillo, no usar enjuagues ni geles en las edades en que la norma no los permite y, en el consultorio, aplicar los productos profesionales con aislamiento, succión y vigilancia. Ante una ingestión accidental de un producto concentrado, la indicación es **buscar atención médica de urgencia** de inmediato y llevar el envase del producto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Nunca dejes solo a un niño durante una aplicación profesional",
+          "md": "La NOM-013-SSA2-2015 exige vigilancia permanente durante la aplicación de agentes fluorurados profesionales. Mantén la succión activa, al paciente en posición adecuada y retira el exceso de producto al terminar. Da a la familia indicaciones claras por escrito sobre lo que el niño puede comer y beber después, según el producto aplicado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El debate reciente, explicado con datos"
+        },
+        {
+          "tipo": "texto",
+          "md": "En los últimos años el fluoruro ha vuelto a estar en las noticias y es probable que tus pacientes te pregunten por ello. En agosto de 2024, el Programa Nacional de Toxicología de Estados Unidos publicó una revisión sistemática que concluyó, con **confianza moderada**, que exposiciones más altas al fluoruro, como **agua con más de 1.5 mg/L**, se asocian con menor coeficiente intelectual en niñas y niños. La misma revisión señaló que los datos eran **insuficientes** para saber si el nivel de 0.7 mg/L que se recomienda en la fluoruración del agua de ese país tiene algún efecto, y que la mayoría de los estudios provenían de lugares con exposiciones elevadas, entre ellos México.\n\nEn 2025, la Administración de Alimentos y Medicamentos de Estados Unidos anunció acciones para restringir los suplementos de fluoruro ingeribles de prescripción para menores de tres años y para niños con riesgo de caries bajo o moderado. Estas decisiones se refieren al fluoruro **ingerido**; no cuestionan el uso de pasta dental fluorurada en las cantidades recomendadas."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m05/d5",
+          "pie": "La fluorosis solo puede producirse durante la formación de los dientes; el beneficio tópico del fluoruro dura toda la vida.",
+          "descripcion": "Línea de tiempo horizontal de la edad, de 0 a 80 años. Sobre la línea, una barra sombreada en los primeros años indica el periodo de formación de las coronas de los dientes permanentes y la leyenda riesgo de fluorosis por ingestión excesiva. Debajo, una barra continua a lo largo de toda la línea indica beneficio del fluoruro tópico. Marcas en el nacimiento, la erupción de los primeros dientes permanentes y la edad adulta.",
+          "elementos": [
+            "Edad",
+            "Formación de los dientes permanentes",
+            "Riesgo de fluorosis por ingestión excesiva",
+            "Beneficio del fluoruro tópico",
+            "Erupción de los primeros permanentes",
+            "Edad adulta"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "¿Qué significa esto para tu práctica en México? Que las conclusiones convergen con lo que ya establece la NOM-013-SSA2-2015: un **solo vehículo sistémico** (la sal, excluida en zonas de alto flúor natural), control de la ingestión en la infancia, atención especial a las regiones con agua de alto contenido de fluoruro y uso amplio de **fluoruros tópicos** en las concentraciones y cantidades recomendadas. Explica a tus pacientes la diferencia entre tragar fluoruro en exceso durante años y cepillarse con una cantidad adecuada de pasta: son exposiciones muy distintas.\n\nTambién conviene reconocer lo que todavía se investiga. La ciencia sobre la exposición total al fluoruro en la infancia sigue avanzando, y es razonable que las recomendaciones se ajusten con nueva evidencia. Tu papel es mantenerte actualizado en fuentes oficiales y en revisiones sistemáticas, y no en titulares."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/14",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con equipo de protección conversa con un padre en el consultorio mientras muestra un cepillo infantil.",
+          "pie": "Responder con datos a las preguntas sobre el flúor fortalece la confianza de las familias en la prevención.",
+          "prompt": "Fotografía realista en formato panorámico de un consultorio dental luminoso: un odontólogo con cubrebocas, lentes de protección, bata y guantes sostiene un cepillo dental infantil y lo muestra a un padre con cubrebocas sentado frente a él; a su lado, un niño pequeño visto de espaldas juega con un peluche. Fondo desenfocado con la unidad dental y estantes ordenados. Luz natural suave, colores cálidos y neutros, ambiente de conversación tranquila. Evitar: texto, logotipos, marcas de agua, sangre, rostros identificables, instrumental en uso, expresiones de miedo."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Flúor: mito o realidad",
+          "afirmaciones": [
+            { "texto": "Un adulto puede desarrollar fluorosis dental si usa pasta con flúor.", "verdadero": false, "explicacion": "La fluorosis dental solo se produce durante la formación de los dientes, en la infancia." },
+            { "texto": "La fluorosis depende de la exposición total al fluoruro, sumando agua, sal y pasta tragada.", "verdadero": true, "explicacion": "Por eso se pregunta por todas las fuentes antes de recomendar productos en niños." },
+            { "texto": "En zonas con fluorosis endémica está prohibido usar pasta dental con flúor.", "verdadero": false, "explicacion": "La NOM-013-SSA2-2015 establece que en esas zonas no está contraindicado el uso de fluoruros tópicos." },
+            { "texto": "La revisión del Programa Nacional de Toxicología de 2024 se refirió a exposiciones mayores de 1.5 mg/L de fluoruro en el agua.", "verdadero": true, "explicacion": "Concluyó con confianza moderada una asociación a esas exposiciones y consideró insuficientes los datos para 0.7 mg/L." },
+            { "texto": "Ante la ingestión accidental de un producto fluorurado concentrado por un niño, basta con esperar a que se le pase.", "verdadero": false, "explicacion": "Hay que buscar atención médica de urgencia de inmediato y llevar el envase del producto." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m05/15",
+          "proporcion": "4:3",
+          "alt": "Vaso de agua de garrafón y un salero sobre una barra de cocina, con un cuaderno de notas al lado.",
+          "pie": "Conocer el agua y la sal que se consumen en casa es parte de valorar la exposición total al fluoruro.",
+          "prompt": "Fotografía realista de una barra de cocina doméstica con azulejos claros: un garrafón de agua purificada con dispensador, un vaso de vidrio con agua, un salero sin etiqueta y un cuaderno abierto con una pluma, sin texto legible. Luz natural lateral de la mañana, colores cálidos y limpios, composición ordenada, profundidad de campo media con el vaso enfocado. Evitar: texto legible, etiquetas, marcas comerciales, logotipos, marcas de agua, personas, refrescos, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para orientar a las familias"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando una familia te diga que tiene miedo al flúor, empieza por preguntar y no por convencer: qué ha escuchado, qué agua toman y qué pasta usan. Después explica la diferencia entre ingerir fluoruro en exceso durante la infancia y usar una cantidad pequeña de pasta con supervisión. Muestra con un cepillo la cantidad adecuada y acuerda con ellos un plan que puedan cumplir."
+        }
+      ],
+      "glosario": [
+        { "termino": "Fluorosis dental", "definicion": "Hipomineralización del esmalte producida por la ingestión crónica y excesiva de fluoruro durante la formación de los dientes." },
+        { "termino": "Índice de Dean", "definicion": "Escala clínica que clasifica la fluorosis dental en normal, cuestionable, muy leve, leve, moderada y severa." },
+        { "termino": "Exposición total al fluoruro", "definicion": "Suma del fluoruro ingerido por todas las fuentes: agua, sal, alimentos, bebidas y pasta tragada." },
+        { "termino": "Hipomineralización incisivo-molar", "definicion": "Defecto del desarrollo del esmalte con opacidades bien delimitadas y asimétricas en primeros molares e incisivos permanentes." },
+        { "termino": "Intoxicación aguda por fluoruro", "definicion": "Cuadro causado por ingerir de una sola vez una cantidad grande de un producto fluorurado; requiere atención médica urgente." }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.5-1",
+          "q": "¿En qué periodo puede producirse la fluorosis dental?",
+          "opciones": [
+            "En cualquier etapa de la vida",
+            "Solo en la edad adulta",
+            "Durante la formación de los dientes, en la infancia",
+            "Solo después de los 60 años"
+          ],
+          "correcta": 2,
+          "explicacion": "La fluorosis resulta de la ingestión excesiva mientras el esmalte se forma; un diente ya erupcionado no desarrolla fluorosis."
+        },
+        {
+          "id": "t5.5-2",
+          "q": "¿Qué rasgo ayuda a distinguir la fluorosis de la hipomineralización incisivo-molar?",
+          "opciones": [
+            "La fluorosis tiene opacidades bien delimitadas y asimétricas",
+            "La fluorosis solo afecta a los molares",
+            "La fluorosis siempre es de color marrón",
+            "La fluorosis es difusa y simétrica en dientes homólogos"
+          ],
+          "correcta": 3,
+          "explicacion": "La fluorosis afecta de forma difusa y simétrica a dientes formados al mismo tiempo; la hipomineralización incisivo-molar es delimitada y asimétrica."
+        },
+        {
+          "id": "t5.5-3",
+          "q": "¿Qué concluyó la revisión del Programa Nacional de Toxicología de Estados Unidos publicada en 2024?",
+          "opciones": [
+            "Que exposiciones mayores de 1.5 mg/L en agua se asocian, con confianza moderada, a menor coeficiente intelectual infantil",
+            "Que la pasta dental fluorurada debe prohibirse",
+            "Que 0.7 mg/L en agua es dañino con certeza",
+            "Que el fluoruro no tiene ningún efecto sobre la caries"
+          ],
+          "correcta": 0,
+          "explicacion": "La conclusión se refirió a exposiciones elevadas y consideró insuficientes los datos para 0.7 mg/L; no se refirió a la pasta dental."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NTP Monograph on the state of the science concerning fluoride exposure and neurodevelopment and cognition: a systematic review (NTP Monograph 08)", "autor": "National Toxicology Program, U.S. Department of Health and Human Services", "anio": 2024 },
+        { "tipo": "oficial", "titulo": "Anuncio de acciones para restringir los productos de fluoruro ingeribles de prescripción para niños", "autor": "U.S. Food and Drug Administration", "anio": 2025 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en el índice de Dean, la definición de fluorosis de la NOM-013-SSA2-2015 y literatura sobre diagnóstico diferencial de opacidades del esmalte", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama del flúor",
+    "pistas": [
+      { "palabra": "FLUORAPATITA", "pista": "Mineral menos soluble que se forma cuando el fluoruro sustituye a los hidroxilos de la hidroxiapatita." },
+      { "palabra": "BARNIZ", "pista": "Agente de aplicación profesional que se pinta en capa delgada y endurece con la saliva." },
+      { "palabra": "FLUOROSIS", "pista": "Alteración del esmalte por ingestión excesiva de fluoruro durante la formación de los dientes." },
+      { "palabra": "SAL", "pista": "Único vehículo de fluoruro sistémico masivo en México." },
+      { "palabra": "ENOLASA", "pista": "Enzima bacteriana de la glucólisis que el fluoruro inhibe." },
+      { "palabra": "TOPICO", "pista": "Tipo de efecto, en la superficie del diente, que explica la mayor parte del beneficio del flúor." },
+      { "palabra": "DEAN", "pista": "Apellido del investigador que da nombre al índice clásico de fluorosis." },
+      { "palabra": "PLATA", "pista": "Metal que acompaña al fluoruro en la solución que detiene caries cavitadas y las tiñe de negro." }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m05-p01",
+        "q": "¿Cuál de estos mecanismos del fluoruro se considera secundario frente a los efectos sobre la desmineralización y la remineralización?",
+        "opciones": [
+          "La adsorción a la superficie de los cristales",
+          "La formación de fluorhidroxiapatita",
+          "La inhibición de la enolasa bacteriana",
+          "La aceleración del depósito de calcio y fosfato"
+        ],
+        "correcta": 2,
+        "explicacion": "El efecto antibacteriano requiere concentraciones más altas y se considera secundario frente a los efectos fisicoquímicos."
+      },
+      {
+        "id": "m05-p02",
+        "q": "¿Qué función cumplen los depósitos semejantes al fluoruro de calcio que se forman tras una aplicación de barniz?",
+        "opciones": [
+          "Actúan como reservorio que libera fluoruro cuando baja el pH",
+          "Blanquean el esmalte",
+          "Sellan las fisuras de forma permanente",
+          "Neutralizan los azúcares de la dieta"
+        ],
+        "correcta": 0,
+        "explicacion": "Se disuelven más rápido en ambiente ácido y liberan fluoruro cuando más se necesita."
+      },
+      {
+        "id": "m05-p03",
+        "q": "¿Qué ciudad fue la primera en ajustar el fluoruro de su agua para prevenir la caries, en 1945?",
+        "opciones": [
+          "Colorado Springs",
+          "Ciudad de México",
+          "Londres",
+          "Grand Rapids"
+        ],
+        "correcta": 3,
+        "explicacion": "Grand Rapids, Michigan, inició la fluoruración del agua en 1945. Colorado Springs fue donde McKay observó la mancha de Colorado."
+      },
+      {
+        "id": "m05-p04",
+        "q": "¿Qué establece la NOM-013-SSA2-2015 sobre los medios de fluoruro sistémico?",
+        "opciones": [
+          "Que se fluoruren el agua y la sal al mismo tiempo",
+          "Que se limite a un solo medio, la sal para consumo humano",
+          "Que se agregue fluoruro a la leche escolar",
+          "Que se prescriban tabletas de fluoruro a todos los niños"
+        ],
+        "correcta": 1,
+        "explicacion": "La norma limita el fluoruro sistémico masivo a la sal y prohíbe adicionarlo a otros alimentos, bebidas o agua."
+      },
+      {
+        "id": "m05-p05",
+        "q": "Según la NOM-040-SSA1-1993, ¿qué contenido de ion flúor debe tener la sal yodada fluorurada?",
+        "opciones": [
+          "25 ± 5 mg/kg",
+          "1,000 ± 100 mg/kg",
+          "250 ± 50 mg/kg",
+          "550 ± 50 mg/kg"
+        ],
+        "correcta": 2,
+        "explicacion": "La norma especifica 250 ± 50 mg/kg de ion flúor, aportado como fluoruro de sodio o de potasio."
+      },
+      {
+        "id": "m05-p06",
+        "q": "¿Hacia qué límite de fluoruros en agua para uso y consumo humano transita la NOM-127-SSA1-2021 con plazos escalonados?",
+        "opciones": [
+          "1.0 mg/L",
+          "0.1 mg/L",
+          "2.5 mg/L",
+          "5.0 mg/L"
+        ],
+        "correcta": 0,
+        "explicacion": "El límite parte de 1.5 mg/L y se ajusta a 1.0 mg/L con plazos según el tamaño de la localidad."
+      },
+      {
+        "id": "m05-p07",
+        "q": "Una pasta dental contiene 1,450 ppm de fluoruro. ¿A qué porcentaje de fluoruro equivale?",
+        "opciones": [
+          "14.5 %",
+          "1.45 %",
+          "0.0145 %",
+          "0.145 %"
+        ],
+        "correcta": 3,
+        "explicacion": "1,000 ppm equivalen a 0.1 %; por lo tanto, 1,450 ppm equivalen a 0.145 %."
+      },
+      {
+        "id": "m05-p08",
+        "q": "¿Por qué la pasta con fluoruro de sodio se formula con abrasivos de sílice y no de carbonato de calcio?",
+        "opciones": [
+          "Porque el carbonato de calcio reacciona con el fluoruro y lo inactiva",
+          "Porque la sílice contiene fluoruro",
+          "Porque el carbonato de calcio mancha los dientes",
+          "Porque la sílice es más barata"
+        ],
+        "correcta": 0,
+        "explicacion": "El calcio del abrasivo se une al fluoruro del fluoruro de sodio; el monofluorofosfato sí es compatible con el carbonato de calcio."
+      },
+      {
+        "id": "m05-p09",
+        "q": "Según la NOM-013-SSA2-2015, ¿qué concentración de pasta dental indica para menores de 6 años?",
+        "opciones": [
+          "1,500 ppm",
+          "550 ppm",
+          "5,000 ppm",
+          "Pasta sin fluoruro"
+        ],
+        "correcta": 1,
+        "explicacion": "La norma indica 550 ppm en menores de 6 años y permite concentraciones mayores solo bajo supervisión y con cantidad máxima de un chícharo."
+      },
+      {
+        "id": "m05-p10",
+        "q": "¿Qué cantidad de pasta fluorurada recomienda la Asociación Dental Americana desde el primer diente hasta los 3 años?",
+        "opciones": [
+          "Una embarradita del tamaño de un grano de arroz",
+          "Una porción del tamaño de un chícharo",
+          "Toda la longitud del cepillo",
+          "Ninguna, solo agua"
+        ],
+        "correcta": 0,
+        "explicacion": "Desde 2014 la ADA recomienda un grano de arroz hasta los 3 años y un chícharo de los 3 a los 6 años."
+      },
+      {
+        "id": "m05-p11",
+        "q": "Según la NOM-013-SSA2-2015, ¿desde qué edad pueden aplicarse geles fluorurados?",
+        "opciones": [
+          "Desde los 12 meses",
+          "Desde los 6 meses",
+          "Desde los 12 años",
+          "Desde los 3 años"
+        ],
+        "correcta": 3,
+        "explicacion": "La norma indica que los geles se apliquen a partir de los 3 años y que no se usen en menores de esa edad."
+      },
+      {
+        "id": "m05-p12",
+        "q": "¿Qué estimó la revisión Cochrane de 2013 sobre el barniz de fluoruro en la dentición permanente de niños y adolescentes?",
+        "opciones": [
+          "Que no tiene ningún efecto",
+          "Una reducción de alrededor del 90 % en caries",
+          "Una reducción de alrededor del 43 % en superficies cariadas, perdidas y obturadas",
+          "Que solo funciona en adultos"
+        ],
+        "correcta": 2,
+        "explicacion": "La revisión estimó alrededor de 43 % en dentición permanente y 37 % en temporal, con evidencia de calidad moderada."
+      },
+      {
+        "id": "m05-p13",
+        "q": "¿Para qué incluyó la OMS en 2021 el diamino fluoruro de plata en su Lista Modelo de Medicamentos Esenciales?",
+        "opciones": [
+          "Para la prevención de caries en dientes sanos",
+          "Para el tratamiento de la caries, es decir, detener lesiones",
+          "Para blanquear los dientes",
+          "Para tratar la enfermedad periodontal"
+        ],
+        "correcta": 1,
+        "explicacion": "El comité lo recomendó para tratamiento y no para prevención, por la incertidumbre en su beneficio preventivo."
+      },
+      {
+        "id": "m05-p14",
+        "q": "¿Qué rasgo clínico confirma que una lesión cavitada tratada con diamino fluoruro de plata está detenida?",
+        "opciones": [
+          "La dentina blanda y amarillenta",
+          "La presencia de biopelícula abundante",
+          "El dolor al frío",
+          "La dentina dura y brillante"
+        ],
+        "correcta": 3,
+        "explicacion": "La detención se reconoce porque la dentina pasa de blanda a dura y brillante, aunque quede teñida."
+      },
+      {
+        "id": "m05-p15",
+        "q": "¿Qué describe mejor a la fluorosis dental leve?",
+        "opciones": [
+          "Una cavidad marrón en la fisura de un molar",
+          "Áreas blancas opacas difusas y simétricas, sin llegar a la mitad de la superficie",
+          "Una opacidad amarilla bien delimitada en un solo molar",
+          "Una mancha blanca junto a la encía que desaparece con la higiene"
+        ],
+        "correcta": 1,
+        "explicacion": "La fluorosis leve presenta áreas blancas opacas difusas y simétricas; las otras opciones describen caries o hipomineralización incisivo-molar."
+      },
+      {
+        "id": "m05-p16",
+        "q": "¿Qué establece la NOM-013-SSA2-2015 sobre los fluoruros tópicos en zonas con fluorosis endémica?",
+        "opciones": [
+          "Que están prohibidos",
+          "Que solo pueden usarse en adultos mayores",
+          "Que no están contraindicados",
+          "Que deben sustituirse por tabletas"
+        ],
+        "correcta": 2,
+        "explicacion": "La norma establece que en esas zonas no está contraindicado el uso de fluoruros tópicos."
+      },
+      {
+        "id": "m05-p17",
+        "q": "Caso clínico: una familia vive en una comunidad de Durango que se abastece de un pozo con fluoruro natural elevado. Tienen un hijo de 2 años. ¿Qué orientación es la más adecuada?",
+        "opciones": [
+          "Comprar sal fluorurada para reforzar la protección",
+          "Suspender todo cepillado hasta los 6 años",
+          "Dar al niño enjuagues fluorurados diarios",
+          "Usar sal sin fluoruro, considerar otra fuente de agua para beber y preparar alimentos y supervisar un cepillado con una cantidad mínima de pasta según la indicación profesional"
+        ],
+        "correcta": 3,
+        "explicacion": "En zonas de alto flúor natural se controla la ingestión, pero no se elimina el beneficio tópico; los enjuagues no se usan en menores de 6 años."
+      },
+      {
+        "id": "m05-p18",
+        "q": "Caso clínico: una madre llama porque su hijo de 3 años se comió buena parte de un tubo de pasta dental. ¿Qué le indicas?",
+        "opciones": [
+          "Que acuda de inmediato a atención médica de urgencia y lleve el envase del producto",
+          "Que le dé agua y espere a la siguiente cita dental",
+          "Que no se preocupe porque la pasta es inofensiva",
+          "Que le provoque el vómito en casa"
+        ],
+        "correcta": 0,
+        "explicacion": "La ingestión de una cantidad grande de un producto fluorurado requiere valoración médica urgente; no se improvisan medidas en casa."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "oficial", "titulo": "NOM-040-SSA1-1993, Productos y servicios. Sal yodada y sal yodada fluorurada. Especificaciones sanitarias", "autor": "Secretaría de Salud", "anio": 1995 },
+    { "tipo": "oficial", "titulo": "NOM-127-SSA1-2021, Agua para uso y consumo humano. Límites permisibles de la calidad del agua", "autor": "Secretaría de Salud", "anio": 2022 },
+    { "tipo": "academica", "titulo": "Prevention and reversal of dental caries: role of low level fluoride", "autor": "Featherstone J. D. B. (Community Dentistry and Oral Epidemiology)", "anio": 1999 },
+    { "tipo": "academica", "titulo": "Fluoride varnishes for preventing dental caries in children and adolescents", "autor": "Marinho V. C. C., Worthington H. V., Walsh T., Clarkson J. E. (Cochrane Database of Systematic Reviews)", "anio": 2013 },
+    { "tipo": "academica", "titulo": "Fluoride toothpastes of different concentrations for preventing dental caries", "autor": "Walsh T., Worthington H. V., Glenny A. M., Marinho V. C. C., Jeroncic A. (Cochrane Database of Systematic Reviews)", "anio": 2019 },
+    { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline on nonrestorative treatments for carious lesions", "autor": "Slayton R. L., Urquhart O., Araujo M. W. B. y cols. (Journal of the American Dental Association)", "anio": 2018 },
+    { "tipo": "oficial", "titulo": "NTP Monograph on the state of the science concerning fluoride exposure and neurodevelopment and cognition: a systematic review (NTP Monograph 08)", "autor": "National Toxicology Program, U.S. Department of Health and Human Services", "anio": 2024 }
+  ]
+}

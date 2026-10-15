@@ -5,6 +5,7 @@ import { Datos } from '../core/datos';
 import { api } from '../core/auth';
 import { Certificados } from '../core/certificados';
 import { esc, placeholder } from '../ui/partials';
+import { certificadosAcademia, verificarFolioLocal } from '../core/academia';
 
 // Folio determinista provisional. En Fase 2 lo emite el backend y queda en certificados/{folio}.
 export function folio(c: Curso) {
@@ -38,6 +39,13 @@ export function certificados() {
         <div><h3>Tu primer certificado está a un curso de distancia</h3><p class="muted">Termina todas las clases de cualquier curso y aparecerá aquí con su folio.</p>
           ${enMarcha[0] ? `<a class="btn btn--brand btn--sm" style="margin-top:10px" href="#/curso/${enMarcha[0].id}">Continuar ${esc(enMarcha[0].titulo.slice(0, 40))}…</a>` : `<a class="btn btn--brand btn--sm" style="margin-top:10px" href="#/cursos">Elegir un curso</a>`}</div>
       </div>`}
+    ${certificadosAcademia().length ? `<h3 style="font-size:var(--fs-md)">Programas de la Academia</h3><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">${certificadosAcademia().map((c) => `
+      <a class="card card--hover" href="#/academia/${encodeURIComponent(c.programaId)}" style="overflow:hidden;color:inherit">
+        <div style="aspect-ratio:1.414;background:var(--hero-gradient);position:relative;display:grid;place-items:center;color:#fff;padding:20px;text-align:center">
+          <div><span class="eyebrow" style="color:rgba(255,255,255,.7)">Academia · programa</span><div class="display" style="font-size:var(--fs-md);margin-top:6px">${esc(c.programaTitulo)}</div><div class="mono" style="font-size:11px;margin-top:10px;opacity:.8">${esc(c.folio)}</div></div>
+        </div>
+        <div class="card--pad" style="padding:16px 18px;display:flex;justify-content:space-between;align-items:center"><div><strong style="font-size:var(--fs-sm)">${c.modulos} módulos aprobados</strong><br><span class="faint" style="font-size:var(--fs-xs)">${fechaLarga(c.emitido)}</span></div><span class="circle-btn" style="width:36px;height:36px"><i data-lucide="arrow-up-right" class="i" style="width:15px;height:15px"></i></span></div>
+      </a>`).join('')}</div>` : ''}
     ${enMarcha.length ? `<h3 style="font-size:var(--fs-md)">En camino</h3><div class="stack" style="gap:10px">${enMarcha.map((c) => `<div class="upnext"><div class="upnext__thumb"><img src="${c.portada}" alt=""></div><div><div class="upnext__title">${esc(c.titulo)}</div><div class="lesson-progress" style="margin-top:6px"><div class="progress progress--thin"><span style="width:${Progreso.porcentaje(c)}%"></span></div>${Progreso.porcentaje(c)}%</div></div><a class="circle-btn" href="#/curso/${c.id}/clase/${Progreso.siguiente(c)}"><i data-lucide="play" class="i"></i></a></div>`).join('')}</div>` : ''}
   </section>`;
 }
@@ -81,8 +89,8 @@ export async function verificar(params: Record<string, string>) {
 
   if (Datos.modo === 'api') {
     try {
-      const r = await api<{ valido: boolean; folio: string; nombre: string; cursoTitulo: string; emitido: string }>(`/verificar/${encodeURIComponent(f)}`);
-      if (r.valido) return verificarOk(r.folio, r.nombre, r.cursoTitulo, r.emitido);
+      const r = await api<{ valido: boolean; folio: string; nombre: string; cursoTitulo: string; emitido: string; tipo?: string }>(`/verificar/${encodeURIComponent(f)}`);
+      if (r.valido) return verificarOk(r.folio, r.nombre, r.cursoTitulo, fechaLarga(r.emitido), r.tipo === 'academia');
     } catch {}
     return verificarFail(f);
   }
@@ -91,10 +99,12 @@ export async function verificar(params: Record<string, string>) {
     if (Progreso.completado(c) && folio(c) === f)
       return verificarOk(f, Perfil.get().nombre, c.titulo, fechaLarga(Progreso.de(c.id).actualizado));
   }
+  const academia = verificarFolioLocal(f);
+  if (academia) return verificarOk(f, academia.nombre, academia.programaTitulo, fechaLarga(academia.emitido), true);
   return verificarFail(f);
 }
 
-function verificarOk(f: string, nombre: string, curso: string, fecha: string) {
+function verificarOk(f: string, nombre: string, curso: string, fecha: string, esAcademia = false) {
   return `
   <section class="verify-page">
     <img src="/brand/logo-horizontal.png" alt="OdonTeck" class="verify-page__logo">
@@ -105,7 +115,7 @@ function verificarOk(f: string, nombre: string, curso: string, fecha: string) {
     </div>
     <div class="card card--pad verify-details">
       <div><span class="faint">Emitido a</span><strong>${esc(nombre)}</strong></div>
-      <div><span class="faint">Curso completado</span><strong>${esc(curso)}</strong></div>
+      <div><span class="faint">${esAcademia ? 'Programa de Academia completado' : 'Curso completado'}</span><strong>${esc(curso)}</strong></div>
       <div><span class="faint">Fecha de emisión</span><strong>${fecha}</strong></div>
     </div>
     <p class="faint" style="font-size:var(--fs-xs);text-align:center;max-width:40ch;margin:0 auto">Este certificado fue emitido por OdonTeck Consulting Group y puede verificarse en cualquier momento.</p>
