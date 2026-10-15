@@ -11,7 +11,7 @@ export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
   { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
   // La barra inferior móvil no tiene espacio: en móvil la Academia vive en "Más".
-  { href: '#/academia', icon: 'graduation-cap', label: 'Academia', match: /^\/academia/, soloEscritorio: true },
+  { href: '#/academia', icon: 'book-open-text', label: 'Academia', match: /^\/academia/, soloEscritorio: true },
   { href: '#/materiales', icon: 'library', label: 'Materiales', match: /^\/materiales/ },
   { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
