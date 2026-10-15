@@ -567,3 +567,66 @@
   .network-profile-sheet__body > footer { align-items: stretch; flex-direction: column; text-align: center; }
   .network-profile-sheet__actions { justify-content: center; }
 }
+
+/* ── Directorio: tarjeta clicable y ficha más rica ── */
+.network-person { cursor: pointer; }
+.network-person:focus-visible { outline: none; box-shadow: var(--ring), 0 20px 48px rgba(22,38,67,.13); }
+.network-person__portrait { aspect-ratio: 1 / .82; }
+.network-person__peek { position: absolute; z-index: 4; left: 50%; top: 50%; display: inline-flex; align-items: center; gap: 7px; padding: 10px 15px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; background: rgba(8,22,46,.58); color: #fff; font-size: 12px; font-weight: 750; white-space: nowrap; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transform: translate(-50%, -38%) scale(.94); transition: opacity var(--t-base), transform var(--t-base); pointer-events: none; }
+.network-person__peek .i { width: 15px; height: 15px; }
+.network-person:hover .network-person__peek, .network-person:focus-visible .network-person__peek { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.network-person > footer { justify-content: stretch; }
+.network-person .network-card__actions { width: 100%; }
+.network-person .network-card__actions [data-network-connect], .network-person .network-card__actions [data-network-profile] { flex: 1; justify-content: center; }
+.network-person .network-card__actions [data-network-view] .i { width: 14px; height: 14px; }
+@media (hover: none) { .network-person__peek { display: none; } }
+
+.network-profile-sheet__metrics > span { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 11px; align-items: center; padding: 12px 14px; background: linear-gradient(145deg, var(--surface), var(--surface-2)); }
+.network-profile-sheet__metrics > span > .i { grid-row: 1 / 3; width: 34px; height: 34px; padding: 8px; border-radius: 11px; background: color-mix(in srgb, var(--primary) 10%, var(--surface)); color: var(--primary); }
+.network-profile-sheet__metrics small { font-size: 10px; line-height: 1.25; }
+
+.network-affinity { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; margin-top: 12px; padding: 13px 15px; border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); border-radius: 16px; background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.network-affinity.is-empty { border-color: color-mix(in srgb, var(--primary) 18%, var(--line)); background: color-mix(in srgb, var(--primary) 5%, var(--surface)); }
+.network-affinity__icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 12px; background: var(--accent); color: #fff; }
+.network-affinity.is-empty .network-affinity__icon { background: var(--primary); }
+.network-affinity__icon .i { width: 17px; height: 17px; }
+.network-affinity strong { display: block; font-size: 13px; }
+.network-affinity p { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; color: var(--text-2); font-size: 11px; line-height: 1.45; }
+.network-affinity p b { padding: 3px 8px; border-radius: 999px; background: var(--surface); color: var(--accent); font-size: 10px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent); }
+
+.network-timeline article { padding-bottom: 14px; }
+.network-timeline h5 { margin-top: 2px; }
+.network-timeline p { margin-top: 4px; font-size: 11px; }
+
+.network-steps { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 22px 0 0; padding: 0; }
+.network-steps li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px; border: 1px dashed color-mix(in srgb, var(--primary) 24%, var(--line)); border-radius: 15px; }
+.network-steps li > span { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--primary); color: #fff; font-size: 11px; font-weight: 800; }
+.network-steps b { display: block; font-size: 12px; }
+.network-steps small { display: block; margin-top: 2px; color: var(--text-3); font-size: 10px; line-height: 1.4; }
+.network-profile-sheet__body > footer { position: sticky; bottom: 12px; z-index: 3; margin-top: 16px; background: color-mix(in srgb, var(--surface) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 16px 36px -18px rgba(20,42,92,.55); }
+
+@media (max-width: 640px) {
+  .network-person__portrait { aspect-ratio: 1 / .78; }
+  .network-profile-sheet__metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .network-profile-sheet__metrics > span { grid-template-columns: 1fr; grid-template-rows: none; justify-items: center; gap: 3px; padding: 10px 6px; text-align: center; }
+  .network-profile-sheet__metrics > span > .i { grid-row: auto; width: 28px; height: 28px; padding: 6px; }
+  .network-profile-sheet__metrics small { font-size: 9px; }
+  .network-steps { grid-template-columns: 1fr; }
+  .network-profile-sheet__body > footer { bottom: 8px; padding: 12px; }
+  .network-profile-sheet__body > footer > div:first-child { display: none; }
+  .network-profile-sheet__actions .btn { flex: 1; justify-content: center; }
+}
+
+/* Tonos de portada dentro de la paleta OdonTeck (antes había morados y rosas). */
+.network-person--tone-1 .network-person__portrait { background: radial-gradient(circle at 24% 20%, rgba(255,255,255,.24), transparent 36%), linear-gradient(145deg, #172a5c, #2f6fb3); }
+.network-person--tone-3 .network-person__portrait { background: radial-gradient(circle at 28% 18%, rgba(255,255,255,.22), transparent 34%), linear-gradient(145deg, #1a2f55, #3f9ea0); }
+.network-person--tone-1 .network-profile-sheet__cover { background: linear-gradient(135deg, #172a5c, #2f6fb3); }
+.network-person--tone-3 .network-profile-sheet__cover { background: linear-gradient(135deg, #1a2f55, #3f9ea0); }
+.network-profile-sheet__identity > div { background: var(--surface); }
+.network-timeline h5, .network-profile-list h5 { margin: 2px 0 0; line-height: 1.3; }
+.network-timeline b { margin-top: 1px; }
+.network-profile-list p { margin: 2px 0 0; }
+.network-profile-list article { align-items: center; }
+
+.network-person { grid-template-rows: auto 1fr auto; }
+.network-person__body { align-content: start; }
