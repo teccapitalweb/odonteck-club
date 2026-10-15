@@ -106,26 +106,31 @@ function abrirTemario(c: CursoVivo) {
 }
 modal.addEventListener('click', (e) => { if (e.target === modal || (e.target as HTMLElement).closest('[data-cerrar]')) modal.close(); });
 
-// ── Planes del club ──
-const ahorro = cfg.precioMensual * 12 - cfg.precioAnual;
+// ── Prueba gratis y capacítate (sin precios) ──
 document.querySelector('[data-planes]')!.innerHTML = `
-  <div class="lp-plan" data-reveal>
-    <span class="lp-plan__name">VIP Mensual</span>
-    <strong class="lp-plan__price">$${cfg.precioMensual.toLocaleString('es-MX')}<small> MXN / mes</small></strong>
-    <p>Acceso completo al club. Cancela cuando quieras.</p>
-    <a class="btn btn--secondary btn--lg" href="${CLUB}/#/login?modo=registro">Empezar mensual</a>
+  <div class="lp-plan lp-plan--paso" data-reveal>
+    <span class="lp-plan__icono"><i data-lucide="gift" class="i"></i></span>
+    <span class="lp-plan__name">Prueba gratis</span>
+    <strong class="lp-plan__titulo">Tu primer curso va por nuestra cuenta</strong>
+    <p>Crea tu cuenta y toma tu curso gratis: todas sus clases, menos la final. Sin tarjeta y sin compromiso.</p>
+    <a class="btn btn--secondary btn--lg" href="${CLUB}/#/login?modo=registro">Crear mi cuenta gratis</a>
   </div>
   <div class="lp-plan lp-plan--top" data-reveal>
-    <span class="lp-plan__badge">${ahorro > 0 ? `Ahorras $${ahorro.toLocaleString('es-MX')}` : 'Mejor precio'}</span>
-    <span class="lp-plan__name">VIP Anual</span>
-    <strong class="lp-plan__price">$${cfg.precioAnual.toLocaleString('es-MX')}<small> MXN / año</small></strong>
-    <p>Equivale a $${Math.round(cfg.precioAnual / 12).toLocaleString('es-MX')} al mes. Un año completo de formación.</p>
-    <a class="btn btn--gradient btn--lg btn--pill-arrow" href="${CLUB}/#/login?modo=registro">Unirme al club <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>
+    <span class="lp-plan__badge">Aprende de verdad</span>
+    <span class="lp-plan__name">Capacítate a tu ritmo</span>
+    <strong class="lp-plan__titulo">Lo que aprendes hoy lo aplicas mañana en consulta.</strong>
+    <ul class="lp-plan__lista">
+      <li><i data-lucide="play-circle" class="i"></i>Clases grabadas por especialistas, con casos reales</li>
+      <li><i data-lucide="brain" class="i"></i>Quiz en cada clase para fijar lo aprendido</li>
+      <li><i data-lucide="gamepad-2" class="i"></i>Retos y casos clínicos para practicar tu diagnóstico</li>
+      <li><i data-lucide="award" class="i"></i>Certificado con folio verificable al terminar</li>
+    </ul>
+    <a class="btn btn--gradient btn--lg btn--pill-arrow" href="${CLUB}/#/login?modo=registro">Empezar gratis <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>
   </div>
   <div class="lp-plan lp-plan--info" data-reveal>
-    <i data-lucide="gift" class="i"></i>
-    <strong>Prueba antes de decidir</strong>
-    <p>El primer curso es casi completo gratis, y en los demás puedes probar la primera clase al crear tu cuenta.</p>
+    <i data-lucide="trending-up" class="i"></i>
+    <strong>Sigue creciendo</strong>
+    <p>Cuando quieras ir por más, hazte VIP y abre todos los cursos, la biblioteca clínica, los retos y la comunidad. Tú decides el ritmo.</p>
   </div>`;
 
 // ── Momentos (fotos reales de generaciones) ──

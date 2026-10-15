@@ -350,3 +350,12 @@ html:has(.lp) { scroll-behavior: smooth; scroll-padding-top: 84px; }
 .lp-hero__dot { width: 9px; height: 9px; border-radius: 99px; background: rgba(255,255,255,.55); box-shadow: 0 1px 4px rgba(0,0,0,.35); cursor: pointer; transition: width .35s var(--ease), background .35s var(--ease); border: none; }
 .lp-hero__dot.on { width: 26px; background: #fff; }
 @media (max-width: 760px) { .lp-hero__dots { right: 16px; bottom: 132px; } }
+
+/* Bloque «Prueba gratis y capacítate» (antes, precios) */
+.lp-plan__titulo { font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+.lp-plan--top .lp-plan__titulo { color: var(--brand-navy); font-size: 1.6rem; }
+.lp-plan__icono { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; background: rgba(111,191,176,.16); color: var(--brand-teal); }
+.lp-plan__icono .i { width: 22px; height: 22px; }
+.lp-plan__lista { display: grid; gap: 10px; margin: 4px 0 6px; padding: 0; list-style: none; }
+.lp-plan__lista li { display: flex; align-items: flex-start; gap: 10px; color: var(--text-2); font-size: var(--fs-sm); line-height: 1.45; }
+.lp-plan__lista .i { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; color: var(--brand-teal); }
