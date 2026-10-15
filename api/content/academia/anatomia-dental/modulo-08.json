@@ -1,0 +1,1940 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 8,
+  "titulo": "Nomenclatura dental y sistemas de numeración FDI y universal",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Para registrar, comunicar y tratar sin errores necesitas nombrar cada diente y cada cara con precisión. En este módulo aprenderás el vocabulario básico de la anatomía dental (arcadas, cuadrantes, grupos, caras, tercios y ángulos), el sistema FDI de dos dígitos adoptado como norma ISO 3950, el sistema universal de la ADA con números y letras, y la notación de Palmer. Practicarás conversiones entre sistemas y verás cómo se aplica la numeración en el odontograma, en situaciones especiales como agenesias o dientes retenidos y en la prevención de tratamientos en el diente equivocado.",
+  "objetivos": [
+    "Describir la división de la boca en arcadas y cuadrantes y nombrar correctamente las caras, tercios y ángulos de un diente.",
+    "Designar cualquier diente permanente o temporal con el sistema FDI de dos dígitos (ISO 3950).",
+    "Convertir códigos entre los sistemas FDI, universal y Palmer, verificando la equivalencia con la descripción anatómica.",
+    "Registrar en un odontograma situaciones especiales como agenesia, dientes temporales retenidos, transposiciones y supernumerarios.",
+    "Aplicar una secuencia de verificación del diente antes de un procedimiento para prevenir errores de sitio."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "anatomia-dental/m08/portada",
+    "proporcion": "16:9",
+    "alt": "Tipodonto de dentición permanente completa visto desde arriba sobre una mesa clínica, junto a un espejo bucal y una sonda.",
+    "prompt": "Fotografía realista de estudio en gran formato, tipodonto de enseñanza con las arcadas superior e inferior abiertas una junto a la otra, vistas desde oclusal, dentición permanente completa de treinta y dos dientes con anatomía correcta de cada grupo, encía de silicona rosada, sobre una mesa clínica blanca con un espejo bucal y una sonda de punta roma acomodados en paralelo, iluminación difusa cenital suave, colores naturales, composición limpia y ordenada. Evitar: texto, números, etiquetas adhesivas, logotipos, marcas comerciales, rostros, manos, dientes faltantes o deformes."
+  },
+  "temas": [
+    {
+      "n": "8.1",
+      "titulo": "El lenguaje de la anatomía dental: arcadas, grupos, superficies y tercios",
+      "minutos": 14,
+      "enPocasPalabras": "Para hablar de los dientes sin confusiones, los odontólogos usan palabras precisas: cada diente pertenece a una arcada, a un lado y a un grupo, y cada cara del diente tiene su nombre. Así, «la cara mesial del primer molar superior derecho» señala un punto exacto de la boca. Aprender este vocabulario es como aprender las calles de un mapa.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Imagina que un colega te dice por teléfono: «revisa la caries de la muela de arriba». ¿Cuál de las seis o más muelas superiores? ¿De qué lado? ¿En qué cara? Una indicación vaga como esa puede terminar en un tratamiento en el diente equivocado. La anatomía dental tiene un **vocabulario estandarizado** que permite describir cualquier punto de la boca sin ambigüedad, y los sistemas de numeración que verás en los siguientes temas son su versión abreviada.\n\nEn este tema construirás la base: cómo se divide la boca, cómo se agrupan los dientes, cómo se llaman sus caras y cómo se combinan esos nombres. Es la gramática que usarás en cada expediente, receta de laboratorio, interconsulta y radiografía durante toda tu carrera."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Arcadas, hemiarcadas y cuadrantes"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los dientes se organizan en dos **arcadas dentarias**: la **superior** o maxilar y la **inferior** o mandibular. Una línea vertical imaginaria, la **línea media**, pasa entre los incisivos centrales y divide cada arcada en dos **hemiarcadas**, derecha e izquierda. Así, la boca queda dividida en cuatro **cuadrantes**: superior derecho, superior izquierdo, inferior izquierdo e inferior derecho.\n\nUna regla que debes fijar desde ahora: **derecha e izquierda se refieren siempre al paciente**, no a quien lo observa. Cuando estás frente a una persona, su lado derecho queda a tu izquierda. Todos los odontogramas y sistemas de numeración siguen esta convención, y olvidarla es una de las fuentes de error más comunes entre estudiantes.\n\nEn salud pública y en algunos índices epidemiológicos también se divide la boca en **sextantes**: un sextante anterior (de canino a canino) y dos posteriores (premolares y molares de cada lado) en cada arcada. Los sextantes se usaron, por ejemplo, en las versiones clásicas del Índice Periodontal Comunitario, y siguen usándose en el examen periodontal básico de varios países."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m08/d1",
+          "pie": "La boca vista de frente desde la posición del operador: línea media, arcadas y cuadrantes.",
+          "descripcion": "Esquema frontal de las dos arcadas permanentes como si el operador estuviera frente al paciente. Una línea vertical marca la línea media y una horizontal separa la arcada superior de la inferior, formando cuatro cuadrantes. El cuadrante superior derecho del paciente aparece arriba a la izquierda del lector, el superior izquierdo arriba a la derecha, el inferior izquierdo abajo a la derecha y el inferior derecho abajo a la izquierda. Una flecha curva indica el sentido de las manecillas del reloj desde el superior derecho. A los lados, rótulos que recuerdan «derecha del paciente» e «izquierda del paciente».",
+          "elementos": [
+            "Línea media",
+            "Arcada superior",
+            "Arcada inferior",
+            "Cuadrante superior derecho",
+            "Cuadrante superior izquierdo",
+            "Cuadrante inferior izquierdo",
+            "Cuadrante inferior derecho",
+            "Derecha del paciente a la izquierda del operador"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Grupos dentarios y fórmula dentaria"
+        },
+        {
+          "tipo": "texto",
+          "md": "Según su forma y función, los dientes se agrupan en **incisivos**, que cortan; **caninos**, que desgarran y guían los movimientos de la mandíbula; **premolares**, que trituran y existen solo en la dentición permanente; y **molares**, que muelen. Incisivos y caninos forman el **sector anterior**; premolares y molares, el **sector posterior**.\n\nLa **fórmula dentaria** resume cuántos dientes de cada grupo hay en una hemiarcada superior y en una inferior. Se escribe como fracción, con los dientes superiores arriba y los inferiores abajo, y se multiplica por dos para obtener el total:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Fórmulas dentarias del ser humano",
+          "columnas": [
+            "Dentición",
+            "Fórmula por hemiarcadas",
+            "Total"
+          ],
+          "filas": [
+            [
+              "Permanente",
+              "I 2/2 · C 1/1 · PM 2/2 · M 3/3",
+              "16 por arcada, 32 dientes"
+            ],
+            [
+              "Temporal",
+              "I 2/2 · C 1/1 · M 2/2",
+              "10 por arcada, 20 dientes"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Fíjate en una diferencia clave: la dentición temporal **no tiene premolares**. Los molares temporales son reemplazados por los premolares permanentes, mientras que los molares permanentes erupcionan por detrás de la dentición temporal sin reemplazar a ningún diente. Por eso a los molares permanentes se les llama **dientes accesionales** y a los incisivos, caninos y premolares permanentes, **dientes sucedáneos**. Volverás sobre esto en el módulo 9."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/01",
+          "proporcion": "16:9",
+          "alt": "Arcada superior permanente completa de un adulto vista desde oclusal, con todos los grupos dentarios visibles.",
+          "pie": "Una arcada permanente completa: incisivos y caninos al frente, premolares y molares en el sector posterior.",
+          "prompt": "Fotografía clínica intraoral realista vista oclusal con espejo de la arcada superior permanente completa de un adulto joven, dieciséis dientes sanos en forma de U, incisivos centrales y laterales, caninos, primeros y segundos premolares, primeros, segundos y terceros molares con anatomía correcta de cúspides y fosas, paladar rosado con rugas palatinas, iluminación clínica uniforme, colores naturales, enfoque nítido de toda la arcada. Evitar: texto, números, etiquetas, logotipos, restauraciones metálicas, caries, sangre, labios o rostro, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las caras del diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada corona tiene cinco caras, y cada una tiene un nombre que indica hacia dónde mira:\n\n- **Vestibular:** la que mira hacia el vestíbulo, es decir, hacia labios y mejillas. En los dientes anteriores también se le llama **labial**, y en los posteriores, **bucal** o **vestibular**.\n- **Lingual** o **palatina:** la que mira hacia la lengua. En la arcada superior se prefiere **palatina**, porque mira hacia el paladar.\n- **Mesial:** la cara proximal más cercana a la línea media, siguiendo la curva de la arcada.\n- **Distal:** la cara proximal más alejada de la línea media.\n- **Oclusal** en premolares y molares, o **borde incisal** en incisivos y caninos: la que contacta con los dientes antagonistas.\n\nLas caras mesial y distal se llaman en conjunto **caras proximales** o **interproximales**, porque miran hacia el diente vecino. Ojo con un caso especial: entre los dos incisivos centrales, ambos contactan por su cara **mesial**."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Mesial y distal siguen la curva",
+          "md": "Mesial y distal no significan «adelante» y «atrás». Se miden **a lo largo de la curva de la arcada**, como si la estiraras en una línea recta que empieza en la línea media. Por eso, en un primer molar, la cara mesial mira hacia el segundo premolar, y en un incisivo lateral, la cara mesial mira hacia el central. Esta convención permite describir cualquier diente de la misma manera, sin importar la forma de la arcada de cada persona."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tercios, ángulos y combinaciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para ubicar un detalle dentro de una cara, se divide en **tercios**. En sentido vertical, la corona tiene un tercio **cervical**, uno **medio** y uno **oclusal** o **incisal**; la raíz, un tercio cervical, uno medio y uno **apical**. En sentido horizontal, una cara vestibular se divide en tercios **mesial**, **medio** y **distal**, y una cara proximal en tercios **vestibular**, **medio** y **lingual**. Así puedes decir con precisión: «mancha blanca en el tercio cervical de la cara vestibular del canino».\n\nLa unión de dos caras forma un **ángulo diedro** o ángulo lineal, y la de tres caras, un **ángulo triedro** o ángulo puntual. En los textos clásicos de anatomía dental, como el de Wheeler, se describen **seis ángulos diedros** en los dientes anteriores, porque el borde incisal se considera una línea y no una cara completa, y **ocho** en los posteriores; ambos grupos tienen **cuatro ángulos triedros**. Los nombres se forman combinando las caras: la primera pierde su terminación y toma una «o». Así se dice **mesio-oclusal**, **disto-vestibular** o **mesio-vestíbulo-oclusal**. Estas mismas combinaciones se usan para describir lesiones y restauraciones que abarcan varias caras, con siglas que verás en todo expediente: **MO** (mesio-oclusal), **DO** (disto-oclusal) y **MOD** (mesio-ocluso-distal)."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/02",
+          "proporcion": "1:1",
+          "alt": "Primer molar inferior permanente aislado sobre fondo neutro, en vista ligeramente oblicua que muestra las caras oclusal, vestibular y mesial.",
+          "pie": "En una vista oblicua se aprecian tres caras de un molar y los ángulos que se forman donde se unen.",
+          "prompt": "Fotografía macro de estudio de un primer molar inferior permanente humano extraído, limpio y sano, colocado sobre un soporte en fondo gris neutro, vista oblicua desde mesio-vestíbulo-oclusal que muestra la cara oclusal con sus cinco cúspides, la cara vestibular con su surco y la cara mesial convexa, dos raíces mesial y distal visibles, esmalte con brillo natural, iluminación difusa uniforme, profundidad de campo amplia. Evitar: texto, flechas, etiquetas, números, logotipos, sangre, restos de tejido, caries, número incorrecto de cúspides o raíces."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Corona, raíz, contactos y troneras"
+        },
+        {
+          "tipo": "texto",
+          "md": "Dos pares de términos se confunden con frecuencia. La **corona anatómica** es la porción del diente cubierta por esmalte, y la **raíz anatómica**, la porción cubierta por cemento; el límite entre ambas es la unión amelocementaria y no cambia. La **corona clínica**, en cambio, es la parte del diente que se ve en boca, por encima del margen de la encía, y la **raíz clínica**, la que queda oculta. En un adolescente con dientes recién erupcionados, la corona clínica es más corta que la anatómica; en un adulto con recesión gingival, es más larga.\n\nEntre dientes vecinos, las caras proximales se tocan en un **área de contacto**. Alrededor de ella quedan espacios en forma de V llamados **troneras**: vestibular, lingual, oclusal o incisal, y gingival. La tronera gingival está ocupada en salud por la **papila interdental**. Un área de contacto bien ubicada protege la papila del impacto de los alimentos y estabiliza la arcada; un contacto abierto o mal reconstruido favorece el empaquetamiento de comida y la inflamación. Por eso estos términos aparecen tanto en anatomía como en operatoria y prótesis."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/03",
+          "proporcion": "4:3",
+          "alt": "Incisivos superiores permanentes vistos de frente, con las áreas de contacto entre ellos y las papilas llenando los espacios gingivales.",
+          "pie": "Las áreas de contacto y las troneras: en salud, la papila interdental ocupa la tronera gingival.",
+          "prompt": "Fotografía clínica intraoral realista en vista frontal de los cuatro incisivos superiores permanentes de un adulto joven con labios separados por retractores transparentes, contactos interproximales cerrados, espacios en forma de V por incisal y papilas interdentales rosadas y puntiagudas que llenan los espacios hacia la encía, encía sana con textura de cáscara de naranja, iluminación clínica uniforme con flash anular, colores naturales, enfoque nítido. Evitar: texto, números, etiquetas, logotipos, rostro completo, sangre, caries, restauraciones, diastemas exagerados, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "¿Qué cara es?",
+          "instruccion": "Relaciona cada término con la descripción correcta.",
+          "pares": [
+            {
+              "a": "Mesial",
+              "b": "Cara proximal más cercana a la línea media siguiendo la curva de la arcada"
+            },
+            {
+              "a": "Distal",
+              "b": "Cara proximal más alejada de la línea media"
+            },
+            {
+              "a": "Palatina",
+              "b": "Cara de los dientes superiores que mira hacia el paladar"
+            },
+            {
+              "a": "Vestibular",
+              "b": "Cara que mira hacia labios y mejillas"
+            },
+            {
+              "a": "Oclusal",
+              "b": "Cara masticatoria de premolares y molares"
+            },
+            {
+              "a": "MOD",
+              "b": "Lesión o restauración que abarca mesial, oclusal y distal"
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Siempre desde el paciente",
+          "md": "El error más frecuente al registrar hallazgos es anotar el lado según la posición del operador. Si trabajas sentado a las 9 en punto o detrás del paciente, tu derecha cambia, pero **la derecha del paciente no**. Antes de registrar, nombra el diente en voz alta con su lado anatómico («primer molar inferior **del lado derecho del paciente**») y compáralo con la radiografía. Este hábito sencillo previene tratamientos en el lado equivocado."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** durante una semana, describe cada hallazgo que observes en clínica o en un modelo con la fórmula completa: diente, arcada, lado, cara y tercio, por ejemplo «lesión cariosa en el tercio cervical de la cara vestibular del segundo premolar inferior izquierdo». Al principio parecerá largo, pero en pocos días lo harás de forma automática, y estarás listo para traducirlo a cualquier sistema de numeración."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Cuadrante",
+          "definicion": "Cada una de las cuatro partes en que la línea media y el plano oclusal dividen las arcadas dentarias."
+        },
+        {
+          "termino": "Fórmula dentaria",
+          "definicion": "Expresión que indica el número de dientes de cada grupo por hemiarcada superior e inferior."
+        },
+        {
+          "termino": "Mesial",
+          "definicion": "Cara proximal de un diente más cercana a la línea media, medida a lo largo de la arcada."
+        },
+        {
+          "termino": "Distal",
+          "definicion": "Cara proximal de un diente más alejada de la línea media."
+        },
+        {
+          "termino": "Ángulo diedro",
+          "definicion": "Línea de unión entre dos caras de una corona, por ejemplo el ángulo mesio-vestibular."
+        },
+        {
+          "termino": "Diente sucedáneo",
+          "definicion": "Diente permanente que reemplaza a un diente temporal: incisivos, caninos y premolares."
+        },
+        {
+          "termino": "Diente accesional",
+          "definicion": "Diente permanente que erupciona por detrás de la dentición temporal sin reemplazar a ninguno: los molares permanentes."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.1-1",
+          "q": "¿Cuál es la fórmula dentaria de la dentición temporal por hemiarcada?",
+          "opciones": [
+            "I 2/2 · C 1/1 · PM 2/2 · M 3/3",
+            "I 2/2 · C 1/1 · PM 2/2",
+            "I 2/2 · C 1/1 · M 2/2",
+            "I 1/1 · C 1/1 · M 3/3"
+          ],
+          "correcta": 2,
+          "explicacion": "La dentición temporal tiene dos incisivos, un canino y dos molares por hemiarcada, 20 dientes en total y ningún premolar."
+        },
+        {
+          "id": "t8.1-2",
+          "q": "¿Hacia qué diente mira la cara mesial de un primer molar superior permanente?",
+          "opciones": [
+            "Hacia el segundo premolar",
+            "Hacia el segundo molar",
+            "Hacia el paladar",
+            "Hacia el molar inferior antagonista"
+          ],
+          "correcta": 0,
+          "explicacion": "Mesial es la cara más cercana a la línea media siguiendo la arcada; en el primer molar mira hacia el segundo premolar."
+        },
+        {
+          "id": "t8.1-3",
+          "q": "¿Qué dientes permanentes se consideran accesionales?",
+          "opciones": [
+            "Los incisivos centrales",
+            "Los premolares",
+            "Los caninos",
+            "Los molares"
+          ],
+          "correcta": 3,
+          "explicacion": "Los molares permanentes erupcionan por detrás de los temporales sin reemplazar a ninguno; los demás son sucedáneos."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Oral health surveys: basic methods",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2013
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en la nomenclatura anatómica dental de uso universitario",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "8.2",
+      "titulo": "El sistema FDI de dos dígitos (ISO 3950)",
+      "minutos": 16,
+      "enPocasPalabras": "El sistema FDI nombra cada diente con dos números: el primero dice en qué parte de la boca está y el segundo qué diente es, contando desde el centro. Así, el 16 es el primer molar de arriba a la derecha y el 55 es una muela de leche. Es el sistema más usado en el mundo y el que encontrarás en la mayoría de los expedientes en México.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Escribir «primer molar superior derecho permanente» cada vez que registras un hallazgo es largo y deja espacio para errores de redacción. Los sistemas de numeración abrevian esa descripción en un código corto e inequívoco. El más difundido en el mundo es el **sistema de dos dígitos de la Federación Dental Internacional (FDI)**, adoptado como norma internacional por la Organización Internacional de Normalización con el número **ISO 3950**. Su edición vigente es **ISO 3950:2016**, *Dentistry — Designation system for teeth and areas of the oral cavity*, que sustituyó a ediciones anteriores publicadas desde 1977.\n\nEl sistema fue desarrollado por la FDI y lo utiliza la Organización Mundial de la Salud en sus encuestas de salud bucal. Se usa en la mayor parte de los países, incluidos México y el resto de América Latina; la principal excepción es Estados Unidos, donde predomina el sistema universal que verás en el tema 8.3. En la década de 1990, la Asociación Dental Americana (ADA) aceptó también el sistema ISO como alternativa al universal."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dos dígitos, dos preguntas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada diente se designa con dos dígitos que responden dos preguntas:\n\n1. **Primer dígito: ¿en qué cuadrante está y de qué dentición es?** Para la dentición permanente se usan los números **1 a 4**; para la temporal, **5 a 8**. La numeración de los cuadrantes sigue el sentido de las manecillas del reloj visto desde el operador, empezando por el superior derecho del paciente: 1 o 5 superior derecho, 2 o 6 superior izquierdo, 3 o 7 inferior izquierdo y 4 u 8 inferior derecho.\n2. **Segundo dígito: ¿qué diente es dentro del cuadrante?** Se cuenta desde la línea media hacia distal: **1 a 8** en la dentición permanente (del incisivo central al tercer molar) y **1 a 5** en la temporal (del incisivo central al segundo molar).\n\nCon estas dos reglas puedes decodificar cualquier número. El **36** es cuadrante 3 (inferior izquierdo, permanente) y diente 6 (primer molar): primer molar inferior izquierdo permanente. El **74** es cuadrante 7 (inferior izquierdo, temporal) y diente 4 (primer molar temporal): primer molar inferior izquierdo temporal."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Dentición permanente en el sistema FDI",
+          "columnas": [
+            "Segundo dígito",
+            "Diente",
+            "Superior derecho (1)",
+            "Superior izquierdo (2)",
+            "Inferior izquierdo (3)",
+            "Inferior derecho (4)"
+          ],
+          "filas": [
+            [
+              "1",
+              "Incisivo central",
+              "11",
+              "21",
+              "31",
+              "41"
+            ],
+            [
+              "2",
+              "Incisivo lateral",
+              "12",
+              "22",
+              "32",
+              "42"
+            ],
+            [
+              "3",
+              "Canino",
+              "13",
+              "23",
+              "33",
+              "43"
+            ],
+            [
+              "4",
+              "Primer premolar",
+              "14",
+              "24",
+              "34",
+              "44"
+            ],
+            [
+              "5",
+              "Segundo premolar",
+              "15",
+              "25",
+              "35",
+              "45"
+            ],
+            [
+              "6",
+              "Primer molar",
+              "16",
+              "26",
+              "36",
+              "46"
+            ],
+            [
+              "7",
+              "Segundo molar",
+              "17",
+              "27",
+              "37",
+              "47"
+            ],
+            [
+              "8",
+              "Tercer molar",
+              "18",
+              "28",
+              "38",
+              "48"
+            ]
+          ]
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Dentición temporal en el sistema FDI",
+          "columnas": [
+            "Segundo dígito",
+            "Diente temporal",
+            "Superior derecho (5)",
+            "Superior izquierdo (6)",
+            "Inferior izquierdo (7)",
+            "Inferior derecho (8)"
+          ],
+          "filas": [
+            [
+              "1",
+              "Incisivo central",
+              "51",
+              "61",
+              "71",
+              "81"
+            ],
+            [
+              "2",
+              "Incisivo lateral",
+              "52",
+              "62",
+              "72",
+              "82"
+            ],
+            [
+              "3",
+              "Canino",
+              "53",
+              "63",
+              "73",
+              "83"
+            ],
+            [
+              "4",
+              "Primer molar",
+              "54",
+              "64",
+              "74",
+              "84"
+            ],
+            [
+              "5",
+              "Segundo molar",
+              "55",
+              "65",
+              "75",
+              "85"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m08/d2",
+          "pie": "Odontograma FDI de la dentición permanente tal como se ve desde el operador.",
+          "descripcion": "Dos filas horizontales de casillas que representan las arcadas vistas de frente. Fila superior, de izquierda a derecha del lector: 18, 17, 16, 15, 14, 13, 12, 11, una línea vertical gruesa como línea media, y 21, 22, 23, 24, 25, 26, 27, 28. Fila inferior, de izquierda a derecha: 48, 47, 46, 45, 44, 43, 42, 41, línea media, y 31, 32, 33, 34, 35, 36, 37, 38. Cada cuadrante con un color de fondo suave distinto y una flecha circular que indica el orden 1, 2, 3, 4 en el sentido de las manecillas del reloj. Debajo, una versión reducida con la dentición temporal de 55 a 51 y 61 a 65 arriba, y 85 a 81 y 71 a 75 abajo.",
+          "elementos": [
+            "Cuadrante 1: 18 a 11",
+            "Cuadrante 2: 21 a 28",
+            "Cuadrante 3: 31 a 38",
+            "Cuadrante 4: 41 a 48",
+            "Cuadrantes temporales 5, 6, 7 y 8",
+            "Línea media",
+            "Sentido de las manecillas del reloj"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/04",
+          "proporcion": "16:9",
+          "alt": "Manos enguantadas sostienen un tipodonto de dentición permanente completa visto de frente, con ambas arcadas en oclusión.",
+          "pie": "Antes de usar un sistema de numeración, ubica los cuatro cuadrantes en un modelo: el superior derecho del paciente queda a tu izquierda.",
+          "prompt": "Fotografía realista de estudio, unas manos con guantes de nitrilo azul sostienen de frente un tipodonto de enseñanza con dentición permanente completa de treinta y dos dientes en oclusión, encía de silicona rosada, dientes blancos con anatomía correcta, vista frontal centrada en la línea media, fondo blanco limpio de laboratorio, iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, números, etiquetas adhesivas, logotipos, marcas comerciales, rostros, manos sin guantes, dientes faltantes, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo leerlo y cómo recordarlo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una convención muy difundida en la enseñanza es leer los dos dígitos por separado: el 18 se dice «uno-ocho» y no «dieciocho», y el 46 «cuatro-seis» y no «cuarenta y seis». Así queda claro que se trata de dos datos, cuadrante y diente, y se evitan confusiones al dictar a la asistente.\n\nEl sistema tiene regularidades que facilitan memorizarlo:\n\n- Todos los dientes cuyo segundo dígito es **3** son **caninos** (13, 23, 33, 43, 53, 63, 73, 83).\n- Todos los que terminan en **6** son **primeros molares permanentes**, el diente de referencia de la oclusión.\n- Todos los que terminan en **8** son **terceros molares**.\n- Si el primer dígito es **5 o mayor**, el diente es **temporal**, y su segundo dígito nunca pasa de 5.\n- Los dígitos del cuadrante temporal equivalen al permanente **sumando 4**: el cuadrante 5 está en el mismo lugar que el 1, el 6 que el 2, el 7 que el 3 y el 8 que el 4.\n\nUna regla útil en dentición mixta: el diente temporal y su sucesor permanente comparten posición, pero no siempre segundo dígito. El **55** (segundo molar temporal superior derecho) es reemplazado por el **15** (segundo premolar), no por el 16. El 16 erupciona por detrás del 55 sin reemplazar a ningún diente."
+        },
+        {
+          "tipo": "texto",
+          "md": "Veamos cómo se escribe la boca completa de un niño de unos ocho años con todos sus incisivos permanentes ya erupcionados, caninos y molares temporales y primeros molares permanentes. La arcada superior, de la derecha a la izquierda del paciente, queda así: **16, 55, 54, 53, 12, 11 | 21, 22, 63, 64, 65, 26**. La inferior: **46, 85, 84, 83, 42, 41 | 31, 32, 73, 74, 75, 36**. Observa que en cada cuadrante el código permanente y el temporal se alternan según el diente que realmente está presente, y que el total es de 24 dientes. Leer un odontograma mixto de esta manera te permite saber de un vistazo qué recambios faltan y en qué orden se esperan."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Un sistema pensado para registros y computadoras",
+          "md": "Una de las ventajas del sistema de dos dígitos es que cada diente se representa solo con números, sin símbolos especiales ni letras. Eso facilita capturarlo en teclados, bases de datos, formatos impresos y sistemas de información en salud, y permite agrupar datos con facilidad: por ejemplo, filtrar todos los dientes que empiezan con 3 para obtener el cuadrante inferior izquierdo. Por eso es el sistema que usa la OMS en sus formularios de encuesta de salud bucal."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/05",
+          "proporcion": "4:3",
+          "alt": "Vista oclusal de la arcada inferior de un niño en dentición mixta, con primeros molares permanentes junto a molares temporales.",
+          "pie": "En dentición mixta conviven códigos de ambas denticiones en el mismo cuadrante: por ejemplo 36 junto a 75 y 74.",
+          "prompt": "Fotografía clínica intraoral realista vista oclusal con espejo de la arcada inferior de un niño de unos ocho años en dentición mixta: incisivos permanentes inferiores recién erupcionados con bordes ligeramente ondulados, caninos temporales, primeros y segundos molares temporales más pequeños y blancos, y primeros molares permanentes completos en los extremos, lengua relajada fuera de foco, encía rosa sana, iluminación clínica uniforme, colores naturales. Evitar: texto, números, etiquetas, logotipos, labios o rostro, sangre, caries extensas, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Lo que dice la norma ISO 3950",
+          "md": "La ISO 3950 no solo designa dientes individuales: su título completo habla de un sistema para designar **dientes y áreas de la cavidad bucal**, porque incluye códigos de dos dígitos para referirse a zonas como una arcada o un cuadrante completos, útiles en facturación, informes de procedimientos y bases de datos. Si vas a diseñar un formato o a configurar un software clínico, consulta la tabla de áreas de la edición vigente en lugar de inventar códigos propios. Para los dientes supernumerarios, la práctica más extendida es registrar su posición con una descripción anatómica junto al código del diente vecino, siguiendo las indicaciones de la institución donde trabajas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Errores frecuentes y cómo evitarlos"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Confusiones típicas al usar el sistema FDI",
+          "items": [
+            "Numerar los cuadrantes desde la perspectiva del operador: el cuadrante 1 es siempre el superior derecho del paciente, aunque en el odontograma aparezca a tu izquierda.",
+            "Usar el código permanente para un diente temporal: un molar temporal superior derecho es 54 o 55, nunca 14 o 15, aunque ocupe el lugar de los premolares.",
+            "Asignar el número por la posición y no por la identidad: si falta el 35 y el 36 se inclinó hacia mesial, el molar sigue siendo 36.",
+            "Leer el código como un número de dos cifras: «cuarenta y seis» invita a confundirlo con el 64; «cuatro-seis» deja claro el cuadrante.",
+            "Registrar un tercer molar ausente como si nunca se hubiera formado: antes de anotar agenesia, confirma con una radiografía que no está retenido dentro del hueso."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El tercer error merece énfasis porque se repite en dentición mixta. Para asignar el código correcto no basta contar dientes desde la línea media: debes **identificar cada diente por su morfología**. Un molar temporal se reconoce por su corona más corta y blanca, su marcado estrechamiento cervical y su tamaño menor que el del primer molar permanente; un premolar recién erupcionado, por sus dos cúspides y su raíz en formación. Si la morfología no es clara, la radiografía resuelve la duda al mostrar raíces en reabsorción o gérmenes por debajo. Solo después de identificar el diente escribes su número."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/06",
+          "proporcion": "4:3",
+          "alt": "Radiografía periapical de un niño con un molar temporal inferior cuyas raíces se reabsorben sobre el germen de un premolar.",
+          "pie": "Cuando la morfología no basta, la radiografía confirma la identidad: aquí, un molar temporal con un premolar en formación por debajo.",
+          "prompt": "Radiografía periapical digital realista en escala de grises de la región posterior inferior de un niño de unos nueve años, un segundo molar temporal con raíces divergentes parcialmente reabsorbidas que abrazan desde arriba el germen de un segundo premolar con corona formada y raíz incipiente, por detrás un primer molar permanente erupcionado con raíces en formación y ápices abiertos, hueso trabecular fino, contraste y nitidez de calidad diagnóstica. Evitar: texto, letras, números, escalas, marcas de agua, logotipos, restauraciones, artefactos, aspecto de dibujo."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Decodifica el número",
+          "instruccion": "Relaciona cada código FDI con el diente que designa.",
+          "pares": [
+            {
+              "a": "36",
+              "b": "Primer molar inferior izquierdo permanente"
+            },
+            {
+              "a": "14",
+              "b": "Primer premolar superior derecho"
+            },
+            {
+              "a": "23",
+              "b": "Canino superior izquierdo permanente"
+            },
+            {
+              "a": "47",
+              "b": "Segundo molar inferior derecho permanente"
+            },
+            {
+              "a": "61",
+              "b": "Incisivo central superior izquierdo temporal"
+            },
+            {
+              "a": "85",
+              "b": "Segundo molar inferior derecho temporal"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** escribe en una tarjeta el odontograma FDI permanente y temporal de memoria, sin mirar la tabla, y compáralo después. Repite el ejercicio tres días seguidos. Luego practica a la inversa: alguien te dice un número al azar, por ejemplo «siete-cinco», y tú señalas el diente en un tipodonto o en tu propia boca frente al espejo, recordando que tu derecha en el espejo no es la derecha anatómica de la imagen."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Sistema FDI",
+          "definicion": "Sistema de dos dígitos de la Federación Dental Internacional para designar dientes; el primero indica cuadrante y dentición, y el segundo, el diente."
+        },
+        {
+          "termino": "ISO 3950",
+          "definicion": "Norma internacional que adopta el sistema de dos dígitos para designar dientes y áreas de la cavidad bucal; su edición vigente es de 2016."
+        },
+        {
+          "termino": "Cuadrante temporal",
+          "definicion": "En el sistema FDI, cuadrantes 5 a 8, que corresponden a la dentición temporal en las mismas posiciones que los cuadrantes 1 a 4."
+        },
+        {
+          "termino": "Odontograma",
+          "definicion": "Representación gráfica de las arcadas en la que se registran el estado y los tratamientos de cada diente."
+        },
+        {
+          "termino": "Dentición mixta",
+          "definicion": "Etapa en la que coexisten en boca dientes temporales y permanentes."
+        },
+        {
+          "termino": "Primer molar permanente",
+          "definicion": "Diente designado con el segundo dígito 6 en el sistema FDI (16, 26, 36 y 46); referencia de la oclusión."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.2-1",
+          "q": "En el sistema FDI, ¿qué diente es el 74?",
+          "opciones": [
+            "Primer premolar inferior izquierdo permanente",
+            "Primer molar inferior izquierdo temporal",
+            "Primer molar inferior derecho temporal",
+            "Canino inferior izquierdo temporal"
+          ],
+          "correcta": 1,
+          "explicacion": "El 7 indica cuadrante inferior izquierdo temporal y el 4, primer molar temporal. Los temporales no tienen premolares."
+        },
+        {
+          "id": "t8.2-2",
+          "q": "¿Qué diente permanente reemplaza al 55?",
+          "opciones": [
+            "El 16",
+            "El 54",
+            "El 14",
+            "El 15"
+          ],
+          "correcta": 3,
+          "explicacion": "El segundo molar temporal superior derecho es reemplazado por el segundo premolar superior derecho (15). El 16 erupciona por detrás sin reemplazar a ninguno."
+        },
+        {
+          "id": "t8.2-3",
+          "q": "¿Qué tienen en común el 13, el 43 y el 63?",
+          "opciones": [
+            "Son caninos",
+            "Son dientes temporales",
+            "Están en el mismo cuadrante",
+            "Son incisivos laterales"
+          ],
+          "correcta": 0,
+          "explicacion": "El segundo dígito 3 designa al canino en cualquier cuadrante; el 13 y el 43 son permanentes y el 63 es temporal."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "ISO 3950:2016, Dentistry — Designation system for teeth and areas of the oral cavity",
+          "autor": "International Organization for Standardization",
+          "anio": 2016
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Oral health surveys: basic methods",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2013
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "8.3",
+      "titulo": "El sistema universal (ADA): números 1 a 32 y letras A a T",
+      "minutos": 16,
+      "enPocasPalabras": "En Estados Unidos los dientes se numeran del 1 al 32 recorriendo la boca como un reloj, y los dientes de leche con letras de la A a la T. Si un paciente llega con papeles de allá, el número que leas puede referirse a un diente muy distinto del que significaría en el sistema FDI. Por eso conviene saber traducir de un sistema a otro.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Aunque en México se usa mayoritariamente el sistema FDI, encontrarás el **sistema universal** con frecuencia: en libros y artículos estadounidenses, en programas de software clínico configurados de origen para Estados Unidos, en los expedientes de pacientes que se atendieron allá y en órdenes de laboratorios que trabajan con clientes de ese país. La Asociación Dental Americana (ADA) lo respalda oficialmente desde 1968 y es el sistema que se usa en el formulario de reclamación dental de la ADA para identificar el diente junto con los códigos de procedimientos (CDT).\n\nSu lógica es distinta de la del FDI: en lugar de combinar cuadrante y diente, asigna a cada diente un **número consecutivo único**, como si recorrieras la boca en un solo trazo. Eso lo hace fácil de aprender, pero también lo hace peligroso cuando se confunde con el FDI, porque muchos números existen en ambos sistemas y designan dientes completamente diferentes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dentición permanente: del 1 al 32"
+        },
+        {
+          "tipo": "texto",
+          "md": "La numeración empieza en el **tercer molar superior derecho**, que es el **1**, y avanza por la arcada superior hasta el **tercer molar superior izquierdo**, que es el **16**. Después baja al **tercer molar inferior izquierdo**, que es el **17**, y recorre la arcada inferior hasta el **tercer molar inferior derecho**, que es el **32**. El sentido del recorrido es el mismo que el de los cuadrantes FDI: las manecillas del reloj vistas desde el operador.\n\nDos detalles importantes:\n\n- Los números se asignan **aunque el diente no esté presente**. Si un paciente no tiene terceros molares, su primer diente presente en la arcada superior derecha seguirá siendo el 2, no el 1.\n- Los incisivos centrales superiores son el **8** (derecho) y el **9** (izquierdo); los inferiores, el **24** (izquierdo) y el **25** (derecho). Recordar estos cuatro números te permite orientarte rápidamente en cualquier odontograma universal."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Arcada superior: equivalencias FDI y universal",
+          "columnas": [
+            "Diente",
+            "Derecho FDI",
+            "Derecho universal",
+            "Izquierdo FDI",
+            "Izquierdo universal"
+          ],
+          "filas": [
+            [
+              "Tercer molar",
+              "18",
+              "1",
+              "28",
+              "16"
+            ],
+            [
+              "Segundo molar",
+              "17",
+              "2",
+              "27",
+              "15"
+            ],
+            [
+              "Primer molar",
+              "16",
+              "3",
+              "26",
+              "14"
+            ],
+            [
+              "Segundo premolar",
+              "15",
+              "4",
+              "25",
+              "13"
+            ],
+            [
+              "Primer premolar",
+              "14",
+              "5",
+              "24",
+              "12"
+            ],
+            [
+              "Canino",
+              "13",
+              "6",
+              "23",
+              "11"
+            ],
+            [
+              "Incisivo lateral",
+              "12",
+              "7",
+              "22",
+              "10"
+            ],
+            [
+              "Incisivo central",
+              "11",
+              "8",
+              "21",
+              "9"
+            ]
+          ]
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Arcada inferior: equivalencias FDI y universal",
+          "columnas": [
+            "Diente",
+            "Izquierdo FDI",
+            "Izquierdo universal",
+            "Derecho FDI",
+            "Derecho universal"
+          ],
+          "filas": [
+            [
+              "Tercer molar",
+              "38",
+              "17",
+              "48",
+              "32"
+            ],
+            [
+              "Segundo molar",
+              "37",
+              "18",
+              "47",
+              "31"
+            ],
+            [
+              "Primer molar",
+              "36",
+              "19",
+              "46",
+              "30"
+            ],
+            [
+              "Segundo premolar",
+              "35",
+              "20",
+              "45",
+              "29"
+            ],
+            [
+              "Primer premolar",
+              "34",
+              "21",
+              "44",
+              "28"
+            ],
+            [
+              "Canino",
+              "33",
+              "22",
+              "43",
+              "27"
+            ],
+            [
+              "Incisivo lateral",
+              "32",
+              "23",
+              "42",
+              "26"
+            ],
+            [
+              "Incisivo central",
+              "31",
+              "24",
+              "41",
+              "25"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m08/d3",
+          "pie": "El recorrido del sistema universal: un solo trazo del 1 al 32.",
+          "descripcion": "Esquema de las dos arcadas permanentes vistas de frente desde el operador, con cada diente como una casilla. Una flecha continua parte del tercer molar superior derecho (casilla 1, a la izquierda del lector), recorre la arcada superior hasta el tercer molar superior izquierdo (16), baja al tercer molar inferior izquierdo (17) y recorre la arcada inferior hasta el tercer molar inferior derecho (32). Los incisivos centrales 8, 9, 24 y 25 aparecen resaltados como puntos de referencia. Debajo, un esquema pequeño de la dentición temporal con la misma flecha de A a J arriba y de K a T abajo.",
+          "elementos": [
+            "1: tercer molar superior derecho",
+            "8 y 9: incisivos centrales superiores",
+            "16: tercer molar superior izquierdo",
+            "17: tercer molar inferior izquierdo",
+            "24 y 25: incisivos centrales inferiores",
+            "32: tercer molar inferior derecho",
+            "A a T: dentición temporal"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dentición temporal: de la A a la T"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para la dentición temporal, el sistema universal usa **letras mayúsculas** con el mismo recorrido: la **A** es el **segundo molar temporal superior derecho** y la **J**, el segundo molar temporal superior izquierdo; la **K** es el **segundo molar temporal inferior izquierdo** y la **T**, el segundo molar temporal inferior derecho. Los incisivos centrales temporales son la **E** y la **F** arriba, y la **O** y la **P** abajo."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Dentición temporal: equivalencias FDI y universal",
+          "columnas": [
+            "Diente temporal",
+            "Sup. der. FDI / univ.",
+            "Sup. izq. FDI / univ.",
+            "Inf. izq. FDI / univ.",
+            "Inf. der. FDI / univ."
+          ],
+          "filas": [
+            [
+              "Segundo molar",
+              "55 / A",
+              "65 / J",
+              "75 / K",
+              "85 / T"
+            ],
+            [
+              "Primer molar",
+              "54 / B",
+              "64 / I",
+              "74 / L",
+              "84 / S"
+            ],
+            [
+              "Canino",
+              "53 / C",
+              "63 / H",
+              "73 / M",
+              "83 / R"
+            ],
+            [
+              "Incisivo lateral",
+              "52 / D",
+              "62 / G",
+              "72 / N",
+              "82 / Q"
+            ],
+            [
+              "Incisivo central",
+              "51 / E",
+              "61 / F",
+              "71 / O",
+              "81 / P"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El mismo número, otro diente",
+          "md": "Los números del 11 al 32 existen en ambos sistemas y casi nunca coinciden. El **18** en FDI es el tercer molar superior derecho; en el universal es el **segundo molar inferior izquierdo**. El **30** universal es el **46** FDI, y el **14** universal es el **26** FDI. Si un documento no indica el sistema, **no supongas**: pregunta, revisa la radiografía y confirma con la descripción anatómica antes de cualquier procedimiento. En documentos que redactes tú, escribe siempre el nombre del sistema o acompaña el número con el nombre del diente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Convertir sin tabla"
+        },
+        {
+          "tipo": "texto",
+          "md": "Con un poco de aritmética puedes convertir un número FDI permanente al universal sin consultar la tabla. Llama *n* al segundo dígito FDI (la posición del diente desde la línea media):\n\n- **Cuadrante 1** (superior derecho): universal = **9 − n**. Ejemplo: 16 → 9 − 6 = 3.\n- **Cuadrante 2** (superior izquierdo): universal = **8 + n**. Ejemplo: 24 → 8 + 4 = 12.\n- **Cuadrante 3** (inferior izquierdo): universal = **25 − n**. Ejemplo: 36 → 25 − 6 = 19.\n- **Cuadrante 4** (inferior derecho): universal = **24 + n**. Ejemplo: 46 → 24 + 6 = 30.\n\nEl razonamiento es sencillo: en los cuadrantes donde el recorrido universal va hacia la línea media (1 y 3), el número disminuye a medida que el diente se aleja de ella, por eso se resta; en los cuadrantes donde el recorrido se aleja de la línea media (2 y 4), se suma. Para la conversión inversa, de universal a FDI, despeja *n* en la fórmula del cuadrante correspondiente: un universal entre 1 y 8 está en el cuadrante 1, entre 9 y 16 en el 2, entre 17 y 24 en el 3 y entre 25 y 32 en el 4."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Del FDI al universal en el cuadrante 3",
+          "instruccion": "Escribe el segundo dígito FDI de un diente del cuadrante inferior izquierdo (de 1 a 8) y obtén su número en el sistema universal. Prueba con el 6 (primer molar, 36) y con el 8 (tercer molar, 38).",
+          "formula": "Universal = 25 − segundo dígito FDI",
+          "variables": [
+            {
+              "id": "posicion",
+              "etiqueta": "Segundo dígito FDI en el cuadrante 3",
+              "valor": 6,
+              "unidad": "posición"
+            }
+          ],
+          "resultado": {
+            "expresion": "25 - posicion",
+            "etiqueta": "Número universal",
+            "unidad": "",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/07",
+          "proporcion": "16:9",
+          "alt": "Monitor de una computadora en un consultorio mostrando un odontograma digital sin texto legible, con manos enguantadas cerca del ratón.",
+          "pie": "Muchos programas clínicos permiten elegir el sistema de numeración: verifica cuál está configurado antes de registrar.",
+          "prompt": "Fotografía realista de un consultorio dental moderno, primer plano de un monitor sobre un brazo articulado junto a la unidad dental que muestra un odontograma digital esquemático con dos filas de siluetas de dientes en colores suaves, sin letras ni números legibles, una mano con guante de nitrilo azul sobre un ratón inalámbrico en primer plano desenfocado, iluminación blanca limpia, fondo de consultorio ordenado, colores naturales. Evitar: texto legible, números legibles, logotipos, marcas comerciales, rostros, pantallas con interfaces de marcas reales, desorden, manos sin guantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un expediente que viene del norte",
+          "md": "Una paciente de 34 años regresa a México después de vivir en Texas y trae un resumen de su dentista anterior: «#30 RCT and crown, #19 watch». Si lo leyeras como FDI, el 30 no existe y el 19 tampoco, lo que ya es una pista de que se trata del sistema universal. Al convertir, el **#30 universal es el 46 FDI** (primer molar inferior derecho) con tratamiento de conductos y corona, y el **#19 universal es el 36 FDI** (primer molar inferior izquierdo), que debía vigilarse. La revisión clínica y radiográfica confirma una corona en el 46. Registras en tu expediente ambos números y el nombre de cada diente."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/08",
+          "proporcion": "4:3",
+          "alt": "Vista oclusal de la arcada inferior de un adulto con una corona metal-porcelana en el primer molar derecho.",
+          "pie": "El primer molar inferior derecho: 46 en FDI y 30 en el sistema universal.",
+          "prompt": "Fotografía clínica intraoral realista en vista oclusal con espejo de la arcada inferior permanente de un adulto de mediana edad, catorce dientes presentes sin terceros molares, el primer molar inferior derecho con una corona de cerámica de color natural bien ajustada, el resto de los dientes sanos con anatomía correcta, lengua relajada fuera de foco, encía rosa sana, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, números, etiquetas, logotipos, labios o rostro, sangre, caries extensas, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ventajas y limitaciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sistema universal tiene ventajas reales: cada diente permanente tiene un número único y corto, no hace falta pensar en cuadrantes y resulta intuitivo para pacientes y personal administrativo. Sus limitaciones aparecen cuando se sale de Estados Unidos. No indica de forma explícita la arcada ni el lado, de modo que para saber dónde está el 21 hay que recordar el recorrido completo; mezcla números y letras para las dos denticiones, lo que complica algunas bases de datos; y sus números se superponen con los del FDI, la fuente de confusión que ya conoces. Ningún sistema es mejor en abstracto: el correcto es el que usa tu institución, siempre que lo declares de forma explícita."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/09",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica de un adulto joven con dentición permanente completa, incluidos los cuatro terceros molares.",
+          "pie": "Una dentición permanente completa: en el sistema universal, del 1 en el extremo superior derecho al 32 en el inferior derecho.",
+          "prompt": "Radiografía panorámica digital realista en escala de grises de un adulto joven con dentición permanente completa de treinta y dos dientes, incluidos cuatro terceros molares erupcionados y alineados, raíces completas, cóndilos mandibulares, senos maxilares y conducto mandibular visibles con anatomía correcta, contraste y nitidez de calidad diagnóstica, imagen centrada y simétrica. Evitar: texto, letras, números, marcadores de lado, escalas, marcas de agua, logotipos, restauraciones metálicas, implantes, artefactos de movimiento."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Dientes supernumerarios en el sistema universal",
+          "md": "Las instrucciones de la ADA para su formulario de reclamación dental describen una convención para los dientes supernumerarios: en la dentición permanente se numeran del **51 al 82**, sumando 50 al número del diente permanente más cercano (por ejemplo, un supernumerario junto al 8 sería el 58); en la temporal se agrega la letra **S** a la letra del diente vecino (por ejemplo, AS o TS). Como el sistema FDI usa los números del 51 al 85 para la dentición temporal, esta convención estadounidense es otra fuente de confusión entre sistemas: un «58» en un documento universal es un supernumerario, mientras que en FDI no existe ese código. Ante cualquier supernumerario, acompaña siempre el código con una descripción anatómica de su ubicación."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** memoriza cuatro anclas del sistema universal, **3, 14, 19 y 30**, que corresponden a los cuatro primeros molares permanentes (16, 26, 36 y 46 en FDI). Con esas anclas y la dirección del recorrido puedes ubicar cualquier otro número contando hacia adelante o hacia atrás, y detectarás de inmediato cuando un documento esté escrito en un sistema distinto del que esperabas."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Sistema universal",
+          "definicion": "Sistema de numeración dental respaldado por la ADA que asigna los números 1 a 32 a los dientes permanentes y las letras A a T a los temporales."
+        },
+        {
+          "termino": "ADA",
+          "definicion": "Asociación Dental Americana, organización profesional de odontólogos de Estados Unidos."
+        },
+        {
+          "termino": "Código CDT",
+          "definicion": "Código de procedimientos dentales de la ADA usado en Estados Unidos para registrar y facturar tratamientos."
+        },
+        {
+          "termino": "Diente supernumerario",
+          "definicion": "Diente adicional al número normal de la dentición."
+        },
+        {
+          "termino": "Conversión de sistemas",
+          "definicion": "Traducción del código de un diente de un sistema de numeración a otro, confirmada con la descripción anatómica."
+        },
+        {
+          "termino": "Ancla de numeración",
+          "definicion": "Diente de referencia fácil de recordar, como los primeros molares, que ayuda a ubicar los demás números."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.3-1",
+          "q": "En el sistema universal, ¿qué diente es el número 1?",
+          "opciones": [
+            "El incisivo central superior derecho",
+            "El tercer molar inferior derecho",
+            "El tercer molar superior derecho",
+            "El tercer molar superior izquierdo"
+          ],
+          "correcta": 2,
+          "explicacion": "El recorrido universal empieza en el tercer molar superior derecho (1) y termina en el tercer molar inferior derecho (32)."
+        },
+        {
+          "id": "t8.3-2",
+          "q": "¿A qué número FDI corresponde el diente 19 del sistema universal?",
+          "opciones": [
+            "36",
+            "19",
+            "46",
+            "26"
+          ],
+          "correcta": 0,
+          "explicacion": "El 19 está en el cuadrante inferior izquierdo: 25 − n = 19, de modo que n = 6. Es el primer molar inferior izquierdo, 36 en FDI."
+        },
+        {
+          "id": "t8.3-3",
+          "q": "En el sistema universal, ¿qué letra corresponde al 85 del sistema FDI?",
+          "opciones": [
+            "A",
+            "K",
+            "J",
+            "T"
+          ],
+          "correcta": 3,
+          "explicacion": "El 85 es el segundo molar temporal inferior derecho, último diente del recorrido temporal: la letra T."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "CDT: Code on Dental Procedures and Nomenclature",
+          "autor": "American Dental Association"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "ADA Universal Tooth Designation System (sistema de códigos HL7 que documenta, entre otros, los números 1 a 32 y 51 a 82)",
+          "autor": "HL7 International",
+          "url": "https://terminology.hl7.org/CodeSystem-ADAUniversalToothDesignationSystem.html"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "ISO 3950:2016, Dentistry — Designation system for teeth and areas of the oral cavity",
+          "autor": "International Organization for Standardization",
+          "anio": 2016
+        }
+      ]
+    },
+    {
+      "n": "8.4",
+      "titulo": "Sistema de Palmer (Zsigmondy) y equivalencias entre sistemas",
+      "minutos": 15,
+      "enPocasPalabras": "Además del FDI y del universal, existe un sistema antiguo que dibuja una pequeña cruz para indicar en qué parte de la boca está el diente y un número del 1 al 8 para decir cuál es. Se usa todavía en algunos países y especialidades. Saber leer los tres sistemas te permite entender cualquier documento y traducirlo sin equivocarte.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Antes de que existieran los sistemas numéricos actuales, los odontólogos ya necesitaban una forma breve de anotar los dientes. En **1861**, el odontólogo **Adolf Zsigmondy** propuso dividir la boca con una **cruz**: una línea horizontal que representa el plano de oclusión y una vertical que representa la línea media. Cada diente se anota con su número de posición desde la línea media, colocado en el ángulo de la cruz que corresponde a su cuadrante. La idea se difundió en Estados Unidos en la segunda mitad del siglo XIX gracias a **Corydon Palmer**, y por eso hoy se conoce como **sistema de Palmer** o **de Zsigmondy-Palmer**.\n\nAunque en México se usa poco en la práctica general, lo encontrarás en libros clásicos, en algunos textos de ortodoncia y cirugía bucal y en documentos del Reino Unido y de otros países europeos, donde sigue vigente en muchos entornos clínicos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo funciona la cruz de Palmer"
+        },
+        {
+          "tipo": "texto",
+          "md": "La cruz se dibuja tal como ves al paciente de frente. Por eso el cuadrante **superior derecho del paciente** queda arriba a la izquierda de la cruz, y su símbolo es un ángulo que «abraza» el número por la derecha y por abajo. En texto, los cuatro símbolos se representan así:\n\n- **Superior derecho:** número seguido de ┘. Ejemplo: **6┘** es el primer molar superior derecho.\n- **Superior izquierdo:** └ seguido del número. Ejemplo: **└6** es el primer molar superior izquierdo.\n- **Inferior derecho:** número seguido de ┐. Ejemplo: **6┐** es el primer molar inferior derecho.\n- **Inferior izquierdo:** ┌ seguido del número. Ejemplo: **┌6** es el primer molar inferior izquierdo.\n\nLa regla mnemotécnica es que **la línea vertical del símbolo siempre apunta hacia la línea media** y **la horizontal hacia el plano de oclusión**. En la dentición permanente los números van del **1** (incisivo central) al **8** (tercer molar), igual que el segundo dígito del FDI. En la temporal se usan las letras **A a E** (del incisivo central al segundo molar temporal); algunas tradiciones europeas usan en su lugar números romanos del I al V."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m08/d4",
+          "pie": "La cruz de Zsigmondy-Palmer con la dentición permanente completa.",
+          "descripcion": "Una cruz grande dibujada en el centro: la línea horizontal representa el plano de oclusión y la vertical la línea media. En el ángulo superior izquierdo del lector se escriben los números 8 7 6 5 4 3 2 1 (cuadrante superior derecho del paciente); en el superior derecho, 1 2 3 4 5 6 7 8 (superior izquierdo); en el inferior izquierdo, 8 7 6 5 4 3 2 1 (inferior derecho); y en el inferior derecho, 1 2 3 4 5 6 7 8 (inferior izquierdo). A un lado, los cuatro símbolos aislados con un ejemplo cada uno, y debajo una cruz más pequeña con las letras E D C B A y A B C D E para la dentición temporal.",
+          "elementos": [
+            "Línea media (vertical)",
+            "Plano de oclusión (horizontal)",
+            "Superior derecho: 6┘",
+            "Superior izquierdo: └6",
+            "Inferior derecho: 6┐",
+            "Inferior izquierdo: ┌6",
+            "Dentición temporal: A a E"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/10",
+          "proporcion": "4:3",
+          "alt": "Odontólogo con cubrebocas y lentes de protección revisa modelos de estudio de yeso sobre una mesa, sosteniéndolos con guantes.",
+          "pie": "En ortodoncia y cirugía bucal de algunos países todavía es habitual anotar los dientes con el sistema de Palmer.",
+          "prompt": "Fotografía realista en un consultorio de ortodoncia luminoso, un odontólogo adulto con cubrebocas quirúrgico, lentes de protección, gorro y bata clara sostiene con guantes de nitrilo azul un par de modelos de estudio de yeso blanco con dentición permanente completa en oclusión, observándolos de frente sobre una mesa limpia con otros modelos desenfocados al fondo, luz natural difusa, colores naturales, encuadre a la altura del pecho. Evitar: texto, letreros, logotipos, marcas comerciales, rostro descubierto, manos sin guantes, modelos rotos, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ventajas y desventajas"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sistema de Palmer es **muy visual**: con solo ver el símbolo sabes de inmediato la arcada y el lado, y en un esquema de ortodoncia puedes escribir varios dientes de un cuadrante dentro del mismo ángulo, por ejemplo extracciones de **4┘└4** y **4┐┌4** para indicar los cuatro primeros premolares. Por eso conserva su popularidad en especialidades que planifican arcadas completas.\n\nSu gran desventaja es **digital**: los símbolos de ángulo no están en los teclados, se pierden o se deforman al copiar entre programas y pueden confundirse si el símbolo se omite o se dibuja mal. Un «6» sin símbolo puede ser cualquiera de los cuatro primeros molares. Por esta razón, la mayoría de los sistemas de información en salud, de los formularios epidemiológicos y de los programas clínicos usa el FDI o el universal."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Otros sistemas que podrías encontrar",
+          "md": "En la literatura histórica y en algunos países se describen otras notaciones. El **sistema de Haderup**, de origen danés, usa signos **más** para los dientes superiores y **menos** para los inferiores, colocados a uno u otro lado del número según el lado de la boca. Algunos textos antiguos combinan además letras y números de maneras propias de cada escuela. No necesitas dominarlos; basta con reconocer que existen, para no confundir su notación con un error tipográfico y buscar la equivalencia cuando aparezcan en un documento."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres sistemas, un mismo diente"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Equivalencias entre los tres sistemas principales",
+          "columnas": [
+            "Diente",
+            "FDI (ISO 3950)",
+            "Universal (ADA)",
+            "Palmer"
+          ],
+          "filas": [
+            [
+              "Tercer molar superior derecho",
+              "18",
+              "1",
+              "8┘"
+            ],
+            [
+              "Incisivo central superior derecho",
+              "11",
+              "8",
+              "1┘"
+            ],
+            [
+              "Canino superior izquierdo",
+              "23",
+              "11",
+              "└3"
+            ],
+            [
+              "Primer molar superior izquierdo",
+              "26",
+              "14",
+              "└6"
+            ],
+            [
+              "Primer molar inferior izquierdo",
+              "36",
+              "19",
+              "┌6"
+            ],
+            [
+              "Incisivo lateral inferior izquierdo",
+              "32",
+              "23",
+              "┌2"
+            ],
+            [
+              "Segundo premolar inferior derecho",
+              "45",
+              "29",
+              "5┐"
+            ],
+            [
+              "Primer molar inferior derecho",
+              "46",
+              "30",
+              "6┐"
+            ],
+            [
+              "Segundo molar temporal superior izquierdo",
+              "65",
+              "J",
+              "└E"
+            ],
+            [
+              "Canino temporal inferior derecho",
+              "83",
+              "R",
+              "C┐"
+            ],
+            [
+              "Primer molar temporal inferior izquierdo",
+              "74",
+              "L",
+              "┌D"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Observa en la tabla un patrón útil: el **segundo dígito del FDI** y el **número de Palmer** coinciden siempre en la dentición permanente, porque ambos cuentan desde la línea media. Lo que cambia es cómo se expresa el cuadrante: con un dígito en el FDI y con un símbolo en Palmer. El universal, en cambio, no conserva la posición del diente dentro del cuadrante; por eso es el que más cálculo exige.\n\nEn la dentición temporal sucede algo parecido con letras: en Palmer, la **A** es siempre el incisivo central temporal y la **E** el segundo molar temporal, en cualquier cuadrante. En el universal, la A es solo el segundo molar temporal superior derecho. Una misma letra puede designar dientes distintos según el sistema: la **A de Palmer** es un incisivo central y la **A del universal** es un molar."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Del universal al FDI, paso a paso",
+          "pasos": [
+            {
+              "titulo": "Ubica el rango",
+              "md": "En la dentición permanente, un número universal del 1 al 8 está en el cuadrante FDI 1; del 9 al 16, en el 2; del 17 al 24, en el 3; y del 25 al 32, en el 4. Ejemplo: el 27 está en el cuadrante 4."
+            },
+            {
+              "titulo": "Calcula la posición",
+              "md": "Despeja la posición *n* con la fórmula del cuadrante: en el 1, n = 9 − universal; en el 2, n = universal − 8; en el 3, n = 25 − universal; en el 4, n = universal − 24. Para el 27: n = 27 − 24 = 3."
+            },
+            {
+              "titulo": "Escribe el código",
+              "md": "Une el cuadrante y la posición: 27 universal es **43** en FDI, el canino inferior derecho."
+            },
+            {
+              "titulo": "Para letras temporales",
+              "md": "De la A a la E corresponde el cuadrante 5, de la F a la J el 6, de la K a la O el 7 y de la P a la T el 8. Dentro de cada grupo, la posición se cuenta en el sentido del recorrido: A es 55 y E es 51; F es 61 y J es 65; K es 75 y O es 71; P es 81 y T es 85."
+            },
+            {
+              "titulo": "Confirma con el diente",
+              "md": "Comprueba que el resultado tenga sentido anatómico: si el documento habla de una corona en un «canino» y tu conversión da un molar, revisa el sistema de origen antes de seguir."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Hay situaciones en las que ningún código basta por sí solo. En un **consentimiento informado**, en una receta de laboratorio para una prótesis compleja o en un informe pericial, conviene escribir el código **y** la descripción anatómica completa: «diente 46 (FDI), primer molar inferior derecho permanente». Esa redundancia no es un exceso de celo: permite que el paciente entienda qué diente se tratará, que el técnico dental no dependa de un sistema que tal vez no usa y que cualquier lector posterior del expediente pueda verificar la información sin ambigüedad."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/11",
+          "proporcion": "16:9",
+          "alt": "Colección didáctica de dientes permanentes extraídos ordenados en forma de arcada sobre una tela oscura.",
+          "pie": "Ordenar dientes de una colección didáctica en su posición de arcada es un buen ejercicio para practicar los tres sistemas.",
+          "prompt": "Fotografía realista de estudio de una colección didáctica de dientes humanos permanentes extraídos, limpios y secos, ordenados en forma de arcada superior en U sobre una tela de terciopelo gris oscuro, desde los incisivos centrales al frente hasta los molares en los extremos, con coronas y raíces completas y anatomía correcta de cada grupo, iluminación difusa cenital, vista desde arriba ligeramente oblicua, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, sangre, restos de tejido, aspecto macabro, dientes deformes o repetidos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una interconsulta en Palmer",
+          "md": "Una ortodoncista que se formó en el Reino Unido envía a cirugía bucal a un paciente de 14 años con la indicación: «extracción de 4┘└4 y 4┐┌4». Si no conoces el sistema, podrías pensar que es un error tipográfico. Al leerlo con la cruz, la indicación corresponde a los **cuatro primeros premolares**: 14, 24, 44 y 34 en FDI, o 5, 12, 28 y 21 en el universal. El cirujano registra la orden con los códigos FDI de la institución, conserva la interconsulta original en el expediente y, antes del procedimiento, confirma con la ortodoncista y con la radiografía qué dientes se extraerán."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Convertir con seguridad",
+          "instruccion": "Ordena los pasos para traducir un registro dental escrito en otro sistema de numeración al sistema de tu institución.",
+          "elementos": [
+            "Identificar qué sistema usa el documento original",
+            "Ubicar arcada y lado del paciente",
+            "Identificar el diente por su posición y su morfología",
+            "Escribir el código en el sistema de tu institución",
+            "Verificar contra la exploración clínica y la radiografía",
+            "Registrar ambos códigos junto con el nombre del diente"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/12",
+          "proporcion": "1:1",
+          "alt": "Primeros premolares superior e inferior permanentes extraídos colocados uno junto al otro sobre fondo gris.",
+          "pie": "Primeros premolares superior e inferior: 4 en Palmer, 14 y 44 o 24 y 34 en FDI según el lado.",
+          "prompt": "Fotografía macro de estudio sobre fondo gris neutro de dos premolares humanos permanentes extraídos, limpios y sanos, colocados uno junto al otro en vista vestibular: a la izquierda un primer premolar superior con dos cúspides de altura similar y dos raíces, a la derecha un primer premolar inferior con cúspide vestibular dominante y raíz única, esmalte con brillo natural, iluminación difusa uniforme, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, sangre, restos de tejido, caries, anatomía incorrecta de cúspides o raíces."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** toma una radiografía panorámica de práctica o una fotografía intraoral y elige cinco dientes al azar. Escribe cada uno en FDI, universal y Palmer, y pide a un compañero que verifique tus respuestas. Cuando puedas hacerlo en menos de un minuto sin consultar tablas, estarás listo para leer cualquier documento clínico, venga de donde venga."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Sistema de Palmer",
+          "definicion": "Notación que indica el cuadrante con un símbolo de ángulo y el diente con un número del 1 al 8 o una letra de la A a la E."
+        },
+        {
+          "termino": "Cruz de Zsigmondy",
+          "definicion": "Esquema propuesto en 1861 que divide la boca con una línea media vertical y un plano de oclusión horizontal."
+        },
+        {
+          "termino": "Plano de oclusión",
+          "definicion": "Plano imaginario en el que se encuentran los dientes superiores e inferiores al cerrar la boca."
+        },
+        {
+          "termino": "Sistema de Haderup",
+          "definicion": "Notación de origen danés que usa signos más y menos para distinguir dientes superiores e inferiores."
+        },
+        {
+          "termino": "Equivalencia",
+          "definicion": "Correspondencia entre los códigos de distintos sistemas que designan un mismo diente."
+        },
+        {
+          "termino": "Interconsulta",
+          "definicion": "Solicitud de valoración o tratamiento que un profesional dirige a otro, con datos clínicos del paciente."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.4-1",
+          "q": "¿Qué diente se escribe como └6 en el sistema de Palmer?",
+          "opciones": [
+            "Primer molar superior derecho",
+            "Primer molar inferior izquierdo",
+            "Primer molar superior izquierdo",
+            "Primer molar inferior derecho"
+          ],
+          "correcta": 2,
+          "explicacion": "El símbolo └ antes del número indica el cuadrante superior izquierdo; el 6 es el primer molar. Su equivalente FDI es 26."
+        },
+        {
+          "id": "t8.4-2",
+          "q": "¿Qué dato coincide siempre entre el sistema de Palmer y el FDI en la dentición permanente?",
+          "opciones": [
+            "El primer dígito del FDI y el símbolo de Palmer",
+            "El segundo dígito del FDI y el número de Palmer",
+            "El número universal y el número de Palmer",
+            "La letra temporal y el cuadrante FDI"
+          ],
+          "correcta": 1,
+          "explicacion": "Ambos cuentan la posición del diente desde la línea media, del 1 al 8; solo cambia la forma de indicar el cuadrante."
+        },
+        {
+          "id": "t8.4-3",
+          "q": "En Palmer, ¿qué diente designa la letra E?",
+          "opciones": [
+            "El incisivo central temporal",
+            "El canino temporal",
+            "El segundo molar temporal superior derecho únicamente",
+            "El segundo molar temporal en cualquier cuadrante"
+          ],
+          "correcta": 3,
+          "explicacion": "En Palmer las letras A a E indican la posición del diente temporal desde la línea media; la E es siempre el segundo molar temporal, y el símbolo indica el cuadrante."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "ISO 3950:2016, Dentistry — Designation system for teeth and areas of the oral cavity",
+          "autor": "International Organization for Standardization",
+          "anio": 2016
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en descripciones de los sistemas de notación dental de Zsigmondy-Palmer, FDI y universal",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "8.5",
+      "titulo": "La numeración en la práctica: odontograma, expediente y seguridad del paciente",
+      "minutos": 16,
+      "enPocasPalabras": "El número de cada diente se usa todos los días para llenar el odontograma, el dibujo de la boca donde se anota qué tiene cada diente. Un número equivocado puede llevar a tratar el diente que no era. Por eso el equipo dental revisa varias veces el número, la radiografía y lo que dice el paciente antes de cualquier procedimiento.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los sistemas de numeración no son un ejercicio de memoria: son la herramienta con la que se construye el **registro clínico**. Cada hallazgo, diagnóstico, plan y procedimiento queda asociado a un diente concreto, y ese vínculo debe mantenerse intacto desde la primera consulta hasta años después, cuando otro profesional lea el expediente. En este tema verás cómo se aplica la numeración en el odontograma, cómo se resuelven las situaciones que no encajan en la boca «ideal» y por qué la identificación correcta del diente es una cuestión de **seguridad del paciente**."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El odontograma"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **odontograma** es la representación gráfica de las arcadas en la que se registra el estado de cada diente. Se dibuja como ves al paciente de frente: la arcada superior arriba, la inferior abajo, el lado derecho del paciente a tu izquierda. Existen dos estilos principales:\n\n- **Anatómico:** cada diente se dibuja con su silueta de corona y raíz. Permite anotar hallazgos radiculares, como tratamientos de conductos o lesiones periapicales.\n- **Geométrico:** cada diente se representa con un recuadro dividido en **cinco áreas** que corresponden a las caras vestibular, lingual o palatina, mesial, distal y oclusal o incisal. Es rápido de llenar y muy usado para registrar caries y restauraciones por superficie.\n\nMuchos formatos combinan ambos y añaden una fila para la dentición temporal, de modo que el mismo documento sirve para niños en dentición mixta. Cada institución define sus símbolos y colores; en muchas escuelas de América Latina es habitual usar **rojo** para lo que requiere tratamiento y **azul** para lo ya realizado, pero lo importante es que el expediente incluya la **simbología** que se usó, para que cualquier lector la interprete."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m08/d5",
+          "pie": "Representación geométrica de un diente posterior en el odontograma: cinco áreas para cinco caras.",
+          "descripcion": "Un cuadrado con un cuadrado más pequeño en el centro y cuatro trapecios alrededor, como en un odontograma geométrico de un molar superior derecho. El cuadrado central corresponde a la cara oclusal; el trapecio superior a la cara vestibular; el inferior a la palatina; el trapecio que queda hacia la línea media a la cara mesial y el opuesto a la distal. Al lado, la misma figura para un diente del lado izquierdo, donde mesial y distal intercambian posición, con una flecha que señala hacia la línea media en ambos casos.",
+          "elementos": [
+            "Oclusal o incisal (centro)",
+            "Vestibular",
+            "Palatina o lingual",
+            "Mesial (hacia la línea media)",
+            "Distal",
+            "Mesial cambia de lado según el cuadrante"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "El expediente estomatológico en la norma",
+          "md": "En México, la **NOM-013-SSA2-2015**, *Para la prevención y control de enfermedades bucales*, establece los criterios de atención estomatológica e incluye disposiciones sobre la historia clínica y las notas de evolución que deben integrar el expediente. La **NOM-004-SSA3-2012**, *Del expediente clínico*, vigente según el Catálogo Mexicano de Normas, remite el expediente odontológico a lo que dispone la NOM-013. Ninguna de las dos te exime de lo esencial: que cada registro identifique sin ambigüedad el diente y la superficie, con un sistema declarado. Antes de diseñar formatos o citar numerales específicos, consulta el texto vigente en el Diario Oficial de la Federación."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/13",
+          "proporcion": "4:3",
+          "alt": "Asistente dental con guantes y cubrebocas registra datos en una tableta junto a la unidad dental, sin texto visible en la pantalla.",
+          "pie": "El registro se hace en el momento, dictado por el operador y confirmado por quien escribe.",
+          "prompt": "Fotografía realista en un consultorio dental limpio y luminoso, una asistente dental con cubrebocas, gorro, lentes de protección, bata y guantes de nitrilo sostiene una tableta con una funda de plástico protectora junto a la unidad dental, la pantalla muestra siluetas esquemáticas de dientes sin letras ni números legibles, al fondo desenfocado un operador con equipo de protección completo frente a un paciente reclinado del que no se ve el rostro, luz natural difusa, colores naturales. Evitar: texto legible, números legibles, logotipos, marcas comerciales, rostros descubiertos, manos sin guantes, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando la boca no es la del libro"
+        },
+        {
+          "tipo": "texto",
+          "md": "La regla de oro es la que ya conoces: **el número sigue la identidad del diente, no su posición**. Aplicarla exige reconocer la morfología de cada diente y, a menudo, confirmar con radiografías. Estas son las situaciones que más dudas generan:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Situaciones especiales y cómo registrarlas",
+          "columnas": [
+            "Situación",
+            "Qué ocurre",
+            "Cómo se registra"
+          ],
+          "filas": [
+            [
+              "Agenesia",
+              "Un diente nunca se formó, por ejemplo un incisivo lateral superior o un segundo premolar",
+              "Se anota el código del diente ausente con el símbolo de ausencia y la causa, confirmada radiográficamente"
+            ],
+            [
+              "Diente temporal retenido",
+              "El temporal persiste más allá de su edad de exfoliación, a veces por agenesia o retención del sucesor",
+              "Se registra con su código temporal (por ejemplo 53) aunque el paciente sea adulto, y se anota la situación del permanente"
+            ],
+            [
+              "Transposición",
+              "Dos dientes intercambian posición; la más común en el maxilar es la de canino y primer premolar",
+              "Cada diente conserva su propio código y se describe la transposición en notas"
+            ],
+            [
+              "Diente supernumerario",
+              "Diente adicional, como el mesiodens entre los incisivos centrales superiores",
+              "Se describe su localización junto al código del diente vecino, según la convención de la institución"
+            ],
+            [
+              "Migración o inclinación",
+              "Un molar se inclina hacia un espacio de extracción",
+              "Conserva su código; el diente extraído se registra como ausente"
+            ]
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Un canino que no aparece",
+          "situacion": "Una adolescente de 14 años acude a revisión. En el lado superior derecho observas, de la línea media hacia distal: incisivo central permanente, incisivo lateral permanente, un diente pequeño, blanco y de corona corta con forma de canino, primer premolar, segundo premolar y primer molar. En el lado izquierdo, el canino permanente ya erupcionó. La radiografía muestra el canino permanente derecho incluido en el paladar.",
+          "opciones": [
+            {
+              "texto": "Registrar el diente pequeño como 13, porque ocupa el lugar del canino permanente.",
+              "correcta": false,
+              "retro": "El número debe seguir la identidad del diente. Ese diente es un canino temporal y el 13 está incluido en el hueso."
+            },
+            {
+              "texto": "Registrar el diente pequeño como 53 retenido y el 13 como incluido en posición palatina.",
+              "correcta": true,
+              "retro": "Correcto: el canino temporal conserva su código temporal y el permanente se registra con su propio código y su situación."
+            },
+            {
+              "texto": "No registrar nada hasta que el canino permanente erupcione.",
+              "correcta": false,
+              "retro": "Los hallazgos deben registrarse en el momento; omitirlos impide dar seguimiento y referir a tiempo."
+            },
+            {
+              "texto": "Registrar el diente pequeño como supernumerario.",
+              "correcta": false,
+              "retro": "Un canino temporal retenido no es un diente adicional: forma parte de la dentición temporal normal que no exfolió."
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Referencias, laboratorio y programas clínicos"
+        },
+        {
+          "tipo": "texto",
+          "md": "El número del diente viaja fuera del consultorio con más frecuencia de la que imaginas: en una **referencia** al endodoncista o al cirujano, en la **orden de trabajo** para el laboratorio dental, en la solicitud de una radiografía a un gabinete externo y en los reportes que generan los **programas clínicos**. En cada uno de esos pasos puede cambiar el sistema de numeración sin que nadie lo note. Un laboratorio que trabaja con clientes estadounidenses puede asumir el sistema universal; un programa importado puede venir configurado así de origen; un gabinete puede usar plantillas con el FDI.\n\nTres hábitos reducen el riesgo: **declarar el sistema** en cada documento («numeración FDI, ISO 3950»), **acompañar el número con el nombre del diente** cuando la indicación implica un procedimiento irreversible y **revisar la configuración del software** al instalarlo o actualizarlo, incluida la forma en que muestra el odontograma y numera la dentición temporal. Cuando recibas un documento externo, aplica la misma desconfianza sana: si el número y la descripción no coinciden, la duda se resuelve antes de actuar, nunca después."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El diente correcto: una cuestión de seguridad"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **cirugía en el sitio equivocado** es uno de los eventos adversos que las iniciativas de seguridad del paciente consideran prevenibles, y en odontología su forma más conocida es la **extracción del diente equivocado**. Suele ser resultado de una cadena de fallas pequeñas: un sistema de numeración no declarado, una orden de referencia ambigua, una radiografía montada al revés, un dictado mal escuchado o la prisa.\n\nPor eso muchos servicios han adaptado a la odontología las listas de verificación quirúrgica, como la promovida por la Organización Mundial de la Salud, que incluyen una **pausa** antes de iniciar: el equipo confirma la identidad del paciente, el procedimiento y el diente, compara la orden con el odontograma y la radiografía, y, cuando es posible, el paciente confirma qué diente se tratará."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Verificación del diente antes de un procedimiento (concepto)",
+          "pasos": [
+            {
+              "titulo": "Revisar la orden",
+              "md": "Confirma qué sistema de numeración usa la indicación o la referencia y tradúcelo al de tu institución si es necesario."
+            },
+            {
+              "titulo": "Comparar con la radiografía",
+              "md": "Ubica el diente en la radiografía actual, verificando su orientación y el lado."
+            },
+            {
+              "titulo": "Contar en boca",
+              "md": "Identifica el diente en la boca por su morfología, no solo contando desde la línea media."
+            },
+            {
+              "titulo": "Pausa del equipo",
+              "md": "El operador nombra en voz alta el código y la descripción anatómica; la asistente confirma con el expediente."
+            },
+            {
+              "titulo": "Confirmación del paciente",
+              "md": "Cuando es posible, el paciente señala o confirma el diente que motivó la consulta."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cuidado con el espejo y con la radiografía",
+          "md": "Al trabajar con visión indirecta, el espejo invierte la imagen y es fácil perder la referencia del lado. Con las radiografías ocurre algo similar: si una periapical se monta o se visualiza al revés, el lado se invierte. Antes de un procedimiento irreversible, **verifica siempre la orientación de la imagen** (en el montaje labial, el más difundido, la radiografía se ve como si estuvieras frente al paciente) y no confíes solo en la memoria de lo que viste en la consulta anterior."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La numeración en la identificación forense",
+          "md": "En la identificación de víctimas de desastres, la guía de INTERPOL considera el **análisis dental comparativo** uno de los identificadores primarios, junto con las huellas dactilares y el ADN. El procedimiento compara los registros dentales previos a la muerte (expedientes, odontogramas, radiografías) con los hallazgos posteriores. La comparación solo es posible si los registros previos son **completos, legibles y con un sistema de numeración inequívoco**. Un expediente bien llevado, con códigos correctos, restauraciones por superficie y radiografías fechadas, puede ser decisivo para devolver la identidad a una persona y dar certeza a su familia."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/14",
+          "proporcion": "16:9",
+          "alt": "Operador y asistente con equipo de protección completo revisan juntos una radiografía en un monitor antes de iniciar un procedimiento.",
+          "pie": "La pausa de verificación: el equipo confirma el diente con la radiografía y el expediente antes de empezar.",
+          "prompt": "Fotografía realista en un consultorio dental moderno, un odontólogo y una asistente con cubrebocas, gorro, lentes de protección, batas y guantes de nitrilo observan juntos un monitor que muestra una radiografía periapical en escala de grises sin texto, uno de ellos señala la imagen sin tocar la pantalla, al fondo la unidad dental con un paciente reclinado cubierto con babero del que no se ve el rostro, iluminación clínica blanca, colores naturales. Evitar: texto legible, números legibles, logotipos, marcas comerciales, rostros descubiertos, manos sin guantes, sangre, instrumental en uso."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m08/15",
+          "proporcion": "4:3",
+          "alt": "Vista intraoral frontal de un adolescente con un canino temporal superior retenido junto a un incisivo lateral permanente.",
+          "pie": "Un canino temporal retenido conserva su código temporal aunque el paciente sea adolescente.",
+          "prompt": "Fotografía clínica intraoral realista en vista frontal con retractores de labios transparentes de un adolescente con dentición permanente, en el lado superior derecho del paciente un canino temporal pequeño, de corona corta y más blanca, ubicado entre el incisivo lateral permanente y el primer premolar, el resto de los dientes permanentes alineados y sanos, encía rosa sana, iluminación clínica con flash, colores naturales, alta nitidez. Evitar: texto, números, etiquetas, logotipos, rostro completo, sangre, caries extensas, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** revisa el formato de odontograma que usa tu clínica o tu facultad y comprueba tres cosas: que indique el sistema de numeración, que tenga una simbología impresa o anexa y que permita registrar la dentición temporal. Si falta alguna, propón agregarla. Es un cambio sencillo que reduce errores de registro para todo el equipo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Odontograma geométrico",
+          "definicion": "Representación de cada diente con cinco áreas que corresponden a sus caras, usada para registrar hallazgos por superficie."
+        },
+        {
+          "termino": "Agenesia dental",
+          "definicion": "Ausencia de un diente porque nunca se formó."
+        },
+        {
+          "termino": "Transposición dental",
+          "definicion": "Intercambio de posición entre dos dientes de la arcada, con mayor frecuencia canino y primer premolar superiores."
+        },
+        {
+          "termino": "Mesiodens",
+          "definicion": "Diente supernumerario localizado entre los incisivos centrales superiores."
+        },
+        {
+          "termino": "Diente incluido",
+          "definicion": "Diente que no ha erupcionado y permanece dentro del hueso después de su edad esperada de erupción."
+        },
+        {
+          "termino": "Montaje labial",
+          "definicion": "Forma de montar o visualizar radiografías intraorales como si el observador estuviera frente al paciente."
+        },
+        {
+          "termino": "Pausa de verificación",
+          "definicion": "Momento previo a un procedimiento en el que el equipo confirma paciente, procedimiento y sitio."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.5-1",
+          "q": "Un paciente adulto conserva el segundo molar temporal inferior izquierdo porque no se formó el segundo premolar. ¿Cómo se registra ese molar en FDI?",
+          "opciones": [
+            "35",
+            "75",
+            "36",
+            "85"
+          ],
+          "correcta": 1,
+          "explicacion": "El diente conserva su código temporal, 75, aunque el paciente sea adulto; el 35 se registra como ausente por agenesia."
+        },
+        {
+          "id": "t8.5-2",
+          "q": "En un odontograma geométrico de un diente posterior, ¿qué representa el área central?",
+          "opciones": [
+            "La cara oclusal",
+            "La cara mesial",
+            "La raíz",
+            "La cara vestibular"
+          ],
+          "correcta": 0,
+          "explicacion": "El cuadro central representa la cara oclusal; las cuatro áreas periféricas, las caras vestibular, lingual o palatina, mesial y distal."
+        },
+        {
+          "id": "t8.5-3",
+          "q": "¿Qué medida reduce más el riesgo de tratar el diente equivocado?",
+          "opciones": [
+            "Confiar en la memoria de la consulta anterior",
+            "Contar dientes desde la línea media sin mirar la radiografía",
+            "Usar siempre números sin indicar el sistema",
+            "Hacer una pausa para confirmar orden, radiografía, diente en boca y paciente"
+          ],
+          "correcta": 3,
+          "explicacion": "La verificación cruzada antes del procedimiento detecta errores de numeración, de orientación y de comunicación."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+          "autor": "Secretaría de Salud",
+          "anio": 2016
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-004-SSA3-2012, Del expediente clínico",
+          "autor": "Secretaría de Salud",
+          "anio": 2012
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "WHO Surgical Safety Checklist",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2009
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Disaster Victim Identification Guide",
+          "autor": "INTERPOL"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en la nomenclatura dental y prácticas de seguridad del paciente",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: nombrar y numerar los dientes",
+    "pistas": [
+      {
+        "palabra": "CUADRANTE",
+        "pista": "Cada una de las cuatro partes en que se divide la boca; en el FDI lo indica el primer dígito."
+      },
+      {
+        "palabra": "MESIAL",
+        "pista": "Cara proximal del diente más cercana a la línea media."
+      },
+      {
+        "palabra": "DISTAL",
+        "pista": "Cara proximal del diente más alejada de la línea media."
+      },
+      {
+        "palabra": "PALATINA",
+        "pista": "Nombre de la cara de los dientes superiores que mira hacia el paladar."
+      },
+      {
+        "palabra": "ODONTOGRAMA",
+        "pista": "Representación gráfica de las arcadas donde se registra el estado de cada diente."
+      },
+      {
+        "palabra": "UNIVERSAL",
+        "pista": "Sistema respaldado por la ADA que numera los dientes permanentes del 1 al 32."
+      },
+      {
+        "palabra": "PALMER",
+        "pista": "Apellido asociado a la notación que usa símbolos de ángulo para indicar el cuadrante."
+      },
+      {
+        "palabra": "ZSIGMONDY",
+        "pista": "Odontólogo que en 1861 propuso dividir la boca con una cruz para anotar los dientes."
+      },
+      {
+        "palabra": "AGENESIA",
+        "pista": "Ausencia de un diente porque nunca llegó a formarse."
+      },
+      {
+        "palabra": "SUPERNUMERARIO",
+        "pista": "Diente adicional al número normal de la dentición, como el mesiodens."
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m08-p01",
+        "q": "¿Cuántos dientes forman la dentición permanente completa?",
+        "opciones": [
+          "20",
+          "32",
+          "28",
+          "36"
+        ],
+        "correcta": 1,
+        "explicacion": "La fórmula permanente es I 2/2, C 1/1, PM 2/2, M 3/3 por hemiarcada: 16 por arcada y 32 en total."
+      },
+      {
+        "id": "m08-p02",
+        "q": "En el sistema FDI, ¿qué diente es el 46?",
+        "opciones": [
+          "Primer molar superior derecho",
+          "Primer molar inferior izquierdo",
+          "Segundo premolar inferior derecho",
+          "Primer molar inferior derecho permanente"
+        ],
+        "correcta": 3,
+        "explicacion": "El 4 indica el cuadrante inferior derecho permanente y el 6, el primer molar."
+      },
+      {
+        "id": "m08-p03",
+        "q": "¿Qué código FDI corresponde al diente 8 del sistema universal?",
+        "opciones": [
+          "11",
+          "18",
+          "21",
+          "41"
+        ],
+        "correcta": 0,
+        "explicacion": "El 8 universal es el incisivo central superior derecho: 9 − n = 8, de modo que n = 1 en el cuadrante 1, es decir, 11."
+      },
+      {
+        "id": "m08-p04",
+        "q": "En el sistema FDI, ¿con qué primeros dígitos se designan los cuadrantes de la dentición temporal?",
+        "opciones": [
+          "Del 1 al 4, igual que la permanente",
+          "Del 0 al 3",
+          "Del 5 al 8",
+          "Con las letras A a D"
+        ],
+        "correcta": 2,
+        "explicacion": "Los cuadrantes temporales son 5, 6, 7 y 8, en las mismas posiciones que los permanentes 1, 2, 3 y 4."
+      },
+      {
+        "id": "m08-p05",
+        "q": "¿A qué código FDI corresponde la letra K del sistema universal?",
+        "opciones": [
+          "55",
+          "75",
+          "85",
+          "65"
+        ],
+        "correcta": 1,
+        "explicacion": "La K es el segundo molar temporal inferior izquierdo, el primer diente del recorrido inferior: 75 en FDI."
+      },
+      {
+        "id": "m08-p06",
+        "q": "Un paciente trae un resumen de su dentista en Estados Unidos que indica «#3 crown». ¿Qué diente tiene la corona en FDI?",
+        "opciones": [
+          "16",
+          "13",
+          "26",
+          "46"
+        ],
+        "correcta": 0,
+        "explicacion": "El 3 universal está en el cuadrante superior derecho: 9 − n = 3, n = 6. Es el primer molar superior derecho, 16."
+      },
+      {
+        "id": "m08-p07",
+        "q": "¿Qué código FDI equivale a 3┐ en el sistema de Palmer?",
+        "opciones": [
+          "13",
+          "23",
+          "33",
+          "43"
+        ],
+        "correcta": 3,
+        "explicacion": "El símbolo ┐ después del número indica el cuadrante inferior derecho; el 3 es el canino. Equivale a 43."
+      },
+      {
+        "id": "m08-p08",
+        "q": "¿Cómo se llama la cara de los dientes superiores que mira hacia el paladar?",
+        "opciones": [
+          "Vestibular",
+          "Mesial",
+          "Palatina",
+          "Distal"
+        ],
+        "correcta": 2,
+        "explicacion": "En la arcada superior, la cara lingual se denomina palatina porque mira hacia el paladar."
+      },
+      {
+        "id": "m08-p09",
+        "q": "¿Qué número universal corresponde al 36 del sistema FDI?",
+        "opciones": [
+          "19",
+          "14",
+          "30",
+          "3"
+        ],
+        "correcta": 0,
+        "explicacion": "En el cuadrante 3, universal = 25 − n = 25 − 6 = 19."
+      },
+      {
+        "id": "m08-p10",
+        "q": "¿Qué norma internacional adopta el sistema de dos dígitos para designar dientes y áreas de la cavidad bucal?",
+        "opciones": [
+          "ISO 9001",
+          "ISO 3950",
+          "ISO 14001",
+          "ISO 4049"
+        ],
+        "correcta": 1,
+        "explicacion": "La ISO 3950, cuya edición vigente es de 2016, adopta el sistema de dos dígitos desarrollado por la FDI."
+      },
+      {
+        "id": "m08-p11",
+        "q": "Un niño de 8 años tiene el 84 en boca. ¿Qué diente permanente lo reemplazará?",
+        "opciones": [
+          "46",
+          "34",
+          "Ninguno, porque el 84 es permanente",
+          "44"
+        ],
+        "correcta": 3,
+        "explicacion": "El 84 es el primer molar temporal inferior derecho y su sucesor es el primer premolar inferior derecho, 44."
+      },
+      {
+        "id": "m08-p12",
+        "q": "¿Por qué se recomienda leer el código FDI 18 como «uno-ocho» y no como «dieciocho»?",
+        "opciones": [
+          "Porque así lo exige la ADA",
+          "Porque «dieciocho» corresponde al sistema de Palmer",
+          "Porque deja claro que son dos datos: cuadrante y diente",
+          "Porque el 18 no existe en el sistema FDI"
+        ],
+        "correcta": 2,
+        "explicacion": "Leer los dígitos por separado evita confusiones al dictar y recuerda que el primero es el cuadrante y el segundo el diente."
+      },
+      {
+        "id": "m08-p13",
+        "q": "¿Qué dientes permanentes se llaman accesionales?",
+        "opciones": [
+          "Los incisivos",
+          "Los molares",
+          "Los premolares",
+          "Los caninos"
+        ],
+        "correcta": 1,
+        "explicacion": "Los molares permanentes erupcionan por detrás de la dentición temporal sin reemplazar a ningún diente."
+      },
+      {
+        "id": "m08-p14",
+        "q": "Recibes una referencia que dice «extraer el 18» sin indicar el sistema. El paciente tiene todos sus dientes. ¿Qué haces?",
+        "opciones": [
+          "Confirmar el sistema con quien refiere y verificar con la radiografía antes de actuar",
+          "Extraer el tercer molar superior derecho, porque en México se usa el FDI",
+          "Extraer el segundo molar inferior izquierdo, porque las referencias usan el universal",
+          "Extraer el diente con más caries del lado derecho"
+        ],
+        "correcta": 0,
+        "explicacion": "El 18 es el tercer molar superior derecho en FDI, pero el segundo molar inferior izquierdo en el universal. Sin sistema declarado, se confirma antes de cualquier procedimiento."
+      },
+      {
+        "id": "m08-p15",
+        "q": "¿Qué código FDI corresponde al 24 del sistema universal?",
+        "opciones": [
+          "41",
+          "24",
+          "31",
+          "34"
+        ],
+        "correcta": 2,
+        "explicacion": "El 24 universal es el incisivo central inferior izquierdo: en el cuadrante 3, n = 25 − 24 = 1, es decir, 31."
+      },
+      {
+        "id": "m08-p16",
+        "q": "¿Qué letra del sistema universal corresponde al 62 del sistema FDI?",
+        "opciones": [
+          "B",
+          "I",
+          "L",
+          "G"
+        ],
+        "correcta": 3,
+        "explicacion": "El 62 es el incisivo lateral temporal superior izquierdo. En el recorrido F (61), G (62), H (63), I (64), J (65), le corresponde la G."
+      },
+      {
+        "id": "m08-p17",
+        "q": "Una mujer de 25 años conserva el canino temporal superior derecho y el permanente está incluido en el paladar. ¿Cómo se registra el canino temporal?",
+        "opciones": [
+          "53",
+          "13",
+          "63",
+          "Supernumerario junto al 12"
+        ],
+        "correcta": 0,
+        "explicacion": "El diente conserva su código temporal, 53, aunque la paciente sea adulta; el 13 se registra como incluido."
+      },
+      {
+        "id": "m08-p18",
+        "q": "¿Cuál es la transposición dental más frecuente en el maxilar superior?",
+        "opciones": [
+          "Incisivo central e incisivo lateral",
+          "Canino y primer premolar",
+          "Primer y segundo molar",
+          "Segundo premolar y primer molar"
+        ],
+        "correcta": 1,
+        "explicacion": "La transposición de canino y primer premolar es la más común en el maxilar; cada diente conserva su propio código."
+      },
+      {
+        "id": "m08-p19",
+        "q": "¿Qué sigla describe una lesión o restauración que abarca las caras mesial, oclusal y distal?",
+        "opciones": [
+          "MO",
+          "DO",
+          "Clase V",
+          "MOD"
+        ],
+        "correcta": 3,
+        "explicacion": "MOD significa mesio-ocluso-distal; MO y DO abarcan solo dos caras."
+      },
+      {
+        "id": "m08-p20",
+        "q": "Un expediente estadounidense menciona el diente 27. ¿Qué diente es en FDI?",
+        "opciones": [
+          "27, segundo molar superior izquierdo",
+          "37, segundo molar inferior izquierdo",
+          "43, canino inferior derecho",
+          "33, canino inferior izquierdo"
+        ],
+        "correcta": 2,
+        "explicacion": "El 27 universal está en el cuadrante 4: n = 27 − 24 = 3. Es el canino inferior derecho, 43 en FDI."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "oficial",
+      "titulo": "ISO 3950:2016, Dentistry — Designation system for teeth and areas of the oral cavity",
+      "autor": "International Organization for Standardization",
+      "anio": 2016
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+      "autor": "Nelson S. J. (Elsevier)"
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "CDT: Code on Dental Procedures and Nomenclature",
+      "autor": "American Dental Association"
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+      "autor": "Secretaría de Salud",
+      "anio": 2016
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "Oral health surveys: basic methods",
+      "autor": "Organización Mundial de la Salud",
+      "anio": 2013
+    }
+  ]
+}

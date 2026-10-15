@@ -7,11 +7,12 @@ import {
   leerDoc,
   perfilConDefectos,
 } from '../datos.js';
+import { ESTADOS_ACADEMIA, estadoEfectivo, idRevision, metricasModulo } from '../lib/academia.js';
 import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMaterial, validarPreguntas } from '../lib/esquemas.js';
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
 import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
-import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, textoRequerido, unoDe, url } from '../lib/validacion.js';
+import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, texto, textoRequerido, unoDe, url } from '../lib/validacion.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
 
@@ -494,6 +495,49 @@ export function rutasAdmin(ctx) {
       return nuevo;
     });
     res.json({ id, ...resultado });
+  }));
+
+  // ---------- Academia: revisión editorial de módulos ----------
+  // El estado efectivo de un módulo es la revisión guardada aquí; si no existe, el "estado" del JSON.
+  const filaAcademia = (p, mm, revisiones) => {
+    const m = ctx.academia.modulo(p.id, mm.n);
+    const revision = revisiones.get(idRevision(p.id, mm.n)) ?? null;
+    return {
+      n: mm.n,
+      titulo: mm.titulo,
+      existe: !!m,
+      estadoJson: m?.estado ?? null,
+      estado: estadoEfectivo(m, revision),
+      revision: revision ? { estado: revision.estado, revisor: revision.revisor ?? null, fecha: revision.fecha ?? null, nota: revision.nota ?? '' } : null,
+      ...(m ? metricasModulo(m) : { palabras: 0, figuras: 0, actividades: 0, temas: 0, preguntas: 0 }),
+    };
+  };
+
+  r.get('/admin/academia', h(async (req, res) => {
+    const snap = await db.collection(COL.academiaRevisiones).get();
+    const revisiones = new Map(snap.docs.map((d) => [d.id, d.data()]));
+    const programas = ctx.academia.catalogo().programas.map((p) => ({
+      id: p.id,
+      numero: p.numero ?? null,
+      titulo: p.titulo,
+      area: p.area ?? '',
+      modulos: p.modulos.map((mm) => filaAcademia(p, mm, revisiones)),
+    }));
+    res.json({ programas });
+  }));
+
+  r.patch('/admin/academia/:programa/:n', h(async (req, res) => {
+    const p = ctx.academia.catalogo().programas.find((x) => x.id === String(req.params.programa));
+    const n = Number(req.params.n);
+    const mm = p?.modulos.find((x) => x.n === n);
+    if (!p || !mm) throw noEncontrado('Ese módulo no existe en el catálogo de la Academia.');
+    if (!ctx.academia.modulo(p.id, n)) throw conflicto('Ese módulo todavía no tiene contenido escrito.', 'modulo_sin_contenido');
+    const b = cuerpo(req);
+    const estado = unoDe(b.estado, ESTADOS_ACADEMIA, { campo: 'estado', requerido: true });
+    const nota = texto(b.nota, { campo: 'nota', max: LIMITES.medio, multilinea: true }) ?? '';
+    const revision = { programa: p.id, modulo: n, estado, revisor: req.usuario.uid, revisorEmail: req.usuario.email || '', fecha: ahoraISO(), nota };
+    await db.collection(COL.academiaRevisiones).doc(idRevision(p.id, n)).set(revision);
+    res.json({ programa: p.id, ...filaAcademia(p, mm, new Map([[idRevision(p.id, n), revision]])) });
   }));
 
   // ---------- Avisos ----------

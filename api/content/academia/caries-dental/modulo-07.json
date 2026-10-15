@@ -1,0 +1,986 @@
+{
+  "programa": "caries-dental",
+  "modulo": 7,
+  "titulo": "Dieta y azúcares libres: la guía de la OMS en la práctica",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los azúcares libres son el factor de la dieta que más pesa en la caries. En este módulo aprenderás a distinguir los azúcares libres de los que vienen dentro de la fruta entera y la leche, qué recomienda la guía de la Organización Mundial de la Salud de 2015 y en qué evidencia se apoya, por qué la frecuencia de consumo importa tanto como la cantidad, cómo leer etiquetas y sellos de advertencia en México y cómo convertir todo eso en una asesoría dietética breve, respetuosa y medible en el consultorio.",
+  "objetivos": [
+    "Definir azúcares libres y distinguirlos de los azúcares intrínsecos de la fruta entera y de la lactosa de la leche.",
+    "Explicar las dos recomendaciones de la guía de la OMS de 2015 y la evidencia dental que las respalda.",
+    "Calcular el porcentaje de la energía diaria que aportan los azúcares libres a partir de un registro de consumo.",
+    "Relacionar la frecuencia y el momento de consumo de azúcares con la caída del pH de la biopelícula.",
+    "Interpretar el etiquetado frontal mexicano y la lista de ingredientes para identificar azúcares añadidos.",
+    "Aplicar un diario de dieta y metas pequeñas y medibles en la asesoría dietética del paciente."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m07/portada",
+    "proporcion": "16:9",
+    "alt": "Mesa de cocina con alimentos frescos de un lado y bebidas azucaradas y dulces del otro, vista desde arriba.",
+    "prompt": "Fotografía cenital de gran formato sobre una mesa de madera clara en una cocina mexicana luminosa, dividida en dos mitades de manera natural: a la izquierda fruta entera de temporada como mandarinas, plátanos y jícama en bastones, un vaso de agua natural, queso fresco y nueces; a la derecha una botella de refresco sin etiqueta, jugo envasado sin marca, pan dulce y caramelos sueltos. Luz natural suave de ventana lateral, sombras ligeras, colores naturales y apetitosos, composición ordenada y equilibrada. Evitar: texto, marcas comerciales, logotipos, etiquetas legibles, personas, manos, dientes, comida en mal estado, colores saturados artificiales."
+  },
+  "temas": [
+    {
+      "n": "7.1",
+      "titulo": "Azúcares libres: qué son y qué no son",
+      "minutos": 13,
+      "enPocasPalabras": "Los azúcares libres son los que se agregan a la comida y la bebida, más los de la miel, los jarabes y los jugos. Son los que más dañan los dientes. El azúcar que viene dentro de la fruta entera y la leche natural no cuenta como azúcar libre.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En los módulos anteriores viste que la caries es una enfermedad de la biopelícula que se activa cuando las bacterias reciben azúcares que pueden fermentar con facilidad. Ahora toca mirar con lupa ese combustible. No todos los azúcares de la dieta se comportan igual en la boca, y no todos se cuentan igual en las recomendaciones de salud. Por eso la Organización Mundial de la Salud (OMS) usa un concepto preciso: **azúcares libres**.\n\nSegún la guía de la OMS de 2015, los azúcares libres son los **monosacáridos** (como la glucosa y la fructosa) y los **disacáridos** (como la sacarosa o azúcar de mesa) que el fabricante, el cocinero o el propio consumidor **añaden** a alimentos y bebidas, más los azúcares **naturalmente presentes en la miel, los jarabes, los jugos de fruta y los concentrados de jugo**. Esta definición es la que debes usar cuando hables de la guía con tus pacientes o colegas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/01",
+          "proporcion": "4:3",
+          "alt": "Comparación entre una naranja entera, un vaso de jugo de naranja y una cucharada de miel sobre una barra de cocina.",
+          "pie": "La naranja entera aporta azúcares intrínsecos dentro de su estructura; el jugo y la miel aportan azúcares libres.",
+          "prompt": "Fotografía de producto sobre una barra de cocina de cuarzo blanco, tres elementos alineados de izquierda a derecha con separación uniforme: una naranja entera con cáscara y hojas verdes, un vaso de vidrio transparente lleno de jugo de naranja recién exprimido y una cuchara de madera con miel dorada que escurre lentamente sobre un plato pequeño. Fondo neutro desenfocado de cocina luminosa, luz natural lateral suave, enfoque nítido en los tres elementos, colores cálidos y naturales. Evitar: texto, etiquetas, marcas, logotipos, personas, manos, fruta dañada, reflejos exagerados, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que no entra en la definición"
+        },
+        {
+          "tipo": "texto",
+          "md": "La guía de la OMS **no se aplica** a los azúcares que están dentro de las frutas y verduras frescas enteras ni a los azúcares propios de la leche, principalmente la **lactosa**. La razón que da la OMS es que no hay evidencia de efectos adversos al consumirlos. A esos azúcares que forman parte de la estructura celular de un alimento se les llama a menudo **azúcares intrínsecos**.\n\nLa diferencia tiene sentido biológico. Cuando muerdes una manzana, el azúcar está encerrado en células vegetales rodeadas de fibra; tienes que masticar, lo que estimula la saliva, y el azúcar se libera de forma gradual. Cuando bebes un jugo, ese mismo azúcar llega ya disuelto, sin fibra, en un volumen que equivale a varias piezas de fruta y en pocos segundos. Por eso la OMS cuenta el azúcar del jugo de fruta como libre, aunque sea natural y no tenga azúcar añadido. La lactosa, por su parte, es fermentada por las bacterias de la placa con menos intensidad que la sacarosa, y la leche aporta calcio, fosfato y proteínas que favorecen la remineralización."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "«Natural» no significa «sin azúcar libre»",
+          "md": "Muchas familias ofrecen jugo de fruta, miel o piloncillo pensando que son opciones saludables para los dientes porque son «naturales». Para la boca y para la guía de la OMS, el azúcar del jugo, la miel, el piloncillo, el jarabe de agave y el azúcar mascabado se comportan como azúcares libres. Corrige el mensaje con tacto: no se trata de prohibir la fruta, sino de preferirla entera."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los nombres del azúcar"
+        },
+        {
+          "tipo": "texto",
+          "md": "La sacarosa sigue siendo el azúcar más cariogénico de la dieta: las bacterias de la biopelícula la fermentan con rapidez y, además, la usan para fabricar **polisacáridos extracelulares** que hacen la placa más pegajosa y porosa. Pero la glucosa, la fructosa, la maltosa y los jarabes de glucosa o de maíz de alta fructosa también se fermentan y bajan el pH de la placa. Para el diente, el «azúcar» tiene muchos nombres.\n\nLos **almidones** (tortilla, pan, arroz, papa) son carbohidratos complejos que no forman parte de los azúcares libres. La amilasa salival los rompe parcialmente en la boca y pueden contribuir a la caries, sobre todo los almidones muy procesados que se quedan pegados entre los dientes. Su potencial es menor que el de la sacarosa, pero la combinación de almidón cocido con azúcar, como en galletas, cereales azucarados y pan dulce, es especialmente desfavorable porque reúne retención y fermentación rápida."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "¿Cuenta como azúcar libre según la OMS?",
+          "columnas": ["Alimento o ingrediente", "¿Azúcar libre?", "Por qué"],
+          "filas": [
+            ["Azúcar de mesa añadida al café", "Sí", "Es sacarosa añadida por el consumidor"],
+            ["Jugo de naranja natural sin azúcar añadido", "Sí", "La OMS incluye los azúcares naturalmente presentes en los jugos"],
+            ["Naranja entera", "No", "Azúcar intrínseco dentro de la fruta fresca"],
+            ["Miel, jarabe de agave, piloncillo", "Sí", "Miel y jarabes están incluidos en la definición"],
+            ["Leche natural sin saborizar", "No", "La lactosa de la leche está excluida"],
+            ["Leche saborizada o yogur endulzado", "En parte", "El azúcar añadido sí cuenta; la lactosa propia no"],
+            ["Tortilla de maíz", "No", "Es almidón, no azúcar libre"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m07/d1",
+          "pie": "Clasificación práctica de los azúcares de la dieta según la definición de la OMS.",
+          "descripcion": "Diagrama de árbol que parte de un recuadro superior «Azúcares de la dieta» y se divide en dos ramas: a la izquierda «Azúcares libres», con tres hojas (añadidos por fabricante, cocinero o consumidor; miel y jarabes; jugos y concentrados de fruta); a la derecha «No son azúcares libres», con dos hojas (azúcares intrínsecos de frutas y verduras enteras; lactosa de la leche). Debajo, separado por una línea punteada, un recuadro gris «Almidones: no son azúcares, pero pueden contribuir si son muy procesados y retentivos».",
+          "elementos": [
+            "Azúcares de la dieta",
+            "Azúcares libres",
+            "Añadidos por fabricante, cocinero o consumidor",
+            "Miel y jarabes",
+            "Jugos y concentrados de fruta",
+            "No son azúcares libres",
+            "Azúcares intrínsecos de frutas y verduras enteras",
+            "Lactosa de la leche",
+            "Almidones procesados"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/02",
+          "proporcion": "1:1",
+          "alt": "Distintos endulzantes en cuencos pequeños: azúcar blanca, azúcar mascabado, piloncillo, miel y jarabe.",
+          "pie": "Azúcar blanca, mascabado, piloncillo, miel y jarabe: para la biopelícula todos son azúcares fermentables.",
+          "prompt": "Fotografía cenital de estudio sobre fondo de pizarra gris mate, cinco cuencos pequeños de cerámica blanca dispuestos en círculo: azúcar blanca refinada, azúcar mascabado húmedo, un cono de piloncillo partido, miel dorada y jarabe de agave ámbar con una cucharita. Iluminación difusa uniforme, sombras suaves, enfoque nítido en toda la composición, colores naturales y cálidos, estilo editorial gastronómico limpio. Evitar: texto, etiquetas, marcas, logotipos, personas, manos, insectos, derrames sucios, colores artificiales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Un jugo, varias frutas",
+          "md": "Para llenar un vaso de jugo de naranja casero se exprimen normalmente varias naranjas. Pocas personas se comerían todas esas naranjas enteras de una sentada, pero el jugo se bebe en un par de minutos. Esa diferencia en la velocidad y en la cantidad de azúcar que llega a la boca explica por qué la OMS separa la fruta entera del jugo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dónde aparecen en la mesa mexicana"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para que el concepto sea útil en la consulta, conviene reconocer las fuentes de azúcares libres más comunes en la alimentación cotidiana de México. Algunas son evidentes, como los refrescos y los dulces; otras están tan integradas en las costumbres que el paciente ni siquiera las menciona cuando le preguntas por «cosas dulces». El café de olla con piloncillo, el atole, el champurrado, las aguas frescas preparadas con azúcar, el pan dulce del desayuno o de la merienda, los yogures bebibles y los cereales de caja forman parte de la rutina de muchas familias.\n\nNo se trata de satanizar la cocina tradicional, sino de **ubicar dónde se concentra el azúcar** para que la persona decida con información. Un agua fresca de fruta puede prepararse con menos azúcar o sin ella; un atole puede dejar de acompañar todas las cenas y reservarse para ocasiones especiales. La conversación funciona mejor cuando el paciente siente que conoces y respetas su forma de comer."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Fuentes frecuentes de azúcares libres que el paciente suele pasar por alto",
+          "items": [
+            "Café o té endulzado varias veces al día, incluido el café de olla con piloncillo.",
+            "Aguas frescas preparadas con azúcar y jugos «naturales» de fruta.",
+            "Atole, champurrado y bebidas de avena endulzadas.",
+            "Yogur bebible, leche saborizada y licuados con azúcar o miel.",
+            "Cereal de caja, barras de granola y galletas «integrales».",
+            "Salsas comerciales, aderezos y panes empacados."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El desayuno que parecía sano",
+          "md": "Una estudiante universitaria desayuna todos los días un jugo de naranja, un yogur bebible de fresa y una barra de granola, convencida de que es un desayuno saludable. Al revisarlo con su odontólogo, descubre que las tres opciones aportan azúcares libres. Cambiar el jugo por la naranja entera y el yogur endulzado por uno natural con fruta picada reduce su consumo sin cambiar el estilo de su desayuno."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "¿Libre o no libre?",
+          "instruccion": "Relaciona cada alimento con la categoría de azúcar que le corresponde según la guía de la OMS.",
+          "pares": [
+            { "a": "Refresco de cola", "b": "Azúcar libre añadido por el fabricante" },
+            { "a": "Jugo de manzana sin azúcar añadido", "b": "Azúcar libre naturalmente presente en jugos" },
+            { "a": "Plátano entero", "b": "Azúcar intrínseco de fruta fresca" },
+            { "a": "Leche natural", "b": "Lactosa, excluida de los azúcares libres" },
+            { "a": "Arroz cocido", "b": "Almidón, no es azúcar libre" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/03",
+          "proporcion": "4:3",
+          "alt": "Refrigerio escolar con fruta entera picada, agua natural y queso, en un recipiente de comida.",
+          "pie": "Un refrigerio sin azúcares libres: fruta entera, agua natural y una porción de queso.",
+          "prompt": "Fotografía cenital de un recipiente reutilizable para comida escolar con compartimentos, sobre una mesa de madera clara: rebanadas de manzana y gajos de mandarina en un compartimento, cubos de queso panela en otro, pepino en rodajas en el tercero, y junto al recipiente una botella reutilizable transparente con agua natural. Luz natural de mañana, sombras suaves, colores frescos y naturales, composición limpia y apetitosa. Evitar: texto, marcas, logotipos, etiquetas, personas, rostros, dulces, envases desechables con estampados, comida en mal estado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando preguntes por la dieta, no preguntes solo «¿come dulces?». Pregunta por **bebidas** (refresco, jugo, agua de sabor endulzada, café o té con azúcar, bebidas deportivas), por **endulzantes que la familia considera naturales** (miel, piloncillo, agave) y por **productos con almidón y azúcar juntos** (galletas, pan dulce, cereal de caja). Con esas tres preguntas detectarás la mayoría de los azúcares libres que el paciente no reconoce como tales. Anota las respuestas en el expediente: te servirán como punto de partida para el registro de dieta que verás en el tema 7.5."
+        }
+      ],
+      "glosario": [
+        { "termino": "Azúcares libres", "definicion": "Monosacáridos y disacáridos añadidos a alimentos y bebidas, más los azúcares naturalmente presentes en miel, jarabes, jugos y concentrados de fruta (definición de la OMS)." },
+        { "termino": "Azúcares intrínsecos", "definicion": "Azúcares que forman parte de la estructura celular de frutas y verduras enteras." },
+        { "termino": "Sacarosa", "definicion": "Disacárido formado por glucosa y fructosa; es el azúcar de mesa y el más cariogénico de la dieta." },
+        { "termino": "Lactosa", "definicion": "Azúcar propio de la leche; la guía de la OMS no lo cuenta como azúcar libre." },
+        { "termino": "Polisacáridos extracelulares", "definicion": "Cadenas de azúcar que las bacterias fabrican a partir de la sacarosa y que dan a la biopelícula su matriz pegajosa." },
+        { "termino": "Almidón", "definicion": "Carbohidrato complejo de cereales y tubérculos; no es azúcar libre, pero si es muy procesado puede contribuir a la caries." }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.1-1",
+          "q": "Según la OMS, ¿cuál de estos alimentos aporta azúcares libres aunque no tenga azúcar añadido?",
+          "opciones": ["Una manzana entera", "Un vaso de leche natural", "Un jugo de fruta natural", "Un plato de arroz cocido"],
+          "correcta": 2,
+          "explicacion": "La definición de la OMS incluye los azúcares naturalmente presentes en los jugos de fruta. La fruta entera, la lactosa y el almidón quedan fuera."
+        },
+        {
+          "id": "t7.1-2",
+          "q": "¿Por qué la lactosa de la leche natural no se cuenta como azúcar libre?",
+          "opciones": ["Porque la OMS no encontró evidencia de efectos adversos de los azúcares propios de la leche", "Porque las bacterias de la boca no pueden fermentarla en ningún caso", "Porque la leche siempre contiene flúor añadido", "Porque la lactosa es un almidón"],
+          "correcta": 0,
+          "explicacion": "La OMS excluye la lactosa de la leche por falta de evidencia de daño; además, la leche aporta calcio y fosfato. La lactosa sí puede fermentarse, aunque con menos intensidad que la sacarosa."
+        },
+        {
+          "id": "t7.1-3",
+          "q": "¿Qué combinación suele ser especialmente desfavorable para los dientes?",
+          "opciones": ["Fruta entera con agua natural", "Queso con verduras", "Tortilla con frijoles", "Almidón cocido con azúcar, como en galletas y pan dulce"],
+          "correcta": 3,
+          "explicacion": "El almidón procesado se retiene entre los dientes y el azúcar se fermenta con rapidez; juntos prolongan la exposición ácida."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Guideline: Sugars intake for adults and children", "autor": "Organización Mundial de la Salud", "anio": 2015 },
+        { "tipo": "academica", "titulo": "Diet and dental caries: the pivotal role of free sugars reemphasized", "autor": "Sheiham A., James W. P. T. (Journal of Dental Research)", "anio": 2015 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la guía de la OMS sobre ingesta de azúcares y textos de cariología", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "7.2",
+      "titulo": "La guía de la OMS de 2015: recomendaciones y evidencia",
+      "minutos": 14,
+      "enPocasPalabras": "La OMS recomienda que los azúcares libres sean menos del 10 % de lo que comes en el día, y si se puede, menos del 5 %. Para un adulto eso es menos de unas 12 cucharaditas, e idealmente unas 6. Una parte importante de la evidencia viene justamente de la caries.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En marzo de 2015 la OMS publicó su guía *Sugars intake for adults and children* (Ingesta de azúcares para adultos y niños). No era la primera vez que la OMS hablaba del azúcar: ya desde 1989 recomendaba limitarlo a menos del 10 % de la energía. Lo nuevo fue el método, con revisiones sistemáticas encargadas para la guía y una calificación formal de la calidad de la evidencia, y una meta adicional más ambiciosa.\n\nLa guía hace tres recomendaciones que conviene que memorices tal como están planteadas, porque los pacientes y los medios las citan a menudo de manera incompleta."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Las tres recomendaciones de la guía",
+          "ordenada": true,
+          "items": [
+            "Reducir la ingesta de azúcares libres a lo largo de toda la vida (recomendación fuerte).",
+            "En adultos y niños, reducir la ingesta de azúcares libres a menos del 10 % de la ingesta energética total (recomendación fuerte).",
+            "Como reducción adicional, llevar la ingesta de azúcares libres a menos del 5 % de la ingesta energética total (recomendación condicional)."
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/04",
+          "proporcion": "16:9",
+          "alt": "Doce cubos de azúcar alineados junto a seis cubos de azúcar sobre una superficie blanca.",
+          "pie": "Representación visual de las dos metas de la OMS para una dieta de unas 2,000 kilocalorías: menos de unas 12 cucharaditas y, de forma ideal, alrededor de 6.",
+          "prompt": "Fotografía de estudio minimalista sobre superficie blanca mate, dos filas horizontales de cubos de azúcar blancos perfectamente alineados: arriba una fila larga de doce cubos y abajo una fila corta de seis cubos, con espacio vacío a la derecha de la fila corta. Luz lateral suave que crea sombras tenues, enfoque nítido, composición limpia con mucho espacio negativo, estilo editorial científico. Evitar: texto, números, etiquetas, marcas, logotipos, personas, manos, cucharas, alimentos adicionales, colores intensos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué significan «fuerte» y «condicional»"
+        },
+        {
+          "tipo": "texto",
+          "md": "La OMS califica sus recomendaciones con el sistema **GRADE**, que valora la calidad de la evidencia y el balance entre beneficios y riesgos. Una recomendación **fuerte** significa que puede adoptarse como política en la mayoría de las situaciones. Una recomendación **condicional** significa que hay que discutirla con las partes interesadas antes de convertirla en política, porque la certeza es menor o las circunstancias pesan más.\n\nEl límite del 10 % es fuerte. El del 5 % es condicional, y la OMS explica por qué: hay pocos estudios en poblaciones que consuman tan poco azúcar, así que buena parte de esa evidencia viene de estudios ecológicos. Esto no hace que la meta del 5 % sea débil o arbitraria; significa que es una meta deseable que cada país y cada persona deben valorar en su contexto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La evidencia dental detrás de la guía",
+          "md": "Para la guía se encargó una revisión sistemática específica sobre caries (Moynihan y Kelly, *Journal of Dental Research*, 2014). Encontró evidencia de calidad moderada, procedente de estudios de cohorte, de que la caries es más baja cuando los azúcares libres representan menos del 10 % de la energía. La evidencia para el umbral del 5 % fue de muy baja calidad y provino sobre todo de estudios ecológicos, entre ellos los de Japón en torno a la Segunda Guerra Mundial, cuando la disponibilidad de azúcar cayó drásticamente y la caries descendió.\n\nUn hallazgo importante es que la relación entre azúcares y caries es **log-lineal y continua**: incluso por debajo del 10 % sigue habiendo daño acumulado a lo largo de la vida, y el flúor reduce la pendiente de esa relación pero no la elimina. Por eso varios autores, como Sheiham y James (2015), sostienen que la caries es una enfermedad dependiente de la dosis de azúcar acumulada durante toda la vida, y que la reducción de azúcares libres es una medida de salud pública y no solo una indicación individual."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Pasar de porcentajes a gramos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las recomendaciones están en porcentaje de la energía porque así se ajustan a cada persona: un niño pequeño necesita menos energía que un adulto activo, y su límite de azúcar en gramos también es menor. Para traducirlas a gramos necesitas dos datos: cuánta energía consume la persona al día y que **cada gramo de azúcar aporta unas 4 kilocalorías**.\n\nEn una dieta de 2,000 kilocalorías, el 10 % son 200 kilocalorías, que equivalen a unos 50 gramos de azúcares libres. El 5 % son unos 25 gramos. La propia OMS traduce los 25 gramos a unas **6 cucharaditas** de azúcar. Para un niño que consume menos energía, el límite en gramos baja en proporción. Esta conversión es solo una aproximación didáctica: la energía que necesita cada persona depende de su edad, sexo, tamaño y actividad, y su cálculo detallado corresponde a nutrición."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Equivalencias aproximadas de las metas de la OMS",
+          "columnas": ["Energía diaria", "Menos del 10 % (meta fuerte)", "Menos del 5 % (meta condicional)"],
+          "filas": [
+            ["1,400 kcal", "Menos de 35 g", "Menos de 17.5 g"],
+            ["2,000 kcal", "Menos de 50 g", "Menos de 25 g"],
+            ["2,500 kcal", "Menos de 62.5 g", "Menos de 31 g"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Estas cifras ayudan a dimensionar productos concretos. Muchos refrescos regulares contienen alrededor de 10 gramos de azúcares por cada 100 mililitros, de modo que una sola botella de 600 mililitros puede acercarse o superar por sí misma el límite del 10 % de un adulto y rebasar con holgura el de un niño en edad escolar. Cuando lo explicas con la botella que el paciente conoce, el porcentaje deja de ser abstracto. Recuerda verificar siempre la etiqueta del producto concreto, porque las formulaciones cambian."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m07/d2",
+          "pie": "Relación continua entre ingesta de azúcares libres y caries: no existe un umbral seguro, solo un riesgo que crece con la dosis.",
+          "descripcion": "Gráfica de línea con el eje horizontal «Azúcares libres (% de la energía)» de 0 a 20 y el eje vertical «Caries acumulada». Dos curvas ascendentes que nacen cerca del origen: una más empinada «Sin exposición a flúor» y otra menos empinada «Con exposición a flúor». Dos líneas verticales punteadas marcan el 5 % y el 10 %, con sombreado verde suave a la izquierda del 5 % y amarillo entre 5 y 10 %.",
+          "elementos": [
+            "Azúcares libres (% de la energía)",
+            "Caries acumulada",
+            "Sin exposición a flúor",
+            "Con exposición a flúor",
+            "Meta condicional: menos del 5 %",
+            "Meta fuerte: menos del 10 %"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "¿Qué porcentaje de la energía viene de azúcares libres?",
+          "instruccion": "Un adolescente registra en su diario un refresco de 600 ml, un pan dulce y dos cucharaditas de azúcar en el café con leche. Sumando las etiquetas y estimaciones, sus azúcares libres del día son unos 95 gramos y su consumo total estimado es de 2,200 kilocalorías. Cambia los valores para ver cómo se mueve el porcentaje.",
+          "formula": "% de energía = (gramos de azúcares libres × 4) ÷ kilocalorías totales × 100",
+          "variables": [
+            { "id": "gramos", "etiqueta": "Azúcares libres del día", "valor": 95, "unidad": "g" },
+            { "id": "energia", "etiqueta": "Energía total del día", "valor": 2200, "unidad": "kcal" }
+          ],
+          "resultado": { "expresion": "gramos * 4 / energia * 100", "etiqueta": "Energía que aportan los azúcares libres", "unidad": "%", "decimales": 1 }
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/05",
+          "proporcion": "4:3",
+          "alt": "Cucharaditas de azúcar alineadas junto a un vaso de bebida endulzada sin etiqueta.",
+          "pie": "Visualizar el azúcar en cucharaditas ayuda a los pacientes a comprender las cifras de la etiqueta.",
+          "prompt": "Fotografía educativa sobre una mesa de madera clara, un vaso de vidrio alto con bebida de color ámbar con burbujas, sin etiqueta ni envase, y frente a él varias cucharitas metálicas alineadas, cada una con una porción de azúcar blanca a ras. Fondo de cocina desenfocado, luz natural lateral, enfoque nítido en las cucharitas, colores naturales, estilo de material de educación para la salud. Evitar: texto, números, etiquetas, marcas, logotipos, personas, manos, rostros, derrames, colores artificiales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La guía no es solo para el peso",
+          "md": "La guía de 2015 se apoyó en dos ejes de evidencia: el peso corporal y la caries. Eso la convierte en una de las pocas recomendaciones nutricionales internacionales en las que la salud bucal tuvo un papel central, y es un argumento útil para que el equipo dental se reconozca como parte de la promoción de la salud general."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que la guía no dice"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las guías se malinterpretan con frecuencia, así que vale la pena aclarar sus límites. La guía de la OMS **no pide eliminar la fruta** ni la leche: al contrario, al excluir los azúcares intrínsecos y la lactosa, deja claro que el problema son los azúcares libres. Tampoco establece un límite para los almidones, ni pretende ser una prescripción dietética individual: es una recomendación de salud pública para población sana, pensada para orientar políticas como el etiquetado, los impuestos a bebidas o la alimentación escolar.\n\nTampoco dice que por debajo del 5 % no haya caries. La caries es multifactorial: el flúor, la higiene, la saliva y la frecuencia de consumo siguen importando. Lo que sí afirma, con evidencia, es que reducir los azúcares libres es una de las medidas más eficaces para disminuir la carga de caries de una población, y que esa reducción debe empezar desde la infancia y mantenerse toda la vida.\n\nEn la consulta individual, las metas de la OMS sirven como **referencia**, no como una cifra que haya que alcanzar desde la primera cita. Para la mayoría de los pacientes, el primer objetivo realista es identificar las fuentes principales de azúcares libres y reducir la frecuencia de consumo; el porcentaje se convierte en una forma de medir el avance."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/06",
+          "proporcion": "3:4",
+          "alt": "Odontóloga con equipo de protección revisando un registro de dieta en una tableta junto a la unidad dental.",
+          "pie": "Las metas de la OMS se vuelven útiles cuando se aplican al registro de dieta de cada paciente.",
+          "prompt": "Fotografía vertical en un consultorio dental moderno y luminoso, una odontóloga de pie junto a la unidad dental con bata clínica, cubrebocas, lentes de protección y guantes de nitrilo, revisando con atención la pantalla de una tableta que sostiene con ambas manos; la pantalla se ve en ángulo sin contenido legible. Al fondo, unidad dental limpia y desenfocada. Luz blanca neutra, colores naturales, ambiente profesional y cálido. Evitar: texto legible en pantalla, logotipos, marcas, pacientes, rostros identificables, falta de equipo de protección, instrumental con sangre."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el estudio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Practica la conversión con tu propio día: anota durante 24 horas todo lo que bebes y comes con azúcar añadido, busca en las etiquetas los gramos de azúcares y calcula el porcentaje con la calculadora de este tema. Haber hecho el ejercicio contigo mismo te dará empatía y ejemplos concretos cuando lo propongas a tus pacientes, y te ayudará a explicar la meta de la OMS sin cifras abstractas."
+        }
+      ],
+      "glosario": [
+        { "termino": "GRADE", "definicion": "Sistema para calificar la calidad de la evidencia y la fuerza de una recomendación en guías de práctica." },
+        { "termino": "Recomendación fuerte", "definicion": "Recomendación que puede adoptarse como política en la mayoría de las situaciones." },
+        { "termino": "Recomendación condicional", "definicion": "Recomendación con menor certeza o mayor dependencia del contexto, que debe discutirse antes de convertirla en política." },
+        { "termino": "Estudio ecológico", "definicion": "Estudio que compara poblaciones o periodos en lugar de individuos." },
+        { "termino": "Kilocaloría", "definicion": "Unidad de energía de los alimentos; un gramo de azúcar aporta unas 4 kilocalorías." },
+        { "termino": "Relación log-lineal", "definicion": "Relación en la que el efecto crece de forma continua con la dosis, sin un umbral por debajo del cual no haya efecto." }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.2-1",
+          "q": "¿Cuál de las recomendaciones de la OMS de 2015 es condicional?",
+          "opciones": ["Reducir los azúcares libres a lo largo de la vida", "Mantener los azúcares libres por debajo del 10 % de la energía", "Eliminar por completo la fruta de la dieta", "Reducir los azúcares libres a menos del 5 % de la energía"],
+          "correcta": 3,
+          "explicacion": "La meta del 5 % es condicional porque se apoya en evidencia de menor certeza, sobre todo estudios ecológicos. Las otras dos recomendaciones de la guía son fuertes; la fruta entera no se restringe."
+        },
+        {
+          "id": "t7.2-2",
+          "q": "En una dieta de 2,000 kilocalorías, ¿a cuántos gramos de azúcares libres equivale aproximadamente el 10 %?",
+          "opciones": ["25 g", "50 g", "100 g", "200 g"],
+          "correcta": 1,
+          "explicacion": "El 10 % de 2,000 son 200 kilocalorías; a 4 kilocalorías por gramo, son unos 50 gramos."
+        },
+        {
+          "id": "t7.2-3",
+          "q": "¿Qué mostró la revisión sistemática sobre caries que respaldó la guía?",
+          "opciones": ["Que la caries es menor cuando los azúcares libres son menos del 10 % de la energía", "Que el flúor elimina por completo el efecto del azúcar", "Que existe un umbral seguro por debajo del cual el azúcar no causa caries", "Que solo importa la cantidad de azúcar en la infancia"],
+          "correcta": 0,
+          "explicacion": "La revisión encontró menos caries por debajo del 10 % y una relación continua con la dosis; el flúor atenúa, pero no elimina, el efecto."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Guideline: Sugars intake for adults and children", "autor": "Organización Mundial de la Salud", "anio": 2015 },
+        { "tipo": "oficial", "titulo": "WHO calls on countries to reduce sugars intake among adults and children (comunicado del 4 de marzo de 2015)", "autor": "Organización Mundial de la Salud", "anio": 2015, "url": "https://www.who.int/news/item/04-03-2015-who-calls-on-countries-to-reduce-sugars-intake-among-adults-and-children" },
+        { "tipo": "academica", "titulo": "Effect on caries of restricting sugars intake: systematic review to inform WHO guidelines", "autor": "Moynihan P. J., Kelly S. A. M. (Journal of Dental Research)", "anio": 2014 },
+        { "tipo": "academica", "titulo": "Diet and dental caries: the pivotal role of free sugars reemphasized", "autor": "Sheiham A., James W. P. T. (Journal of Dental Research)", "anio": 2015 }
+      ]
+    },
+    {
+      "n": "7.3",
+      "titulo": "Frecuencia, momento y forma: cómo el azúcar se vuelve ácido",
+      "minutos": 13,
+      "enPocasPalabras": "Cada vez que comes o bebes algo con azúcar, la placa produce ácido durante un rato. Lo que más daña es hacerlo muchas veces al día, porque el diente no alcanza a recuperarse. Es mejor tomar lo dulce junto con la comida que estar picando todo el día.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La cantidad total de azúcares libres es el eje de la guía de la OMS, pero en la boca hay otra variable que el clínico debe dominar: **cuántas veces** y **de qué forma** llega el azúcar a la biopelícula. Cada exposición inicia un pequeño episodio de producción de ácido. Si los episodios se suceden sin pausa, el diente pasa la mayor parte del día del lado de la desmineralización.\n\nEn el módulo 2 estudiaste el equilibrio entre desmineralización y remineralización. Aquí verás cómo la conducta alimentaria mueve ese equilibrio hora por hora, y cómo usar esa explicación para que el paciente entienda por qué un refresco bebido a sorbos durante toda la tarde puede hacer más daño que el mismo refresco tomado con la comida."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La curva de Stephan"
+        },
+        {
+          "tipo": "texto",
+          "md": "A mediados del siglo XX, Robert Stephan midió el pH de la placa antes y después de enjuagues con azúcar. La gráfica que obtuvo, conocida como **curva de Stephan**, tiene una forma típica: en pocos minutos el pH cae bruscamente porque las bacterias fermentan el azúcar y liberan ácidos orgánicos, sobre todo **ácido láctico**; después, poco a poco, la saliva diluye el azúcar, neutraliza el ácido con su bicarbonato y el pH regresa a su nivel de reposo. Esa recuperación suele tardar de media hora a una hora, según la saliva de la persona, el tipo de alimento y la biopelícula.\n\nMientras el pH está por debajo del **pH crítico** (alrededor de 5.5 para la hidroxiapatita del esmalte, con variaciones según la concentración de calcio y fosfato de la saliva y la placa), el esmalte pierde minerales. Cuando el pH se recupera, la saliva puede devolverlos. La caries progresa cuando la suma de los tiempos por debajo del pH crítico supera la capacidad de reparación."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m07/d3",
+          "pie": "Curvas de pH de la placa con tres exposiciones agrupadas en comidas frente a muchas exposiciones repartidas en el día.",
+          "descripcion": "Dos gráficas apiladas con el mismo eje horizontal «Horas del día» de 7:00 a 22:00 y eje vertical «pH de la placa» de 4 a 7. Una línea horizontal roja punteada en 5.5 rotulada «pH crítico del esmalte». Gráfica superior: tres caídas de pH en desayuno, comida y cena, con recuperación completa entre ellas. Gráfica inferior: caídas repetidas cada hora por bebida a sorbos y refrigerios, sin recuperación completa. Las zonas por debajo del pH crítico se sombrean en rojo claro y las de recuperación en verde claro.",
+          "elementos": [
+            "pH de la placa",
+            "Horas del día",
+            "pH crítico del esmalte (≈5.5)",
+            "Desmineralización",
+            "Remineralización",
+            "Tres comidas",
+            "Consumo frecuente a sorbos"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Frecuencia y cantidad: dos variables que se cruzan",
+          "md": "Estudios clásicos, como el de Vipeholm en Suecia en la década de 1940 (hoy éticamente inaceptable por su diseño en personas institucionalizadas), mostraron que el aumento de caries era mucho mayor cuando el azúcar se daba entre comidas y en forma pegajosa que cuando se daba con los alimentos. La literatura posterior confirma que la frecuencia y la cantidad están muy correlacionadas: quien come azúcar con frecuencia suele comer más azúcar en total. Por eso la guía de la OMS se expresa en cantidad, mientras que la consejería individual combina ambas: reducir la cantidad total y concentrar el consumo en menos momentos del día."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/07",
+          "proporcion": "4:3",
+          "alt": "Persona en un escritorio de oficina con una botella de bebida endulzada a medio terminar junto al teclado.",
+          "pie": "Beber a sorbos una bebida azucarada durante horas mantiene el pH de la placa bajo de forma casi continua.",
+          "prompt": "Fotografía de estilo documental en una oficina luminosa, encuadre desde atrás y por encima del hombro de una persona adulta trabajando en una computadora portátil, sin mostrar su rostro; junto al teclado, una botella de plástico sin etiqueta con bebida de color naranja a medio terminar y una taza de café. Luz natural de ventana, enfoque en la botella, fondo desenfocado de escritorio ordenado, colores naturales. Evitar: texto, pantallas legibles, marcas, logotipos, rostros, personas de frente, comida chatarra amontonada, desorden exagerado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Forma física, momento y alimentos protectores"
+        },
+        {
+          "tipo": "texto",
+          "md": "No solo cuenta cuántas veces, también **cuánto tiempo** se queda el azúcar en contacto con los dientes. Los caramelos que se disuelven lentamente, las paletas, los chicles con azúcar y los alimentos que se pegan en fosetas y espacios interproximales (dulces masticables, frituras de almidón, galletas, fruta deshidratada) alargan cada exposición. Las bebidas que se toman a sorbos o con biberón o vaso entrenador durante mucho tiempo funcionan de forma parecida.\n\nEl **momento** también importa. Durante el sueño el flujo salival disminuye mucho, de modo que el azúcar consumido justo antes de dormir y sin cepillado posterior permanece más tiempo y con menos defensa salival. Por el contrario, cuando el azúcar se consume como parte de una comida principal, la masticación de otros alimentos estimula la saliva y la exposición total es menor.\n\nAlgunos alimentos ayudan a recuperar el pH. El **queso** y la leche aportan calcio, fosfato y caseína; los alimentos fibrosos obligan a masticar; y el **chicle sin azúcar** después de comer estimula la saliva. No neutralizan un consumo excesivo, pero son buenos aliados para cerrar una comida."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Conductas que alargan o acortan el ataque ácido",
+          "columnas": ["Alarga la exposición", "Acorta la exposición"],
+          "filas": [
+            ["Beber refresco o jugo a sorbos durante horas", "Beber agua natural entre comidas"],
+            ["Caramelos y paletas que se disuelven lentamente", "Consumir el postre al terminar la comida principal"],
+            ["Alimentos pegajosos entre comidas", "Masticar chicle sin azúcar después de comer"],
+            ["Bebida azucarada o leche endulzada antes de dormir", "Cepillado con pasta fluorada antes de dormir"],
+            ["Café o té endulzado a lo largo de la jornada", "Reducir el azúcar del café de forma gradual"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Caries y erosión no son lo mismo",
+          "md": "Los refrescos, los jugos cítricos y las bebidas deportivas suelen ser ácidos además de azucarados. El ácido de la bebida puede disolver el esmalte directamente, sin intervención de bacterias: eso es **erosión dental**, un proceso distinto de la caries. En el paciente que consume muchas bebidas ácidas, revisa ambas condiciones y deja la decisión de manejo al odontólogo tratante."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/08",
+          "proporcion": "1:1",
+          "alt": "Plato con un trozo de queso fresco y pepino en rodajas junto a un vaso de agua.",
+          "pie": "Queso, verduras fibrosas y agua natural: buenas opciones para cerrar una comida o como refrigerio.",
+          "prompt": "Fotografía cuadrada de estilo gastronómico, plato de cerámica blanca sobre mantel de lino beige con un trozo de queso fresco cortado en cubos, rodajas de pepino con cáscara y bastones de jícama, junto a un vaso de vidrio con agua natural y gotas de condensación. Luz natural suave desde la izquierda, sombras delicadas, enfoque nítido, colores frescos y naturales. Evitar: texto, etiquetas, marcas, logotipos, personas, manos, salsas con colorante, comida en mal estado, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando la saliva no alcanza"
+        },
+        {
+          "tipo": "texto",
+          "md": "La curva de Stephan describe a una persona con saliva normal. Cuando el flujo salival disminuye, cada exposición al azúcar pesa más, porque la dilución y la neutralización del ácido son más lentas. Esto ocurre con muchos medicamentos de uso frecuente (algunos antidepresivos, antihistamínicos, antihipertensivos y fármacos con efecto anticolinérgico), con la radioterapia de cabeza y cuello, con el síndrome de Sjögren, con la deshidratación y con el envejecimiento cuando se acompaña de varios medicamentos.\n\nEn estos pacientes, una misma dieta produce más lesiones. Por eso la asesoría dietética debe ser todavía más cuidadosa: muchas personas con boca seca chupan caramelos o toman bebidas endulzadas para aliviar la sequedad, sin saber que así multiplican los ataques ácidos. Sugiere alternativas sin azúcar, como sorbos frecuentes de agua natural o chicle sin azúcar, y comenta con el médico tratante cualquier duda sobre la medicación. El manejo de la boca seca y de la caries radicular en personas mayores se estudia con detalle en el módulo 11.\n\nUna situación parecida ocurre durante la noche y en quienes respiran por la boca: la superficie del diente se seca y la saliva protege menos. Explicar este mecanismo ayuda al paciente a entender por qué el cepillado nocturno con pasta fluorada es el más importante del día.\n\nEn la práctica, pregunta también por el **picoteo**: muchas personas no hacen tres comidas definidas, sino que comen y beben pequeñas cantidades a lo largo de toda la jornada. Cada uno de esos momentos con azúcar libre es una exposición nueva para la biopelícula, aunque la cantidad sea mínima. Contar los momentos, y no solo los alimentos, es la clave para entender el riesgo que genera la dieta."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la curva de Stephan",
+          "instruccion": "Coloca los eventos en el orden en que ocurren desde que una persona consume una bebida azucarada hasta que su placa vuelve al reposo.",
+          "elementos": [
+            "El azúcar entra en contacto con la biopelícula",
+            "Las bacterias fermentan el azúcar y producen ácido láctico",
+            "El pH de la placa cae por debajo del pH crítico",
+            "El esmalte pierde calcio y fosfato",
+            "La saliva diluye el azúcar y neutraliza el ácido con bicarbonato",
+            "El pH se recupera y la saliva devuelve minerales al esmalte"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/09",
+          "proporcion": "4:3",
+          "alt": "Mesita de noche con un vaso de agua y un cepillo de dientes infantil junto a un cuento ilustrado cerrado.",
+          "pie": "Antes de dormir: cepillado con pasta fluorada y, si hay sed, solo agua natural.",
+          "prompt": "Fotografía cálida de una mesita de noche en una recámara infantil ordenada, con luz tenue de lámpara de buró, sobre la mesita un vaso de vidrio con agua natural, un cepillo dental infantil de cerdas suaves en un vaso pequeño y un libro de cuentos cerrado con portada lisa sin ilustraciones legibles. Fondo desenfocado con cama tendida y cobija de colores suaves. Colores cálidos y naturales, atmósfera tranquila. Evitar: texto, marcas, logotipos, personas, rostros, biberones con bebidas de color, dulces, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para casa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Propón al paciente la regla de **«lo dulce, con la comida»**: si va a tomar un postre o una bebida azucarada, que sea al final de una comida principal y no repartido en la tarde; que entre comidas beba agua natural; y que después del último cepillado de la noche solo tome agua. Es un cambio fácil de recordar, no exige renunciar a todo y reduce de inmediato el número de ataques ácidos diarios."
+        }
+      ],
+      "glosario": [
+        { "termino": "Curva de Stephan", "definicion": "Gráfica que muestra la caída rápida y la recuperación gradual del pH de la placa después de una exposición al azúcar." },
+        { "termino": "pH crítico", "definicion": "pH por debajo del cual la saliva y la placa dejan de estar saturadas respecto al mineral del diente y este empieza a disolverse; alrededor de 5.5 para el esmalte." },
+        { "termino": "Ácido láctico", "definicion": "Ácido orgánico principal que producen las bacterias de la placa al fermentar azúcares." },
+        { "termino": "Erosión dental", "definicion": "Pérdida de tejido dental por ácidos de origen no bacteriano, como bebidas ácidas o reflujo." },
+        { "termino": "Capacidad amortiguadora", "definicion": "Capacidad de la saliva para neutralizar ácidos, principalmente gracias al bicarbonato." }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.3-1",
+          "q": "¿Qué muestra la curva de Stephan después de un enjuague con azúcar?",
+          "opciones": ["Un aumento del pH que dura todo el día", "Una caída rápida del pH y una recuperación gradual", "Un pH que no cambia si la persona usa pasta fluorada", "Una caída lenta del pH que tarda varias horas en empezar"],
+          "correcta": 1,
+          "explicacion": "El pH cae en pocos minutos por la fermentación y se recupera poco a poco gracias a la saliva."
+        },
+        {
+          "id": "t7.3-2",
+          "q": "Dos personas consumen la misma cantidad de refresco al día. ¿Quién tiene mayor riesgo de caries?",
+          "opciones": ["Quien lo toma con la comida principal", "Quien lo bebe muy frío", "Quien lo bebe a sorbos durante toda la tarde", "Quien lo toma con popote al mediodía"],
+          "correcta": 2,
+          "explicacion": "Beber a sorbos multiplica los episodios de pH bajo e impide la recuperación entre ellos."
+        },
+        {
+          "id": "t7.3-3",
+          "q": "¿Por qué el azúcar antes de dormir es especialmente dañino si no hay cepillado posterior?",
+          "opciones": ["Porque el flujo salival disminuye mucho durante el sueño", "Porque de noche las bacterias no producen ácido", "Porque el esmalte se ablanda solo por la noche", "Porque la lactosa se convierte en sacarosa al dormir"],
+          "correcta": 0,
+          "explicacion": "Con menos saliva, el azúcar y el ácido permanecen más tiempo y la recuperación del pH es más lenta."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Diet and dental caries: the pivotal role of free sugars reemphasized", "autor": "Sheiham A., James W. P. T. (Journal of Dental Research)", "anio": 2015 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura clásica de cariología sobre la curva de Stephan, el pH crítico y los estudios de frecuencia de consumo de azúcar", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "7.4",
+      "titulo": "Azúcares ocultos, etiquetas y el entorno mexicano",
+      "minutos": 13,
+      "enPocasPalabras": "Mucho azúcar viene escondido en productos que no parecen dulces. En México los productos empacados tienen sellos negros que avisan cuando tienen exceso de azúcares. Aprender a leer la etiqueta te ayuda a elegir mejor.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cuando un paciente dice «casi no como dulces», con frecuencia tiene razón en lo que se refiere a caramelos y postres, pero no ve el azúcar que llega en otros productos: bebidas de sabor, cereales de caja, yogures endulzados, barras de granola, salsas comerciales, panes empacados y hasta algunos medicamentos en jarabe. A esos se les suele llamar **azúcares ocultos**, no porque estén escondidos de forma ilegal, sino porque el consumidor no los asocia con lo dulce.\n\nLeer etiquetas es una habilidad clínica. Te permite ayudar al paciente a encontrar el azúcar en su propia despensa y a elegir sustitutos concretos, en lugar de darle un consejo general que olvidará al salir del consultorio."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/10",
+          "proporcion": "16:9",
+          "alt": "Despensa con productos empacados genéricos: cereal, yogur, barras, salsas y bebidas.",
+          "pie": "Muchos productos de uso diario contienen azúcares añadidos aunque no se perciban como dulces.",
+          "prompt": "Fotografía horizontal de una alacena de cocina mexicana ordenada, con estantes de madera clara que contienen cajas de cereal, frascos de salsa, botellas de bebidas de sabor, vasitos de yogur y barras de granola, todos en envases genéricos lisos de colores suaves sin ningún texto, sello ni marca. Luz natural lateral, perspectiva frontal ligeramente angulada, enfoque nítido, colores naturales. Evitar: texto, letras, números, sellos, marcas, logotipos, etiquetas legibles, personas, desorden, productos caducos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El etiquetado frontal de advertencia"
+        },
+        {
+          "tipo": "texto",
+          "md": "En México, la modificación a la **NOM-051-SCFI/SSA1-2010** sobre etiquetado de alimentos y bebidas no alcohólicas preenvasados, publicada en el Diario Oficial de la Federación el 27 de marzo de 2020, incorporó el **sistema de etiquetado frontal de advertencia**. Sus sellos negros en forma de octágono indican cuando un producto excede los límites establecidos de calorías, azúcares, grasas saturadas, grasas trans o sodio. El sello «EXCESO AZÚCARES» es el que más te interesa como profesional de la salud bucal.\n\nLa misma modificación agregó leyendas precautorias para productos que contienen **edulcorantes** o **cafeína**, con el mensaje de que no son recomendables en niños. Las obligaciones entraron en vigor por fases a partir de octubre de 2020. Antes de usar el texto normativo en un documento oficial o una ponencia, consulta la versión vigente en el DOF, porque las normas pueden tener modificaciones posteriores."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Políticas mexicanas que tocan el azúcar",
+          "md": "Además del etiquetado frontal, México ha adoptado otras medidas sobre el entorno alimentario. Los **lineamientos para la preparación, distribución y expendio de alimentos y bebidas en las escuelas** del Sistema Educativo Nacional, publicados por la SEP y la Secretaría de Salud en el DOF el 30 de septiembre de 2024, se aplican desde finales de marzo de 2025 y restringen la venta de productos con sellos de advertencia en los planteles. En lo fiscal, la reforma a la Ley del IEPS publicada en el DOF en noviembre de 2025 fijó para 2026 una cuota de **3.0818 pesos por litro** a las bebidas con azúcares añadidos y de **1.50 pesos por litro** a las bebidas con edulcorantes; las cuotas se actualizan cada año. La **NOM-013-SSA2-2015**, para la prevención y control de enfermedades bucales, da el marco para la educación para la salud bucal en todo el Sistema Nacional de Salud."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Leer la lista de ingredientes y la tabla nutrimental"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sello te dice que hay exceso, pero no cuánto. Para eso revisa la **tabla nutrimental**, donde aparecen los azúcares por porción o por 100 gramos o mililitros, y en muchas etiquetas los **azúcares añadidos** por separado. Fíjate siempre en el tamaño de la porción: una botella puede contener más de una porción declarada.\n\nDespués revisa la **lista de ingredientes**, que se ordena de mayor a menor cantidad. Si alguna forma de azúcar aparece entre los primeros ingredientes, o si aparecen varias formas distintas a lo largo de la lista, el producto aporta una cantidad importante. Algunas denominaciones frecuentes son azúcar, azúcar mascabado, jarabe de maíz, jarabe de maíz de alta fructosa, glucosa, dextrosa, fructosa, maltodextrina, sacarosa, miel, jarabe de agave, concentrado de jugo de fruta y piloncillo."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Lectura rápida de una etiqueta en tres pasos",
+          "pasos": [
+            { "titulo": "Mira el frente", "md": "Busca el sello «EXCESO AZÚCARES» y las leyendas de edulcorantes. Si aparece el sello, el producto no es buena opción para el consumo diario." },
+            { "titulo": "Revisa la tabla nutrimental", "md": "Ubica los gramos de azúcares y de azúcares añadidos, y multiplícalos por las porciones que realmente se consumen." },
+            { "titulo": "Lee los ingredientes", "md": "Cuenta cuántas formas de azúcar aparecen y en qué posición de la lista están." }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Productos para niños, los más vigilados",
+          "md": "Muchos productos dirigidos a niños combinan colores llamativos, personajes y promesas de «energía» o «vitaminas» con un alto contenido de azúcares. Por eso la modificación de 2020 a la norma de etiquetado también restringió el uso de personajes infantiles, juguetes y elementos interactivos en los empaques de productos que llevan sellos de advertencia. Ayuda a las familias a mirar primero los sellos y la lista de ingredientes, no el personaje de la caja."
+        },
+        {
+          "tipo": "texto",
+          "md": "Un punto que confunde a muchas personas es el tamaño del envase. Si una bebida declara los azúcares «por porción» y la botella contiene dos porciones y media, quien se toma la botella completa consume dos veces y media esa cantidad. Del mismo modo, los productos que dicen «sin azúcar añadido» pueden contener azúcares libres si se elaboran con jugo concentrado de fruta, y los que dicen «light» o «reducido en azúcar» solo indican que tienen menos que su versión original, no que tengan poco. Enseña a los pacientes a buscar el dato y no el adjetivo.\n\nPara comparar dos productos parecidos, por ejemplo dos yogures o dos cereales, usa la columna por 100 gramos o 100 mililitros cuando exista: así la comparación no depende del tamaño de la porción que eligió cada fabricante. Y recuerda que los productos sin envase, como el pan de la panadería o el agua fresca del puesto, no traen etiqueta; en ellos la orientación se basa en lo que aprendiste en el tema 7.1 sobre las fuentes de azúcares libres."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m07/d4",
+          "pie": "Partes de la etiqueta de un producto preenvasado que sirven para identificar azúcares libres.",
+          "descripcion": "Esquema de un envase genérico de bebida visto de frente y de espaldas. En el frente, un octágono negro en la esquina superior señalado con una línea guía. En la parte posterior, dos zonas resaltadas con líneas guía: la tabla nutrimental con las filas de azúcares y azúcares añadidos destacadas en amarillo, y la lista de ingredientes con varias palabras subrayadas que representan formas de azúcar.",
+          "elementos": [
+            "Sello de advertencia frontal",
+            "Leyenda precautoria",
+            "Tamaño de la porción",
+            "Azúcares totales",
+            "Azúcares añadidos",
+            "Lista de ingredientes"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Edulcorantes y sustitutos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **edulcorantes sin azúcar** (como sucralosa, aspartame, estevia o acesulfame K) y los **polioles** (como xilitol, sorbitol y eritritol) no son fermentados por las bacterias de la placa como lo es la sacarosa, por lo que son poco o nada cariogénicos. Los chicles endulzados con polioles se usan para estimular la saliva después de comer.\n\nPero «no causa caries» no equivale a «recomendable para todos». En 2023 la OMS publicó una guía en la que recomienda, de forma condicional, **no usar edulcorantes sin azúcar como medio para controlar el peso**. Para el xilitol, una revisión Cochrane de 2015 calificó como de baja calidad la evidencia de que prevenga la caries por sí mismo. El mensaje equilibrado es que el objetivo es acostumbrar el paladar a menos dulzor y preferir agua natural, no sustituir un producto ultraprocesado por otro."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad en la despensa",
+          "afirmaciones": [
+            { "texto": "Si un producto no sabe dulce, no puede tener azúcares añadidos.", "verdadero": false, "explicacion": "Salsas, panes empacados y otros productos salados pueden contener azúcares añadidos; la lista de ingredientes lo revela." },
+            { "texto": "La lista de ingredientes se ordena de mayor a menor cantidad.", "verdadero": true, "explicacion": "Si el azúcar aparece entre los primeros ingredientes, el producto aporta una cantidad importante." },
+            { "texto": "El jarabe de agave no cuenta como azúcar libre porque es de origen vegetal.", "verdadero": false, "explicacion": "Los jarabes están incluidos en la definición de azúcares libres de la OMS, sin importar su origen." },
+            { "texto": "Los polioles como el xilitol son poco fermentables por las bacterias de la placa.", "verdadero": true, "explicacion": "Por eso son poco cariogénicos, aunque la evidencia de que prevengan la caries por sí mismos es limitada." },
+            { "texto": "La OMS recomienda usar edulcorantes sin azúcar para bajar de peso.", "verdadero": false, "explicacion": "Su guía de 2023 recomienda, de forma condicional, no usarlos como medio para controlar el peso." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/11",
+          "proporcion": "4:3",
+          "alt": "Manos sosteniendo un envase genérico mientras se revisa la parte posterior en el pasillo de un supermercado.",
+          "pie": "Revisar la tabla nutrimental y los ingredientes toma menos de un minuto y cambia la decisión de compra.",
+          "prompt": "Fotografía en el pasillo de un supermercado, encuadre cercano de dos manos adultas sosteniendo una caja de cereal genérica de color liso y girándola para revisar la parte posterior, que se ve en ángulo sin texto legible. Fondo desenfocado de anaqueles con productos de colores suaves sin marcas visibles. Luz blanca de tienda, enfoque en las manos y el envase, colores naturales. Evitar: texto legible, números, sellos, marcas, logotipos, rostros, personas de frente, productos reconocibles."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/12",
+          "proporcion": "1:1",
+          "alt": "Jarra de agua fresca con rodajas de pepino y limón junto a un vaso servido.",
+          "pie": "Agua natural o con fruta en rodajas sin endulzar: la bebida de todos los días.",
+          "prompt": "Fotografía cuadrada sobre una mesa de madera clara en exterior sombreado, una jarra de vidrio transparente con agua natural, rodajas de pepino, rodajas de limón y hojas de hierbabuena, junto a un vaso servido con hielo. Luz natural suave de mediodía filtrada, reflejos delicados en el vidrio, fondo verde desenfocado de jardín, colores frescos y naturales. Evitar: texto, etiquetas, marcas, logotipos, personas, manos, azúcar visible, popotes de plástico, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pide al paciente que en la siguiente cita traiga la etiqueta (o una foto) de los **tres productos empacados que más consume** su familia. Revísenlas juntos en el sillón con los tres pasos de este tema. Encontrar el azúcar en su propia despensa convence mucho más que cualquier folleto, y te permite proponer un sustituto concreto para cada producto."
+        }
+      ],
+      "glosario": [
+        { "termino": "Azúcares ocultos", "definicion": "Azúcares añadidos en productos que el consumidor no percibe como dulces." },
+        { "termino": "Etiquetado frontal de advertencia", "definicion": "Sistema de sellos negros en el frente de los productos preenvasados que indica exceso de nutrimentos críticos." },
+        { "termino": "Tabla nutrimental", "definicion": "Recuadro de la etiqueta con la energía y los nutrimentos por porción o por 100 g o ml." },
+        { "termino": "Edulcorante sin azúcar", "definicion": "Sustancia que da sabor dulce con poca o ninguna energía, como sucralosa o estevia." },
+        { "termino": "Poliol", "definicion": "Alcohol de azúcar, como xilitol o sorbitol, poco fermentable por las bacterias de la placa." },
+        { "termino": "IEPS", "definicion": "Impuesto Especial sobre Producción y Servicios; en México grava, entre otros productos, las bebidas saborizadas con azúcares añadidos." }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.4-1",
+          "q": "¿Qué indica el sello «EXCESO AZÚCARES» en un producto mexicano?",
+          "opciones": ["Que el producto excede el límite de azúcares establecido por la norma de etiquetado", "Que el producto está prohibido para adultos", "Que el producto contiene edulcorantes", "Que el producto no tiene azúcares añadidos"],
+          "correcta": 0,
+          "explicacion": "El sello advierte que el producto excede el límite de azúcares que fija la norma de etiquetado. Los edulcorantes se señalan con una leyenda distinta."
+        },
+        {
+          "id": "t7.4-2",
+          "q": "En la lista de ingredientes, ¿qué sugiere que el azúcar aparezca en segundo lugar?",
+          "opciones": ["Que es un ingrediente minoritario", "Que el producto es libre de azúcares", "Que es uno de los ingredientes más abundantes", "Que solo contiene azúcares intrínsecos"],
+          "correcta": 2,
+          "explicacion": "Los ingredientes se listan de mayor a menor cantidad."
+        },
+        {
+          "id": "t7.4-3",
+          "q": "¿Qué recomendó la OMS en 2023 sobre los edulcorantes sin azúcar?",
+          "opciones": ["Usarlos en todos los niños para prevenir la caries", "Sustituir toda el agua natural por bebidas con edulcorantes", "Usarlos como principal medida para bajar de peso", "No usarlos como medio para controlar el peso (recomendación condicional)"],
+          "correcta": 3,
+          "explicacion": "La guía de 2023 recomienda, de forma condicional, no usar edulcorantes sin azúcar para controlar el peso."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Modificación a la NOM-051-SCFI/SSA1-2010, Especificaciones generales de etiquetado para alimentos y bebidas no alcohólicas preenvasados (DOF 27 de marzo de 2020)", "autor": "Secretaría de Economía y Secretaría de Salud", "anio": 2020 },
+        { "tipo": "oficial", "titulo": "Acuerdo por el que se establecen los lineamientos generales para la preparación, distribución y expendio de alimentos y bebidas en las escuelas del Sistema Educativo Nacional (DOF 30 de septiembre de 2024)", "autor": "Secretaría de Educación Pública y Secretaría de Salud", "anio": 2024 },
+        { "tipo": "oficial", "titulo": "Reforma a la Ley del Impuesto Especial sobre Producción y Servicios, artículo 2o., fracción I, inciso G (DOF 7 de noviembre de 2025)", "autor": "Congreso de la Unión", "anio": 2025 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Use of non-sugar sweeteners: WHO guideline", "autor": "Organización Mundial de la Salud", "anio": 2023 },
+        { "tipo": "academica", "titulo": "Xylitol-containing products for preventing dental caries in children and adults (Cochrane Database of Systematic Reviews)", "autor": "Riley P., Moore D., Ahmed F., Sharif M. O., Worthington H. V.", "anio": 2015 }
+      ]
+    },
+    {
+      "n": "7.5",
+      "titulo": "La asesoría dietética en el consultorio dental",
+      "minutos": 14,
+      "enPocasPalabras": "El dentista puede ayudarte a cuidar tus dientes revisando contigo lo que comes y bebes durante unos días. Juntos eligen uno o dos cambios pequeños y fáciles. En la siguiente cita revisan cómo te fue.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Saber qué dice la OMS no sirve de mucho si no se traduce en un cambio en la vida del paciente. La asesoría dietética en odontología no pretende sustituir al nutriólogo: se enfoca en **los azúcares libres y su frecuencia**, que son los factores de la dieta con mayor peso en la caries, y en conectar ese cambio con lo que el paciente ve en su boca.\n\nEsta asesoría es especialmente valiosa en pacientes con lesiones activas o con riesgo alto de caries, en familias con niños pequeños, en adolescentes con alto consumo de bebidas y en adultos con boca seca. La evaluación del riesgo la estudiaste en el módulo 3; aquí verás cómo intervenir sobre el factor dieta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El diario de dieta"
+        },
+        {
+          "tipo": "texto",
+          "md": "La herramienta básica es el **diario o registro de dieta**. Se pide al paciente, o a quien cuida al niño, que anote durante varios días seguidos, idealmente incluyendo un día de fin de semana porque los hábitos cambian, **todo** lo que come y bebe: qué, cuánto, a qué hora y si fue con una comida principal o entre comidas. También se anotan los momentos de cepillado y los medicamentos líquidos o masticables que se toman.\n\nAl revisarlo con el paciente, marca cada **exposición a azúcares libres** con un color, cuenta cuántas ocurren entre comidas y cuántas después del último cepillado de la noche. Con esos tres números (exposiciones totales, exposiciones entre comidas y exposiciones nocturnas) tienes una línea base objetiva para medir el cambio."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/13",
+          "proporcion": "4:3",
+          "alt": "Registro de dieta en papel sobre un escritorio, con marcas de colores y un bolígrafo.",
+          "pie": "Un registro de dieta con las exposiciones a azúcares libres marcadas en color facilita la conversación con el paciente.",
+          "prompt": "Fotografía cenital sobre un escritorio de madera clara de consultorio, una hoja de papel con una cuadrícula manuscrita de varias columnas, sin letras legibles, con algunas filas resaltadas con marcador amarillo y rosa, un bolígrafo azul y un marcador destapado al lado, y en la esquina una taza blanca y unas gafas de lectura. Luz natural suave, enfoque nítido en la hoja, colores naturales. Evitar: texto legible, números legibles, nombres, logotipos, marcas, personas, rostros, datos personales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Lo que revela un diario",
+          "md": "Un repartidor de 34 años consulta por varias lesiones activas en cuellos dentarios. Dice que «no come dulces». En su diario de cuatro días aparecen once exposiciones diarias a azúcares libres: café con dos cucharaditas de azúcar en tres momentos, dos refrescos de 600 ml bebidos a sorbos mientras trabaja y galletas a media tarde. Al ver las marcas de color, él mismo identifica que el refresco «de toda la tarde» es el principal problema. La meta que elige es cambiar el segundo refresco por agua natural."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Conversar sin regañar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los sermones generan culpa y resistencia. Funciona mejor un estilo colaborativo, inspirado en la **entrevista motivacional**: preguntas abiertas («¿qué notas al ver tu registro?»), escucha reflexiva («te cuesta dejar el refresco porque te mantiene despierto en el trabajo»), reconocer lo que ya hace bien y dejar que el paciente proponga el cambio. Tú aportas la información técnica; él decide qué está dispuesto a intentar.\n\nLas metas deben ser **pocas, concretas y medibles**. «Comer menos azúcar» es demasiado vago. «Cambiar el refresco de la tarde por agua natural de lunes a viernes» o «no tomar nada más que agua después del cepillado de la noche» son metas que el paciente puede cumplir y tú puedes verificar con un nuevo registro. Uno o dos cambios a la vez es suficiente."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Una asesoría dietética breve en cinco momentos",
+          "pasos": [
+            { "titulo": "Preguntar", "md": "Pide permiso para hablar de alimentación y explora qué sabe el paciente sobre azúcar y caries." },
+            { "titulo": "Registrar", "md": "Entrega el formato de diario de dieta y explica cómo llenarlo durante varios días, con al menos un día de fin de semana." },
+            { "titulo": "Analizar juntos", "md": "Marca las exposiciones a azúcares libres, cuenta las que ocurren entre comidas y de noche, y relaciónalas con las lesiones que observas." },
+            { "titulo": "Acordar", "md": "Deja que el paciente elija uno o dos cambios concretos y medibles; registra la meta en el expediente." },
+            { "titulo": "Dar seguimiento", "md": "En la siguiente cita pide un nuevo registro corto, reconoce los avances y ajusta la meta." }
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m07/d5",
+          "pie": "Ciclo de la asesoría dietética en el consultorio dental.",
+          "descripcion": "Diagrama circular con cinco nodos unidos por flechas en sentido horario: «Preguntar», «Registrar», «Analizar juntos», «Acordar metas» y «Dar seguimiento», que vuelve a «Registrar». En el centro, un círculo con la leyenda «Menos exposiciones a azúcares libres».",
+          "elementos": [
+            "Preguntar",
+            "Registrar",
+            "Analizar juntos",
+            "Acordar metas",
+            "Dar seguimiento",
+            "Menos exposiciones a azúcares libres"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Medicamentos y situaciones especiales",
+          "md": "Algunos medicamentos líquidos o masticables, en especial pediátricos y de uso prolongado, contienen azúcares. No suspendas ni cambies un medicamento: comenta con el paciente o su familia la posibilidad de preguntar a quien lo prescribe por presentaciones sin azúcar y refuerza la higiene después de tomarlo. Si detectas señales de un trastorno de la conducta alimentaria, diabetes descontrolada o malnutrición, refiere al médico o al nutriólogo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ajustar la asesoría a cada persona"
+        },
+        {
+          "tipo": "texto",
+          "md": "La misma información no le sirve igual a todos. Con **familias de niños pequeños**, la conversación es con quien compra y prepara la comida, y conviene centrarse en las bebidas, la merienda escolar y la rutina de la noche. Con **adolescentes**, el refresco, las bebidas energéticas y los refrigerios fuera de casa pesan mucho, y funciona mejor hablar con ellos directamente, respetando su autonomía y relacionando el cambio con lo que les importa, como la estética de la sonrisa o el rendimiento deportivo.\n\nCon **adultos que trabajan en turnos o en la calle**, el obstáculo suele ser práctico: no tienen agua a la mano ni tiempo para comer. Una botella reutilizable de agua y un refrigerio sin azúcar planeado desde casa pueden resolver más que cualquier explicación. Con **personas con diabetes**, la reducción de azúcares libres coincide con su tratamiento médico; refuerza el mensaje del equipo de salud y nunca contradigas su plan de alimentación. Con **personas mayores**, revisa la boca seca, los suplementos nutricionales endulzados y los caramelos para la tos o la garganta.\n\nRegistra en el expediente clínico la asesoría que diste, la meta acordada y el resultado en la cita siguiente. Además de ser buena práctica, documentar la intervención preventiva permite al equipo dar continuidad aunque el paciente lo atienda otra persona."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué funcionan las metas pequeñas",
+          "md": "Los cambios de alimentación duraderos dependen más de la formación de hábitos que de la información. Un hábito se consolida cuando una conducta se repite en el mismo contexto hasta volverse automática; por eso es más eficaz anclar la meta a una situación concreta («cuando llegue a la oficina, lleno mi botella de agua») que a una intención general. Además, el éxito temprano aumenta la **autoeficacia**, es decir, la confianza de la persona en que puede cambiar, lo que facilita metas posteriores. Este razonamiento, propio de las ciencias de la conducta, explica por qué la asesoría dental eficaz propone uno o dos cambios a la vez y les da seguimiento."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso: la merienda de Sofía",
+          "situacion": "Sofía, de 7 años, tiene dos lesiones activas iniciales en molares temporales. Su mamá trae un diario de cuatro días: tres comidas, jugo de caja en el recreo, galletas al llegar de la escuela, leche con chocolate en polvo antes de dormir después del cepillado y agua de sabor endulzada en la tarde. La mamá dice que el jugo «es natural».",
+          "opciones": [
+            { "texto": "Explicar que el azúcar del jugo cuenta como libre y proponer que la mamá elija uno o dos cambios, por ejemplo agua natural en el recreo y la leche antes del cepillado nocturno, sin chocolate en polvo.", "correcta": true, "retro": "Correcto. Atiendes las exposiciones más dañinas, corriges el mito del jugo con información y dejas que la familia elija metas alcanzables y medibles." },
+            { "texto": "Indicar que Sofía elimine de inmediato todos los alimentos con azúcar, incluida la fruta entera.", "correcta": false, "retro": "La fruta entera no es azúcar libre, y una prohibición total suele fracasar y generar culpa. Es mejor priorizar uno o dos cambios." },
+            { "texto": "No comentar la dieta porque la caries de los dientes temporales no tiene importancia.", "correcta": false, "retro": "Los dientes temporales cumplen funciones importantes y los hábitos de la infancia se mantienen; la dieta es el factor principal a corregir." },
+            { "texto": "Recomendar sustituir todas las bebidas por bebidas con edulcorantes.", "correcta": false, "retro": "La meta es acostumbrar al paladar a menos dulzor y preferir agua natural; además, la norma de etiquetado advierte que los productos con edulcorantes no son recomendables en niños." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/14",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con equipo de protección conversando con una madre y su hija sentadas en el consultorio.",
+          "pie": "Una conversación colaborativa, sentados al mismo nivel, favorece que la familia proponga sus propias metas.",
+          "prompt": "Fotografía horizontal en un consultorio dental luminoso, un odontólogo sentado en un banco a la altura de los ojos de sus interlocutores, con bata clínica, cubrebocas y lentes de protección, conversando con una madre y su hija de unos siete años sentadas frente a él, vistas de espaldas o de perfil parcial sin rostros identificables. Sobre una mesa pequeña, una hoja de registro sin texto legible. Luz natural cálida, ambiente amable y profesional, colores naturales. Evitar: texto, logotipos, marcas, rostros identificables, gestos de regaño, instrumental con sangre, falta de equipo de protección."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m07/15",
+          "proporcion": "3:4",
+          "alt": "Refrigerador doméstico abierto con jarras de agua natural, fruta entera y verduras en el estante principal.",
+          "pie": "Cambiar el entorno de casa, por ejemplo dejar agua y fruta a la vista, facilita cumplir las metas.",
+          "prompt": "Fotografía vertical de un refrigerador doméstico abierto y ordenado en una cocina iluminada, en el estante a la altura de los ojos dos jarras de vidrio con agua natural, un tazón con fruta entera lavada como manzanas, mandarinas y uvas, y recipientes transparentes con verduras picadas; en estantes inferiores leche y queso en envases lisos sin marca. Luz interior blanca del refrigerador combinada con luz natural, colores frescos y naturales. Evitar: texto, etiquetas, marcas, logotipos, personas, refrescos, dulces, comida en mal estado, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Ten listo un **formato de diario de dieta** impreso o digital y una tabla breve de sustituciones (agua natural en lugar de refresco, fruta entera en lugar de jugo, queso o cacahuates naturales en lugar de galletas, café con menos azúcar cada semana). Registra en el expediente la meta acordada y las tres cifras de línea base: exposiciones totales, entre comidas y nocturnas. Repetirlas en la cita de control te dirá, con datos, si la asesoría funcionó."
+        }
+      ],
+      "glosario": [
+        { "termino": "Diario de dieta", "definicion": "Registro de todo lo que una persona come y bebe durante varios días, con horario y circunstancias." },
+        { "termino": "Exposición a azúcares libres", "definicion": "Cada ocasión en que la biopelícula recibe azúcares libres, aunque sea en poca cantidad." },
+        { "termino": "Entrevista motivacional", "definicion": "Estilo de conversación colaborativo que busca fortalecer la motivación propia de la persona para cambiar." },
+        { "termino": "Meta medible", "definicion": "Objetivo concreto cuyo cumplimiento puede verificarse, por ejemplo con un nuevo registro de dieta." },
+        { "termino": "Línea base", "definicion": "Medición inicial que sirve para comparar los resultados de una intervención." }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.5-1",
+          "q": "¿Por qué conviene que el diario de dieta incluya un día de fin de semana?",
+          "opciones": ["Porque es un requisito de la norma de etiquetado", "Porque los hábitos alimentarios suelen cambiar en fin de semana", "Porque entre semana no se consume azúcar", "Porque así se calcula la dosis de flúor"],
+          "correcta": 1,
+          "explicacion": "Los horarios y alimentos cambian en fin de semana; incluirlo da una imagen más completa."
+        },
+        {
+          "id": "t7.5-2",
+          "q": "¿Cuál es una meta dietética bien planteada para un paciente?",
+          "opciones": ["Comer más sano", "Dejar todo el azúcar para siempre", "Evitar los alimentos malos", "Cambiar el refresco de la tarde por agua natural de lunes a viernes"],
+          "correcta": 3,
+          "explicacion": "Es concreta, alcanzable y verificable con un nuevo registro."
+        },
+        {
+          "id": "t7.5-3",
+          "q": "Un niño toma un jarabe con azúcar todos los días por indicación médica. ¿Qué es lo adecuado desde el consultorio dental?",
+          "opciones": ["Suspender el jarabe de inmediato", "Sustituirlo por otro medicamento elegido por el dentista", "Sugerir a la familia consultar con quien lo prescribió si existe una presentación sin azúcar y reforzar la higiene después de tomarlo", "Ignorarlo porque los medicamentos no afectan los dientes"],
+          "correcta": 2,
+          "explicacion": "El medicamento lo maneja quien lo prescribió; el equipo dental orienta y refuerza la higiene."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Guideline: Sugars intake for adults and children", "autor": "Organización Mundial de la Salud", "anio": 2015 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de consejería dietética en odontología y principios de la entrevista motivacional", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el azúcar en la mira",
+    "palabras": ["SACAROSA", "FRUCTOSA", "LACTOSA", "XILITOL", "ETIQUETA", "SELLOS", "MIEL", "JUGO", "FRECUENCIA", "DIARIO", "ACIDO", "SALIVA"]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m07-p01",
+        "q": "¿Cuál es la definición de azúcares libres de la OMS?",
+        "opciones": ["Monosacáridos y disacáridos añadidos más los azúcares naturalmente presentes en miel, jarabes, jugos y concentrados de fruta", "Todos los carbohidratos de la dieta, incluidos los almidones", "Solo el azúcar de mesa que se añade en casa", "Los azúcares de frutas enteras y de la leche"],
+        "correcta": 0,
+        "explicacion": "La definición incluye azúcares añadidos y los de miel, jarabes y jugos; excluye fruta entera, leche y almidones."
+      },
+      {
+        "id": "m07-p02",
+        "q": "¿Qué azúcar excluye expresamente la guía de la OMS?",
+        "opciones": ["El de la miel", "El del jugo de fruta natural", "La lactosa de la leche", "El jarabe de maíz"],
+        "correcta": 2,
+        "explicacion": "Los azúcares propios de la leche y los de frutas y verduras enteras quedan fuera de la definición."
+      },
+      {
+        "id": "m07-p03",
+        "q": "¿Qué fuerza tiene la recomendación de mantener los azúcares libres por debajo del 10 % de la energía?",
+        "opciones": ["Condicional", "Fuerte", "Opcional", "Experimental"],
+        "correcta": 1,
+        "explicacion": "La meta del 10 % es una recomendación fuerte; la del 5 % es condicional."
+      },
+      {
+        "id": "m07-p04",
+        "q": "¿Por qué la meta del 5 % es condicional?",
+        "opciones": ["Porque no hay ninguna evidencia sobre ella", "Porque solo aplica a niños menores de un año", "Porque la OMS la retiró en 2023", "Porque se apoya en evidencia de menor certeza, sobre todo estudios ecológicos"],
+        "correcta": 3,
+        "explicacion": "Hay pocos estudios en poblaciones con consumo tan bajo; la evidencia procede sobre todo de estudios ecológicos."
+      },
+      {
+        "id": "m07-p05",
+        "q": "¿Cuántas kilocalorías aporta aproximadamente un gramo de azúcar?",
+        "opciones": ["2", "9", "4", "7"],
+        "correcta": 2,
+        "explicacion": "Los carbohidratos aportan unas 4 kilocalorías por gramo."
+      },
+      {
+        "id": "m07-p06",
+        "q": "Una persona consume 2,000 kilocalorías al día y 75 g de azúcares libres. ¿Qué porcentaje de su energía viene de azúcares libres?",
+        "opciones": ["7.5 %", "15 %", "3.75 %", "30 %"],
+        "correcta": 1,
+        "explicacion": "75 × 4 = 300 kilocalorías; 300 ÷ 2,000 × 100 = 15 %, por encima de la meta del 10 %."
+      },
+      {
+        "id": "m07-p07",
+        "q": "¿Qué hallazgo de la revisión sistemática de Moynihan y Kelly es más relevante para la práctica?",
+        "opciones": ["La caries depende solo del flúor", "La relación entre azúcares y caries es continua y el flúor la atenúa pero no la elimina", "Por debajo del 10 % el azúcar no produce ningún daño", "Los almidones son más cariogénicos que la sacarosa"],
+        "correcta": 1,
+        "explicacion": "La relación dosis-respuesta es continua; reducir azúcares sigue siendo necesario aunque haya flúor."
+      },
+      {
+        "id": "m07-p08",
+        "q": "¿Qué representa la curva de Stephan?",
+        "opciones": ["El cambio del pH de la placa después de una exposición al azúcar", "La velocidad de erupción de los dientes", "La cantidad de flúor en la saliva a lo largo del día", "El crecimiento de la caries en años"],
+        "correcta": 0,
+        "explicacion": "Muestra la caída rápida y la recuperación gradual del pH de la placa."
+      },
+      {
+        "id": "m07-p09",
+        "q": "¿Alrededor de qué valor se sitúa el pH crítico del esmalte?",
+        "opciones": ["7.4", "6.8", "3.0", "5.5"],
+        "correcta": 3,
+        "explicacion": "Alrededor de 5.5, con variaciones según las concentraciones de calcio y fosfato."
+      },
+      {
+        "id": "m07-p10",
+        "q": "¿Cuál de estas conductas acorta la exposición ácida?",
+        "opciones": ["Tomar caramelos que se disuelven lentamente", "Beber jugo con vaso entrenador durante la tarde", "Comer el postre al terminar la comida principal", "Tomar leche endulzada después del cepillado nocturno"],
+        "correcta": 2,
+        "explicacion": "Concentrar lo dulce en las comidas reduce el número de ataques ácidos."
+      },
+      {
+        "id": "m07-p11",
+        "q": "Un paciente toma muchas bebidas cítricas y deportivas. Además de caries, ¿qué otra condición debes revisar?",
+        "opciones": ["Erosión dental", "Fluorosis", "Hipoplasia por traumatismo", "Amelogénesis imperfecta"],
+        "correcta": 0,
+        "explicacion": "Las bebidas ácidas pueden disolver el esmalte sin intervención bacteriana: eso es erosión."
+      },
+      {
+        "id": "m07-p12",
+        "q": "¿Qué norma mexicana incorporó en 2020 el etiquetado frontal de advertencia?",
+        "opciones": ["NOM-013-SSA2-2015", "NOM-004-SSA3-2012", "NOM-087-SEMARNAT-SSA1-2002", "La modificación a la NOM-051-SCFI/SSA1-2010"],
+        "correcta": 3,
+        "explicacion": "La modificación a la NOM-051, publicada el 27 de marzo de 2020, incorporó los sellos de advertencia."
+      },
+      {
+        "id": "m07-p13",
+        "q": "¿Qué parte de la etiqueta te dice cuántos gramos de azúcares añadidos tiene una porción?",
+        "opciones": ["El sello de advertencia", "La tabla nutrimental", "La fecha de caducidad", "El código de barras"],
+        "correcta": 1,
+        "explicacion": "El sello indica exceso; la cantidad está en la tabla nutrimental."
+      },
+      {
+        "id": "m07-p14",
+        "q": "¿Cuál de estos ingredientes NO es una forma de azúcar libre?",
+        "opciones": ["Dextrosa", "Jarabe de agave", "Concentrado de jugo de fruta", "Harina de maíz nixtamalizado"],
+        "correcta": 3,
+        "explicacion": "La harina de maíz es almidón; las otras tres son formas de azúcar libre."
+      },
+      {
+        "id": "m07-p15",
+        "q": "¿Qué opción describe mejor a los polioles como el xilitol?",
+        "opciones": ["Son poco fermentables por las bacterias de la placa, aunque la evidencia de que prevengan la caries por sí mismos es limitada", "Son azúcares libres según la OMS", "Remineralizan el esmalte igual que el flúor", "Están prohibidos en México"],
+        "correcta": 0,
+        "explicacion": "Son poco cariogénicos; una revisión Cochrane de 2015 calificó de baja calidad la evidencia preventiva del xilitol."
+      },
+      {
+        "id": "m07-p16",
+        "q": "¿Qué información se anota en un diario de dieta útil para el consultorio dental?",
+        "opciones": ["Solo las comidas principales", "Solo los dulces y postres", "Todo lo que se come y bebe, con hora, cantidad y si fue entre comidas, además de los cepillados", "Solo el peso corporal diario"],
+        "correcta": 2,
+        "explicacion": "Hace falta el registro completo para contar exposiciones entre comidas y nocturnas."
+      },
+      {
+        "id": "m07-p17",
+        "q": "Un adolescente con lesiones activas bebe refresco a sorbos toda la tarde y dice que no puede dejarlo. ¿Cuál es el enfoque más adecuado?",
+        "opciones": ["Advertirle que perderá los dientes si no deja el refresco", "Explorar con preguntas abiertas qué cambio está dispuesto a intentar y acordar una meta pequeña y medible", "No hablar de dieta y solo restaurar las lesiones", "Indicarle que cambie a bebidas con edulcorantes sin más explicación"],
+        "correcta": 1,
+        "explicacion": "Un estilo colaborativo con metas concretas favorece el cambio; el miedo y las prohibiciones generan resistencia."
+      },
+      {
+        "id": "m07-p18",
+        "q": "Una madre ofrece miel en lugar de azúcar a su hijo porque «es natural». ¿Qué le explicas?",
+        "opciones": ["Que la miel protege el esmalte", "Que la miel solo es dañina en adultos", "Que la miel es un almidón", "Que la miel cuenta como azúcar libre y se comporta igual en la placa"],
+        "correcta": 3,
+        "explicacion": "La OMS incluye los azúcares de la miel en los azúcares libres; para la biopelícula son fermentables."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "oficial", "titulo": "Guideline: Sugars intake for adults and children", "autor": "Organización Mundial de la Salud", "anio": 2015 },
+    { "tipo": "academica", "titulo": "Effect on caries of restricting sugars intake: systematic review to inform WHO guidelines", "autor": "Moynihan P. J., Kelly S. A. M. (Journal of Dental Research)", "anio": 2014 },
+    { "tipo": "academica", "titulo": "Diet and dental caries: the pivotal role of free sugars reemphasized", "autor": "Sheiham A., James W. P. T. (Journal of Dental Research)", "anio": 2015 },
+    { "tipo": "oficial", "titulo": "Use of non-sugar sweeteners: WHO guideline", "autor": "Organización Mundial de la Salud", "anio": 2023 },
+    { "tipo": "oficial", "titulo": "Modificación a la NOM-051-SCFI/SSA1-2010 (DOF 27 de marzo de 2020)", "autor": "Secretaría de Economía y Secretaría de Salud", "anio": 2020 },
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 }
+  ]
+}

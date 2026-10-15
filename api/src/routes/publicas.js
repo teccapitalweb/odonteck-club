@@ -33,7 +33,8 @@ export function rutasPublicas(ctx) {
     let folio = crudo.toUpperCase();
     let cert = null;
     if (folioValido(folio)) {
-      cert = await leerDoc(ctx.db, COL.certificados, folio);
+      // Cursos y Academia comparten el espacio de folios: se busca en ambas colecciones.
+      cert = (await leerDoc(ctx.db, COL.certificados, folio)) ?? (await leerDoc(ctx.db, COL.academiaCertificados, folio));
     } else if (FOLIO_VIEJO.test(crudo)) {
       // Certificados del club anterior (QR ya impresos): se migraron conservando su folio en `folioAnterior`.
       const variantes = [...new Set([crudo, `OdonTeck-${crudo.slice(9)}`])];
@@ -50,6 +51,9 @@ export function rutasPublicas(ctx) {
       return res.status(404).json({ valido: false, error: 'certificado_no_encontrado', mensaje: 'No existe un certificado con ese folio.' });
     }
     // Solo lo necesario para verificar: nada de uid ni correo.
+    if (cert.tipo === 'academia') {
+      return res.json({ valido: true, folio, tipo: 'academia', nombre: cert.nombre, cursoTitulo: cert.programaTitulo, programaTitulo: cert.programaTitulo, emitido: cert.emitido });
+    }
     return res.json({ valido: true, folio, nombre: cert.nombre, cursoTitulo: cert.cursoTitulo, emitido: cert.emitido });
   }));
 

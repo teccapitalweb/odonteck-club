@@ -1,0 +1,1050 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 3,
+  "titulo": "Huesos maxilares, articulación temporomandibular y músculos de la masticación",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los dientes no flotan: se apoyan en dos huesos muy distintos, el maxilar y la mandíbula, que se relacionan entre sí a través de la articulación temporomandibular y se mueven gracias a los músculos de la masticación. En este módulo recorrerás las referencias óseas que usarás en anestesia, cirugía, implantes y radiografía, incluido el seno maxilar y el conducto mandibular. Estudiarás la articulación temporomandibular pieza por pieza, cómo se mueve y cómo explorarla, y terminarás con el origen, la inserción, la acción y la inervación de cada músculo masticador y suprahioideo. Es la base anatómica para entender el dolor orofacial, la oclusión y la cirugía bucal.",
+  "objetivos": [
+    "Identificar las partes y referencias del maxilar, del hueso palatino y de la mandíbula, y relacionarlas con la anestesia, la cirugía y los implantes.",
+    "Describir el seno maxilar y su relación con las raíces de los dientes posteriores superiores, y reconocer los riesgos clínicos que se derivan de ella.",
+    "Explicar la estructura de la articulación temporomandibular: superficies articulares, disco, tejidos retrodiscales, cápsula y ligamentos.",
+    "Distinguir los movimientos de rotación y traslación de la articulación y aplicar una exploración articular básica, midiendo la apertura bucal.",
+    "Describir origen, inserción, acción e inervación de los músculos de la masticación y de los suprahioideos, y relacionarlos con la palpación y con trastornos comunes."
+  ],
+  "duracionMin": 120,
+  "portada": {
+    "id": "anatomia-dental/m03/portada",
+    "proporcion": "16:9",
+    "alt": "Modelo anatómico de cráneo visto de lado con la mandíbula articulada y los músculos masetero y temporal representados en resina.",
+    "prompt": "Fotografía de estudio de gran formato de un modelo anatómico didáctico de cráneo humano adulto en vista lateral derecha, de resina color hueso con dentición permanente completa en oclusión, con los músculos temporal y masetero representados en resina rojiza semitransparente sobre el hueso, la articulación temporomandibular visible delante del conducto auditivo, fondo gris azulado oscuro, iluminación lateral suave de estudio que resalta volúmenes, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, apariencia de cráneo real con restos de tejido, sangre, dientes deformes o de más, aspecto de caricatura."
+  },
+  "temas": [
+    {
+      "n": "3.1",
+      "titulo": "El maxilar, el hueso palatino y el seno maxilar",
+      "minutos": 24,
+      "enPocasPalabras": "El maxilar es el hueso que sostiene los dientes de arriba. Por dentro tiene una cavidad llena de aire, el seno maxilar, que queda muy cerca de las raíces de las muelas superiores. Por eso una infección o una extracción de esas muelas puede afectar el seno.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **maxilar** (*maxilla*) es un hueso par que, unido a su homólogo en la línea media, forma la mayor parte del tercio medio de la cara. Participa en el piso de la órbita, en las paredes de la cavidad nasal y en el paladar, y aloja en su **proceso alveolar** los dientes superiores. A diferencia de la mandíbula, el maxilar está fijo al resto del cráneo mediante suturas, por lo que transmite las fuerzas de la masticación hacia la base del cráneo y no se mueve durante la función."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuerpo y apófisis del maxilar"
+        },
+        {
+          "tipo": "texto",
+          "md": "El maxilar tiene un **cuerpo** de forma piramidal, que contiene el seno maxilar, y cuatro **apófisis**:\n\n- **Frontal:** asciende entre los huesos nasal y lagrimal hasta articularse con el frontal.\n- **Cigomática:** se une al hueso cigomático y forma el pilar lateral de la mejilla.\n- **Palatina:** lámina horizontal que forma los dos tercios anteriores del paladar duro.\n- **Alveolar:** arco que contiene los alvéolos de los dientes superiores. Su existencia depende de los dientes: cuando se pierden, el proceso se reabsorbe.\n\nEn la **cara anterior** del cuerpo se reconocen el **agujero infraorbitario**, unos milímetros por debajo del reborde de la órbita, por donde sale el nervio infraorbitario; la **fosa canina**, una depresión situada lateral a la **eminencia canina**, que forma la raíz larga del canino; y, hacia la línea media, la escotadura nasal y la **espina nasal anterior**. En la **cara posterior** o infratemporal destaca la **tuberosidad del maxilar**, una prominencia por detrás del último molar perforada por pequeños agujeros alveolares por donde entran los nervios y vasos alveolares superiores posteriores."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/01",
+          "proporcion": "4:3",
+          "alt": "Cráneo de resina en vista anterolateral que muestra el maxilar, el agujero infraorbitario, la eminencia canina y la tuberosidad.",
+          "pie": "Cara anterior del maxilar: agujero infraorbitario, fosa canina, eminencia canina y proceso alveolar.",
+          "prompt": "Fotografía de estudio de un modelo anatómico de cráneo humano adulto de resina color hueso, vista anterolateral izquierda centrada en el tercio medio de la cara, se aprecian el reborde inferior de la órbita, un agujero pequeño por debajo de él, la depresión de la fosa canina, el relieve vertical de la raíz del canino, el proceso alveolar con los dientes superiores y el hueso cigomático, fondo gris neutro, iluminación lateral que marca relieves. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, dientes faltantes o de más, apariencia de cráneo real dañado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El hueso palatino"
+        },
+        {
+          "tipo": "texto",
+          "md": "Detrás del maxilar se encuentra el **hueso palatino**, también par, con forma de L. Su **lámina horizontal** completa el tercio posterior del paladar duro y su **lámina perpendicular** forma parte de la pared lateral de la cavidad nasal. Entre el maxilar y el palatino se forma el **conducto palatino mayor**, que desemboca en el paladar por el **agujero palatino mayor**, a la altura del segundo o tercer molar; por detrás, los **agujeros palatinos menores** se abren en la **apófisis piramidal** del palatino. Por estos agujeros llegan al paladar los nervios y vasos que estudiarás en el módulo 4.\n\nEn la línea media anterior, el **conducto incisivo** se abre en la fosa incisiva, bajo la papila del mismo nombre. Su posición importa en la colocación de implantes entre los incisivos centrales, y en radiografías periapicales su imagen radiolúcida puede confundirse con una lesión apical."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El seno maxilar"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **seno maxilar** es el mayor de los senos paranasales. Ocupa el cuerpo del maxilar y tiene forma de pirámide: su base es la pared lateral de la cavidad nasal y su vértice se dirige hacia la apófisis cigomática. Su volumen en el adulto suele estimarse en alrededor de 15 mL, con mucha variación individual. Está revestido por una mucosa respiratoria con epitelio cilíndrico seudoestratificado ciliado, la **membrana de Schneider**, cuyos cilios mueven el moco hacia el **ostium**, la abertura que drena el seno en el **meato medio** de la cavidad nasal.\n\nUn detalle anatómico explica muchos problemas: el ostium está en la parte **alta** de la pared medial, de modo que el seno no drena por gravedad y depende del movimiento ciliar. Cualquier inflamación que cierre el ostium favorece la acumulación de secreciones.\n\nEl **piso del seno** se relaciona con el proceso alveolar. Las raíces de los molares superiores, sobre todo del primero y del segundo, y a veces de los premolares, pueden estar separadas del seno por una lámina ósea muy delgada o incluso proyectarse dentro de él cubiertas solo por la mucosa. El seno crece durante la infancia y adolescencia acompañando la erupción de los dientes permanentes, y después de la pérdida de los molares tiende a expandirse hacia el reborde, un proceso llamado **neumatización**, que reduce la altura de hueso disponible."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El antro de Highmore",
+          "md": "En muchos textos clínicos el seno maxilar aparece como **antro de Highmore**, en honor del médico inglés Nathaniel Highmore, que lo describió en el siglo XVII. Dentro del seno pueden existir **tabiques óseos** que lo dividen parcialmente en compartimentos. No tienen consecuencias en la vida diaria, pero importan en cirugía: complican la elevación de la membrana de Schneider para colocar injertos, y por eso se buscan en la tomografía antes de planear un implante en la zona posterior del maxilar."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m03/d1",
+          "pie": "Corte frontal del maxilar a nivel del primer molar: relación entre raíces, seno y cavidad nasal.",
+          "descripcion": "Corte frontal esquemático del tercio medio de la cara a la altura del primer molar superior. En el centro, la cavidad nasal con el cornete inferior y el meato medio. A cada lado, el seno maxilar como una cavidad triangular con su mucosa dibujada como una línea delgada. El ostium se ubica en la parte alta de la pared medial y comunica con el meato medio. En el piso del seno, las raíces vestibulares y palatina del primer molar llegan muy cerca de la cavidad, una de ellas formando una pequeña elevación en el piso. Debajo, el paladar duro separa la cavidad nasal de la boca.",
+          "elementos": [
+            "Seno maxilar",
+            "Membrana de Schneider",
+            "Ostium",
+            "Meato medio",
+            "Cavidad nasal",
+            "Piso del seno",
+            "Raíces del primer molar",
+            "Paladar duro"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Comunicación oroantral",
+          "md": "Al extraer un molar superior cuyas raíces están en contacto íntimo con el seno, puede quedar una **comunicación entre la boca y el seno maxilar**. Los signos que la sugieren son el paso de aire o burbujas por el alvéolo cuando el paciente intenta exhalar por la nariz con las fosas cerradas, la salida de líquidos por la nariz o un cambio en la resonancia de la voz. No explores la comunicación con instrumentos, porque puedes agrandarla o empujar restos al seno. Registra el hallazgo, da indicaciones para no aumentar la presión nasal y refiere de inmediato a cirugía bucal. La planificación con radiografías antes de extraer reduce sorpresas."
+        },
+        {
+          "tipo": "texto",
+          "md": "La relación también funciona en sentido contrario. Una infección periapical o periodontal de un molar superior puede extenderse al seno y producir una **sinusitis maxilar de origen dental**, típicamente unilateral y con secreción fétida, que no mejora hasta tratar el diente responsable. A la inversa, una sinusitis puede provocar dolor referido a varios molares superiores a la vez, que el paciente interpreta como dolor de muelas, sobre todo al inclinar la cabeza hacia delante. Cuando varios dientes vecinos duelen sin una causa dental clara y las pruebas pulpares son normales, piensa en el seno."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Hueso poroso, pilares firmes"
+        },
+        {
+          "tipo": "texto",
+          "md": "El hueso del maxilar tiene corticales delgadas y abundante hueso esponjoso. La cortical vestibular del proceso alveolar es fina y porosa, lo que permite que la solución anestésica depositada en el fondo del vestíbulo se difunda hasta los ápices: por eso la **anestesia infiltrativa** suele ser eficaz en el maxilar. También por eso las infecciones de los dientes superiores tienden a abrirse hacia vestibular.\n\nA pesar de su ligereza, el maxilar soporta grandes fuerzas gracias a tres **pilares** verticales de hueso más denso que transmiten la carga de los dientes a la base del cráneo: el pilar **nasomaxilar** o canino, a los lados de la abertura nasal; el pilar **cigomaticomaxilar**, desde la región del primer molar hacia el hueso cigomático; y el pilar **pterigomaxilar**, por detrás de la tuberosidad, donde el maxilar se apoya en la apófisis pterigoides del esfenoides. Estos pilares orientan la colocación de miniplacas en la fijación de fracturas y explican los patrones de fractura del tercio medio que describió René Le Fort a principios del siglo XX."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Referencias del maxilar y del palatino con aplicación clínica",
+          "columnas": ["Referencia", "Ubicación", "Aplicación"],
+          "filas": [
+            ["Agujero infraorbitario", "Por debajo del reborde inferior de la órbita", "Bloqueo del nervio infraorbitario"],
+            ["Eminencia y fosa canina", "Cara anterior, sobre y detrás de la raíz del canino", "Abordajes quirúrgicos y referencia para el pilar canino"],
+            ["Tuberosidad del maxilar", "Detrás del último molar", "Riesgo de fractura al extraer un tercer molar; soporte de prótesis"],
+            ["Agujero palatino mayor", "Paladar, a la altura del segundo o tercer molar", "Bloqueo del nervio palatino mayor; límite de zonas donantes"],
+            ["Conducto incisivo", "Línea media anterior del paladar", "Planeación de implantes; imagen radiolúcida normal"],
+            ["Piso del seno maxilar", "Sobre las raíces de molares y premolares", "Comunicación oroantral, elevación de seno, sinusitis de origen dental"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/02",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica de un adulto en la que se distinguen los senos maxilares por encima de los molares superiores.",
+          "pie": "En una radiografía panorámica, el piso del seno maxilar se dibuja como una línea curva radiopaca sobre los ápices de los molares superiores.",
+          "prompt": "Radiografía panorámica dental digital realista de un adulto con dentición permanente completa sin restauraciones extensas, tonos de gris naturales, se distinguen las cavidades radiolúcidas de ambos senos maxilares por encima de las raíces de los premolares y molares superiores con su piso como una línea curva blanca, la cavidad nasal y el tabique en el centro, la mandíbula completa con sus conductos y los cóndilos a los lados, contraste equilibrado. Evitar: texto, letras, números, marcadores de lado, flechas, logotipos, marcas de agua, implantes, dientes de más o deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Dolor en tres muelas a la vez",
+          "situacion": "Una mujer de 38 años refiere desde hace una semana dolor sordo en los molares superiores izquierdos, que aumenta al agacharse. Tuvo un resfriado hace diez días y tiene congestión nasal. No hay caries ni restauraciones profundas en esos dientes, las pruebas de sensibilidad pulpar son normales y los tres dientes duelen ligeramente a la percusión.",
+          "opciones": [
+            { "texto": "Sospechar dolor referido de origen sinusal, explicar la relación de las raíces con el seno y referir a valoración médica, sin iniciar tratamiento dental invasivo.", "correcta": true, "retro": "Correcto. Varios dientes vecinos sensibles, pulpas normales, empeoramiento al agacharse y antecedente respiratorio sugieren origen sinusal." },
+            { "texto": "Iniciar tratamiento de conductos en el primer molar, porque es el diente más grande.", "correcta": false, "retro": "No hay evidencia de patología pulpar; un tratamiento invasivo no resolvería un dolor de origen sinusal." },
+            { "texto": "Extraer el segundo molar para aliviar la presión del seno.", "correcta": false, "retro": "La extracción no está indicada y podría incluso crear una comunicación oroantral." },
+            { "texto": "Concluir que es bruxismo y entregar una guarda oclusal.", "correcta": false, "retro": "El patrón de dolor y el antecedente respiratorio orientan a otra causa; la guarda no sería la primera conducta." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/03",
+          "proporcion": "1:1",
+          "alt": "Vista inferior de un cráneo de resina que muestra el paladar óseo con sus suturas y los agujeros palatinos.",
+          "pie": "Paladar óseo: apófisis palatinas del maxilar, láminas horizontales del palatino, fosa incisiva y agujeros palatinos.",
+          "prompt": "Fotografía de estudio de la base de un modelo anatómico de cráneo humano adulto de resina color hueso, vista inferior centrada en el paladar óseo, se aprecian la arcada superior completa, la fosa incisiva detrás de los incisivos, la sutura en la línea media y la sutura transversa posterior, dos pequeños agujeros a cada lado cerca de los últimos molares y las apófisis pterigoides por detrás, fondo gris neutro, iluminación uniforme de estudio, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, dientes faltantes o de más."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de extraer un molar superior, o de planear un implante en esa zona, revisa en la radiografía la **distancia entre los ápices y el piso del seno** y anótala. Si las raíces se proyectan dentro del seno o la cortical es apenas visible, comenta al paciente el riesgo de comunicación oroantral, planea una técnica que evite fuerzas hacia arriba y ten listo el plan de referencia. Ese minuto de revisión es lo que separa una complicación prevista de una sorpresa."
+        }
+      ],
+      "glosario": [
+        { "termino": "Proceso alveolar", "definicion": "Porción del maxilar o de la mandíbula que contiene los alvéolos dentales y se reabsorbe tras la pérdida de los dientes." },
+        { "termino": "Tuberosidad del maxilar", "definicion": "Prominencia posterior del maxilar por detrás del último molar, perforada por los agujeros alveolares posteriores." },
+        { "termino": "Seno maxilar", "definicion": "Cavidad neumática del cuerpo del maxilar, el mayor de los senos paranasales, que drena al meato medio." },
+        { "termino": "Membrana de Schneider", "definicion": "Mucosa respiratoria ciliada que reviste el seno maxilar." },
+        { "termino": "Neumatización", "definicion": "Expansión del seno maxilar hacia el reborde alveolar, frecuente tras la pérdida de los dientes posteriores." },
+        { "termino": "Comunicación oroantral", "definicion": "Comunicación anormal entre la cavidad oral y el seno maxilar, a menudo tras una extracción." },
+        { "termino": "Pilares del maxilar", "definicion": "Columnas de hueso denso (nasomaxilar, cigomaticomaxilar y pterigomaxilar) que transmiten la carga masticatoria a la base del cráneo." }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.1-1",
+          "q": "¿Dónde drena el seno maxilar?",
+          "opciones": ["En el meato inferior", "En el meato medio", "En la nasofaringe", "En el vestíbulo oral"],
+          "correcta": 1,
+          "explicacion": "El ostium del seno maxilar se abre en el meato medio, en la parte alta de la pared medial del seno."
+        },
+        {
+          "id": "t3.1-2",
+          "q": "¿Por qué suele ser eficaz la anestesia infiltrativa en el maxilar?",
+          "opciones": ["Porque el maxilar no tiene hueso esponjoso", "Porque los nervios corren por fuera del hueso", "Porque la cortical vestibular es delgada y porosa", "Porque el seno maxilar absorbe la solución"],
+          "correcta": 2,
+          "explicacion": "La cortical vestibular fina y porosa permite que la solución difunda hasta los ápices."
+        },
+        {
+          "id": "t3.1-3",
+          "q": "¿Qué huesos forman el paladar duro óseo?",
+          "opciones": ["Apófisis palatinas del maxilar y láminas horizontales del palatino", "Cuerpo del maxilar y vómer", "Láminas perpendiculares del palatino y esfenoides", "Apófisis alveolar y hueso cigomático"],
+          "correcta": 0,
+          "explicacion": "Las apófisis palatinas del maxilar forman los dos tercios anteriores y las láminas horizontales del palatino el tercio posterior."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Illustrated Anatomy of the Head and Neck", "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)", "anio": 2017 },
+        { "tipo": "academica", "titulo": "Contemporary Oral and Maxillofacial Surgery", "autor": "Hupp J. R., Tucker M. R., Ellis E. (Elsevier)", "anio": 2019 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de anatomía de cabeza y cuello y cirugía bucal", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "3.2",
+      "titulo": "La mandíbula: cuerpo, rama y referencias clínicas",
+      "minutos": 24,
+      "enPocasPalabras": "La mandíbula es el hueso de la quijada y el único hueso de la cara que se mueve. Tiene una parte en forma de herradura que sostiene los dientes de abajo y dos ramas que suben hacia los oídos. Por dentro corre un conducto con un nervio que da sensibilidad a los dientes y al labio inferior, y hay que protegerlo en cirugías e implantes.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **mandíbula** (*mandibula*) es el hueso más grande y resistente de la cara y el único del cráneo, aparte de los huesecillos del oído, que se mueve. Se articula con los temporales a través de las dos articulaciones temporomandibulares y aloja los dientes inferiores. Tiene un **cuerpo** horizontal en forma de herradura y dos **ramas** verticales que se unen al cuerpo en los **ángulos**. Al nacer está formada por dos mitades unidas por tejido fibroso en la sínfisis, que se fusionan durante el primer año de vida."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El cuerpo: cara externa"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la cara externa del cuerpo, en la línea media, se encuentra la **sínfisis mentoniana** y, por debajo, la **protuberancia mentoniana**, triangular, con un **tubérculo mentoniano** a cada lado. Más atrás está el **agujero mentoniano**, por donde salen el nervio y los vasos mentonianos. En el adulto con dientes suele ubicarse por debajo del segundo premolar o entre los ápices del primero y del segundo premolar, aproximadamente a media altura entre el borde alveolar y el borde inferior, aunque su posición varía y pueden existir agujeros accesorios.\n\nDesde el agujero mentoniano hacia atrás asciende la **línea oblicua**, una cresta que se continúa con el borde anterior de la rama. Es una zona de hueso cortical grueso que se palpa en el vestíbulo y que en las radiografías periapicales puede verse como una línea radiopaca que cruza las raíces de los molares."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El cuerpo: cara interna"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la cara interna, junto a la línea media, sobresalen las **espinas mentonianas** o apófisis geni: las superiores dan origen a los músculos genioglosos y las inferiores a los geniohioideos. Por debajo de ellas, cerca del borde inferior, están las **fosas digástricas**, donde se insertan los vientres anteriores de los digástricos.\n\nLa estructura más importante de esta cara es la **línea milohioidea**, una cresta oblicua que asciende desde la región de premolares hasta la de los terceros molares y da origen al músculo milohioideo. Por encima de su porción anterior está la **fosa sublingual**, que aloja la glándula sublingual; por debajo de su porción posterior, la **fosa submandibular**, que aloja la glándula submandibular. Esta fosa forma una **concavidad lingual** en la región molar que no siempre se aprecia en una radiografía panorámica, y que es un punto crítico al colocar implantes: una fresa que perfora la cortical lingual puede lesionar vasos del piso de la boca y provocar una hemorragia capaz de comprometer la vía aérea. En la línea media lingual, además, suelen existir pequeños **agujeros linguales** por donde entran ramas arteriales."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/04",
+          "proporcion": "4:3",
+          "alt": "Mandíbula de resina vista desde su cara interna, con las espinas mentonianas, la línea milohioidea y el agujero mandibular.",
+          "pie": "Cara interna de la mandíbula: espinas mentonianas, fosas sublingual y submandibular, línea milohioidea y agujero mandibular con su língula.",
+          "prompt": "Fotografía de estudio de una mandíbula humana adulta de resina color hueso con dentición permanente completa, vista medial oblicua desde atrás que muestra la cara interna del cuerpo y de la rama derecha, se aprecian las pequeñas espinas en la línea media, una cresta oblicua que asciende hacia los molares, una depresión por encima y otra por debajo de ella, y en el centro de la rama un agujero con una laminilla ósea delante, fondo gris neutro, iluminación lateral suave. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, dientes faltantes o de más, hueso fracturado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La rama"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **rama** es una lámina cuadrilátera que asciende desde el cuerpo. En su extremo superior tiene dos apófisis separadas por la **escotadura mandibular** o sigmoidea:\n\n- La **apófisis coronoides**, anterior, delgada y triangular, donde se inserta el músculo temporal.\n- La **apófisis condilar**, posterior, formada por el **cuello** y la **cabeza** o cóndilo, que se articula con el temporal. En la cara anterior del cuello está la **fóvea pterigoidea**, donde se inserta el pterigoideo lateral.\n\nPor la escotadura mandibular pasan el nervio y los vasos maseterinos hacia el músculo masetero.\n\nEn la cara externa de la rama, cerca del ángulo, las rugosidades de la **tuberosidad maseterina** marcan la inserción del masetero. En la cara interna, cerca del ángulo, la **tuberosidad pterigoidea** recibe al pterigoideo medial. En el centro de la cara interna se abre el **agujero mandibular**, entrada del **conducto mandibular**, protegido por delante por una laminilla ósea, la **língula**, donde se fija el ligamento esfenomandibular. Desde el agujero desciende hacia delante el **surco milohioideo**, por donde corren el nervio y los vasos milohioideos.\n\nPor detrás del último molar, entre las dos crestas que forman el borde anterior de la rama, queda el **trígono retromolar**. Las referencias de la rama, en particular el borde anterior, la escotadura coronoides y la altura del agujero mandibular, son la base de la técnica de bloqueo del nervio alveolar inferior, que estudiarás junto con la inervación en el módulo 4."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m03/d2",
+          "pie": "Referencias de la mandíbula en vista lateral y medial.",
+          "descripcion": "Dos dibujos de la hemimandíbula derecha. A la izquierda, vista lateral con el cuerpo, la rama, el ángulo, el agujero mentoniano bajo los premolares, la línea oblicua, la apófisis coronoides, la escotadura mandibular, el cóndilo y la tuberosidad maseterina. A la derecha, vista medial con las espinas mentonianas, la fosa digástrica, la línea milohioidea, la fosa sublingual por encima y la fosa submandibular por debajo, el agujero mandibular con la língula, el surco milohioideo y la fóvea pterigoidea en el cuello del cóndilo. Una línea punteada en ambas vistas muestra el trayecto del conducto mandibular hasta el agujero mentoniano.",
+          "elementos": [
+            "Agujero mentoniano",
+            "Línea oblicua",
+            "Apófisis coronoides",
+            "Cóndilo y fóvea pterigoidea",
+            "Escotadura mandibular",
+            "Agujero mandibular y língula",
+            "Línea milohioidea",
+            "Fosa submandibular",
+            "Conducto mandibular"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El conducto mandibular"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **conducto mandibular** recorre la rama y el cuerpo desde el agujero mandibular hasta el agujero mentoniano y lleva el **nervio alveolar inferior** con su arteria y su vena. En su trayecto pasa por debajo de los ápices de los molares, a una distancia variable: en muchas personas está muy cerca de las raíces de los terceros molares. Antes de salir por el agujero mentoniano, el nervio puede describir un **asa anterior**, un pequeño recorrido hacia delante y luego hacia atrás, y continúa hacia los incisivos como **conducto incisivo**. Estas variaciones son importantes en la planeación de implantes y cirugías en la región de premolares.\n\nEn la radiografía panorámica, el conducto se ve como una banda radiolúcida limitada por dos líneas radiopacas. Ciertos signos sugieren una relación íntima entre el conducto y las raíces de un tercer molar, entre ellos el oscurecimiento de la raíz donde la cruza el conducto, la interrupción de las líneas blancas del conducto y el desvío o estrechamiento del conducto. Cuando aparecen, suele indicarse una tomografía de haz cónico antes de la cirugía, porque una lesión del nervio produce alteraciones de la sensibilidad del labio inferior y del mentón que pueden ser permanentes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Hueso denso, anestesia distinta",
+          "md": "En el adulto, la mandíbula posterior tiene corticales gruesas y poco porosas, por lo que la infiltración vestibular rara vez alcanza los ápices de los molares inferiores, y para ellos se usa el bloqueo del nervio alveolar inferior. En la región anterior, en niños y en algunos adultos, la cortical es más delgada y la infiltración puede ser suficiente. La elección de la técnica, la solución y la cantidad es una decisión del profesional según la valoración del paciente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una mandíbula que cambia con la vida"
+        },
+        {
+          "tipo": "texto",
+          "md": "La forma de la mandíbula cambia con la edad y con la presencia de dientes. En el recién nacido el ángulo mandibular es muy abierto, el cuerpo es bajo y el agujero mentoniano está cerca del borde inferior. Con la erupción de los dientes y el crecimiento, el ángulo se cierra, la rama se alarga y el cuerpo gana altura. El crecimiento del cóndilo, que contiene un cartílago secundario, contribuye de manera importante al aumento de altura de la rama y a la proyección de la mandíbula.\n\nEn la persona adulta que pierde sus dientes ocurre el proceso inverso en la zona alveolar: el reborde se reabsorbe, el ángulo tiende a verse más abierto y el agujero mentoniano y la línea milohioidea quedan cada vez más cerca de la cresta. En casos de reabsorción avanzada, la presión de una prótesis inferior sobre el agujero mentoniano puede causar dolor u hormigueo en el labio, un dato que debe orientar el ajuste de la base protésica."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Los puntos débiles de la mandíbula",
+          "md": "Aunque es un hueso fuerte, la mandíbula tiene zonas de menor resistencia donde las fracturas son más frecuentes: el **cuello del cóndilo**, el **ángulo**, sobre todo cuando hay un tercer molar retenido que ocupa hueso, y la **región del canino y del agujero mentoniano**, debilitada por la raíz larga del canino y por el propio agujero. Un golpe en el mentón puede fracturar uno o ambos cuellos condilares por transmisión de la fuerza, aunque la zona golpeada no se rompa. Por eso, ante un traumatismo de mentón, revisa siempre la apertura, la oclusión y el dolor frente a los oídos."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/05",
+          "proporcion": "16:9",
+          "alt": "Comparación de dos mandíbulas de resina vistas de lado, una con dientes y otra sin dientes con el reborde muy reabsorbido.",
+          "pie": "Al perder los dientes, el reborde alveolar se reabsorbe y el agujero mentoniano queda más cerca de la cresta.",
+          "prompt": "Fotografía de estudio de dos mandíbulas humanas adultas de resina color hueso colocadas lado a lado en vista lateral sobre fondo gris neutro: a la izquierda una mandíbula con dentición permanente completa, cuerpo alto y ángulo bien definido; a la derecha una mandíbula sin dientes con el cuerpo muy bajo y delgado, el reborde alveolar reabsorbido y un pequeño agujero cerca del borde superior, iluminación lateral suave, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, prótesis, huesos fracturados."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Referencia y músculo o estructura",
+          "instruccion": "Relaciona cada referencia de la mandíbula con lo que se inserta o pasa por ella.",
+          "pares": [
+            { "a": "Apófisis coronoides", "b": "Inserción del músculo temporal" },
+            { "a": "Fóvea pterigoidea", "b": "Inserción del pterigoideo lateral" },
+            { "a": "Espinas mentonianas superiores", "b": "Origen del geniogloso" },
+            { "a": "Língula", "b": "Fijación del ligamento esfenomandibular" },
+            { "a": "Escotadura mandibular", "b": "Paso del nervio y vasos maseterinos" },
+            { "a": "Fosa digástrica", "b": "Inserción del vientre anterior del digástrico" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/06",
+          "proporcion": "4:3",
+          "alt": "Fragmento de radiografía panorámica de la zona del tercer molar inferior con el conducto mandibular cerca de sus raíces.",
+          "pie": "El conducto mandibular aparece como una banda oscura limitada por líneas blancas; su relación con el tercer molar se valora antes de la cirugía.",
+          "prompt": "Recorte realista de una radiografía panorámica digital en tonos de gris centrado en la región del tercer molar inferior derecho de un adulto joven, el tercer molar parcialmente erupcionado con raíces completas, y por debajo una banda radiolúcida horizontal limitada por dos líneas radiopacas finas que pasa muy cerca de los ápices, el segundo molar y el borde anterior de la rama visibles, contraste natural. Evitar: texto, letras, números, flechas, marcadores, logotipos, marcas de agua, implantes, restauraciones metálicas grandes, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Practica palpar la mandíbula en ti mismo y en tus compañeros: la línea oblicua en el vestíbulo, el borde anterior de la rama y la escotadura coronoides detrás de los molares, el borde inferior y el ángulo. Localiza el agujero mentoniano en la radiografía de cada paciente con premolares inferiores por tratar. Cuanto más claro tengas el mapa en tus dedos y en tus imágenes, más seguras y predecibles serán tus anestesias y tus cirugías."
+        }
+      ],
+      "glosario": [
+        { "termino": "Agujero mentoniano", "definicion": "Abertura de la cara externa del cuerpo mandibular, habitualmente bajo los premolares, por donde salen el nervio y los vasos mentonianos." },
+        { "termino": "Línea milohioidea", "definicion": "Cresta oblicua de la cara interna del cuerpo mandibular donde se origina el músculo milohioideo." },
+        { "termino": "Apófisis coronoides", "definicion": "Proyección anterior de la rama donde se inserta el músculo temporal." },
+        { "termino": "Fóvea pterigoidea", "definicion": "Depresión en la cara anterior del cuello del cóndilo donde se inserta el pterigoideo lateral." },
+        { "termino": "Língula", "definicion": "Laminilla ósea delante del agujero mandibular donde se fija el ligamento esfenomandibular." },
+        { "termino": "Conducto mandibular", "definicion": "Conducto óseo del agujero mandibular al mentoniano que lleva el nervio, la arteria y la vena alveolares inferiores." },
+        { "termino": "Trígono retromolar", "definicion": "Área triangular por detrás del último molar inferior, entre las crestas del borde anterior de la rama." }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.2-1",
+          "q": "¿Qué músculo se inserta en la apófisis coronoides?",
+          "opciones": ["Masetero", "Pterigoideo lateral", "Pterigoideo medial", "Temporal"],
+          "correcta": 3,
+          "explicacion": "El temporal se inserta en la apófisis coronoides y el borde anterior de la rama; el pterigoideo lateral en la fóvea pterigoidea."
+        },
+        {
+          "id": "t3.2-2",
+          "q": "Al planear un implante en la región molar inferior, ¿qué estructura de la cara lingual puede pasar inadvertida en una panorámica y causar una perforación?",
+          "opciones": ["La línea oblicua", "La concavidad de la fosa submandibular", "La apófisis coronoides", "La escotadura mandibular"],
+          "correcta": 1,
+          "explicacion": "La fosa submandibular forma una concavidad lingual que la panorámica no muestra; perforarla puede lesionar vasos del piso de la boca."
+        },
+        {
+          "id": "t3.2-3",
+          "q": "¿Dónde se ubica con mayor frecuencia el agujero mentoniano en el adulto con dientes?",
+          "opciones": ["Bajo el segundo premolar o entre los ápices de los premolares", "Bajo el incisivo central", "Bajo el tercer molar", "En la rama, frente a la língula"],
+          "correcta": 0,
+          "explicacion": "Su posición más frecuente es bajo el segundo premolar o entre el primero y el segundo, aunque varía."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Illustrated Anatomy of the Head and Neck", "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)", "anio": 2017 },
+        { "tipo": "academica", "titulo": "The radiological prediction of inferior alveolar nerve injury during third molar surgery (British Journal of Oral and Maxillofacial Surgery)", "autor": "Rood J. P., Shehab B. A.", "anio": 1990 },
+        { "tipo": "academica", "titulo": "Contemporary Oral and Maxillofacial Surgery", "autor": "Hupp J. R., Tucker M. R., Ellis E. (Elsevier)", "anio": 2019 }
+      ]
+    },
+    {
+      "n": "3.3",
+      "titulo": "La articulación temporomandibular: componentes",
+      "minutos": 24,
+      "enPocasPalabras": "La articulación temporomandibular está justo delante de cada oreja y une la mandíbula con el cráneo. Entre los dos huesos hay un disco que funciona como cojín y guía el movimiento. Detrás del disco hay un tejido lleno de vasos y nervios que duele cuando se lastima o se comprime.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **articulación temporomandibular** (ATM) une la mandíbula con el hueso temporal a cada lado del cráneo. Es una de las articulaciones más complejas del cuerpo: es **sinovial**, permite a la vez movimientos de bisagra y de deslizamiento, por lo que se le describe como **ginglimoartrodial**, y funciona siempre en pareja, porque las dos articulaciones están unidas por un mismo hueso. Ningún movimiento de un lado ocurre sin que el otro lado participe. Conocer sus componentes es indispensable para entender los ruidos, el dolor y las limitaciones de apertura que verás en la consulta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las superficies articulares"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **superficie mandibular** es el **cóndilo**, una cabeza ovalada alargada en sentido transversal. Okeson describe dimensiones aproximadas de 15 a 20 mm de lado a lado y de 8 a 10 mm de adelante atrás. Su eje mayor no es perfectamente transversal: se orienta ligeramente hacia atrás y hacia dentro, de modo que las prolongaciones de los ejes de ambos cóndilos se cruzan cerca del borde anterior del agujero magno. El cóndilo tiene un **polo lateral**, que se palpa delante del trago al abrir y cerrar, y un **polo medial**, más prominente.\n\nLa **superficie temporal** está formada por la **fosa mandibular** o glenoidea, cóncava, y por la **eminencia articular**, convexa, situada por delante de ella. El techo de la fosa es delgado y no está diseñado para soportar cargas, mientras que la **pendiente posterior de la eminencia** es gruesa y es la verdadera zona de carga de la articulación. Por detrás de la fosa están el **proceso retroarticular** o posglenoideo y la **fisura petrotimpánica**, por donde sale el nervio cuerda del tímpano.\n\nUn rasgo distintivo de la ATM es que sus superficies articulares **no** están cubiertas por cartílago hialino, como la mayoría de las articulaciones sinoviales, sino por **tejido conectivo fibroso denso**, con una capa de fibrocartílago por debajo. Este tejido tolera mejor las fuerzas de fricción y tiene una mayor capacidad de reparación y remodelado."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/07",
+          "proporcion": "4:3",
+          "alt": "Base de un cráneo de resina vista desde abajo y de lado, centrada en la fosa mandibular y la eminencia articular delante del conducto auditivo.",
+          "pie": "Componente temporal de la articulación: fosa mandibular, eminencia articular y conducto auditivo externo por detrás.",
+          "prompt": "Fotografía de estudio de un modelo anatómico de cráneo humano adulto de resina color hueso sin mandíbula, vista inferolateral derecha centrada en la región delante del conducto auditivo externo, se aprecian una depresión ovalada profunda y por delante de ella una prominencia transversal redondeada, el arco cigomático hacia delante y la apófisis estiloides por detrás, fondo gris neutro, iluminación lateral suave que resalta los relieves, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, dientes, hueso dañado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El disco articular"
+        },
+        {
+          "tipo": "texto",
+          "md": "Entre el cóndilo y el temporal se interpone el **disco articular**, una lámina de tejido conectivo fibroso denso, sin vasos sanguíneos ni nervios en su parte central de carga. Visto en corte sagital tiene forma **bicóncava** con tres zonas: una **banda anterior**, una **zona intermedia**, la más delgada, y una **banda posterior**, la más gruesa. Con la boca cerrada y la articulación sana, el cóndilo se apoya en la zona intermedia y la banda posterior queda por encima de él.\n\nEl disco divide la articulación en dos compartimentos o **espacios articulares**, cada uno con su propio líquido sinovial:\n\n- El **espacio superior**, entre el disco y la fosa con la eminencia.\n- El **espacio inferior**, entre el disco y el cóndilo.\n\nPor sus lados, el disco está unido con firmeza a los polos medial y lateral del cóndilo mediante los **ligamentos colaterales discales**, de modo que disco y cóndilo forman un **complejo cóndilo-disco** que se mueve en conjunto al deslizarse. El disco solo puede rotar sobre el cóndilo hacia delante y hacia atrás, no desplazarse libremente. Por delante se une a la cápsula y recibe fibras del **haz superior del músculo pterigoideo lateral**."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m03/d3",
+          "pie": "Corte sagital de la articulación temporomandibular con la boca cerrada.",
+          "descripcion": "Corte sagital esquemático de la ATM derecha visto desde la derecha, con anterior a la izquierda. Arriba, el hueso temporal con la eminencia articular por delante y la fosa mandibular por detrás. Abajo, el cóndilo de la mandíbula. Entre ambos, el disco bicóncavo con su banda anterior, zona intermedia delgada y banda posterior gruesa sobre el cóndilo. Se dibujan el espacio articular superior y el inferior. Por delante, el haz superior del pterigoideo lateral llega al disco y el haz inferior al cuello del cóndilo. Por detrás, los tejidos retrodiscales se dividen en una lámina superior hacia el temporal y una inferior hacia el cóndilo, con tejido laxo y vasos entre ambas. Una línea envuelve todo como cápsula.",
+          "elementos": [
+            "Eminencia articular",
+            "Fosa mandibular",
+            "Cóndilo",
+            "Banda anterior",
+            "Zona intermedia",
+            "Banda posterior",
+            "Espacio articular superior",
+            "Espacio articular inferior",
+            "Tejidos retrodiscales",
+            "Pterigoideo lateral, haces superior e inferior"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tejidos retrodiscales, cápsula y membrana sinovial"
+        },
+        {
+          "tipo": "texto",
+          "md": "Por detrás, el disco se continúa con los **tejidos retrodiscales**, también llamados zona bilaminar. Tienen una **lámina retrodiscal superior**, rica en fibras elásticas, que se fija en la placa timpánica, y una **lámina retrodiscal inferior**, de colágeno poco elástico, que se fija en el borde posterior del cóndilo. Entre ambas hay tejido conectivo laxo con un plexo venoso abundante y muchas terminaciones nerviosas. Al abrir la boca, este espacio se llena de sangre y se expande; al cerrar, se vacía. Es la parte más vascularizada e inervada de la articulación, y por eso **duele** cuando el cóndilo la comprime, por ejemplo en un desplazamiento del disco o después de un golpe.\n\nToda la articulación está envuelta por la **cápsula articular**, de tejido fibroso, que se inserta en el contorno de la superficie temporal y en el cuello del cóndilo. Su cara interna está revestida, excepto en las superficies de carga, por la **membrana sinovial**, que produce el **líquido sinovial**. Este líquido lubrica las superficies para disminuir la fricción y nutre al disco y a las capas articulares, que no tienen vasos. La inervación de la articulación procede principalmente del nervio auriculotemporal, con contribuciones de ramas maseterina y temporales profundas del nervio mandibular, y su irrigación de ramas de las arterias temporal superficial y maxilar; los detalles están en el módulo 4."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los ligamentos"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Ligamentos de la articulación temporomandibular",
+          "columnas": ["Ligamento", "Inserciones", "Función"],
+          "filas": [
+            ["Colaterales discales", "Bordes medial y lateral del disco a los polos del cóndilo", "Unen disco y cóndilo; permiten que el disco rote pero no que se deslice sobre el cóndilo"],
+            ["Capsular", "Rodea la articulación del temporal al cuello del cóndilo", "Contiene el líquido sinovial y resiste fuerzas que separan las superficies"],
+            ["Temporomandibular o lateral", "Del arco cigomático y la eminencia al cuello del cóndilo; porción oblicua externa y horizontal interna", "La porción oblicua limita la rotación pura y obliga al cóndilo a trasladarse; la horizontal limita el desplazamiento posterior y protege los tejidos retrodiscales"],
+            ["Esfenomandibular", "De la espina del esfenoides a la língula", "Accesorio; sin efecto limitante importante en la función"],
+            ["Estilomandibular", "De la apófisis estiloides al ángulo y borde posterior de la rama", "Accesorio; limita la protrusión excesiva"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los ligamentos no mueven la articulación: actúan como **límites pasivos** del movimiento. Un concepto importante es que los ligamentos no se estiran de manera significativa; si se elongan por traumatismos o por movimientos extremos repetidos, no recuperan su longitud original y la articulación pierde estabilidad. Esto se relaciona con algunos casos de desplazamiento del disco."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Dolor de oído que no viene del oído",
+          "md": "La articulación está separada del conducto auditivo externo solo por una delgada placa ósea, y comparte inervación sensitiva con parte del oído a través del nervio auriculotemporal. Por eso muchos pacientes con dolor articular consultan primero por **dolor de oído**, sensación de oído tapado o zumbidos. A la inversa, una otitis puede doler al masticar. Si el paciente refiere dolor de oído, pregunta si cambia con la función mandibular y palpa la articulación; si el dolor no se modifica con los movimientos ni con la palpación, o hay secreción, fiebre o pérdida de audición, refiere para valoración médica del oído."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Una articulación preparada para remodelarse",
+          "md": "El cóndilo y el temporal se forman por osificación intramembranosa, y el cóndilo desarrolla un **cartílago secundario** que actúa como sitio de crecimiento adaptativo, a diferencia del cartílago de crecimiento de los huesos largos. Bajo la superficie articular se describen capas sucesivas: una **zona articular** de tejido fibroso denso, una **zona proliferativa** con células indiferenciadas capaces de formar nuevo tejido, una **zona fibrocartilaginosa** y una **zona de cartílago calcificado** que se continúa con el hueso. La zona proliferativa explica la capacidad de la ATM para **remodelarse** ante cargas moderadas y sostenidas a lo largo de la vida. Cuando la carga supera esa capacidad adaptativa, por ejemplo por sobrecarga funcional, parafunción intensa o alteración del líquido sinovial, el remodelado puede volverse degenerativo, con adelgazamiento de las superficies, crepitación y cambios óseos visibles en tomografía. Por esta razón, el mismo hallazgo radiográfico puede representar adaptación o enfermedad, y debe interpretarse junto con los síntomas."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/08",
+          "proporcion": "3:4",
+          "alt": "Ilustración anatómica en corte sagital de la articulación temporomandibular con el disco entre el cóndilo y la eminencia.",
+          "pie": "La ATM en corte: disco bicóncavo, dos espacios articulares y tejidos retrodiscales vascularizados.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, corte sagital de la articulación temporomandibular de un adulto con la boca cerrada, el cóndilo mandibular redondeado alojado en la fosa del hueso temporal, un disco fibroso gris azulado bicóncavo sobre el cóndilo, más grueso en su parte posterior, tejido laxo rojizo con pequeños vasos por detrás del disco, fibras musculares rojas que llegan por delante, cápsula fibrosa blanquecina envolviendo la articulación, colores anatómicos suaves, fondo blanco limpio. Evitar: texto, etiquetas, números, flechas, sangre derramada, rostro, proporciones incorrectas, aspecto de caricatura."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Verdadero o falso sobre la ATM",
+          "afirmaciones": [
+            { "texto": "Las superficies articulares de la ATM están cubiertas por cartílago hialino, como la rodilla.", "verdadero": false, "explicacion": "Están cubiertas por tejido conectivo fibroso denso con fibrocartílago debajo." },
+            { "texto": "La zona intermedia es la parte más delgada del disco.", "verdadero": true, "explicacion": "El disco es bicóncavo: bandas anterior y posterior más gruesas y zona intermedia delgada." },
+            { "texto": "La parte central del disco tiene abundantes vasos y nervios.", "verdadero": false, "explicacion": "La zona de carga del disco es avascular y sin nervios; los tejidos retrodiscales sí están muy vascularizados e inervados." },
+            { "texto": "La pendiente posterior de la eminencia articular es una zona de carga.", "verdadero": true, "explicacion": "Es gruesa y recibe la carga; el techo de la fosa es delgado." },
+            { "texto": "Los ligamentos de la ATM son los que generan los movimientos mandibulares.", "verdadero": false, "explicacion": "Los movimientos los producen los músculos; los ligamentos solo los limitan de manera pasiva." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/09",
+          "proporcion": "1:1",
+          "alt": "Dedos enguantados de un profesional palpan la región delante de la oreja de una persona mientras abre la boca, vista de perfil sin mostrar el rostro completo.",
+          "pie": "El polo lateral del cóndilo se palpa justo por delante del trago mientras el paciente abre y cierra.",
+          "prompt": "Fotografía clínica realista en consultorio dental, primer plano lateral de la región preauricular de un adulto sentado, encuadre desde la oreja hasta la comisura labial sin mostrar ojos, dos dedos con guantes de nitrilo de un profesional apoyados suavemente justo por delante del trago, la boca del paciente ligeramente abierta, cabello recogido, iluminación clínica suave, fondo de consultorio desenfocado, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro completo o identificable, ojos, sangre, manos sin guantes, joyas llamativas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando un paciente refiera dolor «en el oído» al masticar, recuerda que la articulación está a pocos milímetros del conducto auditivo y que los tejidos retrodiscales son muy sensibles. Palpa los polos laterales con la boca cerrada y abierta y compara ambos lados. Si la palpación reproduce el dolor que el paciente reconoce como suyo, anota que el origen probable es articular y considera la referencia a un profesional con formación en trastornos temporomandibulares."
+        }
+      ],
+      "glosario": [
+        { "termino": "Articulación ginglimoartrodial", "definicion": "Articulación que combina movimientos de bisagra (rotación) y de deslizamiento (traslación), como la ATM." },
+        { "termino": "Eminencia articular", "definicion": "Prominencia del temporal por delante de la fosa mandibular cuya pendiente posterior es la principal zona de carga de la ATM." },
+        { "termino": "Disco articular", "definicion": "Lámina bicóncava de tejido fibroso denso entre el cóndilo y el temporal que divide la articulación en dos espacios." },
+        { "termino": "Complejo cóndilo-disco", "definicion": "Unidad funcional formada por el cóndilo y el disco unidos por los ligamentos colaterales discales." },
+        { "termino": "Tejidos retrodiscales", "definicion": "Tejido bilaminar, vascular e inervado, situado por detrás del disco." },
+        { "termino": "Membrana sinovial", "definicion": "Revestimiento interno de la cápsula que produce el líquido sinovial." },
+        { "termino": "Ligamento temporomandibular", "definicion": "Ligamento lateral de la ATM que limita la rotación pura y el desplazamiento posterior del cóndilo." }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.3-1",
+          "q": "¿Qué tejido cubre las superficies articulares de la ATM?",
+          "opciones": ["Cartílago hialino", "Cartílago elástico", "Tejido conectivo fibroso denso con fibrocartílago", "Mucosa respiratoria"],
+          "correcta": 2,
+          "explicacion": "Es un rasgo distintivo de la ATM; le da mayor capacidad de reparación y remodelado."
+        },
+        {
+          "id": "t3.3-2",
+          "q": "¿Qué parte de la articulación es la más vascularizada e inervada?",
+          "opciones": ["Zona intermedia del disco", "Banda posterior del disco", "Techo de la fosa mandibular", "Tejidos retrodiscales"],
+          "correcta": 3,
+          "explicacion": "Los tejidos retrodiscales contienen un plexo venoso y abundantes terminaciones nerviosas; por eso duelen al ser comprimidos."
+        },
+        {
+          "id": "t3.3-3",
+          "q": "¿Qué estructuras unen el disco a los polos del cóndilo?",
+          "opciones": ["Los ligamentos colaterales discales", "El ligamento estilomandibular", "La lámina retrodiscal superior", "El ligamento esfenomandibular"],
+          "correcta": 0,
+          "explicacion": "Los ligamentos colaterales discales forman el complejo cóndilo-disco y permiten solo la rotación del disco sobre el cóndilo."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Management of Temporomandibular Disorders and Occlusion", "autor": "Okeson J. P. (Elsevier)", "anio": 2019 },
+        { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de anatomía y fisiología de la articulación temporomandibular", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "3.4",
+      "titulo": "La articulación en movimiento: biomecánica y exploración",
+      "minutos": 24,
+      "enPocasPalabras": "Cuando abres la boca, la mandíbula primero gira como una bisagra y luego se desliza hacia delante. El disco acompaña al hueso en ese recorrido. Si el disco se sale de su lugar aparecen chasquidos o la boca no abre bien; por eso el dentista mide cuánto abres y escucha la articulación.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En el tema anterior estudiaste las piezas de la ATM; ahora verás cómo trabajan juntas. Esta mirada es articular: cómo se mueven el cóndilo y el disco dentro de la fosa. Los movimientos de la mandíbula vistos desde los dientes, como la envolvente de Posselt, las guías y los movimientos excéntricos, los estudiarás en el módulo 13, dedicado a la oclusión."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Rotación y traslación"
+        },
+        {
+          "tipo": "texto",
+          "md": "La ATM realiza dos tipos de movimiento, y cada uno ocurre principalmente en un compartimento distinto:\n\n**Rotación.** El cóndilo gira sobre un eje que pasa por ambos cóndilos, como una bisagra, en el **espacio articular inferior**, entre la superficie del cóndilo y la cara inferior del disco. Al inicio de la apertura, la mandíbula rota sin que el cóndilo abandone la fosa. Okeson describe que esta rotación pura permite separar los incisivos alrededor de 20 a 25 mm.\n\n**Traslación.** Para seguir abriendo, el ligamento temporomandibular limita la rotación y el **complejo cóndilo-disco** se desliza hacia delante y abajo por la pendiente posterior de la eminencia. Este deslizamiento ocurre en el **espacio articular superior**, entre la cara superior del disco y el temporal.\n\nEn la apertura máxima normal el cóndilo suele llegar a la cima de la eminencia o un poco por delante de ella. Mientras se traslada, el disco **rota hacia atrás** sobre el cóndilo, de modo que la zona intermedia permanece entre el cóndilo y la eminencia en todo el recorrido. La lámina retrodiscal superior, elástica, es la única estructura capaz de retraer el disco cuando la boca está abierta."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m03/d4",
+          "pie": "Posición del complejo cóndilo-disco durante la apertura bucal.",
+          "descripcion": "Secuencia de cuatro cortes sagitales esquemáticos de la ATM de izquierda a derecha. Primero, boca cerrada con el cóndilo en la fosa y la zona intermedia del disco sobre él. Segundo, inicio de apertura con el cóndilo rotando en su sitio. Tercero, apertura media con el complejo cóndilo-disco deslizándose por la pendiente de la eminencia y el disco rotando hacia atrás sobre el cóndilo. Cuarto, apertura máxima con el cóndilo en la cima de la eminencia y los tejidos retrodiscales expandidos. Debajo de cada corte, un pequeño esquema de los incisivos con la separación creciente.",
+          "elementos": [
+            "Boca cerrada",
+            "Rotación en el espacio inferior",
+            "Traslación en el espacio superior",
+            "Apertura máxima",
+            "Disco rotando hacia atrás",
+            "Tejidos retrodiscales expandidos"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los movimientos de un solo lado se entienden con la misma lógica. En un movimiento de lateralidad hacia la derecha, el cóndilo **izquierdo**, llamado de no trabajo u orbitante, se traslada hacia delante, abajo y adentro, mientras el cóndilo **derecho**, de trabajo, rota casi en su sitio con un pequeño desplazamiento lateral. En la **protrusión**, ambos cóndilos se trasladan hacia delante a la vez. La estabilidad articular depende de la presión constante entre las superficies, mantenida por el tono de los músculos elevadores, y de la forma bicóncava del disco, que tiende a mantenerlo centrado bajo carga.\n\nUn error frecuente es imaginar que el cóndilo «golpea» el techo de la fosa al cerrar. En una articulación sana, la carga se transmite a través de la zona intermedia del disco hacia la pendiente posterior de la eminencia, y el cóndilo se asienta en su posición más superior y anterior en la fosa cuando los elevadores se contraen. Por eso la forma y la inclinación de la eminencia influyen en la trayectoria del cóndilo: una eminencia muy empinada exige más rotación del disco durante la traslación, y una muy plana permite un deslizamiento más amplio."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/10",
+          "proporcion": "16:9",
+          "alt": "Dos vistas laterales de un cráneo de resina, con la boca cerrada y abierta, que muestran cómo el cóndilo avanza hasta la eminencia articular.",
+          "pie": "Con la boca cerrada el cóndilo está en la fosa; en la apertura máxima se ha trasladado hasta la cima de la eminencia articular.",
+          "prompt": "Composición de dos fotografías de estudio lado a lado de un modelo anatómico de cráneo humano adulto de resina color hueso con mandíbula articulada, vista lateral derecha centrada en la articulación temporomandibular: a la izquierda con la boca cerrada y el cóndilo dentro de la fosa delante del conducto auditivo, a la derecha con la boca muy abierta y el cóndilo desplazado hacia delante bajo la prominencia articular, mismo encuadre e iluminación lateral suave, fondo gris neutro. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, restos de tejido, dientes faltantes o de más."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando el disco se desplaza"
+        },
+        {
+          "tipo": "texto",
+          "md": "La alteración interna más frecuente es el **desplazamiento del disco**, casi siempre hacia delante y hacia dentro. Si la banda posterior se adelgaza y los ligamentos colaterales discales se elongan, el disco puede quedar por delante del cóndilo con la boca cerrada.\n\n- En el **desplazamiento con reducción**, al abrir el cóndilo pasa sobre la banda posterior y recupera la relación normal con el disco, lo que produce un **chasquido**. Al cerrar, el disco vuelve a desplazarse, a menudo con un segundo chasquido más suave cerca del cierre: el llamado chasquido recíproco.\n- En el **desplazamiento sin reducción**, el disco ya no se recaptura y bloquea la traslación. La apertura queda limitada y, al abrir, la mandíbula se desplaza hacia el lado afectado sin regresar a la línea media (deflexión). Es el cuadro conocido como **bloqueo cerrado**.\n\nOtros ruidos tienen otro significado: la **crepitación**, un sonido áspero como de arena, sugiere cambios degenerativos de las superficies articulares. Por otra parte, en la **luxación**, el cóndilo sobrepasa la eminencia y queda atrapado por delante de ella, y el paciente no puede cerrar la boca; es un **bloqueo abierto** que requiere reducción por un profesional entrenado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Aperturas prolongadas en la consulta",
+          "md": "Los procedimientos largos con la boca muy abierta, como las extracciones de terceros molares o las endodoncias de molares, pueden desencadenar dolor articular o muscular y, en personas predispuestas, una luxación. Pregunta antes del tratamiento por antecedentes de chasquidos, bloqueos o luxaciones; usa un abrebocas que permita al paciente descansar los músculos, haz pausas y evita forzar la apertura más allá de lo cómodo. Si la mandíbula queda trabada abierta, mantén la calma, tranquiliza al paciente y pide ayuda de alguien capacitado en la maniobra de reducción."
+        },
+        {
+          "tipo": "texto",
+          "md": "Conviene distinguir también la **hipermovilidad**: algunas personas, a menudo con laxitud ligamentaria generalizada, abren mucho más de lo habitual y el cóndilo sobrepasa la eminencia en cada apertura amplia, a veces con un ruido sordo al final del recorrido. Mientras el paciente pueda cerrar por sí mismo se habla de **subluxación**, y no suele requerir tratamiento más allá de evitar aperturas extremas. Cuando no puede regresar sin ayuda se trata de una luxación."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Exploración articular básica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **Criterios Diagnósticos para los Trastornos Temporomandibulares** (DC/TMD), publicados en 2014 por Schiffman y colaboradores, son el estándar internacional para el examen y el diagnóstico de estos trastornos. Aunque su aplicación completa requiere formación específica, sus componentes básicos se pueden incorporar a cualquier examen odontológico."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Exploración básica de la ATM",
+          "pasos": [
+            { "titulo": "Preguntar", "md": "Indaga dolor en mandíbula, sien, oído o frente al oído, si se modifica al masticar, abrir o bostezar, ruidos articulares y episodios de bloqueo con la boca cerrada o abierta." },
+            { "titulo": "Observar el patrón de apertura", "md": "Pide al paciente que abra lentamente mientras observas la línea media inferior. Una **desviación** se aparta y vuelve a la línea media al final; una **deflexión** se aparta hacia un lado sin regresar y suele indicar limitación de ese lado." },
+            { "titulo": "Medir la apertura", "md": "Mide con una regla la distancia entre los bordes incisales superior e inferior y súmale la sobremordida vertical. Registra la apertura sin dolor, la máxima sin ayuda y la máxima asistida." },
+            { "titulo": "Medir lateralidades y protrusión", "md": "Registra en milímetros los movimientos laterales y la protrusión, y si producen dolor." },
+            { "titulo": "Palpar y auscultar", "md": "Palpa los polos laterales y alrededor de ellos con presión moderada y pregunta si el dolor es el que el paciente reconoce. Detecta chasquidos o crepitación con los dedos sobre la articulación." }
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Apertura bucal máxima",
+          "instruccion": "Mide la distancia entre los bordes incisales con la boca abierta al máximo y la sobremordida vertical en oclusión. Suma ambas para obtener la apertura total.",
+          "formula": "Apertura total = distancia interincisal + sobremordida vertical",
+          "variables": [
+            { "id": "interincisal", "etiqueta": "Distancia entre bordes incisales", "valor": 44, "unidad": "mm" },
+            { "id": "sobremordida", "etiqueta": "Sobremordida vertical", "valor": 3, "unidad": "mm" }
+          ],
+          "resultado": { "expresion": "interincisal + sobremordida", "etiqueta": "Apertura total", "unidad": "mm", "decimales": 0 }
+        },
+        {
+          "tipo": "texto",
+          "md": "La apertura normal varía con la estatura, el sexo y la edad, y no existe un valor único. Como referencia, los DC/TMD consideran **limitada** una apertura máxima asistida menor de 40 mm, incluida la sobremordida vertical, como uno de los criterios del desplazamiento del disco sin reducción con apertura limitada. Más útil que una cifra aislada es la **comparación** con la apertura previa del mismo paciente, por eso conviene registrarla desde la primera consulta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El chasquido que se volvió bloqueo",
+          "md": "Un estudiante de 22 años tenía desde hace un año un chasquido al abrir en la ATM izquierda, sin dolor. Hace tres días despertó con la boca «trabada»: no puede abrir más de 28 mm, al abrir, la mandíbula se desplaza hacia la izquierda sin regresar a la línea media y ya no hay chasquido. El cuadro sugiere que un desplazamiento del disco con reducción evolucionó a desplazamiento sin reducción. Se registra la apertura, se explica al paciente lo que ocurre, se indican medidas de cuidado como dieta blanda y se refiere a un profesional con formación en trastornos temporomandibulares para su manejo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/11",
+          "proporcion": "4:3",
+          "alt": "Profesional con guantes mide con una regla milimetrada la apertura bucal de un paciente del que solo se ve la boca.",
+          "pie": "Medir la apertura con una regla y registrarla en cada visita permite detectar cambios con el tiempo.",
+          "prompt": "Fotografía clínica realista en consultorio dental, encuadre cerrado de la boca de un adulto abierta al máximo, una regla milimetrada metálica sostenida verticalmente por una mano con guante de nitrilo con un extremo apoyado en el borde de los incisivos inferiores y la regla alcanzando el borde de los incisivos superiores, labios relajados, sin mostrar ojos ni nariz completa, iluminación de lámpara dental, fondo desenfocado. Evitar: texto, números legibles, logotipos, marcas de agua, rostro completo, sangre, manos sin guantes, dientes deformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/12",
+          "proporcion": "16:9",
+          "alt": "Imagen de resonancia magnética en corte sagital de una articulación temporomandibular con la boca cerrada.",
+          "pie": "La resonancia magnética muestra el disco y su posición; es el estudio de elección para valorar desplazamientos discales.",
+          "prompt": "Imagen realista de resonancia magnética de la articulación temporomandibular en corte sagital ponderado en densidad protónica, escala de grises, se observa el cóndilo mandibular redondeado alojado en la fosa del temporal, la eminencia articular por delante y una estructura delgada de señal baja en forma de corbatín sobre el cóndilo, el conducto auditivo y el músculo pterigoideo lateral en tonos grises, contraste natural de estudio médico. Evitar: texto, letras, números, escalas, marcadores, flechas, logotipos, marcas de agua, datos de paciente, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Agrega a tu historia clínica tres datos articulares que se registran en menos de un minuto: **apertura máxima en milímetros**, **patrón de apertura** (recta, desviación o deflexión, y hacia qué lado) y **ruidos** (ninguno, chasquido o crepitación, y en qué lado). Con ellos tendrás una línea de base para comparar si el paciente desarrolla síntomas después de un tratamiento largo o con el paso del tiempo."
+        }
+      ],
+      "glosario": [
+        { "termino": "Rotación condilar", "definicion": "Giro del cóndilo sobre un eje transversal en el espacio articular inferior, al inicio de la apertura." },
+        { "termino": "Traslación condilar", "definicion": "Deslizamiento del complejo cóndilo-disco hacia delante y abajo por la eminencia, en el espacio articular superior." },
+        { "termino": "Desplazamiento del disco con reducción", "definicion": "Disco desplazado con la boca cerrada que se recaptura al abrir, generalmente con chasquido." },
+        { "termino": "Bloqueo cerrado", "definicion": "Limitación de la apertura por un disco desplazado que ya no se recaptura." },
+        { "termino": "Deflexión", "definicion": "Desviación de la mandíbula hacia un lado al abrir que no regresa a la línea media." },
+        { "termino": "Crepitación", "definicion": "Ruido articular áspero, como de arena, asociado a cambios degenerativos." },
+        { "termino": "DC/TMD", "definicion": "Criterios Diagnósticos para los Trastornos Temporomandibulares, estándar internacional publicado en 2014." }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.4-1",
+          "q": "¿En qué compartimento ocurre principalmente la traslación del cóndilo?",
+          "opciones": ["En el espacio articular inferior", "En los tejidos retrodiscales", "En el espacio articular superior", "En la membrana sinovial"],
+          "correcta": 2,
+          "explicacion": "La rotación ocurre entre cóndilo y disco (espacio inferior) y la traslación entre el complejo cóndilo-disco y el temporal (espacio superior)."
+        },
+        {
+          "id": "t3.4-2",
+          "q": "Un paciente abre 46 mm entre bordes incisales y tiene 2 mm de sobremordida vertical. ¿Cuál es su apertura total?",
+          "opciones": ["44 mm", "46 mm", "92 mm", "48 mm"],
+          "correcta": 3,
+          "explicacion": "Apertura total = 46 + 2 = 48 mm."
+        },
+        {
+          "id": "t3.4-3",
+          "q": "Un paciente con chasquido previo ahora no puede abrir más de 28 mm y, al abrir, la mandíbula se desplaza hacia el lado afectado sin regresar a la línea media. ¿Qué sugiere?",
+          "opciones": ["Desplazamiento del disco sin reducción", "Luxación del cóndilo", "Desplazamiento del disco con reducción", "Apertura normal"],
+          "correcta": 0,
+          "explicacion": "La desaparición del chasquido con limitación y deflexión hacia el lado afectado sugiere un disco que ya no se recaptura."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Management of Temporomandibular Disorders and Occlusion", "autor": "Okeson J. P. (Elsevier)", "anio": 2019 },
+        { "tipo": "academica", "titulo": "Diagnostic Criteria for Temporomandibular Disorders (DC/TMD) for Clinical and Research Applications (Journal of Oral and Facial Pain and Headache)", "autor": "Schiffman E., Ohrbach R., Truelove E. et al.", "anio": 2014 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de biomecánica de la ATM y examen clínico de trastornos temporomandibulares", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "3.5",
+      "titulo": "Músculos de la masticación y músculos suprahioideos",
+      "minutos": 26,
+      "enPocasPalabras": "Para cerrar la boca y morder con fuerza usamos tres músculos potentes a cada lado: el masetero, el temporal y el pterigoideo medial. Para abrir y mover la mandíbula hacia adelante y a los lados trabajan el pterigoideo lateral y los músculos que están debajo de la barbilla. Cuando se cansan o se tensan por apretar los dientes, pueden doler la cara, las sienes y la cabeza.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los **músculos de la masticación** son cuatro pares: masetero, temporal, pterigoideo medial y pterigoideo lateral. Todos derivan del **primer arco faríngeo** y por eso todos reciben inervación motora del **nervio mandibular** (V3), la única rama del trigémino con fibras motoras. Los tres primeros son principalmente **elevadores**: cierran la boca y generan la fuerza de mordida. El pterigoideo lateral, con fibras horizontales, participa sobre todo en la **protrusión**, la **lateralidad** y la **apertura**, ayudado por los **músculos suprahioideos**, que no se clasifican como masticadores pero son indispensables para abrir la boca."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los elevadores"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Músculos elevadores de la mandíbula",
+          "columnas": ["Músculo", "Origen", "Inserción", "Acción", "Inervación"],
+          "filas": [
+            ["Masetero, porción superficial", "Borde inferior del arco cigomático en sus dos tercios anteriores y apófisis cigomática del maxilar", "Ángulo y mitad inferior de la cara externa de la rama", "Eleva la mandíbula; contribuye a la protrusión", "Nervio maseterino (V3)"],
+            ["Masetero, porción profunda", "Tercio posterior y cara interna del arco cigomático", "Mitad superior de la cara externa de la rama y base de la coronoides", "Eleva y estabiliza; contribuye a la retrusión", "Nervio maseterino (V3)"],
+            ["Temporal", "Fosa temporal y cara profunda de la fascia temporal", "Vértice y cara interna de la apófisis coronoides y borde anterior de la rama", "Fibras anteriores elevan; fibras posteriores retruyen la mandíbula", "Nervios temporales profundos (V3)"],
+            ["Pterigoideo medial", "Cabeza profunda: cara medial de la lámina lateral de la apófisis pterigoides y fosa pterigoidea. Cabeza superficial: tuberosidad del maxilar y apófisis piramidal del palatino", "Cara interna del ángulo y de la rama (tuberosidad pterigoidea)", "Eleva; contribuye a la protrusión; de un solo lado lleva la mandíbula al lado contrario", "Nervio del pterigoideo medial (V3)"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El **masetero** es el más superficial y potente por su sección. Se palpa con facilidad sobre la rama cuando el paciente aprieta los dientes. Junto con el pterigoideo medial, que se inserta en la cara opuesta del ángulo, forma una especie de **cabestrillo muscular** que sostiene la mandíbula: el masetero por fuera, el pterigoideo medial por dentro.\n\nEl **temporal** tiene forma de abanico. Sus fibras anteriores son casi verticales y elevan la mandíbula; las medias son oblicuas y las posteriores, casi horizontales, se curvan sobre la raíz del arco cigomático y llevan la mandíbula hacia atrás. Pasa por debajo del arco cigomático para llegar a la coronoides. Su porción anterior se palpa en la sien al apretar los dientes; su tendón, en la boca, a lo largo del borde anterior de la rama.\n\nEl **pterigoideo medial** está por dentro de la rama, en el espacio pterigomandibular. Es un músculo que todo odontólogo debe tener presente: la aguja del bloqueo del nervio alveolar inferior pasa entre la rama y este músculo, y si se introduce en él puede producir dolor y **trismo** en los días siguientes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/13",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica lateral de la cabeza con la piel retirada que muestra los músculos masetero y temporal.",
+          "pie": "Masetero sobre la rama y temporal en abanico desde la fosa temporal hasta la apófisis coronoides.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, vista lateral izquierda de la cabeza de un adulto con la piel y la grasa retiradas, se muestran el músculo temporal en forma de abanico rojizo sobre la fosa temporal que desciende bajo el arco cigomático, y el músculo masetero grueso y rectangular desde el arco cigomático hasta el ángulo de la mandíbula, con sus fibras bien definidas, cráneo y dientes visibles en parte, colores anatómicos naturales, fondo blanco limpio. Evitar: texto, etiquetas, números, flechas, ojos detallados o rostro identificable, sangre, proporciones incorrectas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El pterigoideo lateral"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **pterigoideo lateral** es el único músculo masticador con fibras predominantemente **horizontales**. Tiene dos haces con orígenes y funciones distintas:\n\n- El **haz inferior**, el más voluminoso, se origina en la cara lateral de la lámina lateral de la apófisis pterigoides y se inserta en la **fóvea pterigoidea** del cuello del cóndilo. Cuando se contraen ambos lados, tiran de los cóndilos hacia delante por la eminencia: **protruyen** la mandíbula y participan en la **apertura**. Cuando se contrae uno solo, lleva el cóndilo de ese lado hacia delante y adentro y la mandíbula se desplaza hacia el **lado contrario**.\n- El **haz superior**, más pequeño, se origina en la cara infratemporal y la cresta del ala mayor del esfenoides. Se inserta en la cápsula, en el borde anteromedial del disco y en el cuello del cóndilo. Su actividad principal ocurre durante el **cierre con fuerza**, como al morder, cuando estabiliza el complejo cóndilo-disco contra la eminencia.\n\nLo inerva el nervio del pterigoideo lateral, rama del nervio mandibular."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El pterigoideo lateral bajo debate",
+          "md": "La descripción de dos haces con funciones opuestas, el inferior activo en la apertura y la protrusión y el superior activo en el cierre con carga, se basa en estudios electromiográficos y es la que adopta Okeson. Sin embargo, la anatomía real es más variable: diversos estudios de disección y de imagen han encontrado que la proporción de fibras del haz superior que llega al disco frente a la que llega al cóndilo cambia entre personas, y algunos autores proponen considerar el músculo como un sistema de fibras con actividad graduada más que como dos músculos independientes. Durante años se atribuyó a una hiperactividad del haz superior la causa del desplazamiento anterior del disco, hipótesis que hoy se considera insuficiente: el desplazamiento se explica mejor por la elongación de los ligamentos discales y el adelgazamiento de la banda posterior. Otro punto práctico: la **palpación intraoral** del pterigoideo lateral, detrás de la tuberosidad, es poco fiable, porque es difícil alcanzar el músculo con el dedo y el dolor suele provenir de otras estructuras; por eso los DC/TMD no la incluyen en su examen básico; solo contemplan la palpación externa del «área del pterigoideo lateral» como procedimiento complementario."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m03/d5",
+          "pie": "Vista desde atrás de la fosa infratemporal: los dos pterigoideos y su relación con la rama.",
+          "descripcion": "Esquema de la región infratemporal derecha vista desde atrás y desde dentro, con la rama mandibular a la derecha y la apófisis pterigoides a la izquierda. El pterigoideo lateral con sus dos haces horizontales: el superior desde el ala mayor del esfenoides hacia el disco y la cápsula, y el inferior desde la cara lateral de la lámina lateral pterigoidea hacia la fóvea pterigoidea del cuello del cóndilo. Debajo, el pterigoideo medial con fibras casi verticales desde la cara medial de la lámina lateral hacia la cara interna del ángulo mandibular. Entre la rama y el pterigoideo medial se marca el espacio pterigomandibular.",
+          "elementos": [
+            "Haz superior del pterigoideo lateral",
+            "Haz inferior del pterigoideo lateral",
+            "Disco articular",
+            "Fóvea pterigoidea",
+            "Lámina lateral de la apófisis pterigoides",
+            "Pterigoideo medial",
+            "Espacio pterigomandibular",
+            "Rama de la mandíbula"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los músculos suprahioideos"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Músculos suprahioideos",
+          "columnas": ["Músculo", "Inserciones", "Acción", "Inervación"],
+          "filas": [
+            ["Digástrico, vientre anterior", "Fosa digástrica de la mandíbula al tendón intermedio fijado al hioides", "Desciende la mandíbula; eleva el hioides", "Nervio milohioideo (V3)"],
+            ["Digástrico, vientre posterior", "Escotadura mastoidea del temporal al tendón intermedio", "Eleva y retrae el hioides", "Nervio facial (VII)"],
+            ["Milohioideo", "Línea milohioidea al rafe medio y al cuerpo del hioides", "Forma el piso de la boca; eleva el hioides y el piso al deglutir", "Nervio milohioideo (V3)"],
+            ["Geniohioideo", "Espinas mentonianas inferiores al cuerpo del hioides", "Lleva el hioides hacia delante; desciende la mandíbula", "Fibras de C1 que viajan con el hipogloso"],
+            ["Estilohioideo", "Apófisis estiloides al hioides", "Eleva y retrae el hioides", "Nervio facial (VII)"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los suprahioideos unen la mandíbula, el hioides y el cráneo. Cuando los **infrahioideos** fijan el hioides desde abajo, la contracción de los suprahioideos, sobre todo el digástrico anterior y el geniohioideo, **desciende la mandíbula** y ayuda a abrir la boca. Cuando la mandíbula está fija por los elevadores, los mismos músculos **elevan el hioides** y la laringe durante la deglución. La inervación mixta del digástrico, con dos nervios distintos para sus dos vientres, refleja su origen en dos arcos faríngeos diferentes: el primero para el vientre anterior y el segundo para el posterior."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Quién hace qué"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Músculos principales en cada movimiento mandibular",
+          "columnas": ["Movimiento", "Músculos principales"],
+          "filas": [
+            ["Elevación (cierre)", "Masetero, temporal y pterigoideo medial de ambos lados"],
+            ["Descenso (apertura)", "Haz inferior del pterigoideo lateral de ambos lados, digástrico anterior y demás suprahioideos"],
+            ["Protrusión", "Pterigoideos laterales de ambos lados, con ayuda del pterigoideo medial y del masetero superficial"],
+            ["Retrusión", "Fibras posteriores del temporal, con ayuda del masetero profundo y los suprahioideos"],
+            ["Lateralidad hacia la derecha", "Pterigoideos lateral y medial izquierdos, con fibras posteriores del temporal derecho"]
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Músculo y nervio",
+          "instruccion": "Relaciona cada músculo con su inervación motora.",
+          "pares": [
+            { "a": "Masetero", "b": "Nervio maseterino (V3)" },
+            { "a": "Temporal", "b": "Nervios temporales profundos (V3)" },
+            { "a": "Vientre anterior del digástrico", "b": "Nervio milohioideo (V3)" },
+            { "a": "Vientre posterior del digástrico", "b": "Nervio facial (VII)" },
+            { "a": "Geniohioideo", "b": "Fibras de C1 con el hipogloso" }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Despertar con la mandíbula cansada",
+          "md": "Una contadora de 34 años refiere que en temporada de cierre fiscal despierta con la cara cansada y dolor en las sienes que mejora durante el día. Al palpar, el masetero y la porción anterior del temporal son dolorosos de ambos lados y reproducen su molestia; el masetero se ve prominente al apretar. Hay facetas de desgaste en caninos. El cuadro es compatible con dolor miofascial asociado a bruxismo del sueño. Se le explica el papel de la actividad muscular nocturna y del estrés, se registra la apertura y se valora el manejo con un profesional con formación en dolor orofacial."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/14",
+          "proporcion": "4:3",
+          "alt": "Dedos enguantados palpan el músculo masetero sobre la mejilla de un adulto mientras aprieta los dientes, vista lateral de la mitad inferior de la cara.",
+          "pie": "La palpación del masetero y del temporal con presión moderada forma parte del examen muscular básico.",
+          "prompt": "Fotografía clínica realista en consultorio dental, encuadre lateral de la mitad inferior de la cara de un adulto sentado, desde el lóbulo de la oreja hasta el mentón sin mostrar ojos, tres dedos con guantes de nitrilo de un profesional apoyados sobre la mejilla a la altura de la rama de la mandíbula, el relieve del músculo masetero visible bajo la piel al apretar los dientes, iluminación clínica suave, fondo desenfocado, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro completo o identificable, ojos, sangre, manos sin guantes, joyas."
+        },
+        {
+          "tipo": "texto",
+          "md": "La exploración muscular básica que proponen los DC/TMD incluye la palpación del **temporal** en sus porciones anterior, media y posterior y del **masetero** en su origen, cuerpo e inserción, con una presión estandarizada de alrededor de 1 kg durante unos segundos, preguntando si el dolor es familiar para el paciente y si se extiende a otras zonas. Las causas de **trismo**, es decir, de limitación de la apertura por origen muscular, incluyen infecciones odontogénicas que alcanzan los espacios alrededor de los músculos, el traumatismo de una inyección en el pterigoideo medial, cirugías de terceros molares y, con menos frecuencia, tumores; un trismo progresivo sin causa evidente siempre merece estudio."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m03/15",
+          "proporcion": "1:1",
+          "alt": "Ilustración anatómica de la región submandibular vista desde abajo con los músculos digástrico y milohioideo.",
+          "pie": "Vista inferior del piso de la boca: vientres anteriores del digástrico sobre el milohioideo, que llega al hioides.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, vista inferior de la región submentoniana y submandibular de un adulto con la piel retirada, se observan los dos vientres anteriores del músculo digástrico como bandas rojizas desde el borde de la mandíbula hacia el hueso hioides, por encima la lámina del músculo milohioideo con su rafe medio, el hueso hioides en forma de U y los vientres posteriores hacia atrás, colores anatómicos naturales, fondo blanco limpio. Evitar: texto, etiquetas, números, flechas, rostro, sangre, proporciones incorrectas, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Aprende la palpación muscular en ti mismo antes de hacerla en pacientes: aprieta los dientes y localiza con dos dedos el masetero sobre la rama y el temporal en la sien; abre y cierra para sentir cómo se relajan. Después incorpora la palpación de ambos músculos, de los dos lados y con la misma presión, a tu examen de cada paciente nuevo. Comparar lados y registrar si el dolor es familiar convierte una exploración rápida en un dato clínico útil."
+        }
+      ],
+      "glosario": [
+        { "termino": "Masetero", "definicion": "Músculo elevador superficial que va del arco cigomático a la cara externa de la rama y el ángulo." },
+        { "termino": "Temporal", "definicion": "Músculo en abanico de la fosa temporal a la apófisis coronoides; sus fibras posteriores retruyen la mandíbula." },
+        { "termino": "Pterigoideo medial", "definicion": "Músculo elevador que va de la fosa pterigoidea y la tuberosidad del maxilar a la cara interna del ángulo mandibular." },
+        { "termino": "Pterigoideo lateral", "definicion": "Músculo de fibras horizontales con dos haces que protruye y lateraliza la mandíbula y estabiliza el cóndilo y el disco." },
+        { "termino": "Nervio mandibular", "definicion": "Tercera rama del trigémino (V3), la única con fibras motoras; inerva los músculos de la masticación." },
+        { "termino": "Músculos suprahioideos", "definicion": "Digástrico, milohioideo, geniohioideo y estilohioideo; descienden la mandíbula o elevan el hioides." },
+        { "termino": "Trismo", "definicion": "Limitación de la apertura bucal por espasmo o lesión de los músculos masticadores." }
+      ],
+      "verificacion": [
+        {
+          "id": "t3.5-1",
+          "q": "¿Qué músculo masticador tiene fibras predominantemente horizontales y protruye la mandíbula?",
+          "opciones": ["Masetero", "Pterigoideo lateral", "Temporal", "Pterigoideo medial"],
+          "correcta": 1,
+          "explicacion": "El pterigoideo lateral, con fibras horizontales, lleva los cóndilos hacia delante."
+        },
+        {
+          "id": "t3.5-2",
+          "q": "¿Qué nervio inerva el vientre posterior del digástrico?",
+          "opciones": ["Nervio milohioideo", "Nervio hipogloso", "Nervio facial", "Nervio maseterino"],
+          "correcta": 2,
+          "explicacion": "El vientre posterior deriva del segundo arco faríngeo y lo inerva el facial; el anterior, del primer arco, lo inerva el milohioideo (V3)."
+        },
+        {
+          "id": "t3.5-3",
+          "q": "Tras un bloqueo del nervio alveolar inferior, un paciente presenta dolor y limitación de apertura a los dos días. ¿Qué músculo es el más probablemente afectado?",
+          "opciones": ["Pterigoideo medial", "Masetero", "Temporal", "Digástrico"],
+          "correcta": 0,
+          "explicacion": "La aguja pasa entre la rama y el pterigoideo medial; su punción puede causar trismo."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Management of Temporomandibular Disorders and Occlusion", "autor": "Okeson J. P. (Elsevier)", "anio": 2019 },
+        { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Diagnostic Criteria for Temporomandibular Disorders (DC/TMD) for Clinical and Research Applications (Journal of Oral and Facial Pain and Headache)", "autor": "Schiffman E., Ohrbach R., Truelove E. et al.", "anio": 2014 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: huesos, articulación y músculos",
+    "pares": [
+      { "a": "Masetero", "b": "Del arco cigomático al ángulo y la cara externa de la rama" },
+      { "a": "Temporal", "b": "De la fosa temporal a la apófisis coronoides" },
+      { "a": "Pterigoideo medial", "b": "A la cara interna del ángulo mandibular" },
+      { "a": "Pterigoideo lateral, haz inferior", "b": "A la fóvea pterigoidea del cuello del cóndilo" },
+      { "a": "Seno maxilar", "b": "Drena al meato medio" },
+      { "a": "Agujero mentoniano", "b": "Habitualmente bajo el segundo premolar inferior" },
+      { "a": "Tejidos retrodiscales", "b": "Zona bilaminar vascularizada e inervada de la ATM" },
+      { "a": "Traslación condilar", "b": "Ocurre en el espacio articular superior" }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m03-p01",
+        "q": "¿Cuál de estas NO es una apófisis del maxilar?",
+        "opciones": ["Frontal", "Coronoides", "Palatina", "Alveolar"],
+        "correcta": 1,
+        "explicacion": "La coronoides es de la mandíbula; el maxilar tiene apófisis frontal, cigomática, palatina y alveolar."
+      },
+      {
+        "id": "m03-p02",
+        "q": "¿Por qué el seno maxilar drena mal por gravedad?",
+        "opciones": ["Porque no tiene mucosa", "Porque drena directamente a la boca", "Porque carece de cilios", "Porque su ostium está en la parte alta de la pared medial"],
+        "correcta": 3,
+        "explicacion": "El ostium se abre en la parte superior de la pared medial; el drenaje depende del movimiento ciliar."
+      },
+      {
+        "id": "m03-p03",
+        "q": "Tras extraer un primer molar superior, el paciente nota que el agua de enjuague sale por la nariz. ¿Qué sospechas?",
+        "opciones": ["Comunicación oroantral", "Alveolitis", "Fractura de la tuberosidad sin comunicación", "Lesión del nervio infraorbitario"],
+        "correcta": 0,
+        "explicacion": "El paso de líquidos de la boca a la nariz sugiere comunicación entre el alvéolo y el seno maxilar."
+      },
+      {
+        "id": "m03-p04",
+        "q": "¿Qué pilar del maxilar transmite la carga desde la región del primer molar hacia el hueso cigomático?",
+        "opciones": ["Nasomaxilar", "Pterigomaxilar", "Cigomaticomaxilar", "Palatino"],
+        "correcta": 2,
+        "explicacion": "El pilar cigomaticomaxilar asciende desde la región molar hacia el cigomático."
+      },
+      {
+        "id": "m03-p05",
+        "q": "¿Qué estructura de la cara interna de la mandíbula da origen al músculo milohioideo?",
+        "opciones": ["La línea oblicua", "La fosa digástrica", "Las espinas mentonianas superiores", "La línea milohioidea"],
+        "correcta": 3,
+        "explicacion": "El milohioideo se origina en la línea milohioidea; la línea oblicua está en la cara externa."
+      },
+      {
+        "id": "m03-p06",
+        "q": "¿Qué contiene el conducto mandibular?",
+        "opciones": ["El nervio lingual", "El nervio, la arteria y la vena alveolares inferiores", "El conducto submandibular", "El nervio milohioideo"],
+        "correcta": 1,
+        "explicacion": "El conducto mandibular lleva el paquete alveolar inferior desde el agujero mandibular hasta el mentoniano."
+      },
+      {
+        "id": "m03-p07",
+        "q": "En la radiografía previa a la extracción de un tercer molar inferior, el conducto se estrecha y la raíz se oscurece donde lo cruza. ¿Qué haces?",
+        "opciones": ["Considerar una tomografía de haz cónico y valorar el riesgo de lesión nerviosa antes de operar", "Extraer de inmediato porque el signo no tiene importancia", "Ignorar el hallazgo porque la panorámica es exacta", "Cambiar a anestesia infiltrativa"],
+        "correcta": 0,
+        "explicacion": "Estos signos sugieren relación íntima entre raíz y conducto; conviene una imagen tridimensional y una planeación cuidadosa."
+      },
+      {
+        "id": "m03-p08",
+        "q": "¿Qué zona de la mandíbula es especialmente vulnerable a fracturas por un golpe en el mentón, aunque no sea la zona golpeada?",
+        "opciones": ["La apófisis coronoides", "La sínfisis", "El cuello del cóndilo", "La línea milohioidea"],
+        "correcta": 2,
+        "explicacion": "La fuerza se transmite a los cuellos condilares, zonas de menor resistencia."
+      },
+      {
+        "id": "m03-p09",
+        "q": "¿Qué parte del disco articular es la más delgada?",
+        "opciones": ["Banda anterior", "Banda posterior", "Inserción retrodiscal", "Zona intermedia"],
+        "correcta": 3,
+        "explicacion": "El disco es bicóncavo, con la zona intermedia delgada entre dos bandas más gruesas."
+      },
+      {
+        "id": "m03-p10",
+        "q": "¿Qué zona del temporal soporta realmente la carga articular?",
+        "opciones": ["El techo de la fosa mandibular", "La pendiente posterior de la eminencia articular", "El proceso retroarticular", "La fisura petrotimpánica"],
+        "correcta": 1,
+        "explicacion": "La pendiente posterior de la eminencia es gruesa y es la zona de carga; el techo de la fosa es delgado."
+      },
+      {
+        "id": "m03-p11",
+        "q": "¿Qué ligamento limita la rotación pura y obliga al cóndilo a trasladarse al abrir?",
+        "opciones": ["Porción oblicua del ligamento temporomandibular", "Ligamento esfenomandibular", "Ligamento estilomandibular", "Ligamentos colaterales discales"],
+        "correcta": 0,
+        "explicacion": "La porción oblicua externa del ligamento temporomandibular frena la rotación e inicia la traslación."
+      },
+      {
+        "id": "m03-p12",
+        "q": "¿Qué estructura es la única capaz de retraer el disco cuando la boca está abierta?",
+        "opciones": ["Haz inferior del pterigoideo lateral", "Ligamento estilomandibular", "Lámina retrodiscal superior", "Masetero profundo"],
+        "correcta": 2,
+        "explicacion": "La lámina retrodiscal superior, rica en fibras elásticas, ejerce tracción posterior sobre el disco en apertura."
+      },
+      {
+        "id": "m03-p13",
+        "q": "Un paciente tiene chasquido al abrir y otro más suave al cerrar, sin limitación ni dolor. ¿Qué es lo más probable?",
+        "opciones": ["Luxación", "Desplazamiento del disco con reducción", "Enfermedad degenerativa con crepitación", "Desplazamiento del disco sin reducción"],
+        "correcta": 1,
+        "explicacion": "El chasquido recíproco sin limitación es típico de un disco desplazado que se recaptura al abrir."
+      },
+      {
+        "id": "m03-p14",
+        "q": "Al abrir, la mandíbula de un paciente se aparta hacia la derecha y no regresa a la línea media. ¿Cómo se llama este patrón?",
+        "opciones": ["Desviación", "Protrusión", "Retrusión", "Deflexión"],
+        "correcta": 3,
+        "explicacion": "La deflexión no regresa a la línea media; la desviación sí regresa al final de la apertura."
+      },
+      {
+        "id": "m03-p15",
+        "q": "¿Qué inervación motora comparten los cuatro músculos de la masticación?",
+        "opciones": ["Nervio facial", "Nervio maxilar (V2)", "Nervio mandibular (V3)", "Nervio hipogloso"],
+        "correcta": 2,
+        "explicacion": "Todos derivan del primer arco faríngeo y los inerva el nervio mandibular, la única rama motora del trigémino."
+      },
+      {
+        "id": "m03-p16",
+        "q": "¿Qué fibras del temporal llevan la mandíbula hacia atrás?",
+        "opciones": ["Las posteriores, casi horizontales", "Las anteriores, verticales", "Las que se insertan en el ángulo", "Las que llegan al disco"],
+        "correcta": 0,
+        "explicacion": "Las fibras posteriores del temporal, horizontales, retruyen la mandíbula."
+      },
+      {
+        "id": "m03-p17",
+        "q": "Para llevar la mandíbula hacia la izquierda, ¿qué pterigoideo lateral se contrae principalmente?",
+        "opciones": ["El izquierdo", "Ambos por igual", "Ninguno; solo actúa el temporal", "El derecho"],
+        "correcta": 3,
+        "explicacion": "El pterigoideo lateral de un lado lleva el cóndilo hacia delante y adentro y desplaza la mandíbula al lado contrario."
+      },
+      {
+        "id": "m03-p18",
+        "q": "¿Dónde se inserta el haz inferior del pterigoideo lateral?",
+        "opciones": ["En la apófisis coronoides", "En la fóvea pterigoidea del cuello del cóndilo", "En la cara interna del ángulo", "En la tuberosidad maseterina"],
+        "correcta": 1,
+        "explicacion": "El haz inferior se inserta en la fóvea pterigoidea; el superior, en la cápsula, el disco y el cuello del cóndilo."
+      },
+      {
+        "id": "m03-p19",
+        "q": "Mides 37 mm entre bordes incisales y 2 mm de sobremordida en la apertura máxima asistida. Según los DC/TMD, ¿cómo clasificas la apertura?",
+        "opciones": ["Limitada, porque la apertura total de 39 mm es menor de 40 mm", "Normal, porque supera los 35 mm", "Excesiva", "No se puede valorar sin radiografía"],
+        "correcta": 0,
+        "explicacion": "37 + 2 = 39 mm; los DC/TMD consideran limitada una apertura asistida menor de 40 mm incluyendo la sobremordida."
+      },
+      {
+        "id": "m03-p20",
+        "q": "¿Qué músculos suprahioideos inerva el nervio milohioideo?",
+        "opciones": ["Geniohioideo y estilohioideo", "Vientre posterior del digástrico y estilohioideo", "Milohioideo y vientre anterior del digástrico", "Solo el geniohioideo"],
+        "correcta": 2,
+        "explicacion": "El nervio milohioideo, rama de V3, inerva el milohioideo y el vientre anterior del digástrico."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "Management of Temporomandibular Disorders and Occlusion", "autor": "Okeson J. P. (Elsevier)", "anio": 2019 },
+    { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+    { "tipo": "academica", "titulo": "Illustrated Anatomy of the Head and Neck", "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)", "anio": 2017 },
+    { "tipo": "academica", "titulo": "Diagnostic Criteria for Temporomandibular Disorders (DC/TMD) for Clinical and Research Applications (Journal of Oral and Facial Pain and Headache)", "autor": "Schiffman E., Ohrbach R., Truelove E. et al.", "anio": 2014 },
+    { "tipo": "academica", "titulo": "Contemporary Oral and Maxillofacial Surgery", "autor": "Hupp J. R., Tucker M. R., Ellis E. (Elsevier)", "anio": 2019 }
+  ]
+}

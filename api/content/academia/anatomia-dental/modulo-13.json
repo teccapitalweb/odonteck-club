@@ -1,0 +1,1762 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 13,
+  "titulo": "Oclusión: relaciones entre arcadas y movimientos mandibulares",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "La oclusión es el punto donde la anatomía de cada diente se convierte en función. En este módulo aprenderás cómo se alinean los dientes dentro de cada arcada y frente a la antagonista, qué hacen las cúspides de soporte y las de guía, cómo registrar la clase de Angle y las sobremordidas, en qué se diferencian la relación céntrica y la máxima intercuspidación, cómo se mueve la mandíbula dentro de la envolvente de Posselt y qué dientes deben guiar la protrusión y la lateralidad. Cerrarás con la oclusión infantil y un examen oclusal ordenado que podrás aplicar desde tu próxima consulta.",
+  "objetivos": [
+    "Describir la alineación intra e interarcada, las curvas de compensación y la función de las cúspides de soporte y de guía.",
+    "Clasificar la relación molar y canina según Angle y medir la sobremordida horizontal y vertical en la clínica.",
+    "Diferenciar la relación céntrica de la máxima intercuspidación e interpretar los bordes de la envolvente de Posselt.",
+    "Explicar los movimientos de protrusión y lateralidad, distinguiendo lado de trabajo, lado de no trabajo, guía canina y función de grupo.",
+    "Reconocer los rasgos normales de la oclusión temporal y mixta e identificar señales que ameritan referencia.",
+    "Aplicar una secuencia ordenada de examen oclusal y documentarla con lenguaje descriptivo en el expediente."
+  ],
+  "duracionMin": 110,
+  "portada": {
+    "id": "anatomia-dental/m13/portada",
+    "proporcion": "16:9",
+    "alt": "Modelos de estudio dentales en oclusión montados en un articulador sobre una mesa clínica, con instrumental de exploración al lado.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental moderno y luminoso: sobre una mesa clínica blanca, un articulador dental semiajustable con modelos de yeso de una dentición permanente completa en oclusión, vista lateral tres cuartos que muestra el engranaje de caninos, premolares y molares, a un lado una sonda periodontal, un espejo bucal y unas pinzas con papel de articular azul; al fondo desenfocado la unidad dental y una ventana con luz natural, colores naturales, profundidad de campo corta. Evitar: texto, escalas legibles, logotipos, marcas comerciales, marcas de agua, personas, yeso fracturado, dientes deformes."
+  },
+  "temas": [
+    {
+      "n": "13.1",
+      "titulo": "Alineación dentaria y anatomía oclusal funcional",
+      "minutos": 14,
+      "enPocasPalabras": "Los dientes de arriba y de abajo no chocan al azar: están acomodados en arcos con curvas suaves para que encajen como engranes. Algunas cúspides sostienen la mordida y otras la guían y protegen mejillas y lengua. Cuando falta un diente o una restauración queda alta, ese engranaje se altera.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cada vez que cierras la boca, los dientes se encuentran en una posición que se repite miles de veces al día con una precisión de décimas de milímetro. A ese encuentro, y a lo que ocurre mientras la mandíbula se mueve con los dientes en contacto, lo llamamos **oclusión**. No es un tema exclusivo de ortodoncistas o rehabilitadores: cada resina oclusal, cada corona, cada extracción y cada guarda la modifican.\n\nEn los módulos 10, 11 y 12 estudiaste la forma de cada diente por separado. Aquí verás cómo esas formas se acomodan dentro de una arcada y frente a la antagonista, para leer la boca como un sistema y anticipar qué pasará si se pierde una pieza."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/01",
+          "proporcion": "16:9",
+          "alt": "Tipodonto de dentición permanente completa en máxima intercuspidación visto de lado.",
+          "pie": "Vista lateral de una dentición permanente en máxima intercuspidación: observa cómo cada diente superior encaja entre dos inferiores.",
+          "prompt": "Fotografía de estudio realista de un tipodonto dental de dentición permanente completa con 28 dientes, montado en máxima intercuspidación, vista lateral derecha a la altura del plano oclusal, dientes de resina color marfil natural con anatomía correcta de incisivos, caninos, premolares y molares, encía de silicona rosa pálido, los molares superiores ligeramente distales respecto a los inferiores como en una relación normal, fondo gris neutro liso, iluminación difusa de estudio, enfoque nítido de canino a segundo molar. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, dientes deformes, número incorrecto de cúspides, colores artificiales, sombras duras."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué entendemos por oclusión"
+        },
+        {
+          "tipo": "texto",
+          "md": "En sentido estricto, oclusión es la relación de contacto entre los dientes maxilares y mandibulares. En sentido funcional, como la plantea Jeffrey Okeson, la oclusión forma parte del **sistema masticatorio**, integrado por los dientes y sus tejidos de soporte, las articulaciones temporomandibulares, los músculos y el sistema nervioso que los controla. Su anatomía la revisaste en el módulo 3; aquí la usarás para explicar cómo se mueven los dientes unos contra otros.\n\nLa **oclusión estática** describe cómo engranan los dientes con la boca cerrada: qué cúspide cae en qué fosa, cuánto cubren los incisivos superiores a los inferiores, qué clase de Angle hay. La **oclusión dinámica** describe los contactos durante los movimientos: qué dientes guían cuando la mandíbula va hacia delante o hacia un lado y cuáles se separan."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Alineación dentro de cada arcada: forma, inclinaciones y curvas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Vista desde oclusal, cada arcada dibuja una curva parabólica, elíptica u ovoide, con variación entre personas. La **arcada maxilar es más amplia** que la mandibular, de modo que los dientes superiores quedan ligeramente por fuera de los inferiores.\n\nCada diente tiene además una **inclinación** propia de su eje largo. En sentido mesiodistal, la mayoría de las coronas se inclinan hacia mesial. En sentido vestibulolingual, los anteriores se inclinan hacia vestibular y los molares inferiores hacia lingual. Estas inclinaciones orientan las fuerzas de cierre hacia el eje de las raíces y permiten que las cúspides se encuentren en los movimientos.\n\nSi unes las puntas de las cúspides y los bordes incisales obtienes el **plano oclusal**, que en realidad es una superficie curva con curvaturas de nombre propio."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Curvas de compensación del plano oclusal",
+          "columnas": [
+            "Curva",
+            "Plano en que se observa",
+            "Cómo se traza",
+            "Para qué sirve"
+          ],
+          "filas": [
+            [
+              "Curva de Spee",
+              "Sagital (vista lateral)",
+              "Desde la punta del canino inferior siguiendo las cúspides vestibulares de premolares y molares inferiores; es cóncava hacia arriba en la mandíbula",
+              "Acompaña la trayectoria del cóndilo; su grado influye en los contactos posteriores durante la protrusión: una curva muy marcada obliga a que las cúspides más posteriores sean más bajas para no interferir"
+            ],
+            [
+              "Curva de Wilson",
+              "Frontal (vista de frente)",
+              "Une las cúspides vestibulares y linguales de los molares de ambos lados; refleja la inclinación lingual de los molares inferiores",
+              "Facilita la lateralidad sin choques y orienta las fuerzas hacia el eje de los molares"
+            ],
+            [
+              "Esfera de Monson",
+              "Tridimensional",
+              "Propuesta clásica que integra ambas curvas en la superficie de una esfera centrada cerca de la glabela",
+              "Modelo teórico para el montaje y diseño de prótesis; hoy se considera una simplificación"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m13/d1",
+          "pie": "Las curvas de compensación vistas en dos planos: la de Spee en un corte sagital y la de Wilson en un corte frontal de los molares.",
+          "descripcion": "Dos paneles lado a lado. Izquierdo: vista lateral esquemática de la arcada inferior con canino, dos premolares y tres molares; una línea curva cóncava hacia arriba une la punta del canino con las cúspides vestibulares de premolares y molares hasta continuar hacia el borde anterior de la rama. Derecho: corte frontal de los primeros molares superiores e inferiores de ambos lados; una línea curva cóncava hacia arriba une las cúspides vestibulares y linguales; flechas finas muestran la inclinación lingual de los molares inferiores.",
+          "elementos": [
+            "Curva de Spee",
+            "Curva de Wilson",
+            "Punta del canino inferior",
+            "Cúspides vestibulares inferiores",
+            "Inclinación lingual del molar inferior",
+            "Plano oclusal"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Nombres con historia",
+          "md": "La curva de Spee debe su nombre al anatomista alemán Ferdinand Graf von Spee, que la describió a finales del siglo XIX, y la esfera, al estadounidense George S. Monson, que a principios del siglo XX propuso que las superficies oclusales se acomodan sobre una esfera de unas cuatro pulgadas de radio. Hoy sabemos que las curvas varían mucho entre personas y se alteran con extrusiones o pérdidas dentarias, por lo que se usan como guía, no como medida fija."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/02",
+          "proporcion": "4:3",
+          "alt": "Modelo de yeso de la arcada inferior visto de lado, con la curva suave que forman las cúspides de canino a molares.",
+          "pie": "En un modelo de estudio inferior la curva de Spee se aprecia al mirar las cúspides vestibulares desde un lado.",
+          "prompt": "Fotografía de estudio realista de un modelo de yeso dental blanco de una arcada inferior permanente completa, vista lateral exacta a la altura del plano oclusal, de modo que se aprecia la curva suave y cóncava que forman la punta del canino y las cúspides vestibulares de premolares y molares, base del modelo recortada y limpia, fondo azul grisáceo uniforme, iluminación lateral suave que resalta el relieve de las cúspides, enfoque nítido en toda la arcada. Evitar: texto, líneas dibujadas, flechas, etiquetas, logotipos, marcas de agua, burbujas o fracturas en el yeso, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Alineación entre arcadas: cúspides de soporte y cúspides de guía"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como la arcada superior es más amplia, en los dientes posteriores las **cúspides vestibulares superiores** quedan por fuera de las inferiores, y las **cúspides linguales inferiores** quedan por dentro de las superiores. En el sector anterior, los incisivos superiores cubren por vestibular a los inferiores. Este escalonamiento divide las cúspides posteriores en dos grupos con funciones distintas.\n\nLas **cúspides de soporte**, también llamadas céntricas o estampadoras, son las **linguales superiores** y las **vestibulares inferiores**. Contactan con las fosas y rebordes marginales de los dientes antagonistas, mantienen la distancia entre maxilar y mandíbula en el cierre, es decir, la dimensión vertical oclusal, y reciben la mayor parte de la carga. Son anchas y redondeadas.\n\nLas **cúspides de guía**, no céntricas o de corte, son las **vestibulares superiores** y las **linguales inferiores**. Son más afiladas, guían ciertos movimientos laterales, ayudan a mantener el bolo alimenticio sobre las mesas oclusales y evitan que te muerdas la mejilla y la lengua."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Comparación de cúspides de soporte y de guía en dientes posteriores",
+          "columnas": [
+            "Característica",
+            "Cúspides de soporte",
+            "Cúspides de guía"
+          ],
+          "filas": [
+            [
+              "Cuáles son",
+              "Linguales superiores y vestibulares inferiores",
+              "Vestibulares superiores y linguales inferiores"
+            ],
+            [
+              "Dónde contactan en el cierre",
+              "Fosas centrales y rebordes marginales antagonistas",
+              "Generalmente sin contacto funcional en el cierre o con contacto mínimo"
+            ],
+            [
+              "Función principal",
+              "Sostener la dimensión vertical y recibir la carga",
+              "Guiar, sostener el bolo y proteger mejillas y lengua"
+            ],
+            [
+              "Cuidado restaurador",
+              "Reproducir su altura y contorno para no perder contactos",
+              "Evitar que queden altas o que interfieran en los movimientos"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Para describir estos contactos, la literatura usa tres líneas imaginarias que recorren cada arcada de mesial a distal: la **línea bucooclusal**, que une las puntas de las cúspides vestibulares; la **línea de fosas centrales**, que pasa por el fondo de los surcos centrales; y la **línea linguooclusal**, que une las puntas de las cúspides linguales. En una oclusión normal, la línea bucooclusal inferior coincide con la línea de fosas centrales superior, y la línea linguooclusal superior coincide con la línea de fosas centrales inferior. Es una forma elegante de decir que cada cúspide de soporte cae en el valle del diente opuesto."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/03",
+          "proporcion": "4:3",
+          "alt": "Vista desde lingual de molares de tipodonto en oclusión, con las cúspides linguales superiores apoyadas en las fosas inferiores.",
+          "pie": "Vista desde lingual: las cúspides linguales superiores, de soporte, descansan en las fosas de los molares inferiores.",
+          "prompt": "Fotografía macro de estudio de la región posterior de un tipodonto dental en oclusión, vista desde el lado lingual, primer y segundo molar superior e inferior y segundo premolar, se aprecia cómo las cúspides linguales superiores, anchas y redondeadas, descansan dentro de las fosas centrales de los molares inferiores, dientes de resina color marfil con anatomía correcta, encía de silicona rosa, fondo gris oscuro, iluminación difusa con ligera luz rasante que resalta el relieve oclusal, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, dientes deformes, número incorrecto de cúspides, colores irreales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Relaciones diente a diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los incisivos centrales superiores son más anchos que los inferiores. Por esa diferencia de tamaño, la arcada superior queda desfasada hacia distal y, en una oclusión normal, **cada diente contacta con dos antagonistas**: el que tiene enfrente y el vecino distal o mesial. Las excepciones son los **incisivos centrales inferiores** y los **terceros molares superiores**, que solo encuentran un antagonista.\n\nEn el sector posterior, la relación de referencia es la del primer molar: la **cúspide mesiovestibular del primer molar superior** ocluye en el **surco vestibular del primer molar inferior**, y la **cúspide mesiolingual del primer molar superior**, la más grande, se aloja en la **fosa central del primer molar inferior**. A partir de esa llave, premolares y molares se acomodan cúspide contra fosa o contra la tronera entre dos rebordes marginales. Que cada diente toque dos antagonistas reparte la carga y da estabilidad: si se pierde uno, el diente opuesto todavía conserva cierto apoyo, aunque con el tiempo tenderá a moverse."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Un hueco nunca es solo un hueco",
+          "md": "Cuando se pierde un diente posterior y no se reemplaza, el antagonista puede **extruirse** hacia el espacio vacío y los vecinos pueden **inclinarse** o desplazarse hacia él. El resultado es un plano oclusal escalonado, contactos que interfieren en los movimientos, zonas de retención de placa y un espacio que más tarde ya no alcanza para una prótesis sin tratamientos adicionales. Al planear una extracción, explica al paciente estas consecuencias y deja registrado en el expediente qué alternativas se le ofrecieron."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada estructura con su función oclusal",
+          "instruccion": "Une cada elemento de la izquierda con la descripción correcta de la derecha.",
+          "pares": [
+            {
+              "a": "Cúspide lingual superior",
+              "b": "Cúspide de soporte que contacta en la fosa central del diente inferior"
+            },
+            {
+              "a": "Cúspide vestibular superior",
+              "b": "Cúspide de guía que protege la mejilla y sostiene el bolo"
+            },
+            {
+              "a": "Curva de Spee",
+              "b": "Curvatura sagital que va del canino inferior a los molares"
+            },
+            {
+              "a": "Curva de Wilson",
+              "b": "Curvatura frontal que refleja la inclinación lingual de los molares inferiores"
+            },
+            {
+              "a": "Incisivo central inferior",
+              "b": "Diente que solo contacta con un antagonista"
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué esto cambia lo que haces en el sillón"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una restauración oclusal que deja la cúspide de soporte demasiado alta concentra la fuerza en un solo punto: el paciente refiere que «choca», puede aparecer sensibilidad al morder y, si se mantiene, dolor periodontal o fractura. Una restauración baja pierde el contacto y el diente o su antagonista pueden migrar hasta encontrarlo. Por eso, tras cualquier restauración posterior se verifican los contactos con papel de articular y se comparan con los dientes vecinos. Leer la boca con las líneas bucooclusal y de fosas centrales en mente te dice dónde debe quedar cada contacto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Carga axial y estabilidad oclusal",
+          "md": "Okeson insiste en que el periodonto tolera bien las fuerzas dirigidas a lo largo del eje largo del diente, porque la mayoría de las fibras del ligamento periodontal se tensan de manera uniforme, mientras que las fuerzas horizontales concentran compresión y tensión en zonas pequeñas del hueso alveolar. Por eso el diseño oclusal busca contactos sobre las puntas de las cúspides de soporte y sobre superficies relativamente planas de fosas o rebordes marginales. Dos variantes clásicas cumplen esta meta: el contacto cúspide-fosa con **tripodismo**, en el que cada cúspide toca tres puntos de las vertientes antagonistas, y el contacto de punta de cúspide sobre superficie plana."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** toma un par de modelos de estudio o un tipodonto y, con un lápiz fino, marca en la arcada superior la línea linguooclusal y en la inferior la línea de fosas centrales. Luego ocluye los modelos y comprueba que coinciden. Repite el ejercicio con las cúspides vestibulares inferiores y las fosas superiores. Después, en tu próxima restauración posterior, antes de pulir, pregúntate: ¿esta cúspide es de soporte o de guía?, ¿dónde debe tocar?"
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Oclusión",
+          "definicion": "Relación de contacto entre los dientes maxilares y mandibulares, tanto en reposo como durante los movimientos de la mandíbula."
+        },
+        {
+          "termino": "Plano oclusal",
+          "definicion": "Superficie imaginaria, en realidad curva, que une los bordes incisales y las puntas de las cúspides de una arcada."
+        },
+        {
+          "termino": "Curva de Spee",
+          "definicion": "Curvatura anteroposterior del plano oclusal que sigue la punta del canino inferior y las cúspides vestibulares de premolares y molares."
+        },
+        {
+          "termino": "Curva de Wilson",
+          "definicion": "Curvatura mediolateral del plano oclusal que une las cúspides vestibulares y linguales de los molares de ambos lados."
+        },
+        {
+          "termino": "Cúspide de soporte",
+          "definicion": "Cúspide lingual superior o vestibular inferior que contacta con las fosas antagonistas y sostiene la dimensión vertical oclusal."
+        },
+        {
+          "termino": "Cúspide de guía",
+          "definicion": "Cúspide vestibular superior o lingual inferior, más aguda, que orienta movimientos, sostiene el bolo y protege mejillas y lengua."
+        },
+        {
+          "termino": "Dimensión vertical oclusal",
+          "definicion": "Distancia entre dos puntos de referencia del maxilar y la mandíbula cuando los dientes están en máxima intercuspidación."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t13.1-1",
+          "q": "¿Cuáles son las cúspides de soporte en los dientes posteriores?",
+          "opciones": [
+            "Las vestibulares superiores y las linguales inferiores",
+            "Las linguales superiores y las vestibulares inferiores",
+            "Solo las cúspides mesiales de cada molar",
+            "Las cúspides de los premolares, pero no las de los molares"
+          ],
+          "correcta": 1,
+          "explicacion": "Las linguales superiores y las vestibulares inferiores contactan con las fosas antagonistas y sostienen la dimensión vertical; las otras dos son cúspides de guía."
+        },
+        {
+          "id": "t13.1-2",
+          "q": "En una oclusión normal, ¿con qué estructura coincide la línea bucooclusal inferior?",
+          "opciones": [
+            "Con la línea bucooclusal superior",
+            "Con la línea linguooclusal inferior",
+            "Con la línea de fosas centrales superior",
+            "Con el borde de la encía marginal superior"
+          ],
+          "correcta": 2,
+          "explicacion": "Las cúspides vestibulares inferiores son de soporte y caen en las fosas centrales de los dientes superiores, por eso ambas líneas coinciden."
+        },
+        {
+          "id": "t13.1-3",
+          "q": "¿Qué dientes contactan normalmente con un solo antagonista?",
+          "opciones": [
+            "Los incisivos centrales inferiores y los terceros molares superiores",
+            "Los caninos superiores e inferiores",
+            "Los primeros molares superiores e inferiores",
+            "Los incisivos laterales superiores y los segundos premolares inferiores"
+          ],
+          "correcta": 0,
+          "explicacion": "Por la diferencia de anchura entre incisivos, las arcadas quedan desfasadas y casi todos los dientes tocan dos antagonistas, salvo los centrales inferiores y los terceros molares superiores."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Management of Temporomandibular Disorders and Occlusion, 8.ª edición",
+          "autor": "Okeson J. P. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en Okeson y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "13.2",
+      "titulo": "Relaciones entre arcadas: clasificación de Angle, sobremordida horizontal y vertical",
+      "minutos": 14,
+      "enPocasPalabras": "Para saber si los dientes de arriba y de abajo están bien acomodados, el dentista compara la posición de los primeros molares y de los caninos. También mide cuánto se adelantan y cuánto cubren los dientes de enfrente a los de abajo. Con eso describe la mordida de forma ordenada y decide si conviene consultar al ortodoncista.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Describir una oclusión con palabras como «mordida bonita» o «dientes chuecos» no sirve para comunicarse con otro profesional ni para seguir la evolución de un paciente. Necesitas un lenguaje común que diga, en pocas palabras, cómo se relacionan las arcadas en los tres planos del espacio: **anteroposterior**, **vertical** y **transversal**. En este tema aprenderás los dos registros más usados en la consulta general: la clasificación de Angle, para el sentido anteroposterior, y las sobremordidas horizontal y vertical, para el sector anterior."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La llave de la oclusión según Angle"
+        },
+        {
+          "tipo": "texto",
+          "md": "A finales del siglo XIX, el ortodoncista estadounidense Edward H. Angle publicó una clasificación de las maloclusiones que, más de un siglo después, sigue siendo la referencia universal. Angle consideró al **primer molar superior** como la «llave de la oclusión», porque su posición en el maxilar le parecía estable, y clasificó las arcadas según dónde ocluye el primer molar inferior respecto a él.\n\nLa referencia es concreta: en la relación normal, la **cúspide mesiovestibular del primer molar superior ocluye en el surco vestibular del primer molar inferior**. Si el molar inferior está más hacia distal de esa posición, hablamos de clase II; si está más hacia mesial, de clase III. Fíjate en que la clasificación describe la posición del molar **inferior** respecto al superior, aunque se tome al superior como referencia."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Clasificación de Angle por relación molar",
+          "columnas": [
+            "Clase",
+            "Relación del primer molar",
+            "Rasgos frecuentes"
+          ],
+          "filas": [
+            [
+              "Clase I (neutroclusión)",
+              "La cúspide mesiovestibular del primer molar superior ocluye en el surco vestibular del inferior",
+              "Puede haber apiñamiento, diastemas, rotaciones o mordidas cruzadas: clase I no significa oclusión ideal"
+            ],
+            [
+              "Clase II (distoclusión)",
+              "El surco vestibular del primer molar inferior queda distal a la cúspide mesiovestibular superior",
+              "Perfil frecuentemente convexo; se divide en división 1 y división 2 según los incisivos superiores"
+            ],
+            [
+              "Clase II, división 1",
+              "Relación molar de clase II",
+              "Incisivos superiores proinclinados y sobremordida horizontal aumentada"
+            ],
+            [
+              "Clase II, división 2",
+              "Relación molar de clase II",
+              "Incisivos centrales superiores retroinclinados, con frecuencia laterales vestibularizados y sobremordida vertical profunda"
+            ],
+            [
+              "Clase III (mesioclusión)",
+              "El surco vestibular del primer molar inferior queda mesial a la cúspide mesiovestibular superior",
+              "Puede haber borde a borde o mordida cruzada anterior; perfil frecuentemente cóncavo"
+            ],
+            [
+              "Subdivisión",
+              "Relación de clase II o III en un solo lado y clase I en el otro",
+              "Se nombra según el lado afectado, por ejemplo clase II subdivisión derecha"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m13/d2",
+          "pie": "Las tres clases de Angle vistas desde vestibular: la posición del surco del molar inferior respecto a la cúspide mesiovestibular superior define la clase.",
+          "descripcion": "Tres paneles verticales, uno por clase, con vista vestibular esquemática del lado izquierdo del paciente (mesial hacia la izquierda del panel) del primer molar superior sobre el primer molar inferior y del canino superior sobre el canino y primer premolar inferiores. Una línea vertical punteada baja desde la cúspide mesiovestibular superior. En clase I coincide con el surco vestibular inferior; en clase II el surco queda a la derecha (distal) de la línea; en clase III queda a la izquierda (mesial). En cada panel, una segunda línea punteada muestra la punta del canino superior respecto a la tronera entre canino y primer premolar inferiores.",
+          "elementos": [
+            "Clase I",
+            "Clase II",
+            "Clase III",
+            "Cúspide mesiovestibular del primer molar superior",
+            "Surco vestibular del primer molar inferior",
+            "Punta del canino superior",
+            "Tronera entre canino y primer premolar inferiores"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/04",
+          "proporcion": "4:3",
+          "alt": "Vista lateral de tipodonto en clase I molar y canina, con la cúspide mesiovestibular superior sobre el surco vestibular inferior.",
+          "pie": "Relación molar y canina de clase I en un tipodonto: compárala con el diagrama anterior.",
+          "prompt": "Fotografía macro de estudio de un tipodonto dental de dentición permanente en oclusión, vista vestibular lateral izquierda centrada en el canino, los premolares y el primer molar, la cúspide mesiovestibular del primer molar superior alineada con el surco vestibular del primer molar inferior y la punta del canino superior en la tronera entre el canino y el primer premolar inferiores, dientes de resina color marfil con anatomía correcta, encía de silicona rosa pálido, fondo gris neutro, iluminación difusa de estudio. Evitar: texto, líneas dibujadas, flechas, etiquetas, logotipos, marcas de agua, dientes deformes, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La relación canina y los límites de Angle"
+        },
+        {
+          "tipo": "texto",
+          "md": "La relación molar puede ser difícil de leer cuando falta el primer molar, cuando se ha desplazado hacia mesial por una pérdida previa o cuando hay restauraciones extensas. Por eso se registra también la **relación canina**. En clase I canina, la **punta del canino superior ocluye en la tronera entre el canino y el primer premolar inferiores**. Si el canino superior queda por delante, hacia mesial de esa tronera, la relación es de clase II; si queda por detrás, hacia distal, es de clase III. En muchos pacientes ambas relaciones coinciden, pero no siempre: un paciente puede tener clase I canina y clase II molar porque los molares se mesializaron tras la pérdida temprana de dientes temporales.\n\nLa clasificación de Angle tiene límites que conviene conocer. Describe solo el sentido **anteroposterior** y solo la relación **dental**: no dice si el origen es un maxilar grande, una mandíbula pequeña o ambos, y no registra problemas verticales o transversales. Por eso la ortodoncia actual la complementa con el análisis del perfil, la cefalometría y otros sistemas. Para el odontólogo general, sigue siendo la forma más rápida y compartida de describir la oclusión."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Clase dental no es clase esquelética",
+          "md": "Hablar de «clase III» en una nota clínica puede interpretarse como un problema de los huesos cuando solo describiste los dientes. Escribe siempre a qué te refieres: «relación molar clase III derecha e izquierda, relación canina clase III». La clase esquelética la determina el ortodoncista con estudios de cabeza y cara. Un niño con mordida cruzada anterior por una inclinación dental es muy distinto de un niño con crecimiento mandibular excesivo, y la urgencia de referirlo también lo es."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Sobremordida horizontal y vertical"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el sector anterior se registran dos medidas que en inglés se conocen como *overjet* y *overbite*. La **sobremordida horizontal** (también llamada resalte) es la distancia, medida en el plano horizontal, entre la cara vestibular del incisivo inferior y el borde incisal del incisivo superior. La **sobremordida vertical** es cuánto cubre el borde del incisivo superior a la corona del inferior, medida en el plano vertical. Ambas se registran en milímetros con la boca en máxima intercuspidación.\n\nEn los textos de anatomía y ortodoncia, los valores considerados habituales en adultos son de alrededor de **2 a 3 mm** para cada medida; la sobremordida vertical también suele expresarse como la proporción de la corona inferior cubierta, cerca de un tercio. No son cifras exactas: lo importante es reconocer cuándo se apartan claramente de lo habitual."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Alteraciones del sector anterior y su descripción",
+          "columnas": [
+            "Hallazgo",
+            "Qué observas",
+            "Por qué importa"
+          ],
+          "filas": [
+            [
+              "Sobremordida horizontal aumentada",
+              "Los incisivos superiores quedan muy por delante de los inferiores",
+              "Mayor riesgo de traumatismo de incisivos superiores; frecuente en clase II división 1"
+            ],
+            [
+              "Sobremordida vertical profunda",
+              "El incisivo superior cubre gran parte o toda la corona inferior",
+              "Los incisivos inferiores pueden tocar el paladar; frecuente en clase II división 2"
+            ],
+            [
+              "Mordida abierta anterior",
+              "No hay contacto vertical entre incisivos al cerrar",
+              "Se asocia con hábitos como la succión digital o con patrones de crecimiento; dificulta cortar alimentos"
+            ],
+            [
+              "Borde a borde",
+              "Los bordes incisales se tocan sin traslape",
+              "Desgaste de bordes y pérdida de guía anterior"
+            ],
+            [
+              "Mordida cruzada anterior",
+              "Uno o más incisivos superiores quedan por detrás de los inferiores",
+              "Puede ser dental o esquelética; conviene valorarla temprano"
+            ],
+            [
+              "Mordida cruzada posterior",
+              "Cúspides vestibulares superiores por dentro de las inferiores",
+              "Alteración transversal; puede producir desviación mandibular al cerrar"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/05",
+          "proporcion": "4:3",
+          "alt": "Manos con guantes miden con una sonda periodontal la distancia horizontal entre incisivos superiores e inferiores de un tipodonto.",
+          "pie": "La sobremordida horizontal se mide con una sonda milimetrada apoyada en la cara vestibular del incisivo inferior.",
+          "prompt": "Fotografía clínica realista en primer plano: manos con guantes de nitrilo azul sostienen una sonda periodontal milimetrada de acero apoyada horizontalmente desde la cara vestibular de un incisivo central inferior hasta el borde incisal del incisivo central superior, en un tipodonto de dentición permanente en oclusión colocado sobre una mesa clínica limpia, vista lateral, dientes con anatomía correcta, encía de silicona rosa, iluminación clínica blanca y uniforme, fondo desenfocado de consultorio, colores naturales. Evitar: texto legible, números impresos ampliados, logotipos, marcas de agua, manos sin guantes, sangre, dientes deformes, rostros."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Cómo se escribe una oclusión en el expediente",
+          "md": "Una mujer de 24 años acude a revisión. Con la boca cerrada observas que el surco vestibular del primer molar inferior queda distal a la cúspide mesiovestibular superior en ambos lados, los caninos superiores ocluyen por delante de la tronera canino-premolar, los incisivos centrales superiores están retroinclinados y los laterales se abren hacia vestibular; los incisivos superiores cubren casi toda la corona de los inferiores. La nota queda así: «Relación molar y canina clase II bilateral, incisivos centrales superiores retroinclinados, sobremordida vertical profunda, sobremordida horizontal de 2 mm. Compatible con clase II división 2 de Angle. Se sugiere valoración por ortodoncia»."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/06",
+          "proporcion": "4:3",
+          "alt": "Vista frontal de un tipodonto con incisivos centrales superiores retroinclinados que cubren casi por completo a los inferiores.",
+          "pie": "Patrón de clase II división 2: centrales superiores retroinclinados y sobremordida vertical profunda.",
+          "prompt": "Fotografía de estudio realista de un tipodonto dental de dentición permanente en oclusión, vista frontal ligeramente lateral, incisivos centrales superiores retroinclinados hacia palatino que cubren casi por completo las coronas de los incisivos inferiores, incisivos laterales superiores inclinados hacia vestibular, caninos y premolares visibles, dientes de resina color marfil con anatomía correcta, encía de silicona rosa pálido, fondo gris claro uniforme, iluminación difusa suave, enfoque nítido en el sector anterior. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, rostros, labios, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "¿Qué clase registras?",
+          "situacion": "Un adolescente de 15 años acude a limpieza. En ambos lados, el surco vestibular del primer molar inferior está mesial a la cúspide mesiovestibular del primer molar superior, por casi el ancho de una cúspide. Los incisivos ocluyen borde a borde y el canino superior queda distal a la tronera entre canino y primer premolar inferiores. No hay dolor ni antecedentes de traumatismo.",
+          "opciones": [
+            {
+              "texto": "Relación molar y canina clase III bilateral, incisivos borde a borde; referir a ortodoncia para valorar componente dental y esquelético.",
+              "correcta": true,
+              "retro": "Correcto. El molar inferior está mesializado respecto al superior y el canino superior queda distal a la tronera: ambos rasgos son de clase III. Solo el ortodoncista determina si el origen es esquelético."
+            },
+            {
+              "texto": "Relación clase II división 1, porque los incisivos no tienen traslape.",
+              "correcta": false,
+              "retro": "La clase II se define por un molar inferior distal y suele acompañarse de sobremordida horizontal aumentada, no de borde a borde."
+            },
+            {
+              "texto": "Relación clase I, porque los incisivos se tocan y no hay mordida cruzada.",
+              "correcta": false,
+              "retro": "El contacto de incisivos no define la clase; la clase se lee en los molares y los caninos, y aquí ambos indican mesioclusión."
+            },
+            {
+              "texto": "Clase III esquelética confirmada; no hace falta ningún estudio adicional.",
+              "correcta": false,
+              "retro": "La exploración clínica describe la relación dental. Afirmar una clase esquelética requiere estudios ortodóncicos."
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Líneas medias y plano transversal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Completa el registro con dos observaciones que Angle no contempla. La primera son las **líneas medias dentarias**: con el paciente en máxima intercuspidación, compara la línea entre los incisivos centrales superiores con la de los inferiores y ambas con la línea media de la cara. Una desviación de la línea inferior que aparece solo al cerrar, y que desaparece con la boca entreabierta, sugiere que la mandíbula se desliza hacia un lado para evitar un contacto prematuro; una desviación presente en ambas posiciones suele ser dental o esquelética.\n\nLa segunda es el **plano transversal**. Recorre los posteriores de cada lado y comprueba que las cúspides vestibulares superiores quedan por fuera de las inferiores. Si quedan por dentro hay **mordida cruzada posterior**; si los superiores quedan completamente por fuera, sin contacto oclusal con los inferiores, se habla de **mordida en tijera**. En niños, una mordida cruzada unilateral con desviación funcional es motivo de referencia temprana, porque puede condicionar un crecimiento asimétrico."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Llevarlo a la práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Registrar estas relaciones toma menos de dos minutos y protege al paciente y a ti. Te permite detectar a tiempo a quien necesita una valoración ortodóncica, explicar por qué una persona tiene desgaste en ciertos dientes, documentar el estado inicial antes de un tratamiento restaurador y comparar en las siguientes visitas. También te alerta sobre riesgos concretos: un niño con sobremordida horizontal muy aumentada tiene incisivos expuestos a fracturas en caídas, y la orientación a la familia sobre protección en deportes es parte de tu trabajo.\n\n**Idea práctica:** en tus próximas cinco revisiones, registra siempre en este orden: relación molar derecha e izquierda, relación canina derecha e izquierda, sobremordida horizontal y vertical en milímetros, líneas medias y presencia de mordidas cruzadas. Usa la sonda periodontal como regla. En una semana el registro te saldrá automático."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Clasificación de Angle",
+          "definicion": "Sistema que describe la relación anteroposterior entre las arcadas según la posición del primer molar inferior respecto al superior."
+        },
+        {
+          "termino": "Neutroclusión",
+          "definicion": "Clase I de Angle: la cúspide mesiovestibular del primer molar superior ocluye en el surco vestibular del inferior."
+        },
+        {
+          "termino": "Distoclusión",
+          "definicion": "Clase II de Angle: el primer molar inferior ocluye en posición distal respecto a la relación normal."
+        },
+        {
+          "termino": "Mesioclusión",
+          "definicion": "Clase III de Angle: el primer molar inferior ocluye en posición mesial respecto a la relación normal."
+        },
+        {
+          "termino": "Sobremordida horizontal",
+          "definicion": "Distancia horizontal entre el borde incisal del incisivo superior y la cara vestibular del incisivo inferior; en inglés, overjet."
+        },
+        {
+          "termino": "Sobremordida vertical",
+          "definicion": "Grado en que el incisivo superior cubre verticalmente la corona del incisivo inferior; en inglés, overbite."
+        },
+        {
+          "termino": "Mordida cruzada",
+          "definicion": "Relación invertida en la que dientes superiores quedan por dentro o por detrás de los inferiores."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t13.2-1",
+          "q": "En la clase I de Angle, ¿dónde ocluye la cúspide mesiovestibular del primer molar superior?",
+          "opciones": [
+            "En la fosa central del primer molar inferior",
+            "En la tronera entre el segundo premolar y el primer molar inferiores",
+            "En el surco distovestibular del segundo molar inferior",
+            "En el surco vestibular del primer molar inferior"
+          ],
+          "correcta": 3,
+          "explicacion": "Es la definición de neutroclusión. La fosa central inferior recibe a la cúspide mesiolingual superior, no a la mesiovestibular."
+        },
+        {
+          "id": "t13.2-2",
+          "q": "¿Qué rasgo distingue la clase II división 2 de la división 1?",
+          "opciones": [
+            "La relación molar es de clase I",
+            "Los incisivos centrales superiores están retroinclinados",
+            "La sobremordida horizontal está muy aumentada",
+            "Siempre existe mordida abierta anterior"
+          ],
+          "correcta": 1,
+          "explicacion": "En la división 2 los centrales superiores se inclinan hacia palatino y suele haber sobremordida vertical profunda; la división 1 se caracteriza por incisivos proinclinados y resalte aumentado."
+        },
+        {
+          "id": "t13.2-3",
+          "q": "¿Qué limitación tiene la clasificación de Angle?",
+          "opciones": [
+            "Solo puede usarse en dentición temporal",
+            "Requiere radiografía panorámica para aplicarse",
+            "Describe solo la relación dental anteroposterior, sin informar el origen esquelético ni los planos vertical y transversal",
+            "No permite registrar diferencias entre el lado derecho y el izquierdo"
+          ],
+          "correcta": 2,
+          "explicacion": "Angle es una clasificación dental y anteroposterior. Se aplica clínicamente y admite subdivisiones para diferencias entre lados."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Classification of malocclusion (Dental Cosmos, 1899)",
+          "autor": "Angle E. H."
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Contemporary Orthodontics, 6.ª edición",
+          "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en Angle, Proffit y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "13.3",
+      "titulo": "Posiciones de referencia: relación céntrica, máxima intercuspidación y envolvente de Posselt",
+      "minutos": 15,
+      "enPocasPalabras": "La mandíbula tiene una posición que dictan los dientes, cuando muerdes con fuerza, y otra que dictan las articulaciones, cuando los músculos la acomodan sin forzarla. En casi todas las personas hay una pequeña diferencia entre ambas. Todos los movimientos posibles de la mandíbula caben dentro de un contorno que se conoce como envolvente de Posselt.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Para hablar de oclusión con precisión necesitas puntos de partida reproducibles, igual que un topógrafo necesita una referencia fija para medir un terreno. En la mandíbula existen dos posiciones de referencia principales: una determinada por los **dientes** y otra por las **articulaciones**. Entender en qué se diferencian, por qué casi nunca coinciden y cómo se relacionan con el resto de los movimientos es la base para registrar mordidas, montar modelos en articulador y planear rehabilitaciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Máxima intercuspidación: la posición que dictan los dientes"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **máxima intercuspidación** (también llamada posición de intercuspidación máxima, MIC o PIM) es la posición en la que los dientes superiores e inferiores logran el mayor número de contactos y el engranaje más completo. Es la que adopta el paciente cuando le pides que «muerda fuerte» y la que usa al tragar y al final de cada ciclo masticatorio.\n\nSu característica principal es que **depende de los dientes**, no de las articulaciones: si se modifica la forma de las cúspides con una restauración, un desgaste o un movimiento ortodóncico, la máxima intercuspidación cambia. Por eso no siempre sirve como referencia estable cuando hay que reconstruir muchos dientes o cuando la oclusión del paciente es inestable."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Relación céntrica: la posición que dictan las articulaciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **relación céntrica** es una posición de los cóndilos, independiente de los contactos dentarios. Su definición ha cambiado a lo largo del siglo XX: durante décadas se describió como la posición más **retrusiva** o posterior de los cóndilos, y después la mayoría de los autores la redefinió como una posición **superoanterior**. Okeson la describe como la posición en la que los cóndilos se ubican en su posición más superior y anterior dentro de las fosas articulares, apoyados contra las pendientes posteriores de las eminencias articulares, con los discos correctamente interpuestos. La llama posición **musculoesqueléticamente estable** porque es la que adoptan los cóndilos cuando los músculos elevadores los asientan sin interferencia dentaria.\n\nSu gran ventaja clínica es la **reproducibilidad**: como no depende de los dientes, se puede registrar varias veces y obtener el mismo resultado, aunque falten piezas o se vayan a modificar todas las superficies oclusales."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/07",
+          "proporcion": "4:3",
+          "alt": "Odontólogo con guantes guía suavemente la mandíbula de un paciente reclinado, del que solo se ven mentón y labios.",
+          "pie": "La manipulación bilateral guía la mandíbula con suavidad para registrar la relación céntrica; nunca se fuerza.",
+          "prompt": "Fotografía clínica realista en un consultorio dental luminoso: un odontólogo con guantes de nitrilo, bata desechable, cubrebocas y lentes de protección coloca ambas manos con suavidad sobre el borde inferior de la mandíbula de un paciente adulto reclinado, pulgares sobre el mentón, encuadre cerrado que muestra solo la parte inferior del rostro del paciente desde los labios hasta el cuello, con babero, piel de aspecto natural, luz blanca suave, fondo desenfocado de la unidad dental, colores naturales. Evitar: texto, logotipos, marcas de agua, ojos o rostro completo del paciente, gesto de dolor, presión exagerada, manos sin guantes, sangre."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El deslizamiento entre ambas posiciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si guías la mandíbula a relación céntrica y pides al paciente que cierre despacio, en la mayoría de las personas los dientes tocan primero en uno o pocos puntos, generalmente en vertientes de premolares o molares. Si después aprieta, la mandíbula **se desliza** hasta la máxima intercuspidación, casi siempre hacia delante y arriba, a veces con un componente lateral. Los estudios clásicos de Ulf Posselt y la revisión de Okeson señalan que este deslizamiento existe en la gran mayoría de la población y que suele medir alrededor de un milímetro.\n\nEste dato tiene una consecuencia práctica importante: **una diferencia pequeña entre relación céntrica y máxima intercuspidación es normal** y por sí sola no justifica tratamientos. Lo que importa es si el paciente tiene una oclusión estable, sin síntomas, y si el deslizamiento es simétrico. Cuando se rehabilita toda la boca, en cambio, muchos clínicos eligen construir la nueva máxima intercuspidación en relación céntrica o muy cerca de ella."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Máxima intercuspidación y relación céntrica frente a frente",
+          "columnas": [
+            "Aspecto",
+            "Máxima intercuspidación",
+            "Relación céntrica"
+          ],
+          "filas": [
+            [
+              "Qué la determina",
+              "Los contactos y la forma de los dientes",
+              "La posición de los cóndilos, discos y músculos"
+            ],
+            [
+              "Requiere contacto dentario",
+              "Sí, por definición",
+              "No; existe incluso en un paciente sin dientes"
+            ],
+            [
+              "Reproducibilidad",
+              "Cambia si cambian los dientes",
+              "Alta, si se registra con técnica adecuada"
+            ],
+            [
+              "Cómo se obtiene",
+              "Se pide al paciente que muerda fuerte",
+              "Se guía la mandíbula con suavidad o con un desprogramador"
+            ],
+            [
+              "Uso clínico habitual",
+              "Restauraciones aisladas en una oclusión estable",
+              "Rehabilitaciones extensas, prótesis total, análisis oclusal en articulador"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Guía, no empujes",
+          "md": "El registro de relación céntrica se hace con el paciente relajado y con una guía suave. Empujar el mentón hacia atrás con fuerza puede llevar los cóndilos a una posición forzada y provocar molestias, sobre todo si existe un trastorno temporomandibular. Si el paciente refiere dolor articular, chasquidos dolorosos o limitación de apertura, detén el procedimiento, regístralo en el expediente y valora la referencia a un especialista en trastornos temporomandibulares y dolor orofacial."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Rotación, traslación y posición postural"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como viste en el módulo 3, el cóndilo puede **rotar** dentro del espacio articular inferior, entre la cabeza del cóndilo y el disco, y **trasladarse** junto con el disco en el espacio articular superior, contra la eminencia articular. Al abrir la boca a partir de relación céntrica, la mandíbula primero rota alrededor de un eje que pasa por ambos cóndilos, el **eje de bisagra terminal**. Okeson describe que esta rotación pura permite una apertura de alrededor de 20 a 25 mm medida entre los bordes incisales; para abrir más, los cóndilos deben trasladarse hacia delante y abajo por las eminencias.\n\nCuando la persona está de pie o sentada, relajada y sin tragar, la mandíbula no suele estar en contacto dentario: adopta una **posición postural**, mantenida por el tono de los músculos, con los dientes separados unos milímetros. Ese espacio entre arcadas se llama **espacio libre interoclusal** y, en los textos clásicos, mide en promedio de 2 a 4 mm. Respetarlo es esencial al aumentar la dimensión vertical en prótesis."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La envolvente de Posselt"
+        },
+        {
+          "tipo": "texto",
+          "md": "En 1952, el odontólogo sueco Ulf Posselt registró el recorrido de un punto entre los incisivos inferiores mientras la mandíbula se movía hasta sus límites. Al trazarlo en el plano sagital obtuvo una figura con forma de escudo o de almendra alargada que hoy lleva su nombre. Sus bordes son los **movimientos límite**, que la mandíbula no puede rebasar por las restricciones de ligamentos, articulaciones, músculos y dientes; todo movimiento funcional, como hablar o masticar, ocurre **dentro** de esa envolvente.\n\nLa figura tiene tres bordes. El **borde de apertura posterior** se recorre en dos etapas: rotación pura desde relación céntrica y después rotación con traslación hasta la apertura máxima. El **borde de apertura anterior** va desde la apertura máxima hasta la posición de máxima protrusión, siguiendo el cierre con los cóndilos adelantados. El **borde superior de contacto** está determinado por los dientes y recorre, de atrás hacia delante, la relación céntrica, el deslizamiento hasta la máxima intercuspidación, el contacto borde a borde de los incisivos y, por último, la protrusión máxima."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m13/d3",
+          "pie": "Envolvente de Posselt en el plano sagital: el contorno muestra los movimientos límite del punto incisal inferior; los movimientos funcionales quedan dentro.",
+          "descripcion": "Figura en forma de escudo alargado vertical, con el borde superior arriba y la apertura máxima abajo. En el borde superior, de izquierda a derecha (posterior a anterior): punto de relación céntrica, trayecto corto hacia arriba y adelante hasta máxima intercuspidación, descenso por la guía anterior hasta borde a borde y luego hasta protrusión máxima en el extremo anterior. Desde relación céntrica baja el borde posterior: primer tramo recto rotulado como rotación pura y segundo tramo curvo con rotación y traslación hasta apertura máxima. Desde protrusión máxima baja el borde anterior hasta apertura máxima. Dentro, un pequeño bucle en forma de gota representa el ciclo masticatorio y un punto aislado la posición postural.",
+          "elementos": [
+            "Relación céntrica",
+            "Máxima intercuspidación",
+            "Borde a borde",
+            "Protrusión máxima",
+            "Rotación pura",
+            "Rotación y traslación",
+            "Apertura máxima",
+            "Ciclo masticatorio",
+            "Posición postural"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Recorre el borde superior de contacto",
+          "instruccion": "Ordena, de posterior a anterior, las posiciones que recorre el punto incisal inferior en el borde superior de la envolvente de Posselt.",
+          "elementos": [
+            "Relación céntrica (primer contacto dentario)",
+            "Máxima intercuspidación",
+            "Deslizamiento de los incisivos inferiores por las caras palatinas de los superiores",
+            "Contacto borde a borde de incisivos",
+            "Protrusión máxima"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/08",
+          "proporcion": "4:3",
+          "alt": "Modelos de yeso superior e inferior montados en un articulador semiajustable sobre una mesa de laboratorio.",
+          "pie": "Montar modelos en articulador con un registro de relación céntrica permite estudiar contactos y deslizamientos fuera de la boca.",
+          "prompt": "Fotografía de estudio realista de un articulador dental semiajustable metálico con modelos de yeso superior e inferior de una dentición permanente completa montados con yeso de montaje, vista lateral tres cuartos, los dientes en oclusión, mesa de laboratorio dental blanca y limpia, al fondo desenfocado un recortador de modelos y una espátula, iluminación difusa y uniforme, colores naturales, enfoque nítido en los modelos y en la guía condilar. Evitar: texto, escalas legibles, marcas comerciales, logotipos, marcas de agua, yeso fracturado, dientes deformes, manos sin guantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Otros planos y métodos de registro",
+          "md": "Posselt también describió los movimientos límite en los planos **horizontal** y **frontal**. En el horizontal, el trazo de un punto central durante lateralidades desde relación céntrica forma el llamado **arco gótico**, cuyo vértice corresponde a la relación céntrica y se usa en prótesis total para registrarla. En el frontal, la figura recuerda un escudo con la apertura máxima en su parte inferior. Para el registro de relación céntrica se describen técnicas de **manipulación bilateral**, popularizada por Peter Dawson, y dispositivos de desprogramación anterior como el **jig de Lucia** o las láminas calibradas (*leaf gauge*), que separan los posteriores para que los músculos asienten los cóndilos sin la guía de los contactos habituales. La elección de técnica es criterio del clínico y requiere entrenamiento supervisado."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/09",
+          "proporcion": "1:1",
+          "alt": "Regla milimetrada de plástico medida entre bordes incisales de un tipodonto con la boca abierta.",
+          "pie": "La apertura máxima se mide entre los bordes incisales superiores e inferiores; es un dato básico del examen funcional.",
+          "prompt": "Fotografía de estudio realista de un tipodonto dental con articulación de bisagra abierto al máximo, una regla milimetrada de plástico transparente colocada verticalmente entre el borde incisal del incisivo central superior y el borde incisal del incisivo central inferior, sostenida por una mano con guante de nitrilo azul, dientes de resina color marfil con anatomía correcta, fondo gris claro uniforme, iluminación difusa suave, enfoque nítido en la regla y los incisivos. Evitar: números ampliados o legibles, texto, logotipos, marcas de agua, manos sin guantes, rostros, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** frente a un espejo, coloca la punta del dedo índice entre tus incisivos inferiores y el labio y abre la boca muy despacio. Notarás un primer tramo en el que la mandíbula parece girar sin avanzar y, a partir de cierto punto, sentirás con los dedos de la otra mano, colocados por delante del oído, cómo los cóndilos se deslizan hacia delante. Acabas de recorrer el borde de apertura posterior de tu propia envolvente de Posselt. En la consulta, mide la apertura máxima de cada paciente nuevo con la sonda o una regla y regístrala: es un dato sencillo que después te permitirá detectar limitaciones."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Máxima intercuspidación",
+          "definicion": "Posición mandibular con el mayor número de contactos dentarios; depende de la forma y posición de los dientes."
+        },
+        {
+          "termino": "Relación céntrica",
+          "definicion": "Posición de los cóndilos, independiente de los dientes, que Okeson describe como la más superior y anterior en las fosas, con los discos bien interpuestos."
+        },
+        {
+          "termino": "Eje de bisagra terminal",
+          "definicion": "Eje transversal que pasa por ambos cóndilos y alrededor del cual la mandíbula rota en el inicio de la apertura desde relación céntrica."
+        },
+        {
+          "termino": "Posición postural",
+          "definicion": "Posición de reposo de la mandíbula mantenida por el tono muscular, con los dientes separados."
+        },
+        {
+          "termino": "Espacio libre interoclusal",
+          "definicion": "Separación entre las arcadas en la posición postural; en los textos clásicos promedia de 2 a 4 mm."
+        },
+        {
+          "termino": "Envolvente de Posselt",
+          "definicion": "Figura que representa los movimientos límite de un punto incisal inferior; los movimientos funcionales ocurren dentro de ella."
+        },
+        {
+          "termino": "Movimiento límite",
+          "definicion": "Movimiento mandibular en el extremo de su rango, restringido por ligamentos, articulaciones, músculos o dientes."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t13.3-1",
+          "q": "¿Por qué la relación céntrica se usa como referencia en rehabilitaciones extensas?",
+          "opciones": [
+            "Porque es la posición con más contactos dentarios",
+            "Porque es reproducible y no depende de los dientes",
+            "Porque es la posición que el paciente adopta al hablar",
+            "Porque coincide siempre con la máxima intercuspidación"
+          ],
+          "correcta": 1,
+          "explicacion": "La relación céntrica es una posición articular que puede registrarse repetidamente aunque se modifiquen o falten dientes; casi nunca coincide exactamente con la máxima intercuspidación."
+        },
+        {
+          "id": "t13.3-2",
+          "q": "¿Cómo debes interpretar un deslizamiento pequeño y simétrico de relación céntrica a máxima intercuspidación en un paciente sin síntomas?",
+          "opciones": [
+            "Como una indicación urgente de ajuste oclusal",
+            "Como signo seguro de trastorno temporomandibular",
+            "Como un error en la técnica de registro",
+            "Como un hallazgo frecuente que por sí solo no justifica tratamiento"
+          ],
+          "correcta": 3,
+          "explicacion": "La mayoría de las personas presenta un deslizamiento de alrededor de un milímetro; lo relevante es la estabilidad oclusal y la ausencia de síntomas."
+        },
+        {
+          "id": "t13.3-3",
+          "q": "En la envolvente de Posselt, ¿qué borde está determinado principalmente por los dientes?",
+          "opciones": [
+            "El borde superior de contacto",
+            "El borde de apertura posterior",
+            "El borde de apertura anterior",
+            "El punto de apertura máxima"
+          ],
+          "correcta": 0,
+          "explicacion": "El borde superior recorre posiciones con contacto dentario: relación céntrica, máxima intercuspidación, borde a borde y protrusión. Los demás dependen de articulaciones, ligamentos y músculos."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Management of Temporomandibular Disorders and Occlusion, 8.ª edición",
+          "autor": "Okeson J. P. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Studies in the mobility of the human mandible (Acta Odontologica Scandinavica, suplemento)",
+          "autor": "Posselt U.",
+          "anio": 1952
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en Okeson, Posselt y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "13.4",
+      "titulo": "Movimientos excéntricos y guías: protrusión, lateralidad, guía canina y función de grupo",
+      "minutos": 15,
+      "enPocasPalabras": "Cuando adelantas la mandíbula o la mueves de lado, unos pocos dientes de enfrente la guían y los de atrás se separan, como si se apartaran para no chocar. Lo más común es que el colmillo dirija el movimiento lateral. Si en ese recorrido chocan muelas que no deberían tocarse, aparecen desgastes, molestias o restauraciones que se rompen.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La máxima intercuspidación es el punto de llegada de muchos movimientos, pero la mandíbula pasa buena parte del tiempo en camino. Al morder un alimento, al rechinar o simplemente al hablar, los dientes se deslizan unos sobre otros fuera de la posición de cierre. Esos movimientos se llaman **excéntricos**: la **protrusión** hacia delante, la **lateralidad** hacia la derecha o la izquierda y sus combinaciones. La manera en que los dientes los guían define buena parte de la salud y la duración de una dentición."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Protrusión y guía anterior"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la **protrusión**, ambos cóndilos avanzan y descienden por las eminencias articulares, mientras los bordes incisales inferiores se deslizan por las caras palatinas de los incisivos superiores hasta llegar al borde a borde. Esa superficie de deslizamiento constituye la **guía anterior** o guía incisal. En una oclusión con guía anterior adecuada, durante todo ese recorrido los **dientes posteriores se separan**, fenómeno que se conoce como **desoclusión posterior**.\n\nLa separación ocurre por dos razones que suman sus efectos: el descenso de los cóndilos por las eminencias aleja la parte posterior de la mandíbula del maxilar, y la inclinación de las caras palatinas de los incisivos superiores obliga a la mandíbula a bajar al avanzar. Cuando la guía anterior es plana o inexistente, como en la mordida abierta anterior o el borde a borde, los posteriores pueden seguir en contacto durante la protrusión y soportar fuerzas horizontales para las que no están diseñados."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/10",
+          "proporcion": "4:3",
+          "alt": "Vista lateral de tipodonto en protrusión con incisivos borde a borde y molares separados.",
+          "pie": "En protrusión con guía anterior adecuada, los incisivos contactan borde a borde y los molares quedan separados.",
+          "prompt": "Fotografía de estudio realista de un tipodonto dental de dentición permanente completa, vista lateral derecha, con la mandíbula adelantada de modo que los incisivos superiores e inferiores contactan borde a borde mientras se aprecia un espacio claro entre las cúspides de premolares y molares superiores e inferiores, dientes de resina color marfil con anatomía correcta, encía de silicona rosa pálido, fondo gris neutro liso, iluminación difusa de estudio con ligero contraluz que resalta el espacio entre los posteriores. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, dientes deformes, rostros, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lateralidad: lado de trabajo y lado de no trabajo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando la mandíbula se desplaza hacia un lado, cada lado se comporta de forma distinta. El **lado de trabajo**, o laterotrusivo, es aquel hacia el que se mueve la mandíbula; ahí se tritura el alimento. El **lado de no trabajo**, también llamado de balance o mediotrusivo, es el contrario.\n\nEn el lado de trabajo, el cóndilo prácticamente **gira** sobre sí mismo alrededor de un eje vertical, con un pequeño desplazamiento lateral conocido como **movimiento de Bennett** o desplazamiento lateral mandibular. En el lado de no trabajo, el cóndilo se **traslada hacia delante, abajo y adentro**, siguiendo la pared medial de la fosa y la eminencia. El ángulo que forma su trayectoria con el plano sagital, visto desde arriba, es el **ángulo de Bennett**. Cuando el desplazamiento lateral ocurre al inicio del movimiento, de forma brusca, se habla de desplazamiento lateral inmediato.\n\nEsta asimetría explica por qué las interferencias del lado de no trabajo resultan tan problemáticas: aparecen en un sitio donde los dientes deberían separarse con facilidad."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m13/d4",
+          "pie": "Movimiento de lateralidad derecha visto de frente y desde arriba: el cóndilo de trabajo gira y el de no trabajo avanza hacia delante, abajo y adentro.",
+          "descripcion": "Dos paneles. Superior: vista frontal esquemática de los primeros molares y caninos de ambos lados con la mandíbula desplazada a la derecha del paciente; en el lado derecho el canino inferior se desliza contra la cara palatina del canino superior y los molares se separan ligeramente; en el lado izquierdo los molares se separan más. Inferior: vista superior de la mandíbula con ambos cóndilos; el cóndilo derecho con una flecha circular pequeña y una flecha lateral corta; el cóndilo izquierdo con una flecha hacia delante y adentro que forma un ángulo con una línea sagital de referencia.",
+          "elementos": [
+            "Lado de trabajo",
+            "Lado de no trabajo",
+            "Cóndilo de trabajo: rotación",
+            "Movimiento de Bennett",
+            "Cóndilo de no trabajo: adelante, abajo y adentro",
+            "Ángulo de Bennett",
+            "Guía canina"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Guía canina y función de grupo"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el lado de trabajo, ¿qué dientes guían el movimiento? Hay dos esquemas considerados aceptables en la dentición natural.\n\nEn la **guía canina** (u oclusión protegida por el canino), solo el canino superior y el inferior del lado de trabajo contactan durante la lateralidad, y todos los demás dientes se separan. El canino reúne condiciones que lo hacen ideal para esta tarea: tiene la **raíz más larga** de la arcada, una buena proporción entre corona y raíz, hueso compacto a su alrededor y una ubicación alejada de los músculos elevadores y de la articulación, donde la palanca le favorece. Okeson resume estudios electromiográficos que sugieren menor actividad de los elevadores cuando solo contactan los caninos en lateralidad.\n\nEn la **función de grupo**, varios dientes del lado de trabajo comparten la guía: el canino, los premolares y, con frecuencia, la cúspide mesiovestibular del primer molar. Es el esquema recomendado cuando el canino no puede asumir la carga por sí solo, por ejemplo si está desgastado, con soporte periodontal reducido, mal posicionado o ausente."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Esquemas de guía lateral",
+          "columnas": [
+            "Esquema",
+            "Dientes que contactan en el lado de trabajo",
+            "Lado de no trabajo",
+            "Cuándo se elige"
+          ],
+          "filas": [
+            [
+              "Guía canina",
+              "Solo los caninos",
+              "Sin contactos",
+              "Caninos sanos y bien posicionados; esquema frecuente en restauraciones de dentición natural"
+            ],
+            [
+              "Función de grupo",
+              "Canino, premolares y a veces cúspide mesiovestibular del primer molar",
+              "Sin contactos",
+              "Caninos con desgaste, soporte periodontal reducido o posición desfavorable"
+            ],
+            [
+              "Oclusión balanceada bilateral",
+              "Varios dientes",
+              "Contactos simultáneos intencionales",
+              "Prótesis total, para estabilizar las dentaduras; no se busca en dientes naturales"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/11",
+          "proporcion": "4:3",
+          "alt": "Boca de un adulto con retractor de labios en lateralidad derecha, con solo los caninos en contacto.",
+          "pie": "Guía canina: en lateralidad, los caninos del lado de trabajo contactan y los posteriores se separan.",
+          "prompt": "Fotografía clínica intraoral realista de un adulto con retractor de mejillas transparente, vista lateral derecha, la mandíbula desplazada hacia la derecha de modo que la punta del canino inferior contacta la cara palatina del canino superior y se observa un espacio entre premolares y molares superiores e inferiores, dentición permanente sana con anatomía correcta, encía rosa pálido, saliva natural, luz de flash clínico anular uniforme, fondo oscuro de la cavidad oral. Evitar: texto, flechas, logotipos, marcas de agua, nariz u ojos del paciente, sangre, caries extensas, restauraciones metálicas, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Interferencias y determinantes de la morfología oclusal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Se llama **interferencia** a cualquier contacto que impide un movimiento suave o que provoca contacto donde debería haber separación. Las más relevantes en la consulta son las del **lado de no trabajo**: durante la lateralidad, las vertientes vestibulares de las cúspides linguales superiores pueden chocar con las vertientes linguales de las cúspides vestibulares inferiores. Estos contactos se asocian con desgaste localizado, sensibilidad, movilidad, fracturas de cúspides y fracasos de restauraciones, aunque su relación con los trastornos temporomandibulares es compleja y no se considera una causa única ni directa.\n\nLa altura de las cúspides y la profundidad de las fosas que una dentición tolera sin interferir dependen de varios **determinantes**. Okeson los divide en verticales y horizontales; conocerlos explica por qué no existe una única «forma correcta» de molar para todos los pacientes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Algunos determinantes verticales de la altura cuspídea posterior",
+          "columnas": [
+            "Determinante",
+            "Si aumenta o se inclina más",
+            "Consecuencia para los posteriores"
+          ],
+          "filas": [
+            [
+              "Guía condílea (inclinación de la eminencia)",
+              "Trayectoria condílea más empinada",
+              "Las cúspides pueden ser más altas sin interferir"
+            ],
+            [
+              "Guía anterior",
+              "Sobremordida vertical mayor o caras palatinas más inclinadas",
+              "Las cúspides pueden ser más altas"
+            ],
+            [
+              "Plano oclusal",
+              "Más paralelo a la guía condílea",
+              "Las cúspides deben ser más bajas"
+            ],
+            [
+              "Curva de Spee",
+              "Curva más pronunciada",
+              "Las cúspides más posteriores deben ser más bajas"
+            ],
+            [
+              "Movimiento de Bennett",
+              "Desplazamiento lateral mayor",
+              "Las cúspides deben ser más bajas"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué la dentición natural y la prótesis total buscan esquemas distintos",
+          "md": "En dientes naturales se busca que los posteriores se separen en los movimientos excéntricos para que las fuerzas horizontales recaigan en dientes anteriores con mejor proporción corona-raíz y propiocepción. En la **prótesis total** ocurre lo contrario: una dentadura apoyada en mucosa se desaloja si solo contacta por un lado. Por eso se diseña una **oclusión balanceada bilateral**, con contactos simultáneos en trabajo, no trabajo y protrusión, que estabiliza las bases. Confundir ambos objetivos lleva a errores: tallar contactos de balance en una corona sobre diente natural crea justamente la interferencia que se quería evitar."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Verdadero o falso sobre las guías?",
+          "afirmaciones": [
+            {
+              "texto": "En la guía canina, los premolares del lado de trabajo contactan junto con el canino.",
+              "verdadero": false,
+              "explicacion": "En la guía canina solo contactan los caninos; cuando participan premolares hablamos de función de grupo."
+            },
+            {
+              "texto": "El lado de no trabajo es el lado opuesto hacia el que se mueve la mandíbula.",
+              "verdadero": true,
+              "explicacion": "Es el lado mediotrusivo o de balance; su cóndilo se traslada hacia delante, abajo y adentro."
+            },
+            {
+              "texto": "La oclusión balanceada bilateral es el objetivo en las coronas sobre dientes naturales.",
+              "verdadero": false,
+              "explicacion": "Se busca en prótesis total; en dientes naturales los contactos de no trabajo se consideran interferencias."
+            },
+            {
+              "texto": "Una guía anterior adecuada separa los dientes posteriores durante la protrusión.",
+              "verdadero": true,
+              "explicacion": "La inclinación palatina de los incisivos superiores y el descenso condilar producen la desoclusión posterior."
+            },
+            {
+              "texto": "Una curva de Spee más pronunciada permite cúspides posteriores más altas.",
+              "verdadero": false,
+              "explicacion": "Según los determinantes descritos por Okeson, una curva más pronunciada obliga a cúspides más bajas en los dientes más posteriores."
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo explorar las guías en la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Con el paciente sentado erguido, pide primero que cierre en máxima intercuspidación y después que deslice la mandíbula hacia la derecha hasta que los caninos queden punta con punta, y luego hacia la izquierda. Observa qué dientes contactan en el lado de trabajo y si alguno toca en el lado contrario. Una tira delgada de celofán o de lámina de registro (*shimstock*) entre los posteriores ayuda: si el paciente la retiene durante el movimiento, hay contacto.\n\nBusca también **facetas de desgaste**, superficies planas y brillantes con bordes nítidos, que coinciden con un antagonista cuando colocas la mandíbula en la posición excéntrica correspondiente. Su presencia en caninos y premolares cuenta la historia de las guías del paciente y, en ocasiones, de hábitos como el bruxismo. Coloca dos dedos sobre los dientes superiores durante los movimientos: una vibración perceptible, llamada **frémito**, indica que ese diente recibe una carga excesiva."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/12",
+          "proporcion": "1:1",
+          "alt": "Pinzas de Miller sostienen papel de articular sobre los molares de un tipodonto.",
+          "pie": "El papel de articular deja marcas que permiten distinguir contactos en cierre y en movimientos excéntricos.",
+          "prompt": "Fotografía clínica realista en primer plano: una mano con guante de nitrilo azul sostiene unas pinzas de Miller con una tira de papel de articular azul colocada sobre las superficies oclusales de los molares inferiores de un tipodonto de dentición permanente, se ven marcas puntuales azules en las cúspides de soporte de los molares, dientes de resina color marfil con anatomía correcta, fondo de mesa clínica blanca desenfocado, iluminación clínica uniforme, colores naturales. Evitar: texto, logotipos, marcas comerciales, marcas de agua, manos sin guantes, sangre, rostros, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una resina que molesta solo al masticar",
+          "md": "Un paciente regresa una semana después de una resina oclusal en el primer molar inferior izquierdo. En máxima intercuspidación el contacto es correcto, pero refiere molestia al masticar. Con papel de articular de dos colores registras primero el cierre y después las lateralidades: en lateralidad derecha aparece una marca en la vertiente lingual de la cúspide distovestibular del molar restaurado. Es un contacto de **no trabajo**. Al ajustar esa vertiente sin tocar la punta de la cúspide de soporte, la molestia desaparece en los días siguientes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** después de cada restauración posterior, revisa la oclusión en tres tiempos: cierre en máxima intercuspidación, lateralidad hacia ambos lados y protrusión. Usa un color de papel para el cierre y otro para los movimientos. Las marcas de cierre en las puntas de las cúspides de soporte se respetan; las marcas de movimientos sobre vertientes de dientes posteriores, en especial del lado de no trabajo, son las que normalmente se ajustan."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Protrusión",
+          "definicion": "Movimiento de la mandíbula hacia delante con descenso de ambos cóndilos por las eminencias articulares."
+        },
+        {
+          "termino": "Lado de trabajo",
+          "definicion": "Lado hacia el que se desplaza la mandíbula en una lateralidad; también llamado laterotrusivo."
+        },
+        {
+          "termino": "Lado de no trabajo",
+          "definicion": "Lado contrario al desplazamiento en una lateralidad; también llamado de balance o mediotrusivo."
+        },
+        {
+          "termino": "Movimiento de Bennett",
+          "definicion": "Desplazamiento lateral del cuerpo de la mandíbula durante la lateralidad, que se refleja en el cóndilo de trabajo."
+        },
+        {
+          "termino": "Guía canina",
+          "definicion": "Esquema en el que solo los caninos contactan en el lado de trabajo durante la lateralidad y el resto de los dientes se separa."
+        },
+        {
+          "termino": "Función de grupo",
+          "definicion": "Esquema en el que canino, premolares y a veces el primer molar comparten la guía en el lado de trabajo."
+        },
+        {
+          "termino": "Interferencia oclusal",
+          "definicion": "Contacto dentario que impide un movimiento mandibular suave o aparece donde debería haber separación."
+        },
+        {
+          "termino": "Desoclusión",
+          "definicion": "Separación de los dientes posteriores durante un movimiento excéntrico gracias a la guía anterior o canina."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t13.4-1",
+          "q": "Durante una lateralidad izquierda, ¿qué hace el cóndilo derecho?",
+          "opciones": [
+            "Gira sobre su eje vertical casi sin trasladarse",
+            "Se desplaza hacia atrás y arriba",
+            "Se traslada hacia delante, abajo y adentro",
+            "Permanece inmóvil porque es el lado de trabajo"
+          ],
+          "correcta": 2,
+          "explicacion": "En lateralidad izquierda el lado derecho es el de no trabajo; su cóndilo se traslada hacia delante, abajo y adentro. El que gira es el cóndilo izquierdo, de trabajo."
+        },
+        {
+          "id": "t13.4-2",
+          "q": "¿Qué característica del canino lo hace adecuado para guiar la lateralidad?",
+          "opciones": [
+            "Es el diente con la corona más corta",
+            "Tiene la raíz más larga de la arcada y una posición alejada del fulcro articular",
+            "Es el único diente con dos raíces en la arcada inferior",
+            "No tiene ligamento periodontal"
+          ],
+          "correcta": 1,
+          "explicacion": "La raíz larga, la buena proporción corona-raíz y su posición anterior, lejos de los elevadores y de la articulación, lo hacen apto para recibir fuerzas horizontales."
+        },
+        {
+          "id": "t13.4-3",
+          "q": "¿En qué situación se busca intencionalmente contacto en el lado de no trabajo?",
+          "opciones": [
+            "En una corona sobre un molar natural",
+            "En una resina oclusal de premolar",
+            "En una guarda con guía canina",
+            "En una prótesis total con oclusión balanceada bilateral"
+          ],
+          "correcta": 3,
+          "explicacion": "En prótesis total los contactos bilaterales estabilizan las bases. En dientes naturales esos contactos se consideran interferencias."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Management of Temporomandibular Disorders and Occlusion, 8.ª edición",
+          "autor": "Okeson J. P. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en Okeson y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "13.5",
+      "titulo": "La oclusión en la dentición temporal y mixta, y el examen oclusal en la consulta",
+      "minutos": 15,
+      "enPocasPalabras": "Los dientes de leche también tienen su propia forma de encajar, y los espacios entre ellos son buena señal porque dejan lugar a los dientes definitivos, que son más grandes. Entre los 6 y los 12 años la mordida cambia mucho y algunas cosas que parecen problemas son normales. Un examen ordenado de la mordida ayuda a saber qué vigilar y cuándo referir al especialista.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los conceptos de los temas anteriores se describieron para la dentición permanente, pero la oclusión se construye durante la infancia. En el módulo 9 revisaste la cronología de erupción; aquí verás cómo engranan los dientes temporales, qué relaciones predicen la oclusión permanente y qué cambios de la dentición mixta son esperables. Al final integrarás todo en un examen oclusal ordenado que puedes aplicar en cualquier consulta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Rasgos de la oclusión temporal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Hacia los tres años suele completarse la dentición temporal. Comparada con la permanente, presenta incisivos más verticales, sobremordidas horizontal y vertical en general pequeñas, una curva de Spee casi plana y, con frecuencia, **espacios entre los dientes anteriores**. Esos espacios, lejos de ser un defecto, son deseables: los incisivos permanentes son más anchos que los temporales y necesitarán ese lugar.\n\nEl ortodoncista Louis Baume describió a mediados del siglo XX dos tipos de arcadas temporales: **tipo I**, con espacios generalizados, y **tipo II**, cerrada, sin espacios. Además describió los **espacios primates**, presentes en muchos niños: en el maxilar se sitúan **entre el incisivo lateral y el canino**, y en la mandíbula **entre el canino y el primer molar temporal**. Las arcadas tipo II tienen mayor probabilidad de presentar apiñamiento en la dentición permanente."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/13",
+          "proporcion": "4:3",
+          "alt": "Tipodonto de dentición temporal completa en oclusión, con espacios entre los incisivos.",
+          "pie": "Dentición temporal con espacios fisiológicos entre los incisivos: una buena señal para la llegada de los permanentes.",
+          "prompt": "Fotografía de estudio realista de un tipodonto pediátrico de dentición temporal completa con veinte dientes temporales en oclusión, vista frontal ligeramente lateral, coronas blancas y pequeñas con anatomía correcta de incisivos, caninos y molares temporales, pequeños espacios visibles entre los incisivos superiores e inferiores y entre el lateral y el canino superior, encía de silicona rosa, fondo gris claro uniforme, iluminación difusa suave, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, dientes permanentes, rostros infantiles, dientes deformes, caries."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Diferencias entre la oclusión temporal y la permanente",
+          "columnas": [
+            "Rasgo",
+            "Dentición temporal",
+            "Dentición permanente"
+          ],
+          "filas": [
+            [
+              "Inclinación de incisivos",
+              "Casi verticales",
+              "Inclinados hacia vestibular"
+            ],
+            [
+              "Espacios anteriores",
+              "Frecuentes y deseables",
+              "Normalmente ausentes"
+            ],
+            [
+              "Curva de Spee",
+              "Casi plana",
+              "Marcada en la arcada inferior"
+            ],
+            [
+              "Referencia anteroposterior",
+              "Plano terminal de los segundos molares",
+              "Clase de Angle de los primeros molares y caninos"
+            ],
+            [
+              "Sobremordidas",
+              "En general pequeñas",
+              "Alrededor de 2 a 3 mm en adultos"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El plano terminal: una pista de la futura clase molar"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la dentición temporal no se usa la clase de Angle, sino la relación entre las **caras distales de los segundos molares temporales** superior e inferior, vista desde vestibular. A esa relación se le llama **plano terminal** y es importante porque los primeros molares permanentes erupcionan guiados por esas caras distales.\n\nSe describen tres variantes. En el **plano terminal recto** ambas caras distales quedan alineadas; los primeros molares permanentes erupcionan en relación cúspide a cúspide y alcanzan la clase I si la mandíbula crece hacia delante y el molar inferior se mesializa, sea cerrando los espacios primates o aprovechando el espacio que deja el recambio de los molares temporales. En el **escalón mesial**, la cara distal inferior queda por delante de la superior; suele conducir a clase I, aunque un escalón muy pronunciado puede evolucionar hacia clase III. En el **escalón distal**, la cara distal inferior queda por detrás; tiende a producir una **clase II** y justifica vigilancia y referencia oportuna."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m13/d5",
+          "pie": "Los tres planos terminales de los segundos molares temporales y su evolución más probable al erupcionar el primer molar permanente.",
+          "descripcion": "Tres columnas. En cada una, arriba, vista vestibular esquemática del segundo molar temporal superior sobre el inferior, con una línea vertical que marca la cara distal de cada uno: alineadas en la primera, la inferior más mesial en la segunda y la inferior más distal en la tercera. Debajo, una flecha hacia un esquema de los primeros molares permanentes con la relación resultante más probable: cúspide a cúspide que pasa a clase I, clase I y clase II respectivamente.",
+          "elementos": [
+            "Plano terminal recto",
+            "Escalón mesial",
+            "Escalón distal",
+            "Segundo molar temporal",
+            "Primer molar permanente",
+            "Tendencia a clase I",
+            "Tendencia a clase II"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La dentición mixta: cambios que asustan pero son normales"
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentición mixta comienza alrededor de los seis años con la erupción de los primeros molares permanentes y de los incisivos inferiores. Varios fenómenos de esta etapa preocupan a las familias y conviene que sepas explicarlos.\n\nEl primero es la **desventaja incisiva**: los incisivos permanentes son más grandes que los temporales, así que en la arcada inferior es frecuente un apiñamiento leve transitorio al principio, que se compensa en parte con los espacios previos y con un ligero aumento del perímetro anterior. El segundo es la llamada **fase del patito feo**, descrita por Broadbent: hacia los 8 a 10 años, los incisivos centrales superiores pueden mostrar un **diastema** y los laterales se abren en abanico, porque las coronas de los caninos en formación presionan sus raíces. Cuando erupcionan los caninos, el diastema suele cerrarse en buena medida. El tercero es el **espacio de deriva** (*leeway space*), descrito por Nance: el canino y los molares temporales ocupan más espacio que el canino y los premolares permanentes que los sustituyen. La diferencia es mayor en la mandíbula y permite que el primer molar inferior se mesialice y alcance la clase I."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué no conviene perder antes de tiempo un segundo molar temporal",
+          "md": "El segundo molar temporal es un mantenedor de espacio natural: ocupa el sitio del segundo premolar y sirve de tope al primer molar permanente. Si se pierde de manera prematura por caries, el primer molar permanente tiende a desplazarse hacia mesial y a consumir el espacio de deriva, lo que puede dejar al premolar sin lugar para erupcionar. Por eso la prevención y el tratamiento oportuno de la caries en molares temporales son también medidas de prevención ortodóncica."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/14",
+          "proporcion": "4:3",
+          "alt": "Boca de un niño de unos nueve años con retractor, con diastema entre incisivos centrales superiores y laterales inclinados.",
+          "pie": "Fase del patito feo en dentición mixta: diastema central y laterales abiertos en abanico antes de la erupción de los caninos.",
+          "prompt": "Fotografía clínica intraoral realista de un niño de nueve años con retractor de mejillas pediátrico transparente, vista frontal, dentición mixta con incisivos centrales superiores permanentes separados por un diastema de pocos milímetros, incisivos laterales superiores inclinados hacia distal en abanico, caninos y molares temporales presentes, incisivos inferiores permanentes, encía sana rosa, luz de flash clínico uniforme, colores naturales, encuadre solo de dientes y encía. Evitar: texto, logotipos, marcas de agua, ojos, nariz o rostro del niño, sangre, caries extensas, aparatos de ortodoncia, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Hábitos y señales de alerta"
+        },
+        {
+          "tipo": "texto",
+          "md": "La oclusión infantil no depende solo de los dientes: los tejidos blandos y los hábitos la moldean. La **succión digital o del chupón** prolongada más allá de la edad preescolar se asocia con mordida abierta anterior, incisivos superiores proinclinados y, a veces, mordida cruzada posterior por estrechamiento del maxilar. La **respiración bucal** sostenida y la **interposición lingual** al tragar también se relacionan con mordidas abiertas y con alteraciones transversales.\n\nUna señal que merece atención especial es la **mordida cruzada posterior con desviación funcional**: el niño cierra, encuentra un contacto prematuro, generalmente en caninos temporales, y desliza la mandíbula hacia un lado para lograr el engranaje. La línea media inferior se desvía solo al cerrar. Detectarla temprano permite que el ortodoncista u odontopediatra valore su corrección mientras el crecimiento todavía ayuda. Otras señales para referir son el escalón distal, la sobremordida horizontal muy aumentada, la mordida cruzada anterior y la pérdida prematura de molares temporales sin mantenedor de espacio."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una línea media que se mueve",
+          "md": "En la revisión de un niño de 5 años observas que, con la boca entreabierta, las líneas medias superior e inferior coinciden. Al pedirle que cierre despacio, los caninos temporales derechos se tocan primero y la mandíbula se desliza hacia la derecha hasta lograr el engranaje; en máxima intercuspidación aparece una mordida cruzada posterior derecha y la línea media inferior queda desviada. Registras: «mordida cruzada posterior derecha con desviación funcional por contacto prematuro en caninos temporales», explicas a la familia por qué conviene atenderla en esta etapa y refieres a odontopediatría u ortodoncia para su valoración."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un examen oclusal ordenado"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Secuencia sugerida para el examen oclusal en la consulta general",
+          "pasos": [
+            {
+              "titulo": "Observar la apertura y el cierre",
+              "md": "Con el paciente sentado y erguido, observa la trayectoria de apertura: si es recta o se desvía. Mide la apertura máxima entre bordes incisales y pregunta por dolor o ruidos articulares."
+            },
+            {
+              "titulo": "Registrar las relaciones en máxima intercuspidación",
+              "md": "Anota la relación molar y canina de cada lado, o el plano terminal en dentición temporal, la sobremordida horizontal y vertical en milímetros, las líneas medias y las mordidas cruzadas."
+            },
+            {
+              "titulo": "Explorar los movimientos excéntricos",
+              "md": "Pide lateralidades derecha e izquierda y protrusión. Identifica el esquema de guía y cualquier contacto en el lado de no trabajo o en los posteriores durante la protrusión."
+            },
+            {
+              "titulo": "Buscar signos de sobrecarga",
+              "md": "Revisa facetas de desgaste, fracturas de cúspides, movilidad, frémito y recesiones localizadas, y relaciónalos con los contactos que encontraste."
+            },
+            {
+              "titulo": "Documentar y decidir",
+              "md": "Registra todo en el expediente con lenguaje descriptivo. Si encuentras escalón distal, mordidas cruzadas con desviación, sobremordida horizontal muy aumentada o síntomas articulares, valora la referencia a ortodoncia, odontopediatría o a un especialista en trastornos temporomandibulares."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Diagnóstico oclusal no es licencia para desgastar",
+          "md": "El ajuste oclusal por desgaste selectivo es **irreversible**. Hallar una interferencia en un paciente sin síntomas no obliga a eliminarla, y el desgaste no se recomienda como tratamiento rutinario ni preventivo de los trastornos temporomandibulares. Cualquier ajuste más allá de corregir una restauración propia recién colocada requiere diagnóstico completo, consentimiento informado y, con frecuencia, análisis en articulador por parte de un profesional con formación específica."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m13/15",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección registra datos oclusales en una tableta junto a la unidad dental.",
+          "pie": "Documentar la oclusión con lenguaje descriptivo permite comparar en cada visita y comunicarse con otros especialistas.",
+          "prompt": "Fotografía realista en un consultorio dental moderno de México: una odontóloga con guantes de nitrilo, bata desechable, cubrebocas y lentes de protección, vista de perfil, anota datos en una tableta electrónica apoyada en la mesa auxiliar, junto a ella sobre una charola hay modelos de estudio de yeso en oclusión, una sonda periodontal y pinzas con papel de articular; al fondo desenfocado la unidad dental vacía, luz natural suave mezclada con luz clínica, colores naturales, ambiente ordenado. Evitar: texto legible en la pantalla, logotipos, marcas de agua, pacientes identificables, manos sin guantes, desorden."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "La preocupación de una mamá",
+          "situacion": "Una madre lleva a su hija de 8 años porque «le salieron los dientes de enfrente separados y chuecos». Observas incisivos centrales superiores permanentes con un diastema de unos 2 mm, laterales inclinados hacia distal, caninos temporales presentes, primeros molares permanentes en clase I bilateral y sin hábitos de succión referidos. No hay frenillo labial de inserción baja ni dientes supernumerarios evidentes en la radiografía.",
+          "opciones": [
+            {
+              "texto": "Explicar que corresponde con la fase del patito feo, que suele mejorar con la erupción de los caninos, y programar vigilancia periódica.",
+              "correcta": true,
+              "retro": "Correcto. Los hallazgos son típicos de esta etapa transitoria. La vigilancia permite detectar si el diastema persiste tras la erupción de los caninos."
+            },
+            {
+              "texto": "Indicar de inmediato aparatología fija para cerrar el diastema.",
+              "correcta": false,
+              "retro": "Cerrar el espacio ahora puede interferir con la erupción de los caninos y no se justifica en una fase fisiológica sin otros hallazgos."
+            },
+            {
+              "texto": "Diagnosticar clase II división 1 por la inclinación de los laterales.",
+              "correcta": false,
+              "retro": "La relación molar es clase I; la inclinación de los laterales en esta etapa se debe a la presión de los caninos en formación."
+            },
+            {
+              "texto": "Recomendar extraer los caninos temporales para acelerar el cierre del diastema.",
+              "correcta": false,
+              "retro": "No hay indicación para extraer dientes temporales sanos; el proceso suele resolverse con la erupción natural."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en la consulta infantil, agrega a la historia clínica una línea fija: «plano terminal derecho e izquierdo» antes de los seis años, y «relación molar, espacios y fase de recambio» después. Ese registro sencillo, comparado año con año, te permitirá referir a tiempo y tranquilizar a las familias cuando los cambios sean normales."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Plano terminal",
+          "definicion": "Relación entre las caras distales de los segundos molares temporales superior e inferior; puede ser recto, escalón mesial o escalón distal."
+        },
+        {
+          "termino": "Espacios primates",
+          "definicion": "Espacios de la dentición temporal situados entre lateral y canino superiores y entre canino y primer molar inferiores."
+        },
+        {
+          "termino": "Arcada tipo I de Baume",
+          "definicion": "Arcada temporal con espacios generalizados entre los dientes anteriores."
+        },
+        {
+          "termino": "Espacio de deriva",
+          "definicion": "Diferencia de tamaño entre canino y molares temporales y sus sucesores permanentes; también llamado leeway space."
+        },
+        {
+          "termino": "Fase del patito feo",
+          "definicion": "Etapa de la dentición mixta con diastema central y laterales en abanico que suele corregirse al erupcionar los caninos."
+        },
+        {
+          "termino": "Faceta de desgaste",
+          "definicion": "Superficie plana y brillante en un diente producida por el roce repetido con su antagonista."
+        },
+        {
+          "termino": "Frémito",
+          "definicion": "Vibración palpable de un diente cuando recibe contactos oclusales durante el cierre o los movimientos."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t13.5-1",
+          "q": "¿Qué plano terminal tiende a producir una relación molar de clase II?",
+          "opciones": [
+            "El escalón distal",
+            "El escalón mesial",
+            "El plano terminal recto con espacios primates",
+            "Cualquier plano terminal en arcada tipo I"
+          ],
+          "correcta": 0,
+          "explicacion": "Cuando la cara distal del segundo molar temporal inferior queda por detrás de la superior, el primer molar permanente tiende a erupcionar en distoclusión."
+        },
+        {
+          "id": "t13.5-2",
+          "q": "¿Dónde se ubica el espacio primate en la arcada inferior?",
+          "opciones": [
+            "Entre los incisivos centrales",
+            "Entre el incisivo lateral y el canino",
+            "Entre el canino y el primer molar temporal",
+            "Entre el primer y el segundo molar temporal"
+          ],
+          "correcta": 2,
+          "explicacion": "En la mandíbula el espacio primate está distal al canino; en el maxilar, mesial al canino, entre este y el lateral."
+        },
+        {
+          "id": "t13.5-3",
+          "q": "¿Por qué el espacio de deriva favorece la clase I molar?",
+          "opciones": [
+            "Porque los premolares permanentes son más anchos que los molares temporales",
+            "Porque obliga al molar superior a desplazarse hacia distal",
+            "Porque elimina la necesidad de crecimiento mandibular",
+            "Porque el espacio sobrante, mayor en la mandíbula, permite que el primer molar inferior se mesialice"
+          ],
+          "correcta": 3,
+          "explicacion": "Canino y molares temporales ocupan más espacio que sus sucesores; el excedente, mayor en la mandíbula, deja avanzar al primer molar inferior."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Physiological tooth migration and its significance for the development of occlusion (Journal of Dental Research)",
+          "autor": "Baume L. J.",
+          "anio": 1950
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Contemporary Orthodontics, 6.ª edición",
+          "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Management of Temporomandibular Disorders and Occlusion, 8.ª edición",
+          "autor": "Okeson J. P. (Elsevier)",
+          "anio": 2019
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en Baume, Proffit, Okeson y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: la oclusión en movimiento",
+    "palabras": [
+      "OCLUSION",
+      "ANGLE",
+      "CENTRICA",
+      "PROTRUSION",
+      "LATERALIDAD",
+      "CANINO",
+      "POSSELT",
+      "SPEE",
+      "WILSON",
+      "SOBREMORDIDA",
+      "BALANCE",
+      "CUSPIDE"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m13-p01",
+        "q": "¿Qué describe la curva de Spee?",
+        "opciones": [
+          "La curvatura frontal que une las cúspides vestibulares y linguales de los molares",
+          "La forma parabólica de la arcada vista desde oclusal",
+          "La curvatura sagital que sigue la punta del canino inferior y las cúspides vestibulares posteriores",
+          "La trayectoria del cóndilo de no trabajo en el plano horizontal"
+        ],
+        "correcta": 2,
+        "explicacion": "La curva de Spee es anteroposterior. La curvatura frontal es la de Wilson y la trayectoria del cóndilo de no trabajo vista desde arriba define el ángulo de Bennett."
+      },
+      {
+        "id": "m13-p02",
+        "q": "¿Cuál de estas cúspides es de guía (no céntrica)?",
+        "opciones": [
+          "La vestibular del primer molar superior",
+          "La lingual del primer molar superior",
+          "La vestibular del primer molar inferior",
+          "La mesiolingual del segundo molar superior"
+        ],
+        "correcta": 0,
+        "explicacion": "Las cúspides de guía son las vestibulares superiores y las linguales inferiores. Las linguales superiores y las vestibulares inferiores son de soporte."
+      },
+      {
+        "id": "m13-p03",
+        "q": "¿Qué función cumplen principalmente las cúspides de soporte?",
+        "opciones": [
+          "Proteger la lengua durante la masticación",
+          "Guiar la protrusión",
+          "Separar los dientes en la lateralidad",
+          "Mantener la dimensión vertical oclusal y recibir la carga del cierre"
+        ],
+        "correcta": 3,
+        "explicacion": "Las cúspides de soporte contactan en fosas y rebordes antagonistas y sostienen la distancia entre maxilar y mandíbula al cerrar."
+      },
+      {
+        "id": "m13-p04",
+        "q": "En la clase II de Angle, ¿cómo se encuentra el surco vestibular del primer molar inferior respecto a la cúspide mesiovestibular superior?",
+        "opciones": [
+          "Coincide exactamente con ella",
+          "En posición distal",
+          "En posición mesial",
+          "En posición lingual, sin relación anteroposterior"
+        ],
+        "correcta": 1,
+        "explicacion": "En la distoclusión el molar inferior queda distal a la relación normal; en la clase III queda mesial."
+      },
+      {
+        "id": "m13-p05",
+        "q": "¿Qué combinación es típica de la clase II división 2?",
+        "opciones": [
+          "Incisivos superiores proinclinados y mordida abierta anterior",
+          "Centrales superiores retroinclinados y sobremordida vertical profunda",
+          "Relación molar clase III y borde a borde",
+          "Sobremordida horizontal negativa y perfil cóncavo"
+        ],
+        "correcta": 1,
+        "explicacion": "La división 2 combina relación molar clase II con centrales superiores retroinclinados, laterales a menudo vestibularizados y mordida profunda."
+      },
+      {
+        "id": "m13-p06",
+        "q": "Un paciente perdió hace años el primer molar inferior y su segundo molar se inclinó hacia mesial. ¿Qué registro ayuda más a describir su relación anteroposterior?",
+        "opciones": [
+          "La curva de Wilson",
+          "El espacio libre interoclusal",
+          "La relación canina",
+          "La apertura máxima"
+        ],
+        "correcta": 2,
+        "explicacion": "Cuando la relación molar no es confiable por pérdidas o migraciones, la relación canina complementa la descripción anteroposterior."
+      },
+      {
+        "id": "m13-p07",
+        "q": "¿Cómo se define la sobremordida horizontal?",
+        "opciones": [
+          "Distancia horizontal entre el borde incisal superior y la cara vestibular del incisivo inferior",
+          "Porción de la corona inferior cubierta verticalmente por el incisivo superior",
+          "Diferencia entre las líneas medias superior e inferior",
+          "Separación entre arcadas en la posición postural"
+        ],
+        "correcta": 0,
+        "explicacion": "La sobremordida horizontal u overjet es una medida horizontal; la vertical u overbite mide el traslape vertical."
+      },
+      {
+        "id": "m13-p08",
+        "q": "¿Qué caracteriza a la relación céntrica según la descripción de Okeson?",
+        "opciones": [
+          "Es la posición con más contactos dentarios",
+          "Es la posición más posterior y forzada de los cóndilos",
+          "Es la posición de reposo con los dientes separados",
+          "Es la posición más superior y anterior de los cóndilos, con los discos bien interpuestos"
+        ],
+        "correcta": 3,
+        "explicacion": "Okeson la define como posición musculoesqueléticamente estable, superoanterior. La definición retrusiva es histórica; la de más contactos corresponde a la máxima intercuspidación."
+      },
+      {
+        "id": "m13-p09",
+        "q": "Un paciente sin síntomas presenta un deslizamiento de aproximadamente 1 mm de relación céntrica a máxima intercuspidación. ¿Cuál es la interpretación más adecuada?",
+        "opciones": [
+          "Debe ajustarse de inmediato por desgaste selectivo",
+          "Indica una luxación del disco articular",
+          "Demuestra un error de registro que debe repetirse hasta eliminarlo",
+          "Es un hallazgo frecuente en la población que por sí solo no requiere tratamiento"
+        ],
+        "correcta": 3,
+        "explicacion": "La mayoría de las personas tiene un deslizamiento pequeño. Sin síntomas ni inestabilidad no hay indicación de tratamiento."
+      },
+      {
+        "id": "m13-p10",
+        "q": "Según Okeson, ¿aproximadamente cuánta apertura interincisal permite la rotación pura de la mandíbula desde relación céntrica?",
+        "opciones": [
+          "Alrededor de 20 a 25 mm",
+          "Alrededor de 2 a 4 mm",
+          "Alrededor de 50 a 60 mm",
+          "No hay rotación; la apertura es solo traslación"
+        ],
+        "correcta": 0,
+        "explicacion": "La rotación pura sobre el eje de bisagra terminal permite unos 20 a 25 mm; después se requiere traslación condílea. De 2 a 4 mm es el espacio libre interoclusal."
+      },
+      {
+        "id": "m13-p11",
+        "q": "En la envolvente de Posselt, ¿dónde ocurren los movimientos de la masticación?",
+        "opciones": [
+          "Exactamente sobre el borde de apertura posterior",
+          "Solo en el punto de protrusión máxima",
+          "Dentro de la envolvente, sin alcanzar los bordes en la mayoría del ciclo",
+          "Fuera de la envolvente, porque son movimientos funcionales"
+        ],
+        "correcta": 2,
+        "explicacion": "Los bordes representan movimientos límite; los movimientos funcionales, como la masticación, ocurren dentro de la figura."
+      },
+      {
+        "id": "m13-p12",
+        "q": "Durante una lateralidad derecha, ¿cuál es el lado de no trabajo?",
+        "opciones": [
+          "El lado derecho",
+          "El lado izquierdo",
+          "Ambos lados por igual",
+          "Ninguno, porque en lateralidad todos los dientes se separan"
+        ],
+        "correcta": 1,
+        "explicacion": "El lado de trabajo es hacia el que se mueve la mandíbula, aquí el derecho; el contrario, el izquierdo, es el de no trabajo o mediotrusivo."
+      },
+      {
+        "id": "m13-p13",
+        "q": "¿Qué ocurre con los dientes posteriores durante la protrusión cuando la guía anterior es adecuada?",
+        "opciones": [
+          "Se separan, fenómeno llamado desoclusión posterior",
+          "Contactan con más fuerza que en el cierre",
+          "Solo contactan los segundos molares",
+          "Contactan solo del lado derecho"
+        ],
+        "correcta": 0,
+        "explicacion": "La inclinación de las caras palatinas de los incisivos superiores y el descenso condilar separan los posteriores."
+      },
+      {
+        "id": "m13-p14",
+        "q": "Un paciente tiene caninos muy desgastados y con soporte periodontal reducido. Al restaurar el sector posterior, ¿qué esquema de guía lateral suele preferirse?",
+        "opciones": [
+          "Guía canina exclusiva",
+          "Oclusión balanceada bilateral",
+          "Contactos intencionales en el lado de no trabajo",
+          "Función de grupo"
+        ],
+        "correcta": 3,
+        "explicacion": "Cuando el canino no puede asumir la carga, la función de grupo reparte la guía entre canino, premolares y a veces el primer molar. La balanceada se reserva para prótesis total."
+      },
+      {
+        "id": "m13-p15",
+        "q": "¿Qué contacto se considera interferencia de no trabajo?",
+        "opciones": [
+          "Canino inferior contra la cara palatina del canino superior del lado de trabajo",
+          "Vertientes vestibulares de cúspides linguales superiores contra vertientes linguales de cúspides vestibulares inferiores en el lado contrario al movimiento",
+          "Bordes incisales inferiores contra caras palatinas superiores en protrusión",
+          "Puntas de cúspides de soporte en fosas centrales en máxima intercuspidación"
+        ],
+        "correcta": 1,
+        "explicacion": "En el lado mediotrusivo esas vertientes pueden chocar. Los otros contactos son guías o contactos normales de cierre."
+      },
+      {
+        "id": "m13-p16",
+        "q": "Según los determinantes de la morfología oclusal, si la trayectoria condílea es más empinada, ¿qué ocurre con las cúspides posteriores?",
+        "opciones": [
+          "Deben ser más bajas",
+          "Deben eliminarse en la restauración",
+          "Pueden ser más altas sin interferir",
+          "No hay relación entre ambas"
+        ],
+        "correcta": 2,
+        "explicacion": "Una guía condílea más inclinada separa más los posteriores al moverse, lo que permite cúspides más altas."
+      },
+      {
+        "id": "m13-p17",
+        "q": "¿Dónde se localiza el espacio primate en el maxilar?",
+        "opciones": [
+          "Entre el canino y el primer molar temporal",
+          "Entre el primer y el segundo molar temporal",
+          "Entre el incisivo lateral y el canino temporal",
+          "Entre los incisivos centrales"
+        ],
+        "correcta": 2,
+        "explicacion": "En el maxilar está mesial al canino; en la mandíbula, distal al canino."
+      },
+      {
+        "id": "m13-p18",
+        "q": "Un niño de 5 años presenta escalón distal bilateral en sus segundos molares temporales. ¿Qué relación molar permanente es más probable si no se interviene?",
+        "opciones": [
+          "Clase II",
+          "Clase I",
+          "Clase III",
+          "Mordida en tijera"
+        ],
+        "correcta": 0,
+        "explicacion": "El escalón distal guía la erupción del primer molar permanente hacia distoclusión."
+      },
+      {
+        "id": "m13-p19",
+        "q": "Una niña de 9 años tiene diastema entre los centrales superiores y laterales en abanico, con caninos temporales presentes y clase I molar. ¿Qué explica mejor este cuadro?",
+        "opciones": [
+          "Maloclusión clase III en desarrollo",
+          "Fase del patito feo, transitoria en la dentición mixta",
+          "Pérdida del espacio de deriva",
+          "Mordida cruzada posterior con desviación funcional"
+        ],
+        "correcta": 1,
+        "explicacion": "Las coronas de los caninos en formación presionan las raíces de los laterales; el diastema suele reducirse al erupcionar los caninos."
+      },
+      {
+        "id": "m13-p20",
+        "q": "Durante el examen oclusal encuentras un contacto en el lado de no trabajo en un paciente sin síntomas ni daño dentario asociado. ¿Qué conducta es la más prudente?",
+        "opciones": [
+          "Desgastarlo de inmediato para prevenir un trastorno temporomandibular",
+          "Indicar extracción del diente afectado",
+          "Colocar una corona nueva con contactos de balance",
+          "Registrarlo, vigilarlo y no hacer ajustes irreversibles sin diagnóstico completo"
+        ],
+        "correcta": 3,
+        "explicacion": "El ajuste oclusal es irreversible y no se recomienda como prevención rutinaria. Documentar y vigilar es la conducta prudente en ausencia de síntomas."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Management of Temporomandibular Disorders and Occlusion, 8.ª edición",
+      "autor": "Okeson J. P. (Elsevier)",
+      "anio": 2019
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+      "autor": "Nelson S. J. (Elsevier)",
+      "anio": 2020
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Contemporary Orthodontics, 6.ª edición",
+      "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)",
+      "anio": 2019
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Studies in the mobility of the human mandible (Acta Odontologica Scandinavica, suplemento)",
+      "autor": "Posselt U.",
+      "anio": 1952
+    },
+    {
+      "tipo": "propia",
+      "titulo": "Elaboración propia OdonTeck con base en Okeson, Nelson (Wheeler's), Proffit, Angle, Posselt y Baume",
+      "autor": "OdonTeck",
+      "anio": 2026
+    }
+  ]
+}

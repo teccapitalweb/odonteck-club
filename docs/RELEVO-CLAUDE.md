@@ -56,14 +56,28 @@ Demo local sin `VITE_API_URL`:
 - puede contener ranking, publicaciones editoriales, casos o flashcards que aún no son datos remotos;
 - sirve para diseño, no como prueba de producción.
 
+### Academia (rama feat/academia, PR pendiente)
+
+Lectura por módulos tipo Cisco Academy, réplica de la de Élite Pecuario con el diseño de OdonTeck. Plan y estándar en `docs/PLAN-ACADEMIA.md`, `docs/ACADEMIA-FORMATO.md` y `docs/ACADEMIA-BRIEF-AGENTES.md`.
+
+- **Catálogo:** 6 programas, 84 módulos (`api/content/academia/catalogo.json`).
+- **Escritos (borrador):** `caries-dental` (12 módulos, revisión en `docs/ACADEMIA-REVISION-CARIES.md`) y `anatomia-dental` (14 módulos, revisados por 3 agentes, pendientes en `docs/ACADEMIA-REVISION-ANATOMIA.md`). Los otros 4 programas aún no tienen módulos. En demo, Admin → Academia → «Modo revisor» abre todos los módulos.
+- **API:** `api/src/routes/academia.js`. Colecciones `v2_academia_progreso`, `v2_academia_intentos`, `v2_academia_certificados` y `v2_academia_revisiones`.
+- **Examen:** se califica en el servidor; aprueba con 70 % y hay una espera de 3 min tras reprobar.
+- **Acceso:** el módulo 1 de cada programa es gratuito; el resto requiere VIP.
+- **Certificado:** al aprobar todo el programa se emite con el folio ODT de siempre, verificable en `/verificar/:folio`.
+- **Visibilidad:** solo los módulos con estado efectivo «aprobado» son visibles; el admin aprueba en **Admin → Academia**. `ACADEMIA_MOSTRAR_BORRADORES=true` muestra los borradores a todos y solo debe usarse en pruebas.
+- **Producción:** el bundle solo incluye el catálogo; el contenido de los módulos lo entrega la API.
+- **Scripts:** `npm run academia:validar -- <programa> --estricto` y los de imágenes en `scripts/academia/` (`importar-imagenes` requiere `sharp`, que no está instalado).
+
 ### Rendimiento (rama perf/arranque-cache-directorio)
 
-Trabajo local, sin fusionar ni desplegar:
+Fusionado y desplegado el 2026-10-15 (Cloudflare y Railway). Los índices del Directorio ya están en READY.
 
 - **Caché de verificación de token** (`api/src/middleware/auth.js`): sólo para `GET` de miembro; dura como máximo 5 minutos o hasta el `exp` del token. Nunca se usa para escrituras, `/admin/*`, `GET /materiales/:id/descarga` ni `GET /clases/:cursoId/:n/ficha` (emiten URLs firmadas), ni para usuarios con claim admin. Un rechazo en vivo deja una lápida para que una verificación más antigua no vuelva a cachear un token revocado, y los `GET` simultáneos del mismo token comparten una sola verificación.
 - **API**: `compression` y CORS `maxAge` de 7200 s; lecturas independientes en paralelo (en `prepararClase` se esperan en orden para conservar 404 > 403 > 500) y `tx.getAll` en las recompensas transaccionales. `GET /foro` sin filtro conserva el tope de 300 temas.
 - **Cliente**: arranque en paralelo y caché de 60 s de Directorio y Comunidad (`src/core/remoto.ts`).
-- **Índices**: los compuestos del Directorio (`api/firestore.indexes.json`) siguen pendientes de crear en la consola de Firebase; mientras falten, la API hace un escaneo de respaldo acotado, más lento pero con el mismo resultado.
+- **Índices**: los compuestos del Directorio (`api/firestore.indexes.json`) se crearon el 2026-10-15 con `firebase-tools deploy --only firestore:indexes`; están en READY.
 - **Estáticos**: `public/_headers` sirve `/assets/*` como inmutables (un año); `/`, `index.html` y `sw.js` van con `no-cache`.
 
 ## 4. Materiales y lector

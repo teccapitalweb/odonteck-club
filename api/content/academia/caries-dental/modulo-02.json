@@ -1,0 +1,1494 @@
+{
+  "programa": "caries-dental",
+  "modulo": 2,
+  "titulo": "Estructura dental, saliva y el equilibrio entre desmineralización y remineralización",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Para entender por qué un diente pierde o recupera mineral necesitas conocer el escenario completo: un esmalte muy mineralizado pero sin células, una dentina viva atravesada por túbulos, y una saliva que defiende al diente minuto a minuto. En este módulo estudiarás la composición de los tejidos dentarios, las funciones protectoras de la saliva y cómo medir su flujo, la química de la desmineralización y la remineralización, y por qué una lesión inicial puede detenerse. Es el puente entre la causa de la caries y todas las medidas preventivas del programa.",
+  "objetivos": [
+    "Describir la composición y la organización del esmalte, la dentina y el cemento, y relacionarlas con su susceptibilidad a los ácidos.",
+    "Explicar las funciones protectoras de la saliva frente a la caries y distinguir entre xerostomía e hiposalivación.",
+    "Calcular e interpretar la tasa de flujo salival a partir de una prueba sencilla.",
+    "Explicar la desmineralización y la remineralización en términos de saturación y pH crítico.",
+    "Reconocer la estructura de una lesión inicial de esmalte y justificar por qué puede detenerse."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m02/portada",
+    "proporcion": "16:9",
+    "alt": "Corte longitudinal de un molar que muestra esmalte, dentina y pulpa, junto a gotas de saliva sobre la superficie dental.",
+    "prompt": "Ilustración realista de alta calidad, estilo fotografía de estudio científico, de un molar permanente inferior cortado longitudinalmente sobre fondo azul petróleo oscuro: se distinguen el esmalte blanco translúcido de la corona, la dentina color marfil con textura fina, la cámara pulpar rosada y los conductos de las dos raíces, con pequeñas gotas brillantes de líquido transparente sobre la superficie oclusal, iluminación lateral suave que resalta las capas, composición horizontal con espacio libre a la izquierda. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, anatomía incorrecta, número equivocado de raíces."
+  },
+  "temas": [
+    {
+      "n": "2.1",
+      "titulo": "El esmalte: el tejido más mineralizado del cuerpo",
+      "minutos": 13,
+      "enPocasPalabras": "El esmalte es la capa externa y más dura del diente. Está hecho casi por completo de cristales minerales y no tiene células, así que no puede regenerarse como un hueso. Lo que sí puede hacer es perder y recuperar mineral en su superficie todos los días.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El esmalte cubre la corona del diente y es el primer tejido que enfrenta los ácidos de la biopelícula. Es el tejido más mineralizado y más duro del cuerpo humano: alrededor del **96 % de su peso es mineral**, y el resto es agua y una pequeña fracción de materia orgánica. Su grosor varía según la zona; es máximo en las cúspides de los molares, donde puede rondar los dos milímetros y medio, y se adelgaza hasta casi desaparecer en la unión con el cemento.\n\nA diferencia del hueso, el esmalte maduro **no tiene células**. Lo forman los ameloblastos durante el desarrollo, y estas células desaparecen cuando el diente hace erupción. Por eso el esmalte no puede repararse por sí mismo con tejido nuevo. Sin embargo, no es un material inerte: su superficie intercambia iones con la saliva y la placa de forma continua, y ese intercambio es la base de todo lo que estudiarás en este módulo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/01",
+          "proporcion": "4:3",
+          "alt": "Superficie vestibular de incisivos superiores sanos con esmalte brillante y translúcido en el borde incisal.",
+          "pie": "El esmalte sano es liso, brillante y ligeramente translúcido, sobre todo en los bordes incisales, donde no hay dentina debajo.",
+          "prompt": "Fotografía clínica macro de los incisivos centrales y laterales superiores permanentes de un adulto joven, vista frontal con labios separados por retractor transparente, esmalte sano, liso y brillante con leve translucidez azulada en los bordes incisales, finas líneas horizontales naturales en la superficie, encía sana rosa pálido con festoneado regular, iluminación difusa con flash anular, colores naturales, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, manchas o caries, carillas artificiales, rostro visible, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cristales de hidroxiapatita"
+        },
+        {
+          "tipo": "texto",
+          "md": "El mineral del esmalte es una **hidroxiapatita** de calcio, cuya fórmula ideal es Ca₁₀(PO₄)₆(OH)₂. En el diente real esa apatita nunca es pura: contiene **carbonato**, magnesio y sodio que sustituyen parte de sus iones. Estas impurezas son importantes, porque el carbonato y el magnesio hacen al cristal más soluble en ácido. Cuando el **fluoruro** ocupa el lugar del grupo hidroxilo se forma una apatita fluorada, menos soluble.\n\nLos cristales del esmalte son largos y delgados, mucho más grandes que los de la dentina o el hueso. Se agrupan por miles en estructuras llamadas **prismas** o varillas, que recorren el espesor del esmalte desde la unión con la dentina hasta la superficie. Entre los prismas queda el **esmalte interprismático**, con cristales orientados en otra dirección. Los espacios diminutos entre cristales, llenos de agua y material orgánico, forman una red de **poros** por donde se difunden los ácidos y los iones. Esa porosidad es la puerta de entrada de la caries y también la de la remineralización."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m02/d1",
+          "pie": "Organización del esmalte desde el cristal hasta el diente completo.",
+          "descripcion": "Diagrama en cuatro niveles de zoom unidos por líneas de ampliación, de izquierda a derecha: corte de una corona con la capa de esmalte resaltada; bloque de esmalte con prismas paralelos que van de la unión amelodentinaria a la superficie; corte transversal de varios prismas con forma de ojo de cerradura y el esmalte interprismático entre ellos; y un cristal hexagonal alargado de hidroxiapatita con espacios de poro alrededor.",
+          "elementos": [
+            "Esmalte",
+            "Unión amelodentinaria",
+            "Prisma",
+            "Esmalte interprismático",
+            "Cristal de hidroxiapatita",
+            "Poros entre cristales"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Sustituciones iónicas y solubilidad",
+          "md": "La red cristalina de la apatita admite sustituciones. El **carbonato** puede reemplazar al fosfato o al hidroxilo y distorsiona la red, lo que aumenta la solubilidad; el esmalte recién erupcionado, más rico en carbonato, es más vulnerable que el esmalte de un adulto. El **magnesio** también favorece la disolución. El **fluoruro**, en cambio, se ajusta mejor en el canal del hidroxilo y estabiliza la red: la fluorapatita y la hidroxiapatita fluorada se disuelven a un pH más bajo. Durante los ciclos repetidos de disolución y reprecipitación, los cristales tienden a perder carbonato y a incorporar fluoruro si está disponible, de modo que la superficie puede volverse más resistente con el tiempo. Sin embargo, la cantidad de fluoruro incorporada al cristal explica solo una parte del efecto preventivo: lo decisivo es el fluoruro presente en los líquidos de la placa y la saliva durante el ataque ácido, tema del módulo 5."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Superficie, maduración y variaciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "La capa más externa del esmalte suele estar más mineralizada y contener más fluoruro que las capas internas, porque es la que más intercambio tiene con el medio bucal. En su superficie se observan las **periquimatías**, finas líneas horizontales que corresponden a los incrementos de formación, más marcadas en dientes jóvenes. Con los años, el desgaste y la incorporación de iones vuelven la superficie más lisa.\n\nCuando un diente acaba de hacer erupción, su esmalte todavía está en **maduración posteruptiva**: es más poroso y más rico en carbonato, y por eso es especialmente vulnerable durante los primeros años en boca. Este dato explica por qué los molares permanentes recién erupcionados de niñas y niños de seis a ocho años, con fisuras profundas y difíciles de limpiar, son un blanco frecuente de la caries y un candidato natural para selladores, tema del módulo 6.\n\nEl grosor y la calidad del esmalte también varían entre personas. Defectos del desarrollo como la **hipoplasia** o la **hipomineralización**, por ejemplo la hipomineralización incisivo-molar, producen zonas más porosas o con menos esmalte que acumulan biopelícula y se desmineralizan con mayor facilidad."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/02",
+          "proporcion": "1:1",
+          "alt": "Vista oclusal de un primer molar permanente recién erupcionado con fisuras profundas y encía aún cubriendo parte de la cara distal.",
+          "pie": "Un primer molar permanente recién erupcionado: fisuras profundas y esmalte todavía en maduración, una combinación de alto riesgo.",
+          "prompt": "Fotografía clínica macro, vista oclusal de un primer molar inferior permanente recién erupcionado en la boca de un niño de unos siete años, con fosetas y fisuras profundas y estrechas, esmalte limpio y brillante, un pequeño opérculo de encía rosada sobre la parte distal de la corona, molares temporales visibles al lado, espejo bucal en el borde del encuadre sostenido por mano con guante, luz de lámpara dental uniforme, encuadre cuadrado. Evitar: texto, flechas, logotipos, marcas de agua, sangre, caries cavitadas, rostro, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El esmalte de los dientes temporales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los dientes temporales tienen un esmalte **más delgado**, de alrededor de la mitad del grosor que en los permanentes, y en general algo menos mineralizado y más poroso. Su cámara pulpar es proporcionalmente más grande y sus cuernos pulpares están más cerca de la superficie. El resultado práctico es que una lesión que en un diente permanente tardaría años en llegar a la dentina puede hacerlo mucho más rápido en un diente temporal, y alcanzar la pulpa en poco tiempo.\n\nEsto explica por qué las lesiones en niñas y niños pequeños deben detectarse y controlarse pronto, y por qué la idea de que los dientes de leche «no importan porque se van a caer» es tan dañina. Los dientes temporales mantienen el espacio para los permanentes, permiten masticar y hablar, y una infección en ellos puede afectar al germen del diente permanente que se forma debajo. El manejo de la caries en la infancia se estudia en el módulo 10."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "¿Por qué una mancha blanca se ve blanca?",
+          "md": "El esmalte sano es translúcido porque sus cristales están muy compactos y la luz lo atraviesa con poca dispersión. Cuando se pierde mineral, los poros se agrandan y se llenan de agua o de aire, que desvían la luz de manera distinta que el mineral. El resultado es una superficie opaca y blanquecina. El aire desvía la luz todavía más que el agua; por eso una lesión inicial que no se ve con el diente húmedo aparece al secarlo con aire unos segundos. Ese principio óptico es la base del examen visual que estudiarás en el módulo 4."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Comparación de los tejidos duros del diente",
+          "columnas": [
+            "Característica",
+            "Esmalte",
+            "Dentina",
+            "Cemento"
+          ],
+          "filas": [
+            [
+              "Mineral (peso aproximado)",
+              "Alrededor de 96 %",
+              "Alrededor de 70 %",
+              "Alrededor de 45 a 50 %"
+            ],
+            [
+              "Matriz orgánica principal",
+              "Mínima, proteínas no colágenas",
+              "Colágeno tipo I",
+              "Colágeno tipo I"
+            ],
+            [
+              "Células",
+              "No tiene",
+              "Prolongaciones de odontoblastos en los túbulos",
+              "Cementocitos en el cemento celular"
+            ],
+            [
+              "Capacidad de reacción",
+              "Solo intercambio iónico en superficie",
+              "Forma dentina nueva y esclerosa",
+              "Depósito continuo y lento"
+            ],
+            [
+              "Susceptibilidad al ácido",
+              "Menor",
+              "Mayor",
+              "Mayor"
+            ]
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada estructura con su descripción",
+          "instruccion": "Une cada término con la descripción que le corresponde.",
+          "pares": [
+            {
+              "a": "Hidroxiapatita",
+              "b": "Mineral de fosfato de calcio que forma los cristales del esmalte"
+            },
+            {
+              "a": "Prisma del esmalte",
+              "b": "Haz de miles de cristales que va de la unión con la dentina a la superficie"
+            },
+            {
+              "a": "Ameloblasto",
+              "b": "Célula que forma el esmalte y desaparece al hacer erupción el diente"
+            },
+            {
+              "a": "Periquimatías",
+              "b": "Líneas horizontales finas de la superficie que reflejan incrementos de formación"
+            },
+            {
+              "a": "Carbonato en la apatita",
+              "b": "Sustitución que aumenta la solubilidad del cristal en ácido"
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/03",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de prismas de esmalte vistos al microscopio con forma de ojo de cerradura.",
+          "pie": "Los prismas del esmalte, vistos en corte, tienen forma de ojo de cerradura y están rodeados de esmalte interprismático.",
+          "prompt": "Ilustración científica realista estilo micrografía electrónica de barrido en escala de grises con un ligero tono marfil, vista en corte transversal de esmalte dental grabado que muestra decenas de prismas con forma de ojo de cerradura ordenados en filas, separados por esmalte interprismático con cristales orientados en otra dirección, relieve marcado por iluminación lateral, composición vertical, alta nitidez. Evitar: texto, barras de escala, etiquetas, flechas, logotipos, marcas de agua, colores artificiales saturados, aspecto de caricatura."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando un paciente pregunte si el esmalte «se regenera», responde con precisión: el esmalte no vuelve a crecer, pero su superficie puede recuperar mineral si se le da tiempo entre ataques ácidos, saliva suficiente y fluoruro. Esa explicación evita dos errores frecuentes, el fatalismo de pensar que nada se puede hacer y la promesa falsa de que un producto «reconstruye» el esmalte perdido."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Hidroxiapatita",
+          "definicion": "Mineral de fosfato de calcio, Ca₁₀(PO₄)₆(OH)₂, que forma los cristales del esmalte, la dentina, el cemento y el hueso."
+        },
+        {
+          "termino": "Prisma del esmalte",
+          "definicion": "Unidad estructural del esmalte formada por miles de cristales agrupados que recorren su espesor."
+        },
+        {
+          "termino": "Ameloblasto",
+          "definicion": "Célula que produce el esmalte durante el desarrollo del diente y que se pierde tras la erupción."
+        },
+        {
+          "termino": "Maduración posteruptiva",
+          "definicion": "Cambios en la composición del esmalte después de la erupción, por intercambio iónico con el medio bucal, que lo vuelven menos soluble."
+        },
+        {
+          "termino": "Periquimatías",
+          "definicion": "Líneas horizontales finas en la superficie del esmalte que corresponden a los incrementos de su formación."
+        },
+        {
+          "termino": "Porosidad del esmalte",
+          "definicion": "Red de espacios microscópicos entre cristales por donde se difunden agua, ácidos e iones."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.1-1",
+          "q": "¿Qué proporción aproximada del peso del esmalte es mineral?",
+          "opciones": [
+            "Alrededor de 45 %",
+            "Alrededor de 70 %",
+            "Alrededor de 96 %",
+            "Alrededor de 20 %"
+          ],
+          "correcta": 2,
+          "explicacion": "El esmalte es el tejido más mineralizado del cuerpo, con alrededor del 96 % de mineral en peso."
+        },
+        {
+          "id": "t2.1-2",
+          "q": "¿Qué sustitución iónica hace más soluble a la apatita del esmalte?",
+          "opciones": [
+            "La de carbonato",
+            "La de fluoruro",
+            "Ninguna sustitución cambia la solubilidad",
+            "La de oxígeno"
+          ],
+          "correcta": 0,
+          "explicacion": "El carbonato distorsiona la red y aumenta la solubilidad; el fluoruro la disminuye."
+        },
+        {
+          "id": "t2.1-3",
+          "q": "¿Por qué los molares permanentes recién erupcionados son especialmente vulnerables a la caries?",
+          "opciones": [
+            "Porque tienen más ameloblastos activos",
+            "Porque no tienen dentina",
+            "Porque su esmalte contiene más fluoruro",
+            "Porque su esmalte aún madura, es más poroso y sus fisuras son profundas y difíciles de limpiar"
+          ],
+          "correcta": 3,
+          "explicacion": "La maduración posteruptiva incompleta y la anatomía de las fisuras favorecen la retención de biopelícula y la desmineralización."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+          "anio": 2015
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología dental y química de la apatita",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "2.2",
+      "titulo": "Dentina, pulpa y cemento: tejidos que reaccionan",
+      "minutos": 13,
+      "enPocasPalabras": "Debajo del esmalte está la dentina, un tejido vivo atravesado por miles de tubitos que se comunican con el nervio del diente. Cuando la caries llega a la dentina, el diente se defiende formando más tejido, pero la dentina se daña más rápido que el esmalte. Las raíces están cubiertas por cemento, que también es más blando.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si el esmalte es una coraza sin células, la dentina es un tejido **vivo**. Forma la mayor parte del diente, sostiene al esmalte en la corona y al cemento en la raíz, y rodea a la pulpa. Dentina y pulpa nacen del mismo tejido embrionario y funcionan como una unidad, por eso se habla del **complejo dentinopulpar**: lo que le pasa a la dentina repercute en la pulpa, y la pulpa responde formando nueva dentina.\n\nEn peso, la dentina tiene alrededor de **70 % de mineral**, 20 % de materia orgánica, sobre todo colágeno tipo I, y 10 % de agua. Sus cristales de apatita son mucho más pequeños que los del esmalte y más ricos en carbonato. Esa combinación de cristales pequeños, más carbonato y más matriz orgánica la hace más blanda y **más soluble en ácido**: la dentina empieza a disolverse a un pH más alto que el esmalte."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/04",
+          "proporcion": "3:4",
+          "alt": "Corte longitudinal de un premolar extraído que muestra esmalte, dentina, cámara pulpar y conducto radicular.",
+          "pie": "Corte longitudinal de un premolar: el esmalte cubre la corona, la dentina forma el cuerpo del diente y rodea a la pulpa.",
+          "prompt": "Fotografía macro de estudio, vertical, de un premolar superior permanente extraído y cortado longitudinalmente en sentido vestíbulo palatino, pulido y limpio, colocado sobre fondo negro mate: se aprecian el esmalte blanco translúcido en la corona, la dentina color marfil con textura fina, la cámara pulpar vacía y dos conductos radiculares estrechos, la raíz cubierta por una capa delgada más opaca, iluminación lateral suave que resalta las capas, enfoque nítido. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, restos de tejido blando, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una red de túbulos"
+        },
+        {
+          "tipo": "texto",
+          "md": "La característica más distintiva de la dentina son los **túbulos dentinarios**: conductos microscópicos que la atraviesan desde la pulpa hasta la unión con el esmalte o el cemento. Dentro de ellos se alojan las prolongaciones de los **odontoblastos**, las células que forman la dentina y cuyos cuerpos se ubican en la periferia de la pulpa, además de líquido tisular. Cerca de la pulpa hay muchos más túbulos por milímetro cuadrado y son más anchos que cerca del esmalte, por eso la dentina profunda es más permeable.\n\nLos túbulos explican dos hechos clínicos. Primero, que la dentina expuesta pueda doler ante el frío, el aire o lo dulce: según la **teoría hidrodinámica**, los estímulos mueven el líquido de los túbulos y ese movimiento activa las fibras nerviosas de la pulpa. Segundo, que los ácidos y los productos bacterianos que llegan a la dentina puedan afectar a la pulpa aunque la lesión todavía esté lejos de ella."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m02/d2",
+          "pie": "El complejo dentinopulpar y sus respuestas defensivas ante la caries.",
+          "descripcion": "Corte esquemático de una corona con una lesión cariosa en la superficie oclusal que avanza en forma de cono hacia la dentina. Debajo de la lesión, la dentina muestra túbulos paralelos que llegan a la pulpa; una zona de túbulos obliterados aparece como dentina esclerosa; en la pared pulpar, frente a la lesión, una capa de dentina terciaria; y en la pulpa, la hilera de odontoblastos con sus prolongaciones dentro de los túbulos.",
+          "elementos": [
+            "Esmalte",
+            "Dentina",
+            "Túbulos dentinarios",
+            "Dentina esclerosa",
+            "Dentina terciaria",
+            "Odontoblastos",
+            "Pulpa"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se defiende el complejo dentinopulpar"
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentina no es un tejido pasivo. A lo largo de la vida, los odontoblastos siguen formando **dentina secundaria** de manera lenta y continua, lo que reduce poco a poco el tamaño de la cámara pulpar; por eso en las radiografías de personas mayores la pulpa se ve más pequeña. Cuando hay una agresión, como una lesión cariosa, un desgaste o un procedimiento, se forma **dentina terciaria** justo frente a la zona afectada. Si los odontoblastos originales sobreviven, la dentina terciaria se llama **reaccional**; si mueren y son sustituidos por nuevas células derivadas de la pulpa, se forma dentina **reparativa**, de estructura más irregular.\n\nOtra defensa es la **esclerosis dentinaria**: los túbulos situados por delante de la lesión se van llenando de mineral, lo que reduce la permeabilidad y frena la difusión de ácidos y bacterias. Estas respuestas explican por qué una lesión de avance lento suele dar tiempo a la pulpa para protegerse, mientras que una lesión rápida puede alcanzarla antes de que se forme una barrera eficaz."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Tipos de dentina según el momento en que se forman",
+          "items": [
+            "**Dentina primaria:** se forma durante el desarrollo del diente, hasta que la raíz termina de formarse.",
+            "**Dentina secundaria:** se deposita de forma lenta y continua durante toda la vida, en toda la pared de la cámara pulpar.",
+            "**Dentina terciaria:** se forma solo frente a un estímulo, como caries, desgaste, traumatismo o un procedimiento; puede ser reaccional o reparativa."
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando la lesión alcanza la dentina"
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentina empieza a reaccionar antes de que la lesión de esmalte la alcance físicamente: los ácidos y otras señales que se difunden a través del esmalte poroso estimulan a los odontoblastos, que inician la esclerosis y la formación de dentina terciaria. Por eso, en una lesión de esmalte no cavitada, la dentina subyacente suele mostrar cambios **reactivos** más que una invasión bacteriana masiva. La desmineralización de la dentina sigue la dirección de los túbulos por debajo del área de esmalte afectada.\n\nCuando la superficie se rompe y se forma una cavidad, la biopelícula penetra en el tejido y la situación cambia. En una lesión cavitada de dentina suele distinguirse una capa externa muy reblandecida, desorganizada y con muchas bacterias, y una capa más profunda desmineralizada pero con su red de colágeno todavía conservada y pocas bacterias. Esta diferencia es la base de las estrategias de remoción selectiva que estudiarás en el módulo 8: la capa profunda puede conservarse y sellarse, porque conserva potencial de remineralización."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La dentina profunda merece respeto",
+          "md": "Cerca de la pulpa, la dentina tiene más túbulos y más anchos, por lo que es mucho más permeable. Por eso, en lesiones profundas, la odontología actual evita retirar de forma agresiva toda la dentina afectada cerca de la pulpa y prefiere estrategias de remoción selectiva y sellado, que estudiarás en el módulo 8. Cualquier procedimiento sobre dentina profunda se realiza con aislamiento, bioseguridad y criterio profesional."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/05",
+          "proporcion": "16:9",
+          "alt": "Ilustración realista de túbulos dentinarios abiertos vistos al microscopio, como pequeños orificios circulares.",
+          "pie": "Los túbulos dentinarios, vistos en corte transversal, aparecen como pequeños orificios; cerca de la pulpa son más numerosos y anchos.",
+          "prompt": "Ilustración científica realista estilo micrografía electrónica de barrido en tonos grises cálidos, vista de una superficie de dentina cortada en sentido transversal que muestra cientos de orificios circulares de túbulos dentinarios distribuidos de forma regular, cada uno rodeado por un anillo de dentina peritubular más densa, algunos túbulos parcialmente obliterados por depósitos minerales, composición horizontal, iluminación lateral que da relieve, alta nitidez. Evitar: texto, barras de escala, etiquetas, flechas, logotipos, marcas de agua, colores artificiales, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El cemento y la raíz expuesta"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **cemento** cubre la dentina de la raíz y sirve de anclaje a las fibras del ligamento periodontal. Es un tejido delgado, con alrededor de 45 a 50 % de mineral, y en algunas zonas contiene células llamadas cementocitos. Mientras la raíz está cubierta por la encía y el hueso, el cemento no está expuesto a la biopelícula ni a los azúcares. Cuando hay **recesión gingival**, por enfermedad periodontal, cepillado traumático o simplemente con la edad, el cemento y la dentina radicular quedan al descubierto.\n\nEsa superficie es mucho más vulnerable que el esmalte: se desmineraliza a un pH más alto, su matriz de colágeno puede degradarse una vez que el mineral se pierde y el cemento se desgasta con facilidad, dejando la dentina expuesta. La caries radicular es un problema creciente en personas mayores que conservan sus dientes, y se estudia con detalle en el módulo 11."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El papel del colágeno en la caries de dentina",
+          "md": "En el esmalte, la caries es casi solo un proceso de disolución mineral. En la dentina, después de que el ácido disuelve el mineral, queda expuesta la red de colágeno. Enzimas presentes en la propia dentina, como las metaloproteinasas de matriz, y enzimas bacterianas pueden degradar ese colágeno. Por eso la dentina cariada se ablanda y por qué la dentina desmineralizada pero con colágeno conservado tiene potencial de remineralizarse, un concepto clave para la odontología mínimamente invasiva."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Verdadero o falso: dentina, pulpa y cemento",
+          "afirmaciones": [
+            {
+              "texto": "La dentina tiene más mineral que el esmalte.",
+              "verdadero": false,
+              "explicacion": "La dentina tiene alrededor de 70 % de mineral y el esmalte alrededor de 96 %."
+            },
+            {
+              "texto": "Los túbulos dentinarios contienen prolongaciones de los odontoblastos.",
+              "verdadero": true,
+              "explicacion": "Los cuerpos de los odontoblastos están en la periferia de la pulpa y sus prolongaciones entran en los túbulos."
+            },
+            {
+              "texto": "La dentina terciaria se forma frente a una agresión como una lesión cariosa.",
+              "verdadero": true,
+              "explicacion": "Es una respuesta defensiva localizada, reaccional o reparativa según sobrevivan o no los odontoblastos originales."
+            },
+            {
+              "texto": "La raíz expuesta es menos vulnerable a la caries que el esmalte.",
+              "verdadero": false,
+              "explicacion": "El cemento y la dentina radicular se disuelven a un pH más alto y tienen más matriz orgánica, por lo que son más vulnerables."
+            },
+            {
+              "texto": "La esclerosis dentinaria reduce la permeabilidad de la dentina.",
+              "verdadero": true,
+              "explicacion": "Los túbulos se llenan de mineral y frenan la difusión de ácidos y bacterias hacia la pulpa."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/06",
+          "proporcion": "4:3",
+          "alt": "Caninos y premolares inferiores de un adulto mayor con recesión de encía y raíces expuestas de color amarillento.",
+          "pie": "La recesión gingival expone cemento y dentina radicular, superficies más vulnerables a la caries que el esmalte.",
+          "prompt": "Fotografía clínica realista de la zona de caninos y premolares inferiores de un adulto mayor, vista vestibular con labio retraído por un retractor transparente, recesión gingival que deja expuestos unos tres milímetros de raíz de color amarillento, esmalte coronal con desgaste leve y sin cavidades, encía rosa pálido firme sin inflamación, iluminación uniforme de lámpara dental, colores naturales, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, inflamación exagerada, rostro visible, caries cavitadas, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en cada revisión de un adulto, busca de forma intencionada las raíces expuestas y anótalas en el expediente. Son superficies que requieren más atención preventiva y que el paciente suele desconocer; mostrárselas con un espejo de mano y explicarle que son más blandas que el esmalte ayuda a que cuide esas zonas con técnica de cepillado suave y exposición regular a pasta con flúor."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Complejo dentinopulpar",
+          "definicion": "Unidad funcional formada por la dentina y la pulpa, que comparten origen y responden juntas a las agresiones."
+        },
+        {
+          "termino": "Túbulo dentinario",
+          "definicion": "Conducto microscópico que atraviesa la dentina desde la pulpa y contiene la prolongación de un odontoblasto y líquido."
+        },
+        {
+          "termino": "Odontoblasto",
+          "definicion": "Célula de la periferia de la pulpa que forma la dentina durante toda la vida del diente."
+        },
+        {
+          "termino": "Dentina terciaria",
+          "definicion": "Dentina que se forma frente a una agresión; es reaccional si la producen los odontoblastos originales y reparativa si la forman células nuevas."
+        },
+        {
+          "termino": "Esclerosis dentinaria",
+          "definicion": "Obliteración mineral de los túbulos que reduce la permeabilidad de la dentina."
+        },
+        {
+          "termino": "Teoría hidrodinámica",
+          "definicion": "Explicación de la sensibilidad dentinaria por el movimiento del líquido de los túbulos ante estímulos."
+        },
+        {
+          "termino": "Recesión gingival",
+          "definicion": "Desplazamiento de la encía hacia apical que deja expuesta la superficie de la raíz."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.2-1",
+          "q": "¿Por qué la dentina es más susceptible al ácido que el esmalte?",
+          "opciones": [
+            "Porque tiene más fluoruro",
+            "Porque tiene cristales más pequeños, más carbonato y más matriz orgánica",
+            "Porque no tiene túbulos",
+            "Porque está siempre expuesta a la saliva"
+          ],
+          "correcta": 1,
+          "explicacion": "Cristales pequeños y ricos en carbonato, con más matriz orgánica, se disuelven a un pH más alto."
+        },
+        {
+          "id": "t2.2-2",
+          "q": "¿Qué es la dentina reaccional?",
+          "opciones": [
+            "La dentina que se forma antes de la erupción",
+            "Dentina sin túbulos que solo existe en la raíz",
+            "Dentina terciaria formada por los odontoblastos originales frente a una agresión",
+            "La capa más externa del cemento"
+          ],
+          "correcta": 2,
+          "explicacion": "Es una forma de dentina terciaria producida por odontoblastos que sobrevivieron a la agresión."
+        },
+        {
+          "id": "t2.2-3",
+          "q": "¿Qué explica la teoría hidrodinámica?",
+          "opciones": [
+            "La sensibilidad de la dentina expuesta por el movimiento del líquido en los túbulos",
+            "La formación de la película adquirida",
+            "El flujo de saliva durante la masticación",
+            "La caída del pH tras consumir azúcar"
+          ],
+          "correcta": 0,
+          "explicacion": "Los estímulos mueven el líquido tubular y activan las fibras nerviosas de la pulpa."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+          "anio": 2015
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología y fisiología del complejo dentinopulpar",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "2.3",
+      "titulo": "La saliva: la defensa natural del diente",
+      "minutos": 14,
+      "enPocasPalabras": "La saliva limpia la boca, neutraliza los ácidos y le devuelve al diente el calcio y el fosfato que pierde. Cuando una persona produce poca saliva, por ejemplo por algunos medicamentos, la caries avanza mucho más rápido. Medir cuánta saliva produce alguien es sencillo y muy útil.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si la biopelícula y los azúcares son el motor de la caries, la saliva es su principal freno natural. Las personas con poca saliva desarrollan caries con una rapidez sorprendente, incluso en superficies que normalmente casi nunca se afectan, como los bordes incisales o las caras lisas de los dientes inferiores. Comprender la saliva te permite reconocer a esos pacientes a tiempo.\n\nUn adulto sano produce entre medio litro y litro y medio de saliva al día. La producen tres pares de **glándulas salivales mayores**, parótidas, submandibulares y sublinguales, además de cientos de glándulas menores repartidas en labios, paladar y mejillas. En reposo, las submandibulares aportan la mayor parte; al masticar o con estímulos gustativos, las parótidas aumentan mucho su contribución y la saliva se vuelve más fluida y más rica en bicarbonato. Durante el sueño el flujo cae casi a cero, lo que explica por qué los azúcares antes de dormir son tan dañinos."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/07",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica realista de perfil de cabeza y cuello que muestra la ubicación de las glándulas parótida, submandibular y sublingual.",
+          "pie": "Las tres glándulas salivales mayores: parótida, submandibular y sublingual.",
+          "prompt": "Ilustración anatómica médica realista, vista lateral de la cabeza y el cuello de un adulto con la piel parcialmente transparente, mostrando la glándula parótida delante de la oreja con su conducto cruzando la mejilla, la glándula submandibular bajo el borde de la mandíbula y la glándula sublingual en el piso de la boca, músculos y hueso mandibular en tonos suaves, estilo de atlas de anatomía, fondo blanco limpio, iluminación uniforme, rostro sin rasgos identificables. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, aspecto de caricatura, proporciones incorrectas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Funciones protectoras de la saliva"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Cómo protege la saliva al diente",
+          "items": [
+            "**Dilución y eliminación:** arrastra azúcares y ácidos hacia la deglución; a este proceso se le llama aclaramiento oral.",
+            "**Amortiguación:** el bicarbonato, principal sistema amortiguador sobre todo en la saliva estimulada, junto con los fosfatos y algunas proteínas, neutraliza los ácidos de la placa.",
+            "**Reservorio mineral:** la saliva está sobresaturada de calcio y fosfato respecto a la apatita del diente, lo que favorece la remineralización cuando el pH se recupera.",
+            "**Película adquirida:** sus proteínas forman sobre el esmalte una capa que frena la difusión de ácidos.",
+            "**Defensa antimicrobiana:** contiene lisozima, lactoferrina, el sistema de la peroxidasa, histatinas e inmunoglobulina A secretora.",
+            "**Vehículo de fluoruro:** transporta y mantiene en la boca el fluoruro que proviene de la pasta dental y otras fuentes."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Un detalle químico interesante: si la saliva está sobresaturada de calcio y fosfato, ¿por qué no se forman cristales por todas partes? Lo impiden proteínas como la **estaterina** y las proteínas ricas en prolina, que se unen a la superficie de los cristales e inhiben la precipitación espontánea. Así la saliva mantiene su reserva mineral disponible sin cubrir los dientes de depósitos, aunque cuando la biopelícula se mineraliza se forma el cálculo."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m02/d3",
+          "pie": "Las funciones de la saliva frente al ataque ácido.",
+          "descripcion": "Esquema central de una superficie de esmalte cubierta por biopelícula, con la saliva representada como una capa que fluye por encima. Seis flechas salen de la capa de saliva hacia rótulos alrededor: aclaramiento de azúcares, amortiguación con bicarbonato y fosfato, aporte de calcio y fosfato, película adquirida, defensa antimicrobiana y transporte de fluoruro. Un indicador de pH muestra cómo la saliva devuelve la placa de la zona ácida a la neutral.",
+          "elementos": [
+            "Aclaramiento",
+            "Bicarbonato y fosfato",
+            "Calcio y fosfato",
+            "Película adquirida",
+            "Defensa antimicrobiana",
+            "Fluoruro"
+          ]
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Saliva en reposo y saliva estimulada",
+          "columnas": [
+            "Característica",
+            "En reposo",
+            "Estimulada"
+          ],
+          "filas": [
+            [
+              "Cuándo predomina",
+              "Entre comidas y gran parte del día",
+              "Al masticar, con sabores ácidos o durante las comidas"
+            ],
+            [
+              "Glándula que más aporta",
+              "Submandibulares",
+              "Parótidas"
+            ],
+            [
+              "Bicarbonato y capacidad amortiguadora",
+              "Menores",
+              "Mayores"
+            ],
+            [
+              "Papel frente a la caries",
+              "Mantiene la película y la protección basal",
+              "Acelera la recuperación del pH tras comer"
+            ],
+            [
+              "Durante el sueño",
+              "Muy reducida",
+              "Prácticamente ausente"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Xerostomía e hiposalivación"
+        },
+        {
+          "tipo": "texto",
+          "md": "Conviene distinguir dos términos. La **xerostomía** es la sensación subjetiva de boca seca que refiere el paciente. La **hiposalivación** es la disminución objetiva y medible del flujo salival. No siempre coinciden: hay personas con sensación de boca seca y flujo normal, y personas con flujo reducido que no lo perciben.\n\nLas causas más frecuentes de hiposalivación son los **medicamentos**: muchos antidepresivos, antihistamínicos, ansiolíticos, antihipertensivos, diuréticos y fármacos con efecto anticolinérgico reducen la secreción, y el efecto se suma cuando una persona toma varios a la vez. Otras causas importantes son la **radioterapia** de cabeza y cuello, el **síndrome de Sjögren**, la diabetes mal controlada, la deshidratación y la respiración bucal. La edad por sí sola influye poco; la hiposalivación de las personas mayores se debe sobre todo a enfermedades y medicamentos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Hiposalivación: un paciente de riesgo muy alto",
+          "md": "Un paciente con flujo salival muy reducido puede desarrollar lesiones nuevas en pocos meses, en sitios atípicos como bordes incisales y caras lisas. Pregunta siempre por los medicamentos que toma y por antecedentes de radioterapia, y registra la sensación de boca seca. Nunca suspendas ni cambies un medicamento: si sospechas que causa hiposalivación, coméntalo con el paciente para que lo valore con su médico tratante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo medir el flujo salival"
+        },
+        {
+          "tipo": "texto",
+          "md": "Medir el flujo es sencillo y no requiere equipo especial. Para el **flujo en reposo**, el paciente, sentado y sin haber comido, bebido, fumado ni cepillado sus dientes durante al menos una hora, deja que la saliva se acumule en la boca y la escupe en un recipiente graduado durante un tiempo fijo, por ejemplo cinco minutos. Para el **flujo estimulado**, mastica una pastilla de parafina o una goma sin sabor y sin azúcar y escupe toda la saliva durante el tiempo indicado. El resultado se expresa en mililitros por minuto.\n\nComo referencia general, en la literatura suele considerarse hiposalivación un flujo en reposo menor de unos 0.1 mL por minuto o un flujo estimulado menor de alrededor de 0.5 a 0.7 mL por minuto. Los valores normales varían mucho entre personas y a lo largo del día, por lo que conviene repetir la medición en condiciones similares y valorarla junto con la historia clínica."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Caso ilustrativo: lesiones en sitios inesperados",
+          "md": "Una mujer de 58 años, que siempre tuvo pocas caries, acude con lesiones nuevas en los bordes incisales inferiores y en el cuello de varios dientes. Refiere que desde hace un año toma un antidepresivo y un medicamento para la presión, y que despierta con la boca muy seca. Su flujo en reposo medido en la consulta es muy bajo. Además, para aliviar la sequedad chupa caramelos durante el día. El plan no puede limitarse a restaurar: incluye explicarle la relación entre su boca seca y las lesiones, sustituir los caramelos por agua a sorbos o goma sin azúcar, reforzar el uso de fluoruro según indique su odontólogo, revisiones más frecuentes y la sugerencia de comentar la boca seca con su médico."
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando el flujo está reducido pero las glándulas conservan función, **estimular la saliva** ayuda: masticar alimentos firmes, beber agua con frecuencia y, cuando es adecuado, masticar goma sin azúcar después de comer. Cuando la función glandular está muy dañada, por ejemplo tras radioterapia, existen sustitutos de saliva y otras medidas que alivian los síntomas, y también fármacos estimulantes de la secreción que solo puede indicar el médico o el odontólogo tras valorar cada caso."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Calcula la tasa de flujo salival",
+          "instruccion": "Introduce el volumen de saliva recolectada y el tiempo de recolección. Compara el resultado con los valores de referencia del texto para flujo en reposo o estimulado, según la prueba que hayas hecho.",
+          "formula": "Flujo salival (mL/min) = volumen recolectado (mL) ÷ tiempo de recolección (min)",
+          "variables": [
+            {
+              "id": "volumen",
+              "etiqueta": "Volumen de saliva recolectado",
+              "valor": 4.5,
+              "unidad": "mL"
+            },
+            {
+              "id": "tiempo",
+              "etiqueta": "Tiempo de recolección",
+              "valor": 5,
+              "unidad": "minutos"
+            }
+          ],
+          "resultado": {
+            "expresion": "volumen / tiempo",
+            "etiqueta": "Tasa de flujo salival",
+            "unidad": "mL/min",
+            "decimales": 2
+          }
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/08",
+          "proporcion": "1:1",
+          "alt": "Tubo graduado con saliva sobre una bandeja clínica junto a un cronómetro y una pastilla de parafina.",
+          "pie": "Material para una prueba de flujo salival estimulado: recipiente graduado, cronómetro y parafina para masticar.",
+          "prompt": "Fotografía clínica realista, encuadre cuadrado, sobre una bandeja de acero inoxidable cubierta con campo desechable azul claro: un tubo cónico graduado transparente con algunos mililitros de líquido claro ligeramente espumoso, un vaso desechable pequeño, un cronómetro digital sin números legibles, una pastilla blanca de parafina y una mano con guante de nitrilo sosteniendo el tubo, luz blanca uniforme de consultorio, colores limpios, enfoque nítido. Evitar: texto, números legibles, etiquetas, logotipos, marcas de agua, sangre, manos sin guante, rostro."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/09",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección revisa con un paciente adulto la lista de medicamentos que este le muestra en una hoja.",
+          "pie": "Revisar los medicamentos del paciente es indispensable para identificar causas de hiposalivación.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental luminoso: una odontóloga con bata, cubrebocas y lentes de protección, sentada junto a un paciente adulto mayor que está de espaldas a la cámara en la unidad dental, ambos miran una hoja de papel y varias cajas de medicamento sin etiquetas legibles sobre una mesa auxiliar, gesto de conversación atenta, luz natural suave mezclada con luz de consultorio, colores naturales, profundidad de campo media. Evitar: texto legible, nombres de medicamentos, logotipos, marcas de agua, rostro identificable del paciente, manos sin guantes en contacto clínico."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** incorpora a tu historia clínica tres preguntas rápidas: «¿Siente la boca seca con frecuencia?», «¿Necesita beber agua para tragar alimentos secos?» y «¿Qué medicamentos toma de forma regular?». Si alguna respuesta es positiva, mide el flujo en la misma cita. Dejar el valor registrado te permitirá comparar en el futuro y justificar un plan preventivo más intenso."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Aclaramiento oral",
+          "definicion": "Eliminación de azúcares, ácidos y otras sustancias de la boca por la saliva y la deglución."
+        },
+        {
+          "termino": "Capacidad amortiguadora",
+          "definicion": "Capacidad de la saliva para neutralizar ácidos y resistir cambios de pH, sobre todo gracias al bicarbonato."
+        },
+        {
+          "termino": "Estaterina",
+          "definicion": "Proteína salival que evita la precipitación espontánea de fosfato de calcio y forma parte de la película adquirida."
+        },
+        {
+          "termino": "Xerostomía",
+          "definicion": "Sensación subjetiva de boca seca referida por el paciente."
+        },
+        {
+          "termino": "Hiposalivación",
+          "definicion": "Disminución objetiva y medible del flujo salival."
+        },
+        {
+          "termino": "Flujo salival estimulado",
+          "definicion": "Cantidad de saliva producida por minuto mientras se mastica una sustancia neutra como parafina."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.3-1",
+          "q": "¿Cuál es el principal sistema amortiguador de la saliva estimulada?",
+          "opciones": [
+            "La lisozima",
+            "La amilasa",
+            "La estaterina",
+            "El bicarbonato"
+          ],
+          "correcta": 3,
+          "explicacion": "El bicarbonato aumenta con la estimulación y es el principal amortiguador; fosfatos y proteínas contribuyen en menor medida."
+        },
+        {
+          "id": "t2.3-2",
+          "q": "¿Qué diferencia hay entre xerostomía e hiposalivación?",
+          "opciones": [
+            "Son exactamente lo mismo",
+            "La xerostomía es una sensación subjetiva y la hiposalivación es una disminución medible del flujo",
+            "La hiposalivación solo ocurre en niños",
+            "La xerostomía es un exceso de saliva"
+          ],
+          "correcta": 1,
+          "explicacion": "Pueden coexistir o no; por eso conviene medir el flujo además de preguntar por la sensación."
+        },
+        {
+          "id": "t2.3-3",
+          "q": "Un paciente recolecta 1.5 mL de saliva en reposo durante 5 minutos. ¿Cuál es su flujo?",
+          "opciones": [
+            "7.5 mL/min",
+            "0.3 mL/min",
+            "3.3 mL/min",
+            "1.5 mL/min"
+          ],
+          "correcta": 1,
+          "explicacion": "1.5 mL ÷ 5 min = 0.3 mL/min, un valor que no corresponde a hiposalivación en reposo según las referencias habituales."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "A review of saliva: normal composition, flow, and function",
+          "autor": "Humphrey S. P., Williamson R. T. (Journal of Prosthetic Dentistry)",
+          "anio": 2001
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Salivary flow patterns and the health of hard and soft oral tissues",
+          "autor": "Dawes C. (Journal of the American Dental Association)",
+          "anio": 2008
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The functions of human saliva: A review sponsored by the World Workshop on Oral Medicine VI",
+          "autor": "Dawes C., Pedersen A. M. L., Villa A. et al. (Archives of Oral Biology)",
+          "anio": 2015
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en literatura de fisiología salival y medición del flujo",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "2.4",
+      "titulo": "La química de la desmineralización",
+      "minutos": 14,
+      "enPocasPalabras": "El diente está hecho de un mineral que se disuelve cuando el ambiente se vuelve ácido. Al principio el daño ocurre por debajo de una superficie que sigue entera, como una mancha blanca. Por eso una caries inicial puede no verse si el diente está mojado.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Ya sabes que los ácidos de la biopelícula disuelven el mineral del diente. En este tema verás **por qué** ocurre, con la química básica necesaria para entender cualquier medida preventiva. No necesitas fórmulas complejas: basta con dos ideas, la **saturación** y el efecto del **pH** sobre el fosfato.\n\nCualquier mineral en contacto con un líquido tiende a un equilibrio. Si el líquido ya contiene tantos iones del mineral como puede mantener disueltos, se dice que está **saturado** y el mineral no se disuelve. Si contiene más, está **sobresaturado** y el mineral tiende a crecer o precipitar. Si contiene menos, está **subsaturado** y el mineral se disuelve. El líquido que rodea al esmalte, el de la placa y la saliva, normalmente está sobresaturado respecto a la hidroxiapatita: en condiciones de reposo, el diente no se disuelve."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué cambia cuando baja el pH"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando las bacterias producen ácido, aumentan los iones hidrógeno en el líquido de la placa. Esos iones se combinan con los iones fosfato y con los hidroxilos, que dejan de estar disponibles en la forma que forma parte del cristal. En términos prácticos, el líquido pasa de sobresaturado a **subsaturado** aunque la cantidad total de calcio y fosfato no haya cambiado. El pH en el que ocurre ese cambio es el **pH crítico**.\n\nA partir de ese momento, los ácidos se difunden por los poros del esmalte y disuelven los cristales, sobre todo los más ricos en carbonato. El calcio y el fosfato liberados se difunden hacia afuera. Cuando la saliva neutraliza el ácido y el pH sube de nuevo, el líquido vuelve a estar sobresaturado y parte de esos iones pueden depositarse otra vez sobre los cristales parcialmente disueltos: eso es la **remineralización**. La caries es el resultado de muchos ciclos en los que la pérdida supera a la ganancia."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m02/d4",
+          "pie": "Ciclo de desmineralización y remineralización según el pH de la placa.",
+          "descripcion": "Diagrama de dos mitades separadas por una línea horizontal del pH crítico. En la mitad inferior, con fondo cálido, un cristal de apatita libera iones calcio y fosfato hacia el líquido de la placa, con flechas hacia afuera y la leyenda de líquido subsaturado. En la mitad superior, con fondo frío, los iones calcio, fosfato y fluoruro regresan al cristal con flechas hacia dentro y la leyenda de líquido sobresaturado. Flechas laterales indican la caída del pH por los ácidos bacterianos y la recuperación por la saliva.",
+          "elementos": [
+            "pH crítico",
+            "Líquido subsaturado: desmineralización",
+            "Líquido sobresaturado: remineralización",
+            "Calcio",
+            "Fosfato",
+            "Fluoruro",
+            "Ácidos bacterianos"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Producto de actividad iónica y grado de saturación",
+          "md": "Formalmente, el grado de saturación de un líquido respecto a un mineral se expresa comparando el **producto de actividad iónica** de los iones que forman ese mineral con su **producto de solubilidad**. Para la hidroxiapatita intervienen las actividades del calcio, del fosfato en su forma trivalente y del hidroxilo. Cuando el producto de actividad iónica supera al de solubilidad, el líquido está sobresaturado; cuando es menor, subsaturado. Al bajar el pH, el fosfato se protona y pasa de PO₄³⁻ a HPO₄²⁻ y H₂PO₄⁻, y disminuye la concentración de hidroxilo, de modo que el producto de actividad cae aunque el calcio y el fosfato totales sean los mismos. Por eso el pH crítico depende de las concentraciones de calcio y fosfato de cada persona. La fluorapatita tiene un producto de solubilidad menor, y un líquido puede estar subsaturado respecto a la hidroxiapatita y aún sobresaturado respecto a la fluorapatita: en esa ventana de pH el esmalte puede perder hidroxiapatita y ganar mineral fluorado al mismo tiempo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La lesión subsuperficial"
+        },
+        {
+          "tipo": "texto",
+          "md": "Algo que sorprende al estudiar la caries inicial es que la pérdida de mineral no ocurre de afuera hacia adentro como si se limara la superficie. Ocurre **por debajo** de una capa superficial que permanece relativamente mineralizada. A esta lesión se le llama **lesión subsuperficial** y es la que vemos clínicamente como mancha blanca.\n\nLa capa superficial se conserva porque es donde más se reprecipitan los iones que salen del interior y donde más fluoruro y proteínas salivales hay, lo que la hace menos soluble. Mientras esa capa permanezca íntegra, la lesión no es una cavidad y puede detenerse. Si la desmineralización continúa, la capa superficial termina por debilitarse y romperse, y aparece la **microcavidad** y luego la cavidad, que retiene biopelícula y acelera el proceso."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Zonas histológicas de la lesión inicial de esmalte",
+          "columnas": [
+            "Zona",
+            "Ubicación",
+            "Qué ocurre"
+          ],
+          "filas": [
+            [
+              "Superficial",
+              "Capa externa, relativamente íntegra",
+              "Pérdida de mineral pequeña por reprecipitación y mayor resistencia"
+            ],
+            [
+              "Cuerpo de la lesión",
+              "Debajo de la zona superficial",
+              "Mayor pérdida de mineral y porosidad; es la que se ve como mancha blanca"
+            ],
+            [
+              "Oscura",
+              "Por dentro del cuerpo",
+              "Poros muy pequeños; se interpreta como zona con algo de remineralización"
+            ],
+            [
+              "Translúcida",
+              "Frente de avance, la más profunda",
+              "Primer cambio detectable, con pérdida de mineral leve"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/10",
+          "proporcion": "4:3",
+          "alt": "Corte fino de esmalte bajo luz polarizada que muestra una lesión en forma de cuña con bandas de distinto tono.",
+          "pie": "Vista al microscopio de luz polarizada de una lesión inicial de esmalte: el cuerpo de la lesión queda bajo una capa superficial íntegra.",
+          "prompt": "Imagen realista de microscopía de luz polarizada de un corte delgado de esmalte dental, con una lesión de caries inicial en forma de cuña que se abre hacia la superficie, una banda superficial delgada y uniforme, un cuerpo de la lesión de tonos más brillantes y azulados, y bandas internas más oscuras y translúcidas hacia la profundidad, fondo de esmalte sano con estrías paralelas, colores de interferencia suaves, composición horizontal. Evitar: texto, barras de escala, etiquetas, flechas, logotipos, marcas de agua, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La misma química, distinta forma según la superficie"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como los ácidos avanzan siguiendo la dirección de los prismas, la forma de la lesión depende de la superficie donde se inicia. En las **superficies lisas**, como las caras vestibulares o las proximales, los prismas convergen hacia la dentina, y la lesión de esmalte adopta forma de cono con la base hacia la superficie y el vértice hacia la unión con la dentina. En **fosetas y fisuras**, la lesión comienza en las paredes a ambos lados de la fisura, donde la biopelícula se estanca, y las dos lesiones laterales se unen; como los prismas divergen hacia la dentina, el área de dentina comprometida puede ser más amplia que lo que se ve en la entrada de la fisura.\n\nEsta geometría tiene consecuencias clínicas. Una lesión oclusal puede parecer pequeña desde la superficie y, sin embargo, haber alcanzado la dentina, lo que se ve como una sombra gris bajo el esmalte. En las caras **proximales**, la lesión se inicia justo por debajo del punto de contacto, donde no llega la vista directa, y por eso su detección suele requerir separación de los dientes o radiografías de aleta de mordida, técnicas que se estudian en el módulo 4."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/11",
+          "proporcion": "4:3",
+          "alt": "Radiografía de aleta de mordida de premolares y molares con una zona radiolúcida pequeña bajo el punto de contacto de un premolar.",
+          "pie": "En las caras proximales, la lesión se inicia por debajo del punto de contacto; la radiografía de aleta de mordida ayuda a detectarla.",
+          "prompt": "Imagen radiográfica dental realista de aleta de mordida del lado derecho de un adulto, en escala de grises, que muestra premolares y molares superiores e inferiores en oclusión con coronas, cámaras pulpares y crestas óseas bien definidas, con una pequeña zona radiolúcida triangular en el esmalte de la cara distal de un premolar inferior justo por debajo del punto de contacto, contraste y nitidez de radiografía digital de buena calidad, encuadre horizontal. Evitar: texto, letras de orientación, números, flechas, marcadores, logotipos, marcas de agua, restauraciones excesivas, anatomía incorrecta."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena lo que ocurre durante un ataque ácido",
+          "instruccion": "Coloca los acontecimientos en el orden en que suceden desde que una persona toma un refresco.",
+          "elementos": [
+            "Las bacterias de la placa fermentan el azúcar y producen ácido",
+            "Baja el pH del líquido de la placa",
+            "El líquido de la placa queda subsaturado respecto a la hidroxiapatita",
+            "El ácido se difunde por los poros y disuelve cristales bajo la superficie",
+            "La saliva neutraliza el ácido y el pH se recupera",
+            "Parte del calcio y el fosfato vuelven a depositarse en los cristales"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Caries y erosión no son lo mismo",
+          "md": "La **erosión dental** también es una pérdida de mineral por ácido, pero el ácido no viene de las bacterias, sino de bebidas y alimentos ácidos o del reflujo gástrico. Esos ácidos actúan sobre toda la superficie expuesta, sin necesidad de biopelícula, y son tan fuertes que disuelven la capa superficial de forma directa. El resultado es una superficie lisa, sin capa superficial conservada y sin lesión subsuperficial. Distinguir ambos procesos es importante porque su prevención es distinta."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/12",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con guantes seca con aire la superficie de un molar para observar una lesión inicial.",
+          "pie": "Secar la superficie con aire hace visible una lesión subsuperficial que puede pasar inadvertida con el diente húmedo.",
+          "prompt": "Fotografía clínica realista horizontal, encuadre cerrado de la arcada inferior posterior de un paciente adulto, una mano con guante de nitrilo sostiene la jeringa triple dirigiendo aire sobre un primer molar inferior mientras la otra mano sostiene un espejo bucal, rollo de algodón en vestibular para aislamiento relativo, superficie del molar limpia, iluminación de lámpara dental intensa y uniforme, colores naturales, enfoque en el molar. Evitar: texto, logotipos, marcas de agua, sangre, rostro visible, manos sin guantes, instrumental oxidado, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** antes de explorar cualquier superficie en busca de lesiones iniciales, retira la biopelícula y seca con aire unos segundos. Si una mancha solo aparece seca, la pérdida de mineral es menor que si se ve también húmeda. Esta observación sencilla, que se sistematiza con ICDAS en el módulo 4, te dice mucho sobre la profundidad de la lesión sin ningún equipo adicional. Acostúmbrate, además, a revisar siempre con buena luz y aislamiento relativo con rollos de algodón: la saliva que regresa en segundos puede ocultar de nuevo lo que acabas de ver."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Saturación",
+          "definicion": "Estado de un líquido que contiene la máxima cantidad de iones de un mineral que puede mantener disuelta sin que este se disuelva ni precipite."
+        },
+        {
+          "termino": "Subsaturación",
+          "definicion": "Estado en que el líquido contiene menos iones de los que el equilibrio permite, por lo que el mineral tiende a disolverse."
+        },
+        {
+          "termino": "Desmineralización",
+          "definicion": "Pérdida de calcio y fosfato de los cristales del diente cuando el líquido que los rodea está subsaturado."
+        },
+        {
+          "termino": "Remineralización",
+          "definicion": "Ganancia de mineral en cristales parcialmente disueltos cuando el líquido vuelve a estar sobresaturado."
+        },
+        {
+          "termino": "Lesión subsuperficial",
+          "definicion": "Lesión inicial de esmalte en la que la pérdida de mineral ocurre bajo una capa superficial relativamente íntegra."
+        },
+        {
+          "termino": "Erosión dental",
+          "definicion": "Pérdida de tejido dental por ácidos de origen no bacteriano, como bebidas ácidas o reflujo gástrico."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.4-1",
+          "q": "¿Qué ocurre con el líquido de la placa cuando el pH baja por debajo del pH crítico?",
+          "opciones": [
+            "Queda sobresaturado y el mineral precipita",
+            "Pierde todo su calcio",
+            "Se vuelve más alcalino",
+            "Queda subsaturado respecto a la hidroxiapatita y el mineral se disuelve"
+          ],
+          "correcta": 3,
+          "explicacion": "Al protonarse el fosfato y disminuir el hidroxilo, el líquido queda subsaturado aunque el calcio y el fosfato totales no cambien."
+        },
+        {
+          "id": "t2.4-2",
+          "q": "¿Por qué la capa superficial de una lesión inicial permanece relativamente íntegra?",
+          "opciones": [
+            "Porque los ácidos no la tocan",
+            "Porque es donde más se reprecipitan iones y donde hay más fluoruro y proteínas salivales",
+            "Porque está formada por dentina",
+            "Porque la recubre el cálculo"
+          ],
+          "correcta": 1,
+          "explicacion": "La reprecipitación de iones y la mayor resistencia de la superficie conservan esa capa mientras la lesión no avanza demasiado."
+        },
+        {
+          "id": "t2.4-3",
+          "q": "¿En qué se diferencia la erosión de la caries?",
+          "opciones": [
+            "La erosión se debe a ácidos no bacterianos que actúan sin necesidad de biopelícula",
+            "La erosión la causan bacterias más agresivas",
+            "La erosión solo afecta a la dentina",
+            "No hay diferencia"
+          ],
+          "correcta": 0,
+          "explicacion": "La erosión proviene de ácidos de la dieta o del estómago y disuelve la superficie directamente, sin lesión subsuperficial."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Dental caries: a dynamic disease process",
+          "autor": "Featherstone J. D. B. (Australian Dental Journal)",
+          "anio": 2008
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+          "anio": 2015
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en literatura de química de la apatita e histopatología de la caries de esmalte",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "2.5",
+      "titulo": "Remineralización y detención de lesiones: inclinar la balanza",
+      "minutos": 13,
+      "enPocasPalabras": "Todos los días el diente pierde y recupera mineral. Si gana más de lo que pierde, una mancha inicial puede dejar de crecer y volverse más dura. Para lograrlo ayudan la saliva, el flúor, cepillarse bien y dar tiempo al diente entre comidas.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si la caries es el resultado de muchos ciclos en los que la pérdida de mineral supera a la ganancia, la prevención consiste en **inclinar la balanza** del lado contrario. Durante el día, cada superficie dental vive alternancias de desmineralización y remineralización. Lo que determina si una lesión progresa, se detiene o recupera parte de su mineral es el **saldo** acumulado de esos ciclos.\n\nEsta forma de pensar es muy útil en la consulta, porque convierte una enfermedad que parece misteriosa en algo que el paciente puede entender y modificar: menos ataques ácidos y más tiempo y recursos para reparar. En el módulo 3 verás cómo los sistemas de evaluación de riesgo convierten esta balanza en una herramienta clínica."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m02/d5",
+          "pie": "La balanza entre factores que favorecen la pérdida de mineral y factores que favorecen su recuperación.",
+          "descripcion": "Balanza de dos platos. En el plato izquierdo, rotulado como pérdida de mineral, aparecen biopelícula acumulada, azúcares frecuentes e hiposalivación. En el plato derecho, rotulado como ganancia de mineral, aparecen saliva suficiente, fluoruro, remoción de biopelícula y tiempo entre comidas. Debajo, tres pequeñas viñetas muestran el resultado según hacia dónde se incline la balanza: lesión que progresa, lesión estable y lesión detenida.",
+          "elementos": [
+            "Pérdida de mineral",
+            "Ganancia de mineral",
+            "Azúcares frecuentes",
+            "Biopelícula acumulada",
+            "Saliva y fluoruro",
+            "Lesión que progresa",
+            "Lesión detenida"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué hace falta para remineralizar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para que una lesión gane mineral se necesitan, al mismo tiempo, varias condiciones. Primero, un **pH por encima del crítico** durante periodos suficientes, lo que exige reducir la frecuencia de azúcares y desorganizar la biopelícula. Segundo, una **fuente de calcio y fosfato**, que normalmente es la saliva. Tercero, de manera muy destacada, la presencia de **fluoruro** en los líquidos que rodean al diente: el fluoruro disponible en la placa y la saliva frena la disolución durante los ataques ácidos y acelera la reprecipitación de mineral cuando el pH se recupera. La pasta dental fluorada usada dos veces al día es la forma más extendida de mantener ese fluoruro disponible; los vehículos, concentraciones y frecuencias de uso se estudian en el módulo 5 y su indicación individual es decisión del odontólogo.\n\nEl mineral que se forma en la remineralización no es idéntico al original. Si hay fluoruro, los cristales que crecen incorporan fluoruro y son menos solubles que los iniciales. Por eso un esmalte que pasó por ciclos de desmineralización y remineralización en presencia de fluoruro puede quedar más resistente que antes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Los límites de la remineralización",
+          "md": "La remineralización de una lesión profunda es más difícil de lo que parece. Los iones que llegan desde la saliva se depositan primero en las capas externas, donde la sobresaturación es mayor, y pueden **sellar** los poros de la superficie antes de alcanzar el cuerpo de la lesión. El resultado es una lesión detenida, con superficie dura y brillante, pero con un cuerpo que conserva buena parte de su porosidad; por eso muchas manchas blancas detenidas siguen viéndose blancas durante años aunque ya no progresen. Clínicamente esto no es un fracaso: el objetivo realista es **detener** la lesión, no borrarla. En las lesiones proximales, además, el contacto con el diente vecino limita la limpieza y el acceso de la saliva, lo que explica que su control dependa tanto de la higiene interproximal."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/13",
+          "proporcion": "4:3",
+          "alt": "Molares inferiores con manchas blancas brillantes y lisas en la cara vestibular, signo de lesiones detenidas.",
+          "pie": "Lesiones de esmalte detenidas: conservan el color blanco, pero su superficie es brillante, lisa y dura, y no hay biopelícula encima.",
+          "prompt": "Fotografía clínica macro de los molares inferiores permanentes de un adulto joven, vista vestibular con mejilla retraída por un retractor transparente, cada molar con una banda blanca bien delimitada cerca del tercio cervical, de superficie lisa y brillante que refleja la luz, sin placa visible, encía sana rosa pálido, esmalte limpio, iluminación con flash anular uniforme, colores naturales, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, cavidades, rostro, encía inflamada, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Estrategias que favorecen la balanza"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Qué inclina la balanza hacia la ganancia de mineral",
+          "columnas": [
+            "Estrategia",
+            "Cómo actúa",
+            "Ejemplo práctico"
+          ],
+          "filas": [
+            [
+              "Reducir la frecuencia de azúcares libres",
+              "Menos caídas de pH y más tiempo por encima del pH crítico",
+              "Agrupar los alimentos dulces con las comidas principales"
+            ],
+            [
+              "Remover la biopelícula a diario",
+              "Menos producción y retención de ácido sobre la superficie",
+              "Cepillado dos veces al día y limpieza interproximal"
+            ],
+            [
+              "Mantener fluoruro en la boca",
+              "Frena la disolución y favorece la reprecipitación de mineral menos soluble",
+              "Pasta fluorada, escupir sin enjuagar abundantemente"
+            ],
+            [
+              "Estimular la saliva",
+              "Más amortiguación, aclaramiento y aporte de calcio y fosfato",
+              "Masticar goma sin azúcar después de comer cuando sea adecuado"
+            ],
+            [
+              "Atender la hiposalivación",
+              "Recupera parte de la defensa natural",
+              "Valorar con el médico los medicamentos responsables"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Existen además productos que aportan calcio y fosfato en formas estabilizadas, o que se proponen como agentes remineralizantes. La evidencia sobre su beneficio adicional, por encima de una buena exposición a fluoruro, es variable según el producto y la situación clínica, y su indicación corresponde al juicio del odontólogo. Lo que la evidencia respalda de manera consistente es la base: control de azúcares, remoción de la biopelícula y fluoruro.\n\nTambién importa el **tiempo de seguimiento**. Una lesión que se considera detenida debe vigilarse en las citas siguientes para confirmar que no cambia. Registrar su aspecto, y cuando sea posible fotografiarla, permite comparar con objetividad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuánto tarda y cómo saber si funciona"
+        },
+        {
+          "tipo": "texto",
+          "md": "La detención de una lesión no se aprecia de un día para otro. Los cambios de superficie, como la recuperación del brillo y de la dureza, suelen hacerse evidentes en semanas o meses de condiciones favorables, y la estabilidad se confirma a lo largo de varias revisiones. Por eso conviene acordar con el paciente un plazo de reevaluación y explicarle qué señales se van a observar.\n\nLas señales clínicas de que la balanza se inclinó a favor son la **desaparición de la biopelícula** sobre la lesión, la transformación de una superficie mate y rugosa en una **brillante y lisa**, la ausencia de lesiones nuevas y, en las lesiones proximales vigiladas con radiografías, la falta de progresión entre una toma y la siguiente, con intervalos que decide el odontólogo según el riesgo. Las señales de alarma son las contrarias: lesiones que se vuelven más opacas o extensas, microcavidades nuevas o la aparición de lesiones en superficies que antes estaban sanas.\n\nSi en la reevaluación la lesión sigue activa, no significa que la estrategia no sirva: casi siempre indica que alguna de las condiciones no se cumplió. Revisa con el paciente qué pudo fallar, por ejemplo la frecuencia de bebidas dulces, la técnica de cepillado en esa zona o la constancia con la pasta fluorada, antes de decidir si hace falta intensificar las medidas profesionales o cambiar de enfoque."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Caso ilustrativo: después de los brackets",
+          "md": "Una joven de 17 años termina su tratamiento de ortodoncia. Al retirar los brackets se observan manchas blancas alrededor de donde estaban pegados, en varios dientes anteriores. Durante el tratamiento, la limpieza alrededor de los aparatos era difícil y consumía bebidas azucaradas con frecuencia. Ahora que la superficie es accesible, el plan se centra en el control de la biopelícula, la reducción de bebidas azucaradas y la exposición a fluoruro indicada por su odontólogo, con fotografías de control. Muchas de estas lesiones se detienen y mejoran su aspecto con el tiempo, aunque algunas conservan cierta opacidad."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: una mancha blanca en un adolescente",
+          "situacion": "Un adolescente de 14 años tiene una mancha blanca opaca, mate y algo rugosa en la cara vestibular del primer molar superior, junto a la encía, cubierta por biopelícula. La superficie está íntegra, sin cavidad. Se cepilla una vez al día y bebe refresco en el recreo y por la tarde. ¿Qué plan es el más adecuado?",
+          "opciones": [
+            {
+              "texto": "Preparar y restaurar la lesión para que no avance.",
+              "correcta": false,
+              "retro": "La lesión no está cavitada y puede detenerse; restaurarla sacrificaría tejido sin necesidad."
+            },
+            {
+              "texto": "No hacer nada porque no hay cavidad.",
+              "correcta": false,
+              "retro": "La lesión es activa: si no cambian las condiciones, puede progresar hasta cavitarse."
+            },
+            {
+              "texto": "Explicar la lesión, mejorar el cepillado con pasta fluorada, reducir el refresco, valorar medidas de fluoruro profesional y revisar en la siguiente cita.",
+              "correcta": true,
+              "retro": "Correcto. Se actúa sobre las causas y se favorece la remineralización, con seguimiento para confirmar que la lesión se detiene."
+            },
+            {
+              "texto": "Indicar solo un enjuague bucal sin cambiar la dieta ni la higiene.",
+              "correcta": false,
+              "retro": "Sin reducir azúcares ni mejorar la remoción de biopelícula, un enjuague por sí solo no inclina la balanza."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/14",
+          "proporcion": "3:4",
+          "alt": "Adolescente frente al espejo se cepilla los dientes posteriores, visto de perfil y con el rostro parcialmente fuera de cuadro.",
+          "pie": "El cepillado diario con pasta fluorada aporta dos cosas a la vez: remoción de biopelícula y fluoruro disponible para la remineralización.",
+          "prompt": "Fotografía realista vertical en un baño doméstico con luz natural, un adolescente visto de perfil desde el hombro, con la mitad superior del rostro fuera del encuadre, se cepilla los dientes posteriores con un cepillo de cerdas suaves y una pequeña cantidad de pasta blanca, inclinando el cepillo hacia la encía, espejo y lavabo blanco desenfocados al fondo, colores naturales y frescos, enfoque en la mano y el cepillo. Evitar: texto, logotipos, marcas comerciales, marcas de agua, ojos o rostro completo, sangre, espuma exagerada."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m02/15",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección toma una fotografía intraoral con cámara y retractores a un paciente del que solo se ven los dientes.",
+          "pie": "Las fotografías intraorales de control permiten comparar el aspecto de una lesión entre citas y demostrar al paciente su evolución.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental moderno: una odontóloga con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección sostiene una cámara réflex con flash anular frente a la boca de un paciente adulto reclinado, del que solo se ven los dientes anteriores expuestos con retractores de labios transparentes, un asistente con guantes sostiene un espejo intraoral, luz de consultorio limpia, colores naturales, profundidad de campo media. Evitar: texto, logotipos, marcas de cámara visibles, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando detectes una lesión inicial activa, en vez de decir «tiene una caries pequeña», di «tiene una zona que está perdiendo mineral y que podemos detener». Acompaña la frase con tres acciones concretas para casa y agenda una revisión para comprobar el resultado. La palabra «detener» transmite que el paciente tiene el control, y la cita de seguimiento convierte la recomendación en un compromiso."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Balanza de la caries",
+          "definicion": "Modelo que representa la caries como el resultado del equilibrio entre factores que favorecen la pérdida de mineral y factores que favorecen su recuperación."
+        },
+        {
+          "termino": "Lesión detenida",
+          "definicion": "Lesión que dejó de progresar; suele tener superficie dura y brillante aunque conserve cambio de color."
+        },
+        {
+          "termino": "Reprecipitación",
+          "definicion": "Depósito de iones de calcio y fosfato sobre cristales parcialmente disueltos cuando el líquido vuelve a estar sobresaturado."
+        },
+        {
+          "termino": "Fluorapatita",
+          "definicion": "Apatita en la que el fluoruro sustituye al hidroxilo; es menos soluble en ácido que la hidroxiapatita."
+        },
+        {
+          "termino": "Lesión de mancha blanca",
+          "definicion": "Lesión inicial de esmalte que se ve opaca y blanquecina por el aumento de porosidad bajo la superficie."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.5-1",
+          "q": "¿Qué condición favorece de forma más directa la remineralización de una lesión inicial?",
+          "opciones": [
+            "Consumir azúcar con frecuencia para estimular la saliva",
+            "Mantener periodos con pH por encima del crítico y fluoruro disponible en la boca",
+            "Explorar la lesión con fuerza para eliminar la capa superficial",
+            "Evitar el cepillado para no desgastar el esmalte"
+          ],
+          "correcta": 1,
+          "explicacion": "Sin ataques ácidos frecuentes y con fluoruro disponible, la balanza se inclina hacia la ganancia de mineral."
+        },
+        {
+          "id": "t2.5-2",
+          "q": "¿Por qué muchas manchas blancas detenidas siguen viéndose blancas?",
+          "opciones": [
+            "Porque siguen activas",
+            "Porque contienen más carbonato que el esmalte sano",
+            "Porque la superficie se remineraliza primero y el cuerpo de la lesión conserva porosidad",
+            "Porque están cubiertas de cálculo"
+          ],
+          "correcta": 2,
+          "explicacion": "Los iones se depositan primero en la superficie; la lesión se detiene, pero el interior puede seguir poroso y opaco."
+        },
+        {
+          "id": "t2.5-3",
+          "q": "¿Cuál es el objetivo clínico realista frente a una lesión inicial activa?",
+          "opciones": [
+            "Borrarla por completo en una semana",
+            "Restaurarla de inmediato",
+            "Ignorarla hasta que se cavite",
+            "Detenerla y vigilarla en las citas siguientes"
+          ],
+          "correcta": 3,
+          "explicacion": "Detener la lesión y confirmar su estabilidad con seguimiento es el objetivo alcanzable y basado en evidencia."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Prevention and reversal of dental caries: role of low level fluoride",
+          "autor": "Featherstone J. D. B. (Community Dentistry and Oral Epidemiology)",
+          "anio": 1999
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental caries: a dynamic disease process",
+          "autor": "Featherstone J. D. B. (Australian Dental Journal)",
+          "anio": 2008
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+          "anio": 2015
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Oral health (nota descriptiva)",
+          "autor": "Organización Mundial de la Salud",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/oral-health"
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: tejidos, saliva y mineral",
+    "pistas": [
+      {
+        "palabra": "HIDROXIAPATITA",
+        "pista": "Mineral de fosfato de calcio que forma los cristales del esmalte."
+      },
+      {
+        "palabra": "DENTINA",
+        "pista": "Tejido vivo, con túbulos, que forma la mayor parte del diente."
+      },
+      {
+        "palabra": "ODONTOBLASTO",
+        "pista": "Célula de la periferia de la pulpa que forma dentina toda la vida."
+      },
+      {
+        "palabra": "BICARBONATO",
+        "pista": "Principal amortiguador de la saliva estimulada."
+      },
+      {
+        "palabra": "ESTATERINA",
+        "pista": "Proteína salival que impide la precipitación espontánea de fosfato de calcio."
+      },
+      {
+        "palabra": "XEROSTOMIA",
+        "pista": "Sensación subjetiva de boca seca."
+      },
+      {
+        "palabra": "CEMENTO",
+        "pista": "Tejido que cubre la raíz y ancla las fibras del ligamento periodontal."
+      },
+      {
+        "palabra": "FLUORAPATITA",
+        "pista": "Apatita con fluoruro en lugar de hidroxilo, menos soluble en ácido."
+      },
+      {
+        "palabra": "EROSION",
+        "pista": "Pérdida de tejido dental por ácidos no bacterianos."
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m02-p01",
+        "q": "¿Por qué el esmalte maduro no puede regenerarse con tejido nuevo?",
+        "opciones": [
+          "Porque los ameloblastos se pierden cuando el diente hace erupción",
+          "Porque no contiene mineral",
+          "Porque está cubierto por cemento",
+          "Porque los odontoblastos lo destruyen"
+        ],
+        "correcta": 0,
+        "explicacion": "El esmalte maduro no tiene células; solo puede intercambiar iones en su superficie."
+      },
+      {
+        "id": "m02-p02",
+        "q": "¿Qué efecto tiene el fluoruro al incorporarse a la apatita?",
+        "opciones": [
+          "Aumenta su solubilidad",
+          "La convierte en colágeno",
+          "Disminuye su solubilidad en ácido",
+          "No tiene ningún efecto"
+        ],
+        "correcta": 2,
+        "explicacion": "La apatita fluorada es más estable y se disuelve a un pH más bajo."
+      },
+      {
+        "id": "m02-p03",
+        "q": "¿Cuál es la composición aproximada en peso de la dentina?",
+        "opciones": [
+          "96 % mineral, 1 % orgánico, 3 % agua",
+          "50 % mineral, 50 % agua",
+          "30 % mineral, 70 % orgánico",
+          "70 % mineral, 20 % orgánico, 10 % agua"
+        ],
+        "correcta": 3,
+        "explicacion": "La dentina tiene alrededor de 70 % de mineral, 20 % de matriz orgánica, sobre todo colágeno tipo I, y 10 % de agua."
+      },
+      {
+        "id": "m02-p04",
+        "q": "¿Qué contienen los túbulos dentinarios?",
+        "opciones": [
+          "Prolongaciones de odontoblastos y líquido",
+          "Ameloblastos activos",
+          "Cristales de fluorapatita pura",
+          "Fibras del ligamento periodontal"
+        ],
+        "correcta": 0,
+        "explicacion": "Los túbulos alojan las prolongaciones de los odontoblastos y líquido tisular."
+      },
+      {
+        "id": "m02-p05",
+        "q": "¿Qué es la esclerosis dentinaria?",
+        "opciones": [
+          "La pérdida total de la dentina",
+          "La obliteración mineral de los túbulos que reduce la permeabilidad",
+          "Un tipo de cemento celular",
+          "La inflamación de la pulpa"
+        ],
+        "correcta": 1,
+        "explicacion": "Es una respuesta defensiva que frena la difusión de ácidos y bacterias hacia la pulpa."
+      },
+      {
+        "id": "m02-p06",
+        "q": "¿Por qué la raíz expuesta es más vulnerable a la caries que el esmalte?",
+        "opciones": [
+          "Porque el cemento contiene más fluoruro",
+          "Porque nunca tiene contacto con la saliva",
+          "Porque el cemento y la dentina se disuelven a un pH más alto y tienen más matriz orgánica",
+          "Porque las raíces no tienen túbulos"
+        ],
+        "correcta": 2,
+        "explicacion": "Menos mineral, cristales más pequeños y más materia orgánica hacen a la raíz más susceptible."
+      },
+      {
+        "id": "m02-p07",
+        "q": "¿Cuál de estas NO es una función protectora de la saliva frente a la caries?",
+        "opciones": [
+          "Amortiguar los ácidos con bicarbonato",
+          "Aportar calcio y fosfato",
+          "Arrastrar azúcares hacia la deglución",
+          "Fermentar azúcares para producir ácido láctico"
+        ],
+        "correcta": 3,
+        "explicacion": "La fermentación de azúcares es obra de las bacterias de la placa, no una función de la saliva."
+      },
+      {
+        "id": "m02-p08",
+        "q": "¿Por qué el azúcar antes de dormir es especialmente dañino?",
+        "opciones": [
+          "Porque durante el sueño el flujo salival cae casi a cero",
+          "Porque la saliva nocturna es más ácida que el refresco",
+          "Porque el esmalte se vuelve más blando de noche",
+          "Porque la biopelícula desaparece al dormir"
+        ],
+        "correcta": 0,
+        "explicacion": "Con muy poca saliva, el pH tarda mucho más en recuperarse."
+      },
+      {
+        "id": "m02-p09",
+        "q": "¿Qué es la hiposalivación?",
+        "opciones": [
+          "La sensación subjetiva de boca seca",
+          "Un exceso de producción de saliva",
+          "La disminución objetiva y medible del flujo salival",
+          "La inflamación de la glándula parótida"
+        ],
+        "correcta": 2,
+        "explicacion": "La hiposalivación se mide; la xerostomía es la sensación referida por el paciente."
+      },
+      {
+        "id": "m02-p10",
+        "q": "¿Cuál es la causa más frecuente de hiposalivación?",
+        "opciones": [
+          "La edad por sí sola",
+          "El consumo de medicamentos",
+          "El uso de pasta dental fluorada",
+          "El cepillado frecuente"
+        ],
+        "correcta": 1,
+        "explicacion": "Muchos fármacos reducen la secreción y su efecto se suma cuando se toman varios a la vez."
+      },
+      {
+        "id": "m02-p11",
+        "q": "Un paciente recolecta 2 mL de saliva estimulada en 5 minutos. ¿Cómo interpretas su flujo?",
+        "opciones": [
+          "0.4 mL/min, por debajo de los valores de referencia para flujo estimulado",
+          "2.5 mL/min, flujo muy alto",
+          "10 mL/min, flujo normal",
+          "No se puede calcular sin saber su edad"
+        ],
+        "correcta": 0,
+        "explicacion": "2 ÷ 5 = 0.4 mL/min, menor que el umbral habitual de alrededor de 0.5 a 0.7 mL/min para flujo estimulado."
+      },
+      {
+        "id": "m02-p12",
+        "q": "¿Por qué baja el grado de saturación del líquido de la placa cuando cae el pH?",
+        "opciones": [
+          "Porque desaparece todo el calcio",
+          "Porque las bacterias consumen el fosfato",
+          "Porque la saliva deja de producirse",
+          "Porque el fosfato se protona y disminuye el hidroxilo disponible"
+        ],
+        "correcta": 3,
+        "explicacion": "Al protonarse el fosfato, baja el producto de actividad iónica aunque el calcio y el fosfato totales no cambien."
+      },
+      {
+        "id": "m02-p13",
+        "q": "¿Qué caracteriza a la lesión inicial de esmalte?",
+        "opciones": [
+          "Una pérdida de mineral que empieza en la dentina",
+          "Una pérdida de mineral bajo una capa superficial relativamente íntegra",
+          "Una cavidad abierta desde el inicio",
+          "Un depósito de cálculo sobre el esmalte"
+        ],
+        "correcta": 1,
+        "explicacion": "Es una lesión subsuperficial; mientras la capa externa se conserve, puede detenerse."
+      },
+      {
+        "id": "m02-p14",
+        "q": "¿Por qué secar el diente con aire ayuda a ver una lesión inicial?",
+        "opciones": [
+          "Porque el aire tiñe la lesión",
+          "Porque el aire endurece el esmalte",
+          "Porque el aire en los poros dispersa la luz más que el agua y la lesión se ve más opaca",
+          "Porque el aire elimina la capa superficial"
+        ],
+        "correcta": 2,
+        "explicacion": "La diferencia de índice de refracción entre aire y mineral vuelve visible la porosidad."
+      },
+      {
+        "id": "m02-p15",
+        "q": "Caso: tras retirar brackets, una paciente tiene manchas blancas en los dientes anteriores. ¿Cuál es el enfoque inicial más adecuado?",
+        "opciones": [
+          "Restaurar todas las manchas con resina de inmediato",
+          "Indicar blanqueamiento para igualar el color",
+          "No hacer nada, porque desaparecen solas sin cambios de hábitos",
+          "Controlar biopelícula y azúcares, exposición a fluoruro según indique el odontólogo y seguimiento con fotografías"
+        ],
+        "correcta": 3,
+        "explicacion": "Son lesiones no cavitadas que pueden detenerse si se actúa sobre las causas y se vigilan."
+      },
+      {
+        "id": "m02-p16",
+        "q": "Caso: un paciente de 68 años refiere boca seca, toma cuatro medicamentos y presenta lesiones nuevas en caras lisas. ¿Qué haces primero?",
+        "opciones": [
+          "Suspender sus medicamentos",
+          "Medir el flujo salival, registrar los medicamentos y comentar con el paciente la valoración por su médico",
+          "Recomendar que beba refresco para estimular la saliva",
+          "Restaurar las lesiones y darlo de alta"
+        ],
+        "correcta": 1,
+        "explicacion": "Hay que documentar la hiposalivación y su posible causa; los medicamentos los ajusta solo su médico tratante."
+      },
+      {
+        "id": "m02-p17",
+        "q": "¿Qué diferencia principal hay entre la erosión dental y la caries?",
+        "opciones": [
+          "En la erosión, el ácido no proviene de bacterias y disuelve la superficie sin necesidad de biopelícula",
+          "La erosión solo ocurre en dientes temporales",
+          "La erosión la produce la saliva",
+          "La caries no involucra ácidos"
+        ],
+        "correcta": 0,
+        "explicacion": "La erosión se debe a ácidos de la dieta o del estómago y no forma una lesión subsuperficial."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Dental Caries: The Disease and its Clinical Management",
+      "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)",
+      "anio": 2015
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)",
+      "anio": 2018
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Dental caries: a dynamic disease process",
+      "autor": "Featherstone J. D. B. (Australian Dental Journal)",
+      "anio": 2008
+    },
+    {
+      "tipo": "academica",
+      "titulo": "A review of saliva: normal composition, flow, and function",
+      "autor": "Humphrey S. P., Williamson R. T. (Journal of Prosthetic Dentistry)",
+      "anio": 2001
+    }
+  ]
+}

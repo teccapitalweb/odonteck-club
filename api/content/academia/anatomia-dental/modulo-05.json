@@ -1,0 +1,1605 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 5,
+  "titulo": "Odontogénesis: cómo se forma un diente",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Un diente se construye durante años mediante un diálogo preciso entre el epitelio oral y el ectomesénquima de la cresta neural. En este módulo recorrerás la odontogénesis completa: la lámina dental, las etapas de brote, casquete y campana, la aposición de dentina y esmalte, la maduración del esmalte y la formación de la raíz y del periodonto. Con esa base aprenderás a razonar el origen de las anomalías dentales más frecuentes, de la agenesia a la fluorosis, y a reconocer por qué cuidar los dientes temporales y los dientes jóvenes protege la dentición de toda la vida.",
+  "objetivos": [
+    "Explicar el origen embrionario de cada tejido dental y el papel de la inducción recíproca entre epitelio y ectomesénquima.",
+    "Describir las etapas de lámina, brote, casquete y campana e identificar qué se forma y qué se decide en cada una.",
+    "Comparar la dentinogénesis y las etapas funcionales del ameloblasto, y relacionarlas con defectos hipoplásicos e hipomineralizados.",
+    "Explicar la formación de la raíz, el cemento, el ligamento y el hueso alveolar a partir de la vaina de Hertwig y el folículo dental.",
+    "Clasificar las anomalías del desarrollo dental por número, tamaño, forma y estructura, y vincularlas con la etapa en que se originan."
+  ],
+  "duracionMin": 110,
+  "portada": {
+    "id": "anatomia-dental/m05/portada",
+    "proporcion": "16:9",
+    "alt": "Ilustración científica de una secuencia de gérmenes dentarios en desarrollo, del brote a un diente con raíz en formación.",
+    "prompt": "Ilustración científica realista de gran formato que muestra, de izquierda a derecha sobre un fondo azul petróleo oscuro, una secuencia de cinco gérmenes dentarios en corte: una yema epitelial redondeada, una forma de casquete, una forma de campana con capas celulares, una corona en formación con capas de dentina y esmalte, y un molar con corona completa y raíces en crecimiento, tejidos en tonos marfil, rosa suave y azul grisáceo translúcido, iluminación de estudio suave, alto detalle, estilo de atlas de histología moderno. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, aspecto de caricatura, anatomía incorrecta."
+  },
+  "temas": [
+    {
+      "n": "5.1",
+      "titulo": "El origen de los dientes: epitelio, ectomesénquima y lámina dental",
+      "minutos": 15,
+      "enPocasPalabras": "Los dientes empiezan a formarse muy temprano en el embarazo, hacia la sexta semana. Nacen de la conversación entre dos tejidos del embrión: la capa que recubre la boca y un tejido profundo que viene de la región de la futura cabeza. De esa conversación surge una banda en forma de herradura, la lámina dental, de la que brotarán todos los dientes.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Un diente no se fabrica como una pieza que se ensambla al final. Se construye durante años, desde las primeras semanas de vida intrauterina hasta varios años después de que aparece en la boca, mediante una secuencia de señales entre tejidos que se repite con precisión para cada uno de los 20 dientes temporales y los 32 permanentes. A ese proceso se le llama **odontogénesis**.\n\nEstudiarla no es un ejercicio de memoria embriológica. La odontogénesis explica por qué un niño puede tener manchas en los dientes permanentes por una infección de un diente temporal, por qué hay personas a las que les faltan dientes desde el nacimiento, por qué algunos quistes se desarrollan alrededor de coronas no erupcionadas y por qué la exposición a ciertas sustancias en momentos concretos deja huellas permanentes en el esmalte. En este primer tema verás de dónde vienen los tejidos que forman el diente y cómo comienza todo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dos tejidos que conversan"
+        },
+        {
+          "tipo": "texto",
+          "md": "El diente se forma a partir de dos componentes embrionarios. El primero es el **epitelio oral**, de origen **ectodérmico**, que recubre la cavidad bucal primitiva o estomodeo. De él derivará el **esmalte**, a través de las células llamadas ameloblastos. El segundo es el **ectomesénquima**, un tejido conjuntivo embrionario que procede de las **células de la cresta neural** craneal. Estas células migran desde los bordes del tubo neural hacia los arcos faríngeos y se instalan bajo el epitelio de los futuros maxilares. De ellas derivarán la **dentina**, la **pulpa**, el **cemento**, el **ligamento periodontal** y parte del hueso alveolar.\n\nNinguno de los dos tejidos puede formar un diente por sí solo. El desarrollo depende de **interacciones epitelio-mesénquima**: señales químicas que un tejido envía al otro, que responde cambiando su comportamiento y enviando nuevas señales de vuelta. A esta secuencia de mensajes de ida y vuelta se le llama **inducción recíproca**, y es el hilo conductor de toda la odontogénesis."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/01",
+          "proporcion": "4:3",
+          "alt": "Ilustración embriológica de un embrión humano temprano en vista lateral con los arcos faríngeos y la región de la futura boca.",
+          "pie": "Hacia la sexta semana, el primer arco faríngeo ya forma los procesos maxilar y mandibular, donde comenzará el desarrollo dental.",
+          "prompt": "Ilustración científica realista de un embrión humano de aproximadamente seis semanas en vista lateral, piel translúcida rosada, cabeza grande con los arcos faríngeos visibles como pliegues redondeados bajo la región de la futura cara, procesos maxilar y mandibular del primer arco destacados con un tono ligeramente más cálido, esbozos de extremidades pequeños, fondo azul oscuro suave y uniforme, iluminación difusa de estudio, estilo de atlas de embriología, alto detalle y colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, aspecto perturbador, rasgos faciales humanos desarrollados, proporciones irreales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Quién manda primero",
+          "md": "Experimentos clásicos en ratones, en los que se recombinan tejidos de distintas regiones, mostraron que al inicio es el **epitelio** el que tiene el potencial de iniciar un diente: el epitelio del primer arco puede inducir la formación dental incluso en mesénquima que normalmente no formaría dientes, siempre que proceda de la cresta neural. Después, ese potencial pasa al **mesénquima**, que a partir de entonces determina el tipo de diente que se forma. Este cambio de mando es un buen ejemplo de inducción recíproca."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La banda epitelial primaria y sus dos láminas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Hacia la **sexta semana** de vida intrauterina, el epitelio oral se engruesa en una franja continua en forma de herradura a lo largo de cada futuro maxilar: la **banda epitelial primaria**. Poco después, esta banda se divide en dos proliferaciones que crecen hacia el mesénquima:\n\n- La **lámina vestibular**, por fuera, cuyas células centrales degeneran para abrir un surco que separará los labios y las mejillas de los procesos alveolares: el futuro **vestíbulo** de la boca.\n- La **lámina dental**, por dentro, de la que nacerán los dientes. En puntos concretos de su borde, que corresponden a la posición de cada diente temporal, la proliferación se acelera y aparecen los primeros **gérmenes dentarios**.\n\nLa lámina dental tiene una vida larga. Primero produce los gérmenes de los dientes temporales. Después, en el lado lingual de cada germen temporal, forma una extensión llamada **lámina sucesional**, de la que derivan los dientes permanentes que sustituyen a los temporales. Por último, se extiende hacia atrás para originar los molares permanentes, que no tienen predecesor. Cuando termina su función, la lámina se fragmenta; algunos restos epiteliales, llamados **restos de Serres**, pueden persistir en los maxilares y en la encía."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m05/d1",
+          "pie": "Del epitelio oral a los gérmenes dentarios: la banda epitelial primaria se divide en lámina vestibular y lámina dental.",
+          "descripcion": "Tres cortes frontales esquemáticos de un maxilar embrionario dispuestos de izquierda a derecha. En el primero, el epitelio oral se engruesa sobre el ectomesénquima. En el segundo, el engrosamiento se divide en dos prolongaciones: una externa (lámina vestibular) y otra interna (lámina dental). En el tercero, la lámina vestibular se abre como un surco que forma el vestíbulo, y la lámina dental muestra un engrosamiento en su extremo (germen dentario) con una pequeña extensión lingual (lámina sucesional). El ectomesénquima se representa con puntos de otro color.",
+          "elementos": [
+            "Epitelio oral (ectodermo)",
+            "Ectomesénquima (cresta neural)",
+            "Banda epitelial primaria",
+            "Lámina vestibular → vestíbulo",
+            "Lámina dental",
+            "Germen dentario",
+            "Lámina sucesional"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuándo se inicia cada diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "La iniciación no ocurre al mismo tiempo para todos los dientes. Los 20 gérmenes temporales aparecen entre la sexta y la octava semana de vida intrauterina, aproximadamente, y siguen un orden anteroposterior. Los gérmenes de los permanentes sucesores se inician después, desde la segunda mitad del embarazo hasta cerca del primer año de vida. En cuanto a los molares permanentes, los textos clásicos sitúan la iniciación del primero hacia el cuarto mes de vida intrauterina, la del segundo alrededor del primer año de edad y la del tercero entre los 4 y los 5 años.\n\nEsto significa que, al nacer, una persona ya tiene en sus maxilares los gérmenes de todos los dientes temporales, en plena formación, y de gran parte de los permanentes. La mineralización de los temporales comienza alrededor de la semana 14 de vida intrauterina, empezando por los incisivos centrales, y el primer molar permanente comienza a mineralizar cerca del nacimiento. Las fechas exactas varían entre autores; lo importante es la idea de que **la odontogénesis abarca desde el embarazo hasta la adolescencia**, y que la cronología detallada de la erupción se estudia en el módulo 9.\n\nLa posición del germen permanente, en lingual y por debajo del ápice del temporal, tiene una consecuencia clínica directa: una infección periapical de un molar temporal o un traumatismo de un incisivo temporal ocurren a pocos milímetros de una corona permanente que todavía se está formando, y pueden dejar en ella defectos permanentes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Momentos aproximados de iniciación del germen dentario",
+          "columnas": [
+            "Grupo de dientes",
+            "Origen en la lámina",
+            "Inicio aproximado"
+          ],
+          "filas": [
+            [
+              "Dientes temporales (20)",
+              "Lámina dental",
+              "Semanas 6 a 8 de vida intrauterina"
+            ],
+            [
+              "Permanentes sucesores (incisivos, caninos y premolares)",
+              "Lámina sucesional, por lingual del germen temporal",
+              "Desde la segunda mitad del embarazo hasta cerca del primer año de vida"
+            ],
+            [
+              "Primer molar permanente",
+              "Extensión posterior de la lámina dental",
+              "Hacia el cuarto mes de vida intrauterina"
+            ],
+            [
+              "Segundo molar permanente",
+              "Extensión posterior de la lámina dental",
+              "Alrededor del primer año de vida"
+            ],
+            [
+              "Tercer molar permanente",
+              "Extensión posterior de la lámina dental",
+              "Entre los 4 y los 5 años"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/02",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica teñida con hematoxilina y eosina de un engrosamiento epitelial que penetra en el mesénquima subyacente.",
+          "pie": "La lámina dental es una proliferación del epitelio oral que avanza dentro del ectomesénquima.",
+          "prompt": "Microfotografía histológica realista de un corte de maxilar de un embrión de mamífero teñido con hematoxilina y eosina, aumento medio, en la parte superior una capa de epitelio oral de varias células de espesor teñida de violeta intenso que se engruesa y penetra en forma de cordón hacia abajo dentro de un tejido mesenquimatoso laxo rosado con células estrelladas dispersas, iluminación de microscopio de campo claro uniforme, enfoque nítido, colores naturales de tinción. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, artefactos de corte exagerados, colores fluorescentes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Las moléculas que dibujan una dentición",
+          "md": "El diálogo epitelio-mesénquima se basa en unas pocas familias de moléculas de señalización que se reutilizan en todo el embrión: las **proteínas morfogenéticas óseas (BMP)**, los **factores de crecimiento fibroblástico (FGF)**, **Sonic hedgehog (SHH)** y la vía **WNT**. Estas señales activan en el mesénquima factores de transcripción como **MSX1** y **PAX9**, indispensables para que el germen avance más allá de la etapa de brote. El tipo de diente se relaciona con códigos de expresión regionales de genes con homeobox: en modelos animales, genes como DLX1 y DLX2 predominan en la región de los molares y MSX1 en la de los incisivos. Las mutaciones en **PAX9**, **MSX1**, **AXIN2**, **WNT10A** o **EDA** se asocian en humanos con agenesias dentales, solas o como parte de síndromes como la displasia ectodérmica hipohidrótica. Este conocimiento es la base de las investigaciones que buscan regenerar dientes completos."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad del origen dental",
+          "afirmaciones": [
+            {
+              "texto": "El esmalte deriva del epitelio oral, de origen ectodérmico.",
+              "verdadero": true,
+              "explicacion": "Los ameloblastos proceden del epitelio interno del órgano del esmalte, que deriva del epitelio oral."
+            },
+            {
+              "texto": "La dentina y la pulpa derivan del mismo tejido que el esmalte.",
+              "verdadero": false,
+              "explicacion": "Dentina y pulpa derivan del ectomesénquima de la cresta neural, a través de la papila dental."
+            },
+            {
+              "texto": "La lámina vestibular origina el surco que separa labios y mejillas de los procesos alveolares.",
+              "verdadero": true,
+              "explicacion": "Sus células centrales degeneran y forman el vestíbulo bucal."
+            },
+            {
+              "texto": "Los molares permanentes se forman a partir de la lámina sucesional de los molares temporales.",
+              "verdadero": false,
+              "explicacion": "Los molares permanentes no tienen predecesor: nacen de la extensión posterior de la lámina dental. Los premolares, en cambio, sí derivan de la lámina sucesional."
+            },
+            {
+              "texto": "Al nacer ya existen en los maxilares gérmenes de dientes permanentes.",
+              "verdadero": true,
+              "explicacion": "Muchos gérmenes permanentes se inician durante el embarazo; el primer molar permanente empieza a mineralizar cerca del nacimiento."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/03",
+          "proporcion": "16:9",
+          "alt": "Ilustración de los maxilares de un recién nacido con los gérmenes de los dientes temporales dentro del hueso y las encías intactas.",
+          "pie": "Al nacer, los maxilares ya alojan las coronas en formación de los dientes temporales y los primeros gérmenes permanentes.",
+          "prompt": "Ilustración anatómica realista estilo atlas, vista lateral de los maxilares de un recién nacido con el hueso representado semitransparente en tono marfil claro, dentro de él coronas de dientes temporales en formación sin raíces, blancas y nacaradas, alineadas en ambas arcadas, y por detrás el germen pequeño del primer molar permanente, encía rosa lisa e intacta sin dientes erupcionados, fondo blanco limpio, iluminación difusa, colores naturales y alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, rostro del bebé, sangre, dientes erupcionados, raíces completas, aspecto perturbador."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Confusiones frecuentes al empezar a estudiar odontogénesis",
+          "items": [
+            "Creer que todo el diente procede del mismo tejido: solo el esmalte es de origen epitelial; el resto del diente y de su soporte es ectomesenquimatoso.",
+            "Llamar «mesodermo» al ectomesénquima: aunque se comporta como tejido conjuntivo, su origen es la cresta neural, derivada del ectodermo.",
+            "Pensar que la iniciación y la mineralización ocurren a la vez: entre la aparición del germen y el depósito de los primeros tejidos duros pasan semanas en los temporales y años en algunos permanentes.",
+            "Suponer que los dientes permanentes se forman después de que se caen los temporales: los gérmenes permanentes coexisten con los temporales durante años, en una posición lingual y apical respecto a ellos."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando atiendas a una embarazada, recuerda que la dentición temporal de su bebé ya está formándose y que la temporal empieza a mineralizar en el segundo trimestre. Es un buen momento para hablar de salud bucal materna, alimentación y control prenatal, y para explicar que cualquier medicamento debe usarse solo con indicación del médico o del odontólogo que conoce el embarazo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Odontogénesis",
+          "definicion": "Proceso de formación de los dientes, desde la iniciación del germen hasta la formación completa de la raíz."
+        },
+        {
+          "termino": "Ectomesénquima",
+          "definicion": "Tejido conjuntivo embrionario derivado de la cresta neural que forma dentina, pulpa, cemento, ligamento periodontal y parte del hueso alveolar."
+        },
+        {
+          "termino": "Cresta neural",
+          "definicion": "Población de células embrionarias que migran desde los bordes del tubo neural y originan, entre otros, la mayor parte de los tejidos de la cara."
+        },
+        {
+          "termino": "Inducción recíproca",
+          "definicion": "Secuencia de señales de ida y vuelta entre epitelio y mesénquima que dirige cada etapa del desarrollo dental."
+        },
+        {
+          "termino": "Lámina dental",
+          "definicion": "Proliferación del epitelio oral en forma de herradura de la que se originan los gérmenes dentarios."
+        },
+        {
+          "termino": "Lámina sucesional",
+          "definicion": "Extensión lingual de la lámina dental junto a cada germen temporal, de la que derivan los dientes permanentes sucesores."
+        },
+        {
+          "termino": "Restos de Serres",
+          "definicion": "Restos epiteliales de la lámina dental que pueden persistir en el hueso o en la encía."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.1-1",
+          "q": "¿De qué tejido embrionario deriva la dentina?",
+          "opciones": [
+            "Del epitelio oral",
+            "Del endodermo faríngeo",
+            "Del mesodermo de los somitas",
+            "Del ectomesénquima de la cresta neural"
+          ],
+          "correcta": 3,
+          "explicacion": "La dentina la producen los odontoblastos, que derivan de la papila dental, de origen ectomesenquimatoso."
+        },
+        {
+          "id": "t5.1-2",
+          "q": "¿De qué estructura se originan los premolares permanentes?",
+          "opciones": [
+            "De la lámina sucesional, por lingual de los molares temporales",
+            "De la lámina vestibular",
+            "De la extensión posterior de la lámina dental",
+            "De los restos de Serres"
+          ],
+          "correcta": 0,
+          "explicacion": "Los premolares sustituyen a los molares temporales y derivan de la lámina sucesional de esos gérmenes."
+        },
+        {
+          "id": "t5.1-3",
+          "q": "¿Aproximadamente en qué semana de vida intrauterina aparece la banda epitelial primaria?",
+          "opciones": [
+            "Semana 2",
+            "Semana 6",
+            "Semana 20",
+            "Semana 36"
+          ],
+          "correcta": 1,
+          "explicacion": "La banda epitelial primaria y la lámina dental aparecen hacia la sexta semana de vida intrauterina."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Developing Human: Clinically Oriented Embryology",
+          "autor": "Moore K. L., Persaud T. V. N., Torchia M. G. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en revisiones sobre la genética del desarrollo dental y la agenesia",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "5.2",
+      "titulo": "Brote, casquete y campana: el germen dentario toma forma",
+      "minutos": 16,
+      "enPocasPalabras": "El diente en formación cambia de forma como si fuera una escultura. Primero es una bolita, luego parece una gorra y después una campana. En la etapa de campana ya se dibuja la forma de la corona, con sus cúspides, y aparecen las células que fabricarán el esmalte y la dentina.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Una vez que la lámina dental marca el lugar de cada diente, el germen atraviesa tres etapas que reciben su nombre por la forma que toma el componente epitelial en los cortes histológicos: **brote**, **casquete** y **campana**. Son etapas de un proceso continuo, no compartimentos con fechas exactas, y en un mismo embrión conviven gérmenes en etapas distintas.\n\nLo que interesa de cada etapa es qué se decide en ella. En el brote, el germen adquiere la capacidad de convertirse en diente. En el casquete se define el tipo de diente y aparece el centro de señalización que organiza la corona. En la campana se dibuja la forma definitiva de la corona y las células se especializan para producir tejidos duros. Si algo falla en cada momento, el resultado es distinto: falta de dientes, dientes de forma anómala o alteraciones de estructura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Etapa de brote: la proliferación"
+        },
+        {
+          "tipo": "texto",
+          "md": "Hacia la **octava semana**, en cada punto donde habrá un diente temporal, el epitelio de la lámina dental prolifera y forma una pequeña esfera que se introduce en el ectomesénquima: el **brote** o yema dentaria. Sus células epiteliales no muestran todavía diferencias entre sí. Alrededor del brote, las células del ectomesénquima se agrupan y se condensan; esa **condensación ectomesenquimatosa** es el primer signo visible de que el mesénquima ha respondido a las señales del epitelio.\n\nEn esta etapa ocurre el cambio de mando descrito en el tema anterior: el potencial para formar un diente pasa del epitelio al mesénquima. Por eso los factores de transcripción mesenquimatosos MSX1 y PAX9 son críticos aquí: en modelos animales, su ausencia detiene el desarrollo en la etapa de brote, y en humanos sus mutaciones se asocian a agenesias."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/04",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica de un germen dentario en etapa de brote, con una esfera epitelial rodeada de mesénquima condensado.",
+          "pie": "Etapa de brote: el epitelio forma una yema redondeada y el ectomesénquima se condensa a su alrededor.",
+          "prompt": "Microfotografía histológica realista de un germen dentario en etapa de brote de un embrión de mamífero, corte teñido con hematoxilina y eosina, aumento medio, una masa epitelial redondeada de células violeta densamente agrupadas unida por un cordón delgado al epitelio oral en la parte superior, rodeada por una zona de células mesenquimatosas más compactas y oscuras, y por fuera mesénquima laxo rosado, iluminación de microscopio de campo claro, enfoque nítido, colores naturales de tinción. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, colores fluorescentes, artefactos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Etapa de casquete: nace el germen dentario"
+        },
+        {
+          "tipo": "texto",
+          "md": "Entre la **novena y la décima semana**, aproximadamente, el brote crece de forma desigual: sus bordes avanzan más que el centro y la superficie profunda se hunde. El componente epitelial adquiere la forma de una gorra o **casquete** que cubre la condensación ectomesenquimatosa. A partir de aquí puede hablarse de un **germen dentario** con tres componentes, cada uno con un destino preciso:\n\n- El **órgano del esmalte**, de origen epitelial, que producirá el esmalte.\n- La **papila dental**, el ectomesénquima condensado que queda dentro del casquete, que formará la dentina y la pulpa.\n- El **folículo** o saco dental, el ectomesénquima que rodea al conjunto, que formará el cemento, el ligamento periodontal y el hueso alveolar propiamente dicho.\n\nEn el centro del órgano del esmalte aparece un grupo de células epiteliales que dejan de dividirse y producen señales (SHH, BMP, FGF y WNT, entre otras): el **nudo del esmalte primario**. Funciona como un **centro de señalización** que regula la proliferación de las células vecinas y, con ello, la forma del casquete. En los molares, después aparecen **nudos del esmalte secundarios** en los sitios donde se formarán las cúspides; el número y la posición de estos nudos anticipan el patrón cuspídeo del diente."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Cúspides dibujadas por señales",
+          "md": "Los nudos del esmalte fueron descritos y estudiados a fondo por grupos de investigación como el de Irma Thesleff y Jukka Jernvall en Finlandia. Sus trabajos mostraron que pequeños cambios en la intensidad o la duración de estas señales bastan para modificar el número de cúspides, lo que ayuda a explicar tanto la diversidad de formas dentales entre especies como algunas variaciones entre personas, por ejemplo cúspides accesorias como el tubérculo de Carabelli en el primer molar superior."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Etapa de campana: forma y especialización"
+        },
+        {
+          "tipo": "texto",
+          "md": "A partir de la semana **11 o 12**, la concavidad del germen se profundiza y sus bordes siguen creciendo: el órgano del esmalte adopta forma de **campana**. En esta etapa ocurren dos procesos simultáneos. La **morfodiferenciación** define la forma de la futura corona, porque la unión entre el epitelio interno y la papila dibuja ya el contorno de la futura **unión amelodentinaria**, con sus cúspides o su borde incisal. La **histodiferenciación** hace que las células se especialicen para su función definitiva.\n\nEn la campana, el órgano del esmalte tiene cuatro capas:\n\n- El **epitelio interno del esmalte**, una capa de células cilíndricas que mira hacia la papila; de ellas surgirán los **ameloblastos**.\n- El **estrato intermedio**, dos o tres hileras de células planas junto al epitelio interno, con intensa actividad enzimática, que apoyan a los ameloblastos.\n- El **retículo estrellado**, células en forma de estrella separadas por abundante matriz extracelular rica en glicosaminoglicanos, que retiene agua y da volumen y protección al órgano del esmalte.\n- El **epitelio externo del esmalte**, una capa de células cúbicas que limita el órgano por fuera y se relaciona con vasos del folículo.\n\nEl epitelio interno y el externo se unen en el borde de la campana formando el **asa cervical**, una zona de proliferación activa que más tarde originará la vaina radicular. Al mismo tiempo, en la papila, las células periféricas que tocan el epitelio interno se preparan para diferenciarse en **odontoblastos**. Durante la campana, la lámina dental que unía el germen al epitelio oral se fragmenta, y el germen continúa su desarrollo separado de la superficie."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Campana temprana y campana tardía"
+        },
+        {
+          "tipo": "texto",
+          "md": "Muchos textos distinguen una **campana temprana**, en la que las células todavía se están especializando y no hay tejidos duros, y una **campana tardía** o etapa de corona, en la que aparecen las primeras capas de dentina y de esmalte en las puntas de las cúspides. Esta transición marca el paso de la forma a la fabricación, que estudiarás en el tema 5.3.\n\nUn detalle anatómico explica cómo se nutre el órgano del esmalte, que no tiene vasos propios: los capilares del folículo se acercan al epitelio externo, que en esta zona se pliega. Cuando comienza el depósito de dentina, el retículo estrellado pierde volumen en las zonas de las cúspides, de modo que los ameloblastos quedan más cerca de esos vasos justo cuando más nutrientes necesitan. Es un ejemplo de cómo la arquitectura del germen se adapta a su función en cada momento."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m05/d2",
+          "pie": "Etapas de brote, casquete y campana con sus componentes.",
+          "descripcion": "Tres esquemas de germen dentario dispuestos de izquierda a derecha con el epitelio oral arriba. Brote: esfera epitelial unida al epitelio oral, rodeada de mesénquima condensado. Casquete: forma de gorra con el nudo del esmalte en el centro, la papila dental dentro de la concavidad y el folículo rodeando todo. Campana: forma de campana con las cuatro capas del órgano del esmalte en colores diferentes, el asa cervical en los bordes, la papila dental con una fila de células periféricas y la lámina dental fragmentándose arriba.",
+          "elementos": [
+            "Brote (yema)",
+            "Casquete",
+            "Campana",
+            "Nudo del esmalte",
+            "Papila dental",
+            "Folículo dental",
+            "Epitelio interno y externo del esmalte",
+            "Retículo estrellado y estrato intermedio",
+            "Asa cervical"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/05",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica de un germen dentario en etapa de campana con el órgano del esmalte, la papila y el folículo.",
+          "pie": "Etapa de campana: el órgano del esmalte rodea a la papila dental y ya dibuja la forma de la futura corona.",
+          "prompt": "Microfotografía histológica realista de un germen dentario en etapa de campana, corte teñido con hematoxilina y eosina, aumento bajo, un órgano del esmalte en forma de campana con una capa interna de células cilíndricas violeta, una zona central pálida de células estrelladas espaciadas y una capa externa delgada, en su interior la papila dental densa y rosada, todo rodeado por un folículo fibroso y hueso en formación en los bordes, iluminación de campo claro, enfoque nítido. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, colores fluorescentes, artefactos de corte."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Qué se decide en cada etapa",
+          "columnas": [
+            "Etapa",
+            "Momento aproximado en temporales",
+            "Acontecimiento clave",
+            "Si falla puede producir"
+          ],
+          "filas": [
+            [
+              "Iniciación (lámina)",
+              "Semana 6",
+              "Se marca la posición de cada diente",
+              "Ausencia de dientes o dientes supernumerarios"
+            ],
+            [
+              "Brote",
+              "Semana 8",
+              "Proliferación y condensación del mesénquima; el mesénquima adquiere el potencial odontogénico",
+              "Agenesia"
+            ],
+            [
+              "Casquete",
+              "Semanas 9 a 10",
+              "Germen con tres componentes; nudo del esmalte",
+              "Alteraciones de número y de forma, como geminación o dens invaginatus"
+            ],
+            [
+              "Campana",
+              "Desde la semana 11 o 12",
+              "Morfodiferenciación de la corona e histodiferenciación de ameloblastos y odontoblastos",
+              "Alteraciones de forma y tamaño, como microdoncia o cúspides accesorias"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El epitelio odontogénico no siempre desaparece",
+          "md": "Los restos de la lámina dental y de otras estructuras epiteliales del germen pueden permanecer inactivos durante décadas. En determinadas circunstancias, estos restos pueden dar origen a **quistes** y **tumores odontogénicos**, como el queratoquiste odontogénico o el ameloblastoma, y a malformaciones como los **odontomas**, que reproducen de forma desordenada los tejidos del diente. Cualquier radiolucidez o radiopacidad inesperada en los maxilares debe documentarse y valorarse con el especialista, porque su diagnóstico definitivo es histopatológico."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El incisivo que no erupcionaba",
+          "md": "Un niño de 9 años tiene el incisivo central superior temporal todavía en boca, mientras el del otro lado ya fue sustituido. La radiografía muestra, por encima del incisivo permanente retenido, un conjunto de pequeñas estructuras radiopacas con forma de dientes diminutos rodeadas de un halo radiolúcido. La imagen es compatible con un **odontoma compuesto**, una malformación en la que el epitelio y el mesénquima odontogénicos produjeron esmalte, dentina y cemento organizados en pequeñas piezas. El diagnóstico definitivo y el tratamiento los define el especialista."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Las etapas del germen dentario",
+          "instruccion": "Ordena los acontecimientos del desarrollo inicial del diente, del más temprano al más tardío.",
+          "elementos": [
+            "Formación de la banda epitelial primaria",
+            "Aparición de la lámina dental",
+            "Etapa de brote con condensación del mesénquima",
+            "Etapa de casquete con nudo del esmalte",
+            "Etapa de campana con cuatro capas en el órgano del esmalte",
+            "Fragmentación de la lámina dental"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/06",
+          "proporcion": "1:1",
+          "alt": "Ilustración tridimensional realista de un germen dentario en campana cortado a la mitad que muestra sus capas internas.",
+          "pie": "Un germen en campana visto en tres dimensiones: la unión entre el epitelio interno y la papila anticipa la forma de la corona.",
+          "prompt": "Ilustración científica tridimensional realista de un germen dentario de molar en etapa de campana cortado por la mitad, órgano del esmalte en tonos azul grisáceo translúcido con una capa interna de células alargadas, zona central esponjosa y capa externa delgada, papila dental rosada dentro de la concavidad con relieve de varias cúspides incipientes, folículo fibroso envolvente en tono beige, fondo oscuro neutro, iluminación de estudio suave con sombras delicadas, alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, aspecto de caricatura, dientes completamente formados."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** al estudiar histología, no intentes memorizar fechas aisladas. Para cada etapa responde tres preguntas: qué forma tiene el epitelio, qué hace el mesénquima y qué anomalía aparecería si el proceso fallara. Ese esquema te servirá para razonar los casos clínicos del tema 5.5."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Germen dentario",
+          "definicion": "Conjunto formado por el órgano del esmalte, la papila dental y el folículo, a partir del cual se desarrolla un diente y su soporte."
+        },
+        {
+          "termino": "Órgano del esmalte",
+          "definicion": "Componente epitelial del germen dentario que produce el esmalte y moldea la forma de la corona."
+        },
+        {
+          "termino": "Papila dental",
+          "definicion": "Ectomesénquima condensado dentro del órgano del esmalte que origina la dentina y la pulpa."
+        },
+        {
+          "termino": "Folículo dental",
+          "definicion": "Ectomesénquima que rodea al germen y origina cemento, ligamento periodontal y hueso alveolar propiamente dicho."
+        },
+        {
+          "termino": "Nudo del esmalte",
+          "definicion": "Centro de señalización del órgano del esmalte que regula la forma de la corona y la posición de las cúspides."
+        },
+        {
+          "termino": "Retículo estrellado",
+          "definicion": "Capa central del órgano del esmalte formada por células estrelladas en una matriz rica en agua."
+        },
+        {
+          "termino": "Asa cervical",
+          "definicion": "Borde del órgano del esmalte donde se unen los epitelios interno y externo; origina la vaina radicular."
+        },
+        {
+          "termino": "Morfodiferenciación",
+          "definicion": "Proceso por el cual el germen adquiere la forma definitiva de la corona."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.2-1",
+          "q": "¿Qué componente del germen dentario forma la dentina y la pulpa?",
+          "opciones": [
+            "El órgano del esmalte",
+            "El folículo dental",
+            "La papila dental",
+            "El retículo estrellado"
+          ],
+          "correcta": 2,
+          "explicacion": "La papila dental, ectomesénquima condensado, origina odontoblastos y pulpa; el folículo forma el soporte."
+        },
+        {
+          "id": "t5.2-2",
+          "q": "¿Qué estructura actúa como centro de señalización que anticipa la posición de las cúspides?",
+          "opciones": [
+            "El nudo del esmalte",
+            "El asa cervical",
+            "El estrato intermedio",
+            "La lámina vestibular"
+          ],
+          "correcta": 0,
+          "explicacion": "Los nudos del esmalte primario y secundarios producen señales que regulan la forma de la corona y el patrón cuspídeo."
+        },
+        {
+          "id": "t5.2-3",
+          "q": "¿En qué etapa se distinguen por primera vez las cuatro capas del órgano del esmalte?",
+          "opciones": [
+            "Iniciación",
+            "Brote",
+            "Casquete",
+            "Campana"
+          ],
+          "correcta": 3,
+          "explicacion": "En la campana se diferencian el epitelio interno, el estrato intermedio, el retículo estrellado y el epitelio externo."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Evidence for the role of the enamel knot as a control center in mammalian tooth cusp formation: non-dividing cells express growth stimulating Fgf-4 gene",
+          "autor": "Jernvall J., Kettunen P., Karavanova I., Martin L. B., Thesleff I. (International Journal of Developmental Biology)",
+          "anio": 1994
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología y embriología oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "5.3",
+      "titulo": "Aposición y maduración: cómo se fabrican la dentina y el esmalte",
+      "minutos": 16,
+      "enPocasPalabras": "Cuando la forma del diente ya está dibujada, unas células empiezan a fabricar la dentina y, justo después, otras fabrican el esmalte, capa por capa, desde la punta de la corona hacia el cuello. Al principio el esmalte es blando; luego se endurece al perder proteínas y agua y ganar mineral. Si algo altera ese proceso, como el exceso de flúor, el esmalte queda con manchas o defectos para siempre.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Al final de la etapa de campana el germen ya tiene forma, pero todavía es un tejido blando. La siguiente fase, llamada **aposición**, consiste en depositar capa tras capa la matriz orgánica de la dentina y del esmalte, que después se mineraliza. La última fase del esmalte, la **maduración**, lo transforma en el tejido más duro del cuerpo.\n\nEntender estas fases tiene un valor clínico enorme: el esmalte no se remodela ni se repara con células, así que cualquier alteración que ocurra mientras se forma queda registrada en él para siempre. Por eso la superficie de un diente es, en cierto modo, un archivo de lo que pasó en el organismo durante los años de su formación."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Primero la dentina: la diferenciación de los odontoblastos"
+        },
+        {
+          "tipo": "texto",
+          "md": "La aposición comienza en la punta de las cúspides o en el borde incisal y avanza hacia el cuello. Las células del **epitelio interno del esmalte** envían señales a las células periféricas de la papila dental, que se alargan, se polarizan con el núcleo alejado del epitelio y se convierten en **odontoblastos**. Estos secretan una matriz rica en **colágeno tipo I** y proteínas no colágenas, llamada **predentina**, que luego se mineraliza para convertirse en dentina.\n\nLa primera dentina que se forma, inmediatamente bajo el futuro esmalte, es la **dentina del manto**: una capa delgada, con fibras de colágeno más gruesas y orientadas de forma distinta, cuya mineralización se inicia en **vesículas de matriz** que brotan de las células. Después se forma la **dentina circumpulpar**, que constituye la mayor parte del tejido. A medida que depositan matriz, los odontoblastos retroceden hacia el centro de la papila y dejan tras de sí una prolongación citoplasmática, la **prolongación odontoblástica**, alrededor de la cual queda el **túbulo dentinario**. Así, cada túbulo es el rastro del camino recorrido por un odontoblasto.\n\nEl depósito no es continuo, sino rítmico: deja **líneas incrementales** diarias y otras de periodicidad más larga, que en el módulo 6 verás con sus nombres. La papila, rodeada ya de dentina, pasa a llamarse **pulpa dental**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/07",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica de la punta de una cúspide en formación con una capa de odontoblastos, una franja de dentina y otra de ameloblastos.",
+          "pie": "En la punta de la cúspide comienza la aposición: los odontoblastos forman dentina y, frente a ellos, los ameloblastos empiezan a formar esmalte.",
+          "prompt": "Microfotografía histológica realista de la punta de una cúspide de un germen dentario en etapa de campana tardía, corte teñido con hematoxilina y eosina, gran aumento, de abajo hacia arriba se ven la pulpa con células dispersas, una hilera de odontoblastos cilíndricos alineados, una franja rosada intensa de predentina y dentina, una franja delgada de matriz de esmalte más pálida y una hilera de ameloblastos altos y en empalizada, iluminación de campo claro uniforme, enfoque nítido. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, colores fluorescentes, artefactos de corte."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Después el esmalte: el ciclo de vida del ameloblasto"
+        },
+        {
+          "tipo": "texto",
+          "md": "La presencia de la primera dentina es la señal que necesitan las células del epitelio interno para convertirse en **ameloblastos** y empezar a secretar esmalte. Este es el núcleo de la inducción recíproca: **sin dentina no hay esmalte**. El ameloblasto pasa por varias etapas funcionales:\n\n1. **Presecretora**: la célula se alarga, invierte su polaridad y se prepara para secretar.\n2. **Secretora**: desarrolla en su extremo una prolongación cónica, el **proceso de Tomes**, y secreta las proteínas de la matriz del esmalte. La principal es la **amelogenina**, que constituye cerca del 90 % de la matriz; la acompañan la **ameloblastina** y la **enamelina**, y la enzima **enamelisina** (MMP-20) empieza a procesarlas. Los cristales de apatita crecen sobre todo en longitud, y la geometría del proceso de Tomes organiza el esmalte en **prismas** y en esmalte interprismático.\n3. **De transición**: la célula se acorta, reduce su aparato secretor y una parte considerable de los ameloblastos muere por apoptosis.\n4. **De maduración**: los ameloblastos retiran agua y proteínas degradadas, sobre todo por acción de la **calicreína 4** (KLK4), e introducen iones de calcio y fosfato. Alternan ciclos en que su borde se ve rugoso y liso, asociados al transporte de iones y al control del pH. Los cristales crecen en grosor y anchura hasta casi tocarse.\n5. **De protección**: los ameloblastos se aplanan y, junto con restos de las otras capas del órgano del esmalte, forman el **epitelio reducido del esmalte**, que cubre la corona hasta la erupción."
+        },
+        {
+          "tipo": "texto",
+          "md": "Dos detalles de esta secuencia se reconocen después en el diente maduro. Como algunas prolongaciones de odontoblastos se extienden entre los ameloblastos antes de que se deposite el esmalte, quedan atrapadas en él y forman los **husos del esmalte**, visibles cerca de la unión amelodentinaria. Y como la secreción avanza de la cúspide hacia el cuello mientras la parte cuspídea ya está madurando, en un mismo germen coexisten ameloblastos en distintas etapas: la corona no se forma de golpe, sino como una ola que recorre la superficie."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m05/d3",
+          "pie": "Etapas funcionales del ameloblasto y lo que ocurre en el esmalte en cada una.",
+          "descripcion": "Banda horizontal con cinco siluetas de ameloblasto de izquierda a derecha: presecretor (alargándose), secretor (alto con proceso de Tomes cónico en su base), de transición (más corto, con algunas células en apoptosis), de maduración (dos siluetas alternas con borde rugoso y liso) y protector (aplanado). Debajo de cada célula, una barra de esmalte cuyo color se intensifica de izquierda a derecha para representar el aumento de mineral, y una flecha inferior que indica salida de proteínas y agua durante la maduración.",
+          "elementos": [
+            "Ameloblasto presecretor",
+            "Ameloblasto secretor con proceso de Tomes",
+            "Transición: apoptosis",
+            "Maduración: borde rugoso y liso",
+            "Epitelio reducido del esmalte",
+            "Salida de proteínas y agua",
+            "Aumento progresivo del mineral"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Un tejido que se construye retirando su andamio",
+          "md": "La paradoja de la amelogénesis es que el esmalte maduro, con alrededor de 96 % de mineral en peso, se forma a partir de una matriz rica en proteínas. Las amelogeninas se autoensamblan en nanoesferas que controlan el espacio entre cristales y su crecimiento ordenado; después deben eliminarse casi por completo para que los cristales ocupen ese espacio. Las mutaciones en los genes de las proteínas de la matriz (**AMELX**, en el cromosoma X; **ENAM**) o de las enzimas que las degradan (**MMP20**, **KLK4**) causan distintos tipos de **amelogénesis imperfecta**. Así se explica la correspondencia entre etapa y defecto: un fallo en la secreción produce esmalte **hipoplásico**, delgado o con fosas; un fallo en la maduración produce esmalte de grosor normal pero **hipomaduro** o **hipocalcificado**, blando y opaco. El mismo razonamiento aplica a los defectos adquiridos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Huellas permanentes de la formación"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como el esmalte no se remodela, los acontecimientos sistémicos que coinciden con su formación dejan marcas cuya ubicación en la corona indica la edad en la que ocurrieron. La **línea neonatal**, una línea incremental acentuada visible en el esmalte y la dentina de los dientes temporales y del primer molar permanente, registra el estrés fisiológico del nacimiento. Enfermedades febriles graves, desnutrición o alteraciones metabólicas en la infancia pueden producir bandas de hipoplasia que rodean los dientes que se estaban formando en ese momento, con una distribución simétrica y cronológica.\n\nLa **fluorosis dental** es la huella adquirida más estudiada. La ingesta excesiva y prolongada de fluoruro durante la formación del esmalte, sobre todo en la maduración, altera la eliminación de proteínas y deja un esmalte con más porosidad bajo la superficie. Se manifiesta como líneas o manchas blancas opacas simétricas y, en formas graves, con zonas pardas y pérdida de superficie tras la erupción. Una vez formada la corona, el fluoruro ya no puede causar fluorosis en ese diente; su acción tópica después de la erupción es la base de la prevención de la caries que estudias en el programa de caries dental."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Fluoruro, sal y agua en México",
+          "md": "Desde principios de la década de 1990, México adoptó la **fluoruración de la sal de mesa** como medida comunitaria para prevenir la caries, porque la sal llega incluso a comunidades sin red de agua potable. Al mismo tiempo, en estados del centro y norte del país, como Durango, Zacatecas, Aguascalientes, San Luis Potosí y Chihuahua, el agua de pozo contiene fluoruro natural en concentraciones altas, y estudios nacionales han documentado ahí una fluorosis dental frecuente. Por ese motivo las autoridades sanitarias controlan la distribución de sal fluorurada en las regiones con fluoruro elevado en el agua. Antes de orientar a una familia sobre fuentes de fluoruro, conoce la situación del agua de su localidad y consulta la normativa vigente de la Secretaría de Salud."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/08",
+          "proporcion": "4:3",
+          "alt": "Vista clínica frontal de incisivos superiores permanentes con finas líneas y manchas blancas opacas simétricas.",
+          "pie": "Fluorosis leve: opacidades blancas simétricas que siguen las líneas de crecimiento del esmalte en dientes homólogos.",
+          "prompt": "Fotografía clínica realista frontal de los incisivos centrales y laterales superiores permanentes de un adolescente, labios separados por un retractor suave, esmalte con finas estrías horizontales blancas opacas y pequeñas manchas blancas como nieve distribuidas de forma simétrica en ambos lados, sin cavidades ni manchas pardas, encía sana rosa pálido, superficie húmeda con brillo natural, iluminación de flash clínico uniforme, enfoque nítido. Evitar: texto, logotipos, marcas de agua, rostro completo, sangre, caries, ortodoncia, dientes deformes o en número incorrecto."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/09",
+          "proporcion": "4:3",
+          "alt": "Primer molar permanente con una opacidad delimitada color crema y amarillo en la cúspide mesiovestibular, en vista oclusal.",
+          "pie": "Hipomineralización: opacidad delimitada en un primer molar permanente, distinta del patrón difuso y simétrico de la fluorosis.",
+          "prompt": "Fotografía clínica macro realista con espejo intraoral de un primer molar inferior permanente de un niño de 8 años en vista oclusal, con una opacidad bien delimitada de color crema amarillento en la cúspide mesiovestibular y esmalte normal brillante en el resto de la corona, fisuras sanas, segundo molar temporal vecino visible, encía rosada sana, superficie limpia y húmeda, iluminación de lámpara dental uniforme, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, rostro, sangre, cavidades profundas, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Etapa y consecuencia",
+          "instruccion": "Relaciona cada etapa o proceso con lo que ocurre en ella o con el defecto asociado a su alteración.",
+          "pares": [
+            {
+              "a": "Ameloblasto secretor",
+              "b": "Forma los prismas mediante el proceso de Tomes"
+            },
+            {
+              "a": "Ameloblasto de maduración",
+              "b": "Retira proteínas y agua y aumenta el mineral"
+            },
+            {
+              "a": "Fallo en la secreción del esmalte",
+              "b": "Esmalte hipoplásico, delgado o con fosas"
+            },
+            {
+              "a": "Fallo en la maduración del esmalte",
+              "b": "Esmalte de grosor normal pero blando y opaco"
+            },
+            {
+              "a": "Primera dentina formada",
+              "b": "Señal que activa la secreción de esmalte"
+            },
+            {
+              "a": "Epitelio reducido del esmalte",
+              "b": "Cubre la corona hasta la erupción"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La **hipomineralización molar-incisiva** (HMI) es otro defecto de la maduración, frecuente en la consulta infantil: afecta a uno o más primeros molares permanentes, a veces con incisivos, con opacidades delimitadas blancas, cremas o pardas, esmalte frágil que puede fracturarse después de la erupción y sensibilidad marcada. Su causa es multifactorial y no está completamente establecida; se han estudiado factores perinatales y enfermedades de la primera infancia, coincidentes con la etapa en que se mineralizan esos dientes. Distinguirla de la fluorosis y de la caries cambia el plan preventivo."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** frente a un defecto del esmalte, pregúntate en qué momento se formó esa parte de la corona y si el patrón es simétrico (sugiere una causa sistémica o genética que actuó en todos los dientes que se formaban a la vez) o aislado (sugiere una causa local, como la infección o el traumatismo de un temporal). Registrar el patrón con fotografías clínicas facilita el diagnóstico diferencial."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Aposición",
+          "definicion": "Fase de la odontogénesis en la que se depositan capa por capa las matrices de dentina y esmalte."
+        },
+        {
+          "termino": "Odontoblasto",
+          "definicion": "Célula derivada de la papila dental que forma la dentina y mantiene una prolongación dentro del túbulo dentinario."
+        },
+        {
+          "termino": "Dentina del manto",
+          "definicion": "Primera capa de dentina formada, inmediatamente bajo el esmalte, con características de mineralización particulares."
+        },
+        {
+          "termino": "Ameloblasto",
+          "definicion": "Célula derivada del epitelio interno del esmalte que secreta la matriz del esmalte y controla su maduración."
+        },
+        {
+          "termino": "Proceso de Tomes",
+          "definicion": "Prolongación cónica del ameloblasto secretor cuya geometría organiza el esmalte en prismas."
+        },
+        {
+          "termino": "Amelogenina",
+          "definicion": "Proteína más abundante de la matriz del esmalte en formación, que se elimina casi por completo durante la maduración."
+        },
+        {
+          "termino": "Fluorosis dental",
+          "definicion": "Alteración del esmalte por ingesta excesiva y prolongada de fluoruro durante su formación, con opacidades simétricas."
+        },
+        {
+          "termino": "Hipomineralización molar-incisiva",
+          "definicion": "Defecto cualitativo del esmalte de primeros molares permanentes, a veces con incisivos, por alteración de la maduración."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.3-1",
+          "q": "¿Qué tejido se deposita primero en la punta de una cúspide en formación?",
+          "opciones": [
+            "Esmalte",
+            "Cemento",
+            "Dentina",
+            "Hueso alveolar"
+          ],
+          "correcta": 2,
+          "explicacion": "Los odontoblastos depositan la primera dentina, y su presencia induce a los ameloblastos a secretar esmalte."
+        },
+        {
+          "id": "t5.3-2",
+          "q": "¿Qué defecto se espera si la alteración ocurre durante la etapa secretora del ameloblasto?",
+          "opciones": [
+            "Esmalte hipoplásico, más delgado o con fosas",
+            "Esmalte de grosor normal pero blando",
+            "Dentina sin túbulos",
+            "Raíces más largas"
+          ],
+          "correcta": 0,
+          "explicacion": "La etapa secretora determina el grosor; su alteración produce hipoplasia. La maduración determina la dureza."
+        },
+        {
+          "id": "t5.3-3",
+          "q": "¿Por qué el fluoruro ya no puede causar fluorosis en un diente cuya corona terminó de formarse?",
+          "opciones": [
+            "Porque el esmalte maduro es impermeable a todo",
+            "Porque el fluoruro solo actúa en la dentina",
+            "Porque la fluorosis la causa una bacteria",
+            "Porque la fluorosis se produce durante la formación del esmalte, y el esmalte formado no se remodela"
+          ],
+          "correcta": 3,
+          "explicacion": "La fluorosis es un defecto del desarrollo; después de formada la corona el fluoruro actúa de forma tópica, sin producir fluorosis en ese diente."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología oral y en estudios epidemiológicos mexicanos sobre fluorosis y fluoruración de la sal (UNAM y revistas indexadas en Medigraphic)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "5.4",
+      "titulo": "La raíz y el periodonto: vaina de Hertwig, cemento y ligamento",
+      "minutos": 15,
+      "enPocasPalabras": "Cuando la corona termina de formarse, un anillo de células crece hacia abajo como un molde y guía la formación de la raíz. Al mismo tiempo se forman el cemento que cubre la raíz, el ligamento que la sujeta y el hueso que la rodea. La raíz sigue creciendo años después de que el diente aparece en la boca, por eso cuidar los dientes nuevos de los niños es tan importante.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La corona es la parte del diente que vemos, pero la raíz decide cuánto tiempo permanecerá en la boca. Su formación sigue una lógica distinta a la de la corona: no hay esmalte, el epitelio actúa como un molde temporal y aparecen tres tejidos nuevos que unen el diente al hueso: el **cemento**, el **ligamento periodontal** y el **hueso alveolar propiamente dicho**.\n\nEste tema explica cómo se forma la raíz, de dónde salen los tejidos de soporte y qué estructuras epiteliales quedan atrapadas en el periodonto, algunas de ellas responsables de quistes frecuentes. La anatomía del ligamento y del hueso alveolar maduros se estudia en el módulo 7, y la cronología de la erupción en el módulo 9."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La vaina epitelial radicular de Hertwig"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando el esmalte alcanza el futuro cuello del diente, el **asa cervical** del órgano del esmalte prolifera hacia apical y forma una doble capa de células: la **vaina epitelial radicular de Hertwig**. Está formada solo por el epitelio interno y el externo del esmalte, sin estrato intermedio ni retículo estrellado; por eso sus células internas no se convierten en ameloblastos y la raíz no tiene esmalte.\n\nLa vaina cumple el mismo papel inductor que el epitelio interno en la corona: sus células señalizan a las células vecinas de la papila, que se diferencian en **odontoblastos** y forman la **dentina radicular**. A medida que la dentina se deposita, la vaina sigue creciendo hacia apical y va dibujando la forma, la longitud y la curvatura de la raíz.\n\nEn su extremo, la vaina se pliega hacia adentro en un plano horizontal formando el **diafragma epitelial**, que delimita la abertura apical de la pulpa. En los dientes multirradiculares, del diafragma crecen lengüetas epiteliales que se fusionan en el centro y dividen esa abertura en dos o tres; cada una continúa formando una raíz independiente, y el punto de unión es la futura **furcación**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/10",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de un corte longitudinal de un diente en formación con la corona completa y una raíz corta abierta en el extremo apical.",
+          "pie": "La vaina de Hertwig avanza hacia apical y guía la formación de la raíz; el ápice permanece abierto mientras la raíz crece.",
+          "prompt": "Ilustración científica realista de un corte longitudinal de un incisivo central inferior permanente en formación dentro del hueso de un niño, corona completa con esmalte blanco translúcido y dentina marfil, raíz corta con paredes delgadas que se abren en forma de embudo hacia apical, pulpa amplia rosada, en el extremo de la raíz una delgada banda celular que se curva hacia adentro, tejido de folículo fibroso alrededor y hueso esponjoso en tono marfil, fondo neutro claro, iluminación difusa. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, caries, raíz completamente cerrada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Del folículo al periodonto: cemento, ligamento y hueso"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una vez que la vaina induce la dentina radicular, se fragmenta. Sus restos se alejan de la superficie de la raíz y las células del **folículo dental** entran en contacto con la dentina recién formada. Algunas se diferencian en **cementoblastos**, que depositan **cemento** sobre la raíz; otras forman los **fibroblastos** del ligamento periodontal, que producen haces de colágeno; y las más externas se convierten en **osteoblastos** que forman el hueso alveolar propiamente dicho. Las fibras del ligamento quedan atrapadas en el cemento por un extremo y en el hueso por el otro: son las **fibras de Sharpey**. Así se construye la articulación del diente con el maxilar, llamada **gonfosis**.\n\nEl origen exacto de los cementoblastos sigue en estudio: además del folículo, algunas investigaciones han propuesto que parte de las células de la vaina de Hertwig podría contribuir a formar cemento. Para efectos clínicos, lo relevante es que el cemento, el ligamento y el hueso alveolar forman una unidad de desarrollo y funcional.\n\nLos restos de la vaina que permanecen en el ligamento periodontal se llaman **restos epiteliales de Malassez**. Normalmente están inactivos, pero ante la inflamación crónica de un diente con necrosis pulpar pueden proliferar y formar el revestimiento de un **quiste radicular**, el quiste odontogénico inflamatorio más frecuente."
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentina de la raíz tiene particularidades que se explican por este origen. En su capa más externa, junto al cemento, aparece una franja de pequeños espacios poco mineralizados llamada **capa granular de Tomes**, y por fuera de ella una capa delgada y sin túbulos, la **capa hialina**, que se interpreta como la zona de unión entre dentina y cemento. Cuando la raíz alcanza su longitud, la abertura apical se estrecha por depósito de dentina por dentro y de cemento por fuera. Como el cemento sigue depositándose en el ápice durante toda la vida, la salida del conducto, el **foramen apical**, a menudo no coincide con la punta anatómica de la raíz, sino que queda desplazada hacia un lado, un hecho que la endodoncia toma en cuenta al determinar la longitud de trabajo."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m05/d4",
+          "pie": "Destino de cada componente del germen durante la formación de la raíz y el periodonto.",
+          "descripcion": "Corte esquemático de una raíz en formación. A lo largo de la raíz, la vaina de Hertwig como doble línea epitelial que se interrumpe en fragmentos (restos de Malassez); en su extremo, el diafragma epitelial plegado hacia adentro. Por dentro, odontoblastos y dentina radicular; por fuera, el folículo con tres flechas de diferenciación hacia cementoblastos (cemento sobre la raíz), fibroblastos (ligamento periodontal) y osteoblastos (hueso alveolar). Fibras de Sharpey dibujadas como líneas que unen cemento y hueso.",
+          "elementos": [
+            "Vaina epitelial radicular de Hertwig",
+            "Diafragma epitelial",
+            "Dentina radicular",
+            "Restos epiteliales de Malassez",
+            "Cementoblastos y cemento",
+            "Fibroblastos y ligamento periodontal",
+            "Osteoblastos y hueso alveolar",
+            "Fibras de Sharpey"
+          ]
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Errores de la vaina de Hertwig y su consecuencia",
+          "columnas": [
+            "Qué ocurre",
+            "Resultado",
+            "Importancia clínica"
+          ],
+          "filas": [
+            [
+              "La vaina se interrumpe antes de inducir la dentina en un punto",
+              "Queda un orificio en la pared de la raíz que comunica la pulpa con el ligamento: conducto lateral o accesorio",
+              "Vía de comunicación entre pulpa y periodonto que se considera en endodoncia"
+            ],
+            [
+              "Células de la vaina no se separan y se diferencian en ameloblastos",
+              "Perla de esmalte, sobre todo en la furcación de molares",
+              "Favorece la retención de placa y puede confundirse con cálculo"
+            ],
+            [
+              "Las lengüetas del diafragma no se fusionan del todo o lo hacen de forma irregular",
+              "Raíces fusionadas, raíces supernumerarias o furcaciones atípicas",
+              "Cambia la anatomía de conductos y el pronóstico periodontal"
+            ],
+            [
+              "El diafragma se desplaza por un obstáculo o un traumatismo durante la formación",
+              "Dilaceración: raíz con una curvatura brusca",
+              "Dificulta tratamientos de conductos, extracciones y movimientos ortodóncicos"
+            ],
+            [
+              "Las raíces de dos dientes vecinos muy próximos se unen por depósito de cemento",
+              "Concrescencia: dos dientes unidos solo por el cemento",
+              "Suele descubrirse en la radiografía o durante una extracción, sobre todo en molares superiores"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/11",
+          "proporcion": "4:3",
+          "alt": "Molar superior extraído visto desde la furcación, con una pequeña esfera de esmalte entre las raíces.",
+          "pie": "Una perla de esmalte en la furcación de un molar: esmalte formado fuera de lugar por células de la vaina radicular.",
+          "prompt": "Fotografía macro de estudio de un segundo molar superior permanente extraído, limpio y seco, sobre fondo gris neutro, vista lateral que muestra la zona de furcación entre las raíces vestibulares, con una pequeña esfera lisa y brillante de color blanco nacarado adherida a la raíz justo debajo del cuello, raíces color marfil con textura de cemento mate, corona con anatomía correcta, iluminación difusa de estudio, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, restos de tejido blando, caries, fracturas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La raíz termina años después de la erupción",
+          "md": "Un diente aparece en la boca cuando su raíz ha completado aproximadamente entre la mitad y las tres cuartas partes de su longitud. Los textos de anatomía dental describen que el ápice de los dientes temporales se completa alrededor de uno a uno y medio años después de la erupción, y el de los permanentes, aproximadamente dos a tres años después. Durante ese tiempo el diente tiene un **ápice abierto**, paredes radiculares delgadas y una pulpa amplia con gran capacidad de respuesta. Para valorar radiográficamente en qué etapa está un diente se usan escalas como las de Nolla o Demirjian, que se estudian en odontopediatría y ortodoncia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El epitelio reducido del esmalte y el comienzo de la erupción"
+        },
+        {
+          "tipo": "texto",
+          "md": "Mientras se forma la raíz, el diente empieza a moverse hacia la cavidad oral. El **folículo dental** coordina ese movimiento: en el lado hacia donde avanza el diente estimula la reabsorción del hueso, y en el lado opuesto, su formación. La corona sigue cubierta por el **epitelio reducido del esmalte**, que protege al esmalte del contacto con el tejido conjuntivo. Cuando el diente se acerca a la mucosa, este epitelio se fusiona con el epitelio oral, el tejido central degenera y se abre un conducto epitelial por el que la corona emerge sin sangrado. Ese mismo epitelio reducido origina el primer **epitelio de unión**, que sella la encía alrededor del diente.\n\nSi se acumula líquido entre el epitelio reducido y la corona de un diente que no ha erupcionado, se forma un **quiste dentígero**, que rodea la corona y se une al diente en el cuello; es frecuente alrededor de terceros molares inferiores y caninos superiores retenidos. Las fases de la erupción, sus teorías y la cronología se tratan en el módulo 9."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/12",
+          "proporcion": "16:9",
+          "alt": "Vista clínica de la encía de un niño con la punta de un primer molar permanente emergiendo detrás del segundo molar temporal.",
+          "pie": "El primer molar permanente emerge cuando su raíz todavía está en formación: un diente nuevo con ápice abierto.",
+          "prompt": "Fotografía clínica realista con espejo intraoral de la hemiarcada inferior izquierda de un niño de 6 años, vista oclusal, dientes temporales completos y sanos, por detrás del segundo molar temporal emergen las cúspides de un primer molar permanente atravesando una encía rosada ligeramente engrosada, sin inflamación marcada, superficies limpias y húmedas, iluminación de lámpara dental uniforme, enfoque nítido, colores naturales. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, rostro, sangre, caries extensas, dientes en número incorrecto."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Un incisivo joven golpeado",
+          "situacion": "Un niño de 8 años sufre una caída en la escuela y se fractura el borde incisal del incisivo central superior permanente, que erupcionó hace aproximadamente un año. La radiografía muestra una raíz corta con paredes delgadas y ápice ampliamente abierto. La fractura no expone la pulpa y el diente responde a las pruebas de sensibilidad.",
+          "opciones": [
+            {
+              "texto": "Priorizar la protección de la pulpa y el seguimiento clínico y radiográfico, porque la pulpa vital es la que permite completar la raíz.",
+              "correcta": true,
+              "retro": "Correcto. Mientras la pulpa siga viva, los odontoblastos y la vaina de Hertwig pueden seguir formando dentina y completando el ápice. El plan concreto lo define el odontólogo o el especialista según el caso."
+            },
+            {
+              "texto": "Indicar la extracción porque la raíz está incompleta.",
+              "correcta": false,
+              "retro": "Una raíz incompleta es normal un año después de la erupción; extraer sería un error grave."
+            },
+            {
+              "texto": "Realizar de inmediato un tratamiento de conductos convencional como en un adulto.",
+              "correcta": false,
+              "retro": "En un diente inmaduro con pulpa vital, el objetivo es conservarla; además, el ápice abierto exige enfoques específicos que decide el especialista."
+            },
+            {
+              "texto": "No dar seguimiento porque la pulpa respondió bien a las pruebas.",
+              "correcta": false,
+              "retro": "Tras un traumatismo, la pulpa puede evolucionar mal semanas o meses después; el seguimiento es indispensable."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Un diente inmaduro necesita su pulpa",
+          "md": "Si la pulpa de un diente con ápice abierto se necrosa, la raíz deja de crecer: queda corta, con paredes delgadas y frágiles, y el pronóstico a largo plazo empeora. Por eso, ante caries profundas o traumatismos en dientes jóvenes, el objetivo clínico es conservar la vitalidad pulpar siempre que sea posible. Las técnicas para dientes inmaduros con pulpa vital o necrótica, como las terapias pulpares vitales o los procedimientos endodónticos regenerativos, son decisiones del especialista."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** antes de planear cualquier tratamiento en un niño o adolescente, revisa en la radiografía el grado de formación radicular de los dientes involucrados. Un ápice abierto cambia el pronóstico, el tipo de tratamiento y la frecuencia del seguimiento."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Vaina epitelial radicular de Hertwig",
+          "definicion": "Doble capa epitelial que crece desde el asa cervical e induce la formación de la dentina radicular y la forma de la raíz."
+        },
+        {
+          "termino": "Diafragma epitelial",
+          "definicion": "Extremo plegado de la vaina de Hertwig que delimita la abertura apical y divide la raíz en los dientes multirradiculares."
+        },
+        {
+          "termino": "Restos epiteliales de Malassez",
+          "definicion": "Restos de la vaina de Hertwig que permanecen en el ligamento periodontal y pueden originar quistes radiculares."
+        },
+        {
+          "termino": "Cementoblasto",
+          "definicion": "Célula que deposita cemento sobre la superficie de la raíz."
+        },
+        {
+          "termino": "Fibras de Sharpey",
+          "definicion": "Extremos de las fibras del ligamento periodontal insertados en el cemento y en el hueso alveolar."
+        },
+        {
+          "termino": "Epitelio reducido del esmalte",
+          "definicion": "Capa epitelial que cubre la corona hasta la erupción y origina el primer epitelio de unión."
+        },
+        {
+          "termino": "Ápice abierto",
+          "definicion": "Extremo radicular todavía en formación, con abertura amplia y paredes delgadas."
+        },
+        {
+          "termino": "Perla de esmalte",
+          "definicion": "Pequeño depósito de esmalte formado fuera de lugar sobre la raíz, a menudo en la furcación de molares."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.4-1",
+          "q": "¿Por qué la raíz no tiene esmalte?",
+          "opciones": [
+            "Porque el esmalte se desgasta al erupcionar",
+            "Porque la vaina de Hertwig carece de estrato intermedio y retículo estrellado, y sus células no se convierten en ameloblastos",
+            "Porque el cemento disuelve el esmalte",
+            "Porque la raíz se forma antes que la corona"
+          ],
+          "correcta": 1,
+          "explicacion": "La vaina solo tiene epitelio interno y externo; induce dentina pero no se diferencia en ameloblastos."
+        },
+        {
+          "id": "t5.4-2",
+          "q": "¿Qué estructura origina el revestimiento de un quiste radicular?",
+          "opciones": [
+            "El retículo estrellado",
+            "Los restos de Serres",
+            "La lámina vestibular",
+            "Los restos epiteliales de Malassez"
+          ],
+          "correcta": 3,
+          "explicacion": "Los restos de Malassez, derivados de la vaina de Hertwig, proliferan ante la inflamación periapical crónica."
+        },
+        {
+          "id": "t5.4-3",
+          "q": "¿Qué componente del germen forma el cemento, el ligamento periodontal y el hueso alveolar propiamente dicho?",
+          "opciones": [
+            "El folículo dental",
+            "La papila dental",
+            "El órgano del esmalte",
+            "El epitelio reducido del esmalte"
+          ],
+          "correcta": 0,
+          "explicacion": "Las células del folículo se diferencian en cementoblastos, fibroblastos del ligamento y osteoblastos."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología oral y patología odontogénica",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "5.5",
+      "titulo": "Anomalías del desarrollo dental: cuando la odontogénesis se desvía",
+      "minutos": 16,
+      "enPocasPalabras": "A veces, mientras los dientes se forman, algo cambia: pueden faltar dientes, sobrar, ser más pequeños, tener formas raras o un esmalte o una dentina débiles. Muchas de estas diferencias vienen de la herencia y otras de enfermedades o golpes en la infancia. Reconocerlas a tiempo permite proteger esos dientes y planear bien el tratamiento.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las anomalías del desarrollo dental son el mejor examen práctico de lo aprendido en este módulo. Cada una puede leerse como una pregunta: ¿en qué etapa falló el proceso y qué tejido se afectó? Con esa lógica, una lista que parecía de memoria se convierte en un razonamiento.\n\nLas anomalías se agrupan en cinco familias: de **número**, de **tamaño**, de **forma**, de **estructura** y de **erupción**. Las de erupción se estudian en el módulo 9. Algunas son variaciones sin consecuencias, otras aumentan el riesgo de caries, de necrosis pulpar o de problemas de oclusión, y otras son la primera señal visible de un síndrome. Por eso registrarlas en el expediente clínico y explicarlas a la familia forma parte de una buena atención."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anomalías de número"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **agenesia** es la ausencia de un diente porque su germen nunca se formó; es una alteración de la iniciación o de la etapa de brote. Se describe como **hipodoncia** cuando faltan de uno a cinco dientes, **oligodoncia** cuando faltan seis o más sin contar los terceros molares, y **anodoncia** cuando faltan todos, lo cual es excepcional. Sin contar los terceros molares, los dientes que faltan con más frecuencia suelen ser los **segundos premolares inferiores** y los **incisivos laterales superiores**, con variaciones entre poblaciones. La agenesia es más común en la dentición permanente que en la temporal, y cuando falta un temporal es frecuente que también falte su sucesor. Algunos gérmenes, en especial los de segundos premolares, pueden empezar a mineralizarse tarde, así que una ausencia en la radiografía de un niño pequeño conviene confirmarla con un control posterior antes de concluir que se trata de agenesia.\n\nLos **dientes supernumerarios** se originan por actividad excesiva de la lámina dental o por división de un germen. El más frecuente es el **mesiodens**, situado entre los incisivos centrales superiores, que puede impedir su erupción o separarlos. Les siguen los cuartos molares y los premolares supernumerarios. Los supernumerarios múltiples obligan a pensar en síndromes como la **displasia cleidocraneal**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/13",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica de un adolescente con ausencia de los incisivos laterales superiores y espacio entre centrales y caninos.",
+          "pie": "Agenesia de incisivos laterales superiores: los caninos ocupan una posición más mesial y pueden quedar espacios.",
+          "prompt": "Radiografía panorámica dental realista de un adolescente de 14 años, imagen en escala de grises con contraste clínico normal, dentición permanente con ausencia de ambos incisivos laterales superiores, caninos superiores en posición más mesial junto a los centrales, premolares y molares completos con raíces en formación final, terceros molares en germen dentro del hueso, estructuras óseas y senos maxilares bien definidos, encuadre panorámico completo. Evitar: texto, letras, números, marcadores de lado, logotipos, marcas de agua, artefactos metálicos, ortodoncia, implantes, dientes duplicados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anomalías de tamaño y de forma"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las anomalías de tamaño y forma se originan sobre todo en las etapas de casquete y campana, cuando se define la morfología de la corona y de la raíz. La **microdoncia** aislada más común es el **incisivo lateral superior conoide**, de corona estrecha y puntiaguda; suele asociarse a la agenesia del lateral del otro lado. La **macrodoncia** verdadera generalizada es rara.\n\nDos anomalías de forma se confunden con frecuencia. En la **geminación**, un solo germen intenta dividirse: la corona aparece ancha y con una muesca, por lo general con una sola raíz y un solo conducto, y el número de dientes de la arcada es normal si se cuenta el diente geminado como uno. En la **fusión**, dos gérmenes se unen por la dentina: si se cuenta el diente fusionado como uno, falta un diente en la arcada, salvo que la fusión sea con un supernumerario. Cuando dos dientes ya formados se unen solo por el cemento se habla de **concrescencia**, que viste en el tema anterior.\n\nOtras anomalías de forma tienen consecuencias clínicas directas. El **dens invaginatus** es una invaginación del órgano del esmalte hacia la papila durante la morfodiferenciación; es más frecuente en los incisivos laterales superiores y deja una fosa profunda revestida de esmalte delgado por la que las bacterias pueden alcanzar la pulpa sin caries visible. El **dens evaginatus** es lo contrario: un tubérculo en la cara oclusal, típico de premolares, que contiene un cuerno pulpar y puede fracturarse. La **cúspide en garra** es una cúspide accesoria en la cara palatina de incisivos. El **taurodontismo** es un molar con cámara pulpar alargada y furcación desplazada hacia apical, por invaginación tardía del diafragma epitelial."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Dientes sanos que pueden perder la pulpa",
+          "md": "En el **dens invaginatus** y en el **dens evaginatus** la pulpa puede necrosarse aunque el diente parezca intacto: en el primero, por la entrada de bacterias a través de la invaginación; en el segundo, por la fractura o el desgaste del tubérculo que contiene un cuerno pulpar. Identificarlos poco después de la erupción permite medidas preventivas, como sellar la fosa o proteger el tubérculo, que decide el odontólogo. Un incisivo lateral con una fosa palatina profunda merece una radiografía."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/14",
+          "proporcion": "4:3",
+          "alt": "Vista clínica de un incisivo lateral superior pequeño y de forma cónica junto a un incisivo central normal.",
+          "pie": "Incisivo lateral superior conoide: la microdoncia aislada más frecuente.",
+          "prompt": "Fotografía clínica realista frontal de los dientes anterosuperiores de un adulto joven, labios separados por un retractor suave, incisivos centrales permanentes de forma y tamaño normales, el incisivo lateral derecho pequeño, estrecho y de forma cónica con punta redondeada y espacios a ambos lados, el lateral izquierdo de forma normal, caninos completos, encía sana rosa pálido, esmalte con brillo natural, iluminación de flash clínico uniforme, enfoque nítido. Evitar: texto, logotipos, marcas de agua, rostro completo, sangre, caries, ortodoncia, restauraciones visibles, dientes duplicados."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m05/d5",
+          "pie": "Cada familia de anomalías se relaciona con la etapa de la odontogénesis en que se origina.",
+          "descripcion": "Línea de tiempo horizontal con las etapas de la odontogénesis (iniciación, brote, casquete, campana, aposición, maduración, formación radicular). Debajo de cada tramo, una caja de color con las anomalías típicas: iniciación y brote, agenesia y supernumerarios; casquete y campana, microdoncia, geminación, fusión, dens invaginatus y evaginatus; aposición, hipoplasia del esmalte y dentinogénesis imperfecta; maduración, fluorosis, hipomineralización y amelogénesis imperfecta hipomadura; formación radicular, dilaceración, taurodontismo y perlas de esmalte.",
+          "elementos": [
+            "Iniciación y brote: agenesia, supernumerarios",
+            "Casquete y campana: tamaño y forma",
+            "Aposición: hipoplasia, dentinogénesis imperfecta",
+            "Maduración: fluorosis, hipomineralización",
+            "Formación radicular: dilaceración, taurodontismo",
+            "Causas genéticas",
+            "Causas ambientales y locales"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anomalías de estructura"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Principales anomalías de estructura",
+          "columnas": [
+            "Anomalía",
+            "Origen",
+            "Cómo se ve",
+            "Qué implica"
+          ],
+          "filas": [
+            [
+              "Amelogénesis imperfecta",
+              "Hereditaria; genes de la matriz del esmalte o de sus enzimas, entre otros",
+              "Afecta a todos los dientes de ambas denticiones; esmalte delgado, blando u opaco según el tipo",
+              "Sensibilidad, desgaste y problemas estéticos; requiere manejo integral especializado"
+            ],
+            [
+              "Dentinogénesis imperfecta",
+              "Hereditaria; mutaciones de DSPP o asociada a osteogénesis imperfecta",
+              "Dientes de color ámbar o gris azulado opalescente; coronas bulbosas, cámaras y conductos que se obliteran",
+              "El esmalte se desprende con facilidad y la dentina se desgasta rápido"
+            ],
+            [
+              "Displasia dentinaria",
+              "Hereditaria",
+              "Coronas casi normales; raíces cortas o cámaras pulpares alteradas en la radiografía",
+              "Movilidad o pérdida temprana de dientes en algunos tipos"
+            ],
+            [
+              "Diente de Turner",
+              "Infección periapical o traumatismo de un temporal sobre el germen permanente en formación",
+              "Un solo diente permanente con hipoplasia o mancha, por lo general un premolar o un incisivo",
+              "Defecto localizado y asimétrico"
+            ],
+            [
+              "Fluorosis e hipomineralización molar-incisiva",
+              "Ambientales o multifactoriales, durante la maduración",
+              "Opacidades simétricas o delimitadas",
+              "Estudiadas en el tema 5.3"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una mancha en un solo premolar",
+          "md": "Una adolescente tiene un segundo premolar inferior con una zona amarillenta y rugosa en la cara vestibular, mientras el homólogo y el resto de los dientes son normales. La madre recuerda que, a los 6 años, el segundo molar temporal de esa zona tuvo un absceso y se extrajo tarde. El patrón aislado y la historia apuntan a un **diente de Turner**: la infección periapical del temporal alteró a los ameloblastos del germen permanente que se formaba justo debajo. El caso muestra por qué tratar a tiempo las infecciones de los dientes temporales protege también a los permanentes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m05/15",
+          "proporcion": "4:3",
+          "alt": "Dientes de un adulto joven con coloración ámbar grisácea opalescente y desgaste de los bordes.",
+          "pie": "Dentinogénesis imperfecta: coloración opalescente y desgaste acelerado por una dentina anormal bajo un esmalte que se desprende.",
+          "prompt": "Fotografía clínica realista frontal de las arcadas en oclusión de un adulto joven, labios separados por un retractor suave, todos los dientes permanentes con una coloración ámbar grisácea translúcida y opalescente, bordes incisales con desgaste moderado y pequeñas zonas donde falta esmalte, forma de las coronas ligeramente bulbosa, encía sana rosa pálido, iluminación de flash clínico uniforme, enfoque nítido, colores realistas. Evitar: texto, logotipos, marcas de agua, rostro completo, sangre, caries extensas, restauraciones metálicas, dientes en número incorrecto, aspecto perturbador."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anomalías que viajan juntas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las anomalías dentales rara vez aparecen aisladas. En personas con agenesia es más frecuente encontrar otras alteraciones en la misma boca: dientes más pequeños de lo esperado, desarrollo dental retrasado, laterales conoides o caninos superiores desplazados hacia palatino. Diversos autores interpretan esta asociación como la expresión variable de un mismo trasfondo genético, y en la práctica significa que hallar una anomalía obliga a buscar las demás.\n\nLas anomalías dentales también forman parte de cuadros más amplios. En la **displasia ectodérmica hipohidrótica**, ligada sobre todo al gen EDA, se combinan oligodoncia, dientes conoides, cabello escaso y menor sudoración. En las **fisuras de labio y paladar** son frecuentes la agenesia o la malformación del incisivo lateral del lado de la fisura y los supernumerarios en esa zona. En el **síndrome de Down** se describen con frecuencia agenesias y microdoncia. El odontólogo no establece estos diagnósticos sindrómicos, pero puede ser el primero en notar las señales y referir oportunamente a genética o pediatría."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Contar dientes es una herramienta diagnóstica",
+          "md": "Antes de interpretar una corona ancha, una arcada con espacios o un temporal que persiste más allá de lo esperado, cuenta los dientes presentes y compáralos con lo esperado para la edad, apoyándote en la radiografía para los no erupcionados. Ese conteo sencillo distingue fusión de geminación, revela agenesias y supernumerarios ocultos y orienta la planeación ortodóncica y protésica desde la infancia."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Reconoce la anomalía",
+          "instruccion": "Relaciona cada descripción con la anomalía del desarrollo que le corresponde.",
+          "pares": [
+            {
+              "a": "Faltan seis o más dientes permanentes, sin contar terceros molares",
+              "b": "Oligodoncia"
+            },
+            {
+              "a": "Diente supernumerario entre los incisivos centrales superiores",
+              "b": "Mesiodens"
+            },
+            {
+              "a": "Corona ancha con muesca y número normal de dientes en la arcada",
+              "b": "Geminación"
+            },
+            {
+              "a": "Fosa palatina profunda revestida de esmalte en un incisivo lateral",
+              "b": "Dens invaginatus"
+            },
+            {
+              "a": "Dientes de color ámbar opalescente con conductos que se obliteran",
+              "b": "Dentinogénesis imperfecta"
+            },
+            {
+              "a": "Un solo premolar hipoplásico tras infección del molar temporal",
+              "b": "Diente de Turner"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** ante cualquier anomalía, hazte tres preguntas y anota las respuestas: ¿afecta a un diente o a varios?, ¿es simétrica?, ¿hay antecedentes familiares o una enfermedad general? Un patrón generalizado y familiar sugiere una causa genética y justifica preguntar por otros signos, como alteraciones del cabello, las uñas o la sudoración, que orientan a una displasia ectodérmica; un patrón aislado sugiere una causa local."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Agenesia dental",
+          "definicion": "Ausencia de un diente por falta de formación de su germen."
+        },
+        {
+          "termino": "Oligodoncia",
+          "definicion": "Agenesia de seis o más dientes permanentes, sin contar los terceros molares."
+        },
+        {
+          "termino": "Mesiodens",
+          "definicion": "Diente supernumerario situado en la línea media, entre los incisivos centrales superiores."
+        },
+        {
+          "termino": "Geminación",
+          "definicion": "Intento de división de un solo germen que produce una corona ancha con muesca y un número normal de dientes."
+        },
+        {
+          "termino": "Fusión",
+          "definicion": "Unión de dos gérmenes por la dentina que reduce en uno el número de dientes de la arcada."
+        },
+        {
+          "termino": "Dens invaginatus",
+          "definicion": "Invaginación del órgano del esmalte hacia la papila que deja una fosa profunda revestida de esmalte."
+        },
+        {
+          "termino": "Dentinogénesis imperfecta",
+          "definicion": "Alteración hereditaria de la dentina que produce dientes opalescentes, frágiles y con conductos que se obliteran."
+        },
+        {
+          "termino": "Diente de Turner",
+          "definicion": "Diente permanente con hipoplasia localizada por infección o traumatismo del temporal que lo precedía."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t5.5-1",
+          "q": "Un paciente tiene un diente con corona ancha y muesca, y al contarlo como uno el número de dientes es normal. ¿Qué anomalía es más probable?",
+          "opciones": [
+            "Fusión",
+            "Concrescencia",
+            "Geminación",
+            "Taurodontismo"
+          ],
+          "correcta": 2,
+          "explicacion": "En la geminación un solo germen intenta dividirse y el número de dientes se mantiene; en la fusión, falta uno."
+        },
+        {
+          "id": "t5.5-2",
+          "q": "¿Cuál de estas anomalías se origina principalmente en la etapa de iniciación o de brote?",
+          "opciones": [
+            "Fluorosis",
+            "Agenesia",
+            "Dilaceración",
+            "Perla de esmalte"
+          ],
+          "correcta": 1,
+          "explicacion": "La agenesia ocurre cuando el germen no se forma o no avanza más allá del brote."
+        },
+        {
+          "id": "t5.5-3",
+          "q": "¿Qué distingue a un diente de Turner de la amelogénesis imperfecta?",
+          "opciones": [
+            "El diente de Turner afecta a todos los dientes",
+            "La amelogénesis imperfecta se debe siempre a un traumatismo",
+            "Ambos se deben al exceso de fluoruro",
+            "El diente de Turner es un defecto localizado, por causa local en el temporal predecesor"
+          ],
+          "correcta": 3,
+          "explicacion": "El diente de Turner es aislado y de causa local; la amelogénesis imperfecta es hereditaria y generalizada."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral and Maxillofacial Pathology",
+          "autor": "Neville B. W., Damm D. D., Allen C. M., Chi A. C. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Prevalence of dental agenesis: a meta-analysis",
+          "autor": "Polder B. J., Van't Hof M. A., Van der Linden F. P. G. M., Kuijpers-Jagtman A. M. (Community Dentistry and Oral Epidemiology)",
+          "anio": 2004
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de patología oral y odontopediatría",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: el nacimiento de un diente",
+    "pistas": [
+      {
+        "palabra": "LAMINA",
+        "pista": "Banda epitelial en herradura de la que nacen los gérmenes dentarios (lámina …)."
+      },
+      {
+        "palabra": "BROTE",
+        "pista": "Primera etapa del germen: una yema epitelial redondeada."
+      },
+      {
+        "palabra": "CASQUETE",
+        "pista": "Etapa con forma de gorra en la que aparece el nudo del esmalte."
+      },
+      {
+        "palabra": "CAMPANA",
+        "pista": "Etapa en la que se definen la forma de la corona y las cuatro capas del órgano del esmalte."
+      },
+      {
+        "palabra": "AMELOBLASTO",
+        "pista": "Célula que secreta la matriz del esmalte."
+      },
+      {
+        "palabra": "ODONTOBLASTO",
+        "pista": "Célula de la papila que forma la dentina."
+      },
+      {
+        "palabra": "PAPILA",
+        "pista": "Ectomesénquima que origina la dentina y la pulpa."
+      },
+      {
+        "palabra": "FOLICULO",
+        "pista": "Saco que rodea al germen y forma el cemento, el ligamento y el hueso alveolar."
+      },
+      {
+        "palabra": "HERTWIG",
+        "pista": "Apellido que da nombre a la vaina epitelial que guía la formación de la raíz."
+      },
+      {
+        "palabra": "MALASSEZ",
+        "pista": "Apellido de los restos epiteliales del ligamento que pueden originar quistes radiculares."
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m05-p01",
+        "q": "¿De qué estructura embrionaria procede el ectomesénquima que forma dentina, pulpa y cemento?",
+        "opciones": [
+          "De las células de la cresta neural",
+          "Del endodermo",
+          "Del epitelio oral",
+          "De los somitas"
+        ],
+        "correcta": 0,
+        "explicacion": "El ectomesénquima deriva de la cresta neural craneal; el esmalte, en cambio, deriva del epitelio oral."
+      },
+      {
+        "id": "m05-p02",
+        "q": "¿Qué tejido dental deriva del epitelio oral?",
+        "opciones": [
+          "La dentina",
+          "El cemento",
+          "La pulpa",
+          "El esmalte"
+        ],
+        "correcta": 3,
+        "explicacion": "Solo el esmalte es de origen epitelial, a través de los ameloblastos."
+      },
+      {
+        "id": "m05-p03",
+        "q": "¿Qué estructura forma el vestíbulo bucal?",
+        "opciones": [
+          "La lámina dental",
+          "La lámina vestibular",
+          "La lámina sucesional",
+          "El asa cervical"
+        ],
+        "correcta": 1,
+        "explicacion": "Las células centrales de la lámina vestibular degeneran y abren el surco que separa labios y mejillas de los procesos alveolares."
+      },
+      {
+        "id": "m05-p04",
+        "q": "¿De dónde se originan los molares permanentes?",
+        "opciones": [
+          "De la lámina sucesional de los molares temporales",
+          "De los restos de Serres",
+          "De la extensión posterior de la lámina dental",
+          "Del folículo de los temporales"
+        ],
+        "correcta": 2,
+        "explicacion": "Los molares permanentes no tienen predecesor y nacen de la extensión distal de la lámina dental."
+      },
+      {
+        "id": "m05-p05",
+        "q": "¿En qué etapa se reconocen por primera vez los tres componentes del germen: órgano del esmalte, papila y folículo?",
+        "opciones": [
+          "Lámina",
+          "Brote",
+          "Maduración",
+          "Casquete"
+        ],
+        "correcta": 3,
+        "explicacion": "En la etapa de casquete el germen ya tiene órgano del esmalte, papila dental y folículo."
+      },
+      {
+        "id": "m05-p06",
+        "q": "¿Qué función cumple el nudo del esmalte?",
+        "opciones": [
+          "Es un centro de señalización que regula la forma de la corona y la posición de las cúspides",
+          "Produce la dentina del manto",
+          "Forma la vaina de Hertwig",
+          "Mineraliza el esmalte"
+        ],
+        "correcta": 0,
+        "explicacion": "El nudo del esmalte primario y los secundarios producen señales que organizan la morfología de la corona."
+      },
+      {
+        "id": "m05-p07",
+        "q": "¿Qué capa del órgano del esmalte origina los ameloblastos?",
+        "opciones": [
+          "El epitelio externo del esmalte",
+          "El epitelio interno del esmalte",
+          "El retículo estrellado",
+          "El estrato intermedio"
+        ],
+        "correcta": 1,
+        "explicacion": "Las células cilíndricas del epitelio interno, frente a la papila, se diferencian en ameloblastos."
+      },
+      {
+        "id": "m05-p08",
+        "q": "¿Qué señal es indispensable para que los ameloblastos empiecen a secretar esmalte?",
+        "opciones": [
+          "La presencia de cemento",
+          "La erupción del diente",
+          "El depósito de la primera dentina",
+          "La fragmentación del folículo"
+        ],
+        "correcta": 2,
+        "explicacion": "Por inducción recíproca, la dentina recién formada activa la secreción de esmalte: sin dentina no hay esmalte."
+      },
+      {
+        "id": "m05-p09",
+        "q": "¿Qué estructura organiza el esmalte en prismas?",
+        "opciones": [
+          "El estrato intermedio",
+          "La prolongación odontoblástica",
+          "El diafragma epitelial",
+          "El proceso de Tomes del ameloblasto secretor"
+        ],
+        "correcta": 3,
+        "explicacion": "La geometría del proceso de Tomes determina la organización del esmalte en prismas e interprismas."
+      },
+      {
+        "id": "m05-p10",
+        "q": "¿Cuál es la proteína más abundante de la matriz del esmalte en formación?",
+        "opciones": [
+          "Amelogenina",
+          "Colágeno tipo I",
+          "Enamelina",
+          "Queratina"
+        ],
+        "correcta": 0,
+        "explicacion": "La amelogenina constituye cerca del 90 % de la matriz y se elimina casi por completo durante la maduración."
+      },
+      {
+        "id": "m05-p11",
+        "q": "Un niño presenta todos los dientes con esmalte de grosor normal pero blando, opaco y que se desgasta rápido, con antecedentes familiares similares. ¿Qué etapa está alterada con más probabilidad?",
+        "opciones": [
+          "La iniciación",
+          "La maduración del esmalte",
+          "La formación radicular",
+          "La etapa de casquete"
+        ],
+        "correcta": 1,
+        "explicacion": "Un esmalte de grosor normal pero poco mineralizado indica un fallo de maduración; el patrón familiar sugiere amelogénesis imperfecta."
+      },
+      {
+        "id": "m05-p12",
+        "q": "¿Por qué una persona puede presentar fluorosis en los incisivos permanentes pero no desarrollarla después de los 12 años en esos mismos dientes?",
+        "opciones": [
+          "Porque después de esa edad ya no se consume fluoruro",
+          "Porque la fluorosis se cura con la edad",
+          "Porque la fluorosis se produce mientras el esmalte se forma, y esas coronas ya están completas",
+          "Porque el fluoruro solo afecta a los temporales"
+        ],
+        "correcta": 2,
+        "explicacion": "La fluorosis es un defecto del desarrollo; el esmalte ya formado no se remodela."
+      },
+      {
+        "id": "m05-p13",
+        "q": "¿Qué capas forman la vaina epitelial radicular de Hertwig?",
+        "opciones": [
+          "Retículo estrellado y estrato intermedio",
+          "Ameloblastos y odontoblastos",
+          "Cementoblastos y fibroblastos",
+          "Epitelio interno y epitelio externo del esmalte"
+        ],
+        "correcta": 3,
+        "explicacion": "La vaina es una doble capa de epitelio interno y externo, sin retículo estrellado ni estrato intermedio."
+      },
+      {
+        "id": "m05-p14",
+        "q": "¿Qué determina el número de raíces de un diente?",
+        "opciones": [
+          "Las lengüetas que crecen desde el diafragma epitelial y se fusionan",
+          "La cantidad de ameloblastos",
+          "El grosor del esmalte",
+          "El número de cúspides"
+        ],
+        "correcta": 0,
+        "explicacion": "Las lengüetas del diafragma dividen la abertura apical y cada división forma una raíz."
+      },
+      {
+        "id": "m05-p15",
+        "q": "Una radiografía muestra un quiste en el ápice de un diente con necrosis pulpar. ¿Qué estructura origina su revestimiento epitelial?",
+        "opciones": [
+          "Los restos de Serres",
+          "Los restos epiteliales de Malassez",
+          "El epitelio reducido del esmalte",
+          "El retículo estrellado"
+        ],
+        "correcta": 1,
+        "explicacion": "El quiste radicular se origina por proliferación de los restos de Malassez ante la inflamación periapical crónica."
+      },
+      {
+        "id": "m05-p16",
+        "q": "¿Qué estructura se relaciona con el quiste dentígero que rodea la corona de un tercer molar retenido?",
+        "opciones": [
+          "La lámina vestibular",
+          "El nudo del esmalte",
+          "El epitelio reducido del esmalte",
+          "La papila dental"
+        ],
+        "correcta": 2,
+        "explicacion": "El quiste dentígero se forma por acumulación de líquido entre el epitelio reducido del esmalte y la corona."
+      },
+      {
+        "id": "m05-p17",
+        "q": "Un niño de 8 años se fractura el borde de un incisivo permanente con ápice abierto, sin exposición pulpar. ¿Cuál es el objetivo biológico principal?",
+        "opciones": [
+          "Conservar la pulpa vital para que la raíz complete su formación",
+          "Extraer el diente porque la raíz es corta",
+          "Cerrar el ápice con cemento de inmediato",
+          "Esperar a la edad adulta para valorar"
+        ],
+        "correcta": 0,
+        "explicacion": "La pulpa vital permite que la raíz siga desarrollándose; el plan concreto lo decide el profesional."
+      },
+      {
+        "id": "m05-p18",
+        "q": "Sin contar los terceros molares, ¿qué dientes faltan con mayor frecuencia por agenesia?",
+        "opciones": [
+          "Primeros molares e incisivos centrales",
+          "Caninos inferiores y primeros premolares",
+          "Incisivos centrales inferiores y caninos superiores",
+          "Segundos premolares inferiores e incisivos laterales superiores"
+        ],
+        "correcta": 3,
+        "explicacion": "Los segundos premolares inferiores y los incisivos laterales superiores son los más afectados, con variaciones entre poblaciones."
+      },
+      {
+        "id": "m05-p19",
+        "q": "¿Qué anomalía puede llevar a necrosis pulpar en un incisivo lateral superior sin caries visible?",
+        "opciones": [
+          "Taurodontismo",
+          "Dens invaginatus",
+          "Concrescencia",
+          "Macrodoncia"
+        ],
+        "correcta": 1,
+        "explicacion": "La invaginación revestida de esmalte delgado permite el paso de bacterias hacia la pulpa."
+      },
+      {
+        "id": "m05-p20",
+        "q": "Un solo premolar presenta hipoplasia y el molar temporal que lo precedía tuvo un absceso. ¿Cómo se denomina?",
+        "opciones": [
+          "Amelogénesis imperfecta",
+          "Fluorosis dental",
+          "Diente de Turner",
+          "Dentinogénesis imperfecta"
+        ],
+        "correcta": 2,
+        "explicacion": "El diente de Turner es un defecto localizado por infección o traumatismo del temporal predecesor."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Oral Anatomy, Histology and Embryology",
+      "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+      "autor": "Nelson S. J. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Evidence for the role of the enamel knot as a control center in mammalian tooth cusp formation: non-dividing cells express growth stimulating Fgf-4 gene",
+      "autor": "Jernvall J., Kettunen P., Karavanova I., Martin L. B., Thesleff I. (International Journal of Developmental Biology)",
+      "anio": 1994
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Prevalence of dental agenesis: a meta-analysis",
+      "autor": "Polder B. J., Van't Hof M. A., Van der Linden F. P. G. M., Kuijpers-Jagtman A. M. (Community Dentistry and Oral Epidemiology)",
+      "anio": 2004
+    }
+  ]
+}

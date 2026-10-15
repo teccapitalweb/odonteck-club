@@ -1,0 +1,1699 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 4,
+  "titulo": "Irrigación e inervación de la región oral",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Cada procedimiento en la boca ocurre cerca de arterias, venas y nervios. En este módulo seguirás la sangre desde la carótida externa hasta la pulpa, conocerás el drenaje venoso y linfático con sus implicaciones en las infecciones, y estudiarás el nervio trigémino con sus divisiones maxilar y mandibular, junto con los nervios del gusto, la saliva y los movimientos de la lengua. Terminarás entendiendo cómo siente un diente y por qué la anatomía explica las distintas técnicas de anestesia local, el dolor referido y las complicaciones nerviosas y hemorrágicas más conocidas.",
+  "objetivos": [
+    "Describir las ramas de la arteria carótida externa y de las tres porciones de la arteria maxilar que irrigan dientes, maxilares y tejidos blandos orales.",
+    "Explicar el drenaje venoso del plexo pterigoideo y de la vena facial, y relacionarlo con la diseminación de infecciones.",
+    "Identificar los grupos ganglionares que drenan cada región oral y realizar conceptualmente su palpación ordenada.",
+    "Distinguir los territorios sensitivos de los nervios maxilar y mandibular y de sus ramas en dientes, encía y mucosa.",
+    "Relacionar las fibras nerviosas de la pulpa y del ligamento periodontal con los tipos de dolor y con la interpretación de las pruebas de sensibilidad.",
+    "Justificar con base anatómica por qué el maxilar suele anestesiarse por infiltración y la mandíbula posterior por bloqueo, sin abordar técnica ni dosis."
+  ],
+  "duracionMin": 110,
+  "portada": {
+    "id": "anatomia-dental/m04/portada",
+    "proporcion": "16:9",
+    "alt": "Ilustración anatómica de la cara en vista lateral con arterias, venas y nervios que se dirigen a los maxilares y los dientes.",
+    "prompt": "Ilustración anatómica realista de gran formato estilo atlas médico moderno, vista lateral derecha de cabeza adulta en la que piel y músculos superficiales se vuelven translúcidos para mostrar el maxilar y la mandíbula con dentición permanente completa y anatomía correcta, arterias en rojo suave, venas en azul tenue y nervios en amarillo pálido que se ramifican hacia los dientes, la lengua y los labios, el perfil facial es neutro y sin rasgos identificables, fondo azul petróleo oscuro degradado, iluminación de estudio suave, alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, rostro reconocible, aspecto de caricatura, dientes en número incorrecto."
+  },
+  "temas": [
+    {
+      "n": "4.1",
+      "titulo": "La irrigación arterial: de la carótida externa a la arteria maxilar",
+      "minutos": 15,
+      "enPocasPalabras": "La sangre llega a los dientes, la lengua y las encías por ramas de una gran arteria del cuello llamada carótida externa. La rama más importante para los dientes es la arteria maxilar, que corre por detrás de la mandíbula y se divide en arterias pequeñas para cada zona. Conocer su recorrido ayuda al dentista a trabajar con seguridad y a prevenir sangrados.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cada vez que tocas la encía de un paciente, anestesias un molar o colocas un implante, trabajas a pocos milímetros de vasos que mantienen vivos los dientes, el hueso y la mucosa. La irrigación de la región oral no es un tema de memoria pura: explica por qué algunas zonas sangran más que otras, por qué un hematoma aparece después de cierta técnica de anestesia y por qué una perforación del piso de boca durante una cirugía puede convertirse en una urgencia.\n\nEn este tema seguirás el camino de la sangre desde el cuello hasta la pulpa dental. Estudiarás la **arteria carótida externa** y sus ramas, con especial atención a la **arteria maxilar**, que irriga todos los dientes, y a las arterias **lingual** y **facial**, responsables de la lengua, el piso de boca, los labios y buena parte de los tejidos blandos."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/01",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica lateral de cabeza y cuello sin piel que muestra la arteria carótida externa y sus ramas hacia la cara.",
+          "pie": "La carótida externa asciende por el cuello y reparte ramas hacia la lengua, la cara, la región temporal y la profundidad de la cara, donde nace la arteria maxilar.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, vista lateral derecha de cabeza y cuello de un adulto sin piel, con el músculo masetero y la rama mandibular parcialmente retirados para mostrar la arteria carótida común que se bifurca a la altura del borde superior del cartílago tiroides, la carótida externa ascendiendo hacia la región parotídea y sus ramas principales hacia la lengua, la cara y la región temporal, arterias en rojo suave, venas en azul tenue, nervios en amarillo pálido, fondo blanco limpio, iluminación difusa y colores naturales, alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre derramada, rostro con rasgos identificables, proporciones anatómicas incorrectas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El origen: la carótida común y su bifurcación"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **arteria carótida común** asciende por el cuello dentro de la vaina carotídea, junto con la vena yugular interna y el nervio vago. A la altura aproximada del borde superior del cartílago tiroides, que corresponde más o menos a la vértebra C3 o C4, se divide en dos: la **carótida interna**, que no da ramas en el cuello y entra al cráneo para irrigar el encéfalo y el ojo, y la **carótida externa**, que irriga casi todas las estructuras de la cara, el cuello superficial y la cavidad oral.\n\nEsa diferencia tiene una consecuencia práctica: casi todo lo que haces en la boca depende de la carótida externa. Sin embargo, ambos sistemas se comunican por anastomosis alrededor de la órbita y en la línea media, de modo que la región oral recibe una irrigación muy abundante y redundante. Eso explica la buena cicatrización de la mucosa oral, pero también que una herida en lengua o labio sangre de forma llamativa."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Ramas de la arteria carótida externa y su interés en odontología",
+          "columnas": [
+            "Rama",
+            "Territorio principal",
+            "Por qué te interesa"
+          ],
+          "filas": [
+            [
+              "Tiroidea superior",
+              "Glándula tiroides y laringe",
+              "Primera rama; referencia anatómica del cuello, sin territorio dental"
+            ],
+            [
+              "Faríngea ascendente",
+              "Faringe, paladar blando y oído medio",
+              "Contribuye a irrigar la región amigdalina"
+            ],
+            [
+              "Lingual",
+              "Lengua, piso de boca, glándula sublingual",
+              "Sangrado en cirugía del piso de boca y en perforaciones linguales de la mandíbula"
+            ],
+            [
+              "Facial",
+              "Labios, mejillas, nariz, glándula submandibular, paladar blando",
+              "Pulso palpable en el borde de la mandíbula; irriga los labios"
+            ],
+            [
+              "Occipital",
+              "Cuero cabelludo posterior y músculos de la nuca",
+              "Sin relevancia dental directa"
+            ],
+            [
+              "Auricular posterior",
+              "Pabellón auricular y región mastoidea",
+              "Sin relevancia dental directa"
+            ],
+            [
+              "Maxilar",
+              "Todos los dientes, maxilares, músculos de la masticación, paladar y fosas nasales",
+              "La arteria clave de la odontología"
+            ],
+            [
+              "Temporal superficial",
+              "Región temporal y glándula parótida",
+              "Rama terminal; pulso frente a la oreja"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una regla para recordar las ramas",
+          "md": "Muchos estudiantes recuerdan el orden de las ramas de la carótida externa agrupándolas por su dirección: **anteriores** (tiroidea superior, lingual y facial), **medial** (faríngea ascendente), **posteriores** (occipital y auricular posterior) y **terminales** (maxilar y temporal superficial). El orden exacto de origen varía entre personas: con frecuencia la lingual y la facial nacen de un tronco común, el **tronco linguofacial**."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La arteria lingual y la arteria facial"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **arteria lingual** nace a la altura del asta mayor del hueso hioides, corre profundo al músculo hiogloso y da tres ramas que debes conocer. La **arteria dorsal de la lengua** irriga la base de la lengua y la región amigdalina. La **arteria sublingual** recorre el piso de boca, irriga la glándula sublingual y la mucosa del piso, y envía ramas que perforan la cortical lingual de la mandíbula en la región anterior. Su continuación, la **arteria lingual profunda** o ranina, avanza hacia la punta de la lengua por su cara inferior, donde a veces se ve por transparencia a cada lado del frenillo.\n\nLa **arteria facial** pasa profunda a la glándula submandibular, a la que irriga, y luego cruza el borde inferior de la mandíbula justo delante del músculo masetero; ahí puedes palpar su pulso. Antes de llegar a la cara da la **palatina ascendente**, para el paladar blando, la **amigdalina** y la **submentoniana**, que irriga el piso de boca por debajo del músculo milohioideo. Ya en la cara forma las **arterias labiales inferior y superior**, que rodean la boca, por lo general entre el músculo orbicular y la mucosa, y se anastomosan con las del lado opuesto, y termina como **arteria angular** junto a la nariz."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/02",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica de la cara inferior de la lengua y el piso de boca con las venas y arterias linguales visibles bajo la mucosa.",
+          "pie": "En la cara ventral de la lengua los vasos linguales se ven por transparencia a cada lado del frenillo; el piso de boca es una zona muy vascularizada.",
+          "prompt": "Ilustración anatómica realista de la cavidad oral de un adulto con la lengua elevada, vista frontal cercana de la cara ventral de la lengua y el piso de boca, mucosa rosada húmeda y brillante, frenillo lingual centrado, vasos sanguíneos finos visibles por transparencia a ambos lados del frenillo, carúnculas sublinguales pequeñas en la base, incisivos inferiores permanentes en el borde inferior del encuadre, iluminación clínica blanca y uniforme, estilo de atlas médico con colores naturales. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, lesiones, rostro, labios exagerados, dientes deformes o en número incorrecto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El piso de boca y la cortical lingual",
+          "md": "En la región anterior de la mandíbula, ramas de las arterias sublingual y submentoniana entran al hueso por pequeños forámenes linguales. Si una fresa o un implante perfora la cortical lingual, puede lesionarlas y producir un hematoma del piso de boca que eleva la lengua y compromete la vía aérea. Por eso la planeación de implantes en esa zona exige estudiar la forma real del hueso con tomografía de haz cónico y la valoración del especialista; ante un aumento rápido de volumen en el piso de boca, la prioridad es la vía aérea y la atención de urgencia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La arteria maxilar en tres porciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **arteria maxilar** nace detrás del cuello del cóndilo mandibular, dentro de la glándula parótida, y avanza hacia adelante por la fosa infratemporal hasta entrar en la fosa pterigopalatina. Para estudiarla se divide en tres porciones según su relación con el **músculo pterigoideo lateral**.\n\nLa **primera porción, mandibular**, está detrás del pterigoideo lateral, junto al cuello del cóndilo. De ella salen la **arteria meníngea media**, que entra al cráneo por el foramen espinoso; ramas pequeñas para el oído (auricular profunda y timpánica anterior) y, sobre todo, la **arteria alveolar inferior**. Esta desciende entre la rama mandibular y el ligamento esfenomandibular, da la rama milohioidea y entra al **foramen mandibular** acompañada del nervio homónimo. Dentro del conducto mandibular irriga los dientes inferiores y el hueso, y a la altura de los premolares se divide en la **arteria mentoniana**, que sale por el foramen mentoniano, y la **arteria incisiva**.\n\nLa **segunda porción, pterigoidea**, se relaciona con el pterigoideo lateral, por fuera o, con menos frecuencia, por dentro de él. Sus ramas son musculares: **temporales profundas, maseterina, pterigoideas** y la **arteria bucal**, que irriga el músculo buccinador y la mucosa de la mejilla.\n\nLa **tercera porción, pterigopalatina**, está dentro de la fosa pterigopalatina. Allí da la **arteria alveolar superior posterior**, que entra en la tuberosidad del maxilar por pequeños forámenes e irriga molares, premolares, encía vestibular y seno maxilar; la **arteria infraorbitaria**, que recorre el piso de la órbita y da la **alveolar superior anterior** para incisivos y caninos; la **palatina descendente**, que se divide en **palatina mayor** y **palatinas menores**; la **arteria del conducto pterigoideo**, la **faríngea** y la **esfenopalatina**, que irriga la cavidad nasal y envía una rama nasopalatina hacia el conducto incisivo."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m04/d1",
+          "pie": "Las tres porciones de la arteria maxilar y sus ramas de interés dental.",
+          "descripcion": "Esquema horizontal de la arteria maxilar como un tubo que avanza de izquierda (detrás del cóndilo) a derecha (fosa pterigopalatina), dividido en tres segmentos de color distinto separados por la silueta del músculo pterigoideo lateral. De cada segmento salen ramas rotuladas: del primero, meníngea media y alveolar inferior con su división en mentoniana e incisiva; del segundo, maseterina, temporales profundas y bucal; del tercero, alveolar superior posterior, infraorbitaria con la alveolar superior anterior, palatina descendente con palatina mayor, y esfenopalatina.",
+          "elementos": [
+            "Primera porción (mandibular)",
+            "Segunda porción (pterigoidea)",
+            "Tercera porción (pterigopalatina)",
+            "Músculo pterigoideo lateral",
+            "Arteria alveolar inferior",
+            "Arteria meníngea media",
+            "Arteria bucal y maseterina",
+            "Arteria alveolar superior posterior",
+            "Arteria infraorbitaria y alveolar superior anterior",
+            "Arteria palatina mayor",
+            "Arteria esfenopalatina"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Del vaso al diente: cómo llega la sangre a la pulpa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las arterias alveolares no llegan al diente como un solo vaso. Dentro del hueso forman ramas **dentales**, que entran a la pulpa por el foramen apical y por conductos accesorios; ramas **interalveolares** o **interdentales**, que recorren los tabiques óseos; y ramas **perforantes**, que salen del hueso hacia el ligamento periodontal y la encía. A su vez, la encía recibe sangre de los vasos supraperiósticos de la mucosa: en vestibular inferior, de la bucal y la mentoniana; en lingual inferior, de la sublingual; en el paladar, de la palatina mayor, que entra por el **foramen palatino mayor**, a la altura aproximada del segundo o tercer molar superior, y avanza hacia adelante en un surco del hueso.\n\nEsta red tiene dos implicaciones. Primero, el periodonto recibe sangre de varias fuentes, lo que favorece su reparación. Segundo, la pulpa depende de vasos que entran por un orificio pequeño en un compartimento de paredes rígidas; en el módulo 6 verás por qué eso condiciona su respuesta a la inflamación."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/03",
+          "proporcion": "16:9",
+          "alt": "Vista clínica del paladar duro de un adulto con dentición permanente completa, iluminado de forma uniforme.",
+          "pie": "La arteria palatina mayor recorre el paladar duro de atrás hacia adelante, a medio camino entre la línea media y los márgenes gingivales de los molares.",
+          "prompt": "Fotografía clínica realista con espejo intraoral de la arcada superior de un adulto joven, vista oclusal del paladar duro completo, dentición permanente de incisivo central a segundo molar en ambos lados, mucosa palatina rosa pálido con rugas palatinas suaves en la zona anterior, papila incisiva visible detrás de los incisivos centrales, superficie húmeda con brillo natural, iluminación de lámpara dental uniforme, enfoque nítido de todo el paladar, colores naturales. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, lesiones, restauraciones metálicas llamativas, dientes faltantes o deformes, rostro."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Cada arteria con su territorio",
+          "instruccion": "Relaciona cada arteria con la zona que irriga principalmente.",
+          "pares": [
+            {
+              "a": "Arteria alveolar inferior",
+              "b": "Dientes inferiores y cuerpo de la mandíbula"
+            },
+            {
+              "a": "Arteria alveolar superior posterior",
+              "b": "Molares superiores, encía vestibular posterior y seno maxilar"
+            },
+            {
+              "a": "Arteria alveolar superior anterior",
+              "b": "Incisivos y caninos superiores"
+            },
+            {
+              "a": "Arteria palatina mayor",
+              "b": "Mucosa y encía del paladar duro"
+            },
+            {
+              "a": "Arteria sublingual",
+              "b": "Piso de boca y glándula sublingual"
+            },
+            {
+              "a": "Arterias labiales",
+              "b": "Labios superior e inferior"
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Errores frecuentes y lo que significan en la clínica"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Confusiones que conviene evitar",
+          "items": [
+            "Pensar que la carótida interna irriga la boca: no da ramas en el cuello; la región oral depende casi por completo de la carótida externa.",
+            "Creer que la arteria alveolar inferior irriga solo dientes: también nutre el hueso mandibular y, por la mentoniana, el labio y el mentón.",
+            "Olvidar que la palatina mayor corre por el paladar duro: un colgajo o una toma de injerto palatino demasiado profundos y posteriores pueden lesionarla.",
+            "Suponer que el patrón es idéntico en todas las personas: las variaciones de origen y recorrido son comunes, sobre todo en la arteria maxilar."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando estudies una radiografía panorámica o una tomografía, identifica el conducto mandibular, el foramen mentoniano y el foramen palatino mayor, y recuerda que por cada uno pasa una arteria junto con un nervio. Pensar en paquetes vasculonerviosos, y no solo en nervios, te ayuda a prever tanto la anestesia como el sangrado en cualquier procedimiento."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Arteria carótida externa",
+          "definicion": "Rama de la carótida común que irriga la cara, el cuello superficial y la cavidad oral mediante ocho ramas principales."
+        },
+        {
+          "termino": "Arteria maxilar",
+          "definicion": "Rama terminal de la carótida externa que se divide en porciones mandibular, pterigoidea y pterigopalatina e irriga todos los dientes."
+        },
+        {
+          "termino": "Arteria alveolar inferior",
+          "definicion": "Rama de la primera porción de la arteria maxilar que entra al foramen mandibular e irriga dientes y hueso de la mandíbula."
+        },
+        {
+          "termino": "Arteria palatina mayor",
+          "definicion": "Rama de la palatina descendente que sale por el foramen palatino mayor e irriga la mucosa y la encía del paladar duro."
+        },
+        {
+          "termino": "Anastomosis",
+          "definicion": "Comunicación entre dos vasos sanguíneos que permite una circulación alternativa."
+        },
+        {
+          "termino": "Fosa pterigopalatina",
+          "definicion": "Espacio profundo entre el maxilar y la apófisis pterigoides donde se ramifican la tercera porción de la arteria maxilar y el nervio maxilar."
+        },
+        {
+          "termino": "Paquete vasculonervioso",
+          "definicion": "Conjunto de arteria, vena y nervio que recorren juntos un mismo conducto o foramen."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.1-1",
+          "q": "¿De qué porción de la arteria maxilar nace la arteria alveolar inferior?",
+          "opciones": [
+            "De la porción pterigopalatina",
+            "De la porción mandibular",
+            "De la porción pterigoidea",
+            "Directamente de la carótida externa"
+          ],
+          "correcta": 1,
+          "explicacion": "La alveolar inferior sale de la primera porción, mandibular, detrás del pterigoideo lateral, junto con la meníngea media."
+        },
+        {
+          "id": "t4.1-2",
+          "q": "¿Qué arteria irriga principalmente los incisivos y caninos superiores?",
+          "opciones": [
+            "La alveolar superior posterior",
+            "La palatina mayor",
+            "La arteria bucal",
+            "La alveolar superior anterior, rama de la infraorbitaria"
+          ],
+          "correcta": 3,
+          "explicacion": "La alveolar superior anterior nace de la arteria infraorbitaria y desciende hacia los dientes anteriores superiores."
+        },
+        {
+          "id": "t4.1-3",
+          "q": "¿Por qué una perforación de la cortical lingual en la región anterior de la mandíbula puede ser una urgencia?",
+          "opciones": [
+            "Porque puede lesionar ramas de las arterias sublingual o submentoniana y causar un hematoma del piso de boca",
+            "Porque ahí pasa la carótida interna",
+            "Porque lesiona siempre el nervio facial",
+            "Porque abre el seno maxilar"
+          ],
+          "correcta": 0,
+          "explicacion": "Las ramas sublinguales y submentonianas entran al hueso por la cortical lingual; un hematoma del piso de boca puede comprometer la vía aérea."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Clinically Oriented Anatomy",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Atlas of Human Anatomy",
+          "autor": "Netter F. H. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Anatomy, Head and Neck, Maxillary Artery (StatPearls)",
+          "autor": "StatPearls Publishing"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "4.2",
+      "titulo": "Drenaje venoso y linfático: plexo pterigoideo, vena facial y ganglios regionales",
+      "minutos": 14,
+      "enPocasPalabras": "Después de nutrir los tejidos, la sangre regresa por venas que forman redes en la profundidad de la cara y se comunican con el interior del cráneo. La linfa, un líquido que limpia los tejidos, pasa por pequeños ganglios del cuello y la mandíbula. Por eso una infección de un diente puede inflamar ganglios y, en casos raros pero graves, extenderse más lejos.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las arterias reciben casi toda la atención en los libros, pero en la consulta las venas y los vasos linfáticos explican muchos hallazgos cotidianos: el hematoma que aparece tras una anestesia en la región posterior del maxilar, el ganglio doloroso bajo la mandíbula de un niño con un absceso dental o la recomendación de no subestimar una infección que se extiende hacia el ojo.\n\nEn este tema estudiarás las dos vías de regreso: el **drenaje venoso**, que lleva la sangre de vuelta al corazón por las venas yugulares, y el **drenaje linfático**, que filtra el líquido de los tejidos a través de cadenas de **ganglios linfáticos** antes de devolverlo a la circulación. Ambas vías son, además, rutas posibles de diseminación de infecciones y de células tumorales, por lo que forman parte de cualquier exploración de cabeza y cuello."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las venas profundas: el plexo pterigoideo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las venas de la región oral acompañan en general a las arterias y llevan nombres equivalentes: alveolares inferiores, alveolares superiores, palatinas, bucales. La diferencia está en lo que ocurre en la profundidad. Muchas de ellas desembocan en el **plexo venoso pterigoideo**, una red de venas de paredes delgadas situada en la fosa infratemporal, entre el músculo temporal y los músculos pterigoideos lateral y medial.\n\nEl plexo pterigoideo recibe sangre de los dientes, del paladar, de los músculos de la masticación y de la cavidad nasal. Drena hacia atrás en la **vena maxilar**, que se une a la **vena temporal superficial** para formar la **vena retromandibular** dentro de la glándula parótida. Por adelante se comunica con la vena facial a través de la **vena facial profunda**, y por arriba con el **seno cavernoso**, dentro del cráneo, mediante venas emisarias que atraviesan la base del cráneo.\n\nSe suele describir que la contracción de los músculos pterigoideos, durante la masticación, ayuda a vaciar el plexo. Para ti, como clínico, lo importante es su ubicación: queda cerca de la zona donde se trabaja al anestesiar el nervio alveolar superior posterior y al acceder al espacio pterigomandibular."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/04",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica lateral de la fosa infratemporal con la rama mandibular retirada y una red de venas entre los músculos pterigoideos.",
+          "pie": "El plexo pterigoideo ocupa la fosa infratemporal, rodeando los músculos pterigoideos, y se conecta con la vena facial y con el seno cavernoso.",
+          "prompt": "Ilustración anatómica realista estilo atlas médico de la fosa infratemporal derecha de un adulto, vista lateral con el arco cigomático y la rama de la mandíbula parcialmente retirados, mostrando los músculos pterigoideos lateral y medial en tonos rojizos musculares, una red densa de venas delgadas azul tenue envolviéndolos, la arteria maxilar en rojo suave cruzando la fosa y nervios en amarillo pálido, hueso en marfil, fondo blanco, iluminación difusa, alto detalle anatómico y colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre derramada, piel, rostro, proporciones irreales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Hematoma tras una técnica de anestesia posterior",
+          "md": "Cuando la aguja de una técnica dirigida al nervio alveolar superior posterior se introduce más allá de lo indicado, puede lesionar venas del plexo pterigoideo o la propia arteria alveolar superior posterior. El resultado típico es un **hematoma** que aumenta de volumen en la mejilla en pocos minutos y se vuelve violáceo en los días siguientes. Por eso esa técnica se enseña con referencias anatómicas precisas y bajo formación clínica supervisada. Ante un hematoma, la conducta inmediata la decide el odontólogo; el paciente debe saber que es un evento conocido, explicarle qué esperar y vigilar signos de infección o de limitación de la apertura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La vena facial y la comunicación con el cráneo"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **vena facial** comienza junto a la nariz como **vena angular**, que se comunica con las **venas oftálmicas** de la órbita. Desciende por la cara detrás de la arteria facial, recibe las venas labiales, la facial profunda y la submentoniana, cruza el borde de la mandíbula y, por lo general, se une a una rama de la retromandibular para desembocar en la **vena yugular interna**.\n\nEsa conexión con las venas oftálmicas, sumada a la del plexo pterigoideo, crea dos caminos por los que una infección de la cara puede alcanzar el **seno cavernoso**. La **trombosis del seno cavernoso** de origen dental es rara en la era de los antibióticos, pero es grave. Por eso la zona que rodea la nariz y el labio superior se describe clásicamente como de riesgo, y una infección de un diente superior que produce edema periorbitario, fiebre alta, dolor de cabeza intenso o alteraciones de la visión o de los movimientos oculares requiere valoración médica urgente, no solo manejo en el consultorio."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m04/d2",
+          "pie": "Vías venosas que comunican la región oral con el seno cavernoso y con la yugular interna.",
+          "descripcion": "Esquema de flujo con cajas y flechas. A la izquierda, cajas para los dientes superiores e inferiores y el paladar que drenan al plexo pterigoideo. Del plexo salen tres flechas: hacia atrás a la vena maxilar y luego a la retromandibular; hacia adelante, por la vena facial profunda, a la vena facial; hacia arriba, por venas emisarias, al seno cavernoso. De la vena facial sale una flecha hacia arriba por la vena angular y las oftálmicas al seno cavernoso, y otra hacia abajo hasta la yugular interna. Las vías hacia el seno cavernoso se dibujan en color de alerta.",
+          "elementos": [
+            "Plexo venoso pterigoideo",
+            "Vena maxilar",
+            "Vena retromandibular",
+            "Vena facial profunda",
+            "Vena facial",
+            "Vena angular y venas oftálmicas",
+            "Seno cavernoso",
+            "Vena yugular interna"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El sistema linfático de la boca"
+        },
+        {
+          "tipo": "texto",
+          "md": "La linfa de la región oral sigue una regla general: primero llega a **ganglios regionales** superficiales, situados bajo la mandíbula y el mentón, y después a la **cadena cervical profunda**, que acompaña a la vena yugular interna. Desde ahí la linfa regresa a la sangre en la base del cuello. Ningún vaso linfático de la boca se salta por completo la cadena cervical profunda.\n\nConocer qué ganglio recibe cada territorio te permite dos cosas: buscar el origen de un ganglio aumentado de tamaño y examinar de manera ordenada el cuello de cualquier paciente, algo que forma parte del examen extraoral de rutina y de la detección temprana del cáncer de boca."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Drenaje linfático de la región oral",
+          "columnas": [
+            "Ganglios",
+            "Ubicación",
+            "Territorios que drenan"
+          ],
+          "filas": [
+            [
+              "Submentonianos",
+              "Bajo el mentón, entre los vientres anteriores de los músculos digástricos",
+              "Incisivos inferiores y su encía, punta de la lengua, parte central del labio inferior, mentón y piso de boca anterior"
+            ],
+            [
+              "Submandibulares",
+              "Junto a la glándula submandibular, bajo el cuerpo de la mandíbula",
+              "La mayoría de los dientes superiores e inferiores y su encía, labio superior, partes laterales del labio inferior, paladar duro anterior, bordes de la lengua y mejilla; reciben también de los submentonianos"
+            ],
+            [
+              "Cervicales profundos superiores, incluido el yugulodigástrico",
+              "Junto a la vena yugular interna, debajo del vientre posterior del digástrico",
+              "Base de la lengua, amígdala palatina, paladar blando, y la linfa que llega de los ganglios submandibulares y submentonianos"
+            ],
+            [
+              "Cervicales profundos inferiores",
+              "Parte baja de la cadena yugular",
+              "Drenaje final de toda la cabeza y el cuello antes de volver a la circulación venosa"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Dos detalles de esta tabla tienen peso clínico. El primero es la **lengua**: su porción central y su punta pueden drenar hacia ganglios de **ambos lados** del cuello, mientras que los bordes laterales drenan sobre todo al mismo lado. Por eso, ante un tumor de la lengua cercano a la línea media, el especialista evalúa los dos lados del cuello. El segundo es que los grupos no son compartimentos cerrados: la linfa de los submentonianos pasa después a los submandibulares y de ahí a la cadena profunda, de modo que un proceso que empieza en un incisivo inferior puede acabar manifestándose en varios niveles.\n\nEn cuanto a los propios dientes, la pulpa drena su sangre por vénulas de pared muy delgada que salen por el foramen apical. La existencia y el papel de vasos linfáticos verdaderos dentro de la pulpa humana se siguen discutiendo en la literatura, así que conviene presentarlos con cautela."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/05",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas de una profesional palpan la región submandibular de un paciente adulto, visto de perfil desde el cuello hacia abajo.",
+          "pie": "La palpación de los ganglios submentonianos, submandibulares y cervicales es parte del examen extraoral de cada consulta.",
+          "prompt": "Fotografía clínica realista en consultorio dental bien iluminado, encuadre cerrado del cuello y la región submandibular de un paciente adulto sentado con la cabeza ligeramente inclinada hacia adelante, una odontóloga con guantes de nitrilo y bata clara palpa con las yemas de los dedos bajo el borde inferior de la mandíbula, el rostro del paciente queda fuera de cuadro por arriba del labio inferior, luz blanca suave, fondo desenfocado de la unidad dental, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro identificable, sangre, manos sin guantes, gestos de dolor exagerados."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El ganglio que señala al diente",
+          "md": "Una niña de 8 años llega con dolor en un primer molar inferior temporal con caries extensa y una tumefacción blanda y dolorosa bajo el ángulo de la mandíbula del mismo lado. El ganglio submandibular aumentado, móvil y sensible es la respuesta esperada a un foco infeccioso en su territorio. Al tratar el origen dental, el ganglio suele regresar a su tamaño en días o semanas. En cambio, un ganglio duro, indoloro, fijo a planos profundos y que persiste sin un foco claro debe referirse para estudio, porque puede corresponder a otra enfermedad, incluida una neoplasia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se examinan los ganglios"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Palpación ganglionar de cabeza y cuello (concepto)",
+          "pasos": [
+            {
+              "titulo": "Posición",
+              "md": "Con el paciente sentado y la cabeza ligeramente flexionada hacia adelante, los tejidos del cuello se relajan y los ganglios se palpan mejor."
+            },
+            {
+              "titulo": "Región submentoniana",
+              "md": "Con las yemas de los dedos, palpa bajo el mentón presionando suavemente hacia el borde de la mandíbula."
+            },
+            {
+              "titulo": "Región submandibular",
+              "md": "Recorre el borde inferior del cuerpo mandibular de adelante hacia atrás, en ambos lados, comparando uno con otro."
+            },
+            {
+              "titulo": "Cadena cervical",
+              "md": "Sigue el borde anterior del músculo esternocleidomastoideo desde el ángulo de la mandíbula hasta la clavícula, sin olvidar el ganglio yugulodigástrico."
+            },
+            {
+              "titulo": "Registro",
+              "md": "Anota tamaño aproximado, consistencia, dolor a la palpación, movilidad y lado. Un registro claro permite comparar en la siguiente cita."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/06",
+          "proporcion": "3:4",
+          "alt": "Ilustración anatómica del cuello en vista anterolateral con los grupos de ganglios linfáticos submentonianos, submandibulares y cervicales.",
+          "pie": "Los ganglios de la región oral se organizan en grupos superficiales bajo la mandíbula y en una cadena profunda junto a la vena yugular interna.",
+          "prompt": "Ilustración anatómica realista estilo atlas médico de cabeza y cuello de un adulto en vista anterolateral izquierda, sin piel, con la glándula submandibular, el músculo digástrico y el esternocleidomastoideo visibles, pequeños ganglios linfáticos ovalados de color verde pálido agrupados bajo el mentón, junto a la glándula submandibular y a lo largo de la vena yugular interna, vasos linfáticos finos que los unen, venas en azul tenue, arterias en rojo suave, fondo blanco limpio, colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, rostro con rasgos identificables, sangre, inflamación exagerada."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad del drenaje venoso y linfático",
+          "afirmaciones": [
+            {
+              "texto": "El plexo pterigoideo se comunica con el seno cavernoso.",
+              "verdadero": true,
+              "explicacion": "Lo hace mediante venas emisarias de la base del cráneo; es una vía posible de diseminación de infecciones."
+            },
+            {
+              "texto": "Los incisivos inferiores drenan primero a los ganglios submentonianos.",
+              "verdadero": true,
+              "explicacion": "Los incisivos inferiores, la punta de la lengua y el centro del labio inferior drenan a los submentonianos."
+            },
+            {
+              "texto": "Un ganglio duro, fijo e indoloro que persiste sin foco infeccioso es un hallazgo sin importancia.",
+              "verdadero": false,
+              "explicacion": "Esas características obligan a referir al paciente para estudio."
+            },
+            {
+              "texto": "La vena facial desemboca habitualmente en la vena yugular interna.",
+              "verdadero": true,
+              "explicacion": "Tras cruzar la mandíbula, la vena facial suele drenar en la yugular interna."
+            },
+            {
+              "texto": "Los vasos linfáticos de la boca pueden evitar por completo la cadena cervical profunda.",
+              "verdadero": false,
+              "explicacion": "Toda la linfa de la cabeza y el cuello termina pasando por la cadena cervical profunda."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** incorpora la palpación ganglionar a tu examen extraoral de cada primera consulta y de cada revisión. Toma menos de un minuto, te ayuda a localizar focos infecciosos y es una de las herramientas más sencillas para detectar a tiempo una lesión que requiere estudio."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Plexo venoso pterigoideo",
+          "definicion": "Red de venas situada en la fosa infratemporal que recibe sangre de los dientes, el paladar y los músculos de la masticación."
+        },
+        {
+          "termino": "Vena retromandibular",
+          "definicion": "Vena formada por la unión de las venas maxilar y temporal superficial dentro de la glándula parótida."
+        },
+        {
+          "termino": "Seno cavernoso",
+          "definicion": "Conducto venoso dentro del cráneo, a los lados de la silla turca, que se comunica con venas de la cara y de la órbita."
+        },
+        {
+          "termino": "Ganglio linfático",
+          "definicion": "Pequeño órgano que filtra la linfa y participa en la respuesta inmunitaria."
+        },
+        {
+          "termino": "Ganglio yugulodigástrico",
+          "definicion": "Ganglio de la cadena cervical profunda superior, bajo el vientre posterior del digástrico, que recibe linfa de la amígdala y la base de la lengua."
+        },
+        {
+          "termino": "Linfadenopatía",
+          "definicion": "Aumento de tamaño o cambio de consistencia de uno o varios ganglios linfáticos."
+        },
+        {
+          "termino": "Hematoma",
+          "definicion": "Acumulación de sangre en los tejidos por la ruptura de un vaso."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.2-1",
+          "q": "¿Qué estructuras forman la vena retromandibular?",
+          "opciones": [
+            "La vena facial y la angular",
+            "La vena lingual y la sublingual",
+            "La vena maxilar y la temporal superficial",
+            "La yugular interna y la externa"
+          ],
+          "correcta": 2,
+          "explicacion": "La vena maxilar, que drena el plexo pterigoideo, se une a la temporal superficial dentro de la parótida para formar la retromandibular."
+        },
+        {
+          "id": "t4.2-2",
+          "q": "Un paciente presenta un ganglio aumentado bajo el mentón. ¿Qué territorio debes revisar primero?",
+          "opciones": [
+            "Incisivos inferiores, punta de la lengua y centro del labio inferior",
+            "Molares superiores",
+            "Amígdala palatina",
+            "Paladar blando"
+          ],
+          "correcta": 0,
+          "explicacion": "Los ganglios submentonianos drenan los incisivos inferiores, la punta de la lengua, el centro del labio inferior y el mentón."
+        },
+        {
+          "id": "t4.2-3",
+          "q": "¿Qué complicación explica la comunicación entre la vena angular, las oftálmicas y el seno cavernoso?",
+          "opciones": [
+            "La parálisis facial transitoria",
+            "La sialolitiasis submandibular",
+            "La luxación de la articulación temporomandibular",
+            "La posible diseminación de una infección facial al seno cavernoso"
+          ],
+          "correcta": 3,
+          "explicacion": "Esta vía venosa permite, en casos raros, que una infección de la cara llegue al seno cavernoso y cause trombosis."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Clinically Oriented Anatomy",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Handbook of Local Anesthesia",
+          "autor": "Malamed S. F. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía de cabeza y cuello",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "4.3",
+      "titulo": "El nervio trigémino y el nervio maxilar (V2): la inervación del maxilar superior",
+      "minutos": 15,
+      "enPocasPalabras": "El nervio trigémino es el gran nervio de la sensibilidad de la cara y de la boca. Tiene tres ramas: una para la frente y los ojos, otra para el maxilar superior y otra para la mandíbula. La rama del maxilar superior lleva la sensación de los dientes de arriba, el paladar, las encías y el labio superior.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cuando un paciente dice que siente un diente «frío», que le duele la encía o que tiene el labio dormido después de la anestesia, está describiendo la función de un solo nervio: el **trigémino**, el quinto par craneal (V). Es el nervio sensitivo más importante de la cabeza y, además, mueve los músculos de la masticación. Comprender su organización es la base para interpretar el dolor dental, para entender por qué existen distintas técnicas de anestesia local y para reconocer complicaciones nerviosas.\n\nEn este tema verás la organización general del trigémino y estudiarás a detalle su segunda rama, el **nervio maxilar (V2)**, responsable de toda la sensibilidad de los dientes superiores, el paladar, la encía del maxilar, el seno maxilar y la piel de la parte media de la cara."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Organización general del trigémino"
+        },
+        {
+          "tipo": "texto",
+          "md": "El trigémino emerge de la cara lateral del puente, en el tronco encefálico, con una **raíz sensitiva** grande y una **raíz motora** pequeña. La raíz sensitiva llega al **ganglio trigeminal** (también llamado ganglio de Gasser o semilunar), que se aloja en una depresión de la porción petrosa del temporal, dentro del cráneo. En ese ganglio están los cuerpos de las neuronas sensitivas, y de él salen las tres divisiones que dan nombre al nervio:\n\n- **Oftálmica (V1)**: sale por la fisura orbitaria superior; es solo sensitiva y lleva la sensibilidad de la frente, el párpado superior, el ojo y la parte alta de la nariz.\n- **Maxilar (V2)**: sale por el **foramen redondo**; es solo sensitiva y cubre el tercio medio de la cara y el maxilar superior.\n- **Mandibular (V3)**: sale por el **foramen oval**; es mixta, porque además de sensibilidad lleva las fibras motoras de los músculos de la masticación.\n\nLa raíz motora pasa por debajo del ganglio sin hacer sinapsis y se une solo a V3. Las neuronas que reciben la información sensitiva están en los **núcleos del trigémino**, que se extienden desde el mesencéfalo hasta la médula cervical alta. El núcleo espinal procesa dolor y temperatura; el núcleo sensitivo principal, el tacto fino; y el núcleo mesencefálico, la información de los receptores de los músculos de la masticación y del ligamento periodontal, que te permite detectar un objeto muy pequeño entre los dientes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/07",
+          "proporcion": "16:9",
+          "alt": "Ilustración anatómica lateral de cráneo y cara con el nervio trigémino y sus tres divisiones dirigiéndose a frente, maxilar y mandíbula.",
+          "pie": "Las tres divisiones del trigémino nacen del ganglio trigeminal y reparten la sensibilidad de la cara en tres territorios.",
+          "prompt": "Ilustración anatómica realista estilo atlas médico, vista lateral derecha de un cráneo adulto con una ventana ósea que expone la fosa craneal media, el ganglio trigeminal en color amarillo pálido y sus tres divisiones saliendo hacia la órbita, hacia la fosa pterigopalatina y el maxilar, y hacia la mandíbula, ramas finas que alcanzan los dientes superiores e inferiores dentro de los huesos semitransparentes, dientes permanentes completos con anatomía correcta, fondo blanco limpio, iluminación difusa, colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, piel con rostro identificable, sangre, dientes en número incorrecto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué el dolor dental se localiza mal",
+          "md": "Las fibras de dolor de los dientes superiores e inferiores, de la mucosa, de los senos paranasales y de la articulación temporomandibular convergen en el **subnúcleo caudal** del núcleo espinal del trigémino, donde muchas neuronas de segundo orden reciben información de varios territorios a la vez. Esta **convergencia** se considera una de las bases del **dolor referido**: un molar inferior con pulpitis puede percibirse en el oído o en un diente superior, y un dolor muscular o sinusal puede confundirse con dolor dental. Además, la pulpa casi no tiene receptores que indiquen posición, por lo que el paciente con pulpitis a menudo no sabe señalar el diente afectado, mientras que cuando la inflamación alcanza el ligamento periodontal, rico en mecanorreceptores, la localización mejora. Por eso el diagnóstico se apoya en pruebas clínicas y radiografías, y nunca solo en el lugar que el paciente señala."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El recorrido del nervio maxilar"
+        },
+        {
+          "tipo": "texto",
+          "md": "El nervio maxilar sale del cráneo por el foramen redondo y entra en la **fosa pterigopalatina**, donde se relaciona con el **ganglio pterigopalatino**, un ganglio parasimpático. Las fibras sensitivas de V2 atraviesan ese ganglio sin hacer sinapsis y se distribuyen con sus ramas. Después, el nervio entra en la órbita por la fisura orbitaria inferior, recorre el surco y el conducto infraorbitario en el piso de la órbita, que es a la vez el techo del seno maxilar, y sale a la cara por el **foramen infraorbitario** con el nombre de **nervio infraorbitario**.\n\nEn ese trayecto da ramas en tres zonas: en la fosa pterigopalatina, en el piso de la órbita y en la cara. Para la odontología, las más importantes son los nervios alveolares superiores, que forman el **plexo dental superior**, y los nervios palatinos y nasopalatino, que inervan el paladar."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Ramas del nervio maxilar con territorio oral",
+          "columnas": [
+            "Rama",
+            "Origen y trayecto",
+            "Territorio"
+          ],
+          "filas": [
+            [
+              "Nervio alveolar superior posterior",
+              "Sale en la fosa pterigopalatina, desciende por la tuberosidad del maxilar y entra por forámenes pequeños",
+              "Molares superiores (con la posible excepción de la raíz mesiovestibular del primer molar), encía y mucosa vestibular de los molares, seno maxilar"
+            ],
+            [
+              "Nervio alveolar superior medio",
+              "Del nervio infraorbitario en el piso de la órbita; es inconstante",
+              "Premolares superiores y, cuando existe, raíz mesiovestibular del primer molar; encía vestibular de premolares"
+            ],
+            [
+              "Nervio alveolar superior anterior",
+              "Del nervio infraorbitario, poco antes del foramen infraorbitario; desciende por la pared anterior del seno",
+              "Incisivos y canino superiores, su encía vestibular y parte de la mucosa nasal anterior"
+            ],
+            [
+              "Nervio palatino mayor",
+              "Desciende por el conducto palatino mayor y sale por el foramen palatino mayor",
+              "Mucosa y encía del paladar duro desde el canino hasta la zona de los molares"
+            ],
+            [
+              "Nervios palatinos menores",
+              "Salen por los forámenes palatinos menores",
+              "Paladar blando y región amigdalina"
+            ],
+            [
+              "Nervio nasopalatino",
+              "Cruza el tabique nasal y sale por el foramen incisivo",
+              "Mucosa y encía palatina de los dientes anteriores, de canino a canino"
+            ],
+            [
+              "Ramas terminales del infraorbitario",
+              "Salen por el foramen infraorbitario",
+              "Párpado inferior, ala de la nariz, piel y mucosa del labio superior"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m04/d3",
+          "pie": "Territorios sensitivos del nervio maxilar en el maxilar superior, vistos desde vestibular y desde palatino.",
+          "descripcion": "Dos esquemas de la arcada superior lado a lado. En el izquierdo, vista vestibular de la hemiarcada con zonas de color que indican el territorio de los nervios alveolares superiores posterior (molares), medio (premolares, con borde punteado por ser inconstante) y anterior (incisivos y canino), y el labio superior inervado por el infraorbitario. En el derecho, vista palatina del paladar duro con el territorio del nasopalatino detrás de los dientes anteriores de canino a canino y el del palatino mayor en la parte posterior, con los forámenes incisivo y palatino mayor marcados como puntos.",
+          "elementos": [
+            "Nervio alveolar superior posterior",
+            "Nervio alveolar superior medio (inconstante)",
+            "Nervio alveolar superior anterior",
+            "Plexo dental superior",
+            "Nervio nasopalatino y foramen incisivo",
+            "Nervio palatino mayor y foramen palatino mayor",
+            "Nervio infraorbitario"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El plexo dental superior y el seno maxilar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los tres nervios alveolares superiores no trabajan en compartimentos estancos. Dentro del hueso, por encima de los ápices, se unen y forman el **plexo dental superior**, del que salen ramas dentales hacia cada pulpa y ramas para el ligamento periodontal, el hueso y la encía. Por esa superposición, la frontera entre los territorios del alveolar superior medio y los vecinos no es exacta, y en las personas en las que el medio no existe, sus funciones las asumen el anterior y el posterior.\n\nLos nervios alveolares corren en las paredes del **seno maxilar**, muy cerca de su mucosa. Por eso una sinusitis maxilar puede percibirse como dolor en varios molares y premolares superiores a la vez, a menudo con sensibilidad a la percusión de varios dientes sanos del mismo lado y empeoramiento al inclinar la cabeza hacia adelante. Distinguir este cuadro de un problema pulpar evita tratamientos innecesarios."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/08",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica de un corte del maxilar que muestra el seno maxilar sobre los ápices de los molares superiores y finos nervios en su pared.",
+          "pie": "Los ápices de los molares superiores están muy cerca del piso del seno maxilar, y los nervios alveolares recorren sus paredes.",
+          "prompt": "Ilustración anatómica realista estilo atlas médico, corte sagital del maxilar derecho de un adulto que muestra el seno maxilar como una cavidad aérea revestida de mucosa rosada delgada, debajo de él el proceso alveolar con primer y segundo molares superiores permanentes cuyas raíces se aproximan al piso del seno, finas fibras nerviosas amarillo pálido y vasos rojo suave que corren por la pared del seno hacia los ápices, hueso esponjoso en tono marfil, fondo blanco, iluminación difusa, colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, inflamación, dientes con número incorrecto de raíces."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué el maxilar se anestesia distinto de la mandíbula",
+          "md": "La cortical vestibular del maxilar superior es delgada y porosa, y el hueso alveolar es muy esponjoso. Esa característica anatómica permite que un anestésico depositado junto al periostio, cerca del ápice, difunda hasta los nervios dentales; por eso en la mayoría de los dientes superiores se utilizan técnicas de **infiltración**. En el paladar, la mucosa está firmemente adherida al hueso y tiene poca distensibilidad, lo que explica que las técnicas palatinas resulten más molestas. La elección de la técnica, el anestésico y la cantidad son decisiones profesionales que se aprenden con formación clínica supervisada."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/09",
+          "proporcion": "16:9",
+          "alt": "Ilustración de un cráneo adulto en vista frontal con el foramen infraorbitario debajo del borde de la órbita y los dientes superiores completos.",
+          "pie": "El foramen infraorbitario, por donde sale el nervio infraorbitario, se localiza por debajo del borde inferior de la órbita.",
+          "prompt": "Ilustración anatómica realista de un cráneo humano adulto en vista frontal ligeramente oblicua, hueso en tono marfil con textura natural, órbitas, aberturas nasales y maxilar superior bien definidos, el foramen infraorbitario visible como un orificio pequeño debajo del borde inferior de cada órbita, arcada superior con dentición permanente completa y anatomía correcta, mandíbula articulada, fondo gris neutro, iluminación lateral suave que realza el relieve óseo, estilo de atlas médico. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, aspecto macabro, grietas, dientes faltantes o deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "¿Diente o seno?",
+          "situacion": "Una mujer de 42 años refiere desde hace cinco días dolor sordo en «todas las muelas de arriba» del lado derecho, que empeora al agacharse. Tuvo un resfriado la semana anterior. A la exploración, el primer y segundo molar y el segundo premolar superiores derechos están ligeramente sensibles a la percusión; no hay caries ni restauraciones profundas, y las pruebas de sensibilidad pulpar responden de forma normal.",
+          "opciones": [
+            {
+              "texto": "Sospechar un origen sinusal, explicar la relación anatómica y referir o coordinar valoración médica si se confirma.",
+              "correcta": true,
+              "retro": "Correcto. Dolor en varios dientes contiguos con pulpas que responden normal, antecedente respiratorio y empeoramiento al inclinarse sugieren un origen sinusal por la cercanía de los nervios alveolares."
+            },
+            {
+              "texto": "Iniciar tratamiento de conductos en el primer molar porque es el más sensible.",
+              "correcta": false,
+              "retro": "No hay evidencia de patología pulpar; tratar un diente sano no resolvería el problema."
+            },
+            {
+              "texto": "Extraer el segundo premolar para aliviar la presión.",
+              "correcta": false,
+              "retro": "Es un tratamiento irreversible sin diagnóstico que lo justifique."
+            },
+            {
+              "texto": "Indicar al paciente que ignore el dolor porque desaparecerá solo.",
+              "correcta": false,
+              "retro": "Hay que orientar y dar seguimiento; si es sinusitis, puede requerir atención médica."
+            }
+          ]
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Errores frecuentes al estudiar el nervio maxilar",
+          "items": [
+            "Atribuir al nervio maxilar función motora: V2 es solo sensitivo; los músculos de la cara los mueve el nervio facial y los de la masticación, V3.",
+            "Dar por hecho que el alveolar superior medio existe en todas las personas: es inconstante y su territorio se superpone con el de los vecinos.",
+            "Confundir el nasopalatino con el palatino mayor: el primero sale por el foramen incisivo, detrás de los incisivos centrales; el segundo, por el foramen palatino mayor, en la zona de los molares.",
+            "Olvidar que la encía vestibular y la palatina de un mismo diente superior tienen inervaciones distintas, algo que el clínico considera al planear cualquier procedimiento que involucre ambas caras."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando un paciente señale dolor en el maxilar superior, dibuja mentalmente el mapa de los nervios alveolares y del seno. Antes de culpar a un diente, comprueba si el dolor abarca varios dientes vecinos, si cambia con la posición de la cabeza y si las pruebas pulpares son normales."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Nervio trigémino",
+          "definicion": "Quinto par craneal; principal nervio sensitivo de la cara y la boca y nervio motor de los músculos de la masticación."
+        },
+        {
+          "termino": "Ganglio trigeminal",
+          "definicion": "Acúmulo de cuerpos de neuronas sensitivas del trigémino situado en la fosa craneal media, del que salen sus tres divisiones."
+        },
+        {
+          "termino": "Nervio maxilar (V2)",
+          "definicion": "Segunda división del trigémino, puramente sensitiva, que sale por el foramen redondo e inerva el maxilar superior y el tercio medio de la cara."
+        },
+        {
+          "termino": "Plexo dental superior",
+          "definicion": "Red formada por los nervios alveolares superiores dentro del maxilar, de la que salen las ramas para cada diente."
+        },
+        {
+          "termino": "Nervio nasopalatino",
+          "definicion": "Rama de V2 que sale por el foramen incisivo e inerva la mucosa palatina de los dientes anteriores."
+        },
+        {
+          "termino": "Dolor referido",
+          "definicion": "Dolor que se percibe en un lugar distinto de aquel donde se origina el estímulo."
+        },
+        {
+          "termino": "Infiltración",
+          "definicion": "Técnica de anestesia local en la que el anestésico se deposita cerca del ápice para que difunda a través del hueso hasta los nervios dentales."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.3-1",
+          "q": "¿Por qué foramen sale el nervio maxilar del cráneo?",
+          "opciones": [
+            "Foramen oval",
+            "Fisura orbitaria superior",
+            "Foramen redondo",
+            "Foramen espinoso"
+          ],
+          "correcta": 2,
+          "explicacion": "V1 sale por la fisura orbitaria superior, V2 por el foramen redondo y V3 por el foramen oval; por el espinoso pasa la arteria meníngea media."
+        },
+        {
+          "id": "t4.3-2",
+          "q": "¿Qué nervio inerva la mucosa palatina detrás de los incisivos y caninos superiores?",
+          "opciones": [
+            "El nasopalatino",
+            "El palatino mayor",
+            "El alveolar superior anterior",
+            "El lingual"
+          ],
+          "correcta": 0,
+          "explicacion": "El nasopalatino sale por el foramen incisivo y cubre la mucosa palatina de canino a canino; el palatino mayor inerva la zona posterior."
+        },
+        {
+          "id": "t4.3-3",
+          "q": "¿Qué rasgo anatómico permite anestesiar la mayoría de los dientes superiores por infiltración?",
+          "opciones": [
+            "La ausencia de seno maxilar",
+            "Que el nervio alveolar superior anterior está fuera del hueso",
+            "Que el maxilar no tiene periostio",
+            "La cortical vestibular delgada y porosa del maxilar"
+          ],
+          "correcta": 3,
+          "explicacion": "El hueso maxilar, delgado y poroso en vestibular, permite que el anestésico difunda desde la zona periapical hasta los nervios dentales."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Clinically Oriented Anatomy",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Handbook of Local Anesthesia",
+          "autor": "Malamed S. F. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Atlas of Human Anatomy",
+          "autor": "Netter F. H. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "4.4",
+      "titulo": "El nervio mandibular (V3) y los demás nervios de la boca",
+      "minutos": 16,
+      "enPocasPalabras": "La tercera rama del trigémino da sensibilidad a los dientes de abajo, la lengua y el labio inferior, y además mueve los músculos que usamos para masticar. Otros nervios se encargan del gusto, de la saliva y de mover la lengua y la cara. Saber qué hace cada uno ayuda a entender por qué, por ejemplo, la anestesia de abajo duerme también el labio y la lengua.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **nervio mandibular (V3)** es la división más grande del trigémino y la única mixta: lleva sensibilidad de los dientes inferiores, la mandíbula, los dos tercios anteriores de la lengua, el piso de boca, la mejilla, el labio inferior y parte del oído y la sien, y además contiene las fibras motoras de los músculos de la masticación. En la consulta es el nervio protagonista de las técnicas de anestesia de la mandíbula y el que más se relaciona con complicaciones nerviosas en cirugía de terceros molares e implantes.\n\nPero la boca no depende solo del trigémino. El gusto, la secreción de saliva, los movimientos de la lengua y la expresión de los labios corren a cargo de otros pares craneales: el **facial (VII)**, el **glosofaríngeo (IX)**, el **vago (X)** y el **hipogloso (XII)**. Este tema los integra para que puedas explicar con precisión qué siente, qué mueve y qué secreta cada parte de la boca."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El tronco del nervio mandibular y sus dos divisiones"
+        },
+        {
+          "tipo": "texto",
+          "md": "V3 sale del cráneo por el **foramen oval** y llega a la fosa infratemporal, profundo al músculo pterigoideo lateral. Allí su tronco da una rama meníngea y el nervio del **pterigoideo medial**, y luego se divide en dos.\n\nLa **división anterior**, más pequeña, es principalmente motora: inerva el **masetero**, el **temporal** (por los nervios temporales profundos) y el **pterigoideo lateral**. Su única rama sensitiva es el **nervio bucal**, que no debe confundirse con el nervio facial ni con el músculo buccinador al que atraviesa sin inervarlo: lleva la sensibilidad de la piel y la mucosa de la mejilla y de la **encía vestibular de los molares inferiores**.\n\nLa **división posterior**, más grande, es principalmente sensitiva y da tres ramas. El **nervio auriculotemporal** rodea la arteria meníngea media, inerva la piel de la sien, parte del pabellón auricular y la articulación temporomandibular, y transporta fibras secretoras hacia la parótida. El **nervio lingual** desciende hacia la lengua. El **nervio alveolar inferior**, el más importante para los dientes, desciende hacia el foramen mandibular. Además, la división posterior aporta una rama motora, el **nervio milohioideo**, que nace del alveolar inferior y se dirige al milohioideo y al vientre anterior del digástrico. Las otras fibras motoras de V3 que no van a músculos masticadores, para el tensor del velo del paladar y el tensor del tímpano, salen del tronco junto con el nervio del pterigoideo medial."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/10",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica de la cara interna de la rama mandibular con los nervios alveolar inferior y lingual descendiendo hacia el foramen mandibular y la lengua.",
+          "pie": "El nervio alveolar inferior entra al foramen mandibular, mientras el nervio lingual, por delante y por dentro, se dirige hacia la lengua.",
+          "prompt": "Ilustración anatómica realista estilo atlas médico de la cara medial de la rama mandibular derecha de un adulto, vista desde el interior de la boca con la lengua y la mucosa retiradas, el músculo pterigoideo medial en tono rojizo, dos nervios amarillo pálido que descienden desde arriba: uno entra en el foramen mandibular detrás de una pequeña espina ósea y otro avanza hacia adelante en dirección a la lengua junto al tercer molar inferior, vasos rojo suave acompañantes, dientes inferiores permanentes con anatomía correcta, fondo blanco, iluminación difusa. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre, piel, rostro, proporciones irreales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El nervio alveolar inferior y el nervio lingual"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **nervio alveolar inferior** desciende entre el ligamento esfenomandibular, por dentro, y la rama mandibular, por fuera, dentro del **espacio pterigomandibular**. Antes de entrar al **foramen mandibular**, protegido por una pequeña lámina ósea llamada **língula**, da el nervio milohioideo. Dentro del **conducto mandibular** inerva todos los dientes inferiores de su lado, su ligamento periodontal y el hueso, y a la altura de los premolares se divide en dos ramas terminales: el **nervio mentoniano**, que sale por el **foramen mentoniano** e inerva la piel del mentón, la piel y mucosa del labio inferior y la encía vestibular desde los premolares hasta la línea media, y el **nervio incisivo**, que sigue dentro del hueso hacia canino e incisivos.\n\nEl **foramen mentoniano** suele localizarse cerca del ápice del segundo premolar inferior o entre los ápices de los dos premolares, aunque su posición varía y a veces existen forámenes accesorios. Esa variabilidad es una razón para estudiarlo en la radiografía antes de cualquier cirugía en la zona.\n\nEl **nervio lingual** desciende por delante y por dentro del alveolar inferior. En la fosa infratemporal recibe la **cuerda del tímpano**, rama del nervio facial. Luego pasa muy cerca de la cortical lingual de la mandíbula, a la altura del **tercer molar inferior**, a veces justo bajo la mucosa, cruza el conducto de la glándula submandibular y llega a la lengua. Lleva la sensibilidad general de los dos tercios anteriores de la lengua, del piso de boca y de la encía lingual de los dientes inferiores."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Nervios en riesgo durante la cirugía de terceros molares",
+          "md": "La proximidad de las raíces del tercer molar inferior al conducto mandibular y la posición superficial del nervio lingual en la cara interna de la mandíbula explican que la extracción quirúrgica de estos dientes sea la causa más conocida de **alteraciones sensitivas** del labio inferior o de la lengua. La mayoría de estas alteraciones son transitorias, pero algunas persisten. Por eso la valoración radiográfica previa, que a veces incluye tomografía, el consentimiento informado que menciona este riesgo y la referencia a un cirujano maxilofacial en casos complejos son parte de la práctica responsable."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m04/d4",
+          "pie": "Ramas del nervio mandibular (V3) organizadas por división.",
+          "descripcion": "Árbol vertical. Arriba, una caja para el nervio mandibular saliendo por el foramen oval, con una rama corta hacia el pterigoideo medial. Debajo se abre en dos columnas: división anterior (color motor) con masetero, temporales profundos, pterigoideo lateral y nervio bucal señalado como sensitivo; división posterior (color sensitivo) con auriculotemporal, lingual (recibe la cuerda del tímpano) y alveolar inferior, que se ramifica en milohioideo, mentoniano e incisivo.",
+          "elementos": [
+            "Nervio mandibular (V3) · foramen oval",
+            "División anterior: masetero, temporal, pterigoideo lateral",
+            "Nervio bucal (sensitivo)",
+            "División posterior",
+            "Nervio auriculotemporal",
+            "Nervio lingual + cuerda del tímpano",
+            "Nervio alveolar inferior",
+            "Nervio milohioideo",
+            "Nervios mentoniano e incisivo"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué la mandíbula posterior se anestesia con bloqueo"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el adulto, la cortical vestibular de la mandíbula en la zona de premolares y molares es gruesa y compacta, por lo que un anestésico depositado junto al periostio difunde mal hasta los nervios dentales. Por ese motivo el concepto que se enseña es el **bloqueo** del nervio alveolar inferior antes de que entre al foramen mandibular, en el espacio pterigomandibular, donde el nervio lingual está cerca. Así se explica que, tras esa técnica, el paciente sienta adormecidos los dientes de esa hemiarcada, el labio inferior y la mitad de la lengua.\n\nEl mismo razonamiento anatómico explica otros hechos clínicos. La encía vestibular de los molares inferiores depende del **nervio bucal**, que no se bloquea con el alveolar inferior. Los incisivos inferiores reciben fibras que cruzan la línea media desde el lado opuesto. Y se han descrito fuentes de **inervación accesoria**, como el nervio milohioideo, que pueden explicar anestesias incompletas. La técnica, la elección del anestésico y su cantidad son decisiones profesionales que se aprenden con práctica supervisada y no forman parte de este curso."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/11",
+          "proporcion": "16:9",
+          "alt": "Mandíbula humana adulta seca en vista lateral con el foramen mentoniano visible debajo de los premolares.",
+          "pie": "El foramen mentoniano suele estar a la altura de los premolares inferiores; su posición exacta varía entre personas.",
+          "prompt": "Fotografía de estudio de una mandíbula humana adulta de modelo anatómico de alta calidad, vista lateral izquierda, hueso en tono marfil con textura natural, dentición permanente inferior completa con anatomía correcta de incisivos, canino, dos premolares y tres molares, el foramen mentoniano visible como un orificio ovalado en el cuerpo mandibular por debajo de los premolares, cóndilo y apófisis coronoides bien definidos, fondo gris neutro, iluminación lateral suave, enfoque nítido. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, aspecto macabro, dientes faltantes, fracturas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Gusto, saliva y movimiento: los otros nervios de la boca"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Nervios craneales que participan en la función oral",
+          "columnas": [
+            "Nervio",
+            "Función en la boca",
+            "Correlación clínica"
+          ],
+          "filas": [
+            [
+              "Facial (VII)",
+              "Mueve los músculos de la expresión, incluidos el orbicular de los labios y el buccinador; por la cuerda del tímpano lleva el gusto de los dos tercios anteriores de la lengua y fibras secretoras a las glándulas submandibular y sublingual",
+              "Una anestesia depositada por error dentro de la parótida puede alcanzar sus ramas y producir una parálisis facial transitoria"
+            ],
+            [
+              "Glosofaríngeo (IX)",
+              "Sensibilidad general y gusto del tercio posterior de la lengua y de la orofaringe; fibras secretoras a la parótida a través del ganglio ótico y el auriculotemporal",
+              "Participa en el reflejo nauseoso junto con el vago"
+            ],
+            [
+              "Vago (X)",
+              "Músculos del paladar blando (salvo el tensor del velo del paladar, que inerva V3) y de la faringe; sensibilidad de la epiglotis",
+              "Elevación del paladar al decir «ah» durante la exploración"
+            ],
+            [
+              "Hipogloso (XII)",
+              "Motor de los músculos de la lengua, salvo el palatogloso, que inerva el vago",
+              "Si se lesiona de un lado, la lengua protruida se desvía hacia el lado afectado"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Las vías autonómicas de la saliva",
+          "md": "La secreción salival depende sobre todo del sistema **parasimpático**, que llega a las glándulas por dos rutas que «se suben» a ramas del trigémino. Para las **glándulas submandibular y sublingual**, las fibras preganglionares nacen en el núcleo salival superior, viajan en el nervio facial y en la cuerda del tímpano, se unen al **nervio lingual** y hacen sinapsis en el **ganglio submandibular**, suspendido del lingual. Para la **parótida**, las fibras nacen en el núcleo salival inferior, viajan en el glosofaríngeo y el nervio petroso menor, hacen sinapsis en el **ganglio ótico**, junto a V3, y llegan a la glándula con el **auriculotemporal**. La inervación **simpática**, que procede del ganglio cervical superior y viaja con las arterias, modifica la composición de la saliva y el flujo sanguíneo glandular. Por eso muchos medicamentos con efecto anticolinérgico, que bloquean la acción parasimpática, se asocian con boca seca."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/12",
+          "proporcion": "1:1",
+          "alt": "Vista clínica del dorso de la lengua de un adulto, sana, con papilas visibles y las papilas caliciformes en la parte posterior.",
+          "pie": "El dorso de la lengua tiene doble inervación sensitiva y gustativa: los dos tercios anteriores dependen del lingual y la cuerda del tímpano, y el tercio posterior del glosofaríngeo.",
+          "prompt": "Fotografía clínica macro realista del dorso de la lengua sana de un adulto, protruida y relajada, encuadre cerrado que solo muestra la lengua y el borde de los incisivos inferiores, superficie rosada con papilas filiformes finas y algunas fungiformes rojizas dispersas, en el fondo la fila en forma de V de papilas caliciformes, humedad natural con brillo suave, iluminación de lámpara dental blanca y uniforme, fondo oscuro desenfocado, colores naturales. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, labios o rostro completo, saburra exagerada, lesiones, sangre, piercings."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "El recorrido del nervio alveolar inferior",
+          "instruccion": "Ordena las estructuras en el sentido en que las recorre la sensibilidad, desde el cráneo hasta el labio inferior.",
+          "elementos": [
+            "Foramen oval",
+            "División posterior del nervio mandibular",
+            "Espacio pterigomandibular",
+            "Foramen mandibular",
+            "Conducto mandibular",
+            "Foramen mentoniano"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** después de cualquier procedimiento en la mandíbula, pregunta al paciente si recupera la sensibilidad del labio y de la lengua dentro del tiempo esperado y registra su respuesta. Ante un adormecimiento que persiste, documentar la zona afectada y referir a tiempo cambia el pronóstico."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Nervio mandibular (V3)",
+          "definicion": "Tercera división del trigémino, mixta, que sale por el foramen oval e inerva dientes inferiores, lengua, labio inferior y músculos de la masticación."
+        },
+        {
+          "termino": "Nervio alveolar inferior",
+          "definicion": "Rama de la división posterior de V3 que entra al foramen mandibular e inerva los dientes inferiores."
+        },
+        {
+          "termino": "Nervio lingual",
+          "definicion": "Rama de V3 que lleva la sensibilidad general de los dos tercios anteriores de la lengua, el piso de boca y la encía lingual inferior."
+        },
+        {
+          "termino": "Cuerda del tímpano",
+          "definicion": "Rama del nervio facial que se une al lingual y lleva el gusto de los dos tercios anteriores de la lengua y fibras secretoras a las glándulas submandibular y sublingual."
+        },
+        {
+          "termino": "Nervio bucal",
+          "definicion": "Rama sensitiva de la división anterior de V3 para la mejilla y la encía vestibular de los molares inferiores."
+        },
+        {
+          "termino": "Foramen mentoniano",
+          "definicion": "Orificio del cuerpo mandibular, por lo general a la altura de los premolares, por donde salen el nervio y los vasos mentonianos."
+        },
+        {
+          "termino": "Língula",
+          "definicion": "Pequeña lámina ósea que protege el borde del foramen mandibular y sirve de inserción al ligamento esfenomandibular."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.4-1",
+          "q": "¿Qué nervio lleva la sensibilidad de la encía vestibular de los molares inferiores?",
+          "opciones": [
+            "El nervio lingual",
+            "El nervio mentoniano",
+            "El nervio milohioideo",
+            "El nervio bucal"
+          ],
+          "correcta": 3,
+          "explicacion": "El nervio bucal, rama sensitiva de la división anterior de V3, inerva la mejilla y la encía vestibular de los molares inferiores."
+        },
+        {
+          "id": "t4.4-2",
+          "q": "¿Qué nervio aporta el gusto de los dos tercios anteriores de la lengua?",
+          "opciones": [
+            "La cuerda del tímpano, rama del facial",
+            "El hipogloso",
+            "El glosofaríngeo",
+            "El nervio bucal"
+          ],
+          "correcta": 0,
+          "explicacion": "La cuerda del tímpano viaja con el nervio lingual y lleva el gusto anterior; el glosofaríngeo lleva el del tercio posterior."
+        },
+        {
+          "id": "t4.4-3",
+          "q": "¿Por qué en el adulto los molares inferiores se anestesian conceptualmente mediante bloqueo y no por infiltración?",
+          "opciones": [
+            "Porque no tienen ligamento periodontal",
+            "Porque la cortical vestibular de la mandíbula posterior es gruesa y compacta",
+            "Porque los inerva el nervio maxilar",
+            "Porque el conducto mandibular está fuera del hueso"
+          ],
+          "correcta": 1,
+          "explicacion": "El hueso cortical grueso dificulta la difusión del anestésico; por eso se bloquea el nervio antes de que entre al foramen mandibular."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Clinically Oriented Anatomy",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Handbook of Local Anesthesia",
+          "autor": "Malamed S. F. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Atlas of Human Anatomy",
+          "autor": "Netter F. H. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "4.5",
+      "titulo": "Cómo siente un diente: inervación de la pulpa y el periodonto y su aplicación clínica",
+      "minutos": 16,
+      "enPocasPalabras": "Dentro de cada diente hay nervios que avisan con dolor cuando algo lo amenaza, como el frío, una caries o una infección. Hay fibras rápidas que dan un dolor agudo y breve, y fibras lentas que dan un dolor sordo y persistente. Alrededor de la raíz, otros receptores le dicen al cerebro cuánta fuerza haces al morder.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los temas anteriores trazaron el recorrido de los nervios hasta la entrada del diente. Ahora entrarás en él. La pulpa es uno de los tejidos más densamente inervados del cuerpo y, sin embargo, casi toda su respuesta consciente se traduce en una sola sensación: **dolor**. Entender por qué, qué fibras lo producen y cómo se comporta el ligamento periodontal te permitirá interpretar las respuestas del paciente a las pruebas de sensibilidad, distinguir un dolor pulpar de uno periodontal y comprender la lógica anatómica que hay detrás de cada técnica de anestesia.\n\nEste tema se enfoca en los nervios; la estructura de la pulpa y de la dentina se estudia a fondo en el módulo 6."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los nervios entran por el ápice"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los haces nerviosos entran a la pulpa por el **foramen apical** junto con arteriolas y vénulas, formando el paquete neurovascular. En la raíz corren casi paralelos, y en la porción coronaria se ramifican intensamente hasta formar, por debajo de la zona rica en células, el **plexo nervioso subodontoblástico de Raschkow**. Desde ahí, muchas fibras pierden su mielina y terminan entre los odontoblastos, en la predentina y en el tercio interno de algunos túbulos dentinarios, sobre todo bajo los cuernos pulpares.\n\nLa mayoría de las fibras sensitivas de la pulpa son de dos tipos. Las **fibras A-delta** son mielinizadas, conducen rápido, tienen un umbral relativamente bajo y se concentran en la periferia de la pulpa, cerca de la dentina. Las **fibras C** no tienen mielina, conducen lento, tienen un umbral más alto y se distribuyen por todo el cuerpo de la pulpa. Junto a ellas hay fibras **simpáticas**, procedentes del ganglio cervical superior, que regulan el calibre de los vasos y, con ello, el flujo sanguíneo pulpar."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Fibras nerviosas de la pulpa",
+          "columnas": [
+            "Característica",
+            "Fibras A-delta",
+            "Fibras C"
+          ],
+          "filas": [
+            [
+              "Mielina",
+              "Sí, delgada",
+              "No"
+            ],
+            [
+              "Velocidad de conducción",
+              "Rápida",
+              "Lenta"
+            ],
+            [
+              "Ubicación principal",
+              "Periferia de la pulpa y unión pulpa-dentina",
+              "Todo el cuerpo de la pulpa"
+            ],
+            [
+              "Tipo de dolor",
+              "Agudo, punzante, breve y bien delimitado en el tiempo",
+              "Sordo, pulsátil, quemante, difuso y persistente"
+            ],
+            [
+              "Estímulos típicos",
+              "Frío, aire, sondeo de dentina expuesta, cambios osmóticos",
+              "Mediadores de la inflamación, calor, daño tisular"
+            ],
+            [
+              "Contexto clínico",
+              "Hipersensibilidad dentinaria y pulpa reversiblemente inflamada",
+              "Inflamación pulpar avanzada; dolor espontáneo y prolongado"
+            ],
+            [
+              "Resistencia a la falta de oxígeno",
+              "Menor",
+              "Mayor: pueden seguir activas en una pulpa muy dañada"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/13",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de un corte longitudinal de un molar con la pulpa coronaria y radicular y finas fibras nerviosas que entran por los ápices.",
+          "pie": "Los nervios entran por el ápice junto con los vasos y se ramifican en la pulpa coronaria, donde forman un plexo bajo la capa de odontoblastos.",
+          "prompt": "Ilustración realista de estilo histológico y anatómico, corte longitudinal de un primer molar inferior permanente sano de un adulto, esmalte blanco translúcido, dentina color marfil con textura fina, cámara pulpar y conductos radiculares en rosa suave, finas fibras nerviosas amarillo pálido y vasos rojo tenue que entran por los dos ápices, ascienden por los conductos y se ramifican en abanico bajo el techo de la cámara pulpar, hueso alveolar alrededor de las raíces, fondo neutro claro, iluminación difusa. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, caries, sangre, raíces en número incorrecto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué la pulpa solo «sabe» doler"
+        },
+        {
+          "tipo": "texto",
+          "md": "Casi cualquier estímulo suficientemente intenso que llega a la pulpa, ya sea frío, calor, presión osmótica o corriente eléctrica, se percibe como dolor. La explicación más aceptada para la sensibilidad de la dentina es la **teoría hidrodinámica**, propuesta por Brännström: los estímulos desplazan el líquido dentro de los túbulos dentinarios, y ese movimiento deforma las terminaciones nerviosas cercanas a los odontoblastos, sobre todo fibras A-delta. En el módulo 6 verás la estructura que hace posible este mecanismo.\n\nEsta organización tiene consecuencias diagnósticas. Las **pruebas de sensibilidad pulpar**, como el frío o el estímulo eléctrico, evalúan la respuesta de los nervios, sobre todo de las fibras A-delta, y no el flujo de sangre. Por eso una respuesta positiva indica que hay nervios funcionales, pero no garantiza que la pulpa esté sana, y una respuesta negativa no siempre significa necrosis: en dientes recién traumatizados o con raíces inmaduras puede haber falsos negativos. Las técnicas que miden directamente la vascularización, como la oximetría de pulso o el flujo láser Doppler, se estudian en endodoncia."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m04/d5",
+          "pie": "Del estímulo en la dentina a la percepción de dolor: vía de la sensibilidad pulpar.",
+          "descripcion": "Diagrama de flujo de izquierda a derecha. Primero, un corte ampliado de dentina con túbulos y líquido desplazándose ante un estímulo de frío; luego, la terminación nerviosa junto al odontoblasto; después, dos líneas paralelas, una delgada rápida (A-delta) y otra más gruesa y lenta (C), que viajan hacia el nervio alveolar, el ganglio trigeminal y el núcleo espinal del trigémino; al final, la corteza cerebral con dos etiquetas de tipo de dolor.",
+          "elementos": [
+            "Estímulo (frío, aire, sondeo)",
+            "Movimiento de líquido en los túbulos",
+            "Terminación nerviosa junto al odontoblasto",
+            "Fibras A-delta: dolor agudo",
+            "Fibras C: dolor sordo y persistente",
+            "Ganglio trigeminal",
+            "Núcleo espinal del trigémino"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El ligamento periodontal: el sentido del tacto del diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "A diferencia de la pulpa, el **ligamento periodontal** contiene, además de terminaciones de dolor, numerosos **mecanorreceptores** que informan sobre la dirección y la magnitud de las fuerzas que recibe el diente. Gracias a ellos percibes un cabello entre los dientes, ajustas la fuerza al morder un alimento frágil y detectas de inmediato una restauración «alta». Esta información participa en reflejos que protegen a los dientes durante la masticación.\n\nClínicamente, esto explica dos hechos. Cuando la inflamación se limita a la pulpa, el paciente puede no saber qué diente le duele; cuando alcanza el ligamento periodontal apical, el diente duele a la **percusión** y a la masticación, y el paciente lo señala con precisión. Y un paciente con implantes, que carecen de ligamento, tiene menor sensibilidad táctil en esa zona, por lo que puede aplicar fuerzas mayores sin advertirlo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El dolor que «se fue» y la pulpa que no se curó",
+          "md": "Un hombre de 35 años tuvo durante varios días un dolor intenso y espontáneo en un molar inferior que empeoraba con el calor. Ahora dice que «ya no le duele nada», pero el diente duele al masticar. Esta secuencia es compatible con la evolución de una inflamación pulpar irreversible hacia la necrosis: al perder la función nerviosa de la pulpa desaparece el dolor espontáneo, mientras el proceso alcanza el periodonto apical y aparece el dolor a la percusión. La desaparición del dolor no es curación; el diagnóstico requiere pruebas clínicas y radiografía."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una pulpa inflamada es más difícil de anestesiar",
+          "md": "Es una observación clínica constante que los dientes con inflamación pulpar irreversible se anestesian con más dificultad que los sanos. Entre las explicaciones propuestas están la **sensibilización** de las terminaciones nerviosas por los mediadores de la inflamación, cambios en los canales de sodio de las fibras nociceptivas y la acidez del tejido inflamado, que reduce la proporción de anestésico en la forma capaz de atravesar la membrana del nervio. Por eso el labio adormecido no garantiza que la pulpa esté anestesiada."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/14",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas de un odontólogo aplican una torunda de algodón fría sobre la cara vestibular de un premolar inferior.",
+          "pie": "Las pruebas de sensibilidad evalúan la respuesta nerviosa de la pulpa; siempre se comparan con dientes control del mismo paciente.",
+          "prompt": "Fotografía clínica realista, encuadre cerrado de la boca de un paciente adulto con labios separados por un retractor suave, un odontólogo con guantes de nitrilo azul sostiene con pinzas de curación una torunda de algodón con escarcha blanca de frío y la apoya en el tercio medio de la cara vestibular de un premolar inferior permanente sano, dientes vecinos secos, encía rosa sana, iluminación de lámpara dental blanca, enfoque nítido, fondo desenfocado. Evitar: texto, logotipos, marcas de agua, sangre, rostro completo del paciente, manos sin guantes, caries, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Mapa nervioso para la clínica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Con todo lo aprendido en el módulo puedes construir un mapa sencillo: para cada zona de la boca, qué nervio lleva la sensibilidad del diente, cuál la de su encía vestibular y cuál la de su encía palatina o lingual. Este mapa es la base anatómica sobre la que se diseñan las técnicas de anestesia y explica por qué, a veces, se necesita actuar sobre más de un nervio para un mismo procedimiento. Recuerda que la técnica concreta, el anestésico y su cantidad son decisiones del odontólogo, tomadas según el paciente, su historia médica y el procedimiento."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Mapa nervioso por zonas",
+          "columnas": [
+            "Zona",
+            "Diente (pulpa y periodonto)",
+            "Encía y mucosa vestibular",
+            "Encía y mucosa palatina o lingual"
+          ],
+          "filas": [
+            [
+              "Incisivos y canino superiores",
+              "Alveolar superior anterior",
+              "Alveolar superior anterior e infraorbitario (labio)",
+              "Nasopalatino"
+            ],
+            [
+              "Premolares superiores",
+              "Alveolar superior medio o, si falta, anterior y posterior",
+              "Alveolar superior medio o posterior",
+              "Palatino mayor"
+            ],
+            [
+              "Molares superiores",
+              "Alveolar superior posterior (la raíz mesiovestibular del primer molar puede depender del medio)",
+              "Alveolar superior posterior",
+              "Palatino mayor"
+            ],
+            [
+              "Incisivos, canino y premolares inferiores",
+              "Alveolar inferior por su rama incisiva; fibras que cruzan la línea media en los incisivos",
+              "Mentoniano",
+              "Lingual"
+            ],
+            [
+              "Molares inferiores",
+              "Alveolar inferior",
+              "Bucal",
+              "Lingual"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El mismo mapa ayuda a entender los patrones de **dolor referido** más conocidos. El dolor de un molar inferior puede sentirse en el oído, en el ángulo de la mandíbula o en un molar superior del mismo lado; el de un molar superior, en la sien o en la región del seno; y el de un canino superior, cerca del ojo o la nariz. El dolor referido casi nunca cruza la línea media, salvo en la región de los incisivos, por lo que el lado de la boca que señala el paciente suele ser confiable aunque el diente no lo sea."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m04/15",
+          "proporcion": "16:9",
+          "alt": "Tipodonto adulto completo sobre una mesa de laboratorio dental, con ambas arcadas visibles desde una vista frontal ligeramente superior.",
+          "pie": "Sobre un modelo de las dos arcadas puedes practicar el mapa nervioso: diente, encía vestibular y encía palatina o lingual.",
+          "prompt": "Fotografía de estudio realista de un tipodonto dental de adulto de alta calidad colocado en una mesa blanca de laboratorio de enseñanza, arcadas superior e inferior entreabiertas con dentición permanente completa de 32 dientes y anatomía correcta, encía de silicona rosa pálido, vista frontal ligeramente superior que permite ver el paladar y la cara lingual de los dientes inferiores, luz suave de ventana, fondo limpio desenfocado, colores naturales. Evitar: texto, etiquetas, logotipos, marcas, marcas de agua, dientes faltantes o deformes, sangre, personas."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Mapa nervioso de la boca",
+          "instruccion": "Relaciona cada zona con el nervio que lleva su sensibilidad.",
+          "pares": [
+            {
+              "a": "Pulpa del primer molar inferior",
+              "b": "Nervio alveolar inferior"
+            },
+            {
+              "a": "Encía vestibular del segundo molar inferior",
+              "b": "Nervio bucal"
+            },
+            {
+              "a": "Encía lingual de los premolares inferiores",
+              "b": "Nervio lingual"
+            },
+            {
+              "a": "Encía palatina de los incisivos superiores",
+              "b": "Nervio nasopalatino"
+            },
+            {
+              "a": "Encía palatina de los molares superiores",
+              "b": "Nervio palatino mayor"
+            },
+            {
+              "a": "Labio inferior y encía vestibular de los incisivos inferiores",
+              "b": "Nervio mentoniano"
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Anestesia: concepto aquí, técnica en la práctica supervisada",
+          "md": "Conocer la anatomía no habilita para aplicar anestesia. Las técnicas, la selección del anestésico y del vasoconstrictor y las cantidades dependen de la valoración médica de cada paciente y se aprenden en formación clínica con supervisión. Asistentes y pacientes informados pueden usar este mapa para entender lo que sienten y lo que se les explica, no para indicar o modificar un tratamiento."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** al realizar pruebas de sensibilidad, compara siempre el diente sospechoso con dientes control del mismo paciente, registra el tipo de respuesta (ausente, normal, exagerada o que persiste después de retirar el estímulo) y recuerda que estás midiendo nervios, no circulación."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Fibras A-delta",
+          "definicion": "Fibras nerviosas mielinizadas y rápidas de la periferia pulpar que producen dolor agudo y breve."
+        },
+        {
+          "termino": "Fibras C",
+          "definicion": "Fibras nerviosas no mielinizadas y lentas, distribuidas en toda la pulpa, que producen dolor sordo, difuso y persistente."
+        },
+        {
+          "termino": "Plexo de Raschkow",
+          "definicion": "Red nerviosa situada por debajo de la zona rica en células de la pulpa coronaria, de la que salen las terminaciones hacia los odontoblastos."
+        },
+        {
+          "termino": "Teoría hidrodinámica",
+          "definicion": "Explicación de la sensibilidad dentinaria según la cual el movimiento del líquido en los túbulos estimula las terminaciones nerviosas pulpares."
+        },
+        {
+          "termino": "Prueba de sensibilidad pulpar",
+          "definicion": "Prueba clínica, como el frío o el estímulo eléctrico, que evalúa la respuesta de los nervios de la pulpa."
+        },
+        {
+          "termino": "Mecanorreceptor",
+          "definicion": "Receptor sensitivo que responde a la presión o al estiramiento; abundante en el ligamento periodontal."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t4.5-1",
+          "q": "¿Qué evalúa una prueba de sensibilidad pulpar con frío?",
+          "opciones": [
+            "El flujo sanguíneo de la pulpa",
+            "La densidad del esmalte",
+            "La respuesta de las fibras nerviosas de la pulpa",
+            "La movilidad del diente"
+          ],
+          "correcta": 2,
+          "explicacion": "Las pruebas térmicas y eléctricas evalúan la respuesta nerviosa, no la vascularización."
+        },
+        {
+          "id": "t4.5-2",
+          "q": "Un dolor sordo, pulsátil y persistente que empeora con el calor se relaciona sobre todo con:",
+          "opciones": [
+            "Fibras A-delta",
+            "Fibras C",
+            "Mecanorreceptores del ligamento periodontal",
+            "Fibras motoras del trigémino"
+          ],
+          "correcta": 1,
+          "explicacion": "Las fibras C, lentas y distribuidas en toda la pulpa, responden a mediadores inflamatorios y producen ese tipo de dolor."
+        },
+        {
+          "id": "t4.5-3",
+          "q": "¿Por qué un diente con inflamación que alcanza el periodonto apical se localiza con más facilidad?",
+          "opciones": [
+            "Porque el ligamento periodontal tiene mecanorreceptores que informan con precisión",
+            "Porque la pulpa tiene receptores de posición",
+            "Porque el esmalte transmite el dolor",
+            "Porque las fibras C son más rápidas"
+          ],
+          "correcta": 0,
+          "explicacion": "El ligamento periodontal posee mecanorreceptores que permiten ubicar el diente; la pulpa casi solo transmite dolor difuso."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Seltzer and Bender's Dental Pulp",
+          "autor": "Hargreaves K. M., Goodis H. E., Tay F. R. (Quintessence)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Handbook of Local Anesthesia",
+          "autor": "Malamed S. F. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología oral y fisiología pulpar",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: vasos y nervios de la boca",
+    "palabras": [
+      "TRIGEMINO",
+      "MAXILAR",
+      "MANDIBULAR",
+      "LINGUAL",
+      "ALVEOLAR",
+      "PTERIGOIDEO",
+      "MENTONIANO",
+      "CAROTIDA",
+      "NASOPALATINO",
+      "FACIAL",
+      "PALATINO",
+      "BUCAL"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m04-p01",
+        "q": "¿Qué arteria es la principal fuente de irrigación de los dientes?",
+        "opciones": [
+          "La arteria maxilar",
+          "La arteria carótida interna",
+          "La arteria occipital",
+          "La arteria tiroidea superior"
+        ],
+        "correcta": 0,
+        "explicacion": "La arteria maxilar, rama terminal de la carótida externa, da las alveolares superiores e inferior. La carótida interna no da ramas en el cuello."
+      },
+      {
+        "id": "m04-p02",
+        "q": "¿Con qué músculo se relaciona la arteria maxilar para dividirse en tres porciones?",
+        "opciones": [
+          "Masetero",
+          "Buccinador",
+          "Pterigoideo lateral",
+          "Temporal"
+        ],
+        "correcta": 2,
+        "explicacion": "Las porciones mandibular, pterigoidea y pterigopalatina se definen por su posición respecto al pterigoideo lateral."
+      },
+      {
+        "id": "m04-p03",
+        "q": "¿Cuál de estas arterias nace de la tercera porción, pterigopalatina, de la arteria maxilar?",
+        "opciones": [
+          "Alveolar inferior",
+          "Meníngea media",
+          "Maseterina",
+          "Alveolar superior posterior"
+        ],
+        "correcta": 3,
+        "explicacion": "La alveolar superior posterior nace en la fosa pterigopalatina; la alveolar inferior y la meníngea media son de la primera porción y la maseterina de la segunda."
+      },
+      {
+        "id": "m04-p04",
+        "q": "¿Por qué foramen sale la arteria palatina mayor hacia el paladar duro?",
+        "opciones": [
+          "Foramen incisivo",
+          "Foramen palatino mayor",
+          "Foramen redondo",
+          "Foramen mentoniano"
+        ],
+        "correcta": 1,
+        "explicacion": "La arteria y el nervio palatinos mayores salen por el foramen palatino mayor, en la zona posterior del paladar duro."
+      },
+      {
+        "id": "m04-p05",
+        "q": "Durante la colocación de un implante anterior inferior se perfora la cortical lingual y aparece un aumento rápido de volumen del piso de boca. ¿Cuál es la principal preocupación?",
+        "opciones": [
+          "Una lesión del nervio facial",
+          "Una comunicación con el seno maxilar",
+          "Un hematoma por lesión de ramas sublinguales o submentonianas que comprometa la vía aérea",
+          "Una fractura del cóndilo"
+        ],
+        "correcta": 2,
+        "explicacion": "Las ramas sublinguales y submentonianas entran a la mandíbula por la cortical lingual anterior; su sangrado puede elevar la lengua y obstruir la vía aérea."
+      },
+      {
+        "id": "m04-p06",
+        "q": "¿Dónde se localiza el plexo venoso pterigoideo?",
+        "opciones": [
+          "En la fosa infratemporal, alrededor de los músculos pterigoideos",
+          "En el piso de boca",
+          "Dentro de la glándula submandibular",
+          "En el paladar duro"
+        ],
+        "correcta": 0,
+        "explicacion": "El plexo pterigoideo rodea los pterigoideos en la fosa infratemporal y se comunica con la vena facial y el seno cavernoso."
+      },
+      {
+        "id": "m04-p07",
+        "q": "Un paciente presenta un hematoma de rápida aparición en la mejilla tras una técnica de anestesia en la región de la tuberosidad del maxilar. ¿Qué estructura es la causa más probable?",
+        "opciones": [
+          "La arteria lingual",
+          "La vena yugular externa",
+          "La arteria facial en el borde de la mandíbula",
+          "El plexo pterigoideo o la arteria alveolar superior posterior"
+        ],
+        "correcta": 3,
+        "explicacion": "La técnica para el nervio alveolar superior posterior se realiza cerca del plexo pterigoideo y de la arteria homónima."
+      },
+      {
+        "id": "m04-p08",
+        "q": "¿Qué ganglios reciben primero la linfa de la mayoría de los dientes?",
+        "opciones": [
+          "Submentonianos",
+          "Submandibulares",
+          "Parotídeos",
+          "Occipitales"
+        ],
+        "correcta": 1,
+        "explicacion": "La mayoría de los dientes drenan a los ganglios submandibulares; los incisivos inferiores lo hacen primero a los submentonianos."
+      },
+      {
+        "id": "m04-p09",
+        "q": "¿Qué característica de un ganglio cervical obliga a referir al paciente para estudio?",
+        "opciones": [
+          "Que sea doloroso y móvil junto a un absceso dental",
+          "Que disminuya tras tratar la infección",
+          "Que sea duro, indoloro, fijo y persista sin foco infeccioso",
+          "Que se palpe pequeño y blando en un niño"
+        ],
+        "correcta": 2,
+        "explicacion": "Un ganglio duro, indoloro, fijo y persistente sin causa clara puede corresponder a una neoplasia y requiere estudio."
+      },
+      {
+        "id": "m04-p10",
+        "q": "¿Cuál de las divisiones del trigémino es mixta, sensitiva y motora?",
+        "opciones": [
+          "La oftálmica (V1)",
+          "La maxilar (V2)",
+          "Las tres por igual",
+          "La mandibular (V3)"
+        ],
+        "correcta": 3,
+        "explicacion": "Solo V3 recibe la raíz motora que inerva los músculos de la masticación; V1 y V2 son sensitivas."
+      },
+      {
+        "id": "m04-p11",
+        "q": "¿Qué nervio inerva los incisivos y el canino superiores?",
+        "opciones": [
+          "El alveolar superior anterior",
+          "El alveolar superior posterior",
+          "El nasopalatino",
+          "El palatino mayor"
+        ],
+        "correcta": 0,
+        "explicacion": "El alveolar superior anterior, rama del infraorbitario, inerva los dientes anterosuperiores; el nasopalatino inerva su mucosa palatina."
+      },
+      {
+        "id": "m04-p12",
+        "q": "Una paciente con resfriado reciente refiere dolor en varios molares superiores del mismo lado que empeora al agacharse; las pruebas pulpares son normales. ¿Qué relación anatómica explica el cuadro?",
+        "opciones": [
+          "La cercanía del conducto mandibular",
+          "Los nervios alveolares superiores corren en las paredes del seno maxilar",
+          "La vena facial drena el seno",
+          "El nervio lingual inerva el seno maxilar"
+        ],
+        "correcta": 1,
+        "explicacion": "La sinusitis maxilar puede irritar los nervios alveolares en las paredes del seno y simular dolor dental."
+      },
+      {
+        "id": "m04-p13",
+        "q": "¿Qué rama del nervio mandibular es motora y sale del alveolar inferior antes de que entre al foramen mandibular?",
+        "opciones": [
+          "Nervio bucal",
+          "Nervio auriculotemporal",
+          "Nervio milohioideo",
+          "Nervio mentoniano"
+        ],
+        "correcta": 2,
+        "explicacion": "El nervio milohioideo inerva el milohioideo y el vientre anterior del digástrico; se ha descrito como posible fuente de inervación accesoria."
+      },
+      {
+        "id": "m04-p14",
+        "q": "¿Cerca de qué diente pasa el nervio lingual, a veces justo bajo la mucosa de la cara interna de la mandíbula?",
+        "opciones": [
+          "Incisivo central inferior",
+          "Primer premolar inferior",
+          "Canino inferior",
+          "Tercer molar inferior"
+        ],
+        "correcta": 3,
+        "explicacion": "El nervio lingual pasa muy cerca de la cortical lingual a la altura del tercer molar, lo que lo pone en riesgo en la cirugía de ese diente."
+      },
+      {
+        "id": "m04-p15",
+        "q": "Tras una anestesia para un molar inferior, el paciente refiere labio y mitad de la lengua dormidos, pero siente molestia al manipular la encía vestibular del molar. ¿Qué nervio no se incluyó?",
+        "opciones": [
+          "El nervio bucal",
+          "El nervio mentoniano",
+          "El nervio lingual",
+          "El nervio incisivo"
+        ],
+        "correcta": 0,
+        "explicacion": "La encía vestibular de los molares inferiores depende del nervio bucal, que no se bloquea junto con el alveolar inferior."
+      },
+      {
+        "id": "m04-p16",
+        "q": "¿Qué nervio lleva el gusto del tercio posterior de la lengua?",
+        "opciones": [
+          "El hipogloso",
+          "El glosofaríngeo",
+          "La cuerda del tímpano",
+          "El nervio lingual"
+        ],
+        "correcta": 1,
+        "explicacion": "El glosofaríngeo aporta sensibilidad general y gusto del tercio posterior; la cuerda del tímpano, el gusto de los dos tercios anteriores."
+      },
+      {
+        "id": "m04-p17",
+        "q": "¿Qué nervio mueve los músculos de la lengua?",
+        "opciones": [
+          "El trigémino",
+          "El facial",
+          "El hipogloso",
+          "El glosofaríngeo"
+        ],
+        "correcta": 2,
+        "explicacion": "El hipogloso es motor de la lengua, excepto el palatogloso, que depende del vago."
+      },
+      {
+        "id": "m04-p18",
+        "q": "¿Qué fibras pulpares producen un dolor agudo, breve y provocado por el frío o el aire?",
+        "opciones": [
+          "Fibras C",
+          "Fibras simpáticas",
+          "Fibras motoras",
+          "Fibras A-delta"
+        ],
+        "correcta": 3,
+        "explicacion": "Las A-delta, mielinizadas y periféricas, responden al movimiento de líquido en los túbulos con dolor agudo y breve."
+      },
+      {
+        "id": "m04-p19",
+        "q": "Un diente con dolor espontáneo intenso durante días ahora «ya no duele», pero duele al morder. ¿Cuál es la interpretación más prudente?",
+        "opciones": [
+          "La pulpa podría haber evolucionado a necrosis con afectación del periodonto apical",
+          "La pulpa se curó sola",
+          "El dolor era de origen muscular",
+          "El diente ya no necesita valoración"
+        ],
+        "correcta": 0,
+        "explicacion": "Al perderse la función nerviosa pulpar cede el dolor espontáneo; el dolor a la masticación indica afectación periapical. Requiere diagnóstico."
+      },
+      {
+        "id": "m04-p20",
+        "q": "¿Por qué el maxilar superior se anestesia con frecuencia por infiltración?",
+        "opciones": [
+          "Porque sus dientes no tienen pulpa",
+          "Porque su cortical vestibular es delgada y porosa",
+          "Porque el nervio maxilar es motor",
+          "Porque no tiene periostio"
+        ],
+        "correcta": 1,
+        "explicacion": "La cortical delgada y el hueso esponjoso permiten que el anestésico difunda hasta los nervios dentales; la técnica y la cantidad las decide el profesional."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Clinically Oriented Anatomy",
+      "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Atlas of Human Anatomy",
+      "autor": "Netter F. H. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Oral Anatomy, Histology and Embryology",
+      "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Handbook of Local Anesthesia",
+      "autor": "Malamed S. F. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)"
+    }
+  ]
+}

@@ -1,0 +1,951 @@
+{
+  "programa": "caries-dental",
+  "modulo": 12,
+  "titulo": "Comunicación con el paciente y programas de prevención",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Todo lo que aprendiste en este programa solo funciona si el paciente lo entiende, lo acepta y lo hace suyo, y si la prevención se organiza para llegar a más personas. En este módulo final aprenderás a comunicarte con lenguaje claro y a comprobar que te entendieron, a usar la entrevista motivacional para acompañar cambios de hábitos, a explicar el riesgo y las opciones de tratamiento para decidir junto con el paciente, a organizar un programa preventivo en tu consultorio y a participar en programas escolares y comunitarios, con el marco de la NOM-013-SSA2-2015 y de la estrategia mundial de salud bucodental de la OMS.",
+  "objetivos": [
+    "Aplicar técnicas de lenguaje claro y el método de enseñanza de retorno para comprobar la comprensión del paciente.",
+    "Utilizar los principios y las habilidades básicas de la entrevista motivacional para promover cambios de hábitos relacionados con la caries.",
+    "Explicar el riesgo de caries y las opciones de manejo con un proceso de decisión compartida y un consentimiento informado conforme a la norma.",
+    "Diseñar un programa preventivo en el consultorio con citas según riesgo, funciones del equipo e indicadores de seguimiento.",
+    "Describir los componentes de un programa escolar o comunitario de prevención de caries en el contexto mexicano.",
+    "Calcular e interpretar un indicador de asistencia a las citas de prevención."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m12/portada",
+    "proporcion": "16:9",
+    "alt": "Odontóloga con cubrebocas conversa sentada a la altura de una paciente adulta, vista de espaldas, mientras le muestra una imagen intraoral en un monitor.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental moderno y luminoso. Una odontóloga con bata, cubrebocas, gorro y lentes de protección está sentada en un banco a la misma altura que una paciente adulta, que permanece sentada en el sillón y aparece de espaldas, sin rostro visible. Ambas miran un monitor que muestra una imagen intraoral ampliada de dientes sanos con placa teñida, sin texto en pantalla. La odontóloga gesticula con una mano enguantada, en actitud de explicar con calma. Luz natural lateral, colores cálidos y naturales. Evitar: texto, letreros, logotipos, interfaz con letras, marcas de agua, rostro identificable de la paciente, sangre, instrumental punzante, profesional sin equipo de protección."
+  },
+  "temas": [
+    {
+      "n": "12.1",
+      "titulo": "Comunicar con claridad: lenguaje sencillo y comprobación de la comprensión",
+      "minutos": 13,
+      "enPocasPalabras": "Para cuidar tu boca necesitas entender lo que te dice el dentista. Un buen dentista usa palabras sencillas, te muestra lo que ve y te pide que le expliques con tus palabras lo que vas a hacer en casa, para asegurarse de que se explicó bien.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Has aprendido a diagnosticar lesiones con ICDAS, a evaluar el riesgo, a indicar flúor y selladores y a decidir entre detener o restaurar. Nada de eso cambia la salud de una persona si ella no entiende qué tiene, por qué importa y qué le toca hacer. La **comunicación** no es un complemento amable de la clínica: es una competencia técnica que se aprende, se practica y se evalúa igual que una restauración.\n\nLa prevención de la caries depende, sobre todo, de lo que el paciente hace en las miles de horas que pasa fuera del consultorio: cómo se cepilla, qué come, qué bebe y con qué frecuencia. Tu tiempo en el sillón es corto; lo que dices en ese tiempo tiene que ser claro, útil y recordable."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Alfabetización en salud: un problema invisible"
+        },
+        {
+          "tipo": "texto",
+          "md": "Se llama **alfabetización en salud** a la capacidad de una persona para obtener, entender y usar información de salud para tomar decisiones. No depende solo de la escolaridad: un abogado o una ingeniera pueden no entender qué es una «lesión no cavitada activa» o qué significa «remoción selectiva». A esto se suman el estrés de la consulta, el ruido de la pieza de mano, el cubrebocas que amortigua la voz y la vergüenza de decir «no entendí».\n\nPor eso conviene adoptar una actitud de **precaución universal**: suponer que cualquier paciente puede tener dificultades para entender y comunicarse con todos de forma clara, en lugar de intentar adivinar quién las tiene. La Agencia para la Investigación y la Calidad de la Atención Médica de Estados Unidos (AHRQ) publica un conjunto de herramientas basado en esta idea, que incluye el método de enseñanza de retorno que verás más adelante."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La norma pide lenguaje claro",
+          "md": "El apéndice de la **NOM-013-SSA2-2015** establece que en todos los grupos de edad es necesario utilizar un **lenguaje claro y sencillo**. Además, la carta de consentimiento informado debe expresarse en lenguaje sencillo, sin terminología técnica. La norma también reconoce como grupos prioritarios para la promoción de la salud bucal a escolares, embarazadas, adolescentes, adultos mayores, personas con discapacidad, pueblos indígenas, personas con VIH y personas con enfermedades crónico-degenerativas, lo que en México implica adaptar el mensaje a contextos culturales y lingüísticos diversos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Técnicas de lenguaje claro"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Siete hábitos de comunicación clara en la consulta",
+          "items": [
+            "Siéntate a la altura de los ojos del paciente y, cuando sea seguro hacerlo fuera del procedimiento, habla sin la pieza de mano encendida.",
+            "Usa palabras cotidianas: «picadura» o «caries», «encía», «mancha blanca», en lugar de términos técnicos sin explicar.",
+            "Limita el mensaje a dos o tres acciones clave por consulta.",
+            "Explica el porqué de cada recomendación con una imagen o una comparación sencilla.",
+            "Muestra en lugar de solo describir: espejo de mano, cámara intraoral, tableta reveladora de placa o un modelo.",
+            "Habla despacio y haz pausas para preguntas, y pide que te hagan preguntas de forma abierta.",
+            "Entrega por escrito lo esencial, con letra grande y dibujos, en el idioma o la variante que la persona domina."
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/01",
+          "proporcion": "4:3",
+          "alt": "Paciente adulto, visto de espaldas, observa en un espejo de mano sus dientes con placa teñida mientras un odontólogo con equipo de protección señala.",
+          "pie": "Ver la placa teñida en su propia boca convence más que cualquier explicación verbal.",
+          "prompt": "Fotografía realista en un consultorio dental limpio y luminoso. Un hombre adulto de unos cuarenta años, sentado en el sillón y visto de espaldas y ligeramente de perfil, sostiene un espejo de mano frente a su boca; el reflejo muestra de forma difusa dientes con zonas teñidas de color violeta suave por una tableta reveladora de placa, sin rostro nítido. A su lado, un odontólogo con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección señala el espejo con un dedo enguantado. Luz natural suave, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro identificable, reflejo nítido del rostro, sangre, instrumental punzante, profesional sin equipo de protección."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Del lenguaje técnico al lenguaje claro",
+          "columnas": ["Término técnico", "Una forma clara de decirlo"],
+          "filas": [
+            ["Biopelícula o placa dentobacteriana", "Capa pegajosa de bacterias que se forma sobre los dientes y que el cepillo retira"],
+            ["Lesión no cavitada activa", "Mancha donde el diente está perdiendo minerales, todavía sin agujero, que podemos frenar"],
+            ["Remineralización", "El diente recupera minerales gracias a la saliva y al flúor"],
+            ["Azúcares libres", "Azúcar que se agrega a alimentos y bebidas, más la de jugos y mieles"],
+            ["Riesgo alto de caries", "Hoy tienes más probabilidad de que te salgan nuevas caries si no cambiamos algunas cosas"],
+            ["Recesión gingival", "La encía bajó y dejó a la vista parte de la raíz"]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Diversidad cultural y lingüística"
+        },
+        {
+          "tipo": "texto",
+          "md": "México es un país con gran diversidad lingüística: el Instituto Nacional de Lenguas Indígenas (INALI) reconoce en su catálogo 68 agrupaciones lingüísticas y 364 variantes. En muchas comunidades, el español es la segunda lengua de las personas mayores y de algunas madres. Cuando la persona no domina el español, busca un **intérprete** adulto de su confianza o un promotor de salud de la comunidad, y evita usar a niñas o niños como intérpretes para temas clínicos.\n\nLa cultura también influye en lo que la gente cree sobre la boca: que los dientes de leche no importan, que el embarazo «quita un diente», que un diente que duele debe extraerse siempre o que ciertos remedios caseros curan la caries. Antes de corregir una creencia, pregunta qué sabe la persona y por qué lo cree; muchas veces podrás construir sobre lo que ya hace bien. El respeto abre más puertas que la corrección."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Enseñanza de retorno: comprobar que te entendieron"
+        },
+        {
+          "tipo": "texto",
+          "md": "Preguntar «¿me entendió?» casi siempre obtiene un «sí», aunque no sea cierto. La **enseñanza de retorno** (*teach-back*) consiste en pedir al paciente que explique **con sus propias palabras** lo que va a hacer, por ejemplo: «Para estar seguro de que lo expliqué bien, ¿me cuenta cómo le va a lavar los dientes a su hijo esta noche?». Si la respuesta es incompleta, explicas de nuevo de otra forma y vuelves a preguntar, hasta que la persona lo expresa correctamente.\n\nUna variante es el método **«muéstrame»**: el paciente demuestra la técnica con su cepillo, el hilo o el cepillo interdental frente a ti. Es especialmente útil con habilidades manuales y con cuidadores. El punto clave es la actitud: la pregunta evalúa **qué tan bien explicaste tú**, no cuánto sabe el paciente, y así debe plantearse para que nadie se sienta examinado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Explicar en bloques y comprobar",
+          "md": "Una forma práctica de organizar la consulta es **dividir la información en bloques pequeños** y comprobar la comprensión después de cada uno, en lugar de dar toda la explicación y preguntar al final. Explicas la causa de la lesión, compruebas; explicas qué hará en casa, compruebas; explicas cuándo regresará, compruebas. Así, si algo no quedó claro, lo detectas a tiempo y no al final, cuando la persona ya está cansada."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m12/d1",
+          "pie": "El ciclo de la enseñanza de retorno: explicar, comprobar, aclarar y volver a comprobar.",
+          "descripcion": "Diagrama circular con cuatro estaciones unidas por flechas en sentido horario. Primera estación: explicar un bloque de información con lenguaje claro. Segunda: pedir al paciente que lo explique con sus palabras o lo demuestre. Tercera, solo si la respuesta es incompleta: aclarar de otra forma. Cuarta: volver a comprobar. Una flecha de salida lleva desde la segunda estación al siguiente bloque cuando la comprensión es correcta.",
+          "elementos": ["Explicar un bloque", "El paciente lo explica o lo demuestra", "¿Comprensión correcta?", "Aclarar de otra forma", "Volver a comprobar", "Siguiente bloque"]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Traduce al lenguaje claro",
+          "instruccion": "Relaciona cada frase técnica con la versión clara que podrías decirle a un paciente.",
+          "pares": [
+            { "a": "Tiene lesiones no cavitadas activas en vestibular", "b": "Tienes manchas donde el diente pierde minerales; aún no hay agujero y podemos frenarlas" },
+            { "a": "Aumente la frecuencia de exposición al fluoruro", "b": "Usa tu pasta con flúor en la mañana y antes de dormir, sin enjuagarte de más" },
+            { "a": "Reduzca la ingesta de azúcares libres entre comidas", "b": "Evita bebidas y golosinas con azúcar entre comidas; mejor agua simple" },
+            { "a": "Presenta recesión con exposición radicular", "b": "La encía bajó y quedó a la vista una parte de la raíz, que se pica con más facilidad" },
+            { "a": "Su riesgo de caries es alto", "b": "Hoy tienes más probabilidad de nuevas caries si no cambiamos algunas cosas" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Durante una semana, termina cada consulta preventiva con una pregunta de enseñanza de retorno, siempre la misma: «Para asegurarme de que lo expliqué bien, ¿me cuenta qué va a hacer distinto a partir de hoy?». Anota cuántas veces la respuesta fue completa a la primera. El resultado te dirá más sobre tu forma de explicar que cualquier encuesta de satisfacción. Cuando la respuesta sea incompleta, anota qué parte faltó: así descubrirás qué explicaciones necesitas reformular con otras palabras o con una imagen."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/02",
+          "proporcion": "16:9",
+          "alt": "Madre, vista de espaldas, demuestra con un cepillo sobre un modelo dental cómo cepillará a su hijo mientras una asistente dental con equipo de protección observa.",
+          "pie": "El método «muéstrame»: la persona demuestra la técnica y el equipo corrige en el momento.",
+          "prompt": "Fotografía realista horizontal en un área de educación para la salud dentro de un consultorio dental luminoso. Una mujer joven, vista de espaldas y sin rostro visible, sostiene un cepillo dental infantil sobre un modelo didáctico grande de dentición temporal colocado en una mesa. A su lado, una asistente dental con uniforme, guantes de nitrilo, cubrebocas y lentes de protección observa y señala con suavidad el ángulo del cepillo. Al fondo, desenfocado, un niño pequeño juega de espaldas. Luz natural difusa, colores suaves. Evitar: texto, carteles, logotipos, marcas comerciales, marcas de agua, rostros identificables, sangre, instrumental punzante, profesional sin equipo de protección."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/03",
+          "proporcion": "3:4",
+          "alt": "Hoja de indicaciones ilustrada sin texto legible, con dibujos de un cepillo, un vaso de agua y un reloj, sobre la mesa junto a un cepillo dental.",
+          "pie": "Las indicaciones por escrito con dibujos ayudan a recordar lo esencial en casa.",
+          "prompt": "Fotografía realista vertical, vista cenital de una mesa de madera clara. Sobre ella hay una hoja tamaño carta con ilustraciones sencillas y coloridas de un cepillo dental, un vaso de agua, un reloj y una luna, organizadas en recuadros, sin letras ni números legibles, como una guía pictográfica. Junto a la hoja, un cepillo dental de adulto y un cepillo interdental pequeño. Luz natural suave de ventana, sombras ligeras, colores cálidos. Evitar: texto legible, letras, números, logotipos, marcas comerciales, marcas de agua, personas, colores fluorescentes."
+        }
+      ],
+      "glosario": [
+        { "termino": "Alfabetización en salud", "definicion": "Capacidad de una persona para obtener, entender y usar información de salud para tomar decisiones." },
+        { "termino": "Precaución universal", "definicion": "Actitud de comunicarse con todos los pacientes de forma clara, sin suponer quién entenderá y quién no." },
+        { "termino": "Enseñanza de retorno", "definicion": "Método en el que el paciente explica con sus palabras lo que va a hacer para comprobar que la explicación fue clara." },
+        { "termino": "Método «muéstrame»", "definicion": "Variante en la que el paciente demuestra una técnica, como el cepillado, frente al profesional." },
+        { "termino": "Tableta reveladora", "definicion": "Producto con colorante que tiñe la placa para hacerla visible." }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.1-1",
+          "q": "¿Qué evalúa en realidad la enseñanza de retorno?",
+          "opciones": ["La inteligencia del paciente", "Qué tan bien explicó el profesional", "La escolaridad del paciente", "La memoria del asistente"],
+          "correcta": 1,
+          "explicacion": "Su planteamiento correcto es que evalúa la claridad de la explicación, no los conocimientos del paciente."
+        },
+        {
+          "id": "t12.1-2",
+          "q": "¿Qué significa adoptar una actitud de precaución universal en comunicación?",
+          "opciones": ["Usar lenguaje técnico para mostrar profesionalismo", "Hablar claro solo con pacientes de baja escolaridad", "Evitar dar información para no confundir", "Comunicarse con claridad con todos los pacientes sin suponer quién entenderá"],
+          "correcta": 3,
+          "explicacion": "Cualquier persona puede tener dificultades para entender información de salud, sobre todo en una consulta."
+        },
+        {
+          "id": "t12.1-3",
+          "q": "¿Qué establece la NOM-013-SSA2-2015 sobre el lenguaje en la atención?",
+          "opciones": ["Que debe ser claro y sencillo en todos los grupos de edad", "Que debe usar términos en latín", "Que solo importa en niños", "Que no hace referencia al lenguaje"],
+          "correcta": 0,
+          "explicacion": "El apéndice normativo pide lenguaje claro y sencillo en todos los grupos de edad y en el consentimiento informado."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Health Literacy Universal Precautions Toolkit, 2nd Edition", "autor": "Agency for Healthcare Research and Quality (AHRQ)", "anio": 2015 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Catálogo de las Lenguas Indígenas Nacionales", "autor": "Instituto Nacional de Lenguas Indígenas (INALI)", "anio": 2008 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de lenguaje claro y alfabetización en salud aplicados a la consulta dental", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "12.2",
+      "titulo": "Acompañar el cambio: entrevista motivacional en la consulta dental",
+      "minutos": 13,
+      "enPocasPalabras": "Cambiar costumbres como dejar el refresco o cepillarse antes de dormir no es fácil. En lugar de regañar, el dentista pregunta, escucha y ayuda a que la persona encuentre sus propias razones y un primer paso posible.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Todos conocemos la escena: el odontólogo explica con detalle por qué hay que dejar las bebidas azucaradas, el paciente asiente y seis meses después vuelve con lesiones nuevas y el mismo refresco en la mano. Saber qué hacer no basta para hacerlo. Los hábitos que causan la caries están ligados al gusto, a la rutina, a la economía familiar, al estrés y a la cultura, y cambiarlos implica una **ambivalencia** natural: la persona quiere cuidar sus dientes y, al mismo tiempo, no quiere renunciar a lo que le gusta o le resulta cómodo.\n\nLa **entrevista motivacional** es un estilo de conversación desarrollado por William R. Miller y Stephen Rollnick para ayudar a las personas a resolver esa ambivalencia y fortalecer su propia motivación para cambiar. Nació en el campo de las adicciones y hoy se usa en muchas áreas de la salud, incluida la odontología."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El reflejo de corregir"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los profesionales de la salud tenemos un impulso muy fuerte de **corregir**: ver el problema y decir de inmediato qué hay que hacer. Miller y Rollnick lo llaman el **reflejo de corregir**. El problema es que, ante una persona ambivalente, cuanto más argumentamos a favor del cambio, más tiende ella a defender el lado contrario («es que el agua no me gusta», «es que no tengo tiempo»). Y lo que una persona se escucha decir a sí misma influye en lo que termina haciendo.\n\nLa entrevista motivacional invierte la dinámica: en lugar de que tú des las razones para cambiar, buscas que sea el paciente quien las exprese. Tu papel es preguntar, escuchar con atención, reflejar lo que dice y ayudar a convertir sus propias razones en un plan concreto. No es manipulación ni una técnica para convencer: el respeto por la autonomía de la persona es parte esencial del método."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Los cuatro procesos y lo que dice la evidencia",
+          "md": "En la cuarta edición de su libro (2023), Miller y Rollnick organizan la entrevista motivacional en cuatro procesos que se superponen: **involucrar** (construir una relación de trabajo), **enfocar** (acordar de qué se va a hablar), **evocar** (hacer surgir las razones propias de la persona para cambiar) y **planificar** (construir un plan concreto cuando la persona está lista). En una consulta dental breve, los cuatro pueden recorrerse en pocos minutos o a lo largo de varias citas.\n\nUn concepto central es el **lenguaje de cambio**: las frases del paciente que expresan deseo, capacidad, razones o necesidad de cambiar («me gustaría que mis hijos no tuvieran caries como yo»). Cuanto más lenguaje de cambio aparece en la conversación, más probable es el cambio. El **lenguaje de mantenimiento** expresa lo contrario.\n\nSobre su eficacia en salud bucal, los estudios en odontología muestran resultados variables: algunos ensayos encontraron mejoras en hábitos o en indicadores de caries y otros no. La calidad de la formación de quien aplica la técnica parece ser determinante. Por eso conviene verla como una herramienta de comunicación respaldada por un cuerpo amplio de investigación en salud, más que como una intervención con efecto garantizado sobre la caries."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuatro habilidades básicas"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Habilidades básicas de la entrevista motivacional con ejemplos dentales",
+          "columnas": ["Habilidad", "Para qué sirve", "Ejemplo en la consulta"],
+          "filas": [
+            ["Preguntas abiertas", "Invitan a la persona a hablar y explorar", "«¿Cómo es un día normal en cuanto a lo que bebe?»"],
+            ["Afirmaciones", "Reconocen esfuerzos y fortalezas reales", "«Se nota que ha hecho un esfuerzo por cepillar a su hija en la noche.»"],
+            ["Reflejos", "Muestran que escuchas y ayudan a la persona a oírse", "«Le preocupa que su hijo llore si le quita el biberón.»"],
+            ["Resúmenes", "Reúnen lo dicho y abren el paso a la planificación", "«Por un lado le gusta el café con azúcar; por otro, no quiere más caries en las raíces…»"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/04",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con cubrebocas escucha con atención a un paciente adulto sentado frente a él, visto de perfil desde atrás.",
+          "pie": "Escuchar y reflejar lo que dice el paciente es la base de la entrevista motivacional.",
+          "prompt": "Fotografía realista horizontal en un área de consulta tranquila junto al sillón dental, con luz natural suave. Un odontólogo con bata, cubrebocas, gorro y lentes de protección, sin instrumental en las manos, está sentado frente a un paciente adulto de unos cincuenta años con postura inclinada hacia adelante y gesto atento. El paciente aparece de perfil desde atrás, sin rostro visible, y gesticula con una mano mientras habla. Ambiente cálido y sin prisa, colores naturales, profundidad de campo media. Evitar: texto, letreros, logotipos, marcas de agua, rostro identificable del paciente, sangre, instrumental punzante, gestos de regaño, profesional sin cubrebocas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Escalas de importancia y confianza"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una herramienta muy útil y breve son las **reglas de importancia y confianza**. Preguntas: «Del 0 al 10, ¿qué tan importante es para usted dejar de dormir a su hijo con el biberón?» y luego: «Del 0 al 10, ¿qué tan seguro se siente de poder lograrlo?». Después viene la pregunta clave: «¿Por qué un 6 y no un 3?». Al responder, la persona expresa sus propias razones. Y si añades «¿qué haría falta para pasar de 6 a 8?», empieza a construir su plan.\n\nSi la importancia es baja, la conversación debe centrarse en explorar valores y razones. Si la importancia es alta pero la confianza es baja, el foco está en encontrar obstáculos concretos y soluciones posibles. Esta distinción evita gastar tiempo en convencer a quien ya está convencido y solo necesita un plan."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m12/d2",
+          "pie": "Las reglas de importancia y confianza orientan la conversación.",
+          "descripcion": "Dos reglas horizontales graduadas de 0 a 10, una encima de la otra. La superior se titula importancia y la inferior confianza. Un marcador en cada regla señala un valor de ejemplo (6 en importancia y 4 en confianza). A la derecha, dos globos de diálogo con las preguntas de seguimiento: por qué ese número y no uno menor, y qué haría falta para subir dos puntos. Debajo, un cuadro de dos por dos indica el foco según los valores: explorar razones cuando la importancia es baja, buscar soluciones cuando la confianza es baja.",
+          "elementos": ["Importancia: 0 a 10", "Confianza: 0 a 10", "¿Por qué ese número y no uno menor?", "¿Qué haría falta para subir?", "Importancia baja: explorar razones", "Confianza baja: buscar soluciones"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Del deseo a un plan concreto"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando la persona expresa que quiere cambiar, ayúdale a convertir esa intención en un **paso pequeño, concreto y medible**, elegido por ella. «Voy a tomar menos refresco» es una intención vaga; «voy a cambiar el refresco de la comida por agua de lunes a viernes» es un plan. Pregunta qué obstáculos imagina y cómo podría resolverlos, y acuerda cómo sabrán ambos en la próxima cita si funcionó.\n\nEs mejor un paso pequeño que se cumple que un cambio grande que se abandona en una semana. En la siguiente consulta, empieza preguntando por ese paso, reconoce el esfuerzo aunque el resultado sea parcial y construye sobre él.\n\nCon niños pequeños, la conversación motivacional es con la **madre, el padre o el cuidador**, que son quienes deciden qué se compra, qué se sirve y quién cepilla en la noche. Con adolescentes, en cambio, conviene hablar directamente con ellos y respetar su creciente autonomía: sus razones para cambiar, como el aliento o la apariencia, suelen ser distintas de las de los adultos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Dos formas de decir lo mismo",
+          "md": "**Estilo directivo:** «Tiene que dejar de darle jugo a su hija. El jugo tiene mucha azúcar y por eso tiene caries. Si no lo hace, vamos a tener que hacerle tratamientos».\n\n**Estilo motivacional:** «¿Qué sabe usted de la relación entre el jugo y las caries de su hija?… Entiendo, a ella le encanta y le da tranquilidad dárselo. ¿Qué le gustaría para sus dientes?… ¿Qué cambio pequeño cree que podría intentar esta semana?»\n\nEl segundo estilo tarda un poco más, pero la decisión que resulta es de la madre y, por eso, tiene más probabilidades de mantenerse."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso: la respuesta que abre la conversación",
+          "situacion": "Andrés, de 28 años, tiene cuatro lesiones activas nuevas. Cuando le preguntas por su dieta, dice: «Sí, ya sé que el refresco me hace daño, pero en el trabajo es lo único que me quita el sueño y no puedo dejarlo». ¿Cuál es la respuesta más coherente con la entrevista motivacional?",
+          "opciones": [
+            { "texto": "«Pues tiene que dejarlo, porque si no va a perder los dientes.»", "correcta": false, "retro": "Es el reflejo de corregir. Ante una persona ambivalente suele generar más argumentos en contra del cambio." },
+            { "texto": "«Por un lado sabe que le está afectando los dientes y, por otro, el refresco le ayuda a aguantar el turno. ¿Qué opciones se le ocurren para seguir despierto con menos azúcar?»", "correcta": true, "retro": "Correcto. El reflejo reconoce ambos lados de la ambivalencia y la pregunta abierta invita a Andrés a buscar sus propias soluciones." },
+            { "texto": "«Bueno, si no puede dejarlo, no hay nada que hacer.»", "correcta": false, "retro": "Renunciar no respeta su autonomía; deja de explorar las razones y los recursos que Andrés sí tiene." },
+            { "texto": "«Le voy a dar un folleto sobre el azúcar para que lo lea en casa.»", "correcta": false, "retro": "Un folleto puede complementar, pero no responde a lo que Andrés acaba de expresar ni lo involucra en el plan." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "En tu siguiente paciente con riesgo alto, cambia una sola cosa: antes de dar cualquier recomendación, haz la pregunta de importancia del 0 al 10 y la de «¿por qué ese número y no uno menor?». Escucha la respuesta sin interrumpir y termina con un resumen de lo que dijo. Observa cuánto cambia la conversación con solo esas dos preguntas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/05",
+          "proporcion": "4:3",
+          "alt": "Vaso de agua simple y botella de refresco sin etiqueta, uno junto al otro sobre un escritorio de oficina.",
+          "pie": "El cambio empieza con un paso pequeño elegido por la persona, como sustituir una bebida azucarada por agua.",
+          "prompt": "Fotografía realista sobre un escritorio de oficina ordenado con luz natural de tarde. En primer plano, un vaso de vidrio con agua simple y hielos junto a una botella de vidrio de refresco oscuro sin etiqueta ni marca, ligeramente desenfocada y colocada un poco atrás. Al fondo, desenfocados, una libreta cerrada y un teclado. Composición sencilla que sugiere elección, colores naturales, profundidad de campo corta con foco en el vaso de agua. Evitar: texto, etiquetas, logotipos, marcas comerciales, marcas de agua, personas, colores saturados artificiales."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/06",
+          "proporcion": "1:1",
+          "alt": "Manos de un paciente adulto y de una odontóloga con guantes revisando juntos una hoja de plan en blanco sobre una carpeta.",
+          "pie": "El plan de cambio se construye en conjunto y se revisa en la siguiente cita.",
+          "prompt": "Fotografía realista cuadrada, encuadre cerrado sobre una mesa clara en un consultorio. Se ven solo las manos de dos personas: a la izquierda, las manos de un paciente adulto sin guantes sosteniendo una pluma; a la derecha, una mano con guante de nitrilo de una odontóloga señalando una hoja de papel en blanco con algunos recuadros dibujados, sin texto legible, sobre una carpeta. Luz natural suave, tonos cálidos, profundidad de campo corta. Evitar: texto legible, letras, números, logotipos, marcas comerciales, marcas de agua, rostros, sangre, instrumental."
+        }
+      ],
+      "glosario": [
+        { "termino": "Entrevista motivacional", "definicion": "Estilo de conversación colaborativo que ayuda a la persona a resolver su ambivalencia y fortalecer su propia motivación para cambiar." },
+        { "termino": "Ambivalencia", "definicion": "Estado en el que una persona quiere y no quiere cambiar al mismo tiempo." },
+        { "termino": "Reflejo de corregir", "definicion": "Impulso del profesional de decir de inmediato qué hacer, que puede generar resistencia en una persona ambivalente." },
+        { "termino": "Lenguaje de cambio", "definicion": "Frases del paciente que expresan deseo, capacidad, razones o necesidad de cambiar." },
+        { "termino": "Reflejo", "definicion": "Habilidad de devolver al paciente lo que dijo, con otras palabras, para mostrar escucha y ayudarle a oírse." },
+        { "termino": "Regla de importancia", "definicion": "Pregunta del 0 al 10 sobre qué tan importante es un cambio para la persona." }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.2-1",
+          "q": "¿Qué ocurre con frecuencia cuando el profesional argumenta con insistencia ante un paciente ambivalente?",
+          "opciones": ["El paciente cambia de inmediato", "El paciente tiende a defender el lado contrario al cambio", "La ambivalencia desaparece", "El paciente pide más tratamientos"],
+          "correcta": 1,
+          "explicacion": "El reflejo de corregir suele provocar que la persona exprese más razones para no cambiar."
+        },
+        {
+          "id": "t12.2-2",
+          "q": "Un paciente califica con 9 la importancia de cambiar y con 3 su confianza. ¿En qué conviene centrar la conversación?",
+          "opciones": ["En convencerlo de que es importante", "En darle un folleto", "En identificar obstáculos y soluciones concretas", "En terminar la consulta"],
+          "correcta": 2,
+          "explicacion": "Ya está convencido; lo que necesita es aumentar su confianza con un plan posible."
+        },
+        {
+          "id": "t12.2-3",
+          "q": "¿Cuál de estas frases es un ejemplo de pregunta abierta?",
+          "opciones": ["«¿Se cepilla dos veces al día?»", "«¿Toma refresco?»", "«¿Usa hilo dental?»", "«¿Cómo es un día normal en cuanto a lo que bebe?»"],
+          "correcta": 3,
+          "explicacion": "Las preguntas abiertas no se responden con sí o no e invitan a la persona a describir y explorar."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Motivational Interviewing: Helping People Change and Grow (4.ª ed.)", "autor": "Miller W. R., Rollnick S. (Guilford Press)", "anio": 2023 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de la entrevista motivacional aplicados a la prevención de la caries", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "12.3",
+      "titulo": "Explicar el riesgo y las opciones: decisiones compartidas y consentimiento informado",
+      "minutos": 12,
+      "enPocasPalabras": "Cuando hay varias formas de atender un diente, el dentista te explica cada opción, sus ventajas y desventajas, y decide contigo. Antes de un tratamiento firmas un consentimiento, escrito en palabras sencillas, que puedes retirar antes de empezar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "A lo largo del programa viste que muchas lesiones de caries tienen **más de una opción razonable**: vigilar y controlar, sellar, aplicar un agente de detención, restaurar con distintos materiales. Elegir entre ellas no es solo una decisión técnica. Depende también de lo que la persona valora: el costo, el número de citas, la estética, el miedo a la anestesia o el tiempo disponible. Cuando hay varias opciones aceptables, la mejor decisión es la que se toma **junto con el paciente**."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Decidir juntos"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **toma de decisiones compartida** es un proceso en el que el profesional aporta la información clínica y la evidencia, y el paciente aporta sus valores y preferencias, para llegar juntos a una decisión. Un modelo muy citado, propuesto por Glyn Elwyn y colaboradores en el *BMJ* en 2017, lo organiza en **tres conversaciones**: la conversación de **equipo**, en la que explicas que hay opciones y que quieres decidir con la persona; la conversación de **opciones**, en la que describes cada alternativa con sus beneficios y riesgos; y la conversación de **decisión**, en la que exploras qué es importante para ella y acuerdan qué hacer.\n\nEn la práctica dental esto es especialmente relevante con las **lesiones no cavitadas**. Muchos pacientes esperan que «encontrar una caries» signifique «ponerme una resina» y pueden desconfiar si propones vigilar. Explicar que la mancha está en una etapa en la que puede detenerse, mostrarla, acordar medidas concretas y fijar una revisión transforma la desconfianza en participación."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m12/d3",
+          "pie": "El modelo de las tres conversaciones para la decisión compartida.",
+          "descripcion": "Tres bloques horizontales conectados por flechas de izquierda a derecha. El primero, conversación de equipo, con un icono de dos personas. El segundo, conversación de opciones, con un icono de caminos que se separan. El tercero, conversación de decisión, con un icono de apretón de manos. Debajo de cada bloque, una frase guía breve. Una flecha de retorno desde el tercer bloque al segundo indica que se puede volver a revisar opciones.",
+          "elementos": ["Conversación de equipo: hay opciones y decidiremos juntos", "Conversación de opciones: beneficios y riesgos de cada una", "Conversación de decisión: qué es importante para ti", "Volver a revisar opciones"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo explicar el riesgo de caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "Decir «su riesgo es alto» informa poco si la persona no sabe qué significa ni qué puede hacer con ello. Tres recomendaciones mejoran mucho la explicación. Primero, **une el riesgo a las causas concretas** que encontraste: «su riesgo es alto porque tuvo tres lesiones nuevas este año, toma bebidas con azúcar varias veces al día y tiene la boca seca por un medicamento». Segundo, **di qué puede cambiar**: el riesgo no es una etiqueta permanente, y la persona tiene en sus manos varios de sus factores. Tercero, si usas números, prefiere las **frecuencias naturales** («de cada 10 personas…») a los porcentajes y los riesgos absolutos a los relativos, porque se entienden mejor; y usa solo cifras que provengan de una fuente confiable.\n\nLas imágenes ayudan: fotografías intraorales de las lesiones del propio paciente, la placa teñida en su boca o una comparación entre la primera visita y la actual. Ver su propio progreso es un motivador poderoso. Evita, en cambio, el lenguaje que asusta o culpa («si sigue así va a perder todos los dientes»): el miedo puede provocar evasión y que la persona deje de acudir, justo cuando más necesita seguimiento."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/07",
+          "proporcion": "16:9",
+          "alt": "Monitor en el consultorio muestra dos fotografías intraorales lado a lado de una lesión blanca antes y después de detenerse; una odontóloga con equipo de protección señala.",
+          "pie": "Comparar fotografías de la misma lesión en distintas citas ayuda al paciente a ver el efecto de sus cambios.",
+          "prompt": "Fotografía realista horizontal de un monitor sobre un brazo articulado junto al sillón dental en un consultorio luminoso. La pantalla muestra dos fotografías clínicas intraorales lado a lado de un mismo molar: a la izquierda con una mancha blanca opaca en el margen gingival y placa, a la derecha la misma zona limpia con la mancha más brillante y reducida, sin texto ni números en pantalla. Una mano con guante de nitrilo de una odontóloga con bata señala la imagen de la derecha. Luz neutra, enfoque en la pantalla. Evitar: texto, letras, números, interfaz de programa, logotipos, marcas de agua, rostros, sangre, profesional sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El consentimiento informado"
+        },
+        {
+          "tipo": "texto",
+          "md": "La decisión compartida se documenta en la **carta de consentimiento informado**. La NOM-013-SSA2-2015 dedica un apartado a este documento y remite también a la **NOM-004-SSA3-2012, del expediente clínico**. Entre lo que establece la NOM-013-SSA2-2015 destacan que la carta debe expresarse en **lenguaje sencillo, sin terminología técnica**; que es **revocable** mientras no inicie el procedimiento; que debe señalar que se **explicaron diferentes alternativas** de tratamiento y que el paciente eligió el procedimiento; que se debe informar que existen **riesgos imprevistos**; y que se elabora una nueva carta si el plan de tratamiento cambia. Además, aclara que el consentimiento no obliga al estomatólogo a realizar un procedimiento que implique mayor riesgo que beneficio.\n\nEl consentimiento no es una firma al final de la cita: es el resultado de una conversación. Si la conversación fue buena, el documento simplemente la deja por escrito."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Confianza, costos y ética"
+        },
+        {
+          "tipo": "texto",
+          "md": "La decisión compartida exige **transparencia** también en los costos. Presenta un presupuesto claro para cada opción, incluidas las citas de seguimiento y las medidas preventivas, y explica qué ocurre si la persona decide esperar. Una opción que el paciente no puede pagar no es una opción real para él, y conviene saberlo antes de iniciar.\n\nEl enfoque de mínima intervención que recorriste en este programa también protege la confianza. Cuando un paciente comprueba que no le propones restaurar una mancha que puede detenerse, entiende que tus recomendaciones buscan su salud y no un tratamiento más. Esa confianza es la que hace que regrese a sus revisiones y que acepte el tratamiento el día que de verdad lo necesite."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Vigilar también es tratar",
+          "md": "Mariana, de 24 años, tiene una mancha blanca activa sin cavidad en la cara vestibular de un premolar. Esperaba una resina. El odontólogo le muestra la lesión con la cámara intraoral, le explica que está en una etapa que puede detenerse y le presenta dos opciones: control no operatorio con flúor, cambios en el cepillado y revisión en pocos meses, o un sellado de la lesión. Le pregunta qué prefiere y por qué. Mariana elige el control y pide que le enseñen a cepillar mejor esa zona. En la revisión, la lesión se ve más brillante y lisa, y ella la reconoce en la fotografía."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Elementos del consentimiento informado según la NOM-013-SSA2-2015 (selección)",
+          "columnas": ["Elemento", "Qué significa en la práctica"],
+          "filas": [
+            ["Lenguaje sencillo", "Escribir como hablarías con el paciente, sin tecnicismos"],
+            ["Alternativas explicadas", "Dejar constancia de que se presentaron las opciones y el paciente eligió una"],
+            ["Revocable", "El paciente puede retirar su consentimiento mientras no inicie el procedimiento"],
+            ["Riesgos imprevistos", "Informar que pueden presentarse situaciones que alteren el resultado"],
+            ["Nueva carta si cambia el plan", "Cualquier modificación del tratamiento requiere otro consentimiento"],
+            ["Datos mínimos", "Nombre del paciente, de la institución y del estomatólogo, y descripción de la intervención y sus objetivos, entre otros"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cuando el paciente es menor o no puede decidir",
+          "md": "En niñas, niños y personas que no pueden decidir por sí mismas, el consentimiento lo otorga su madre, padre, tutor o representante legal, de acuerdo con la normativa del expediente clínico. Aun así, explica al niño o a la persona lo que vas a hacer con palabras que pueda entender y toma en cuenta su opinión según su edad y capacidad. Un niño que sabe qué va a pasar coopera mejor."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena una conversación de decisión compartida",
+          "instruccion": "Coloca en orden los pasos para decidir con un paciente qué hacer con una lesión que admite varias opciones.",
+          "elementos": ["Explicar el hallazgo con lenguaje claro y mostrarlo", "Decir que hay varias opciones y que la decisión será conjunta", "Describir cada opción con sus beneficios, riesgos y costos", "Preguntar qué es importante para el paciente", "Acordar la opción y el seguimiento", "Documentar la decisión en el consentimiento informado"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Prepara una hoja visual de opciones para las situaciones que más se repiten en tu consulta, como una lesión no cavitada en una fisura o una lesión radicular limpiable, con dos o tres alternativas, sus ventajas, sus desventajas y lo que implica cada una para el paciente. Úsala para guiar la conversación de opciones y anexa al expediente la que el paciente eligió."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/08",
+          "proporcion": "4:3",
+          "alt": "Paciente adulta, vista de espaldas, lee un documento en una tableta mientras un odontólogo con cubrebocas le explica sentado a su lado.",
+          "pie": "El consentimiento informado documenta una conversación, no la sustituye.",
+          "prompt": "Fotografía realista en el área de escritorio de un consultorio dental moderno con luz natural. Una mujer adulta de unos treinta y cinco años, vista de espaldas y sin rostro visible, sostiene una tableta con un documento de texto pequeño e ilegible. A su lado, sentado a la misma altura, un odontólogo con bata, cubrebocas y lentes de protección señala una parte del documento con una pluma y le explica con calma. Ambiente sereno y respetuoso, colores naturales, profundidad de campo media. Evitar: texto legible, logotipos, marcas comerciales, marcas de agua, rostro identificable, sangre, instrumental, gestos de presión."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/09",
+          "proporcion": "1:1",
+          "alt": "Modelo dental didáctico de un molar seccionado sobre la mesa del consultorio, junto a un espejo de mano.",
+          "pie": "Un modelo seccionado ayuda a explicar la diferencia entre una lesión superficial y una profunda.",
+          "prompt": "Fotografía realista cuadrada de estudio sobre la mesa clara de un consultorio. Un modelo didáctico grande de un molar permanente seccionado longitudinalmente muestra con colores realistas el esmalte, la dentina y la cámara pulpar, con una pequeña zona oscura que representa una lesión en el esmalte de la fisura. Junto al modelo, un espejo de mano dental con mango blanco. Iluminación suave y uniforme, sombras ligeras, fondo neutro. Evitar: texto, etiquetas, números, flechas, logotipos, marcas comerciales, marcas de agua, sangre, anatomía incorrecta, número incorrecto de raíces."
+        }
+      ],
+      "glosario": [
+        { "termino": "Toma de decisiones compartida", "definicion": "Proceso en el que profesional y paciente combinan la evidencia clínica y las preferencias de la persona para decidir juntos." },
+        { "termino": "Frecuencia natural", "definicion": "Forma de expresar un riesgo con números enteros, por ejemplo «3 de cada 10 personas»." },
+        { "termino": "Riesgo absoluto", "definicion": "Probabilidad real de que ocurra un evento en un grupo, sin compararla con otro." },
+        { "termino": "Consentimiento informado", "definicion": "Aceptación de un procedimiento por parte del paciente o su representante, después de recibir información clara sobre opciones, beneficios y riesgos." },
+        { "termino": "Revocable", "definicion": "Que puede retirarse; el consentimiento puede revocarse mientras no inicie el procedimiento." }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.3-1",
+          "q": "¿Cuáles son las tres conversaciones del modelo de decisión compartida de Elwyn y colaboradores?",
+          "opciones": ["Diagnóstico, tratamiento y alta", "Equipo, opciones y decisión", "Historia, exploración y radiografía", "Presupuesto, pago y cita"],
+          "correcta": 1,
+          "explicacion": "El modelo organiza el proceso en conversación de equipo, de opciones y de decisión."
+        },
+        {
+          "id": "t12.3-2",
+          "q": "Según la NOM-013-SSA2-2015, ¿hasta cuándo puede revocarse el consentimiento informado?",
+          "opciones": ["Mientras no inicie el procedimiento", "Solo el mismo día de la firma", "Nunca, una vez firmado", "Hasta un año después del tratamiento"],
+          "correcta": 0,
+          "explicacion": "La norma establece que el consentimiento es revocable mientras no inicie el procedimiento."
+        },
+        {
+          "id": "t12.3-3",
+          "q": "¿Qué forma de presentar un riesgo suele entenderse mejor?",
+          "opciones": ["Riesgo relativo en porcentaje", "Una cifra sin contexto", "Términos técnicos sin números", "Frecuencias naturales y riesgos absolutos"],
+          "correcta": 3,
+          "explicacion": "Expresiones como «de cada 10 personas» y los riesgos absolutos son más comprensibles que los relativos."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "A three-talk model for shared decision making: multistage consultation process", "autor": "Elwyn G. et al. (BMJ)", "anio": 2017 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (numeral 9.6, carta de consentimiento informado)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-004-SSA3-2012, Del expediente clínico", "autor": "Secretaría de Salud", "anio": 2012 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de comunicación de riesgos y decisión compartida", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "12.4",
+      "titulo": "Un programa preventivo en tu consultorio",
+      "minutos": 13,
+      "enPocasPalabras": "Un consultorio que previene de verdad no espera a que los pacientes lleguen con dolor. Revisa el riesgo de cada persona, la cita con la frecuencia que necesita, le recuerda sus citas y mide si las caries nuevas van bajando.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Muchos consultorios hacen prevención, pero pocos tienen un **programa preventivo**. La diferencia está en la organización: en lugar de que cada profesional decida sobre la marcha qué recomendar, el consultorio tiene un protocolo escrito, funciones claras para cada miembro del equipo, un sistema para que los pacientes regresen y unos indicadores que le dicen si el programa funciona. Es lo que convierte la prevención de una buena intención en un servicio confiable. No se necesita un consultorio grande ni un programa informático costoso: basta un protocolo de una página, una agenda bien llevada y la decisión del equipo de revisar sus resultados con regularidad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El riesgo como eje del programa"
+        },
+        {
+          "tipo": "texto",
+          "md": "El punto de partida es que **cada paciente tenga registrado su nivel de riesgo de caries**, evaluado con los criterios que estudiaste en el módulo 3 y actualizado en cada revisión. A partir de ese nivel, el protocolo define qué medidas recibe cada grupo y con qué frecuencia regresa. La NOM-013-SSA2-2015, por ejemplo, propone para niños de hasta 3 años citas cada 6 meses con riesgo bajo o moderado y cada 3 meses con riesgo alto. El principio general es el mismo para todas las edades: **más riesgo, más contacto y más medidas**; menos riesgo, intervalos más largos y menos intervenciones.\n\nEste enfoque también es más justo y más eficiente: concentra el tiempo del equipo y los recursos del paciente donde más se necesitan, en lugar de aplicar a todos lo mismo con la misma frecuencia."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Ejemplo de estructura de un protocolo preventivo por riesgo (orientativo)",
+          "columnas": ["Nivel de riesgo", "En casa", "En el consultorio", "Seguimiento"],
+          "filas": [
+            ["Bajo", "Cepillado con pasta fluorurada dos veces al día y dieta con pocos azúcares libres", "Refuerzo educativo breve", "Intervalo largo, definido por el profesional"],
+            ["Moderado", "Lo anterior más limpieza interdental y metas de dieta concretas", "Fluoruro profesional o selladores según indicación", "Intervalo intermedio"],
+            ["Alto", "Plan individual acordado, con productos indicados por el odontólogo", "Fluoruros u otros agentes según juicio profesional, control de lesiones activas", "Intervalo corto y reevaluación del riesgo en cada cita"]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El equipo y sus funciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un programa preventivo no puede depender solo del odontólogo. La **asistente dental** o el personal auxiliar capacitado pueden encargarse de la educación en higiene, de la enseñanza con tabletas reveladoras, de la revisión de la dieta con un cuestionario sencillo y de los recordatorios de citas. La NOM-013-SSA2-2015 reconoce que la aplicación profesional de fluoruros puede realizarla el estomatólogo, el pasante en servicio social o el personal técnico o auxiliar capacitado, según el caso. El diagnóstico, la evaluación del riesgo y las decisiones clínicas son responsabilidad del odontólogo.\n\nPara que el mensaje sea coherente, todo el equipo debe usar las **mismas frases clave** y los mismos materiales. Si el odontólogo recomienda cepillarse antes de dormir y la asistente dice que lo importante es después de cada comida, el paciente recibe un mensaje confuso."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cómo poner en marcha un programa preventivo (concepto)",
+          "pasos": [
+            { "titulo": "Diagnóstico de la situación", "md": "Revisar cuántos pacientes tienen evaluación de riesgo registrada, cuántos regresan a sus citas y cuántas lesiones nuevas aparecen al año." },
+            { "titulo": "Protocolo escrito", "md": "Definir, con base en la evidencia y la normativa, qué medidas y qué intervalo corresponden a cada nivel de riesgo." },
+            { "titulo": "Funciones del equipo", "md": "Asignar quién evalúa, quién educa, quién aplica medidas profesionales y quién da seguimiento a las citas." },
+            { "titulo": "Sistema de recordatorios", "md": "Programar la siguiente cita antes de que el paciente salga y enviar recordatorios por el medio que el paciente autorice." },
+            { "titulo": "Indicadores y revisión", "md": "Medir cada cierto tiempo los indicadores elegidos, comentar los resultados con el equipo y ajustar el protocolo." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/10",
+          "proporcion": "16:9",
+          "alt": "Equipo dental de tres personas con uniforme y cubrebocas en una reunión breve frente a una pizarra blanca sin texto.",
+          "pie": "Un programa preventivo se construye en equipo, con protocolos y funciones claras para cada persona.",
+          "prompt": "Fotografía realista horizontal en una pequeña sala de juntas de un consultorio dental moderno, con luz natural. Tres integrantes del equipo dental, una odontóloga, un odontólogo y una asistente, con uniformes clínicos y cubrebocas, conversan de pie frente a una pizarra blanca vacía; uno de ellos sostiene una carpeta cerrada. Se ven de perfil o de tres cuartos, con gestos de colaboración. Ambiente profesional y ordenado, colores claros. Evitar: texto, escritura en la pizarra, gráficas con números, logotipos, marcas comerciales, marcas de agua, sangre, instrumental."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Recordatorios y datos personales",
+          "md": "Los recordatorios por mensaje, correo o llamada usan datos personales de salud. Pide al paciente su **autorización expresa** para contactarlo por cada medio, registra esa autorización, no incluyas información clínica en el mensaje («tiene caries activas») y protege las listas de contactos. En México, el manejo de datos personales en consultorios privados está regulado por la legislación federal de protección de datos personales; revisa tu aviso de privacidad con un asesor."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La sala de espera y el expediente también previenen"
+        },
+        {
+          "tipo": "texto",
+          "md": "La NOM-013-SSA2-2015 pide orientar a las personas en los consultorios y **salas de espera** sobre el autocuidado de la salud bucal, por medio de pláticas, demostraciones y diferentes auxiliares didácticos. El tiempo que los pacientes pasan esperando puede aprovecharse con materiales visuales sencillos, modelos para practicar el cepillado o un video breve sobre bebidas azucaradas, siempre con contenido revisado por el equipo y coherente con lo que se dice en el sillón.\n\nEl **expediente clínico**, que debe cumplir con la NOM-004-SSA3-2012, es la columna vertebral del programa. Ahí quedan el nivel de riesgo y su fecha, las lesiones con su actividad, las medidas aplicadas, las metas acordadas con el paciente y la fecha de la siguiente cita. Un expediente que registra estos datos de forma ordenada permite obtener los indicadores sin trabajo extra y da continuidad cuando el paciente es atendido por otro miembro del equipo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Medir para mejorar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un programa sin indicadores no sabe si funciona. Elige pocos indicadores, fáciles de medir con tu expediente, y revísalos con el equipo cada cierto tiempo. Algunos útiles son: el **porcentaje de pacientes con evaluación de riesgo registrada**, el **porcentaje de pacientes que acuden a su cita preventiva programada**, el **número de lesiones nuevas por paciente al año** (incremento de caries) en los pacientes del programa y el **porcentaje de lesiones activas que se detienen** en el seguimiento.\n\nLos indicadores sirven para aprender, no para culpar. Si la asistencia a las citas es baja, la pregunta es qué barreras tienen los pacientes y qué puede cambiar el consultorio: horarios, recordatorios, costos o la forma de explicar por qué la cita importa."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Asistencia a citas preventivas",
+          "instruccion": "Calcula qué porcentaje de pacientes con riesgo alto acudió a su cita preventiva programada en el último trimestre. Cambia los valores para ver cómo se mueve el indicador.",
+          "formula": "Asistencia = pacientes que acudieron ÷ pacientes con cita programada × 100",
+          "variables": [
+            { "id": "acudieron", "etiqueta": "Pacientes de riesgo alto que acudieron", "valor": 34, "unidad": "pacientes" },
+            { "id": "programados", "etiqueta": "Pacientes de riesgo alto con cita programada", "valor": 50, "unidad": "pacientes" }
+          ],
+          "resultado": { "expresion": "acudieron / programados * 100", "etiqueta": "Asistencia a citas preventivas", "unidad": "%", "decimales": 1 }
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m12/d4",
+          "pie": "El ciclo de mejora de un programa preventivo en el consultorio.",
+          "descripcion": "Ciclo circular de cuatro etapas con flechas en sentido horario: planear (protocolo por riesgo y funciones), hacer (aplicar el protocolo con cada paciente), medir (indicadores de riesgo registrado, asistencia, lesiones nuevas y lesiones detenidas) y ajustar (cambiar lo que no funciona). En el centro, el paciente y su nivel de riesgo.",
+          "elementos": ["Planear: protocolo por riesgo", "Hacer: aplicar con cada paciente", "Medir: indicadores", "Ajustar: cambiar lo que no funciona", "Paciente y su nivel de riesgo"]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un hallazgo que cambió el horario",
+          "md": "Un consultorio comunitario midió la asistencia de sus pacientes de riesgo alto y encontró que solo la mitad regresaba a la cita. Al preguntar, muchas familias explicaron que las citas de la mañana coincidían con la escuela y el trabajo. El consultorio abrió un bloque de citas preventivas en la tarde del sábado y repitió la medición unos meses después para ver el efecto. El indicador no solo midió el problema: señaló la solución."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Empieza con un solo indicador. Durante el próximo mes, registra en una hoja cuántos pacientes salen del consultorio con su **siguiente cita preventiva ya agendada** y cuántos sin ella. Es un dato fácil de obtener y, si lo mejoras, todos los demás indicadores mejoran con él."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/11",
+          "proporcion": "4:3",
+          "alt": "Recepcionista con cubrebocas agenda la siguiente cita de un paciente, visto de espaldas, en el mostrador del consultorio.",
+          "pie": "Agendar la siguiente cita preventiva antes de que el paciente salga es una de las medidas más sencillas y eficaces.",
+          "prompt": "Fotografía realista en la recepción de un consultorio dental moderno, limpia y luminosa. Una recepcionista con uniforme y cubrebocas, sentada detrás de un mostrador claro, mira la pantalla de una computadora cuyo contenido no se ve, mientras sostiene una tarjeta de cita en blanco. Frente a ella, un paciente adulto de pie aparece de espaldas, sin rostro visible. Al fondo, una planta y una sala de espera ordenada. Luz natural suave, colores neutros y cálidos. Evitar: texto, letreros, logotipos, marcas comerciales, contenido legible en pantalla, marcas de agua, rostro identificable, sangre, instrumental."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/12",
+          "proporcion": "1:1",
+          "alt": "Asistente dental con guantes y cubrebocas entrega a un paciente un cepillo interdental junto a una tableta reveladora de placa.",
+          "pie": "La asistente dental capacitada tiene un papel central en la educación y el seguimiento del programa preventivo.",
+          "prompt": "Fotografía realista cuadrada, encuadre cerrado en un consultorio dental luminoso. Una asistente dental con uniforme, guantes de nitrilo, cubrebocas y lentes de protección, de quien se ven las manos y parte del torso, entrega a un paciente adulto, del que solo se ve la mano extendida, un pequeño sobre con un cepillo interdental y una tableta reveladora de placa. Fondo desenfocado del área clínica con el sillón dental. Luz suave y uniforme, colores naturales. Evitar: texto, etiquetas, logotipos, marcas comerciales, marcas de agua, rostros, sangre, instrumental punzante, asistente sin guantes."
+        }
+      ],
+      "glosario": [
+        { "termino": "Programa preventivo", "definicion": "Conjunto organizado de protocolos, funciones, seguimiento e indicadores para prevenir enfermedades bucales en los pacientes de un consultorio." },
+        { "termino": "Intervalo de revisión", "definicion": "Tiempo entre una cita preventiva y la siguiente, definido según el riesgo del paciente." },
+        { "termino": "Indicador", "definicion": "Medida que permite saber si un programa está logrando sus objetivos." },
+        { "termino": "Incremento de caries", "definicion": "Número de lesiones nuevas que aparecen en una persona o un grupo durante un periodo." },
+        { "termino": "Aviso de privacidad", "definicion": "Documento que informa a las personas cómo se usarán y protegerán sus datos personales." }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.4-1",
+          "q": "¿Cuál es el principio general para definir la frecuencia de las citas preventivas?",
+          "opciones": ["Todos los pacientes cada 6 meses sin excepción", "Solo cuando el paciente tenga dolor", "Más riesgo, más contacto y más medidas", "Una vez al año para los de riesgo alto"],
+          "correcta": 2,
+          "explicacion": "La frecuencia y la intensidad de las medidas se ajustan al nivel de riesgo de cada paciente."
+        },
+        {
+          "id": "t12.4-2",
+          "q": "Un consultorio programó 40 citas preventivas de pacientes de riesgo alto y acudieron 30. ¿Cuál es la asistencia?",
+          "opciones": ["30 %", "40 %", "70 %", "75 %"],
+          "correcta": 3,
+          "explicacion": "30 ÷ 40 × 100 = 75 %."
+        },
+        {
+          "id": "t12.4-3",
+          "q": "¿Qué precaución debes tener con los recordatorios de citas?",
+          "opciones": ["Obtener autorización para cada medio y no incluir información clínica en el mensaje", "Incluir el diagnóstico completo para motivar al paciente", "Enviar los recordatorios desde números personales del equipo", "Compartir la lista de pacientes con otros consultorios"],
+          "correcta": 0,
+          "explicacion": "Los datos de salud son sensibles; se requieren autorización, confidencialidad y protección de la información."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (numeral 7.9.2.3 y Apéndice A)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de manejo de la caries basado en el riesgo (ICCMS, CAMBRA) y la gestión de calidad en servicios de salud", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "12.5",
+      "titulo": "Programas escolares y comunitarios de prevención",
+      "minutos": 13,
+      "enPocasPalabras": "Muchas caries se previenen fuera del consultorio: en las escuelas, en las comunidades y con políticas como la sal con flúor o la venta de comida saludable en escuelas. Los dentistas pueden participar en estos programas y ayudar a que lleguen a quienes más los necesitan.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El consultorio solo ve a quienes llegan a él. Las familias con más riesgo de caries suelen ser las que menos acceso tienen a la atención dental, de modo que la prevención en el sillón, por buena que sea, no basta para reducir la caries en una población. Por eso la salud pública bucal trabaja también en **escuelas, comunidades y políticas**, y por eso este programa termina mirando más allá de la boca de un solo paciente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dos estrategias que se complementan"
+        },
+        {
+          "tipo": "texto",
+          "md": "En salud pública se distinguen dos grandes estrategias. La **estrategia de alto riesgo** identifica a las personas con más riesgo y les ofrece medidas intensivas: por ejemplo, barniz de flúor para niños con lesiones activas. La **estrategia poblacional** busca modificar un factor para toda la población, aunque cada persona reciba un beneficio pequeño: por ejemplo, la fluoruración de la sal o la reducción de bebidas azucaradas en las escuelas. Ambas se necesitan y se complementan.\n\nEn México, la NOM-013-SSA2-2015 establece **acciones educativo-preventivas dirigidas a la comunidad** con un enfoque basado en factores de riesgo y en los grupos menos favorecidos, entre ellos escolares, mujeres embarazadas, adolescentes, adultos mayores, personas con discapacidad, pueblos indígenas, personas con VIH y personas con enfermedades crónico-degenerativas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La paradoja preventiva y el universalismo proporcional",
+          "md": "El epidemiólogo Geoffrey Rose describió en la década de 1980 la llamada **paradoja preventiva**: una medida que aporta mucho beneficio a la población puede aportar poco a cada persona, y la mayoría de los casos de una enfermedad frecuente no provienen del pequeño grupo de riesgo alto, sino del grupo mucho más numeroso de riesgo moderado. Aplicado a la caries, significa que concentrar todos los esfuerzos en los niños con riesgo alto deja fuera a muchos niños de riesgo moderado que, en conjunto, aportan una gran parte de las lesiones.\n\nUna respuesta moderna es el **universalismo proporcional**: acciones para toda la población, con una intensidad que aumenta según la necesidad de cada grupo. Un programa escolar con cepillado supervisado para todos los alumnos y barniz o selladores adicionales para quienes tienen mayor riesgo es un ejemplo de este enfoque. La **Estrategia y Plan de acción mundiales sobre salud bucodental 2023–2030** de la OMS también propone integrar la salud bucal en la atención primaria y en la cobertura universal, combinando acciones poblacionales y servicios esenciales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Programas escolares"
+        },
+        {
+          "tipo": "texto",
+          "md": "La escuela es uno de los mejores lugares para la prevención: reúne a los niños durante años, en un entorno donde se aprenden hábitos. La NOM-013-SSA2-2015 pide promover medidas preventivas en espacios escolares y capacitar a maestros, madres, padres de familia y voluntarios para mejorar la salud bucal del escolar, y contempla **enjuagatorios periódicos de fluoruro de sodio** para la protección específica grupal de la población en edad escolar, bajo la supervisión de personal de salud.\n\nUn programa escolar sólido suele combinar varios componentes: **educación para la salud** adaptada a la edad; **cepillado supervisado** con pasta fluorurada; **revisión y detección** de lesiones con referencia a los servicios de salud; **selladores** en los molares permanentes de los niños que los necesitan; y un **entorno escolar saludable**, con agua simple disponible y menos bebidas y alimentos azucarados."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Escuelas sin comida chatarra",
+          "md": "Las Secretarías de Educación Pública y de Salud publicaron en el Diario Oficial de la Federación, el 30 de septiembre de 2024, lineamientos generales para el expendio y la distribución de alimentos y bebidas en las escuelas del Sistema Educativo Nacional, que entraron en vigor el 29 de marzo de 2025. Limitan la venta de productos ultraprocesados y bebidas azucaradas y promueven alimentos naturales y agua simple. Para la prevención de la caries es una medida poblacional relevante, porque reduce la exposición diaria a azúcares en el lugar donde los niños pasan buena parte del día. Consulta el texto vigente en el DOF para conocer sus alcances exactos."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/13",
+          "proporcion": "16:9",
+          "alt": "Grupo de niños de primaria vistos de espaldas cepillándose los dientes en lavabos escolares bajo la supervisión de una promotora de salud.",
+          "pie": "El cepillado supervisado en la escuela combina hábito, fluoruro y educación en un mismo momento.",
+          "prompt": "Fotografía realista horizontal en el área de lavabos de una escuela primaria mexicana, limpia y con luz natural. Una fila de seis niñas y niños de unos siete u ocho años, con uniforme escolar, aparecen de espaldas frente a lavabos bajos, cada uno con su cepillo dental y su vaso. Detrás de ellos, una promotora de salud con bata, cubrebocas y guantes de nitrilo observa y guía. No se ven los rostros de los niños ni sus reflejos con nitidez. Colores alegres y naturales, ambiente ordenado. Evitar: texto, letreros, logotipos, marcas comerciales, marcas de agua, rostros identificables de los niños, reflejos nítidos, sangre, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Programas comunitarios y nacionales"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el nivel nacional, la Secretaría de Salud organiza las **Semanas Nacionales de Salud Bucal**, que se realizan dos veces al año para intensificar las acciones de promoción, prevención y atención; consulta el calendario vigente con los servicios de salud de tu entidad. La NOM-013-SSA2-2015 asigna a la Secretaría de Salud la **vigilancia sanitaria de la fluoruración de la sal** para consumo humano, una de las principales medidas poblacionales con fluoruro en el país, y establece que el registro y la notificación de las patologías bucales se hacen mediante el **SIVEPAB**, que permite evaluar la evolución de la salud bucal de la población atendida.\n\nEn el ámbito internacional, la OMS adoptó en 2021 una resolución sobre salud bucodental y, después, la **Estrategia mundial** y el **Plan de acción mundial sobre salud bucodental 2023–2030**, que incluye 100 acciones y 11 metas globales. En noviembre de 2024, en la primera Reunión Mundial de la OMS sobre Salud Bucodental, los Estados miembros adoptaron la **Declaración de Bangkok «No hay salud sin salud bucodental»**, que reafirma el compromiso de lograr la cobertura universal de salud bucodental para 2030."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m12/d5",
+          "pie": "Ciclo de planeación de un programa comunitario de prevención de caries.",
+          "descripcion": "Ciclo de cinco etapas dispuestas en círculo con flechas: diagnóstico de la comunidad (datos del SIVEPAB, encuestas y recursos), definición de objetivos medibles, diseño de intervenciones (educación, cepillado supervisado, fluoruros, selladores, entorno saludable), ejecución con participación de escuelas y familias, y evaluación con indicadores. Del centro salen líneas hacia dos círculos pequeños que indican la estrategia poblacional y la estrategia de alto riesgo.",
+          "elementos": ["Diagnóstico de la comunidad", "Objetivos medibles", "Intervenciones", "Ejecución con escuelas y familias", "Evaluación con indicadores", "Estrategia poblacional", "Estrategia de alto riesgo"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Evaluar lo que se hace"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un programa comunitario se evalúa en dos niveles. Los **indicadores de proceso** dicen si el programa se está haciendo como se planeó: cuántas escuelas participan, qué porcentaje de niños recibe el cepillado supervisado, cuántos fueron revisados y cuántos de los referidos llegaron realmente a atención. Los **indicadores de resultado** dicen si la salud cambió: la evolución de los índices ceo-d y CPO-D, la proporción de niños sin caries o la proporción de lesiones activas que se detienen. Los resultados tardan en verse; los procesos se pueden corregir cada mes.\n\nRecuerda también los aspectos éticos: las revisiones escolares requieren la **autorización de madres, padres o tutores**, los datos de los niños se protegen, y detectar sin una ruta clara de **referencia y atención** deja a las familias con un problema identificado y sin solución. Antes de revisar, acuerda con los servicios de salud a dónde irán los niños que lo necesiten."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad sobre la prevención comunitaria",
+          "afirmaciones": [
+            { "texto": "La prevención en el consultorio basta para reducir la caries en toda una población.", "verdadero": false, "explicacion": "Las familias con más riesgo suelen tener menos acceso; se necesitan también acciones en escuelas, comunidades y políticas." },
+            { "texto": "La fluoruración de la sal es un ejemplo de estrategia poblacional.", "verdadero": true, "explicacion": "Modifica un factor para toda la población, aunque cada persona reciba un beneficio individual pequeño." },
+            { "texto": "La NOM-013-SSA2-2015 contempla capacitar a maestros, madres y padres para mejorar la salud bucal del escolar.", "verdadero": true, "explicacion": "La norma incluye esta acción entre las dirigidas a la comunidad." },
+            { "texto": "La Declaración de Bangkok de 2024 se enfocó en eliminar el uso del flúor.", "verdadero": false, "explicacion": "Se centró en la cobertura universal de salud bucodental para 2030 y reafirmó el compromiso de los Estados miembros." },
+            { "texto": "Un programa escolar puede combinar acciones para todos con medidas adicionales para quienes tienen más riesgo.", "verdadero": true, "explicacion": "Es el enfoque del universalismo proporcional." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu comunidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Elige una escuela, una guardería o un centro comunitario cercano a tu consultorio o a tu clínica de servicio social y propón una acción concreta y medible para un ciclo escolar: por ejemplo, cepillado supervisado diario en un grupo, una plática con madres y padres sobre biberón y bebidas azucaradas, y una revisión con referencia de los niños que lo necesiten. Define desde el inicio cómo vas a medir el resultado. Pequeños programas bien evaluados son la base de los grandes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/14",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con cubrebocas da una plática a un grupo de madres y padres, vistos de espaldas, en un salón comunitario.",
+          "pie": "Las pláticas con familias en espacios comunitarios llevan la prevención a quienes no acuden al consultorio.",
+          "prompt": "Fotografía realista en un salón comunitario sencillo y luminoso de una colonia en México, con sillas de plástico acomodadas en semicírculo. Una odontóloga con bata, cubrebocas y lentes de protección, de pie al frente, sostiene un modelo dental grande y un cepillo mientras explica. Un grupo de madres y padres de familia sentados la escuchan y aparecen de espaldas, sin rostros visibles. Luz natural que entra por ventanas amplias, colores cálidos y naturales, ambiente participativo. Evitar: texto, carteles, letreros, logotipos institucionales, marcas comerciales, marcas de agua, rostros identificables, sangre, instrumental."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m12/15",
+          "proporcion": "1:1",
+          "alt": "Bebedero con agua potable en el patio de una escuela, junto a un vaso reutilizable sobre la orilla.",
+          "pie": "El acceso a agua simple en las escuelas apoya la reducción de bebidas azucaradas.",
+          "prompt": "Fotografía realista cuadrada de un bebedero de acero inoxidable con agua potable en el patio de una escuela primaria mexicana, con luz de mañana. Sobre la orilla del bebedero descansa un vaso reutilizable de plástico de color azul. Al fondo, desenfocados, una cancha, árboles y una barda pintada de colores lisos. No aparecen personas. Colores naturales y alegres, enfoque nítido en el bebedero. Evitar: texto, letreros, murales con letras, logotipos, marcas comerciales, marcas de agua, personas, basura, refrescos."
+        }
+      ],
+      "glosario": [
+        { "termino": "Estrategia poblacional", "definicion": "Medida que modifica un factor para toda la población, como la fluoruración de la sal." },
+        { "termino": "Estrategia de alto riesgo", "definicion": "Medidas intensivas dirigidas a las personas con mayor riesgo de una enfermedad." },
+        { "termino": "Paradoja preventiva", "definicion": "Una medida con gran beneficio para la población puede aportar poco a cada persona; muchos casos provienen del grupo de riesgo moderado." },
+        { "termino": "Universalismo proporcional", "definicion": "Acciones para toda la población con intensidad que aumenta según la necesidad de cada grupo." },
+        { "termino": "Cepillado supervisado", "definicion": "Cepillado con pasta fluorurada realizado en grupo bajo la vigilancia de un adulto capacitado." },
+        { "termino": "Cobertura universal de salud", "definicion": "Situación en la que todas las personas reciben los servicios de salud que necesitan sin enfrentar dificultades económicas." }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.5-1",
+          "q": "¿Cuál de estas medidas es un ejemplo de estrategia poblacional?",
+          "opciones": ["Aplicar barniz a un niño con lesiones activas", "Restaurar una lesión cavitada", "La fluoruración de la sal para consumo humano", "Referir a un paciente al odontopediatra"],
+          "correcta": 2,
+          "explicacion": "Modifica un factor para toda la población, a diferencia de las medidas dirigidas a individuos de alto riesgo."
+        },
+        {
+          "id": "t12.5-2",
+          "q": "¿Qué adoptaron los Estados miembros de la OMS en Bangkok en noviembre de 2024?",
+          "opciones": ["La Declaración de Bangkok «No hay salud sin salud bucodental»", "La prohibición mundial del azúcar", "Un nuevo índice de caries", "La NOM-013-SSA2-2015"],
+          "correcta": 0,
+          "explicacion": "La declaración reafirma el compromiso con la cobertura universal de salud bucodental para 2030."
+        },
+        {
+          "id": "t12.5-3",
+          "q": "Según la NOM-013-SSA2-2015, ¿mediante qué sistema se registran y notifican las patologías bucales?",
+          "opciones": ["El padrón escolar", "El SIVEPAB", "El catálogo de medicamentos", "El registro civil"],
+          "correcta": 1,
+          "explicacion": "La norma establece que el registro y la notificación se hacen mediante el Sistema de Vigilancia Epidemiológica de Patologías Bucales."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (numerales 6, 7.9.1 y 10)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Global strategy and action plan on oral health 2023–2030", "autor": "Organización Mundial de la Salud", "anio": 2024 },
+        { "tipo": "oficial", "titulo": "Bangkok Declaration – No Health Without Oral Health", "autor": "Organización Mundial de la Salud", "anio": 2024 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los lineamientos SEP-Salud para alimentos y bebidas en escuelas (DOF 30/09/2024) y en la estrategia poblacional de Geoffrey Rose", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: comunicar y prevenir",
+    "pares": [
+      { "a": "Enseñanza de retorno", "b": "El paciente explica con sus palabras lo que hará" },
+      { "a": "Entrevista motivacional", "b": "Ayuda a resolver la ambivalencia ante el cambio" },
+      { "a": "Pregunta abierta", "b": "«¿Cómo es un día normal en cuanto a lo que bebe?»" },
+      { "a": "Decisión compartida", "b": "Conversaciones de equipo, opciones y decisión" },
+      { "a": "Consentimiento informado", "b": "Lenguaje sencillo y revocable antes de iniciar" },
+      { "a": "Estrategia poblacional", "b": "Fluoruración de la sal" },
+      { "a": "SIVEPAB", "b": "Vigilancia epidemiológica de patologías bucales" },
+      { "a": "Declaración de Bangkok 2024", "b": "No hay salud sin salud bucodental" }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m12-p01",
+        "q": "¿Qué es la alfabetización en salud?",
+        "opciones": ["La capacidad de leer cualquier texto", "La capacidad de obtener, entender y usar información de salud para decidir", "El nivel de estudios de una persona", "El conocimiento técnico del profesional"],
+        "correcta": 1,
+        "explicacion": "Va más allá de la escolaridad: incluye entender y usar la información en decisiones de salud."
+      },
+      {
+        "id": "m12-p02",
+        "q": "¿Cuál es la mejor forma de comprobar que un paciente entendió las indicaciones?",
+        "opciones": ["Preguntar «¿me entendió?»", "Darle un folleto", "Pedirle que explique con sus palabras lo que va a hacer", "Repetir la explicación más rápido"],
+        "correcta": 2,
+        "explicacion": "La enseñanza de retorno revela si la explicación fue clara; el «¿me entendió?» casi siempre recibe un sí."
+      },
+      {
+        "id": "m12-p03",
+        "q": "¿Qué frase es un ejemplo de lenguaje claro para una lesión no cavitada activa?",
+        "opciones": ["«Mancha donde el diente pierde minerales, todavía sin agujero, que podemos frenar»", "«Lesión ICDAS 2 activa en fosas»", "«Desmineralización subsuperficial del esmalte»", "«Caries incipiente con actividad»"],
+        "correcta": 0,
+        "explicacion": "Usa palabras cotidianas y transmite que la lesión puede detenerse."
+      },
+      {
+        "id": "m12-p04",
+        "q": "¿Qué es el reflejo de corregir en la entrevista motivacional?",
+        "opciones": ["Una técnica para corregir la posición del cepillo", "Repetir lo que dijo el paciente", "Un ejercicio de respiración", "El impulso del profesional de decir de inmediato qué hacer, que puede generar resistencia"],
+        "correcta": 3,
+        "explicacion": "Ante una persona ambivalente, insistir en el cambio suele provocar más argumentos en contra."
+      },
+      {
+        "id": "m12-p05",
+        "q": "¿Cuáles son los cuatro procesos de la entrevista motivacional según Miller y Rollnick?",
+        "opciones": ["Diagnosticar, tratar, controlar y dar de alta", "Informar, advertir, prescribir y revisar", "Involucrar, enfocar, evocar y planificar", "Escuchar, juzgar, corregir y premiar"],
+        "correcta": 2,
+        "explicacion": "Son los procesos que organizan la conversación motivacional, de la relación al plan."
+      },
+      {
+        "id": "m12-p06",
+        "q": "Una madre dice: «Me gustaría que mi hija no tuviera las caries que yo tuve». ¿Cómo se clasifica esta frase?",
+        "opciones": ["Lenguaje de mantenimiento", "Lenguaje de cambio", "Una pregunta cerrada", "Un resumen"],
+        "correcta": 1,
+        "explicacion": "Expresa deseo de cambio; reconocerlo y reflejarlo fortalece la motivación."
+      },
+      {
+        "id": "m12-p07",
+        "q": "Un paciente califica con 3 la importancia de reducir el azúcar. ¿Qué pregunta de seguimiento es más útil?",
+        "opciones": ["«¿Por qué un 3 y no un 0?»", "«¿Por qué no un 10?»", "«¿Sabe que el azúcar causa caries?»", "«¿Quiere un folleto?»"],
+        "correcta": 0,
+        "explicacion": "Preguntar por qué no un número menor hace que el paciente exprese sus propias razones para cambiar."
+      },
+      {
+        "id": "m12-p08",
+        "q": "¿Cuál de estos es un plan de cambio concreto y medible?",
+        "opciones": ["«Voy a cuidarme más»", "«Voy a tomar menos azúcar»", "«Voy a intentar mejorar»", "«Voy a cambiar el refresco de la comida por agua de lunes a viernes»"],
+        "correcta": 3,
+        "explicacion": "Define qué, cuándo y cómo, lo que permite verificar si se cumplió."
+      },
+      {
+        "id": "m12-p09",
+        "q": "En la decisión compartida, ¿qué aporta el paciente?",
+        "opciones": ["El diagnóstico", "Sus valores y preferencias", "La técnica operatoria", "La evidencia científica"],
+        "correcta": 1,
+        "explicacion": "El profesional aporta la información clínica y la evidencia; el paciente, lo que es importante para él."
+      },
+      {
+        "id": "m12-p10",
+        "q": "Según la NOM-013-SSA2-2015, ¿cómo debe redactarse la carta de consentimiento informado?",
+        "opciones": ["Con terminología técnica precisa", "En inglés", "En lenguaje sencillo, sin terminología técnica", "Solo con los datos del estomatólogo"],
+        "correcta": 2,
+        "explicacion": "La norma pide lenguaje sencillo, sin tecnicismos, para que el paciente comprenda lo que acepta."
+      },
+      {
+        "id": "m12-p11",
+        "q": "Un paciente firmó el consentimiento para una restauración y, antes de iniciar, decide no hacerla. ¿Qué procede?",
+        "opciones": ["Respetar su decisión, porque el consentimiento es revocable mientras no inicie el procedimiento", "Realizarla porque ya firmó", "Cobrar el tratamiento completo", "Pedir autorización a otro familiar"],
+        "correcta": 0,
+        "explicacion": "La norma establece que el consentimiento puede revocarse mientras no se inicie el procedimiento."
+      },
+      {
+        "id": "m12-p12",
+        "q": "¿Qué forma de expresar un riesgo es más comprensible para la mayoría de los pacientes?",
+        "opciones": ["«El riesgo relativo aumenta 200 %»", "«Su razón de momios es 3»", "«Es estadísticamente significativo»", "«De cada 10 personas en su situación, 3…»"],
+        "correcta": 3,
+        "explicacion": "Las frecuencias naturales y los riesgos absolutos se entienden mejor que los relativos o los términos estadísticos."
+      },
+      {
+        "id": "m12-p13",
+        "q": "¿Cuál es el eje de un programa preventivo en el consultorio?",
+        "opciones": ["El precio de los tratamientos", "El nivel de riesgo de cada paciente", "La marca de los materiales", "El número de sillones"],
+        "correcta": 1,
+        "explicacion": "El riesgo determina qué medidas recibe cada paciente y con qué frecuencia regresa."
+      },
+      {
+        "id": "m12-p14",
+        "q": "Un consultorio programó 60 citas preventivas y acudieron 45 pacientes. ¿Cuál es la asistencia?",
+        "opciones": ["45 %", "60 %", "75 %", "15 %"],
+        "correcta": 2,
+        "explicacion": "45 ÷ 60 × 100 = 75 %."
+      },
+      {
+        "id": "m12-p15",
+        "q": "¿Quién es responsable del diagnóstico y de las decisiones clínicas en un programa preventivo?",
+        "opciones": ["El odontólogo", "La recepcionista", "El paciente", "El proveedor de materiales"],
+        "correcta": 0,
+        "explicacion": "El personal auxiliar capacitado apoya en educación y aplicación de medidas, pero el diagnóstico y las decisiones son del odontólogo."
+      },
+      {
+        "id": "m12-p16",
+        "q": "¿Qué describe la paradoja preventiva de Geoffrey Rose?",
+        "opciones": ["Que la prevención siempre es más cara que el tratamiento", "Que solo los pacientes de alto riesgo se benefician", "Que el flúor no funciona en poblaciones", "Que una medida con gran beneficio poblacional puede aportar poco a cada persona"],
+        "correcta": 3,
+        "explicacion": "Además, muchos casos de una enfermedad frecuente provienen del gran grupo de riesgo moderado."
+      },
+      {
+        "id": "m12-p17",
+        "q": "¿Qué incluye un programa escolar de prevención de caries bien diseñado?",
+        "opciones": ["Solo una plática al año", "Educación, cepillado supervisado con pasta fluorurada, detección y referencia, selladores y entorno saludable", "Venta de dulces sin azúcar", "Únicamente extracciones en la escuela"],
+        "correcta": 1,
+        "explicacion": "Combina componentes educativos, preventivos, de detección y de entorno."
+      },
+      {
+        "id": "m12-p18",
+        "q": "¿Qué meta reafirma la Declaración de Bangkok de la OMS de 2024?",
+        "opciones": ["La cobertura universal de salud bucodental para 2030", "Eliminar la caries para 2026", "Sustituir a los odontólogos por promotores", "Prohibir las bebidas azucaradas en todo el mundo"],
+        "correcta": 0,
+        "explicacion": "La declaración reafirma el compromiso de integrar la salud bucodental en la cobertura universal de salud para 2030."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "academica", "titulo": "Motivational Interviewing: Helping People Change and Grow (4.ª ed.)", "autor": "Miller W. R., Rollnick S. (Guilford Press)", "anio": 2023 },
+    { "tipo": "academica", "titulo": "A three-talk model for shared decision making: multistage consultation process", "autor": "Elwyn G. et al. (BMJ)", "anio": 2017 },
+    { "tipo": "oficial", "titulo": "Health Literacy Universal Precautions Toolkit, 2nd Edition", "autor": "Agency for Healthcare Research and Quality (AHRQ)", "anio": 2015 },
+    { "tipo": "oficial", "titulo": "Global strategy and action plan on oral health 2023–2030", "autor": "Organización Mundial de la Salud", "anio": 2024 },
+    { "tipo": "oficial", "titulo": "Bangkok Declaration – No Health Without Oral Health", "autor": "Organización Mundial de la Salud", "anio": 2024 }
+  ]
+}

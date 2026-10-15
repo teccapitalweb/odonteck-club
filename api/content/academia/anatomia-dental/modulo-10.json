@@ -1,0 +1,1754 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 10,
+  "titulo": "Anatomía de incisivos y caninos permanentes",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los incisivos y caninos forman el sector anterior: cortan y desgarran los alimentos, guían los movimientos de la mandíbula y definen la sonrisa. En este módulo estudiarás cada uno desde sus cinco caras, con sus medidas de referencia, sus áreas de contacto, la forma de sus raíces y las configuraciones de conducto más frecuentes. Aprenderás a identificar un diente anterior aislado, a distinguir el derecho del izquierdo y el superior del inferior, y a reconocer variantes como el lateral conoide, el diente invaginado o el incisivo en pala. Todo con su aplicación en restauración, endodoncia y cirugía.",
+  "objetivos": [
+    "Describir la morfología vestibular, lingual, proximal e incisal de cada incisivo y canino permanente.",
+    "Comparar las dimensiones de referencia, las áreas de contacto y las alturas de contorno de los seis dientes anteriores de cada arcada.",
+    "Identificar un diente anterior aislado indicando su clase, arcada, tipo y lado con al menos dos señales concordantes.",
+    "Explicar la frecuencia y la importancia clínica del segundo conducto en los incisivos y el canino inferiores.",
+    "Reconocer variantes morfológicas del sector anterior y relacionarlas con riesgos de caries, periodontales o pulpares.",
+    "Aplicar la anatomía del sector anterior a la planeación de restauraciones y a la comprensión conceptual del acceso endodóntico y la extracción."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "anatomia-dental/m10/portada",
+    "proporcion": "16:9",
+    "alt": "Incisivos y caninos permanentes extraídos ordenados en abanico sobre una superficie neutra junto a un tipodonto.",
+    "prompt": "Ilustración realista de gran formato para portada educativa: sobre una superficie de laboratorio gris mate, una hilera en abanico de incisivos centrales, laterales y caninos permanentes superiores e inferiores, extraídos, limpios y con anatomía correcta, vistos desde vestibular, con las raíces de los caninos claramente más largas; al fondo, desenfocado, un tipodonto de arcada superior completo. Iluminación de estudio suave y lateral que resalta el relieve del esmalte, colores naturales, profundidad de campo corta. Evitar: texto, etiquetas, logotipos, marcas de agua, sangre, restos de tejido, rostros, dientes deformes, número de raíces incorrecto."
+  },
+  "temas": [
+    {
+      "n": "10.1",
+      "titulo": "Incisivo central superior: el diente que define la sonrisa",
+      "minutos": 14,
+      "enPocasPalabras": "El incisivo central superior es el diente más ancho y visible del frente de la boca. Tiene una sola raíz en forma de cono y un borde recto que corta los alimentos. Conocer su forma exacta permite reconstruirlo de manera natural cuando se fractura o se desgasta.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En este módulo entras de lleno a la **morfología dentaria**: la forma externa de cada diente permanente vista desde sus cinco caras. Ya conoces la nomenclatura FDI (módulo 8) y la cronología de erupción (módulo 9); ahora vas a aprender a reconocer un diente aislado, a distinguir el derecho del izquierdo y a relacionar cada rasgo con una decisión clínica. Empezamos por el **incisivo central superior** (11 y 21 en notación FDI), el diente más estudiado por la odontología estética y uno de los que con mayor frecuencia se fractura por traumatismos.\n\nEl incisivo central superior se desarrolla a partir de **cuatro lóbulos**: tres vestibulares (mesial, central y distal) y uno lingual, que forma el cíngulo. Esa historia embrionaria explica casi todo lo que verás en su superficie: los mamelones del borde incisal, las depresiones verticales de la cara vestibular y el abultamiento cervical de la cara palatina.\n\nSegún la cronología que recoge Wheeler, su calcificación comienza entre los 3 y 4 meses de vida, el esmalte se completa hacia los 4 o 5 años, el diente erupciona entre los **7 y 8 años** y la raíz termina de formarse hacia los 10 años. Ese último dato tiene consecuencias prácticas: un niño de 8 años que se fractura un central superior tiene todavía un ápice abierto, y la conducta clínica cambia por completo respecto a la de un adulto. Recuerda también que la morfología que describes aquí es la de un diente sin desgaste; con los años el borde incisal se aplana, la corona se acorta y los ángulos pierden nitidez."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/01",
+          "proporcion": "3:4",
+          "alt": "Incisivo central superior derecho extraído, visto desde vestibular sobre fondo gris neutro, con corona en forma de pala y raíz cónica.",
+          "pie": "Vista vestibular del incisivo central superior derecho: corona trapezoidal, ángulo mesioincisal casi recto y ángulo distoincisal redondeado.",
+          "prompt": "Ilustración realista de estudio de un incisivo central superior permanente derecho de adulto, limpio y extraído, colocado en posición vertical con la corona hacia abajo como en la boca, visto exactamente desde vestibular sobre fondo gris neutro liso. Corona trapezoidal más ancha en incisal que en cervical, contorno mesial casi recto, ángulo distoincisal redondeado, dos depresiones verticales tenues en el esmalte, línea cervical curva, raíz cónica única de longitud algo mayor que la corona y ápice romo. Iluminación difusa de estudio, colores naturales de esmalte y cemento, enfoque nítido. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dientes deformes, raíces dobles."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cara vestibular: un trapecio con esquinas distintas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Visto desde vestibular, el contorno de la corona es un **trapecio** cuyo lado mayor es el borde incisal. Es el diente anterior más ancho en sentido mesiodistal: en la tabla de referencia de Wheeler mide alrededor de **8.5 mm** en el área de contacto y unos 7 mm en el cuello. La longitud de la corona ronda los **10.5 mm**, de modo que la proporción ancho/alto se sitúa cerca del 80 %, un valor que los protocolos estéticos usan como guía al diseñar restauraciones.\n\nObserva las dos esquinas incisales. El **ángulo mesioincisal** es casi recto y nítido; el **ángulo distoincisal** es más redondeado y obtuso. El contorno mesial de la corona es ligeramente convexo, casi recto, mientras que el distal es más convexo. Estas diferencias son la primera clave para saber si tienes en la mano un diente derecho o izquierdo.\n\nEn dientes recién erupcionados el borde incisal muestra tres pequeñas elevaciones, los **mamelones**, que corresponden a los tres lóbulos vestibulares. Suelen desgastarse con la función en los primeros años. Sobre la superficie vestibular se aprecian dos **depresiones de desarrollo** verticales y finas líneas horizontales, las **líneas de imbricación** o periquimatías, que dan textura al esmalte y que una buena restauración estética reproduce."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Mamelones persistentes",
+          "md": "Si en un adulto ves mamelones intactos en los incisivos superiores, suele indicar que esos dientes **no tienen contacto funcional** con los inferiores, como ocurre en la mordida abierta anterior. El desgaste de los mamelones es, por tanto, una pista indirecta de cómo ocluye el paciente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cara palatina: cíngulo, crestas marginales y fosa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde palatino la corona se ve más estrecha, porque converge hacia lingual. En el tercio cervical destaca el **cíngulo**, una convexidad formada por el lóbulo lingual; en el incisivo central suele estar ligeramente desplazado hacia distal. Desde el cíngulo hacia incisal corren dos **crestas marginales**, mesial y distal, que delimitan la **fosa lingual**, una concavidad poco profunda en forma de pala. A veces aparece una **fosita lingual** en la unión del cíngulo con la fosa, punto de retención de biopelícula y lugar donde puede iniciar una lesión de caries.\n\nLa profundidad de la fosa y el relieve de las crestas marginales varían mucho entre poblaciones. Cuando las crestas son muy prominentes se habla de **incisivo en pala**, un rasgo que estudiarás con detalle en el tema 10.5."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m10/d1",
+          "pie": "Las cinco caras del incisivo central superior derecho y sus referencias anatómicas principales.",
+          "descripcion": "Cinco siluetas esquemáticas del incisivo central superior derecho dispuestas en cruz: al centro la vista vestibular, a la izquierda la mesial, a la derecha la distal, abajo la incisal y arriba la palatina. Cada silueta lleva líneas guía hacia sus referencias: ángulos incisales, cíngulo, crestas marginales, fosa lingual, curvatura de la línea cervical y posición de los contactos proximales marcada con un pequeño óvalo.",
+          "elementos": [
+            "Ángulo mesioincisal",
+            "Ángulo distoincisal",
+            "Mamelones",
+            "Cíngulo",
+            "Crestas marginales",
+            "Fosa lingual",
+            "Línea cervical",
+            "Área de contacto mesial",
+            "Área de contacto distal"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Caras proximales y vista incisal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde mesial o distal la corona tiene forma de **cuña o triángulo**, con la base en cervical y el vértice en el borde incisal. El borde incisal queda aproximadamente sobre el eje longitudinal de la raíz. La convexidad máxima o **altura de contorno** de las caras vestibular y palatina está en el **tercio cervical**; en la cara palatina coincide con el cíngulo.\n\nLa **línea cervical** (unión amelocementaria) se curva hacia incisal en las caras proximales. En el central superior esa curvatura es la mayor de toda la boca: alrededor de **3.5 mm en mesial** y 2.5 mm en distal. La regla general, útil para identificar el lado, es que la curvatura cervical siempre es mayor en mesial que en distal.\n\nLos contactos proximales siguen el mismo patrón asimétrico: el **contacto mesial** está en el tercio incisal, muy cerca del ángulo, y el **distal** en la unión de los tercios incisal y medio. Desde la vista incisal la corona es más ancha en sentido mesiodistal (8.5 mm) que en sentido vestibulolingual (alrededor de 7 mm), y el contorno vestibular es ancho y ligeramente convexo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/02",
+          "proporcion": "4:3",
+          "alt": "Incisivo central superior visto desde mesial, con corona en forma de cuña y línea cervical muy curvada hacia incisal.",
+          "pie": "Vista mesial: perfil en cuña, cíngulo palatino y la curvatura cervical más pronunciada de toda la dentición.",
+          "prompt": "Ilustración realista de estudio de un incisivo central superior permanente extraído, visto exactamente desde su cara mesial, colocado vertical con la corona hacia abajo sobre fondo gris claro. Corona de perfil triangular en cuña con el borde incisal alineado sobre el eje de la raíz, convexidad vestibular suave, cíngulo palatino visible en el tercio cervical, línea amelocementaria marcadamente curvada hacia incisal, raíz cónica única que se estrecha hacia un ápice romo. Luz difusa lateral que resalta el relieve, colores naturales, alta nitidez. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de ligamento, fracturas, caries, raíces dobles, proporciones irreales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La raíz y el conducto"
+        },
+        {
+          "tipo": "texto",
+          "md": "La raíz es **única y cónica**, de unos 13 mm en la tabla de Wheeler, con un corte transversal triangular de vértices redondeados en el tercio cervical que se vuelve casi circular hacia apical. Con frecuencia el tercio apical se inclina levemente hacia distal. La proporción raíz/corona es de alrededor de 1.2, una de las más bajas del grupo anterior.\n\nEn su interior el incisivo central tiene, en la inmensa mayoría de los casos, **un solo conducto** amplio (configuración tipo I de Vertucci). Un metaanálisis de estudios en población asiática encontró esa configuración en más del 97 % de los dientes anteriores superiores. En pacientes jóvenes la cámara pulpar presenta **tres cuernos pulpares** que reflejan los lóbulos vestibulares, un dato a tener en cuenta cuando se prepara el diente para una carilla o una corona."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Incisivo central superior: medidas de referencia (Wheeler, en mm)",
+          "columnas": [
+            "Medida",
+            "Valor promedio",
+            "Para qué te sirve"
+          ],
+          "filas": [
+            [
+              "Longitud de la corona",
+              "10.5",
+              "Planear la altura de una corona o carilla"
+            ],
+            [
+              "Longitud de la raíz",
+              "13.0",
+              "Estimar el soporte óseo disponible"
+            ],
+            [
+              "Diámetro mesiodistal de la corona",
+              "8.5",
+              "Calcular espacios en ortodoncia y prótesis"
+            ],
+            [
+              "Diámetro mesiodistal cervical",
+              "7.0",
+              "Diseñar el perfil de emergencia"
+            ],
+            [
+              "Diámetro vestibulolingual de la corona",
+              "7.0",
+              "Valorar el grosor disponible para preparar"
+            ],
+            [
+              "Diámetro vestibulolingual cervical",
+              "6.0",
+              "Ubicar los márgenes de la preparación"
+            ],
+            [
+              "Curvatura cervical mesial / distal",
+              "3.5 / 2.5",
+              "Respetar la papila y el contorno gingival"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Las medidas son promedios, no moldes",
+          "md": "Las cifras de Wheeler son **promedios de referencia** y sirven para comparar y para tallar modelos. En la clínica siempre manda el diente del propio paciente y su homólogo contralateral. Estudios con tomografía en distintas poblaciones encuentran diferencias de uno o más milímetros respecto a esos valores, por lo que nunca debes diseñar una restauración sin medir."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Derecho o izquierdo? Verdadero o falso",
+          "afirmaciones": [
+            {
+              "texto": "En el incisivo central superior el ángulo distoincisal es más agudo que el mesioincisal.",
+              "verdadero": false,
+              "explicacion": "Es al revés: el ángulo mesioincisal es casi recto y nítido; el distoincisal es redondeado."
+            },
+            {
+              "texto": "La curvatura de la línea cervical es mayor en la cara mesial que en la distal.",
+              "verdadero": true,
+              "explicacion": "Es una regla general de la dentición; en el central superior ronda 3.5 mm en mesial frente a 2.5 mm en distal."
+            },
+            {
+              "texto": "El contacto distal del central superior está más hacia cervical que el mesial.",
+              "verdadero": true,
+              "explicacion": "El mesial está en el tercio incisal y el distal en la unión de los tercios incisal y medio."
+            },
+            {
+              "texto": "Lo habitual es que el incisivo central superior tenga dos conductos.",
+              "verdadero": false,
+              "explicacion": "Casi siempre tiene un solo conducto amplio, configuración tipo I de Vertucci."
+            },
+            {
+              "texto": "Los mamelones corresponden a los tres lóbulos vestibulares del diente.",
+              "verdadero": true,
+              "explicacion": "Son la huella del desarrollo a partir de tres lóbulos vestibulares y uno lingual."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/03",
+          "proporcion": "16:9",
+          "alt": "Encuadre de la boca de un adulto sonriendo con los incisivos centrales superiores al centro, sin mostrar el rostro.",
+          "pie": "En boca, el central superior domina la sonrisa: su forma, proporción y textura son la referencia de cualquier tratamiento estético anterior.",
+          "prompt": "Fotografía clínica realista en encuadre cerrado de la boca de una persona adulta sonriendo, solo labios y dientes visibles, sin nariz ni ojos. Incisivos centrales superiores permanentes al centro, sanos, con proporción natural ancho/alto cercana a 80 %, textura de periquimatías visible al contraluz, laterales y caninos a los lados con contornos gingivales armoniosos, encía rosa pálido sana, iluminación de flash anular suave, fondo neutro. Colores naturales, nitidez alta. Evitar: texto, logotipos, marcas de agua, rostro completo, dientes blanqueados de forma artificial, sangre, ortodoncia, labial exagerado, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Correlaciones clínicas"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Por qué esta anatomía importa en la consulta",
+          "items": [
+            "**Traumatismos:** por su posición adelantada es el diente permanente que más se fractura; reconstruir el borde exige reproducir la asimetría de sus ángulos incisales.",
+            "**Restauraciones proximales:** el contacto mesial en el tercio incisal y el distal más cervical definen la forma de las troneras y la altura de la papila.",
+            "**Coronas y carillas:** la gran curvatura cervical obliga a que el margen siga el festón gingival para no invadir la papila.",
+            "**Acceso endodóntico (concepto):** se realiza por palatino, con contorno triangular que reproduce la forma de la cámara y sus cuernos pulpares; es tema del programa de endodoncia.",
+            "**Extracción (concepto):** su raíz cónica y de corte casi circular tolera movimientos de rotación suaves, a diferencia de las raíces aplanadas de los incisivos inferiores."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** toma un modelo de estudio o un tipodonto y, con una regla milimétrica, mide los incisivos centrales: ancho en el contacto, altura de la corona y diferencia entre ambos lados. Después compara tus cifras con la tabla. Hacerlo una vez entrena el ojo para detectar asimetrías que más tarde tendrás que corregir en una restauración."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Lóbulo de desarrollo",
+          "definicion": "Centro de formación de la corona; los incisivos se forman a partir de tres lóbulos vestibulares y uno lingual."
+        },
+        {
+          "termino": "Mamelón",
+          "definicion": "Cada una de las tres pequeñas elevaciones del borde incisal de un incisivo recién erupcionado."
+        },
+        {
+          "termino": "Cíngulo",
+          "definicion": "Convexidad del tercio cervical de la cara lingual de los dientes anteriores, formada por el lóbulo lingual."
+        },
+        {
+          "termino": "Altura de contorno",
+          "definicion": "Punto de mayor convexidad de una cara del diente vista de perfil; en los anteriores está en el tercio cervical."
+        },
+        {
+          "termino": "Línea cervical",
+          "definicion": "Unión entre el esmalte de la corona y el cemento de la raíz, también llamada unión amelocementaria."
+        },
+        {
+          "termino": "Periquimatías",
+          "definicion": "Finas líneas horizontales en la superficie del esmalte que reflejan su formación por capas."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.1-1",
+          "q": "¿Qué rasgo permite reconocer el lado de un incisivo central superior aislado?",
+          "opciones": [
+            "Su raíz siempre se curva hacia mesial",
+            "El ángulo mesioincisal es casi recto y el distoincisal redondeado",
+            "El cíngulo está centrado y es simétrico",
+            "La cara distal es más plana que la mesial"
+          ],
+          "correcta": 1,
+          "explicacion": "El ángulo mesioincisal nítido y el distoincisal redondeado son la clave más visible; además la raíz tiende a inclinarse a distal y el cíngulo suele estar algo desplazado a distal."
+        },
+        {
+          "id": "t10.1-2",
+          "q": "¿Dónde se encuentra la altura de contorno vestibular del incisivo central superior?",
+          "opciones": [
+            "En el tercio incisal",
+            "En el tercio medio",
+            "En el borde incisal",
+            "En el tercio cervical"
+          ],
+          "correcta": 3,
+          "explicacion": "En los dientes anteriores las alturas de contorno vestibular y lingual están en el tercio cervical."
+        },
+        {
+          "id": "t10.1-3",
+          "q": "¿Cuál es la configuración de conducto más frecuente en el incisivo central superior?",
+          "opciones": [
+            "Un solo conducto de entrada a salida (tipo I)",
+            "Dos conductos que se unen (tipo II)",
+            "Dos conductos independientes (tipo IV)",
+            "Conducto en forma de C"
+          ],
+          "correcta": 0,
+          "explicacion": "Más del 97 % de los dientes anteriores superiores presentan un solo conducto (tipo I de Vertucci) en los estudios agrupados."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Variations in root canal morphology of permanent incisors and canines among Asian population: A systematic review and meta-analysis",
+          "autor": "Usha G., Muddappa S. C., Venkitachalam R. et al. (Journal of Oral Biosciences)",
+          "anio": 2021
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Root canal anatomy of the human permanent teeth",
+          "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+          "anio": 1984
+        }
+      ]
+    },
+    {
+      "n": "10.2",
+      "titulo": "Incisivo lateral superior: el diente más variable del grupo anterior",
+      "minutos": 13,
+      "enPocasPalabras": "El incisivo lateral superior se parece al central, pero es más pequeño y redondeado. Es uno de los dientes que con más frecuencia nace pequeño, con forma de cono o que simplemente no se forma. Reconocer esas variantes ayuda a planear a tiempo la ortodoncia o la estética.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **incisivo lateral superior** (12 y 22) complementa la función del central: corta los alimentos, sostiene el labio y da forma a la sonrisa. Morfológicamente es una versión más pequeña y redondeada del central, pero con una diferencia importante: es **el diente anterior más variable** de la dentición permanente. Puede presentarse con forma normal, reducido de tamaño, con forma de cono, con invaginaciones profundas o ausente por agenesia. Por eso, cuando estudias un lateral, no basta con memorizar una forma: necesitas saber reconocer su rango de variación.\n\nErupciona entre los **8 y 9 años**, aproximadamente un año después del central, y su raíz se completa hacia los 11 años. Durante el periodo de dentición mixta, la posición de su raíz está muy influida por el canino superior, que se desarrolla por encima y por distal. En niños de 8 a 10 años es normal que los laterales se vean inclinados hacia distal y con un diastema entre los centrales: es una etapa transitoria que suele corregirse cuando erupcionan los caninos."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/04",
+          "proporcion": "4:3",
+          "alt": "Incisivo central y lateral superiores derechos extraídos, colocados lado a lado y vistos desde vestibular para comparar tamaño y ángulos.",
+          "pie": "Central y lateral superiores lado a lado: el lateral es más estrecho, más corto de corona y con ambos ángulos incisales más redondeados.",
+          "prompt": "Ilustración realista de estudio de dos dientes permanentes superiores derechos extraídos colocados lado a lado en posición anatómica, con la corona hacia abajo, vistos desde vestibular sobre fondo gris neutro: a la izquierda un incisivo central ancho con ángulo mesioincisal recto, a la derecha un incisivo lateral más estrecho, de corona más corta, con ángulo distoincisal muy redondeado y raíz cónica delgada ligeramente curvada a distal en el ápice. Iluminación difusa de estudio, colores naturales del esmalte y cemento, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dientes deformes, raíces dobles."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cara vestibular: más estrecho y más redondo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde vestibular la corona del lateral mide alrededor de **6.5 mm** de ancho mesiodistal y **9 mm** de alto en la tabla de Wheeler, es decir, unos 2 mm más estrecha y 1.5 mm más corta que la del central. La proporción ancho/alto queda alrededor del 70 %, por lo que el lateral se ve relativamente más alargado.\n\nAmbos ángulos incisales son más redondeados que en el central, pero el **distoincisal es claramente más redondeado** que el mesioincisal, al grado de que en algunos dientes el borde incisal parece descender en curva continua hacia distal. El contorno distal de la corona es más convexo que el mesial. Las depresiones vestibulares y los mamelones existen, pero son menos marcados.\n\nLos contactos proximales quedan más hacia cervical que en el central: el **mesial** en el tercio incisal, cerca de su unión con el tercio medio, y el **distal** en el tercio medio. Esta posición más baja del contacto distal deja una tronera incisal amplia entre lateral y canino, uno de los detalles que dan naturalidad a una sonrisa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cara palatina y caras proximales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde palatino el lateral muestra un **cíngulo** generalmente centrado, crestas marginales más marcadas y una fosa lingual relativamente más profunda que la del central. Con frecuencia aparece una **fosita lingual** profunda en la unión del cíngulo y la fosa, y a veces un surco que cruza el cíngulo y continúa sobre la raíz: el **surco palatogingival** o palatorradicular. Este surco, más frecuente en el lateral superior que en cualquier otro diente, favorece la acumulación de biopelícula y puede asociarse a una bolsa periodontal profunda y localizada en un diente por lo demás sano.\n\nDesde mesial y distal la corona conserva la forma de cuña del central, con la altura de contorno vestibular y palatina en el tercio cervical. La curvatura de la línea cervical es algo menor: unos 3 mm en mesial y 2 mm en distal. La raíz es cónica, más delgada, de longitud similar a la del central (alrededor de 13 mm), por lo que su **proporción raíz/corona es mayor**. Es frecuente que el ápice se incline hacia distal. Internamente presenta casi siempre un solo conducto."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Central frente a lateral superior: claves de diferenciación",
+          "columnas": [
+            "Rasgo",
+            "Incisivo central superior",
+            "Incisivo lateral superior"
+          ],
+          "filas": [
+            [
+              "Ancho mesiodistal de corona",
+              "Alrededor de 8.5 mm",
+              "Alrededor de 6.5 mm"
+            ],
+            [
+              "Longitud de corona",
+              "Alrededor de 10.5 mm",
+              "Alrededor de 9 mm"
+            ],
+            [
+              "Ángulo mesioincisal",
+              "Casi recto y nítido",
+              "Ligeramente redondeado"
+            ],
+            [
+              "Ángulo distoincisal",
+              "Redondeado",
+              "Muy redondeado"
+            ],
+            [
+              "Cíngulo",
+              "Algo desplazado a distal",
+              "Generalmente centrado"
+            ],
+            [
+              "Fosa lingual",
+              "Poco profunda",
+              "Más profunda, con fosita frecuente"
+            ],
+            [
+              "Contacto distal",
+              "Unión de tercios incisal y medio",
+              "Tercio medio"
+            ],
+            [
+              "Variabilidad de forma",
+              "Baja",
+              "Alta: conoide, agenesia, invaginación"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m10/d2",
+          "pie": "Espectro de formas del incisivo lateral superior, de la forma típica a la agenesia.",
+          "descripcion": "Fila horizontal de cinco siluetas vestibulares de incisivos laterales superiores, de izquierda a derecha: forma típica, lateral reducido de tamaño (microdoncia), lateral conoide en forma de clavija, lateral con fosita lingual profunda vista en corte que muestra la invaginación del esmalte hacia la pulpa, y un espacio vacío punteado que representa la agenesia. Debajo de cada silueta, su nombre.",
+          "elementos": [
+            "Forma típica",
+            "Microdoncia",
+            "Lateral conoide",
+            "Diente invaginado",
+            "Agenesia"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Variantes y anomalías del lateral"
+        },
+        {
+          "tipo": "texto",
+          "md": "Excluyendo a los terceros molares, el incisivo lateral superior está entre los dientes que con mayor frecuencia **faltan por agenesia**, junto con el segundo premolar inferior. Cuando falta uno, conviene revisar el contralateral: a menudo el otro lateral es pequeño o conoide. La **microdoncia** del lateral y el **lateral conoide** (en forma de clavija) se consideran expresiones del mismo espectro de reducción.\n\nEl lateral superior es también el diente donde más se describe el **diente invaginado** (*dens invaginatus*): un repliegue del esmalte y la dentina hacia el interior de la corona que se inicia en la fosita lingual. Puede pasar inadvertido en la inspección, pero comunica con facilidad la cavidad bucal con la pulpa, de modo que un diente sin caries visible puede presentar necrosis pulpar. Su forma más simple se detecta como una fosita profunda o como una imagen de «diente dentro de diente» en la radiografía."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Fositas profundas: sellar y vigilar",
+          "md": "Una fosita lingual profunda o un surco palatogingival en el lateral superior son puntos de riesgo. Ante una fosita profunda en un niño, valora el sellado preventivo y una radiografía periapical para descartar invaginación. Ante una bolsa periodontal aislada en palatino de un lateral sin otros factores, busca con la sonda un surco palatorradicular antes de pensar en otra causa."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/05",
+          "proporcion": "1:1",
+          "alt": "Tipodonto superior visto de frente con un incisivo lateral derecho conoide más pequeño que el contralateral.",
+          "pie": "Lateral conoide en un tipodonto: la forma en clavija y el espacio a ambos lados son típicos de esta variante.",
+          "prompt": "Fotografía realista de estudio de un tipodonto de arcada superior permanente de adulto visto de frente en ligera vista oclusal, dientes de resina con color natural de esmalte, el incisivo lateral derecho de forma conoide en clavija, más corto y estrecho que el izquierdo, con pequeños espacios a sus lados, el resto de los dientes con anatomía normal y bien alineados, encía artificial rosa, iluminación difusa uniforme, fondo blanco neutro. Evitar: texto, etiquetas, logotipos, marcas de agua, manos, sangre, dientes adicionales, número incorrecto de dientes, brackets."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/06",
+          "proporcion": "3:4",
+          "alt": "Incisivo lateral superior extraído visto desde palatino, con cíngulo centrado y fosita lingual profunda.",
+          "pie": "Vista palatina del lateral: cíngulo centrado, crestas marginales marcadas y fosita lingual, punto frecuente de retención de biopelícula.",
+          "prompt": "Ilustración realista de estudio de un incisivo lateral superior permanente extraído, visto exactamente desde palatino, en posición vertical con la corona hacia abajo, sobre fondo gris neutro. Corona estrecha con cíngulo centrado en el tercio cervical, crestas marginales mesial y distal prominentes, fosa lingual profunda y una fosita pequeña en la unión del cíngulo con la fosa, raíz cónica delgada y única con ápice ligeramente inclinado hacia distal. Luz rasante suave que resalta los relieves, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, caries, restos de tejido, raíces dobles, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Identifica el diente",
+          "situacion": "En el laboratorio de anatomía te entregan un diente anterior superior aislado. La corona mide unos 6.5 mm de ancho y 9 mm de alto, ambos ángulos incisales son redondeados, el cíngulo está centrado y hay una fosita lingual profunda. Con el diente orientado como en la boca (corona hacia abajo) y visto desde vestibular, la raíz se inclina en su tercio apical hacia tu derecha, y el ángulo más redondeado de la corona también queda a tu derecha.",
+          "opciones": [
+            {
+              "texto": "Incisivo central superior derecho",
+              "correcta": false,
+              "retro": "El central es más ancho (unos 8.5 mm), tiene el ángulo mesioincisal nítido y el cíngulo algo desplazado a distal."
+            },
+            {
+              "texto": "Incisivo lateral superior izquierdo",
+              "correcta": true,
+              "retro": "Correcto. Las medidas y el cíngulo centrado indican un lateral. Visto desde vestibular, si el ángulo redondeado y la inclinación apical (ambos distales) quedan a tu derecha, el lado mesial queda a tu izquierda; en un diente superior visto de frente eso corresponde al lado izquierdo del paciente, el 22."
+            },
+            {
+              "texto": "Incisivo lateral superior derecho",
+              "correcta": false,
+              "retro": "Es un lateral, pero en el 12 visto desde vestibular el distal queda a tu izquierda."
+            },
+            {
+              "texto": "Canino superior izquierdo",
+              "correcta": false,
+              "retro": "El canino tiene una cúspide puntiaguda y una raíz mucho más larga, no un borde incisal."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un caso frecuente en ortodoncia",
+          "md": "Una adolescente acude por «espacios» entre los dientes de enfrente. Tiene el 12 conoide y el 22 ausente. El plan se define en equipo: mantener o cerrar el espacio del 22, y dar forma al 12 con resina o una carilla. Saber que estas variantes suelen presentarse juntas evita sorpresas y permite explicar a la familia que no se trata de un problema de higiene sino del desarrollo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La clasificación de Oehlers para el diente invaginado",
+          "md": "La clasificación más usada para el *dens invaginatus* coronal es la de **Oehlers** (1957), que describe tres tipos según la extensión del repliegue:\n\n- **Tipo I:** la invaginación queda confinada a la corona y no rebasa la unión amelocementaria.\n- **Tipo II:** la invaginación se extiende más allá de la unión amelocementaria como un saco ciego dentro de la raíz; puede o no comunicar con la pulpa.\n- **Tipo III:** la invaginación atraviesa la raíz y se abre al ligamento periodontal, ya sea por una perforación lateral (IIIa) o por un segundo foramen en la zona apical (IIIb), en general sin comunicar con la pulpa.\n\nEl interés clínico es doble. Primero, el tejido que reviste la invaginación suele ser esmalte delgado e irregular, de modo que las bacterias alcanzan con facilidad la dentina y la pulpa. Segundo, en los tipos II y III la anatomía interna se vuelve compleja y su estudio con radiografías en distintas angulaciones o tomografía de haz cónico corresponde al especialista. Para el odontólogo general, la meta es **detectar a tiempo** y prevenir."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Implicaciones restauradoras de un diente estrecho"
+        },
+        {
+          "tipo": "texto",
+          "md": "El diámetro mesiodistal cervical del lateral ronda los **5 mm** y su raíz es aplanada en ese mismo sentido. Eso significa que hay poca dentina entre el conducto y la superficie radicular mesial y distal. Cuando un lateral necesita una corona, el desgaste en el tercio cervical debe ser conservador, y cuando tiene tratamiento de conductos conviene recordar que la raíz tolera mal las preparaciones amplias para postes.\n\nEn el cierre de espacios por agenesia, el canino suele desplazarse a la posición del lateral y se modifica su forma para que lo imite; en la reposición con prótesis o implante, el espacio disponible entre las raíces vecinas es el factor decisivo. En ambos casos, conocer las dimensiones normales del lateral te da la referencia contra la cual comparar lo que ves en el paciente."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando revises a un paciente de 8 a 12 años, cuenta los incisivos laterales y compara su forma con la del contralateral. Si uno falta, es pequeño o tiene una fosita profunda, anótalo en el expediente y planea una radiografía: detectar a tiempo una agenesia o una invaginación cambia el plan de tratamiento."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Agenesia dental",
+          "definicion": "Ausencia congénita de un diente porque su germen nunca se formó."
+        },
+        {
+          "termino": "Microdoncia",
+          "definicion": "Diente de tamaño menor al habitual para su tipo."
+        },
+        {
+          "termino": "Lateral conoide",
+          "definicion": "Incisivo lateral reducido, de corona en forma de cono o clavija."
+        },
+        {
+          "termino": "Diente invaginado",
+          "definicion": "Anomalía del desarrollo en la que el esmalte y la dentina se repliegan hacia el interior de la corona; también llamado dens invaginatus."
+        },
+        {
+          "termino": "Surco palatogingival",
+          "definicion": "Surco de desarrollo que cruza el cíngulo de un incisivo superior y se extiende sobre la raíz, favoreciendo la acumulación de biopelícula."
+        },
+        {
+          "termino": "Tronera",
+          "definicion": "Espacio en forma de V que se abre a partir del área de contacto entre dos dientes vecinos."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.2-1",
+          "q": "¿Dónde se ubica el contacto distal del incisivo lateral superior?",
+          "opciones": [
+            "En el tercio incisal, junto al ángulo",
+            "En el borde incisal",
+            "En el tercio medio",
+            "En el tercio cervical"
+          ],
+          "correcta": 2,
+          "explicacion": "El contacto distal del lateral está en el tercio medio, más cervical que en el central, lo que crea una tronera incisal amplia con el canino."
+        },
+        {
+          "id": "t10.2-2",
+          "q": "¿En qué diente se describe con mayor frecuencia el diente invaginado?",
+          "opciones": [
+            "Incisivo central inferior",
+            "Canino inferior",
+            "Primer molar superior",
+            "Incisivo lateral superior"
+          ],
+          "correcta": 3,
+          "explicacion": "El dens invaginatus se describe sobre todo en el incisivo lateral superior y suele iniciar en la fosita lingual."
+        },
+        {
+          "id": "t10.2-3",
+          "q": "Si falta un incisivo lateral superior por agenesia, ¿qué conviene revisar?",
+          "opciones": [
+            "El contralateral, que a menudo es pequeño o conoide",
+            "Únicamente los terceros molares",
+            "Los incisivos centrales inferiores",
+            "La forma de los caninos temporales"
+          ],
+          "correcta": 0,
+          "explicacion": "La agenesia y la reducción de tamaño del lateral forman parte del mismo espectro y con frecuencia coinciden en un mismo paciente."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dens invaginatus (dilated composite odontome). I. Variations of the invagination process and associated anterior crown forms",
+          "autor": "Oehlers F. A. C. (Oral Surgery, Oral Medicine, Oral Pathology)",
+          "anio": 1957
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía dental y patología oral sobre variantes del incisivo lateral superior",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "10.3",
+      "titulo": "Incisivos inferiores: los dientes más pequeños y su conducto escondido",
+      "minutos": 14,
+      "enPocasPalabras": "Los incisivos de abajo son los dientes más pequeños de la boca y son muy parecidos entre sí. Su raíz es delgada y aplanada, y por dentro pueden tener un segundo conducto que no se ve a simple vista. Son además los dientes donde más se acumula el sarro, junto a la salida de la saliva.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los **incisivos inferiores** (31, 32, 41 y 42) son los dientes permanentes más pequeños. Ocluyen por detrás de los superiores, contra su cara palatina, y en una relación normal su borde incisal contacta cerca de las crestas marginales y el cíngulo de los incisivos superiores. Son los primeros dientes anteriores permanentes en erupcionar: el **central entre los 6 y 7 años** y el **lateral entre los 7 y 8 años**, con raíces completas hacia los 9 y 10 años, respectivamente.\n\nA diferencia de lo que ocurre en la arcada superior, el central y el lateral inferiores se parecen tanto que distinguirlos exige observar detalles finos. La regla general es útil: el **central es el más simétrico** de todos los incisivos y el **lateral es algo más grande** que el central, al revés de lo que sucede arriba."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/07",
+          "proporcion": "4:3",
+          "alt": "Incisivos central y lateral inferiores extraídos, lado a lado, vistos desde vestibular, con coronas estrechas y raíces largas.",
+          "pie": "Incisivos inferiores: el central es simétrico; el lateral es un poco más ancho y su ángulo distoincisal más redondeado.",
+          "prompt": "Ilustración realista de estudio de dos incisivos inferiores permanentes derechos extraídos, colocados lado a lado en posición anatómica con la corona hacia arriba, vistos desde vestibular sobre fondo gris neutro: a la izquierda un central con corona estrecha y simétrica, borde incisal recto y ángulos casi rectos; a la derecha un lateral algo más ancho con el ángulo distoincisal ligeramente redondeado. Raíces únicas, largas, rectas y estrechas en sentido mesiodistal. Iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, cálculo, caries, restos de tejido, raíces dobles, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Incisivo central inferior: simetría casi perfecta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde vestibular, la corona del central inferior es estrecha y alta: alrededor de **5 mm** de ancho y **9 mm** de altura en la tabla de Wheeler. Sus contornos mesial y distal descienden casi rectos desde los ángulos incisales, que son prácticamente rectos y de forma similar. El borde incisal es recto y perpendicular al eje del diente. Esta **simetría bilateral** hace muy difícil distinguir el central derecho del izquierdo; en la práctica se recurre a la curvatura cervical (mayor en mesial) y a la ligera inclinación distal del ápice.\n\nAmbos contactos proximales están en el **tercio incisal**, a la misma altura. La cara lingual es lisa, con un cíngulo pequeño y centrado, crestas marginales apenas marcadas y una fosa lingual poco profunda. Desde proximal la corona tiene forma de cuña, y el borde incisal queda **lingual al eje de la raíz**, un rasgo propio de los incisivos inferiores que ayuda a distinguirlos de los superiores en una vista proximal. Desde incisal, el diámetro vestibulolingual (unos 6 mm) supera al mesiodistal (unos 5 mm)."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Incisivo lateral inferior: pequeño giro distal"
+        },
+        {
+          "tipo": "texto",
+          "md": "El lateral inferior es un poco mayor: unos **5.5 mm** de ancho, **9.5 mm** de altura de corona y **14 mm** de raíz. Su diferencia más útil es la asimetría: el **ángulo distoincisal es más redondeado** que el mesioincisal, y vista desde incisal la corona parece **girada sobre la raíz**, con el borde incisal orientado en dirección distolingual siguiendo la curva de la arcada. El cíngulo suele estar ligeramente desplazado hacia distal. El contacto distal está algo más hacia cervical que el mesial, aunque ambos permanecen en el tercio incisal.\n\nEn los dos incisivos la **raíz es única, larga y muy aplanada** en sentido mesiodistal, con depresiones longitudinales en sus caras mesial y distal; en el lateral la depresión distal suele ser más marcada. Esa forma en lámina tiene dos consecuencias: hay muy poco hueso interradicular entre incisivos inferiores vecinos y la raíz no tolera movimientos de rotación durante una extracción."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Incisivos inferiores: medidas de referencia (Wheeler, en mm)",
+          "columnas": [
+            "Medida",
+            "Central inferior",
+            "Lateral inferior"
+          ],
+          "filas": [
+            [
+              "Longitud de la corona",
+              "9.0",
+              "9.5"
+            ],
+            [
+              "Longitud de la raíz",
+              "12.5",
+              "14.0"
+            ],
+            [
+              "Diámetro mesiodistal de la corona",
+              "5.0",
+              "5.5"
+            ],
+            [
+              "Diámetro mesiodistal cervical",
+              "3.5",
+              "4.0"
+            ],
+            [
+              "Diámetro vestibulolingual de la corona",
+              "6.0",
+              "6.5"
+            ],
+            [
+              "Diámetro vestibulolingual cervical",
+              "5.3",
+              "5.8"
+            ],
+            [
+              "Curvatura cervical mesial / distal",
+              "3.0 / 2.0",
+              "3.0 / 2.0"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m10/d3",
+          "pie": "Cortes transversales de la raíz de un incisivo inferior y las configuraciones de conducto más frecuentes.",
+          "descripcion": "A la izquierda, una raíz de incisivo inferior vista desde proximal con tres líneas horizontales que marcan cortes en los tercios cervical, medio y apical; al lado, los tres cortes en forma de óvalo alargado en sentido vestibulolingual con uno o dos conductos. A la derecha, tres esquemas longitudinales de la raíz con sus conductos: tipo I (un conducto), tipo II (dos conductos que se unen antes del ápice) y tipo III (uno que se divide y vuelve a unirse).",
+          "elementos": [
+            "Vestibular",
+            "Lingual",
+            "Corte cervical",
+            "Corte medio",
+            "Tipo I: 1-1",
+            "Tipo II: 2-1",
+            "Tipo III: 1-2-1"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El segundo conducto"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como la raíz es ancha en sentido vestibulolingual y estrecha en sentido mesiodistal, el conducto puede dividirse en un **conducto vestibular** y otro **lingual**. En la radiografía periapical convencional, tomada de frente, ambos se superponen y el diente parece tener un solo conducto.\n\nLa frecuencia varía mucho según la población y el método de estudio. En un metaanálisis de estudios asiáticos, la configuración de un solo conducto (tipo I de Vertucci) se encontró en alrededor del **78 % de los centrales** y del **69 % de los laterales** inferiores, de modo que entre una quinta y una tercera parte presentaron configuraciones con dos conductos en algún tramo. Otros estudios con tomografía en distintas regiones del mundo reportan rangos parecidos o más amplios. La mayoría de esas configuraciones son de tipo III o II: los dos conductos se reúnen y terminan en un solo foramen; los forámenes apicales independientes son mucho menos comunes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué el lateral muestra más variación",
+          "md": "En el metaanálisis de Usha y colaboradores (2021), el incisivo lateral inferior tuvo la menor prevalencia de conducto único de todos los dientes anteriores. Los autores observaron además más configuraciones complejas en hombres y en grupos de menor edad, y diferencias según la técnica de estudio. Esto ilustra un principio general de la anatomía interna: las cifras son **rangos poblacionales**, no promedios universales, y dependen del método (diafanización, radiografía o tomografía). La clasificación de Vertucci (1984), basada en dientes diafanizados, sigue siendo el lenguaje común para describir estas variantes y la estudiarás a fondo en el programa de endodoncia."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cálculo y periodonto en los incisivos inferiores",
+          "md": "Los conductos de las glándulas submandibulares y sublinguales desembocan en el piso de boca, justo detrás de los incisivos inferiores. Por eso la cara lingual de estos dientes es el sitio donde **más se forma cálculo supragingival**. Además, el hueso que los rodea es delgado por vestibular y entre raíces vecinas, por lo que la pérdida de inserción avanza aquí con rapidez si no se controla la biopelícula."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/08",
+          "proporcion": "4:3",
+          "alt": "Incisivo inferior extraído visto desde mesial, con raíz ancha en sentido vestibulolingual y depresión longitudinal.",
+          "pie": "Vista mesial: la raíz es una lámina ancha en sentido vestibulolingual con una depresión longitudinal; ahí se esconde el posible segundo conducto.",
+          "prompt": "Ilustración realista de estudio de un incisivo central inferior permanente extraído, visto exactamente desde mesial, en posición vertical con la corona hacia arriba, sobre fondo gris claro. Corona en forma de cuña con el borde incisal ligeramente lingual al eje de la raíz, cíngulo pequeño, raíz única larga, ancha en sentido vestibulolingual y con una depresión longitudinal poco profunda en el centro de su cara mesial, línea cervical curvada hacia incisal. Luz rasante suave, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, cálculo, restos de tejido, raíces bifurcadas, dientes deformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/09",
+          "proporcion": "16:9",
+          "alt": "Vista lingual de los incisivos inferiores en un tipodonto, con la lengua ausente y el piso de boca representado en encía artificial.",
+          "pie": "Cara lingual del sector anterior inferior: cíngulos pequeños, fosas poco profundas y la zona donde con mayor frecuencia se acumula el cálculo.",
+          "prompt": "Fotografía realista de estudio de un tipodonto de arcada inferior permanente de adulto, vista lingual cercana del sector anterior desde canino a canino, dientes de resina con color natural, incisivos estrechos con cíngulos pequeños y fosas linguales poco profundas, encía artificial rosa con el contorno gingival bien definido, sin lengua, iluminación difusa de estudio, fondo blanco neutro, profundidad de campo media. Evitar: texto, etiquetas, logotipos, marcas de agua, manos, sangre, cálculo exagerado, número incorrecto de dientes, brackets, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona el rasgo con el incisivo",
+          "instruccion": "Une cada característica con el incisivo al que mejor describe.",
+          "pares": [
+            {
+              "a": "Corona más simétrica de todos los incisivos",
+              "b": "Central inferior"
+            },
+            {
+              "a": "Corona girada en sentido distolingual sobre la raíz",
+              "b": "Lateral inferior"
+            },
+            {
+              "a": "Contacto distal en el tercio medio",
+              "b": "Lateral superior"
+            },
+            {
+              "a": "Mayor curvatura cervical de la dentición, unos 3.5 mm",
+              "b": "Central superior"
+            },
+            {
+              "a": "Borde incisal lingual al eje de la raíz",
+              "b": "Incisivos inferiores"
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "¿Superior o inferior? Claves de arcada"
+        },
+        {
+          "tipo": "texto",
+          "md": "En un examen práctico es común recibir un incisivo aislado y tener que decidir primero a qué arcada pertenece. El criterio más fiable no es el tamaño total sino la **relación entre los diámetros de la corona**: en los superiores el diámetro mesiodistal es mayor que el vestibulolingual; en los inferiores ocurre lo contrario. Si además miras el diente desde proximal y el borde incisal queda por lingual del eje de la raíz, estás ante un inferior. La tabla resume las claves que conviene revisar en orden."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Incisivos superiores frente a inferiores",
+          "columnas": [
+            "Clave",
+            "Superiores",
+            "Inferiores"
+          ],
+          "filas": [
+            [
+              "Proporción de la corona vista desde incisal",
+              "Más ancha en sentido mesiodistal",
+              "Más ancha en sentido vestibulolingual"
+            ],
+            [
+              "Borde incisal visto desde proximal",
+              "Sobre el eje de la raíz o algo vestibular",
+              "Lingual al eje de la raíz"
+            ],
+            [
+              "Cara lingual",
+              "Cíngulo y crestas marginales marcados, fosa evidente",
+              "Lisa, cíngulo pequeño y fosa poco profunda"
+            ],
+            [
+              "Forma de la raíz en corte",
+              "Triangular redondeada o casi circular",
+              "Aplanada en sentido mesiodistal, con depresiones proximales"
+            ],
+            [
+              "Relación central y lateral",
+              "El central es claramente mayor",
+              "El lateral es ligeramente mayor"
+            ],
+            [
+              "Posibilidad de un segundo conducto",
+              "Muy baja",
+              "Frecuente"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Correlaciones clínicas"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "**Endodoncia (concepto):** ante un incisivo inferior con tratamiento, hay que buscar sistemáticamente el conducto lingual; las tomas radiográficas con angulación horizontal distinta ayudan a separarlo.",
+            "**Restauración:** el esmalte y la dentina cervicales son delgados; las preparaciones para coronas completas en incisivos inferiores comprometen con facilidad la pulpa.",
+            "**Ortodoncia:** el hueso vestibular delgado limita cuánto pueden inclinarse estos dientes sin riesgo de recesión gingival.",
+            "**Extracción (concepto):** la raíz aplanada se luxa con movimientos vestibulolinguales controlados, no con rotación.",
+            "**Apiñamiento:** el sector anterior inferior es una zona donde el apiñamiento aparece o se acentúa con frecuencia en la adolescencia y la vida adulta; como el ancho de estos dientes es pequeño, una diferencia de pocos milímetros en el perímetro de arcada se nota mucho.",
+            "**Desgaste incisal:** en personas con bruxismo, el borde incisal de los inferiores se aplana y deja ver una franja de dentina; al ser dientes estrechos, la pérdida de altura cambia rápido su proporción."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en tu siguiente práctica de laboratorio, mira cualquier incisivo inferior extraído desde mesial y luego desde vestibular. Notarás que la raíz que parecía delgada es en realidad ancha. Ese cambio de perspectiva es exactamente lo que se pierde en una radiografía de frente, y la razón por la que debes sospechar siempre un segundo conducto."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Simetría bilateral",
+          "definicion": "Condición en la que las mitades mesial y distal de la corona son casi iguales; característica del incisivo central inferior."
+        },
+        {
+          "termino": "Conducto lingual",
+          "definicion": "Segundo conducto que puede presentarse en los incisivos inferiores, situado por lingual del conducto principal."
+        },
+        {
+          "termino": "Clasificación de Vertucci",
+          "definicion": "Sistema de ocho tipos que describe cómo se dividen y reúnen los conductos dentro de una raíz, desde el orificio hasta el ápice."
+        },
+        {
+          "termino": "Diafanización",
+          "definicion": "Técnica de laboratorio que vuelve transparente un diente extraído para observar sus conductos teñidos."
+        },
+        {
+          "termino": "Cálculo supragingival",
+          "definicion": "Biopelícula mineralizada que se deposita sobre la corona, por encima del margen de la encía."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.3-1",
+          "q": "¿Qué incisivo es el más simétrico de toda la dentición permanente?",
+          "opciones": [
+            "Lateral superior",
+            "Central superior",
+            "Lateral inferior",
+            "Central inferior"
+          ],
+          "correcta": 3,
+          "explicacion": "El central inferior tiene ángulos y contornos mesial y distal casi idénticos, lo que dificulta distinguir el lado."
+        },
+        {
+          "id": "t10.3-2",
+          "q": "¿Por qué el segundo conducto de un incisivo inferior pasa inadvertido en una radiografía de frente?",
+          "opciones": [
+            "Porque está calcificado en todos los adultos",
+            "Porque los conductos vestibular y lingual se superponen en esa proyección",
+            "Porque solo existe en dientes temporales",
+            "Porque se localiza en la corona"
+          ],
+          "correcta": 1,
+          "explicacion": "La raíz es ancha en sentido vestibulolingual; en una proyección de frente los dos conductos quedan uno detrás del otro."
+        },
+        {
+          "id": "t10.3-3",
+          "q": "¿Cuál es la relación de tamaño entre los incisivos inferiores?",
+          "opciones": [
+            "El lateral es ligeramente mayor que el central",
+            "El central es mucho mayor que el lateral",
+            "Son exactamente del mismo tamaño",
+            "El lateral es más corto de raíz"
+          ],
+          "correcta": 0,
+          "explicacion": "En la arcada inferior el lateral es algo más ancho y largo que el central, al revés de lo que ocurre en la superior."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Variations in root canal morphology of permanent incisors and canines among Asian population: A systematic review and meta-analysis",
+          "autor": "Usha G., Muddappa S. C., Venkitachalam R. et al. (Journal of Oral Biosciences)",
+          "anio": 2021
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Root canal anatomy of the human permanent teeth",
+          "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+          "anio": 1984
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        }
+      ]
+    },
+    {
+      "n": "10.4",
+      "titulo": "Caninos superior e inferior: las piedras angulares de la arcada",
+      "minutos": 15,
+      "enPocasPalabras": "Los caninos son los dientes con una sola punta que están en las esquinas de la boca. Tienen las raíces más largas de todos los dientes y por eso duran mucho tiempo en boca. Además guían el movimiento de la mandíbula hacia los lados y sostienen la forma de la cara.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los **caninos** (13, 23, 33 y 43) ocupan las esquinas de las arcadas, en la transición entre el sector anterior y el posterior. Son los únicos dientes anteriores con una **cúspide** en lugar de un borde incisal y los que tienen las **raíces más largas** de la dentición. En la literatura anatómica se les llama a menudo las «piedras angulares» de la arcada: su raíz larga, anclada en un hueso grueso, los convierte en dientes muy estables, con frecuencia los últimos en perderse, y su posición sostiene el contorno del labio en la zona de la comisura; la prominencia ósea que produce la raíz del canino superior se conoce como **eminencia canina**.\n\nComo los incisivos, se desarrollan a partir de **cuatro lóbulos**: tres vestibulares y uno lingual. El lóbulo vestibular central está muy desarrollado y forma la cúspide y la **cresta vestibular**, un relieve vertical que recorre el centro de la cara vestibular. El canino inferior erupciona entre los **9 y 10 años** y el superior entre los **11 y 12 años**; este último completa su raíz hacia los 13 a 15 años."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/10",
+          "proporcion": "3:4",
+          "alt": "Canino superior derecho extraído visto desde vestibular, con cúspide puntiaguda, cresta vestibular y raíz muy larga.",
+          "pie": "Canino superior: la raíz más larga de la dentición y una cúspide cuya vertiente mesial es más corta que la distal.",
+          "prompt": "Ilustración realista de estudio de un canino superior permanente derecho de adulto extraído, en posición vertical con la corona hacia abajo, visto exactamente desde vestibular sobre fondo gris neutro. Corona con una cúspide puntiaguda, vertiente mesial más corta que la distal, cresta vestibular vertical marcada en el centro, contorno distal más convexo, línea cervical curva y una raíz única muy larga, casi el doble de la corona, que termina en un ápice afilado. Iluminación difusa de estudio, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, raíces dobles, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Canino superior: vista vestibular y palatina"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde vestibular la corona tiene forma de **pentágono**: dos lados cervicales, dos contornos proximales y las dos vertientes de la cúspide. La **punta de la cúspide** está algo hacia mesial del centro, de modo que la **vertiente mesial es más corta** que la distal. El contorno mesial de la corona es convexo con su máxima convexidad cerca de la unión de los tercios incisal y medio, donde está el **contacto mesial**; el contorno distal es más convexo y su contacto queda más bajo, en el **tercio medio**. La corona mide alrededor de **10 mm** de alto y **7.5 mm** de ancho.\n\nDesde palatino destacan un **cíngulo** voluminoso, unas **crestas marginales** marcadas y una **cresta lingual** que baja desde la punta de la cúspide hasta el cíngulo y divide la cara palatina en dos fosas, **mesiolingual** y **distolingual**. Esta cresta es la que hace contacto con los caninos inferiores durante el movimiento lateral de la mandíbula."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Caras proximales, vista incisal y raíz"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde proximal, el canino superior es el diente anterior más grueso: su diámetro vestibulolingual (alrededor de **8 mm**) supera al mesiodistal, y la punta de la cúspide queda sobre el eje de la raíz o ligeramente por vestibular. La curvatura cervical es menor que la de los incisivos, unos 2.5 mm en mesial y 1.5 mm en distal. Desde incisal la corona es asimétrica: la mitad distal se ve más delgada en sentido vestibulolingual, como estirada hacia el contacto con el primer premolar, y la cresta vestibular hace prominente el contorno vestibular.\n\nLa **raíz** mide alrededor de **17 mm**, por lo que el diente completo ronda los 27 mm: es el diente más largo de la boca. Es ancha en sentido vestibulolingual, con depresiones longitudinales en mesial y distal, y su ápice suele inclinarse a distal. Casi siempre aloja **un solo conducto** amplio y largo; en el metaanálisis de Usha y colaboradores la configuración tipo I superó el 97 % en los dientes anteriores superiores."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Canino inferior: más estrecho, más alto y más alineado con la raíz"
+        },
+        {
+          "tipo": "texto",
+          "md": "El canino inferior se parece al superior, pero su corona es **más estrecha** (unos 7 mm) y **más alta** (unos 11 mm, la corona más larga de la arcada inferior). Su cúspide es menos aguda y la **vertiente mesial es mucho más corta** que la distal. El rasgo que mejor lo distingue es que su **contorno mesial continúa casi en línea recta con la raíz**, como si corona y raíz formaran un solo perfil; en cambio, el contorno distal muestra un ángulo más evidente a nivel del contacto.\n\nLa cara lingual es más lisa, con cíngulo y cresta lingual menos marcados. Desde proximal la punta de la cúspide queda **lingual al eje de la raíz**, como en los incisivos inferiores. El **contacto mesial** está en el tercio incisal, muy cerca de la punta, y el **distal** en la unión de los tercios incisal y medio. La raíz mide unos 16 mm. En la mayoría de los casos hay un solo conducto, aunque el metaanálisis asiático encontró configuración tipo I en cerca del 91 %: el canino inferior puede tener dos conductos con mayor frecuencia que el superior, y en raras ocasiones su raíz se **bifurca** en una rama vestibular y otra lingual."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Caninos: medidas de referencia (Wheeler, en mm)",
+          "columnas": [
+            "Medida",
+            "Canino superior",
+            "Canino inferior"
+          ],
+          "filas": [
+            [
+              "Longitud de la corona",
+              "10.0",
+              "11.0"
+            ],
+            [
+              "Longitud de la raíz",
+              "17.0",
+              "16.0"
+            ],
+            [
+              "Diámetro mesiodistal de la corona",
+              "7.5",
+              "7.0"
+            ],
+            [
+              "Diámetro mesiodistal cervical",
+              "5.5",
+              "5.5"
+            ],
+            [
+              "Diámetro vestibulolingual de la corona",
+              "8.0",
+              "7.5"
+            ],
+            [
+              "Diámetro vestibulolingual cervical",
+              "7.0",
+              "7.0"
+            ],
+            [
+              "Curvatura cervical mesial / distal",
+              "2.5 / 1.5",
+              "2.5 / 1.0"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m10/d4",
+          "pie": "Comparación de perfiles vestibulares: canino superior frente a canino inferior.",
+          "descripcion": "Dos siluetas vestibulares superpuestas a la misma escala, la del canino superior en un color y la del inferior en otro, alineadas por la línea cervical. Se marcan con líneas guía la punta de la cúspide, la vertiente mesial y la distal de cada uno, el área de contacto mesial y distal, la cresta vestibular y la continuidad recta entre corona y raíz en el contorno mesial del canino inferior.",
+          "elementos": [
+            "Punta de la cúspide",
+            "Vertiente mesial",
+            "Vertiente distal",
+            "Cresta vestibular",
+            "Contacto mesial",
+            "Contacto distal",
+            "Contorno mesial recto (canino inferior)"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El canino retenido",
+          "md": "Después de los terceros molares, el **canino superior** es el diente que con más frecuencia queda **retenido**, a menudo en posición palatina. Su largo trayecto de erupción, desde una posición alta junto al piso de la nariz, lo hace vulnerable. Por eso, en niños de 9 a 10 años se recomienda palpar la eminencia canina por vestibular: cuando no se palpa o existe una asimetría marcada entre lados, se justifica estudiar su posición con imagen."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/11",
+          "proporcion": "4:3",
+          "alt": "Canino superior e inferior extraídos vistos desde mesial, lado a lado, mostrando la diferencia de grosor y la posición de la punta de la cúspide.",
+          "pie": "Vista mesial: el canino superior es más grueso y su cúspide queda sobre el eje radicular; en el inferior la cúspide queda lingual al eje.",
+          "prompt": "Ilustración realista de estudio de dos caninos permanentes extraídos vistos exactamente desde mesial, colocados lado a lado sobre fondo gris claro: a la izquierda un canino superior con la corona hacia abajo, cíngulo voluminoso y raíz muy larga; a la derecha un canino inferior con la corona hacia arriba, corona más estrecha y punta de la cúspide ligeramente lingual al eje de la raíz. Ambas raíces únicas con depresión longitudinal en su cara mesial. Iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dientes deformes, raíces bifurcadas."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Proporción raíz/corona",
+          "instruccion": "La proporción raíz/corona compara la longitud de la raíz con la de la corona. Cambia los valores por los de otros dientes de la tabla y observa por qué los caninos son pilares tan estables.",
+          "formula": "Proporción raíz/corona = longitud de la raíz ÷ longitud de la corona",
+          "variables": [
+            {
+              "id": "raiz",
+              "etiqueta": "Longitud de la raíz",
+              "valor": 17,
+              "unidad": "mm"
+            },
+            {
+              "id": "corona",
+              "etiqueta": "Longitud de la corona",
+              "valor": 10,
+              "unidad": "mm"
+            }
+          ],
+          "resultado": {
+            "expresion": "raiz / corona",
+            "etiqueta": "Proporción raíz/corona",
+            "unidad": ": 1",
+            "decimales": 2
+          }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Claves para reconocer un canino aislado"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Revisa en este orden",
+          "ordenada": true,
+          "items": [
+            "**¿Es canino?** Una sola cúspide, cresta vestibular y raíz única mucho más larga que la corona.",
+            "**¿Superior o inferior?** El superior tiene corona más ancha, cíngulo y cresta lingual marcados y la cúspide sobre el eje de la raíz; el inferior, corona estrecha y alta, cara lingual lisa, cúspide lingual al eje y contorno mesial recto con la raíz.",
+            "**¿Qué lado es mesial?** La vertiente más corta, el contacto más cercano a la punta y la mayor curvatura cervical señalan mesial; el contorno más convexo y el ápice inclinado señalan distal.",
+            "**¿Derecho o izquierdo?** Orienta el diente como en la boca, míralo desde vestibular y ubica la línea media del lado mesial."
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/12",
+          "proporcion": "16:9",
+          "alt": "Tipodonto articulado visto de lado en movimiento lateral, con contacto entre canino superior e inferior y dientes posteriores separados.",
+          "pie": "Guía canina en un tipodonto: durante el movimiento lateral, el contacto entre caninos separa a los dientes posteriores.",
+          "prompt": "Fotografía realista de estudio de un tipodonto de dentición permanente completa montado en un articulador simple, vista lateral derecha cercana, con la mandíbula desplazada hacia ese lado: la punta del canino inferior contacta la cresta lingual del canino superior y los premolares y molares quedan ligeramente separados, dientes de resina de color natural, encía artificial rosa, iluminación difusa de estudio, fondo blanco neutro, enfoque nítido en los caninos. Evitar: texto, etiquetas, flechas, logotipos, manos, sangre, número incorrecto de dientes, brackets, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Función y correlaciones clínicas"
+        },
+        {
+          "tipo": "texto",
+          "md": "En muchas personas, cuando la mandíbula se desplaza hacia un lado, los caninos de ese lado son los que contactan y separan a los dientes posteriores: es la llamada **guía canina**, que estudiarás en el módulo 13. Su cúspide también desgarra alimentos fibrosos. Para la prótesis y la ortodoncia, la raíz larga del canino lo convierte en un **pilar** valioso.\n\nEn restauraciones, reproducir la cresta vestibular y la posición mesial de la punta es esencial para que el canino se vea natural y cumpla su función. En las extracciones, su raíz larga y la cortical vestibular delgada hacen que sea un diente que exige una técnica cuidadosa; se trata como concepto en el programa de cirugía.\n\nObserva también la punta de la cúspide en cada revisión. Un canino con la punta aplanada y una faceta brillante que coincide con su antagonista sugiere desgaste por contacto repetido, a menudo relacionado con bruxismo. Registrarlo con fotografía permite comparar a lo largo del tiempo y decidir si hace falta proteger esos dientes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Identifica el diente",
+          "md": "Tienes un diente con una cúspide, raíz única de unos 16 mm, corona estrecha y alta, y el contorno mesial forma una línea casi recta con la raíz. Vista desde proximal, la punta de la cúspide queda lingual al eje. Es un **canino inferior**. Si al verlo desde vestibular, con la corona hacia arriba, la vertiente corta (mesial) queda a tu derecha, es el **43**, el canino inferior derecho: en la arcada inferior derecha vista de frente, la línea media queda a tu derecha."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** palpa con tu dedo índice la eminencia canina de un compañero, por encima del canino superior, y luego la zona de los incisivos. Sentir el relieve de esa raíz larga bajo la mucosa te ayuda a recordar su longitud y a entender por qué su ausencia o retención cambia el contorno del labio."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Cúspide",
+          "definicion": "Elevación puntiaguda o redondeada de la corona que forma parte de la superficie oclusal o incisal."
+        },
+        {
+          "termino": "Vertiente",
+          "definicion": "Cada una de las crestas que descienden desde la punta de una cúspide hacia mesial o distal."
+        },
+        {
+          "termino": "Cresta vestibular",
+          "definicion": "Relieve vertical en el centro de la cara vestibular del canino, formado por el lóbulo vestibular central."
+        },
+        {
+          "termino": "Eminencia canina",
+          "definicion": "Prominencia del hueso alveolar por vestibular producida por la raíz del canino superior."
+        },
+        {
+          "termino": "Guía canina",
+          "definicion": "Patrón de movimiento lateral de la mandíbula en el que los caninos contactan y separan a los dientes posteriores."
+        },
+        {
+          "termino": "Diente retenido",
+          "definicion": "Diente que no erupciona en el tiempo esperado y permanece dentro del hueso o la mucosa."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.4-1",
+          "q": "¿Qué diente tiene la raíz más larga de la dentición permanente?",
+          "opciones": [
+            "Incisivo central superior",
+            "Canino superior",
+            "Primer premolar superior",
+            "Canino inferior"
+          ],
+          "correcta": 1,
+          "explicacion": "El canino superior tiene una raíz de unos 17 mm y una longitud total cercana a 27 mm, la mayor de la boca."
+        },
+        {
+          "id": "t10.4-2",
+          "q": "¿Qué rasgo distingue mejor al canino inferior del superior?",
+          "opciones": [
+            "Tiene la vertiente mesial más larga que la distal",
+            "Su corona es más ancha en sentido mesiodistal",
+            "Siempre tiene dos raíces",
+            "Su contorno mesial continúa casi recto con la raíz"
+          ],
+          "correcta": 3,
+          "explicacion": "El perfil mesial casi recto entre corona y raíz es característico del canino inferior; su corona es además más estrecha y alta."
+        },
+        {
+          "id": "t10.4-3",
+          "q": "¿Qué estructura divide la cara palatina del canino superior en dos fosas?",
+          "opciones": [
+            "La cresta lingual",
+            "La cresta vestibular",
+            "El surco palatogingival",
+            "La cresta marginal mesial"
+          ],
+          "correcta": 0,
+          "explicacion": "La cresta lingual baja desde la punta de la cúspide hasta el cíngulo y separa las fosas mesiolingual y distolingual."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Variations in root canal morphology of permanent incisors and canines among Asian population: A systematic review and meta-analysis",
+          "autor": "Usha G., Muddappa S. C., Venkitachalam R. et al. (Journal of Oral Biosciences)",
+          "anio": 2021
+        }
+      ]
+    },
+    {
+      "n": "10.5",
+      "titulo": "Identificación del grupo anterior, variantes y aplicación clínica",
+      "minutos": 15,
+      "enPocasPalabras": "Los seis dientes de enfrente de cada arcada se pueden reconocer por su tamaño, su forma y la de su raíz. Algunas personas tienen variantes heredadas, como incisivos en forma de pala, que son normales pero requieren más cuidado. Saber identificarlos ayuda a restaurarlos, limpiarlos y tratarlos mejor.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Ya recorriste cada diente anterior por separado. En este tema integras esa información en un **método de identificación** que puedes aplicar a cualquier diente aislado, conoces las **variantes morfológicas** que más verás en población mexicana y conectas la anatomía con las decisiones de restauración, endodoncia y cirugía. La identificación no es un ejercicio de memoria: es la base para leer una radiografía, para registrar un hallazgo en el odontograma y para reconstruir un diente de forma que funcione.\n\nRecuerda que las medidas de la tabla siguiente son promedios para comparar dientes entre sí. Lo que te interesa retener no es cada cifra exacta, sino las **relaciones**: qué diente es más ancho, cuál tiene la raíz más larga y cómo bajan los contactos de la línea media hacia los caninos."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Los seis dientes anteriores de un lado: valores de referencia (Wheeler, en mm)",
+          "columnas": [
+            "Diente",
+            "Corona (alto)",
+            "Raíz",
+            "Corona MD",
+            "Corona VL",
+            "Contacto mesial",
+            "Contacto distal"
+          ],
+          "filas": [
+            [
+              "Central superior",
+              "10.5",
+              "13.0",
+              "8.5",
+              "7.0",
+              "Tercio incisal",
+              "Unión incisal y medio"
+            ],
+            [
+              "Lateral superior",
+              "9.0",
+              "13.0",
+              "6.5",
+              "6.0",
+              "Tercio incisal, cerca del medio",
+              "Tercio medio"
+            ],
+            [
+              "Canino superior",
+              "10.0",
+              "17.0",
+              "7.5",
+              "8.0",
+              "Unión incisal y medio",
+              "Tercio medio"
+            ],
+            [
+              "Central inferior",
+              "9.0",
+              "12.5",
+              "5.0",
+              "6.0",
+              "Tercio incisal",
+              "Tercio incisal"
+            ],
+            [
+              "Lateral inferior",
+              "9.5",
+              "14.0",
+              "5.5",
+              "6.5",
+              "Tercio incisal",
+              "Tercio incisal"
+            ],
+            [
+              "Canino inferior",
+              "11.0",
+              "16.0",
+              "7.0",
+              "7.5",
+              "Tercio incisal",
+              "Unión incisal y medio"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un método en cuatro preguntas"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cómo identificar un diente anterior aislado",
+          "pasos": [
+            {
+              "titulo": "Clase: incisivo o canino",
+              "md": "Un borde incisal recto indica incisivo; una cúspide con dos vertientes, canino. La raíz del canino es notablemente más larga."
+            },
+            {
+              "titulo": "Arcada: superior o inferior",
+              "md": "Desde incisal, si el diámetro mesiodistal domina es superior; si domina el vestibulolingual, inferior. Desde proximal, un borde o cúspide lingual al eje de la raíz indica inferior. Una raíz aplanada con depresiones proximales marcadas también apunta a la arcada inferior."
+            },
+            {
+              "titulo": "Tipo: central o lateral",
+              "md": "En la superior, el central es mucho más ancho y con ángulo mesioincisal nítido. En la inferior, el central es simétrico y el lateral un poco mayor, con la corona girada en sentido distolingual."
+            },
+            {
+              "titulo": "Lado: derecho o izquierdo",
+              "md": "Ubica mesial con varias señales a la vez: ángulo más agudo o vertiente más corta, contacto más incisal, mayor curvatura cervical. Ubica distal con el contorno más convexo y la inclinación del ápice. Después orienta el diente como en la boca y míralo desde vestibular."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Nunca te fíes de una sola señal",
+          "md": "La inclinación distal del ápice es frecuente, pero no constante; el desgaste borra los ángulos incisales, y una restauración cambia el contorno. Para decidir el lado, busca **al menos dos señales que coincidan**. Este hábito es el mismo que usarás al interpretar radiografías, donde cada pista aislada puede engañar."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/13",
+          "proporcion": "16:9",
+          "alt": "Doce dientes anteriores permanentes extraídos ordenados en dos filas sobre fondo neutro, superiores arriba e inferiores abajo.",
+          "pie": "Los doce dientes anteriores ordenados por arcada y posición: compara anchos de corona, longitudes radiculares y formas de cíngulo.",
+          "prompt": "Ilustración realista de estudio de los doce dientes anteriores permanentes de un adulto, extraídos y limpios, ordenados en dos filas horizontales sobre fondo gris neutro: arriba los seis superiores de canino a canino con las coronas hacia abajo, abajo los seis inferiores con las coronas hacia arriba, todos vistos desde vestibular y alineados por la línea cervical, mostrando diferencias reales de ancho de corona y longitud de raíz, caninos con las raíces más largas. Iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, números, etiquetas, flechas, logotipos, sangre, restos de tejido, dientes repetidos, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Del más estrecho al más ancho",
+          "instruccion": "Ordena los dientes anteriores según el diámetro mesiodistal de su corona, del menor al mayor, con los valores de referencia de Wheeler.",
+          "elementos": [
+            "Incisivo central inferior",
+            "Incisivo lateral inferior",
+            "Incisivo lateral superior",
+            "Canino inferior",
+            "Canino superior",
+            "Incisivo central superior"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Variantes morfológicas del grupo anterior"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **incisivo en pala** presenta crestas marginales linguales muy prominentes que encierran una fosa lingual profunda, de modo que la cara palatina recuerda una pala. Es más evidente en los incisivos superiores, en especial en los laterales y centrales. Los estudios de antropología dental lo describen como uno de los rasgos más característicos de las poblaciones de **Asia oriental y de los pueblos originarios de América**, mientras que es poco frecuente en poblaciones europeas y africanas. En consecuencia, es un hallazgo común en la consulta en México. Cuando además existen crestas marginales en la cara **vestibular**, se habla de **doble pala**.\n\nLa **cúspide en garra** (*talon cusp*) es una estructura accesoria en forma de cúspide que se proyecta desde el cíngulo de un incisivo, con mayor frecuencia superior. Puede contener una extensión de la pulpa, crear surcos profundos en su unión con la cara palatina e interferir con la oclusión. Su manejo, sea vigilancia, sellado de los surcos o reducción gradual, se decide caso por caso.\n\nOtras variantes que ya conociste son el lateral conoide, la agenesia y el diente invaginado. En el canino inferior, una **raíz bifurcada** vestibulolingual es infrecuente, pero conviene recordarla al interpretar una radiografía con un contorno radicular doble."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m10/d5",
+          "pie": "Cara palatina de un incisivo central superior: forma típica, en pala, en doble pala y con cúspide en garra.",
+          "descripcion": "Cuatro siluetas palatinas de incisivo central superior en fila. La primera con crestas marginales suaves y fosa poco profunda; la segunda con crestas marginales gruesas y fosa profunda (pala); la tercera, vista en corte transversal, con crestas tanto en palatino como en vestibular (doble pala); la cuarta con una proyección cónica que sale del cíngulo (cúspide en garra), con una línea punteada que sugiere la extensión de la pulpa en su interior.",
+          "elementos": [
+            "Forma típica",
+            "Incisivo en pala",
+            "Doble pala",
+            "Cúspide en garra",
+            "Crestas marginales",
+            "Fosa lingual",
+            "Extensión pulpar"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/14",
+          "proporcion": "4:3",
+          "alt": "Vista palatina de los incisivos superiores en un tipodonto con crestas marginales muy prominentes y fosas profundas.",
+          "pie": "Incisivos en pala: las crestas marginales gruesas delimitan una fosa profunda que retiene biopelícula con facilidad.",
+          "prompt": "Fotografía realista de estudio, vista palatina cercana tomada con espejo de los cuatro incisivos superiores permanentes de un tipodonto de adulto, dientes de resina de color natural con crestas marginales linguales muy prominentes y fosas linguales profundas en forma de pala, cíngulos bien definidos, encía artificial rosa del paladar en el borde inferior del encuadre, iluminación difusa uniforme, colores naturales, fondo neutro. Evitar: texto, etiquetas, logotipos, marcas de agua, sangre, caries, manos sin guantes, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Morfología y ascendencia",
+          "md": "La población mexicana es mayoritariamente mestiza, con aportes amerindios, europeos y africanos en proporciones que varían por región. Por eso rasgos como el incisivo en pala aparecen con frecuencia en la consulta. No son anomalías que haya que corregir: son **variantes normales**. Su importancia clínica está en la higiene, porque las fosas profundas retienen biopelícula, y en las restauraciones, porque el contorno palatino debe respetarse para no alterar la oclusión."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Cómo se mide un rasgo morfológico",
+          "md": "En antropología dental, los rasgos de la corona no se registran como «presente» o «ausente», sino en **grados**. El sistema más usado es el de la Universidad Estatal de Arizona (ASUDAS), descrito por Turner, Nichol y Scott, que compara cada diente con placas de referencia. Para el incisivo en pala, la escala va de 0 (cara lingual plana) a grados altos con crestas marginales muy gruesas, y el valor máximo, en el lateral superior, corresponde a la forma en «barril». La misma lógica se aplica a la doble pala, a la cúspide de Carabelli o al número de cúspides de los molares.\n\nEsta forma de medir tiene dos lecciones para la clínica. La primera: la variación morfológica es **continua**, no hay un límite tajante entre «normal» y «variante». La segunda: comparar frecuencias entre estudios solo tiene sentido si usaron el mismo umbral; por eso las cifras de prevalencia de un rasgo pueden diferir mucho entre publicaciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Registrar y prevenir"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una variante morfológica identificada debe quedar **anotada en el expediente**, con una fotografía intraoral cuando sea posible. Ese registro sirve para tres cosas: justificar más adelante un sellador o una restauración preventiva, explicar al paciente por qué un diente concreto necesita más atención en casa y comparar a lo largo del tiempo si aparecen lesiones en esa zona.\n\nEn la orientación de higiene, la anatomía del sector anterior dicta los puntos críticos: la fosa lingual profunda de los incisivos en pala y las fositas linguales de los laterales superiores; la cara lingual de los incisivos inferiores, donde se forma cálculo; y las troneras gingivales, que en los incisivos inferiores son estrechas y exigen auxiliares de limpieza del tamaño adecuado. Enseñar al paciente a inclinar el cepillo en vertical para alcanzar la cara lingual de los anteriores es un ejemplo de cómo un dato anatómico se convierte en una instrucción concreta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "De la anatomía a la clínica"
+        },
+        {
+          "tipo": "texto",
+          "md": "**Restauración.** Las áreas de contacto de los anteriores bajan de posición de la línea media hacia los caninos. Al mismo tiempo, las **troneras incisales** se abren progresivamente: casi inexistente entre centrales superiores, más amplia entre central y lateral, y todavía mayor entre lateral y canino. Reproducir esa progresión y la altura de contorno cervical, que deja un perfil de emergencia plano, es lo que distingue una restauración natural de una artificial y protege a la encía de la acumulación de biopelícula.\n\n**Endodoncia (concepto).** La forma de la cámara pulpar repite la forma de la corona. Por eso el acceso a los incisivos se hace por la cara palatina o lingual y tiene un contorno triangular en los superiores y ovalado y alargado en sentido vestibulolingual en los inferiores, para no perder el posible conducto lingual. El detalle técnico corresponde al programa de endodoncia.\n\n**Cirugía (concepto).** Las raíces cónicas de los incisivos superiores y del canino toleran movimientos de rotación suaves, mientras que las raíces aplanadas de los inferiores no. Conocer la forma de la raíz antes de intervenir permite elegir la técnica menos traumática."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m10/15",
+          "proporcion": "4:3",
+          "alt": "Manos con guantes sostienen un tipodonto anterior superior y comparan un incisivo restaurado con su homólogo.",
+          "pie": "La pieza homóloga es la mejor guía para restaurar un diente anterior: forma, contactos y troneras deben coincidir.",
+          "prompt": "Fotografía realista en un laboratorio de práctica odontológica: manos con guantes de nitrilo azul sostienen un tipodonto de arcada superior permanente visto de frente; el incisivo central derecho tiene una restauración de resina del color del diente en el ángulo mesioincisal y se compara con el central izquierdo, ambos con troneras incisales y contornos simétricos. Fondo de mesa de trabajo desenfocado, luz blanca uniforme, colores naturales. Evitar: texto, etiquetas, logotipos, marcas de agua, rostros, sangre, manos sin guantes, instrumentos punzantes en primer plano, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** arma tu propia «ficha de identificación» con las cuatro preguntas de este tema y úsala con cada diente anterior que encuentres en el laboratorio o en una radiografía. Después de veinte o treinta dientes, el proceso se vuelve automático y podrás dedicar tu atención a lo que realmente importa: las variantes y lo que significan para el paciente."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Incisivo en pala",
+          "definicion": "Incisivo con crestas marginales linguales prominentes y fosa lingual profunda; variante frecuente en poblaciones de ascendencia asiática y amerindia."
+        },
+        {
+          "termino": "Doble pala",
+          "definicion": "Variante en la que, además de las crestas linguales, el incisivo presenta crestas marginales en su cara vestibular."
+        },
+        {
+          "termino": "Cúspide en garra",
+          "definicion": "Estructura accesoria en forma de cúspide que se proyecta desde el cíngulo de un incisivo y puede contener tejido pulpar."
+        },
+        {
+          "termino": "Diente homólogo",
+          "definicion": "El diente equivalente del lado opuesto de la misma arcada, por ejemplo el 21 respecto al 11."
+        },
+        {
+          "termino": "Perfil de emergencia",
+          "definicion": "Contorno con el que la corona o una restauración sale del surco gingival hacia la cavidad bucal."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.5-1",
+          "q": "Un incisivo aislado es más ancho en sentido vestibulolingual que mesiodistal y su borde queda lingual al eje de la raíz. ¿A qué arcada pertenece?",
+          "opciones": [
+            "Superior",
+            "No es posible saberlo",
+            "Inferior",
+            "Solo puede ser un lateral superior"
+          ],
+          "correcta": 2,
+          "explicacion": "Ambas señales, la proporción de la corona y la posición del borde respecto a la raíz, son propias de los incisivos inferiores."
+        },
+        {
+          "id": "t10.5-2",
+          "q": "¿En qué poblaciones es más frecuente el incisivo en pala?",
+          "opciones": [
+            "Europeas y africanas",
+            "Asia oriental y pueblos originarios de América",
+            "Solo en personas con síndromes genéticos",
+            "Solo en la dentición temporal"
+          ],
+          "correcta": 1,
+          "explicacion": "La antropología dental lo describe como característico de Asia oriental y de los pueblos originarios de América, lo que explica su frecuencia en México."
+        },
+        {
+          "id": "t10.5-3",
+          "q": "¿Qué diente anterior tiene la corona más ancha en sentido mesiodistal?",
+          "opciones": [
+            "Incisivo central superior",
+            "Canino superior",
+            "Canino inferior",
+            "Incisivo lateral superior"
+          ],
+          "correcta": 0,
+          "explicacion": "Con unos 8.5 mm, el central superior es el más ancho; le siguen el canino superior (7.5 mm) y el inferior (7 mm)."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Anthropology of Modern Human Teeth: Dental Morphology and its Variation in Recent Human Populations",
+          "autor": "Scott G. R., Turner C. G. II (Cambridge University Press)",
+          "anio": 1997
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Scoring procedures for key morphological traits of the permanent dentition: the Arizona State University dental anthropology system",
+          "autor": "Turner C. G. II, Nichol C. R., Scott G. R. (en Advances in Dental Anthropology, Wiley-Liss)",
+          "anio": 1991
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía dental y operatoria sobre identificación y correlación clínica del sector anterior",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el sector anterior",
+    "palabras": [
+      "INCISIVO",
+      "CANINO",
+      "CINGULO",
+      "MAMELON",
+      "CUSPIDE",
+      "CONOIDE",
+      "PALA",
+      "TRONERA",
+      "VERTIENTE",
+      "PERIQUIMATIA",
+      "CONTACTO"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m10-p01",
+        "q": "¿Cuántos lóbulos de desarrollo forman la corona de un incisivo permanente?",
+        "opciones": [
+          "Cuatro: tres vestibulares y uno lingual",
+          "Dos: uno vestibular y uno lingual",
+          "Tres: todos vestibulares",
+          "Cinco: tres vestibulares y dos linguales"
+        ],
+        "correcta": 0,
+        "explicacion": "Los incisivos y caninos se forman a partir de tres lóbulos vestibulares y uno lingual, este último responsable del cíngulo."
+      },
+      {
+        "id": "m10-p02",
+        "q": "¿Dónde se ubica el área de contacto mesial del incisivo central superior?",
+        "opciones": [
+          "En el tercio medio",
+          "En el tercio cervical",
+          "En el tercio incisal, cerca del ángulo",
+          "En la unión de los tercios medio y cervical"
+        ],
+        "correcta": 2,
+        "explicacion": "El contacto mesial del central superior está en el tercio incisal; el distal, en la unión de los tercios incisal y medio."
+      },
+      {
+        "id": "m10-p03",
+        "q": "¿En qué cara la línea cervical presenta mayor curvatura en los dientes anteriores?",
+        "opciones": [
+          "Vestibular",
+          "Lingual",
+          "Distal",
+          "Mesial"
+        ],
+        "correcta": 3,
+        "explicacion": "La curvatura cervical es mayor en mesial que en distal; en el central superior ronda 3.5 mm frente a 2.5 mm."
+      },
+      {
+        "id": "m10-p04",
+        "q": "¿Qué valor aproximado tiene la longitud de la raíz del canino superior según la tabla de Wheeler?",
+        "opciones": [
+          "13 mm",
+          "17 mm",
+          "12.5 mm",
+          "21 mm"
+        ],
+        "correcta": 1,
+        "explicacion": "La raíz del canino superior mide alrededor de 17 mm; con su corona de 10 mm suma unos 27 mm, la mayor longitud de la dentición."
+      },
+      {
+        "id": "m10-p05",
+        "q": "¿Qué rasgo tiene el incisivo central inferior que no comparten los demás incisivos?",
+        "opciones": [
+          "Simetría casi perfecta entre sus mitades mesial y distal",
+          "Cíngulo voluminoso desplazado a distal",
+          "Fosa lingual muy profunda",
+          "Raíz de corte circular"
+        ],
+        "correcta": 0,
+        "explicacion": "El central inferior es el más simétrico de los incisivos, por lo que distinguir su lado es difícil."
+      },
+      {
+        "id": "m10-p06",
+        "q": "En los incisivos inferiores, ¿por qué un segundo conducto puede pasar inadvertido?",
+        "opciones": [
+          "Porque se forma después de los 40 años",
+          "Porque se ubica en la corona",
+          "Porque los conductos vestibular y lingual se superponen en una radiografía tomada de frente",
+          "Porque siempre está calcificado"
+        ],
+        "correcta": 2,
+        "explicacion": "La raíz es ancha en sentido vestibulolingual; en una proyección de frente ambos conductos se superponen."
+      },
+      {
+        "id": "m10-p07",
+        "q": "De acuerdo con el metaanálisis de Usha y colaboradores en población asiática, ¿qué diente anterior tuvo la menor prevalencia de conducto único?",
+        "opciones": [
+          "Canino superior",
+          "Incisivo central superior",
+          "Canino inferior",
+          "Incisivo lateral inferior"
+        ],
+        "correcta": 3,
+        "explicacion": "El lateral inferior tuvo configuración tipo I en alrededor del 69 %, la cifra más baja entre los dientes anteriores."
+      },
+      {
+        "id": "m10-p08",
+        "q": "¿Qué diente anterior se describe con mayor frecuencia como conoide o ausente por agenesia?",
+        "opciones": [
+          "Canino inferior",
+          "Incisivo lateral superior",
+          "Incisivo central inferior",
+          "Canino superior"
+        ],
+        "correcta": 1,
+        "explicacion": "El lateral superior es el diente anterior más variable: puede ser conoide, pequeño o faltar."
+      },
+      {
+        "id": "m10-p09",
+        "q": "¿Qué estructura divide la cara palatina del canino superior en fosas mesiolingual y distolingual?",
+        "opciones": [
+          "El cíngulo",
+          "La cresta marginal distal",
+          "La cresta lingual",
+          "La cresta vestibular"
+        ],
+        "correcta": 2,
+        "explicacion": "La cresta lingual desciende desde la punta de la cúspide hasta el cíngulo y separa ambas fosas."
+      },
+      {
+        "id": "m10-p10",
+        "q": "En el canino superior, ¿cómo se comparan sus vertientes?",
+        "opciones": [
+          "La mesial es más corta que la distal",
+          "Ambas tienen la misma longitud",
+          "La distal es más corta que la mesial",
+          "No tiene vertientes, sino borde incisal"
+        ],
+        "correcta": 0,
+        "explicacion": "La punta de la cúspide está algo hacia mesial, de modo que la vertiente mesial es más corta."
+      },
+      {
+        "id": "m10-p11",
+        "q": "¿Qué rasgo es característico del incisivo lateral inferior visto desde incisal?",
+        "opciones": [
+          "El cíngulo está desplazado a mesial",
+          "La corona es más ancha en sentido mesiodistal",
+          "El borde incisal es perfectamente perpendicular al eje",
+          "La corona parece girada en sentido distolingual sobre la raíz"
+        ],
+        "correcta": 3,
+        "explicacion": "El borde incisal del lateral inferior se orienta siguiendo la curva de la arcada, lo que da la impresión de un giro distolingual."
+      },
+      {
+        "id": "m10-p12",
+        "q": "¿Dónde se encuentra la altura de contorno de las caras vestibular y lingual de los dientes anteriores?",
+        "opciones": [
+          "En el tercio incisal",
+          "En el tercio cervical",
+          "En el tercio medio",
+          "En el borde incisal"
+        ],
+        "correcta": 1,
+        "explicacion": "En los anteriores ambas alturas de contorno están en el tercio cervical; en lingual coincide con el cíngulo."
+      },
+      {
+        "id": "m10-p13",
+        "q": "¿Qué variante anatómica es frecuente en poblaciones de ascendencia amerindia, como buena parte de la población mexicana?",
+        "opciones": [
+          "Lateral conoide bilateral",
+          "Raíz bifurcada en el central superior",
+          "Incisivo en pala",
+          "Canino inferior con tres raíces"
+        ],
+        "correcta": 2,
+        "explicacion": "El incisivo en pala es característico de Asia oriental y de los pueblos originarios de América."
+      },
+      {
+        "id": "m10-p14",
+        "q": "¿Por qué la cara lingual de los incisivos inferiores acumula tanto cálculo?",
+        "opciones": [
+          "Porque tienen fosas linguales muy profundas",
+          "Porque su esmalte es más poroso",
+          "Porque no reciben contacto con la lengua",
+          "Porque cerca desembocan los conductos de las glándulas submandibulares y sublinguales"
+        ],
+        "correcta": 3,
+        "explicacion": "La saliva de esas glándulas, rica en minerales, baña directamente la cara lingual de los incisivos inferiores."
+      },
+      {
+        "id": "m10-p15",
+        "q": "Te entregan un diente con una cúspide, raíz de unos 17 mm, cíngulo voluminoso y cresta lingual marcada; la punta queda sobre el eje de la raíz. Visto desde vestibular con la corona hacia abajo, la vertiente corta queda a tu izquierda. ¿Qué diente es?",
+        "opciones": [
+          "Canino superior izquierdo (23)",
+          "Canino superior derecho (13)",
+          "Canino inferior derecho (43)",
+          "Canino inferior izquierdo (33)"
+        ],
+        "correcta": 0,
+        "explicacion": "Los rasgos indican un canino superior. La vertiente corta es mesial; si queda a tu izquierda al verlo de frente, la línea media está a tu izquierda, lo que corresponde al lado izquierdo del paciente: el 23."
+      },
+      {
+        "id": "m10-p16",
+        "q": "Un diente anterior aislado tiene corona de unos 5 mm de ancho, ángulos incisales casi rectos e iguales, raíz aplanada con depresiones proximales y borde incisal lingual al eje. ¿Qué diente es?",
+        "opciones": [
+          "Incisivo lateral superior",
+          "Incisivo central inferior",
+          "Canino inferior",
+          "Incisivo central superior"
+        ],
+        "correcta": 1,
+        "explicacion": "El ancho pequeño, la simetría y la raíz aplanada son propios del incisivo central inferior."
+      },
+      {
+        "id": "m10-p17",
+        "q": "Un niño de 9 años presenta una bolsa periodontal aislada en palatino del 12, sin otros hallazgos periodontales. ¿Qué rasgo anatómico debes buscar primero?",
+        "opciones": [
+          "Una cúspide de Carabelli",
+          "Una raíz bifurcada",
+          "Un surco palatogingival",
+          "Un mamelón persistente"
+        ],
+        "correcta": 2,
+        "explicacion": "El surco palatogingival, más frecuente en el lateral superior, favorece una bolsa localizada en un diente por lo demás sano."
+      },
+      {
+        "id": "m10-p18",
+        "q": "¿En qué consiste el diente invaginado?",
+        "opciones": [
+          "En la unión de dos gérmenes dentarios",
+          "En una cúspide accesoria en el cíngulo",
+          "En una raíz adicional en posición lingual",
+          "En un repliegue de esmalte y dentina hacia el interior de la corona"
+        ],
+        "correcta": 3,
+        "explicacion": "El dens invaginatus es un repliegue que suele iniciar en la fosita lingual y puede comunicar la cavidad bucal con la pulpa."
+      },
+      {
+        "id": "m10-p19",
+        "q": "¿Qué implicación quirúrgica tiene la forma de la raíz de los incisivos inferiores (concepto)?",
+        "opciones": [
+          "Tolera rotaciones amplias por ser cónica",
+          "Su forma aplanada no tolera la rotación y se luxa en sentido vestibulolingual",
+          "Su raíz es la más larga de la boca",
+          "Siempre tiene dos raíces separadas"
+        ],
+        "correcta": 1,
+        "explicacion": "Las raíces aplanadas en sentido mesiodistal no admiten rotación; las cónicas de los incisivos superiores sí toleran movimientos rotatorios suaves."
+      },
+      {
+        "id": "m10-p20",
+        "q": "¿Qué relación de tamaño existe entre el central y el lateral inferiores?",
+        "opciones": [
+          "El lateral es ligeramente mayor que el central",
+          "El central es mucho mayor que el lateral",
+          "Son idénticos en todas sus medidas",
+          "El central tiene la raíz más larga"
+        ],
+        "correcta": 0,
+        "explicacion": "En la arcada inferior el lateral es un poco más ancho y largo que el central (5.5 frente a 5 mm de corona; 14 frente a 12.5 mm de raíz)."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+      "autor": "Nelson S. J. (Elsevier)",
+      "anio": 2020
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Woelfel's Dental Anatomy",
+      "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Root canal anatomy of the human permanent teeth",
+      "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+      "anio": 1984
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Variations in root canal morphology of permanent incisors and canines among Asian population: A systematic review and meta-analysis",
+      "autor": "Usha G., Muddappa S. C., Venkitachalam R. et al. (Journal of Oral Biosciences)",
+      "anio": 2021
+    },
+    {
+      "tipo": "academica",
+      "titulo": "The Anthropology of Modern Human Teeth: Dental Morphology and its Variation in Recent Human Populations",
+      "autor": "Scott G. R., Turner C. G. II (Cambridge University Press)",
+      "anio": 1997
+    }
+  ]
+}

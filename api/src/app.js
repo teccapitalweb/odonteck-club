@@ -2,7 +2,9 @@
 import compression from 'compression';
 import cors from 'cors';
 import express from 'express';
+import { cargadorAcademiaDisco } from './lib/academia.js';
 import { manejarErrores, noEncontradoRuta } from './middleware/errores.js';
+import { rutasAcademia } from './routes/academia.js';
 import { rutasAdmin } from './routes/admin.js';
 import { rutasEncuestas } from './routes/encuestas.js';
 import { rutasDirectorio } from './routes/directorio.js';
@@ -17,6 +19,8 @@ const CONFIG_POR_DEFECTO = {
   storageBucket: '',
   stripeWebhookSecret: '',
   stripePrices: { mensual: '', anual: '' },
+  // ACADEMIA_MOSTRAR_BORRADORES=true publica también los módulos en borrador (solo para revisión).
+  academiaBorradores: false,
 };
 
 export const normalizarOrigen = (o) => String(o ?? '').trim().replace(/\/+$/, '');
@@ -29,6 +33,7 @@ export const normalizarOrigen = (o) => String(o ?? '').trim().replace(/\/+$/, ''
  *   materiales?: { ids: Function, tiene: Function, urlFirmada: Function, validar: Function, enviar: Function } | null,
  *   stripe?: import('stripe').Stripe | null,
  *   bunny?: { libraryId: string, tokenAuthKey: string, ttlSeconds: number } | null,
+ *   academia?: { catalogo: Function, modulo: Function } | null,
  *   now?: () => Date,
  *   config?: Partial<typeof CONFIG_POR_DEFECTO>,
  *   logger?: Pick<Console, 'error' | 'warn' | 'info'>,
@@ -45,6 +50,8 @@ export function crearApp(deps) {
     materiales: deps.materiales ?? null,
     stripe: deps.stripe ?? null,
     bunny: deps.bunny ?? null,
+    // Contenido de la Academia (disco por defecto; los tests inyectan uno en memoria).
+    academia: deps.academia ?? cargadorAcademiaDisco(),
     now: deps.now ?? (() => new Date()),
     logger: deps.logger ?? console,
     config: {
@@ -87,6 +94,7 @@ export function crearApp(deps) {
   app.use(rutasPublicas(ctx));
   app.use(rutasEncuestas(ctx));
   app.use(rutasDirectorio(ctx));
+  app.use(rutasAcademia(ctx));
   app.use(rutasAdmin(ctx));
   app.use(rutasStripe(ctx));
   app.use(rutasMiembro(ctx));

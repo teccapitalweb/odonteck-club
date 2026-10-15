@@ -10,6 +10,8 @@ const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && ne
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
   { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/(cursos$|curso(\/|$))/ },
+  // La barra inferior móvil no tiene espacio: en móvil la Academia vive en "Más".
+  { href: '#/academia', icon: 'graduation-cap', label: 'Academia', match: /^\/academia/, soloEscritorio: true },
   { href: '#/materiales', icon: 'library', label: 'Materiales', match: /^\/materiales/ },
   { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
@@ -38,7 +40,7 @@ export function shellHTML() {
       ? `<div class="nav__label eyebrow">${n.group}</div>`
       : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && proximos() ? `<span class="badge">${proximos()}</span>` : ''}</a>`
   ).join('');
-  const bottom = nav.filter((n) => 'href' in n).slice(0, 4).map((n: any) =>
+  const bottom = nav.filter((n) => 'href' in n && !('soloEscritorio' in n)).slice(0, 4).map((n: any) =>
     `<a href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}</a>`).join('') +
     `<a href="#/mas" data-nav><i data-lucide="menu" class="i"></i>Más</a>`;
   return `

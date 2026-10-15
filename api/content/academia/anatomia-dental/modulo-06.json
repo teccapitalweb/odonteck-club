@@ -1,0 +1,1684 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 6,
+  "titulo": "Tejidos dentarios: esmalte, dentina, pulpa y cemento",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Un diente es un órgano formado por cuatro tejidos con composición y comportamiento distintos. En este módulo estudiarás desde la histología el esmalte, con sus cristales, prismas y líneas de crecimiento; la dentina, con sus túbulos y sus tipos primario, secundario y terciario; la pulpa, con sus zonas, células, vasos y cambios con la edad; y el cemento, con su clasificación y su papel en el anclaje del diente. Cada estructura se conecta con hechos clínicos cotidianos: la sensibilidad, la adhesión, la respuesta pulpar, la recesión, la ortodoncia y el envejecimiento dental.",
+  "objetivos": [
+    "Comparar la composición, el origen y las propiedades del esmalte, la dentina, la pulpa y el cemento, y describir sus uniones.",
+    "Describir la organización del esmalte en cristales y prismas e identificar sus estructuras microscópicas y líneas incrementales.",
+    "Explicar la estructura de los túbulos dentinarios, distinguir los tipos de dentina y relacionarlos con la sensibilidad y la protección pulpar.",
+    "Identificar las zonas, las células y la vascularización de la pulpa y explicar sus cambios con la edad.",
+    "Clasificar los tipos de cemento según Schroeder y relacionar sus propiedades con la periodoncia, la ortodoncia y la reabsorción radicular."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "anatomia-dental/m06/portada",
+    "proporcion": "16:9",
+    "alt": "Ilustración de un corte de molar con capas de esmalte, dentina, pulpa y cemento y ampliaciones microscópicas de cada tejido.",
+    "prompt": "Ilustración científica realista de gran formato sobre fondo azul petróleo oscuro: a la izquierda, un corte longitudinal de un primer molar inferior permanente con esmalte blanco translúcido, dentina marfil, pulpa rosada y cemento delgado sobre las raíces; a la derecha, tres círculos de ampliación con apariencia de microscopía que muestran prismas del esmalte en patrón de panal, túbulos dentinarios paralelos y células alineadas de la pulpa, iluminación de estudio suave, alto detalle, colores naturales. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, caries, sangre, raíces en número incorrecto."
+  },
+  "temas": [
+    {
+      "n": "6.1",
+      "titulo": "El diente como órgano: composición comparada y uniones entre tejidos",
+      "minutos": 14,
+      "enPocasPalabras": "Un diente está hecho de cuatro tejidos que trabajan juntos: el esmalte por fuera de la corona, la dentina por dentro, la pulpa en el centro y el cemento cubriendo la raíz. Cada uno tiene distinta cantidad de mineral y distinta función. Las zonas donde se unen, como el cuello del diente, son puntos delicados que conviene conocer.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Mirar un diente como una pieza sólida y uniforme es uno de los errores más frecuentes al empezar la carrera. En realidad es un **órgano** formado por cuatro tejidos con composición, origen y comportamiento distintos: el **esmalte**, la **dentina**, la **pulpa** y el **cemento**. Tres de ellos están mineralizados; la pulpa es un tejido conjuntivo blando. Dos de ellos, dentina y pulpa, forman una unidad funcional inseparable.\n\nEn este módulo estudiarás cada tejido desde la histología y la anatomía. El programa de caries dental retoma algunos de estos temas desde otro ángulo, la desmineralización y la defensa frente a la lesión; aquí el objetivo es entender **cómo están construidos**, porque de esa construcción depende cómo responden a la masticación, al frío, a la caries, a los materiales de restauración y al paso del tiempo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/01",
+          "proporcion": "3:4",
+          "alt": "Ilustración de un corte longitudinal de un molar inferior con esmalte, dentina, pulpa y cemento en su posición dentro del hueso.",
+          "pie": "Los cuatro tejidos del diente en un corte longitudinal: esmalte en la corona, dentina en todo el cuerpo del diente, pulpa en el centro y cemento sobre la raíz.",
+          "prompt": "Ilustración anatómica realista de un corte longitudinal vestibulolingual de un primer molar inferior permanente sano de un adulto colocado en su alvéolo, esmalte blanco translúcido que se adelgaza hacia el cuello, dentina color marfil amarillento con estrías finas, pulpa rosada con cuernos pulpares bajo las cúspides y conductos que llegan a los ápices, capa delgada de cemento color hueso sobre las raíces, ligamento fino y hueso alveolar alrededor, encía rosada en el margen, fondo neutro claro, iluminación difusa. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, caries, sangre, raíces en número incorrecto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuatro tejidos, cuatro composiciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "La diferencia más importante entre los tejidos dentales es su proporción de **mineral**, que en los tres tejidos duros es una apatita de calcio y fosfato con distintas sustituciones, sobre todo de carbonato. El esmalte es el tejido más mineralizado del cuerpo: alrededor del 96 % de su peso es mineral. La dentina tiene aproximadamente un 70 % de mineral, un 20 % de matriz orgánica y un 10 % de agua, en peso. El cemento tiene cerca de un 45 a 50 % de mineral, una proporción parecida a la del hueso. Las cifras exactas varían un poco según la fuente, la zona del diente y si se expresan en peso o en volumen, pero el orden nunca cambia: **esmalte > dentina > cemento**.\n\nEl componente orgánico también es distinto. En la dentina y el cemento predomina el **colágeno tipo I**, como en el hueso. En el esmalte maduro casi no queda proteína, y la que hay no es colágeno, sino restos de las proteínas propias del esmalte. La pulpa, por su parte, es un tejido conjuntivo laxo con abundante agua, células, vasos y nervios."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Comparación de los tejidos dentarios",
+          "columnas": [
+            "Característica",
+            "Esmalte",
+            "Dentina",
+            "Pulpa",
+            "Cemento"
+          ],
+          "filas": [
+            [
+              "Mineral aproximado (en peso)",
+              "Alrededor de 96 %",
+              "Alrededor de 70 %",
+              "No mineralizada",
+              "Alrededor de 45 a 50 %"
+            ],
+            [
+              "Matriz orgánica principal",
+              "Restos de proteínas del esmalte, no colágeno",
+              "Colágeno tipo I",
+              "Colágeno tipo I y III, proteoglicanos",
+              "Colágeno tipo I"
+            ],
+            [
+              "Célula formadora",
+              "Ameloblasto (desaparece al erupcionar)",
+              "Odontoblasto (vive en la pulpa)",
+              "Fibroblasto, entre otras",
+              "Cementoblasto"
+            ],
+            [
+              "Origen embrionario",
+              "Epitelio oral (ectodermo)",
+              "Papila dental (ectomesénquima)",
+              "Papila dental (ectomesénquima)",
+              "Folículo dental (ectomesénquima)"
+            ],
+            [
+              "Vasos y nervios propios",
+              "No",
+              "No, pero contiene prolongaciones de odontoblastos y algunas terminaciones nerviosas",
+              "Sí, abundantes",
+              "No"
+            ],
+            [
+              "Capacidad de formarse de nuevo",
+              "Ninguna por células",
+              "Sí, durante toda la vida de la pulpa",
+              "Limitada, con capacidad de reparación",
+              "Sí, por depósito continuo"
+            ],
+            [
+              "Aspecto radiográfico",
+              "El más radiopaco",
+              "Radiopaco, menos que el esmalte",
+              "Radiolúcida",
+              "No se distingue de la dentina"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Duro no es lo mismo que resistente",
+          "md": "El esmalte es el tejido más duro del cuerpo, pero también es **frágil**: soporta muy bien la compresión y el desgaste, pero se fractura con facilidad si no tiene dentina debajo. La dentina, menos dura, es más **elástica** y absorbe parte de las fuerzas. Por eso el esmalte sin soporte dentinario, como el que queda en los bordes de una cavidad socavada o de una fractura, tiende a romperse, un principio que se aplica en el diseño de cualquier preparación y restauración."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las uniones: donde un tejido se encuentra con otro"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los límites entre los tejidos son zonas con anatomía propia y con gran importancia clínica.\n\nLa **unión amelodentinaria** separa esmalte y dentina en la corona. No es una línea recta, sino **festoneada**: vista al microscopio, forma pequeñas concavidades orientadas hacia el esmalte, una disposición que se considera que aumenta la superficie de contacto y ayuda a frenar la propagación de grietas del esmalte hacia la dentina. Es también la zona donde muchas lesiones de caries se extienden lateralmente.\n\nLa **unión amelocementaria**, en el cuello del diente, es donde termina el esmalte y empieza el cemento. Su relación varía: según los textos clásicos, en cerca del 60 % de los dientes el cemento cubre ligeramente el borde del esmalte; en alrededor del 30 % ambos se tocan borde con borde; y en cerca del 10 % no llegan a encontrarse y queda una franja de dentina expuesta. Estudios más recientes con microscopía muestran que las tres relaciones pueden coexistir alrededor de un mismo diente. La franja de dentina expuesta es una de las razones por las que algunos cuellos son muy sensibles cuando la encía se retrae.\n\nLa **unión cementodentinaria** separa la dentina radicular del cemento y en el ápice marca, de forma aproximada, el límite entre el conducto y el periodonto; su posición exacta varía y no siempre coincide con el sitio más estrecho del conducto."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m06/d1",
+          "pie": "Las tres relaciones posibles entre esmalte y cemento en la unión amelocementaria.",
+          "descripcion": "Tres ampliaciones esquemáticas del cuello de un diente, una junto a otra, con esmalte en azul claro, dentina en amarillo y cemento en marrón claro. En la primera, el cemento cubre el borde del esmalte; en la segunda, ambos se tocan borde con borde; en la tercera, queda una franja de dentina expuesta entre ambos. Bajo cada esquema, el porcentaje aproximado clásico. Encima, un diente completo pequeño que indica la zona ampliada.",
+          "elementos": [
+            "Esmalte",
+            "Dentina",
+            "Cemento",
+            "Cemento sobre esmalte (cerca del 60 %)",
+            "Borde con borde (cerca del 30 %)",
+            "Dentina expuesta (cerca del 10 %)",
+            "Unión amelocementaria"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/02",
+          "proporcion": "4:3",
+          "alt": "Vista clínica del cuello de un premolar inferior con ligera recesión gingival que deja visible el límite entre esmalte y raíz.",
+          "pie": "Con la recesión gingival queda a la vista la unión amelocementaria; si hay dentina expuesta, la sensibilidad es frecuente.",
+          "prompt": "Fotografía clínica macro realista de la cara vestibular de un primer premolar inferior permanente de un adulto, con recesión gingival leve que deja visible una franja de raíz de color ligeramente amarillento por debajo del esmalte brillante, límite nítido entre ambos en el cuello, encía rosa pálido sana y firme, dientes vecinos parcialmente visibles, superficie limpia y húmeda, iluminación de lámpara dental uniforme, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, caries, cálculo abundante, rostro, inflamación marcada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El complejo dentinopulpar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Dentina y pulpa se estudian por separado, pero funcionan como un solo sistema: el **complejo dentinopulpar**. Los odontoblastos tienen su cuerpo en la periferia de la pulpa y su prolongación dentro de los túbulos de la dentina; la dentina recibe de la pulpa su capacidad de responder, y la pulpa queda protegida por la dentina. Cualquier estímulo que llega a la dentina, como la caries, el desgaste, el calor de una fresa o un material de restauración, es en realidad un estímulo para la pulpa. Por eso al preparar una cavidad no tallas «un material inerte», sino un tejido vivo conectado con el centro del diente."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué el esmalte y la dentina se adhieren de forma distinta",
+          "md": "La composición explica uno de los principios de la odontología adhesiva. El **esmalte**, casi todo mineral y con muy poca agua, se graba con ácido y se disuelve de manera selectiva según la orientación de sus prismas, dejando una superficie microrretentiva en la que la resina penetra y se traba mecánicamente; la unión es predecible. La **dentina**, en cambio, tiene alrededor de un 30 % de componentes orgánicos y agua en peso, túbulos llenos de líquido que fluye desde la pulpa y, después de cortarla, una **capa de desecho** (*smear layer*) que tapa los túbulos. La adhesión a dentina depende de infiltrar la red de colágeno expuesta y formar una **capa híbrida**, concepto descrito por Nakabayashi y colaboradores en la década de 1980. Por eso la dentina profunda, con más túbulos y más húmeda, es un sustrato más difícil que la superficial."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/03",
+          "proporcion": "4:3",
+          "alt": "Microfotografía de microscopio electrónico de barrido de la superficie de dentina cortada con múltiples orificios de túbulos.",
+          "pie": "La dentina vista de frente: cada orificio es un túbulo que comunica con la pulpa.",
+          "prompt": "Microfotografía realista de microscopio electrónico de barrido en escala de grises de una superficie de dentina humana cortada transversalmente, numerosos orificios circulares de túbulos dentinarios distribuidos de forma regular, cada uno rodeado por un anillo más brillante, matriz intertubular de textura fina entre ellos, iluminación y contraste típicos de microscopía electrónica, enfoque nítido en todo el campo, encuadre lleno. Evitar: texto, barras de escala, números, etiquetas, flechas, logotipos, marcas de agua, colores artificiales, artefactos de carga eléctrica."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El cuello del diente es una zona vulnerable",
+          "md": "En la unión amelocementaria el esmalte es muy delgado y el cemento también; si la encía se retrae, una capa de cemento de pocas decenas de micrómetros puede perderse con un cepillado horizontal enérgico, con pastas muy abrasivas o con instrumentación repetida, y dejar la dentina expuesta. El resultado frecuente es la hipersensibilidad y, con el tiempo, lesiones cervicales. Por eso conviene recomendar cepillos suaves, técnica sin fuerza excesiva y valorar el cuello dental en cada revisión."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad de los tejidos dentarios",
+          "afirmaciones": [
+            {
+              "texto": "El esmalte es más mineralizado que la dentina, y la dentina más que el cemento.",
+              "verdadero": true,
+              "explicacion": "Alrededor de 96 %, 70 % y 45 a 50 % de mineral en peso, respectivamente."
+            },
+            {
+              "texto": "El esmalte contiene abundante colágeno tipo I.",
+              "verdadero": false,
+              "explicacion": "El esmalte maduro casi no tiene proteína y no contiene colágeno; el colágeno tipo I predomina en dentina y cemento."
+            },
+            {
+              "texto": "En algunos dientes el esmalte y el cemento no se tocan y queda dentina expuesta en el cuello.",
+              "verdadero": true,
+              "explicacion": "Ocurre en una minoría de dientes y favorece la sensibilidad cuando hay recesión gingival."
+            },
+            {
+              "texto": "El esmalte sin dentina de soporte resiste igual que el esmalte apoyado.",
+              "verdadero": false,
+              "explicacion": "El esmalte es frágil; sin soporte dentinario se fractura con facilidad."
+            },
+            {
+              "texto": "La pulpa y la dentina funcionan como una unidad.",
+              "verdadero": true,
+              "explicacion": "Las prolongaciones de los odontoblastos dentro de los túbulos unen ambos tejidos en el complejo dentinopulpar."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los cuatro tejidos también cambian con la edad, y lo hacen de forma coordinada. El esmalte se desgasta y se vuelve menos permeable; la dentina sigue formándose hacia dentro y sus túbulos se van obliterando; la pulpa disminuye de tamaño y pierde células; el cemento se engrosa, sobre todo en el ápice. Por eso el diente de una persona mayor suele ser más oscuro, menos sensible y con una cámara pulpar más pequeña que el de un adolescente, diferencias que verás con detalle en los temas siguientes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando expliques un tratamiento a un paciente, usa la estructura del diente como guía: «el esmalte es la capa dura de afuera, la dentina es la capa viva de adentro que transmite la sensibilidad, y la pulpa es el nervio y los vasos del centro». Esa imagen sencilla ayuda a que entienda por qué una lesión que llega a la dentina ya no se trata igual que una que solo afecta el esmalte."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Complejo dentinopulpar",
+          "definicion": "Unidad funcional formada por la dentina y la pulpa, unidas por los odontoblastos y sus prolongaciones."
+        },
+        {
+          "termino": "Unión amelodentinaria",
+          "definicion": "Límite festoneado entre el esmalte y la dentina en la corona."
+        },
+        {
+          "termino": "Unión amelocementaria",
+          "definicion": "Límite entre el esmalte y el cemento en el cuello del diente."
+        },
+        {
+          "termino": "Unión cementodentinaria",
+          "definicion": "Límite entre la dentina radicular y el cemento."
+        },
+        {
+          "termino": "Apatita",
+          "definicion": "Mineral de fosfato de calcio que forma la parte inorgánica del esmalte, la dentina, el cemento y el hueso."
+        },
+        {
+          "termino": "Colágeno tipo I",
+          "definicion": "Proteína fibrosa que forma la mayor parte de la matriz orgánica de dentina, cemento y hueso."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.1-1",
+          "q": "¿Cuál es el orden correcto de los tejidos dentales de mayor a menor contenido mineral?",
+          "opciones": [
+            "Dentina, esmalte, cemento",
+            "Esmalte, dentina, cemento",
+            "Cemento, dentina, esmalte",
+            "Esmalte, cemento, dentina"
+          ],
+          "correcta": 1,
+          "explicacion": "Esmalte (alrededor de 96 %), dentina (alrededor de 70 %) y cemento (alrededor de 45 a 50 %), en peso."
+        },
+        {
+          "id": "t6.1-2",
+          "q": "¿Qué relación entre esmalte y cemento es la más frecuente en la unión amelocementaria según los textos clásicos?",
+          "opciones": [
+            "Borde con borde",
+            "Separación con dentina expuesta",
+            "El cemento cubre ligeramente el borde del esmalte",
+            "El esmalte cubre el cemento"
+          ],
+          "correcta": 2,
+          "explicacion": "La superposición del cemento sobre el esmalte se describe en cerca del 60 % de los dientes."
+        },
+        {
+          "id": "t6.1-3",
+          "q": "¿Qué tejido dental no está mineralizado?",
+          "opciones": [
+            "El cemento",
+            "La dentina",
+            "El esmalte",
+            "La pulpa"
+          ],
+          "correcta": 3,
+          "explicacion": "La pulpa es tejido conjuntivo laxo; los otros tres son tejidos mineralizados."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "6.2",
+      "titulo": "El esmalte: cristales, prismas y estructuras de un tejido sin células",
+      "minutos": 15,
+      "enPocasPalabras": "El esmalte es la capa más dura del cuerpo y cubre la corona. Está hecho de millones de cristales minerales ordenados en varillas muy finas llamadas prismas. Como no tiene células, no puede repararse a sí mismo: lo que se pierde por desgaste o por una fractura no vuelve a crecer.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El esmalte cubre la corona anatómica y es la interfaz entre el diente y todo lo que entra a la boca. Su espesor no es uniforme: alcanza su máximo en las cúspides y los bordes incisales, donde los textos de histología describen hasta unos 2.5 mm en dientes permanentes, y se adelgaza progresivamente hasta casi desaparecer en el cuello. En los dientes temporales es mucho más delgado. Es **translúcido**, por lo que el color del diente depende en buena parte de la dentina que hay debajo y del espesor de esmalte que la cubre: un esmalte delgado deja ver más el tono amarillento de la dentina.\n\nEn este tema verás de qué está hecho el esmalte, cómo se organizan sus cristales y qué estructuras microscópicas tiene. Cada una explica algo que verás en la clínica: por qué el ácido graba la superficie con distintos patrones, por qué las grietas se detienen o avanzan, o por qué las fosetas y fisuras retienen placa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cristales y prismas"
+        },
+        {
+          "tipo": "texto",
+          "md": "La unidad básica del esmalte es el **cristal de apatita**, mucho más largo y grueso que los cristales de la dentina, el cemento o el hueso. No es hidroxiapatita pura: incorpora carbonato, magnesio y sodio, que lo hacen más soluble en ácido, y puede incorporar fluoruro, que lo hace menos soluble; la química de ese equilibrio se estudia en el programa de caries dental. Entre los cristales hay una cantidad muy pequeña de agua y de proteínas residuales, que forman una red de microporos.\n\nLos cristales se agrupan en **prismas** o varillas, estructuras alargadas de unos cuantos micrómetros de diámetro que recorren el esmalte desde la unión amelodentinaria hasta cerca de la superficie. Cada prisma corresponde, en esencia, al trabajo de un ameloblasto. Dentro de un prisma, los cristales se orientan más o menos paralelos a su eje; entre los prismas está el **esmalte interprismático**, cuyos cristales tienen otra orientación. En el límite entre ambos, el cambio brusco de orientación y un poco más de material orgánico forman la **vaina del prisma**.\n\nVistos en corte transversal, en el esmalte humano los prismas se describen a menudo con forma de **ojo de cerradura**: una cabeza redondeada orientada hacia oclusal y una cola hacia cervical. Esta organización hace que el esmalte se comporte de manera distinta según la dirección: es más fácil fracturarlo entre prismas que a través de ellos."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/04",
+          "proporcion": "4:3",
+          "alt": "Microfotografía de microscopio electrónico de barrido de esmalte grabado con ácido que muestra prismas en patrón de panal.",
+          "pie": "El esmalte grabado deja ver la organización en prismas; el patrón exacto depende de qué parte del prisma se disuelve más.",
+          "prompt": "Microfotografía realista de microscopio electrónico de barrido en escala de grises de la superficie de esmalte humano grabado con ácido, patrón regular de prismas vistos en corte transversal con centros ligeramente hundidos y bordes elevados formando un dibujo parecido a un panal o a escamas, textura cristalina fina visible, contraste típico de microscopía electrónica, enfoque nítido en todo el campo, encuadre lleno. Evitar: texto, barras de escala, números, etiquetas, flechas, logotipos, marcas de agua, colores artificiales, artefactos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué el grabado ácido no siempre se ve igual",
+          "md": "Al grabar el esmalte con ácido, en algunas zonas se disuelve más el centro de los prismas, en otras su periferia, y en otras el patrón es irregular. Estos patrones se han clasificado en tipos I, II y III y dependen de la orientación de los cristales respecto a la superficie. En la superficie externa de muchos dientes, sobre todo temporales, existe además una capa de **esmalte aprismático**, sin prismas, que responde peor al grabado. Por eso, en algunos protocolos clínicos se recomienda preparar ligeramente la superficie antes de grabar; la decisión depende del caso y del material."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La trayectoria de los prismas y las bandas de Hunter-Schreger"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los prismas no van en línea recta. Salen de la unión amelodentinaria más o menos perpendiculares a ella y, en los dos tercios internos del esmalte, grupos de prismas vecinos ondulan en direcciones alternas, cruzándose entre sí. Al observar un corte longitudinal con luz reflejada, ese entrecruzamiento produce franjas claras y oscuras alternas: las **bandas de Hunter-Schreger**, un fenómeno óptico que delata la decusación de los prismas. En las cúspides y los bordes incisales el entrecruzamiento es tan intenso que el esmalte se ve enredado: es el **esmalte nudoso**.\n\nEste diseño tiene sentido mecánico: el cruce de prismas desvía las grietas y les hace perder energía, lo que aumenta la resistencia del esmalte a la fractura justo donde reciben más carga. En el tercio externo, los prismas son más rectos y paralelos, y en la superficie se orientan casi perpendiculares a ella."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Líneas de crecimiento y estructuras de la unión amelodentinaria"
+        },
+        {
+          "tipo": "texto",
+          "md": "El esmalte guarda el registro de su formación en **líneas incrementales**. Las **estrías transversales** marcan el depósito diario a lo largo de cada prisma. Las **estrías de Retzius** son líneas más marcadas que se forman con una periodicidad de alrededor de una semana (por lo general entre 6 y 12 días según la persona, con más frecuencia de 7 a 9), constante dentro de cada individuo; en un corte longitudinal se ven como líneas oblicuas que recorren el esmalte desde la unión amelodentinaria hacia la superficie. Donde las estrías de Retzius alcanzan la superficie forman surcos poco profundos y paralelos llamados **periquimatías**, visibles con lupa en dientes jóvenes y que se desgastan con la edad. La **línea neonatal** es una estría de Retzius acentuada que marca el nacimiento.\n\nCerca de la unión amelodentinaria se observan además tres estructuras:\n\n- Los **penachos del esmalte**: zonas hipomineralizadas que nacen en la unión y se extienden un corto trecho en el esmalte, como pequeños arbustos.\n- Las **laminillas del esmalte**: defectos delgados en forma de hoja que pueden atravesar todo el espesor del esmalte, rellenos de material orgánico; algunos se forman durante el desarrollo y otros son grietas posteriores.\n- Los **husos del esmalte**: terminaciones de prolongaciones de odontoblastos que quedaron atrapadas en el esmalte durante su formación."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m06/d2",
+          "pie": "Estructuras microscópicas del esmalte en un corte longitudinal de la corona.",
+          "descripcion": "Esquema de un corte longitudinal de una cúspide, con el esmalte ampliado en un recuadro. Se muestran: la unión amelodentinaria festoneada; prismas ondulantes que salen de ella; franjas claras y oscuras en los dos tercios internos (bandas de Hunter-Schreger); esmalte nudoso en la punta de la cúspide; líneas oblicuas de Retzius que llegan a la superficie formando periquimatías; y en la unión, penachos, una laminilla que cruza todo el espesor y husos cortos.",
+          "elementos": [
+            "Prismas del esmalte",
+            "Esmalte interprismático",
+            "Bandas de Hunter-Schreger",
+            "Esmalte nudoso",
+            "Estrías de Retzius",
+            "Periquimatías",
+            "Penachos",
+            "Laminillas",
+            "Husos del esmalte",
+            "Unión amelodentinaria"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/05",
+          "proporcion": "4:3",
+          "alt": "Microfotografía con luz reflejada de un corte longitudinal de esmalte con bandas claras y oscuras alternas.",
+          "pie": "Bandas de Hunter-Schreger: el cruce de grupos de prismas produce franjas alternas cuando se ilumina el corte.",
+          "prompt": "Microfotografía óptica realista de un corte longitudinal pulido de esmalte humano observado con luz reflejada oblicua, aumento bajo, franjas alternas claras y oscuras que se extienden desde el borde de la dentina en la parte inferior hacia la superficie del esmalte en la parte superior y se desvanecen en el tercio externo, tonos marfil y gris cálido, textura fina y regular, enfoque nítido, encuadre lleno. Evitar: texto, barras de escala, números, etiquetas, flechas, logotipos, marcas de agua, colores artificiales, grietas grandes, suciedad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Fosetas, fisuras y esmalte a lo largo de la vida"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las caras oclusales de premolares y molares tienen **fosetas y fisuras**, surcos donde se unieron los lóbulos de desarrollo. Su forma varía: algunas son abiertas en forma de V y otras estrechas y profundas, en forma de I o de embudo, con un fondo al que no llegan las cerdas del cepillo y donde el esmalte es más delgado. Esta anatomía explica que las fisuras sean el sitio donde se inicia la mayoría de las lesiones de caries en los molares jóvenes, y es la base de los selladores, que se estudian en el programa de caries.\n\nComo el esmalte no tiene células, **no se regenera**. Con los años pierde periquimatías por desgaste, se vuelve menos permeable, su contenido de fluoruro superficial puede aumentar y se oscurece en parte porque la dentina de abajo se engrosa y se vuelve más opaca. Sí puede ganar o perder mineral por procesos químicos en su superficie, lo que permite remineralizar lesiones iniciales, como estudiaste en el módulo 2 del programa de caries dental."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Esmalte de dientes temporales y permanentes",
+          "columnas": [
+            "Característica",
+            "Dientes temporales",
+            "Dientes permanentes"
+          ],
+          "filas": [
+            [
+              "Espesor",
+              "Mucho más delgado y relativamente uniforme",
+              "Más grueso, máximo en cúspides y bordes incisales"
+            ],
+            [
+              "Color",
+              "Más blanco y opaco",
+              "Más translúcido; deja ver el tono de la dentina"
+            ],
+            [
+              "Esmalte aprismático superficial",
+              "Frecuente y más extenso",
+              "Presente en menos zonas"
+            ],
+            [
+              "Formación",
+              "Comienza antes del nacimiento y las coronas terminan durante el primer año; muestra línea neonatal",
+              "Casi toda después del nacimiento, salvo el inicio del primer molar"
+            ],
+            [
+              "Implicación clínica",
+              "Una lesión llega antes a la dentina y a la pulpa",
+              "La lesión tarda más en atravesar el esmalte"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "La grieta que no duele",
+          "md": "Durante una revisión, observas con luz transmitida varias líneas finas verticales en el esmalte vestibular de los incisivos superiores de un adulto de 45 años. No son sensibles, no retienen tinte y no hay síntomas. Lo más probable es que correspondan a **líneas de fisura del esmalte** o laminillas, muy frecuentes en adultos y por lo general sin consecuencia. Las bandas de Hunter-Schreger y la unión amelodentinaria suelen detener su avance. Lo indicado es registrarlas y vigilarlas; cambian el plan solo si se acompañan de dolor al morder o de pigmentación progresiva."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/06",
+          "proporcion": "1:1",
+          "alt": "Vista oclusal macro de un segundo molar inferior permanente sano con fisuras profundas y estrechas.",
+          "pie": "Las fisuras estrechas y profundas de un molar joven son zonas de retención de placa con esmalte más delgado en el fondo.",
+          "prompt": "Fotografía clínica macro realista con espejo intraoral de la cara oclusal de un segundo molar inferior permanente de un adolescente, recién erupcionado y sano, cuatro cúspides bien definidas con anatomía correcta, fisuras centrales y vestibulares estrechas y profundas con ligera pigmentación natural en el fondo, esmalte translúcido con brillo, superficie limpia y seca, iluminación de lámpara dental uniforme, enfoque nítido de toda la superficie. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, cavidades, restauraciones, sangre, rostro, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Estructuras del esmalte",
+          "instruccion": "Relaciona cada estructura del esmalte con su descripción.",
+          "pares": [
+            {
+              "a": "Estrías de Retzius",
+              "b": "Líneas incrementales de periodicidad semanal aproximada"
+            },
+            {
+              "a": "Periquimatías",
+              "b": "Surcos superficiales donde las estrías de Retzius alcanzan la superficie"
+            },
+            {
+              "a": "Bandas de Hunter-Schreger",
+              "b": "Franjas ópticas producidas por el cruce de grupos de prismas"
+            },
+            {
+              "a": "Husos del esmalte",
+              "b": "Prolongaciones de odontoblastos atrapadas en el esmalte"
+            },
+            {
+              "a": "Esmalte nudoso",
+              "b": "Entrecruzamiento intenso de prismas en cúspides y bordes incisales"
+            },
+            {
+              "a": "Esmalte aprismático",
+              "b": "Capa superficial sin prismas que responde peor al grabado"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** antes de pulir, grabar o desgastar el esmalte, recuerda que lo que retires no se recupera. Elige siempre el procedimiento más conservador que resuelva el problema y explica al paciente que el esmalte es un tejido que no se regenera, pero que sí se puede proteger."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Prisma del esmalte",
+          "definicion": "Varilla de cristales de apatita que recorre el esmalte desde la unión amelodentinaria hasta la superficie; unidad estructural del esmalte."
+        },
+        {
+          "termino": "Esmalte interprismático",
+          "definicion": "Esmalte situado entre los prismas, con cristales de orientación distinta."
+        },
+        {
+          "termino": "Estrías de Retzius",
+          "definicion": "Líneas incrementales del esmalte que reflejan su formación con una periodicidad aproximada de una semana."
+        },
+        {
+          "termino": "Periquimatías",
+          "definicion": "Surcos finos y paralelos de la superficie del esmalte que corresponden a las estrías de Retzius."
+        },
+        {
+          "termino": "Bandas de Hunter-Schreger",
+          "definicion": "Franjas claras y oscuras visibles en cortes del esmalte producidas por el entrecruzamiento de prismas."
+        },
+        {
+          "termino": "Laminilla del esmalte",
+          "definicion": "Defecto delgado en forma de hoja, relleno de material orgánico, que puede atravesar todo el espesor del esmalte."
+        },
+        {
+          "termino": "Esmalte aprismático",
+          "definicion": "Capa de esmalte sin prismas, frecuente en la superficie de los dientes temporales."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.2-1",
+          "q": "¿Qué estructura del esmalte se relaciona con su resistencia a la propagación de grietas?",
+          "opciones": [
+            "El entrecruzamiento de prismas que produce las bandas de Hunter-Schreger",
+            "Las periquimatías",
+            "El esmalte aprismático",
+            "La línea neonatal"
+          ],
+          "correcta": 0,
+          "explicacion": "La decusación de los prismas desvía las grietas y disipa su energía."
+        },
+        {
+          "id": "t6.2-2",
+          "q": "¿Qué son las periquimatías?",
+          "opciones": [
+            "Prolongaciones de odontoblastos en el esmalte",
+            "Grietas que atraviesan el esmalte",
+            "Zonas hipomineralizadas en la unión amelodentinaria",
+            "Surcos de la superficie donde las estrías de Retzius alcanzan el exterior"
+          ],
+          "correcta": 3,
+          "explicacion": "Las periquimatías son la manifestación superficial de las estrías de Retzius."
+        },
+        {
+          "id": "t6.2-3",
+          "q": "¿Por qué el esmalte perdido por desgaste no se recupera?",
+          "opciones": [
+            "Porque no tiene minerales",
+            "Porque los ameloblastos desaparecen tras la erupción y el esmalte no tiene células",
+            "Porque la pulpa lo reabsorbe",
+            "Porque el fluoruro lo impide"
+          ],
+          "correcta": 1,
+          "explicacion": "Sin células formadoras, el esmalte no puede regenerarse, aunque sí intercambia mineral en su superficie."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dental Caries: The Disease and its Clinical Management",
+          "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología del esmalte",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "6.3",
+      "titulo": "La dentina: túbulos, tipos de dentina y sensibilidad",
+      "minutos": 15,
+      "enPocasPalabras": "La dentina es la capa amarillenta que forma la mayor parte del diente, debajo del esmalte y del cemento. Está atravesada por miles de canalitos llenos de líquido que llegan hasta la pulpa; por eso, cuando la dentina queda expuesta, el diente se vuelve sensible al frío o al dulce. A diferencia del esmalte, la dentina puede seguir formándose toda la vida.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **dentina** forma el cuerpo del diente: está debajo del esmalte en la corona y debajo del cemento en la raíz, y rodea la cavidad pulpar. Es de color amarillento, menos dura que el esmalte pero más elástica, y tiene alrededor de un 70 % de mineral, un 20 % de matriz orgánica, en su mayor parte colágeno tipo I, y un 10 % de agua, en peso. Su rasgo distintivo es estar atravesada por **túbulos dentinarios** que van de la pulpa a la unión con el esmalte o el cemento.\n\nComprender la dentina es indispensable para la clínica diaria: explica la sensibilidad, condiciona la adhesión de los materiales, determina cómo responde el diente a la caries y al desgaste y define cuánto tejido puedes retirar sin comprometer la pulpa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los túbulos dentinarios"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada túbulo es el camino que recorrió un odontoblasto mientras formaba la dentina, y contiene su **prolongación odontoblástica** y **líquido dentinario**. Hasta dónde llega la prolongación dentro del túbulo es un tema que se ha debatido por décadas: la mayoría de los estudios la sitúan en la parte interna de la dentina, mientras que el resto del túbulo está ocupado por líquido y, en algunos, por terminaciones nerviosas cerca de la pulpa.\n\nEn la corona, los túbulos siguen un trayecto en forma de **S** suave desde la pulpa hacia el esmalte, la llamada curvatura primaria; bajo las cúspides y los bordes incisales y en la raíz son casi rectos. Como la superficie de la pulpa es mucho menor que la de la unión amelodentinaria, los túbulos están **más juntos y son más anchos cerca de la pulpa**. Los estudios clásicos de microscopía, como el de Garberoglio y Brännström de 1976, describieron alrededor de 45,000 túbulos por milímetro cuadrado cerca de la pulpa frente a unos 20,000 cerca del esmalte, con diámetros aproximados de 2.5 µm junto a la pulpa y menos de 1 µm en la periferia. Las cifras varían entre dientes y estudios, pero la idea es firme: **la dentina profunda es mucho más permeable que la superficial**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/07",
+          "proporcion": "4:3",
+          "alt": "Microfotografía de un corte longitudinal de dentina coronaria con túbulos paralelos en forma de S suave desde la pulpa hacia el esmalte.",
+          "pie": "Los túbulos dentinarios recorren la dentina en forma de S suave y se acercan entre sí a medida que llegan a la pulpa.",
+          "prompt": "Microfotografía óptica realista de un corte longitudinal por desgaste de dentina coronaria humana, aumento medio, cientos de túbulos finos y oscuros que corren paralelos desde la parte inferior, donde estaría la pulpa, hacia la parte superior, donde estaría el esmalte, describiendo una curva suave en forma de S, matriz de tono marfil dorado entre ellos, iluminación de campo claro, enfoque nítido. Evitar: texto, barras de escala, números, etiquetas, flechas, logotipos, marcas de agua, colores artificiales, grietas, suciedad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dentina peritubular, intertubular y predentina"
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentina que forma la pared de cada túbulo es la **dentina peritubular** o intratubular: un anillo muy mineralizado y pobre en colágeno que, con el tiempo, se va engrosando hacia la luz del túbulo. La dentina que ocupa el espacio entre túbulos es la **dentina intertubular**, rica en colágeno, y constituye la mayor parte del tejido.\n\nEntre los odontoblastos y la dentina mineralizada siempre hay una franja de matriz recién depositada y aún sin mineralizar: la **predentina**. Su presencia es un signo de que los odontoblastos siguen activos, y protege a la dentina de la reabsorción desde la pulpa.\n\nEn algunas zonas, sobre todo bajo la dentina del manto en la corona, la mineralización no se completa de forma homogénea y quedan áreas de matriz sin mineralizar entre esferas de mineral fusionadas: la **dentina interglobular**. En la raíz, una franja similar junto al cemento forma la **capa granular de Tomes**. La dentina también registra su crecimiento con **líneas incrementales**: las de von Ebner, finas y regulares, y las líneas de contorno de Owen, más marcadas, que reflejan alteraciones en la formación; la línea neonatal es una de ellas."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m06/d3",
+          "pie": "Organización de la dentina desde la unión amelodentinaria hasta la pulpa.",
+          "descripcion": "Corte esquemático en bandas horizontales de arriba abajo: esmalte, unión amelodentinaria festoneada, dentina del manto, dentina interglobular en algunos puntos, dentina circumpulpar primaria atravesada por túbulos en S, dentina secundaria con un ligero cambio de dirección de los túbulos, predentina y capa de odontoblastos con prolongaciones entrando en los túbulos. Una ampliación lateral circular muestra un túbulo en corte transversal con su anillo de dentina peritubular y la dentina intertubular alrededor.",
+          "elementos": [
+            "Dentina del manto",
+            "Dentina circumpulpar",
+            "Dentina secundaria",
+            "Predentina",
+            "Odontoblastos y prolongaciones",
+            "Túbulo dentinario",
+            "Dentina peritubular",
+            "Dentina intertubular",
+            "Dentina interglobular"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Primaria, secundaria y terciaria: una dentina que sigue formándose"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Tipos de dentina según el momento y la causa de su formación",
+          "columnas": [
+            "Tipo",
+            "Cuándo se forma",
+            "Quién la forma",
+            "Características"
+          ],
+          "filas": [
+            [
+              "Primaria",
+              "Hasta que la raíz completa su formación",
+              "Odontoblastos originales",
+              "Forma la mayor parte del diente; incluye la dentina del manto y la circumpulpar"
+            ],
+            [
+              "Secundaria",
+              "Después de completarse la raíz, durante toda la vida",
+              "Odontoblastos originales, a un ritmo más lento",
+              "Túbulos continuos con los primarios, con un leve cambio de dirección; reduce poco a poco la cámara pulpar, más en el techo y el piso"
+            ],
+            [
+              "Terciaria reaccional",
+              "En respuesta a un estímulo moderado como caries lenta o desgaste",
+              "Odontoblastos originales que sobreviven",
+              "Túbulos generalmente continuos con los previos; se forma solo bajo la zona afectada"
+            ],
+            [
+              "Terciaria reparativa",
+              "En respuesta a un estímulo intenso que destruye a los odontoblastos",
+              "Células nuevas de tipo odontoblasto diferenciadas desde la pulpa",
+              "Estructura irregular, con pocos túbulos o sin ellos y sin continuidad con los anteriores"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Además de formar dentina nueva, el complejo dentinopulpar modifica la existente. La **dentina esclerótica** se produce cuando los túbulos se obliteran por depósito de mineral; es más translúcida, menos permeable y aparece con la edad y bajo lesiones de caries lentas o zonas de desgaste. Por eso la dentina expuesta de un adulto mayor suele doler menos que la de un joven. Los **tractos muertos** son grupos de túbulos vacíos, cuyos odontoblastos murieron, que se ven oscuros en cortes por desgaste y suelen quedar sellados del lado pulpar por dentina terciaria. Las respuestas de la dentina ante la caries se analizan desde el punto de vista de la enfermedad en el programa de caries dental."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La dentina como reloj biológico",
+          "md": "La obliteración progresiva de los túbulos hace que la dentina de la raíz se vuelva **translúcida** desde el ápice hacia la corona a medida que pasan los años. Como ese cambio avanza de forma bastante regular, la longitud de la zona translúcida es uno de los parámetros que la odontología forense ha usado, junto con otros, para estimar la edad de una persona a partir de un diente aislado. Es un buen ejemplo de que la dentina no es un tejido estático."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/08",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista comparativa de dos cortes de incisivo, uno joven con pulpa amplia y otro de adulto mayor con pulpa reducida por dentina secundaria.",
+          "pie": "La dentina secundaria reduce la cámara pulpar con los años: compara la pulpa de un diente joven con la de uno de un adulto mayor.",
+          "prompt": "Ilustración científica realista con dos cortes longitudinales de incisivos centrales superiores permanentes colocados lado a lado sobre fondo neutro claro, a la izquierda un diente joven con cámara pulpar amplia y cuernos pulpares altos en rosa suave, a la derecha un diente de adulto mayor con cámara pulpar estrecha y conducto delgado por el depósito de dentina, borde incisal ligeramente desgastado y dentina más oscura, esmalte translúcido en ambos, iluminación difusa, alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, caries, sangre, proporciones incorrectas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Sensibilidad dentinaria e hipersensibilidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como viste en el módulo 4, la explicación más aceptada de la sensibilidad de la dentina es la **teoría hidrodinámica**: estímulos como el frío, el aire, el roce o las soluciones azucaradas desplazan el líquido dentro de los túbulos abiertos, y ese movimiento activa las terminaciones nerviosas A-delta junto a los odontoblastos. La **hipersensibilidad dentinaria** es un dolor breve y agudo que aparece cuando la dentina expuesta por recesión, desgaste o pérdida de cemento tiene túbulos abiertos hacia la boca, y que no puede atribuirse a otra causa como caries o fractura. Por eso las estrategias de manejo buscan **ocluir los túbulos** o **reducir la excitabilidad nerviosa**; la elección del producto y de la técnica corresponde al odontólogo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El espesor de dentina que queda protege a la pulpa",
+          "md": "Mientras más cerca de la pulpa trabajas, más túbulos por milímetro cuadrado y más anchos encuentras, de modo que el calor, la desecación y los componentes de los materiales llegan a la pulpa con más facilidad. El **espesor de dentina remanente** entre el fondo de una preparación y la pulpa es uno de los factores protectores más importantes. Por eso se usa refrigeración abundante al cortar, se evita secar en exceso la dentina profunda y se seleccionan los materiales según la profundidad; el criterio clínico concreto se aprende en operatoria dental."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/09",
+          "proporcion": "4:3",
+          "alt": "Cuellos de premolares inferiores con recesión gingival y dentina expuesta de color amarillento.",
+          "pie": "La dentina expuesta en el cuello, con túbulos abiertos, es la causa anatómica de la hipersensibilidad dentinaria.",
+          "prompt": "Fotografía clínica macro realista de la cara vestibular de premolares inferiores permanentes de un adulto con recesión gingival moderada, franja de dentina radicular expuesta de color amarillento mate por debajo del esmalte blanco brillante, ligera concavidad en el cuello por desgaste, encía rosa pálido sana y firme sin inflamación, superficie limpia y húmeda, iluminación de lámpara dental uniforme, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, caries, cálculo, rostro, inflamación marcada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Mucho desgaste, poca sensibilidad",
+          "md": "Un hombre de 68 años con bruxismo tiene los bordes incisales de los dientes anteriores inferiores desgastados hasta mostrar islas de dentina oscura y brillante. Sorprendentemente, no refiere sensibilidad. La explicación está en la dentina: el desgaste lento dio tiempo para que los túbulos expuestos se obliteraran (dentina esclerótica) y para que se depositara dentina terciaria bajo la zona afectada, alejando la pulpa. La ausencia de dolor no significa ausencia de problema: el desgaste debe registrarse, medirse en el tiempo y valorarse su causa."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "De la unión amelodentinaria a la pulpa",
+          "instruccion": "Ordena las capas que atraviesas en la corona de un diente adulto, desde la unión con el esmalte hasta la pulpa.",
+          "elementos": [
+            "Dentina del manto",
+            "Dentina circumpulpar primaria",
+            "Dentina secundaria",
+            "Predentina",
+            "Capa de odontoblastos"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** ante un paciente que refiere dolor breve con el frío, revisa primero si hay dentina expuesta en los cuellos, lesiones cervicales o restauraciones con márgenes abiertos, y descarta caries o fracturas. Explicarle que su molestia viene de «canalitos abiertos» en la dentina ayuda a que entienda por qué el cepillado suave y el seguimiento son parte de la solución."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Túbulo dentinario",
+          "definicion": "Conducto microscópico que atraviesa la dentina desde la pulpa hasta la unión con el esmalte o el cemento y contiene líquido y la prolongación del odontoblasto."
+        },
+        {
+          "termino": "Dentina peritubular",
+          "definicion": "Anillo muy mineralizado que forma la pared de cada túbulo."
+        },
+        {
+          "termino": "Dentina intertubular",
+          "definicion": "Dentina rica en colágeno situada entre los túbulos; forma la mayor parte del tejido."
+        },
+        {
+          "termino": "Predentina",
+          "definicion": "Franja de matriz dentinaria aún no mineralizada adyacente a los odontoblastos."
+        },
+        {
+          "termino": "Dentina secundaria",
+          "definicion": "Dentina fisiológica que se forma lentamente después de completarse la raíz y reduce la cavidad pulpar con la edad."
+        },
+        {
+          "termino": "Dentina terciaria",
+          "definicion": "Dentina formada en respuesta a un estímulo; reaccional si la forman odontoblastos originales y reparativa si la forman células nuevas."
+        },
+        {
+          "termino": "Dentina esclerótica",
+          "definicion": "Dentina con túbulos obliterados por mineral, más translúcida y menos permeable."
+        },
+        {
+          "termino": "Hipersensibilidad dentinaria",
+          "definicion": "Dolor breve y agudo originado en dentina expuesta con túbulos abiertos, no atribuible a otra patología."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.3-1",
+          "q": "¿Por qué la dentina profunda es más permeable que la superficial?",
+          "opciones": [
+            "Porque tiene más esmalte",
+            "Porque no tiene colágeno",
+            "Porque está más mineralizada",
+            "Porque cerca de la pulpa los túbulos son más numerosos y más anchos"
+          ],
+          "correcta": 3,
+          "explicacion": "La convergencia de los túbulos hacia la pulpa aumenta su densidad y su diámetro."
+        },
+        {
+          "id": "t6.3-2",
+          "q": "¿Qué tipo de dentina forman células nuevas de tipo odontoblasto tras la muerte de los odontoblastos originales?",
+          "opciones": [
+            "Primaria",
+            "Secundaria",
+            "Terciaria reparativa",
+            "Del manto"
+          ],
+          "correcta": 2,
+          "explicacion": "La dentina reparativa la forman células diferenciadas desde la pulpa; la reaccional, los odontoblastos supervivientes."
+        },
+        {
+          "id": "t6.3-3",
+          "q": "¿Qué explica la teoría hidrodinámica?",
+          "opciones": [
+            "La sensibilidad de la dentina por movimiento del líquido en los túbulos",
+            "La formación del esmalte",
+            "La erupción dental",
+            "La adhesión del cemento al hueso"
+          ],
+          "correcta": 0,
+          "explicacion": "Los estímulos desplazan el líquido tubular y activan terminaciones nerviosas junto a los odontoblastos."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Scanning electron microscopic investigation of human dentinal tubules",
+          "autor": "Garberoglio R., Brännström M. (Archives of Oral Biology)",
+          "anio": 1976
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología de la dentina y del complejo dentinopulpar",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "6.4",
+      "titulo": "La pulpa dental: zonas, células, vasos y envejecimiento",
+      "minutos": 15,
+      "enPocasPalabras": "La pulpa es el tejido blando y vivo del centro del diente, al que muchas personas llaman «el nervio». Tiene células que fabrican dentina, vasos que la nutren, nervios que avisan con dolor y células de defensa. Está encerrada en paredes duras, por eso una inflamación en ella puede doler mucho y le cuesta recuperarse.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **pulpa dental** es un tejido conjuntivo laxo, especializado, que ocupa la cavidad pulpar: la **cámara pulpar** en la corona, con sus prolongaciones hacia las cúspides llamadas **cuernos pulpares**, y los **conductos radiculares** en la raíz, que se comunican con el periodonto por el foramen apical y, a veces, por conductos accesorios. La morfología de la cámara y de los conductos de cada diente se estudia en el programa de endodoncia; aquí te interesa el **tejido**: cómo está organizado, qué células tiene, cómo se nutre y cómo cambia.\n\nDos características condicionan todo lo que le ocurre a la pulpa. Primero, vive **encerrada en paredes rígidas** de dentina, con una entrada vascular estrecha en el ápice. Segundo, está unida a la dentina por los odontoblastos, de modo que cualquier agresión a la dentina la alcanza."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las cuatro funciones de la pulpa"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Qué hace la pulpa",
+          "items": [
+            "**Formativa**: produce dentina primaria, secundaria y terciaria durante toda la vida del diente.",
+            "**Nutritiva**: aporta oxígeno y nutrientes a los odontoblastos y, a través del líquido tubular, a la dentina.",
+            "**Sensitiva**: sus nervios transmiten dolor ante estímulos que amenazan al diente, como estudiaste en el módulo 4.",
+            "**Defensiva**: responde a las agresiones con inflamación, con células inmunitarias y con la formación de dentina terciaria."
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las zonas de la pulpa"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la pulpa coronaria de un diente maduro se distinguen cuatro zonas desde la dentina hacia el centro:\n\n- La **capa odontoblástica**, una hilera de odontoblastos en empalizada junto a la predentina. En la corona son altos y cilíndricos; en la raíz se vuelven más cúbicos y en la región apical, más aplanados.\n- La **zona pobre en células** o **zona de Weil**, una franja relativamente acelular atravesada por capilares, fibras nerviosas no mielinizadas y prolongaciones de fibroblastos. Es más evidente en la pulpa coronaria y puede no verse en pulpas jóvenes o muy activas.\n- La **zona rica en células**, con abundantes fibroblastos y células indiferenciadas; por debajo de ella se encuentra el **plexo nervioso de Raschkow**.\n- El **núcleo pulpar** o pulpa propiamente dicha, en el centro, con los vasos y nervios de mayor calibre.\n\nEsta organización tiene sentido funcional: la periferia está dedicada a formar dentina y a detectar estímulos; el centro, a distribuir sangre y nervios."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m06/d4",
+          "pie": "Zonas de la pulpa coronaria desde la dentina hacia el centro.",
+          "descripcion": "Corte esquemático ampliado de la periferia de la pulpa coronaria en bandas verticales de izquierda a derecha: dentina con túbulos, predentina, capa de odontoblastos altos con prolongaciones entrando en los túbulos, zona pobre en células con capilares y fibras nerviosas finas, zona rica en células con fibroblastos y células indiferenciadas, plexo de Raschkow como red de fibras amarillas, y núcleo pulpar con una arteriola, una vénula y un haz nervioso.",
+          "elementos": [
+            "Dentina y predentina",
+            "Capa odontoblástica",
+            "Zona pobre en células (de Weil)",
+            "Zona rica en células",
+            "Plexo de Raschkow",
+            "Núcleo pulpar",
+            "Arteriola y vénula",
+            "Haz nervioso"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/10",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica de la periferia de la pulpa con dentina, odontoblastos, una franja clara y una zona densa en células.",
+          "pie": "Las zonas de la pulpa: odontoblastos junto a la dentina, una franja pobre en células y, por dentro, la zona rica en células.",
+          "prompt": "Microfotografía histológica realista de la periferia de la pulpa coronaria de un diente humano, corte teñido con hematoxilina y eosina, aumento medio, en la parte superior dentina rosada intensa y una delgada franja de predentina más pálida, debajo una hilera de odontoblastos en empalizada con núcleos violeta, luego una franja clara con escasos núcleos y capilares finos, después una zona con abundantes núcleos y abajo tejido laxo con un vaso sanguíneo, iluminación de campo claro, enfoque nítido. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, colores fluorescentes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las células de la pulpa y su matriz"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **odontoblastos** son células posmitóticas: no se dividen, viven en principio tanto como el diente y mantienen su prolongación en el túbulo. Los **fibroblastos** son las células más numerosas; producen y renuevan la matriz, formada por **colágeno tipo I y tipo III**, proteoglicanos y abundante agua. En la pulpa joven predominan las células y la sustancia fundamental; con la edad aumenta la proporción de fibras.\n\nLa pulpa contiene además **células madre y progenitoras**, que pueden diferenciarse en células de tipo odontoblasto cuando los odontoblastos originales mueren, y una población de **células inmunitarias**: células dendríticas, abundantes en la periferia junto a los odontoblastos, que detectan antígenos bacterianos que llegan por los túbulos, además de macrófagos y linfocitos. Los propios odontoblastos participan en la defensa: detectan componentes bacterianos y liberan señales que atraen células inmunitarias."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Células madre de la pulpa dental",
+          "md": "En el año 2000, Gronthos y colaboradores describieron en la pulpa de terceros molares humanos una población de **células madre de la pulpa dental** (DPSC, por sus siglas en inglés) capaces de formar un tejido parecido al complejo dentinopulpar al trasplantarse en animales. En 2003, Miura y colaboradores describieron células similares en dientes temporales exfoliados (SHED). Desde entonces, estas células se investigan para regenerar la pulpa y otros tejidos. Las **terapias endodónticas regenerativas** que se usan hoy en dientes inmaduros con pulpa necrótica se basan en parte en atraer células progenitoras de la región apical hacia el conducto. En cambio, el almacenamiento de dientes temporales en bancos privados para obtener células madre con fines terapéuticos futuros sigue siendo un campo de investigación y no una práctica clínica con beneficio demostrado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vasos sanguíneos: una circulación en un compartimento rígido"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las arteriolas entran por el foramen apical, ascienden por el centro del conducto y en la corona se ramifican hasta formar una densa **red capilar subodontoblástica**, que nutre a los odontoblastos, muy activos metabólicamente. La sangre regresa por vénulas de pared delgada, más numerosas y anchas que las arteriolas. Existen además **anastomosis arteriovenosas** que pueden desviar la sangre y regular el flujo. El calibre de los vasos lo controlan fibras simpáticas y mediadores locales.\n\nComo la pulpa no puede hincharse dentro de sus paredes de dentina, se describe como un **entorno de baja distensibilidad**. Durante la inflamación aumentan el flujo y la salida de líquido de los vasos, y la presión de los tejidos sube en la zona afectada. Los estudios actuales indican que ese aumento de presión es sobre todo **local**: la pulpa puede tener áreas inflamadas e incluso necróticas junto a zonas sanas, y los vasos linfáticos y los capilares vecinos ayudan a drenar el exceso de líquido. Por eso la inflamación pulpar avanza por compartimentos, de la zona más afectada hacia el resto, y una pulpa con inflamación localizada puede conservarse si se elimina a tiempo la causa."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Lo que la pulpa no tolera bien",
+          "md": "El calor generado al cortar sin refrigeración, la desecación prolongada de la dentina profunda, la filtración bacteriana en los márgenes de una restauración y los traumatismos con daño al paquete vascular apical son agresiones frecuentes a la pulpa. Una pulpa sana tolera bastante; una pulpa ya inflamada por caries o por procedimientos repetidos tiene menos margen. Cada intervención suma, por eso el respeto a la pulpa empieza en el diagnóstico y continúa en cada paso operatorio."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/11",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de la red vascular de la pulpa de un premolar con vasos que entran por el ápice y forman una malla bajo la dentina.",
+          "pie": "Las arteriolas entran por el ápice y forman en la corona una red capilar densa bajo la capa de odontoblastos.",
+          "prompt": "Ilustración científica realista de un premolar inferior permanente con la dentina y el esmalte representados semitransparentes en tono marfil claro, mostrando en su interior la pulpa como un molde rosado con una red de vasos sanguíneos rojos finos que entran por el ápice, ascienden por el conducto y forman una malla capilar densa bajo el techo de la cámara pulpar y los cuernos pulpares, venas en azul tenue acompañantes, fondo oscuro neutro, iluminación de estudio suave, alto detalle. Evitar: texto, etiquetas, flechas, números, logotipos, marcas de agua, sangre derramada, caries, raíces en número incorrecto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La pulpa con los años y las calcificaciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Con la edad, el depósito continuo de dentina secundaria reduce el volumen de la cámara y estrecha los conductos, y la pulpa cambia: disminuyen las células y los vasos, aumentan las fibras y los odontoblastos pueden reducirse en número y altura. En la pulpa también se forman **calcificaciones**. Los **cálculos pulpares** o dentículos son masas mineralizadas redondeadas, libres en la cámara o adheridas a la pared, frecuentes en la pulpa coronaria; las **calcificaciones difusas**, lineales, predominan en los conductos. Su frecuencia aumenta con la edad, con las restauraciones extensas y con algunas condiciones sistémicas, y en general no producen síntomas, pero pueden dificultar el acceso a los conductos en un tratamiento endodóntico."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Pulpa joven y pulpa envejecida",
+          "columnas": [
+            "Característica",
+            "Pulpa joven",
+            "Pulpa envejecida"
+          ],
+          "filas": [
+            [
+              "Volumen de la cavidad pulpar",
+              "Amplio, con cuernos pulpares altos",
+              "Reducido por dentina secundaria; cámara baja y conductos estrechos"
+            ],
+            [
+              "Células",
+              "Abundantes; zonas bien definidas",
+              "Menos fibroblastos y odontoblastos"
+            ],
+            [
+              "Fibras",
+              "Proporción menor",
+              "Proporción mayor; aspecto más fibroso"
+            ],
+            [
+              "Vascularización",
+              "Abundante, ápice amplio en dientes inmaduros",
+              "Menor; foramen apical más estrecho"
+            ],
+            [
+              "Calcificaciones",
+              "Poco frecuentes",
+              "Cálculos y calcificaciones difusas más frecuentes"
+            ],
+            [
+              "Respuesta a estímulos",
+              "Intensa; mayor capacidad de reparación",
+              "Más débil; menor capacidad de reparación"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/12",
+          "proporcion": "4:3",
+          "alt": "Radiografía periapical de molares inferiores con una imagen radiopaca redondeada dentro de la cámara pulpar de uno de ellos.",
+          "pie": "Un cálculo pulpar se ve en la radiografía como una masa radiopaca dentro de la cámara pulpar.",
+          "prompt": "Radiografía periapical dental realista en escala de grises de los molares inferiores izquierdos de un adulto, primer y segundo molar con raíces completas y lámina dura visible, en la cámara pulpar del primer molar una masa radiopaca redondeada y bien delimitada que ocupa parte de la cámara, conductos estrechos, hueso alveolar con trabeculado normal, sin caries ni restauraciones, contraste clínico normal. Evitar: texto, letras, números, marcadores, logotipos, marcas de agua, artefactos metálicos, implantes, lesiones periapicales, distorsión exagerada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El diente golpeado que se vuelve amarillo",
+          "md": "Después de un traumatismo, sobre todo en incisivos jóvenes, algunas pulpas responden depositando dentina de forma acelerada en toda la cavidad pulpar, hasta que la cámara y el conducto casi desaparecen en la radiografía. Este fenómeno se conoce como **obliteración del conducto pulpar** o metamorfosis cálcica. La corona suele verse más amarilla y opaca porque la dentina engrosada cambia la forma en que la luz atraviesa el diente. Muchos de estos dientes se mantienen sin síntomas durante años, pero requieren seguimiento."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Dos pulpas, dos edades",
+          "situacion": "Necesitas explicar a un grupo de asistentes por qué, en la misma consulta, un adolescente de 15 años refiere mucha sensibilidad tras una restauración de profundidad moderada en un molar, mientras que una paciente de 72 años con una restauración de profundidad similar no refiere ninguna molestia.",
+          "opciones": [
+            {
+              "texto": "Porque en la persona mayor la dentina secundaria y la esclerosis tubular reducen la permeabilidad, alejan la pulpa y la pulpa tiene menos células y vasos.",
+              "correcta": true,
+              "retro": "Correcto. Con la edad la cámara se reduce, los túbulos se obliteran y la respuesta pulpar cambia; en el adolescente la pulpa es amplia y la dentina muy permeable."
+            },
+            {
+              "texto": "Porque la pulpa de las personas mayores ya no tiene nervios.",
+              "correcta": false,
+              "retro": "La pulpa envejecida conserva nervios, aunque su respuesta y su volumen cambian."
+            },
+            {
+              "texto": "Porque el esmalte del adolescente es más delgado que el de la paciente mayor.",
+              "correcta": false,
+              "retro": "El esmalte no explica la diferencia; la clave está en la dentina y la pulpa."
+            },
+            {
+              "texto": "Porque la paciente mayor tiene cálculos pulpares que bloquean el dolor.",
+              "correcta": false,
+              "retro": "Los cálculos pulpares no actúan como aislantes del dolor; son hallazgos frecuentes y por lo general asintomáticos."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** antes de cualquier procedimiento restaurador, estima en la radiografía la distancia entre la lesión y los cuernos pulpares y considera la edad del paciente. Una pulpa joven y amplia exige más cuidado con el calor y la desecación; una pulpa envejecida tiene conductos más estrechos y menos capacidad de respuesta."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Pulpa dental",
+          "definicion": "Tejido conjuntivo laxo especializado que ocupa la cámara pulpar y los conductos, con funciones formativa, nutritiva, sensitiva y defensiva."
+        },
+        {
+          "termino": "Zona pobre en células (de Weil)",
+          "definicion": "Franja de la pulpa coronaria situada por debajo de los odontoblastos, con pocos núcleos y abundantes capilares y fibras nerviosas."
+        },
+        {
+          "termino": "Zona rica en células",
+          "definicion": "Franja de la pulpa con abundantes fibroblastos y células indiferenciadas, por dentro de la zona pobre en células."
+        },
+        {
+          "termino": "Células madre de la pulpa dental",
+          "definicion": "Células progenitoras de la pulpa capaces de diferenciarse en células formadoras de dentina, entre otras."
+        },
+        {
+          "termino": "Célula dendrítica",
+          "definicion": "Célula inmunitaria que detecta antígenos y abunda en la periferia de la pulpa."
+        },
+        {
+          "termino": "Cálculo pulpar",
+          "definicion": "Masa mineralizada dentro de la cavidad pulpar, libre o adherida a la pared, por lo general asintomática."
+        },
+        {
+          "termino": "Cuerno pulpar",
+          "definicion": "Prolongación de la cámara pulpar hacia una cúspide o hacia el borde incisal."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.4-1",
+          "q": "¿Cuál es el orden correcto de las zonas de la pulpa coronaria desde la dentina hacia el centro?",
+          "opciones": [
+            "Zona rica en células, odontoblastos, zona pobre en células, núcleo",
+            "Núcleo, zona pobre en células, odontoblastos, zona rica en células",
+            "Odontoblastos, zona pobre en células, zona rica en células, núcleo pulpar",
+            "Zona pobre en células, núcleo, odontoblastos, zona rica en células"
+          ],
+          "correcta": 2,
+          "explicacion": "De la periferia al centro: capa odontoblástica, zona pobre en células, zona rica en células y núcleo pulpar."
+        },
+        {
+          "id": "t6.4-2",
+          "q": "¿Cuál es la célula más numerosa de la pulpa?",
+          "opciones": [
+            "El fibroblasto",
+            "El odontoblasto",
+            "La célula dendrítica",
+            "El linfocito"
+          ],
+          "correcta": 0,
+          "explicacion": "Los fibroblastos son las células más abundantes y producen la matriz pulpar."
+        },
+        {
+          "id": "t6.4-3",
+          "q": "¿Qué describe mejor el aumento de presión durante la inflamación pulpar según los estudios actuales?",
+          "opciones": [
+            "Es inmediato y uniforme en toda la pulpa",
+            "No ocurre porque la pulpa es distensible",
+            "Solo ocurre en dientes temporales",
+            "Es sobre todo local, de modo que zonas inflamadas pueden coexistir con zonas sanas"
+          ],
+          "correcta": 3,
+          "explicacion": "La inflamación avanza por compartimentos; por eso una pulpa con inflamación localizada puede conservarse."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Seltzer and Bender's Dental Pulp",
+          "autor": "Hargreaves K. M., Goodis H. E., Tay F. R. (Quintessence)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Postnatal human dental pulp stem cells (DPSCs) in vitro and in vivo",
+          "autor": "Gronthos S., Mankani M., Brahim J., Robey P. G., Shi S. (PNAS)",
+          "anio": 2000
+        },
+        {
+          "tipo": "academica",
+          "titulo": "SHED: stem cells from human exfoliated deciduous teeth",
+          "autor": "Miura M., Gronthos S., Zhao M. et al. (PNAS)",
+          "anio": 2003
+        }
+      ]
+    },
+    {
+      "n": "6.5",
+      "titulo": "El cemento: tipos, función de anclaje y respuesta clínica",
+      "minutos": 15,
+      "enPocasPalabras": "El cemento es una capa delgada, parecida al hueso, que cubre la raíz del diente. En ella se clavan las fibras que sostienen el diente dentro del hueso. A diferencia del hueso, no tiene vasos ni nervios y casi no se reabsorbe, por eso permite mover los dientes con ortodoncia sin dañar las raíces en condiciones normales.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **cemento** es el tejido mineralizado que cubre la dentina de la raíz. Es delgado, de color amarillo pálido, más blando que la dentina y, por su composición, el más parecido al hueso de los tejidos dentarios: alrededor de un 45 a 50 % de mineral y el resto de matriz orgánica, en su mayor parte colágeno tipo I, y agua. Aunque pasa desapercibido en la clínica, es una pieza clave del sostén del diente: en él se insertan las fibras del **ligamento periodontal**, que por el otro extremo se anclan en el hueso alveolar.\n\nEn el módulo 7 estudiarás el ligamento y el hueso alveolar como partes del periodonto de inserción. Aquí te concentrarás en el cemento: cómo se distribuye, qué tipos existen, en qué se parece y en qué se diferencia del hueso, y qué ocurre con él en la enfermedad periodontal, el tratamiento periodontal, la ortodoncia y el envejecimiento."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un tejido parecido al hueso, pero distinto"
+        },
+        {
+          "tipo": "texto",
+          "md": "El cemento comparte con el hueso la composición y el tipo de células formadoras: los **cementoblastos**, que tapizan su superficie del lado del ligamento, y, en algunos tipos, los **cementocitos**, cementoblastos que quedaron atrapados en pequeñas cavidades llamadas **lagunas** y que se comunican por **canalículos** orientados hacia el ligamento, de donde reciben nutrientes.\n\nLas diferencias, sin embargo, son decisivas. El cemento **no tiene vasos sanguíneos ni linfáticos**, **no tiene nervios** y, en condiciones normales, **no se remodela**: no hay un ciclo continuo de reabsorción y formación como en el hueso, sino un depósito lento que continúa durante toda la vida, sobre todo en la región apical. Además, es **más resistente a la reabsorción** que el hueso. Esta propiedad, junto con la protección que le dan los cementoblastos y la capa de matriz no mineralizada de su superficie, llamada **cementoide**, es una de las bases del movimiento ortodóncico: al aplicar fuerzas adecuadas, se reabsorbe y se forma hueso alrededor del diente mientras la raíz se conserva."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/13",
+          "proporcion": "4:3",
+          "alt": "Microfotografía histológica de la superficie de una raíz con dentina, una capa de cemento con células atrapadas y el ligamento periodontal.",
+          "pie": "Cemento celular en la región apical: los cementocitos ocupan lagunas y el ligamento periodontal se inserta en su superficie.",
+          "prompt": "Microfotografía histológica realista de un corte longitudinal de la región apical de una raíz humana, tinción de hematoxilina y eosina, aumento medio, a la izquierda dentina radicular rosada con túbulos finos, en el centro una banda gruesa de cemento con pequeñas lagunas que contienen células de núcleo oscuro y líneas incrementales paralelas, a la derecha el ligamento periodontal con haces de fibras que se insertan en el cemento, iluminación de campo claro, enfoque nítido. Evitar: texto, etiquetas, flechas, barras de escala, números, logotipos, marcas de agua, colores fluorescentes, artefactos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los tipos de cemento"
+        },
+        {
+          "tipo": "texto",
+          "md": "La clasificación más usada, propuesta por Schroeder, combina dos criterios: si el cemento contiene **células** (celular o acelular) y de dónde provienen sus **fibras de colágeno**. Las **fibras extrínsecas** son las fibras de Sharpey, que pertenecen al ligamento y quedan incorporadas en el cemento, perpendiculares u oblicuas a la raíz. Las **fibras intrínsecas** las producen los propios cementoblastos y corren más o menos paralelas a la superficie radicular.\n\nEl espesor del cemento varía a lo largo de la raíz: en el cuello es muy delgado, del orden de unas pocas decenas de micrómetros, y aumenta hacia el ápice, donde los textos describen valores de 150 a 200 µm o más, en especial en dientes que soportan cargas o en personas mayores. Ese depósito apical continuo se interpreta como una forma de compensar, junto con la erupción continua, el desgaste de las caras oclusales a lo largo de los años, de modo que el diente mantiene su contacto con el antagonista."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Tipos de cemento según Schroeder",
+          "columnas": [
+            "Tipo",
+            "Ubicación principal",
+            "Características",
+            "Función"
+          ],
+          "filas": [
+            [
+              "Acelular afibrilar",
+              "Junto a la unión amelocementaria, a veces sobre el esmalte",
+              "Sin células ni fibras de colágeno; capa muy delgada",
+              "Sin función de inserción conocida"
+            ],
+            [
+              "Acelular de fibras extrínsecas",
+              "Tercio cervical a mitad de la raíz; en incisivos y caninos puede cubrir casi toda la raíz",
+              "Sin células; formado sobre todo por fibras de Sharpey densamente empaquetadas; crecimiento muy lento",
+              "Principal tejido de anclaje del diente"
+            ],
+            [
+              "Celular de fibras intrínsecas",
+              "Tercio apical y furcaciones; también en zonas de reparación",
+              "Con cementocitos; fibras propias paralelas a la raíz; crecimiento más rápido",
+              "Adaptación y reparación; poca función de inserción"
+            ],
+            [
+              "Celular mixto estratificado",
+              "Tercio apical y furcaciones",
+              "Capas alternas de cemento acelular de fibras extrínsecas y celular de fibras intrínsecas",
+              "Adaptación de la posición del diente y anclaje"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m06/d5",
+          "pie": "Distribución de los tipos de cemento a lo largo de la raíz de un molar.",
+          "descripcion": "Esquema de un molar inferior con dos raíces en vista lateral. Una franja de color sobre la raíz indica: junto al cuello, un punto pequeño de cemento acelular afibrilar; en la mitad cervical, una capa delgada y uniforme de cemento acelular de fibras extrínsecas con fibras de Sharpey perpendiculares; en el tercio apical y la furcación, una capa más gruesa de cemento celular con cementocitos y capas estratificadas. Al lado, una regla vertical que indica que el espesor aumenta hacia el ápice.",
+          "elementos": [
+            "Cemento acelular afibrilar",
+            "Cemento acelular de fibras extrínsecas",
+            "Fibras de Sharpey",
+            "Cemento celular de fibras intrínsecas",
+            "Cemento celular mixto estratificado",
+            "Cementocitos en lagunas",
+            "Furcación",
+            "Mayor espesor hacia el ápice"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Anillos de crecimiento en la raíz",
+          "md": "El cemento acelular se deposita por capas a lo largo de la vida y forma **líneas incrementales** que, en ciertos cortes, recuerdan los anillos de un árbol. Contar esas líneas es la base de una técnica de investigación forense y antropológica para estimar la edad al momento de la muerte, conocida como análisis de las anulaciones del cemento. Su precisión es motivo de estudio y se usa junto con otros métodos, pero ilustra que el cemento, como el esmalte y la dentina, conserva un registro del tiempo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El cemento en la clínica"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **enfermedad periodontal** altera el cemento expuesto en las bolsas: su superficie se contamina con productos bacterianos y se pierde la inserción de las fibras. El objetivo del tratamiento periodontal no quirúrgico es eliminar la biopelícula y el cálculo de la raíz; hoy se considera que no es necesario retirar deliberadamente todo el cemento, porque los productos bacterianos se adhieren sobre todo a su superficie y la instrumentación excesiva expone dentina y aumenta la sensibilidad.\n\nCuando la raíz queda expuesta a la boca por recesión, el cemento, delgado y relativamente blando, puede perderse por cepillado traumático y deja la dentina descubierta. La raíz expuesta es además el sitio de la **caries radicular**, frecuente en adultos mayores, que se estudia en el programa de caries dental.\n\nEl cemento también puede **reabsorberse**. Las pequeñas reabsorciones superficiales son frecuentes y suelen repararse con cemento celular. Las reabsorciones más extensas pueden aparecer con fuerzas ortodóncicas excesivas, traumatismos, dientes retenidos que presionan una raíz vecina o lesiones inflamatorias. Si el ligamento se destruye y el hueso entra en contacto directo con la raíz, se produce una **anquilosis**, en la que la raíz se sustituye progresivamente por hueso; es una complicación conocida de los dientes avulsionados que se reimplantan después de que su ligamento se dañó fuera de la boca, por ejemplo al secarse."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Sensibilidad después del tratamiento periodontal",
+          "md": "Una mujer de 52 años termina su fase de raspado y alisado radicular por periodontitis. Dos semanas después, la inflamación ha disminuido, la encía se ha retraído ligeramente y refiere dolor breve al tomar agua fría en varios dientes inferiores. La explicación anatómica es directa: al desinflamarse la encía, quedó expuesta raíz cuyo cemento delgado se perdió en parte por la enfermedad y la instrumentación, dejando túbulos dentinarios abiertos. Suele mejorar con el tiempo y con medidas indicadas por el odontólogo; explicarlo antes del tratamiento evita que la paciente lo interprete como un daño."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Otras alteraciones del cemento que verás en radiografías y extracciones",
+          "items": [
+            "**Hipercementosis**: depósito excesivo de cemento que engrosa la raíz, sobre todo en el tercio apical; puede ser idiopática o asociarse a inflamación periapical crónica, a cargas oclusales aumentadas y a algunas enfermedades óseas sistémicas como la enfermedad de Paget. Puede dificultar una extracción.",
+            "**Cementículos**: pequeñas masas calcificadas libres o adheridas en el ligamento periodontal, por lo general sin consecuencia clínica.",
+            "**Desgarro del cemento**: fragmento de cemento desprendido de la raíz, por ejemplo por traumatismo; puede favorecer la pérdida localizada de inserción.",
+            "**Concrescencia**: unión de dos raíces vecinas por cemento, descrita en el módulo 5."
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/14",
+          "proporcion": "4:3",
+          "alt": "Premolar inferior extraído con la raíz engrosada en forma de maza en su tercio apical.",
+          "pie": "Hipercementosis: el depósito excesivo de cemento engrosa la raíz en su tercio apical.",
+          "prompt": "Fotografía macro de estudio de un premolar inferior permanente extraído, limpio y seco, sobre fondo gris neutro, vista proximal, corona con anatomía correcta y esmalte íntegro, raíz única de color marfil mate que se engrosa de forma redondeada en su tercio apical como una maza, superficie radicular lisa sin restos de tejido, iluminación difusa de estudio, enfoque nítido de toda la pieza. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, restos de tejido blando, caries, fracturas, instrumental."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Fuerzas excesivas y reabsorción radicular",
+          "md": "Aunque el cemento resiste la reabsorción mejor que el hueso, las fuerzas ortodóncicas intensas o mal controladas, así como algunos factores individuales, pueden producir **reabsorción radicular apical**, que acorta la raíz de manera irreversible. Por eso los tratamientos de ortodoncia se planean con radiografías iniciales y de control, y la magnitud y duración de las fuerzas son decisiones del especialista. Ante un paciente con antecedente de ortodoncia, revisa la longitud radicular en la radiografía y regístrala."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m06/15",
+          "proporcion": "16:9",
+          "alt": "Manos enguantadas de una higienista realizan un raspado suave con una cureta en los dientes inferiores de un paciente, en encuadre cerrado.",
+          "pie": "El tratamiento periodontal busca eliminar biopelícula y cálculo de la raíz conservando el cemento sano siempre que sea posible.",
+          "prompt": "Fotografía clínica realista en consultorio dental bien iluminado, encuadre cerrado de la boca de un paciente adulto con los labios separados por un retractor suave, una profesional con guantes de nitrilo, cubrebocas y careta transparente sostiene una cureta periodontal con apoyo digital estable junto al margen gingival de un incisivo inferior, encía rosa con leve enrojecimiento marginal, sin sangrado, luz blanca de lámpara dental, fondo desenfocado, colores naturales. Evitar: texto, logotipos, marcas de agua, sangre, rostro completo del paciente, manos sin guantes, instrumental oxidado, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Tipos y alteraciones del cemento",
+          "instruccion": "Relaciona cada término con su descripción.",
+          "pares": [
+            {
+              "a": "Cemento acelular de fibras extrínsecas",
+              "b": "Principal tejido de anclaje en la porción cervical y media de la raíz"
+            },
+            {
+              "a": "Cemento celular de fibras intrínsecas",
+              "b": "Contiene cementocitos y participa en la reparación"
+            },
+            {
+              "a": "Fibras de Sharpey",
+              "b": "Fibras del ligamento incorporadas en el cemento y en el hueso"
+            },
+            {
+              "a": "Hipercementosis",
+              "b": "Engrosamiento de la raíz por depósito excesivo de cemento"
+            },
+            {
+              "a": "Anquilosis",
+              "b": "Fusión directa del hueso con la raíz tras perderse el ligamento"
+            },
+            {
+              "a": "Cementoide",
+              "b": "Capa superficial de matriz de cemento aún no mineralizada"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en cada radiografía periapical, recorre el contorno de las raíces buscando engrosamientos apicales, acortamientos o irregularidades. Registrar hipercementosis o reabsorciones antes de extraer, mover o instrumentar un diente evita sorpresas y respalda tus decisiones ante el paciente."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Cemento",
+          "definicion": "Tejido mineralizado avascular que cubre la dentina radicular y ancla las fibras del ligamento periodontal."
+        },
+        {
+          "termino": "Cementoblasto",
+          "definicion": "Célula que forma el cemento y tapiza su superficie del lado del ligamento."
+        },
+        {
+          "termino": "Cementocito",
+          "definicion": "Cementoblasto atrapado en una laguna dentro del cemento celular."
+        },
+        {
+          "termino": "Fibras extrínsecas",
+          "definicion": "Fibras de Sharpey del ligamento periodontal incorporadas al cemento."
+        },
+        {
+          "termino": "Fibras intrínsecas",
+          "definicion": "Fibras de colágeno producidas por los cementoblastos, paralelas a la superficie radicular."
+        },
+        {
+          "termino": "Cementoide",
+          "definicion": "Capa superficial de matriz de cemento no mineralizada que contribuye a protegerlo de la reabsorción."
+        },
+        {
+          "termino": "Hipercementosis",
+          "definicion": "Depósito excesivo de cemento que engrosa la raíz."
+        },
+        {
+          "termino": "Anquilosis dentaria",
+          "definicion": "Unión directa del hueso alveolar con la raíz por pérdida del ligamento periodontal."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.5-1",
+          "q": "¿Qué tipo de cemento es el principal responsable del anclaje del diente?",
+          "opciones": [
+            "Acelular afibrilar",
+            "Celular de fibras intrínsecas",
+            "Acelular de fibras extrínsecas",
+            "Cementículos"
+          ],
+          "correcta": 2,
+          "explicacion": "El cemento acelular de fibras extrínsecas está formado por fibras de Sharpey densamente empaquetadas."
+        },
+        {
+          "id": "t6.5-2",
+          "q": "¿Qué característica del cemento permite mover dientes con ortodoncia sin reabsorber las raíces en condiciones normales?",
+          "opciones": [
+            "Que es más resistente a la reabsorción que el hueso",
+            "Que tiene abundantes vasos",
+            "Que se remodela más rápido que el hueso",
+            "Que tiene nervios que avisan del exceso de fuerza"
+          ],
+          "correcta": 0,
+          "explicacion": "El cemento, avascular y protegido por cementoblastos y cementoide, resiste la reabsorción mejor que el hueso."
+        },
+        {
+          "id": "t6.5-3",
+          "q": "¿Dónde es más grueso el cemento?",
+          "opciones": [
+            "En el cuello del diente",
+            "Sobre el esmalte",
+            "Es igual en toda la raíz",
+            "En el tercio apical y las furcaciones"
+          ],
+          "correcta": 3,
+          "explicacion": "El cemento es muy delgado en el cuello y aumenta hacia el ápice, donde predomina el cemento celular."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral Anatomy, Histology and Embryology",
+          "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Clinical Periodontology and Implant Dentistry",
+          "autor": "Lang N. P., Berglundh T., Giannobile W. V., Sanz M. (Wiley Blackwell)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en la clasificación de los tipos de cemento de Schroeder y en textos de histología oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: cada estructura con su tejido",
+    "pares": [
+      {
+        "a": "Prismas y estrías de Retzius",
+        "b": "Esmalte"
+      },
+      {
+        "a": "Túbulos y predentina",
+        "b": "Dentina"
+      },
+      {
+        "a": "Zona de Weil y plexo de Raschkow",
+        "b": "Pulpa"
+      },
+      {
+        "a": "Fibras de Sharpey y cementocitos",
+        "b": "Cemento"
+      },
+      {
+        "a": "Alrededor de 96 % de mineral",
+        "b": "El tejido más mineralizado del cuerpo"
+      },
+      {
+        "a": "Teoría hidrodinámica",
+        "b": "Explica la sensibilidad dentinaria"
+      },
+      {
+        "a": "Dentina secundaria",
+        "b": "Reduce la cámara pulpar con la edad"
+      },
+      {
+        "a": "Hipercementosis",
+        "b": "Raíz engrosada en el tercio apical"
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m06-p01",
+        "q": "¿Qué porcentaje aproximado de mineral, en peso, tiene la dentina?",
+        "opciones": [
+          "Alrededor de 96 %",
+          "Alrededor de 70 %",
+          "Alrededor de 45 %",
+          "Alrededor de 20 %"
+        ],
+        "correcta": 1,
+        "explicacion": "La dentina tiene cerca de 70 % de mineral, 20 % de matriz orgánica y 10 % de agua, en peso."
+      },
+      {
+        "id": "m06-p02",
+        "q": "¿Qué tejido dental tiene un contenido mineral parecido al del hueso?",
+        "opciones": [
+          "El esmalte",
+          "La pulpa",
+          "El cemento",
+          "La predentina"
+        ],
+        "correcta": 2,
+        "explicacion": "El cemento tiene alrededor de 45 a 50 % de mineral, una proporción semejante a la del hueso."
+      },
+      {
+        "id": "m06-p03",
+        "q": "Un paciente con recesión gingival refiere sensibilidad intensa en el cuello de un premolar sin caries. ¿Qué variante de la unión amelocementaria la favorece?",
+        "opciones": [
+          "Cemento que cubre el esmalte",
+          "Esmalte y cemento borde con borde",
+          "Esmalte que cubre el cemento por completo",
+          "Separación entre esmalte y cemento con dentina expuesta"
+        ],
+        "correcta": 3,
+        "explicacion": "Cuando esmalte y cemento no se encuentran queda dentina expuesta, que se vuelve sensible si la encía se retrae."
+      },
+      {
+        "id": "m06-p04",
+        "q": "¿Qué estructura forma la unidad básica de organización del esmalte?",
+        "opciones": [
+          "El prisma o varilla de cristales",
+          "El túbulo",
+          "La laguna",
+          "El odontoblasto"
+        ],
+        "correcta": 0,
+        "explicacion": "Los cristales de apatita se agrupan en prismas que van de la unión amelodentinaria a la superficie."
+      },
+      {
+        "id": "m06-p05",
+        "q": "¿Qué representan las estrías de Retzius?",
+        "opciones": [
+          "Grietas producidas por la masticación",
+          "Líneas incrementales de formación del esmalte con periodicidad aproximada semanal",
+          "Prolongaciones de odontoblastos",
+          "Zonas de esmalte sin prismas"
+        ],
+        "correcta": 1,
+        "explicacion": "Son líneas de crecimiento; donde alcanzan la superficie forman las periquimatías."
+      },
+      {
+        "id": "m06-p06",
+        "q": "¿Por qué el esmalte sin soporte de dentina tiende a fracturarse?",
+        "opciones": [
+          "Porque tiene poco mineral",
+          "Porque contiene colágeno",
+          "Porque es duro pero frágil y necesita la elasticidad de la dentina",
+          "Porque tiene túbulos"
+        ],
+        "correcta": 2,
+        "explicacion": "El esmalte resiste la compresión y el desgaste, pero sin la dentina que lo amortigua se fractura con facilidad."
+      },
+      {
+        "id": "m06-p07",
+        "q": "¿Qué son los husos del esmalte?",
+        "opciones": [
+          "Grietas que atraviesan todo el esmalte",
+          "Bandas ópticas por cruce de prismas",
+          "Zonas hipomineralizadas con forma de arbusto",
+          "Prolongaciones de odontoblastos atrapadas en el esmalte"
+        ],
+        "correcta": 3,
+        "explicacion": "Durante la formación, algunas prolongaciones odontoblásticas cruzan la unión y quedan incluidas en el esmalte."
+      },
+      {
+        "id": "m06-p08",
+        "q": "¿Dónde son más numerosos y más anchos los túbulos dentinarios?",
+        "opciones": [
+          "Cerca de la pulpa",
+          "Cerca de la unión amelodentinaria",
+          "En el esmalte",
+          "En el cemento"
+        ],
+        "correcta": 0,
+        "explicacion": "Los túbulos convergen hacia la pulpa, de modo que allí su densidad y su diámetro son mayores."
+      },
+      {
+        "id": "m06-p09",
+        "q": "¿Qué tipo de dentina se forma durante toda la vida después de completarse la raíz, sin necesidad de un estímulo patológico?",
+        "opciones": [
+          "Primaria",
+          "Terciaria reparativa",
+          "Secundaria",
+          "Del manto"
+        ],
+        "correcta": 2,
+        "explicacion": "La dentina secundaria es fisiológica y reduce lentamente la cavidad pulpar."
+      },
+      {
+        "id": "m06-p10",
+        "q": "Bajo una lesión de caries de avance lento, los odontoblastos originales forman una capa de dentina nueva. ¿Cómo se llama?",
+        "opciones": [
+          "Dentina reparativa",
+          "Dentina reaccional",
+          "Dentina del manto",
+          "Dentina interglobular"
+        ],
+        "correcta": 1,
+        "explicacion": "La dentina reaccional la forman odontoblastos supervivientes; la reparativa, células nuevas tras su muerte."
+      },
+      {
+        "id": "m06-p11",
+        "q": "¿Qué mecanismo explica la teoría hidrodinámica de la sensibilidad dentinaria?",
+        "opciones": [
+          "El estímulo destruye el esmalte",
+          "Las bacterias activan los nervios del cemento",
+          "El esmalte conduce electricidad",
+          "El movimiento del líquido en los túbulos estimula terminaciones nerviosas"
+        ],
+        "correcta": 3,
+        "explicacion": "Los estímulos desplazan el líquido tubular y ese movimiento activa fibras A-delta junto a los odontoblastos."
+      },
+      {
+        "id": "m06-p12",
+        "q": "¿Por qué la dentina profunda es un sustrato de adhesión más difícil que la superficial?",
+        "opciones": [
+          "Porque tiene más túbulos, más anchos, y más humedad",
+          "Porque tiene más esmalte",
+          "Porque no contiene colágeno",
+          "Porque está más mineralizada que el esmalte"
+        ],
+        "correcta": 0,
+        "explicacion": "La mayor densidad y diámetro tubular aumentan la humedad y reducen la proporción de dentina intertubular disponible para la unión."
+      },
+      {
+        "id": "m06-p13",
+        "q": "¿Qué zona de la pulpa se encuentra inmediatamente por dentro de la capa de odontoblastos?",
+        "opciones": [
+          "El núcleo pulpar",
+          "La zona rica en células",
+          "La zona pobre en células o de Weil",
+          "La predentina"
+        ],
+        "correcta": 2,
+        "explicacion": "Por dentro de los odontoblastos está la zona pobre en células; después, la zona rica en células y el núcleo."
+      },
+      {
+        "id": "m06-p14",
+        "q": "¿Qué célula inmunitaria abunda en la periferia de la pulpa y detecta antígenos que llegan por los túbulos?",
+        "opciones": [
+          "El eritrocito",
+          "El cementocito",
+          "El osteoclasto",
+          "La célula dendrítica"
+        ],
+        "correcta": 3,
+        "explicacion": "Las células dendríticas se sitúan junto a los odontoblastos y participan en la vigilancia inmunitaria."
+      },
+      {
+        "id": "m06-p15",
+        "q": "Una radiografía de un adulto mayor muestra cámaras pulpares pequeñas y conductos estrechos. ¿Qué lo explica principalmente?",
+        "opciones": [
+          "Depósito continuo de dentina secundaria",
+          "Reabsorción del esmalte",
+          "Pérdida de cemento",
+          "Aumento de vasos pulpares"
+        ],
+        "correcta": 0,
+        "explicacion": "La dentina secundaria reduce la cavidad pulpar con los años, más en el techo y el piso de la cámara."
+      },
+      {
+        "id": "m06-p16",
+        "q": "¿Qué describe mejor la presión tisular durante la inflamación pulpar según los estudios actuales?",
+        "opciones": [
+          "Aumenta de manera uniforme en toda la pulpa al instante",
+          "Aumenta sobre todo de forma local, con zonas afectadas junto a zonas sanas",
+          "No cambia porque la pulpa se expande",
+          "Solo cambia en el cemento"
+        ],
+        "correcta": 1,
+        "explicacion": "La inflamación pulpar progresa por compartimentos, lo que permite conservar pulpas con inflamación localizada."
+      },
+      {
+        "id": "m06-p17",
+        "q": "¿Qué tipo de cemento predomina en el tercio apical y las furcaciones y contiene células?",
+        "opciones": [
+          "Acelular afibrilar",
+          "Acelular de fibras extrínsecas",
+          "Celular de fibras intrínsecas o mixto estratificado",
+          "Cementoide"
+        ],
+        "correcta": 2,
+        "explicacion": "El cemento celular, intrínseco o mixto estratificado, se localiza en el tercio apical y las furcaciones."
+      },
+      {
+        "id": "m06-p18",
+        "q": "¿Qué propiedad distingue al cemento del hueso alveolar?",
+        "opciones": [
+          "Que contiene colágeno tipo I",
+          "Que está mineralizado",
+          "Que tiene células formadoras",
+          "Que no tiene vasos y no se remodela en condiciones normales"
+        ],
+        "correcta": 3,
+        "explicacion": "El cemento es avascular, carece de nervios y no tiene el ciclo de remodelación continua del hueso."
+      },
+      {
+        "id": "m06-p19",
+        "q": "Al extraer un premolar, la raíz se encuentra engrosada en forma de maza en su tercio apical. ¿Qué alteración es más probable?",
+        "opciones": [
+          "Hipercementosis",
+          "Perla de esmalte",
+          "Dentinogénesis imperfecta",
+          "Anquilosis"
+        ],
+        "correcta": 0,
+        "explicacion": "La hipercementosis es un depósito excesivo de cemento, sobre todo apical, que puede dificultar la extracción."
+      },
+      {
+        "id": "m06-p20",
+        "q": "¿Qué implica el objetivo actual del tratamiento periodontal no quirúrgico respecto al cemento?",
+        "opciones": [
+          "Retirar todo el cemento para eliminar las toxinas",
+          "Eliminar biopelícula y cálculo conservando el cemento sano cuando es posible",
+          "Pulir el cemento hasta exponer la pulpa",
+          "No tocar la raíz en ningún caso"
+        ],
+        "correcta": 1,
+        "explicacion": "Los productos bacterianos se adhieren sobre todo a la superficie; la instrumentación excesiva expone dentina y causa sensibilidad."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Oral Anatomy, Histology and Embryology",
+      "autor": "Berkovitz B. K. B., Holland G. R., Moxham B. J. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Seltzer and Bender's Dental Pulp",
+      "autor": "Hargreaves K. M., Goodis H. E., Tay F. R. (Quintessence)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Scanning electron microscopic investigation of human dentinal tubules",
+      "autor": "Garberoglio R., Brännström M. (Archives of Oral Biology)",
+      "anio": 1976
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Postnatal human dental pulp stem cells (DPSCs) in vitro and in vivo",
+      "autor": "Gronthos S., Mankani M., Brahim J., Robey P. G., Shi S. (PNAS)",
+      "anio": 2000
+    }
+  ]
+}

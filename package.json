@@ -8,7 +8,13 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test:guia": "node scripts/test-guia-datos.mjs && node scripts/test-guia-inteligencia.mjs && node scripts/test-guia-capas.mjs && node scripts/test-movimiento-guia.mjs",
-    "audit:learning-packs": "node scripts/audit-learning-packs.mjs"
+    "audit:learning-packs": "node scripts/audit-learning-packs.mjs",
+    "academia:validar": "node scripts/academia/validar.mjs",
+    "academia:balancear": "node scripts/academia/balancear-respuestas.mjs",
+    "academia:catalogo": "node scripts/academia/generar-catalogo.mjs",
+    "academia:preparar-imagenes": "node scripts/academia/preparar-imagenes.mjs",
+    "academia:importar-imagenes": "node scripts/academia/importar-imagenes.mjs",
+    "academia:pdf-prompts": "node scripts/academia/pdf-prompts.mjs"
   },
   "devDependencies": {
     "typescript": "~6.0.2",

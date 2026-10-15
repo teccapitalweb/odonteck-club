@@ -5,6 +5,8 @@ import { resolve } from 'node:path';
 // Dos sitios en el mismo repo: el club (index.html) y la landing pública (landing/index.html).
 export default defineConfig({
   base: process.env.VITE_BASE_PATH || '/',
+  // output/ guarda el perfil temporal de Edge de pdf-prompts; vigilarlo tumba el servidor con EBUSY.
+  server: { watch: { ignored: ['**/output/**'] } },
   plugins: [{
     name: 'odonteck-production-safety',
     enforce: 'pre',

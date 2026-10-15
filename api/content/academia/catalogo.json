@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "actualizado": "2026-10-15",
+  "programas": [
+    {
+      "id": "anatomia-dental",
+      "numero": 1,
+      "titulo": "Anatomía dental y de la cavidad oral",
+      "area": "Ciencias básicas",
+      "descripcion": "Recorrido por la cavidad oral, sus tejidos, huesos, músculos, vasos y nervios, y por la anatomía de cada grupo dentario. Incluye odontogénesis, nomenclatura FDI, dentición temporal, oclusión y anatomía radiográfica, la base para todo lo demás.",
+      "nivel": "Inicial a Intermedio",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "asistentes dentales",
+        "pacientes informados"
+      ],
+      "portada": {
+        "id": "anatomia-dental/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "La cavidad oral: límites, regiones y funciones"
+        },
+        {
+          "n": 2,
+          "titulo": "Mucosa oral, encía y glándulas salivales"
+        },
+        {
+          "n": 3,
+          "titulo": "Huesos maxilares, articulación temporomandibular y músculos de la masticación"
+        },
+        {
+          "n": 4,
+          "titulo": "Irrigación e inervación de la región oral"
+        },
+        {
+          "n": 5,
+          "titulo": "Odontogénesis: cómo se forma un diente"
+        },
+        {
+          "n": 6,
+          "titulo": "Tejidos dentarios: esmalte, dentina, pulpa y cemento"
+        },
+        {
+          "n": 7,
+          "titulo": "Periodonto de inserción: ligamento periodontal y hueso alveolar"
+        },
+        {
+          "n": 8,
+          "titulo": "Nomenclatura dental y sistemas de numeración FDI y universal"
+        },
+        {
+          "n": 9,
+          "titulo": "Dentición temporal y cronología de la erupción"
+        },
+        {
+          "n": 10,
+          "titulo": "Anatomía de incisivos y caninos permanentes"
+        },
+        {
+          "n": 11,
+          "titulo": "Anatomía de premolares permanentes"
+        },
+        {
+          "n": 12,
+          "titulo": "Anatomía de molares permanentes"
+        },
+        {
+          "n": 13,
+          "titulo": "Oclusión: relaciones entre arcadas y movimientos mandibulares"
+        },
+        {
+          "n": 14,
+          "titulo": "Anatomía radiográfica de los dientes y sus estructuras de soporte"
+        }
+      ]
+    },
+    {
+      "id": "caries-dental",
+      "numero": 2,
+      "titulo": "Caries dental: prevención, diagnóstico y manejo",
+      "area": "Cariología",
+      "descripcion": "La caries como enfermedad dinámica mediada por la biopelícula y los azúcares, y cómo prevenirla, detectarla y manejarla con criterios actuales. Recorre la evaluación de riesgo, ICDAS II, flúor, selladores, dieta, odontología mínimamente invasiva y la atención por etapas de la vida.",
+      "nivel": "Inicial a Intermedio",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "odontólogos generales",
+        "asistentes dentales",
+        "pacientes informados"
+      ],
+      "portada": {
+        "id": "caries-dental/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "Qué es la caries: biopelícula, azúcares y la hipótesis de la placa ecológica"
+        },
+        {
+          "n": 2,
+          "titulo": "Estructura dental, saliva y el equilibrio entre desmineralización y remineralización"
+        },
+        {
+          "n": 3,
+          "titulo": "Factores de riesgo y evaluación del riesgo de caries con CAMBRA e ICCMS"
+        },
+        {
+          "n": 4,
+          "titulo": "Diagnóstico de la caries: examen visual-táctil, ICDAS II y radiografías"
+        },
+        {
+          "n": 5,
+          "titulo": "Flúor y remineralización: mecanismos, vehículos y uso seguro"
+        },
+        {
+          "n": 6,
+          "titulo": "Selladores de fosetas y fisuras"
+        },
+        {
+          "n": 7,
+          "titulo": "Dieta y azúcares libres: la guía de la OMS en la práctica"
+        },
+        {
+          "n": 8,
+          "titulo": "Odontología mínimamente invasiva y remoción selectiva de tejido cariado"
+        },
+        {
+          "n": 9,
+          "titulo": "Materiales restauradores en el manejo de la caries"
+        },
+        {
+          "n": 10,
+          "titulo": "Caries en niños y caries de la infancia temprana"
+        },
+        {
+          "n": 11,
+          "titulo": "Caries radicular y salud bucal en personas mayores"
+        },
+        {
+          "n": 12,
+          "titulo": "Comunicación con el paciente y programas de prevención"
+        }
+      ]
+    },
+    {
+      "id": "enfermedad-periodontal",
+      "numero": 3,
+      "titulo": "Enfermedad periodontal: de la gingivitis a la periodontitis",
+      "area": "Periodoncia",
+      "descripcion": "Del periodonto sano a la periodontitis con la clasificación 2017 de la AAP y la EFP. Enseña examen periodontal, estadificación y gradación, factores de riesgo, relación con la salud general, terapia no quirúrgica, mantenimiento y salud periimplantaria.",
+      "nivel": "Intermedio a Avanzado",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "odontólogos generales",
+        "asistentes dentales"
+      ],
+      "portada": {
+        "id": "enfermedad-periodontal/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "El periodonto sano: estructura y función"
+        },
+        {
+          "n": 2,
+          "titulo": "Biopelícula dental, cálculo y respuesta inmunoinflamatoria"
+        },
+        {
+          "n": 3,
+          "titulo": "Clasificación de las enfermedades periodontales y periimplantarias 2017"
+        },
+        {
+          "n": 4,
+          "titulo": "Salud gingival y gingivitis inducida por biopelícula"
+        },
+        {
+          "n": 5,
+          "titulo": "Enfermedades gingivales no inducidas por biopelícula"
+        },
+        {
+          "n": 6,
+          "titulo": "Examen periodontal: sondeo, periodontograma e índices de placa"
+        },
+        {
+          "n": 7,
+          "titulo": "Evaluación radiográfica de la pérdida ósea"
+        },
+        {
+          "n": 8,
+          "titulo": "Periodontitis: estadificación y gradación"
+        },
+        {
+          "n": 9,
+          "titulo": "Enfermedades periodontales necrosantes, abscesos y lesiones endoperiodontales"
+        },
+        {
+          "n": 10,
+          "titulo": "Factores de riesgo: tabaquismo, diabetes y otros modificadores"
+        },
+        {
+          "n": 11,
+          "titulo": "Enfermedad periodontal y salud general"
+        },
+        {
+          "n": 12,
+          "titulo": "Terapia periodontal no quirúrgica: principios y etapas"
+        },
+        {
+          "n": 13,
+          "titulo": "Control de la biopelícula en casa: técnicas y auxiliares"
+        },
+        {
+          "n": 14,
+          "titulo": "Mantenimiento periodontal y criterios de referencia al especialista"
+        },
+        {
+          "n": 15,
+          "titulo": "Salud periimplantaria: mucositis y periimplantitis"
+        }
+      ]
+    },
+    {
+      "id": "endodoncia",
+      "numero": 4,
+      "titulo": "Endodoncia: fundamentos del tratamiento de conductos",
+      "area": "Endodoncia",
+      "descripcion": "Fundamentos del tratamiento de conductos, desde la biología pulpar y la anatomía interna hasta el diagnóstico, la terapia pulpar vital y las fases de limpieza, conformación y obturación. Cierra con pronóstico, retratamiento, traumatismos y criterios de referencia.",
+      "nivel": "Intermedio a Avanzado",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "odontólogos generales"
+      ],
+      "portada": {
+        "id": "endodoncia/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "La pulpa dental: estructura, funciones y respuesta a la agresión"
+        },
+        {
+          "n": 2,
+          "titulo": "Anatomía interna: cámara pulpar y sistema de conductos"
+        },
+        {
+          "n": 3,
+          "titulo": "Diagnóstico endodóntico: historia clínica y pruebas de sensibilidad pulpar"
+        },
+        {
+          "n": 4,
+          "titulo": "Terminología diagnóstica pulpar y periapical"
+        },
+        {
+          "n": 5,
+          "titulo": "Radiografía y tomografía de haz cónico en endodoncia"
+        },
+        {
+          "n": 6,
+          "titulo": "Dolor de origen dental: urgencias y diagnóstico diferencial"
+        },
+        {
+          "n": 7,
+          "titulo": "Terapia pulpar vital: recubrimiento pulpar y pulpotomía"
+        },
+        {
+          "n": 8,
+          "titulo": "Aislamiento absoluto y bioseguridad en endodoncia"
+        },
+        {
+          "n": 9,
+          "titulo": "Acceso cameral y localización de conductos"
+        },
+        {
+          "n": 10,
+          "titulo": "Conformación del conducto: instrumentación manual y mecanizada"
+        },
+        {
+          "n": 11,
+          "titulo": "Irrigación y desinfección del sistema de conductos"
+        },
+        {
+          "n": 12,
+          "titulo": "Obturación del conducto y sellado coronal"
+        },
+        {
+          "n": 13,
+          "titulo": "Éxito, fracaso y retratamiento: seguimiento y pronóstico"
+        },
+        {
+          "n": 14,
+          "titulo": "Traumatismos dentales y su repercusión pulpar"
+        }
+      ]
+    },
+    {
+      "id": "odontopediatria",
+      "numero": 5,
+      "titulo": "Odontopediatría: salud bucal en niños",
+      "area": "Odontopediatría",
+      "descripcion": "Salud bucal de bebés, niñas y niños: desarrollo de la dentición, primera visita, manejo de la conducta, prevención personalizada y caries de la infancia temprana. Incluye terapia pulpar y restauración de dientes temporales, hábitos, traumatismos y atención a necesidades especiales.",
+      "nivel": "Inicial a Intermedio",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "odontólogos generales",
+        "asistentes dentales",
+        "pacientes informados"
+      ],
+      "portada": {
+        "id": "odontopediatria/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "La salud bucal infantil y el papel de la odontopediatría"
+        },
+        {
+          "n": 2,
+          "titulo": "Crecimiento craneofacial y desarrollo de la dentición"
+        },
+        {
+          "n": 3,
+          "titulo": "Anomalías dentales del desarrollo e hipomineralización incisivo-molar"
+        },
+        {
+          "n": 4,
+          "titulo": "Primera visita al dentista y atención del bebé"
+        },
+        {
+          "n": 5,
+          "titulo": "Manejo de la conducta y comunicación con niños y familias"
+        },
+        {
+          "n": 6,
+          "titulo": "Evaluación del riesgo y prevención personalizada en la infancia"
+        },
+        {
+          "n": 7,
+          "titulo": "Higiene bucal por edades: guía para madres, padres y cuidadores"
+        },
+        {
+          "n": 8,
+          "titulo": "Caries de la infancia temprana: enfoque familiar y comunitario"
+        },
+        {
+          "n": 9,
+          "titulo": "Terapia pulpar en dientes temporales"
+        },
+        {
+          "n": 10,
+          "titulo": "Restauración de dientes temporales: materiales y coronas"
+        },
+        {
+          "n": 11,
+          "titulo": "Hábitos orales y desarrollo de la oclusión"
+        },
+        {
+          "n": 12,
+          "titulo": "Mantenedores de espacio y ortodoncia interceptiva"
+        },
+        {
+          "n": 13,
+          "titulo": "Traumatismos dentales en la infancia"
+        },
+        {
+          "n": 14,
+          "titulo": "Niñas y niños con necesidades especiales de atención"
+        }
+      ]
+    },
+    {
+      "id": "bioseguridad",
+      "numero": 6,
+      "titulo": "Bioseguridad y control de infecciones en el consultorio dental",
+      "area": "Bioseguridad",
+      "descripcion": "Control de infecciones en el consultorio dental con base en la normativa mexicana y las guías internacionales. Cubre precauciones estándar, higiene de manos, equipo de protección, vacunación, punzocortantes, aerosoles, esterilización y su monitoreo, agua de la unidad, RPBI y protección radiológica.",
+      "nivel": "Inicial a Intermedio",
+      "publico": [
+        "estudiantes de odontología",
+        "pasantes",
+        "odontólogos generales",
+        "asistentes dentales"
+      ],
+      "portada": {
+        "id": "bioseguridad/portada",
+        "proporcion": "16:9"
+      },
+      "modulos": [
+        {
+          "n": 1,
+          "titulo": "Bioseguridad en odontología: principios y marco normativo"
+        },
+        {
+          "n": 2,
+          "titulo": "Cadena de infección y vías de transmisión en el consultorio"
+        },
+        {
+          "n": 3,
+          "titulo": "Precauciones estándar y precauciones basadas en la transmisión"
+        },
+        {
+          "n": 4,
+          "titulo": "Higiene de manos"
+        },
+        {
+          "n": 5,
+          "titulo": "Equipo de protección personal: selección, colocación y retiro"
+        },
+        {
+          "n": 6,
+          "titulo": "Vacunación y salud ocupacional del equipo dental"
+        },
+        {
+          "n": 7,
+          "titulo": "Prevención y manejo de exposiciones con objetos punzocortantes"
+        },
+        {
+          "n": 8,
+          "titulo": "Aerosoles, ventilación y calidad del aire"
+        },
+        {
+          "n": 9,
+          "titulo": "Limpieza, desinfección y clasificación de Spaulding"
+        },
+        {
+          "n": 10,
+          "titulo": "Procesamiento y esterilización del instrumental"
+        },
+        {
+          "n": 11,
+          "titulo": "Monitoreo de la esterilización con indicadores físicos, químicos y biológicos"
+        },
+        {
+          "n": 12,
+          "titulo": "Calidad del agua de la unidad dental"
+        },
+        {
+          "n": 13,
+          "titulo": "Residuos peligrosos biológico-infecciosos en el consultorio"
+        },
+        {
+          "n": 14,
+          "titulo": "Protección radiológica en el consultorio dental"
+        },
+        {
+          "n": 15,
+          "titulo": "Auditoría y protocolo de bioseguridad del consultorio"
+        }
+      ]
+    }
+  ]
+}
