@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite';
-import { readdirSync, rmSync, unlinkSync } from 'node:fs';
+import { readdirSync, realpathSync, rmSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // Dos sitios en el mismo repo: el club (index.html) y la landing pública (landing/index.html).
 export default defineConfig({
   base: process.env.VITE_BASE_PATH || '/',
   // output/ guarda el perfil temporal de Edge de pdf-prompts; vigilarlo tumba el servidor con EBUSY.
-  server: { watch: { ignored: ['**/output/**'] } },
+  // En un worktree, node_modules puede ser un enlace a otra carpeta: se permite servir sus
+  // archivos (fuentes) para que la vista local se vea igual que producción.
+  server: { watch: { ignored: ['**/output/**'] }, fs: { allow: [import.meta.dirname, (() => { try { return realpathSync(resolve(import.meta.dirname, 'node_modules')); } catch { return resolve(import.meta.dirname, 'node_modules'); } })()] } },
   plugins: [{
     name: 'odonteck-production-safety',
     enforce: 'pre',
