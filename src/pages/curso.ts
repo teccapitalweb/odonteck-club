@@ -1,3 +1,4 @@
+import { CursoGratis } from '../core/curso-gratis';
 import { curso as getCurso, cursos, fmtMin } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { Acceso } from '../core/acceso';
@@ -13,6 +14,10 @@ export function curso(params: Record<string, string>) {
   const iniciales = c.instructor.split(' ').filter((w) => /^[A-ZÁÉÍÓÚ]/.test(w)).slice(-2).map((w) => w[0]).join('');
   const esGratis = Acceso.cursoGratis(c);
   const bloqueado = !Acceso.vip() && !esGratis;
+  const gratisElegido = CursoGratis.id();
+  const sinElegir = !Acceso.vip() && !gratisElegido;
+  const cursoGratisNombre = gratisElegido ? cursos.find((x) => x.id === gratisElegido)?.titulo ?? '' : '';
+  const puedeCambiar = !Acceso.vip() && !!CursoGratis.estado()?.puedeCambiar && !esGratis;
 
   const temario = c.clases.map((k) => {
     const vista = vistas.includes(k.n);
@@ -42,7 +47,9 @@ export function curso(params: Record<string, string>) {
 
   const cta = done
     ? `<a class="btn btn--white btn--lg btn--pill-arrow" href="#/certificados">Ver mi certificado <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="award" class="i"></i></span></a>`
-    : bloqueado
+    : sinElegir
+      ? `<button class="btn btn--white btn--lg btn--pill-arrow" data-curso-gratis-abrir="${c.id}"><i data-lucide="gift" class="i"></i>Elegir como mi curso gratis <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="arrow-right" class="i"></i></span></button>`
+      : bloqueado
       ? `<button class="btn btn--white btn--lg btn--pill-arrow" data-paywall="Este curso es para miembros VIP. Hazte VIP y desbloquea todos los cursos."><i data-lucide="crown" class="i"></i>Hazte VIP para empezar <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="arrow-right" class="i"></i></span></button>`
       : `<a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${c.id}/clase/${sig}">${p ? `Continuar con la clase ${sig}` : 'Empezar el curso'} <span class="arrow" style="background:var(--brand-navy);color:#fff"><i data-lucide="play" class="i"></i></span></a>`;
 
@@ -72,7 +79,13 @@ export function curso(params: Record<string, string>) {
         <div class="syllabus">${temario}</div>
       </div>
       <div class="stack" style="position:sticky;top:88px">
-        ${bloqueado ? `
+        ${sinElegir ? `
+        <div class="cg-cta" style="grid-template-columns:auto minmax(0,1fr)">
+          <span class="cg-cta__ic"><i data-lucide="gift" class="i"></i></span>
+          <div><strong>¿Este será tu curso gratis?</strong><small>Elige uno del catálogo y tenlo completo, menos la clase final.</small></div>
+          <button class="btn" style="grid-column:1/-1;justify-content:center" data-curso-gratis-abrir="${c.id}"><i data-lucide="gift" class="i"></i>Elegir este curso</button>
+        </div>` : bloqueado ? `
+        ${cursoGratisNombre ? `<p class="muted" style="font-size:var(--fs-sm)"><i data-lucide="gift" class="i" style="width:14px;height:14px;vertical-align:-2px"></i> Tu curso gratis es <a href="#/curso/${gratisElegido}"><strong>${esc(cursoGratisNombre)}</strong></a>.${puedeCambiar ? ` <button class="btn btn--ghost btn--sm" data-curso-gratis-abrir="${c.id}">Cambiar a este</button>` : ''}</p>` : ''}
         <div class="card card--pad stack" style="gap:12px;background:color-mix(in srgb,var(--brand-navy) 6%,var(--surface));border-color:color-mix(in srgb,var(--brand-navy) 20%,var(--line))">
           <div class="row" style="gap:10px"><span class="circle-btn" style="width:40px;height:40px;background:var(--brand-gradient);color:#fff"><i data-lucide="crown" class="i" style="width:18px;height:18px"></i></span><div><strong>Curso VIP</strong><p class="muted" style="font-size:var(--fs-sm)">Hazte VIP para ver todas las clases, obtener tu certificado y acceder a la biblioteca.</p></div></div>
           <button class="btn btn--brand" style="width:100%;justify-content:center" data-paywall="Este curso es para miembros VIP. Hazte VIP y desbloquea todos los cursos."><i data-lucide="crown" class="i"></i>Hazte VIP</button>

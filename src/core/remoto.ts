@@ -1,3 +1,4 @@
+import { CursoGratis } from './curso-gratis';
 import { api, Auth } from './auth';
 import { Datos, type Config, type Curso, type Evento, type Material, type Quiz } from './datos';
 import { Progreso, type ProgresoCurso } from './progreso';
@@ -114,12 +115,15 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
     const gen = generacion;
     const nueva: Promise<void> = (async () => {
       void Recompensas.cargar().catch(() => null);
+      // La elección del curso gratis decide qué se ve abierto; se pide junto con el catálogo.
+      const cursoGratisP = CursoGratis.cargar().catch(() => { CursoGratis.hidratar({ cursoId: null, origen: null, elegido: null, puedeCambiar: false, cambiaHasta: null }); return null; });
       // /catalogo lee los desbloqueos del estado guardado; la sincronización de recompensas solo suma puntos y logros.
       const [catalogo, progreso] = await Promise.all([
         api<CatalogoRemoto>('/catalogo'),
         api<Record<string, ProgresoCurso>>('/progreso').catch(() => null),
       ]);
       if (gen !== generacion) return;
+      await cursoGratisP;
 
       Datos.hidratarAdmin('cursos', (catalogo.cursos || []).map(adaptarCurso));
       Datos.hidratarAdmin('materiales', (catalogo.materiales || []).map(adaptarMaterial));
@@ -163,6 +167,7 @@ export function invalidarClub() {
   Datos.invalidarAdmin('cursos', 'materiales', 'eventos', 'config');
   RetosRemotos.limpiar();
   Recompensas.limpiar();
+  CursoGratis.limpiar();
   invalidarComunidad();
   Comunidad.hidratar([]);
   invalidarDirectorio();

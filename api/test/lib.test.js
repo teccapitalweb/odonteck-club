@@ -100,10 +100,15 @@ describe('desbloqueo secuencial y acceso a clase', () => {
     assert.equal(claseDesbloqueada(conHueco, 3, [1]), true);
   });
 
-  test('acceso: VIP o clase gratis', () => {
-    assert.equal(tieneAccesoAClase({ gratis: true }, false), true);
-    assert.equal(tieneAccesoAClase({ gratis: false }, false), false);
-    assert.equal(tieneAccesoAClase({}, true), true);
+  test('acceso: VIP o curso gratis elegido, nunca por la marca gratis de la clase', () => {
+    const tres = { clases: [{ n: 1, gratis: true }, { n: 2 }, { n: 3 }] };
+    assert.equal(tieneAccesoAClase(tres, 'a', 1, false, null), false, 'sin elegir no abre nada');
+    assert.equal(tieneAccesoAClase(tres, 'a', 1, false, 'a'), true);
+    assert.equal(tieneAccesoAClase(tres, 'a', 2, false, 'a'), true);
+    assert.equal(tieneAccesoAClase(tres, 'a', 3, false, 'a'), false, 'la última clase es VIP');
+    assert.equal(tieneAccesoAClase(tres, 'b', 1, false, 'a'), false, 'otro curso es VIP');
+    assert.equal(tieneAccesoAClase(tres, 'b', 3, true, null), true);
+    assert.equal(tieneAccesoAClase({ clases: [{ n: 1 }] }, 'a', 1, false, 'a'), false, 'un curso de una sola clase no regala su cierre');
   });
 
   test('curso completo cuando todas las clases están vistas', () => {
@@ -137,26 +142,27 @@ describe('regla freemium unificada', () => {
   const futuro = new Date('2027-01-01T00:00:00Z').toISOString();
   const pasado = new Date('2026-01-01T00:00:00Z').toISOString();
 
-  test('primer curso, primera clase: accesible sin VIP', () => {
-    assert.equal(tieneAccesoAClase(primerCurso.clases[0], false), true);
+  test('curso gratis elegido, primera clase: accesible sin VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso, 'primero', 1, false, 'primero'), true);
   });
 
-  test('primer curso, penúltima clase: accesible sin VIP', () => {
-    assert.equal(tieneAccesoAClase(primerCurso.clases[3], false), true);
+  test('curso gratis elegido, penúltima clase: accesible sin VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso, 'primero', 4, false, 'primero'), true);
   });
 
-  test('primer curso, última clase: requiere VIP', () => {
-    assert.equal(tieneAccesoAClase(primerCurso.clases[4], false), false);
-    assert.equal(tieneAccesoAClase(primerCurso.clases[4], true), true);
+  test('curso gratis elegido, última clase: requiere VIP', () => {
+    assert.equal(tieneAccesoAClase(primerCurso, 'primero', 5, false, 'primero'), false);
+    assert.equal(tieneAccesoAClase(primerCurso, 'primero', 5, true, 'primero'), true);
   });
 
-  test('segundo curso, primera clase: accesible sin VIP', () => {
-    assert.equal(tieneAccesoAClase(segundoCurso.clases[0], false), true);
+  test('el usuario puede elegir cualquier curso, no solo el primero', () => {
+    assert.equal(tieneAccesoAClase(segundoCurso, 'segundo', 2, false, 'segundo'), true);
+    assert.equal(tieneAccesoAClase(primerCurso, 'primero', 1, false, 'segundo'), false, 'al elegir otro, el primero se cierra');
   });
 
-  test('segundo curso, segunda clase: requiere VIP', () => {
-    assert.equal(tieneAccesoAClase(segundoCurso.clases[1], false), false);
-    assert.equal(tieneAccesoAClase(segundoCurso.clases[1], true), true);
+  test('curso no elegido: todo requiere VIP aunque tenga clases marcadas gratis', () => {
+    assert.equal(tieneAccesoAClase(segundoCurso, 'segundo', 1, false, 'primero'), false);
+    assert.equal(tieneAccesoAClase(segundoCurso, 'segundo', 1, true, 'primero'), true);
   });
 
   test('usuario sin membresía no es VIP', () => {

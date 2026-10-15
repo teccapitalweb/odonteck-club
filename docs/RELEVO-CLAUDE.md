@@ -226,3 +226,7 @@ Antes de afirmar que algo está en producción, comprobar el commit fuente, el d
 - `scripts/pipeline/README.md`: contenido, transcripciones y revisión clínica.
 
 Si una implementación cambia producción, reglas comerciales, puntos, logros, rutas, seguridad o pendientes, actualiza estos documentos en el mismo commit.
+
+## 2026-10-15 · Regla freemium nueva: «Escoge tu curso gratis»
+
+El miembro gratis elige un curso; queda abierto menos la última clase y los demás se cierran. Ver la sección de reglas comerciales en `CONTEXTO-MAESTRO.md`. Rama `feat/curso-gratis-elegible`. Al desplegar la API, quien ya avanzó en el curso gratis anterior lo conserva solo; el resto verá el anuncio al entrar. No requiere índices ni reglas nuevas (la colección `v2_curso_gratis` la escribe solo el servidor).

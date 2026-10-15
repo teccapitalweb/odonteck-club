@@ -242,16 +242,22 @@ Las portadas finales de cursos conviven con portadas numeradas antiguas en `publ
 
 La regla comercial unificada es:
 
-- **Primer curso** (identificado por `orden === 1`, "Diagnóstico en Ortodoncia"): todas las clases gratuitas **excepto la última** (clase 5 requiere VIP).
-- **Demás cursos**: solo la **primera clase** es gratuita; el resto requiere VIP.
+**Regla vigente desde 2026-10-15: «Escoge tu curso gratis».**
 
-Esta regla está implementada de forma coherente en:
+- Cada miembro gratis **elige un curso** del catálogo en un anuncio de bienvenida que aparece al entrar por primera vez (después de la encuesta inicial y antes del recorrido).
+- Ese curso queda abierto **completo excepto su última clase**, que junto con el certificado requiere VIP.
+- **Los demás cursos se cierran por completo** para cuentas gratis. VIP ve todo.
+- La elección es **definitiva**, con **un solo cambio** permitido en las primeras 24 horas si no ha visto más de una clase.
+- Quien ya tenía avance en el curso gratis anterior (el que tenía clases con `gratis: true`) **lo conserva automáticamente**, sin elegir (origen `migracion`).
+- Administración puede **reiniciar la elección** desde el detalle del miembro; el miembro vuelve a ver el anuncio y su progreso no se borra.
 
-- `src/data/catalogo.json`: campo `gratis` por clase (clases 1–4 del primer curso son `true`, clase 5 es `false`; en los demás, solo clase 1 es `true`).
-- `src/core/acceso.ts`: `claseLibre()` usa `curso.orden === 1` para identificar el primer curso de forma estable.
-- API (`api/src/lib/acceso.js`): `tieneAccesoAClase()` usa `clase.gratis === true`.
-- Textos de landing, onboarding y login reflejan que el primer curso es casi completo gratis.
-- `api/test/lib.test.js`: 9 pruebas de límite validan los escenarios: primer curso primera/penúltima/última clase, segundo curso primera/segunda clase, sin membresía, VIP activo, VIP vencido, admin.
+Implementación:
+
+- Colección `v2_curso_gratis/{uid}` (`cursoId`, `origen` eleccion|migracion|reinicio, `elegido`, `cambios`). Solo la escribe el servidor.
+- API: `GET/POST /curso-gratis`, `DELETE /admin/miembros/:uid/curso-gratis`; `api/src/lib/curso-gratis.js` (lectura con migración perezosa y ventana de cambio).
+- `api/src/lib/acceso.js`: `tieneAccesoAClase(curso, cursoId, n, vip, cursoGratisId)`. La marca `gratis` por clase **ya no abre contenido**; solo identifica el curso gratis anterior para migrar y para textos de landing.
+- Frontend: `src/core/curso-gratis.ts` (demo en localStorage), `src/ui/curso-gratis.ts` (anuncio de 2 pasos + celebración), `Acceso.cursoGratis/claseLibre` aplican la misma regla que el servidor.
+- Pruebas: `api/test/lib.test.js` y el bloque «escoge tu curso gratis» de `api/test/rutas-miembro.test.js`.
 
 ### Material gratuito
 

@@ -1,3 +1,5 @@
+import { CursoGratis } from '../core/curso-gratis';
+import { Acceso } from '../core/acceso';
 import { Progreso } from '../core/progreso';
 import { type Curso, duracionCurso } from '../core/catalogo';
 
@@ -27,6 +29,7 @@ export function tarjetaCurso(c: Curso) {
   <a class="pcard" href="#/curso/${c.id}">
     <img src="${c.portada}" alt="" loading="lazy">
     <div class="pcard__top">${chip}<span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="${icon}" class="i" style="width:15px;height:15px"></i></span></div>
+    ${Acceso.vip() ? '' : Acceso.cursoGratis(c) ? '<span class="pcard__mine"><i data-lucide="gift" class="i"></i>Tu curso gratis</span>' : CursoGratis.id() ? '<span class="pcard__lock"><i data-lucide="crown" class="i"></i>VIP</span>' : ''}
     <div class="pcard__body">
       <div class="pcard__title">${esc(c.titulo)}</div>
       <div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>${meta(c)}</span><span><i data-lucide="signal" class="i"></i>${c.nivel}</span></div>

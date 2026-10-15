@@ -287,7 +287,7 @@ export function rutasAdmin(ctx) {
 
   r.get('/admin/miembros/:uid', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
-    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario] = await Promise.all([
+    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis] = await Promise.all([
       leerDoc(db, COL.miembros, uid),
       leerDoc(db, COL.cortesias, uid),
       leerDoc(db, COL.perfiles, uid),
@@ -296,6 +296,7 @@ export function rutasAdmin(ctx) {
       db.collection(COL.certificados).where('uid', '==', uid).get(),
       db.collection(COL.cursos).get(),
       usuarioAuth(uid),
+      leerDoc(db, COL.cursoGratis, uid),
     ]);
     if (!m && !c && !perfil && !usuario && progSnap.empty) throw noEncontrado('No existe ese miembro.');
     const esAdmin = usuario?.customClaims?.admin === true;
@@ -335,6 +336,7 @@ export function rutasAdmin(ctx) {
           certificado: p.certificado ?? null,
         })),
       certificados: certSnap.docs.map((d) => d.data()).sort((a, b) => String(b.emitido).localeCompare(String(a.emitido))),
+      cursoGratis: cursoGratis?.cursoId ? { cursoId: cursoGratis.cursoId, titulo: cursos.get(cursoGratis.cursoId)?.titulo ?? cursoGratis.cursoId, origen: cursoGratis.origen, elegido: cursoGratis.elegido, cambios: cursoGratis.cambios ?? 0 } : null,
     });
   }));
 
@@ -355,6 +357,16 @@ export function rutasAdmin(ctx) {
     };
     await db.collection(COL.cortesias).doc(uid).set(cortesia);
     res.status(201).json(cortesia);
+  }));
+
+  // Reinicia «Escoge tu curso gratis»: el miembro vuelve a ver el anuncio para elegir.
+  // Se deja un registro vacío para que la migración automática no lo reasigne.
+  r.delete('/admin/miembros/:uid/curso-gratis', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const ref = db.collection(COL.cursoGratis).doc(uid);
+    const previo = await ref.get();
+    await ref.set({ uid, cursoId: null, origen: 'reinicio', anterior: previo.exists ? previo.data().cursoId ?? null : null, reiniciadoPor: req.usuario.email || req.usuario.uid, elegido: null, cambios: 0, fecha: ctx.now().toISOString() });
+    res.json({ ok: true, uid });
   }));
 
   r.delete('/admin/miembros/:uid/cortesia', h(async (req, res) => {

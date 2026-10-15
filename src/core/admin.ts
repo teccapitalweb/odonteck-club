@@ -20,6 +20,7 @@ export interface DetalleMiembroAdmin extends MiembroDemo {
   cortesia?: { hasta?: string; motivo?: string } | null;
   progreso: { cursoId: string; titulo: string; vistas: number[]; total: number; ultima: number | null; actualizado: string | null; certificado?: string | null }[];
   certificados: { folio: string; cursoTitulo: string; emitido: string }[];
+  cursoGratis?: { cursoId: string; titulo: string; origen: string; elegido: string | null; cambios: number } | null;
 }
 
 export interface ReporteDirectorioAdmin {
@@ -150,7 +151,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
         estado.detalleMiembro = {
           ...d,
           ...adaptarMiembro({ ...d, clasesVistas: progreso.reduce((n: number, p: any) => n + (Array.isArray(p.vistas) ? p.vistas.length : 0), 0), ultimaActividad }),
-          cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [],
+          cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [], cursoGratis: d.cursoGratis ?? null,
         };
       }, true));
     } else if (path === '/admin/comunidad') {
@@ -271,6 +272,12 @@ export async function guardarCortesiaAdmin(uid: string, dias: number, motivo: st
     m.cortesiaHasta = new Date(base + dias * 864e5).toISOString(); m.cortesiaMotivo = motivo; Datos.guardarMiembro(m); return;
   }
   await api(`/admin/miembros/${encodeURIComponent(uid)}/cortesia`, { method: 'POST', json: { dias, motivo } });
+  cargados.delete(`miembro:${uid}`);
+}
+
+export async function reiniciarCursoGratisAdmin(uid: string) {
+  if (Datos.modo === 'demo') return;
+  await api(`/admin/miembros/${encodeURIComponent(uid)}/curso-gratis`, { method: 'DELETE' });
   cargados.delete(`miembro:${uid}`);
 }
 
