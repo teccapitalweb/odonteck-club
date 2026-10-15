@@ -18,10 +18,10 @@ const ic = (n: string) => `<i data-lucide="${n}" class="i" aria-hidden="true"></
 // Cada área conserva un tono de la familia de marca (azules, teal y marino).
 const AREAS: [RegExp, { icono: string; color: string }][] = [
   [/anatom|ciencias/i, { icono: 'scan-face', color: '#2f6fb5' }],
-  [/cariol|caries/i, { icono: 'shield-plus', color: '#3b8a7d' }],
+  [/cariol|caries/i, { icono: 'shield-plus', color: '#2f786d' }],
   [/periodon/i, { icono: 'heart-pulse', color: '#4a6fb0' }],
   [/endodon/i, { icono: 'git-branch', color: '#1c467a' }],
-  [/pediatr/i, { icono: 'baby', color: '#4fa899' }],
+  [/pediatr/i, { icono: 'baby', color: '#0f7a8a' }],
   [/bioseg|infecc/i, { icono: 'shield-check', color: '#20254b' }],
 ];
 const area = (a: string) => AREAS.find(([re]) => re.test(a))?.[1] ?? { icono: 'graduation-cap', color: '#2f6fb5' };
