@@ -300,7 +300,8 @@ export function montarGuia(fuente: Fuente) {
     panel.style.setProperty('--oguia-top', `${Math.round(top)}px`);
     panel.classList.toggle('compacta', alto < (movil ? 650 : 600));
     panel.setAttribute('aria-modal', String(movil));
-    bloquearFondo(movil);
+    // El velo cubre toda la página en cualquier tamaño: si el fondo no se bloquea, en Mac sigue desplazándose detrás.
+    bloquearFondo(true);
   }
 
   function abrir(action?: string) {
