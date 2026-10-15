@@ -7,7 +7,7 @@ import {
   tieneAccesoAClase,
 } from '../lib/acceso.js';
 import { firmarEmbedBunny } from '../lib/bunny.js';
-import { CAMBIO_GRATIS_MS, MAX_VISTAS_PARA_CAMBIAR, estadoCursoGratis, leerCursoGratis, leerVistas } from '../lib/curso-gratis.js';
+import { MAX_VISTAS_PARA_CAMBIAR, enVentanaDeCambio, estadoCursoGratis, leerCursoGratis } from '../lib/curso-gratis.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
 import { aMillis } from '../lib/fechas.js';
@@ -346,22 +346,29 @@ export function rutasMiembro(ctx) {
     if (!curso || curso.publicado !== true) throw noEncontrado('Ese curso no existe o no está publicado.');
     if (numerosDeClase(curso).length < 2) throw conflicto('Ese curso todavía no tiene clases suficientes para elegirlo.', 'curso_incompleto');
     const ref = db.collection(COL.cursoGratis).doc(uid);
-    const previa = await leerCursoGratis(ctx, uid);
+    await leerCursoGratis(ctx, uid); // aplica la migración perezosa antes de decidir
     const ahora = ctx.now();
     let datos;
-    if (!previa?.cursoId) {
-      datos = { uid, cursoId, origen: 'eleccion', elegido: ahora.toISOString(), cambios: 0 };
-    } else if (previa.cursoId === cursoId) {
-      datos = previa;
-    } else {
-      const enVentana = previa.origen === 'eleccion' && (previa.cambios ?? 0) === 0 && ahora.getTime() < new Date(previa.elegido).getTime() + CAMBIO_GRATIS_MS;
-      if (!enVentana || (await leerVistas(ctx, uid, previa.cursoId)) > MAX_VISTAS_PARA_CAMBIAR) {
-        throw conflicto('Tu curso gratis ya está definido. Hazte VIP para abrir todos los cursos.', 'eleccion_definitiva');
+    let mismo = false;
+    // Transacción: dos peticiones simultáneas no pueden gastar el cambio único dos veces.
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const previa = snap.exists ? snap.data() : null;
+      if (!previa?.cursoId) {
+        datos = { uid, cursoId, origen: 'eleccion', elegido: ahora.toISOString(), cambios: 0, maxAbierta: 0 };
+      } else if (previa.cursoId === cursoId) {
+        datos = previa; mismo = true; return;
+      } else {
+        const prog = await tx.get(db.collection(COL.progreso).doc(`${uid}_${previa.cursoId}`));
+        const vistas = prog.exists ? (prog.data().vistas ?? []).length : 0;
+        if (!enVentanaDeCambio(previa, ahora.getTime()) || vistas > MAX_VISTAS_PARA_CAMBIAR) {
+          throw conflicto('Tu curso gratis ya está definido. Hazte VIP para abrir todos los cursos.', 'eleccion_definitiva');
+        }
+        datos = { ...previa, cursoId, cambios: 1, anterior: previa.cursoId, cambiadoEn: ahora.toISOString(), maxAbierta: 0 };
       }
-      datos = { ...previa, cursoId, cambios: 1, anterior: previa.cursoId, cambiadoEn: ahora.toISOString() };
-    }
-    await ref.set(datos);
-    res.status(previa?.cursoId === cursoId ? 200 : 201).json({ ...(await estadoCursoGratis(ctx, uid, datos)), esVip: false });
+      tx.set(ref, datos);
+    });
+    res.status(mismo ? 200 : 201).json({ ...(await estadoCursoGratis(ctx, uid, datos)), esVip: false });
   }));
 
   /** Carga curso + clase y verifica acceso (VIP o gratis) y, opcionalmente, desbloqueo secuencial. */
@@ -386,6 +393,11 @@ export function rutasMiembro(ctx) {
       throw requiereVip(eleccion?.cursoId === cursoId
         ? 'La última clase de tu curso gratis es para miembros VIP. Hazte VIP para terminarlo y obtener tu certificado.'
         : 'Este curso es para miembros VIP. Tu curso gratis es el que elegiste; hazte VIP para abrir todos.');
+    }
+    // Registra hasta qué clase del curso gratis ya se abrió (video, ficha, quiz o vista),
+    // para que el cambio único no permita aprovechar un curso y luego cambiarse.
+    if (!estado.esVip && eleccion?.cursoId === cursoId && n > (eleccion.maxAbierta ?? 0)) {
+      await db.collection(COL.cursoGratis).doc(u.uid).update({ maxAbierta: n });
     }
     const progSnap = await progP;
     const progreso = progSnap?.exists ? progSnap.data() : null;

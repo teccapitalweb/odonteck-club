@@ -34,13 +34,23 @@ export async function leerCursoGratis(ctx, uid) {
   return datos;
 }
 
+/**
+ * El cambio único solo procede si la elección es propia, no se ha usado el cambio, sigue dentro
+ * de las 24 h y el miembro no ha consumido más de una clase. «Consumir» cuenta tanto las clases
+ * marcadas como vistas como cualquier clase cuyo video, ficha o quiz ya abrió (`maxAbierta`),
+ * para que no pueda aprovechar un curso sin marcarlo y luego cambiarse a otro.
+ */
+export function enVentanaDeCambio(eleccion, ahoraMs) {
+  if (!eleccion?.cursoId || eleccion.origen !== 'eleccion' || (eleccion.cambios ?? 0) !== 0) return false;
+  if ((eleccion.maxAbierta ?? 0) > MAX_VISTAS_PARA_CAMBIAR) return false;
+  return ahoraMs < new Date(eleccion.elegido).getTime() + CAMBIO_GRATIS_MS;
+}
+
 /** Estado público de la elección, con la ventana de cambio único ya resuelta. */
 export async function estadoCursoGratis(ctx, uid, eleccion) {
   if (!eleccion?.cursoId) return { cursoId: null, origen: eleccion?.origen ?? null, elegido: null, puedeCambiar: false, cambiaHasta: null };
-  const limite = new Date(eleccion.elegido).getTime() + CAMBIO_GRATIS_MS;
-  const enVentana = eleccion.origen === 'eleccion' && (eleccion.cambios ?? 0) === 0 && ctx.now().getTime() < limite;
-  const puedeCambiar = enVentana && (await leerVistas(ctx, uid, eleccion.cursoId)) <= MAX_VISTAS_PARA_CAMBIAR;
-  return { cursoId: eleccion.cursoId, origen: eleccion.origen, elegido: eleccion.elegido, puedeCambiar, cambiaHasta: puedeCambiar ? new Date(limite).toISOString() : null };
+  const puedeCambiar = enVentanaDeCambio(eleccion, ctx.now().getTime()) && (await leerVistas(ctx, uid, eleccion.cursoId)) <= MAX_VISTAS_PARA_CAMBIAR;
+  return { cursoId: eleccion.cursoId, origen: eleccion.origen, elegido: eleccion.elegido, puedeCambiar, cambiaHasta: puedeCambiar ? new Date(new Date(eleccion.elegido).getTime() + CAMBIO_GRATIS_MS).toISOString() : null };
 }
 
 export { leerVistas };
