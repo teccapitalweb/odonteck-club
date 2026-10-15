@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { Router } from 'express';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -22,6 +22,17 @@ const REINTENTO_RECHAZADO_MS = 30 * 86400000;
 const MOTIVOS_REPORTE = ['spam', 'suplantacion', 'contenido_inapropiado', 'datos_falsos', 'otro'];
 const fotoPath = (uid) => `directorio/perfiles/${uid}/avatar.webp`;
 const bannerPath = (uid) => `directorio/perfiles/${uid}/banner.webp`;
+// Documentos del perfil (CV, títulos, constancias). Viven fuera de la carpeta pública de
+// fotos y solo se sirven con enlaces firmados de corta duración tras revisar permisos.
+const DOC_MAX = 6;
+const DOC_TIPOS = ['cv', 'titulo', 'certificado', 'constancia', 'portafolio', 'otro'];
+const DOC_VISIBILIDAD = ['miembros', 'conexiones'];
+const DOC_MIME = { 'application/pdf': 10_000_000, 'image/webp': 6_000_000, 'image/jpeg': 6_000_000, 'image/png': 6_000_000 };
+const DOC_MINIATURA_MAX = 400_000;
+const docBase = (uid, id) => `directorio-documentos/${uid}/${id}`;
+const docArchivoPath = (uid, id) => `${docBase(uid, id)}/archivo`;
+const docMiniaturaPath = (uid, id) => `${docBase(uid, id)}/miniatura.webp`;
+const documentoPublico = (d) => ({ id: d.id, nombre: d.nombre, tipo: d.tipo, visibilidad: d.visibilidad, mime: d.mime, bytes: d.bytes, paginas: d.paginas ?? null, creado: d.creado });
 const assetUrl = (bucket, path) => `https://firebasestorage.googleapis.com/v0/b/${bucket}/o/${encodeURIComponent(path)}?alt=media`;
 const idEstable = (...partes) => createHash('sha256').update(partes.join('|')).digest('hex').slice(0, 40);
 const unicoPorId = (lista) => [...new Map(lista.map((v) => [v.id ?? v.uid, v])).values()];
@@ -50,6 +61,7 @@ const perfilPublico = (p, uid) => ({
   habilidades: p.habilidades ?? [], bio: p.bio ?? '', foto: assetVersionado(p.foto, p.actualizado), banner: assetVersionado(p.banner, p.actualizado),
   anosExperiencia: p.anosExperiencia ?? null, idiomas: p.idiomas ?? [], experiencia: p.experiencia ?? [],
   formacion: p.formacion ?? [], credenciales: p.credenciales ?? [], actualizado: p.actualizado,
+  documentos: (p.documentos ?? []).map(documentoPublico),
   esMio: p.uid === uid,
 });
 
@@ -87,7 +99,27 @@ function validarPerfil(body, anterior, usuario, nombre, bucket) {
     contacto: { canal: contactoCanal, valor: contactoValor },
     foto: body.foto === null ? null : body.foto === 'propia' && bucket ? assetUrl(bucket, fotoPath(usuario.uid)) : anterior?.foto ?? null,
     banner: body.banner === null ? null : body.banner === 'propio' && bucket ? assetUrl(bucket, bannerPath(usuario.uid)) : anterior?.banner ?? null,
+    // Los documentos solo cambian por sus rutas propias; guardar el perfil los conserva.
+    documentos: anterior?.documentos ?? [],
   });
+}
+
+async function metadatosValidos(archivo, tiposPermitidos, maxBytes) {
+  let metadata;
+  try { [metadata] = await archivo.getMetadata(); }
+  catch { return null; }
+  const bytes = Number(metadata?.size);
+  if (!tiposPermitidos.includes(metadata?.contentType) || !Number.isFinite(bytes) || bytes < 1 || bytes > maxBytes) return null;
+  return { contentType: metadata.contentType, bytes };
+}
+
+async function hayConexionAceptada(ctx, a, b) {
+  const [salientes, entrantes] = await Promise.all([
+    ctx.db.collection(COL.directorioConexiones).where('deUid', '==', a).get(),
+    ctx.db.collection(COL.directorioConexiones).where('deUid', '==', b).get(),
+  ]);
+  return salientes.docs.some((d) => d.data().paraUid === b && d.data().estado === 'aceptada')
+    || entrantes.docs.some((d) => d.data().paraUid === a && d.data().estado === 'aceptada');
 }
 
 function listaEstructurada(valor, campo, maxItems, normalizar) {
@@ -241,7 +273,9 @@ export function rutasDirectorio(ctx) {
   r.delete('/directorio/perfil', auth, h(async (req, res) => {
     const uid = req.usuario.uid;
     const ref = ctx.db.collection(COL.directorioPerfiles).doc(uid);
-    if (!(await ref.get()).exists) throw noEncontrado('No tienes un perfil en el directorio.');
+    const previoSnap = await ref.get();
+    if (!previoSnap.exists) throw noEncontrado('No tienes un perfil en el directorio.');
+    const docsEliminados = previoSnap.data().documentos ?? [];
     const [oportunidades, salientes, entrantes] = await Promise.all([
       ctx.db.collection(COL.directorioOportunidades).where('autorUid', '==', uid).get(),
       ctx.db.collection(COL.directorioConexiones).where('deUid', '==', uid).get(),
@@ -256,7 +290,10 @@ export function rutasDirectorio(ctx) {
     if (ctx.storage && ctx.config.storageBucket) {
       try {
         const bucket = ctx.storage.bucket(ctx.config.storageBucket);
-        await Promise.all([bucket.file(fotoPath(uid)).delete({ ignoreNotFound: true }), bucket.file(bannerPath(uid)).delete({ ignoreNotFound: true })]);
+        await Promise.all([
+          bucket.file(fotoPath(uid)).delete({ ignoreNotFound: true }), bucket.file(bannerPath(uid)).delete({ ignoreNotFound: true }),
+          ...docsEliminados.flatMap((d) => [bucket.file(docArchivoPath(uid, d.id)).delete({ ignoreNotFound: true }), bucket.file(docMiniaturaPath(uid, d.id)).delete({ ignoreNotFound: true })]),
+        ]);
       }
       catch (error) { ctx.logger?.warn?.('No se pudo retirar la foto del perfil eliminado.', { uid, error: error?.message }); }
     }
@@ -303,6 +340,125 @@ export function rutasDirectorio(ctx) {
     const snap = await ref.get();
     if (snap.exists) await ref.update({ banner: null, actualizado: ctx.now().toISOString() });
     res.json({ ok: true });
+  }));
+
+  // ── Documentos del perfil ──
+  r.post('/directorio/perfil/documentos/subida', auth, h(async (req, res) => {
+    if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de documentos no está configurado en el servidor.');
+    const uid = req.usuario.uid;
+    const snap = await ctx.db.collection(COL.directorioPerfiles).doc(uid).get();
+    if (!snap.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
+    if ((snap.data().documentos ?? []).length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
+    const b = cuerpo(req);
+    const mime = unoDe(b.contentType, Object.keys(DOC_MIME), { campo: 'contentType', requerido: true });
+    const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: DOC_MIME[mime] });
+    const miniaturaBytes = entero(b.miniaturaBytes, { campo: 'miniaturaBytes', min: 1, max: DOC_MINIATURA_MAX });
+    const id = randomBytes(12).toString('hex');
+    const bucket = ctx.storage.bucket(ctx.config.storageBucket);
+    const expires = ctx.now().getTime() + 10 * 60 * 1000;
+    const [[uploadUrl], [miniaturaUploadUrl]] = await Promise.all([
+      bucket.file(docArchivoPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: mime }),
+      bucket.file(docMiniaturaPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE }),
+    ]);
+    res.json({ id, uploadUrl, contentType: mime, bytes, miniaturaUploadUrl, miniaturaContentType: FOTO_CONTENT_TYPE, miniaturaBytes, expira: new Date(expires).toISOString() });
+  }));
+
+  r.post('/directorio/perfil/documentos', auth, h(async (req, res) => {
+    if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de documentos no está configurado en el servidor.');
+    const uid = req.usuario.uid;
+    const b = cuerpo(req);
+    const id = String(b.id ?? '');
+    if (!/^[a-f0-9]{24}$/.test(id)) throw invalido('El documento no es válido.', 'documento_invalido');
+    const nombre = textoRequerido(b.nombre, { campo: 'nombre', max: 90 });
+    const tipo = unoDe(b.tipo, DOC_TIPOS, { campo: 'tipo', requerido: true });
+    const visibilidad = unoDe(b.visibilidad, DOC_VISIBILIDAD, { campo: 'visibilidad', requerido: true });
+    const paginas = b.paginas === undefined || b.paginas === null ? null : entero(b.paginas, { campo: 'paginas', min: 1, max: 500 });
+    const bucket = ctx.storage.bucket(ctx.config.storageBucket);
+    const archivo = bucket.file(docArchivoPath(uid, id));
+    const miniatura = bucket.file(docMiniaturaPath(uid, id));
+    const [metaArchivo, metaMiniatura] = await Promise.all([
+      metadatosValidos(archivo, Object.keys(DOC_MIME), Math.max(...Object.values(DOC_MIME))),
+      metadatosValidos(miniatura, [FOTO_CONTENT_TYPE], DOC_MINIATURA_MAX),
+    ]);
+    if (!metaArchivo || metaArchivo.bytes > DOC_MIME[metaArchivo.contentType] || !metaMiniatura) {
+      await Promise.all([archivo.delete({ ignoreNotFound: true }), miniatura.delete({ ignoreNotFound: true })]);
+      throw invalido('No encontramos el documento subido o no cumple el formato (PDF de hasta 10 MB o imagen de hasta 6 MB).', 'documento_invalido');
+    }
+    const ref = ctx.db.collection(COL.directorioPerfiles).doc(uid);
+    const ahora = ctx.now().toISOString();
+    const documento = { id, nombre, tipo, visibilidad, mime: metaArchivo.contentType, bytes: metaArchivo.bytes, paginas, creado: ahora };
+    await ctx.db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
+      const actuales = snap.data().documentos ?? [];
+      if (actuales.some((d) => d.id === id)) throw conflicto('Ese documento ya está adjunto.');
+      if (actuales.length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
+      tx.update(ref, { documentos: [...actuales, documento], actualizado: ahora });
+    });
+    res.status(201).json(documentoPublico(documento));
+  }));
+
+  r.patch('/directorio/perfil/documentos/:id', auth, h(async (req, res) => {
+    const id = idDocumento(req.params.id, 'id');
+    const b = cuerpo(req);
+    const ref = ctx.db.collection(COL.directorioPerfiles).doc(req.usuario.uid);
+    let actualizado;
+    await ctx.db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const actuales = snap.exists ? snap.data().documentos ?? [] : [];
+      const previo = actuales.find((d) => d.id === id);
+      if (!previo) throw noEncontrado('Ese documento ya no está en tu perfil.');
+      actualizado = sinIndefinidos({
+        ...previo,
+        nombre: b.nombre === undefined ? previo.nombre : textoRequerido(b.nombre, { campo: 'nombre', max: 90 }),
+        tipo: b.tipo === undefined ? previo.tipo : unoDe(b.tipo, DOC_TIPOS, { campo: 'tipo', requerido: true }),
+        visibilidad: b.visibilidad === undefined ? previo.visibilidad : unoDe(b.visibilidad, DOC_VISIBILIDAD, { campo: 'visibilidad', requerido: true }),
+      });
+      tx.update(ref, { documentos: actuales.map((d) => d.id === id ? actualizado : d), actualizado: ctx.now().toISOString() });
+    });
+    res.json(documentoPublico(actualizado));
+  }));
+
+  r.delete('/directorio/perfil/documentos/:id', auth, h(async (req, res) => {
+    const uid = req.usuario.uid;
+    const id = idDocumento(req.params.id, 'id');
+    const ref = ctx.db.collection(COL.directorioPerfiles).doc(uid);
+    await ctx.db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const actuales = snap.exists ? snap.data().documentos ?? [] : [];
+      if (!actuales.some((d) => d.id === id)) throw noEncontrado('Ese documento ya no está en tu perfil.');
+      tx.update(ref, { documentos: actuales.filter((d) => d.id !== id), actualizado: ctx.now().toISOString() });
+    });
+    if (ctx.storage && ctx.config.storageBucket) {
+      const bucket = ctx.storage.bucket(ctx.config.storageBucket);
+      try { await Promise.all([bucket.file(docArchivoPath(uid, id)).delete({ ignoreNotFound: true }), bucket.file(docMiniaturaPath(uid, id)).delete({ ignoreNotFound: true })]); }
+      catch (error) { ctx.logger?.warn?.('No se pudo retirar el archivo del documento.', { uid, id, error: error?.message }); }
+    }
+    res.json({ ok: true });
+  }));
+
+  // Enlaces firmados de lectura (15 min). Los documentos «conexiones» solo los ve su dueño,
+  // administración o quien tenga una conexión aceptada con esa persona.
+  r.get('/directorio/perfiles/:uid/documentos', auth, h(async (req, res) => {
+    const duenoUid = idDocumento(req.params.uid, 'uid');
+    const yo = req.usuario.uid;
+    const snap = await ctx.db.collection(COL.directorioPerfiles).doc(duenoUid).get();
+    const esDueno = duenoUid === yo;
+    if (!snap.exists || (!esDueno && !req.usuario.esAdmin && snap.data().visible !== true)) throw noEncontrado('Ese perfil ya no está disponible.');
+    const docs = snap.data().documentos ?? [];
+    const conectado = esDueno || req.usuario.esAdmin ? true : docs.some((d) => d.visibilidad === 'conexiones') ? await hayConexionAceptada(ctx, yo, duenoUid) : false;
+    const bucket = ctx.storage && ctx.config.storageBucket ? ctx.storage.bucket(ctx.config.storageBucket) : null;
+    const expires = ctx.now().getTime() + 15 * 60 * 1000;
+    const documentos = await Promise.all(docs.map(async (d) => {
+      const accesible = d.visibilidad === 'miembros' || conectado;
+      if (!accesible || !bucket) return { ...documentoPublico(d), accesible, url: null, miniatura: null };
+      const [[url], [miniatura]] = await Promise.all([
+        bucket.file(docArchivoPath(duenoUid, d.id)).getSignedUrl({ version: 'v4', action: 'read', expires }),
+        bucket.file(docMiniaturaPath(duenoUid, d.id)).getSignedUrl({ version: 'v4', action: 'read', expires }),
+      ]);
+      return { ...documentoPublico(d), accesible, url, miniatura };
+    }));
+    res.json({ perfil: perfilPublico({ ...snap.data(), uid: duenoUid }, yo), documentos, expira: new Date(expires).toISOString() });
   }));
 
   r.post('/directorio/oportunidades', auth, h(async (req, res) => {
