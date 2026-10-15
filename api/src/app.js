@@ -1,4 +1,5 @@
 // Crea la app de Express a partir de dependencias inyectadas (reales en server.js, dobles en tests).
+import compression from 'compression';
 import cors from 'cors';
 import express from 'express';
 import { manejarErrores, noEncontradoRuta } from './middleware/errores.js';
@@ -71,9 +72,11 @@ export function crearApp(deps) {
       origin: (origin, cb) => cb(null, !origin || permitidos.has(normalizarOrigen(origin))),
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Authorization', 'Content-Type'],
-      maxAge: 600,
+      maxAge: 7200,
     }),
   );
+
+  app.use(compression({ threshold: 1024 }));
 
   // El webhook necesita el cuerpo crudo para verificar la firma: va ANTES de express.json.
   app.post('/stripe/webhook', express.raw({ type: '*/*', limit: '1mb' }), webhookStripe(ctx));

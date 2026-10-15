@@ -12,6 +12,7 @@ import { Acceso, mostrarPaywall } from '../core/acceso';
 import { Liga } from '../core/liga';
 import { Datos } from '../core/datos';
 import { RetosRemotos, type PreguntaSesionReto } from '../core/retos-remotos';
+import { current } from '../core/router';
 
 type Vista = 'hub' | 'quiz' | 'caso' | 'flash' | 'diaria' | 'liga';
 let vista: Vista = 'hub';
@@ -56,6 +57,11 @@ let D: { p: Pregunta; contestada: boolean } | null = null;
 const root = () => document.getElementById('arcade');
 function pinta(html: string) { const r = root(); if (!r) return; r.innerHTML = html; createIcons({ icons }); }
 const iconos = () => createIcons({ icons });
+const repintarHub = () => {
+  if (!current().path.startsWith('/retos')) return;
+  if (vista === 'hub') hub();
+  else if (vista === 'quiz' && root()?.querySelector('.ar-mode-grid')) bibliotecaQuiz();
+};
 
 // ══════════════ PÁGINA ══════════════
 export function retos() {
@@ -70,7 +76,7 @@ export function montarArcade() {
   r.addEventListener('click', onClick);
   if (!globalesMontados) {
     document.addEventListener('keydown', onKey);
-    window.addEventListener('retos:cambio', () => { if (vista === 'hub') hub(); });
+    window.addEventListener('retos:cambio', repintarHub);
     globalesMontados = true;
   }
   hub();
@@ -82,7 +88,7 @@ function onClick(e: Event) {
   const a = el.dataset.a!;
   const acciones: Record<string, () => void> = {
     hub: () => { parar(); vista = 'hub'; hub(); },
-    'retos-retry': () => { RetosRemotos.cargar(true).then(() => hub()); },
+    'retos-retry': () => { void RetosRemotos.cargar(true); hub(); },
     'ir-liga': vistaLiga,
     'ir-quiz': bibliotecaQuiz, 'quiz-jugar': () => iniciarQuiz(el.dataset.area || 'Todas', (el.dataset.modo || 'relampago') as ModoQuiz), 'quiz-resp': () => responderQuiz(+el.dataset.i!), 'quiz-enviar': enviarQuiz, 'quiz-move': () => moverQuiz(el), 'quiz-sig': sigQuiz,
     'ir-caso': () => elegirCaso(), 'caso-jugar': () => iniciarCaso(el.dataset.id!),
@@ -109,6 +115,9 @@ function hub() {
     ? remoto.estado.dominio.slice(0, 4)
     : (remoto?.disponibilidad.areas || []).slice(0, 4).map((item) => ({ area: item.area, aciertos: 0, total: 0, precision: 0, estado: 'Por explorar', ultima: null }));
   const errorRemoto = esApi ? RetosRemotos.error() : null;
+  const sinRemoto = esApi && !remoto;
+  const cargando = sinRemoto && !errorRemoto;
+  const dato = (v: string | number) => (sinRemoto ? (errorRemoto ? '—' : '…') : v);
   pinta(`
     <div class="ar-hub">
     <header class="ar-intro">
@@ -117,7 +126,7 @@ function hub() {
         <h1>Entrena lo que más te hará avanzar.</h1>
         <p>Sesiones breves que convierten tus cursos, errores y repasos pendientes en práctica clínica útil.</p>
       </div>
-      <span class="ar-streak"><i data-lucide="flame" class="i"></i><span><small>Constancia actual</small><strong>${racha} ${racha === 1 ? 'día' : 'días'}</strong></span></span>
+      <span class="ar-streak"><i data-lucide="flame" class="i"></i><span><small>Constancia actual</small><strong>${sinRemoto ? dato(racha) : `${racha} ${racha === 1 ? 'día' : 'días'}`}</strong></span></span>
     </header>
 
     ${errorRemoto ? `<div class="ar-sync-error"><i data-lucide="cloud-off" class="i"></i><div><strong>No pudimos preparar tus datos de entrenamiento.</strong><span>${esc(errorRemoto)}</span></div><button class="btn btn--secondary btn--sm" data-a="retos-retry">Reintentar</button></div>` : ''}
@@ -127,11 +136,11 @@ function hub() {
         <div class="ar-prescription__head"><span><i data-lucide="crosshair" class="i"></i>Tu siguiente mejor paso</span><small>${recomendacion?.minutos || 5} min</small></div>
         <div class="ar-prescription__copy">
           <span class="eyebrow">Sesión recomendada</span>
-          <h2>${recomendacion ? `Refuerza ${esc(recomendacion.area)}` : 'Tu entrenamiento estará listo pronto'}</h2>
-          <p>${recomendacion ? esc(recomendacion.motivo) : 'Aún no hay preguntas aprobadas disponibles para tu acceso.'}</p>
+          <h2>${recomendacion ? `Refuerza ${esc(recomendacion.area)}` : cargando ? 'Preparando tu sesión recomendada' : 'Tu entrenamiento estará listo pronto'}</h2>
+          <p>${recomendacion ? esc(recomendacion.motivo) : cargando ? 'Revisamos tu desempeño y las preguntas disponibles para tu acceso.' : 'Aún no hay preguntas aprobadas disponibles para tu acceso.'}</p>
         </div>
         <div class="ar-prescription__meta">
-          <span><i data-lucide="list-checks" class="i"></i>${recomendacion?.preguntas || 0} preguntas</span>
+          <span><i data-lucide="list-checks" class="i"></i>${dato(recomendacion?.preguntas || 0)} preguntas</span>
           <span><i data-lucide="graduation-cap" class="i"></i>Modo práctica</span>
           <span><i data-lucide="shield-check" class="i"></i>Feedback clínico</span>
         </div>
@@ -140,16 +149,16 @@ function hub() {
 
       <aside class="ar-mastery">
         <div class="ar-mastery__title"><div><span class="eyebrow">Mapa de dominio</span><h2>Tu criterio por área</h2></div><span class="ar-level-dot" style="--c:${nv.color}"><i data-lucide="${nv.icon}" class="i"></i></span></div>
-        ${dominio.length ? `<div class="ar-mastery__list">${dominio.map((item) => `<div class="ar-mastery__row"><div><strong>${esc(item.area)}</strong><small>${esc(item.estado)}</small></div><span>${item.total ? `${item.precision}%` : 'Nuevo'}</span><div class="ar-mastery__bar"><i style="width:${item.total ? Math.max(6, item.precision) : 3}%"></i></div></div>`).join('')}</div>` : '<div class="ar-mastery__empty"><i data-lucide="radar" class="i"></i><p>Completa tu primera sesión para construir tu mapa clínico.</p></div>'}
-        <div class="ar-mastery__level"><span>Nivel ${nv.indice + 1} · ${nv.nombre}</span><strong>${nv.xp} XP</strong><div><i style="width:${nv.pct}%"></i></div><small>${nv.siguiente ? `${nv.faltan} XP para ${nv.siguiente.nombre}` : 'Nivel máximo alcanzado'}</small></div>
+        ${dominio.length ? `<div class="ar-mastery__list">${dominio.map((item) => `<div class="ar-mastery__row"><div><strong>${esc(item.area)}</strong><small>${esc(item.estado)}</small></div><span>${item.total ? `${item.precision}%` : 'Nuevo'}</span><div class="ar-mastery__bar"><i style="width:${item.total ? Math.max(6, item.precision) : 3}%"></i></div></div>`).join('')}</div>` : cargando ? '<div class="ar-mastery__empty"><i data-lucide="loader-circle" class="i spin"></i><p>Cargando tu mapa clínico…</p></div>' : '<div class="ar-mastery__empty"><i data-lucide="radar" class="i"></i><p>Completa tu primera sesión para construir tu mapa clínico.</p></div>'}
+        <div class="ar-mastery__level"><span>Nivel ${dato(`${nv.indice + 1} · ${nv.nombre}`)}</span><strong>${dato(nv.xp)} XP</strong><div><i style="width:${sinRemoto ? 0 : nv.pct}%"></i></div><small>${sinRemoto ? (cargando ? 'Sincronizando tu progreso…' : '') : nv.siguiente ? `${nv.faltan} XP para ${nv.siguiente.nombre}` : 'Nivel máximo alcanzado'}</small></div>
       </aside>
     </section>
 
     <div class="ar-evidence-strip">
-      <div><strong>${esApi && remoto ? `${remoto.estado.quiz.precision}%` : mejorQuiz()}</strong><span>${esApi ? 'precisión acumulada' : 'mejor quiz'}</span></div>
+      <div><strong>${esApi ? dato(`${remoto?.estado.quiz.precision ?? 0}%`) : mejorQuiz()}</strong><span>${esApi ? 'precisión acumulada' : 'mejor quiz'}</span></div>
       <div><strong>${casosResueltos()}/${totalCasos}</strong><span>casos resueltos</span></div>
       <div><strong>${em.dominadas}</strong><span>tarjetas dominadas</span></div>
-      <div><strong>${banco}</strong><span>preguntas disponibles</span></div>
+      <div><strong>${dato(banco)}</strong><span>preguntas disponibles</span></div>
     </div>
 
     <div class="ar-feature-row">
@@ -168,7 +177,7 @@ function hub() {
       <i data-lucide="chevron-right" class="i league-mini__arr"></i>
     </button>`; })()}
 
-    ${esApi ? `<div class="ar-daily ar-daily--insight"><span class="ar-daily__ic"><i data-lucide="calendar-check-2" class="i"></i></span><span class="ar-daily__tx"><strong>${racha ? `Llevas ${racha} ${racha === 1 ? 'día' : 'días'} entrenando` : 'Tu constancia empieza hoy'}</strong><span class="faint">Una sesión corta y bien elegida vale más que acumular puntos sin propósito.</span></span></div>` : `<button class="ar-daily ${d.hechoHoy ? 'is-done' : ''}" data-a="ir-diaria" ${d.hechoHoy ? 'disabled' : ''}>
+    ${esApi ? `<div class="ar-daily ar-daily--insight"><span class="ar-daily__ic"><i data-lucide="calendar-check-2" class="i"></i></span><span class="ar-daily__tx"><strong>${cargando ? 'Revisando tu constancia…' : racha ? `Llevas ${racha} ${racha === 1 ? 'día' : 'días'} entrenando` : 'Tu constancia empieza hoy'}</strong><span class="faint">Una sesión corta y bien elegida vale más que acumular puntos sin propósito.</span></span></div>` : `<button class="ar-daily ${d.hechoHoy ? 'is-done' : ''}" data-a="ir-diaria" ${d.hechoHoy ? 'disabled' : ''}>
       <span class="ar-daily__ic">${d.hechoHoy ? '<i data-lucide="check-check" class="i"></i>' : `<img src="/brand/icon-reto-diario.jpg" alt="Reto diario" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`}</span>
       <span class="ar-daily__tx">
         <strong>Reto diario ${d.racha > 0 ? `· racha ${d.racha}` : ''}</strong>
@@ -181,7 +190,7 @@ function hub() {
     <section class="ar-training">
     <header class="ar-section-intro"><div><span class="ar-kicker ar-kicker--light">Elige tu reto</span><h2>¿Qué quieres entrenar hoy?</h2></div><p>Sesiones cortas para avanzar a tu ritmo.</p></header>
     <div class="ar-grid">
-      ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Banco clínico', `${banco} preguntas · estudio o simulación`, '#4a7fc1')}
+      ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Banco clínico', `${dato(banco)} preguntas · estudio o simulación`, '#4a7fc1')}
       ${tile('ir-caso', '/brand/icon-detective.jpg', 'Detective Dental', `Diagnostica ${totalCasos} casos clínicos paso a paso`, '#4fa899')}
       ${(() => { const pend = pendientesHoy(); const lim = Acceso.vip() ? 15 : 5; return tile('ir-flash', '/brand/icon-flashcards.jpg', 'Flashcards', pend ? `${Math.min(pend, lim)} para hoy · ${em.total} tarjetas` : `Todo repasado · ${em.dominadas} dominadas`, '#c98a5b'); })()}
     </div>
@@ -411,6 +420,8 @@ async function responderQuiz(respuesta: unknown) {
   let puntos = 0;
   let respuestaCorrecta: unknown = null;
   if (Datos.modo === 'api' && p.remota) {
+    document.getElementById('ar-fb')!.innerHTML = '<div class="ar-exp" role="status"><strong class="row" style="gap:8px"><i data-lucide="loader-circle" class="i spin"></i>Calificando…</strong></div>';
+    iconos();
     try {
       const resultado = await RetosRemotos.responder(p.remota, respuesta);
       puntos = resultado.puntos;

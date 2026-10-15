@@ -171,10 +171,22 @@ function pendientesDemo(): EncuestaPendiente[] {
   return salida.sort((a, b) => (b.prioridad || 0) - (a.prioridad || 0));
 }
 
+let cargando: Promise<void> | null = null;
+let generacion = 0;
 export async function cargarEncuestas(forzar = false) {
   if (estado.cargado && !forzar) return;
+  if (!forzar && cargando) return cargando;
+  const carga: Promise<void> = leerEncuestas().finally(() => { if (cargando === carga) cargando = null; });
+  cargando = carga;
+  return carga;
+}
+
+async function leerEncuestas() {
   if (Datos.modo === 'api') {
+    const gen = generacion;
     const r = await api<{ pendientes: EncuestaPendiente[]; respondidas?: string[]; vip?: boolean; perfil?: PerfilEncuesta | null }>('/encuestas/pendientes');
+    // Respuesta de una sesión anterior (cerró sesión y entró otra cuenta mientras estaba en vuelo).
+    if (gen !== generacion) return;
     estado.pendientes = r.pendientes; estado.respondidas = r.respondidas ?? []; estado.vip = r.vip ?? null; estado.perfil = r.perfil ?? null;
   } else {
     estado.pendientes = pendientesDemo();
@@ -244,7 +256,7 @@ export async function posponerEncuesta(encuesta: EncuestaPendiente) {
   await cargarEncuestas(true);
 }
 
-export function reiniciarEncuestas() { estado.cargado = false; estado.pendientes = []; estado.respondidas = []; estado.vip = null; estado.perfil = null; }
+export function reiniciarEncuestas() { cargando = null; generacion++; estado.cargado = false; estado.pendientes = []; estado.respondidas = []; estado.vip = null; estado.perfil = null; }
 
 // ── Resumen demo (espejo de resumirEncuestas en la API) ──
 const porcentaje = (n: number, total: number) => total ? Math.round((n / total) * 1000) / 10 : 0;

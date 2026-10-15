@@ -24,6 +24,7 @@
     "seed": "node scripts/seed-v2.mjs"
   },
   "dependencies": {
+    "compression": "^1.8.2",
     "cors": "^2.8.5",
     "express": "^4.22.1",
     "firebase-admin": "^14.4.0",

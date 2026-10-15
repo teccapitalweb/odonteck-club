@@ -29,6 +29,7 @@ import {
   otorgarEventos,
   otorgarEventosTx,
   recompensaDeMaterial,
+  registrarEventos,
   REGLAS_PUNTOS,
 } from '../lib/recompensas.js';
 import {
@@ -123,8 +124,9 @@ export function rutasMiembro(ctx) {
     if (!estadoActual.contadores.retosMigrados) {
       eventos.push({ clave: 'retos:migracion:v1', tipo: 'sistema', puntos: 0, contador: 'retosMigrados', detalle: 'Migración de Retos completada' });
     }
-    if (eventos.length) await otorgarEventos(ctx, COL, usuario.uid, eventos);
-    return normalizarEstadoRecompensas(await leerDoc(db, COL.recompensasEstado, usuario.uid), usuario.uid);
+    if (!eventos.length) return { estado: estadoActual, membresia };
+    const { estado } = await registrarEventos(ctx, COL, usuario.uid, eventos);
+    return { estado: normalizarEstadoRecompensas(estado, usuario.uid), membresia };
   }
 
   // ---------- Perfil ----------
@@ -193,12 +195,12 @@ export function rutasMiembro(ctx) {
 
   // ---------- Puntos, logros y recompensas ----------
   r.get('/recompensas/resumen', auth, h(async (req, res) => {
-    const estado = await sincronizarRecompensas(req.usuario);
-    const [membresia, movimientosSnap, materialesSnap] = await Promise.all([
-      estadoMembresia(ctx, req.usuario),
-      db.collection(COL.recompensasMovimientos).where('uid', '==', req.usuario.uid).get(),
+    const [{ estado, membresia }, materialesSnap] = await Promise.all([
+      sincronizarRecompensas(req.usuario),
       db.collection(COL.materiales).get(),
     ]);
+    // Después de sincronizar, para que aparezcan los movimientos que se acaban de otorgar.
+    const movimientosSnap = await db.collection(COL.recompensasMovimientos).where('uid', '==', req.usuario.uid).get();
     const materialesDisponibles = new Set(materialesSnap.docs
       .filter((doc) => doc.data().estado === 'disponible' && typeof doc.data().archivo === 'string' && doc.data().archivo)
       .map((doc) => doc.id));
@@ -219,9 +221,8 @@ export function rutasMiembro(ctx) {
   }));
 
   r.post('/recompensas/canjear', auth, h(async (req, res) => {
-    await sincronizarRecompensas(req.usuario);
+    const { membresia } = await sincronizarRecompensas(req.usuario);
     const recompensaId = slug(cuerpo(req).recompensaId, { campo: 'recompensaId' });
-    const membresia = await estadoMembresia(ctx, req.usuario);
     const resultado = await canjearRecompensa(ctx, COL, req.usuario, recompensaId, membresia.esVip);
     res.status(201).json({
       saldo: resultado.estado.saldo,
@@ -329,23 +330,30 @@ export function rutasMiembro(ctx) {
   }));
 
   /** Carga curso + clase y verifica acceso (VIP o gratis) y, opcionalmente, desbloqueo secuencial. */
-  async function prepararClase(req, cursoId, nCrudo, { exigirDesbloqueo = true } = {}) {
+  async function prepararClase(req, cursoId, nCrudo, { exigirDesbloqueo = true, conQuiz = false } = {}) {
     const u = req.usuario;
     idDocumento(cursoId, 'cursoId');
     const n = entero(nCrudo, { campo: 'n', min: 1, max: 999 });
-    const curso = await leerDoc(db, COL.cursos, cursoId);
+    const progRef = db.collection(COL.progreso).doc(`${u.uid}_${cursoId}`);
+    // Se lanzan a la vez pero se esperan en el orden de validación: un fallo secundario no tapa un 404 o 403.
+    const cursoP = leerDoc(db, COL.cursos, cursoId);
+    const estadoP = estadoMembresia(ctx, u);
+    const progP = exigirDesbloqueo ? progRef.get() : null;
+    const quizP = conQuiz ? leerDoc(db, COL.quizzes, `${cursoId}_${n}`) : null;
+    for (const p of [estadoP, progP, quizP]) p?.catch(() => {});
+    const curso = await cursoP;
     if (!curso || (curso.publicado !== true && !u.esAdmin)) throw new HttpError(404, 'curso_no_encontrado', 'Ese curso no existe o no está publicado.');
     const clase = (curso.clases ?? []).find((c) => Number(c.n) === n);
     if (!clase) throw new HttpError(404, 'clase_no_encontrada', 'Esa clase no existe en el curso.');
-    const estado = await estadoMembresia(ctx, u);
+    const estado = await estadoP;
     if (!tieneAccesoAClase(clase, estado.esVip)) {
       throw requiereVip('Esta clase es exclusiva para miembros VIP. Hazte VIP para continuar.');
     }
-    const progRef = db.collection(COL.progreso).doc(`${u.uid}_${cursoId}`);
-    const progSnap = await progRef.get();
-    const progreso = progSnap.exists ? progSnap.data() : null;
+    const progSnap = await progP;
+    const progreso = progSnap?.exists ? progSnap.data() : null;
     if (exigirDesbloqueo) verificarDesbloqueo(u, curso, n, progreso);
-    return { u, n, curso: { id: cursoId, ...curso }, clase, estado, progRef, progreso };
+    const quiz = await quizP;
+    return { u, n, curso: { id: cursoId, ...curso }, clase, estado, progRef, progreso, quiz };
   }
 
   function verificarDesbloqueo(u, curso, n, progreso) {
@@ -557,8 +565,7 @@ export function rutasMiembro(ctx) {
 
   // ---------- Quizzes ----------
   async function cargarQuizPor(req, cursoId, numero) {
-    const { curso, n } = await prepararClase(req, cursoId, numero, { exigirDesbloqueo: false });
-    const quiz = await leerDoc(db, COL.quizzes, `${curso.id}_${n}`);
+    const { curso, n, quiz } = await prepararClase(req, cursoId, numero, { exigirDesbloqueo: false, conQuiz: true });
     const preguntas = Array.isArray(quiz?.preguntas) ? quiz.preguntas : [];
     if (!quiz || quiz.estado !== 'aprobado' || preguntas.length === 0) {
       throw new HttpError(404, 'quiz_no_disponible', 'Esta clase todavía no tiene quiz.');
@@ -742,10 +749,13 @@ export function rutasMiembro(ctx) {
     const modo = b.modo === 'relampago' ? 'relampago' : b.modo === 'practica' ? 'practica' : null;
     if (!modo) throw invalido('"modo" debe ser "practica" o "relampago".');
     const area = texto(b.area, { campo: 'area', max: 80 }) || 'Todas';
-    const { preguntas, estadoAcceso } = await bancoRetos(req);
+    const [{ preguntas, estadoAcceso }, retosGuardados] = await Promise.all([
+      bancoRetos(req),
+      leerDoc(db, COL.retosEstado, req.usuario.uid),
+    ]);
     const maximo = estadoAcceso.esVip ? (modo === 'practica' ? 10 : 8) : 3;
     const limite = entero(b.limite ?? maximo, { campo: 'limite', min: 1, max: maximo });
-    const guardado = normalizarEstadoRetos(await leerDoc(db, COL.retosEstado, req.usuario.uid), req.usuario.uid);
+    const guardado = normalizarEstadoRetos(retosGuardados, req.usuario.uid);
     const candidatas = preguntas.filter((item) => (area === 'Todas' || item.area === area) && (modo !== 'relampago' || item.tipo === 'seleccion'));
     candidatas.sort((a, b) => prioridadPregunta(guardado, a) - prioridadPregunta(guardado, b) || a.ref.localeCompare(b.ref));
     const seleccion = candidatas.slice(0, limite);
@@ -844,12 +854,26 @@ export function rutasMiembro(ctx) {
   }
 
   r.get('/foro', auth, h(async (req, res) => {
-    let q = db.collection(COL.foro);
+    const TOPE = 300;
+    let docs;
     if (req.query.cursoId !== undefined && req.query.cursoId !== '') {
-      q = q.where('cursoId', '==', idDocumento(String(req.query.cursoId), 'cursoId'));
+      docs = (await db.collection(COL.foro).where('cursoId', '==', idDocumento(String(req.query.cursoId), 'cursoId')).get()).docs;
+    } else {
+      // Sólo sin filtro (where + orderBy exigiría un índice compuesto). Se pagina hasta juntar TOPE visibles: los ocultos no cuentan.
+      docs = [];
+      let visibles = 0;
+      let desde = null;
+      for (;;) {
+        let q = db.collection(COL.foro).orderBy('fecha', 'desc').limit(TOPE);
+        if (desde) q = q.startAfter(desde);
+        const pagina = await q.get();
+        docs.push(...pagina.docs);
+        visibles += pagina.docs.filter((d) => d.data().oculto !== true).length;
+        if (visibles >= TOPE || pagina.size < TOPE) break;
+        desde = pagina.docs.at(-1);
+      }
     }
-    const snap = await q.get();
-    const hilos = snap.docs
+    const hilos = docs
       .map((d) => ({ id: d.id, ...d.data() }))
       .filter((hilo) => hilo.oculto !== true)
       .sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)))
@@ -898,9 +922,11 @@ export function rutasMiembro(ctx) {
   r.get('/foro/:id', auth, h(async (req, res) => {
     const id = idDocumento(req.params.id);
     const ref = db.collection(COL.foro).doc(id);
+    const respP = ref.collection(COL.respuestas).get();
+    respP.catch(() => {});
     const snap = await ref.get();
     if (!snap.exists || snap.data().oculto === true) throw noEncontrado('Ese tema no existe.');
-    const respSnap = await ref.collection(COL.respuestas).get();
+    const respSnap = await respP;
     const respuestas = respSnap.docs
       .map((d) => ({ id: d.id, ...d.data() }))
       .filter((x) => x.oculto !== true)

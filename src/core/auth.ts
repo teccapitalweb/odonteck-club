@@ -20,10 +20,21 @@ let fb: typeof import('firebase/auth') | null = null;
 let authInst: import('firebase/auth').Auth | null = null;
 let usuario: Usuario | null = null;
 let listo: Promise<void> | null = null;
+let perfilListo: Promise<void> | null = null;
+let perfilResuelto = true;
+
+if (API) {
+  try {
+    const origen = new URL(API).origin;
+    if (!document.querySelector(`link[rel="preconnect"][href="${origen}"]`)) {
+      document.head.append(Object.assign(document.createElement('link'), { rel: 'preconnect', href: origen, crossOrigin: 'anonymous' }));
+    }
+  } catch { /* URL relativa: no hay otro origen que precalentar */ }
+}
 
 async function cargarFirebase() {
-  const { initializeApp } = await import('firebase/app');
-  fb = await import('firebase/auth');
+  const [{ initializeApp }, modAuth] = await Promise.all([import('firebase/app'), import('firebase/auth')]);
+  fb = modAuth;
   authInst = fb.getAuth(initializeApp(FIREBASE_CONFIG));
   await fb.setPersistence(authInst, fb.browserLocalPersistence);
 }
@@ -43,24 +54,27 @@ export const Auth = {
       await cargarFirebase();
       await new Promise<void>((ok) => {
         fb!.onAuthStateChanged(authInst!, async (u) => {
-          if (!u) { usuario = null; ok(); return; }
+          if (!u) { usuario = null; perfilListo = null; perfilResuelto = true; ok(); return; }
           const tok = await u.getIdTokenResult();
-          let esVip = false;
-          let esAdmin = tok.claims.admin === true;
-          let nombre = u.displayName || u.email?.split('@')[0] || '';
-          try {
-            const me = await api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me');
-            esVip = me.esVip;
-            esAdmin = me.esAdmin === true || esAdmin;
-            if (me.perfil) { Perfil.hidratar(me.perfil, me.plan, me.vence); nombre = me.perfil.nombre || nombre; }
-          } catch { /* el backend dirá si no hay acceso */ }
-          usuario = { uid: u.uid, email: u.email || '', nombre, foto: u.photoURL || '', esAdmin, esVip };
+          usuario = { uid: u.uid, email: u.email || '', nombre: u.displayName || u.email?.split('@')[0] || '', foto: u.photoURL || '', esAdmin: tok.claims.admin === true, esVip: false };
+          // esVip solo llega con /me: lo que decida paywalls o acceso admin debe esperar Auth.perfil().
+          perfilResuelto = false;
+          perfilListo = api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me').then((me) => {
+            const actual = usuario;
+            if (!actual || actual.uid !== u.uid) return;
+            usuario = { ...actual, esVip: me.esVip, esAdmin: me.esAdmin === true || actual.esAdmin, nombre: me.perfil?.nombre || actual.nombre };
+            if (me.perfil) Perfil.hidratar(me.perfil, me.plan, me.vence);
+          }).catch(() => { /* el backend dirá si no hay acceso */ })
+            .finally(() => { if (usuario?.uid === u.uid) perfilResuelto = true; });
           ok();
         });
       });
     })();
     return listo;
   },
+  perfil(): Promise<void> { return perfilListo ?? Promise.resolve(); },
+  /** false mientras /me no responde: el cascarón no debe pintarse con esVip o perfil provisionales. */
+  perfilResuelto(): boolean { return perfilResuelto; },
 
   async entrarDemo() { localStorage.setItem(DEMO_KEY, '1'); listo = null; await this.iniciar(); },
 
@@ -84,7 +98,7 @@ export const Auth = {
   async salir() {
     if (Datos.modo === 'demo') localStorage.removeItem(DEMO_KEY);
     else if (authInst) await fb!.signOut(authInst);
-    usuario = null; listo = null;
+    usuario = null; listo = null; perfilListo = null; perfilResuelto = true;
   },
   async token() { return authInst?.currentUser ? authInst.currentUser.getIdToken() : null; },
 };

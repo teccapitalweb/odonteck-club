@@ -571,6 +571,22 @@ describe('quizzes', () => {
     env.db.docs.set('v2_quizzes/curso-a_2', { cursoId: 'curso-a', n: 2, estado: 'aprobado', preguntas: [{ q: 'x', opciones: ['a', 'b'], correcta: 0 }] });
     await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.free)).expect(403);
   });
+
+  test('si falla la lectura del quiz, el 404 del curso y el 403 de VIP conservan su prioridad', async () => {
+    const snapshot = env.db._snapshot.bind(env.db);
+    env.db._snapshot = (ref) => {
+      if (ref.path.startsWith('v2_quizzes/')) throw new Error('Firestore no disponible (simulado).');
+      return snapshot(ref);
+    };
+    const inexistente = await request(env.app).get('/quiz/no-existe/1').set(bearer(TOKENS.free)).expect(404);
+    assert.equal(inexistente.body.error, 'curso_no_encontrado');
+    const sinClase = await request(env.app).get('/quiz/curso-a/9').set(bearer(TOKENS.free)).expect(404);
+    assert.equal(sinClase.body.error, 'clase_no_encontrada');
+    const vip = await request(env.app).get('/quiz/curso-a/2').set(bearer(TOKENS.free)).expect(403);
+    assert.equal(vip.body.error, 'requiere_vip');
+    const accesible = await request(env.app).get('/quiz/curso-a/1').set(bearer(TOKENS.free)).expect(500);
+    assert.equal(accesible.body.error, 'error_interno');
+  });
 });
 
 describe('Retos V2', () => {
@@ -677,6 +693,28 @@ describe('foro', () => {
     assert.deepEqual(r.body.map((x) => x.id), ['hilo1']);
     assert.equal('utilPor' in r.body[0], false);
     await request(env.app).get('/foro/hilo-oculto').set(bearer(TOKENS.vip)).expect(404);
+  });
+
+  test('sin filtro lista hasta 300 temas visibles, los más recientes primero (los ocultos no restan)', async () => {
+    for (let i = 320; i < 325; i++) {
+      const fecha = new Date(Date.parse('2026-01-01T00:00:00.000Z') + i * 60_000).toISOString();
+      env.db.docs.set(`v2_foro/t${i}`, { id: `t${i}`, titulo: `Oculto ${i}`, texto: 'x', autorUid: 'vip2', autor: 'Dr. Beto VIP', cursoId: null, fecha, util: 0, utilPor: [], oculto: true });
+    }
+    for (let i = 0; i < 320; i++) {
+      const fecha = new Date(Date.parse('2026-01-01T00:00:00.000Z') + i * 60_000).toISOString();
+      env.db.docs.set(`v2_foro/t${i}`, { id: `t${i}`, titulo: `Tema ${i}`, texto: 'x', autorUid: 'vip2', autor: 'Dr. Beto VIP', cursoId: null, fecha, util: 0, utilPor: [], oculto: false });
+    }
+    const r = await request(env.app).get('/foro').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(r.body.length, 300);
+    assert.equal(r.body[0].id, 'hilo1');
+    assert.equal(r.body[1].id, 't319');
+    assert.equal(r.body.at(-1).id, 't21');
+  });
+
+  test('un tema oculto no expone sus respuestas', async () => {
+    env.db.docs.set('v2_foro/hilo-oculto/respuestas/r1', { id: 'r1', autorUid: 'x', autor: 'x', texto: 'Respuesta oculta', fecha: AHORA_ISO, oculto: false });
+    const r = await request(env.app).get('/foro/hilo-oculto').set(bearer(TOKENS.vip)).expect(404);
+    assert.equal(JSON.stringify(r.body).includes('Respuesta oculta'), false);
   });
 
   test('publicar exige VIP, rechaza HTML y textos largos', async () => {

@@ -60,6 +60,13 @@ export interface ResumenRecompensas {
   actualizado: string | null;
 }
 
+export interface PremioRecompensas {
+  puntosGanados?: number;
+  saldo?: number;
+  logrosNuevos?: { id?: string; titulo?: string }[];
+  notificaciones?: NotificacionRecompensa[];
+}
+
 const DEMO_KEY = 'odonteck-club:recompensas-demo:v1';
 const catalogoDemo: Omit<Recompensa, 'canjeada' | 'incluidaVip' | 'alcanza' | 'disponible'>[] = [
   { id: 'guia-diagnostico-ortodoncico', titulo: 'Guía de diagnóstico ortodóncico', descripcion: 'Desbloqueo permanente de una guía clínica propia de OdonTeck.', puntos: 250, tipo: 'material', materialId: 'guia-diagnostico-ortodoncico', icono: 'book-open' },
@@ -76,6 +83,8 @@ const catalogoDemo: Omit<Recompensa, 'canjeada' | 'incluidaVip' | 'alcanza' | 'd
 
 let cache: ResumenRecompensas | null = null;
 let pendiente: Promise<ResumenRecompensas | null> | null = null;
+let sucio = false;
+let generacion = 0;
 
 const progresoDemo = () => {
   const clases = Progreso.totalVistas();
@@ -125,12 +134,31 @@ export const Recompensas = {
   resumen: () => cache ?? (Datos.modo === 'demo' ? demo() : null),
   async cargar(forzar = false): Promise<ResumenRecompensas | null> {
     if (Datos.modo === 'demo') return publicar(demo());
-    if (cache && !forzar) return cache;
+    if (cache && !forzar && !sucio) return cache;
     if (pendiente) return pendiente;
-    pendiente = api<ResumenRecompensas>('/recompensas/resumen')
-      .then(publicar)
-      .finally(() => { pendiente = null; });
-    return pendiente;
+    sucio = false;
+    const gen = generacion;
+    const carga: Promise<ResumenRecompensas | null> = api<ResumenRecompensas>('/recompensas/resumen')
+      .then((valor) => (gen === generacion ? publicar(valor) : null))
+      .catch((e) => { if (gen === generacion) sucio = true; throw e; })
+      .finally(() => { if (pendiente === carga) pendiente = null; });
+    pendiente = carga;
+    return carga;
+  },
+  aplicarPremio(premio: PremioRecompensas | null | undefined) {
+    if (!premio || Datos.modo !== 'api') return;
+    sucio = true;
+    if (!cache) { void this.cargar().catch(() => null); return; }
+    const puntos = Math.max(0, Number(premio.puntosGanados) || 0);
+    const nuevos = new Set((premio.logrosNuevos || []).map((l) => l.id));
+    const ahora = new Date().toISOString();
+    publicar({
+      ...cache,
+      saldo: typeof premio.saldo === 'number' ? premio.saldo : cache.saldo + puntos,
+      ganados: cache.ganados + puntos,
+      logros: cache.logros.map((l) => nuevos.has(l.id) && !l.logrado ? { ...l, logrado: true, progreso: l.meta, fecha: ahora } : l),
+      notificaciones: Array.isArray(premio.notificaciones) ? premio.notificaciones : cache.notificaciones,
+    });
   },
   async canjear(recompensaId: string) {
     if (Datos.modo === 'demo') {
@@ -153,5 +181,5 @@ export const Recompensas = {
     if (Datos.modo === 'api') await api('/recompensas/notificaciones/leidas', { method: 'POST' });
     if (cache) publicar({ ...cache, notificaciones: [] });
   },
-  limpiar() { cache = null; pendiente = null; },
+  limpiar() { generacion++; cache = null; pendiente = null; sucio = false; },
 };
