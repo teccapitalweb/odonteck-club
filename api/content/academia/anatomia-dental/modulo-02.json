@@ -1,0 +1,1092 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 2,
+  "titulo": "Mucosa oral, encía y glándulas salivales",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "La mucosa oral es la primera barrera de defensa de la boca y el tejido que más observarás en tu vida profesional. En este módulo estudiarás su estructura histológica, la diferencia entre epitelio queratinizado y no queratinizado y la clasificación en mucosa masticadora, de revestimiento y especializada. Después recorrerás la encía con detalle: sus partes, sus dimensiones, los signos clínicos de salud y la unión dentogingival que sella el diente. Cerrarás con las glándulas salivales mayores y menores, sus conductos y la saliva, un fluido que protege los dientes y cuya falta cambia por completo el pronóstico de un paciente.",
+  "objetivos": [
+    "Describir las capas de la mucosa oral y diferenciar el epitelio ortoqueratinizado, paraqueratinizado y no queratinizado.",
+    "Clasificar las regiones de la boca en mucosa masticadora, de revestimiento y especializada, y relacionar cada tipo con su comportamiento clínico.",
+    "Identificar las partes de la encía y sus características de salud, y calcular el ancho de encía insertada a partir de mediciones clínicas.",
+    "Explicar la estructura de la unión dentogingival y la importancia de la inserción de tejidos supracrestales para la odontología restauradora.",
+    "Ubicar las glándulas salivales mayores, el trayecto y desembocadura de sus conductos, y relacionar la composición y el flujo salival con la salud bucal."
+  ],
+  "duracionMin": 115,
+  "portada": {
+    "id": "anatomia-dental/m02/portada",
+    "proporcion": "16:9",
+    "alt": "Vista frontal cercana de dientes anteriores con encía rosa coral, firme y festoneada, y mucosa alveolar más roja por encima.",
+    "prompt": "Fotografía clínica macro realista de gran formato del sector anterior de la boca de un adulto joven sano, labios retraídos con retractores transparentes, dientes anteriores superiores e inferiores bien alineados, encía rosa coral firme con margen delgado y festoneado, papilas que llenan los espacios interdentales, textura ligeramente punteada, y por encima una franja de mucosa alveolar más roja y brillante con vasos finos visibles, saliva natural, iluminación de flash clínico uniforme, colores naturales y nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, rostro completo, sangre, inflamación, dientes deformes, aspecto artificial."
+  },
+  "temas": [
+    {
+      "n": "2.1",
+      "titulo": "Estructura y clasificación de la mucosa oral",
+      "minutos": 22,
+      "enPocasPalabras": "La boca está cubierta por una piel húmeda llamada mucosa. En las zonas que reciben más roce, como la encía y el paladar, es más dura y firme; en las mejillas, los labios y debajo de la lengua es más suave y elástica. Esta capa se renueva muy rápido y protege contra golpes, sustancias irritantes y microbios.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **mucosa oral** es el revestimiento húmedo de la boca. Se parece a la piel en que tiene un epitelio sobre un tejido conectivo, pero se diferencia de ella en que está bañada de saliva, carece de pelo y de glándulas sudoríparas, se renueva más rápido y, en muchas zonas, no forma una capa córnea. Su estructura cambia según la función de cada región: donde hay fricción y presión durante la masticación es firme y queratinizada, y donde se necesita movilidad es blanda, elástica y no queratinizada. Comprender esta lógica te permitirá predecir cómo se comporta cada zona ante una inyección, una incisión, una prótesis o un traumatismo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las capas de la mucosa"
+        },
+        {
+          "tipo": "texto",
+          "md": "La mucosa oral tiene dos componentes principales y, en algunas regiones, un tercero:\n\n1. El **epitelio**, plano estratificado, que forma la barrera.\n2. La **lámina propia** o corion, de tejido conectivo, que da soporte, nutrición e inervación al epitelio.\n3. La **submucosa**, de tejido conectivo laxo con grasa, glándulas salivales menores y vasos de mayor calibre, que une la mucosa con el hueso o el músculo subyacente. Falta en la encía, en el rafe palatino y en el dorso de la lengua.\n\nEntre el epitelio y la lámina propia hay una **membrana basal**. La unión no es plana: el epitelio emite prolongaciones hacia abajo, las **crestas epiteliales**, que se alternan con **papilas de tejido conectivo** que suben hacia el epitelio. Esta interdigitación aumenta la superficie de contacto y la resistencia a las fuerzas de cizalla; por eso es muy marcada en la encía y en el paladar duro y menos en la mucosa de revestimiento.\n\nLa lámina propia tiene una **capa papilar** superficial, con fibras finas y abundantes capilares, y una **capa reticular** más profunda, con haces de colágeno más gruesos. Contiene fibroblastos, macrófagos, mastocitos y células de defensa, además de fibras elásticas, abundantes en las zonas móviles."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/01",
+          "proporcion": "4:3",
+          "alt": "Microfotografía de un corte histológico de mucosa oral teñido con hematoxilina y eosina, con epitelio estratificado y tejido conectivo subyacente.",
+          "pie": "Corte histológico de mucosa oral: el epitelio se interdigita con la lámina propia mediante crestas epiteliales y papilas de tejido conectivo.",
+          "prompt": "Microfotografía óptica realista de un corte histológico de mucosa oral humana teñido con hematoxilina y eosina, aumento medio, se observa un epitelio plano estratificado de color morado rosado con crestas epiteliales que se proyectan hacia abajo alternando con papilas de tejido conectivo rosado claro, núcleos basales más oscuros, capilares pequeños con eritrocitos en las papilas y fibras de colágeno en la parte inferior, fondo de portaobjetos blanco, enfoque nítido. Evitar: texto, escalas, flechas, etiquetas, logotipos, marcas de agua, colores fluorescentes, artefactos exagerados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Queratinizado, paraqueratinizado y no queratinizado"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las células principales del epitelio son los **queratinocitos**. Se forman en la capa basal y ascienden mientras maduran hasta descamarse en la superficie. La forma en que maduran define tres tipos de epitelio en la boca:\n\n- **Ortoqueratinizado:** las células superficiales pierden el núcleo y se llenan de queratina, como en la piel. Tiene cuatro estratos: basal, espinoso, granuloso y córneo. Es típico del paladar duro.\n- **Paraqueratinizado:** la capa superficial está queratinizada pero sus células conservan núcleos pequeños y condensados (picnóticos) y el estrato granuloso es poco evidente. Es frecuente en la encía.\n- **No queratinizado:** las células superficiales conservan su núcleo y no forman capa córnea. Sus estratos son basal, espinoso, intermedio y superficial. Recubre mejillas, labios por dentro, piso de la boca, cara ventral de la lengua y paladar blando.\n\nEl epitelio queratinizado es más resistente a la abrasión y menos permeable; el no queratinizado es más flexible y más permeable. Esta diferencia explica por qué algunos medicamentos se absorben con rapidez por vía sublingual: la mucosa del piso de la boca es delgada, no queratinizada y muy vascularizada."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m02/d1",
+          "pie": "Comparación de los estratos del epitelio queratinizado y no queratinizado.",
+          "descripcion": "Dos columnas verticales lado a lado que representan cortes de epitelio sobre una franja de lámina propia. La columna izquierda, epitelio queratinizado, muestra de abajo arriba los estratos basal, espinoso, granuloso con gránulos oscuros y córneo con células aplanadas sin núcleo. La columna derecha, epitelio no queratinizado, muestra los estratos basal, espinoso, intermedio y superficial con células aplanadas que conservan núcleo. Una línea ondulada marca la membrana basal en ambas columnas.",
+          "elementos": [
+            "Estrato basal",
+            "Estrato espinoso",
+            "Estrato granuloso",
+            "Estrato córneo",
+            "Estrato intermedio",
+            "Estrato superficial",
+            "Membrana basal",
+            "Lámina propia"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las otras células del epitelio"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Células del epitelio oral que no son queratinocitos",
+          "columnas": ["Célula", "Ubicación", "Función", "Relevancia clínica"],
+          "filas": [
+            ["Melanocito", "Capa basal", "Produce melanina y la transfiere a los queratinocitos", "Pigmentación fisiológica de la encía y lesiones melánicas"],
+            ["Célula de Langerhans", "Capas suprabasales", "Capta antígenos y los presenta al sistema inmunitario", "Respuesta a alérgenos y microorganismos de la superficie"],
+            ["Célula de Merkel", "Capa basal", "Receptor táctil asociado a terminaciones nerviosas", "Sensibilidad fina de labios, encía y paladar"],
+            ["Linfocitos y neutrófilos", "Dispersos entre los queratinocitos", "Defensa inmunitaria", "Aumentan con la inflamación"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una barrera que se renueva sin parar",
+          "md": "El epitelio oral se renueva más rápido que la epidermis de la piel, y el epitelio de unión de la encía está entre los tejidos de renovación más rápida del organismo. Esa velocidad explica que las heridas de la mucosa cicatricen pronto y casi sin dejar marca, pero también que la mucosa sea muy sensible a los tratamientos contra el cáncer que atacan a las células que se dividen: por eso la **mucositis oral** es un efecto adverso frecuente de la quimioterapia y de la radioterapia de cabeza y cuello."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Para qué sirve la mucosa"
+        },
+        {
+          "tipo": "texto",
+          "md": "La función principal de la mucosa es la **protección**: separa los tejidos profundos del medio oral, resiste la compresión y la fricción de la masticación y funciona como barrera frente a microorganismos y sustancias irritantes. A esto se suman otras funciones:\n\n- **Sensibilidad:** la boca tiene receptores de tacto, presión, temperatura y dolor, además del gusto. Desencadena reflejos como la deglución, la náusea y la salivación.\n- **Secreción:** las glándulas salivales menores de la submucosa mantienen la superficie húmeda y lubricada.\n- **Defensa inmunitaria:** células de Langerhans, linfocitos y anticuerpos forman parte de una vigilancia constante.\n- **Absorción limitada:** en zonas delgadas no queratinizadas algunas sustancias pasan con facilidad a la circulación.\n\nLa mucosa también cicatriza de manera notable: las heridas de la boca suelen cerrar más rápido y con menos cicatriz que las de la piel, en parte por la saliva, por la rápida renovación del epitelio y por características particulares de sus fibroblastos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Mucosa masticadora, de revestimiento y especializada"
+        },
+        {
+          "tipo": "texto",
+          "md": "Según su función, la mucosa oral se clasifica en tres tipos. Los textos de histología oral, como el de Ten Cate, estiman que la mucosa de revestimiento ocupa alrededor del 60 % de la superficie, la masticadora cerca del 25 % y la especializada alrededor del 15 %."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Tipos funcionales de mucosa oral",
+          "columnas": ["Tipo", "Dónde está", "Epitelio", "Lámina propia y submucosa", "Comportamiento clínico"],
+          "filas": [
+            ["Masticadora", "Encía y paladar duro", "Queratinizado o paraqueratinizado", "Lámina propia densa, papilas largas; unida al hueso como mucoperiostio", "Inmóvil, resiste la fricción; las inyecciones son más molestas y los colgajos se levantan junto con el periostio"],
+            ["De revestimiento", "Labios y mejillas por dentro, mucosa alveolar, piso de la boca, cara ventral de la lengua, paladar blando", "No queratinizado", "Lámina propia laxa con fibras elásticas; submucosa presente", "Móvil y elástica; difunde con facilidad los líquidos y la inflamación; se sutura bien"],
+            ["Especializada", "Dorso de la lengua", "Queratinizado y no queratinizado en mosaico, con papilas", "Unida directamente al músculo lingual", "Contiene botones gustativos; su aspecto cambia con la hidratación, la higiene y la salud general"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El límite entre mucosa masticadora y de revestimiento se ve con claridad en la cara vestibular de los procesos alveolares: es la **unión mucogingival**, una línea festoneada donde la encía rosa pálido y firme se continúa con la mucosa alveolar, roja, delgada y móvil. En el paladar no hay unión mucogingival, porque la encía se continúa sin cambio con la mucosa palatina, que también es masticadora.\n\nUn error frecuente es pensar que «más queratina» significa siempre «más sano». La queratinización forma parte de la adaptación normal en ciertas regiones, pero una zona blanca en una mucosa que normalmente no se queratiniza, como la cara ventral de la lengua, puede ser un signo de irritación crónica o de un trastorno potencialmente maligno. Lo que importa es si la queratinización corresponde a la región."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/02",
+          "proporcion": "16:9",
+          "alt": "Sector posterior vestibular con la mejilla retraída que muestra la encía pálida y firme y la mucosa alveolar roja separadas por la unión mucogingival.",
+          "pie": "La unión mucogingival separa la encía, mucosa masticadora, de la mucosa alveolar, mucosa de revestimiento.",
+          "prompt": "Fotografía clínica intraoral realista del sector posterior vestibular inferior derecho de un adulto sano, la mejilla retraída con un separador, se aprecian premolares y molares con encía rosa pálido firme y ligeramente punteada que termina en una línea festoneada nítida, por debajo la mucosa alveolar de color rojo más intenso, lisa, brillante y con vasos finos visibles que continúa hacia el fondo de saco, iluminación de flash clínico uniforme, colores naturales. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, inflamación, recesiones marcadas, rostro visible."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Dónde inyectar y dónde incidir",
+          "md": "La mucosa de revestimiento, con submucosa laxa, acepta la solución anestésica con poca presión y poca molestia; por eso la infiltración se coloca en el fondo de saco y no en la encía insertada. En cambio, en la mucosa masticadora unida al periostio el líquido no tiene espacio y la presión duele. Por la misma razón, una inflamación en la mucosa de revestimiento se extiende con rapidez y produce aumentos de volumen notorios, mientras que en el paladar un absceso queda contenido y muy tenso. Ten presente esta diferencia al planear la técnica y al explicar al paciente lo que sentirá."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "¿Qué tipo de mucosa es?",
+          "instruccion": "Relaciona cada región con el tipo de mucosa que la recubre.",
+          "pares": [
+            { "a": "Encía insertada", "b": "Masticadora, paraqueratinizada" },
+            { "a": "Paladar duro", "b": "Masticadora, ortoqueratinizada" },
+            { "a": "Piso de la boca", "b": "Revestimiento, delgada y muy permeable" },
+            { "a": "Mucosa yugal", "b": "Revestimiento, con submucosa y glándulas" },
+            { "a": "Dorso de la lengua", "b": "Especializada, con papilas y botones gustativos" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/03",
+          "proporcion": "1:1",
+          "alt": "Comparación microscópica de dos epitelios lado a lado, uno con capa córnea rosada y otro sin ella.",
+          "pie": "Epitelio queratinizado del paladar frente a epitelio no queratinizado de la mejilla, observados al microscopio.",
+          "prompt": "Composición de dos microfotografías ópticas realistas lado a lado, cortes histológicos de mucosa oral humana teñidos con hematoxilina y eosina al mismo aumento: a la izquierda un epitelio plano estratificado con una capa superficial rosada compacta de células aplanadas sin núcleo y crestas epiteliales largas, a la derecha un epitelio más grueso con células superficiales aplanadas que conservan núcleos y una interfaz con el tejido conectivo más suave, fondo blanco de portaobjetos, enfoque nítido. Evitar: texto, escalas, flechas, etiquetas, logotipos, marcas de agua, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando describas una lesión blanca o roja, pregúntate primero qué tipo de mucosa hay en ese sitio y cómo debería verse. Una mancha blanca en el paladar de un fumador de pipa, una zona blanca que se desprende en la mejilla o una placa blanca fija en el borde lateral de la lengua tienen significados muy distintos. Anotar la región, el tipo de mucosa y si la lesión se desprende al raspar con suavidad con una gasa es el primer paso de un buen diagnóstico diferencial."
+        }
+      ],
+      "glosario": [
+        { "termino": "Lámina propia", "definicion": "Capa de tejido conectivo bajo el epitelio de la mucosa, con vasos, nervios y células de defensa." },
+        { "termino": "Submucosa", "definicion": "Tejido conectivo laxo con grasa y glándulas que une la mucosa al hueso o al músculo; falta en la encía y el rafe palatino." },
+        { "termino": "Ortoqueratinización", "definicion": "Maduración epitelial en la que las células superficiales pierden el núcleo y forman una capa córnea." },
+        { "termino": "Paraqueratinización", "definicion": "Queratinización en la que las células superficiales conservan núcleos picnóticos; frecuente en la encía." },
+        { "termino": "Mucosa masticadora", "definicion": "Mucosa queratinizada e inmóvil de la encía y el paladar duro, adaptada a la fricción." },
+        { "termino": "Mucosa de revestimiento", "definicion": "Mucosa no queratinizada, móvil y elástica de labios, mejillas, piso de la boca, cara ventral de la lengua, paladar blando y mucosa alveolar." },
+        { "termino": "Unión mucogingival", "definicion": "Línea donde la encía se continúa con la mucosa alveolar; no existe en el paladar." }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.1-1",
+          "q": "¿Qué estrato está presente en el epitelio no queratinizado pero no en el ortoqueratinizado?",
+          "opciones": ["Estrato basal", "Estrato espinoso", "Estrato córneo", "Estrato intermedio"],
+          "correcta": 3,
+          "explicacion": "El epitelio no queratinizado tiene estratos basal, espinoso, intermedio y superficial; el ortoqueratinizado tiene basal, espinoso, granuloso y córneo."
+        },
+        {
+          "id": "t2.1-2",
+          "q": "¿Por qué una infiltración anestésica en el paladar duro resulta más molesta que en el fondo de saco vestibular?",
+          "opciones": ["Porque el paladar tiene epitelio no queratinizado", "Porque la mucosa palatina está unida al periostio y no tiene espacio para el líquido", "Porque el paladar carece de nervios sensitivos", "Porque el fondo de saco tiene epitelio ortoqueratinizado"],
+          "correcta": 1,
+          "explicacion": "La mucosa masticadora del paladar forma un mucoperiostio con poca submucosa, de modo que la solución genera presión."
+        },
+        {
+          "id": "t2.1-3",
+          "q": "¿Qué célula del epitelio oral capta antígenos y los presenta al sistema inmunitario?",
+          "opciones": ["Célula de Langerhans", "Melanocito", "Célula de Merkel", "Fibroblasto"],
+          "correcta": 0,
+          "explicacion": "Las células de Langerhans son presentadoras de antígeno; los melanocitos producen pigmento, las de Merkel son receptores táctiles y los fibroblastos están en la lámina propia."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Orban's Oral Histology and Embryology", "autor": "Kumar G. S. (Elsevier)", "anio": 2015 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de histología oral", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "2.2",
+      "titulo": "Variaciones regionales, mucosa de la lengua y variantes normales",
+      "minutos": 22,
+      "enPocasPalabras": "Cada parte de la boca tiene una mucosa un poco distinta, adaptada a lo que hace. La lengua tiene pequeñas salientes llamadas papilas, y algunas guardan los receptores del sabor. También hay formas de mucosa que se ven raras pero son normales, como una lengua con surcos o con manchas que cambian de lugar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En el tema anterior viste la clasificación general de la mucosa oral. Ahora toca recorrerla región por región, porque cada zona tiene un grosor, una unión con los tejidos profundos y un contenido de glándulas que la hacen comportarse de manera propia. Este conocimiento te ayuda a anticipar dónde se acumula la inflamación, qué zonas absorben mejor, dónde sangra más una incisión y cómo se ve la normalidad antes de llamar «lesión» a algo que no lo es."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Recorrido regional"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Características de la mucosa por región",
+          "columnas": ["Región", "Epitelio", "Unión con planos profundos", "Notas clínicas"],
+          "filas": [
+            ["Mucosa labial y yugal", "No queratinizado, grueso", "Submucosa con grasa y glándulas menores, unida al músculo", "Móvil; frecuente asiento de mordisqueo, mucoceles y aftas"],
+            ["Mucosa alveolar", "No queratinizado, delgado", "Lámina propia laxa con muchas fibras elásticas", "Roja y con vasos visibles; se lesiona con el cepillado traumático"],
+            ["Piso de la boca", "No queratinizado, muy delgado", "Submucosa laxa con glándula sublingual", "Muy permeable y vascularizado; sitio de alto riesgo de cáncer"],
+            ["Cara ventral de la lengua", "No queratinizado, delgado", "Unido con firmeza al músculo", "Venas visibles; las lesiones blancas aquí no son normales"],
+            ["Paladar blando", "No queratinizado", "Submucosa con abundantes glándulas mucosas", "Puede tener botones gustativos; muy vascularizado"],
+            ["Paladar duro", "Ortoqueratinizado", "Mucoperiostio; zonas con grasa o glándulas en la submucosa lateral", "Firme e inmóvil; zona donante de injertos"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El **paladar duro** merece una descripción más fina, porque su estructura no es igual en todas partes. En la **línea media** (rafe) y en la franja de **encía** que rodea los dientes, la mucosa se une directamente al periostio sin submucosa. En la región lateral, entre la encía y el rafe, sí hay submucosa: en la **zona anterior**, por delante de los primeros molares, contiene sobre todo **tejido adiposo**, y en la **zona posterior** contiene **glándulas salivales menores** mucosas, que continúan hacia el paladar blando. Gruesos haces de colágeno atraviesan esa submucosa y anclan la mucosa al hueso, lo que mantiene su inmovilidad.\n\nEsta organización tiene consecuencias prácticas: la zona glandular posterior es más resiliente y permite que la prótesis total se asiente sobre ella; la zona adiposa anterior y la glandular posterior son también las áreas desde donde se toman injertos de tejido conectivo en periodoncia, y el grosor disponible varía de un paciente a otro."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/04",
+          "proporcion": "4:3",
+          "alt": "Paladar duro y blando de un adulto visto con espejo, con mucosa anterior pálida y firme y mucosa posterior con pequeños orificios glandulares.",
+          "pie": "El paladar duro no es homogéneo: su submucosa lateral es adiposa por delante y glandular por detrás.",
+          "prompt": "Fotografía clínica intraoral realista con espejo oclusal del paladar de un adulto sano con dentición superior completa, mucosa del paladar duro anterior rosa pálido firme con rugas, mucosa de la mitad posterior ligeramente más rosada con diminutos puntos que corresponden a orificios de glándulas, transición nítida al paladar blando de color rojo más intenso, rafe medio blanquecino, iluminación de flash clínico uniforme, colores naturales y nitidez alta. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, lesiones, toro palatino grande, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La mucosa especializada del dorso lingual"
+        },
+        {
+          "tipo": "texto",
+          "md": "El dorso de la lengua combina zonas queratinizadas y no queratinizadas organizadas en **papilas**, y está unido directamente a la musculatura sin submucosa, lo que lo hace muy firme.\n\nLas **papilas filiformes** son proyecciones cónicas con un casquete de epitelio queratinizado. Son las más numerosas, dan al dorso su aspecto aterciopelado, funcionan como una superficie abrasiva que ayuda a manipular el alimento y no tienen botones gustativos. Cuando la descamación de su queratina se retrasa por poca fricción, poca saliva o mala higiene, se acumulan bacterias y restos y aparece la **lengua saburral**, blanquecina o amarillenta.\n\nLas **papilas fungiformes** tienen forma de hongo, un epitelio delgado y un núcleo de tejido conectivo muy vascularizado, por eso se ven como puntos rojos. Llevan botones gustativos en su superficie superior.\n\nLas **papilas foliadas** son pliegues verticales en los bordes laterales posteriores, con botones gustativos en sus paredes. Las **papilas circunvaladas**, de 8 a 12, forman una V por delante del surco terminal; cada una está rodeada por un surco profundo en cuyas paredes se alinean cientos de botones gustativos. En el fondo de ese surco desembocan las **glándulas serosas de von Ebner**, cuya secreción lava el surco para que los receptores puedan percibir nuevos estímulos."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m02/d2",
+          "pie": "Los cuatro tipos de papilas linguales en corte y la estructura de un botón gustativo.",
+          "descripcion": "Fila de cuatro cortes esquemáticos de papilas sobre una franja de músculo: filiforme cónica con casquete de queratina, fungiforme en forma de hongo con botones gustativos en la cima, foliada con pliegues y botones en las paredes, y circunvalada rodeada por un surco con botones en sus paredes y una glándula de von Ebner que desemboca en el fondo del surco. A la derecha, ampliación de un botón gustativo en forma de barril dentro del epitelio, con su poro gustativo abierto a la superficie, células receptoras alargadas, células basales y una fibra nerviosa que llega por la base.",
+          "elementos": [
+            "Papila filiforme",
+            "Papila fungiforme",
+            "Papila foliada",
+            "Papila circunvalada",
+            "Glándula de von Ebner",
+            "Botón gustativo",
+            "Poro gustativo",
+            "Fibra nerviosa gustativa"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El **botón gustativo** es una estructura en forma de barril incluida en el epitelio, formada por varias decenas de células alargadas que se abren a la superficie por un pequeño **poro gustativo**. Dentro se distinguen células de sostén, células receptoras de distintos tipos y células basales que las reemplazan. Las células del botón se renuevan continuamente, en cuestión de días a pocas semanas, lo que explica que la alteración del gusto tras una quemadura leve de la lengua suela ser transitoria. Además de las papilas, hay botones gustativos dispersos en el paladar blando, la faringe y la epiglotis."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El «mapa de la lengua» es un mito",
+          "md": "Durante décadas se enseñó que la punta percibe lo dulce, los bordes lo salado y lo ácido y el fondo lo amargo. Ese mapa surgió de una interpretación exagerada de un trabajo de principios del siglo XX. Hoy se sabe que todas las regiones con botones gustativos pueden detectar los cinco sabores básicos: dulce, salado, ácido, amargo y umami. Lo que varía entre zonas es solo una pequeña diferencia de sensibilidad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Variantes de la normalidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el módulo 1 conociste los gránulos de Fordyce y la línea alba. Hay otras variantes frecuentes que conviene reconocer para no alarmar al paciente ni hacer tratamientos innecesarios:\n\n- **Pigmentación melánica fisiológica:** manchas color café, simétricas y difusas, sobre todo en la encía insertada vestibular. Es más frecuente en personas de piel morena y no cambia con el tiempo. Una mancha pigmentada única, asimétrica o que cambia sí requiere valoración.\n- **Leucoedema:** aspecto blanco grisáceo, opalescente y difuso de la mucosa yugal, casi siempre bilateral, que **desaparece o se atenúa al estirar la mejilla**. Se debe a un edema intracelular del epitelio y es más evidente en personas de piel morena y en fumadores.\n- **Lengua fisurada:** surcos múltiples en el dorso, de profundidad variable. Es una variante benigna; conviene enseñar a limpiar los surcos porque retienen restos.\n- **Lengua geográfica** o glositis migratoria benigna: zonas rojas por pérdida de papilas filiformes, bordeadas por un halo blanco amarillento, que cambian de forma y de lugar en días o semanas. Puede causar ardor con alimentos picantes o ácidos. A menudo coexiste con la lengua fisurada.\n- **Várices sublinguales:** venas tortuosas y azuladas en la cara ventral de la lengua, frecuentes en personas mayores y sin consecuencias."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando la lengua habla de la salud general"
+        },
+        {
+          "tipo": "texto",
+          "md": "No todo cambio difuso del dorso lingual es una variante. Una lengua **lisa, roja y brillante** por pérdida generalizada de papilas, la llamada glositis atrófica, puede acompañar a deficiencias de hierro, vitamina B12 o ácido fólico, y a veces es el primer signo visible de una anemia. Se diferencia de la lengua geográfica en que la pérdida de papilas es extensa y estable, no migratoria, y suele acompañarse de ardor y de queilitis angular. Otro cuadro es la **lengua vellosa**, en la que las papilas filiformes se alargan por falta de descamación y se tiñen de blanco, café o negro; se asocia con tabaco, higiene deficiente, boca seca y algunos antibióticos. Las placas blancas que se desprenden al raspar y dejan una base roja sugieren candidosis. En todos estos casos, describir con precisión lo que ves y preguntar por la salud general, la dieta y los medicamentos orienta la referencia al médico."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/05",
+          "proporcion": "4:3",
+          "alt": "Dorso de la lengua con varias zonas rojas lisas sin papilas, rodeadas por bordes blanquecinos ondulados, sobre una lengua con surcos.",
+          "pie": "Lengua geográfica asociada a lengua fisurada: zonas depapiladas con bordes blanquecinos que cambian de lugar.",
+          "prompt": "Fotografía clínica macro realista del dorso de la lengua de un adulto, protruida sobre el labio inferior, con varias áreas rojas lisas de contorno irregular sin papilas filiformes, cada una rodeada por un borde blanco amarillento ondulado y ligeramente elevado, el resto del dorso con textura aterciopelada normal y algunos surcos poco profundos, saliva natural, iluminación clínica uniforme, fondo oscuro desenfocado. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, úlceras profundas, rostro visible, piercings, colores saturados artificiales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Manchas que se mueven",
+          "md": "Una joven de 24 años consulta preocupada porque su lengua tiene «mapas» que cambian de lugar cada semana y a veces le arde con la salsa. Al explorarla ves zonas rojas depapiladas con halo blanquecino en el dorso y surcos leves. Ninguna zona está indurada y no hay úlceras. El cuadro corresponde a lengua geográfica. Le explicas que es benigna, que no es contagiosa ni se relaciona con cáncer, y que puede evitar los irritantes en los periodos de ardor. Registras la imagen para comparar en la siguiente visita."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Normal o no",
+          "afirmaciones": [
+            { "texto": "El leucoedema se atenúa o desaparece al estirar la mucosa yugal.", "verdadero": true, "explicacion": "Esa maniobra es la clave para distinguirlo de otras lesiones blancas." },
+            { "texto": "Las papilas filiformes contienen la mayor parte de los botones gustativos.", "verdadero": false, "explicacion": "Las filiformes no tienen botones gustativos; estos están en las fungiformes, foliadas y circunvaladas." },
+            { "texto": "La pigmentación melánica fisiológica suele ser simétrica y estable.", "verdadero": true, "explicacion": "Una mancha única, asimétrica o cambiante sí requiere valoración." },
+            { "texto": "Una placa blanca en la cara ventral de la lengua es una variante normal.", "verdadero": false, "explicacion": "La cara ventral no se queratiniza normalmente; una placa blanca ahí debe estudiarse." },
+            { "texto": "Las glándulas de von Ebner desembocan en el surco de las papilas circunvaladas.", "verdadero": true, "explicacion": "Su secreción serosa lava el surco y renueva el estímulo para los botones gustativos." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/06",
+          "proporcion": "16:9",
+          "alt": "Encía vestibular anterior con pigmentación café difusa y simétrica en una persona de piel morena.",
+          "pie": "Pigmentación melánica fisiológica: difusa, simétrica y estable, más frecuente en personas de piel morena.",
+          "prompt": "Fotografía clínica intraoral realista del sector anterior de un adulto mexicano de piel morena, labios retraídos con separadores, dientes anteriores sanos y alineados, encía insertada vestibular superior e inferior con bandas de pigmentación café difusa y simétrica a ambos lados, margen gingival rosa delgado y papilas sanas, sin inflamación, iluminación de flash clínico uniforme, colores naturales. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, manchas negras aisladas, rostro completo, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Ante un hallazgo en la mucosa, usa tres preguntas antes de alarmarte o de alarmar al paciente: **¿es simétrico?**, **¿cambia con una maniobra sencilla** como estirar o raspar suavemente?, **¿ha estado ahí desde siempre según el paciente o según tus registros?** Las variantes normales suelen ser simétricas, estables y responder de manera típica a esas maniobras. Una fotografía clínica en el expediente convierte la siguiente consulta en una comparación objetiva y no en un recuerdo."
+        }
+      ],
+      "glosario": [
+        { "termino": "Papila filiforme", "definicion": "Papila lingual cónica y queratinizada, la más numerosa, sin botones gustativos." },
+        { "termino": "Papila circunvalada", "definicion": "Papila grande rodeada por un surco con botones gustativos; hay de 8 a 12 por delante del surco terminal." },
+        { "termino": "Botón gustativo", "definicion": "Estructura epitelial en forma de barril con células receptoras del gusto que se abren por un poro." },
+        { "termino": "Glándulas de von Ebner", "definicion": "Glándulas salivales menores serosas que desembocan en el surco de las papilas circunvaladas y foliadas." },
+        { "termino": "Leucoedema", "definicion": "Aspecto blanco grisáceo difuso de la mucosa yugal que se atenúa al estirarla; variante normal." },
+        { "termino": "Lengua geográfica", "definicion": "Condición benigna con zonas depapiladas rojas de bordes blanquecinos que cambian de lugar." },
+        { "termino": "Lengua saburral", "definicion": "Capa blanquecina o amarillenta sobre el dorso lingual por acumulación de queratina, bacterias y restos." }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.2-1",
+          "q": "En la submucosa lateral anterior del paladar duro predomina:",
+          "opciones": ["Tejido glandular", "Tejido adiposo", "Músculo esquelético", "Tejido linfoide"],
+          "correcta": 1,
+          "explicacion": "La zona lateral anterior es adiposa y la posterior glandular; el rafe y la encía carecen de submucosa."
+        },
+        {
+          "id": "t2.2-2",
+          "q": "¿Qué maniobra ayuda a reconocer el leucoedema?",
+          "opciones": ["Raspar con fuerza hasta que sangre", "Aplicar calor", "Estirar la mucosa yugal y observar si se atenúa", "Pedir al paciente que saque la lengua"],
+          "correcta": 2,
+          "explicacion": "El leucoedema se atenúa o desaparece al estirar la mejilla, a diferencia de otras lesiones blancas."
+        },
+        {
+          "id": "t2.2-3",
+          "q": "¿Qué papilas linguales se ven como puntos rojos por su núcleo muy vascularizado y su epitelio delgado?",
+          "opciones": ["Fungiformes", "Filiformes", "Circunvaladas", "Foliadas"],
+          "correcta": 0,
+          "explicacion": "Las fungiformes tienen epitelio delgado sobre un núcleo conectivo muy vascularizado y portan botones gustativos."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Oral and Maxillofacial Pathology", "autor": "Neville B. W., Damm D. D., Allen C. M., Chi A. C. (Elsevier)", "anio": 2016 },
+        { "tipo": "academica", "titulo": "The receptors and cells for mammalian taste (Nature)", "autor": "Chandrashekar J., Hoon M. A., Ryba N. J. P., Zuker C. S.", "anio": 2006 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de histología oral y medicina bucal", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "2.3",
+      "titulo": "La encía: partes, dimensiones y signos de salud",
+      "minutos": 24,
+      "enPocasPalabras": "La encía es la parte firme de la mucosa que rodea el cuello de los dientes y los sostiene como un cuello de tortuga. Cuando está sana es rosa, firme, con forma de festón y no sangra. Si sangra o se ve roja e hinchada, algo está fallando y conviene atenderlo pronto.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **encía** es la porción de la mucosa masticadora que cubre los procesos alveolares y rodea la parte cervical de los dientes. Junto con la unión dentogingival forma el **periodonto de protección**, cuya tarea es sellar el paso entre la boca, colonizada por bacterias, y los tejidos profundos que sostienen al diente. El ligamento periodontal, el cemento y el hueso alveolar, el **periodonto de inserción**, los estudiarás en el módulo 7. Aquí te concentrarás en lo que ves y mides en la consulta todos los días."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las partes de la encía"
+        },
+        {
+          "tipo": "texto",
+          "md": "La encía se divide en tres porciones:\n\n**Encía libre o marginal.** Es la franja que rodea el cuello del diente sin estar unida a él en su porción más coronal. Su borde, el **margen gingival**, sigue la línea de las uniones amelocementarias con un contorno festoneado y, en el adulto joven sano, se sitúa ligeramente coronal a ellas, por lo general entre 1 y 2 mm. Entre la encía libre y el diente queda un espacio en forma de V, el **surco gingival**. En una parte de los adultos se observa en la superficie un **surco marginal**, una depresión poco profunda que separa la encía libre de la insertada.\n\n**Encía insertada.** Se continúa con la libre y está firmemente unida al cemento y al hueso alveolar por fibras de colágeno, por lo que es inmóvil. Se extiende hasta la **unión mucogingival**. Su resistencia la hace funcionar como un amortiguador frente a la tracción de labios, mejillas y frenillos.\n\n**Encía interdental.** Ocupa el espacio entre dos dientes vecinos, por debajo del punto de contacto, y forma la **papila interdental**. En los dientes anteriores la papila tiene forma piramidal; en los posteriores, donde el contacto es más ancho, tiene una papila vestibular y otra lingual unidas por una depresión llamada **col**, cubierta por epitelio delgado no queratinizado. El col es una zona protegida de la fricción pero con mayor acumulación de placa, y es un sitio donde la gingivitis suele empezar."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m02/d3",
+          "pie": "Vista vestibular de la encía en incisivos inferiores, con sus partes y referencias.",
+          "descripcion": "Esquema de vista vestibular de dos incisivos con la encía y la mucosa alveolar. De incisal a apical: margen gingival festoneado, encía libre con línea punteada que indica la profundidad del surco, surco marginal, encía insertada con textura punteada, línea festoneada de la unión mucogingival y mucosa alveolar más oscura. Entre ambos dientes, la papila interdental. A la derecha, un pequeño recuadro muestra un corte vestibulolingual de la zona interdental de dos molares con el col entre una papila vestibular y una lingual.",
+          "elementos": [
+            "Margen gingival",
+            "Encía libre",
+            "Surco marginal",
+            "Encía insertada",
+            "Unión mucogingival",
+            "Mucosa alveolar",
+            "Papila interdental",
+            "Col"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las medidas que importan"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **surco gingival** tiene, en cortes histológicos de encía sana, una profundidad media cercana a 0.7 mm según las mediciones clásicas de Gargiulo y colaboradores de 1961. En la clínica, sin embargo, la sonda periodontal penetra en el epitelio de unión, y en un periodonto sano registra **profundidades de sondaje de 1 a 3 mm**. La diferencia entre profundidad histológica y profundidad de sondaje es una fuente frecuente de confusión: lo que mides con la sonda depende de la fuerza, del grosor de la punta y del grado de inflamación del tejido.\n\nEl **ancho de la encía insertada** varía de un diente a otro y entre personas. Los datos clásicos que recoge el texto de periodontología de Carranza indican que suele ser mayor en la región de incisivos, alrededor de 3.5 a 4.5 mm en el maxilar y 3.3 a 3.9 mm en la mandíbula, y menor en la región de premolares, cerca de 1.9 mm en el primer premolar superior y 1.8 mm en el inferior. El ancho tiende a aumentar con la edad. No se mide directamente: se calcula restando la profundidad de sondaje al ancho total de la **encía queratinizada**, que va del margen gingival a la unión mucogingival.\n\nDos errores frecuentes al medir: confundir encía queratinizada con encía insertada, y sondear con demasiada fuerza. La fuerza recomendada para el sondaje es ligera, del orden de 0.2 a 0.25 newtons, el equivalente a unos 20 a 25 gramos; una presión mayor atraviesa el epitelio de unión, sobreestima la profundidad y lastima al paciente. Si no estás seguro de dónde está la unión mucogingival, mueve con suavidad el labio o la mejilla: la mucosa alveolar se desplaza y la encía insertada permanece fija. También puedes deslizar horizontalmente la sonda sobre la superficie, desde la mucosa hacia la encía, y notarás el escalón."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Ancho de encía insertada",
+          "instruccion": "Mide con la sonda el ancho de encía queratinizada desde el margen gingival hasta la unión mucogingival, mide la profundidad de sondaje en el mismo punto y calcula el ancho de encía insertada.",
+          "formula": "Encía insertada = ancho de encía queratinizada − profundidad de sondaje",
+          "variables": [
+            { "id": "queratinizada", "etiqueta": "Ancho de encía queratinizada", "valor": 5, "unidad": "mm" },
+            { "id": "sondaje", "etiqueta": "Profundidad de sondaje", "valor": 2, "unidad": "mm" }
+          ],
+          "resultado": { "expresion": "queratinizada - sondaje", "etiqueta": "Ancho de encía insertada", "unidad": "mm", "decimales": 1 }
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/07",
+          "proporcion": "4:3",
+          "alt": "Sonda periodontal milimetrada colocada verticalmente sobre la encía vestibular de un incisivo inferior para medir la encía queratinizada.",
+          "pie": "La sonda colocada sobre la superficie mide el ancho de encía queratinizada; dentro del surco mide la profundidad de sondaje.",
+          "prompt": "Fotografía clínica macro realista del sector anterior inferior de un adulto sano, una sonda periodontal metálica milimetrada con marcas oscuras sostenida por una mano con guante de nitrilo, apoyada verticalmente sobre la superficie de la encía vestibular de un incisivo central inferior desde el margen gingival hasta la línea de unión con la mucosa alveolar, encía rosa coral firme, mucosa alveolar más roja, labio retraído, iluminación de flash clínico. Evitar: texto, números legibles, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro visible, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los signos de una encía sana"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Encía sana frente a encía con gingivitis",
+          "columnas": ["Característica", "Encía sana", "Gingivitis"],
+          "filas": [
+            ["Color", "Rosa coral, con o sin pigmentación melánica fisiológica", "Roja o rojo azulada, sobre todo en el margen"],
+            ["Consistencia", "Firme y resiliente; la insertada no se desplaza", "Blanda, edematosa, se deprime al presionar"],
+            ["Textura", "Puede tener punteado en la encía insertada", "Pérdida del punteado, superficie lisa y brillante"],
+            ["Contorno", "Margen delgado en filo de cuchillo, festoneado; papilas que llenan el espacio", "Margen engrosado y redondeado; papilas abultadas"],
+            ["Sangrado al sondaje", "Ausente", "Presente"],
+            ["Profundidad de sondaje", "De 1 a 3 mm", "Puede aumentar por agrandamiento del tejido sin pérdida de inserción"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El **punteado** de la encía insertada, con aspecto de cáscara de naranja, se debe a las papilas de tejido conectivo y a los haces de colágeno que unen la encía al hueso. Su presencia varía entre personas, entre zonas y con la edad, de modo que su ausencia aislada no significa enfermedad; lo que sí orienta es su **pérdida** en un sitio que antes lo tenía, junto con otros signos.\n\nDe todos los signos, el **sangrado al sondaje** es el más útil y objetivo. La encía sana no sangra al introducir una sonda con fuerza ligera; el sangrado indica inflamación del tejido conectivo bajo el epitelio del surco, aunque el color y el contorno aún se vean casi normales. Por eso, en la clasificación de enfermedades periodontales de 2017, el porcentaje de sitios con sangrado al sondaje es un criterio central para definir salud gingival y gingivitis."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La encía también cambia con la edad",
+          "md": "En la dentición temporal, la encía suele verse algo más roja, con menos punteado, márgenes más redondeados y mayor movilidad que en el adulto, y durante la erupción los márgenes alrededor de los dientes que emergen se ven engrosados y enrojecidos sin que eso signifique enfermedad. En el adulto el ancho de encía insertada tiende a aumentar con los años. En el adulto mayor son frecuentes las recesiones y las raíces expuestas, que cambian el riesgo de caries y la sensibilidad. Interpreta siempre lo que ves según la edad del paciente."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/08",
+          "proporcion": "4:3",
+          "alt": "Acercamiento de encía insertada sana con textura de cáscara de naranja y margen delgado alrededor de incisivos inferiores.",
+          "pie": "Encía sana: color rosa coral, margen en filo de cuchillo, papilas completas y punteado en la encía insertada.",
+          "prompt": "Fotografía clínica macro realista con luz rasante de la encía vestibular de los incisivos inferiores de un adulto joven sano, se observa el margen gingival delgado en filo de cuchillo siguiendo el contorno festoneado de los dientes, papilas puntiagudas que llenan los espacios interdentales, encía insertada rosa coral con una textura fina de pequeños hoyuelos como cáscara de naranja, y abajo la transición a la mucosa alveolar lisa y roja, labio retraído fuera del encuadre, nitidez alta. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, inflamación, sarro, rostro visible."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El fenotipo periodontal"
+        },
+        {
+          "tipo": "texto",
+          "md": "No todas las encías sanas son iguales. El taller mundial de 2017 de la Academia Americana de Periodontología y la Federación Europea de Periodontología recomendó usar el término **fenotipo periodontal**, que combina el **fenotipo gingival** (grosor de la encía y ancho de tejido queratinizado) y el **morfotipo óseo** (grosor de la tabla ósea vestibular). En términos prácticos se distinguen fenotipos **delgados**, con encía fina, festoneado pronunciado, papilas altas y coronas más largas y triangulares, y fenotipos **gruesos**, con encía densa, festoneado plano y coronas más cuadradas.\n\nUna forma sencilla de estimarlo es la **transparencia de la sonda**: se introduce la sonda en el surco vestibular y se observa si su silueta se transparenta a través de la encía. Si se ve, el fenotipo se considera delgado. Los fenotipos delgados tienen más riesgo de **recesión** ante el cepillado traumático, la ortodoncia que mueve los dientes hacia vestibular, la inflamación o las restauraciones con márgenes subgingivales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cuidado con el cepillado agresivo",
+          "md": "En pacientes con fenotipo delgado y poca encía insertada, sobre todo en caninos y premolares, el cepillado horizontal con cerdas duras y mucha fuerza puede producir recesiones y lesiones cervicales. Enseña una técnica suave con cepillo de cerdas suaves, revisa la presión que aplica el paciente y registra la posición del margen en cada visita. Una recesión documentada a tiempo permite valorar con el periodoncista si conviene vigilarla o tratarla."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/09",
+          "proporcion": "16:9",
+          "alt": "Dos sectores anteriores lado a lado: uno con encía delgada y festoneado alto, otro con encía gruesa y festoneado plano.",
+          "pie": "Fenotipo gingival delgado frente a grueso: cambia el riesgo de recesión y la respuesta a la cirugía y a la ortodoncia.",
+          "prompt": "Composición de dos fotografías clínicas intraorales realistas lado a lado del sector anterior superior de dos adultos sanos distintos con labios retraídos: a la izquierda dientes largos y triangulares con encía delgada, translúcida, festoneado pronunciado y papilas altas; a la derecha dientes más cuadrados con encía gruesa, densa, festoneado plano y papilas cortas y anchas, ambas sin inflamación, iluminación de flash clínico igual en las dos, colores naturales. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro completo, restauraciones visibles, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "¿Hay encía insertada suficiente?",
+          "situacion": "Un adolescente de 15 años va a iniciar ortodoncia. En el incisivo central inferior izquierdo mides 2 mm de encía queratinizada y 2 mm de profundidad de sondaje. El frenillo labial inferior se inserta cerca del margen y, al traccionar el labio, el margen gingival se mueve. La encía se ve delgada y la sonda se transparenta.",
+          "opciones": [
+            { "texto": "Registrar que prácticamente no hay encía insertada en ese sitio, fotografiarlo y comentar con el ortodoncista y el periodoncista antes de mover el diente.", "correcta": true, "retro": "Correcto. Con 2 mm de queratinizada y 2 mm de sondaje la encía insertada es prácticamente nula; con fenotipo delgado y tracción del frenillo, el riesgo de recesión es alto y amerita valoración conjunta." },
+            { "texto": "Iniciar la ortodoncia sin más, porque el sondaje es normal.", "correcta": false, "retro": "El sondaje normal no excluye el problema: lo que falta es encía insertada, y el movimiento vestibular puede provocar recesión." },
+            { "texto": "Indicar cepillado más fuerte para que la encía se engrose.", "correcta": false, "retro": "El cepillado traumático favorece la recesión; la encía no se engrosa por mayor fricción." },
+            { "texto": "Concluir que hay 4 mm de encía insertada sumando ambas medidas.", "correcta": false, "retro": "La encía insertada se calcula restando el sondaje al ancho de encía queratinizada, no sumándolos." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Incluye en tu periodontograma, al menos en los dientes anteriores y en los que vas a restaurar o mover, el **ancho de encía queratinizada** y una nota sobre el **fenotipo**. Son dos datos que toman segundos, que casi nunca se registran y que cambian decisiones: dónde colocar un margen, cómo planear la ortodoncia y qué técnica de higiene enseñar."
+        }
+      ],
+      "glosario": [
+        { "termino": "Encía libre", "definicion": "Porción de la encía que rodea el cuello del diente sin unirse a él en su parte más coronal; limita el surco gingival." },
+        { "termino": "Encía insertada", "definicion": "Encía firmemente unida al cemento y al hueso que se extiende hasta la unión mucogingival." },
+        { "termino": "Surco gingival", "definicion": "Espacio en V entre la encía libre y la superficie del diente." },
+        { "termino": "Col", "definicion": "Depresión de la encía interdental bajo el contacto de dientes posteriores, cubierta por epitelio no queratinizado." },
+        { "termino": "Punteado gingival", "definicion": "Textura de cáscara de naranja de la encía insertada, variable entre personas." },
+        { "termino": "Fenotipo periodontal", "definicion": "Combinación del grosor y ancho del tejido gingival y del grosor del hueso vestibular." },
+        { "termino": "Sangrado al sondaje", "definicion": "Sangrado tras introducir la sonda con fuerza ligera; signo objetivo de inflamación gingival." }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.3-1",
+          "q": "Mides 6 mm de encía queratinizada y 2 mm de profundidad de sondaje. ¿Cuánta encía insertada hay?",
+          "opciones": ["8 mm", "6 mm", "2 mm", "4 mm"],
+          "correcta": 3,
+          "explicacion": "Encía insertada = encía queratinizada − profundidad de sondaje = 6 − 2 = 4 mm."
+        },
+        {
+          "id": "t2.3-2",
+          "q": "¿Cuál es el signo clínico más objetivo de inflamación gingival?",
+          "opciones": ["Ausencia de punteado", "Sangrado al sondaje", "Pigmentación melánica", "Papilas piramidales"],
+          "correcta": 1,
+          "explicacion": "El sangrado al sondaje indica inflamación del tejido conectivo y es central en la clasificación de 2017; el punteado varía mucho entre personas."
+        },
+        {
+          "id": "t2.3-3",
+          "q": "¿En qué región suele ser más estrecha la encía insertada?",
+          "opciones": ["Premolares", "Incisivos superiores", "Incisivos inferiores", "Paladar"],
+          "correcta": 0,
+          "explicacion": "Los datos clásicos muestran mayor ancho en incisivos y menor en premolares; en el paladar no se habla de encía insertada delimitada por unión mucogingival."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Newman and Carranza's Clinical Periodontology", "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)", "anio": 2019 },
+        { "tipo": "academica", "titulo": "Dimensions and relations of the dentogingival junction in humans (Journal of Periodontology)", "autor": "Gargiulo A. W., Wentz F. M., Orban B.", "anio": 1961 },
+        { "tipo": "academica", "titulo": "Periodontal manifestations of systemic diseases and developmental and acquired conditions: Consensus report of workgroup 3 of the 2017 World Workshop", "autor": "Jepsen S., Caton J. G., Albandar J. M. et al. (Journal of Clinical Periodontology)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Periodontal health and gingival diseases and conditions on an intact and a reduced periodontium: Consensus report of workgroup 1 of the 2017 World Workshop", "autor": "Chapple I. L. C., Mealey B. L., Van Dyke T. E. et al. (Journal of Clinical Periodontology)", "anio": 2018 }
+      ]
+    },
+    {
+      "n": "2.4",
+      "titulo": "Histología de la encía y unión dentogingival",
+      "minutos": 22,
+      "enPocasPalabras": "La encía se pega al diente con una capa muy especial de células que funciona como un sello. Ese sello es delicado: deja pasar defensas y líquido para proteger, pero también es por donde empiezan los problemas si se acumula placa. Por eso los dentistas cuidan que las coronas y resinas no invadan ese espacio.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El diente es la única estructura del cuerpo que atraviesa un epitelio y queda expuesta al medio externo. En la piel, cualquier cosa que la perfore se considera una herida; en la boca, el organismo resuelve este problema con un sello especializado: la **unión dentogingival**. Entender su estructura es indispensable para comprender cómo empieza la enfermedad periodontal y por qué la posición de un margen restaurador puede provocar inflamación crónica."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres epitelios en un mismo tejido"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si haces un corte vestibulolingual de un diente con su encía, encontrarás tres epitelios distintos:\n\n**Epitelio gingival oral.** Cubre la cara externa de la encía libre e insertada, la que ves en la boca. Es queratinizado o paraqueratinizado, con crestas epiteliales largas, y es una barrera eficaz y poco permeable.\n\n**Epitelio del surco.** Reviste la pared blanda del surco gingival, desde el margen hasta el epitelio de unión. Es delgado, no queratinizado y sin crestas epiteliales marcadas. Es más permeable que el epitelio oral y se considera una zona de transición.\n\n**Epitelio de unión.** Es el que se adhiere al diente. Tiene forma de cuña: es más grueso en su parte coronal, donde llega a tener de 15 a 30 capas de células, y se adelgaza hasta unas pocas capas en su extremo apical, cerca de la unión amelocementaria en un periodonto sano. Es no queratinizado, sus células son aplanadas y orientadas paralelas a la superficie dental, y los espacios entre ellas son amplios."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/10",
+          "proporcion": "3:4",
+          "alt": "Ilustración en corte de la región cervical de un diente con la encía, el surco y el hueso alveolar.",
+          "pie": "Corte de la unión dentogingival: el epitelio de unión sella el diente y las fibras de colágeno anclan la encía.",
+          "prompt": "Ilustración anatómica realista de estilo atlas de histología, corte longitudinal vestibulolingual del tercio cervical de un incisivo humano con su encía, se ven el esmalte blanco, la dentina color marfil, el cemento delgado, la encía rosada con su superficie externa, un surco gingival poco profundo, una banda delgada de epitelio adherida al esmalte cervical, haces de fibras de colágeno en abanico en el tejido conectivo y la cresta del hueso alveolar por debajo, colores suaves naturales, fondo blanco. Evitar: texto, etiquetas, números, flechas, sangre, proporciones incorrectas, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se pega el epitelio de unión al diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "El epitelio de unión tiene **dos láminas basales**. La **externa** lo une al tejido conectivo, como en cualquier epitelio. La **interna** lo une a la superficie del diente, sea esmalte, cemento o, a veces, dentina, mediante **hemidesmosomas**. Esta lámina basal interna tiene una composición particular, con proteínas como la laminina 332, y es lo que se conoce como **inserción epitelial**.\n\nEl epitelio de unión se origina del **epitelio reducido del esmalte** cuando el diente erupciona; después se renueva a partir de las células de la encía y puede formarse de nuevo tras una cirugía o un sondaje. Sus células se renuevan muy rápido y se descaman hacia el fondo del surco.\n\nSus amplios espacios intercelulares lo hacen **permeable** en ambos sentidos. Por ellos sale hacia el surco el **líquido crevicular gingival**, un exudado del tejido conectivo que contiene proteínas plasmáticas, anticuerpos y células de defensa. Aun en la encía clínicamente sana, el epitelio de unión contiene **neutrófilos** que migran continuamente hacia el surco y forman una primera línea de defensa frente a la biopelícula. Esta permeabilidad es útil para la defensa, pero también es el camino por el que los productos bacterianos alcanzan el tejido conectivo y desencadenan la inflamación.\n\nEl volumen de líquido crevicular es mínimo en la encía sana y aumenta conforme se inflama. Como refleja lo que ocurre en el tejido conectivo, en investigación se recoge con tiras de papel para medir mediadores de inflamación, enzimas que degradan colágeno y productos de destrucción de tejido; es una ventana a la biología de la encía sin necesidad de biopsia."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m02/d4",
+          "pie": "La unión dentogingival y sus componentes en un periodonto sano.",
+          "descripcion": "Corte esquemático vertical de la región cervical de un diente a la izquierda y la encía a la derecha. De coronal a apical se señalan el margen gingival, el epitelio gingival oral en la cara externa, el surco gingival con su epitelio del surco, el epitelio de unión en forma de cuña adherido al esmalte, la unión amelocementaria, la inserción de tejido conectivo con fibras que entran al cemento y la cresta ósea alveolar. A un lado, una llave vertical agrupa el epitelio de unión y la inserción conectiva bajo el rótulo de inserción de tejidos supracrestales.",
+          "elementos": [
+            "Epitelio gingival oral",
+            "Surco gingival",
+            "Epitelio del surco",
+            "Epitelio de unión",
+            "Lámina basal interna y hemidesmosomas",
+            "Unión amelocementaria",
+            "Inserción de tejido conectivo",
+            "Cresta ósea alveolar"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El tejido conectivo y sus fibras"
+        },
+        {
+          "tipo": "texto",
+          "md": "La lámina propia de la encía es un tejido conectivo denso, rico en colágeno y con fibroblastos, vasos y células de defensa. Sus haces de colágeno, las **fibras gingivales**, mantienen la encía firme contra el diente y resisten las fuerzas de la masticación. Se describen varios grupos:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Grupos de fibras gingivales",
+          "columnas": ["Grupo", "Trayecto", "Función principal"],
+          "filas": [
+            ["Dentogingivales", "Del cemento supraalveolar hacia la encía libre e insertada", "Sostienen la encía contra el diente"],
+            ["Alveologingivales", "De la cresta alveolar hacia la encía", "Anclan la encía al hueso"],
+            ["Circulares", "Rodean el cuello del diente dentro de la encía libre", "Ciñen la encía como un anillo"],
+            ["Dentoperiósticas", "Del cemento sobre la cresta hacia el periostio de la tabla ósea", "Anclan el diente al proceso alveolar"],
+            ["Transeptales", "Del cemento de un diente al del vecino, por encima de la cresta interdental", "Mantienen la relación entre dientes vecinos"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Por qué recidiva una rotación",
+          "md": "Una paciente terminó su ortodoncia con un incisivo lateral que antes estaba rotado. A los pocos meses, el diente empieza a girar de nuevo. Las fibras supracrestales, en particular las transeptales y circulares, se remodelan más lentamente que el ligamento periodontal y tienden a «tirar» del diente hacia su posición original. Por eso los ortodoncistas planean una retención prolongada y, en algunos casos, valoran una fibrotomía supracrestal, un procedimiento que corta esas fibras para disminuir la recidiva."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La inserción de tejidos supracrestales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Entre el fondo del surco y la cresta del hueso alveolar hay una distancia ocupada por el epitelio de unión y la inserción de tejido conectivo. Durante décadas se le llamó **anchura biológica**; el taller mundial de 2017 propuso llamarla **inserción de tejidos supracrestales**. Su importancia clínica es que el organismo tiende a mantenerla: si un margen de restauración se coloca invadiendo ese espacio, la encía responde con inflamación crónica, sangrado, recesión o pérdida ósea hasta «recuperar» la distancia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo empieza la gingivitis en esta estructura"
+        },
+        {
+          "tipo": "texto",
+          "md": "La descripción histológica clásica de Page y Schroeder, de 1976, sigue siendo útil para entender lo que ocurre bajo la superficie cuando la biopelícula se acumula en el margen. En la **lesión inicial**, en los primeros días, los vasos bajo el epitelio de unión se dilatan, aumenta el líquido crevicular y más neutrófilos migran hacia el surco; clínicamente casi no se ve nada. En la **lesión temprana**, alrededor de una semana después, se acumulan linfocitos en el tejido conectivo, se pierde colágeno en la zona y el epitelio de unión empieza a proliferar; aparecen enrojecimiento y sangrado al sondaje. En la **lesión establecida**, tras unas semanas, predominan las células plasmáticas y el epitelio del surco se transforma en un epitelio de bolsa ulcerado y más permeable. Mientras la inserción no se pierda, todo esto es reversible con el control de la biopelícula. La **lesión avanzada** ya corresponde a periodontitis, con migración apical del epitelio de unión y pérdida de inserción y de hueso."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Alrededor de un implante el sello es distinto",
+          "md": "La mucosa que rodea un implante también tiene un epitelio de unión y una zona de tejido conectivo, pero hay diferencias importantes: no existe cemento ni ligamento periodontal, las fibras de colágeno corren en su mayoría paralelas o circulares alrededor del implante en lugar de insertarse en él, y el tejido conectivo tiene menos vasos. Por eso la mucosa periimplantaria defiende peor frente a la biopelícula y la inflamación puede avanzar más rápido. El control de placa alrededor de los implantes y su revisión periódica no son opcionales."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Cifras de Gargiulo y sus límites",
+          "md": "En 1961, Gargiulo, Wentz y Orban midieron en cortes de autopsia la unión dentogingival y obtuvieron valores medios de **0.69 mm** para el surco, **0.97 mm** para el epitelio de unión y **1.07 mm** para la inserción de tejido conectivo. De ahí surgió la cifra popular de unos **2 mm** de anchura biológica (epitelio de unión más inserción conectiva) que no debería invadirse. Sin embargo, estudios posteriores, como el de Vacek y colaboradores de 1994, encontraron valores distintos y una gran variación entre personas, dientes y superficies; la inserción conectiva resultó la dimensión más constante y el epitelio de unión, la más variable. Por eso el consenso de 2017 subraya que no existe una cifra universal: la distancia debe valorarse en cada paciente, por ejemplo con el **sondaje transgingival** bajo anestesia hasta el hueso, antes de decidir la posición de un margen subgingival o la necesidad de un alargamiento de corona."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "De la boca al hueso",
+          "instruccion": "Ordena las estructuras que encuentra una sonda imaginaria que avanza desde el margen gingival hacia la cresta ósea en un periodonto sano.",
+          "elementos": [
+            "Margen gingival",
+            "Surco gingival con su epitelio",
+            "Epitelio de unión",
+            "Inserción de tejido conectivo",
+            "Cresta ósea alveolar"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/11",
+          "proporcion": "4:3",
+          "alt": "Corona cerámica anterior con margen ligeramente subgingival y encía sana sin inflamación alrededor.",
+          "pie": "Un margen que respeta la inserción de tejidos supracrestales permite una encía estable y sin inflamación.",
+          "prompt": "Fotografía clínica intraoral realista del sector anterior superior de un adulto con una corona cerámica en el incisivo central derecho de color y forma naturales idénticos al diente vecino, encía marginal rosa coral delgada y sin enrojecimiento alrededor de la corona, papilas completas, labios retraídos con separadores, iluminación de flash clínico uniforme, colores naturales y nitidez alta. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, inflamación, margen metálico visible, rostro completo, dientes deformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/12",
+          "proporcion": "1:1",
+          "alt": "Tira de papel absorbente colocada en la entrada del surco gingival de un diente anterior para recoger líquido crevicular.",
+          "pie": "El líquido crevicular gingival puede recogerse con tiras de papel para estudios de investigación sobre inflamación.",
+          "prompt": "Fotografía clínica macro realista del margen gingival vestibular de un incisivo superior de un adulto, una tira delgada de papel absorbente blanco sostenida con pinzas de punta fina por una mano con guante de nitrilo, colocada suavemente en la entrada del surco gingival, encía rosa sana, campo seco aislado con rollos de algodón, iluminación de flash clínico, fondo desenfocado. Evitar: texto, números, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro visible, manos sin guantes, inflamación."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de preparar un diente con margen subgingival, sondea el surco y anota su profundidad en ese sitio. Como regla de prudencia, el margen debe quedar dentro del surco sin alcanzar el fondo y nunca invadir la inserción. Si la caries o la fractura llegan cerca de la cresta ósea, no improvises: comenta el caso con el periodoncista para valorar un alargamiento de corona antes de restaurar."
+        }
+      ],
+      "glosario": [
+        { "termino": "Unión dentogingival", "definicion": "Conjunto del epitelio de unión y la inserción de tejido conectivo que sella la encía alrededor del diente." },
+        { "termino": "Epitelio de unión", "definicion": "Epitelio no queratinizado en forma de cuña que se adhiere al diente mediante una lámina basal interna y hemidesmosomas." },
+        { "termino": "Epitelio del surco", "definicion": "Epitelio delgado no queratinizado que reviste la pared blanda del surco gingival." },
+        { "termino": "Hemidesmosoma", "definicion": "Estructura de anclaje que une una célula epitelial a su lámina basal." },
+        { "termino": "Líquido crevicular gingival", "definicion": "Exudado del tejido conectivo que sale al surco a través del epitelio de unión; aumenta con la inflamación." },
+        { "termino": "Fibras transeptales", "definicion": "Haces de colágeno que van del cemento de un diente al de su vecino por encima de la cresta interdental." },
+        { "termino": "Inserción de tejidos supracrestales", "definicion": "Epitelio de unión más inserción de tejido conectivo por encima de la cresta ósea; antes llamada anchura biológica." }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.4-1",
+          "q": "¿Mediante qué estructuras se adhiere el epitelio de unión a la superficie dental?",
+          "opciones": ["Desmosomas y fibras de Sharpey", "Uniones estrechas y queratina", "Fibras transeptales", "Lámina basal interna y hemidesmosomas"],
+          "correcta": 3,
+          "explicacion": "La inserción epitelial está formada por una lámina basal interna unida a las células por hemidesmosomas."
+        },
+        {
+          "id": "t2.4-2",
+          "q": "¿Qué característica del epitelio de unión explica la salida de líquido crevicular y neutrófilos al surco?",
+          "opciones": ["Su queratinización", "Sus amplios espacios intercelulares", "Sus crestas epiteliales largas", "La ausencia de lámina basal"],
+          "correcta": 1,
+          "explicacion": "Los amplios espacios intercelulares lo hacen permeable en ambos sentidos."
+        },
+        {
+          "id": "t2.4-3",
+          "q": "Un margen de corona invade la inserción de tejidos supracrestales. ¿Qué respuesta es esperable?",
+          "opciones": ["Inflamación crónica, sangrado, recesión o pérdida ósea", "Mayor queratinización sin inflamación", "Formación de nuevo esmalte", "Ninguna, porque la encía se adapta sin cambios"],
+          "correcta": 0,
+          "explicacion": "El tejido tiende a restablecer su dimensión; la invasión provoca inflamación persistente y remodelado."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Dimensions and relations of the dentogingival junction in humans (Journal of Periodontology)", "autor": "Gargiulo A. W., Wentz F. M., Orban B.", "anio": 1961 },
+        { "tipo": "academica", "titulo": "The dimensions of the human dentogingival junction (International Journal of Periodontics and Restorative Dentistry)", "autor": "Vacek J. S., Gher M. E., Assad D. A., Richardson A. C., Giambarresi L. I.", "anio": 1994 },
+        { "tipo": "academica", "titulo": "Pathogenesis of inflammatory periodontal disease. A summary of current work (Laboratory Investigation)", "autor": "Page R. C., Schroeder H. E.", "anio": 1976 },
+        { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Periodontal manifestations of systemic diseases and developmental and acquired conditions: Consensus report of workgroup 3 of the 2017 World Workshop", "autor": "Jepsen S., Caton J. G., Albandar J. M. et al. (Journal of Clinical Periodontology)", "anio": 2018 }
+      ]
+    },
+    {
+      "n": "2.5",
+      "titulo": "Glándulas salivales y saliva",
+      "minutos": 25,
+      "enPocasPalabras": "La saliva la producen tres pares de glándulas grandes y cientos de glándulas pequeñas. Moja la comida, ayuda a tragar y a sentir sabores, limpia los dientes y neutraliza los ácidos que causan caries. Cuando falta saliva, aumentan las caries, las infecciones y las molestias al comer y al usar prótesis.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La saliva es uno de los factores protectores más importantes de la boca, y cuando falta lo notas enseguida en la clínica: caries que aparecen en sitios poco habituales, mucosa seca y adherida al espejo, infecciones por hongos y prótesis que no se sostienen. Para entenderla hay que conocer primero las glándulas que la producen, dónde están, cómo drenan y qué controla su secreción."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La unidad secretora"
+        },
+        {
+          "tipo": "texto",
+          "md": "Todas las glándulas salivales comparten una arquitectura básica en forma de racimo. La unidad funcional empieza en los **acinos**, grupos de células secretoras que pueden ser **serosas**, que producen una secreción acuosa rica en proteínas y enzimas como la amilasa, o **mucosas**, que producen mucinas viscosas. En las glándulas mixtas, algunos acinos mucosos están coronados por células serosas dispuestas en media luna. Alrededor de los acinos y de los primeros conductos se encuentran las **células mioepiteliales**, contráctiles, que exprimen la secreción.\n\nDesde el acino, la saliva recorre un sistema de conductos: el **conducto intercalado**, el **conducto estriado** y los **conductos excretores**, que confluyen hasta el conducto principal. El conducto estriado es mucho más que un tubo: sus células, con muchas mitocondrias, modifican la saliva."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Secreción en dos etapas",
+          "md": "La formación de saliva se explica con un modelo de dos etapas. En la primera, los acinos producen una **saliva primaria** isotónica, con una composición de electrolitos parecida a la del plasma, en respuesta principalmente a estímulos parasimpáticos que movilizan calcio intracelular y abren canales de cloro. En la segunda, al pasar por los conductos estriados y excretores, el epitelio **reabsorbe sodio y cloro** y **secreta potasio y bicarbonato**, pero es poco permeable al agua. El resultado es una saliva final **hipotónica**. Cuando el flujo aumenta, la saliva pasa más rápido por los conductos, hay menos tiempo para la reabsorción y la concentración de sodio y de bicarbonato sube; por eso la saliva estimulada tiene **mayor capacidad amortiguadora** que la saliva en reposo. El sistema simpático también estimula la secreción, sobre todo de proteínas, con un volumen menor, lo que explica la boca seca y espesa de las situaciones de estrés."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las glándulas mayores"
+        },
+        {
+          "tipo": "texto",
+          "md": "**Glándula parótida.** Es la más grande. Se ubica por delante y por debajo de la oreja, sobre la rama de la mandíbula y el masetero, y se extiende hacia atrás detrás de la rama. Es una glándula **serosa pura**. El **nervio facial** atraviesa la glándula y se ramifica dentro de ella, dividiéndola de forma quirúrgica en una porción superficial y otra profunda; por eso una cirugía o un tumor de parótida puede afectar la movilidad facial. Su conducto, el **conducto parotídeo** o de Stensen, mide unos 5 cm, cruza superficialmente el masetero, gira hacia dentro en su borde anterior, perfora el buccinador y desemboca en la **papila parotídea**, frente al segundo molar superior. Su secreción está controlada por fibras parasimpáticas del nervio glosofaríngeo que hacen relevo en el ganglio ótico.\n\n**Glándula submandibular.** Del tamaño de una nuez, se aloja en la fosa submandibular de la cara interna de la mandíbula. Rodea el borde posterior del músculo milohioideo, de modo que tiene una porción superficial, por debajo de él, y una profunda, por encima. Es **mixta, con predominio seroso**. Su conducto, el **conducto submandibular** o de Wharton, de unos 5 cm, corre hacia delante por el piso de la boca, por encima del milohioideo, y desemboca en la **carúncula sublingual**. En su trayecto lo cruza el **nervio lingual**, que primero pasa por fuera y después por debajo de él, una relación importante en cirugía del piso de la boca. Recibe fibras parasimpáticas del nervio facial a través de la cuerda del tímpano y el ganglio submandibular.\n\n**Glándula sublingual.** Es la más pequeña de las mayores. Se encuentra bajo el pliegue sublingual, por encima del milohioideo. Es **mixta, con predominio mucoso**. No tiene un conducto único: drena por numerosos conductos pequeños que se abren a lo largo del pliegue sublingual y, en algunas personas, por un conducto mayor que se une al submandibular. Comparte su inervación parasimpática con la submandibular."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m02/d5",
+          "pie": "Las tres glándulas salivales mayores y el trayecto de sus conductos.",
+          "descripcion": "Vista lateral de la cara con la mandíbula en transparencia. La parótida se dibuja por delante de la oreja sobre el masetero; su conducto cruza el masetero, gira en su borde anterior, atraviesa el buccinador y termina frente al segundo molar superior. Bajo la mandíbula, la glándula submandibular rodea el borde posterior del milohioideo; su conducto avanza por el piso de la boca hasta la carúncula sublingual junto al frenillo lingual. La glándula sublingual, alargada, está por encima del milohioideo con varios conductos cortos que se abren en el pliegue sublingual.",
+          "elementos": [
+            "Glándula parótida",
+            "Conducto parotídeo (Stensen)",
+            "Papila parotídea",
+            "Glándula submandibular",
+            "Conducto submandibular (Wharton)",
+            "Carúncula sublingual",
+            "Glándula sublingual",
+            "Pliegue sublingual",
+            "Músculo milohioideo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/13",
+          "proporcion": "4:3",
+          "alt": "Ilustración anatómica lateral de la cara sin piel que muestra la glándula parótida sobre el masetero y su conducto hacia la mejilla.",
+          "pie": "Glándula parótida y su conducto, que cruza el masetero y atraviesa el buccinador.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, vista lateral derecha de la cabeza de un adulto con la piel retirada en la región de la mejilla, se observan la glándula parótida lobulada de color amarillo rosado delante de la oreja, su conducto blanquecino que cruza horizontalmente el músculo masetero y se hunde en la mejilla atravesando el buccinador, el músculo masetero rojizo, la mandíbula y el arco cigomático, fondo blanco limpio, iluminación uniforme. Evitar: texto, etiquetas, números, flechas, ojos detallados o rostro identificable, sangre, proporciones incorrectas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cálculos y quistes de retención",
+          "md": "La **sialolitiasis** afecta sobre todo a la glándula submandibular: la mayoría de las series la sitúan en alrededor del 80 % de los casos o más. Se atribuye a una saliva más viscosa y rica en calcio y a un conducto largo, de calibre estrecho en su desembocadura y con trayecto ascendente. El cuadro típico es dolor e inflamación de la glándula al comer, que cede después. La **ránula** es un fenómeno de extravasación de moco en el piso de la boca, casi siempre a partir de la glándula sublingual; se ve como un aumento de volumen azulado a un lado del frenillo y algunas atraviesan el milohioideo hacia el cuello. Ambos requieren valoración por cirugía bucal."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las glándulas menores"
+        },
+        {
+          "tipo": "texto",
+          "md": "Se calcula que hay entre 600 y 1,000 **glándulas salivales menores** en la submucosa de labios, mejillas, paladar, lengua y piso de la boca; solo faltan en la encía y en la parte anterior del paladar duro. La mayoría son **mucosas**, con excepción de las glándulas serosas de von Ebner de la lengua. Secretan de manera continua, de día y de noche, y aunque aportan un volumen pequeño, contribuyen con buena parte de las mucinas que lubrican y protegen la mucosa. Son el origen de los mucoceles y de un porcentaje relevante de tumores salivales, sobre todo en el paladar."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/14",
+          "proporcion": "1:1",
+          "alt": "Piso de la boca con la lengua elevada y una gota de saliva clara que sale por la carúncula sublingual tras secar la zona.",
+          "pie": "Tras secar el piso de la boca y presionar suavemente la glándula submandibular desde fuera, la saliva fluye clara por la carúncula.",
+          "prompt": "Fotografía clínica macro realista del piso de la boca de un adulto sano con la punta de la lengua elevada, mucosa del piso seca con una gasa, se observa una pequeña elevación junto a la base del frenillo lingual de la que emerge una gota de saliva clara y transparente, venas linguales visibles en la cara ventral, pliegue sublingual a un lado, incisivos inferiores en el borde del encuadre, iluminación de lámpara dental. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, pus, saliva turbia, rostro visible, piercings."
+        },
+        {
+          "tipo": "texto",
+          "md": "Al explorar las glándulas, compara ambos lados. Palpa la parótida delante de la oreja y sobre el masetero, y la submandibular de forma bimanual, con un dedo en el piso de la boca y los dedos de la otra mano bajo el borde de la mandíbula. Después seca la desembocadura del conducto y presiona con suavidad la glándula desde fuera: la saliva normal sale **clara, fluida y en cantidad suficiente**. Una saliva turbia, espesa o con grumos, o la ausencia de flujo en un lado, son hallazgos que deben registrarse y valorarse."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuánta saliva y de dónde viene"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Contribución aproximada de cada glándula al flujo salival",
+          "columnas": ["Glándula", "Tipo de secreción", "En reposo", "Estimulada"],
+          "filas": [
+            ["Submandibular", "Mixta, predominio seroso", "Alrededor de 65 a 70 %", "Disminuye su proporción"],
+            ["Parótida", "Serosa", "Alrededor de 20 a 25 %", "Aumenta hasta cerca de la mitad o más"],
+            ["Sublingual", "Mixta, predominio mucoso", "Alrededor de 7 a 8 %", "Pequeña"],
+            ["Menores", "Mayormente mucosa", "Menos de 10 %", "Pequeña, pero rica en mucinas"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "En adultos sanos, el flujo de **saliva total no estimulada** suele estar alrededor de 0.3 a 0.4 mL por minuto, y el de saliva estimulada alrededor de 1.5 a 2 mL por minuto, con amplia variación entre personas. Durante el sueño el flujo cae casi a cero, lo que explica que la boca amanezca seca y que la higiene antes de dormir sea tan importante. Se habla de **hiposalivación** cuando el flujo no estimulado es igual o menor de 0.1 mL por minuto o el estimulado igual o menor de 0.5 a 0.7 mL por minuto. La **xerostomía**, en cambio, es la sensación subjetiva de boca seca, que no siempre coincide con una disminución medible del flujo.\n\nLa saliva es agua en más del 99 %, con electrolitos, proteínas y otras moléculas que explican sus funciones:\n\n- **Lubricación y protección** de la mucosa, gracias a las mucinas.\n- **Limpieza** de restos de alimentos y bacterias por arrastre.\n- **Amortiguación** de los ácidos, sobre todo por el bicarbonato.\n- **Remineralización** del esmalte, porque está sobresaturada de calcio y fosfato, que proteínas como la estaterina mantienen en solución.\n- Formación de la **película adquirida**, una capa de proteínas salivales que cubre el esmalte en minutos.\n- **Defensa antimicrobiana**, con lisozima, lactoferrina, histatinas, peroxidasa e inmunoglobulina A secretora.\n- **Digestión** inicial del almidón por la amilasa y **disolución** de las sustancias para que puedan percibirse los sabores."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Flujo de saliva no estimulada",
+          "instruccion": "El paciente deja caer la saliva sin estimularla en un recipiente graduado durante un tiempo medido. Calcula el flujo en mililitros por minuto y compáralo con el punto de corte de 0.1 mL por minuto.",
+          "formula": "Flujo = volumen recolectado ÷ tiempo de recolección",
+          "variables": [
+            { "id": "volumen", "etiqueta": "Volumen recolectado", "valor": 1.5, "unidad": "mL" },
+            { "id": "minutos", "etiqueta": "Tiempo de recolección", "valor": 15, "unidad": "min" }
+          ],
+          "resultado": { "expresion": "volumen / minutos", "etiqueta": "Flujo no estimulado", "unidad": "mL/min", "decimales": 2 }
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m02/15",
+          "proporcion": "4:3",
+          "alt": "Tubo graduado con saliva recolectada junto a un cronómetro sobre una bandeja clínica.",
+          "pie": "La sialometría mide el flujo salival con un procedimiento sencillo: recolectar durante un tiempo fijo y dividir el volumen entre los minutos.",
+          "prompt": "Fotografía realista de estudio sobre una bandeja clínica blanca en un consultorio dental, un tubo de ensayo graduado transparente con una pequeña cantidad de saliva espumosa en el fondo dentro de una gradilla, un embudo pequeño de plástico al lado, un cronómetro digital sin números legibles y una caja de guantes de nitrilo al fondo desenfocada, iluminación clínica suave y uniforme, colores neutros. Evitar: texto, números legibles, etiquetas, logotipos, marcas de agua, personas, rostros, sangre, recipientes sucios."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Glándula, conducto y desembocadura",
+          "instruccion": "Relaciona cada estructura con su descripción.",
+          "pares": [
+            { "a": "Conducto parotídeo", "b": "Se abre frente al segundo molar superior" },
+            { "a": "Conducto submandibular", "b": "Se abre en la carúncula sublingual" },
+            { "a": "Glándula sublingual", "b": "Drena por varios conductos en el pliegue sublingual" },
+            { "a": "Glándulas de von Ebner", "b": "Serosas, en el surco de las papilas circunvaladas" },
+            { "a": "Glándula submandibular", "b": "Rodea el borde posterior del milohioideo" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "La causa más frecuente de boca seca en adultos es el uso de **medicamentos** con efecto sobre la secreción salival, y el riesgo aumenta con el número de fármacos que toma la persona. En tu historia clínica, pregunta siempre qué medicamentos usa y si siente la boca seca, sobre todo al comer o al hablar. Si sospechas hiposalivación, mide el flujo, refuerza las medidas preventivas contra la caries y comenta con el médico tratante; cualquier cambio de medicamento es decisión de quien lo prescribe."
+        }
+      ],
+      "glosario": [
+        { "termino": "Acino", "definicion": "Grupo de células secretoras en el extremo de los conductos de una glándula salival; puede ser seroso o mucoso." },
+        { "termino": "Conducto estriado", "definicion": "Conducto que modifica la saliva reabsorbiendo sodio y cloro y secretando potasio y bicarbonato." },
+        { "termino": "Conducto parotídeo", "definicion": "Conducto de Stensen; cruza el masetero, perfora el buccinador y se abre frente al segundo molar superior." },
+        { "termino": "Conducto submandibular", "definicion": "Conducto de Wharton; recorre el piso de la boca y se abre en la carúncula sublingual." },
+        { "termino": "Hiposalivación", "definicion": "Disminución medible del flujo salival, por ejemplo flujo no estimulado igual o menor de 0.1 mL por minuto." },
+        { "termino": "Xerostomía", "definicion": "Sensación subjetiva de boca seca, que puede o no acompañarse de hiposalivación." },
+        { "termino": "Película adquirida", "definicion": "Capa de proteínas salivales que se adsorbe sobre el esmalte en minutos." },
+        { "termino": "Sialolitiasis", "definicion": "Formación de cálculos dentro de una glándula salival o su conducto; más frecuente en la submandibular." }
+      ],
+      "verificacion": [
+        {
+          "id": "t2.5-1",
+          "q": "¿Qué glándula aporta la mayor proporción de la saliva en reposo?",
+          "opciones": ["Parótida", "Sublingual", "Submandibular", "Glándulas menores"],
+          "correcta": 2,
+          "explicacion": "La submandibular aporta alrededor de dos tercios de la saliva no estimulada; con estimulación, la parótida aumenta su proporción."
+        },
+        {
+          "id": "t2.5-2",
+          "q": "¿Qué nervio atraviesa la glándula parótida y puede lesionarse en su cirugía?",
+          "opciones": ["Nervio lingual", "Nervio facial", "Nervio hipogloso", "Nervio alveolar inferior"],
+          "correcta": 1,
+          "explicacion": "El nervio facial se ramifica dentro de la parótida; su lesión altera la movilidad de los músculos de la expresión."
+        },
+        {
+          "id": "t2.5-3",
+          "q": "Un paciente recolecta 1.2 mL de saliva no estimulada en 15 minutos. ¿Cómo interpretas el resultado?",
+          "opciones": ["0.08 mL/min, compatible con hiposalivación", "1.2 mL/min, flujo alto", "0.8 mL/min, normal", "18 mL/min, error de medición"],
+          "correcta": 0,
+          "explicacion": "1.2 ÷ 15 = 0.08 mL/min, por debajo del punto de corte de 0.1 mL/min para saliva no estimulada."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Diagnosis and management of xerostomia and hyposalivation (Therapeutics and Clinical Risk Management)", "autor": "Villa A., Connell C. L., Abati S.", "anio": 2015, "url": "https://www.dovepress.com/diagnosis-and-management-of-xerostomia-and-hyposalivation-peer-reviewed-fulltext-article-TCRM" },
+        { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Oral and Maxillofacial Pathology", "autor": "Neville B. W., Damm D. D., Allen C. M., Chi A. C. (Elsevier)", "anio": 2016 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: mucosa, encía y saliva",
+    "pistas": [
+      { "palabra": "MIOEPITELIAL", "pista": "Células contráctiles que rodean los acinos y exprimen la secreción salival." },
+      { "palabra": "LANGERHANS", "pista": "Células del epitelio que captan antígenos y los presentan al sistema inmunitario." },
+      { "palabra": "CIRCUNVALADA", "pista": "Papila grande, rodeada por un surco, que forma una V por delante del surco terminal." },
+      { "palabra": "PUNTEADO", "pista": "Textura de cáscara de naranja que puede tener la encía insertada." },
+      { "palabra": "HEMIDESMOSOMA", "pista": "Estructura que une el epitelio de unión a la lámina basal interna sobre el diente." },
+      { "palabra": "PAROTIDA", "pista": "Glándula salival serosa atravesada por el nervio facial." },
+      { "palabra": "CARUNCULA", "pista": "Elevación junto al frenillo lingual donde desemboca el conducto submandibular." },
+      { "palabra": "XEROSTOMIA", "pista": "Sensación subjetiva de boca seca." },
+      { "palabra": "RANULA", "pista": "Extravasación de moco en el piso de la boca, casi siempre de origen sublingual." },
+      { "palabra": "COL", "pista": "Depresión de la encía interdental bajo el contacto de dos molares." }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m02-p01",
+        "q": "¿Qué capa de la mucosa oral falta en la encía y en el rafe palatino?",
+        "opciones": ["Epitelio", "Lámina propia", "Membrana basal", "Submucosa"],
+        "correcta": 3,
+        "explicacion": "En estas zonas la lámina propia se une directamente al periostio, formando un mucoperiostio sin submucosa."
+      },
+      {
+        "id": "m02-p02",
+        "q": "¿Qué tipo de epitelio predomina en el paladar duro?",
+        "opciones": ["Ortoqueratinizado", "No queratinizado", "Cilíndrico seudoestratificado", "Cúbico simple"],
+        "correcta": 0,
+        "explicacion": "El paladar duro es mucosa masticadora con epitelio típicamente ortoqueratinizado."
+      },
+      {
+        "id": "m02-p03",
+        "q": "¿Por qué la mucosa del piso de la boca absorbe con rapidez algunas sustancias?",
+        "opciones": ["Porque está ortoqueratinizada", "Porque carece de vasos sanguíneos", "Porque es delgada, no queratinizada y muy vascularizada", "Porque está unida al periostio"],
+        "correcta": 2,
+        "explicacion": "Su epitelio delgado y no queratinizado es permeable y la rica vascularización favorece la absorción."
+      },
+      {
+        "id": "m02-p04",
+        "q": "¿Qué porcentaje aproximado de la superficie oral corresponde a mucosa de revestimiento?",
+        "opciones": ["15 %", "60 %", "25 %", "90 %"],
+        "correcta": 1,
+        "explicacion": "Se estima alrededor de 60 % de revestimiento, 25 % masticadora y 15 % especializada."
+      },
+      {
+        "id": "m02-p05",
+        "q": "Un paciente de piel morena tiene un aspecto blanco grisáceo difuso en ambas mejillas que se atenúa al estirarlas. ¿Qué es lo más probable?",
+        "opciones": ["Leucoplasia", "Candidosis", "Liquen plano", "Leucoedema"],
+        "correcta": 3,
+        "explicacion": "El leucoedema es bilateral, difuso y se atenúa al estirar la mucosa; es una variante normal."
+      },
+      {
+        "id": "m02-p06",
+        "q": "¿Qué papilas linguales no tienen botones gustativos?",
+        "opciones": ["Filiformes", "Fungiformes", "Foliadas", "Circunvaladas"],
+        "correcta": 0,
+        "explicacion": "Las filiformes son queratinizadas y mecánicas; no tienen botones gustativos."
+      },
+      {
+        "id": "m02-p07",
+        "q": "¿Qué describe mejor a la lengua geográfica?",
+        "opciones": ["Placa blanca fija que no se desprende", "Úlcera indurada que no cicatriza", "Zonas depapiladas rojas con halo blanquecino que cambian de lugar", "Pigmentación negra difusa"],
+        "correcta": 2,
+        "explicacion": "Es una condición benigna con zonas migratorias sin papilas filiformes rodeadas por un borde blanquecino."
+      },
+      {
+        "id": "m02-p08",
+        "q": "¿Qué estructura marca el límite entre la encía insertada y la mucosa alveolar?",
+        "opciones": ["El surco marginal", "La unión mucogingival", "El margen gingival", "La unión amelocementaria"],
+        "correcta": 1,
+        "explicacion": "La unión mucogingival separa la mucosa masticadora de la encía de la mucosa de revestimiento alveolar."
+      },
+      {
+        "id": "m02-p09",
+        "q": "Mides 4 mm de encía queratinizada y 3 mm de profundidad de sondaje en un canino. ¿Cuánta encía insertada hay?",
+        "opciones": ["1 mm", "7 mm", "4 mm", "3 mm"],
+        "correcta": 0,
+        "explicacion": "Encía insertada = 4 − 3 = 1 mm."
+      },
+      {
+        "id": "m02-p10",
+        "q": "¿Cuál es el signo más útil para diferenciar encía sana de gingivitis?",
+        "opciones": ["El punteado", "La pigmentación", "El ancho de encía insertada", "El sangrado al sondaje"],
+        "correcta": 3,
+        "explicacion": "El sangrado al sondaje es el indicador objetivo de inflamación usado en la clasificación de 2017."
+      },
+      {
+        "id": "m02-p11",
+        "q": "Un adulto tiene encía delgada, festoneado pronunciado y la sonda se transparenta en el surco vestibular. ¿Qué riesgo debes considerar?",
+        "opciones": ["Mayor riesgo de recesión", "Mayor riesgo de sialolitiasis", "Hiperplasia gingival inevitable", "Ninguno, el fenotipo no influye"],
+        "correcta": 0,
+        "explicacion": "El fenotipo delgado tiene más riesgo de recesión ante trauma, ortodoncia vestibular o inflamación."
+      },
+      {
+        "id": "m02-p12",
+        "q": "¿Qué epitelio se adhiere directamente a la superficie del diente?",
+        "opciones": ["Epitelio gingival oral", "Epitelio del surco", "Epitelio de unión", "Epitelio de la mucosa alveolar"],
+        "correcta": 2,
+        "explicacion": "El epitelio de unión se une al diente por una lámina basal interna y hemidesmosomas."
+      },
+      {
+        "id": "m02-p13",
+        "q": "¿De qué estructura se origina inicialmente el epitelio de unión?",
+        "opciones": ["Del ligamento periodontal", "Del epitelio reducido del esmalte", "Del cemento", "De la papila dental"],
+        "correcta": 1,
+        "explicacion": "Al erupcionar el diente, el epitelio reducido del esmalte forma el epitelio de unión inicial."
+      },
+      {
+        "id": "m02-p14",
+        "q": "Según las mediciones de Gargiulo de 1961, ¿cuánto suman en promedio el epitelio de unión y la inserción conectiva?",
+        "opciones": ["Alrededor de 0.7 mm", "Alrededor de 5 mm", "Alrededor de 3.5 mm", "Alrededor de 2 mm"],
+        "correcta": 3,
+        "explicacion": "0.97 mm de epitelio de unión más 1.07 mm de inserción conectiva dan unos 2 mm, aunque hay gran variación individual."
+      },
+      {
+        "id": "m02-p15",
+        "q": "¿Qué grupo de fibras gingivales contribuye a la recidiva de las rotaciones tras la ortodoncia?",
+        "opciones": ["Fibras alveologingivales", "Fibras transeptales y circulares", "Fibras de Sharpey del hueso basal", "Fibras elásticas de la mucosa alveolar"],
+        "correcta": 1,
+        "explicacion": "Las fibras supracrestales, como las transeptales y circulares, se remodelan lentamente y tienden a devolver el diente."
+      },
+      {
+        "id": "m02-p16",
+        "q": "¿Dónde desemboca el conducto parotídeo?",
+        "opciones": ["En la carúncula sublingual", "En el pliegue sublingual", "En la papila parotídea frente al segundo molar superior", "En las fóveas palatinas"],
+        "correcta": 2,
+        "explicacion": "Cruza el masetero, perfora el buccinador y se abre en la mucosa yugal frente al segundo molar superior."
+      },
+      {
+        "id": "m02-p17",
+        "q": "Un paciente refiere dolor e inflamación bajo la mandíbula cada vez que come, que cede horas después. ¿Qué sospechas primero?",
+        "opciones": ["Sialolitiasis submandibular", "Ránula", "Mucocele del labio", "Parotiditis viral"],
+        "correcta": 0,
+        "explicacion": "El dolor prandial con inflamación submandibular es típico de un cálculo que obstruye el conducto de Wharton."
+      },
+      {
+        "id": "m02-p18",
+        "q": "¿Por qué la saliva estimulada tiene mayor capacidad amortiguadora que la no estimulada?",
+        "opciones": ["Porque contiene más mucinas", "Porque proviene solo de las glándulas menores", "Porque es isotónica", "Porque al pasar más rápido por los conductos conserva más bicarbonato"],
+        "correcta": 3,
+        "explicacion": "Con mayor flujo hay menos tiempo para modificar la saliva en los conductos y aumenta el bicarbonato."
+      },
+      {
+        "id": "m02-p19",
+        "q": "¿Qué diferencia hay entre xerostomía e hiposalivación?",
+        "opciones": ["Son sinónimos", "La xerostomía es la sensación de boca seca y la hiposalivación es la reducción medible del flujo", "La hiposalivación es un síntoma y la xerostomía un signo medible", "La xerostomía solo ocurre en niños"],
+        "correcta": 1,
+        "explicacion": "La xerostomía es subjetiva; la hiposalivación se confirma midiendo el flujo salival."
+      },
+      {
+        "id": "m02-p20",
+        "q": "¿Qué glándula salival mayor es mixta con predominio mucoso?",
+        "opciones": ["Parótida", "Submandibular", "Sublingual", "Glándula de von Ebner"],
+        "correcta": 2,
+        "explicacion": "La sublingual es mixta con predominio mucoso; la parótida es serosa y la submandibular mixta con predominio seroso."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function", "autor": "Nanci A. (Elsevier)", "anio": 2018 },
+    { "tipo": "academica", "titulo": "Newman and Carranza's Clinical Periodontology", "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)", "anio": 2019 },
+    { "tipo": "academica", "titulo": "Dimensions and relations of the dentogingival junction in humans (Journal of Periodontology)", "autor": "Gargiulo A. W., Wentz F. M., Orban B.", "anio": 1961 },
+    { "tipo": "academica", "titulo": "Diagnosis and management of xerostomia and hyposalivation (Therapeutics and Clinical Risk Management)", "autor": "Villa A., Connell C. L., Abati S.", "anio": 2015 },
+    { "tipo": "academica", "titulo": "Anatomía con orientación clínica", "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)", "anio": 2018 }
+  ]
+}

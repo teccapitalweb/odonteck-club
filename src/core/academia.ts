@@ -190,8 +190,12 @@ export function juegoCompletado(p: string, n: number) {
   try { return !!JSON.parse(localStorage.getItem(claveJuegos()) || '{}')[`${p}/${n}`]; } catch { return false; }
 }
 
-/** Admin real (claim verificado por la API). En demo la sesión simulada no salta candados para poder probar el flujo. */
-export const esAdminAcademia = () => MODO_API && !!Auth.usuario?.esAdmin;
+const CLAVE_REVISOR = 'odonteck-club:academia:modo-revisor';
+export function modoRevisorDemo() { try { return !MODO_API && localStorage.getItem(CLAVE_REVISOR) === '1'; } catch { return false; } }
+export function alternarModoRevisorDemo() { try { if (modoRevisorDemo()) localStorage.removeItem(CLAVE_REVISOR); else localStorage.setItem(CLAVE_REVISOR, '1'); } catch { /* sin almacenamiento */ } }
+
+/** Admin real (claim verificado por la API). En demo solo salta candados con el «modo revisor» activado, para poder probar también el flujo normal. */
+export const esAdminAcademia = () => (MODO_API && !!Auth.usuario?.esAdmin) || (modoRevisorDemo() && !!Auth.usuario?.esAdmin);
 export const moduloAprobado = (p: string, n: number) => !!avanceModulo(p, n).aprobado;
 export const moduloDesbloqueado = (p: string, n: number) => n === 1 || moduloAprobado(p, n - 1) || esAdminAcademia();
 export function temasLeidos(p: string, m: Modulo) { const t = avanceModulo(p, m.modulo).temas || {}; return m.temas.filter((x) => t[x.n]).length; }

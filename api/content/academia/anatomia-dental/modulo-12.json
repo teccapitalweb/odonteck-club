@@ -1,0 +1,1780 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 12,
+  "titulo": "Anatomía de molares permanentes",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los molares son los dientes más grandes y complejos de la boca, y también los que más tratamientos reciben. En este módulo estudiarás los seis molares de cada lado desde sus cinco caras: la cresta oblicua y la cúspide de Carabelli del primer molar superior, sus tres raíces y el conducto MB2; las cinco cúspides y el patrón Y5 del primer molar inferior; el patrón en cruz y el conducto en C del segundo, y la variabilidad de los terceros molares. Cerrarás con un método de identificación y con las variantes que modifican su manejo: raíces adicionales, taurodontismo y perlas o proyecciones de esmalte, siempre con datos de revisiones de la literatura.",
+  "objetivos": [
+    "Describir la morfología vestibular, lingual, proximal y oclusal de los molares superiores e inferiores, con sus cúspides, crestas, fosas y surcos.",
+    "Comparar las raíces y las configuraciones de conductos del primer molar superior y del primer molar inferior con base en revisiones sistemáticas.",
+    "Explicar la prevalencia y el significado anatómico del conducto MB2, del conducto en C y de la radix entomolaris.",
+    "Identificar un molar aislado indicando arcada, posición y lado mediante rasgos concordantes de corona y raíz.",
+    "Reconocer el taurodontismo, las perlas y proyecciones de esmalte y las cúspides accesorias, y relacionarlos con riesgos periodontales, restauradores y endodónticos."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "anatomia-dental/m12/portada",
+    "proporcion": "16:9",
+    "alt": "Molares permanentes superiores e inferiores extraídos dispuestos sobre una superficie neutra, vistos desde oclusal y de perfil.",
+    "prompt": "Ilustración realista de gran formato para portada educativa: sobre una superficie de laboratorio gris mate, seis molares permanentes extraídos y limpios con anatomía correcta, tres superiores con tres raíces divergentes y tres inferiores con dos raíces, dispuestos en arco; algunos vistos desde oclusal mostrando la cresta oblicua y cinco cúspides, otros de perfil mostrando sus raíces. Al fondo, desenfocado, un tipodonto completo. Iluminación de estudio suave y lateral que resalta cúspides y surcos, colores naturales, profundidad de campo corta. Evitar: texto, etiquetas, números, logotipos, marcas de agua, sangre, restos de tejido, rostros, dientes deformes."
+  },
+  "temas": [
+    {
+      "n": "12.1",
+      "titulo": "Los molares como clase y la corona del primer molar superior",
+      "minutos": 15,
+      "enPocasPalabras": "Los molares son las muelas grandes del fondo de la boca y sirven para moler la comida. El primero de arriba aparece alrededor de los 6 años, sin que se caiga ningún diente de leche, por eso muchas familias no lo notan. Tiene cuatro puntas principales, a veces una quinta pequeña, y un relieve en diagonal muy característico.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los **molares** son los dientes más grandes de la boca y los principales responsables de triturar y moler el alimento. Hay tres por cuadrante: primero, segundo y tercer molar (16, 17 y 18 en el superior derecho; 46, 47 y 48 en el inferior derecho). A diferencia de los premolares, **no tienen predecesor temporal**: erupcionan por detrás de la dentición temporal, en el espacio que deja el crecimiento de los maxilares. Por eso se les llama dientes **no sucedáneos** o accesionales.\n\nEl **primer molar** erupciona hacia los **6 o 7 años**, a menudo sin que la familia lo note, porque no sustituye a ningún diente. El segundo molar lo hace entre los **11 y 13 años** y el tercero, cuando se forma, entre los **17 y 21 años**, con gran variabilidad. Que el primer molar permanente aparezca tan temprano, con fosas profundas y en una boca infantil, explica por qué es uno de los dientes con mayor riesgo de caries."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Rasgos que comparten todos los molares"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "Coronas anchas con **tres a cinco cúspides** principales y una cara oclusal con fosas y surcos.",
+            "**Varias raíces**: típicamente tres en los superiores (dos vestibulares y una palatina) y dos en los inferiores (mesial y distal), unidas en un **tronco radicular**.",
+            "**Furcaciones**: zonas donde las raíces se separan, críticas en periodoncia.",
+            "Tamaño decreciente del primero al tercero, con morfología cada vez más variable.",
+            "Alturas de contorno vestibular en el tercio cervical y lingual en el tercio medio; contactos en el tercio medio o en la unión con el oclusal."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "En los molares, cada cúspide principal corresponde a un **lóbulo de desarrollo**. El primer molar superior se forma a partir de cuatro lóbulos, uno por cúspide, y cuando existe la cúspide de Carabelli se interpreta como una expresión adicional asociada al lóbulo mesiopalatino. El primer molar inferior, con sus cinco cúspides, se forma a partir de cinco lóbulos. Los surcos de desarrollo marcan los límites entre ellos, y es justamente en su fondo, donde el esmalte de lóbulos vecinos se une, que se forman las fosetas y fisuras profundas tan susceptibles a la caries."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/01",
+          "proporcion": "3:4",
+          "alt": "Primer molar superior derecho extraído visto desde vestibular, con dos cúspides vestibulares y tres raíces.",
+          "pie": "Vista vestibular del primer molar superior: dos cúspides vestibulares separadas por el surco vestibular y tres raíces divergentes.",
+          "prompt": "Ilustración realista de estudio de un primer molar superior permanente derecho de adulto, extraído y limpio, en posición vertical con la corona hacia abajo, visto exactamente desde vestibular sobre fondo gris neutro. Corona con cúspides mesiovestibular y distovestibular separadas por un surco vestibular vertical, línea cervical casi recta, tronco radicular corto y tres raíces divergentes: mesiovestibular ancha y curvada hacia distal, distovestibular más corta y recta, y la palatina, la más larga, asomando entre ambas. Iluminación difusa, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dos raíces, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Primer molar superior: dimensiones y vista vestibular"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **primer molar superior** (16 y 26) es el diente más voluminoso de la arcada superior. En la tabla de Wheeler su corona mide **7.5 mm** de alto, **10 mm** de ancho mesiodistal y **11 mm** vestibulolingual: es **más ancha de vestibular a palatino que de mesial a distal**, una relación que se invierte en los molares inferiores. Sus raíces miden alrededor de **12 mm** las vestibulares y **13 mm** la palatina.\n\nDesde vestibular se ven dos cúspides, la **mesiovestibular** y la **distovestibular**, separadas por el **surco vestibular**, que desciende hasta cerca del centro de la cara y a veces termina en una fosita. La mesiovestibular es más ancha; la distovestibular, algo más corta y puntiaguda. Por detrás se alcanza a ver la cúspide mesiopalatina, la más alta. La corona converge hacia cervical y hacia distal, y la línea cervical es casi recta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vista palatina y la cúspide de Carabelli"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde palatino dominan dos cúspides: la **mesiopalatina**, la más grande y alta del diente, que ocupa alrededor de tres quintas partes del ancho de la cara, y la **distopalatina**, más pequeña y redondeada. Las separa el **surco palatino**, que suele continuar sobre la raíz palatina.\n\nSobre la cara palatina de la cúspide mesiopalatina aparece con frecuencia el **tubérculo o cúspide de Carabelli**, un rasgo cuya expresión va desde un simple surco o fosita hasta una cúspide bien formada. Cuando existe, se considera una quinta cúspide no funcional, porque no suele contactar con los dientes antagonistas. Su frecuencia varía mucho entre poblaciones: los estudios de antropología dental la describen como más común y más desarrollada en poblaciones de ascendencia europea, y menos frecuente en otras."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Un rasgo con nombre propio",
+          "md": "El rasgo lleva el nombre de Georg Carabelli, dentista de la corte austriaca que lo describió en la primera mitad del siglo XIX. Hoy se usa en antropología dental para comparar poblaciones y se registra en grados con el sistema ASUDAS. Clínicamente, el surco que lo separa de la cúspide mesiopalatina puede ser profundo y retener biopelícula, por lo que conviene revisarlo con cuidado en niños recién erupcionados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vistas proximales y oclusal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde **mesial** se observan la cúspide mesiovestibular y la mesiopalatina, el tubérculo de Carabelli cuando existe y la **raíz mesiovestibular**, ancha en sentido vestibulopalatino, que oculta a la distovestibular. La raíz palatina sobresale hacia palatino. Desde **distal**, como la corona converge hacia distal, se ve parte de las caras vestibular y palatina y la raíz distovestibular, más estrecha.\n\nDesde **oclusal** el contorno es un **romboide**: los ángulos mesiovestibular y distopalatino son agudos, y los ángulos mesiopalatino y distovestibular, obtusos. El rasgo más característico es la **cresta oblicua**, formada por la unión de la cresta triangular de la cúspide distovestibular con la vertiente distal de la mesiopalatina, que cruza la cara oclusal en diagonal. Delante de ella queda la **fosa central**, amplia; detrás, la **fosa distal**, más pequeña. Junto a las crestas marginales están las fosas triangulares mesial y distal. Los surcos principales son el **central**, el **vestibular**, que sale de la fosa central, y el **distal oblicuo**, que recorre la fosa distal y se continúa con el surco palatino."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m12/d1",
+          "pie": "Cara oclusal del primer molar superior derecho: cúspides, cresta oblicua, fosas y surcos.",
+          "descripcion": "Vista oclusal esquemática del primer molar superior derecho con contorno romboidal. Se dibujan las cuatro cúspides principales con sus puntas (mesiovestibular, distovestibular, mesiopalatina y distopalatina) y la cúspide de Carabelli en el lado palatino de la mesiopalatina; la cresta oblicua resaltada en diagonal desde la mesiopalatina hasta la distovestibular; la fosa central delante de la cresta y la fosa distal detrás; los surcos central, vestibular, distal oblicuo y palatino; y las crestas marginales mesial y distal.",
+          "elementos": [
+            "Cúspide mesiovestibular",
+            "Cúspide distovestibular",
+            "Cúspide mesiopalatina",
+            "Cúspide distopalatina",
+            "Cúspide de Carabelli",
+            "Cresta oblicua",
+            "Fosa central",
+            "Fosa distal",
+            "Surco distal oblicuo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/02",
+          "proporcion": "1:1",
+          "alt": "Vista oclusal de un primer molar superior extraído con contorno romboidal, cresta oblicua y cúspide de Carabelli.",
+          "pie": "Vista oclusal: contorno romboidal, cresta oblicua en diagonal y una cúspide de Carabelli en palatino.",
+          "prompt": "Ilustración macro realista de estudio de un primer molar superior permanente extraído visto exactamente desde oclusal, centrado sobre fondo gris neutro. Contorno romboidal, cuatro cúspides principales con la mesiopalatina como la mayor, una cresta oblicua continua que cruza en diagonal desde la cúspide mesiopalatina hasta la distovestibular, fosa central amplia por delante y fosa distal pequeña por detrás, surcos de desarrollo nítidos y una pequeña cúspide accesoria en la cara palatina de la cúspide mesiopalatina. Iluminación difusa, colores naturales, enfoque nítido. Evitar: texto, etiquetas, flechas, logotipos, sangre, caries, restauraciones, selladores, dientes deformes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Cúspides del primer molar superior, de mayor a menor",
+          "columnas": [
+            "Cúspide",
+            "Rasgos",
+            "Función habitual"
+          ],
+          "filas": [
+            [
+              "Mesiopalatina",
+              "La más grande y alta; origen de la cresta oblicua",
+              "Cúspide de soporte principal; ocluye en la fosa central del primer molar inferior"
+            ],
+            [
+              "Mesiovestibular",
+              "Ancha, separada de la distovestibular por el surco vestibular",
+              "Cúspide de guía; su posición define la clase molar de Angle"
+            ],
+            [
+              "Distovestibular",
+              "Más corta y puntiaguda",
+              "Cúspide de guía"
+            ],
+            [
+              "Distopalatina",
+              "Pequeña y redondeada",
+              "Contacto con la zona distal del molar inferior"
+            ],
+            [
+              "Carabelli (cuando existe)",
+              "Tubérculo o cúspide en palatino de la mesiopalatina",
+              "Sin contacto oclusal habitual"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Contactos y lado"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **contacto mesial** del primer molar superior, con el segundo premolar, se ubica cerca de la unión de los tercios oclusal y medio y algo hacia vestibular; el **contacto distal**, con el segundo molar, queda en el tercio medio. La cresta marginal distal suele ser menos prominente que la mesial, y la corona se estrecha hacia distal, de modo que la tronera distal es más abierta.\n\nPara saber si un primer molar superior aislado es derecho o izquierdo, empieza por las raíces: la **palatina**, la más larga, marca el lado palatino, y la **mesiovestibular**, ancha y aplanada, marca el lado mesial. En la corona, confirma con la cresta oblicua, que siempre parte de la cúspide mesiopalatina hacia la distovestibular, y con la cúspide de Carabelli, siempre del lado mesiopalatino. Orienta el diente con la corona hacia abajo y la cara vestibular hacia ti: si mesial queda a tu derecha, es el **16**; si queda a tu izquierda, el **26**."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El molar de los seis años",
+          "md": "El primer molar permanente erupciona cuando el niño todavía se cepilla con poca destreza, y durante meses queda por debajo del plano oclusal, sin contacto con el antagonista, lo que favorece la acumulación de biopelícula en sus fosas. Explica a las familias que **es un diente permanente**, no de leche, y considera la indicación de selladores según el riesgo de caries."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/03",
+          "proporcion": "16:9",
+          "alt": "Encuadre de la boca de un niño con el primer molar superior permanente recién erupcionado detrás de los molares temporales.",
+          "pie": "Primer molar superior permanente en erupción, detrás de los molares temporales, en una boca de alrededor de 6 años.",
+          "prompt": "Fotografía clínica realista con espejo intraoral de la arcada superior de un niño de alrededor de 6 años, vista oclusal del lado derecho: molares temporales sanos y, detrás, un primer molar permanente recién erupcionado con la cara oclusal todavía parcialmente cubierta por encía en su mitad distal, fosas profundas y esmalte brillante. Encía rosa sana, mano con guante de nitrilo sosteniendo el espejo en el borde del encuadre, luz de lámpara dental uniforme, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro, sangre, caries, aparatos de ortodoncia, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "El primer molar superior en cinco afirmaciones",
+          "afirmaciones": [
+            {
+              "texto": "La corona del primer molar superior es más ancha en sentido vestibulopalatino que mesiodistal.",
+              "verdadero": true,
+              "explicacion": "Mide unos 11 mm vestibulopalatino y 10 mm mesiodistal; en los molares inferiores la relación es inversa."
+            },
+            {
+              "texto": "La cresta oblicua une la cúspide mesiovestibular con la distopalatina.",
+              "verdadero": false,
+              "explicacion": "Une la cúspide mesiopalatina con la distovestibular."
+            },
+            {
+              "texto": "La cúspide de Carabelli se ubica en la cara palatina de la cúspide mesiopalatina.",
+              "verdadero": true,
+              "explicacion": "Es su localización típica; su expresión va de una fosita a una cúspide formada."
+            },
+            {
+              "texto": "El primer molar permanente sustituye al segundo molar temporal.",
+              "verdadero": false,
+              "explicacion": "Los molares permanentes no tienen predecesor: erupcionan por detrás de los molares temporales."
+            },
+            {
+              "texto": "La cúspide más grande del primer molar superior es la mesiopalatina.",
+              "verdadero": true,
+              "explicacion": "Es la más alta y voluminosa y la principal cúspide de soporte del diente."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en cada revisión infantil a partir de los 5 años, busca con espejo y buena luz el primer molar permanente detrás del último molar temporal. Si está erupcionando, muéstraselo a la familia con un espejo de mano y enséñales a llevar el cepillo hasta el fondo: ese gesto sencillo protege al diente que más tiempo trabajará en la boca."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Diente no sucedáneo",
+          "definicion": "Diente permanente que no sustituye a uno temporal; es el caso de los molares."
+        },
+        {
+          "termino": "Cresta oblicua",
+          "definicion": "Cresta que cruza en diagonal la cara oclusal de los molares superiores, de la cúspide mesiopalatina a la distovestibular."
+        },
+        {
+          "termino": "Cúspide de Carabelli",
+          "definicion": "Tubérculo o cúspide accesoria en la cara palatina de la cúspide mesiopalatina de los molares superiores, sobre todo del primero."
+        },
+        {
+          "termino": "Surco distal oblicuo",
+          "definicion": "Surco de la fosa distal del primer molar superior que corre paralelo a la cresta oblicua y se continúa con el surco palatino."
+        },
+        {
+          "termino": "Cúspide de soporte",
+          "definicion": "Cúspide que mantiene el contacto entre arcadas en oclusión; en los superiores, las palatinas."
+        },
+        {
+          "termino": "Fosa central",
+          "definicion": "Depresión principal de la cara oclusal de un molar donde se reúnen los surcos de desarrollo."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.1-1",
+          "q": "¿Qué cúspides une la cresta oblicua del primer molar superior?",
+          "opciones": [
+            "Mesiovestibular y distopalatina",
+            "Mesiovestibular y mesiopalatina",
+            "Mesiopalatina y distovestibular",
+            "Distovestibular y distopalatina"
+          ],
+          "correcta": 2,
+          "explicacion": "La cresta oblicua va de la cúspide mesiopalatina a la distovestibular y separa la fosa central de la distal."
+        },
+        {
+          "id": "t12.1-2",
+          "q": "¿Cuál es la cúspide más grande del primer molar superior?",
+          "opciones": [
+            "Mesiopalatina",
+            "Mesiovestibular",
+            "Distovestibular",
+            "Carabelli"
+          ],
+          "correcta": 0,
+          "explicacion": "La mesiopalatina es la más alta y voluminosa y la principal cúspide de soporte."
+        },
+        {
+          "id": "t12.1-3",
+          "q": "¿Qué forma tiene la cara oclusal del primer molar superior?",
+          "opciones": [
+            "Pentagonal",
+            "Cuadrada",
+            "Circular",
+            "Romboidal, con ángulos mesiovestibular y distopalatino agudos"
+          ],
+          "correcta": 3,
+          "explicacion": "Su contorno es romboidal; los ángulos agudos son el mesiovestibular y el distopalatino."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Woelfel's Dental Anatomy",
+          "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Anthropology of Modern Human Teeth: Dental Morphology and its Variation in Recent Human Populations",
+          "autor": "Scott G. R., Turner C. G. II (Cambridge University Press)",
+          "anio": 1997
+        }
+      ]
+    },
+    {
+      "n": "12.2",
+      "titulo": "Raíces del primer molar superior, el conducto MB2 y los molares superiores segundo y tercero",
+      "minutos": 15,
+      "enPocasPalabras": "El primer molar de arriba casi siempre tiene tres raíces, y una de ellas suele esconder un conducto extra que se busca con cuidado en los tratamientos de nervio. El segundo y el tercer molar son más pequeños y sus raíces están más juntas. El tercero, la muela del juicio, es el que más cambia de una persona a otra.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las raíces de los molares superiores son tan importantes como sus coronas: definen su estabilidad, su relación con el seno maxilar, su pronóstico periodontal cuando hay pérdida ósea y la complejidad de un tratamiento de conductos. En este tema estudias el sistema radicular del primer molar superior con datos de una revisión amplia de la literatura y luego recorres el segundo y el tercer molar superiores, que se describen mejor por comparación con el primero."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres raíces y un tronco"
+        },
+        {
+          "tipo": "texto",
+          "md": "El primer molar superior tiene típicamente **tres raíces**: **mesiovestibular**, **distovestibular** y **palatina**, que nacen de un **tronco radicular** corto. La revisión de Cleghorn, Christie y Dong (2006) encontró **tres raíces en el 95.9 %** de los dientes y dos raíces en el 3.9 %; la fusión de dos o tres raíces se presentó en alrededor del 5.2 %.\n\nLa **raíz palatina** es la más larga (unos 13 mm), de corte redondeado, y diverge hacia palatino; con frecuencia su tercio apical se curva hacia vestibular. La **mesiovestibular** es ancha en sentido vestibulopalatino y aplanada en sentido mesiodistal, con una concavidad en su cara distal, y suele curvarse hacia distal. La **distovestibular** es la más corta y delgada, y es más recta. Las tres se separan dejando tres entradas de **furcación**: mesial, vestibular y distal."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/04",
+          "proporcion": "4:3",
+          "alt": "Primer molar superior extraído visto desde mesial, con la raíz mesiovestibular ancha y la palatina divergente.",
+          "pie": "Vista mesial: la raíz mesiovestibular es ancha en sentido vestibulopalatino, la razón anatómica de su segundo conducto.",
+          "prompt": "Ilustración realista de estudio de un primer molar superior permanente extraído, visto exactamente desde mesial, en posición vertical con la corona hacia abajo, sobre fondo gris claro. Corona con cúspide mesiovestibular y mesiopalatina y un pequeño tubérculo en palatino; raíz mesiovestibular ancha y aplanada que oculta a la distovestibular, con una depresión longitudinal suave; raíz palatina larga que diverge hacia palatino con el ápice curvado ligeramente hacia vestibular; tronco radicular corto. Luz difusa lateral, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, raíces fusionadas, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El conducto MB2"
+        },
+        {
+          "tipo": "texto",
+          "md": "Por su forma aplanada, la raíz mesiovestibular aloja con mucha frecuencia **dos conductos**: el mesiovestibular principal (MB1) y un **segundo conducto mesiovestibular o MB2**, situado hacia palatino. En el promedio ponderado de 34 estudios con 8,399 dientes reunidos por Cleghorn y colaboradores, la raíz mesiovestibular tuvo **dos conductos en el 56.8 %** y uno en el 43.1 %. La cifra fue mayor en estudios de laboratorio (60.5 %) que en estudios clínicos (54.7 %), lo que sugiere que en la clínica parte de esos conductos no se localiza. Otras revisiones mencionan rangos todavía más amplios, según el método y la población.\n\nLas otras dos raíces son mucho más predecibles: la distovestibular tuvo **un conducto en el 98.3 %** y la palatina, **un conducto en más del 99 %**. En términos prácticos, un primer molar superior tiene con mayor frecuencia **cuatro conductos** que tres."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Primer molar superior: raíces y conductos según Cleghorn y colaboradores (2006)",
+          "columnas": [
+            "Característica",
+            "Frecuencia"
+          ],
+          "filas": [
+            [
+              "Tres raíces",
+              "95.9 %"
+            ],
+            [
+              "Dos raíces",
+              "3.9 %"
+            ],
+            [
+              "Fusión de dos o tres raíces",
+              "Alrededor de 5.2 %"
+            ],
+            [
+              "Raíz mesiovestibular con dos conductos",
+              "56.8 % (laboratorio 60.5 %, clínica 54.7 %)"
+            ],
+            [
+              "Raíz distovestibular con un conducto",
+              "98.3 %"
+            ],
+            [
+              "Raíz palatina con un conducto",
+              "Más del 99 %"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m12/d2",
+          "pie": "Piso de la cámara pulpar del primer molar superior y ubicación conceptual de los orificios de los conductos.",
+          "descripcion": "Vista oclusal esquemática del contorno del primer molar superior con la cámara pulpar dibujada en su interior en forma de triángulo de base mesial. Se marcan los orificios mesiovestibular (MB1), distovestibular y palatino en los vértices, y un cuarto orificio MB2 sobre la línea que une MB1 con el palatino, ligeramente hacia palatino y mesial de MB1. Líneas punteadas unen los orificios. Debajo, un corte transversal de la raíz mesiovestibular con dos conductos.",
+          "elementos": [
+            "Orificio MB1",
+            "Orificio MB2",
+            "Orificio distovestibular",
+            "Orificio palatino",
+            "Piso de la cámara pulpar",
+            "Raíz mesiovestibular en corte"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué el MB2 se pierde",
+          "md": "El orificio del MB2 suele ubicarse sobre la línea que une el orificio mesiovestibular principal con el palatino, ligeramente hacia palatino y mesial del MB1, y con frecuencia queda **cubierto por dentina secundaria o terciaria** o por una cornisa de la pared mesial de la cámara. Además, el conducto puede unirse con el MB1 antes del ápice (tipo II de Vertucci) o terminar por separado (tipo IV), y es estrecho y curvo. La diferencia entre la frecuencia hallada en el laboratorio y la reportada en estudios clínicos de la revisión de Cleghorn se interpreta precisamente como conductos que existen pero no se localizan. Un conducto no tratado puede mantener una infección; por eso, en el programa de endodoncia, la búsqueda sistemática del MB2 con magnificación e iluminación y, cuando está indicada, con tomografía de haz cónico, se considera parte del estándar de atención. Aquí basta con que retengas el dato anatómico: **la raíz mesiovestibular tiene dos conductos más veces que uno**."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Furcaciones y seno",
+          "md": "Cuando la enfermedad periodontal destruye el hueso entre las raíces, las **furcaciones** se exponen y la limpieza se vuelve muy difícil. En el primer molar superior, la furcación mesial queda oculta por la raíz mesiovestibular ancha y se explora mejor desde palatino; la distal puede abordarse desde vestibular o palatino. Por otra parte, los ápices de los molares superiores pueden estar muy cerca del **piso del seno maxilar**, algo que se valora siempre en imagen antes de extraer o colocar implantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Segundo molar superior: una versión comprimida"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **segundo molar superior** (17 y 27) erupciona entre los **12 y 13 años**. Su corona es más pequeña: **9 mm** mesiodistal, **11 mm** vestibulopalatino y **7 mm** de alto, con raíces de unos 11 a 12 mm. Se presenta en dos formas principales: una de **cuatro cúspides**, parecida al primero pero con la **distopalatina más reducida**, y otra en forma de **corazón**, de tres cúspides, en la que la distopalatina falta. La cresta oblicua es menos prominente y la **cúspide de Carabelli es rara**. Desde oclusal el romboide se ve más aplanado, con los ángulos agudos todavía más marcados.\n\nSus tres raíces son **más cortas, más próximas entre sí** y más inclinadas hacia distal, con un tronco radicular más largo; la fusión de raíces es más frecuente que en el primero. En el estudio que agrupó la población saudita, todos los segundos molares superiores revisados tuvieron tres raíces y el 88 % tuvo tres conductos, es decir, el MB2 se encontró con menos frecuencia que en el primer molar."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/05",
+          "proporcion": "16:9",
+          "alt": "Primer, segundo y tercer molares superiores extraídos vistos desde vestibular, en tamaño decreciente y raíces cada vez más juntas.",
+          "pie": "Los tres molares superiores: coronas cada vez más pequeñas y raíces cada vez más juntas, cortas y fusionadas.",
+          "prompt": "Ilustración realista de estudio de los tres molares superiores permanentes derechos de un adulto, extraídos y limpios, colocados en fila en posición anatómica con la corona hacia abajo y vistos desde vestibular sobre fondo gris neutro: primer molar con tres raíces bien separadas, segundo molar más pequeño con raíces más juntas e inclinadas a distal, tercer molar pequeño con corona redondeada y raíces cortas fusionadas en forma cónica. Iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, números, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tercer molar superior: el más variable"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **tercer molar superior** (18 y 28) es el diente más variable de la arcada superior junto con el lateral. Su tamaño promedio en Wheeler es menor (corona de 8.5 mm mesiodistal y 6.5 mm de alto), pero su forma va desde una réplica del segundo molar hasta coronas pequeñas, cónicas o con múltiples cúspides irregulares y muchos surcos suplementarios. La forma de **corazón**, con tres cúspides, es frecuente. Sus raíces suelen ser **cortas, fusionadas** y curvadas a distal, aunque pueden aparecer tres raíces separadas o raíces muy dilaceradas. Además, es uno de los dientes que con mayor frecuencia falta por agenesia o queda retenido. Su relación con la tuberosidad del maxilar y con el seno maxilar se valora antes de cualquier intervención."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Molares superiores: medidas de referencia (Wheeler, en mm)",
+          "columnas": [
+            "Medida",
+            "Primer molar",
+            "Segundo molar",
+            "Tercer molar"
+          ],
+          "filas": [
+            [
+              "Longitud de la corona",
+              "7.5",
+              "7.0",
+              "6.5"
+            ],
+            [
+              "Longitud de la raíz",
+              "Vestibular 12, palatina 13",
+              "Vestibular 11, palatina 12",
+              "11"
+            ],
+            [
+              "Diámetro mesiodistal de la corona",
+              "10.0",
+              "9.0",
+              "8.5"
+            ],
+            [
+              "Diámetro mesiodistal cervical",
+              "8.0",
+              "7.0",
+              "6.5"
+            ],
+            [
+              "Diámetro vestibulopalatino de la corona",
+              "11.0",
+              "11.0",
+              "10.0"
+            ],
+            [
+              "Diámetro vestibulopalatino cervical",
+              "10.0",
+              "10.0",
+              "9.5"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/06",
+          "proporcion": "1:1",
+          "alt": "Segundo molar superior extraído visto desde oclusal, con forma de corazón y tres cúspides.",
+          "pie": "Segundo molar superior en forma de corazón: la cúspide distopalatina está ausente y la cara oclusal tiene tres cúspides.",
+          "prompt": "Ilustración macro realista de estudio de un segundo molar superior permanente extraído visto exactamente desde oclusal, centrado sobre fondo gris neutro. Contorno en forma de corazón con tres cúspides, mesiovestibular, distovestibular y mesiopalatina, sin cúspide distopalatina, cresta oblicua discreta, surcos de desarrollo y algunos surcos suplementarios, esmalte con brillo natural. Iluminación difusa uniforme, colores naturales, enfoque nítido. Evitar: texto, etiquetas, flechas, logotipos, sangre, caries, restauraciones, cúspide de Carabelli marcada, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "¿Primero, segundo o tercero?"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para distinguir un molar superior aislado, compara cuatro rasgos. **Tamaño y forma oclusal**: el primero es el más grande, con un romboide bien definido y cuatro cúspides grandes; el segundo es más pequeño y aplanado, con frecuencia en forma de corazón; el tercero es el menor y el más irregular. **Cúspide de Carabelli**: frecuente en el primero, rara en el segundo y excepcional en el tercero. **Raíces**: bien separadas y divergentes en el primero, más próximas e inclinadas a distal en el segundo, y a menudo fusionadas en un cono en el tercero. **Tronco radicular**: corto en el primero y progresivamente más largo hacia distal.\n\nEstos cambios siguen una tendencia general de la dentición: del primer al tercer molar, las coronas se reducen, las cúspides distales pierden tamaño y las raíces se acercan. Reconocer esa tendencia te ayuda también a interpretar radiografías, donde la separación de las raíces es a menudo la pista más visible."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona el rasgo con su molar o raíz",
+          "instruccion": "Une cada característica con el diente o la raíz al que corresponde.",
+          "pares": [
+            {
+              "a": "Dos conductos en más de la mitad de los casos",
+              "b": "Raíz mesiovestibular del primer molar superior"
+            },
+            {
+              "a": "Raíz más larga, de corte redondeado",
+              "b": "Raíz palatina del primer molar superior"
+            },
+            {
+              "a": "Forma de corazón con tres cúspides, frecuente",
+              "b": "Segundo y tercer molares superiores"
+            },
+            {
+              "a": "Cúspide de Carabelli frecuente",
+              "b": "Primer molar superior"
+            },
+            {
+              "a": "Raíces cortas, a menudo fusionadas en un cono",
+              "b": "Tercer molar superior"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando observes una radiografía periapical de un primer molar superior con tratamiento de conductos, cuenta cuántos conductos obturados ves en la raíz mesiovestibular. Si solo hay uno, recuerda que en más de la mitad de estos dientes existe un segundo conducto; ese dato anatómico es el que justifica referir el caso cuando hay síntomas persistentes."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "MB2",
+          "definicion": "Segundo conducto de la raíz mesiovestibular de los molares superiores, situado hacia palatino del conducto principal."
+        },
+        {
+          "termino": "Furcación",
+          "definicion": "Zona donde se separan las raíces de un diente multirradicular."
+        },
+        {
+          "termino": "Fusión radicular",
+          "definicion": "Unión parcial o total de dos o más raíces de un mismo diente."
+        },
+        {
+          "termino": "Dentina terciaria",
+          "definicion": "Dentina que se forma en respuesta a estímulos como la caries o el desgaste y que puede estrechar la cámara y ocultar orificios."
+        },
+        {
+          "termino": "Tuberosidad del maxilar",
+          "definicion": "Prominencia ósea situada por detrás del último molar superior."
+        },
+        {
+          "termino": "Molar en forma de corazón",
+          "definicion": "Variante de los molares superiores segundo y tercero con tres cúspides por ausencia de la distopalatina."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.2-1",
+          "q": "Según la revisión de Cleghorn y colaboradores (2006), ¿con qué frecuencia la raíz mesiovestibular del primer molar superior tiene dos conductos?",
+          "opciones": [
+            "Alrededor del 5 %",
+            "Alrededor del 25 %",
+            "Alrededor del 98 %",
+            "Alrededor del 57 %"
+          ],
+          "correcta": 3,
+          "explicacion": "El promedio ponderado fue de 56.8 %, con 60.5 % en laboratorio y 54.7 % en estudios clínicos."
+        },
+        {
+          "id": "t12.2-2",
+          "q": "¿Cuál es la raíz más larga del primer molar superior?",
+          "opciones": [
+            "La palatina",
+            "La mesiovestibular",
+            "La distovestibular",
+            "Todas miden lo mismo"
+          ],
+          "correcta": 0,
+          "explicacion": "La raíz palatina mide alrededor de 13 mm, frente a unos 12 mm de las vestibulares."
+        },
+        {
+          "id": "t12.2-3",
+          "q": "¿Qué rasgo describe al segundo molar superior respecto al primero?",
+          "opciones": [
+            "Tiene una cúspide de Carabelli más grande",
+            "Sus raíces están más separadas y son más largas",
+            "Su cúspide distopalatina es más reducida o falta, y sus raíces están más juntas",
+            "Siempre tiene cinco cúspides"
+          ],
+          "correcta": 2,
+          "explicacion": "El segundo molar superior tiene la distopalatina reducida o ausente (forma de corazón) y raíces más cortas y próximas, a veces fusionadas."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Root and root canal morphology of the human permanent maxillary first molar: a literature review",
+          "autor": "Cleghorn B. M., Christie W. H., Dong C. C. S. (Journal of Endodontics)",
+          "anio": 2006,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/16934622/"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Anatomical Evaluation of Root and Root Canal Configuration of Permanent Maxillary Dentition in the Population of the Kingdom of Saudi Arabia",
+          "autor": "Mashyakhy M., Awawdeh M., Abu-Melha A. et al. (BioMed Research International)",
+          "anio": 2022
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Root canal anatomy of the human permanent teeth",
+          "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+          "anio": 1984
+        }
+      ]
+    },
+    {
+      "n": "12.3",
+      "titulo": "Primer molar inferior: cinco cúspides y dos raíces",
+      "minutos": 15,
+      "enPocasPalabras": "El primer molar de abajo es la muela más grande de la mandíbula. Tiene cinco puntas, tres hacia la mejilla y dos hacia la lengua, y dos raíces, una adelante y otra atrás. Es el diente permanente que con más frecuencia se ve afectado por caries y el que más a menudo necesita tratamiento de conductos.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **primer molar inferior** (36 y 46) es el primer diente permanente en erupcionar, hacia los **6 o 7 años**, por lo general unos meses antes que el superior. Es el diente más grande de la mandíbula y una referencia central de la oclusión. En la tabla de Wheeler su corona mide **11 mm** de ancho mesiodistal, **10.5 mm** vestibulolingual y **7.5 mm** de alto, y sus raíces unos **14 mm**. Observa la diferencia con el molar superior: aquí la corona es **más ancha de mesial a distal que de vestibular a lingual**.\n\nSu llegada temprana y su anatomía oclusal compleja lo convierten en uno de los dientes más afectados por caries y en uno de los que con mayor frecuencia reciben restauraciones extensas y tratamientos de conductos. Por eso conocer su forma con precisión tiene un impacto clínico enorme."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/07",
+          "proporcion": "3:4",
+          "alt": "Primer molar inferior derecho extraído visto desde vestibular, con tres cúspides vestibulares y dos raíces separadas.",
+          "pie": "Vista vestibular del primer molar inferior: tres cúspides vestibulares, dos surcos vestibulares y raíces mesial y distal bien separadas.",
+          "prompt": "Ilustración realista de estudio de un primer molar inferior permanente derecho de adulto, extraído y limpio, en posición vertical con la corona hacia arriba, visto exactamente desde vestibular sobre fondo gris neutro. Corona con tres cúspides vestibulares, mesiovestibular la más ancha, distovestibular y distal la más pequeña, separadas por los surcos mesiovestibular y distovestibular; tronco radicular corto y dos raíces bien separadas: mesial ancha y curvada hacia distal, distal más recta. Iluminación difusa, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, tres raíces, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Caras vestibular y lingual"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde vestibular se ven **tres cúspides**: **mesiovestibular**, la más ancha de las vestibulares; **distovestibular**; y **distal**, la más pequeña, ubicada en el ángulo distovestibular. Las separan el **surco mesiovestibular** y el **surco distovestibular**. El surco mesiovestibular suele terminar en una **fosita vestibular**, cerca del centro de la cara, un sitio frecuente de caries. En el tercio cervical hay una convexidad marcada, la **cresta cervical vestibular**, que corresponde a la altura de contorno.\n\nDesde lingual se ven **dos cúspides**, **mesiolingual** y **distolingual**, separadas por el **surco lingual**. Las cúspides linguales son **más altas y puntiagudas** que las vestibulares, de modo que desde lingual no se alcanza a ver la cara vestibular. Por detrás asoman, más bajas, las cúspides vestibulares. La altura de contorno lingual está en el tercio medio."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Caras proximales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde mesial, la corona muestra la **inclinación lingual** propia de los posteriores inferiores: el contorno vestibular sobresale en el tercio cervical y luego se inclina hacia lingual, de modo que las puntas de las cúspides vestibulares quedan sobre la raíz. La **cresta marginal mesial** está más alta que la distal. La **raíz mesial** es ancha en sentido vestibulolingual y suele presentar una depresión longitudinal en su cara mesial.\n\nDesde distal, como la cresta marginal distal es más baja y la corona converge hacia distal, se alcanza a ver parte de la cara oclusal y la cúspide distal en primer plano. El **contacto mesial** está cerca de la unión de los tercios oclusal y medio; el **distal**, algo más hacia cervical."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cara oclusal: el patrón Y5"
+        },
+        {
+          "tipo": "texto",
+          "md": "Desde oclusal el contorno es **pentagonal**, más ancho en mesial que en distal y más ancho en vestibular que en lingual. Las cinco cúspides rodean una **fosa central** grande, y junto a las crestas marginales están las **fosas triangulares mesial y distal**. El **surco central** recorre la cara de mesial a distal en zigzag; de él salen los surcos mesiovestibular y distovestibular hacia vestibular y el surco lingual hacia lingual.\n\nLa disposición de los surcos entre las cúspides forma una **Y**, y la combinación de este patrón con cinco cúspides se conoce en antropología como **patrón Y5** o driopitecino, considerado el patrón ancestral del primer molar inferior. Variantes con cuatro cúspides y surcos en cruz (patrón +4) son más propias del segundo molar."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m12/d3",
+          "pie": "Cara oclusal del primer molar inferior derecho: cinco cúspides y patrón de surcos Y5.",
+          "descripcion": "Vista oclusal esquemática del primer molar inferior derecho con contorno pentagonal. Se dibujan las cinco cúspides con sus puntas: mesiovestibular, distovestibular y distal del lado vestibular; mesiolingual y distolingual del lado lingual. Se trazan el surco central en zigzag, los surcos mesiovestibular y distovestibular, el surco lingual, la fosa central, las fosas triangulares mesial y distal y las crestas marginales, y se resalta en color la Y que forman los surcos entre las cúspides.",
+          "elementos": [
+            "Cúspide mesiovestibular",
+            "Cúspide distovestibular",
+            "Cúspide distal",
+            "Cúspide mesiolingual",
+            "Cúspide distolingual",
+            "Surco mesiovestibular",
+            "Surco lingual",
+            "Fosa central",
+            "Patrón Y5"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/08",
+          "proporcion": "1:1",
+          "alt": "Vista oclusal de un primer molar inferior extraído con cinco cúspides y contorno pentagonal.",
+          "pie": "Vista oclusal: contorno pentagonal, cinco cúspides y surcos que dibujan el patrón Y5.",
+          "prompt": "Ilustración macro realista de estudio de un primer molar inferior permanente extraído visto exactamente desde oclusal, centrado sobre fondo gris neutro. Contorno pentagonal más ancho en sentido mesiodistal, tres cúspides vestibulares redondeadas con la distal como la más pequeña, dos cúspides linguales más altas y puntiagudas, fosa central amplia, surco central en zigzag y surcos vestibulares y lingual nítidos, crestas marginales bien definidas, esmalte con brillo natural. Iluminación difusa uniforme, colores naturales, enfoque nítido. Evitar: texto, etiquetas, flechas, logotipos, sangre, caries, restauraciones, selladores, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Raíces y conductos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Lo típico son **dos raíces**: **mesial**, ancha, aplanada en sentido mesiodistal y curvada hacia distal, y **distal**, más estrecha en sentido vestibulolingual, más recta y con un ápice más romo. El **tronco radicular** es corto, de modo que la **furcación** queda relativamente cerca de la línea cervical.\n\nLa revisión sistemática de De Pablo y colaboradores (2010), con 41 estudios y 18,781 dientes, aporta las cifras de referencia. La raíz mesial tuvo **dos conductos en el 94.4 %**, con configuración tipo IV de Vertucci en el 52.3 % y tipo II en el 35 %; un **tercer conducto mesial** (conducto mesial medio) apareció en el 2.3 %. La raíz distal tuvo configuración tipo I, un solo conducto, en el 62.7 %, seguida de los tipos II (14.5 %) y IV (12.4 %). En conjunto, el diente tuvo **tres conductos en el 61.3 %**, **cuatro en el 35.7 %** y cinco en alrededor del 1 %. Las **comunicaciones en istmo** entre conductos fueron frecuentes: 54.8 % en la raíz mesial y 20.2 % en la distal.\n\nEn una proporción variable de personas aparece además una **tercera raíz**, casi siempre en posición distolingual. La misma revisión la encontró en el 13 % de los dientes y la relacionó estrechamente con el origen étnico de la población estudiada. La estudiarás con detalle, junto con otras variantes radiculares, en el tema 12.5."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Primer molar inferior: conductos según De Pablo y colaboradores (2010)",
+          "columnas": [
+            "Característica",
+            "Frecuencia"
+          ],
+          "filas": [
+            [
+              "Raíz mesial con dos conductos",
+              "94.4 %"
+            ],
+            [
+              "Raíz mesial con tres conductos",
+              "2.3 %"
+            ],
+            [
+              "Raíz distal con un conducto (tipo I)",
+              "62.7 %"
+            ],
+            [
+              "Tres conductos en total",
+              "61.3 %"
+            ],
+            [
+              "Cuatro conductos en total",
+              "35.7 %"
+            ],
+            [
+              "Istmo en la raíz mesial",
+              "54.8 %"
+            ],
+            [
+              "Tercera raíz",
+              "13 %, muy dependiente de la población"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Istmos y el sistema de conductos como red",
+          "md": "Un **istmo** es una comunicación estrecha, en forma de cinta, entre dos conductos de una misma raíz. Es más frecuente en raíces aplanadas como la mesial del primer molar inferior, donde la revisión de De Pablo lo encontró en más de la mitad de los dientes. Su presencia recuerda que el sistema de conductos no es un conjunto de tubos independientes, sino una **red tridimensional** con conductos principales, istmos, conductos laterales y ramificaciones apicales. Esta complejidad, descrita desde los estudios de diafanización de Vertucci y confirmada hoy con microtomografía, explica por qué la desinfección química es tan importante como la conformación mecánica en endodoncia, y por qué los istmos no limpiados pueden albergar bacterias. El detalle clínico corresponde al programa de endodoncia; aquí lo importante es entender la anatomía que lo justifica."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/09",
+          "proporcion": "4:3",
+          "alt": "Primer molar inferior extraído visto desde mesial con la raíz mesial ancha y la corona inclinada hacia lingual.",
+          "pie": "Vista mesial: raíz mesial ancha con depresión longitudinal, donde se alojan los conductos mesiovestibular y mesiolingual.",
+          "prompt": "Ilustración realista de estudio de un primer molar inferior permanente extraído, visto exactamente desde mesial, en posición vertical con la corona hacia arriba, sobre fondo gris claro. Corona con la cúspide mesiovestibular y la mesiolingual, esta última más alta, convexidad vestibular marcada en el tercio cervical y corona inclinada hacia lingual; raíz mesial ancha en sentido vestibulolingual, con una depresión longitudinal central y ápice romo. Luz difusa lateral, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, raíces adicionales, dientes deformes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Identifica el diente",
+          "situacion": "Recibes un molar con dos raíces, una mesial ancha y curvada y una distal más recta. La corona es más ancha de mesial a distal (11 mm) que de vestibular a lingual, tiene tres cúspides vestibulares y dos linguales. Con la corona hacia arriba y la cara vestibular hacia ti, la cúspide más pequeña, en el ángulo distovestibular, queda a tu izquierda.",
+          "opciones": [
+            {
+              "texto": "Primer molar inferior izquierdo (36)",
+              "correcta": false,
+              "retro": "Es un primer molar inferior, pero en el 36 visto de frente la línea media queda a tu izquierda, así que la cúspide distal quedaría a tu derecha."
+            },
+            {
+              "texto": "Primer molar inferior derecho (46)",
+              "correcta": true,
+              "retro": "Correcto. Cinco cúspides y dos raíces indican un primer molar inferior. La cúspide distal señala el lado distal; si queda a tu izquierda, mesial y la línea media quedan a tu derecha: es el 46."
+            },
+            {
+              "texto": "Segundo molar inferior derecho (47)",
+              "correcta": false,
+              "retro": "El segundo molar inferior suele tener cuatro cúspides y raíces más próximas entre sí."
+            },
+            {
+              "texto": "Primer molar superior derecho (16)",
+              "correcta": false,
+              "retro": "El superior tiene tres raíces y una corona más ancha de vestibular a palatino que de mesial a distal."
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Correlaciones clínicas"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "**Restauración oclusal:** las cúspides vestibulares son de soporte y ocluyen en las fosas de los dientes superiores; reproducir la fosa central y la altura de las cúspides linguales evita contactos prematuros y deflexiones.",
+            "**Furcación:** el tronco radicular corto deja la furcación cerca de la línea cervical; una pérdida ósea moderada basta para exponerla, lo que complica la higiene y el pronóstico periodontal.",
+            "**Endodoncia (concepto):** la cámara pulpar tiene un piso de forma trapezoidal, con los orificios mesiales separados y el distal centrado o dividido; buscar un segundo conducto distal y, rara vez, un mesial medio, forma parte de la evaluación.",
+            "**Extracción (concepto):** dos raíces divergentes y la curvatura distal de la mesial hacen que, cuando la corona está muy destruida, a menudo se planee separar las raíces; la decisión técnica es quirúrgica.",
+            "**Pérdida temprana:** cuando se pierde y no se repone, el segundo molar tiende a inclinarse hacia mesial y el antagonista superior puede extruirse, alterando la oclusión del cuadrante."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La fosita vestibular",
+          "md": "La fosita en que termina el surco mesiovestibular, en la cara vestibular del primer molar inferior, es un sitio clásico de caries en niños y adolescentes, porque queda fuera del alcance del cepillo cuando el diente está en erupción. Revísala con la superficie seca en cada consulta y valora sellarla cuando sea profunda."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** con un tipodonto en la mano, cuenta en voz alta las cúspides del primer molar inferior empezando por la mesiovestibular y siguiendo en el sentido de las manecillas del reloj. Después localiza la fosita vestibular y el surco lingual. Repetirlo con los dos lados entrena la orientación espacial que necesitarás para leer odontogramas, radiografías y registros oclusales."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Patrón Y5",
+          "definicion": "Disposición de cinco cúspides con surcos que forman una Y, característica del primer molar inferior; también llamado patrón driopitecino."
+        },
+        {
+          "termino": "Fosita vestibular",
+          "definicion": "Depresión en la cara vestibular del primer molar inferior donde termina el surco mesiovestibular."
+        },
+        {
+          "termino": "Istmo",
+          "definicion": "Comunicación estrecha en forma de cinta entre dos conductos de la misma raíz."
+        },
+        {
+          "termino": "Conducto mesial medio",
+          "definicion": "Tercer conducto, poco frecuente, situado entre los conductos mesiovestibular y mesiolingual del molar inferior."
+        },
+        {
+          "termino": "Cresta cervical vestibular",
+          "definicion": "Convexidad del tercio cervical de la cara vestibular de los molares inferiores."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.3-1",
+          "q": "¿Cuántas cúspides tiene típicamente el primer molar inferior?",
+          "opciones": [
+            "Cuatro",
+            "Tres",
+            "Seis",
+            "Cinco"
+          ],
+          "correcta": 3,
+          "explicacion": "Tiene tres cúspides vestibulares (mesiovestibular, distovestibular y distal) y dos linguales."
+        },
+        {
+          "id": "t12.3-2",
+          "q": "Según De Pablo y colaboradores, ¿con qué frecuencia la raíz mesial del primer molar inferior tiene dos conductos?",
+          "opciones": [
+            "Alrededor del 94 %",
+            "Alrededor del 35 %",
+            "Alrededor del 13 %",
+            "Alrededor del 62 %"
+          ],
+          "correcta": 0,
+          "explicacion": "La raíz mesial tuvo dos conductos en el 94.4 %; el 62.7 % corresponde a la configuración tipo I de la raíz distal."
+        },
+        {
+          "id": "t12.3-3",
+          "q": "¿Qué cúspides del primer molar inferior son más altas y puntiagudas?",
+          "opciones": [
+            "Las vestibulares",
+            "Las linguales",
+            "La distal",
+            "Todas tienen la misma altura"
+          ],
+          "correcta": 1,
+          "explicacion": "Las cúspides linguales son más altas y agudas; las vestibulares, más redondeadas, son las de soporte."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Root anatomy and canal configuration of the permanent mandibular first molar: a systematic review",
+          "autor": "De Pablo O. V., Estevez R., Péix Sánchez M., Heilborn C., Cohenca N. (Journal of Endodontics)",
+          "anio": 2010,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21092807/"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Root canal anatomy of the human permanent teeth",
+          "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+          "anio": 1984
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Anthropology of Modern Human Teeth: Dental Morphology and its Variation in Recent Human Populations",
+          "autor": "Scott G. R., Turner C. G. II (Cambridge University Press)",
+          "anio": 1997
+        }
+      ]
+    },
+    {
+      "n": "12.4",
+      "titulo": "Segundo y tercer molares inferiores: cuatro cúspides, conductos en C y muelas del juicio",
+      "minutos": 14,
+      "enPocasPalabras": "El segundo molar de abajo es un poco más chico que el primero y suele tener cuatro puntas en forma de cruz. En algunas personas sus raíces están unidas y por dentro forman un conducto en forma de letra C. El tercer molar, la muela del juicio, cambia mucho de una persona a otra y con frecuencia no tiene espacio para salir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Detrás del primer molar inferior están el **segundo molar inferior** (37 y 47), que erupciona entre los **11 y 13 años**, y el **tercer molar inferior** (38 y 48), que cuando se forma lo hace entre los **17 y 21 años**, o nunca llega a erupcionar. Ambos siguen la tendencia de los molares: coronas más pequeñas, menos cúspides y raíces más juntas a medida que se avanza hacia distal. Pero cada uno tiene rasgos propios con gran repercusión clínica: el conducto en forma de C del segundo y la relación del tercero con el conducto dentario inferior."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Segundo molar inferior: la cruz de cuatro cúspides"
+        },
+        {
+          "tipo": "texto",
+          "md": "La corona del segundo molar inferior mide en Wheeler **10.5 mm** mesiodistal, **10 mm** vestibulolingual y **7 mm** de alto. Su forma típica tiene **cuatro cúspides** de tamaño parecido: **mesiovestibular**, **distovestibular**, **mesiolingual** y **distolingual**. No hay cúspide distal. El surco central y los surcos vestibular y lingual se cruzan casi en ángulo recto en la fosa central, formando una **cruz**: es el **patrón +4**. El contorno oclusal es **rectangular**, más ancho de mesial a distal, sin la convergencia distal marcada del primero.\n\nDesde vestibular se ven dos cúspides separadas por un solo **surco vestibular**, que puede terminar en una fosita. Las cúspides linguales, como en el primero, son algo más altas. La corona conserva la inclinación lingual y la cresta cervical vestibular de los molares inferiores. Las crestas marginales y los contactos siguen el patrón del primer molar, con el contacto distal algo más cervical que el mesial."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/10",
+          "proporcion": "4:3",
+          "alt": "Primer y segundo molares inferiores extraídos vistos desde oclusal: uno con cinco cúspides y surcos en Y, otro con cuatro cúspides y surcos en cruz.",
+          "pie": "Primer molar inferior (patrón Y5) junto al segundo molar inferior (patrón +4): la diferencia más útil para distinguirlos.",
+          "prompt": "Ilustración macro realista de estudio de dos molares inferiores permanentes derechos extraídos, vistos exactamente desde oclusal y colocados lado a lado sobre fondo gris neutro: a la izquierda un primer molar de contorno pentagonal con cinco cúspides y surcos en Y; a la derecha un segundo molar más pequeño, de contorno rectangular, con cuatro cúspides de tamaño parecido y surcos que se cruzan en ángulo recto formando una cruz en la fosa central. Iluminación difusa, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, caries, restauraciones, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Raíces del segundo molar y el conducto en C"
+        },
+        {
+          "tipo": "texto",
+          "md": "El segundo molar inferior tiene típicamente **dos raíces**, mesial y distal, **más cortas** que las del primero (unos 13 mm), **más próximas entre sí**, más paralelas y más inclinadas hacia distal, con un tronco radicular más largo. Lo habitual es encontrar dos conductos en la raíz mesial y uno en la distal.\n\nEn algunas personas las raíces se **fusionan por vestibular** y adoptan forma de herradura; el espacio pulpar se transforma entonces en una lámina continua o semicontinua que en un corte transversal dibuja una letra **C**. En la revisión sistemática con metaanálisis de Martins y colaboradores (2019), basada en estudios con tomografía de haz cónico, la prevalencia promedio de **conducto en C** fue de **12 %** en el segundo molar inferior, frente a **0.3 %** en el primero. En los países de **Asia oriental** llegó a cerca del **40 %** (39.6 %). Un metaanálisis posterior de Yousefi y colaboradores (2025) estimó una prevalencia global de 17.3 % en este diente, más alta en mujeres y en el continente asiático."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Conducto en C en molares inferiores (estudios con tomografía de haz cónico)",
+          "columnas": [
+            "Estudio",
+            "Diente o grupo",
+            "Prevalencia"
+          ],
+          "filas": [
+            [
+              "Martins y cols., 2019",
+              "Primer molar inferior",
+              "0.3 %"
+            ],
+            [
+              "Martins y cols., 2019",
+              "Segundo molar inferior, promedio",
+              "12 %"
+            ],
+            [
+              "Martins y cols., 2019",
+              "Segundo molar inferior, Asia oriental",
+              "39.6 %"
+            ],
+            [
+              "Yousefi y cols., 2025",
+              "Segundo molar inferior, promedio",
+              "17.3 %"
+            ],
+            [
+              "Yousefi y cols., 2025",
+              "Segundo molar inferior, mujeres / hombres",
+              "23.6 % / 16.7 %"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m12/d4",
+          "pie": "Del molar con dos raíces separadas al conducto en forma de C.",
+          "descripcion": "Dos columnas. En la primera, un segundo molar inferior visto desde vestibular con dos raíces separadas y, debajo, el corte transversal de las raíces con dos conductos mesiales redondos y uno distal. En la segunda, un segundo molar con las raíces fusionadas por vestibular en forma de herradura y, debajo, el corte transversal con un conducto continuo en forma de C abierta hacia lingual. Flechas indican la fusión radicular y la orientación vestibular y lingual.",
+          "elementos": [
+            "Raíces separadas",
+            "Raíces fusionadas",
+            "Conductos mesiales",
+            "Conducto distal",
+            "Conducto en C",
+            "Vestibular",
+            "Lingual"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Lo que significa una «C» en la clínica",
+          "md": "El conducto en C no es un conducto más ancho: es un espacio con forma de cinta que puede ser **continuo** de un extremo a otro de la C, **interrumpido** en uno o varios puntos o dividido en conductos separados, y esa forma puede cambiar a lo largo de la raíz. Para describir estos cortes transversales se usa la clasificación de Melton modificada por Fan y colaboradores (2004), que distingue categorías desde la C continua (C1) hasta formas con conductos separados. En su estudio con microtomografía, Fan observó que la forma del conducto cambiaba drásticamente a lo largo de la raíz y que la forma en los tercios medio y apical no podía predecirse a partir de la del orificio. La forma en herradura implica áreas de dentina muy delgadas, en especial en la pared lingual de la C, donde el riesgo de perforación durante la preparación es mayor. En el piso de la cámara, el orificio puede verse como una **banda en forma de media luna** en lugar de orificios puntuales. Por la prevalencia tan alta en poblaciones de Asia oriental y por su complejidad, se considera un caso para valorar con imagen tridimensional y, a menudo, con el especialista. El dato anatómico que debes retener: **si las raíces del segundo molar inferior se ven fusionadas en la radiografía, sospecha un conducto en C**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/11",
+          "proporcion": "1:1",
+          "alt": "Segundo molar inferior extraído visto desde vestibular con raíces fusionadas en forma de herradura.",
+          "pie": "Segundo molar inferior con raíces fusionadas por vestibular, la morfología externa que acompaña al conducto en C.",
+          "prompt": "Ilustración realista de estudio de un segundo molar inferior permanente extraído, en posición vertical con la corona hacia arriba, visto en tres cuartos desde vestibular y apical sobre fondo gris neutro: corona de cuatro cúspides y raíces mesial y distal fusionadas por su cara vestibular formando una sola masa cónica en forma de herradura abierta hacia lingual, con un surco longitudinal tenue en la zona de unión. Iluminación difusa, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, raíces separadas, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tercer molar inferior"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **tercer molar inferior** es el diente más variable de la arcada inferior. En la tabla de Wheeler su corona mide **10 mm** mesiodistal, **9.5 mm** vestibulolingual y **7 mm** de alto, con raíces de unos **11 mm**. Puede parecerse a un primer molar, con cinco cúspides, o a un segundo, con cuatro, y su cara oclusal suele mostrar **muchos surcos suplementarios** que le dan un aspecto arrugado. Sus raíces suelen ser **cortas, fusionadas** y muy **inclinadas o curvadas hacia distal**, aunque pueden presentar formas irregulares y dilaceradas.\n\nEs, junto con el tercer molar superior, el diente que con mayor frecuencia **falta por agenesia** y el que con mayor frecuencia queda **retenido**, total o parcialmente, por falta de espacio entre el segundo molar y la rama mandibular. Su posición se describe según la angulación del eje del diente (mesioangular, vertical, horizontal o distoangular) y su profundidad respecto al plano oclusal."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Vecinos delicados",
+          "md": "Los ápices del tercer molar inferior suelen estar muy cerca del **conducto dentario inferior**, que contiene el nervio y los vasos alveolares inferiores, y por lingual el **nervio lingual** puede pasar muy próximo a la cortical en esa zona. Por eso cualquier extracción de terceros molares se planea con imagen y, cuando la relación es estrecha, con estudios complementarios. La técnica se estudia como concepto en el programa de cirugía."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/12",
+          "proporcion": "16:9",
+          "alt": "Ilustración anatómica del cuerpo y la rama mandibular con un tercer molar retenido en posición mesioangular junto al conducto dentario inferior.",
+          "pie": "Tercer molar inferior retenido en posición mesioangular, con sus ápices próximos al conducto dentario inferior.",
+          "prompt": "Ilustración anatómica realista, estilo lámina de atlas, de la vista lateral de la región posterior de una mandíbula adulta con la cortical vestibular parcialmente transparente: primer y segundo molares inferiores erupcionados, y detrás un tercer molar retenido dentro del hueso, inclinado hacia mesial con su corona contra la cara distal del segundo molar; por debajo, un conducto óseo tubular que corre a lo largo del cuerpo mandibular muy cerca de los ápices del tercer molar. Hueso color marfil, colores sobrios. Evitar: texto, etiquetas, flechas, logotipos, sangre, nervios de colores irreales, rostros, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "¿Primero, segundo o tercero inferior?"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para identificar un molar inferior aislado, empieza por las cúspides: **cinco** con patrón Y5 y una cúspide distal sugieren el primero; **cuatro** de tamaño parecido con patrón en cruz, el segundo; una corona más pequeña, redondeada y con muchos surcos suplementarios, el tercero. Después mira las raíces: **bien separadas y divergentes** en el primero; **más próximas, paralelas e inclinadas a distal** en el segundo; **cortas, fusionadas y curvadas** en el tercero. El tronco radicular se alarga del primero al tercero.\n\nPara el lado, recuerda que la raíz mesial es la más ancha en sentido vestibulolingual y la que se curva hacia distal, y que la cresta marginal mesial es más alta que la distal. En el primer molar, además, la cúspide distal marca sin duda el lado distal."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Correlaciones clínicas"
+        },
+        {
+          "tipo": "lista",
+          "items": [
+            "**Restauración:** al restaurar un segundo molar inferior, el patrón en cruz y la ausencia de cúspide distal deben respetarse; copiar la anatomía del primer molar crea interferencias.",
+            "**Periodoncia:** el tronco radicular más largo del segundo molar protege la furcación más tiempo, pero cuando las raíces están fusionadas los surcos entre ellas acumulan biopelícula difícil de remover.",
+            "**Endodoncia (concepto):** raíces fusionadas en la radiografía obligan a pensar en un conducto en C y a valorar imagen tridimensional antes de tratar.",
+            "**Tercer molar y segundo molar:** un tercer molar retenido en posición mesioangular puede favorecer caries o reabsorción en la cara distal del segundo molar, un hallazgo que se busca en la radiografía."
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Segundo y tercer molares inferiores",
+          "afirmaciones": [
+            {
+              "texto": "El segundo molar inferior típico tiene cinco cúspides con patrón en Y.",
+              "verdadero": false,
+              "explicacion": "Tiene cuatro cúspides de tamaño parecido con surcos en cruz (patrón +4); el patrón Y5 es propio del primero."
+            },
+            {
+              "texto": "El conducto en C es mucho más frecuente en el segundo molar inferior que en el primero.",
+              "verdadero": true,
+              "explicacion": "En el metaanálisis de Martins y colaboradores fue de 12 % en el segundo frente a 0.3 % en el primero."
+            },
+            {
+              "texto": "La prevalencia del conducto en C es similar en todas las regiones del mundo.",
+              "verdadero": false,
+              "explicacion": "Fue significativamente mayor en Asia oriental, cercana al 40 %."
+            },
+            {
+              "texto": "Las raíces del tercer molar inferior suelen ser cortas, fusionadas y curvadas a distal.",
+              "verdadero": true,
+              "explicacion": "Es su forma más común, aunque es el diente más variable de la arcada inferior."
+            },
+            {
+              "texto": "Los ápices del tercer molar inferior pueden estar muy cerca del conducto dentario inferior.",
+              "verdadero": true,
+              "explicacion": "Por eso su extracción se planea siempre con imagen."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando revises una radiografía panorámica de un adolescente, sigue con la vista el conducto dentario inferior desde la rama hasta el agujero mentoniano y localiza en ese trayecto los terceros molares en formación. Registrar su posición y su relación con el conducto, sin emitir juicios definitivos, es el primer paso para referir a tiempo cuando el caso lo requiera."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Patrón +4",
+          "definicion": "Disposición de cuatro cúspides con surcos que se cruzan en ángulo recto, típica del segundo molar inferior."
+        },
+        {
+          "termino": "Conducto en C",
+          "definicion": "Configuración en la que el espacio pulpar adopta en corte transversal una forma de C, asociada a raíces fusionadas."
+        },
+        {
+          "termino": "Diente retenido",
+          "definicion": "Diente que no erupciona en el tiempo esperado y permanece total o parcialmente dentro del hueso o la mucosa."
+        },
+        {
+          "termino": "Conducto dentario inferior",
+          "definicion": "Conducto óseo de la mandíbula por el que corren el nervio y los vasos alveolares inferiores."
+        },
+        {
+          "termino": "Posición mesioangular",
+          "definicion": "Retención de un tercer molar con su corona inclinada hacia el segundo molar."
+        },
+        {
+          "termino": "Raíz dilacerada",
+          "definicion": "Raíz con una curvatura o angulación brusca."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.4-1",
+          "q": "¿Qué patrón de surcos es típico del segundo molar inferior?",
+          "opciones": [
+            "Y5",
+            "+4, en cruz",
+            "H",
+            "Oblicuo"
+          ],
+          "correcta": 1,
+          "explicacion": "El segundo molar inferior típico tiene cuatro cúspides y surcos que se cruzan en ángulo recto."
+        },
+        {
+          "id": "t12.4-2",
+          "q": "Según el metaanálisis de Martins y colaboradores (2019), ¿cuál fue la prevalencia promedio de conducto en C en el segundo molar inferior?",
+          "opciones": [
+            "0.3 %",
+            "56.8 %",
+            "12 %",
+            "95 %"
+          ],
+          "correcta": 2,
+          "explicacion": "Fue de 12 %, con cifras cercanas al 40 % en Asia oriental; 0.3 % correspondió al primer molar."
+        },
+        {
+          "id": "t12.4-3",
+          "q": "¿Qué hallazgo radiográfico debe hacerte sospechar un conducto en C en un segundo molar inferior?",
+          "opciones": [
+            "Raíces mesial y distal muy separadas",
+            "Una cúspide distal grande",
+            "Una fosita vestibular profunda",
+            "Raíces que se ven fusionadas"
+          ],
+          "correcta": 3,
+          "explicacion": "El conducto en C se asocia a la fusión de las raíces, a menudo por vestibular."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Prevalence of C-shaped canal morphology using cone beam computed tomography - a systematic review with meta-analysis",
+          "autor": "Martins J. N. R., Marques D., Silva E. J. N. L. et al. (International Endodontic Journal)",
+          "anio": 2019,
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31215045/"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Prevalence of c-shaped canal morphology in premolar and molar teeth assessed by cone-beam computed tomography: systematic review and meta-analysis",
+          "autor": "Yousefi F., Mohammadi Y., Shokri E. (BMC Oral Health)",
+          "anio": 2025
+        },
+        {
+          "tipo": "academica",
+          "titulo": "C-shaped canal system in mandibular second molars: Part I—Anatomical features",
+          "autor": "Fan B., Cheung G. S. P., Fan M. et al. (Journal of Endodontics)",
+          "anio": 2004
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        }
+      ]
+    },
+    {
+      "n": "12.5",
+      "titulo": "Identificación de molares, variantes radiculares y anomalías",
+      "minutos": 15,
+      "enPocasPalabras": "Las muelas de arriba y de abajo se distinguen por el número de raíces y la forma de su corona. Algunas personas tienen raíces de más, cámaras pulpares muy grandes o gotitas de esmalte entre las raíces. Son variantes que no causan molestias por sí mismas, pero cambian la forma de limpiar, restaurar o tratar esos dientes.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Con los tres molares de cada arcada estudiados, en este tema integras un método de identificación y revisas las **variantes y anomalías** que con mayor frecuencia modifican la anatomía de los molares: raíces adicionales, taurodontismo, perlas y proyecciones de esmalte y cúspides accesorias. Muchas de ellas pasan inadvertidas hasta que un tratamiento de conductos, una extracción o una bolsa periodontal las ponen en evidencia. Reconocerlas antes es parte de una atención segura."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Molares superiores frente a inferiores",
+          "columnas": [
+            "Clave",
+            "Molares superiores",
+            "Molares inferiores"
+          ],
+          "filas": [
+            [
+              "Raíces",
+              "Tres: mesiovestibular, distovestibular y palatina",
+              "Dos: mesial y distal"
+            ],
+            [
+              "Proporción de la corona",
+              "Más ancha de vestibular a palatino",
+              "Más ancha de mesial a distal"
+            ],
+            [
+              "Contorno oclusal del primero",
+              "Romboidal, con cresta oblicua",
+              "Pentagonal, con cinco cúspides"
+            ],
+            [
+              "Cúspides más altas",
+              "La mesiopalatina; la distopalatina es la más baja del diente",
+              "Linguales"
+            ],
+            [
+              "Cúspides de soporte",
+              "Palatinas",
+              "Vestibulares"
+            ],
+            [
+              "Inclinación de la corona",
+              "Alineada con el tronco radicular",
+              "Inclinada hacia lingual"
+            ],
+            [
+              "Rasgo accesorio típico",
+              "Cúspide de Carabelli",
+              "Cúspide distal en el primero; protostílido ocasional"
+            ]
+          ]
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Cómo identificar un molar aislado",
+          "pasos": [
+            {
+              "titulo": "Arcada",
+              "md": "Cuenta las raíces y mide la corona: tres raíces y corona más ancha de vestibular a palatino indican superior; dos raíces mesial y distal y corona más ancha de mesial a distal, inferior. Si las raíces están fusionadas, recurre a la forma oclusal."
+            },
+            {
+              "titulo": "Posición",
+              "md": "Del primero al tercero, la corona se reduce, las cúspides distales pierden tamaño, las raíces se acercan y el tronco radicular se alarga. Carabelli frecuente y cinco cúspides inferiores apuntan al primer molar."
+            },
+            {
+              "titulo": "Mesial y distal",
+              "md": "La raíz mesiovestibular superior y la raíz mesial inferior son anchas y se curvan hacia distal; la corona converge hacia distal y la cresta marginal distal es más baja."
+            },
+            {
+              "titulo": "Lado",
+              "md": "En los superiores, la raíz palatina marca el lado palatino; en los inferiores, la cara con tres cúspides o con la cresta cervical prominente es vestibular. Orienta el diente como en la boca y ubica la línea media del lado mesial."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/13",
+          "proporcion": "16:9",
+          "alt": "Seis molares permanentes extraídos ordenados en dos filas, superiores con tres raíces arriba e inferiores con dos raíces abajo.",
+          "pie": "Los seis molares de un lado: compara número y separación de las raíces y el tamaño de las coronas del primero al tercero.",
+          "prompt": "Ilustración realista de estudio de seis molares permanentes de un mismo lado, extraídos y limpios, ordenados en dos filas sobre fondo gris neutro y vistos desde vestibular: arriba primer, segundo y tercer molares superiores con la corona hacia abajo y tres raíces cada vez más juntas y fusionadas; abajo primer, segundo y tercer molares inferiores con la corona hacia arriba y dos raíces cada vez más próximas y cortas. Tamaños decrecientes reales. Iluminación difusa uniforme, colores naturales, nitidez alta. Evitar: texto, números, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Raíces adicionales: radix entomolaris y paramolaris"
+        },
+        {
+          "tipo": "texto",
+          "md": "La variante radicular más estudiada de los molares inferiores es la **tercera raíz**. Cuando se sitúa en **distolingual** recibe el nombre de **radix entomolaris**; cuando aparece en **mesiovestibular**, mucho más rara, **radix paramolaris**. La radix entomolaris suele ser más corta y delgada que las raíces principales, con una curvatura marcada hacia vestibular que no siempre se aprecia en la radiografía de frente.\n\nSu frecuencia depende mucho de la población. En la revisión sistemática de De Pablo y colaboradores (2010), la tercera raíz apareció en el **13 %** de los primeros molares inferiores, con una fuerte relación con el origen étnico. Un metaanálisis de estudios con tomografía (Aung y Myint, 2022), con casi 38 mil dientes de 31 países, estimó que el **9 %** de los primeros molares inferiores tiene tres raíces, con presencia bilateral en más del 45 % de las personas que la presentaban, y una radix paramolaris de apenas 0.1 %; los autores señalan la influencia de la ascendencia del este de Asia en las cifras más altas. En el **segundo molar inferior** es mucho menos común: un metaanálisis reciente estimó la radix entomolaris en **0.72 %** y la paramolaris en 0.17 % (Al-Haddad y colaboradores, 2026)."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Si hay una, busca la otra",
+          "md": "Como la tercera raíz del primer molar inferior aparece con frecuencia en ambos lados, encontrarla en un molar justifica revisar con cuidado el contralateral antes de cualquier tratamiento. En la radiografía, un contorno radicular doble en la raíz distal o un conducto distal que parece excéntrico son pistas que conviene confirmar con otra angulación o con imagen tridimensional."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Taurodontismo"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **taurodontismo** es una alteración del desarrollo en la que el cuerpo del diente se alarga en sentido vertical a expensas de las raíces: la **cámara pulpar es muy alta**, el **piso de la cámara y la furcación se desplazan hacia apical** y la constricción a nivel de la línea cervical se pierde. El nombre alude a la semejanza con los dientes de los rumiantes. Afecta sobre todo a los **molares** y se clasifica, según el grado de desplazamiento de la furcación, en **hipotaurodontismo**, **mesotaurodontismo** e **hipertaurodontismo**, una clasificación que se remonta a Shaw (1928).\n\nPuede aparecer de forma aislada o asociado a síndromes. Por ejemplo, en el síndrome tricodentoóseo es uno de los hallazgos dentales más frecuentes: un metaanálisis de 2025 lo encontró en alrededor del 70 % de las personas afectadas. Su prevalencia en la población general varía mucho entre estudios, en parte porque los criterios de medición no son uniformes. Clínicamente, la cámara amplia y los orificios de los conductos situados muy hacia apical complican el tratamiento de conductos, y la furcación profunda puede ser, paradójicamente, una ventaja periodontal."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m12/d5",
+          "pie": "Molar normal frente a los tres grados de taurodontismo.",
+          "descripcion": "Cuatro cortes longitudinales esquemáticos de un molar inferior en fila. El primero con cámara pulpar de altura normal, constricción cervical y furcación cercana a la línea cervical. Los tres siguientes con cámara cada vez más alta, piso de la cámara y furcación desplazados progresivamente hacia apical y raíces cada vez más cortas, hasta un diente casi cilíndrico con raíces mínimas. Una línea horizontal punteada marca la línea cervical en los cuatro.",
+          "elementos": [
+            "Molar normal (cinodonte)",
+            "Hipotaurodontismo",
+            "Mesotaurodontismo",
+            "Hipertaurodontismo",
+            "Línea cervical",
+            "Piso de la cámara pulpar",
+            "Furcación"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Perlas y proyecciones de esmalte"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las **perlas de esmalte** son pequeñas masas esféricas de esmalte, a veces con un núcleo de dentina e incluso de pulpa, adheridas a la superficie radicular, con frecuencia cerca de la furcación. Se describen con mayor frecuencia en los **molares superiores**, sobre todo en los segundos y terceros. Las **proyecciones cervicales de esmalte** son extensiones del esmalte que descienden desde la línea cervical hacia la furcación, sobre todo en la cara vestibular de los molares; Masters y Hoskins (1964) las clasificaron en tres grados según cuánto se acercan a la furcación.\n\nAmbas tienen importancia **periodontal**: el epitelio y el tejido conectivo no se insertan sobre el esmalte como lo hacen sobre el cemento, de modo que estas zonas favorecen la formación de bolsas y la afectación de la furcación. Además, una perla puede confundirse en la radiografía con un cálculo o una restauración."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/14",
+          "proporcion": "4:3",
+          "alt": "Molar superior extraído con una pequeña perla de esmalte redonda y brillante en la zona de la furcación.",
+          "pie": "Perla de esmalte en la furcación de un molar superior: una pequeña esfera brillante donde la encía no logra insertarse.",
+          "prompt": "Ilustración macro realista de estudio de un segundo molar superior permanente extraído y limpio, visto desde distal en ligera vista oblicua sobre fondo gris neutro, con una pequeña esfera de esmalte blanco brillante de unos dos milímetros adherida a la superficie radicular, justo por encima de la entrada de la furcación entre la raíz distovestibular y la palatina; el resto de la raíz con el tono mate amarillento del cemento. Iluminación difusa, colores naturales, enfoque nítido en la perla. Evitar: texto, etiquetas, flechas, logotipos, sangre, cálculo, restos de tejido, caries, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Cúspides accesorias con nombre propio",
+          "md": "Además de la cúspide de Carabelli, la antropología dental registra otros rasgos accesorios de los molares: el **protostílido**, un relieve en la cara vestibular de la cúspide mesiovestibular de los molares inferiores, y las **cúspides 6 y 7** de los molares inferiores, que aparecen entre la cúspide distal y la distolingual o entre las dos linguales, respectivamente. Todos se registran en grados con el sistema ASUDAS. Clínicamente, cada cúspide accesoria añade surcos y fosas, es decir, nuevos sitios de retención de biopelícula."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una alteración del esmalte que verás a menudo"
+        },
+        {
+          "tipo": "texto",
+          "md": "No todas las alteraciones de los molares son de forma. La **hipomineralización incisivo-molar** (HIM) es un defecto cualitativo del esmalte, de origen sistémico, que afecta a uno o más primeros molares permanentes y con frecuencia también a los incisivos. Weerheijm y colaboradores propusieron esta denominación en 2001. Se reconoce por opacidades delimitadas de color blanco, crema, amarillo o marrón, a menudo asimétricas entre los lados, y por un esmalte frágil que puede fracturarse poco después de la erupción. Los molares afectados suelen ser más sensibles y más susceptibles a la caries. Su relación con este tema es directa: el primer molar, el diente más importante de la arcada, es también el que más a menudo la presenta, y su detección temprana cambia el plan preventivo."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Variantes de los molares",
+          "instruccion": "Relaciona cada variante con su descripción.",
+          "pares": [
+            {
+              "a": "Radix entomolaris",
+              "b": "Tercera raíz en posición distolingual del molar inferior"
+            },
+            {
+              "a": "Radix paramolaris",
+              "b": "Tercera raíz en posición mesiovestibular del molar inferior, muy rara"
+            },
+            {
+              "a": "Taurodontismo",
+              "b": "Cámara pulpar alta y furcación desplazada hacia apical"
+            },
+            {
+              "a": "Perla de esmalte",
+              "b": "Masa esférica de esmalte sobre la raíz, cerca de la furcación"
+            },
+            {
+              "a": "Proyección cervical de esmalte",
+              "b": "Extensión del esmalte desde la línea cervical hacia la furcación"
+            },
+            {
+              "a": "Protostílido",
+              "b": "Relieve en la cara vestibular de la cúspide mesiovestibular inferior"
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una bolsa que se explica por el esmalte",
+          "md": "Un paciente de 38 años con buena higiene general presenta una bolsa de 6 mm y afectación de la furcación vestibular del 46, sin otras bolsas en boca. Al explorar con la sonda se percibe una superficie lisa y dura que desciende desde la línea cervical hacia la furcación. Es una proyección cervical de esmalte: el tejido no puede insertarse sobre ella. Reconocer la causa anatómica cambia la explicación al paciente y orienta al periodoncista sobre el manejo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m12/15",
+          "proporcion": "4:3",
+          "alt": "Primer molar inferior extraído visto desde distolingual con una tercera raíz pequeña y curvada.",
+          "pie": "Radix entomolaris: una tercera raíz más corta y delgada, en posición distolingual, curvada hacia vestibular.",
+          "prompt": "Ilustración realista de estudio de un primer molar inferior permanente extraído, en posición vertical con la corona hacia arriba, visto desde distolingual sobre fondo gris neutro: corona de cinco cúspides, raíz mesial ancha, raíz distal principal y una tercera raíz adicional más corta y delgada que nace en la zona distolingual del tronco radicular y se curva hacia vestibular en su tercio apical. Iluminación difusa, colores naturales, nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, sangre, restos de tejido, caries, más de tres raíces, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando sondees un molar con una bolsa aislada o explores una furcación, piensa en la anatomía antes que en la higiene: ¿hay una proyección de esmalte, una perla, un surco entre raíces fusionadas? Registrar el hallazgo con el diente, la cara y el tipo de variante en el expediente convierte una observación anatómica en información útil para todo el equipo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Radix entomolaris",
+          "definicion": "Tercera raíz supernumeraria en posición distolingual de un molar inferior."
+        },
+        {
+          "termino": "Radix paramolaris",
+          "definicion": "Tercera raíz supernumeraria en posición mesiovestibular de un molar inferior."
+        },
+        {
+          "termino": "Taurodontismo",
+          "definicion": "Alteración del desarrollo con cámara pulpar alargada verticalmente y furcación desplazada hacia apical."
+        },
+        {
+          "termino": "Perla de esmalte",
+          "definicion": "Masa esférica de esmalte adherida a la raíz, por lo general cerca de la furcación de un molar."
+        },
+        {
+          "termino": "Proyección cervical de esmalte",
+          "definicion": "Extensión del esmalte desde la línea cervical hacia la furcación de un molar."
+        },
+        {
+          "termino": "Protostílido",
+          "definicion": "Rasgo accesorio en la cara vestibular de la cúspide mesiovestibular de los molares inferiores."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t12.5-1",
+          "q": "¿Dónde se ubica la radix entomolaris?",
+          "opciones": [
+            "En mesiovestibular del molar superior",
+            "En distolingual del molar inferior",
+            "En palatino del premolar superior",
+            "En mesial del canino inferior"
+          ],
+          "correcta": 1,
+          "explicacion": "Es una tercera raíz en posición distolingual de los molares inferiores, sobre todo del primero."
+        },
+        {
+          "id": "t12.5-2",
+          "q": "¿Qué caracteriza al taurodontismo?",
+          "opciones": [
+            "Raíces muy largas y cámara pequeña",
+            "Una cúspide accesoria en palatino",
+            "Cámara pulpar alta y furcación desplazada hacia apical",
+            "Esmalte sobre la raíz"
+          ],
+          "correcta": 2,
+          "explicacion": "El cuerpo del diente se alarga a expensas de las raíces; la cámara es alta y la furcación queda muy apical."
+        },
+        {
+          "id": "t12.5-3",
+          "q": "¿Por qué una proyección cervical de esmalte favorece la afectación de la furcación?",
+          "opciones": [
+            "Porque el esmalte es más blando que el cemento",
+            "Porque aumenta la producción de saliva",
+            "Porque provoca caries de forma inmediata",
+            "Porque los tejidos periodontales no se insertan sobre el esmalte como sobre el cemento"
+          ],
+          "correcta": 3,
+          "explicacion": "La falta de inserción sobre el esmalte crea una vía para la formación de bolsas hacia la furcación."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Three-Rooted Permanent Mandibular First Molars: A Meta-Analysis of Prevalence",
+          "autor": "Aung N. M., Myint K. K. (International Journal of Dentistry)",
+          "anio": 2022
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Root anatomy and canal configuration of the permanent mandibular first molar: a systematic review",
+          "autor": "De Pablo O. V., Estevez R., Péix Sánchez M., Heilborn C., Cohenca N. (Journal of Endodontics)",
+          "anio": 2010
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The Worldwide Prevalence of Radix Molaris in Mandibular Second Molars Assessed by Cone Beam Computed Tomography: Systematic Review and Meta-analysis",
+          "autor": "Al-Haddad A., Alarami N., Alshammari A. F. et al. (Journal of Endodontics)",
+          "anio": 2026
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dento-Craniofacial Features of Tricho-Dento-Osseous Syndrome: A Systematic Review and Meta-Analysis",
+          "autor": "Drumond V. Z., de Arruda J. A. A., de Andrade B. A. B. et al. (Special Care in Dentistry)",
+          "anio": 2025
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Taurodont Teeth in South African Races",
+          "autor": "Shaw J. C. M. (Journal of Anatomy)",
+          "anio": 1928
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Molar-incisor hypomineralisation",
+          "autor": "Weerheijm K. L., Jälevik B., Alaluusua S. (Caries Research)",
+          "anio": 2001
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Projection of cervical enamel into molar furcations",
+          "autor": "Masters D. H., Hoskins S. W. (Journal of Periodontology)",
+          "anio": 1964
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama de los molares",
+    "pares": [
+      {
+        "a": "Cúspide de Carabelli",
+        "b": "En palatino de la cúspide mesiopalatina del primer molar superior"
+      },
+      {
+        "a": "Cresta oblicua",
+        "b": "Une la cúspide mesiopalatina con la distovestibular"
+      },
+      {
+        "a": "MB2",
+        "b": "Segundo conducto de la raíz mesiovestibular superior"
+      },
+      {
+        "a": "Patrón Y5",
+        "b": "Primer molar inferior con cinco cúspides"
+      },
+      {
+        "a": "Patrón +4",
+        "b": "Segundo molar inferior con cuatro cúspides en cruz"
+      },
+      {
+        "a": "Conducto en C",
+        "b": "Raíces fusionadas del segundo molar inferior"
+      },
+      {
+        "a": "Radix entomolaris",
+        "b": "Tercera raíz distolingual del molar inferior"
+      },
+      {
+        "a": "Taurodontismo",
+        "b": "Cámara pulpar alta y furcación desplazada a apical"
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m12-p01",
+        "q": "¿Por qué se dice que los molares permanentes son dientes no sucedáneos?",
+        "opciones": [
+          "Porque erupcionan antes que todos los dientes temporales",
+          "Porque no sustituyen a ningún diente temporal",
+          "Porque no tienen raíces completas",
+          "Porque se forman después de los 20 años"
+        ],
+        "correcta": 1,
+        "explicacion": "Los molares erupcionan por detrás de la dentición temporal sin reemplazar a ningún diente; los premolares, en cambio, sustituyen a los molares temporales."
+      },
+      {
+        "id": "m12-p02",
+        "q": "¿Qué relación de diámetros tiene la corona del primer molar superior?",
+        "opciones": [
+          "Es más ancha de vestibular a palatino que de mesial a distal",
+          "Es más ancha de mesial a distal",
+          "Ambos diámetros son idénticos",
+          "Es más alta que ancha"
+        ],
+        "correcta": 0,
+        "explicacion": "Mide unos 11 mm vestibulopalatino y 10 mm mesiodistal; en los molares inferiores la relación se invierte."
+      },
+      {
+        "id": "m12-p03",
+        "q": "¿Qué separa la cresta oblicua del primer molar superior?",
+        "opciones": [
+          "Las cúspides vestibulares",
+          "La raíz palatina de las vestibulares",
+          "La fosa central de la fosa distal",
+          "La cúspide de Carabelli de la mesiopalatina"
+        ],
+        "correcta": 2,
+        "explicacion": "La cresta oblicua cruza en diagonal la cara oclusal y deja la fosa central por delante y la fosa distal por detrás."
+      },
+      {
+        "id": "m12-p04",
+        "q": "Según Cleghorn y colaboradores (2006), ¿qué porcentaje de primeros molares superiores tiene tres raíces?",
+        "opciones": [
+          "56.8 %",
+          "43.1 %",
+          "13 %",
+          "95.9 %"
+        ],
+        "correcta": 3,
+        "explicacion": "El 95.9 % tuvo tres raíces y el 3.9 % dos; 56.8 % es la frecuencia de dos conductos en la raíz mesiovestibular."
+      },
+      {
+        "id": "m12-p05",
+        "q": "¿Dónde se localiza habitualmente el orificio del conducto MB2?",
+        "opciones": [
+          "En la raíz palatina, hacia vestibular",
+          "Sobre la línea entre el orificio mesiovestibular principal y el palatino, algo hacia palatino y mesial del MB1",
+          "En la raíz distovestibular, hacia distal",
+          "En la corona, por encima de la cámara"
+        ],
+        "correcta": 1,
+        "explicacion": "El MB2 suele estar en esa línea, a menudo cubierto por dentina, lo que explica que no siempre se localice."
+      },
+      {
+        "id": "m12-p06",
+        "q": "¿Qué rasgo distingue al segundo molar superior del primero?",
+        "opciones": [
+          "Su cúspide distopalatina reducida o ausente y raíces más juntas",
+          "Su cúspide de Carabelli más grande",
+          "Sus cinco cúspides vestibulares",
+          "Su corona más ancha de mesial a distal que la del primero"
+        ],
+        "correcta": 0,
+        "explicacion": "El segundo molar superior puede tener forma de corazón por falta de la distopalatina, y sus raíces son más cortas y próximas."
+      },
+      {
+        "id": "m12-p07",
+        "q": "¿Qué cúspides tiene el primer molar inferior en su cara vestibular?",
+        "opciones": [
+          "Mesiovestibular y distovestibular",
+          "Mesiovestibular, distovestibular y distal",
+          "Mesiolingual y distolingual",
+          "Solo una, la mesiovestibular"
+        ],
+        "correcta": 1,
+        "explicacion": "Tiene tres cúspides vestibulares, separadas por los surcos mesiovestibular y distovestibular; la distal es la más pequeña."
+      },
+      {
+        "id": "m12-p08",
+        "q": "Según De Pablo y colaboradores (2010), ¿cuántos conductos tiene con mayor frecuencia el primer molar inferior?",
+        "opciones": [
+          "Dos",
+          "Cinco",
+          "Tres",
+          "Seis"
+        ],
+        "correcta": 2,
+        "explicacion": "Tres conductos se encontraron en el 61.3 %, cuatro en el 35.7 % y cinco en alrededor del 1 %."
+      },
+      {
+        "id": "m12-p09",
+        "q": "¿Qué patrón oclusal es típico del segundo molar inferior?",
+        "opciones": [
+          "Y5",
+          "Romboidal con cresta oblicua",
+          "Hexagonal",
+          "+4, con surcos en cruz"
+        ],
+        "correcta": 3,
+        "explicacion": "Cuatro cúspides de tamaño parecido y surcos que se cruzan en ángulo recto definen el patrón +4."
+      },
+      {
+        "id": "m12-p10",
+        "q": "En el metaanálisis de Martins y colaboradores (2019), ¿en qué región fue más alta la prevalencia de conducto en C en el segundo molar inferior?",
+        "opciones": [
+          "Europa occidental",
+          "África subsahariana",
+          "Asia oriental",
+          "Norteamérica"
+        ],
+        "correcta": 2,
+        "explicacion": "La prevalencia en Asia oriental fue de 39.6 %, significativamente mayor que en otras regiones."
+      },
+      {
+        "id": "m12-p11",
+        "q": "¿Qué estructura anatómica suele relacionarse con los ápices del tercer molar inferior?",
+        "opciones": [
+          "El conducto dentario inferior",
+          "El seno maxilar",
+          "El agujero incisivo",
+          "La tuberosidad del maxilar"
+        ],
+        "correcta": 0,
+        "explicacion": "Los ápices del tercer molar inferior pueden estar muy próximos al conducto dentario inferior, lo que se valora siempre con imagen."
+      },
+      {
+        "id": "m12-p12",
+        "q": "¿Qué es la radix entomolaris?",
+        "opciones": [
+          "Una cúspide accesoria vestibular",
+          "Un conducto en forma de C",
+          "Una perla de esmalte en la furcación",
+          "Una tercera raíz en posición distolingual de un molar inferior"
+        ],
+        "correcta": 3,
+        "explicacion": "Es una raíz supernumeraria distolingual, más frecuente en poblaciones de ascendencia del este de Asia."
+      },
+      {
+        "id": "m12-p13",
+        "q": "¿Qué caracteriza al taurodontismo?",
+        "opciones": [
+          "Raíces largas con cámara pulpar diminuta",
+          "Cámara pulpar alta con furcación desplazada hacia apical",
+          "Esmalte que recubre toda la raíz",
+          "Ausencia congénita de molares"
+        ],
+        "correcta": 1,
+        "explicacion": "El cuerpo del diente se alarga verticalmente a expensas de las raíces; se clasifica en hipo, meso e hipertaurodontismo."
+      },
+      {
+        "id": "m12-p14",
+        "q": "¿En qué molares se describen con mayor frecuencia las perlas de esmalte?",
+        "opciones": [
+          "Primeros molares inferiores",
+          "Molares temporales",
+          "Molares superiores, sobre todo segundos y terceros",
+          "Premolares inferiores"
+        ],
+        "correcta": 2,
+        "explicacion": "Las perlas de esmalte se describen sobre todo en molares superiores, cerca de la furcación."
+      },
+      {
+        "id": "m12-p15",
+        "q": "Un molar aislado tiene tres raíces, la más larga en posición lingual, y su corona es más ancha de vestibular a lingual. Tiene cuatro cúspides grandes, cresta oblicua marcada y un tubérculo en palatino de la cúspide mayor. Con la corona hacia abajo y la cara vestibular hacia ti, el tubérculo queda del lado derecho. ¿Qué diente es?",
+        "opciones": [
+          "Primer molar superior izquierdo (26)",
+          "Segundo molar superior derecho (17)",
+          "Primer molar inferior derecho (46)",
+          "Primer molar superior derecho (16)"
+        ],
+        "correcta": 3,
+        "explicacion": "Tres raíces, cresta oblicua marcada y Carabelli indican un primer molar superior. El tubérculo está en la cúspide mesiopalatina, así que mesial queda a tu derecha; con la línea media a tu derecha, es el lado derecho del paciente: el 16."
+      },
+      {
+        "id": "m12-p16",
+        "q": "Un molar aislado tiene dos raíces muy próximas e inclinadas a distal, corona rectangular de cuatro cúspides de tamaño parecido con surcos en cruz y sin cúspide distal. ¿Qué diente es con mayor probabilidad?",
+        "opciones": [
+          "Segundo molar inferior",
+          "Primer molar inferior",
+          "Primer molar superior",
+          "Segundo premolar inferior"
+        ],
+        "correcta": 0,
+        "explicacion": "El patrón +4, la ausencia de cúspide distal y las raíces próximas son propios del segundo molar inferior."
+      },
+      {
+        "id": "m12-p17",
+        "q": "En la radiografía de un segundo molar inferior que requiere tratamiento de conductos, las raíces se ven fusionadas en una sola masa cónica. ¿Qué variante anatómica debes sospechar?",
+        "opciones": [
+          "Radix paramolaris",
+          "Conducto MB2",
+          "Conducto en forma de C",
+          "Cúspide de Carabelli"
+        ],
+        "correcta": 2,
+        "explicacion": "La fusión de raíces del segundo molar inferior se asocia con el conducto en C, que requiere valoración cuidadosa con imagen."
+      },
+      {
+        "id": "m12-p18",
+        "q": "Un paciente presenta una bolsa aislada con afectación de la furcación vestibular de un molar inferior; la sonda encuentra una superficie lisa y dura que baja de la línea cervical. ¿Qué variante explica mejor el hallazgo?",
+        "opciones": [
+          "Taurodontismo",
+          "Proyección cervical de esmalte",
+          "Cúspide de Carabelli",
+          "Patrón Y5"
+        ],
+        "correcta": 1,
+        "explicacion": "Las proyecciones cervicales de esmalte impiden la inserción de los tejidos y favorecen bolsas hacia la furcación."
+      },
+      {
+        "id": "m12-p19",
+        "q": "¿Cuál es la cúspide de soporte principal del primer molar superior?",
+        "opciones": [
+          "Mesiovestibular",
+          "Distovestibular",
+          "Carabelli",
+          "Mesiopalatina"
+        ],
+        "correcta": 3,
+        "explicacion": "La mesiopalatina es la más grande y alta y ocluye en la fosa central del primer molar inferior."
+      },
+      {
+        "id": "m12-p20",
+        "q": "En el primer molar inferior, ¿qué rasgo de la raíz mesial explica que con tanta frecuencia tenga dos conductos?",
+        "opciones": [
+          "Es ancha en sentido vestibulolingual y aplanada en sentido mesiodistal",
+          "Es la más corta y redonda",
+          "Está fusionada con la raíz distal",
+          "Se ubica en posición distolingual"
+        ],
+        "correcta": 0,
+        "explicacion": "Las raíces anchas y aplanadas tienden a dividir su espacio pulpar en dos conductos; la raíz mesial tuvo dos conductos en el 94.4 % en la revisión de De Pablo."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+      "autor": "Nelson S. J. (Elsevier)",
+      "anio": 2020
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Woelfel's Dental Anatomy",
+      "autor": "Scheid R. C., Weiss G. (Wolters Kluwer)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Root and root canal morphology of the human permanent maxillary first molar: a literature review",
+      "autor": "Cleghorn B. M., Christie W. H., Dong C. C. S. (Journal of Endodontics)",
+      "anio": 2006
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Root anatomy and canal configuration of the permanent mandibular first molar: a systematic review",
+      "autor": "De Pablo O. V., Estevez R., Péix Sánchez M., Heilborn C., Cohenca N. (Journal of Endodontics)",
+      "anio": 2010
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Prevalence of C-shaped canal morphology using cone beam computed tomography - a systematic review with meta-analysis",
+      "autor": "Martins J. N. R., Marques D., Silva E. J. N. L. et al. (International Endodontic Journal)",
+      "anio": 2019
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Root canal anatomy of the human permanent teeth",
+      "autor": "Vertucci F. J. (Oral Surgery, Oral Medicine, Oral Pathology)",
+      "anio": 1984
+    }
+  ]
+}

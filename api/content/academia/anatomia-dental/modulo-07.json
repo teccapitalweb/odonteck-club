@@ -1,0 +1,1577 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 7,
+  "titulo": "Periodonto de inserción: ligamento periodontal y hueso alveolar",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los dientes no están soldados a los maxilares: cuelgan dentro de sus alvéolos gracias al periodonto de inserción, formado por el cemento radicular, el ligamento periodontal y el hueso alveolar. En este módulo estudiarás su origen común, las dimensiones y los grupos de fibras del ligamento, sus células y funciones, la estructura del hueso alveolar propio y de soporte, y la forma en que todo el sistema se adapta a la masticación, a la falta de uso, a la ortodoncia y a la carga excesiva. Es la base anatómica para entender la movilidad dentaria, la periodontitis, los traumatismos y los implantes.",
+  "objetivos": [
+    "Identificar los tejidos que forman el periodonto de inserción y explicar su origen común en el folículo dental.",
+    "Describir el ancho, la composición y los cinco grupos de fibras principales del ligamento periodontal, relacionando cada grupo con la fuerza que resiste.",
+    "Explicar las funciones de las células del ligamento y su relevancia en la avulsión, la anquilosis y el quiste radicular.",
+    "Distinguir el hueso alveolar propio, el hueso esponjoso y las corticales, y reconocer la lámina dura, las dehiscencias y las fenestraciones.",
+    "Interpretar la movilidad dentaria con el índice de Miller y explicar la respuesta del periodonto a la hipofunción, la ortodoncia y el trauma oclusal."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "anatomia-dental/m07/portada",
+    "proporcion": "16:9",
+    "alt": "Ilustración realista de un corte de mandíbula con un molar y un premolar en sus alvéolos, rodeados por el ligamento y el hueso alveolar.",
+    "prompt": "Ilustración médica realista de gran formato estilo atlas anatómico contemporáneo, corte longitudinal de un segmento de mandíbula adulta con un premolar y un primer molar inferiores permanentes en sus alvéolos, raíces rodeadas por una banda fina rosada de ligamento periodontal con fibras sutiles, cemento color marfil, hueso alveolar con cortical densa y hueso trabecular de textura fina, encía rosa pálido sana sobre las crestas, iluminación suave lateral de estudio, fondo gris azulado degradado, colores naturales y alto detalle. Evitar: texto, flechas, etiquetas, números, logotipos, sangre, rostros, número incorrecto de raíces, aspecto de caricatura."
+  },
+  "temas": [
+    {
+      "n": "7.1",
+      "titulo": "El periodonto de inserción: un aparato de sostén vivo",
+      "minutos": 14,
+      "enPocasPalabras": "Los dientes no están pegados al hueso: cuelgan dentro de su alvéolo gracias a miles de fibras que van de la raíz al hueso. Ese sistema de sostén se llama periodonto de inserción y está formado por el cemento de la raíz, el ligamento periodontal y el hueso alveolar. Cuando se daña, el diente pierde soporte y esa pérdida casi nunca se recupera sola.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si tomas un diente recién extraído y lo observas de cerca, notarás que la raíz no tiene trozos de hueso adheridos. Puede tener restos de un tejido blando, fibroso y rosado, pero nunca una soldadura con el hueso. Esto revela algo fundamental: en condiciones sanas, **el diente no está fusionado a los maxilares**. Está suspendido dentro de su alvéolo por un tejido conectivo muy especializado que lo sostiene, amortigua cada mordida, informa al cerebro de la fuerza que se aplica y se renueva sin descanso.\n\nA este sistema de sostén se le llama **periodonto**, palabra que viene del griego *peri* (alrededor) y *odontos* (diente). Entenderlo es indispensable para todo lo que harás en la clínica: desde interpretar una movilidad dentaria hasta planear una extracción, un movimiento de ortodoncia o la colocación de un implante."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/01",
+          "proporcion": "4:3",
+          "alt": "Ilustración realista de un corte de mandíbula que muestra un molar dentro de su alvéolo, con el espacio del ligamento entre la raíz y el hueso.",
+          "pie": "El diente se aloja en su alvéolo sin tocar el hueso: entre ambos hay un espacio ocupado por el ligamento periodontal.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, corte sagital de un segmento de mandíbula adulta con un primer molar inferior permanente y sus dos raíces dentro de los alvéolos, se aprecia un espacio fino y uniforme de tejido rosado entre la raíz y la pared ósea, hueso cortical denso en la periferia y hueso esponjoso trabeculado en el centro, encía rosa pálido cubriendo la cresta, colores naturales, iluminación suave de estudio, fondo neutro gris claro, alto detalle histológico sin exagerar. Evitar: texto, flechas, etiquetas, números, logotipos, sangre, raíces fusionadas al hueso, número incorrecto de raíces, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Periodonto de protección y periodonto de inserción"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los textos clásicos de periodontología, como el de Lindhe y el de Newman y Carranza, describen el periodonto como el conjunto de cuatro tejidos: **encía, ligamento periodontal, cemento radicular y hueso alveolar**. Por su función se agrupan en dos partes:\n\n- El **periodonto de protección** está formado por la encía y la unión dentogingival. Sella el cuello del diente y aísla los tejidos profundos del medio bucal. Lo estudiaste en el módulo 2.\n- El **periodonto de inserción** (también llamado aparato de inserción o de sostén) está formado por el **cemento radicular**, el **ligamento periodontal** y el **hueso alveolar propio**. Es el que fija el diente a los maxilares y transmite las fuerzas de la masticación.\n\nEl término «inserción» no es casual. Las fibras de colágena del ligamento se **insertan** por un extremo en el cemento y por el otro en el hueso. Esos extremos mineralizados se conocen como **fibras de Sharpey**. Gracias a ellas, el diente queda colgado de su alvéolo como una hamaca sostenida por miles de cuerdas pequeñas, y no apoyado sobre el fondo del hueso."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una articulación entre diente y hueso",
+          "md": "Desde el punto de vista anatómico, la unión del diente con su alvéolo es una **articulación fibrosa** llamada **gonfosis** (del griego *gomphos*, clavo). Es la única articulación del cuerpo en la que uno de los elementos no es hueso. A diferencia de una sutura del cráneo, la gonfosis permite microdesplazamientos: un diente sano se mueve fracciones de milímetro cuando lo empujas, y regresa a su posición cuando dejas de hacerlo."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m07/d1",
+          "pie": "Componentes del periodonto en un corte vestibulolingual de un incisivo inferior.",
+          "descripcion": "Corte longitudinal vestibulolingual de un incisivo inferior dentro de su alvéolo. De la corona hacia el ápice se marcan el esmalte, la unión amelocementaria y la raíz cubierta por una capa fina de cemento. Alrededor de la raíz, una banda delgada que representa el ligamento periodontal, y por fuera de ella una línea densa que corresponde al hueso alveolar propio. Más afuera, las corticales vestibular y lingual y, entre ellas, hueso esponjoso. En la parte superior, la encía cubre la cresta alveolar. Una llave lateral agrupa encía y unión dentogingival como periodonto de protección, y otra agrupa cemento, ligamento y hueso alveolar propio como periodonto de inserción.",
+          "elementos": [
+            "Encía",
+            "Unión amelocementaria",
+            "Cemento radicular",
+            "Ligamento periodontal",
+            "Hueso alveolar propio",
+            "Cortical vestibular y lingual",
+            "Hueso esponjoso",
+            "Periodonto de protección",
+            "Periodonto de inserción"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un mismo origen: el folículo dental"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los tres tejidos del periodonto de inserción tienen un origen común. Durante la odontogénesis, que estudiaste en el módulo 5, el germen dentario queda rodeado por el **folículo** o **saco dental**, una capa de ectomesénquima derivado de la cresta neural. Cuando empieza a formarse la raíz, la **vaina epitelial radicular de Hertwig** guía la forma de la raíz e induce la formación de dentina radicular. Después la vaina se fragmenta, y las células del folículo entran en contacto con la dentina recién formada.\n\nA partir de ese momento, las células foliculares se diferencian en tres direcciones: **cementoblastos**, que depositan cemento sobre la raíz; **fibroblastos**, que producen las fibras del ligamento; y **osteoblastos**, que forman el hueso que tapiza el alvéolo. Por eso el periodonto de inserción se comporta como una sola unidad funcional: comparte origen, se forma al mismo tiempo que la raíz y responde en conjunto a las fuerzas y a la enfermedad.\n\nLos restos de la vaina de Hertwig no desaparecen por completo. Quedan dentro del ligamento como pequeños cordones de células epiteliales llamados **restos epiteliales de Malassez**, que volverás a encontrar en el tema 7.3."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Los tres tejidos del periodonto de inserción",
+          "columnas": [
+            "Tejido",
+            "Naturaleza",
+            "Célula formadora",
+            "Papel en el sostén"
+          ],
+          "filas": [
+            [
+              "Cemento radicular",
+              "Tejido mineralizado avascular que cubre la raíz",
+              "Cementoblasto",
+              "Ancla las fibras del ligamento del lado del diente"
+            ],
+            [
+              "Ligamento periodontal",
+              "Tejido conectivo fibroso, celular y muy vascularizado",
+              "Fibroblasto",
+              "Suspende el diente, distribuye fuerzas y aporta sensibilidad"
+            ],
+            [
+              "Hueso alveolar propio",
+              "Lámina ósea delgada que tapiza el alvéolo",
+              "Osteoblasto",
+              "Ancla las fibras del ligamento del lado del hueso"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El cemento lo estudiaste a fondo en el módulo 6, así que aquí basta recordar cómo participa en la inserción. En los dos tercios cervicales de la raíz predomina el **cemento acelular de fibras extrínsecas**, una capa delgada que se forma lentamente y que está atravesada por una gran cantidad de fibras de Sharpey: es el anclaje principal del diente. En el tercio apical y en las furcaciones predomina el **cemento celular**, más grueso y capaz de seguir depositándose a lo largo de la vida, lo que ayuda a compensar el desgaste oclusal y la erupción continua. Si el cemento se pierde o se contamina, las fibras ya no tienen dónde insertarse."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/02",
+          "proporcion": "1:1",
+          "alt": "Vista microscópica realista de la interfase entre raíz, ligamento periodontal y hueso, con fibras que cruzan de un lado a otro.",
+          "pie": "Al microscopio, las fibras del ligamento cruzan el espacio entre el cemento y el hueso y se insertan en ambos.",
+          "prompt": "Microfotografía realista de histología con tinción de hematoxilina y eosina, corte longitudinal de la interfase entre raíz dental y hueso alveolar, a la izquierda dentina y una banda delgada de cemento de tono rosado más claro, al centro el ligamento periodontal con haces de fibras de colágena ondulados y oblicuos y núcleos alargados de fibroblastos, a la derecha hueso alveolar con osteocitos en sus lagunas, campo de microscopio óptico con iluminación uniforme, enfoque nítido, colores típicos de laboratorio. Evitar: texto, flechas, escalas numéricas, etiquetas, logotipos, artefactos de tinción exagerados, aspecto de dibujo animado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Inserción clínica: la medida que importa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para el clínico, la salud del periodonto de inserción se resume en una pregunta: **¿cuánto soporte conserva este diente?** La referencia anatómica es la **unión amelocementaria**, la línea donde termina el esmalte y comienza el cemento. En un periodonto sano, las fibras del ligamento y la cresta ósea están muy cerca de esa línea, a poco más de un milímetro o dos.\n\nCuando la periodontitis destruye fibras, cemento y hueso, el fondo del surco migra hacia el ápice. Lo que se pierde se mide como **nivel de inserción clínica**: la distancia en milímetros desde la unión amelocementaria hasta el fondo del surco o la bolsa. No hay que confundirlo con la **profundidad al sondaje**, que se mide desde el margen de la encía. Una encía inflamada puede crecer y dar bolsas profundas sin pérdida de inserción; y una encía retraída puede mostrar sondajes cortos en un diente que ya perdió mucho soporte.\n\nLa clasificación de enfermedades periodontales del World Workshop 2017 de la AAP y la EFP usa precisamente la pérdida de inserción y la pérdida ósea para definir la periodontitis y su estadio. No necesitas dominarla aquí, pero sí entender que todo parte de la anatomía que estás estudiando."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La inserción perdida no vuelve sola",
+          "md": "El ligamento, el cemento y el hueso alveolar que destruye la periodontitis **no se regeneran espontáneamente**. Con tratamiento, la inflamación cede y la enfermedad se estabiliza, pero el soporte perdido suele quedar perdido. Las técnicas de regeneración periodontal existen, pero tienen indicaciones limitadas y resultados variables. Por eso detectar la pérdida de inserción temprano, con sondaje y registro cuidadosos, vale más que cualquier tratamiento tardío."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Cada tejido con su papel",
+          "instruccion": "Relaciona cada estructura del periodonto con la descripción que le corresponde.",
+          "pares": [
+            {
+              "a": "Cemento radicular",
+              "b": "Tejido mineralizado que cubre la raíz y ancla fibras del lado del diente"
+            },
+            {
+              "a": "Ligamento periodontal",
+              "b": "Tejido conectivo que suspende el diente dentro del alvéolo"
+            },
+            {
+              "a": "Hueso alveolar propio",
+              "b": "Lámina ósea que tapiza el alvéolo y recibe fibras del ligamento"
+            },
+            {
+              "a": "Fibras de Sharpey",
+              "b": "Extremos mineralizados de las fibras de colágena dentro del cemento y del hueso"
+            },
+            {
+              "a": "Folículo dental",
+              "b": "Tejido embrionario del que derivan los tres componentes de la inserción"
+            },
+            {
+              "a": "Encía",
+              "b": "Parte del periodonto de protección que sella el cuello del diente"
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El ligamento como reservorio de células madre",
+          "md": "En 2004, Seo y colaboradores publicaron en *The Lancet* el aislamiento de **células madre mesenquimales del ligamento periodontal humano** (PDLSC, por sus siglas en inglés), capaces de formar en modelos animales estructuras parecidas al cemento y al ligamento. Este hallazgo explica por qué el ligamento conserva durante toda la vida una capacidad de renovación que no tienen otros tejidos dentales, y es la base biológica de la regeneración periodontal: el objetivo de las técnicas regenerativas es favorecer que células con origen en el ligamento repueblen la superficie radicular antes que el epitelio o el tejido conectivo de la encía. Si llegan primero las células epiteliales, se forma un **epitelio de unión largo**, que sella pero no reconstruye la inserción. La investigación con estas células sigue en fase experimental y no hay terapias celulares periodontales de uso clínico rutinario."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/03",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas sostienen una sonda periodontal milimetrada junto a la encía de un premolar inferior en un modelo de estudio.",
+          "pie": "El sondaje periodontal traduce la anatomía de la inserción en números que se registran en el expediente.",
+          "prompt": "Fotografía clínica realista en primer plano de un modelo de estudio periodontal tipo tipodonto con encía de silicona rosada y dientes permanentes inferiores, unas manos con guantes de nitrilo azul introducen con suavidad una sonda periodontal metálica de punta roma en el surco vestibular de un premolar, ángulo paralelo al eje del diente, iluminación clínica blanca uniforme, fondo de consultorio desenfocado, colores naturales, nitidez alta en la punta de la sonda. Evitar: texto, números visibles, logotipos, marcas de agua, sangre, rostro de pacientes, manos sin guantes, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué significa esto en tu práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pensar en el periodonto de inserción como una unidad te ayuda a interpretar lo que ves. Si un diente está más móvil, el problema puede estar en el ligamento (inflamación, sobrecarga), en el hueso (pérdida por periodontitis) o en ambos. Si en una radiografía el espacio del ligamento se ve ensanchado, algo está pasando en la interfase entre diente y hueso. Y si planeas una extracción, sabes que lo que tienes que vencer son las fibras del ligamento, no una soldadura ósea.\n\n**Idea práctica:** cuando revises a tu próximo paciente, toma un diente sano y empújalo con suavidad entre dos instrumentos de mango romo, primero hacia vestibular y luego hacia lingual. Ese mínimo movimiento que percibes es el ligamento trabajando. Registrar desde el inicio cómo se siente la movilidad fisiológica te dará la referencia para reconocer después la movilidad patológica."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Periodonto",
+          "definicion": "Conjunto de tejidos que rodean y sostienen al diente: encía, ligamento periodontal, cemento radicular y hueso alveolar."
+        },
+        {
+          "termino": "Periodonto de inserción",
+          "definicion": "Parte del periodonto que fija el diente a los maxilares: cemento, ligamento periodontal y hueso alveolar propio."
+        },
+        {
+          "termino": "Gonfosis",
+          "definicion": "Articulación fibrosa entre el diente y su alvéolo, que permite microdesplazamientos."
+        },
+        {
+          "termino": "Fibras de Sharpey",
+          "definicion": "Porciones de las fibras de colágena del ligamento que quedan incluidas y mineralizadas dentro del cemento o del hueso."
+        },
+        {
+          "termino": "Folículo dental",
+          "definicion": "Capa de ectomesénquima que rodea al germen dentario y origina el cemento, el ligamento y el hueso alveolar propio."
+        },
+        {
+          "termino": "Nivel de inserción clínica",
+          "definicion": "Distancia desde la unión amelocementaria hasta el fondo del surco o bolsa; mide el soporte perdido."
+        },
+        {
+          "termino": "Unión amelocementaria",
+          "definicion": "Línea donde termina el esmalte de la corona y comienza el cemento de la raíz."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.1-1",
+          "q": "¿Qué tejidos forman el periodonto de inserción?",
+          "opciones": [
+            "Encía, mucosa alveolar y hueso alveolar",
+            "Esmalte, dentina y cemento",
+            "Cemento radicular, ligamento periodontal y hueso alveolar propio",
+            "Encía, unión dentogingival y ligamento periodontal"
+          ],
+          "correcta": 2,
+          "explicacion": "El aparato de inserción lo forman cemento, ligamento y hueso alveolar propio. La encía y la unión dentogingival integran el periodonto de protección."
+        },
+        {
+          "id": "t7.1-2",
+          "q": "¿De qué estructura embrionaria derivan los tres tejidos del periodonto de inserción?",
+          "opciones": [
+            "Del folículo o saco dental",
+            "Del órgano del esmalte",
+            "De la lámina dental",
+            "Del epitelio oral externo"
+          ],
+          "correcta": 0,
+          "explicacion": "Las células del folículo dental, de origen ectomesenquimatoso, se diferencian en cementoblastos, fibroblastos y osteoblastos."
+        },
+        {
+          "id": "t7.1-3",
+          "q": "¿Desde qué punto de referencia se mide el nivel de inserción clínica?",
+          "opciones": [
+            "Desde el margen de la encía",
+            "Desde el borde incisal u oclusal",
+            "Desde la cresta del hueso alveolar",
+            "Desde la unión amelocementaria"
+          ],
+          "correcta": 3,
+          "explicacion": "La inserción clínica se mide desde la unión amelocementaria, un punto fijo; la profundidad al sondaje se mide desde el margen gingival, que puede cambiar de posición."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Periodontología clínica e implantología odontológica",
+          "autor": "Lindhe J., Lang N. P. et al. (Editorial Médica Panamericana)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Newman and Carranza's Clinical Periodontology",
+          "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Investigation of multipotent postnatal stem cells from human periodontal ligament",
+          "autor": "Seo B. M., Miura M., Gronthos S. et al. (The Lancet)",
+          "anio": 2004
+        },
+        {
+          "tipo": "academica",
+          "titulo": "A new classification scheme for periodontal and peri-implant diseases and conditions",
+          "autor": "Caton J. G., Armitage G., Berglundh T. et al. (Journal of Clinical Periodontology)",
+          "anio": 2018
+        }
+      ]
+    },
+    {
+      "n": "7.2",
+      "titulo": "Ligamento periodontal: dimensiones, composición y grupos de fibras",
+      "minutos": 15,
+      "enPocasPalabras": "El ligamento periodontal es una capa muy delgada, de menos de medio milímetro, que rodea toda la raíz. Está hecho de fibras orientadas en distintas direcciones, como los tirantes de un puente, para que el diente aguante mordidas desde cualquier ángulo. También tiene vasos que lo nutren y nervios que nos avisan cuánta fuerza estamos haciendo al morder.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **ligamento periodontal** es el tejido conectivo que ocupa el espacio entre el cemento radicular y el hueso alveolar propio. Se continúa hacia coronal con el tejido conectivo de la encía y, a través del foramen apical, con la pulpa dental. Aunque es muy delgado, es uno de los tejidos conectivos más activos del cuerpo: sus fibras se renuevan con rapidez, sus células responden en horas a un cambio de carga y su red de vasos y nervios lo convierte en un órgano sensorial además de mecánico.\n\nEn este tema estudiarás su arquitectura: cuánto mide, de qué está hecho y, sobre todo, cómo se organizan sus fibras para resistir fuerzas que llegan en todas las direcciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un espacio en forma de reloj de arena"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las mediciones histológicas clásicas, que se remontan a los estudios de Coolidge publicados en 1937, sitúan el ancho del ligamento entre **0.15 y 0.38 mm**, con un promedio cercano a **0.2 mm** en el adulto. Su ancho no es uniforme a lo largo de la raíz: es mayor en la región de la cresta alveolar y cerca del ápice, y menor en el **tercio medio de la raíz**. Por eso se describe con forma de **reloj de arena**. La zona más estrecha coincide aproximadamente con el **fulcro**, el punto alrededor del cual el diente gira cuando recibe una fuerza lateral: ahí el desplazamiento es mínimo y el espacio también.\n\nEl ancho cambia con la función y con la edad:\n\n- Los dientes con **mayor carga funcional** tienen ligamentos más anchos que los dientes sin antagonista.\n- Con la **edad**, el ligamento tiende a estrecharse, en parte por el depósito continuo de cemento y en parte por la menor exigencia masticatoria.\n- Una **sobrecarga** sostenida, como la que provocan un contacto prematuro o un bruxismo intenso, ensancha el ligamento; en la radiografía se aprecia como un espacio periodontal más amplio, a menudo en forma de embudo cerca de la cresta."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/04",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de un canino inferior en su alvéolo con el espacio del ligamento más ancho en la cresta y el ápice y más estrecho a la mitad de la raíz.",
+          "pie": "El ligamento es más estrecho a la altura del fulcro, cerca de la mitad de la raíz, y más ancho junto a la cresta y el ápice.",
+          "prompt": "Ilustración anatómica realista estilo atlas, corte longitudinal de un canino inferior permanente de un adulto dentro de su alvéolo, el espacio entre raíz y hueso representado como una banda rosada fina que se ensancha ligeramente cerca de la cresta alveolar y del ápice y se estrecha a la mitad de la raíz, cemento color marfil, hueso alveolar con trabéculas visibles, encía sana sobre la cresta, iluminación suave de estudio, fondo gris claro, proporciones anatómicas correctas, raíz única y larga. Evitar: texto, flechas, etiquetas, números, logotipos, sangre, raíz curva exagerada, aspecto caricaturesco."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "De qué está hecho el ligamento"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como todo tejido conectivo, el ligamento tiene tres componentes: **células**, **fibras** y **sustancia fundamental**, además de vasos y nervios. Las células las verás en el tema 7.3; aquí nos concentramos en la matriz.\n\nLa mayor parte de las fibras son de **colágena tipo I**, acompañada de colágena tipo III en menor proporción. Se agrupan en haces gruesos llamados **fibras principales**, que tienen recorrido ondulado: esa ondulación les permite estirarse un poco antes de quedar tensas, lo que da al diente su movilidad fisiológica. Entre ellas hay **fibras oxitalánicas**, una variedad de fibra elástica inmadura que corre más o menos paralela a la raíz y se asocia con las paredes de los vasos; se piensa que participan en la regulación del flujo vascular.\n\nLa **sustancia fundamental** es un gel rico en agua, proteoglicanos y glicoproteínas que llena los espacios entre fibras y células. No es un simple relleno: cuando el diente recibe una fuerza, el líquido de la matriz y de los vasos se desplaza y actúa como amortiguador hidráulico, un mecanismo que estudiarás en el tema 7.3."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los grupos de fibras principales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las fibras principales del ligamento, también llamadas **fibras alveolodentales**, se clasifican en cinco grupos según su orientación y su posición a lo largo de la raíz. Su disposición no es caprichosa: cada grupo está orientado para resistir un tipo de fuerza, y en conjunto convierten la presión de la mordida en **tensión** sobre el hueso, que es como el hueso tolera mejor las cargas."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Fibras principales del ligamento periodontal",
+          "columnas": [
+            "Grupo",
+            "Recorrido",
+            "Fuerza que resiste principalmente"
+          ],
+          "filas": [
+            [
+              "Crestoalveolares",
+              "Del cemento, justo por debajo de la unión amelocementaria, hacia la cresta alveolar, en dirección oblicua hacia apical",
+              "Extrusión del diente y movimientos laterales"
+            ],
+            [
+              "Horizontales",
+              "Perpendiculares al eje mayor del diente, del cemento al hueso, inmediatamente por debajo de las crestoalveolares",
+              "Fuerzas laterales u horizontales"
+            ],
+            [
+              "Oblicuas",
+              "Del cemento hacia coronal hasta el hueso, en dirección oblicua; ocupan la mayor parte del ligamento",
+              "Fuerzas verticales de la masticación, que convierten en tensión"
+            ],
+            [
+              "Apicales",
+              "Irradian desde el ápice hacia el fondo del alvéolo; no existen mientras la raíz está incompleta",
+              "Intrusión, inclinación y luxación; protegen el paquete vasculonervioso apical"
+            ],
+            [
+              "Interradiculares",
+              "Desde la cresta del septum interradicular hacia la furcación; solo en dientes multirradiculares",
+              "Inclinación, rotación y luxación del diente multirradicular"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m07/d2",
+          "pie": "Orientación de los cinco grupos de fibras principales en un molar inferior.",
+          "descripcion": "Corte mesiodistal de un primer molar inferior con sus dos raíces dentro del alvéolo. En la raíz mesial se dibujan, de coronal a apical, las fibras crestoalveolares inclinadas desde el cemento hacia la cresta, las horizontales perpendiculares a la raíz, las oblicuas largas que bajan desde el hueso hacia el cemento y las apicales en abanico alrededor del ápice. En el espacio entre ambas raíces, las fibras interradiculares van desde la cresta del septum hacia la furcación. Cada grupo con un color distinto y una flecha pequeña que indica la fuerza que resiste.",
+          "elementos": [
+            "Fibras crestoalveolares",
+            "Fibras horizontales",
+            "Fibras oblicuas",
+            "Fibras apicales",
+            "Fibras interradiculares",
+            "Septum interradicular",
+            "Furcación"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El grupo **oblicuo** merece atención especial. Sus fibras se insertan en el hueso en un nivel más coronal que en el cemento, de modo que cuando muerdes y el diente tiende a hundirse, las fibras se tensan y transmiten la carga al hueso como tracción. Si no existieran, la presión se concentraría en el fondo del alvéolo y el hueso se reabsorbería. Por eso es el grupo más numeroso y el que se considera el principal soporte frente a la masticación.\n\nPor encima de la cresta alveolar existen además las **fibras gingivales** (dentogingivales, alveologingivales, circulares, dentoperiósticas y transeptales), que pertenecen al tejido conectivo de la encía y forman parte del periodonto de protección. Entre ellas destacan las **transeptales**, que van del cemento de un diente al cemento del diente vecino pasando sobre la cresta interdental, y mantienen unidos los dientes de la arcada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un diente que vuelve a girar",
+          "md": "Un paciente de 16 años terminó su tratamiento de ortodoncia con un incisivo lateral superior que estaba muy rotado y quedó bien alineado. Seis meses después de retirar los aparatos y sin usar el retenedor, el diente volvió a girar parcialmente. Una de las explicaciones más aceptadas es que las **fibras supracrestales** (transeptales y circulares) se reorganizan con mucha lentitud y conservan durante meses la «memoria» de la posición original. Por eso los ortodoncistas insisten en la retención prolongada y, en casos seleccionados, consideran procedimientos sobre esas fibras."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/05",
+          "proporcion": "4:3",
+          "alt": "Microfotografía realista con luz polarizada de haces de colágena del ligamento que se insertan en hueso.",
+          "pie": "Con luz polarizada, los haces de colágena del ligamento brillan y permiten ver su orientación oblicua y su entrada en el hueso.",
+          "prompt": "Microfotografía realista de histología bajo microscopio con luz polarizada, corte de ligamento periodontal humano entre raíz y hueso alveolar, haces de fibras de colágena birrefringentes de tono amarillo dorado y naranja orientados en dirección oblicua, que penetran en el hueso como pequeños haces paralelos, fondo oscuro, contraste alto, enfoque nítido, aspecto de preparación de laboratorio universitario. Evitar: texto, escalas numéricas, flechas, etiquetas, logotipos, colores fluorescentes artificiales, aspecto de dibujo animado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vasos y nervios"
+        },
+        {
+          "tipo": "texto",
+          "md": "El ligamento recibe sangre de tres fuentes que se anastomosan entre sí: ramas **apicales** de las arterias alveolares, que entran al alvéolo antes de llegar a la pulpa; ramas **interalveolares**, que corren dentro del hueso de los septos y perforan la pared del alvéolo; y ramas **gingivales** que descienden por encima de la cresta. Esta red abundante explica que el ligamento tolere bien pequeñas lesiones y que la sangre contenida en él participe en la amortiguación.\n\nLa inervación proviene de ramas del **nervio trigémino**, a través de los nervios alveolares. El ligamento tiene **terminaciones libres**, que conducen el dolor, y **mecanorreceptores**, en especial terminaciones de tipo Ruffini, que detectan cuánto y hacia dónde se mueve el diente. Gracias a ellos percibes un cabello entre los dientes o un grano de arena en la comida, y tu cerebro regula la fuerza de la mordida antes de que dañes un diente."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "De la cresta al ápice",
+          "instruccion": "Ordena los grupos de fibras principales tal como se encuentran en una raíz única, desde la cresta alveolar hasta el ápice.",
+          "elementos": [
+            "Fibras crestoalveolares",
+            "Fibras horizontales",
+            "Fibras oblicuas",
+            "Fibras apicales"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "¿Existe un plexo intermedio?",
+          "md": "Durante décadas se enseñó que las fibras del ligamento no cruzaban completas de lado a lado, sino que las fibras que salen del cemento y las que salen del hueso se entrelazaban a la mitad en un **plexo intermedio**, donde ocurriría el ajuste rápido durante la erupción y el movimiento dentario. Estudios posteriores con microscopía electrónica y marcaje de colágena mostraron que, en dientes en función, muchos haces sí atraviesan todo el espacio, y que la remodelación ocurre **a lo largo de toda la fibra**, no en una zona media. Hoy se considera que la apariencia de plexo depende en buena parte del plano de corte y de la fase de erupción. Lo relevante para la clínica es la **altísima tasa de recambio** de la colágena del ligamento, superior a la de la encía y a la de la piel, que explica su rápida adaptación a las fuerzas."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/06",
+          "proporcion": "16:9",
+          "alt": "Ilustración realista de los vasos sanguíneos finos que rodean la raíz de un premolar dentro del hueso.",
+          "pie": "La red vascular del ligamento llega desde el ápice, desde los septos interdentales y desde la encía.",
+          "prompt": "Ilustración médica realista de estilo atlas, vista lateral de un premolar inferior permanente dentro de un bloque de hueso alveolar seccionado, alrededor de la raíz una red delicada de vasos sanguíneos finos en tonos rojo oscuro y azul que llegan desde el ápice, desde perforaciones en la pared del alvéolo y desde la encía, hueso con textura trabecular realista, fondo gris claro neutro, iluminación suave de estudio, alto detalle anatómico. Evitar: texto, flechas, etiquetas, números, logotipos, sangre derramada, aspecto gráfico perturbador, raíces múltiples, colores neón."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en tu próxima práctica de laboratorio o al revisar un atlas de histología, dibuja a mano un corte de un molar y traza los cinco grupos de fibras con colores distintos, junto con una flecha que indique la fuerza que resiste cada uno. Hacerlo una vez a mano fija la orientación de las fibras mucho mejor que leer la tabla tres veces, y te servirá para entender por qué una fuerza horizontal repetida daña más que una vertical."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Ligamento periodontal",
+          "definicion": "Tejido conectivo fibroso que une el cemento radicular con el hueso alveolar y suspende el diente en su alvéolo."
+        },
+        {
+          "termino": "Fibras principales",
+          "definicion": "Haces de colágena del ligamento organizados en cinco grupos: crestoalveolares, horizontales, oblicuas, apicales e interradiculares."
+        },
+        {
+          "termino": "Fibras oblicuas",
+          "definicion": "Grupo más numeroso del ligamento; transforma las fuerzas verticales de la masticación en tensión sobre el hueso."
+        },
+        {
+          "termino": "Fibras oxitalánicas",
+          "definicion": "Fibras elásticas inmaduras del ligamento, paralelas a la raíz y asociadas con los vasos sanguíneos."
+        },
+        {
+          "termino": "Fulcro",
+          "definicion": "Punto de la raíz alrededor del cual gira el diente ante una fuerza lateral; ahí el ligamento es más estrecho."
+        },
+        {
+          "termino": "Fibras transeptales",
+          "definicion": "Fibras gingivales que unen el cemento de dos dientes vecinos pasando por encima de la cresta interdental."
+        },
+        {
+          "termino": "Mecanorreceptor",
+          "definicion": "Terminación nerviosa que detecta presión o desplazamiento; en el ligamento informa la fuerza y dirección de la mordida."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.2-1",
+          "q": "¿Cuál es el grupo de fibras principales más numeroso y el principal soporte frente a las fuerzas verticales de la masticación?",
+          "opciones": [
+            "Crestoalveolares",
+            "Oblicuas",
+            "Apicales",
+            "Transeptales"
+          ],
+          "correcta": 1,
+          "explicacion": "Las fibras oblicuas ocupan la mayor parte del ligamento y convierten la presión vertical en tensión sobre el hueso. Las transeptales son fibras gingivales, no principales."
+        },
+        {
+          "id": "t7.2-2",
+          "q": "¿En qué zona de la raíz el ligamento periodontal suele ser más estrecho?",
+          "opciones": [
+            "Junto a la cresta alveolar",
+            "En el ápice",
+            "En la furcación",
+            "En el tercio medio, cerca del fulcro"
+          ],
+          "correcta": 3,
+          "explicacion": "El ligamento tiene forma de reloj de arena: es más estrecho en el tercio medio, donde el diente apenas se desplaza al girar."
+        },
+        {
+          "id": "t7.2-3",
+          "q": "¿Qué grupo de fibras solo existe en dientes con dos o más raíces?",
+          "opciones": [
+            "Interradiculares",
+            "Horizontales",
+            "Oblicuas",
+            "Apicales"
+          ],
+          "correcta": 0,
+          "explicacion": "Las fibras interradiculares van de la cresta del septum interradicular a la furcación, por lo que requieren un diente multirradicular."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Periodontología clínica e implantología odontológica",
+          "autor": "Lindhe J., Lang N. P. et al. (Editorial Médica Panamericana)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Newman and Carranza's Clinical Periodontology",
+          "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de histología oral y periodontología",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "7.3",
+      "titulo": "Células y funciones del ligamento periodontal",
+      "minutos": 15,
+      "enPocasPalabras": "El ligamento no es solo un conjunto de fibras: está lleno de células que fabrican, reparan y remodelan el tejido todo el tiempo. Gracias a ellas el diente se sostiene, amortigua los golpes, recibe nutrientes y nos avisa cuándo mordemos demasiado fuerte. Si esas células mueren, por ejemplo cuando un diente se cae y se deja secar, el diente puede terminar pegado al hueso.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si el tema anterior te mostró la arquitectura del ligamento, este te muestra a quienes la construyen y la mantienen. El ligamento periodontal es un tejido **muy celular** comparado con otros tejidos conectivos densos, como los tendones. Esa riqueza de células explica sus dos rasgos más notables: se renueva con enorme rapidez y es capaz de formar tres tejidos distintos, cemento, hueso y el propio ligamento.\n\nConocer sus células tiene consecuencias clínicas directas: explica por qué un diente avulsionado tiene mejor pronóstico si se reimplanta pronto, por qué algunos quistes aparecen alrededor de las raíces y por qué un implante no se comporta como un diente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las poblaciones celulares"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Células del ligamento periodontal",
+          "columnas": [
+            "Grupo",
+            "Células",
+            "Función principal"
+          ],
+          "filas": [
+            [
+              "Formadoras",
+              "Fibroblastos",
+              "Producen y también degradan la colágena y la sustancia fundamental; son las más abundantes"
+            ],
+            [
+              "Formadoras",
+              "Cementoblastos y osteoblastos",
+              "Depositan cemento sobre la raíz y hueso sobre la pared del alvéolo"
+            ],
+            [
+              "De reabsorción",
+              "Osteoclastos y odontoclastos (cementoclastos)",
+              "Reabsorben hueso o tejidos duros del diente durante la remodelación, el movimiento dentario o la exfoliación de dientes temporales"
+            ],
+            [
+              "Progenitoras",
+              "Células mesenquimales indiferenciadas, sobre todo perivasculares",
+              "Se dividen y reponen fibroblastos, cementoblastos y osteoblastos"
+            ],
+            [
+              "Epiteliales",
+              "Restos epiteliales de Malassez",
+              "Restos de la vaina de Hertwig cercanos al cemento; participan en la homeostasis del ligamento"
+            ],
+            [
+              "De defensa",
+              "Macrófagos, mastocitos y eosinófilos",
+              "Vigilancia inmunitaria, limpieza de restos celulares y respuesta inflamatoria"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El **fibroblasto** del ligamento es una célula alargada, orientada en paralelo a los haces de colágena, con abundante retículo endoplásmico rugoso y aparato de Golgi. Tiene una particularidad: además de sintetizar colágena, la **fagocita y la degrada dentro de la propia célula**. Por eso el mismo fibroblasto puede fabricar fibras en un lado y remodelarlas en otro, un equilibrio que permite el recambio continuo sin que el diente pierda soporte.\n\nLos **cementoblastos** tapizan la superficie radicular y los **osteoblastos**, la pared ósea. Entre ellos trabajan los **osteoclastos**, células multinucleadas que se alojan en pequeñas excavaciones del hueso llamadas lagunas de Howship. En los dientes temporales, las células que reabsorben la raíz durante el recambio se conocen como **odontoclastos**; los verás de nuevo en el módulo 9.\n\nLas **células progenitoras** se concentran alrededor de los vasos sanguíneos. Son la reserva que repone las células que mueren y la base de la capacidad regenerativa del ligamento, como viste en el recuadro sobre células madre del tema 7.1."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/07",
+          "proporcion": "1:1",
+          "alt": "Microfotografía realista del ligamento periodontal con núcleos alargados de fibroblastos y pequeños grupos de células epiteliales cerca del cemento.",
+          "pie": "Fibroblastos alineados con las fibras y, cerca del cemento, pequeños cúmulos de restos epiteliales de Malassez.",
+          "prompt": "Microfotografía realista de histología a gran aumento con tinción de hematoxilina y eosina, ligamento periodontal humano entre una franja de cemento acelular rosa pálido a la izquierda y hueso alveolar a la derecha, núcleos alargados y fusiformes de fibroblastos alineados con fibras de colágena onduladas, y cerca del cemento pequeños cúmulos redondeados de células epiteliales con núcleos oscuros, algunos capilares con eritrocitos, enfoque nítido, iluminación uniforme de microscopio óptico. Evitar: texto, escalas numéricas, flechas, etiquetas, logotipos, colores artificiales, aspecto de ilustración infantil."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los restos epiteliales de Malassez"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando la vaina de Hertwig se fragmenta durante la formación de la raíz, parte de sus células persiste como una red de cordones e islotes cerca del cemento: los **restos epiteliales de Malassez**. Por mucho tiempo se consideraron simples residuos embrionarios sin función. Revisiones recientes muestran que participan en el **mantenimiento del espacio del ligamento**, que podrían ayudar a evitar que el hueso invada ese espacio y que intervienen en procesos de reparación.\n\nTienen también un lado clínico importante. Cuando un diente sufre necrosis pulpar y se forma una lesión inflamatoria periapical, los mediadores de la inflamación pueden estimular la proliferación de estos restos. Esa proliferación es el origen aceptado del **quiste radicular** o periapical, el quiste odontogénico más frecuente de los maxilares."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cinco funciones de un tejido delgado"
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m07/d3",
+          "pie": "Las funciones del ligamento periodontal agrupadas alrededor de la raíz.",
+          "descripcion": "Esquema circular con la raíz de un diente y su ligamento al centro. Alrededor, cinco recuadros conectados por líneas al ligamento, cada uno con un pequeño icono: un puente colgante para la función física de soporte, un resorte para la amortiguación, unos ladrillos para la función formativa y de remodelación, un vaso sanguíneo para la nutrición y una terminación nerviosa para la función sensorial.",
+          "elementos": [
+            "Física: soporte y transmisión de fuerzas",
+            "Amortiguación de cargas",
+            "Formativa y de remodelación",
+            "Nutritiva",
+            "Sensorial y propioceptiva"
+          ]
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Las funciones del ligamento, una por una",
+          "pasos": [
+            {
+              "titulo": "Física",
+              "md": "Une el diente al hueso, mantiene la relación de la encía con el diente, transmite las fuerzas oclusales al hueso como tensión y protege los vasos y nervios que entran por el ápice."
+            },
+            {
+              "titulo": "Amortiguación",
+              "md": "Ante una fuerza, el diente se desplaza primero dentro del ligamento: las fibras onduladas se estiran y el líquido de la matriz y de los vasos se redistribuye. Si la fuerza aumenta, el hueso alveolar se deforma ligeramente. Se describe como un **sistema viscoelástico**, en el que fibras, líquido y hueso comparten la carga."
+            },
+            {
+              "titulo": "Formativa y de remodelación",
+              "md": "Sus células forman y reabsorben cemento, hueso y colágena todo el tiempo. Esta actividad permite la erupción, la migración fisiológica de los dientes hacia mesial, la adaptación a las fuerzas y el movimiento ortodóncico."
+            },
+            {
+              "titulo": "Nutritiva",
+              "md": "Su red vascular aporta oxígeno y nutrientes al cemento, al hueso alveolar propio y a la encía adyacente, y drena los productos de desecho."
+            },
+            {
+              "titulo": "Sensorial",
+              "md": "Sus mecanorreceptores informan sobre la magnitud y la dirección de las fuerzas y participan en reflejos que regulan la fuerza de cierre de la mandíbula. Sus terminaciones libres transmiten el dolor."
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué un implante «se siente» diferente",
+          "md": "Un implante oseointegrado está en contacto directo con el hueso: **no tiene ligamento periodontal**. No hay fibras que amortigüen ni mecanorreceptores que informen con precisión sobre la carga. Las personas con implantes perciben las fuerzas a través de receptores del hueso, la mucosa, los músculos y la articulación temporomandibular, una percepción menos fina que a veces se llama **oseopercepción**. Por eso los umbrales para detectar un objeto entre los dientes son mayores con implantes que con dientes naturales, y por eso un implante no se mueve fisiológicamente ni puede desplazarse con ortodoncia."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/08",
+          "proporcion": "16:9",
+          "alt": "Comparación ilustrada lado a lado de un diente natural con ligamento y un implante unido directamente al hueso.",
+          "pie": "El diente natural está suspendido por el ligamento; el implante está unido directamente al hueso, sin ligamento intermedio.",
+          "prompt": "Ilustración médica realista de estilo atlas, dos cortes longitudinales lado a lado en un mismo bloque de hueso maxilar: a la izquierda un premolar natural con su raíz rodeada por una banda fina rosada de ligamento periodontal y encía sana, a la derecha un implante dental de titanio gris con roscas y su corona, en contacto directo con el hueso sin banda intermedia, hueso cortical y trabecular realistas, fondo gris claro, iluminación de estudio suave, colores naturales. Evitar: texto, flechas, etiquetas, números, logotipos, marcas comerciales, sangre, aspecto caricaturesco, proporciones irreales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando las células del ligamento mueren"
+        },
+        {
+          "tipo": "texto",
+          "md": "La importancia de las células del ligamento se vuelve evidente en un traumatismo. Cuando un diente permanente sale completo de su alvéolo, lo que se llama **avulsión**, una parte del ligamento queda pegada a la raíz y otra en el alvéolo. Si las células de la raíz siguen vivas al reimplantar el diente, el ligamento puede repararse. Si se secan o mueren, el hueso entra en contacto con la raíz y la va sustituyendo poco a poco: es la **reabsorción por reemplazo** con **anquilosis**, en la que el diente queda fusionado al hueso, pierde su movilidad fisiológica y produce un sonido metálico a la percusión.\n\nLas guías de la International Association of Dental Traumatology (IADT) de 2020 insisten en que el **tiempo fuera de la boca** y el **medio en que se transporta** el diente son decisivos para la supervivencia de esas células. El diente no debe secarse ni tallarse; si no se puede reimplantar de inmediato, conviene transportarlo en un medio adecuado, como leche o solución salina, y acudir de inmediato a atención odontológica."
+        },
+        {
+          "tipo": "texto",
+          "md": "La anquilosis tiene consecuencias distintas según la edad. En un adulto, el diente anquilosado puede permanecer en boca muchos años mientras la raíz se reabsorbe lentamente. En un niño o adolescente que todavía crece, el diente anquilosado no acompaña el desarrollo vertical del proceso alveolar: los dientes vecinos siguen erupcionando y el anquilosado queda cada vez más hundido, en **infraoclusión**. El mismo fenómeno se observa en molares temporales anquilosados, que aparecen «sumergidos» respecto a sus vecinos, un hallazgo que retomarás en el módulo 9. En todos los casos, la pista clínica es la misma: ausencia de movilidad fisiológica y un sonido agudo, metálico, cuando se percute el diente."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/09",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas sostienen por la corona un incisivo central superior permanente sobre un recipiente con leche.",
+          "pie": "El diente avulsionado se sujeta por la corona y se transporta en un medio que evite que el ligamento se seque.",
+          "prompt": "Fotografía realista de estudio, primer plano de unas manos con guantes de nitrilo azul que sostienen con delicadeza por la corona un incisivo central superior permanente completo con raíz larga y cónica, sobre un recipiente de plástico transparente con tapa que contiene leche, mesa clínica blanca y limpia, luz suave difusa, fondo de consultorio desenfocado, colores naturales, nitidez alta en el diente. Evitar: texto, logotipos, marcas comerciales, sangre, rostros, dedos tocando la raíz, manos sin guantes, diente deforme o con dos raíces."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Nunca raspes la raíz de un diente avulsionado",
+          "md": "Es un error frecuente intentar «limpiar» la raíz de un diente que se cayó frotándola con gasa o cepillo. Esa maniobra arranca las células del ligamento que justamente se quieren conservar. Sujeta el diente siempre por la **corona**, enjuágalo solo si está visiblemente sucio y por pocos segundos, y deja la decisión sobre el reimplante y su seguimiento al odontólogo. Los dientes temporales avulsionados no se reimplantan, porque podrían dañar al germen del permanente."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Un incisivo en la cancha",
+          "situacion": "Un adolescente de 13 años recibe un golpe jugando futbol y el incisivo central superior permanente sale completo de su alvéolo. Su entrenador lo recoge del pasto. El consultorio está a 20 minutos y el diente tiene tierra en la raíz. El entrenador te llama por teléfono y pregunta qué hacer mientras llegan.",
+          "opciones": [
+            {
+              "texto": "Envolver el diente en una servilleta seca para que no se pierda.",
+              "correcta": false,
+              "retro": "El secado destruye las células del ligamento en poco tiempo y aumenta mucho el riesgo de anquilosis."
+            },
+            {
+              "texto": "Tomarlo por la corona, enjuagarlo brevemente si está sucio y transportarlo en leche o solución salina hacia el consultorio de inmediato, o reimplantarlo si alguien capacitado puede hacerlo.",
+              "correcta": true,
+              "retro": "Es la conducta que protege las células del ligamento: no tocar la raíz, evitar el secado y reducir el tiempo extraoral."
+            },
+            {
+              "texto": "Cepillar la raíz con jabón para quitar toda la tierra antes de guardarlo.",
+              "correcta": false,
+              "retro": "Frotar la raíz elimina las células del ligamento; la limpieza debe ser un enjuague breve sin tallar."
+            },
+            {
+              "texto": "Guardarlo en agua de la llave durante varias horas y acudir al día siguiente.",
+              "correcta": false,
+              "retro": "El agua no es un medio adecuado para conservar las células por tiempo prolongado y la demora empeora el pronóstico."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** escribe en una tarjeta las tres reglas para una avulsión de diente permanente (tomar por la corona, no dejar secar, acudir de inmediato) y compártela con la escuela de tus pacientes pediátricos o con el entrenador del equipo de tu colonia. Es una de las acciones de prevención con mayor impacto que puedes hacer fuera del consultorio, y se basa por completo en la biología del ligamento que acabas de estudiar."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Fibroblasto periodontal",
+          "definicion": "Célula más abundante del ligamento; sintetiza y degrada colágena para mantener el recambio del tejido."
+        },
+        {
+          "termino": "Osteoclasto",
+          "definicion": "Célula multinucleada que reabsorbe hueso; se aloja en las lagunas de Howship."
+        },
+        {
+          "termino": "Restos epiteliales de Malassez",
+          "definicion": "Islotes de células epiteliales derivados de la vaina de Hertwig que persisten en el ligamento cerca del cemento."
+        },
+        {
+          "termino": "Quiste radicular",
+          "definicion": "Quiste inflamatorio asociado al ápice de un diente con necrosis pulpar, originado por la proliferación de los restos de Malassez."
+        },
+        {
+          "termino": "Anquilosis dentoalveolar",
+          "definicion": "Fusión del diente con el hueso por pérdida del ligamento; el diente pierde su movilidad fisiológica."
+        },
+        {
+          "termino": "Avulsión",
+          "definicion": "Salida completa de un diente de su alvéolo por un traumatismo."
+        },
+        {
+          "termino": "Oseopercepción",
+          "definicion": "Percepción de fuerzas en personas con implantes, mediada por receptores del hueso y tejidos vecinos en lugar del ligamento."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.3-1",
+          "q": "¿Qué característica distingue al fibroblasto del ligamento periodontal?",
+          "opciones": [
+            "Solo produce colágena tipo III",
+            "Reabsorbe hueso en las lagunas de Howship",
+            "Deriva del epitelio oral",
+            "Sintetiza colágena y también la degrada dentro de la célula"
+          ],
+          "correcta": 3,
+          "explicacion": "El fibroblasto periodontal fabrica y fagocita colágena, lo que permite el recambio rápido del tejido. La reabsorción ósea es tarea del osteoclasto."
+        },
+        {
+          "id": "t7.3-2",
+          "q": "¿Cuál es el origen aceptado del quiste radicular?",
+          "opciones": [
+            "La proliferación de los restos epiteliales de Malassez estimulados por inflamación periapical",
+            "La degeneración del órgano del esmalte después de la erupción",
+            "El crecimiento de células de la mucosa oral hacia el ápice",
+            "La calcificación del ligamento periodontal"
+          ],
+          "correcta": 0,
+          "explicacion": "La inflamación periapical secundaria a necrosis pulpar estimula la proliferación de los restos de Malassez, que forman el revestimiento del quiste."
+        },
+        {
+          "id": "t7.3-3",
+          "q": "¿Qué ocurre si las células del ligamento de un diente avulsionado mueren antes del reimplante?",
+          "opciones": [
+            "El ligamento se regenera igual en pocos días",
+            "El diente se vuelve más móvil de forma permanente",
+            "Aumenta el riesgo de anquilosis y reabsorción por reemplazo",
+            "La pulpa se regenera y protege la raíz"
+          ],
+          "correcta": 2,
+          "explicacion": "Sin ligamento vivo, el hueso contacta la raíz y la sustituye progresivamente; el diente queda anquilosado."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Newman and Carranza's Clinical Periodontology",
+          "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "International Association of Dental Traumatology guidelines for the management of traumatic dental injuries: 2. Avulsion of permanent teeth",
+          "autor": "Fouad A. F., Abbott P. V., Tsilingaridis G. et al. (Dental Traumatology)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Epithelial rests of Malassez: from latent cells to active participation in orthodontic movement",
+          "autor": "Silva B. S., Fagundes N. C. F., Nogueira B. C. L. et al. (Dental Press Journal of Orthodontics)",
+          "anio": 2017
+        }
+      ]
+    },
+    {
+      "n": "7.4",
+      "titulo": "Hueso alveolar: hueso propio, corticales y hueso esponjoso",
+      "minutos": 15,
+      "enPocasPalabras": "El hueso alveolar es la parte de los maxilares que forma los alvéolos donde se alojan las raíces. Existe porque existen los dientes: se forma cuando erupcionan y se pierde poco a poco cuando se extraen. En algunas zonas, sobre todo al frente de la boca, la capa de hueso que cubre la raíz es tan delgada como una hoja de papel.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En el módulo 3 estudiaste el maxilar y la mandíbula como huesos completos. Ahora nos acercamos a la porción que rodea directamente a los dientes: el **proceso alveolar**. Es la parte de los maxilares que forma y sostiene los alvéolos, y se distingue del **hueso basal**, el cuerpo del maxilar o de la mandíbula que no depende de los dientes.\n\nLa característica más importante del proceso alveolar es que es **dependiente de los dientes**. Se desarrolla a medida que los dientes erupcionan y se adapta a su posición y función. Cuando un diente se pierde, el proceso alveolar de esa zona se reabsorbe; en personas que nunca desarrollan algunos dientes, como en la agenesia, el proceso alveolar de esa región queda poco desarrollado. Entender esta dependencia es la base de la odontología restauradora e implantológica moderna."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las partes del proceso alveolar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si haces un corte horizontal del proceso alveolar a la altura de la raíz, encuentras tres capas de dentro hacia fuera:\n\n1. **Hueso alveolar propio.** Es la pared delgada que tapiza el alvéolo y recibe las fibras de Sharpey del ligamento. Está perforada por numerosos conductos por donde pasan vasos y nervios desde el hueso hacia el ligamento; por eso también se le llama **lámina cribiforme** (de *cribum*, criba). Histológicamente tiene una porción de **hueso fasciculado** (*bundle bone*), donde se anclan las fibras, y una porción de hueso laminar.\n2. **Hueso esponjoso o trabecular.** Ocupa el espacio entre el hueso alveolar propio y las corticales. Está formado por trabéculas separadas por espacios medulares con médula ósea. Es más abundante en el maxilar superior y en las zonas posteriores, y puede faltar casi por completo en la región anterior, donde las corticales se fusionan con el hueso propio.\n3. **Corticales vestibular y lingual o palatina.** Son placas de hueso compacto que forman las paredes externas del proceso alveolar. Su grosor varía mucho según la zona: son más delgadas en el maxilar que en la mandíbula, y especialmente delgadas en vestibular de los dientes anteriores.\n\nAl hueso esponjoso y a las corticales juntos se les llama **hueso de soporte**, porque refuerzan al hueso alveolar propio."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m07/d4",
+          "pie": "Corte horizontal del proceso alveolar mandibular a la altura del tercio medio de las raíces.",
+          "descripcion": "Corte axial de la mandíbula en la región de premolares y primer molar, visto desde oclusal. Cada raíz aparece como un círculo u óvalo rodeado por una banda fina que representa el ligamento y por una línea densa que es el hueso alveolar propio. Entre las raíces de dientes vecinos, el septum interdental; entre las raíces mesial y distal del molar, el septum interradicular. Por fuera, la cortical vestibular y la cortical lingual, y en el centro hueso esponjoso con espacios medulares. Un rótulo adicional señala la lámina cribiforme con pequeños conductos que la perforan.",
+          "elementos": [
+            "Hueso alveolar propio (lámina cribiforme)",
+            "Hueso fasciculado",
+            "Hueso esponjoso",
+            "Cortical vestibular",
+            "Cortical lingual",
+            "Septum interdental",
+            "Septum interradicular",
+            "Ligamento periodontal"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Las diferencias regionales tienen consecuencias prácticas. En el **maxilar superior**, las corticales son delgadas y porosas y predomina el hueso esponjoso; por eso la anestesia infiltrativa difunde con facilidad hacia los ápices. En la **mandíbula**, la cortical es más gruesa y densa, sobre todo en la región de molares, donde la **línea oblicua externa** refuerza la cara vestibular; ahí la difusión del anestésico a través del hueso es mucho menor y se recurre con frecuencia a técnicas de bloqueo. En la región de los **incisivos inferiores**, en cambio, el proceso alveolar es estrecho en sentido vestibulolingual y las raíces quedan cubiertas por láminas muy finas en ambas caras."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lámina dura y cresta alveolar"
+        },
+        {
+          "tipo": "texto",
+          "md": "En una radiografía periapical, el hueso alveolar propio aparece como una **línea radiopaca delgada y continua** que contornea la raíz: es la **lámina dura**. Entre ella y la raíz se ve una línea radiolúcida fina, el **espacio del ligamento periodontal**. Ambas son referencias de salud: una lámina dura continua y un espacio periodontal uniforme sugieren un periodonto de inserción estable. Su pérdida o interrupción, o el ensanchamiento del espacio, son signos que deben investigarse. La anatomía radiográfica completa la estudiarás en el módulo 14.\n\nLa **cresta alveolar** es el borde coronal del hueso entre dos dientes. En un periodonto sano se sitúa aproximadamente de 1 a 2 mm por debajo de la unión amelocementaria, y su contorno sigue la forma de esa unión: en los dientes anteriores la cresta interdental es puntiaguda, y en los posteriores, más plana y ancha. Cuando los dientes vecinos están a diferente altura o inclinados, la cresta se inclina en el mismo sentido, siguiendo la línea imaginaria que une sus uniones amelocementarias. Por eso una cresta oblicua junto a un diente inclinado no siempre significa pérdida ósea."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/10",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical realista de premolares inferiores con la lámina dura visible como una línea blanca alrededor de las raíces.",
+          "pie": "La lámina dura es la imagen radiográfica del hueso alveolar propio; el espacio oscuro fino que la separa de la raíz corresponde al ligamento.",
+          "prompt": "Radiografía periapical digital realista en escala de grises, región de premolares inferiores permanentes de un adulto sano, raíces únicas y rectas, una línea blanca delgada y continua que contornea cada raíz separada de ella por una línea oscura fina y uniforme, crestas alveolares a poca distancia de las uniones amelocementarias, trabeculado óseo fino en el hueso esponjoso, contraste y nitidez de calidad diagnóstica. Evitar: texto, letras, números, escalas, marcas de agua, logotipos, restauraciones metálicas, lesiones, artefactos de movimiento, aspecto de dibujo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dehiscencias y fenestraciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como la cortical vestibular puede ser muy delgada, a veces no cubre por completo la raíz. Se describen dos defectos anatómicos:\n\n- **Dehiscencia:** falta de hueso que **incluye el borde marginal**, de modo que la raíz queda desnuda desde la cresta hacia apical, cubierta solo por ligamento, periostio y encía.\n- **Fenestración:** una «ventana» de hueso ausente sobre la raíz, **con el borde marginal intacto**.\n\nAmbos defectos son más frecuentes en vestibular que en lingual, en dientes anteriores que en posteriores, y en raíces prominentes o desplazadas hacia vestibular. Se asocian también con algunos movimientos de ortodoncia que llevan la raíz fuera de su envoltura ósea. No son visibles en una radiografía periapical convencional; se detectan durante una cirugía o se sospechan en una tomografía de haz cónico. Su importancia clínica radica en que predisponen a **recesiones gingivales** cuando se suman otros factores, como un cepillado traumático o un biotipo gingival delgado."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/11",
+          "proporcion": "4:3",
+          "alt": "Cráneo seco de estudio visto de frente con raíces de incisivos y caninos superiores marcando relieves en la cortical vestibular.",
+          "pie": "En el maxilar anterior, las raíces forman relieves bajo una cortical vestibular muy delgada; ahí son más frecuentes dehiscencias y fenestraciones.",
+          "prompt": "Fotografía realista de estudio de un cráneo humano seco de uso académico, encuadre cerrado de la región anterior del maxilar superior vista desde vestibular con dientes permanentes completos, relieves verticales de las raíces de incisivos y caninos bajo una cortical ósea fina, en un canino una pequeña ventana ovalada en el hueso que deja ver la raíz con el borde marginal intacto, iluminación lateral suave que resalta el relieve, fondo negro mate. Evitar: texto, etiquetas, flechas, logotipos, aspecto macabro o de terror, dientes faltantes, piezas deformes, tejidos blandos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El hueso fasciculado y el alvéolo después de una extracción",
+          "md": "El **hueso fasciculado** existe porque existen las fibras del ligamento que se anclan en él; es una estructura **dependiente del diente**. Cuando el diente se extrae, pierde su razón de ser y se reabsorbe. Araújo y Lindhe documentaron en 2005, en un estudio experimental en perros, que la reabsorción del hueso fasciculado tras la extracción provoca una pérdida de altura mayor en la pared vestibular que en la lingual, porque en vestibular la pared es delgada y está formada casi solo por ese hueso. En humanos, Schropp y colaboradores describieron en 2003 que el reborde alveolar pierde alrededor de la mitad de su ancho en los 12 meses posteriores a la extracción de un premolar o molar, con la mayor parte de esa pérdida en los primeros tres meses. Estudios con tomografía de haz cónico, como el de Januário y colaboradores en 2011, mostraron que en el maxilar anterior la pared vestibular mide 1 mm o menos en la mayoría de los sitios. Estos datos explican la planificación actual de extracciones e implantes: preservar la pared vestibular es una prioridad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un hueso que se renueva toda la vida"
+        },
+        {
+          "tipo": "texto",
+          "md": "El hueso alveolar es uno de los huesos con **mayor tasa de remodelación** del esqueleto. En su superficie trabajan osteoblastos que forman matriz, osteocitos atrapados en ella que detectan la deformación mecánica, y osteoclastos que reabsorben. La señal que coordina a estas células proviene en gran parte de las fuerzas que recibe el diente: la carga funcional estimula el mantenimiento del hueso y la falta de carga favorece su pérdida, un principio que se resume en la llamada **ley de Wolff**. En el tema 7.5 verás cómo esta capacidad de remodelación hace posible el movimiento ortodóncico y cómo una carga excesiva puede convertirse en daño."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Cuidado con la pared vestibular",
+          "md": "En una extracción de incisivos o caninos superiores, las maniobras de luxación muy amplias hacia vestibular pueden fracturar una cortical que mide apenas un milímetro. Esa pérdida complica cualquier rehabilitación posterior, en especial la colocación de un implante. La planificación de la extracción, la elección del instrumental y la técnica corresponden al criterio del odontólogo tratante; lo que debes retener desde la anatomía es que **el hueso vestibular anterior es frágil y difícil de recuperar**."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Verdadero o falso sobre el hueso alveolar?",
+          "afirmaciones": [
+            {
+              "texto": "El proceso alveolar se mantiene igual aunque se extraigan los dientes.",
+              "verdadero": false,
+              "explicacion": "Es dependiente de los dientes: tras la extracción se reabsorbe, sobre todo en los primeros meses."
+            },
+            {
+              "texto": "La lámina dura es la imagen radiográfica del hueso alveolar propio.",
+              "verdadero": true,
+              "explicacion": "El hueso alveolar propio se ve como una línea radiopaca delgada y continua alrededor de la raíz."
+            },
+            {
+              "texto": "En una fenestración falta también el borde marginal del hueso.",
+              "verdadero": false,
+              "explicacion": "Esa es la dehiscencia. En la fenestración el borde marginal está intacto y la ausencia de hueso forma una ventana."
+            },
+            {
+              "texto": "La pared vestibular del maxilar anterior suele ser muy delgada.",
+              "verdadero": true,
+              "explicacion": "Los estudios con tomografía muestran que en la mayoría de los sitios mide 1 mm o menos."
+            },
+            {
+              "texto": "En un periodonto sano, la cresta alveolar está unos 5 mm por debajo de la unión amelocementaria.",
+              "verdadero": false,
+              "explicacion": "En salud se ubica aproximadamente de 1 a 2 mm por debajo; distancias mayores sugieren pérdida ósea."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/12",
+          "proporcion": "16:9",
+          "alt": "Modelo anatómico de una mandíbula con una zona desdentada donde el reborde es más estrecho y bajo que en las zonas con dientes.",
+          "pie": "Donde faltan dientes, el proceso alveolar se reabsorbe y el reborde queda más bajo y angosto.",
+          "prompt": "Fotografía realista de estudio de un modelo anatómico de mandíbula adulta de resina con textura ósea natural, vista oblicua desde vestibular, dientes permanentes presentes en ambos lados y una zona sin primer molar en la que el reborde alveolar se ve claramente más bajo y estrecho que en las zonas vecinas con dientes, iluminación lateral suave que resalta el contorno, fondo gris neutro, enfoque nítido en el reborde. Evitar: texto, etiquetas, flechas, números, logotipos, aspecto macabro, tejidos blandos, sangre, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** la próxima vez que observes una radiografía periapical, recorre con la vista la lámina dura de cada raíz desde la cresta hasta el ápice y comprueba si es continua y si el espacio del ligamento es uniforme. Después localiza la cresta interdental y estima su distancia a la unión amelocementaria. Hacer esta lectura sistemática en cada radiografía, aunque el motivo de consulta sea otro, te entrena para detectar a tiempo la pérdida ósea y las alteraciones del periodonto de inserción."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Proceso alveolar",
+          "definicion": "Porción de los maxilares que forma y sostiene los alvéolos dentarios; depende de la presencia de los dientes."
+        },
+        {
+          "termino": "Hueso alveolar propio",
+          "definicion": "Pared ósea delgada que tapiza el alvéolo, recibe las fibras de Sharpey y está perforada por conductos vasculares."
+        },
+        {
+          "termino": "Hueso fasciculado",
+          "definicion": "Porción del hueso alveolar propio donde se anclan las fibras del ligamento; se reabsorbe tras la extracción."
+        },
+        {
+          "termino": "Lámina dura",
+          "definicion": "Línea radiopaca delgada y continua que representa al hueso alveolar propio en la radiografía."
+        },
+        {
+          "termino": "Dehiscencia",
+          "definicion": "Ausencia de hueso sobre la raíz que incluye el borde marginal del alvéolo."
+        },
+        {
+          "termino": "Fenestración",
+          "definicion": "Ventana de hueso ausente sobre la raíz con el borde marginal conservado."
+        },
+        {
+          "termino": "Septum interradicular",
+          "definicion": "Tabique óseo situado entre las raíces de un mismo diente multirradicular."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.4-1",
+          "q": "¿Por qué al hueso alveolar propio también se le llama lámina cribiforme?",
+          "opciones": [
+            "Porque es la capa más gruesa del proceso alveolar",
+            "Porque está perforado por conductos por donde pasan vasos y nervios",
+            "Porque contiene la médula ósea roja",
+            "Porque solo existe en la mandíbula"
+          ],
+          "correcta": 1,
+          "explicacion": "Sus perforaciones, como las de una criba, comunican el hueso con el ligamento y permiten el paso de vasos y nervios."
+        },
+        {
+          "id": "t7.4-2",
+          "q": "¿Qué diferencia una dehiscencia de una fenestración?",
+          "opciones": [
+            "La dehiscencia solo ocurre en dientes temporales",
+            "La fenestración se ve en toda radiografía periapical",
+            "La dehiscencia es lingual y la fenestración siempre vestibular",
+            "La dehiscencia incluye el borde marginal; la fenestración lo conserva"
+          ],
+          "correcta": 3,
+          "explicacion": "En la dehiscencia la raíz queda descubierta desde la cresta; en la fenestración hay una ventana de hueso ausente con el borde marginal intacto."
+        },
+        {
+          "id": "t7.4-3",
+          "q": "Después de extraer un incisivo superior, ¿qué pared del alvéolo tiende a perder más altura?",
+          "opciones": [
+            "La pared vestibular, delgada y formada sobre todo por hueso fasciculado",
+            "La pared palatina, por ser la más gruesa",
+            "Ambas pierden exactamente lo mismo",
+            "Ninguna, porque el hueso basal la reemplaza"
+          ],
+          "correcta": 0,
+          "explicacion": "La pared vestibular anterior es delgada y depende del hueso fasciculado, que se reabsorbe tras la extracción."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Periodontología clínica e implantología odontológica",
+          "autor": "Lindhe J., Lang N. P. et al. (Editorial Médica Panamericana)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dimensional ridge alterations following tooth extraction. An experimental study in the dog",
+          "autor": "Araújo M. G., Lindhe J. (Journal of Clinical Periodontology)",
+          "anio": 2005
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Bone healing and soft tissue contour changes following single-tooth extraction: a clinical and radiographic 12-month prospective study",
+          "autor": "Schropp L., Wenzel A., Kostopoulos L., Karring T. (International Journal of Periodontics and Restorative Dentistry)",
+          "anio": 2003
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Dimension of the facial bone wall in the anterior maxilla: a cone-beam computed tomography study",
+          "autor": "Januário A. L., Duarte W. R., Barriviera M., Mesti J. C., Araújo M. G., Lindhe J. (Clinical Oral Implants Research)",
+          "anio": 2011
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Newman and Carranza's Clinical Periodontology",
+          "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "7.5",
+      "titulo": "El periodonto en función: movilidad, adaptación y carga oclusal",
+      "minutos": 16,
+      "enPocasPalabras": "El periodonto se adapta a las fuerzas que recibe: si muerdes más, se refuerza; si un diente deja de usarse, se debilita. Esa capacidad de cambiar es lo que permite mover los dientes con ortodoncia. Pero cuando la fuerza es excesiva o el soporte ya está reducido, el diente se afloja, y el odontólogo lo mide y lo registra.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Hasta aquí has estudiado el periodonto de inserción como una estructura. En este tema lo verás **en acción**: cómo responde a la masticación diaria, a la falta de uso, a una fuerza ortodóncica y a una carga excesiva. Todo depende de lo que ya conoces: fibras que se tensan, un líquido que amortigua, células que forman y reabsorben, y un hueso que se remodela según la señal mecánica que recibe."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Movilidad fisiológica y patológica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Todo diente sano tiene una pequeña **movilidad fisiológica**. Cuando aplicas una fuerza horizontal ligera, el diente se desplaza primero dentro del espacio del ligamento, mientras las fibras onduladas se estiran y el líquido se redistribuye; con fuerzas mayores, el hueso alveolar se deforma un poco. Al retirar la fuerza, el diente regresa a su posición. Esta movilidad es mayor en dientes unirradiculares con raíces cortas, como los incisivos inferiores, y menor en molares con raíces múltiples y divergentes.\n\nLa movilidad se vuelve **patológica** cuando supera lo esperado para ese diente. Las causas principales son tres: **pérdida de soporte** (por periodontitis, por ejemplo), **inflamación** del ligamento (como en una lesión periapical aguda o tras un traumatismo) y **fuerzas oclusales excesivas**. Una movilidad aumentada no siempre es progresiva: tras una cirugía periodontal o un traumatismo puede ser transitoria."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Grados de movilidad según el índice de Miller (versión de uso común)",
+          "columnas": [
+            "Grado",
+            "Hallazgo clínico"
+          ],
+          "filas": [
+            [
+              "0",
+              "Movilidad fisiológica, no perceptible como aumentada"
+            ],
+            [
+              "1",
+              "Primer signo perceptible de movilidad mayor que la normal"
+            ],
+            [
+              "2",
+              "Desplazamiento horizontal de la corona de hasta 1 mm"
+            ],
+            [
+              "3",
+              "Desplazamiento horizontal mayor de 1 mm, o movilidad vertical (el diente se hunde o rota en su alvéolo)"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/13",
+          "proporcion": "4:3",
+          "alt": "Dos mangos de instrumentos metálicos apoyados en las caras vestibular y lingual de un incisivo inferior en un modelo, sostenidos por manos enguantadas.",
+          "pie": "La movilidad se evalúa con dos mangos de instrumentos rígidos, nunca con los dedos, porque la yema absorbe parte del movimiento.",
+          "prompt": "Fotografía clínica realista, primer plano de un tipodonto de estudio con dientes permanentes inferiores y encía de silicona rosada, unas manos con guantes de nitrilo azul apoyan los extremos romos de los mangos de dos instrumentos metálicos, uno por vestibular y otro por lingual, sobre la corona de un incisivo central inferior, iluminación clínica blanca uniforme, fondo de consultorio desenfocado, colores naturales, nitidez alta. Evitar: texto, números, logotipos, marcas comerciales, sangre, rostros, manos sin guantes, puntas afiladas apoyadas en la encía, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Movilidad en un solo diente: no la ignores",
+          "md": "Cuando un diente aislado se vuelve móvil en poco tiempo y sus vecinos tienen buen soporte, no lo atribuyas de entrada a la periodontitis. Una lesión periapical de origen pulpar, una fractura radicular, una sobrecarga localizada o, con menor frecuencia, una lesión que destruye hueso pueden manifestarse así. Registra el hallazgo, solicita el estudio radiográfico que indique el odontólogo responsable y asegúrate de que el diagnóstico se complete antes de cualquier tratamiento."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Hipofunción: cuando el diente deja de trabajar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si un diente pierde su antagonista, por ejemplo cuando se extrae el molar opuesto y no se reemplaza, el periodonto de inserción se adapta a la falta de carga. El ligamento se **estrecha**, sus fibras pierden su orientación funcional y el hueso de soporte se vuelve menos denso, con trabéculas más finas. Al mismo tiempo, el diente sin contacto tiende a **sobreerupcionar** hacia el espacio vacío, arrastrando consigo el proceso alveolar. Clínicamente esto se traduce en un plano oclusal desnivelado y en dificultades para rehabilitar después la zona, una de las razones por las que conviene reponer a tiempo los dientes perdidos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un periodonto que se mueve toda la vida"
+        },
+        {
+          "tipo": "texto",
+          "md": "Aun sin tratamiento, los dientes no permanecen inmóviles. A lo largo de la vida ocurren dos movimientos fisiológicos lentos. El primero es la **migración mesial fisiológica**: el desgaste de los puntos de contacto y los componentes de la fuerza masticatoria empujan a los dientes posteriores poco a poco hacia mesial, y el periodonto acompaña ese desplazamiento con reabsorción en la pared mesial del alvéolo y aposición en la distal. El segundo es la **erupción continua**, que compensa el desgaste oclusal e incisal: el diente sigue avanzando muy lentamente hacia oclusal, mientras el cemento apical se engrosa y el hueso alveolar acompaña el movimiento.\n\nCon la edad, el periodonto de inserción también cambia. Los textos de periodontología describen un ligamento con **menos células** y fibras menos ordenadas, un cemento más grueso, sobre todo en la zona apical, y un hueso alveolar con menor vascularización y menor velocidad de remodelación, lo que hace más lenta la cicatrización. Sin embargo, el envejecimiento por sí solo no explica una pérdida importante de inserción: cuando una persona mayor tiene mucho soporte perdido, la causa suele ser la periodontitis acumulada durante años, no la edad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El movimiento ortodóncico: presión y tensión"
+        },
+        {
+          "tipo": "texto",
+          "md": "La ortodoncia es la demostración más clara de que el periodonto de inserción está vivo. Cuando se aplica una fuerza continua a un diente, el ligamento queda **comprimido** de un lado y **estirado** del otro:\n\n- **Lado de presión.** Los vasos del ligamento se comprimen y disminuye el flujo sanguíneo. Las células liberan señales que reclutan **osteoclastos**, que reabsorben la pared del alvéolo frente a la raíz. El espacio se recupera y el diente avanza.\n- **Lado de tensión.** Las fibras se estiran y estimulan a los **osteoblastos**, que depositan hueso nuevo sobre la pared del alvéolo. Así el diente arrastra consigo su alvéolo y conserva un ligamento de ancho normal.\n\nSi la fuerza es excesiva, la compresión del lado de presión es tan intensa que el tejido pierde su irrigación y se forma una zona de **hialinización**, una necrosis estéril del ligamento. El hueso no puede reabsorberse de frente y la reabsorción tiene que hacerse desde los espacios medulares, por detrás de la pared, lo que se llama **reabsorción socavante**. El movimiento se detiene temporalmente y aumenta el riesgo de reabsorción de la raíz. Por eso la ortodoncia contemporánea busca, en principio, fuerzas ligeras y controladas; la selección de fuerzas y aparatos es criterio del especialista."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m07/d5",
+          "pie": "Respuesta del periodonto de inserción a una fuerza ortodóncica aplicada hacia distal.",
+          "descripcion": "Corte longitudinal de un canino dentro de su alvéolo con una flecha horizontal en la corona que indica una fuerza hacia la derecha. En el lado derecho de la raíz, el ligamento aparece estrecho y comprimido, con osteoclastos en la pared ósea y una pequeña zona sombreada de hialinización. En el lado izquierdo, el ligamento aparece ensanchado con fibras estiradas y osteoblastos depositando capas nuevas de hueso. Una flecha discontinua indica que el alvéolo completo se desplaza junto con el diente.",
+          "elementos": [
+            "Fuerza ortodóncica",
+            "Lado de presión: reabsorción por osteoclastos",
+            "Zona de hialinización (fuerza excesiva)",
+            "Lado de tensión: aposición por osteoblastos",
+            "Fibras estiradas",
+            "Desplazamiento del alvéolo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/14",
+          "proporcion": "16:9",
+          "alt": "Arcada superior de un adolescente con brackets metálicos y arco, vista desde oclusal con espejo.",
+          "pie": "Durante la ortodoncia, cada diente se mueve porque el ligamento y el hueso alveolar se remodelan alrededor de su raíz.",
+          "prompt": "Fotografía clínica intraoral realista vista oclusal con espejo de la arcada superior permanente de un adolescente, brackets metálicos pequeños adheridos a premolares, caninos e incisivos con un arco de alambre fino y ligaduras transparentes, primeros y segundos molares con tubos, encía rosa sana, superficie dental limpia, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, logotipos, marcas comerciales, sangre, labios o rostro visibles, dientes faltantes, número incorrecto de dientes, aparatos deformes, caries visibles."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Trauma oclusal"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando las fuerzas oclusales superan la capacidad de adaptación del periodonto, se produce **trauma oclusal**: una lesión del aparato de inserción causada por fuerzas excesivas. Se distingue el **trauma oclusal primario**, que ocurre en un periodonto con soporte normal (por ejemplo, por una restauración alta o por bruxismo), del **secundario**, que ocurre cuando fuerzas normales actúan sobre un periodonto con soporte reducido por periodontitis.\n\nLos signos que orientan son: movilidad progresiva, **frémito** (vibración que se palpa al ocluir), migración del diente, molestias al morder, desgaste marcado y, en la radiografía, **ensanchamiento del espacio del ligamento** y engrosamiento de la lámina dura. El consenso del World Workshop 2017 concluyó que las fuerzas oclusales traumáticas **no inician la periodontitis** ni provocan pérdida de inserción por sí mismas; pueden causar movilidad adaptativa y la evidencia sobre su papel en la progresión de una periodontitis existente es limitada."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una corona que llegó «alta»",
+          "md": "Una paciente de 45 años recibe una corona en el primer molar inferior. Dos semanas después regresa con dolor al morder y sensación de que el diente «está flojo». Al revisar con papel de articular, la corona hace contacto antes que el resto de los dientes. La radiografía muestra un ligamento ligeramente ensanchado sin pérdida ósea. Es un trauma oclusal primario: tras el ajuste oclusal, la movilidad y el dolor desaparecen en pocas semanas porque el ligamento, con su capacidad de adaptación, recupera su ancho normal."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "¿Qué parte de la raíz perdió soporte?",
+          "instruccion": "En una radiografía periapical, mide la distancia desde la unión amelocementaria hasta el fondo del defecto óseo y la longitud de la raíz desde la unión amelocementaria hasta el ápice. El resultado es una estimación didáctica del porcentaje de raíz sin soporte; para simplificar, no se restan los 1 a 2 mm que en salud separan la cresta de la unión amelocementaria.",
+          "formula": "Porcentaje de raíz sin soporte = distancia de la unión amelocementaria al defecto ÷ longitud de la raíz × 100",
+          "variables": [
+            {
+              "id": "distanciaDefecto",
+              "etiqueta": "Distancia de la unión amelocementaria al fondo del defecto",
+              "valor": 4.5,
+              "unidad": "mm"
+            },
+            {
+              "id": "longitudRaiz",
+              "etiqueta": "Longitud de la raíz (unión amelocementaria al ápice)",
+              "valor": 15,
+              "unidad": "mm"
+            }
+          ],
+          "resultado": {
+            "expresion": "distanciaDefecto / longitudRaiz * 100",
+            "etiqueta": "Raíz sin soporte",
+            "unidad": "%",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El porcentaje de soporte en la clasificación de 2017",
+          "md": "La clasificación de periodontitis por **estadios** propuesta por Tonetti, Greenwell y Kornman en el World Workshop 2017 usa la pérdida ósea radiográfica expresada en relación con la longitud de la raíz. En términos generales, una pérdida limitada al tercio coronal y menor de 15 % orienta a estadio I, de 15 a 33 % a estadio II, y una pérdida que se extiende al tercio medio o más allá orienta a estadios III o IV, que además consideran la pérdida de dientes por periodontitis y la complejidad del tratamiento. Por eso el cálculo que acabas de practicar no es un ejercicio aislado: entender la anatomía de la raíz y del hueso alveolar es la base para interpretar esa clasificación, que estudiarás a fondo en un programa de periodoncia."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m07/15",
+          "proporcion": "4:3",
+          "alt": "Manos enguantadas colocan papel de articular entre los dientes posteriores de un modelo articulado.",
+          "pie": "El papel de articular revela los contactos oclusales que pueden sobrecargar el periodonto de un diente.",
+          "prompt": "Fotografía clínica realista de primer plano, modelos de yeso de arcadas permanentes superior e inferior montados en un articulador semiajustable, unas manos con guantes de nitrilo azul sostienen con pinzas una tira delgada de papel de articular de color azul entre los molares, mesa de laboratorio dental limpia, iluminación blanca difusa, fondo desenfocado, colores naturales, enfoque nítido en los molares. Evitar: texto, números, logotipos, marcas comerciales, rostros, manos sin guantes, dientes deformes, modelos rotos, desorden."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** al revisar la movilidad, hazlo siempre con dos mangos de instrumentos y registra el grado de Miller en el odontograma de cada diente con movilidad aumentada. Si encuentras movilidad, pregúntate en orden: ¿hay pérdida de soporte?, ¿hay inflamación?, ¿hay una fuerza excesiva? Esta secuencia, basada en la anatomía del periodonto de inserción, te ayudará a no confundir un problema oclusal con uno periodontal o endodóntico."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Movilidad fisiológica",
+          "definicion": "Desplazamiento mínimo y reversible de un diente sano dentro de su alvéolo ante una fuerza."
+        },
+        {
+          "termino": "Índice de Miller",
+          "definicion": "Escala clínica de 0 a 3 que gradúa la movilidad dentaria según la amplitud y dirección del desplazamiento."
+        },
+        {
+          "termino": "Hialinización",
+          "definicion": "Necrosis estéril del ligamento en el lado de presión cuando la fuerza ortodóncica es excesiva."
+        },
+        {
+          "termino": "Reabsorción socavante",
+          "definicion": "Reabsorción del hueso alveolar desde los espacios medulares, por detrás de una zona hialinizada."
+        },
+        {
+          "termino": "Trauma oclusal",
+          "definicion": "Lesión del aparato de inserción causada por fuerzas oclusales que superan su capacidad de adaptación."
+        },
+        {
+          "termino": "Frémito",
+          "definicion": "Vibración palpable de un diente cuando el paciente ocluye o realiza movimientos mandibulares."
+        },
+        {
+          "termino": "Sobreerupción",
+          "definicion": "Desplazamiento de un diente sin antagonista hacia el espacio oclusal vacío."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t7.5-1",
+          "q": "En el movimiento ortodóncico, ¿qué ocurre en el lado de tensión del ligamento?",
+          "opciones": [
+            "Se forma una zona de hialinización",
+            "Los osteoclastos reabsorben la pared del alvéolo",
+            "Los osteoblastos depositan hueso nuevo",
+            "El ligamento desaparece y el diente se anquilosa"
+          ],
+          "correcta": 2,
+          "explicacion": "En el lado de tensión las fibras se estiran y estimulan la aposición ósea; la reabsorción y la hialinización ocurren en el lado de presión."
+        },
+        {
+          "id": "t7.5-2",
+          "q": "Un diente cuya corona se desplaza más de 1 mm en sentido horizontal y además se hunde al presionarlo tiene movilidad de grado:",
+          "opciones": [
+            "1",
+            "2",
+            "0",
+            "3"
+          ],
+          "correcta": 3,
+          "explicacion": "El grado 3 de Miller incluye desplazamiento horizontal mayor de 1 mm o movilidad vertical."
+        },
+        {
+          "id": "t7.5-3",
+          "q": "¿Qué concluyó el consenso del World Workshop 2017 sobre las fuerzas oclusales traumáticas?",
+          "opciones": [
+            "No inician la periodontitis ni causan pérdida de inserción por sí mismas",
+            "Son la causa principal de la periodontitis",
+            "Producen siempre recesión gingival",
+            "Solo afectan a dientes temporales"
+          ],
+          "correcta": 0,
+          "explicacion": "El consenso señaló que estas fuerzas pueden causar movilidad adaptativa, pero no inician la periodontitis ni provocan pérdida de inserción por sí solas."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Occlusal trauma and excessive occlusal forces: Narrative review, case definitions, and diagnostic considerations",
+          "autor": "Fan J., Caton J. G. (Journal of Clinical Periodontology)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Staging and grading of periodontitis: Framework and proposal of a new classification and case definition",
+          "autor": "Tonetti M. S., Greenwell H., Kornman K. S. (Journal of Clinical Periodontology)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Periodontología clínica e implantología odontológica",
+          "autor": "Lindhe J., Lang N. P. et al. (Editorial Médica Panamericana)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Contemporary Orthodontics",
+          "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en el índice de movilidad de Miller y textos de periodontología",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el periodonto de inserción",
+    "palabras": [
+      "LIGAMENTO",
+      "CEMENTO",
+      "SHARPEY",
+      "ALVEOLO",
+      "OBLICUAS",
+      "APICALES",
+      "FIBROBLASTO",
+      "MALASSEZ",
+      "GONFOSIS",
+      "LAMINADURA",
+      "ANQUILOSIS",
+      "FENESTRACION"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m07-p01",
+        "q": "¿Qué estructuras forman el periodonto de inserción?",
+        "opciones": [
+          "Cemento radicular, ligamento periodontal y hueso alveolar propio",
+          "Encía libre, encía insertada y mucosa alveolar",
+          "Esmalte, dentina y pulpa",
+          "Encía, unión dentogingival y cemento"
+        ],
+        "correcta": 0,
+        "explicacion": "El aparato de inserción lo forman cemento, ligamento y hueso alveolar propio. Encía y unión dentogingival integran el periodonto de protección."
+      },
+      {
+        "id": "m07-p02",
+        "q": "¿Cuál es el ancho promedio aproximado del ligamento periodontal en un adulto?",
+        "opciones": [
+          "0.02 mm",
+          "2 mm",
+          "0.2 mm",
+          "1.5 mm"
+        ],
+        "correcta": 2,
+        "explicacion": "Las mediciones histológicas clásicas lo sitúan entre 0.15 y 0.38 mm, con un promedio cercano a 0.2 mm."
+      },
+      {
+        "id": "m07-p03",
+        "q": "¿Qué grupo de fibras va del cemento, justo por debajo de la unión amelocementaria, a la cresta alveolar y se opone a la extrusión del diente?",
+        "opciones": [
+          "Apicales",
+          "Crestoalveolares",
+          "Interradiculares",
+          "Oblicuas"
+        ],
+        "correcta": 1,
+        "explicacion": "Las fibras crestoalveolares resisten la extrusión y los movimientos laterales. Las oblicuas soportan sobre todo las fuerzas verticales."
+      },
+      {
+        "id": "m07-p04",
+        "q": "¿Qué son las fibras de Sharpey?",
+        "opciones": [
+          "Fibras elásticas inmaduras paralelas a la raíz",
+          "Fibras nerviosas que conducen el dolor",
+          "Fibras gingivales que unen dientes vecinos",
+          "Extremos de las fibras de colágena del ligamento incluidos y mineralizados en el cemento o el hueso"
+        ],
+        "correcta": 3,
+        "explicacion": "Las fibras de Sharpey son la porción de las fibras principales anclada dentro del cemento y del hueso alveolar propio."
+      },
+      {
+        "id": "m07-p05",
+        "q": "¿Cuál es la célula más abundante del ligamento periodontal?",
+        "opciones": [
+          "Osteoclasto",
+          "Cementoblasto",
+          "Fibroblasto",
+          "Macrófago"
+        ],
+        "correcta": 2,
+        "explicacion": "El fibroblasto predomina y sintetiza y degrada la colágena, lo que permite el recambio rápido del tejido."
+      },
+      {
+        "id": "m07-p06",
+        "q": "Un paciente con buen soporte óseo recibió hace dos semanas una restauración en un premolar que ahora duele al morder, tiene movilidad aumentada y muestra en la radiografía un espacio del ligamento ensanchado. La restauración hace contacto antes que los demás dientes. ¿Qué es lo más probable?",
+        "opciones": [
+          "Trauma oclusal primario",
+          "Trauma oclusal secundario",
+          "Anquilosis dentoalveolar",
+          "Fenestración del hueso vestibular"
+        ],
+        "correcta": 0,
+        "explicacion": "Una fuerza excesiva sobre un periodonto con soporte normal produce trauma oclusal primario; el secundario ocurre con soporte reducido."
+      },
+      {
+        "id": "m07-p07",
+        "q": "En una radiografía periapical, ¿qué estructura corresponde a la lámina dura?",
+        "opciones": [
+          "El cemento celular apical",
+          "La cortical vestibular",
+          "El espacio del ligamento periodontal",
+          "El hueso alveolar propio"
+        ],
+        "correcta": 3,
+        "explicacion": "La lámina dura es la línea radiopaca delgada que representa al hueso alveolar propio; el espacio radiolúcido contiguo es el ligamento."
+      },
+      {
+        "id": "m07-p08",
+        "q": "¿Por qué un implante oseointegrado no puede moverse con ortodoncia como un diente natural?",
+        "opciones": [
+          "Porque su corona es de un material más duro",
+          "Porque no tiene ligamento periodontal que permita la remodelación de presión y tensión",
+          "Porque el hueso que lo rodea no tiene osteoclastos",
+          "Porque está cubierto de cemento celular"
+        ],
+        "correcta": 1,
+        "explicacion": "El movimiento ortodóncico depende de la respuesta del ligamento; el implante está en contacto directo con el hueso, sin ligamento."
+      },
+      {
+        "id": "m07-p09",
+        "q": "Una niña de 3 años se cae y un incisivo central superior temporal sale completo de su alvéolo. ¿Cuál es la conducta adecuada?",
+        "opciones": [
+          "Reimplantarlo de inmediato en el lugar del accidente",
+          "Conservarlo en leche para reimplantarlo en el consultorio",
+          "No reimplantarlo y llevar a la niña a valoración odontológica",
+          "Cepillar la raíz y reimplantarlo al día siguiente"
+        ],
+        "correcta": 2,
+        "explicacion": "Los dientes temporales avulsionados no se reimplantan porque podría dañarse el germen del permanente; la niña debe ser valorada."
+      },
+      {
+        "id": "m07-p10",
+        "q": "¿Qué porción del hueso alveolar se reabsorbe tras una extracción porque depende de la presencia del diente?",
+        "opciones": [
+          "El hueso fasciculado",
+          "El hueso basal de la mandíbula",
+          "La línea oblicua externa",
+          "La sínfisis mandibular"
+        ],
+        "correcta": 0,
+        "explicacion": "El hueso fasciculado existe para anclar las fibras del ligamento; tras la extracción se reabsorbe, sobre todo en la pared vestibular."
+      },
+      {
+        "id": "m07-p11",
+        "q": "¿Qué es una fenestración?",
+        "opciones": [
+          "Ausencia de hueso que incluye el borde marginal del alvéolo",
+          "Ventana de hueso ausente sobre la raíz con el borde marginal intacto",
+          "Ensanchamiento del espacio del ligamento",
+          "Fusión del diente con el hueso"
+        ],
+        "correcta": 1,
+        "explicacion": "En la fenestración el borde marginal se conserva; cuando también falta, se trata de una dehiscencia."
+      },
+      {
+        "id": "m07-p12",
+        "q": "¿De qué estructura del germen dentario derivan el cemento, el ligamento y el hueso alveolar propio?",
+        "opciones": [
+          "Del retículo estrellado",
+          "De la papila dental",
+          "Del epitelio interno del órgano del esmalte",
+          "Del folículo dental"
+        ],
+        "correcta": 3,
+        "explicacion": "Las células del folículo, de origen ectomesenquimatoso, se diferencian en cementoblastos, fibroblastos y osteoblastos."
+      },
+      {
+        "id": "m07-p13",
+        "q": "Si una fuerza ortodóncica es excesiva, ¿qué sucede en el lado de presión?",
+        "opciones": [
+          "Se forma una zona de hialinización y el hueso se reabsorbe desde los espacios medulares",
+          "Aumenta la aposición ósea y el movimiento se acelera",
+          "El ligamento se ensancha y las fibras se estiran",
+          "Se forman nuevas fibras de Sharpey en el cemento"
+        ],
+        "correcta": 0,
+        "explicacion": "La compresión intensa produce necrosis estéril del ligamento (hialinización) y reabsorción socavante, que retrasa el movimiento."
+      },
+      {
+        "id": "m07-p14",
+        "q": "¿Qué estructura origina el revestimiento epitelial del quiste radicular?",
+        "opciones": [
+          "La lámina dental",
+          "El epitelio de unión",
+          "Los restos epiteliales de Malassez",
+          "El epitelio reducido del esmalte"
+        ],
+        "correcta": 2,
+        "explicacion": "La inflamación periapical estimula la proliferación de los restos de Malassez, derivados de la vaina de Hertwig."
+      },
+      {
+        "id": "m07-p15",
+        "q": "Un paciente perdió hace tres años el primer molar inferior y no lo reemplazó. El primer molar superior se ve desplazado hacia el espacio vacío. ¿Cómo se llama este fenómeno?",
+        "opciones": [
+          "Migración mesial fisiológica",
+          "Anquilosis",
+          "Trauma oclusal secundario",
+          "Sobreerupción por falta de antagonista"
+        ],
+        "correcta": 3,
+        "explicacion": "Sin antagonista, el diente tiende a sobreerupcionar y arrastra el proceso alveolar; el ligamento se estrecha por hipofunción."
+      },
+      {
+        "id": "m07-p16",
+        "q": "¿Qué tipo de mecanorreceptor del ligamento se describe como el más característico para detectar el desplazamiento del diente?",
+        "opciones": [
+          "Corpúsculos de Pacini de la piel",
+          "Terminaciones de tipo Ruffini",
+          "Husos neuromusculares",
+          "Bastones y conos"
+        ],
+        "correcta": 1,
+        "explicacion": "Las terminaciones de tipo Ruffini del ligamento detectan la magnitud y dirección de las fuerzas; las terminaciones libres conducen el dolor."
+      },
+      {
+        "id": "m07-p17",
+        "q": "En una radiografía, el fondo de un defecto óseo está a 6 mm de la unión amelocementaria en una raíz de 15 mm. ¿Qué porcentaje aproximado de la raíz ha perdido soporte, sin restar la distancia fisiológica?",
+        "opciones": [
+          "4 %",
+          "15 %",
+          "40 %",
+          "90 %"
+        ],
+        "correcta": 2,
+        "explicacion": "6 ÷ 15 × 100 = 40 %. Una pérdida así sobrepasa el tercio coronal de la raíz."
+      },
+      {
+        "id": "m07-p18",
+        "q": "¿Dónde suele ser más estrecho el ligamento periodontal?",
+        "opciones": [
+          "En el tercio medio de la raíz, cerca del fulcro",
+          "Junto a la cresta alveolar",
+          "Alrededor del ápice",
+          "En toda la raíz por igual"
+        ],
+        "correcta": 0,
+        "explicacion": "El ligamento tiene forma de reloj de arena: más ancho en la cresta y el ápice y más estrecho a la mitad de la raíz."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Periodontología clínica e implantología odontológica",
+      "autor": "Lindhe J., Lang N. P. et al. (Editorial Médica Panamericana)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Newman and Carranza's Clinical Periodontology",
+      "autor": "Newman M. G., Takei H. H., Klokkevold P. R., Carranza F. A. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Dimensional ridge alterations following tooth extraction. An experimental study in the dog",
+      "autor": "Araújo M. G., Lindhe J. (Journal of Clinical Periodontology)",
+      "anio": 2005
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Occlusal trauma and excessive occlusal forces: Narrative review, case definitions, and diagnostic considerations",
+      "autor": "Fan J., Caton J. G. (Journal of Clinical Periodontology)",
+      "anio": 2018
+    }
+  ]
+}

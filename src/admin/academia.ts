@@ -3,7 +3,7 @@
 // cuenta el "estado" escrito en el JSON. Solo "aprobado" se publica.
 import { createIcons, icons } from 'lucide';
 import { adminHead } from './shell';
-import { cargarRevisionAcademia, revisarModulo, type EstadoRevision, type ProgramaRevision } from '../core/academia';
+import { alternarModoRevisorDemo, cargarRevisionAcademia, modoRevisorDemo, revisarModulo, type EstadoRevision, type ProgramaRevision } from '../core/academia';
 import { mensajeError } from '../core/auth';
 import { Datos } from '../core/datos';
 import { esc } from '../ui/partials';
@@ -29,7 +29,7 @@ export async function adminAcademia() {
       <div class="card card--pad"><span class="eyebrow">En revisión</span><div class="display" style="font-size:var(--fs-xl)">${enRevision}</div></div>
       <div class="card card--pad"><span class="eyebrow">Publicados</span><div class="display" style="font-size:var(--fs-xl)">${aprobados}</div></div>
     </div>
-    ${Datos.modo === 'demo' ? `<p class="faint" style="font-size:var(--fs-xs)">${ic('flask-conical')} Demo: las decisiones se guardan en este navegador y no publican nada.</p>` : ''}
+    ${Datos.modo === 'demo' ? `<div class="row" style="justify-content:space-between;gap:12px;flex-wrap:wrap"><p class="faint" style="font-size:var(--fs-xs);margin:0">${ic('flask-conical')} Demo: las decisiones se guardan en este navegador y no publican nada.</p><button type="button" class="btn ${modoRevisorDemo() ? 'btn--brand' : 'btn--secondary'} btn--sm" data-ac-modo-revisor aria-pressed="${modoRevisorDemo()}">${ic(modoRevisorDemo() ? 'unlock' : 'lock')}Modo revisor: ${modoRevisorDemo() ? 'todos los módulos abiertos' : 'desactivado'}</button></div>` : ''}
     ${programas.map((p) => `
     <details class="card ac-admin__prog" ${p.modulos.some((m) => m.existe) ? 'open' : ''}>
       <summary><span><strong>${p.numero ? `${String(p.numero).padStart(2, '0')} · ` : ''}${esc(p.titulo)}</strong><small class="faint">${esc(p.area)} · ${p.modulos.filter((m) => m.existe).length} de ${p.modulos.length} escritos · ${p.modulos.filter((m) => m.estado === 'aprobado').length} aprobados</small></span>${ic('chevron-down')}</summary>
@@ -62,6 +62,12 @@ export function montarAdminAcademia(toast: (msg: string, icon?: string) => void,
   if (!root) return;
   abortar = new AbortController();
   root.addEventListener('click', async (e) => {
+    if ((e.target as HTMLElement).closest('[data-ac-modo-revisor]')) {
+      alternarModoRevisorDemo();
+      toast(modoRevisorDemo() ? 'Modo revisor activado: puedes leer todos los módulos' : 'Modo revisor desactivado', modoRevisorDemo() ? 'unlock' : 'lock');
+      repintar();
+      return;
+    }
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-ac-revisar]');
     if (!b) return;
     const fila = b.closest<HTMLElement>('[data-ac-fila]')!;

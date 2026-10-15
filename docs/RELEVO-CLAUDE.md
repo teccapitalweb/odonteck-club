@@ -61,7 +61,7 @@ Demo local sin `VITE_API_URL`:
 Lectura por módulos tipo Cisco Academy, réplica de la de Élite Pecuario con el diseño de OdonTeck. Plan y estándar en `docs/PLAN-ACADEMIA.md`, `docs/ACADEMIA-FORMATO.md` y `docs/ACADEMIA-BRIEF-AGENTES.md`.
 
 - **Catálogo:** 6 programas, 84 módulos (`api/content/academia/catalogo.json`).
-- **Piloto escrito:** `caries-dental` (12 módulos, todos en **borrador**). La lista de pendientes para el odontólogo revisor está en `docs/ACADEMIA-REVISION-CARIES.md`. Los otros 5 programas aún no tienen módulos.
+- **Escritos (borrador):** `caries-dental` (12 módulos, revisión en `docs/ACADEMIA-REVISION-CARIES.md`) y `anatomia-dental` (14 módulos, revisados por 3 agentes, pendientes en `docs/ACADEMIA-REVISION-ANATOMIA.md`). Los otros 4 programas aún no tienen módulos. En demo, Admin → Academia → «Modo revisor» abre todos los módulos.
 - **API:** `api/src/routes/academia.js`. Colecciones `v2_academia_progreso`, `v2_academia_intentos`, `v2_academia_certificados` y `v2_academia_revisiones`.
 - **Examen:** se califica en el servidor; aprueba con 70 % y hay una espera de 3 min tras reprobar.
 - **Acceso:** el módulo 1 de cada programa es gratuito; el resto requiere VIP.
