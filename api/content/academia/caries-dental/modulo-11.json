@@ -1,0 +1,929 @@
+{
+  "programa": "caries-dental",
+  "modulo": 11,
+  "titulo": "Caries radicular y salud bucal en personas mayores",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Cada vez más personas llegan a la vejez con sus propios dientes, y eso trae un desafío nuevo: la caries en las raíces que quedan expuestas cuando la encía se retrae. En este módulo conocerás cómo cambia la boca con los años, por qué la superficie radicular es tan vulnerable, cómo se diagnostica y se valora la actividad de una lesión radicular, qué factores aumentan el riesgo en personas mayores, cómo se previene y se maneja, y cómo adaptar la atención a quienes viven con enfermedades crónicas, deterioro cognitivo o dependencia, de acuerdo con la NOM-013-SSA2-2015.",
+  "objetivos": [
+    "Explicar por qué la superficie radicular expuesta es más susceptible a la caries que el esmalte.",
+    "Diagnosticar lesiones de caries radicular y valorar su actividad con criterios clínicos de textura, localización y relación con la placa.",
+    "Calcular e interpretar el Índice de Caries Radicular de una persona.",
+    "Identificar los factores de riesgo de caries radicular, incluida la hiposalivación asociada a medicamentos.",
+    "Proponer un plan preventivo y de manejo de la caries radicular basado en fluoruros y control de la biopelícula.",
+    "Adaptar las recomendaciones de higiene a personas mayores dependientes y a sus cuidadores."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m11/portada",
+    "proporcion": "16:9",
+    "alt": "Hombre mayor visto de espaldas en el sillón dental mientras una odontóloga con equipo de protección le muestra un cepillo interdental.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental moderno, limpio y luminoso. Un hombre de unos setenta y cinco años, de cabello cano, está sentado en el sillón dental y aparece de espaldas y ligeramente de perfil, sin mostrar su rostro. Frente a él, una odontóloga con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección le muestra con paciencia un cepillo interdental pequeño y un cepillo dental de mango grueso. Luz natural lateral cálida, ambiente respetuoso y tranquilo, colores naturales. Evitar: texto, letreros, logotipos, marcas de agua, rostro identificable del paciente, sangre, jeringas, instrumental punzante en primer plano, profesional sin equipo de protección."
+  },
+  "temas": [
+    {
+      "n": "11.1",
+      "titulo": "La boca que envejece: más dientes, nuevos riesgos",
+      "minutos": 12,
+      "enPocasPalabras": "Hoy muchas personas mayores conservan sus dientes, y eso es una buena noticia. Pero con los años la encía puede retraerse y dejar la raíz al descubierto, y esa raíz se pica con más facilidad que la corona. Perder los dientes no es algo normal de la edad: se puede prevenir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Durante generaciones se dio por hecho que envejecer significaba perder los dientes y usar dentadura completa. Esa idea está cambiando. Gracias a los fluoruros, a una mayor conciencia sobre la higiene y a la odontología restauradora, cada vez más personas llegan a los 60, 70 u 80 años con buena parte de su dentición natural. Es un logro de salud pública, pero trae consigo una nueva tarea para el equipo dental: **cuidar dientes que llevan décadas en boca**, con encías que se han retraído, restauraciones antiguas, raíces expuestas y una saliva que muchas veces ya no es la de antes.\n\nLa NOM-013-SSA2-2015 lo dice con claridad en su apartado para personas de 60 años y más: hay que **empoderar al paciente en relación a que la pérdida de los dientes no es consecuencia de la edad**. Los dientes se pierden por caries y por enfermedad periodontal, no por cumplir años."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/01",
+          "proporcion": "4:3",
+          "alt": "Sonrisa de una mujer mayor con dientes naturales, encía ligeramente retraída y raíces visibles en los caninos inferiores.",
+          "pie": "Dentición natural en una persona mayor: la recesión gingival deja expuesta parte de la raíz en algunos dientes.",
+          "prompt": "Fotografía clínica realista en primer plano de la boca de una mujer de unos setenta años sonriendo, encuadre que muestra solo los labios y los dientes, sin nariz ni ojos. Dientes naturales con ligero desgaste incisal y tono marfil, algunas restauraciones del color del diente, encía rosa pálido con recesión leve en caninos y premolares inferiores que deja ver una franja de raíz amarillenta, sin lesiones cavitadas evidentes. Iluminación de estudio suave y uniforme, fondo neutro, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro completo, sangre, encía inflamada, dientes artificialmente blancos, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Envejecimiento normal y enfermedad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Conviene separar lo que el tiempo hace por sí mismo de lo que es enfermedad. Con los años, el esmalte se desgasta un poco, la dentina se vuelve más esclerótica y la cámara pulpar se reduce por depósito de dentina secundaria; por eso muchos dientes de personas mayores responden menos a los estímulos y se ven más amarillos. Estos cambios, por sí solos, no causan caries.\n\nLo que sí aumenta el riesgo son las condiciones que se acumulan con la edad: la **recesión gingival**, que expone la raíz; la **pérdida de inserción periodontal** previa; las **restauraciones** con márgenes envejecidos; la disminución de la **destreza manual** y de la visión; las **enfermedades crónicas** y los **medicamentos** que reducen la saliva; y cambios en la alimentación. Ninguno es inevitable, y todos pueden atenuarse con un plan preventivo bien diseñado.\n\nLa salud bucal en la vejez también tiene consecuencias más allá de la boca. La propia NOM-013-SSA2-2015 advierte que la deficiente higiene bucal y las complicaciones de enfermedades sistémicas llevan a la pérdida de dientes, que a su vez provoca **malnutrición**. Una persona que no puede masticar bien evita la carne, las verduras crudas y la fruta, y tiende a preferir alimentos blandos y con frecuencia más ricos en azúcares."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m11/d1",
+          "pie": "Cómo la recesión gingival expone la superficie radicular al ambiente bucal.",
+          "descripcion": "Dos cortes longitudinales esquemáticos de un premolar inferior lado a lado. A la izquierda, un diente con periodonto sano: la encía cubre la unión cemento-esmalte y la raíz queda dentro del hueso y la encía. A la derecha, el mismo diente con recesión gingival: el margen de la encía se desplazó hacia apical y deja expuesta una franja de cemento y dentina radicular, donde una mancha de biopelícula se acumula junto al nuevo margen gingival. Etiquetas con líneas guía.",
+          "elementos": ["Esmalte", "Unión cemento-esmalte", "Cemento", "Dentina radicular", "Margen gingival sano", "Margen gingival con recesión", "Raíz expuesta", "Biopelícula"]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Lo que pide la NOM-013-SSA2-2015 para personas de 60 años y más",
+          "md": "El apéndice normativo de la NOM-013-SSA2-2015 incluye acciones específicas para este grupo de edad: fomentar el autocuidado y la autoexploración, promover el cuidado, la revisión y la higiene de las **prótesis dentales**, informar que la pérdida de dientes no es consecuencia del envejecimiento, y que el profesional realice la valoración bucal integral, la remoción de depósitos dentarios, la **aplicación de fluoruros tópicos en gel y barniz en caries dental radicular** y la aplicación de selladores o barnices con fluoruro en la exposición dentinaria y la unión esmalte-cemento, previa valoración del caso."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una población que crece"
+        },
+        {
+          "tipo": "texto",
+          "md": "México, como el resto de América Latina, vive un proceso de envejecimiento acelerado de su población. Esto significa que en los próximos años los consultorios atenderán a más personas mayores con dientes naturales, más restauraciones y más enfermedades crónicas que requerirán coordinación con su médico. Para consultar cifras actualizadas sobre la población adulta mayor, la fuente nacional de referencia es el Instituto Nacional de Estadística y Geografía (INEGI).\n\nEn el plano internacional, la Organización Mundial de la Salud adoptó en 2021 una resolución sobre salud bucodental y en 2023 el **Plan de acción mundial sobre salud bucodental 2023–2030**, que pide integrar la salud bucal en la atención primaria a lo largo de toda la vida, incluida la vejez. El reto ya no es solo extraer dientes dañados, sino conservar una boca funcional el mayor tiempo posible.\n\nEl *Informe sobre la situación mundial de la salud bucodental* de la OMS (2022) recuerda que la caries no tratada en dientes permanentes es la condición de salud más común del mundo y que la enfermedad periodontal grave, una de las principales causas de pérdida dental en adultos, afecta a alrededor de mil millones de personas. Ambas se acumulan con los años, y por eso la vejez concentra sus consecuencias: dientes perdidos, prótesis, dolor y dificultad para comer. La prevención que se haga a los 50 y 60 años decide en buena medida la boca que se tendrá a los 80."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La campaña «8020»",
+          "md": "En 1989, Japón lanzó la campaña **«8020»**, impulsada por su Ministerio de Salud y la Asociación Dental Japonesa, con una meta sencilla de recordar: conservar al menos **20 dientes naturales a los 80 años**. Se eligió ese número porque con alrededor de 20 dientes una persona suele masticar la mayoría de los alimentos sin prótesis. La campaña se volvió un ejemplo internacional de cómo una meta clara puede orientar la prevención durante toda la vida."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/02",
+          "proporcion": "3:4",
+          "alt": "Manos de una persona mayor sosteniendo un cepillo dental de mango grueso sobre un lavabo.",
+          "pie": "Los cambios en la destreza manual hacen necesario adaptar los instrumentos de higiene, por ejemplo con mangos más gruesos.",
+          "prompt": "Fotografía realista vertical en un baño doméstico limpio con luz natural suave de ventana. Encuadre cerrado sobre las manos de una persona de unos ochenta años, con piel arrugada y articulaciones algo engrosadas, que sostienen con firmeza un cepillo dental de mango grueso y antideslizante sobre un lavabo blanco. Al lado, un vaso con agua y un cepillo interdental pequeño. No se ve el rostro. Tonos cálidos y naturales, profundidad de campo corta con foco en las manos. Evitar: texto, logotipos, marcas comerciales, empaques, marcas de agua, rostro, sangre, suciedad, colores saturados artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La primera consulta de una persona mayor"
+        },
+        {
+          "tipo": "texto",
+          "md": "La primera cita de un paciente mayor necesita más tiempo que la de un adulto joven, y vale la pena dárselo. La NOM-013-SSA2-2015 pide, para este grupo, **tomar signos vitales y somatometría en cada consulta** y realizar la valoración bucal integral, que incluye la historia de la dieta, el **uso de fármacos**, la detección de placa, el examen de la mucosa, del reborde alveolar y de la dimensión vertical, y los aspectos funcionales y estéticos.\n\nEn la práctica, conviene que tu historia clínica responda además preguntas que en otros pacientes pasarían de largo: ¿quién lo acompaña y quién lo ayuda en casa?, ¿puede sujetar un cepillo y ver bien lo que hace?, ¿usa prótesis y duerme con ella?, ¿siente la boca seca?, ¿ha perdido peso o evita algunos alimentos? Las respuestas te dirán tanto como el odontograma."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Lo que no puede faltar en la valoración de una persona mayor",
+          "items": [
+            "Lista completa de medicamentos, incluidos los de venta libre y los suplementos.",
+            "Registro de superficies radiculares expuestas y lesiones con su actividad.",
+            "Estado, ajuste e higiene de las prótesis, y de la mucosa que las soporta.",
+            "Examen de toda la mucosa bucal en busca de lesiones blancas, rojas o úlceras persistentes.",
+            "Capacidad de autocuidado: destreza, visión, memoria y apoyo de un cuidador.",
+            "Cambios recientes en la alimentación o en el peso."
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad sobre la boca en la vejez",
+          "afirmaciones": [
+            { "texto": "Perder los dientes es una consecuencia normal de envejecer.", "verdadero": false, "explicacion": "Los dientes se pierden por caries y enfermedad periodontal. La NOM-013-SSA2-2015 pide explicar que la pérdida dental no es consecuencia de la edad." },
+            { "texto": "La recesión gingival deja expuesta una superficie más vulnerable a la caries.", "verdadero": true, "explicacion": "El cemento y la dentina radicular tienen menos mineral que el esmalte y se desmineralizan a un pH más alto." },
+            { "texto": "Las personas mayores ya no necesitan pasta con flúor porque sus dientes son viejos.", "verdadero": false, "explicacion": "El flúor es uno de los principales factores protectores contra la caries radicular a cualquier edad." },
+            { "texto": "Comer peor por falta de dientes puede llevar a malnutrición.", "verdadero": true, "explicacion": "La norma advierte que la pérdida dental puede provocar malnutrición al limitar la dieta." },
+            { "texto": "Una persona con dentadura parcial removible no necesita revisiones dentales.", "verdadero": false, "explicacion": "Los dientes que sostienen la prótesis acumulan biopelícula y requieren control; la prótesis también debe revisarse." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "En cada paciente de 60 años o más, registra en el odontograma qué dientes tienen **raíz expuesta** y en qué superficies. Esa lista es tu mapa de riesgo: ahí es donde aparecerán las lesiones radiculares y donde concentrarás la prevención. Explícale al paciente, con un espejo de mano, dónde están esas zonas para que también él las cuide."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/03",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con equipo de protección muestra a una paciente mayor, vista de espaldas, sus dientes en un espejo de mano.",
+          "pie": "Mostrar al paciente sus raíces expuestas con un espejo de mano lo convierte en aliado de la prevención.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental bien iluminado. Una mujer de unos setenta años, de cabello gris recogido, está sentada en el sillón dental y aparece de espaldas, sosteniendo un espejo de mano a la altura de su boca; su reflejo no se distingue. A su lado, un odontólogo con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección señala con un dedo enguantado hacia el espejo mientras le explica. Luz neutra y suave, ambiente cordial, colores naturales. Evitar: texto, letreros, logotipos, marcas de agua, rostro identificable de la paciente, reflejo nítido del rostro, sangre, instrumental punzante, profesional sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Recesión gingival", "definicion": "Desplazamiento del margen de la encía hacia la raíz, que deja expuesta parte de la superficie radicular." },
+        { "termino": "Unión cemento-esmalte", "definicion": "Línea donde termina el esmalte de la corona y comienza el cemento de la raíz." },
+        { "termino": "Dentina secundaria", "definicion": "Dentina que se forma lentamente durante toda la vida y reduce el tamaño de la cámara pulpar." },
+        { "termino": "Dentina esclerótica", "definicion": "Dentina con túbulos parcialmente obliterados por mineral; es más dura y menos permeable." },
+        { "termino": "Dentición funcional", "definicion": "Conjunto de dientes naturales suficiente para masticar la mayoría de los alimentos sin prótesis." }
+      ],
+      "verificacion": [
+        {
+          "id": "t11.1-1",
+          "q": "Según la NOM-013-SSA2-2015, ¿qué mensaje se debe dar a las personas mayores sobre la pérdida de dientes?",
+          "opciones": ["Que es inevitable después de los 60 años", "Que solo se evita con implantes", "Que no es consecuencia del envejecimiento", "Que depende únicamente de la genética"],
+          "correcta": 2,
+          "explicacion": "La norma pide empoderar al paciente: la pérdida dental se debe a enfermedades prevenibles, no a la edad."
+        },
+        {
+          "id": "t11.1-2",
+          "q": "¿Cuál es la condición que expone la superficie radicular al ambiente bucal?",
+          "opciones": ["La recesión gingival", "La formación de dentina secundaria", "La fluorosis", "La erupción pasiva del esmalte"],
+          "correcta": 0,
+          "explicacion": "Al retraerse la encía, la raíz queda expuesta a la biopelícula y a los ácidos."
+        },
+        {
+          "id": "t11.1-3",
+          "q": "¿Qué propone la campaña japonesa «8020»?",
+          "opciones": ["Cepillarse 8 veces al día durante 20 segundos", "Visitar al dentista 8 veces en 20 años", "Reducir 80 % el azúcar en 20 años", "Conservar al menos 20 dientes naturales a los 80 años"],
+          "correcta": 3,
+          "explicacion": "Su meta es mantener al menos 20 dientes naturales a los 80 años, lo que suele permitir una masticación funcional."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (Apéndice A.12, personas de 60 años y más)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Global strategy and action plan on oral health 2023–2030", "autor": "Organización Mundial de la Salud", "anio": 2024 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la literatura de odontogeriatría sobre cambios bucales asociados a la edad y la campaña 8020", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "11.2",
+      "titulo": "Caries radicular: qué es y cómo se diagnostica",
+      "minutos": 13,
+      "enPocasPalabras": "La caries radicular es la que aparece en la raíz del diente cuando queda expuesta. Suele verse como una mancha amarilla o café junto a la encía. El dentista revisa si está blanda o dura para saber si está activa y decidir qué hacer.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **caries radicular** es la lesión de caries que se desarrolla en la superficie de la raíz expuesta, en el cemento y la dentina subyacente. Comparte el mismo proceso que ya conoces, una biopelícula que produce ácidos a partir de los azúcares y un desequilibrio sostenido entre desmineralización y remineralización, pero ocurre en un tejido muy distinto del esmalte. Por eso se ve diferente, progresa diferente y se diagnostica con criterios propios."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Un tejido más vulnerable"
+        },
+        {
+          "tipo": "texto",
+          "md": "El esmalte es el tejido más mineralizado del cuerpo: alrededor del 96 % de su peso es mineral. La dentina tiene cerca del 70 % de mineral y una matriz orgánica abundante, sobre todo colágeno, y el cemento que la cubre en la raíz es todavía menos mineralizado y muy delgado en la zona cervical. Además, los cristales de la dentina y del cemento son más pequeños y tienen más impurezas, como carbonato, lo que los hace más solubles.\n\nEl resultado práctico es que la superficie radicular empieza a desmineralizarse con un ácido más débil. Se suele citar un **pH crítico** de alrededor de 6.0 a 6.7 para la dentina radicular, frente a cerca de 5.5 para el esmalte. Una exposición a azúcares que apenas afectaría a una corona puede ser suficiente para dañar una raíz expuesta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Más allá del mineral: el papel del colágeno",
+          "md": "En el esmalte, la caries es esencialmente un proceso de disolución mineral. En la dentina y el cemento, una vez que el ácido retira el mineral, queda expuesta la **matriz de colágeno tipo I**. Esa matriz puede degradarse por enzimas bacterianas y por enzimas propias del huésped, como las **metaloproteinasas de la matriz** y las catepsinas, que se activan en el medio ácido. Cuando el colágeno se degrada, la superficie pierde la base sobre la cual podría volver a depositarse mineral, y la lesión se vuelve blanda y difícil de detener.\n\nPor eso el manejo de la caries radicular busca no solo aportar fluoruro para favorecer la remineralización, sino también **controlar la biopelícula** para que el ambiente deje de ser ácido. Las superficies que se mantienen limpias y expuestas a fluoruro tienden a endurecerse y a oscurecerse con el tiempo, un proceso que la literatura describe como detención de la lesión. Este doble componente, mineral y orgánico, explica por qué las lesiones radiculares inactivas pueden ser duras y lisas aunque tengan un color oscuro."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo se ve una lesión radicular"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las lesiones radiculares suelen aparecer **junto al margen gingival** o muy cerca de la unión cemento-esmalte, en las caras vestibulares y, con mucha frecuencia, en las **proximales**, donde la higiene es más difícil. Tienden a extenderse **a lo ancho** más que en profundidad, y pueden rodear el cuello del diente. Su color va del amarillo claro al café oscuro o negro, y sus bordes suelen ser poco definidos.\n\nPara valorar la **actividad** de la lesión, el color es engañoso: una lesión oscura puede estar activa y una clara puede estar detenida. Lo que más ayuda es la **textura** al deslizar con suavidad una sonda de punta roma, la **localización** respecto de la encía y la presencia de **placa** encima. Recuerda que en la raíz no hay esmalte que proteger de la presión, pero aun así la exploración debe ser suave para no dañar la superficie."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Criterios clínicos de actividad en la caries radicular",
+          "columnas": ["Criterio", "Lesión probablemente activa", "Lesión probablemente detenida"],
+          "filas": [
+            ["Textura con sonda roma", "Blanda o correosa", "Dura, como la dentina sana"],
+            ["Superficie", "Mate, rugosa", "Lisa y brillante"],
+            ["Localización", "Junto al margen gingival, cubierta por placa", "Alejada del margen gingival, sin placa"],
+            ["Color", "Amarillo a café claro, poco confiable", "Café oscuro o negro, poco confiable por sí solo"]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/04",
+          "proporcion": "4:3",
+          "alt": "Lesión de caries radicular amarillenta y mate en la cara vestibular de un canino inferior, junto al margen de la encía.",
+          "pie": "Lesión radicular de aspecto activo: amarillenta, mate y junto al margen gingival, en una raíz expuesta por recesión.",
+          "prompt": "Fotografía clínica macro de la cara vestibular de un canino inferior permanente de una persona de unos setenta años, con recesión gingival que deja expuestos unos tres milímetros de raíz. Justo debajo de la unión cemento-esmalte y junto al margen de la encía se observa una lesión poco profunda, ancha y alargada, de color amarillo-café claro, superficie mate y bordes difusos, con una delgada capa de placa blanquecina en el borde. Encía rosa sin sangrado. Labio inferior retraído con suavidad por un espejo sostenido con guante de nitrilo. Iluminación de lámpara dental neutra. Evitar: texto, flechas, logotipos, marcas de agua, sangre, pus, rostro, dientes deformes, mano sin guante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "ICDAS para superficies radiculares y radiografías"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sistema **ICDAS** que estudiaste en el módulo 4 tiene una escala específica para superficies radiculares, más corta que la coronal: **código 0** para una superficie radicular sana; **código 1** para un cambio de color bien definido sin pérdida de superficie o con una pérdida menor de 0.5 mm; y **código 2** para una lesión con **cavitación** de 0.5 mm o más. Las superficies sin raíz expuesta se registran como excluidas. A cada lesión se le añade la valoración de actividad con los criterios de la tabla anterior.\n\nLas **radiografías de aleta de mordida** ayudan a detectar lesiones proximales radiculares que no se ven en la exploración. Pero cuidado con una trampa clásica: el **«quemado cervical»** (*cervical burnout*), una zona radiolúcida que aparece en el cuello de los dientes entre el borde del esmalte y la cresta ósea, porque ahí el tejido es más delgado y absorbe menos radiación. No es una lesión: se confirma con la exploración clínica y comparando con dientes vecinos."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m11/d2",
+          "pie": "Códigos ICDAS para superficies radiculares sobre un esquema de raíz expuesta.",
+          "descripcion": "Tres esquemas de la misma raíz expuesta vista de lado, ordenados de izquierda a derecha. En el primero, la superficie es lisa y de color uniforme. En el segundo, una mancha de color bien definido sin pérdida de contorno. En el tercero, una lesión con pérdida de sustancia y un escalón de profundidad marcado. Debajo de cada uno, su código y una regla esquemática que indica el umbral de 0.5 mm.",
+          "elementos": ["Código 0: superficie radicular sana", "Código 1: cambio de color sin cavidad o menor de 0.5 mm", "Código 2: cavitación de 0.5 mm o más", "Unión cemento-esmalte", "Margen gingival", "Umbral de 0.5 mm"]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Revisa debajo de las prótesis y alrededor de las restauraciones",
+          "md": "Las lesiones radiculares se esconden con facilidad bajo los ganchos de las prótesis parciales removibles y en los márgenes cervicales de coronas y restauraciones antiguas. Pide al paciente que retire su prótesis antes de la exploración, seca la zona con aire y usa buena luz. Una lesión radicular en el margen de una corona puede avanzar mucho antes de causar síntomas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/05",
+          "proporcion": "4:3",
+          "alt": "Lesión radicular oscura, lisa y brillante en un premolar inferior, alejada del margen de la encía.",
+          "pie": "Lesión radicular de aspecto detenido: oscura, lisa, brillante y separada del margen gingival.",
+          "prompt": "Fotografía clínica macro de la cara vestibular de un primer premolar inferior permanente de una persona mayor, con recesión gingival amplia. En la superficie radicular expuesta, a un par de milímetros del margen de la encía, se ve una lesión plana de color café oscuro casi negro, de superficie lisa y brillante que refleja la luz de la lámpara, sin placa encima. Encía rosa firme. Mejilla retraída con un espejo dental sostenido con guante de nitrilo. Iluminación de lámpara dental neutra, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, rostro, encía inflamada, dientes deformes, mano sin guante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "No todo defecto cervical es caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el cuello de los dientes de personas mayores también encontrarás **lesiones cervicales no cariosas**, que se confunden con caries radicular con frecuencia. La **abrasión** se debe a un cepillado vigoroso con cepillo duro o pasta muy abrasiva y forma un defecto en cuña o en plato, de superficie dura, lisa y brillante. La **erosión** por ácidos de la dieta o de origen gástrico deja superficies lisas, redondeadas y sin placa. Muchas lesiones combinan varios mecanismos de desgaste.\n\nLa diferencia clave es que estas lesiones son **duras**, **limpias** y no se asocian a biopelícula, mientras que la caries radicular activa es blanda o correosa y aparece bajo la placa. Distinguirlas cambia el plan: una abrasión pide corregir la técnica y el tipo de cepillo, no reforzar el control de azúcares. Y ambas pueden coexistir en el mismo diente, porque una superficie desgastada y expuesta también puede desarrollar caries si se acumula biopelícula."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Índice de Caries Radicular",
+          "instruccion": "El Índice de Caries Radicular, descrito por Katz, expresa qué porcentaje de las superficies radiculares expuestas tiene caries o restauración. Solo cuenta superficies con recesión gingival. Cambia los valores del caso de un paciente de 72 años y observa el resultado.",
+          "formula": "ICR = (superficies radiculares cariadas + obturadas) ÷ (cariadas + obturadas + sanas expuestas) × 100",
+          "variables": [
+            { "id": "cariadas", "etiqueta": "Superficies radiculares cariadas", "valor": 5, "unidad": "superficies" },
+            { "id": "obturadas", "etiqueta": "Superficies radiculares obturadas", "valor": 3, "unidad": "superficies" },
+            { "id": "sanas", "etiqueta": "Superficies radiculares expuestas sanas", "valor": 24, "unidad": "superficies" }
+          ],
+          "resultado": { "expresion": "(cariadas + obturadas) / (cariadas + obturadas + sanas) * 100", "etiqueta": "Índice de Caries Radicular", "unidad": "%", "decimales": 1 }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando encuentres una lesión radicular, no te quedes con el color: anota en el expediente su **textura**, su **distancia al margen gingival** y si tenía **placa**. En la siguiente cita repite la misma valoración. Que una lesión pase de blanda a dura es la mejor evidencia de que tu plan preventivo está funcionando."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/06",
+          "proporcion": "16:9",
+          "alt": "Manos con guantes deslizan una sonda de punta roma sobre una raíz expuesta mientras otra mano seca la zona con la jeringa de aire.",
+          "pie": "La textura se valora deslizando con suavidad una sonda de punta roma sobre la superficie radicular limpia y seca.",
+          "prompt": "Fotografía clínica realista horizontal, encuadre cerrado de la zona de premolares inferiores de una persona mayor con recesión gingival, labios y mejilla retraídos. Una mano con guante de nitrilo desliza con suavidad la punta roma de una sonda periodontal sobre una lesión amarillenta en la raíz expuesta, mientras otra mano enguantada dirige la jeringa triple de aire hacia la zona. Al borde del encuadre se ve la manga de una bata. Iluminación de lámpara dental neutra, enfoque nítido en la punta de la sonda. Evitar: texto, flechas, logotipos, marcas de agua, sangre, encía lacerada, rostro, explorador puntiagudo, manos sin guantes."
+        }
+      ],
+      "glosario": [
+        { "termino": "Caries radicular", "definicion": "Lesión de caries que se desarrolla en el cemento y la dentina de una raíz expuesta." },
+        { "termino": "pH crítico", "definicion": "Valor de pH por debajo del cual un tejido dental empieza a perder mineral." },
+        { "termino": "Cemento", "definicion": "Tejido mineralizado delgado que cubre la raíz y sirve de anclaje al ligamento periodontal." },
+        { "termino": "Metaloproteinasas de la matriz", "definicion": "Enzimas que degradan colágeno; las presentes en la dentina se activan en medio ácido y contribuyen a la caries." },
+        { "termino": "Quemado cervical", "definicion": "Zona radiolúcida en el cuello del diente causada por menor espesor de tejido; puede confundirse con caries." },
+        { "termino": "Índice de Caries Radicular", "definicion": "Porcentaje de superficies radiculares expuestas que presentan caries o restauración." }
+      ],
+      "verificacion": [
+        {
+          "id": "t11.2-1",
+          "q": "¿Qué criterio es el menos confiable por sí solo para valorar la actividad de una lesión radicular?",
+          "opciones": ["La textura con sonda roma", "La presencia de placa encima", "La distancia al margen gingival", "El color"],
+          "correcta": 3,
+          "explicacion": "Lesiones oscuras pueden estar activas y lesiones claras detenidas; la textura y la relación con la placa son más informativas."
+        },
+        {
+          "id": "t11.2-2",
+          "q": "En la escala ICDAS para superficies radiculares, ¿qué indica el código 2?",
+          "opciones": ["Superficie sana", "Cavitación de 0.5 mm o más", "Cambio de color sin pérdida de superficie", "Superficie sin raíz expuesta"],
+          "correcta": 1,
+          "explicacion": "El código 2 corresponde a una lesión con cavitación igual o mayor de 0.5 mm."
+        },
+        {
+          "id": "t11.2-3",
+          "q": "¿Por qué la dentina radicular se desmineraliza con mayor facilidad que el esmalte?",
+          "opciones": ["Porque tiene menos mineral, cristales más solubles y un pH crítico más alto", "Porque no tiene colágeno", "Porque está cubierta siempre por saliva", "Porque recibe más fluoruro"],
+          "correcta": 0,
+          "explicacion": "Su menor contenido mineral y sus cristales más pequeños y con carbonato hacen que se disuelva con ácidos más débiles."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Dental Caries: The Disease and its Clinical Management (3.ª ed.)", "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)", "anio": 2015 },
+        { "tipo": "academica", "titulo": "International Caries Detection and Assessment System (ICDAS II): criterios para superficies coronales y radiculares", "autor": "ICDAS Foundation" },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en el Índice de Caries Radicular descrito por Katz y la literatura de cariología sobre la superficie radicular", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "11.3",
+      "titulo": "Factores de riesgo en personas mayores: saliva, medicamentos y destreza",
+      "minutos": 12,
+      "enPocasPalabras": "Las raíces de los dientes se pican más cuando hay poca saliva, cuando se toman medicamentos que secan la boca, cuando cuesta trabajo cepillarse y cuando se come azúcar seguido. El dentista pregunta por todo esto para saber cuánto riesgo hay.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En el módulo 3 aprendiste a evaluar el riesgo de caries de cualquier persona. En los adultos mayores, ese ejercicio necesita una mirada especial porque aparecen factores que en un joven casi nunca pesan: la disminución de la saliva, los medicamentos, la pérdida de destreza o de memoria y la dependencia de otras personas para la higiene. Una revisión sistemática publicada en 2019 en el *Journal of Dentistry* encontró que la aparición de nuevas lesiones radiculares se asocia de forma positiva con la **edad**, la **experiencia previa de caries radicular**, la **recesión gingival** y el **consumo de tabaco**, y de forma negativa con un mejor **nivel socioeconómico**, una **buena higiene bucal** y el **uso de fluoruros**. Los propios autores advierten que pocos estudios eran de alta calidad, así que estos factores son orientadores, no una fórmula exacta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Xerostomía e hiposalivación no son lo mismo"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **xerostomía** es la **sensación subjetiva** de boca seca: lo que el paciente siente y te cuenta. La **hiposalivación** es la **disminución objetiva** del flujo salival, la que se mide. Pueden coincidir o no: hay personas que sienten la boca seca con un flujo normal y otras con flujo muy bajo que no se quejan. En la literatura se considera hiposalivación un flujo de saliva no estimulada de alrededor de 0.1 mL por minuto o menos.\n\nLa saliva es el principal factor protector natural contra la caries: diluye y elimina los azúcares, amortigua los ácidos, aporta calcio y fosfato para la remineralización y contiene proteínas antimicrobianas. Cuando falta, la biopelícula permanece ácida mucho más tiempo, y las superficies radiculares, que se desmineralizan a un pH más alto, son las primeras en sufrir."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Señales clínicas que sugieren hiposalivación",
+          "items": [
+            "El espejo dental se adhiere a la mucosa de la mejilla o de la lengua.",
+            "Saliva espumosa o filante, o ausencia de saliva acumulada en el piso de la boca.",
+            "Lengua lisa, seca o fisurada.",
+            "Dificultad para hablar, masticar o tragar alimentos secos sin agua.",
+            "Lesiones de caries en sitios poco habituales, como bordes incisales o cúspides.",
+            "Prótesis removibles que se desajustan o lastiman por falta de lubricación."
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Medir en lugar de suponer"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando sospeches hiposalivación, una medición sencilla del **flujo de saliva no estimulada** te da un dato objetivo para comparar en el tiempo. El concepto es simple: la persona, sentada y en reposo, sin haber comido ni bebido durante un rato antes, deja que la saliva se acumule en la boca y la escupe en un recipiente graduado durante un tiempo fijo, de unos cinco minutos; el volumen total entre los minutos da el flujo por minuto. También puede medirse la saliva estimulada, por ejemplo masticando un trozo de parafina, que informa sobre la capacidad de reserva de las glándulas.\n\nNo necesitas equipo especial, y repetir la medición en las mismas condiciones en cada revisión te permite ver si el flujo mejora tras un cambio de medicamentos indicado por el médico o si sigue bajando. Anota siempre la hora y las condiciones, porque el flujo salival varía a lo largo del día."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/07",
+          "proporcion": "1:1",
+          "alt": "Recipiente graduado transparente con una pequeña cantidad de saliva sobre una charola dental junto a un cronómetro.",
+          "pie": "La medición del flujo de saliva no estimulada solo requiere un recipiente graduado, un cronómetro y condiciones constantes.",
+          "prompt": "Fotografía realista cuadrada de una charola dental de acero inoxidable sobre la mesa auxiliar de un consultorio limpio y bien iluminado. Sobre la charola, un recipiente plástico transparente graduado con tapa a un lado, que contiene una pequeña cantidad de líquido claro y ligeramente espumoso en el fondo, junto a un cronómetro digital de pantalla apagada y una gasa doblada. Un par de manos con guantes de nitrilo azul acomodan el recipiente. Iluminación de lámpara dental neutra, fondo desenfocado. Evitar: texto, números legibles, etiquetas, logotipos, marcas comerciales, marcas de agua, sangre, rostro, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los medicamentos: la causa más frecuente"
+        },
+        {
+          "tipo": "texto",
+          "md": "La causa más común de hiposalivación en personas mayores no es la edad, sino los **medicamentos**. Muchos grupos de fármacos de uso frecuente pueden reducir el flujo salival, entre ellos algunos antidepresivos, antipsicóticos, antihistamínicos, anticolinérgicos, diuréticos y otros antihipertensivos, así como medicamentos para el control de la vejiga. El efecto suele sumarse cuando la persona toma varios a la vez, situación conocida como **polifarmacia**, muy común en esta edad.\n\nOtras causas importantes son la **radioterapia de cabeza y cuello**, que puede dañar de forma permanente las glándulas salivales, el **síndrome de Sjögren**, la diabetes mal controlada y la deshidratación. La NOM-013-SSA2-2015 contempla el uso de **sustitutos de saliva o saliva artificial fluorurada** en pacientes con xerostomía de cualquier origen.\n\nTu papel no es suspender ni cambiar medicamentos: esa decisión corresponde al médico tratante. Lo que sí haces es **registrar todos los medicamentos** en la historia clínica, identificar los que pueden secar la boca, ajustar el plan preventivo y, cuando el problema es importante, **comunicarte con el médico** para valorar juntos alternativas."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Los caramelos para la boca seca",
+          "md": "Para aliviar la sequedad, muchas personas chupan dulces o caramelos con azúcar a lo largo del día. Es una combinación muy dañina: poca saliva más exposiciones frecuentes a azúcar. Pregunta siempre qué hace el paciente para aliviar la boca seca y sugiere alternativas sin azúcar, como sorbos frecuentes de agua o productos sustitutos de saliva que el odontólogo considere adecuados."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/08",
+          "proporcion": "4:3",
+          "alt": "Pastillero semanal con varios medicamentos junto a un vaso de agua sobre una mesa de cocina.",
+          "pie": "La polifarmacia es frecuente en personas mayores; muchos medicamentos de uso común reducen el flujo salival.",
+          "prompt": "Fotografía realista sobre una mesa de cocina de madera con luz natural de mañana. En primer plano, un pastillero semanal de plástico translúcido con compartimentos abiertos que contienen tabletas y cápsulas de distintos colores y tamaños, junto a un vaso de vidrio con agua simple. Al fondo, desenfocados, unos anteojos de lectura y una taza. Composición ordenada y doméstica, colores naturales. No aparecen personas. Evitar: texto, nombres de medicamentos, etiquetas, cajas con marcas, logotipos, marcas de agua, jeringas, sangre, colores saturados artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Destreza, cognición, prótesis y dieta"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **artritis**, el temblor, la debilidad después de un evento vascular cerebral o la pérdida de visión hacen que un cepillado que antes era eficaz deje de serlo. El **deterioro cognitivo** y la demencia agregan otra capa: la persona puede olvidar si ya se cepilló, no reconocer el cepillo o resistirse a que otro le limpie la boca. En estas situaciones, la higiene depende cada vez más de un cuidador.\n\nLas **prótesis parciales removibles** favorecen la acumulación de biopelícula en los dientes donde apoyan los ganchos, sobre todo si la persona duerme con ellas. Y la **dieta** cambia: alimentos blandos y pegajosos, colaciones frecuentes, suplementos nutricionales endulzados, café o té con azúcar a lo largo del día. Cada uno de estos cambios suele tener una buena razón, pero sumados mantienen la biopelícula en un estado ácido.\n\nNo olvides los factores que acompañan a la persona desde antes de la vejez. El **tabaco** se asocia con más lesiones radiculares nuevas y con mayor pérdida de inserción periodontal, que a su vez expone más raíz. Las condiciones **socioeconómicas** pesan igual que en la infancia: el costo de las consultas, de los cepillos interdentales o de las pastas de prescripción, la distancia al consultorio y la dependencia económica de la familia determinan qué recomendaciones son realistas para cada paciente."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m11/d3",
+          "pie": "Factores que convergen en la caries radicular de la persona mayor.",
+          "descripcion": "Diagrama radial con un círculo central que representa una raíz expuesta con biopelícula ácida. Alrededor, seis sectores con iconos sencillos conectados por flechas hacia el centro: recesión gingival, hiposalivación por medicamentos, destreza o cognición disminuidas, dieta frecuente en azúcares, prótesis removibles y experiencia previa de caries radicular. Un arco exterior en otro color agrupa los factores protectores: fluoruro diario, buena higiene y revisión periódica.",
+          "elementos": ["Raíz expuesta con biopelícula ácida", "Recesión gingival", "Hiposalivación por medicamentos", "Destreza o cognición disminuidas", "Azúcares frecuentes", "Prótesis removibles", "Caries radicular previa", "Protectores: fluoruro, higiene y revisión"]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Tres lesiones nuevas en seis meses",
+          "md": "Don Ernesto, de 78 años, siempre tuvo pocas caries. En seis meses aparecen tres lesiones radiculares activas. Al actualizar su historia, descubres que su médico le agregó dos medicamentos que pueden reducir la saliva, que ahora toma café endulzado cinco veces al día y que una artritis en las manos le dificulta cepillarse. Ningún factor explica todo por sí solo; juntos cambiaron su riesgo de bajo a alto."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada situación con su efecto en el riesgo",
+          "instruccion": "Une cada situación frecuente en personas mayores con la razón por la que modifica el riesgo de caries radicular.",
+          "pares": [
+            { "a": "Polifarmacia", "b": "Varios medicamentos pueden sumar su efecto de reducir el flujo salival" },
+            { "a": "Recesión gingival", "b": "Expone cemento y dentina, que se desmineralizan con un pH más alto" },
+            { "a": "Artritis en las manos", "b": "Disminuye la eficacia del cepillado por falta de destreza" },
+            { "a": "Dormir con la prótesis parcial", "b": "Favorece biopelícula sobre los dientes donde apoyan los ganchos" },
+            { "a": "Uso diario de pasta fluorurada", "b": "Factor protector asociado a menos lesiones radiculares nuevas" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Pide a cada paciente mayor que traiga a la consulta **todos sus medicamentos** o una foto de sus cajas, incluidos los de venta libre. Revísalos con él, anota los que pueden secar la boca y pregúntale qué hace para aliviar la sequedad. Con esa información, y con el registro de raíces expuestas, tendrás una evaluación de riesgo mucho más precisa que con un cuestionario general."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/09",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección revisa con una paciente mayor, vista de espaldas, una bolsa con sus medicamentos.",
+          "pie": "Revisar con el paciente todos sus medicamentos ayuda a identificar los que pueden reducir la saliva.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental luminoso, en el área de escritorio junto al sillón. Una odontóloga con bata, cubrebocas, gorro y lentes de protección, sin guantes porque está en el área administrativa, revisa junto a una mujer de unos ochenta años varias cajas de medicamentos sin etiquetas legibles sobre el escritorio, y toma notas en una tableta. La paciente aparece de espaldas, con cabello blanco y un suéter, sin rostro visible. Luz natural suave, ambiente atento y cordial. Evitar: texto legible, nombres de medicamentos, logotipos, marcas comerciales, marcas de agua, rostro identificable, jeringas, sangre."
+        }
+      ],
+      "glosario": [
+        { "termino": "Xerostomía", "definicion": "Sensación subjetiva de boca seca que refiere la persona." },
+        { "termino": "Hiposalivación", "definicion": "Disminución objetiva y medible del flujo salival." },
+        { "termino": "Polifarmacia", "definicion": "Uso simultáneo de varios medicamentos por una misma persona." },
+        { "termino": "Síndrome de Sjögren", "definicion": "Enfermedad autoinmune que afecta las glándulas salivales y lagrimales y produce sequedad." },
+        { "termino": "Saliva artificial", "definicion": "Producto que sustituye parcialmente las funciones lubricantes de la saliva; algunos contienen fluoruro." },
+        { "termino": "Deterioro cognitivo", "definicion": "Disminución de funciones como la memoria, la atención o el juicio, que puede afectar el autocuidado." }
+      ],
+      "verificacion": [
+        {
+          "id": "t11.3-1",
+          "q": "¿Cuál es la diferencia entre xerostomía e hiposalivación?",
+          "opciones": ["Son sinónimos exactos", "La xerostomía es la sensación de boca seca y la hiposalivación es la disminución medible del flujo", "La hiposalivación solo ocurre en niños", "La xerostomía se mide con una regla"],
+          "correcta": 1,
+          "explicacion": "La xerostomía es un síntoma subjetivo; la hiposalivación es un hallazgo objetivo. Pueden presentarse por separado."
+        },
+        {
+          "id": "t11.3-2",
+          "q": "Un paciente mayor con hiposalivación por medicamentos te pregunta si debe suspenderlos. ¿Qué respondes?",
+          "opciones": ["Que los suspenda de inmediato", "Que tome la mitad de la dosis", "Que la decisión corresponde a su médico y que ajustarás el plan preventivo y te comunicarás con él si es necesario", "Que los cambie por remedios caseros"],
+          "correcta": 2,
+          "explicacion": "Modificar medicamentos es decisión del médico tratante; el odontólogo ajusta la prevención y coordina."
+        },
+        {
+          "id": "t11.3-3",
+          "q": "Según la revisión sistemática de 2019, ¿cuál de estos se asocia con menos lesiones radiculares nuevas?",
+          "opciones": ["Mayor recesión gingival", "Consumo de tabaco", "Experiencia previa de caries radicular", "Uso de fluoruros"],
+          "correcta": 3,
+          "explicacion": "El uso de fluoruros, la buena higiene y un mejor nivel socioeconómico se asociaron de forma negativa con nuevas lesiones."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Risk predictors of dental root caries: A systematic review", "autor": "Zhang J. et al. (Journal of Dentistry)", "anio": 2019 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (numeral 7.9.2.10, saliva artificial fluorurada)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la literatura sobre hiposalivación, xerostomía y medicamentos en personas mayores", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "11.4",
+      "titulo": "Prevención y manejo de la caries radicular",
+      "minutos": 13,
+      "enPocasPalabras": "Para proteger las raíces se usa pasta con flúor todos los días, se limpian bien los espacios entre dientes y se reduce el azúcar. El dentista puede aplicar productos especiales para endurecer las lesiones. Si la lesión ya tiene un hueco que no se puede limpiar, se restaura.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La buena noticia sobre la caries radicular es que **muchas lesiones pueden detenerse sin necesidad de restaurarlas**, siempre que se controle la biopelícula y se aporte fluoruro con regularidad. Restaurar una raíz es técnicamente difícil y la restauración no elimina el riesgo; por eso, en este tema el orden es el mismo que en todo el programa: primero controlar la enfermedad, después decidir qué hacer con cada lesión."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Fluoruros: la herramienta central"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una revisión sistemática con metaanálisis en red publicada en 2020 en el *Journal of Dental Research* comparó los fluoruros tópicos para prevenir la caries radicular. Entre las medidas de autocuidado, el **uso diario de pasta dental fluorurada** de concentración convencional, solo o combinado con enjuague fluorurado, mostró efecto preventivo; entre las medidas profesionales, la **aplicación periódica de fluoruro diamino de plata acompañada de educación en salud bucal** fue la que con mayor probabilidad resultó más eficaz. Un metaanálisis previo, de 2018, también encontró que el fluoruro diamino de plata previene nuevas lesiones radiculares en adultos mayores mejor que el placebo. Ambos trabajos se basan en pocos ensayos clínicos, de modo que la evidencia es prometedora pero limitada.\n\nPara personas con riesgo alto, el odontólogo puede indicar **pastas de alta concentración de fluoruro** de prescripción, **barnices de flúor** aplicados en el consultorio o **saliva artificial fluorurada** cuando hay xerostomía. La NOM-013-SSA2-2015 contempla en este grupo de edad la aplicación de fluoruros tópicos en gel y barniz en caries radicular y de selladores o barnices con fluoruro en la dentina expuesta y en la unión esmalte-cemento, previa valoración del caso. La elección del producto, su concentración y su frecuencia es una decisión profesional basada en el riesgo de cada persona."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El color también cuenta en la vejez",
+          "md": "El fluoruro diamino de plata tiñe de negro las lesiones tratadas, igual que en los niños. En una raíz posterior, poco visible, muchas personas lo aceptan sin problema; en un canino o un incisivo, algunas no. Explicar este efecto con fotografías antes de aplicarlo y registrarlo en el consentimiento informado evita sorpresas y reclamaciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Higiene adaptada a la persona"
+        },
+        {
+          "tipo": "texto",
+          "md": "La técnica de cepillado ideal es la que la persona puede hacer. Para quien tiene poca destreza, un **cepillo eléctrico** o un cepillo con **mango engrosado** (con un tubo de espuma o el mango de una pelota) facilita el agarre. Los **cepillos interdentales** del calibre adecuado limpian las superficies proximales de raíces expuestas mejor que el hilo dental en muchas personas mayores, sobre todo si hay espacios amplios por la pérdida de inserción. El cepillado debe incluir el **margen gingival**, justo donde nacen las lesiones radiculares, y terminar sin enjuagar en exceso para que el fluoruro de la pasta permanezca en la boca.\n\nSi la persona usa **prótesis removible**, debe retirarla para cepillar sus dientes naturales, limpiarla por separado y, en general, no dormir con ella para dar descanso a los tejidos y reducir la acumulación de biopelícula, según lo indique su odontólogo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/10",
+          "proporcion": "4:3",
+          "alt": "Cepillo interdental limpiando el espacio entre dos premolares inferiores con raíces expuestas en un modelo didáctico.",
+          "pie": "Los cepillos interdentales del calibre adecuado limpian las superficies proximales de las raíces expuestas.",
+          "prompt": "Fotografía macro realista de un modelo didáctico de arcada inferior de adulto mayor con encía de silicona rosa que simula recesión gingival y espacios interdentales amplios. Un cepillo interdental pequeño de mango delgado se introduce con suavidad entre el primer y el segundo premolar inferiores, a la altura de las raíces expuestas, sostenido por dedos con guante de nitrilo. Anatomía dental correcta, iluminación de estudio suave, fondo neutro claro, enfoque nítido en el cepillo. Evitar: texto, etiquetas, logotipos, marcas comerciales, marcas de agua, sangre, encía real lacerada, dientes deformes, mano sin guante."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Plan preventivo para un paciente con riesgo alto de caries radicular (concepto)",
+          "pasos": [
+            { "titulo": "Registrar el punto de partida", "md": "Anotar superficies radiculares expuestas, lesiones con su actividad, medicamentos, flujo salival aparente, dieta y capacidad de autocuidado." },
+            { "titulo": "Acordar cambios en casa", "md": "Cepillado con pasta fluorurada dos veces al día, limpieza interdental adaptada, horarios de comida definidos y alternativas sin azúcar para la boca seca." },
+            { "titulo": "Medidas profesionales", "md": "Remoción de depósitos y aplicación de fluoruros u otros agentes de detención según el riesgo y el juicio del odontólogo." },
+            { "titulo": "Coordinar con el médico", "md": "Cuando la hiposalivación es importante, comunicar el hallazgo al médico tratante para valorar alternativas." },
+            { "titulo": "Reevaluar", "md": "En intervalos cortos al inicio, revisar textura y placa de cada lesión y ajustar el plan según la respuesta." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuándo restaurar una lesión radicular"
+        },
+        {
+          "tipo": "texto",
+          "md": "Se considera restaurar cuando la lesión forma una **cavidad que retiene biopelícula y no puede limpiarse**, cuando hay **sensibilidad** persistente, cuando compromete la **resistencia** del diente o cuando la persona tiene una preocupación estética importante. Las restauraciones radiculares son un reto técnico: los márgenes suelen estar cerca o por debajo de la encía, el **control de la humedad** es difícil, la dentina esclerótica dificulta la adhesión y el acceso en zonas proximales es limitado.\n\nPor esas condiciones, con frecuencia se eligen materiales que toleran mejor la humedad y liberan fluoruro, como los **ionómeros de vidrio**, aunque la elección depende de la situación clínica, como estudiaste en el módulo 9. Ninguna restauración sustituye al plan preventivo: sin él, aparecerán lesiones nuevas en los márgenes.\n\nEl **seguimiento** cierra el ciclo. Al principio conviene revisar al paciente con riesgo alto en intervalos cortos, que el odontólogo define según su evolución, para comprobar que las lesiones activas se endurecen y que no aparecen nuevas. Las fotografías clínicas tomadas con la misma luz y el mismo ángulo, con autorización del paciente, facilitan esa comparación. Cuando varias citas seguidas muestran lesiones detenidas y buena higiene, el intervalo puede alargarse; si aparecen lesiones nuevas, el plan se revisa antes de pensar en restaurar."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Restauraciones antiguas: reparar antes que reemplazar"
+        },
+        {
+          "tipo": "texto",
+          "md": "Muchas lesiones radiculares aparecen en el **margen de coronas y restauraciones** colocadas hace años. Ante una lesión marginal, la decisión no es automáticamente retirar la corona completa. Si la lesión es accesible y el resto de la restauración está bien adaptada, la **reparación** del margen conserva más tejido, cuesta menos al paciente y evita los riesgos de un tratamiento más extenso, de acuerdo con los principios de odontología mínimamente invasiva que estudiaste en el módulo 8. Cuando la lesión se extiende por debajo de la restauración o compromete su soporte, el odontólogo valora el reemplazo.\n\nEn cualquier caso, recuerda que la lesión marginal te está diciendo que el riesgo del paciente es alto. La reparación sin plan preventivo solo retrasa el problema."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Productos de alta concentración de fluoruro en casa",
+          "md": "Las pastas de alta concentración de fluoruro son productos de **prescripción** para adultos con riesgo alto, no para uso familiar. Explica al paciente que son solo para él, que no deben usarlas niñas ni niños de la casa y que se guardan fuera de su alcance. La indicación, la duración y la forma de uso las define el odontólogo y se revisan en cada cita según la respuesta."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/11",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con equipo de protección aplica barniz con un pincel fino sobre la raíz expuesta de un premolar inferior.",
+          "pie": "Aplicación profesional de barniz con fluoruro en superficies radiculares expuestas, según el riesgo del paciente.",
+          "prompt": "Fotografía clínica realista en primer plano de la zona de premolares inferiores de un adulto mayor con recesión gingival, con la mejilla retraída por un espejo dental y la zona aislada con rollos de algodón. Una mano con guante de nitrilo sostiene un pincel aplicador fino y deposita una capa delgada y translúcida de barniz sobre la raíz expuesta del primer premolar. Al fondo, desenfocada, la manga de una bata y el borde de unos lentes de protección. Iluminación de lámpara dental neutra, enfoque nítido en la punta del pincel. Evitar: texto, etiquetas, logotipos, marcas comerciales, marcas de agua, sangre, rostro, manos sin guantes, exceso de producto."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m11/d4",
+          "pie": "Decisión simplificada ante una lesión de caries radicular.",
+          "descripcion": "Diagrama de flujo vertical. Comienza con la evaluación de la lesión. Primer rombo: ¿lesión activa? Si no, rama hacia seguimiento y prevención. Si sí, segundo rombo: ¿cavidad que retiene biopelícula y no se puede limpiar? Si no, rama hacia control no operatorio con higiene, fluoruros o agente de detención. Si sí, rama hacia restauración con material adecuado más plan preventivo. Todas las ramas terminan en reevaluación según riesgo.",
+          "elementos": ["Evaluar la lesión", "¿Activa?", "Seguimiento y prevención", "¿Cavidad que no se puede limpiar?", "Control no operatorio: higiene, fluoruros, agente de detención", "Restauración más plan preventivo", "Reevaluación según riesgo"]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: doña Rosa, 81 años",
+          "situacion": "Doña Rosa tiene 81 años, vive con su hija y toma cinco medicamentos para la presión, el ánimo y el sueño. Refiere boca seca y chupa caramelos durante el día. Encuentras tres lesiones radiculares en caras vestibulares de premolares inferiores: amarillentas, correosas al deslizar una sonda roma, cubiertas de placa y sin cavidad que retenga alimento. No hay dolor.",
+          "opciones": [
+            { "texto": "Restaurar de inmediato las tres lesiones y citar en un año.", "correcta": false, "retro": "Las lesiones no tienen cavidad que retenga biopelícula; restaurarlas sin controlar los factores de riesgo no detiene la enfermedad." },
+            { "texto": "Diseñar un plan de control no operatorio: higiene adaptada con pasta fluorurada, sustituir los caramelos por alternativas sin azúcar, medidas profesionales con fluoruro o agente de detención según tu juicio, coordinar con su médico por la boca seca y reevaluar en poco tiempo.", "correcta": true, "retro": "Correcto. Son lesiones activas pero limpiables: pueden detenerse si se controlan la biopelícula, los azúcares y se refuerza el fluoruro." },
+            { "texto": "Indicarle que suspenda los medicamentos que le secan la boca.", "correcta": false, "retro": "Modificar medicamentos es decisión del médico tratante; tu papel es informar y coordinar." },
+            { "texto": "No hacer nada porque a su edad no vale la pena.", "correcta": false, "retro": "La edad no justifica abandonar la prevención; las lesiones activas progresarán y podrían causar dolor o pérdida dental." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Entrega a tus pacientes mayores con riesgo alto un **kit de inicio** adaptado: un cepillo de mango grueso o eléctrico si lo necesitan, cepillos interdentales del calibre que mediste en boca y una tarjeta con letra grande que diga cuándo cepillarse y qué evitar. Pide que te demuestren su uso antes de salir del consultorio."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/12",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con equipo de protección enseña a un paciente mayor, visto de espaldas, a usar un cepillo eléctrico frente a un espejo.",
+          "pie": "Enseñar y pedir que el paciente demuestre la técnica asegura que la recomendación sea posible para él.",
+          "prompt": "Fotografía realista horizontal en un área de enseñanza de higiene dentro de un consultorio dental, con un lavabo y un espejo amplio. Un hombre de unos setenta y cinco años, visto de espaldas y sin reflejo nítido de su rostro, sostiene un cepillo dental eléctrico. A su lado, un odontólogo con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección le guía la mano con suavidad para mostrarle el ángulo correcto. Luz blanca suave, ambiente limpio, colores naturales. Evitar: texto, logotipos, marcas comerciales, marcas de agua, rostro identificable, reflejo nítido del rostro, sangre, profesional sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Control no operatorio", "definicion": "Manejo de una lesión de caries sin preparar el diente, mediante higiene, dieta y agentes como los fluoruros." },
+        { "termino": "Agente de detención", "definicion": "Producto de aplicación profesional que ayuda a detener la progresión de una lesión de caries." },
+        { "termino": "Cepillo interdental", "definicion": "Cepillo pequeño de forma cilíndrica o cónica para limpiar los espacios entre los dientes." },
+        { "termino": "Ionómero de vidrio", "definicion": "Material restaurador que se adhiere químicamente al diente, tolera mejor la humedad y libera fluoruro." },
+        { "termino": "Metaanálisis en red", "definicion": "Método estadístico que compara varias intervenciones a la vez combinando comparaciones directas e indirectas." }
+      ],
+      "verificacion": [
+        {
+          "id": "t11.4-1",
+          "q": "Según el metaanálisis en red de 2020, ¿qué medida profesional resultó con mayor probabilidad la más eficaz para prevenir caries radicular?",
+          "opciones": ["El pulido con pasta abrasiva", "La aplicación de selladores en todas las raíces", "La aplicación periódica de fluoruro diamino de plata con educación en salud bucal", "La extracción preventiva"],
+          "correcta": 2,
+          "explicacion": "El fluoruro diamino de plata combinado con educación en salud bucal ocupó el primer lugar entre las medidas profesionales, con evidencia limitada."
+        },
+        {
+          "id": "t11.4-2",
+          "q": "¿Cuándo se considera restaurar una lesión radicular?",
+          "opciones": ["Cuando forma una cavidad que retiene biopelícula y no puede limpiarse", "Siempre que tenga color café", "Solo cuando el paciente es menor de 60 años", "Nunca, todas se detienen solas"],
+          "correcta": 0,
+          "explicacion": "La restauración se reserva para cavidades no limpiables, sensibilidad persistente, compromiso estructural o preocupación estética."
+        },
+        {
+          "id": "t11.4-3",
+          "q": "¿Por qué con frecuencia se eligen ionómeros de vidrio en lesiones radiculares?",
+          "opciones": ["Porque son los más estéticos en cualquier caso", "Porque no necesitan seguimiento", "Porque sustituyen el plan preventivo", "Porque toleran mejor la humedad y liberan fluoruro"],
+          "correcta": 3,
+          "explicacion": "Las condiciones de la zona radicular, como la humedad y los márgenes cercanos a la encía, favorecen materiales con estas propiedades."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Topical Fluoride to Prevent Root Caries: Systematic Review with Network Meta-analysis", "autor": "Zhang J., Sardana D., Li K. Y., Leung K. C. M., Lo E. C. M. (Journal of Dental Research)", "anio": 2020 },
+        { "tipo": "academica", "titulo": "Controlling caries in exposed root surfaces with silver diamine fluoride: A systematic review with meta-analysis", "autor": "Oliveira B. H. et al. (Journal of the American Dental Association)", "anio": 2018 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (Apéndice A.12.3)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de manejo de la caries radicular de la literatura de cariología", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "11.5",
+      "titulo": "Atención a personas mayores dependientes y a sus cuidadores",
+      "minutos": 12,
+      "enPocasPalabras": "Cuando una persona mayor ya no puede cuidarse sola, alguien más tiene que limpiar su boca y su dentadura todos los días. El dentista enseña a los cuidadores cómo hacerlo con respeto y seguridad. Una boca limpia ayuda a comer mejor y puede reducir infecciones.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Una parte de las personas mayores vive con fragilidad, enfermedades crónicas avanzadas, demencia o discapacidad que les impide cuidar su boca. Algunas viven en casa con su familia y otras en residencias o casas de asistencia. En todos los casos, la salud bucal pasa a depender de **cuidadores** que rara vez han recibido capacitación para ello y que tienen muchas otras tareas. En este grupo, la caries radicular y la enfermedad periodontal avanzan rápido, y el dolor puede pasar inadvertido porque la persona no logra expresarlo.\n\nTu papel cambia: además de tratar, te conviertes en **formador de cuidadores** y en enlace con el médico y con la familia. El objetivo realista no siempre es una boca perfecta, sino una boca **sin dolor, sin infección, limpia y funcional** para comer y comunicarse con dignidad. Los planes de tratamiento se ajustan a la expectativa de vida, a la capacidad de tolerar citas y a lo que la persona o su familia valoran, siempre con la prevención como base."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué la boca importa en la fragilidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una boca con dolor o infección afecta la **alimentación**, el estado nutricional, el sueño y el ánimo. En una persona con demencia, el dolor dental puede manifestarse como agitación, rechazo a comer, golpearse la cara o alteraciones de conducta que se atribuyen a la enfermedad de base.\n\nAdemás, la biopelícula bucal es un reservorio de microorganismos que pueden ser aspirados hacia las vías respiratorias. Una revisión sistemática publicada en 2008 en el *Journal of the American Geriatrics Society* encontró que los ensayos clínicos en personas mayores hospitalizadas y residentes de casas de asistencia mostraban un efecto preventivo de la higiene bucal sobre la neumonía y las infecciones respiratorias, aunque los estudios eran pocos y de calidad variable. El mensaje para el equipo de cuidado es claro y prudente: la higiene bucal diaria es parte del cuidado general, no un lujo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Riesgo de aspiración durante la higiene",
+          "md": "En personas con dificultad para tragar, encamadas o con alteración del estado de alerta, el agua y la pasta pueden aspirarse. Realiza o enseña la higiene con la persona **sentada o semisentada** y con la cabeza ligeramente inclinada hacia adelante, usa poca agua, retira el exceso con gasa o succión cuando sea posible y nunca introduzcas líquidos en una persona que no está alerta. Ante dudas sobre la deglución, coordina con el médico o el equipo de rehabilitación."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/13",
+          "proporcion": "4:3",
+          "alt": "Cuidadora con guantes y cubrebocas cepilla los dientes de una persona mayor sentada en una silla, vista desde atrás.",
+          "pie": "Higiene asistida: la persona sentada y el cuidador detrás o a un lado, con buena luz y guantes.",
+          "prompt": "Fotografía realista en una habitación luminosa de una casa de asistencia para personas mayores, limpia y ordenada. Una cuidadora con uniforme claro, guantes de nitrilo, cubrebocas y lentes de protección está de pie detrás de un hombre de unos ochenta y cinco años sentado en una silla con respaldo; con una mano sostiene suavemente su barbilla y con la otra un cepillo dental de cabeza pequeña. Encuadre desde atrás y ligeramente lateral que no muestra el rostro del hombre. Luz natural suave, ambiente respetuoso y tranquilo. Evitar: texto, logotipos, marcas de agua, rostro identificable, sangre, gestos de forcejeo, cama de hospital con equipo médico invasivo, cuidadora sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Higiene asistida paso a paso"
+        },
+        {
+          "tipo": "texto",
+          "md": "Enseñar a un cuidador es más eficaz si lo haces en vivo, con la persona presente o con un modelo, y si le pides que repita la técnica frente a ti. Explica con palabras sencillas, deja instrucciones escritas con letra grande y respeta siempre la **dignidad** de la persona: preséntate, explica lo que vas a hacer aunque parezca no comprender, y detente si muestra miedo o rechazo para intentarlo de nuevo con calma más tarde.\n\nCon las personas con demencia ayudan las rutinas fijas, el mismo lugar y horario, las instrucciones cortas de un paso a la vez y, a veces, dejar que sostengan su propio cepillo mientras el cuidador guía la mano. Si la persona tiene **prótesis**, debe retirarse antes de limpiar la boca, cepillarse por separado con agua y jabón neutro o un limpiador indicado y guardarse limpia; se revisa también la mucosa debajo de ella en busca de lesiones."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la higiene bucal asistida",
+          "instruccion": "Coloca en orden los pasos que un cuidador sigue para la higiene bucal de una persona mayor dependiente que usa prótesis parcial.",
+          "elementos": ["Higiene de manos y colocación de guantes", "Explicar a la persona lo que se va a hacer y sentarla erguida", "Retirar la prótesis parcial", "Cepillar los dientes naturales y los márgenes de la encía con poca pasta fluorurada", "Limpiar los espacios interdentales y revisar la mucosa", "Limpiar la prótesis por separado y guardarla o recolocarla según la indicación"]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m11/d5",
+          "pie": "Responsabilidades compartidas en el cuidado bucal de una persona mayor dependiente.",
+          "descripcion": "Diagrama de tres círculos parcialmente superpuestos. El primero corresponde al equipo dental, el segundo al cuidador o familia y el tercero al médico o equipo de salud. En cada círculo, sus tareas principales; en la zona central de intersección, la persona mayor. En las intersecciones de dos círculos se colocan las tareas compartidas: capacitación en higiene (dental y cuidador), revisión de medicamentos y saliva (dental y médico), vigilancia de alimentación y dolor (cuidador y médico).",
+          "elementos": ["Persona mayor", "Equipo dental: valoración, fluoruros y capacitación", "Cuidador o familia: higiene diaria y prótesis", "Médico: medicamentos y enfermedades crónicas", "Capacitación en higiene", "Revisión de medicamentos y saliva", "Vigilancia de alimentación y dolor"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Revisar lo que no se ve"
+        },
+        {
+          "tipo": "texto",
+          "md": "En las personas dependientes, la revisión periódica debe ir más allá de los dientes. Debajo de una prótesis mal ajustada o que no se retira por la noche pueden aparecer **enrojecimiento de la mucosa**, infecciones por hongos o **úlceras** por roce. La comisura de los labios puede agrietarse e infectarse cuando la dimensión vertical se ha perdido. Y la exploración completa de lengua, piso de boca, paladar y carrillos es una oportunidad para detectar a tiempo **lesiones blancas o rojas** o úlceras que no sanan en unas dos semanas, que deben valorarse y referirse sin demora.\n\nCuando la persona no puede acudir al consultorio, algunos servicios ofrecen **atención domiciliaria** o en la propia residencia, con equipo portátil y las mismas medidas de bioseguridad que en el consultorio: higiene de manos, equipo de protección personal completo, instrumental estéril transportado de forma segura y manejo adecuado de los residuos. Aunque no se puedan realizar todos los tratamientos, la valoración, la limpieza, la aplicación de fluoruros y la capacitación del cuidador sí son posibles en casa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Consentimiento, comunicación y coordinación"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando la persona tiene deterioro cognitivo, el **consentimiento informado** requiere la participación de su representante legal o del familiar responsable, conforme a la NOM-004-SSA3-2012, del expediente clínico, y a la NOM-013-SSA2-2015, sin dejar de explicar a la persona lo que se hará con el lenguaje que pueda comprender. La NOM-013-SSA2-2015 pide además usar un lenguaje claro y sencillo en todos los grupos de edad y que las personas con alguna discapacidad sean atendidas con la presencia de un acompañante mayor de edad, tutor o responsable.\n\nPara quienes tienen pérdida auditiva o visual, habla de frente, despacio y con buena iluminación, y entrega indicaciones escritas con letra grande. Agenda citas cortas, preferentemente a la hora del día en que la persona está más alerta. Y comunica tus hallazgos al médico tratante cuando afecten la nutrición, la deglución o el manejo de medicamentos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La norma y el acompañante",
+          "md": "El apéndice de la **NOM-013-SSA2-2015** establece que en todos los grupos de edad debe usarse un lenguaje claro y sencillo y que, en menores de edad o en personas con alguna discapacidad, la atención en el consultorio debe realizarse con la presencia de un **acompañante mayor de edad, tutor o responsable**. En la práctica con personas mayores dependientes, ese acompañante es también tu principal aliado para la higiene diaria."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando atiendas a una persona mayor dependiente, reserva cinco minutos de la cita exclusivamente para el cuidador: pídele que te muestre cómo hace la higiene, corrige un solo aspecto a la vez y entrégale una hoja ilustrada con la secuencia de higiene asistida. Si trabajas cerca de una casa de asistencia, ofrecer una capacitación breve a su personal puede beneficiar a decenas de personas a la vez. Deja por escrito un plan sencillo para cada residente: quién hace la higiene, en qué horario, con qué instrumentos y a quién avisar si observa dolor, inflamación o una prótesis que lastima."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/14",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección enseña a un grupo de cuidadores a limpiar una dentadura removible sobre un modelo.",
+          "pie": "La capacitación del personal de casas de asistencia multiplica el alcance de la prevención.",
+          "prompt": "Fotografía realista horizontal en una sala de capacitación sencilla y luminosa de una casa de asistencia. Una odontóloga con bata, guantes de nitrilo, cubrebocas y lentes de protección sostiene una prótesis parcial removible sobre un lavabo portátil y muestra cómo cepillarla con un cepillo para prótesis. A su alrededor, cuatro cuidadores con uniforme y cubrebocas observan de pie, vistos de espaldas o de perfil sin rostros nítidos. Luz natural difusa, ambiente participativo. Evitar: texto, carteles, logotipos, marcas comerciales, marcas de agua, rostros identificables, sangre, prótesis con anatomía incorrecta, profesional sin guantes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m11/15",
+          "proporcion": "1:1",
+          "alt": "Prótesis parcial removible limpia guardada en un recipiente con tapa junto a un cepillo para prótesis.",
+          "pie": "La prótesis se limpia por separado y se guarda limpia; la boca debajo de ella también necesita revisión.",
+          "prompt": "Fotografía realista cuadrada de estudio sobre una superficie blanca de baño. Una prótesis parcial removible superior limpia, con base acrílica rosa, dientes artificiales de anatomía correcta y ganchos metálicos discretos, reposa dentro de un recipiente plástico transparente con tapa abierta. A un lado, un cepillo para prótesis de dos cabezales y una toalla pequeña doblada. Iluminación suave y uniforme, sombras ligeras, colores naturales. Evitar: texto, etiquetas, logotipos, marcas comerciales, marcas de agua, restos de comida, sarro, manchas, sangre, dientes deformes, prótesis rota."
+        }
+      ],
+      "glosario": [
+        { "termino": "Fragilidad", "definicion": "Estado de vulnerabilidad de algunas personas mayores en el que pequeñas agresiones causan gran deterioro de la salud." },
+        { "termino": "Higiene bucal asistida", "definicion": "Limpieza de la boca y las prótesis realizada o guiada por otra persona cuando el paciente no puede hacerla solo." },
+        { "termino": "Aspiración", "definicion": "Paso de líquidos, alimentos o secreciones hacia las vías respiratorias." },
+        { "termino": "Disfagia", "definicion": "Dificultad para tragar." },
+        { "termino": "Representante legal", "definicion": "Persona facultada para tomar decisiones de salud en nombre de quien no puede hacerlo por sí misma." }
+      ],
+      "verificacion": [
+        {
+          "id": "t11.5-1",
+          "q": "¿Cuál es la posición recomendada para la higiene asistida de una persona con riesgo de aspiración?",
+          "opciones": ["Acostada boca arriba sin almohada", "Sentada o semisentada con la cabeza ligeramente hacia adelante", "Con la cabeza muy inclinada hacia atrás", "De pie sin apoyo"],
+          "correcta": 1,
+          "explicacion": "Sentada o semisentada con la cabeza hacia adelante reduce el riesgo de que el agua y la pasta pasen a las vías respiratorias."
+        },
+        {
+          "id": "t11.5-2",
+          "q": "En una persona con demencia, ¿cómo puede manifestarse el dolor dental?",
+          "opciones": ["Siempre con queja verbal clara", "Únicamente con fiebre", "Con agitación, rechazo a comer o tocarse la cara", "No produce ningún cambio"],
+          "correcta": 2,
+          "explicacion": "Las personas con demencia pueden no expresar el dolor con palabras; los cambios de conducta y de alimentación son señales de alerta."
+        },
+        {
+          "id": "t11.5-3",
+          "q": "¿Qué encontró la revisión sistemática de 2008 sobre higiene bucal en personas mayores hospitalizadas o en casas de asistencia?",
+          "opciones": ["Que no tiene relación con ninguna infección", "Que solo mejora la estética", "Que aumenta el riesgo de neumonía", "Un efecto preventivo sobre la neumonía y las infecciones respiratorias, con estudios limitados"],
+          "correcta": 3,
+          "explicacion": "Los ensayos mostraron un efecto preventivo, aunque los autores señalaron que los estudios eran pocos y de calidad variable."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "A systematic review of the preventive effect of oral hygiene on pneumonia and respiratory tract infection in elderly people in hospitals and nursing homes", "autor": "Sjögren P. et al. (Journal of the American Geriatrics Society)", "anio": 2008 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (Apéndice A.3 y A.12)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-004-SSA3-2012, Del expediente clínico", "autor": "Secretaría de Salud", "anio": 2012 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la literatura de odontogeriatría sobre higiene asistida y atención a personas dependientes", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: la boca en la vejez",
+    "pistas": [
+      { "palabra": "CEMENTO", "pista": "Tejido delgado que cubre la raíz y queda expuesto con la recesión." },
+      { "palabra": "RECESION", "pista": "Desplazamiento de la encía hacia la raíz que deja expuesta la superficie radicular." },
+      { "palabra": "XEROSTOMIA", "pista": "Sensación subjetiva de boca seca." },
+      { "palabra": "HIPOSALIVACION", "pista": "Disminución objetiva y medible del flujo de saliva." },
+      { "palabra": "POLIFARMACIA", "pista": "Uso simultáneo de varios medicamentos, frecuente en personas mayores." },
+      { "palabra": "FLUORURO", "pista": "Principal factor protector contra la caries radicular." },
+      { "palabra": "PROTESIS", "pista": "Aparato que sustituye dientes perdidos y debe retirarse para limpiar la boca." },
+      { "palabra": "CUIDADOR", "pista": "Persona que realiza la higiene bucal de quien ya no puede hacerla solo." },
+      { "palabra": "INTERDENTAL", "pista": "Tipo de cepillo para limpiar entre los dientes y las raíces expuestas." },
+      { "palabra": "ASPIRACION", "pista": "Paso de líquidos o secreciones hacia las vías respiratorias que se debe evitar durante la higiene asistida." }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m11-p01",
+        "q": "¿Qué es la caries radicular?",
+        "opciones": ["Una caries que afecta solo el esmalte de las cúspides", "Una infección de la pulpa sin lesión visible", "Una lesión de caries en el cemento y la dentina de una raíz expuesta", "Un desgaste causado por el cepillado"],
+        "correcta": 2,
+        "explicacion": "Se desarrolla en la superficie radicular expuesta, generalmente por recesión gingival."
+      },
+      {
+        "id": "m11-p02",
+        "q": "¿Cuál es el pH crítico aproximado que se suele citar para la dentina radicular?",
+        "opciones": ["Alrededor de 6.0 a 6.7", "Alrededor de 4.0", "Alrededor de 8.0", "Igual al del esmalte, 5.5"],
+        "correcta": 0,
+        "explicacion": "La dentina radicular comienza a desmineralizarse con un pH más alto que el esmalte, que ronda 5.5."
+      },
+      {
+        "id": "m11-p03",
+        "q": "¿Dónde suelen localizarse las lesiones radiculares?",
+        "opciones": ["En los bordes incisales", "En el centro de las caras oclusales", "En el ápice de la raíz", "Junto al margen gingival y en superficies proximales"],
+        "correcta": 3,
+        "explicacion": "Aparecen donde la biopelícula se acumula sobre la raíz expuesta: junto a la encía y en caras proximales."
+      },
+      {
+        "id": "m11-p04",
+        "q": "¿Qué hallazgo indica con más probabilidad una lesión radicular activa?",
+        "opciones": ["Superficie lisa y brillante", "Textura blanda o correosa con placa encima, junto al margen gingival", "Color negro", "Lesión alejada de la encía y sin placa"],
+        "correcta": 1,
+        "explicacion": "La textura blanda, la placa y la cercanía al margen gingival indican actividad; el color no es confiable."
+      },
+      {
+        "id": "m11-p05",
+        "q": "En la escala ICDAS radicular, una lesión con cambio de color bien definido y sin pérdida de superficie corresponde al código:",
+        "opciones": ["0", "2", "1", "E"],
+        "correcta": 2,
+        "explicacion": "El código 1 describe cambio de color sin cavitación o con pérdida menor de 0.5 mm."
+      },
+      {
+        "id": "m11-p06",
+        "q": "¿Qué es el «quemado cervical» en una radiografía?",
+        "opciones": ["Una radiolucidez en el cuello del diente por menor espesor de tejido que puede confundirse con caries", "Una caries muy profunda", "Una quemadura por radiación", "Un defecto del sensor digital"],
+        "correcta": 0,
+        "explicacion": "Es un artefacto anatómico; se confirma con exploración clínica y comparación con dientes vecinos."
+      },
+      {
+        "id": "m11-p07",
+        "q": "Un paciente tiene 4 superficies radiculares cariadas, 2 obturadas y 14 expuestas sanas. ¿Cuál es su Índice de Caries Radicular?",
+        "opciones": ["20 %", "10 %", "43 %", "30 %"],
+        "correcta": 3,
+        "explicacion": "(4 + 2) ÷ (4 + 2 + 14) × 100 = 30 %."
+      },
+      {
+        "id": "m11-p08",
+        "q": "¿Cuál es la causa más frecuente de hiposalivación en personas mayores?",
+        "opciones": ["La edad por sí sola", "Los medicamentos", "El uso de pasta fluorurada", "La recesión gingival"],
+        "correcta": 1,
+        "explicacion": "Muchos fármacos de uso común reducen el flujo salival, y su efecto se suma con la polifarmacia."
+      },
+      {
+        "id": "m11-p09",
+        "q": "¿Qué signo clínico sugiere hiposalivación?",
+        "opciones": ["Saliva abundante en el piso de boca", "Encía rosa y firme", "El espejo dental se adhiere a la mucosa", "Lengua húmeda y brillante"],
+        "correcta": 2,
+        "explicacion": "La adherencia del espejo a la mucosa es una señal sencilla de sequedad."
+      },
+      {
+        "id": "m11-p10",
+        "q": "Una paciente de 76 años con boca seca chupa caramelos con azúcar todo el día. ¿Qué recomiendas?",
+        "opciones": ["Sustituirlos por alternativas sin azúcar como sorbos de agua o sustitutos de saliva indicados por el odontólogo", "Mantenerlos porque estimulan la saliva", "Cambiarlos por refresco", "Chuparlos solo en la noche"],
+        "correcta": 0,
+        "explicacion": "La combinación de poca saliva y azúcar frecuente es muy cariogénica; las alternativas sin azúcar alivian sin aumentar el riesgo."
+      },
+      {
+        "id": "m11-p11",
+        "q": "Según la revisión sistemática de 2019, ¿cuál de estos factores se asocia con más lesiones radiculares nuevas?",
+        "opciones": ["Buena higiene bucal", "Uso de fluoruros", "Mejor nivel socioeconómico", "Consumo de tabaco"],
+        "correcta": 3,
+        "explicacion": "La edad, la caries radicular previa, la recesión y el tabaco se asociaron de forma positiva; los demás son protectores."
+      },
+      {
+        "id": "m11-p12",
+        "q": "¿Qué contempla la NOM-013-SSA2-2015 para la caries radicular en personas de 60 años y más?",
+        "opciones": ["Extracción de todos los dientes con raíz expuesta", "Aplicación de fluoruros tópicos en gel y barniz", "Solo enjuagues con agua", "No contempla acciones para este grupo"],
+        "correcta": 1,
+        "explicacion": "La norma incluye la aplicación de fluoruros tópicos en gel y barniz en caries radicular, entre otras acciones."
+      },
+      {
+        "id": "m11-p13",
+        "q": "¿Qué medida de autocuidado mostró efecto preventivo contra la caries radicular en el metaanálisis en red de 2020?",
+        "opciones": ["Enjuague con agua caliente", "Cepillado sin pasta", "Uso diario de pasta dental fluorurada", "Goma de mascar con azúcar"],
+        "correcta": 2,
+        "explicacion": "La pasta fluorurada diaria, sola o con enjuague fluorurado, mostró efecto preventivo."
+      },
+      {
+        "id": "m11-p14",
+        "q": "Un paciente presenta una lesión radicular activa, sin cavidad, limpiable y sin dolor. ¿Cuál es el manejo inicial más adecuado?",
+        "opciones": ["Control no operatorio con higiene, fluoruros y reevaluación", "Restauración inmediata con resina", "Extracción", "Endodoncia"],
+        "correcta": 0,
+        "explicacion": "Las lesiones limpiables pueden detenerse sin restauración si se controlan la biopelícula y los azúcares."
+      },
+      {
+        "id": "m11-p15",
+        "q": "¿Qué dificultad técnica es característica de las restauraciones radiculares?",
+        "opciones": ["Exceso de esmalte que retirar", "Control de la humedad por márgenes cercanos o subgingivales", "Falta total de dentina", "Imposibilidad de usar cualquier material"],
+        "correcta": 1,
+        "explicacion": "Los márgenes cerca de la encía, la dentina esclerótica y el acceso limitado dificultan el aislamiento y la adhesión."
+      },
+      {
+        "id": "m11-p16",
+        "q": "¿Qué recomendación es correcta para una persona con prótesis parcial removible?",
+        "opciones": ["Dormir siempre con ella puesta", "Limpiarla solo una vez al mes", "No cepillar los dientes donde apoyan los ganchos", "Retirarla para cepillar los dientes y limpiarla por separado"],
+        "correcta": 3,
+        "explicacion": "Los dientes pilares acumulan biopelícula; la prótesis se retira para limpiar la boca y se limpia por separado."
+      },
+      {
+        "id": "m11-p17",
+        "q": "Una persona con demencia avanzada necesita un tratamiento dental. ¿Quién participa en el consentimiento informado?",
+        "opciones": ["Nadie, se procede sin consentimiento", "Solo el odontólogo", "Su representante legal o familiar responsable, explicando también a la persona lo que pueda comprender", "Cualquier otro paciente de la sala de espera"],
+        "correcta": 2,
+        "explicacion": "Ante deterioro cognitivo, el consentimiento requiere la participación del representante legal conforme a la normativa del expediente clínico."
+      },
+      {
+        "id": "m11-p18",
+        "q": "¿Por qué es importante la posición sentada durante la higiene asistida en personas con disfagia?",
+        "opciones": ["Porque reduce el riesgo de aspiración de agua y pasta", "Porque permite usar más pasta", "Porque sustituye el uso de guantes", "Porque evita tener que retirar la prótesis"],
+        "correcta": 0,
+        "explicacion": "Sentada o semisentada con la cabeza hacia adelante disminuye el paso de líquidos a la vía respiratoria."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "academica", "titulo": "Risk predictors of dental root caries: A systematic review", "autor": "Zhang J. et al. (Journal of Dentistry)", "anio": 2019 },
+    { "tipo": "academica", "titulo": "Topical Fluoride to Prevent Root Caries: Systematic Review with Network Meta-analysis", "autor": "Zhang J. et al. (Journal of Dental Research)", "anio": 2020 },
+    { "tipo": "academica", "titulo": "Controlling caries in exposed root surfaces with silver diamine fluoride: A systematic review with meta-analysis", "autor": "Oliveira B. H. et al. (Journal of the American Dental Association)", "anio": 2018 },
+    { "tipo": "academica", "titulo": "Dental Caries: The Disease and its Clinical Management (3.ª ed.)", "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)", "anio": 2015 }
+  ]
+}

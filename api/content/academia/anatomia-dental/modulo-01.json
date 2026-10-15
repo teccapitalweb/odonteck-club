@@ -1,0 +1,1672 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 1,
+  "titulo": "La cavidad oral: límites, regiones y funciones",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Todo lo que harás en odontología ocurre dentro de un espacio pequeño y muy ocupado: la cavidad oral. En este módulo aprenderás a delimitarla con precisión, a dividirla en vestíbulo y cavidad propia, y a reconocer cada una de sus regiones: labios, mejillas, paladar duro y blando, istmo de las fauces, lengua y piso de la boca. Para cada región verás sus referencias anatómicas, sus variantes normales y por qué importan en la consulta. Cerrarás con las funciones de la boca y con una secuencia de exploración ordenada que podrás aplicar desde tu siguiente paciente.",
+  "objetivos": [
+    "Delimitar la cavidad oral y distinguir el vestíbulo de la cavidad oral propiamente dicha, identificando sus vías de comunicación.",
+    "Reconocer en un paciente las referencias anatómicas de labios, mejillas y vestíbulo, incluidos frenillos, papila parotídea y modiolo.",
+    "Describir el paladar duro, el paladar blando y el istmo de las fauces, y relacionar sus referencias con la anestesia, las impresiones y el reflejo nauseoso.",
+    "Explicar la organización de la lengua y del piso de la boca, su musculatura e inervación motora, y señalar las zonas de mayor riesgo de cáncer bucal.",
+    "Relacionar las funciones de la cavidad oral con la práctica clínica y aplicar una secuencia sistemática de exploración intraoral."
+  ],
+  "duracionMin": 110,
+  "portada": {
+    "id": "anatomia-dental/m01/portada",
+    "proporcion": "16:9",
+    "alt": "Vista frontal cercana de una boca adulta abierta con retractores, que muestra labios, dientes, lengua, paladar y el fondo de la garganta bajo luz clínica.",
+    "prompt": "Fotografía clínica realista de gran formato de la boca abierta de un adulto joven sano, encuadre cerrado desde el mentón hasta la base de la nariz, labios separados con retractores transparentes, se aprecian ambas arcadas dentales permanentes completas, la lengua en reposo con papilas finas, el paladar duro con rugas suaves, el paladar blando con la úvula centrada y los arcos palatinos al fondo, mucosa rosa húmeda y sana, iluminación blanca uniforme de lámpara dental, fondo neutro desenfocado, colores naturales y nitidez alta. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, ojos o rostro completo, sangre, lesiones, dientes deformes o de más, aspecto de caricatura."
+  },
+  "temas": [
+    {
+      "n": "1.1",
+      "titulo": "Límites y divisiones de la cavidad oral",
+      "minutos": 20,
+      "enPocasPalabras": "La boca es la puerta de entrada del aparato digestivo. Tiene dos espacios: el vestíbulo, que queda entre los labios o las mejillas y los dientes, y la cavidad propia, que queda por dentro de los dientes y aloja la lengua. Conocer sus límites ayuda a revisar la boca sin dejar zonas sin mirar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **cavidad oral** (*cavitas oris*) es la primera porción del aparato digestivo y, al mismo tiempo, una vía accesoria de la respiración y el órgano principal de la articulación de la palabra. Para quien trabaja en odontología es, además, el campo operatorio de todos los días. Antes de estudiar dientes, encía o músculos conviene tener claro el «mapa» del espacio que los contiene: dónde empieza, dónde termina, cómo se divide y con qué regiones vecinas se relaciona.\n\nEl espacio oral se forma muy temprano en la vida embrionaria a partir del **estomodeo**, una depresión revestida de ectodermo que queda separada del intestino anterior por la **membrana bucofaríngea**. Esta membrana se rompe hacia la cuarta semana del desarrollo y deja comunicada la boca con la faringe. Por ese origen, el epitelio que reviste la boca y el esmalte de los dientes derivan del ectodermo, mientras que gran parte de los tejidos de sostén proviene del mesénquima de los arcos faríngeos, con una contribución importante de células de la cresta neural."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/01",
+          "proporcion": "4:3",
+          "alt": "Corte sagital ilustrado de la cabeza que muestra la cavidad oral, la cavidad nasal por encima y la faringe por detrás.",
+          "pie": "La cavidad oral se relaciona por arriba con la cavidad nasal, por detrás con la orofaringe y por abajo con el piso muscular de la boca.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, corte sagital medio de la cabeza de un adulto visto desde la izquierda, se muestran la cavidad oral con la lengua en reposo, el paladar duro óseo y el paladar blando con la úvula, la cavidad nasal por encima, la orofaringe y la epiglotis por detrás, la mandíbula seccionada y los músculos del piso de la boca, colores anatómicos suaves y naturales, fondo blanco limpio, iluminación uniforme. Evitar: texto, etiquetas, números, flechas, rostro con rasgos identificables, sangre, proporciones incorrectas, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los cinco límites de la cavidad oral"
+        },
+        {
+          "tipo": "texto",
+          "md": "La cavidad oral tiene forma de un espacio ovoide aplanado de arriba abajo, casi virtual cuando la boca está cerrada, porque la lengua llena la mayor parte de su interior. Sus límites son:\n\n- **Anterior:** la **hendidura bucal** (*rima oris*), la abertura entre el labio superior y el inferior, que termina a cada lado en las **comisuras labiales**.\n- **Laterales:** las **mejillas**, cuya base muscular es el músculo buccinador.\n- **Superior:** el **paladar**, formado por el paladar duro en sus dos tercios anteriores y el paladar blando en el tercio posterior. El paladar separa la boca de la cavidad nasal.\n- **Inferior:** el **piso de la boca**, sostenido por los dos músculos milohioideos, que forman una especie de hamaca llamada diafragma oral, sobre la cual descansa la lengua.\n- **Posterior:** el **istmo de las fauces** (*isthmus faucium*), la abertura que comunica la boca con la orofaringe. Está limitado por los arcos palatoglosos a los lados, por el borde libre del paladar blando y la úvula por arriba, y por el dorso de la lengua por abajo.\n\nEstos límites no son paredes rígidas. Los labios, las mejillas, la lengua y el paladar blando se mueven todo el tiempo, y por eso las dimensiones de la boca cambian al hablar, al masticar o al abrir para una exploración."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m01/d1",
+          "pie": "Vista frontal esquemática de la boca abierta con sus cinco límites y sus dos divisiones.",
+          "descripcion": "Esquema frontal de una boca abierta. Un contorno exterior en forma de herradura, sombreado en color claro, representa el vestíbulo entre labios y mejillas por fuera y las arcadas dentales por dentro. El área interior, en otro color, representa la cavidad oral propia con la lengua. Flechas señalan el labio superior e inferior al frente, las mejillas a los lados, el paladar arriba, el piso de la boca abajo y el istmo de las fauces al fondo. Un pequeño recuadro lateral marca el espacio retromolar como vía de comunicación entre ambas divisiones.",
+          "elementos": [
+            "Hendidura bucal (límite anterior)",
+            "Mejillas (límites laterales)",
+            "Paladar duro y blando (límite superior)",
+            "Piso de la boca (límite inferior)",
+            "Istmo de las fauces (límite posterior)",
+            "Vestíbulo oral",
+            "Cavidad oral propia",
+            "Espacio retromolar"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vestíbulo y cavidad oral propiamente dicha"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las arcadas dentales y los procesos alveolares que las sostienen dividen la boca en dos compartimentos:\n\nEl **vestíbulo oral** (*vestibulum oris*) es el espacio en forma de herradura que queda entre los labios y las mejillas por fuera, y los dientes, la encía y los procesos alveolares por dentro. Arriba y abajo termina en el **fondo de saco vestibular** (o surco vestibular), donde la mucosa de la mejilla o del labio se refleja para cubrir el proceso alveolar. En el vestíbulo desembocan el conducto de la glándula parótida y numerosas glándulas salivales menores de labios y mejillas.\n\nLa **cavidad oral propiamente dicha** (*cavitas oris propria*) es el espacio que queda por dentro de las arcadas. La ocupa casi por completo la lengua y en ella desembocan los conductos de las glándulas submandibulares y sublinguales.\n\nCuando los dientes están en contacto, ambos compartimentos siguen comunicados por los **espacios interdentales** y, sobre todo, por el **espacio retromolar**, situado detrás del último molar de cada lado, entre la rama de la mandíbula y la tuberosidad del maxilar. Este detalle tiene aplicación práctica: por ese espacio se puede introducir líquido o una sonda delgada a un paciente con los maxilares inmovilizados o con trismo intenso."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una boca casi virtual",
+          "md": "Con los labios cerrados y la lengua en reposo, la cavidad oral prácticamente no contiene aire. La lengua se apoya contra el paladar y la presión negativa que se genera ayuda a mantener la mandíbula en posición de reposo con poco esfuerzo muscular. Por eso, cuando un paciente respira por la boca de manera habitual, la lengua suele descender y cambia el equilibrio de fuerzas sobre los dientes y el paladar, un tema que estudiarás en ortodoncia."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/02",
+          "proporcion": "16:9",
+          "alt": "Vestíbulo inferior expuesto al retraer suavemente el labio con un espejo, mostrando encía, fondo de saco y mucosa labial.",
+          "pie": "Al retraer el labio se expone el vestíbulo: la encía insertada, el fondo de saco y la mucosa labial, más roja y móvil.",
+          "prompt": "Fotografía clínica realista, encuadre cerrado del sector anterior inferior de la boca de un adulto sano, el labio inferior retraído suavemente con un espejo bucal sostenido por una mano con guante de nitrilo, se ve la encía rosa pálido y firme alrededor de los incisivos inferiores, el fondo de saco vestibular y la mucosa del labio de color rojo más intenso con pequeños vasos visibles, saliva natural, iluminación de lámpara dental uniforme, fondo desenfocado. Evitar: texto, etiquetas, logotipos, marcas de agua, sangre, lesiones, rostro visible, manos sin guantes, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Regiones topográficas para el examen clínico"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para describir con precisión dónde está un hallazgo, la cavidad oral se divide en regiones. Su nomenclatura varía un poco entre textos, pero en la práctica se usan las siguientes, que coinciden con las zonas que se recorren en el examen de la mucosa recomendado por la Organización Mundial de la Salud en su manual de encuestas de salud bucal."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Regiones de la cavidad oral y lo que contienen",
+          "columnas": [
+            "Región",
+            "Qué incluye",
+            "Por qué importa"
+          ],
+          "filas": [
+            [
+              "Labial",
+              "Bermellón, comisuras, mucosa labial y frenillos labiales",
+              "Sitio de queilitis actínica, mucoceles y herpes labial"
+            ],
+            [
+              "Yugal o geniana",
+              "Mucosa de las mejillas, papila parotídea, línea alba",
+              "Lesiones por mordisqueo, gránulos de Fordyce, salida de saliva parotídea"
+            ],
+            [
+              "Gingivoalveolar",
+              "Encía y mucosa de los procesos alveolares, rebordes en pacientes sin dientes",
+              "Salud periodontal, soporte de prótesis"
+            ],
+            [
+              "Palatina",
+              "Paladar duro y blando, úvula",
+              "Anestesia palatina, toros, límite posterior de prótesis superiores"
+            ],
+            [
+              "Lingual",
+              "Dorso, bordes, punta y cara ventral de la lengua",
+              "Bordes y cara ventral: zonas de alto riesgo de cáncer"
+            ],
+            [
+              "Sublingual o piso de la boca",
+              "Pliegue y carúncula sublingual, frenillo lingual",
+              "Salida de saliva submandibular, cálculos salivales, cáncer"
+            ],
+            [
+              "Retromolar y orofaríngea",
+              "Trígono retromolar, arcos palatinos, amígdalas",
+              "Terceros molares, bloqueo del nervio alveolar inferior, reflejo nauseoso"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vecindad: lo que rodea a la boca"
+        },
+        {
+          "tipo": "texto",
+          "md": "La boca no es un compartimento aislado. Por arriba, el paladar duro la separa de las **fosas nasales**, y las raíces de premolares y molares superiores guardan una relación estrecha con el **seno maxilar**, que estudiarás en el módulo 3. Por detrás se continúa con la **orofaringe**, que a su vez comunica con la nasofaringe y la laringofaringe. Por debajo del diafragma oral están la región submandibular y el cuello. A los lados, por fuera del buccinador, se encuentran la glándula parótida, el músculo masetero y la bola adiposa de la mejilla.\n\nEsta vecindad explica por qué una infección de origen dental puede extenderse hacia los espacios faciales y cervicales, por qué una extracción de un molar superior puede comunicar la boca con el seno maxilar y por qué los problemas nasales pueden reflejarse en la respiración y en la postura de la lengua. Cuando explores la boca, piensa siempre en tres dimensiones: lo que ves en la superficie tiene vecinos por arriba, por abajo y por detrás."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Errores frecuentes al delimitar la boca"
+        },
+        {
+          "tipo": "texto",
+          "md": "Tres confusiones aparecen una y otra vez en estudiantes y en notas clínicas. La primera es ubicar las **amígdalas palatinas** dentro de la boca: en realidad están por detrás del arco palatogloso, es decir, en la orofaringe. La segunda es considerar que la **base de la lengua** forma parte de la cavidad oral; el tercio posterior, por detrás del surco terminal, mira a la orofaringe. La tercera es usar «boca» y «garganta» como sinónimos al describir una lesión.\n\nLa distinción no es académica. En oncología, los cánceres de la **cavidad oral** y los de la **orofaringe** se clasifican y se tratan de forma distinta, y una parte importante de los cánceres de orofaringe, sobre todo de amígdala y base de lengua, se asocia con la infección por virus del papiloma humano. Registrar con precisión si un hallazgo está por delante o por detrás del arco palatogloso ayuda al especialista que recibe tu referencia."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La vía aérea comparte la puerta",
+          "md": "La orofaringe es una vía común para el alimento y el aire. Una gasa, un rollo de algodón, un fragmento de restauración o un instrumento pequeño que caiga hacia el istmo de las fauces puede ser deglutido o aspirado. Por eso se recomienda proteger la orofaringe durante los procedimientos, usar dique de hule cuando la técnica lo permite, asegurar los objetos pequeños y trabajar con el paciente en una posición que permita controlar la vía aérea. Si un objeto se pierde de vista, no continúes el procedimiento hasta saber dónde está."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada límite con la estructura que lo forma",
+          "instruccion": "Une cada límite de la cavidad oral con la estructura anatómica que lo constituye.",
+          "pares": [
+            {
+              "a": "Límite anterior",
+              "b": "Hendidura bucal entre los labios"
+            },
+            {
+              "a": "Límites laterales",
+              "b": "Mejillas con el músculo buccinador"
+            },
+            {
+              "a": "Límite superior",
+              "b": "Paladar duro y paladar blando"
+            },
+            {
+              "a": "Límite inferior",
+              "b": "Piso de la boca sostenido por los milohioideos"
+            },
+            {
+              "a": "Límite posterior",
+              "b": "Istmo de las fauces"
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/03",
+          "proporcion": "1:1",
+          "alt": "Modelo anatómico de cráneo con mandíbula, visto desde atrás y abajo, que muestra la región retromolar entre la rama mandibular y la tuberosidad maxilar.",
+          "pie": "Detrás de los últimos molares queda el espacio retromolar, una comunicación permanente entre vestíbulo y cavidad propia.",
+          "prompt": "Fotografía de estudio de un modelo anatómico de cráneo humano adulto de resina color hueso con dentición permanente completa y mandíbula articulada en oclusión, vista oblicua posterolateral desde abajo que muestra el espacio entre la cara distal del último molar, la tuberosidad del maxilar y el borde anterior de la rama mandibular, fondo gris neutro, iluminación suave de estudio con sombras definidas, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, marcas de agua, número incorrecto de dientes, huesos deformes, apariencia de cráneo real con restos de tejido."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando registres un hallazgo en el expediente, no escribas solo «lesión en boca». Indica la **división** (vestíbulo o cavidad propia), la **región** (por ejemplo, mucosa yugal derecha), la **referencia** más cercana (a la altura del primer molar superior, a 5 mm del fondo de saco) y el tamaño medido con la sonda periodontal. Una descripción así permite que otro colega, o tú mismo en la siguiente cita, encuentre exactamente el mismo sitio y compare su evolución."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Cavidad oral",
+          "definicion": "Primera porción del aparato digestivo, limitada por labios, mejillas, paladar, piso de la boca e istmo de las fauces."
+        },
+        {
+          "termino": "Vestíbulo oral",
+          "definicion": "Espacio en forma de herradura entre labios y mejillas por fuera, y dientes, encía y procesos alveolares por dentro."
+        },
+        {
+          "termino": "Cavidad oral propiamente dicha",
+          "definicion": "Espacio situado por dentro de las arcadas dentales, ocupado en su mayor parte por la lengua."
+        },
+        {
+          "termino": "Istmo de las fauces",
+          "definicion": "Abertura posterior de la boca hacia la orofaringe, limitada por los arcos palatoglosos, el paladar blando y el dorso de la lengua."
+        },
+        {
+          "termino": "Espacio retromolar",
+          "definicion": "Espacio detrás del último molar que comunica vestíbulo y cavidad propia aun con los dientes en contacto."
+        },
+        {
+          "termino": "Estomodeo",
+          "definicion": "Depresión embrionaria revestida de ectodermo que da origen a la cavidad oral primitiva."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.1-1",
+          "q": "¿Qué estructura forma el límite posterior de la cavidad oral?",
+          "opciones": [
+            "El paladar duro",
+            "El istmo de las fauces",
+            "La epiglotis",
+            "El músculo milohioideo"
+          ],
+          "correcta": 1,
+          "explicacion": "El istmo de las fauces comunica la boca con la orofaringe. El paladar duro es parte del límite superior, el milohioideo del inferior y la epiglotis pertenece a la laringe."
+        },
+        {
+          "id": "t1.1-2",
+          "q": "Un paciente tiene los maxilares inmovilizados con alambres tras una fractura. ¿Por dónde puede comunicarse el vestíbulo con la cavidad propia para darle líquidos?",
+          "opciones": [
+            "Por el agujero incisivo",
+            "Por el conducto parotídeo",
+            "Por el istmo de las fauces",
+            "Por el espacio retromolar"
+          ],
+          "correcta": 3,
+          "explicacion": "El espacio retromolar, detrás del último molar, mantiene la comunicación entre ambos compartimentos aun con los dientes en contacto."
+        },
+        {
+          "id": "t1.1-3",
+          "q": "¿Dónde desemboca el conducto de la glándula parótida?",
+          "opciones": [
+            "En el vestíbulo oral",
+            "En el piso de la boca",
+            "En la orofaringe",
+            "En el paladar blando"
+          ],
+          "correcta": 0,
+          "explicacion": "El conducto parotídeo se abre en la mucosa de la mejilla, es decir, en el vestíbulo. Las glándulas submandibular y sublingual desembocan en la cavidad propia."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Anatomía con orientación clínica",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Illustrated Anatomy of the Head and Neck",
+          "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)",
+          "anio": 2017
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Oral Health Surveys: Basic Methods, 5th edition",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2013
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía de cabeza y cuello",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.2",
+      "titulo": "Labios, mejillas y vestíbulo",
+      "minutos": 20,
+      "enPocasPalabras": "Los labios y las mejillas cierran la boca por delante y a los lados, y ayudan a mantener la comida entre los dientes. Tienen pliegues, frenillos y pequeñas glándulas que son normales. Saber cómo se ven sanos ayuda a notar a tiempo cualquier cambio.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los labios y las mejillas son la pared móvil de la boca. No son solo una cubierta: forman un **sistema muscular** que sella la cavidad oral, devuelve el alimento hacia las caras oclusales durante la masticación, participa en la articulación de muchos sonidos y en la expresión facial, y ejerce una presión constante sobre las caras vestibulares de los dientes. Esa presión, equilibrada por la lengua desde dentro, contribuye a la posición final de los dientes en la arcada, la llamada **zona neutra**, un concepto clave en prótesis y ortodoncia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anatomía de superficie de los labios"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cada labio tiene tres zonas que conviene distinguir con claridad:\n\n1. **Zona cutánea:** piel con folículos pilosos, glándulas sebáceas y sudoríparas.\n2. **Bermellón** o zona roja: la porción visible de color rojo, una zona de transición entre la piel y la mucosa. Su epitelio es delgado y con una queratinización discreta, y las papilas de tejido conectivo son altas y muy vascularizadas, lo que transparenta el color de la sangre. Carece de glándulas salivales y prácticamente de glándulas sebáceas, por eso depende de la saliva para no resecarse.\n3. **Mucosa labial:** la cara interna, húmeda, revestida por epitelio no queratinizado y con numerosas glándulas salivales menores que se palpan como pequeños granos.\n\nEl límite entre la piel y el bermellón es la **línea mucocutánea**, que en el labio superior dibuja el **arco de Cupido**. En la línea media del labio superior está el **filtrum**, un surco vertical limitado por dos crestas que baja desde la columela nasal, y por debajo de él, el **tubérculo** del labio. Los labios se unen lateralmente en las **comisuras**. El labio superior está separado de la mejilla por el **surco nasolabial** y el inferior del mentón por el **surco mentolabial**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/04",
+          "proporcion": "4:3",
+          "alt": "Acercamiento de los labios de un adulto en reposo, cerrados, con el arco de Cupido y el filtrum bien definidos.",
+          "pie": "Arco de Cupido, filtrum, tubérculo y comisuras: referencias que se usan para valorar la sonrisa y planear restauraciones anteriores.",
+          "prompt": "Fotografía macro realista de los labios cerrados y relajados de un adulto, encuadre que incluye solo la base de la nariz, el labio superior con el filtrum y el arco de Cupido bien marcados, el tubérculo central, el labio inferior y las comisuras, piel de textura natural con poros finos, bermellón rosado e hidratado, iluminación lateral suave de estudio, fondo neutro claro, colores naturales. Evitar: texto, etiquetas, logotipos, marcas de agua, maquillaje intenso, ojos o rostro completo, lesiones, sangre, retoque artificial de la piel."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El bermellón inferior merece una mirada atenta",
+          "md": "El labio inferior recibe más radiación solar que el superior. En personas con exposición prolongada al sol, como trabajadores del campo y de la construcción, puede desarrollarse **queilitis actínica**: pérdida de la nitidez de la línea mucocutánea, zonas blanquecinas o escamosas y resequedad persistente. Es un trastorno potencialmente maligno y el labio inferior es un sitio reconocido de carcinoma de células escamosas. Si observas estos cambios, regístralos y refiere al paciente para valoración especializada; recomienda protección solar labial."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los músculos que mueven los labios"
+        },
+        {
+          "tipo": "texto",
+          "md": "El músculo principal de los labios es el **orbicular de la boca** (*musculus orbicularis oris*), un esfínter formado por fibras propias y por fibras que llegan de los músculos vecinos. Cierra la hendidura bucal, proyecta los labios hacia delante al silbar o besar, y los aprieta contra los dientes. A él se unen los músculos elevadores del labio superior, los depresores del labio inferior, el risorio y los cigomáticos. Todos son **músculos de la expresión facial**, se desarrollan a partir del segundo arco faríngeo y reciben inervación motora del **nervio facial** (VII).\n\nA cada lado, un poco por fuera de la comisura, convergen varios de estos músculos en un nudo fibromuscular llamado **modiolo**. En él se entrecruzan el orbicular, el buccinador, el elevador y el depresor del ángulo de la boca, el cigomático mayor y el risorio. El modiolo es importante en prótesis total: si los dientes artificiales o el borde de la prótesis invaden su zona de acción, la dentadura se desaloja cada vez que el paciente sonríe o habla."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La mejilla y el músculo buccinador"
+        },
+        {
+          "tipo": "texto",
+          "md": "La mejilla está formada, de fuera hacia dentro, por piel, tejido subcutáneo con fibras de músculos faciales, la **bola adiposa de la mejilla** (bola de Bichat), el **músculo buccinador** con su fascia, y la mucosa yugal.\n\nEl **buccinador** (*musculus buccinator*) se origina en las caras externas de los procesos alveolares del maxilar y de la mandíbula a la altura de los molares y en el **rafe pterigomandibular**, una banda fibrosa que va del gancho de la apófisis pterigoides a la mandíbula, por detrás del último molar. Sus fibras avanzan hacia el modiolo y se mezclan con el orbicular de la boca. Lo inerva el nervio facial. Su función es mantener la mejilla tensa contra los dientes para que el alimento no se acumule en el vestíbulo y expulsar el aire al soplar; de ahí su nombre, que alude a los trompetistas.\n\nEl rafe pterigomandibular se ve en la boca abierta como un pliegue de mucosa que va del paladar a la región retromolar. Es una referencia clásica para la técnica de bloqueo del nervio alveolar inferior, que estudiarás junto con la inervación en el módulo 4."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m01/d2",
+          "pie": "El buccinador y el orbicular de la boca forman un cinturón muscular continuo alrededor de la boca.",
+          "descripcion": "Vista lateral esquemática de la cara sin piel. El orbicular de la boca rodea la hendidura bucal. El buccinador se extiende horizontalmente desde atrás, desde el rafe pterigomandibular y los procesos alveolares a nivel de molares, hasta el modiolo junto a la comisura. Por detrás del rafe continúa el constrictor superior de la faringe. Un punto marca el modiolo y un círculo pequeño sobre el buccinador, frente al segundo molar superior, indica el sitio donde lo perfora el conducto parotídeo.",
+          "elementos": [
+            "Orbicular de la boca",
+            "Buccinador",
+            "Modiolo",
+            "Rafe pterigomandibular",
+            "Constrictor superior de la faringe",
+            "Paso del conducto parotídeo"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Lo que ves en la mucosa yugal y el vestíbulo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Al retraer la mejilla encontrarás varias referencias normales:\n\n- La **papila parotídea**, una pequeña elevación frente a la corona del segundo molar superior, donde desemboca el conducto parotídeo. Si secas la zona y presionas con suavidad la glándula desde fuera, verás salir saliva clara.\n- La **línea alba**, una línea blanquecina horizontal a la altura del plano oclusal, producida por la fricción y el roce leve de los dientes. Es una hiperqueratosis reactiva sin importancia clínica cuando es simétrica y lisa.\n- Los **gránulos de Fordyce**, pequeñas pápulas amarillentas de 1 a 2 mm, a menudo agrupadas, que corresponden a glándulas sebáceas ectópicas. Son una variante normal muy frecuente en adultos y no requieren tratamiento.\n- Los **frenillos labiales** superior e inferior en la línea media y las **bridas** o frenillos laterales en la región de premolares: pliegues de mucosa con tejido conectivo que unen labio o mejilla al proceso alveolar.\n- El **fondo de saco vestibular**, donde la mucosa cambia de dirección. Su profundidad determina el espacio disponible para el cepillado, para los bordes de una prótesis y para la colocación de anestesia infiltrativa."
+        },
+        {
+          "tipo": "texto",
+          "md": "Las **glándulas salivales menores** de labios y mejillas merecen una mención especial. Son cientos de pequeñas glándulas, sobre todo mucosas, situadas en la submucosa, que mantienen húmeda la cara interna de labios y mejillas. Cuando el paciente se muerde el labio inferior, el conducto de una de ellas puede romperse y la saliva se derrama en el tejido: aparece un **mucocele**, una vesícula azulada o translúcida, indolora, que crece y se vacía de manera intermitente. Es la lesión de glándula salival más frecuente y se localiza típicamente en el labio inferior, rara vez en el superior. Por esta misma riqueza glandular, la mucosa labial es el sitio que se elige cuando se requiere una biopsia de glándula salival menor para estudiar enfermedades sistémicas como el síndrome de Sjögren.\n\nLa **bola adiposa de la mejilla** es otra estructura con consecuencias prácticas. Es una masa de grasa encapsulada, más prominente en lactantes, que ayuda a estabilizar la mejilla durante la succión. En adultos puede herniarse hacia la boca tras un traumatismo o una incisión profunda en la región yugal posterior, y se reconoce como una masa amarillenta y lobulada que asoma por la mucosa."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/05",
+          "proporcion": "4:3",
+          "alt": "Mucosa yugal derecha retraída con espejo, con la papila parotídea frente al segundo molar superior y una línea alba tenue.",
+          "pie": "Mucosa de la mejilla: papila parotídea frente al segundo molar superior y línea alba a la altura del plano oclusal.",
+          "prompt": "Fotografía clínica intraoral realista de la mucosa yugal derecha de un adulto sano, la mejilla retraída hacia fuera con un espejo bucal sostenido por una mano con guante de nitrilo, se ve una pequeña elevación redondeada de mucosa rosada frente a la corona del segundo molar superior y una línea blanquecina tenue horizontal a la altura del plano de oclusión, mucosa húmeda brillante, algunos puntos amarillentos diminutos dispersos, iluminación de lámpara dental, fondo de los molares visible. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, úlceras, rostro visible, manos sin guantes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Clasificación de la inserción del frenillo labial superior (Placek y colaboradores, 1974)",
+          "columnas": [
+            "Tipo",
+            "Dónde se inserta",
+            "Implicación clínica"
+          ],
+          "filas": [
+            [
+              "Mucoso",
+              "Hasta la unión mucogingival",
+              "Habitualmente sin consecuencias"
+            ],
+            [
+              "Gingival",
+              "Dentro de la encía insertada",
+              "Habitualmente sin consecuencias"
+            ],
+            [
+              "Papilar",
+              "En la papila interdental",
+              "Puede dificultar la higiene y tensar la papila"
+            ],
+            [
+              "Papilar penetrante",
+              "Atraviesa la papila hasta la cara palatina",
+              "Se asocia con diastema persistente; valoración ortodóncica y periodontal"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "El diastema que no cerraba",
+          "md": "Una niña de 8 años tiene un espacio entre los incisivos centrales superiores y su madre está preocupada. A esa edad un diastema central es frecuente y suele reducirse al erupcionar los caninos permanentes, la etapa conocida como «patito feo». Al traccionar el labio superior, la papila palatina no se blanquea, lo que sugiere que el frenillo no es penetrante. La conducta razonable es vigilar y explicar el proceso. Si en la adolescencia el diastema persiste y la tracción blanquea la papila, se valora en conjunto con ortodoncia el momento de una frenectomía."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Normal o para vigilar?",
+          "afirmaciones": [
+            {
+              "texto": "Los gránulos de Fordyce son glándulas sebáceas ectópicas y una variante normal.",
+              "verdadero": true,
+              "explicacion": "Son pápulas amarillentas muy frecuentes en la mucosa yugal y el labio superior; no requieren tratamiento."
+            },
+            {
+              "texto": "La papila parotídea se encuentra frente al primer premolar inferior.",
+              "verdadero": false,
+              "explicacion": "Se ubica en la mucosa yugal, frente a la corona del segundo molar superior."
+            },
+            {
+              "texto": "El buccinador recibe inervación motora del nervio trigémino.",
+              "verdadero": false,
+              "explicacion": "Es un músculo de la expresión facial y lo inerva el nervio facial. El nervio bucal, rama del trigémino, solo da sensibilidad a la mejilla."
+            },
+            {
+              "texto": "La pérdida de nitidez del borde del bermellón inferior en un trabajador del campo debe registrarse y referirse.",
+              "verdadero": true,
+              "explicacion": "Es un signo de posible queilitis actínica, un trastorno potencialmente maligno."
+            },
+            {
+              "texto": "El modiolo es un nudo muscular situado por fuera de cada comisura labial.",
+              "verdadero": true,
+              "explicacion": "Ahí convergen el orbicular, el buccinador y otros músculos faciales; influye en la estabilidad de las prótesis."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/06",
+          "proporcion": "16:9",
+          "alt": "Labio superior evertido con los dedos enguantados que muestra el frenillo labial superior insertado en la encía entre los incisivos centrales.",
+          "pie": "Frenillo labial superior: al traccionar el labio se observa dónde se inserta y si tensa la papila.",
+          "prompt": "Fotografía clínica realista del sector anterior superior de la boca de un adulto joven, el labio superior evertido hacia arriba con dos dedos que llevan guantes de nitrilo, se observa el frenillo labial superior como un pliegue delgado de mucosa que se inserta en la encía insertada entre los incisivos centrales, encía rosa pálido sana, mucosa labial roja y húmeda con pequeñas glándulas visibles, iluminación de lámpara dental uniforme. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro visible, manos sin guantes, dientes deformes o apiñados en exceso."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de cualquier procedimiento, haz una prueba rápida de **tracción de labios y mejillas**: tira con suavidad del labio superior, del inferior y de cada mejilla mientras observas la encía. Si la encía marginal o la papila se mueven o se blanquean, anótalo. Ese dato orienta la higiene que puedes pedir al paciente, el diseño de los bordes de una prótesis y la necesidad de valoración periodontal antes de un tratamiento de ortodoncia."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Bermellón",
+          "definicion": "Zona roja y visible del labio, de transición entre la piel y la mucosa, sin glándulas salivales."
+        },
+        {
+          "termino": "Filtrum",
+          "definicion": "Surco vertical de la línea media del labio superior, limitado por dos crestas, que llega al arco de Cupido."
+        },
+        {
+          "termino": "Modiolo",
+          "definicion": "Nudo fibromuscular por fuera de cada comisura donde convergen el orbicular, el buccinador y otros músculos faciales."
+        },
+        {
+          "termino": "Buccinador",
+          "definicion": "Músculo de la mejilla que mantiene el alimento entre los dientes; lo inerva el nervio facial."
+        },
+        {
+          "termino": "Rafe pterigomandibular",
+          "definicion": "Banda fibrosa entre el gancho pterigoideo y la mandíbula donde se unen el buccinador y el constrictor superior de la faringe."
+        },
+        {
+          "termino": "Gránulos de Fordyce",
+          "definicion": "Glándulas sebáceas ectópicas visibles como pápulas amarillentas en la mucosa yugal o labial; variante normal."
+        },
+        {
+          "termino": "Línea alba",
+          "definicion": "Línea blanquecina en la mucosa yugal a la altura del plano oclusal, causada por fricción."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.2-1",
+          "q": "¿Qué nervio aporta la inervación motora del orbicular de la boca y del buccinador?",
+          "opciones": [
+            "Nervio trigémino",
+            "Nervio hipogloso",
+            "Nervio facial",
+            "Nervio glosofaríngeo"
+          ],
+          "correcta": 2,
+          "explicacion": "Ambos son músculos de la expresión facial derivados del segundo arco faríngeo y los inerva el nervio facial."
+        },
+        {
+          "id": "t1.2-2",
+          "q": "¿Qué hallazgo en el labio inferior debe registrarse y referirse para valoración?",
+          "opciones": [
+            "Glándulas menores palpables como granos en la mucosa",
+            "Pérdida de nitidez del borde del bermellón con zonas escamosas",
+            "Bermellón rojo y uniforme",
+            "Surco mentolabial marcado"
+          ],
+          "correcta": 1,
+          "explicacion": "La pérdida de nitidez de la línea mucocutánea con zonas escamosas sugiere queilitis actínica, un trastorno potencialmente maligno. Las otras opciones son normales."
+        },
+        {
+          "id": "t1.2-3",
+          "q": "Al traccionar el labio superior se blanquea la papila incisiva, en la cara palatina, detrás de los incisivos centrales. ¿Qué tipo de inserción del frenillo sugiere?",
+          "opciones": [
+            "Papilar penetrante",
+            "Mucosa",
+            "Gingival",
+            "Lateral"
+          ],
+          "correcta": 0,
+          "explicacion": "El blanqueamiento de la papila al traccionar indica que el frenillo llega a ella o la atraviesa, como en la inserción papilar penetrante."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Anatomía con orientación clínica",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Significance of the labial frenum attachment in periodontal disease in man. Part I: Classification and epidemiology of the labial frenum attachment (Journal of Periodontology)",
+          "autor": "Placek M., Skach M., Mrklas L.",
+          "anio": 1974
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)",
+          "anio": 2018
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía de cabeza y cuello y medicina bucal",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.3",
+      "titulo": "Paladar duro, paladar blando e istmo de las fauces",
+      "minutos": 20,
+      "enPocasPalabras": "El paladar es el techo de la boca. Su parte de adelante es dura porque tiene hueso, y la de atrás es blanda y se mueve para cerrar el paso hacia la nariz cuando tragas o hablas. Al fondo están los arcos y las amígdalas, que marcan el paso a la garganta.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El **paladar** forma el techo de la cavidad oral y el piso de las fosas nasales. Tiene dos porciones con estructura y funciones distintas: el **paladar duro**, rígido, en los dos tercios anteriores, y el **paladar blando** o velo del paladar, móvil, en el tercio posterior. Juntos permiten que la lengua tenga un apoyo firme para triturar y formar el bolo, y que la nasofaringe se cierre durante la deglución y al pronunciar la mayoría de los sonidos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El paladar duro: hueso cubierto de mucosa firme"
+        },
+        {
+          "tipo": "texto",
+          "md": "La base ósea del paladar duro está formada por las **apófisis palatinas de los maxilares** por delante y las **láminas horizontales de los huesos palatinos** por detrás. Se unen en la **sutura palatina media** y en la **sutura palatina transversa**. Por delante, detrás de los incisivos centrales, se abre la **fosa incisiva** con el agujero incisivo, por donde pasan el nervio nasopalatino y vasos del mismo nombre. En la parte posterolateral, a cada lado, están los **agujeros palatinos mayor y menor**, por donde salen los nervios y vasos palatinos. El agujero palatino mayor suele situarse a la altura del segundo o tercer molar superior, aproximadamente a medio camino entre la línea media y el margen gingival.\n\nSobre el hueso, la mucosa del paladar duro es firme, rosada y está unida al periostio, lo que la hace poco elástica. En ella se reconocen:\n\n- La **papila incisiva**, una elevación ovalada en la línea media por detrás de los incisivos centrales, que cubre la fosa incisiva.\n- Las **rugas palatinas**, pliegues transversales irregulares en el tercio anterior que ayudan a sujetar y orientar el alimento. Su patrón es individual y bastante estable a lo largo de la vida, por lo que se ha estudiado como apoyo en la identificación forense.\n- El **rafe palatino medio**, una línea blanquecina en la línea media que corresponde a la sutura.\n- El **toro palatino**, cuando existe: una exostosis ósea benigna en la línea media, de tamaño y forma variables, cubierta por mucosa delgada."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/07",
+          "proporcion": "4:3",
+          "alt": "Vista oclusal del paladar duro de un adulto con espejo, que muestra papila incisiva, rugas palatinas y rafe medio.",
+          "pie": "Paladar duro visto con espejo: papila incisiva, rugas palatinas y rafe medio, referencias para anestesia y prótesis.",
+          "prompt": "Fotografía clínica intraoral realista tomada con espejo oclusal, vista del paladar duro de un adulto sano con arcada superior permanente completa, se aprecian la papila incisiva por detrás de los incisivos centrales, las rugas palatinas como pliegues transversales irregulares en el tercio anterior, una línea media blanquecina tenue y la mucosa rosa pálido firme, transición al paladar blando más rojizo al fondo, iluminación de flash clínico uniforme. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, reflejos de dedos, sangre, lesiones, número incorrecto de dientes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Por qué la anestesia palatina duele más",
+          "md": "La mucosa del paladar duro está firmemente adherida al periostio y tiene muy poco espacio para alojar líquido. Por eso la anestesia en el paladar se percibe más molesta que en otras zonas de la boca, y la región de la papila incisiva es especialmente sensible. Cómo reducir esa molestia es parte de la técnica anestésica, que el odontólogo aprende y decide con formación clínica supervisada."
+        },
+        {
+          "tipo": "texto",
+          "md": "El trayecto de los vasos y nervios palatinos mayores tiene otra aplicación. Desde el agujero palatino mayor, el paquete neurovascular corre hacia delante por el paladar, en el ángulo entre la bóveda y el proceso alveolar. Cuando un periodoncista toma un injerto de tejido conectivo del paladar, planea la profundidad y la extensión de la zona donante para mantenerse lejos de ese paquete; la distancia disponible es menor en paladares poco profundos. El mismo razonamiento aplica a las incisiones palatinas en cirugía bucal: se trazan paralelas al trayecto de los vasos, no perpendiculares a él."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El paladar blando: un velo muscular"
+        },
+        {
+          "tipo": "texto",
+          "md": "El paladar blando cuelga del borde posterior del paladar duro como una cortina móvil que termina en la **úvula**. Su armazón es la **aponeurosis palatina**, una lámina fibrosa que en gran parte es la expansión del tendón del tensor del velo del paladar. Sobre ella actúan cinco músculos:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Músculos del paladar blando",
+          "columnas": [
+            "Músculo",
+            "Acción principal",
+            "Inervación motora"
+          ],
+          "filas": [
+            [
+              "Tensor del velo del paladar",
+              "Tensa el velo y abre la trompa auditiva al deglutir o bostezar",
+              "Nervio mandibular (V3)"
+            ],
+            [
+              "Elevador del velo del paladar",
+              "Eleva el velo para cerrar la nasofaringe",
+              "Plexo faríngeo (vago, X)"
+            ],
+            [
+              "Músculo de la úvula",
+              "Acorta y eleva la úvula",
+              "Plexo faríngeo (vago, X)"
+            ],
+            [
+              "Palatogloso",
+              "Eleva la raíz de la lengua y acerca los arcos palatoglosos, estrechando el istmo",
+              "Plexo faríngeo (vago, X)"
+            ],
+            [
+              "Palatofaríngeo",
+              "Tensa el velo y eleva la faringe al deglutir",
+              "Plexo faríngeo (vago, X)"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La función más importante del paladar blando es el **cierre velofaríngeo**: al deglutir y al pronunciar la mayoría de los sonidos del español, el velo se eleva y se apoya contra la pared posterior de la faringe, impidiendo que el alimento o el aire pasen a la nariz. Cuando este cierre falla, como ocurre en algunos pacientes con fisura palatina, aparecen voz nasal y paso de líquidos a la nariz.\n\nEn la transición entre el paladar duro y el blando hay dos referencias de interés protésico. Las **fóveas palatinas** son dos pequeñas depresiones a los lados de la línea media que corresponden a la desembocadura de conductos de glándulas salivales menores. La **línea de vibración** es la zona donde el velo empieza a moverse; se identifica pidiendo al paciente que diga «ah» de forma corta y repetida. El borde posterior de una prótesis total superior debe quedar sobre tejido que se desplaza poco, cerca de esa línea, para lograr sellado sin provocar náusea."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Formación del paladar y fisuras orofaciales",
+          "md": "El paladar se forma en dos etapas. El **paladar primario**, la porción triangular anterior que llevará a los incisivos, deriva del segmento intermaxilar, formado por la fusión de los procesos nasales mediales. El **paladar secundario** se forma a partir de dos **procesos palatinos** que crecen desde los procesos maxilares, primero en posición vertical a los lados de la lengua. Cuando la lengua desciende, los procesos se elevan a la horizontal, se encuentran en la línea media y se fusionan entre sí, con el paladar primario y con el tabique nasal. La fusión avanza de adelante hacia atrás y se completa hacia el final del primer trimestre, alrededor de la duodécima semana. Si la elevación o la fusión fallan, se produce una **fisura palatina**; si falla la fusión del proceso maxilar con el segmento intermaxilar, una **fisura labial**, que puede extenderse al proceso alveolar entre el incisivo lateral y el canino. La papila incisiva marca en el adulto el sitio de unión entre paladar primario y secundario. La causa de las fisuras es multifactorial, con componentes genéticos y ambientales, y su atención requiere un equipo interdisciplinario."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El istmo de las fauces y el anillo linfático"
+        },
+        {
+          "tipo": "texto",
+          "md": "Al pedir al paciente que abra la boca y saque ligeramente la lengua verás dos pliegues a cada lado que bajan desde el paladar blando. El anterior es el **arco palatogloso**, formado por el músculo del mismo nombre; marca el límite entre la boca y la orofaringe. El posterior es el **arco palatofaríngeo**. Entre ambos se encuentra la **fosa amigdalina**, que aloja la **amígdala palatina**.\n\nLas amígdalas palatinas forman parte del **anillo linfático de la faringe** o anillo de Waldeyer, junto con la amígdala faríngea (adenoides) en el techo de la nasofaringe, las amígdalas tubáricas cerca de la abertura de la trompa auditiva y la amígdala lingual en la base de la lengua. Este anillo vigila la entrada de antígenos por la boca y la nariz. Su tamaño varía con la edad: suele ser mayor en la infancia y disminuir en la adolescencia. Unas amígdalas muy grandes en un niño pueden asociarse con respiración bucal y ronquido, un dato que conviene comentar con el pediatra."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m01/d3",
+          "pie": "Vista de la boca abierta con las referencias del paladar y del istmo de las fauces.",
+          "descripcion": "Esquema frontal de una boca muy abierta con la lengua deprimida. Arriba, el paladar duro con la papila incisiva, las rugas y el rafe medio; más atrás, la línea de vibración y las dos fóveas palatinas en la transición con el paladar blando. El paladar blando termina en la úvula. A cada lado se dibujan dos arcos: el palatogloso por delante y el palatofaríngeo por detrás, con la amígdala palatina entre ambos. Al fondo, la pared posterior de la orofaringe.",
+          "elementos": [
+            "Papila incisiva",
+            "Rugas palatinas",
+            "Rafe palatino medio",
+            "Fóveas palatinas",
+            "Línea de vibración",
+            "Úvula",
+            "Arco palatogloso",
+            "Amígdala palatina",
+            "Arco palatofaríngeo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/08",
+          "proporcion": "3:4",
+          "alt": "Boca abierta con la lengua deprimida por un abatelenguas que deja ver la úvula, los arcos palatinos y amígdalas pequeñas.",
+          "pie": "Istmo de las fauces: úvula, arcos palatogloso y palatofaríngeo y amígdalas palatinas.",
+          "prompt": "Fotografía clínica realista de la boca muy abierta de un adulto joven sano, encuadre cerrado sin mostrar ojos, la lengua deprimida suavemente por un abatelenguas de madera sostenido por una mano con guante de nitrilo, se ven el paladar blando, la úvula centrada, los arcos palatogloso y palatofaríngeo a cada lado con amígdalas palatinas pequeñas y rosadas, y la pared posterior de la orofaringe, iluminación frontal con lámpara clínica, colores naturales. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, sangre, pus, amígdalas inflamadas, rostro completo, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El reflejo nauseoso"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **reflejo nauseoso** protege la vía aérea y digestiva. Se desencadena al estimular la base de la lengua, los arcos palatinos, la úvula o la pared posterior de la faringe. Su vía aferente es principalmente el **nervio glosofaríngeo** (IX) y la eferente el **nervio vago** (X). Su intensidad varía mucho entre personas y aumenta con la ansiedad, la fatiga o la congestión nasal. En la consulta influye en la toma de impresiones, radiografías intraorales posteriores y procedimientos en molares. Ayuda trabajar con el paciente sentado más erguido, explicar cada paso, pedir respiración nasal lenta, usar portaimpresiones de tamaño adecuado y evitar tocar sin necesidad el paladar blando y la base de la lengua."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Una impresión superior complicada",
+          "situacion": "Un adulto de 62 años, sin dientes en la arcada superior, acude para una prótesis total. Al probar el portaimpresiones siente náusea intensa. Al revisarlo, ves que el borde posterior del portaimpresiones y el material sobrepasan la línea de vibración y tocan el paladar blando móvil.",
+          "opciones": [
+            {
+              "texto": "Ajustar el borde posterior para que termine cerca de la línea de vibración, sentar al paciente más erguido y pedirle respiración nasal lenta.",
+              "correcta": true,
+              "retro": "Correcto. El exceso sobre el paladar móvil desencadena el reflejo; ajustar el límite y controlar postura y respiración suele resolverlo."
+            },
+            {
+              "texto": "Colocar más material para asegurar el sellado posterior.",
+              "correcta": false,
+              "retro": "Más material sobre el paladar blando intensifica la náusea y puede fluir hacia la orofaringe."
+            },
+            {
+              "texto": "Reclinar al paciente por completo para que el material no escurra.",
+              "correcta": false,
+              "retro": "La posición supina facilita que el material se desplace hacia la faringe; suele ser preferible una postura más erguida."
+            },
+            {
+              "texto": "Terminar la prótesis por delante de las rugas para evitar el paladar.",
+              "correcta": false,
+              "retro": "Una base tan corta pierde soporte y sellado; el límite correcto está en la transición entre paladar duro y blando."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/09",
+          "proporcion": "1:1",
+          "alt": "Modelo de yeso de un maxilar sin dientes, visto desde abajo, con el paladar, la tuberosidad y la zona del límite posterior.",
+          "pie": "En un paciente sin dientes, el paladar duro es la principal superficie de soporte de la prótesis superior.",
+          "prompt": "Fotografía de estudio de un modelo de yeso dental color blanco de un maxilar superior completamente desdentado, vista desde oclusal, rebordes alveolares redondeados, paladar duro con rugas suaves y papila incisiva visibles, tuberosidades a ambos lados y la zona de transición al paladar blando en el borde posterior del modelo, sobre una superficie gris neutra, iluminación de estudio suave con sombras definidas, enfoque nítido. Evitar: texto, marcas de lápiz, etiquetas, logotipos, marcas de agua, dientes, fracturas del yeso, burbujas grandes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "En cada examen pide al paciente que diga «ah» con la boca abierta. En unos segundos observas la elevación simétrica del velo y de la úvula, el aspecto de los arcos y las amígdalas y la línea de vibración. Una úvula que se desvía hacia un lado al elevarse, o un velo que no se eleva, es un hallazgo que merece registro y valoración médica, porque puede reflejar un problema de los nervios que lo controlan."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Paladar duro",
+          "definicion": "Dos tercios anteriores del paladar, con base ósea formada por las apófisis palatinas del maxilar y las láminas horizontales del palatino."
+        },
+        {
+          "termino": "Paladar blando",
+          "definicion": "Tercio posterior y móvil del paladar, formado por la aponeurosis palatina y cinco músculos, que termina en la úvula."
+        },
+        {
+          "termino": "Rugas palatinas",
+          "definicion": "Pliegues transversales irregulares de la mucosa del tercio anterior del paladar duro."
+        },
+        {
+          "termino": "Papila incisiva",
+          "definicion": "Elevación de la mucosa por detrás de los incisivos centrales superiores que cubre la fosa incisiva."
+        },
+        {
+          "termino": "Cierre velofaríngeo",
+          "definicion": "Contacto del paladar blando con la pared posterior de la faringe que separa la boca de la nasofaringe al deglutir y hablar."
+        },
+        {
+          "termino": "Línea de vibración",
+          "definicion": "Zona donde el paladar blando empieza a moverse; referencia del límite posterior de la prótesis total superior."
+        },
+        {
+          "termino": "Anillo de Waldeyer",
+          "definicion": "Conjunto de amígdalas faríngea, tubáricas, palatinas y lingual que rodean la entrada de la faringe."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.3-1",
+          "q": "¿Cuál es el único músculo del paladar blando inervado por el nervio mandibular?",
+          "opciones": [
+            "Elevador del velo del paladar",
+            "Palatogloso",
+            "Músculo de la úvula",
+            "Tensor del velo del paladar"
+          ],
+          "correcta": 3,
+          "explicacion": "El tensor del velo del paladar lo inerva el nervio mandibular (V3); los demás músculos del velo reciben fibras del plexo faríngeo del vago."
+        },
+        {
+          "id": "t1.3-2",
+          "q": "¿Qué estructura forma el límite entre la cavidad oral y la orofaringe a cada lado?",
+          "opciones": [
+            "El arco palatofaríngeo",
+            "El arco palatogloso",
+            "La amígdala palatina",
+            "La úvula"
+          ],
+          "correcta": 1,
+          "explicacion": "El arco palatogloso, anterior, marca el istmo de las fauces. El palatofaríngeo es posterior y la amígdala queda entre ambos."
+        },
+        {
+          "id": "t1.3-3",
+          "q": "¿Qué huesos forman la base ósea del paladar duro?",
+          "opciones": [
+            "Apófisis palatinas del maxilar y láminas horizontales del palatino",
+            "Apófisis pterigoides del esfenoides y vómer",
+            "Láminas horizontales del palatino y etmoides",
+            "Apófisis alveolares del maxilar y hueso cigomático"
+          ],
+          "correcta": 0,
+          "explicacion": "Las apófisis palatinas de los maxilares forman la parte anterior y las láminas horizontales de los palatinos la posterior."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Anatomía con orientación clínica",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Embriología clínica",
+          "autor": "Moore K. L., Persaud T. V. N., Torchia M. G. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Illustrated Anatomy of the Head and Neck",
+          "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)",
+          "anio": 2017
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía, embriología y prostodoncia total",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.4",
+      "titulo": "La lengua y el piso de la boca",
+      "minutos": 22,
+      "enPocasPalabras": "La lengua es un músculo muy fuerte y flexible que mueve la comida, ayuda a tragar, a hablar y a sentir los sabores. Debajo de ella está el piso de la boca, donde sale la saliva de dos glándulas. Los lados y la parte de abajo de la lengua, junto con el piso de la boca, son las zonas que más hay que revisar para detectar cáncer a tiempo.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **lengua** es un órgano muscular cubierto de mucosa que ocupa casi toda la cavidad oral propia y se extiende hacia la orofaringe. Participa en la masticación, la deglución, el gusto, la articulación de la palabra y la limpieza natural de los dientes. Debajo de ella, el **piso de la boca** es una región pequeña pero llena de estructuras: los conductos de las glándulas salivales, el frenillo lingual, vasos y nervios que pasan muy cerca de la superficie."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Partes y superficies de la lengua"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la lengua se distinguen el **vértice** o punta, el **cuerpo**, que corresponde a los dos tercios anteriores, y la **raíz** o base, el tercio posterior. El cuerpo y la raíz se separan en el dorso por el **surco terminal**, un surco en forma de V abierta hacia delante. En el vértice de la V se encuentra el **agujero ciego**, resto del sitio donde en el embrión se originó la glándula tiroides antes de descender al cuello. Por esa razón, de manera excepcional, puede encontrarse tejido tiroideo en la base de la lengua: la llamada tiroides lingual.\n\nLa porción anterior al surco terminal, o **porción oral**, está en la boca; la posterior, o **porción faríngea**, mira hacia la orofaringe y contiene la amígdala lingual, con aspecto irregular y nodular. Además del dorso, la lengua tiene **bordes** laterales y una **cara inferior** o ventral, lisa y delgada, en la que se transparentan las **venas linguales profundas** y se observan los **pliegues fimbriados**, unas pequeñas franjas a cada lado."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Papilas linguales como referencias de superficie",
+          "columnas": [
+            "Papila",
+            "Localización",
+            "Aspecto clínico",
+            "Botones gustativos"
+          ],
+          "filas": [
+            [
+              "Filiformes",
+              "Todo el dorso de los dos tercios anteriores",
+              "Las más numerosas; dan textura aterciopelada y blanquecina",
+              "No"
+            ],
+            [
+              "Fungiformes",
+              "Dispersas entre las filiformes, más en punta y bordes",
+              "Puntos rojos redondeados",
+              "Sí"
+            ],
+            [
+              "Foliadas",
+              "Bordes laterales posteriores",
+              "Pliegues verticales paralelos, a veces prominentes",
+              "Sí"
+            ],
+            [
+              "Circunvaladas",
+              "Por delante del surco terminal, en V",
+              "De 8 a 12 papilas grandes rodeadas por un surco",
+              "Sí, en las paredes del surco"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una «bolita» que no es tumor",
+          "md": "Las papilas foliadas y la amígdala lingual pueden verse abultadas cuando se inflaman o en algunas personas de forma natural. Es frecuente que un paciente, al revisarse con un espejo, descubra unos pliegues rojizos en la parte posterior del borde de la lengua y se alarme. Conocer su localización simétrica y su aspecto normal te permite tranquilizarlo con fundamento, siempre comparando ambos lados y registrando cualquier asimetría, úlcera o endurecimiento."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/10",
+          "proporcion": "4:3",
+          "alt": "Dorso de la lengua de un adulto sano extendida, con papilas filiformes, fungiformes como puntos rojos y la fila de papilas circunvaladas al fondo.",
+          "pie": "Dorso lingual: textura de papilas filiformes, puntos rojos de las fungiformes y, al fondo, las circunvaladas en V.",
+          "prompt": "Fotografía clínica macro realista del dorso de la lengua de un adulto sano, protruida hacia delante sobre el labio inferior, superficie rosada con textura aterciopelada de papilas filiformes finas, pequeñas papilas fungiformes como puntos rojizos dispersos más abundantes en la punta, y al fondo una fila en forma de V de papilas circunvaladas redondeadas, surco medio leve, saliva natural, iluminación clínica uniforme, fondo oscuro desenfocado. Evitar: texto, etiquetas, flechas, logotipos, marcas de agua, saburra gruesa, lesiones, sangre, rostro visible, perforaciones o piercings."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Músculos de la lengua"
+        },
+        {
+          "tipo": "texto",
+          "md": "La lengua tiene dos grupos de músculos, separados en su línea media por un **tabique lingual** fibroso. Los **músculos intrínsecos** (longitudinal superior, longitudinal inferior, transverso y vertical) no se insertan en hueso y cambian la **forma** de la lengua: la acortan, la alargan, la aplanan o la enrollan. Los **músculos extrínsecos** se originan fuera de la lengua y cambian su **posición**:\n\n- **Geniogloso:** se origina en la espina mentoniana superior, en la cara interna de la sínfisis mandibular, y se abre en abanico hacia el dorso. Es el principal músculo que **protruye** la lengua y, con su tono, evita que la base de la lengua caiga hacia atrás.\n- **Hiogloso:** desde el cuerpo y el asta mayor del hueso hioides; **deprime** y retrae los bordes de la lengua.\n- **Estilogloso:** desde la apófisis estiloides del temporal; **retrae** y eleva la lengua.\n- **Palatogloso:** desde la aponeurosis palatina; eleva la raíz de la lengua y estrecha el istmo de las fauces.\n\nTodos los músculos de la lengua reciben inervación motora del **nervio hipogloso** (XII), con una excepción: el **palatogloso**, que la recibe del plexo faríngeo del vago (X). La inervación sensitiva y gustativa es más compleja e incluye ramas de los nervios trigémino, facial, glosofaríngeo y vago; la estudiarás en el módulo 4.\n\nEl tono del geniogloso tiene una consecuencia que verás cada vez más en la consulta. Durante el sueño ese tono disminuye y, en algunas personas, la base de la lengua se desplaza hacia la orofaringe y estrecha la vía aérea, lo que contribuye al ronquido y a la apnea obstructiva del sueño. Los dispositivos de avance mandibular que se elaboran en odontología funcionan llevando la mandíbula, y con ella la inserción del geniogloso en la sínfisis, hacia delante. Su indicación requiere un diagnóstico médico previo del trastorno del sueño."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "La lengua que se desvía",
+          "md": "Un adulto mayor acude por molestias con su prótesis inferior. Al pedirle que saque la lengua, notas que la punta se desvía hacia la derecha y que el borde derecho se ve más delgado y con pequeñas ondulaciones. Una lesión del nervio hipogloso deja sin función al geniogloso del mismo lado: el geniogloso sano empuja la lengua hacia el lado afectado. Es un hallazgo neurológico que no debes atribuir a la prótesis; regístralo y refiere al paciente para valoración médica."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El piso de la boca"
+        },
+        {
+          "tipo": "texto",
+          "md": "Al levantar la punta de la lengua aparece el piso de la boca. En la línea media está el **frenillo lingual**, un pliegue que une la cara ventral de la lengua con la encía lingual de los incisivos inferiores. A cada lado de su base se observa la **carúncula sublingual**, una pequeña elevación donde desemboca el conducto de la glándula submandibular. Desde la carúncula, hacia atrás y afuera, corre el **pliegue sublingual**, que cubre la glándula sublingual y recibe varios de sus conductos. Los detalles de estas glándulas los verás en el módulo 2.\n\nLa base muscular del piso es el **músculo milohioideo**, que se extiende desde la línea milohioidea de la cara interna de la mandíbula hasta un rafe medio y el hueso hioides. Por encima de él se encuentra el **músculo geniohioideo**. El milohioideo divide la región en un **espacio sublingual**, por encima, y un **espacio submandibular**, por debajo.\n\nEsta división tiene una aplicación muy concreta. La línea milohioidea sube hacia atrás, de manera que los ápices de los premolares y del primer molar inferior suelen quedar **por encima** de ella y los del segundo y tercer molar, **por debajo**. Por eso una infección periapical de un premolar tiende a extenderse al espacio sublingual, con aumento de volumen en el piso de la boca, mientras que la de un tercer molar inferior tiende a extenderse al espacio submandibular, con aumento de volumen bajo el borde de la mandíbula. Una infección que invade a la vez los espacios sublingual, submandibular y submentoniano de ambos lados, la **angina de Ludwig**, puede elevar la lengua y comprometer la vía aérea: es una urgencia médica."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m01/d4",
+          "pie": "Corte frontal a nivel de los molares: el milohioideo separa el espacio sublingual del submandibular.",
+          "descripcion": "Corte frontal esquemático de la mandíbula a nivel del segundo molar, con la lengua arriba. El músculo milohioideo va de la línea milohioidea de cada lado hacia la línea media formando una hamaca. Por encima del milohioideo se señala el espacio sublingual con la glándula sublingual; por debajo, el espacio submandibular con la glándula submandibular. Se dibuja la raíz de un premolar con ápice por encima de la línea y la raíz de un tercer molar con ápice por debajo, con flechas que indican la dirección de propagación de cada infección.",
+          "elementos": [
+            "Lengua",
+            "Músculo milohioideo",
+            "Línea milohioidea",
+            "Espacio sublingual",
+            "Espacio submandibular",
+            "Ápice de premolar por encima",
+            "Ápice de tercer molar por debajo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/11",
+          "proporcion": "4:3",
+          "alt": "Cara ventral de la lengua elevada que muestra el frenillo lingual, las carúnculas sublinguales y las venas linguales.",
+          "pie": "Piso de la boca con la lengua elevada: frenillo lingual, carúnculas sublinguales, pliegues sublinguales y venas linguales profundas.",
+          "prompt": "Fotografía clínica intraoral realista de un adulto sano con la punta de la lengua elevada hacia el paladar, se observa la cara ventral lisa con venas linguales profundas azuladas a cada lado, los pliegues fimbriados, el frenillo lingual en la línea media, dos pequeñas elevaciones a los lados de su base y los pliegues sublinguales hacia atrás, mucosa del piso húmeda y brillante, incisivos inferiores en el borde inferior del encuadre, iluminación de lámpara dental. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, lesiones, rostro visible, piercings."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Las zonas que no puedes saltarte",
+          "md": "Los **bordes laterales y la cara ventral de la lengua** y el **piso de la boca** son los sitios intraorales donde con más frecuencia se presenta el carcinoma de células escamosas. Son también las zonas que con más facilidad se omiten en un examen rápido, porque requieren mover la lengua. Toma la punta con una gasa, llévala con suavidad hacia cada lado para ver los bordes completos hasta atrás, pide al paciente que la eleve y palpa el piso con una técnica bimanual. Cualquier úlcera, mancha blanca o roja, o zona indurada que no se resuelva en unas dos semanas debe referirse."
+        },
+        {
+          "tipo": "texto",
+          "md": "Dos variantes del piso de la boca merecen mención. La **anquiloglosia** es un frenillo lingual corto o grueso que limita la movilidad de la lengua; según su grado puede dificultar la lactancia, la higiene o ciertos sonidos, y su manejo se decide en equipo con pediatría y terapia de lenguaje. El **toro mandibular** es una exostosis ósea benigna en la cara lingual de la mandíbula, por lo general en la región de premolares y a menudo bilateral; no requiere tratamiento salvo que interfiera con una prótesis o se ulcere por traumatismo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/12",
+          "proporcion": "4:3",
+          "alt": "Vista lingual de la arcada inferior con dos abultamientos óseos lisos y redondeados a la altura de los premolares, cubiertos por mucosa sana.",
+          "pie": "Toro mandibular bilateral: exostosis benigna en la cara lingual de la mandíbula, a la altura de los premolares.",
+          "prompt": "Fotografía clínica intraoral realista tomada con espejo, vista lingual de la arcada inferior de un adulto, con la lengua elevada fuera del encuadre, se observan dos abultamientos óseos lisos, redondeados y simétricos en la cara lingual de la mandíbula a la altura de los premolares, cubiertos por mucosa rosa pálido delgada y brillante, dientes inferiores sanos alineados, piso de la boca húmedo, iluminación de flash clínico uniforme. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, úlceras, rostro visible, dientes deformes o de más."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Músculo y función",
+          "instruccion": "Relaciona cada músculo con su acción principal.",
+          "pares": [
+            {
+              "a": "Geniogloso",
+              "b": "Protruye la lengua"
+            },
+            {
+              "a": "Hiogloso",
+              "b": "Deprime los bordes de la lengua"
+            },
+            {
+              "a": "Estilogloso",
+              "b": "Retrae y eleva la lengua"
+            },
+            {
+              "a": "Palatogloso",
+              "b": "Eleva la raíz de la lengua y estrecha el istmo"
+            },
+            {
+              "a": "Milohioideo",
+              "b": "Forma el piso muscular de la boca"
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Incorpora a tu rutina la **maniobra de la gasa**: toma la punta de la lengua con una gasa seca, llévala a la derecha, luego a la izquierda y después hacia arriba, observando cada superficie con buena luz durante unos segundos. Termina palpando el piso de la boca entre un dedo dentro y otro fuera, bajo el mentón. Toma menos de un minuto y cubre las zonas de mayor riesgo de cáncer bucal."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Surco terminal",
+          "definicion": "Surco en V del dorso de la lengua que separa la porción oral, anterior, de la porción faríngea, posterior."
+        },
+        {
+          "termino": "Agujero ciego",
+          "definicion": "Depresión en el vértice del surco terminal, resto del origen embrionario de la glándula tiroides."
+        },
+        {
+          "termino": "Geniogloso",
+          "definicion": "Músculo extrínseco que se origina en la espina mentoniana superior y protruye la lengua."
+        },
+        {
+          "termino": "Nervio hipogloso",
+          "definicion": "Duodécimo nervio craneal; da la inervación motora a todos los músculos de la lengua excepto al palatogloso."
+        },
+        {
+          "termino": "Carúncula sublingual",
+          "definicion": "Elevación a cada lado de la base del frenillo lingual donde desemboca el conducto submandibular."
+        },
+        {
+          "termino": "Milohioideo",
+          "definicion": "Músculo que forma el diafragma de la boca y separa el espacio sublingual del submandibular."
+        },
+        {
+          "termino": "Anquiloglosia",
+          "definicion": "Frenillo lingual corto o grueso que limita la movilidad de la lengua."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.4-1",
+          "q": "¿Qué músculo de la lengua NO está inervado por el nervio hipogloso?",
+          "opciones": [
+            "Geniogloso",
+            "Estilogloso",
+            "Hiogloso",
+            "Palatogloso"
+          ],
+          "correcta": 3,
+          "explicacion": "El palatogloso recibe inervación del plexo faríngeo del vago; el resto de los músculos linguales dependen del hipogloso."
+        },
+        {
+          "id": "t1.4-2",
+          "q": "Un paciente presenta aumento de volumen bajo el borde de la mandíbula por un absceso de un tercer molar inferior. ¿Por qué se extendió ahí?",
+          "opciones": [
+            "Porque su ápice suele quedar por debajo de la línea milohioidea",
+            "Porque su ápice está por encima del milohioideo",
+            "Porque drena hacia el conducto parotídeo",
+            "Porque el buccinador lo dirige hacia abajo"
+          ],
+          "correcta": 0,
+          "explicacion": "Los ápices del segundo y tercer molar suelen quedar por debajo de la línea milohioidea, así que la infección pasa al espacio submandibular."
+        },
+        {
+          "id": "t1.4-3",
+          "q": "¿Cuál de estas zonas tiene mayor riesgo de carcinoma de células escamosas intraoral?",
+          "opciones": [
+            "Dorso central de la lengua",
+            "Borde lateral y cara ventral de la lengua",
+            "Paladar duro anterior",
+            "Encía insertada vestibular"
+          ],
+          "correcta": 1,
+          "explicacion": "Los bordes laterales, la cara ventral de la lengua y el piso de la boca son los sitios de mayor riesgo."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Anatomía con orientación clínica",
+          "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Illustrated Anatomy of the Head and Neck",
+          "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)",
+          "anio": 2017
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Oral and Maxillofacial Pathology",
+          "autor": "Neville B. W., Damm D. D., Allen C. M., Chi A. C. (Elsevier)",
+          "anio": 2016
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía, patología bucal e infecciones odontogénicas",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "1.5",
+      "titulo": "Funciones de la cavidad oral y exploración ordenada",
+      "minutos": 20,
+      "enPocasPalabras": "La boca sirve para masticar, tragar, saborear, hablar, ayudar a respirar y defendernos de microbios. Cuando algo falla en la boca, se nota en la comida, en la voz y en la salud general. Por eso el dentista la revisa completa y siempre en el mismo orden.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Conocer la anatomía de la cavidad oral cobra sentido cuando entiendes para qué sirve cada parte. La boca reúne funciones digestivas, sensoriales, de comunicación, respiratorias y de defensa, y casi todas dependen de la coordinación de varias estructuras a la vez. Una prótesis mal ajustada, una lengua con movilidad limitada o la falta de saliva no solo son problemas locales: cambian lo que una persona puede comer, cómo se comunica y su calidad de vida."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Masticación y formación del bolo"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **masticación** reduce el alimento a partículas pequeñas y lo mezcla con saliva hasta formar un **bolo** blando y cohesivo que se puede deglutir con seguridad. Los dientes cortan y trituran; los músculos de la masticación, que estudiarás en el módulo 3, aportan la fuerza; la lengua, las mejillas y los labios reposicionan el alimento sobre las caras oclusales una y otra vez. La saliva humedece, lubrica y comienza la digestión química: la **amilasa salival** inicia la degradación del almidón y la **lipasa lingual**, secretada por glándulas de la lengua, inicia la de algunas grasas.\n\nEl proceso está regulado por un generador de patrones en el tronco encefálico que recibe información continua de los receptores del ligamento periodontal, de la mucosa y de los músculos. Gracias a ella, el sistema ajusta la fuerza en milisegundos cuando muerdes algo duro inesperado. Esa retroalimentación cambia cuando se pierden dientes o se usan prótesis, y es una razón por la que una persona con dentadura total suele masticar con menos eficacia."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Deglución"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Fases de la deglución",
+          "pasos": [
+            {
+              "titulo": "Fase oral preparatoria",
+              "md": "Voluntaria. El alimento se mastica, se insaliva y se forma el bolo. Los labios se mantienen cerrados y el paladar blando, apoyado sobre la base de la lengua, evita que el bolo caiga antes de tiempo hacia la faringe."
+            },
+            {
+              "titulo": "Fase oral de propulsión",
+              "md": "Voluntaria. La punta de la lengua se apoya detrás de los incisivos superiores y una onda de contacto contra el paladar empuja el bolo hacia atrás, hacia el istmo de las fauces."
+            },
+            {
+              "titulo": "Fase faríngea",
+              "md": "Refleja, dura alrededor de un segundo. El velo se eleva y cierra la nasofaringe, la laringe asciende, la epiglotis se inclina y las cuerdas vocales se cierran para proteger la vía aérea, mientras los constrictores faríngeos llevan el bolo al esófago."
+            },
+            {
+              "titulo": "Fase esofágica",
+              "md": "Refleja. El esfínter esofágico superior se relaja y una onda peristáltica lleva el bolo hasta el estómago."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "En la deglución adulta típica los dientes contactan brevemente y la lengua trabaja dentro de las arcadas. En los lactantes y en algunas personas que conservan un patrón infantil, la lengua se interpone entre los incisivos al tragar; ese patrón puede asociarse con mordida abierta anterior, y su valoración es motivo de interconsulta con ortodoncia y terapia miofuncional."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Señales de alarma al deglutir",
+          "md": "Tos o carraspeo al beber, voz «mojada» después de tragar, sensación de alimento atorado, residuos que quedan en la boca tras cada bocado o pérdida de peso sin explicación pueden indicar **disfagia**. Es frecuente en personas mayores y en pacientes con secuelas de enfermedad vascular cerebral o enfermedad de Parkinson, y aumenta el riesgo de neumonía por aspiración. Si lo detectas, regístralo y sugiere valoración médica. En estos pacientes, la higiene bucal cuidadosa es una medida preventiva importante, porque reduce la carga de bacterias que podrían aspirarse."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/13",
+          "proporcion": "16:9",
+          "alt": "Ilustración en corte sagital de la cabeza durante la fase faríngea de la deglución, con el paladar blando elevado y la epiglotis inclinada.",
+          "pie": "Durante la fase faríngea, el velo cierra la nasofaringe y la epiglotis protege la laringe mientras el bolo pasa al esófago.",
+          "prompt": "Ilustración anatómica realista de estilo atlas médico, corte sagital medio de la cabeza y el cuello de un adulto durante la deglución, el paladar blando elevado en contacto con la pared posterior de la faringe, la lengua presionando contra el paladar, un bolo alimenticio color beige en la orofaringe dirigiéndose al esófago, la laringe elevada y la epiglotis inclinada hacia atrás, colores anatómicos suaves, fondo blanco limpio. Evitar: texto, etiquetas, números, flechas, rostro con rasgos identificables, sangre, proporciones incorrectas, aspecto de caricatura."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Gusto, sensibilidad y habla"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **gusto** depende de los botones gustativos de las papilas fungiformes, foliadas y circunvaladas, y en menor número del paladar blando, la faringe y la epiglotis. Se reconocen cinco sabores básicos: dulce, salado, ácido, amargo y umami. Lo que comúnmente llamamos «sabor» es la suma del gusto con el **olfato retronasal**, la textura y la temperatura; por eso una persona resfriada siente que la comida «no sabe». La boca también tiene una **sensibilidad táctil** muy fina: la punta de la lengua y los labios distinguen detalles de fracciones de milímetro, lo que explica que un paciente perciba como enorme un pequeño escalón en una restauración.\n\nEn el **habla**, la cavidad oral modifica el sonido producido en la laringe. Según el punto donde se interrumpe o estrecha el paso del aire, los sonidos del español se agrupan así:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Puntos de articulación de algunos sonidos del español y su relevancia dental",
+          "columnas": [
+            "Punto de articulación",
+            "Ejemplos",
+            "Relevancia en odontología"
+          ],
+          "filas": [
+            [
+              "Bilabial",
+              "p, b, m",
+              "Requieren sellado labial; sirven para valorar el soporte del labio"
+            ],
+            [
+              "Labiodental",
+              "f",
+              "El borde de los incisivos superiores toca el labio inferior; guía la longitud de incisivos en prótesis"
+            ],
+            [
+              "Dental y alveolar",
+              "t, d, s, n, l, r",
+              "La s exige un espacio mínimo entre incisivos; ayuda a valorar la dimensión vertical"
+            ],
+            [
+              "Palatal",
+              "ch, ñ, y",
+              "La lengua contacta el paladar duro; un paladar protésico grueso puede alterarlos"
+            ],
+            [
+              "Velar",
+              "k, g, j",
+              "El dorso de la lengua contacta el paladar blando"
+            ]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Respiración y defensa"
+        },
+        {
+          "tipo": "texto",
+          "md": "La boca es una vía **accesoria** de la respiración. La respiración nasal calienta, humedece y filtra el aire; cuando la nariz se obstruye, la boca toma el relevo. La respiración bucal habitual reseca la mucosa y la encía anterior y modifica la postura de la lengua y de la mandíbula.\n\nLa **defensa** de la cavidad oral se apoya en varias barreras: el epitelio que se renueva constantemente, la saliva con su flujo de arrastre y sus proteínas antimicrobianas, la inmunoglobulina A secretora, el líquido del surco gingival con células de defensa y el anillo de tejido linfoide de la faringe. Además, la boca alberga una comunidad microbiana diversa que, en equilibrio, ayuda a impedir la colonización por microorganismos patógenos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Función oral y salud general"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las funciones de la boca están ligadas a la nutrición y a la vida social. Una persona que ha perdido varios dientes posteriores, o que usa una prótesis inestable, tiende a evitar carnes, frutas y verduras crudas y a preferir alimentos blandos, a menudo ricos en azúcares y harinas refinadas. En adultos mayores, esta adaptación silenciosa contribuye a la desnutrición y a la pérdida de masa muscular. Del mismo modo, una alteración de la fonación por falta de dientes anteriores o por una prótesis mal diseñada puede llevar a la persona a hablar menos en público o a cubrirse la boca al reír.\n\nPor eso, al valorar a un paciente, pregunta no solo si le duele algo, sino también **qué come, qué ha dejado de comer y si se siente cómodo al hablar y sonreír**. Esas respuestas son un indicador directo de la función oral y te ayudan a priorizar el tratamiento según lo que más afecta su vida diaria."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La exploración de la boca en la norma",
+          "md": "La **NOM-013-SSA2-2015**, *Para la prevención y control de enfermedades bucales*, publicada en el Diario Oficial de la Federación el 23 de noviembre de 2016 y vigente según el Sistema Nacional de Normas de la Secretaría de Economía, establece criterios para prevenir, detectar, diagnosticar y tratar las enfermedades bucales, y pide que la información se integre en el expediente clínico conforme a la NOM-004-SSA3-2012. Una exploración completa y bien registrada de toda la cavidad oral, no solo de los dientes, es la base para cumplirla. Antes de citarla en un documento formal, confirma en el DOF que no haya sido modificada."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una exploración en orden"
+        },
+        {
+          "tipo": "texto",
+          "md": "El error más común en la exploración no es la falta de conocimiento sino la falta de **método**: se mira donde el paciente señala y se omite el resto. El manual de encuestas de salud bucal de la Organización Mundial de la Salud propone examinar la mucosa en una secuencia fija, y la mayoría de las facultades enseña un recorrido semejante. Lo importante es que siempre sea el mismo, con buena luz, la mucosa seca cuando haga falta y dos espejos o un espejo y una gasa."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m01/d5",
+          "pie": "Ruta de exploración intraoral: siempre en el mismo orden, de afuera hacia adentro.",
+          "descripcion": "Esquema de la boca abierta vista de frente con una línea punteada numerada que recorre las regiones en orden: primero labios y comisuras, luego mucosa labial y vestíbulo, mucosas yugales derecha e izquierda, encía y rebordes, lengua en dorso, bordes y cara ventral, piso de la boca, paladar duro y blando y, al final, istmo de las fauces y orofaringe. Cada estación tiene un número en un círculo.",
+          "elementos": [
+            "1 Labios y comisuras",
+            "2 Mucosa labial y vestíbulo",
+            "3 Mucosa yugal",
+            "4 Encía y rebordes",
+            "5 Lengua: dorso, bordes y cara ventral",
+            "6 Piso de la boca",
+            "7 Paladar duro y blando",
+            "8 Istmo y orofaringe"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la exploración intraoral",
+          "instruccion": "Coloca las estaciones de la exploración en el orden en que conviene recorrerlas, de afuera hacia adentro.",
+          "elementos": [
+            "Labios y comisuras",
+            "Mucosa labial y vestíbulo",
+            "Mucosa yugal derecha e izquierda",
+            "Encía y procesos alveolares",
+            "Lengua y piso de la boca",
+            "Paladar duro y blando",
+            "Istmo de las fauces y orofaringe"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/14",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con equipo de protección completo explora la boca de un paciente usando dos espejos bucales bajo la lámpara.",
+          "pie": "Dos espejos, buena luz y un orden fijo: la base de una exploración que no deja zonas sin revisar.",
+          "prompt": "Fotografía clínica realista en un consultorio dental limpio y luminoso, una odontóloga con guantes de nitrilo, cubrebocas, careta transparente, gorro y bata desechable sostiene dos espejos bucales separando la mejilla y la lengua de un paciente adulto reclinado, encuadre lateral cercano en el que del paciente solo se ven la boca entreabierta y el mentón con babero, lámpara dental encendida, bandeja con gasas e instrumental ordenado, colores naturales. Evitar: texto, logotipos, marcas de agua, rostro identificable del paciente, sangre, manos sin guantes, instrumental oxidado."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m01/15",
+          "proporcion": "1:1",
+          "alt": "Mano enguantada que sostiene con una gasa la punta de la lengua y la desplaza hacia un lado para exponer su borde lateral.",
+          "pie": "Con una gasa se puede desplazar la lengua para revisar sus bordes completos hasta la región de las papilas foliadas.",
+          "prompt": "Fotografía clínica realista, encuadre cerrado de la boca abierta de un adulto, una mano con guante de nitrilo sujeta la punta de la lengua con una gasa blanca doblada y la desplaza suavemente hacia la izquierda del paciente, exponiendo el borde lateral derecho completo con su mucosa rosada y pliegues verticales en la parte posterior, dientes inferiores visibles en el borde del encuadre, iluminación de lámpara dental uniforme. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, úlceras, rostro visible, manos sin guantes."
+        },
+        {
+          "tipo": "texto",
+          "md": "Un último punto: compara siempre **ambos lados**. La simetría es la mejor referencia de normalidad en anatomía de superficie. Una estructura que existe solo de un lado, que cambió desde la consulta anterior o que se siente más dura al palpar merece una segunda mirada y, si persiste, una referencia.\n\n**Idea práctica:** escribe la secuencia de exploración en una tarjeta y pégala junto a tu unidad dental durante un mes. Al terminar cada paciente, revisa mentalmente si cubriste las ocho estaciones. La repetición convierte el método en hábito, y el hábito es lo que permite detectar a tiempo una lesión que el paciente no había notado."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Bolo alimenticio",
+          "definicion": "Masa blanda y cohesiva de alimento mezclado con saliva, lista para ser deglutida."
+        },
+        {
+          "termino": "Deglución",
+          "definicion": "Acto de tragar; tiene fases oral voluntaria, faríngea y esofágica reflejas."
+        },
+        {
+          "termino": "Amilasa salival",
+          "definicion": "Enzima de la saliva que inicia la degradación del almidón."
+        },
+        {
+          "termino": "Olfato retronasal",
+          "definicion": "Percepción de los aromas del alimento que llegan a la nariz desde la boca y que forman parte del sabor."
+        },
+        {
+          "termino": "Punto de articulación",
+          "definicion": "Lugar de la boca donde se estrecha o interrumpe el paso del aire para producir un sonido del habla."
+        },
+        {
+          "termino": "Respiración bucal",
+          "definicion": "Respiración habitual por la boca en lugar de la nariz, con efectos sobre la mucosa y la postura de la lengua."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t1.5-1",
+          "q": "¿Qué fase de la deglución es refleja y cierra la nasofaringe y la laringe?",
+          "opciones": [
+            "Fase oral preparatoria",
+            "Fase oral de propulsión",
+            "Fase faríngea",
+            "Fase de masticación"
+          ],
+          "correcta": 2,
+          "explicacion": "La fase faríngea es refleja: el velo cierra la nasofaringe y la laringe se protege mientras el bolo pasa al esófago."
+        },
+        {
+          "id": "t1.5-2",
+          "q": "Al pronunciar la «f», ¿qué estructuras entran en contacto?",
+          "opciones": [
+            "Ambos labios",
+            "El borde de los incisivos superiores y el labio inferior",
+            "La punta de la lengua y el paladar duro",
+            "El dorso de la lengua y el paladar blando"
+          ],
+          "correcta": 1,
+          "explicacion": "La f es labiodental; por eso se usa para valorar la longitud y posición de los incisivos superiores en prótesis."
+        },
+        {
+          "id": "t1.5-3",
+          "q": "¿Cuál es el principal motivo para explorar la boca siempre en el mismo orden?",
+          "opciones": [
+            "Evitar omitir regiones y detectar hallazgos que el paciente no ha notado",
+            "Reducir el tiempo de consulta a la mitad",
+            "Evitar usar espejos",
+            "Cumplir con un requisito estético"
+          ],
+          "correcta": 0,
+          "explicacion": "Un recorrido fijo evita que se revise solo la zona de la queja y deja de lado regiones de riesgo."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "Oral Health Surveys: Basic Methods, 5th edition",
+          "autor": "Organización Mundial de la Salud",
+          "anio": 2013
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+          "autor": "Secretaría de Salud",
+          "anio": 2016
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Guyton y Hall. Tratado de fisiología médica",
+          "autor": "Hall J. E., Hall M. E. (Elsevier)",
+          "anio": 2021
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en fisiología oral, fonética del español y exploración clínica bucal",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: el mapa de la boca",
+    "palabras": [
+      "VESTIBULO",
+      "ISTMO",
+      "PALADAR",
+      "UVULA",
+      "FRENILLO",
+      "BUCCINADOR",
+      "MODIOLO",
+      "RUGAS",
+      "CARUNCULA",
+      "MILOHIOIDEO",
+      "GENIOGLOSO",
+      "AMIGDALA"
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m01-p01",
+        "q": "¿Qué separa el vestíbulo oral de la cavidad oral propiamente dicha?",
+        "opciones": [
+          "La lengua",
+          "Las arcadas dentales con sus procesos alveolares",
+          "El paladar blando",
+          "El músculo milohioideo"
+        ],
+        "correcta": 1,
+        "explicacion": "Los dientes, la encía y los procesos alveolares dividen la boca en vestíbulo, por fuera, y cavidad propia, por dentro."
+      },
+      {
+        "id": "m01-p02",
+        "q": "¿Qué estructura forma el límite inferior de la cavidad oral?",
+        "opciones": [
+          "El hueso hioides",
+          "La epiglotis",
+          "El piso de la boca sostenido por los milohioideos",
+          "El músculo buccinador"
+        ],
+        "correcta": 2,
+        "explicacion": "Los milohioideos forman el diafragma oral sobre el que descansa la lengua."
+      },
+      {
+        "id": "m01-p03",
+        "q": "¿Frente a qué diente se localiza habitualmente la papila parotídea?",
+        "opciones": [
+          "Primer premolar superior",
+          "Canino superior",
+          "Primer molar inferior",
+          "Segundo molar superior"
+        ],
+        "correcta": 3,
+        "explicacion": "El conducto parotídeo se abre en la mucosa yugal frente a la corona del segundo molar superior."
+      },
+      {
+        "id": "m01-p04",
+        "q": "¿Qué nervio da inervación motora al músculo buccinador?",
+        "opciones": [
+          "Nervio facial",
+          "Nervio bucal del trigémino",
+          "Nervio hipogloso",
+          "Nervio glosofaríngeo"
+        ],
+        "correcta": 0,
+        "explicacion": "El buccinador es un músculo de la expresión facial y lo inerva el nervio facial. El nervio bucal del trigémino es sensitivo."
+      },
+      {
+        "id": "m01-p05",
+        "q": "En un adulto ves pápulas amarillentas de 1 a 2 mm agrupadas en la mucosa yugal, asintomáticas. ¿Qué es lo más probable?",
+        "opciones": [
+          "Candidosis",
+          "Gránulos de Fordyce",
+          "Leucoplasia",
+          "Mucocele"
+        ],
+        "correcta": 1,
+        "explicacion": "Son glándulas sebáceas ectópicas, una variante normal frecuente que no requiere tratamiento."
+      },
+      {
+        "id": "m01-p06",
+        "q": "¿Por qué importa el modiolo en la prótesis total?",
+        "opciones": [
+          "Porque es el sitio de inserción del masetero",
+          "Porque contiene la glándula parótida",
+          "Porque marca el límite posterior del paladar",
+          "Porque su actividad puede desalojar una prótesis que invade su zona"
+        ],
+        "correcta": 3,
+        "explicacion": "En el modiolo convergen músculos que se contraen al sonreír y hablar; si la prótesis invade su zona, se desaloja."
+      },
+      {
+        "id": "m01-p07",
+        "q": "¿Qué estructura ósea forma la parte posterior del paladar duro?",
+        "opciones": [
+          "Las láminas horizontales de los huesos palatinos",
+          "El vómer",
+          "La apófisis pterigoides",
+          "La apófisis cigomática del maxilar"
+        ],
+        "correcta": 0,
+        "explicacion": "El paladar duro está formado por las apófisis palatinas del maxilar por delante y las láminas horizontales del palatino por detrás."
+      },
+      {
+        "id": "m01-p08",
+        "q": "¿Qué referencia usarías para ubicar el límite posterior de una prótesis total superior?",
+        "opciones": [
+          "La papila incisiva",
+          "Las rugas palatinas",
+          "La línea de vibración, cerca de las fóveas palatinas",
+          "El arco palatofaríngeo"
+        ],
+        "correcta": 2,
+        "explicacion": "El borde posterior debe quedar en la transición entre paladar duro y blando, cerca de la línea de vibración y las fóveas."
+      },
+      {
+        "id": "m01-p09",
+        "q": "¿Qué músculo del paladar blando abre la trompa auditiva al deglutir?",
+        "opciones": [
+          "Elevador del velo del paladar",
+          "Palatofaríngeo",
+          "Músculo de la úvula",
+          "Tensor del velo del paladar"
+        ],
+        "correcta": 3,
+        "explicacion": "El tensor del velo del paladar, inervado por V3, tensa el velo y abre la trompa auditiva."
+      },
+      {
+        "id": "m01-p10",
+        "q": "¿Cuáles son la vía aferente y eferente principales del reflejo nauseoso?",
+        "opciones": [
+          "Trigémino y facial",
+          "Glosofaríngeo y vago",
+          "Facial e hipogloso",
+          "Vago y trigémino"
+        ],
+        "correcta": 1,
+        "explicacion": "El glosofaríngeo lleva la información sensitiva de la faringe y el vago produce la respuesta motora."
+      },
+      {
+        "id": "m01-p11",
+        "q": "Un paciente protruye la lengua y la punta se desvía a la izquierda. ¿Qué sugiere?",
+        "opciones": [
+          "Lesión del nervio hipogloso izquierdo",
+          "Lesión del nervio hipogloso derecho",
+          "Lesión del nervio facial izquierdo",
+          "Anquiloglosia"
+        ],
+        "correcta": 0,
+        "explicacion": "Sin función del geniogloso del lado lesionado, el geniogloso sano empuja la lengua hacia el lado afectado."
+      },
+      {
+        "id": "m01-p12",
+        "q": "¿Qué papilas linguales NO contienen botones gustativos?",
+        "opciones": [
+          "Fungiformes",
+          "Foliadas",
+          "Filiformes",
+          "Circunvaladas"
+        ],
+        "correcta": 2,
+        "explicacion": "Las filiformes son las más numerosas y tienen función mecánica; no tienen botones gustativos."
+      },
+      {
+        "id": "m01-p13",
+        "q": "¿Dónde desemboca el conducto de la glándula submandibular?",
+        "opciones": [
+          "En la papila parotídea",
+          "En las fóveas palatinas",
+          "En el agujero ciego",
+          "En la carúncula sublingual"
+        ],
+        "correcta": 3,
+        "explicacion": "Se abre en la carúncula sublingual, a cada lado de la base del frenillo lingual."
+      },
+      {
+        "id": "m01-p14",
+        "q": "Un absceso de un primer premolar inferior produce aumento de volumen en el piso de la boca. ¿Qué explica esa localización?",
+        "opciones": [
+          "Su ápice suele quedar por encima de la línea milohioidea",
+          "Su ápice suele quedar por debajo de la línea milohioidea",
+          "La infección drena por el conducto submandibular",
+          "El buccinador desvía el pus hacia lingual"
+        ],
+        "correcta": 0,
+        "explicacion": "Los ápices de premolares y primer molar suelen estar por encima del milohioideo, así que la infección pasa al espacio sublingual."
+      },
+      {
+        "id": "m01-p15",
+        "q": "¿Qué resto embrionario representa el agujero ciego de la lengua?",
+        "opciones": [
+          "El conducto de la glándula sublingual",
+          "El sitio de origen de la glándula tiroides",
+          "La membrana bucofaríngea",
+          "La fusión de los procesos palatinos"
+        ],
+        "correcta": 1,
+        "explicacion": "La tiroides se origina en ese punto y desciende al cuello; por eso puede existir, rara vez, una tiroides lingual."
+      },
+      {
+        "id": "m01-p16",
+        "q": "¿Qué sonidos del español son bilabiales y sirven para valorar el sellado y soporte de los labios?",
+        "opciones": [
+          "k, g, j",
+          "ch, ñ, y",
+          "p, b, m",
+          "t, d, s"
+        ],
+        "correcta": 2,
+        "explicacion": "La p, la b y la m se producen con el contacto de ambos labios."
+      },
+      {
+        "id": "m01-p17",
+        "q": "Un trabajador de la construcción de 58 años tiene el borde del bermellón inferior borroso, con zonas escamosas persistentes. ¿Qué haces?",
+        "opciones": [
+          "Lo consideras una variante normal por la edad",
+          "Indicas solo crema humectante y no lo registras",
+          "Le explicas que es línea alba",
+          "Lo registras, recomiendas protección solar labial y lo refieres para valoración"
+        ],
+        "correcta": 3,
+        "explicacion": "Es compatible con queilitis actínica, un trastorno potencialmente maligno que requiere seguimiento especializado."
+      },
+      {
+        "id": "m01-p18",
+        "q": "¿Qué zonas forman parte del recorrido indispensable para detectar cáncer bucal y suelen omitirse?",
+        "opciones": [
+          "Bordes laterales y cara ventral de la lengua y piso de la boca",
+          "Caras oclusales de los molares",
+          "Papila incisiva y rugas",
+          "Encía vestibular de incisivos superiores"
+        ],
+        "correcta": 0,
+        "explicacion": "Son los sitios intraorales de mayor riesgo y requieren mover la lengua para verlos."
+      },
+      {
+        "id": "m01-p19",
+        "q": "¿Qué amígdala forma parte del anillo de Waldeyer y se localiza en la base de la lengua?",
+        "opciones": [
+          "Amígdala faríngea",
+          "Amígdala tubárica",
+          "Amígdala lingual",
+          "Amígdala palatina"
+        ],
+        "correcta": 2,
+        "explicacion": "La amígdala lingual está en la porción faríngea de la lengua, por detrás del surco terminal."
+      },
+      {
+        "id": "m01-p20",
+        "q": "¿Qué función cumple principalmente el músculo buccinador durante la masticación?",
+        "opciones": [
+          "Elevar la mandíbula",
+          "Mantener la mejilla contra los dientes para que el alimento no se acumule en el vestíbulo",
+          "Protruir la lengua",
+          "Cerrar la nasofaringe"
+        ],
+        "correcta": 1,
+        "explicacion": "El buccinador tensa la mejilla y devuelve el alimento a las caras oclusales; no eleva la mandíbula."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "Anatomía con orientación clínica",
+      "autor": "Moore K. L., Dalley A. F., Agur A. M. R. (Wolters Kluwer)",
+      "anio": 2018
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Illustrated Anatomy of the Head and Neck",
+      "autor": "Fehrenbach M. J., Herring S. W. (Elsevier)",
+      "anio": 2017
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+      "autor": "Nanci A. (Elsevier)",
+      "anio": 2018
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "Oral Health Surveys: Basic Methods, 5th edition",
+      "autor": "Organización Mundial de la Salud",
+      "anio": 2013
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales",
+      "autor": "Secretaría de Salud",
+      "anio": 2016
+    }
+  ]
+}

@@ -1,0 +1,979 @@
+{
+  "programa": "caries-dental",
+  "modulo": 8,
+  "titulo": "Odontología mínimamente invasiva y remoción selectiva de tejido cariado",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Durante un siglo, tratar la caries significó cortar: quitar todo el tejido afectado y extender la cavidad para «prevenir». Hoy la evidencia propone lo contrario: controlar primero la enfermedad, detener las lesiones sin tocar el diente cuando es posible y, cuando hay que intervenir, quitar solo lo necesario. En este módulo conocerás la filosofía de la mínima intervención, las opciones no invasivas y microinvasivas, cómo se clasifica la dentina cariada por su dureza, las estrategias de remoción selectiva y escalonada del consenso internacional de 2016 y las técnicas que reducen aerosoles y desgaste.",
+  "objetivos": [
+    "Explicar los componentes de la odontología de mínima intervención según la declaración de la FDI de 2016.",
+    "Distinguir las opciones no invasivas, microinvasivas e invasivas para manejar lesiones de caries.",
+    "Clasificar la dentina cariada por su dureza clínica: blanda, coriácea, firme y dura.",
+    "Comparar la remoción selectiva a dentina firme, la remoción selectiva a dentina blanda, la remoción escalonada y la remoción no selectiva.",
+    "Justificar la reparación de restauraciones defectuosas frente a su reemplazo completo.",
+    "Aplicar medidas de bioseguridad y reducción de aerosoles en los procedimientos de mínima intervención."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "caries-dental/m08/portada",
+    "proporcion": "16:9",
+    "alt": "Manos de un odontólogo con guantes sosteniendo un excavador manual frente a un modelo tipodonto en un consultorio luminoso.",
+    "prompt": "Fotografía clínica horizontal de gran formato en un consultorio dental moderno, primer plano de las manos de un odontólogo con guantes de nitrilo azul sosteniendo con delicadeza un excavador manual de cucharilla frente a un modelo tipodonto de arcada inferior permanente con dientes bien formados. Al fondo desenfocado, una unidad dental limpia y un asistente con bata, cubrebocas y lentes de protección. Luz blanca neutra, profundidad de campo corta, colores naturales, ambiente sereno y preciso. Evitar: texto, logotipos, marcas, sangre, tejidos expuestos, rostros identificables, manos sin guantes, dientes deformes, instrumental oxidado."
+  },
+  "temas": [
+    {
+      "n": "8.1",
+      "titulo": "Del «extender para prevenir» a la mínima intervención",
+      "minutos": 13,
+      "enPocasPalabras": "Antes se quitaba mucho diente para curar la caries. Hoy se sabe que conviene conservar todo el diente sano posible y atacar la causa de la caries. Así los dientes duran más.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "A finales del siglo XIX y principios del XX, Greene Vardiman Black sistematizó la odontología restauradora con principios que dominaron la enseñanza durante décadas. Uno de ellos fue la **extensión por prevención**: ampliar la cavidad hasta incluir fosetas, fisuras y zonas consideradas susceptibles, para que la nueva restauración quedara en áreas «autolimpiables». En su tiempo tenía lógica: no había flúor en pastas, los materiales eran de amalgama o metal, no existía la adhesión y la caries se veía como una lesión que había que extirpar.\n\nEl conocimiento cambió. Hoy entendemos la caries como una **enfermedad dinámica mediada por la biopelícula y los azúcares**, cuyas lesiones pueden detenerse o progresar según el equilibrio entre factores patológicos y protectores (módulos 1 a 3). También sabemos que los materiales adhesivos no necesitan cavidades retentivas y que cada vez que se corta tejido sano el diente se debilita para siempre. De esa comprensión nace la **odontología de mínima intervención** (en inglés *Minimal Intervention Dentistry*, MID)."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/01",
+          "proporcion": "4:3",
+          "alt": "Dos molares de tipodonto lado a lado: uno con una cavidad oclusal extensa y otro con una preparación pequeña y conservadora.",
+          "pie": "Comparación entre una preparación extensa al estilo clásico y una preparación conservadora limitada a la lesión.",
+          "prompt": "Fotografía macro de estudio sobre fondo gris neutro, dos primeros molares inferiores permanentes de tipodonto de resina color diente colocados lado a lado en vista oclusal: el de la izquierda con una preparación oclusal amplia que recorre todas las fisuras, el de la derecha con una preparación pequeña y redondeada limitada a una sola foseta. Superficies limpias, sin restauración, iluminación de estudio difusa, enfoque nítido, anatomía oclusal correcta con cinco cúspides. Evitar: texto, flechas, etiquetas, marcas, sangre, tejidos humanos, dientes deformes, número incorrecto de cúspides, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El ciclo restaurador"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando un diente se restaura por primera vez, entra en lo que varios autores llaman **ciclo restaurador** o «espiral de muerte del diente». Ninguna restauración dura para siempre: con los años aparecen caries alrededor del margen, fracturas o desgaste, y la restauración se reemplaza. Cada reemplazo suele ser más grande que la anterior, porque al retirar el material viejo se pierde también algo de tejido sano. Tras varias vueltas, la restauración se vuelve tan grande que el diente necesita una corona, luego quizá un tratamiento de conductos, y finalmente puede perderse.\n\nEsta secuencia no es inevitable, pero sí frecuente. Por eso la decisión de hacer la **primera** restauración es tan importante: retrasarla mientras la lesión se pueda controlar sin cortar, y hacerla lo más pequeña posible cuando sea necesaria, puede añadir años de vida al diente. La misma lógica aplica a cada reemplazo: reparar una restauración defectuosa en lugar de retirarla completa interrumpe la espiral."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m08/d1",
+          "pie": "Ciclo restaurador: cada reemplazo agranda la restauración y acerca al diente a su pérdida.",
+          "descripcion": "Espiral que se abre desde el centro hacia afuera, con cinco estaciones sucesivas representadas por siluetas de un molar en corte: «Lesión sin restaurar», «Primera restauración pequeña», «Restauración más grande», «Corona», «Tratamiento de conductos» y, en el extremo exterior, «Pérdida del diente». Junto a la primera estación, una flecha lateral verde sale de la espiral con la leyenda «Control de la enfermedad y reparación» indicando la salida del ciclo.",
+          "elementos": [
+            "Lesión sin restaurar",
+            "Primera restauración pequeña",
+            "Restauración más grande",
+            "Corona",
+            "Tratamiento de conductos",
+            "Pérdida del diente",
+            "Control de la enfermedad y reparación"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una restauración no cura la caries",
+          "md": "Restaurar una cavidad devuelve forma y función al diente, pero no cambia la biopelícula, la dieta ni la saliva del paciente. Si la enfermedad sigue activa, aparecerán lesiones nuevas en otras superficies y alrededor de la propia restauración. Por eso en mínima intervención el control de la enfermedad siempre va primero o, al menos, al mismo tiempo que el tratamiento restaurador."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los componentes de la mínima intervención según la FDI"
+        },
+        {
+          "tipo": "texto",
+          "md": "La Federación Dental Internacional (FDI) publicó su primera declaración de política sobre mínima intervención en 2002 y la revisó en 2016. En esa revisión afirma que la mínima intervención es la forma contemporánea de manejar la caries dental y que el abordaje operatorio («quirúrgico») debe reservarse para cuando está específicamente indicado. La declaración agrupa la práctica en seis componentes que conviene que conozcas de memoria, porque estructuran todo este módulo y buena parte del programa."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Componentes principales de la mínima intervención (FDI, 2016)",
+          "ordenada": true,
+          "items": [
+            "Detección temprana de las lesiones y evaluación del riesgo y de la actividad de la caries.",
+            "Remineralización del esmalte y de la dentina desmineralizados.",
+            "Medidas óptimas para mantener sanos los dientes sanos.",
+            "Citas de control adaptadas a cada paciente según su riesgo.",
+            "Intervenciones operatorias mínimamente invasivas que aseguren la supervivencia del diente.",
+            "Reparación, en lugar de reemplazo, de las restauraciones defectuosas."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Observa que cuatro de los seis componentes no implican cortar el diente. La mínima intervención no es una técnica de preparación de cavidades: es una manera de **organizar la atención** alrededor del paciente y de su riesgo. En la práctica se traduce en tres niveles de intervención que verás a lo largo del módulo: **no invasivo** (sin retirar tejido: control de biopelícula, flúor, dieta), **microinvasivo** (se retira una capa de micrómetros del esmalte, como en los selladores o la infiltración con resina) e **invasivo** (se retira tejido dental, pero solo el necesario y con la técnica que menos desgaste produzca)."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/02",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección explicando a un paciente adulto, visto de espaldas, la evolución de sus lesiones en una pantalla.",
+          "pie": "La mínima intervención empieza con la evaluación del riesgo y una conversación sobre el control de la enfermedad.",
+          "prompt": "Fotografía horizontal en un consultorio dental luminoso, una odontóloga con bata clínica, cubrebocas, lentes de protección y guantes de nitrilo señala con la mano una pantalla de monitor que muestra una fotografía intraoral desenfocada sin detalles legibles; un paciente adulto sentado en la unidad dental aparece de espaldas, sin rostro visible. Luz natural complementada con luz clínica blanca, ambiente tranquilo y colaborativo, colores naturales. Evitar: texto, logotipos, marcas, rostros identificables, sangre, imágenes clínicas gráficas, falta de equipo de protección."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Mínima intervención no es «no hacer nada»",
+          "md": "Dejar una lesión sin restaurar solo es correcto si está **inactiva** o si hay un plan activo para detenerla, con seguimiento documentado. Vigilar sin controlar la enfermedad, sin registrar la lesión y sin citar al paciente es omisión, no mínima intervención. Registra cada lesión con su código, su actividad y la decisión tomada, y revalúa en la cita de control."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué cada milímetro cuenta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Conservar tejido no es solo una cuestión de principios. Las cúspides, los rebordes marginales y el techo de la cámara pulpar funcionan como vigas que dan rigidez al diente. Estudios de laboratorio clásicos mostraron que la pérdida de los rebordes marginales, como ocurre en una preparación que abarca las caras mesial, oclusal y distal, reduce de forma importante la rigidez de la corona y aumenta el riesgo de fractura cuspídea. Cuanto más pequeña es la preparación, más se parece el diente restaurado a un diente sano en su comportamiento mecánico.\n\nTambién hay razones biológicas. Cada milímetro de dentina que se retira acerca la cavidad a la pulpa y abre más túbulos dentinarios, lo que aumenta la sensibilidad posoperatoria y la agresión pulpar. Y hay razones prácticas: las restauraciones pequeñas son más rápidas, suelen requerir menos anestesia, cuestan menos y, si fallan, dejan opciones para una reparación sencilla."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Prioridades del consenso internacional cuando una restauración es inevitable (ICCC, 2016)",
+          "ordenada": true,
+          "items": [
+            "Conservar el tejido sano y el tejido que puede remineralizarse.",
+            "Lograr un sellado restaurador hermético.",
+            "Mantener la salud de la pulpa.",
+            "Maximizar el éxito y la duración de la restauración."
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El consenso añade una frase que resume el cambio de paradigma: el tejido cariado se retira **solo para crear las condiciones de una restauración duradera**, no para «eliminar bacterias». Esta idea, que desarrollaremos en los temas 8.3 y 8.4, parecía una herejía hace treinta años y hoy es la base de la enseñanza en cariología."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Componentes de la FDI en la práctica",
+          "instruccion": "Relaciona cada componente de la mínima intervención con un ejemplo clínico.",
+          "pares": [
+            { "a": "Detección temprana y evaluación del riesgo", "b": "Registrar lesiones con ICDAS y clasificar el riesgo del paciente" },
+            { "a": "Remineralización", "b": "Aplicar flúor tópico sobre una mancha blanca activa" },
+            { "a": "Citas de control adaptadas", "b": "Citar cada tres meses a un paciente de riesgo alto y cada año a uno de riesgo bajo" },
+            { "a": "Intervención operatoria mínimamente invasiva", "b": "Remoción selectiva de tejido cariado en una lesión cavitada profunda" },
+            { "a": "Reparar en lugar de reemplazar", "b": "Corregir solo el margen defectuoso de una resina que en lo demás está bien" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/03",
+          "proporcion": "1:1",
+          "alt": "Molar de tipodonto con una restauración pequeña y bien adaptada del color del diente.",
+          "pie": "Una restauración pequeña conserva cúspides y rebordes, que son los que dan resistencia al diente.",
+          "prompt": "Fotografía macro cuadrada de un primer molar superior permanente de tipodonto en vista oclusal sobre fondo negro mate, con una restauración pequeña del color del diente en la fosa central, perfectamente integrada, cúspides y rebordes marginales intactos, anatomía oclusal correcta con cuatro cúspides principales. Iluminación de flash anular clínica, enfoque nítido de borde a borde, colores naturales. Evitar: texto, etiquetas, flechas, marcas, sangre, encía inflamada, número incorrecto de cúspides, restauración sobredimensionada, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de planear cualquier restauración, hazte tres preguntas y anota la respuesta en el expediente: **¿la lesión está activa?**, **¿está cavitada y es limpiable por el paciente?** y **¿qué estoy haciendo para controlar la enfermedad en esta boca?** Si no puedes responder la tercera, el plan de tratamiento está incompleto, por muy buena que sea la restauración que vas a colocar. Con el tiempo, estas tres preguntas se vuelven automáticas y cambian la manera en que miras cada boca: primero la enfermedad y su control, después la lesión y, al final, la técnica restauradora que mejor la resuelva."
+        }
+      ],
+      "glosario": [
+        { "termino": "Mínima intervención", "definicion": "Enfoque de manejo de la caries que prioriza la detección temprana, el control de la enfermedad y la preservación del tejido dental." },
+        { "termino": "Extensión por prevención", "definicion": "Principio clásico que ampliaba la cavidad a zonas susceptibles; hoy se considera innecesario con materiales adhesivos y control de la enfermedad." },
+        { "termino": "Ciclo restaurador", "definicion": "Secuencia de reemplazos cada vez mayores de una restauración, que puede terminar en la pérdida del diente." },
+        { "termino": "Intervención microinvasiva", "definicion": "Tratamiento que retira solo una capa microscópica de esmalte, como el sellador o la infiltración con resina." },
+        { "termino": "Actividad de la lesión", "definicion": "Condición de una lesión de caries que indica si está progresando (activa) o detenida (inactiva)." }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.1-1",
+          "q": "¿Qué propone la declaración de la FDI de 2016 sobre el abordaje operatorio de la caries?",
+          "opciones": ["Que se use solo cuando esté específicamente indicado", "Que se aplique a toda lesión detectada", "Que se extienda la cavidad a todas las fisuras", "Que se evite siempre, aunque haya dolor"],
+          "correcta": 0,
+          "explicacion": "La FDI considera la mínima intervención el enfoque contemporáneo y reserva el abordaje operatorio para cuando está indicado."
+        },
+        {
+          "id": "t8.1-2",
+          "q": "¿Por qué el ciclo restaurador acerca al diente a su pérdida?",
+          "opciones": ["Porque los materiales actuales son tóxicos", "Porque cada reemplazo suele agrandar la restauración y retirar tejido sano", "Porque las restauraciones producen caries por sí mismas", "Porque el flúor debilita las restauraciones"],
+          "correcta": 1,
+          "explicacion": "Al retirar una restauración vieja se pierde tejido; con cada vuelta el diente queda más debilitado."
+        },
+        {
+          "id": "t8.1-3",
+          "q": "¿Cuál de estos tratamientos es microinvasivo?",
+          "opciones": ["Cepillado con pasta fluorada", "Corona completa", "Infiltración de una lesión proximal con resina", "Asesoría dietética"],
+          "correcta": 2,
+          "explicacion": "La infiltración retira solo una capa microscópica de esmalte; el cepillado y la dieta son no invasivos, y la corona es invasiva."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Minimal Intervention Dentistry (MID) for Managing Dental Caries. Declaración de política", "autor": "FDI World Dental Federation", "anio": 2016, "url": "https://www.fdiworlddental.org/minimal-intervention-dentistry-mid-managing-dental-caries" },
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on terminology (Advances in Dental Research 28(2):49-57)", "autor": "Innes N. P. T., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la declaración de la FDI y textos de cariología y operatoria dental", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "8.2",
+      "titulo": "Detener sin cortar: manejo no invasivo y microinvasivo",
+      "minutos": 13,
+      "enPocasPalabras": "Muchas caries pequeñas se pueden detener sin usar la fresa. Se logra limpiando bien, usando flúor y, a veces, sellando la zona con materiales especiales. El dentista vigila que la lesión no avance.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El primer escalón de la mínima intervención consiste en **detener lesiones sin retirar tejido**. Funciona porque la caries no es una infección que haya que extirpar, sino el resultado de una biopelícula activa sobre una superficie. Si se desorganiza esa biopelícula de manera regular y se favorece la remineralización, la lesión puede **inactivarse**: deja de progresar, su superficie se vuelve dura y brillante y se mantiene estable durante años.\n\nEste principio aplica sobre todo a las lesiones **no cavitadas** (manchas blancas o cafés con superficie íntegra) y, sorprendentemente para muchos clínicos, también a algunas lesiones **cavitadas** cuando la cavidad es abierta y el paciente puede limpiarla. Lo que define si una lesión necesita una restauración no es solo su tamaño, sino si la biopelícula que contiene puede controlarse."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/04",
+          "proporcion": "4:3",
+          "alt": "Superficie vestibular de premolares con una lesión blanca opaca activa junto a otra lesión blanca brillante inactiva.",
+          "pie": "Lesión activa (blanca, opaca y rugosa) frente a lesión inactiva (brillante y lisa) en la superficie vestibular.",
+          "prompt": "Fotografía clínica intraoral macro de la superficie vestibular de dos premolares superiores permanentes de un adulto joven, limpios y secos, cerca del margen gingival: en el primero una mancha blanca opaca, mate y ligeramente rugosa; en el segundo una mancha blanca lisa y brillante con bordes definidos. Encía sana rosa pálido, retractor de labios transparente apenas visible en el borde, iluminación clínica uniforme, enfoque nítido. Evitar: texto, flechas, etiquetas, sangre, inflamación gingival, rostro, labios completos, dientes deformes, instrumental sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Medidas no invasivas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las medidas no invasivas actúan sobre las causas de la enfermedad y sobre el equilibrio mineral. Son cuatro y se combinan según el riesgo del paciente: **control mecánico de la biopelícula** (cepillado dirigido a la superficie con la lesión, limpieza interproximal), **flúor** en sus distintos vehículos (estudiado en el módulo 5), **modificación de la dieta**, sobre todo de la frecuencia de azúcares libres (módulo 7), y **estimulación salival** cuando hay boca seca.\n\nLa clave clínica es que la medida llegue a la superficie concreta de la lesión. Una mancha blanca activa en el cuello de un molar inferior no se detendrá si el paciente cepilla bien los incisivos pero nunca alcanza ese sitio. Muéstrale la lesión en un espejo o con una fotografía intraoral, enséñale a dirigir el cepillo hacia ella y revisa en la siguiente cita si la superficie cambió de opaca a brillante."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una cavidad que el paciente aprendió a limpiar",
+          "md": "Un hombre de 58 años presenta en la cara vestibular de un canino inferior una lesión cavitada amplia y poco profunda, con dentina reblandecida y placa visible. La cavidad es abierta y accesible al cepillo. Tras explicarle la situación, el equipo le enseña a limpiar la zona con un cepillo de cabeza pequeña y pasta fluorada, se refuerza el flúor tópico profesional y se ajusta la dieta. A los seis meses la dentina expuesta está dura, oscura y brillante: la lesión se inactivó sin necesidad de restaurarla. Se registra y se mantiene en control."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Control de cavidades sin restaurar"
+        },
+        {
+          "tipo": "texto",
+          "md": "El caso anterior ilustra el **control de cavidades no restaurativo** (en inglés *non-restorative cavity control*). Se aplica a lesiones cavitadas en las que la cavidad es amplia, abierta y accesible a la higiene. En algunos casos, sobre todo en dientes temporales, el odontólogo amplía ligeramente la entrada de la cavidad para que el cepillo llegue, retirando solo los bordes de esmalte socavado. La lesión se convierte así en una superficie limpiable que puede inactivarse con cepillado y flúor.\n\nOtra herramienta para detener lesiones cavitadas es el **fluoruro diamino de plata**, un producto tópico que combina el efecto antibacteriano de la plata con el flúor. Su principal limitación es estética: las lesiones detenidas se tiñen de negro de forma permanente. Su indicación, la técnica y el consentimiento informado, que debe mencionar ese cambio de color, son decisión del odontólogo, y su uso en niños se trata en el módulo 10."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Opciones para detener lesiones sin restauración convencional",
+          "columnas": ["Opción", "Nivel", "Lesiones en las que se considera", "Limitaciones"],
+          "filas": [
+            ["Control de biopelícula, flúor y dieta", "No invasivo", "Lesiones no cavitadas activas y cavidades limpiables", "Depende de la constancia del paciente"],
+            ["Control de cavidades no restaurativo", "No invasivo", "Cavidades amplias y abiertas, accesibles al cepillo", "Exige seguimiento; no devuelve la forma"],
+            ["Fluoruro diamino de plata", "No invasivo", "Lesiones cavitadas en pacientes con dificultad para recibir tratamiento convencional", "Tinción negra permanente de la lesión"],
+            ["Sellador sobre lesión no cavitada", "Microinvasivo", "Lesiones no cavitadas en fosetas y fisuras", "Requiere control de humedad y revisión de retención"],
+            ["Infiltración con resina", "Microinvasivo", "Lesiones proximales y vestibulares no cavitadas", "No sirve para lesiones cavitadas"]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Sellar e infiltrar: el nivel microinvasivo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando las medidas no invasivas no bastan o la superficie es difícil de limpiar, se puede crear una **barrera física** que aísle la lesión de la biopelícula. En fosetas y fisuras, el sellador cumple esa función sobre lesiones no cavitadas; su técnica se estudió en el módulo 6.\n\nEn superficies lisas, sobre todo proximales, existe la **infiltración con resina**. La idea es ingeniosa: una lesión no cavitada es un esmalte poroso bajo una capa superficial relativamente íntegra. Se acondiciona la superficie con un ácido que elimina esa capa, se seca la lesión y se aplica una resina de muy baja viscosidad que, por capilaridad, penetra en los poros del cuerpo de la lesión y se polimeriza dentro. Así se bloquean las vías por las que entran los ácidos y se detiene la progresión, sin preparar el diente. Como efecto adicional, las manchas blancas vestibulares se vuelven menos visibles, porque la resina cambia la forma en que el esmalte refleja la luz."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m08/d2",
+          "pie": "Escalera de intervención: de lo no invasivo a lo invasivo según el estado de la lesión.",
+          "descripcion": "Escalera de cuatro peldaños ascendentes de izquierda a derecha, coloreada de verde a naranja. Peldaño 1 «No invasivo: biopelícula, flúor, dieta». Peldaño 2 «Microinvasivo: sellador, infiltración». Peldaño 3 «Invasivo mínimo: remoción selectiva y restauración adhesiva». Peldaño 4 «Invasivo extenso: restauraciones grandes, coronas». Debajo, una flecha horizontal larga con la leyenda «Más pérdida de tejido» y, encima, una flecha opuesta con la leyenda «Preferir siempre el peldaño más bajo que controle la lesión».",
+          "elementos": [
+            "No invasivo: biopelícula, flúor, dieta",
+            "Microinvasivo: sellador, infiltración",
+            "Invasivo mínimo: remoción selectiva",
+            "Invasivo extenso: coronas",
+            "Más pérdida de tejido",
+            "Preferir el peldaño más bajo eficaz"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué una lesión sellada deja de avanzar",
+          "md": "Las bacterias de la dentina cariada dependen de los nutrientes que llegan desde la cavidad oral, sobre todo de los azúcares. Cuando una lesión queda sellada de forma hermética, ese suministro se interrumpe: la composición de la microbiota cambia, el número de bacterias viables disminuye y la lesión deja de progresar. Estudios clínicos con restauraciones selladas sobre dentina cariada, algunos con seguimiento de alrededor de una década, mostraron lesiones detenidas bajo restauraciones intactas. Esta observación es el fundamento biológico de la infiltración, de los selladores sobre lesiones no cavitadas y de la remoción selectiva que verás en los temas 8.3 y 8.4. El requisito crítico es la **calidad del sellado**: si el margen se filtra, el suministro de nutrientes se restablece."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/05",
+          "proporcion": "4:3",
+          "alt": "Dientes posteriores de tipodonto con una banda separadora y un aplicador fino en el espacio interproximal.",
+          "pie": "La infiltración con resina trata lesiones proximales no cavitadas sin preparar el diente.",
+          "prompt": "Fotografía clínica macro sobre un modelo tipodonto de arcada superior permanente, vista lateral de un premolar y un primer molar con una cuña de madera clara en el espacio interproximal y una tira aplicadora plástica delgada colocada entre ambos dientes, sostenida por una mano con guante de nitrilo azul en el borde del encuadre. Iluminación clínica blanca uniforme, fondo oscuro desenfocado, colores naturales, enfoque nítido en el punto de contacto. Evitar: texto, logotipos, marcas, sangre, encía humana inflamada, rostro, manos sin guantes, anatomía dental incorrecta."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Hay que cortar para detener la caries?",
+          "afirmaciones": [
+            { "texto": "Una lesión no cavitada puede inactivarse con control de la biopelícula y flúor.", "verdadero": true, "explicacion": "Al controlar la biopelícula y favorecer la remineralización, la lesión puede detenerse sin retirar tejido." },
+            { "texto": "Toda lesión cavitada necesita restaurarse de inmediato.", "verdadero": false, "explicacion": "Algunas cavidades abiertas y limpiables pueden inactivarse con control no restaurativo y seguimiento." },
+            { "texto": "La infiltración con resina está indicada para lesiones proximales ya cavitadas.", "verdadero": false, "explicacion": "Está pensada para lesiones no cavitadas, en las que la resina puede penetrar en el esmalte poroso." },
+            { "texto": "El fluoruro diamino de plata tiñe de negro las lesiones que detiene.", "verdadero": true, "explicacion": "Es su principal limitación y debe explicarse en el consentimiento informado." },
+            { "texto": "Para que una lesión sellada se detenga, el sellado debe ser hermético.", "verdadero": true, "explicacion": "Si el margen se filtra, vuelven a llegar nutrientes a las bacterias y la lesión puede avanzar." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/06",
+          "proporcion": "3:4",
+          "alt": "Mano de un adulto sujetando un cepillo dental de cabeza pequeña junto a un espejo de lavabo.",
+          "pie": "Dirigir el cepillo a la superficie concreta de la lesión es la base del manejo no invasivo.",
+          "prompt": "Fotografía vertical en un baño doméstico limpio y luminoso, primer plano de la mano de un adulto sujetando un cepillo dental de cabeza pequeña y cerdas suaves con una porción de pasta del tamaño de un chícharo, frente a un lavabo blanco y un espejo que refleja solo azulejos claros. Luz natural suave, enfoque en el cepillo, fondo desenfocado, colores naturales. Evitar: texto, marcas, logotipos, rostros, reflejos de personas, pasta en exceso, desorden, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando decidas no restaurar una lesión, documenta su **línea base**: código ICDAS, actividad, fotografía intraoral si es posible y, en lesiones proximales, la radiografía de referencia. Anota qué medida aplicaste y cuándo revalorarás. Comparar la misma superficie en el mismo encuadre meses después es la forma más convincente de demostrar, al paciente y a ti mismo, que el manejo no invasivo funcionó.\n\nAjusta el intervalo de revisión al riesgo del paciente: más corto cuando hay varias lesiones activas o la higiene es irregular, más largo cuando las lesiones ya se ven inactivas. Si en el control la lesión progresó pese a las medidas, sube un peldaño en la escalera de intervención en lugar de insistir con la misma estrategia."
+        }
+      ],
+      "glosario": [
+        { "termino": "Lesión inactiva", "definicion": "Lesión de caries detenida, con superficie dura y generalmente brillante, que no progresa." },
+        { "termino": "Control de cavidades no restaurativo", "definicion": "Manejo de una cavidad abierta y limpiable mediante higiene y flúor, sin restaurarla." },
+        { "termino": "Fluoruro diamino de plata", "definicion": "Producto tópico con plata y flúor que detiene lesiones cavitadas y las tiñe de negro." },
+        { "termino": "Infiltración con resina", "definicion": "Técnica microinvasiva que introduce una resina de muy baja viscosidad en los poros de una lesión no cavitada para detenerla." },
+        { "termino": "Capilaridad", "definicion": "Fenómeno por el que un líquido penetra en espacios muy pequeños sin presión externa." }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.2-1",
+          "q": "¿Qué determina, además del tamaño, si una lesión cavitada podría manejarse sin restaurar?",
+          "opciones": ["El color del diente vecino", "La edad del odontólogo", "La marca de pasta que usa el paciente", "Que la cavidad sea abierta y el paciente pueda limpiarla"],
+          "correcta": 3,
+          "explicacion": "Si la biopelícula de la cavidad puede controlarse, la lesión puede inactivarse con higiene y flúor."
+        },
+        {
+          "id": "t8.2-2",
+          "q": "¿En qué lesiones se indica la infiltración con resina?",
+          "opciones": ["Lesiones lisas o proximales no cavitadas", "Lesiones profundas con dolor espontáneo", "Cavidades extensas en dentina", "Restauraciones fracturadas"],
+          "correcta": 0,
+          "explicacion": "La resina penetra en el esmalte poroso de lesiones no cavitadas; no sustituye una restauración en cavidades."
+        },
+        {
+          "id": "t8.2-3",
+          "q": "¿Qué debe incluir el consentimiento informado antes de aplicar fluoruro diamino de plata?",
+          "opciones": ["Que el diente quedará más blanco", "Que se necesitará anestesia", "Que las lesiones detenidas quedarán teñidas de negro", "Que se retirará todo el tejido cariado"],
+          "correcta": 2,
+          "explicacion": "La tinción negra permanente es el efecto más relevante para el paciente."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on terminology (Advances in Dental Research 28(2):49-57)", "autor": "Innes N. P. T., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Minimal Intervention Dentistry (MID) for Managing Dental Caries. Declaración de política", "autor": "FDI World Dental Federation", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de cariología sobre manejo no invasivo y microinvasivo de lesiones", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "8.3",
+      "titulo": "La dentina cariada: capas, dureza y qué conservar",
+      "minutos": 13,
+      "enPocasPalabras": "Dentro de una caries, la parte de afuera está muy dañada y la de adentro todavía puede recuperarse. El dentista distingue esas capas por lo duras o blandas que se sienten. Así sabe qué quitar y qué dejar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Para entender la remoción selectiva necesitas imaginar cómo es una lesión de caries que ya llegó a la dentina. No es un hueco con bacterias y tejido sano alrededor, sino un **gradiente**: desde la superficie hacia la pulpa, la dentina pasa de estar completamente destruida a estar casi intacta. La pregunta clínica no es «¿dónde termina la caries?», porque no hay una línea nítida, sino «¿hasta dónde necesito retirar tejido para que la restauración funcione y la pulpa se mantenga sana?».\n\nEn la década de 1970, la escuela japonesa de Fusayama describió dos capas de dentina cariada con comportamiento distinto. La **capa externa**, muy desmineralizada, con colágeno desnaturalizado de forma irreversible y abundantes bacterias, no puede remineralizarse. La **capa interna**, parcialmente desmineralizada, conserva su colágeno con la estructura que permite la remineralización y contiene pocas bacterias. Durante años se habló de dentina «infectada» y dentina «afectada»."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/07",
+          "proporcion": "3:4",
+          "alt": "Ilustración realista de un corte longitudinal de un molar con una lesión de caries que avanza en forma de cono hacia la pulpa.",
+          "pie": "Corte de un molar con lesión en dentina: el tejido cambia de forma gradual desde la superficie hacia la pulpa.",
+          "prompt": "Ilustración médica realista de un corte longitudinal de un primer molar inferior permanente con dos raíces, mostrando esmalte translúcido, dentina amarillo claro, cámara pulpar rosada y conductos; desde una foseta oclusal, una lesión de caries de color café que se ensancha en dentina en forma de cono hacia la pulpa sin alcanzarla, con un degradado de café oscuro en la superficie a amarillo pálido en la zona profunda. Fondo blanco limpio, iluminación uniforme, estilo de atlas anatómico. Evitar: texto, etiquetas, flechas, números, sangre, anatomía incorrecta, raíces fusionadas, colores fluorescentes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "De «infectada» y «afectada» a la dureza clínica"
+        },
+        {
+          "tipo": "texto",
+          "md": "El problema de esas etiquetas es que no se pueden ver ni medir en el sillón. Ninguna prueba clínica dice con certeza dónde dejan de existir bacterias. Además, las investigaciones mostraron que quitar todas las bacterias no es necesario ni posible: incluso tras una remoción «completa» quedan microorganismos en los túbulos.\n\nPor eso, en 2016 el **Consenso Internacional de Caries** (*International Caries Consensus Collaboration*, ICCC) propuso describir la dentina con un criterio clínico que sí se puede aplicar: su **dureza** al tacto con un instrumento. Define cuatro estados que conviene manejar con precisión, porque son la base de las estrategias de remoción del tema 8.4."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Estados de la dentina cariada según su dureza (ICCC, 2016)",
+          "columnas": ["Estado", "Cómo se percibe", "Significado clínico"],
+          "filas": [
+            ["Dentina blanda", "Se deforma al presionar con un instrumento duro y se levanta con facilidad con un excavador, casi sin fuerza", "Muy desmineralizada; corresponde a las capas más externas de la lesión"],
+            ["Dentina coriácea", "No se deforma al presionar, pero se levanta sin mucha fuerza; tiene consistencia parecida al cuero", "Estado intermedio entre blanda y firme"],
+            ["Dentina firme", "Resiste físicamente el excavador; hay que hacer cierta fuerza para levantarla", "Parcialmente desmineralizada; base adecuada para la restauración"],
+            ["Dentina dura", "Hay que hacer fuerza con una fresa o un instrumento cortante afilado; se escucha un sonido «crujiente» con la sonda", "Dentina sana o casi sana"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m08/d3",
+          "pie": "Gradiente de dureza de la dentina cariada desde la superficie de la lesión hasta la pulpa.",
+          "descripcion": "Corte esquemático ampliado de una lesión en dentina, dibujado como un cono invertido sobre la cámara pulpar. De la superficie hacia la pulpa, cuatro bandas de color de oscuro a claro rotuladas «Dentina blanda», «Dentina coriácea», «Dentina firme» y «Dentina dura». A la izquierda, una barra vertical con degradado rotulada «Más bacterias y más desmineralización» arriba y «Menos bacterias, colágeno remineralizable» abajo. En la parte inferior, la «Pulpa» en rosa. A los lados, en los márgenes de la cavidad, una banda gris rotulada «Periferia: esmalte y dentina dura para el sellado».",
+          "elementos": [
+            "Dentina blanda",
+            "Dentina coriácea",
+            "Dentina firme",
+            "Dentina dura",
+            "Pulpa",
+            "Periferia: esmalte y dentina dura para el sellado",
+            "Más bacterias y desmineralización",
+            "Colágeno remineralizable"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Lo que pasa en la profundidad de la lesión",
+          "md": "Por delante del frente bacteriano, la dentina no permanece pasiva. Los odontoblastos y el complejo dentinopulpar responden a la agresión con **dentina esclerótica** (túbulos ocluidos por depósitos minerales, que reducen la permeabilidad) y, en la interfase con la pulpa, con **dentina terciaria** (reaccionaria o reparativa, según la intensidad del estímulo). Por eso una lesión de avance lento suele tener dentina más dura y oscura, y una lesión activa y rápida, dentina más blanda, húmeda y clara. Los ácidos y las enzimas que degradan el colágeno (metaloproteinasas de la matriz y catepsinas, en parte de origen dentinario) explican que la capa externa pierda la estructura de su colágeno. En la capa interna, el colágeno conservado actúa como andamio para la remineralización una vez que la lesión se sella y se interrumpe el suministro de nutrientes a las bacterias."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Centro y periferia: dos objetivos distintos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una idea central del consenso es que la cavidad tiene **dos zonas con objetivos diferentes**. En la **periferia**, es decir, en las paredes que rodean la lesión y en la unión amelodentinaria, se busca dentina dura y esmalte sano, porque ahí se forma el sellado de la restauración. Un margen sobre dentina blanda filtraría y dejaría pasar nutrientes y bacterias.\n\nEn el **centro**, sobre la pulpa, el objetivo depende de la profundidad. En lesiones superficiales o moderadas, la prioridad es la longevidad de la restauración. En lesiones profundas, la prioridad es **proteger la pulpa**: conviene dejar tejido desmineralizado sobre ella antes que arriesgar una exposición pulpar. Separar mentalmente centro y periferia es lo que permite conservar tejido sin comprometer el sellado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El color y los tintes no son buen criterio",
+          "md": "El color de la dentina cariada varía con la velocidad de la lesión y los pigmentos de la dieta: una dentina oscura puede estar dura e inactiva y una dentina clara puede estar blanda. Los tintes detectores de caries tiñen la matriz orgánica desmineralizada, incluida la capa interna que puede remineralizarse, por lo que usarlos como único criterio favorece la remoción excesiva. La dureza, valorada con un excavador afilado y presión controlada, es el criterio clínico recomendado."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/08",
+          "proporcion": "1:1",
+          "alt": "Juego de excavadores manuales de distintos tamaños sobre una charola de instrumental estéril.",
+          "pie": "Los excavadores afilados permiten valorar la dureza de la dentina y retirar selectivamente el tejido blando.",
+          "prompt": "Fotografía cuadrada de estudio de cuatro excavadores dentales de acero inoxidable de distintos tamaños de cucharilla, alineados en paralelo sobre una charola metálica perforada con un campo estéril azul claro, todos limpios y brillantes. Iluminación difusa de estudio con reflejos suaves en el metal, enfoque nítido en las puntas, fondo neutro, colores naturales y fríos. Evitar: texto, logotipos, marcas grabadas legibles, sangre, residuos, óxido, manos, rostros, instrumental desordenado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Humedad y color: indicadores complementarios"
+        },
+        {
+          "tipo": "texto",
+          "md": "El consenso recomienda la dureza como **criterio principal** para valorar, describir y registrar la dentina, y acepta la **humedad** (húmeda, ligeramente húmeda o seca) y el **color** (pálido o amarillento frente a café oscuro o negro) como indicadores adicionales. La lógica es que la dentina más dura, más oscura y más seca suele reflejar una lesión detenida, mientras que la dentina blanda, húmeda y clara suele corresponder a una lesión activa de avance rápido. Ninguno de los dos sirve por sí solo, pero combinados con la dureza ayudan a interpretar lo que ves.\n\nEn la práctica, la valoración se hace con un **excavador afilado** y presión controlada, no con la punta de una sonda empujada con fuerza, y siempre en un campo limpio, iluminado y aislado. Valora primero la periferia, donde buscas tejido duro, y después el centro, donde la meta depende de la profundidad de la lesión. Describe lo que encuentras con las palabras del consenso: así tus notas serán comparables con las de cualquier colega que use la misma terminología.\n\nRecuerda también que todos estos criterios son **indicadores sustitutos**: no garantizan por sí mismos el resultado que importa al paciente, que es conservar su diente sin dolor y con la pulpa sana. Por eso las decisiones se acompañan siempre de seguimiento clínico y radiográfico."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "De la superficie a la pulpa",
+          "instruccion": "Ordena los estados de la dentina cariada tal como se encuentran desde la superficie de una lesión profunda hasta el tejido sano.",
+          "elementos": [
+            "Dentina blanda",
+            "Dentina coriácea",
+            "Dentina firme",
+            "Dentina dura"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/09",
+          "proporcion": "4:3",
+          "alt": "Corte de un molar extraído montado para estudio, con una lesión café en dentina vista en laboratorio.",
+          "pie": "Los cortes de dientes extraídos permiten estudiar en el laboratorio el gradiente de la lesión en dentina.",
+          "prompt": "Fotografía de laboratorio académico, un molar humano extraído limpio y cortado longitudinalmente por la mitad, montado sobre un portaobjetos de vidrio bajo una lupa estereoscópica, mostrando esmalte, dentina y una lesión café en forma de cono que avanza hacia la cámara pulpar vacía. Mano con guante de nitrilo sosteniendo pinzas en el borde del encuadre, mesa de laboratorio blanca, luz fría uniforme, enfoque nítido en el corte. Evitar: texto, etiquetas, logotipos, sangre, tejido blando, rostros, manos sin guantes, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el estudio"
+        },
+        {
+          "tipo": "texto",
+          "md": "En el laboratorio de preclínica, practica la valoración de dureza en dientes extraídos con lesiones reales (manejados con las medidas de bioseguridad de tu institución). Primero presiona con la sonda y describe lo que sientes con las palabras del consenso: blanda, coriácea, firme o dura. Después compara tu descripción con la de un compañero y la de tu profesor. Calibrar el tacto requiere repetición, y es la habilidad que hace posible la remoción selectiva. Anota además el color y la humedad de cada muestra para comprobar por ti mismo que no siempre coinciden con la dureza."
+        }
+      ],
+      "glosario": [
+        { "termino": "Dentina blanda", "definicion": "Dentina cariada que se deforma al presionar y se retira con muy poca fuerza." },
+        { "termino": "Dentina coriácea", "definicion": "Dentina con consistencia de cuero: no se deforma al presionar, pero se levanta sin mucha fuerza." },
+        { "termino": "Dentina firme", "definicion": "Dentina que resiste el excavador y requiere cierta fuerza para levantarse." },
+        { "termino": "Dentina dura", "definicion": "Dentina sana o casi sana que solo se corta con fresa o instrumento afilado con fuerza." },
+        { "termino": "Dentina esclerótica", "definicion": "Dentina con túbulos ocluidos por minerales, que reduce la permeabilidad frente a la lesión." },
+        { "termino": "Unión amelodentinaria", "definicion": "Límite entre el esmalte y la dentina; zona clave para el sellado periférico de una restauración." }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.3-1",
+          "q": "¿Qué criterio clínico propuso el consenso ICCC de 2016 para describir la dentina cariada?",
+          "opciones": ["El color", "La dureza al tacto con un instrumento", "La presencia de bacterias vista a simple vista", "La temperatura"],
+          "correcta": 1,
+          "explicacion": "La dureza es un criterio aplicable en el sillón; el color y la presencia bacteriana no se pueden valorar con fiabilidad."
+        },
+        {
+          "id": "t8.3-2",
+          "q": "¿Qué se busca en la periferia de la cavidad?",
+          "opciones": ["Dejar dentina blanda para proteger la pulpa", "Exponer la pulpa", "Usar tinte detector como único criterio", "Esmalte sano y dentina dura para lograr un buen sellado"],
+          "correcta": 3,
+          "explicacion": "El sellado de la restauración depende de márgenes sobre tejido duro."
+        },
+        {
+          "id": "t8.3-3",
+          "q": "¿Por qué no se recomienda usar tintes detectores de caries como único criterio?",
+          "opciones": ["Porque tiñen también dentina desmineralizada que podría remineralizarse y favorecen la remoción excesiva", "Porque son tóxicos para la pulpa", "Porque solo tiñen el esmalte", "Porque están prohibidos en México"],
+          "correcta": 0,
+          "explicacion": "Tiñen la matriz orgánica desmineralizada, incluida la capa interna que puede conservarse."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on terminology (Advances in Dental Research 28(2):49-57)", "autor": "Innes N. P. T., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de histopatología de la caries en dentina y del complejo dentinopulpar", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "8.4",
+      "titulo": "Estrategias de remoción: selectiva, escalonada y no selectiva",
+      "minutos": 14,
+      "enPocasPalabras": "Cuando hay que arreglar una caries profunda, ya no se quita todo el tejido dañado. Se deja una capa cerca del nervio y se sella muy bien encima. Así el nervio del diente se protege y la caries deja de avanzar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cuando una lesión cavitada no puede limpiarse ni sellarse con medidas no invasivas o microinvasivas, está indicada una restauración. La pregunta siguiente es **cuánto tejido retirar**. El consenso ICCC de 2016 dio nombre a cuatro estrategias, ordenadas de la más conservadora a la más radical. Conocerlas con precisión te permitirá entender las decisiones de tus profesores y especialistas, leer la literatura actual y explicar al paciente por qué se deja tejido desmineralizado en su diente.\n\nTodas comparten dos condiciones: la **periferia** de la cavidad se lleva a tejido duro para lograr el sellado, y la estrategia se elige para un diente con **pulpa vital** sin signos ni síntomas de inflamación pulpar irreversible. El diagnóstico pulpar, con sus pruebas e historia del dolor, se estudia en el programa de endodoncia y es parte indispensable de la decisión."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las cuatro estrategias del consenso"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Estrategias de remoción de tejido cariado (ICCC, 2016)",
+          "columnas": ["Estrategia", "Qué se deja en el centro de la cavidad", "Cuándo la recomienda el consenso"],
+          "filas": [
+            ["Remoción selectiva a dentina blanda", "Dentina blanda sobre la pulpa; periferia en dentina dura", "Lesiones cavitadas profundas en dientes temporales y permanentes"],
+            ["Remoción escalonada", "Primera etapa: dentina blanda bajo una restauración provisional duradera; segunda etapa, de 6 a 12 meses después: se retira hasta dentina coriácea o firme", "Alternativa en lesiones profundas de dientes permanentes"],
+            ["Remoción selectiva a dentina firme", "Dentina firme o coriácea en el centro; periferia en dentina dura", "Lesiones cavitadas superficiales o moderadamente profundas"],
+            ["Remoción no selectiva a dentina dura", "Solo dentina dura en toda la cavidad", "Ya no se recomienda; antes se llamaba remoción completa"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La **remoción selectiva a dentina firme** es la estrategia para lesiones que no se acercan peligrosamente a la pulpa. Se deja en el centro una dentina que resiste el excavador, una base mecánica suficiente para la restauración, y se elimina lo blando que no aportaría soporte.\n\nEn las **lesiones profundas**, las que en la radiografía alcanzan el tercio o el cuarto interno de la dentina, quitar todo el tejido desmineralizado conlleva un riesgo alto de exponer la pulpa. Ahí el consenso recomienda la **remoción selectiva a dentina blanda**: se deja tejido blando sobre la pulpa y se coloca una restauración con un sellado hermético. En dientes permanentes, una alternativa es la **remoción escalonada**: en una primera cita se deja dentina blanda y se coloca una restauración provisional sellada; tras un periodo de 6 a 12 meses, durante el cual la dentina remanente se endurece y la pulpa forma dentina terciaria, se reabre la cavidad, se reevalúan el color y la dureza, se retira tejido hasta que sobre la pulpa queda dentina coriácea o firme y se coloca la restauración definitiva. En dientes temporales, por su vida limitada, el consenso no considera necesaria la remoción escalonada."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/10",
+          "proporcion": "4:3",
+          "alt": "Ilustración de tres cortes de molar que comparan la remoción selectiva a dentina blanda, la selectiva a dentina firme y la no selectiva.",
+          "pie": "Tres estrategias de remoción en una lesión profunda: cuánto tejido queda sobre la pulpa en cada una.",
+          "prompt": "Ilustración médica realista de tres cortes longitudinales idénticos de un primer molar inferior permanente colocados lado a lado sobre fondo blanco, cada uno con una cavidad oclusal profunda: en el primero queda una capa café clara de tejido sobre la cámara pulpar bajo una restauración del color del diente; en el segundo una capa más delgada de tejido amarillo pálido; en el tercero la cavidad llega muy cerca de la pulpa sin tejido cariado remanente. Esmalte, dentina y pulpa rosada bien diferenciados, estilo de atlas. Evitar: texto, etiquetas, números, flechas, sangre, exposición pulpar, anatomía incorrecta, colores fluorescentes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Qué dice la evidencia sobre las lesiones profundas",
+          "md": "Los ensayos clínicos que compararon estrategias en lesiones profundas mostraron que dejar dentina desmineralizada sobre la pulpa **reduce de manera importante el riesgo de exposición pulpar** frente a la remoción no selectiva, sin que la lesión sellada siga progresando mientras la restauración se mantenga íntegra. La remoción escalonada también reduce las exposiciones frente a la remoción no selectiva, pero tiene un inconveniente práctico: exige una segunda intervención, y algunos pacientes no regresan o la restauración provisional falla en el intervalo. Por eso el consenso prefiere la remoción selectiva a dentina blanda y deja la escalonada como alternativa en dientes permanentes. La prioridad declarada es clara: en lesiones profundas con pulpa vital, la **salud pulpar** pesa más que la «limpieza» completa de la cavidad; en lesiones superficiales, pesa más la **longevidad de la restauración**."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Decidir según la profundidad y el estado pulpar"
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m08/d4",
+          "pie": "Árbol de decisión simplificado para elegir la estrategia de remoción en una lesión cavitada que necesita restauración.",
+          "descripcion": "Diagrama de flujo de arriba hacia abajo. Inicio: «Lesión cavitada que no se puede limpiar ni sellar». Primer rombo: «¿Pulpa vital sin signos de inflamación irreversible?»; si no, recuadro gris «Diagnóstico y manejo pulpar (endodoncia)». Si sí, segundo rombo: «¿Profundidad radiográfica?». Rama «Superficial o moderada» hacia recuadro verde «Remoción selectiva a dentina firme». Rama «Profunda (tercio o cuarto interno de la dentina)» hacia recuadro azul «Remoción selectiva a dentina blanda» y, con línea punteada, recuadro azul claro «Alternativa en permanentes: remoción escalonada». Al pie de todas las ramas, recuadro común «Periferia en tejido duro y sellado hermético».",
+          "elementos": [
+            "Lesión cavitada que no se puede limpiar ni sellar",
+            "¿Pulpa vital sin inflamación irreversible?",
+            "Diagnóstico y manejo pulpar",
+            "Superficial o moderada",
+            "Profunda",
+            "Remoción selectiva a dentina firme",
+            "Remoción selectiva a dentina blanda",
+            "Remoción escalonada",
+            "Periferia en tejido duro y sellado hermético"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "El árbol de decisión es una simplificación: el odontólogo considera también la edad del paciente, la cooperación, el tipo de diente, la posibilidad de aislar el campo, el riesgo de caries y los recursos disponibles. En dientes temporales, por ejemplo, existe la **técnica de Hall**, en la que se cementa una corona metálica preformada sobre el molar sin retirar tejido cariado ni preparar el diente; se estudia en el módulo 10 y en el programa de odontopediatría.\n\nLo que no cambia es el principio: **retirar lo necesario para sellar, no todo lo que esté desmineralizado**. Y que el éxito depende del sellado. Un material bien adherido a la periferia, con márgenes íntegros, convierte la dentina remanente en un tejido aislado que deja de alimentar la lesión. Los materiales y su elección se estudian en el módulo 9."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "¿Desinfectar la cavidad? ¿Colocar una base?"
+        },
+        {
+          "tipo": "texto",
+          "md": "Tradicionalmente, después de retirar el tejido cariado se aplicaban soluciones para «desinfectar» la cavidad y se colocaban bases o forros, sobre todo de hidróxido de calcio, con la idea de matar las bacterias restantes y estimular la formación de dentina. El consenso de 2016 revisó esas prácticas. Concluyó que la **desinfección de la cavidad no tiene evidencia de beneficio para el paciente**, porque si el sellado es hermético el número de bacterias remanentes pierde importancia y los desinfectantes actúan solo en la superficie.\n\nSobre los **forros cavitarios**, el consenso señala que no son necesarios para controlar una lesión sellada, aunque podrían ser útiles bajo resinas compuestas para frenar la penetración de monómeros hacia la pulpa y evitar fracturas de la dentina remanente, que es más débil. La elección de un forro, cuando se usa, y del material restaurador corresponde al odontólogo; sus propiedades se estudian en el módulo 9. El consenso también aclara que **no hay evidencia definitiva** de que un material sea superior a otro para restaurar después de una remoción selectiva: la ubicación y extensión de la lesión, el riesgo de caries, la actividad de la lesión y las condiciones del paciente guían la elección."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Registra lo que dejaste",
+          "md": "Cuando se deja dentina blanda o coriácea de forma deliberada, anótalo en el expediente clínico: estrategia aplicada, profundidad, estado pulpar inicial, material y plan de control. Si otro colega ve meses después una radiografía con una zona radiolúcida bajo la restauración, ese registro evitará que se interprete como caries residual «olvidada» y se reintervenga sin necesidad. Explica también al paciente que su diente se controlará y qué síntomas deben motivar una consulta antes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/11",
+          "proporcion": "16:9",
+          "alt": "Odontólogo y asistente con equipo de protección completo trabajando sobre un paciente con dique de hule colocado.",
+          "pie": "El aislamiento del campo favorece la calidad del sellado, que es la condición del éxito en la remoción selectiva.",
+          "prompt": "Fotografía clínica horizontal en un consultorio dental moderno, un odontólogo y una asistente sentados a ambos lados del paciente, ambos con bata, gorro, cubrebocas, lentes de protección y guantes de nitrilo; el paciente reclinado con un dique de hule azul colocado en la arcada inferior, cubierto con babero y lentes de protección, rostro no identificable cubierto por el dique y el encuadre. Luz de la lámpara dental dirigida a la boca, colores naturales, ambiente ordenado. Evitar: texto, logotipos, marcas, sangre, rostros identificables, falta de equipo de protección, instrumental desordenado, aerosoles exagerados."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso: una lesión profunda sin dolor",
+          "situacion": "Una mujer de 29 años presenta un primer molar inferior con una lesión oclusal cavitada. En la radiografía de aleta de mordida, la lesión alcanza el cuarto interno de la dentina. Refiere sensibilidad breve al frío que desaparece al retirar el estímulo y no ha tenido dolor espontáneo ni nocturno. Las pruebas pulpares realizadas por su odontólogo son compatibles con una pulpa vital. El campo puede aislarse adecuadamente.",
+          "opciones": [
+            { "texto": "Remoción selectiva a dentina blanda en el centro, periferia en dentina dura y restauración con sellado hermético, con control clínico y radiográfico.", "correcta": true, "retro": "Correcto. Es la estrategia que el consenso recomienda en lesiones profundas con pulpa vital: protege la pulpa y detiene la lesión bajo un buen sellado." },
+            { "texto": "Remoción no selectiva hasta dentina dura en toda la cavidad para asegurar que no quede caries.", "correcta": false, "retro": "Aumenta mucho el riesgo de exposición pulpar sin beneficio demostrado; el consenso ya no la recomienda." },
+            { "texto": "Dejar la periferia sobre dentina blanda para conservar más tejido.", "correcta": false, "retro": "La periferia debe quedar en tejido duro; sobre dentina blanda el sellado fallaría." },
+            { "texto": "Iniciar tratamiento de conductos de inmediato por la profundidad de la lesión.", "correcta": false, "retro": "La profundidad por sí sola no indica tratamiento de conductos; con pulpa vital sin inflamación irreversible se busca conservarla." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/12",
+          "proporcion": "4:3",
+          "alt": "Radiografía de aleta de mordida de molares en un negatoscopio digital, revisada por manos con guantes.",
+          "pie": "La profundidad radiográfica de la lesión orienta la elección de la estrategia de remoción.",
+          "prompt": "Fotografía en un consultorio dental de un monitor médico que muestra una radiografía de aleta de mordida de molares y premolares de un adulto, en escala de grises, con una zona radiolúcida oclusal en un molar inferior que se acerca a la cámara pulpar sin alcanzarla; en primer plano, una mano con guante de nitrilo señala la pantalla con un bolígrafo cerrado. Luz ambiental tenue, enfoque en la pantalla, colores neutros. Evitar: texto, nombres, fechas, datos del paciente, logotipos, rostros, sangre, anatomía radiográfica incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Incorpora a tu nota clínica una línea fija para cada restauración por caries: **«Estrategia de remoción: …; dentina remanente en el centro: blanda, coriácea, firme o dura; periferia: dura»**. Escribirlo te obliga a tomar la decisión de forma consciente, deja constancia para el equipo y permite revisar con datos, en tus controles, cómo evolucionan tus casos."
+        }
+      ],
+      "glosario": [
+        { "termino": "Remoción selectiva a dentina blanda", "definicion": "Estrategia que deja dentina blanda sobre la pulpa y lleva la periferia a dentina dura antes de sellar; indicada en lesiones profundas." },
+        { "termino": "Remoción selectiva a dentina firme", "definicion": "Estrategia que deja dentina firme o coriácea en el centro; indicada en lesiones superficiales o moderadas." },
+        { "termino": "Remoción escalonada", "definicion": "Remoción en dos etapas: primero a dentina blanda con restauración provisional y, de 6 a 12 meses después, hasta dentina firme." },
+        { "termino": "Remoción no selectiva", "definicion": "Retiro de todo el tejido hasta dentina dura; antes llamada remoción completa y ya no recomendada." },
+        { "termino": "Exposición pulpar", "definicion": "Comunicación directa entre la cavidad y la pulpa dental durante la remoción de tejido." },
+        { "termino": "Técnica de Hall", "definicion": "Colocación de una corona metálica preformada sobre un molar temporal sin retirar tejido cariado ni preparar el diente." }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.4-1",
+          "q": "¿Qué estrategia recomienda el consenso ICCC en lesiones cavitadas profundas de dientes temporales y permanentes con pulpa vital?",
+          "opciones": ["Remoción no selectiva a dentina dura", "Remoción selectiva a dentina firme", "Remoción selectiva a dentina blanda", "Extracción del diente"],
+          "correcta": 2,
+          "explicacion": "Dejar dentina blanda sobre la pulpa reduce el riesgo de exposición; la escalonada es alternativa en permanentes."
+        },
+        {
+          "id": "t8.4-2",
+          "q": "En la remoción escalonada, ¿cuándo se realiza la segunda etapa?",
+          "opciones": ["El mismo día", "De 6 a 12 meses después", "A los cinco años", "Solo si aparece dolor"],
+          "correcta": 1,
+          "explicacion": "El intervalo permite que la dentina remanente se endurezca y se forme dentina terciaria."
+        },
+        {
+          "id": "t8.4-3",
+          "q": "¿Qué condición comparten todas las estrategias de remoción selectiva?",
+          "opciones": ["La periferia en tejido duro y un sellado hermético", "El uso obligatorio de tinte detector", "La exposición deliberada de la pulpa", "La ausencia de registro en el expediente"],
+          "correcta": 0,
+          "explicacion": "El sellado periférico sobre tejido duro es lo que detiene la lesión remanente."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on terminology (Advances in Dental Research 28(2):49-57)", "autor": "Innes N. P. T., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en el consenso ICCC 2016 y literatura de manejo de lesiones profundas", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "8.5",
+      "titulo": "Técnicas, bioseguridad y reparación de restauraciones",
+      "minutos": 13,
+      "enPocasPalabras": "Para quitar solo lo necesario se usan instrumentos de mano, fresas lentas y otras técnicas suaves. Estas técnicas generan menos aerosoles. Además, cuando una restauración se daña un poco, muchas veces se puede reparar en lugar de cambiarla toda.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La remoción selectiva es una decisión, pero también una técnica. Retirar solo la dentina blanda del centro y llevar la periferia a tejido duro exige instrumentos que den **control táctil** y que no eliminen tejido sano de forma involuntaria. En este tema verás, como concepto y no como instrucción paso a paso, los recursos que se usan en mínima intervención, el tratamiento restaurativo atraumático, las medidas de bioseguridad que acompañan a estos procedimientos y el último componente de la FDI: reparar en lugar de reemplazar.\n\nRecuerda que todos estos procedimientos los realiza o supervisa el odontólogo, con el paciente informado, el campo aislado y el equipo dental con su protección completa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Instrumentos para quitar solo lo necesario"
+        },
+        {
+          "tipo": "texto",
+          "md": "El instrumento más útil para la dentina blanda sigue siendo el **excavador manual** afilado: retira tejido reblandecido con facilidad y se detiene por sí solo cuando encuentra dentina más dura, lo que lo convierte a la vez en herramienta de corte y de diagnóstico. Las **fresas de baja velocidad**, de carburo o de cerámica, se usan con presión ligera para la dentina coriácea y firme; algunas fresas de polímero están diseñadas para cortar dentina blanda y desgastarse al encontrar tejido más duro. La **alta velocidad** sigue siendo necesaria para abrir el acceso a través del esmalte cuando la lesión está socavada.\n\nExisten además alternativas: los **geles químico-mecánicos**, a base de enzimas como la papaína o de hipoclorito con aminoácidos, que reblandecen selectivamente la dentina más degradada para retirarla con instrumentos manuales; la **abrasión con aire**, que proyecta partículas finas para preparaciones pequeñas en esmalte; y los **láseres de erbio**, capaces de retirar tejido dental duro. Cada uno tiene indicaciones, costos y curvas de aprendizaje propias, y su elección corresponde al odontólogo. El consenso ICCC de 2016 concluyó que no hay evidencia suficiente para recomendar un único método de remoción, aunque la excavación manual o químico-mecánica podría reducir el dolor y la molestia durante el tratamiento, algo especialmente valioso en niños y en personas con ansiedad dental."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/13",
+          "proporcion": "16:9",
+          "alt": "Charola de instrumental para mínima intervención con excavadores, fresas de baja velocidad y un gel en jeringa sin marca.",
+          "pie": "Instrumental de mínima intervención: excavadores manuales, fresas de baja velocidad y geles químico-mecánicos.",
+          "prompt": "Fotografía cenital horizontal de una charola de instrumental dental sobre campo estéril azul claro: tres excavadores manuales de acero, una pieza de mano de baja velocidad tipo contraángulo, un pequeño soporte con fresas redondas de carburo de distintos tamaños, una jeringa plástica lisa sin marca con gel transparente y dos rollos de algodón. Todo limpio y ordenado en paralelo, iluminación difusa de estudio, colores naturales y fríos, enfoque nítido. Evitar: texto, logotipos, marcas, etiquetas legibles, sangre, residuos, manos, rostros, instrumental oxidado o desordenado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El tratamiento restaurativo atraumático"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **tratamiento restaurativo atraumático** (en inglés *Atraumatic Restorative Treatment*, ART) surgió a mediados de la década de 1980 en Tanzania, para atender caries en comunidades sin electricidad ni equipo dental, y después fue promovido por la Organización Mundial de la Salud. Su concepto es sencillo: se accede a la lesión y se retira el tejido blando **solo con instrumentos manuales**, y la cavidad se restaura con un **ionómero de vidrio de alta viscosidad**, un material que se adhiere químicamente al diente y libera flúor (módulo 9). Cuando hay fosetas y fisuras vecinas en riesgo, se sellan con el mismo material.\n\nHoy el ART no es solo una opción para comunidades remotas. Por no requerir pieza de mano en la mayoría de los casos, suele generar menos ansiedad en niños y en personas con miedo al tratamiento, a menudo puede hacerse sin anestesia local y **reduce la generación de aerosoles**. Es una herramienta valiosa en brigadas, en servicio social, en atención domiciliaria de personas mayores y en consultorios que buscan intervenciones más amables. Su desempeño es mejor en cavidades de una sola superficie que en cavidades de varias superficies."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Mínima intervención en el servicio social",
+          "md": "Muchos pasantes de odontología en México hacen su servicio social en unidades de primer nivel o en comunidades con equipo limitado. Ahí, las estrategias de este módulo, como el control no invasivo, el ART y la remoción selectiva con instrumentos manuales, permiten ofrecer atención eficaz con pocos recursos. La NOM-013-SSA2-2015, para la prevención y control de enfermedades bucales, orienta la atención estomatológica en el Sistema Nacional de Salud hacia la prevención; consulta su texto vigente en el Diario Oficial de la Federación y los lineamientos de tu institución antes de aplicar cualquier técnica."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Bioseguridad y aerosoles"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las técnicas de mínima intervención tienen una ventaja adicional que se volvió muy visible después de la pandemia de COVID-19: muchas de ellas **generan menos aerosoles** que la alta velocidad con irrigación. Esto no elimina la necesidad de las precauciones estándar. En todo procedimiento restaurador se usan guantes, cubrebocas o respirador según la evaluación de riesgo, protección ocular o careta y bata; el paciente lleva protección ocular; se procesa el instrumental de acuerdo con la clasificación de Spaulding y se manejan los residuos según la normativa vigente.\n\nEl **aislamiento del campo**, idealmente con dique de hule, cumple una doble función: protege la calidad del sellado, que es la condición de éxito de la remoción selectiva, y reduce la contaminación de los aerosoles con saliva. La **succión de alto volumen** complementa ambas funciones. El detalle de estas medidas se estudia en el programa de bioseguridad."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Bioseguridad mínima en un procedimiento de remoción selectiva",
+          "items": [
+            "Equipo de protección completo para todo el equipo: guantes, cubrebocas o respirador, protección ocular o careta y bata.",
+            "Protección ocular para el paciente.",
+            "Instrumental estéril y procesado según su clasificación.",
+            "Aislamiento del campo, idealmente con dique de hule.",
+            "Succión de alto volumen cuando se usa instrumental rotatorio.",
+            "Manejo de residuos y punzocortantes conforme a la normativa vigente."
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/14",
+          "proporcion": "3:4",
+          "alt": "Asistente dental con equipo de protección completo preparando una charola de instrumental en un área limpia del consultorio.",
+          "pie": "La bioseguridad acompaña a todo procedimiento de mínima intervención, aunque genere pocos aerosoles.",
+          "prompt": "Fotografía vertical de una asistente dental de pie en un área de preparación limpia y ordenada de un consultorio, con bata desechable, gorro, cubrebocas, careta transparente y guantes de nitrilo, colocando instrumental en una charola sobre un campo estéril azul, con bolsas de esterilización selladas a un lado. Luz blanca neutra, superficies de acero inoxidable relucientes, colores naturales, ambiente profesional. Evitar: texto, logotipos, marcas, etiquetas legibles, rostros identificables, sangre, guantes rotos, desorden, falta de equipo de protección."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Reparar en lugar de reemplazar"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sexto componente de la FDI rompe con una costumbre muy arraigada. Ante una restauración con un margen defectuoso, una pequeña fractura, un cambio de color localizado o una lesión de caries adyacente limitada, la tendencia era retirarla por completo y hacer una nueva. La declaración de 2016 señala que la supervivencia a largo plazo de las restauraciones defectuosas **reparadas** es tan buena como la de las **reemplazadas**, y que el reemplazo se considera en muchos casos un sobretratamiento.\n\nReparar significa retirar solo la parte defectuosa de la restauración y del tejido afectado, y añadir material nuevo. **Reacondicionar** significa pulir, contornear o sellar márgenes sin añadir material. Ambas opciones conservan tejido, son más rápidas, suelen requerir menos anestesia y cuestan menos al paciente. La decisión depende de que el resto de la restauración esté bien adaptado y de que el defecto sea accesible; si la restauración entera está comprometida, el reemplazo sigue siendo la opción adecuada."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m08/d5",
+          "pie": "Opciones ante una restauración defectuosa, de la más conservadora a la más invasiva.",
+          "descripcion": "Tres columnas con un molar esquemático en vista oclusal con una restauración y un defecto marginal pequeño en rojo. Columna 1 «Monitorear»: defecto mínimo sin caries, con un ojo como icono. Columna 2 «Reacondicionar o reparar»: solo la zona del defecto se retira y se rellena, resaltada en verde. Columna 3 «Reemplazar»: toda la restauración y una franja de tejido alrededor resaltadas en naranja. Debajo, una flecha de izquierda a derecha rotulada «Más tejido perdido».",
+          "elementos": [
+            "Monitorear",
+            "Reacondicionar o reparar",
+            "Reemplazar",
+            "Defecto marginal",
+            "Más tejido perdido"
+          ]
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Auditoría: ¿cuánto reparas?",
+          "instruccion": "En una auditoría de expedientes de tu consultorio, cuenta cuántas restauraciones defectuosas se repararon o reacondicionaron y cuántas se reemplazaron por completo en el último semestre. El porcentaje de reparación te ayuda a ver si aplicas este componente de la mínima intervención. Cambia los valores con los datos de tu práctica.",
+          "formula": "% de reparación = reparadas ÷ (reparadas + reemplazadas) × 100",
+          "variables": [
+            { "id": "reparadas", "etiqueta": "Restauraciones reparadas o reacondicionadas", "valor": 18, "unidad": "restauraciones" },
+            { "id": "reemplazadas", "etiqueta": "Restauraciones reemplazadas por completo", "valor": 42, "unidad": "restauraciones" }
+          ],
+          "resultado": { "expresion": "reparadas / (reparadas + reemplazadas) * 100", "etiqueta": "Restauraciones defectuosas manejadas con reparación", "unidad": "%", "decimales": 1 }
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La adhesión hizo posible la reparación",
+          "md": "Reparar una amalgama o una resina era muy difícil cuando las restauraciones dependían solo de la retención mecánica. Con los sistemas adhesivos actuales y el acondicionamiento de superficie, por ejemplo con arenado o asperización y un agente de unión adecuado, el material nuevo puede unirse al diente y a la restauración existente. El módulo 9 explica cómo funcionan esos materiales."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m08/15",
+          "proporcion": "1:1",
+          "alt": "Molar de tipodonto con una restauración antigua del color del diente y una pequeña reparación marginal recién pulida.",
+          "pie": "Una reparación marginal conserva la mayor parte de la restauración y del tejido dental.",
+          "prompt": "Fotografía macro cuadrada de un primer molar inferior permanente de tipodonto en vista oclusal sobre fondo gris oscuro, con una restauración del color del diente de tamaño moderado en la que una pequeña zona del margen distal tiene un tono ligeramente distinto y brillo de pulido reciente, integrada sin escalones. Anatomía oclusal correcta con cinco cúspides, iluminación de flash anular clínica, enfoque nítido, colores naturales. Evitar: texto, flechas, etiquetas, marcas, sangre, encía humana, dientes deformes, número incorrecto de cúspides, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de indicar el reemplazo de una restauración, escribe en el expediente cuál es el defecto concreto y por qué no puede repararse. Si no puedes nombrar el defecto o este se limita a una zona accesible, considera reacondicionar o reparar. Revisa cada semestre tu porcentaje de reparación con la calculadora de este tema: es un indicador sencillo de cuánto tejido estás conservando para tus pacientes."
+        }
+      ],
+      "glosario": [
+        { "termino": "Excavador", "definicion": "Instrumento manual con punta en forma de cucharilla que retira dentina blanda con control táctil." },
+        { "termino": "Remoción químico-mecánica", "definicion": "Uso de geles que reblandecen selectivamente la dentina degradada para retirarla con instrumentos manuales." },
+        { "termino": "Tratamiento restaurativo atraumático", "definicion": "Técnica que retira tejido blando solo con instrumentos manuales y restaura con ionómero de vidrio de alta viscosidad." },
+        { "termino": "Reparación de restauraciones", "definicion": "Retiro de la parte defectuosa de una restauración y adición de material nuevo, conservando el resto." },
+        { "termino": "Reacondicionamiento", "definicion": "Pulido, recontorneado o sellado de márgenes de una restauración sin añadir material." },
+        { "termino": "Succión de alto volumen", "definicion": "Sistema de aspiración de gran caudal que reduce aerosoles y mantiene el campo seco." }
+      ],
+      "verificacion": [
+        {
+          "id": "t8.5-1",
+          "q": "¿Qué caracteriza al tratamiento restaurativo atraumático?",
+          "opciones": ["Uso obligatorio de alta velocidad", "Retiro de tejido solo con instrumentos manuales y restauración con ionómero de vidrio de alta viscosidad", "Colocación de coronas metálicas sin preparación", "Extracción del diente afectado"],
+          "correcta": 1,
+          "explicacion": "El ART se basa en instrumentos manuales e ionómero de vidrio de alta viscosidad; la corona sin preparación corresponde a la técnica de Hall."
+        },
+        {
+          "id": "t8.5-2",
+          "q": "Según la FDI, ¿cómo se compara la supervivencia de una restauración defectuosa reparada con la de una reemplazada?",
+          "opciones": ["La reparada dura la mitad", "No hay datos", "La reparada siempre falla al año", "Es tan buena como la de la reemplazada"],
+          "correcta": 3,
+          "explicacion": "La declaración de 2016 señala supervivencia equivalente y considera el reemplazo un sobretratamiento en muchos casos."
+        },
+        {
+          "id": "t8.5-3",
+          "q": "¿Qué doble función cumple el dique de hule en la remoción selectiva?",
+          "opciones": ["Anestesiar y blanquear", "Acelerar el fraguado y pulir", "Proteger la calidad del sellado y reducir la contaminación de los aerosoles con saliva", "Sustituir el equipo de protección personal"],
+          "correcta": 2,
+          "explicacion": "El aislamiento mejora el sellado y reduce aerosoles contaminados; nunca sustituye al equipo de protección."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Minimal Intervention Dentistry (MID) for Managing Dental Caries. Declaración de política", "autor": "FDI World Dental Federation", "anio": 2016, "url": "https://www.fdiworlddental.org/minimal-intervention-dentistry-mid-managing-dental-caries" },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Guidelines for Infection Control in Dental Health-Care Settings", "autor": "Centers for Disease Control and Prevention", "anio": 2003 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura sobre tratamiento restaurativo atraumático, remoción químico-mecánica y reparación de restauraciones", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: conservar es intervenir",
+    "pistas": [
+      { "palabra": "ESCALONADA", "pista": "Remoción en dos etapas separadas por 6 a 12 meses." },
+      { "palabra": "CORIACEA", "pista": "Dentina con consistencia de cuero, entre blanda y firme." },
+      { "palabra": "FIRME", "pista": "Dentina que resiste el excavador y sirve de base a la restauración." },
+      { "palabra": "EXCAVADOR", "pista": "Instrumento manual de cucharilla para retirar dentina blanda." },
+      { "palabra": "INFILTRACION", "pista": "Técnica microinvasiva con resina de muy baja viscosidad para lesiones no cavitadas." },
+      { "palabra": "REPARACION", "pista": "Alternativa al reemplazo completo de una restauración defectuosa." },
+      { "palabra": "SELLADO", "pista": "Condición hermética que detiene la lesión remanente." },
+      { "palabra": "ART", "pista": "Siglas en inglés del tratamiento restaurativo atraumático." },
+      { "palabra": "PERIFERIA", "pista": "Zona de la cavidad que debe quedar en tejido duro." }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m08-p01",
+        "q": "¿Qué principio clásico de G. V. Black abandona la odontología de mínima intervención?",
+        "opciones": ["Extensión por prevención", "Aislamiento del campo", "Uso de instrumental estéril", "Diagnóstico antes del tratamiento"],
+        "correcta": 0,
+        "explicacion": "Ampliar la cavidad a zonas sanas susceptibles ya no se justifica con materiales adhesivos y control de la enfermedad."
+      },
+      {
+        "id": "m08-p02",
+        "q": "¿Cuál de estos es uno de los componentes de la mínima intervención según la FDI?",
+        "opciones": ["Reemplazar toda restauración con más de cinco años", "Citas de control iguales para todos los pacientes", "Reparar en lugar de reemplazar restauraciones defectuosas", "Extender las cavidades a todas las fisuras"],
+        "correcta": 2,
+        "explicacion": "La FDI incluye la reparación, las citas adaptadas al riesgo y la intervención mínimamente invasiva."
+      },
+      {
+        "id": "m08-p03",
+        "q": "¿Qué describe el ciclo restaurador?",
+        "opciones": ["La remineralización espontánea de una lesión", "La secuencia de reemplazos cada vez mayores que puede llevar a la pérdida del diente", "El tiempo de fraguado de un material", "La erupción de los dientes permanentes"],
+        "correcta": 1,
+        "explicacion": "Cada reemplazo retira tejido y agranda la restauración."
+      },
+      {
+        "id": "m08-p04",
+        "q": "¿Qué nivel de intervención corresponde a la infiltración con resina?",
+        "opciones": ["No invasivo", "Invasivo extenso", "Quirúrgico", "Microinvasivo"],
+        "correcta": 3,
+        "explicacion": "Retira solo una capa microscópica de esmalte al acondicionar la superficie."
+      },
+      {
+        "id": "m08-p05",
+        "q": "Una lesión cavitada vestibular, amplia y abierta, se vuelve dura y brillante tras seis meses de cepillado dirigido y flúor. ¿Qué estrategia se aplicó?",
+        "opciones": ["Control de cavidades no restaurativo", "Remoción escalonada", "Técnica de Hall", "Remoción no selectiva"],
+        "correcta": 0,
+        "explicacion": "La cavidad limpiable se inactivó sin restaurarla."
+      },
+      {
+        "id": "m08-p06",
+        "q": "¿Cuál es la principal limitación estética del fluoruro diamino de plata?",
+        "opciones": ["Blanquea en exceso el diente", "Tiñe de negro las lesiones detenidas", "Deja el diente transparente", "Produce manchas blancas en dientes sanos"],
+        "correcta": 1,
+        "explicacion": "La tinción negra es permanente y debe explicarse antes de aplicarlo."
+      },
+      {
+        "id": "m08-p07",
+        "q": "¿Cómo se describe la dentina coriácea?",
+        "opciones": ["Se deforma al presionar y se retira casi sin fuerza", "Solo se corta con fresa y fuerza", "No se deforma al presionar, pero se levanta sin mucha fuerza", "Es esmalte desmineralizado"],
+        "correcta": 2,
+        "explicacion": "Tiene consistencia de cuero, entre la blanda y la firme."
+      },
+      {
+        "id": "m08-p08",
+        "q": "¿Por qué el consenso ICCC prefirió la dureza a los términos «infectada» y «afectada»?",
+        "opciones": ["Porque la dureza puede valorarse clínicamente y la presencia de bacterias no", "Porque la dureza indica la edad del paciente", "Porque los términos antiguos eran demasiado largos", "Porque la dureza se mide con radiografías"],
+        "correcta": 0,
+        "explicacion": "No hay una prueba clínica que indique dónde terminan las bacterias; la dureza sí se percibe con un instrumento."
+      },
+      {
+        "id": "m08-p09",
+        "q": "En la periferia de una cavidad, ¿qué tejido se busca antes de restaurar?",
+        "opciones": ["Dentina blanda", "Dentina coriácea", "Tejido teñido con tinte detector", "Esmalte sano y dentina dura"],
+        "correcta": 3,
+        "explicacion": "El sellado se forma en la periferia y requiere tejido duro."
+      },
+      {
+        "id": "m08-p10",
+        "q": "¿Qué estrategia recomienda el consenso para lesiones cavitadas superficiales o moderadamente profundas?",
+        "opciones": ["Remoción selectiva a dentina blanda", "Remoción selectiva a dentina firme", "Remoción no selectiva a dentina dura", "Extracción"],
+        "correcta": 1,
+        "explicacion": "En lesiones no profundas, la dentina firme da soporte a la restauración sin riesgo pulpar relevante."
+      },
+      {
+        "id": "m08-p11",
+        "q": "¿Cuál es la principal ventaja de la remoción selectiva a dentina blanda en lesiones profundas?",
+        "opciones": ["Elimina todas las bacterias", "Evita colocar restauración", "Reduce el riesgo de exposición pulpar", "Permite dejar la periferia sobre dentina blanda"],
+        "correcta": 2,
+        "explicacion": "Dejar tejido desmineralizado sobre la pulpa reduce las exposiciones; la periferia sigue en tejido duro."
+      },
+      {
+        "id": "m08-p12",
+        "q": "¿Cuál es un inconveniente práctico de la remoción escalonada?",
+        "opciones": ["Requiere una segunda intervención y el paciente puede no regresar", "Aumenta las exposiciones pulpares frente a la remoción no selectiva", "No puede hacerse en dientes permanentes", "Exige retirar todo el esmalte"],
+        "correcta": 0,
+        "explicacion": "Exige reabrir la cavidad meses después; la restauración provisional puede fallar o el paciente no volver."
+      },
+      {
+        "id": "m08-p13",
+        "q": "¿Qué condición pulpar se requiere para aplicar las estrategias de remoción selectiva?",
+        "opciones": ["Pulpa necrótica", "Pulpa vital sin signos de inflamación irreversible", "Absceso periapical", "Dolor espontáneo nocturno"],
+        "correcta": 1,
+        "explicacion": "La remoción selectiva busca conservar una pulpa vital sana o con inflamación reversible."
+      },
+      {
+        "id": "m08-p14",
+        "q": "Meses después de una remoción selectiva, un colega ve una zona radiolúcida bajo una restauración íntegra y sin síntomas. ¿Qué ayuda a evitar una reintervención innecesaria?",
+        "opciones": ["Retirar la restauración por precaución", "Indicar tratamiento de conductos", "Aplicar tinte detector", "El registro en el expediente de la estrategia aplicada y la dentina remanente"],
+        "correcta": 3,
+        "explicacion": "Documentar la dentina dejada deliberadamente permite interpretar la radiografía correctamente."
+      },
+      {
+        "id": "m08-p15",
+        "q": "¿Qué material se usa en el tratamiento restaurativo atraumático?",
+        "opciones": ["Amalgama", "Resina compuesta de nanorrelleno", "Ionómero de vidrio de alta viscosidad", "Cerámica fresada"],
+        "correcta": 2,
+        "explicacion": "Se adhiere químicamente al diente, libera flúor y puede colocarse sin equipo eléctrico."
+      },
+      {
+        "id": "m08-p16",
+        "q": "¿Qué ventaja comparten el ART y la remoción con instrumentos manuales en materia de bioseguridad?",
+        "opciones": ["Eliminan la necesidad de guantes", "Generan menos aerosoles que la alta velocidad con irrigación", "No requieren esterilizar el instrumental", "Sustituyen el manejo de residuos"],
+        "correcta": 1,
+        "explicacion": "Generan menos aerosoles, pero las precauciones estándar se mantienen completas."
+      },
+      {
+        "id": "m08-p17",
+        "q": "Una resina de diez años tiene un pequeño defecto marginal accesible y el resto está bien adaptado. ¿Qué es lo más conservador?",
+        "opciones": ["Repararla o reacondicionarla", "Reemplazarla por completo", "Colocar una corona", "Extraer el diente"],
+        "correcta": 0,
+        "explicacion": "Reparar conserva tejido y tiene supervivencia comparable al reemplazo según la FDI."
+      },
+      {
+        "id": "m08-p18",
+        "q": "¿Qué es la técnica de Hall?",
+        "opciones": ["Un tinte detector de caries", "Un tipo de ionómero de vidrio", "Una prueba de sensibilidad pulpar", "Una corona metálica preformada colocada sobre un molar temporal sin retirar tejido cariado"],
+        "correcta": 3,
+        "explicacion": "Sella la lesión bajo la corona sin preparación; se estudia en el módulo 10."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "oficial", "titulo": "Minimal Intervention Dentistry (MID) for Managing Dental Caries. Declaración de política", "autor": "FDI World Dental Federation", "anio": 2016, "url": "https://www.fdiworlddental.org/minimal-intervention-dentistry-mid-managing-dental-caries" },
+    { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on terminology (Advances in Dental Research 28(2):49-57)", "autor": "Innes N. P. T., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+    { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 }
+  ]
+}

@@ -1,0 +1,960 @@
+{
+  "programa": "caries-dental",
+  "modulo": 9,
+  "titulo": "Materiales restauradores en el manejo de la caries",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Cuando una lesión de caries necesita restaurarse, el material elegido influye en cuánto tejido se conserva, en la calidad del sellado y en la duración del tratamiento. En este módulo estudiarás, a nivel de concepto, las propiedades que se le piden a un material restaurador, la amalgama dental y su eliminación progresiva por el Convenio de Minamata, las resinas compuestas y los sistemas adhesivos, los ionómeros de vidrio y otros materiales que liberan iones, y los criterios para elegir y colocar cada uno con seguridad para el paciente y el equipo dental.",
+  "objetivos": [
+    "Describir las propiedades clínicas que se evalúan al elegir un material restaurador.",
+    "Explicar la composición, las ventajas y las limitaciones de la amalgama, y las obligaciones derivadas del Convenio de Minamata.",
+    "Distinguir los componentes de una resina compuesta y las estrategias de adhesión de grabado y enjuague, autograbado y universales.",
+    "Comparar los ionómeros de vidrio convencionales, de alta viscosidad y modificados con resina, y otros materiales que liberan iones.",
+    "Relacionar la elección del material con la ubicación y extensión de la lesión, el riesgo de caries y las condiciones del paciente.",
+    "Aplicar medidas de seguridad ocupacional frente al mercurio, los monómeros y la luz de fotopolimerización."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "caries-dental/m09/portada",
+    "proporcion": "16:9",
+    "alt": "Mesa de trabajo dental con jeringas de resina sin marca, cápsulas de ionómero y una lámpara de fotopolimerizar, junto a un tipodonto.",
+    "prompt": "Fotografía horizontal de gran formato sobre una mesa de trabajo clínica blanca y ordenada: varias jeringas de resina compuesta de distintos tonos color diente sin etiquetas, cápsulas lisas de ionómero de vidrio, un aplicador de adhesivo, una lámpara de fotopolimerizar inalámbrica apagada con su filtro naranja y un modelo tipodonto de arcada posterior con restauraciones del color del diente. Fondo desenfocado de consultorio moderno, luz blanca suave, enfoque nítido, colores naturales. Evitar: texto, logotipos, marcas, etiquetas legibles, sangre, rostros, manos sin guantes, desorden, colores artificiales."
+  },
+  "temas": [
+    {
+      "n": "9.1",
+      "titulo": "Qué le pedimos a un material restaurador",
+      "minutos": 13,
+      "enPocasPalabras": "Cuando hay que tapar una caries, el dentista elige entre varios materiales. Cada uno tiene ventajas: unos son más resistentes, otros se pegan mejor al diente o liberan flúor. El mejor material depende de dónde está la caries, de su tamaño y de cada paciente.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "En el módulo 8 viste que la decisión de restaurar llega al final de un camino: primero se intenta controlar la enfermedad y detener la lesión, y solo si la cavidad no puede limpiarse ni sellarse se coloca una restauración. Cuando ese momento llega, la restauración tiene que cumplir varias funciones a la vez: **sellar** la cavidad para que la lesión remanente deje de avanzar, **facilitar el control de la biopelícula** devolviendo una superficie lisa y limpiable, **proteger el complejo dentinopulpar** y **devolver forma, función y estética** al diente.\n\nNingún material hace todo de manera perfecta. Por eso no existe «el mejor material», sino el más adecuado para una lesión concreta, en un diente concreto, en un paciente concreto. El consenso internacional de caries de 2016 lo expresa así: la elección del material debe guiarse por la ubicación y la extensión de la lesión, el riesgo de caries, la actividad de la lesión y las condiciones particulares del paciente y del lugar de atención, y no hay evidencia definitiva de que un material sea superior a otro para restaurar después de una remoción selectiva."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/01",
+          "proporcion": "16:9",
+          "alt": "Cuatro molares de tipodonto con restauraciones de amalgama, resina compuesta, ionómero de vidrio y cerámica.",
+          "pie": "Restauraciones con distintos materiales: cada uno ofrece un equilibrio diferente entre resistencia, adhesión, estética y liberación de iones.",
+          "prompt": "Fotografía macro horizontal de estudio sobre fondo gris oscuro mate, cuatro primeros molares inferiores permanentes de tipodonto alineados en vista oclusal: el primero con una restauración oclusal metálica plateada, el segundo con una restauración del color del diente brillante, el tercero con una restauración blanca opaca ligeramente mate, el cuarto con una incrustación cerámica de brillo vítreo. Anatomía oclusal correcta con cinco cúspides en cada molar, iluminación de estudio difusa, enfoque nítido. Evitar: texto, etiquetas, flechas, marcas, sangre, encía humana, dientes deformes, número incorrecto de cúspides, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las propiedades que se evalúan"
+        },
+        {
+          "tipo": "texto",
+          "md": "Para comparar materiales se usan propiedades que conviene entender como conceptos, sin necesidad de memorizar cifras de laboratorio. Las **propiedades mecánicas** describen cómo resiste el material las fuerzas de la masticación: la resistencia a la compresión y a la flexión, la **tenacidad a la fractura** (la capacidad de resistir que una grieta avance) y la resistencia al **desgaste**. Son decisivas en cavidades grandes de dientes posteriores que reciben carga oclusal.\n\nLas **propiedades de interfase** describen la relación del material con el diente: si se une por **retención mecánica** (la forma de la cavidad lo sujeta), por **adhesión micromecánica** (se traba en el esmalte y la dentina acondicionados) o por **adhesión química** (forma enlaces con el calcio del diente); y cuánto se contrae o se expande con el fraguado y con los cambios de temperatura. Una interfase que se abre permite la filtración de bacterias y nutrientes, y es el origen de buena parte de las lesiones alrededor de las restauraciones.\n\nLas **propiedades biológicas** incluyen la biocompatibilidad con la pulpa y la encía, la liberación de iones como flúor o calcio y el potencial alergénico. Las **propiedades de manipulación** incluyen el tiempo de trabajo, la sensibilidad a la humedad durante la colocación y la necesidad de equipo especial. Por último, cuentan la **estética**, la **radiopacidad** (que permite distinguir el material de una lesión en la radiografía), el **costo** y el **impacto ambiental**."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Propiedades que se evalúan al elegir un material",
+          "columnas": ["Grupo", "Propiedad", "Por qué importa en el manejo de la caries"],
+          "filas": [
+            ["Mecánicas", "Resistencia y tenacidad a la fractura", "Evita fracturas en cavidades grandes con carga oclusal"],
+            ["Mecánicas", "Resistencia al desgaste", "Mantiene la forma y los contactos con el tiempo"],
+            ["Interfase", "Tipo de unión al diente", "Determina cuánto tejido sano hay que retirar para retener el material"],
+            ["Interfase", "Contracción y expansión", "Influyen en la apertura de márgenes y la filtración"],
+            ["Biológicas", "Liberación de iones", "Puede favorecer la remineralización junto a la restauración"],
+            ["Manipulación", "Sensibilidad a la humedad", "Condiciona el éxito cuando el aislamiento es difícil"],
+            ["Otras", "Radiopacidad, estética, costo e impacto ambiental", "Afectan el diagnóstico, la aceptación y el acceso"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Las restauraciones fallan por dos razones principales",
+          "md": "Los estudios clínicos de larga duración coinciden en que las dos causas más frecuentes de fracaso de las restauraciones directas son la **caries alrededor de la restauración** y la **fractura** del material o del diente. La primera depende mucho del riesgo de caries del paciente y de la calidad del sellado; la segunda, del tamaño de la restauración, de la carga oclusal y de las propiedades mecánicas del material. Por eso el mismo material puede durar muchos años en un paciente y fallar pronto en otro."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Directos e indirectos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los materiales restauradores se agrupan en dos grandes familias. Los **directos** se colocan en estado plástico dentro de la cavidad y endurecen en la boca en la misma cita: amalgama, resinas compuestas, ionómeros de vidrio y sus variantes. Los **indirectos** se fabrican fuera de la boca, en un laboratorio o con un sistema de diseño y fresado asistido por computadora, y después se cementan: incrustaciones, recubrimientos y coronas de metal, cerámica o resina.\n\nEn el manejo de la caries predominan los materiales directos, porque permiten preparaciones pequeñas que se limitan a la lesión. Las restauraciones indirectas tienen su lugar en dientes muy destruidos o con varias superficies comprometidas, pero el consenso de 2016 recuerda que suelen exigir una preparación más invasiva, con sacrificio de tejido sano, y que tienen un costo mayor."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m09/d1",
+          "pie": "Familias de materiales restauradores usados en el manejo de la caries y su mecanismo principal de unión al diente.",
+          "descripcion": "Mapa conceptual con un nodo central «Materiales restauradores» que se divide en dos ramas: «Directos» e «Indirectos». De «Directos» salen cuatro nodos: «Amalgama: retención mecánica», «Resina compuesta: adhesión micromecánica con sistema adhesivo», «Ionómero de vidrio: adhesión química» y «Materiales híbridos y que liberan iones». De «Indirectos» salen dos nodos: «Cerámica y resina fresada o de laboratorio» y «Metal colado». Cada nodo de material lleva un pequeño icono de un diente en corte.",
+          "elementos": [
+            "Materiales restauradores",
+            "Directos",
+            "Indirectos",
+            "Amalgama: retención mecánica",
+            "Resina compuesta: adhesión micromecánica",
+            "Ionómero de vidrio: adhesión química",
+            "Materiales híbridos que liberan iones",
+            "Cerámica y resina fresada",
+            "Metal colado"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/02",
+          "proporcion": "4:3",
+          "alt": "Bloque cerámico siendo fresado en una unidad de fresado dental de consultorio, visto a través de la ventana del equipo.",
+          "pie": "Las restauraciones indirectas se fabrican fuera de la boca; suelen requerir preparaciones más amplias que las directas.",
+          "prompt": "Fotografía en primer plano del interior de una fresadora dental de consultorio a través de su ventana transparente: un pequeño bloque cerámico color diente sujeto en el portabloque mientras dos fresas finas de diamante lo tallan, con chorros finos de agua refrigerante. Iluminación interna fría del equipo, fondo oscuro, enfoque nítido en el bloque, colores naturales. Evitar: texto, pantallas legibles, logotipos, marcas, personas, rostros, sangre, colores artificiales, elementos de ciencia ficción."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Laboratorio contra clínica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los catálogos de los fabricantes suelen presentar resultados de laboratorio: fuerza de unión, resistencia a la flexión, liberación de flúor en una solución. Son datos útiles para entender un material, pero no siempre predicen cómo se comportará en la boca, donde intervienen la saliva, la biopelícula, los cambios de temperatura, la masticación durante años y la habilidad del operador. El consenso de 2016 señala, por ejemplo, que las pruebas de laboratorio sobre la capacidad de sellado de las resinas parecen tener poca relevancia clínica.\n\nPor eso, cuando evalúes un material nuevo, pregunta por **estudios clínicos** con seguimiento de varios años, idealmente independientes del fabricante, y por la experiencia acumulada con materiales de la misma familia. Un material con años de uso y evidencia clínica sólida suele ser una apuesta más segura que uno recién lanzado con resultados de laboratorio brillantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El material no compensa una mala indicación",
+          "md": "Ningún material, por avanzado que sea, resuelve una restauración colocada sobre una lesión que no necesitaba restaurarse, un campo contaminado con saliva o una enfermedad sin control. Antes de discutir qué material usar, verifica que la restauración está indicada, que podrás aislar el campo y que el paciente tiene un plan de control de la caries."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Propiedades en palabras sencillas",
+          "instruccion": "Relaciona cada propiedad con su significado clínico.",
+          "pares": [
+            { "a": "Tenacidad a la fractura", "b": "Capacidad de resistir que una grieta avance" },
+            { "a": "Adhesión química", "b": "Enlaces entre el material y el calcio del diente" },
+            { "a": "Radiopacidad", "b": "Permite distinguir el material de una lesión en la radiografía" },
+            { "a": "Sensibilidad a la humedad", "b": "El material falla si se contamina con saliva al colocarlo" },
+            { "a": "Retención mecánica", "b": "La forma de la cavidad sujeta al material" }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/03",
+          "proporcion": "4:3",
+          "alt": "Radiografía de aleta de mordida en un monitor que muestra restauraciones de distinta radiopacidad.",
+          "pie": "La radiopacidad permite distinguir el material restaurador de una lesión de caries en la radiografía.",
+          "prompt": "Fotografía de un monitor médico en un consultorio que muestra una radiografía de aleta de mordida de premolares y molares de un adulto en escala de grises, con varias restauraciones: algunas muy blancas y radiopacas, otras ligeramente menos radiopacas que el esmalte; anatomía radiográfica correcta de coronas, cámaras pulpares y crestas óseas. Luz ambiental tenue, enfoque en la pantalla, colores neutros. Evitar: texto, nombres, fechas, números, datos del paciente, logotipos, rostros, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el estudio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Haz una tabla personal con los materiales que usa tu clínica o tu facultad y, para cada uno, anota tres datos: cómo se une al diente, qué tan sensible es a la humedad y si libera iones. Esa tabla de tres columnas te servirá más que una lista de cifras para razonar cada elección en los temas siguientes y para explicar al paciente por qué se recomienda un material y no otro. Actualízala cada vez que conozcas un material nuevo."
+        }
+      ],
+      "glosario": [
+        { "termino": "Material directo", "definicion": "Material que se coloca en estado plástico en la cavidad y endurece en la boca en la misma cita." },
+        { "termino": "Material indirecto", "definicion": "Restauración fabricada fuera de la boca y cementada después, como una incrustación o una corona." },
+        { "termino": "Tenacidad a la fractura", "definicion": "Capacidad de un material para resistir el avance de una grieta." },
+        { "termino": "Radiopacidad", "definicion": "Capacidad de un material de bloquear los rayos X y verse claro en la radiografía." },
+        { "termino": "Filtración marginal", "definicion": "Paso de fluidos, bacterias y nutrientes por la interfase entre la restauración y el diente." },
+        { "termino": "Retención mecánica", "definicion": "Unión del material al diente lograda por la forma de la cavidad, sin adhesión." }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.1-1",
+          "q": "Según el consenso internacional de 2016, ¿qué debe guiar la elección del material restaurador?",
+          "opciones": ["Solo el precio del material", "La marca más reciente del mercado", "El color del diente vecino exclusivamente", "La ubicación y extensión de la lesión, el riesgo de caries, la actividad de la lesión y las condiciones del paciente"],
+          "correcta": 3,
+          "explicacion": "El consenso enumera esos criterios y aclara que no hay evidencia definitiva de que un material sea superior tras la remoción selectiva."
+        },
+        {
+          "id": "t9.1-2",
+          "q": "¿Cuáles son las dos causas más frecuentes de fracaso de las restauraciones directas?",
+          "opciones": ["Cambio de color y sensibilidad", "Desgaste del diente antagonista y alergia", "Caries alrededor de la restauración y fractura", "Pérdida de brillo y mal olor"],
+          "correcta": 2,
+          "explicacion": "Los estudios de larga duración señalan la caries secundaria y la fractura como causas principales."
+        },
+        {
+          "id": "t9.1-3",
+          "q": "¿Por qué predominan los materiales directos en el manejo de la caries?",
+          "opciones": ["Porque permiten preparaciones pequeñas limitadas a la lesión", "Porque son siempre más resistentes que los indirectos", "Porque no requieren aislamiento", "Porque no se ven en la radiografía"],
+          "correcta": 0,
+          "explicacion": "Los indirectos suelen exigir preparaciones más invasivas y son más costosos."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de materiales dentales y operatoria dental", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "9.2",
+      "titulo": "Amalgama dental y el Convenio de Minamata",
+      "minutos": 14,
+      "enPocasPalabras": "La amalgama es el material plateado que se usó por más de un siglo para tapar caries. Contiene mercurio, y por eso el mundo acordó dejar de usarla poco a poco. Si tienes amalgamas en buen estado, no hace falta quitarlas.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La **amalgama dental** fue durante más de un siglo el material de elección para restaurar dientes posteriores. Es una aleación que se forma al mezclar un polvo metálico, compuesto principalmente de **plata, estaño y cobre**, con **mercurio** líquido. Al reaccionar, el mercurio se combina con los otros metales y el material endurece en pocos minutos; cerca de la mitad de la masa de la amalgama fraguada corresponde al mercurio, ya unido en fases metálicas. Las aleaciones actuales tienen alto contenido de cobre, lo que mejoró su resistencia a la corrosión y su comportamiento en los márgenes.\n\nLa amalgama no se adhiere al diente: se sostiene por **retención mecánica**, gracias a paredes convergentes hacia oclusal y a una profundidad mínima que le dé volumen suficiente para no fracturarse. Esto obliga a retirar algo de tejido sano, lo que choca con los principios de mínima intervención del módulo 8."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/04",
+          "proporcion": "1:1",
+          "alt": "Molar de tipodonto con una restauración oclusal de amalgama pulida y bien adaptada.",
+          "pie": "Restauración de amalgama: material metálico de larga trayectoria que se retiene de forma mecánica.",
+          "prompt": "Fotografía macro cuadrada de un primer molar inferior permanente de tipodonto en vista oclusal sobre fondo negro mate, con una restauración oclusal de amalgama plateada pulida, bien adaptada a los márgenes y con anatomía de surcos tallada, rodeada de esmalte de color natural. Anatomía oclusal correcta con cinco cúspides, iluminación de flash anular clínica con reflejos metálicos suaves, enfoque nítido. Evitar: texto, flechas, etiquetas, marcas, sangre, encía humana, corrosión exagerada, dientes deformes, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ventajas que explican su larga historia"
+        },
+        {
+          "tipo": "texto",
+          "md": "La amalgama tiene virtudes clínicas reales. Es resistente al desgaste y a la compresión, tolera mejor que las resinas un campo con algo de humedad, es fácil de manipular, radiopaca y de bajo costo. Sus productos de corrosión tienden a **sellar progresivamente la interfase** después de colocada y tienen cierto efecto antibacteriano. Estudios clínicos de larga duración, citados en el consenso de 2016, encontraron una buena longevidad, especialmente en pacientes con **riesgo alto de caries**, en los que las resinas compuestas parecen más propensas a presentar caries alrededor de la restauración.\n\nSus desventajas también son claras: es antiestética, no se adhiere al diente, exige preparaciones retentivas, conduce la temperatura (por lo que en cavidades profundas se protege la pulpa) y contiene mercurio. Este último punto es el que ha transformado su lugar en la odontología."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El Convenio de Minamata"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **Convenio de Minamata sobre el Mercurio**, firmado en octubre de 2013, es un tratado internacional que busca proteger la salud humana y el ambiente de las emisiones y liberaciones de mercurio. Toma su nombre de la ciudad japonesa donde, a mediados del siglo XX, la contaminación industrial con mercurio causó una grave intoxicación colectiva. El convenio clasifica la amalgama dental como **producto con mercurio añadido** y, en su anexo A, obliga a cada país parte a aplicar **dos o más medidas** para reducir progresivamente su uso: entre ellas, metas nacionales de prevención de caries que reduzcan la necesidad de restaurar, promoción de alternativas sin mercurio, formación de estudiantes y dentistas en esas alternativas, uso exclusivo de amalgama encapsulada y buenas prácticas ambientales para evitar liberaciones al agua y al suelo.\n\nLas conferencias de las partes han endurecido las medidas con el tiempo. En la sexta conferencia, celebrada en Ginebra en noviembre de 2025, se acordó una **eliminación global de la amalgama dental para 2034**, con una excepción para su uso cuando el odontólogo lo considere necesario según las necesidades del paciente. La Unión Europea, por su parte, prohibió su uso general desde enero de 2025, salvo necesidades médicas específicas."
+        },
+        {
+          "tipo": "texto",
+          "md": "Para el clínico, la transición significa tres cosas. Primero, **dominar las alternativas sin mercurio** en dientes posteriores, sobre todo las resinas compuestas y los ionómeros de alta viscosidad, que estudiarás en los temas 9.3 y 9.4. Segundo, reforzar la **prevención**, porque el propio convenio reconoce que la mejor manera de reducir el uso de amalgama es necesitar menos restauraciones. Y tercero, **manejar con seguridad** las amalgamas que ya existen en la boca de millones de personas: vigilarlas, repararlas cuando sea posible y, si deben retirarse, hacerlo con las medidas de protección adecuadas y con un manejo correcto de los residuos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "México y la amalgama",
+          "md": "México firmó el Convenio de Minamata en octubre de 2013 y lo ratificó el 29 de septiembre de 2015; el convenio entró en vigor en agosto de 2017. La COFEPRIS publicó una **Guía de buenas prácticas de uso de mercurio en consultorios dentales**, de carácter informativo, que describe la manipulación segura de la amalgama, el manejo de derrames y la disposición de los residuos, que se consideran residuos peligrosos conforme a la normativa ambiental. Antes de aplicar cualquier disposición, revisa la versión vigente de la guía y las normas aplicables en el Diario Oficial de la Federación."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m09/d2",
+          "pie": "Línea del tiempo de las principales decisiones internacionales sobre la amalgama dental.",
+          "descripcion": "Línea del tiempo horizontal con cinco hitos marcados con círculos: «2013: firma del Convenio de Minamata», «2015: México ratifica el convenio», «2017: entrada en vigor del convenio», «2025: la Unión Europea prohíbe el uso general; la COP-6 acuerda la eliminación global» y «2034: fecha global de eliminación, con excepción clínica». Encima de la línea, un degradado de gris a verde que simboliza la transición hacia alternativas sin mercurio.",
+          "elementos": [
+            "2013: firma del Convenio de Minamata",
+            "2015: México ratifica",
+            "2017: entrada en vigor",
+            "2025: prohibición en la Unión Europea y acuerdo de la COP-6",
+            "2034: eliminación global con excepción clínica",
+            "Transición a alternativas sin mercurio"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "¿Es peligrosa la amalgama para el paciente?"
+        },
+        {
+          "tipo": "texto",
+          "md": "La amalgama libera cantidades muy pequeñas de vapor de mercurio, sobre todo al colocarla, al retirarla y con la masticación intensa. Para la población general, las organizaciones profesionales consideran que las restauraciones de amalgama son seguras. En septiembre de 2020, la Administración de Alimentos y Medicamentos de Estados Unidos (FDA) recomendó usar alternativas sin mercurio, cuando sea posible y apropiado, en grupos con mayor riesgo potencial: embarazadas y mujeres que planean embarazarse, mujeres en lactancia, niños, especialmente menores de seis años, personas con enfermedad neurológica preexistente, con función renal disminuida o con sensibilidad conocida al mercurio.\n\nLa misma comunicación de la FDA fue clara en un punto que debes saber explicar: **no se recomienda retirar amalgamas en buen estado**, porque al retirarlas aumenta temporalmente la exposición al vapor de mercurio y se pierde tejido dental sano. El reemplazo se justifica cuando la restauración está defectuosa o hay una indicación médica, y la decisión corresponde al odontólogo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Mercurio y salud ocupacional",
+          "md": "El grupo más expuesto al mercurio de la amalgama es el **equipo dental**, no el paciente. Si en tu lugar de trabajo todavía se usa o se retira amalgama: emplea solo amalgama encapsulada; trabaja con succión de alto volumen y aislamiento; nunca toques el mercurio ni la amalgama sin fraguar; recoge los restos en recipientes cerrados destinados a ese fin, sin mezclarlos con residuos biológico-infecciosos; y usa separadores de amalgama en el drenaje cuando estén disponibles. No calientes ni esterilices instrumentos con restos de amalgama sin limpiarlos antes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/05",
+          "proporcion": "4:3",
+          "alt": "Recipiente hermético para residuos de amalgama en un área de trabajo dental, manipulado por una mano con guante.",
+          "pie": "Los restos de amalgama se recogen en recipientes cerrados específicos, separados de otros residuos.",
+          "prompt": "Fotografía en un área de trabajo de consultorio dental limpia, primer plano de una mano con guante de nitrilo colocando una cápsula usada dentro de un recipiente plástico hermético de tapa roscada, sin etiquetas legibles, sobre una superficie de acero inoxidable; al fondo desenfocado, contenedores de residuos ordenados. Luz blanca neutra, colores naturales, enfoque nítido en el recipiente. Evitar: texto, símbolos legibles, logotipos, marcas, gotas de mercurio visibles, rostros, manos sin guantes, desorden, sangre."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Lo que sí y lo que no sobre la amalgama",
+          "afirmaciones": [
+            { "texto": "La amalgama se adhiere químicamente al esmalte y la dentina.", "verdadero": false, "explicacion": "Se sostiene por retención mecánica; por eso exige preparaciones retentivas." },
+            { "texto": "El Convenio de Minamata clasifica la amalgama como producto con mercurio añadido.", "verdadero": true, "explicacion": "Por eso obliga a los países a aplicar medidas para reducir su uso." },
+            { "texto": "La FDA recomendó retirar todas las amalgamas en buen estado.", "verdadero": false, "explicacion": "Recomendó no retirarlas, porque al hacerlo aumenta temporalmente la exposición y se pierde tejido sano." },
+            { "texto": "En la COP-6 de 2025 se acordó una eliminación global de la amalgama para 2034 con una excepción clínica.", "verdadero": true, "explicacion": "Se permite su uso cuando el odontólogo lo considere necesario según las necesidades del paciente." },
+            { "texto": "Los restos de amalgama pueden desecharse junto con los residuos biológico-infecciosos.", "verdadero": false, "explicacion": "Se recogen por separado en recipientes cerrados y se manejan como residuos peligrosos conforme a la normativa ambiental." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/06",
+          "proporcion": "3:4",
+          "alt": "Odontólogo con equipo de protección y paciente con dique de hule durante el retiro de una restauración metálica, con succión de alto volumen.",
+          "pie": "El retiro de amalgama, cuando está indicado, se hace con aislamiento, succión de alto volumen y protección completa.",
+          "prompt": "Fotografía vertical en un consultorio dental, un odontólogo con bata, gorro, cubrebocas de alta eficiencia, careta transparente y guantes de nitrilo trabaja sobre la arcada inferior de un paciente reclinado que tiene colocado un dique de hule verde y lentes de protección; una asistente con equipo completo sostiene una cánula de succión de alto volumen cerca del campo. Rostros no identificables por el dique, el encuadre y las caretas. Luz clínica blanca, colores naturales. Evitar: texto, logotipos, marcas, sangre, rostros identificables, falta de equipo de protección, aerosoles exagerados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Prepara una explicación breve y serena para el paciente que pregunta si debe retirar sus amalgamas: «Tus restauraciones están en buen estado; retirarlas te expondría a más mercurio que dejarlas y te haría perder diente sano. Las revisaremos en cada cita y, si alguna se daña, la cambiaremos por un material sin mercurio». Una respuesta clara evita tratamientos innecesarios y transmite confianza. Si tu consultorio todavía tiene amalgama o mercurio almacenado, revisa con tu equipo cómo se guarda y cómo se entregan sus residuos."
+        }
+      ],
+      "glosario": [
+        { "termino": "Amalgama dental", "definicion": "Aleación de plata, estaño, cobre y otros metales con mercurio, usada como material restaurador directo." },
+        { "termino": "Convenio de Minamata", "definicion": "Tratado internacional de 2013 para proteger la salud y el ambiente de las emisiones y liberaciones de mercurio." },
+        { "termino": "Amalgama encapsulada", "definicion": "Presentación en cápsulas con proporciones predosificadas de aleación y mercurio, que reduce la exposición al manipularla." },
+        { "termino": "Separador de amalgama", "definicion": "Dispositivo del drenaje de la unidad dental que retiene las partículas de amalgama antes de que lleguen al agua residual." },
+        { "termino": "Producto con mercurio añadido", "definicion": "Categoría del Convenio de Minamata para productos que contienen mercurio de forma intencional, como la amalgama." }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.2-1",
+          "q": "¿Qué medida del Convenio de Minamata se relaciona directamente con la prevención?",
+          "opciones": ["Establecer metas nacionales de prevención de caries para reducir la necesidad de restaurar", "Usar mercurio a granel en lugar de cápsulas", "Retirar todas las amalgamas existentes", "Prohibir el uso de resinas compuestas"],
+          "correcta": 0,
+          "explicacion": "El anexo A incluye metas de prevención de caries y promoción de la salud entre las medidas para reducir el uso de amalgama."
+        },
+        {
+          "id": "t9.2-2",
+          "q": "¿Qué acordó la sexta Conferencia de las Partes del Convenio de Minamata en 2025?",
+          "opciones": ["Aumentar el uso de amalgama en niños", "Eliminar de inmediato toda restauración de amalgama existente", "Una eliminación global de la amalgama para 2034 con excepción clínica", "Sustituir la amalgama por cerámica en todos los casos"],
+          "correcta": 2,
+          "explicacion": "Se fijó 2034 como fecha global, permitiendo su uso cuando el odontólogo lo considere necesario."
+        },
+        {
+          "id": "t9.2-3",
+          "q": "¿Por qué no se recomienda retirar amalgamas en buen estado?",
+          "opciones": ["Porque la amalgama protege contra la erosión", "Porque el retiro aumenta temporalmente la exposición al mercurio y elimina tejido sano", "Porque es ilegal retirarlas", "Porque la resina no puede colocarse donde hubo amalgama"],
+          "correcta": 1,
+          "explicacion": "Así lo señaló la FDA en 2020; el reemplazo se reserva para restauraciones defectuosas o indicaciones médicas."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Convenio de Minamata sobre el Mercurio, artículo 4 y anexo A, parte II", "autor": "Programa de las Naciones Unidas para el Medio Ambiente", "anio": 2013 },
+        { "tipo": "oficial", "titulo": "Minamata Convention COP-6 agrees to end use of dental amalgam by 2034 (comunicado)", "autor": "Programa de las Naciones Unidas para el Medio Ambiente", "anio": 2025, "url": "https://www.unep.org/news-and-stories/press-release/minamata-convention-cop-6-agrees-end-use-dental-amalgam-2034" },
+        { "tipo": "oficial", "titulo": "Guía de buenas prácticas de uso de mercurio en consultorios dentales", "autor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)" },
+        { "tipo": "oficial", "titulo": "Recommendations About the Use of Dental Amalgam in Certain High-Risk Populations: FDA Safety Communication", "autor": "U.S. Food and Drug Administration", "anio": 2020 },
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 }
+      ]
+    },
+    {
+      "n": "9.3",
+      "titulo": "Resinas compuestas y sistemas adhesivos",
+      "minutos": 14,
+      "enPocasPalabras": "La resina es el material del color del diente que más se usa hoy. Se pega al diente con un adhesivo especial y se endurece con una luz azul. Funciona muy bien si la zona se mantiene seca mientras se coloca.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Las **resinas compuestas** son hoy el material restaurador directo más usado en muchos países. Su nombre describe su estructura: son un **compuesto** de dos fases unidas químicamente. La **matriz orgánica** está formada por monómeros de metacrilato, como el Bis-GMA, el UDMA y el TEGDMA, que al polimerizar forman una red rígida. El **relleno inorgánico**, de partículas de vidrio, sílice o cerámica, aporta resistencia, reduce la contracción y da radiopacidad. Un **agente de acoplamiento**, el silano, une químicamente el relleno a la matriz.\n\nLa mayoría de las resinas para restauración directa son **fotopolimerizables**: contienen un fotoiniciador, con frecuencia la canforoquinona, que se activa con luz azul y desencadena la polimerización. Por eso se colocan por capas o **incrementos**, para que la luz alcance todo el espesor del material."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/07",
+          "proporcion": "4:3",
+          "alt": "Mano con guante aplicando luz azul de una lámpara de fotopolimerizar sobre un molar de tipodonto, con filtro naranja protector.",
+          "pie": "La fotopolimerización activa el endurecimiento de la resina; el filtro naranja protege los ojos del operador.",
+          "prompt": "Fotografía clínica macro sobre un modelo tipodonto de arcada inferior permanente, la punta de una lámpara de fotopolimerizar inalámbrica emite luz azul intensa sobre la cara oclusal de un primer molar, sostenida por una mano con guante de nitrilo; delante de la punta, un escudo protector naranja translúcido. Fondo oscuro desenfocado, la luz azul ilumina suavemente los dientes vecinos, enfoque nítido en la punta y el diente, colores naturales salvo el azul de la luz. Evitar: texto, logotipos, marcas, sangre, rostros, manos sin guantes, anatomía dental incorrecta, destellos exagerados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tipos de resina y la contracción de polimerización"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las resinas se clasifican sobre todo por el tamaño y la cantidad de su relleno. Las de **nanorrelleno** y las **nanohíbridas** combinan resistencia y buen pulido, y son las más usadas para restauraciones anteriores y posteriores. Las **resinas fluidas** tienen menos relleno y más fluidez: se adaptan bien a cavidades pequeñas y a las paredes, pero son menos resistentes al desgaste. Las **resinas de colocación en bloque** (*bulk-fill*) permiten incrementos más gruesos, de hasta unos 4 milímetros según el fabricante, gracias a una mayor translucidez y a fotoiniciadores más eficientes.\n\nTodas las resinas comparten una limitación: al polimerizar, los monómeros se acercan entre sí y el material **se contrae**, en las resinas convencionales alrededor de 1 a 3 % de su volumen, y más en las fluidas. Si el material está adherido a varias paredes de la cavidad, esa contracción genera **estrés** en la interfase, que puede abrir los márgenes, causar sensibilidad posoperatoria o microfracturas del esmalte. La técnica incremental, la elección del tipo de resina y una adhesión de calidad buscan controlar ese estrés.\n\nLa calidad de la **fotopolimerización** también importa. Una resina que recibe poca luz, por una lámpara débil, una punta sucia, una distancia excesiva o un tiempo insuficiente, queda con monómeros sin reaccionar: se desgasta más, se tiñe, es menos resistente y puede liberar más monómero residual."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Cómo se une una resina a la dentina: la capa híbrida",
+          "md": "La adhesión al **esmalte** se basa en el grabado ácido descrito por Buonocore en 1955: el ácido disuelve selectivamente los prismas y crea microporosidades en las que penetra la resina, formando prolongaciones que se traban al polimerizar. La **dentina** es más difícil: tiene más agua y matriz orgánica, y túbulos con fluido a presión. En 1982, Nakabayashi describió la **capa híbrida**: el acondicionamiento desmineraliza la superficie de la dentina y expone una red de fibras de colágeno; los monómeros del adhesivo infiltran esa red y, al polimerizar, forman una capa mixta de colágeno y resina que traba micromecánicamente el material. Algunos monómeros funcionales, como el **10-MDP**, además forman enlaces químicos estables con el calcio de la hidroxiapatita que queda en la dentina. La durabilidad de esta interfase es el gran reto de la odontología adhesiva: la hidrólisis de la resina y la degradación del colágeno por enzimas propias de la dentina pueden debilitarla con los años. En la dentina cariada que se deja tras una remoción selectiva, la capa híbrida es más gruesa pero la fuerza de unión inmediata es menor, por lo que el consenso de 2016 insiste en que la periferia de la cavidad, donde se juega el sellado, quede en tejido sano."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres estrategias de adhesión"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los sistemas adhesivos se agrupan según cómo tratan el **barrillo dentinario**, la capa de restos que deja la preparación sobre la dentina. En la estrategia de **grabado y enjuague** se aplica primero ácido fosfórico, que se lava después; elimina el barrillo y desmineraliza esmalte y dentina, y luego se aplica el adhesivo. Es la referencia para el esmalte, pero en dentina es sensible a la técnica: si la dentina se seca en exceso, el colágeno se colapsa y el adhesivo no penetra.\n\nEn la estrategia de **autograbado**, monómeros ácidos acondicionan e infiltran al mismo tiempo, sin lavado; el barrillo se incorpora a la capa híbrida. Es menos sensible a la humedad de la dentina, pero su grabado del esmalte es más débil. Los **adhesivos universales**, o de modo múltiple, pueden usarse con cualquiera de las dos estrategias; una opción muy extendida es el **grabado selectivo del esmalte**, que combina el grabado con ácido fosfórico solo en el esmalte con el autograbado en la dentina."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Estrategias de adhesión comparadas",
+          "columnas": ["Estrategia", "Qué hace con el barrillo dentinario", "Fortaleza", "Punto débil"],
+          "filas": [
+            ["Grabado y enjuague", "Lo elimina con ácido fosfórico y lavado", "Excelente unión al esmalte", "Sensible al secado de la dentina"],
+            ["Autograbado", "Lo incorpora a la capa híbrida", "Menos sensible a la técnica en dentina", "Grabado del esmalte más débil"],
+            ["Universal con grabado selectivo del esmalte", "Elimina el barrillo solo en el esmalte", "Combina ventajas de ambas", "Requiere controlar dónde se aplica el ácido"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m09/d3",
+          "pie": "Corte esquemático de la interfase entre una resina compuesta y la dentina.",
+          "descripcion": "Corte transversal ampliado de abajo hacia arriba: dentina con túbulos verticales; encima, la capa híbrida como una franja donde se entrelazan fibras de colágeno y resina; prolongaciones de resina dentro de los túbulos; encima, una capa delgada de adhesivo; y arriba, la resina compuesta con partículas de relleno dibujadas como esferas de distintos tamaños. A la derecha, líneas guía que rotulan cada capa.",
+          "elementos": [
+            "Resina compuesta",
+            "Partículas de relleno",
+            "Capa de adhesivo",
+            "Capa híbrida",
+            "Prolongaciones de resina en los túbulos",
+            "Dentina",
+            "Túbulos dentinarios"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La saliva arruina la adhesión",
+          "md": "La contaminación con saliva o sangre de la superficie acondicionada reduce de manera importante la fuerza de unión y la calidad del sellado. Por eso las restauraciones adhesivas requieren un **aislamiento eficaz**, idealmente con dique de hule. Cuando el aislamiento no es posible, por ejemplo en lesiones subgingivales o en pacientes que no cooperan, conviene considerar materiales menos sensibles a la humedad, como los ionómeros de vidrio del tema 9.4."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/08",
+          "proporcion": "1:1",
+          "alt": "Molar de tipodonto aislado con dique de hule y un microaplicador sobre la cavidad.",
+          "pie": "El aislamiento con dique de hule protege la superficie acondicionada de la contaminación con saliva.",
+          "prompt": "Fotografía macro cuadrada de un primer molar inferior permanente de tipodonto aislado con dique de hule azul y una grapa metálica, con una cavidad oclusal pequeña y limpia; un microaplicador de punta blanca sostenido por una mano con guante de nitrilo se acerca a la cavidad. Iluminación clínica uniforme, fondo azul del dique, enfoque nítido en la cavidad, colores naturales. Evitar: texto, logotipos, marcas, sangre, encía humana inflamada, rostros, manos sin guantes, anatomía incorrecta, número incorrecto de cúspides."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "La secuencia de una restauración adhesiva (concepto)",
+          "instruccion": "Ordena, como concepto, las etapas de una restauración directa de resina compuesta con estrategia de grabado y enjuague.",
+          "elementos": [
+            "Aislamiento del campo operatorio",
+            "Grabado con ácido fosfórico y lavado",
+            "Aplicación del sistema adhesivo y fotopolimerización",
+            "Colocación de la resina por incrementos y fotopolimerización de cada uno",
+            "Ajuste oclusal, acabado y pulido"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ventajas, límites y riesgo de caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las resinas permiten preparaciones mínimas, limitadas a la lesión, porque no necesitan retención mecánica; son estéticas, pueden repararse con facilidad y su longevidad en dientes posteriores se ha acercado a la de la amalgama en estudios clínicos. Sus límites son la sensibilidad a la técnica y a la humedad, la contracción de polimerización, el mayor tiempo clínico y una propensión mayor a la caries alrededor de la restauración en **pacientes con riesgo alto**, cuya causa todavía no se comprende por completo. Este último punto refuerza la idea central del programa: la restauración más cuidadosa no sustituye el control de la enfermedad."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/09",
+          "proporcion": "4:3",
+          "alt": "Premolar y molar de tipodonto con restauraciones de resina compuesta pulidas que imitan el color natural del diente.",
+          "pie": "Una resina bien pulida se integra con el diente y facilita el control de la biopelícula.",
+          "prompt": "Fotografía macro de un segundo premolar y un primer molar superiores permanentes de tipodonto en vista oclusal, con restauraciones de resina compuesta pequeñas y pulidas en las fosas, del mismo tono que el esmalte, con anatomía de surcos natural y márgenes invisibles. Fondo negro mate, iluminación de flash clínico doble, brillo natural en las cúspides, enfoque nítido. Evitar: texto, flechas, etiquetas, marcas, sangre, encía humana, dientes deformes, número incorrecto de cúspides, colores artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de cada restauración de resina, verifica la **lámpara de fotopolimerizar**: limpia la punta, revisa que no tenga resina adherida ni rayaduras y, si tu clínica cuenta con radiómetro, mide su intensidad de forma periódica y regístrala. Una lámpara deficiente produce resinas mal polimerizadas que se desgastan, se tiñen y filtran, y el problema pasa desapercibido hasta que las restauraciones fallan."
+        }
+      ],
+      "glosario": [
+        { "termino": "Resina compuesta", "definicion": "Material restaurador formado por una matriz de monómeros de metacrilato, relleno inorgánico y un agente de acoplamiento." },
+        { "termino": "Silano", "definicion": "Agente de acoplamiento que une químicamente las partículas de relleno a la matriz de la resina." },
+        { "termino": "Contracción de polimerización", "definicion": "Reducción de volumen de la resina al endurecer, que genera estrés en la interfase con el diente." },
+        { "termino": "Capa híbrida", "definicion": "Capa de colágeno dentinario infiltrado por resina que traba micromecánicamente el adhesivo a la dentina." },
+        { "termino": "Barrillo dentinario", "definicion": "Capa de restos de tejido que queda sobre la dentina después de prepararla con instrumentos." },
+        { "termino": "Adhesivo universal", "definicion": "Sistema adhesivo que puede usarse con grabado y enjuague, con autograbado o con grabado selectivo del esmalte." },
+        { "termino": "Resina de colocación en bloque", "definicion": "Resina diseñada para polimerizar en incrementos más gruesos que las convencionales." }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.3-1",
+          "q": "¿Qué función cumple el silano en una resina compuesta?",
+          "opciones": ["Dar color al material", "Activar la polimerización con luz azul", "Disolver el barrillo dentinario", "Unir químicamente el relleno inorgánico a la matriz"],
+          "correcta": 3,
+          "explicacion": "El silano es el agente de acoplamiento entre las partículas de relleno y la matriz orgánica."
+        },
+        {
+          "id": "t9.3-2",
+          "q": "¿Qué describió Nakabayashi en 1982?",
+          "opciones": ["El grabado ácido del esmalte", "La capa híbrida en la dentina", "La amalgama de alto cobre", "El ionómero de vidrio"],
+          "correcta": 1,
+          "explicacion": "La capa híbrida es la base de la adhesión a la dentina; el grabado del esmalte lo describió Buonocore en 1955."
+        },
+        {
+          "id": "t9.3-3",
+          "q": "¿Qué combina el grabado selectivo del esmalte?",
+          "opciones": ["Grabado con ácido fosfórico solo en el esmalte y autograbado en la dentina", "Ácido fosfórico en la dentina y nada en el esmalte", "Dos capas de resina fluida", "Amalgama en el fondo y resina en la superficie"],
+          "correcta": 0,
+          "explicacion": "Aprovecha el mejor grabado del esmalte con ácido fosfórico y la menor sensibilidad del autograbado en dentina."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "A simple method of increasing the adhesion of acrylic filling materials to enamel surfaces (Journal of Dental Research 34:849-853)", "autor": "Buonocore M. G.", "anio": 1955 },
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de materiales dentales y literatura de odontología adhesiva", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "9.4",
+      "titulo": "Ionómeros de vidrio y materiales que liberan iones",
+      "minutos": 13,
+      "enPocasPalabras": "El ionómero de vidrio es un material blanco que se pega solo al diente y suelta flúor poco a poco. Es útil cuando es difícil mantener seca la boca o en personas con mucho riesgo de caries. Es menos resistente que la resina, por eso se usa en lugares con poca fuerza de mordida.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los **cementos de ionómero de vidrio** fueron desarrollados a principios de la década de 1970 por Wilson y Kent en el Reino Unido. Endurecen mediante una **reacción ácido-base**: un polvo de vidrio de fluoroaluminosilicato reacciona con una solución de ácido poliacrílico (un ácido polialquenoico). El ácido ataca la superficie de las partículas de vidrio, libera iones de calcio, aluminio y flúor, y estos iones forman puentes entre las cadenas del ácido, que así se entrelazan y endurecen alrededor de los núcleos de vidrio que no reaccionaron.\n\nDos propiedades los distinguen de las resinas. La primera es la **adhesión química**: los grupos carboxilo del ácido forman enlaces iónicos con el calcio de la hidroxiapatita del esmalte y la dentina, y se produce un intercambio de iones en la interfase. La segunda es la **liberación de flúor**: el material libera flúor de forma sostenida, con una liberación inicial alta que después disminuye, y puede **recargarse** cuando el diente recibe flúor tópico, por ejemplo de la pasta dental."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/10",
+          "proporcion": "1:1",
+          "alt": "Cápsula de ionómero de vidrio sin marca junto a un aplicador y una loseta de mezcla con material blanco.",
+          "pie": "Los ionómeros de vidrio se presentan en cápsulas predosificadas o en polvo y líquido para mezclar.",
+          "prompt": "Fotografía macro cuadrada de estudio sobre una superficie blanca: una cápsula plástica lisa de ionómero de vidrio sin marcas, un aplicador metálico para cápsulas, una loseta de vidrio con una pequeña porción de material blanco cremoso recién mezclado y una espátula de plástico. Iluminación difusa, sombras suaves, enfoque nítido en el material, colores naturales y limpios. Evitar: texto, etiquetas, logotipos, marcas, manos sin guantes, rostros, sangre, colores artificiales, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Fortalezas y debilidades"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los ionómeros tienen un **coeficiente de expansión térmica** parecido al de la dentina, buena biocompatibilidad, no requieren un sistema adhesivo separado y toleran mejor que las resinas un campo que no está perfectamente seco al momento de colocarlos. Por eso son valiosos en lesiones cercanas a la encía, en pacientes con dificultad para cooperar y en personas con riesgo alto de caries.\n\nSus debilidades son mecánicas y estéticas: comparados con las resinas, tienen menor resistencia a la flexión y a la fractura, mayor desgaste en sus primeras etapas y un aspecto más opaco. Además, durante el fraguado inicial son vulnerables a **dos problemas opuestos**: si absorben agua se debilitan y si se deshidratan se agrietan. Por eso se protegen con un barniz o una resina de cobertura en los primeros momentos. Estudios antiguos los mostraban propensos a fracasar en cavidades proximales grandes con carga oclusal, y el consenso de 2016 señala que las revisiones más recientes encuentran que los **ionómeros de alta viscosidad** son una alternativa valiosa en dientes temporales y en cavidades de **una sola superficie** de dientes permanentes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Variantes de ionómero de vidrio",
+          "columnas": ["Tipo", "Cómo endurece", "Uso frecuente", "Consideraciones"],
+          "filas": [
+            ["Convencional", "Reacción ácido-base", "Forros, bases y cementación", "Baja resistencia mecánica"],
+            ["Alta viscosidad", "Reacción ácido-base con más polvo y partículas optimizadas", "Tratamiento restaurativo atraumático y cavidades de una superficie", "Mejor resistencia que el convencional"],
+            ["Modificado con resina", "Reacción ácido-base más polimerización con luz", "Lesiones cervicales y radiculares, forros bajo resina", "Contiene HEMA, un monómero alergénico"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "¿Previene la caries el flúor del ionómero?",
+          "md": "La liberación de flúor de los ionómeros está bien demostrada en el laboratorio, y es atractivo suponer que protege el esmalte vecino frente a nuevas lesiones. La evidencia clínica, sin embargo, es menos concluyente de lo que sugiere el marketing: los estudios que comparan la caries alrededor de restauraciones de ionómero y de otros materiales muestran resultados variables, y el efecto depende del riesgo de caries del paciente y de las demás fuentes de flúor. Lo más prudente es considerar la liberación de flúor como una **ventaja complementaria**, útil sobre todo en pacientes de riesgo alto, y no como un sustituto de la higiene, la pasta fluorada y el control de la dieta. La misma cautela aplica a la palabra «bioactivo», que los fabricantes usan con significados distintos: algunos la emplean para la liberación de iones, otros para la formación de minerales en la superficie, y no siempre hay estudios clínicos que demuestren un beneficio para el paciente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Otros materiales que liberan iones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Entre las resinas y los ionómeros existe una familia de materiales híbridos. Los **compómeros**, o resinas modificadas con poliácidos, son básicamente resinas que contienen componentes de ionómero y liberan menos flúor que este. Los **giómeros** incorporan partículas de vidrio prerreaccionadas. Los **alcasitos** son materiales más recientes, con rellenos alcalinos que liberan flúor, calcio e iones hidroxilo. Los **vidrios híbridos** buscan mejorar la resistencia de los ionómeros de alta viscosidad. En todos los casos, la elección debe basarse en la evidencia clínica de cada producto, que en los más nuevos todavía es limitada.\n\nEn lesiones profundas también se usan **cementos de silicato de calcio**, como el agregado de trióxido mineral y otros más recientes, que liberan iones de calcio e hidroxilo y favorecen la formación de dentina. Su papel principal está en la terapia pulpar vital y en la endodoncia, que se estudian en el programa de endodoncia; el consenso de 2016 los menciona como materiales cuyo beneficio clínico como forros todavía estaba en estudio."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m09/d4",
+          "pie": "Espectro de materiales directos de color diente, desde el ionómero puro hasta la resina compuesta.",
+          "descripcion": "Barra horizontal con degradado de izquierda a derecha. Extremo izquierdo «Ionómero de vidrio convencional» y extremo derecho «Resina compuesta». En medio, de izquierda a derecha: «Ionómero de alta viscosidad», «Ionómero modificado con resina», «Giómero y compómero». Encima de la barra, una flecha que crece hacia la izquierda rotulada «Más liberación de flúor y adhesión química»; debajo, una flecha que crece hacia la derecha rotulada «Más resistencia mecánica y estética».",
+          "elementos": [
+            "Ionómero de vidrio convencional",
+            "Ionómero de alta viscosidad",
+            "Ionómero modificado con resina",
+            "Giómero y compómero",
+            "Resina compuesta",
+            "Más liberación de flúor y adhesión química",
+            "Más resistencia mecánica y estética"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ionómero y resina juntos: la técnica sándwich"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los ionómeros y las resinas no compiten siempre: a veces se combinan. En la llamada **técnica sándwich**, el odontólogo coloca una capa de ionómero de vidrio en la parte profunda de la cavidad, en contacto con la dentina, y la cubre con resina compuesta, que aporta resistencia y estética en la superficie. En la variante **cerrada**, la resina cubre todo el ionómero; en la **abierta**, el ionómero llega hasta el margen cervical de una cavidad proximal, donde el esmalte es escaso y el aislamiento difícil.\n\nLa idea es aprovechar lo mejor de cada material: la adhesión química, la tolerancia a la humedad y la liberación de flúor del ionómero en la zona profunda o cervical, y las propiedades mecánicas y estéticas de la resina donde recibe carga. También se usa una capa delgada de ionómero, generalmente modificado con resina, como **forro** bajo restauraciones de resina en cavidades profundas, en línea con lo que el consenso de 2016 describe sobre los forros: no son necesarios para detener la lesión sellada, pero pueden ayudar a proteger la dentina remanente. La indicación concreta es decisión del odontólogo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un material para una boca seca",
+          "md": "Una mujer de 74 años, con varios medicamentos que reducen su saliva, presenta tres lesiones cavitadas activas en superficies radiculares vestibulares de premolares inferiores, cerca de la encía, donde es difícil aislar. Su odontóloga, además de reforzar el flúor y ajustar la dieta, decide restaurarlas con ionómero de vidrio, por su tolerancia a la humedad, su adhesión química y su liberación de flúor. La caries radicular y la atención de las personas mayores se estudian en el módulo 11."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/11",
+          "proporcion": "4:3",
+          "alt": "Premolares inferiores de tipodonto con restauraciones cervicales blancas y opacas cerca del margen gingival.",
+          "pie": "Restauraciones cervicales de ionómero de vidrio: aspecto más opaco, pero buena tolerancia a la humedad.",
+          "prompt": "Fotografía macro de la cara vestibular de dos premolares inferiores permanentes de un modelo tipodonto con encía artificial rosa, cada uno con una pequeña restauración cervical blanca, ligeramente opaca y mate, en el tercio gingival junto al margen de la encía. Iluminación clínica uniforme, fondo oscuro desenfocado, enfoque nítido en las restauraciones, colores naturales. Evitar: texto, flechas, etiquetas, marcas, sangre, inflamación, rostros, labios, anatomía dental incorrecta, colores artificiales."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso: brigada de salud en una comunidad",
+          "situacion": "Durante una brigada en una comunidad rural sin electricidad estable, una pasante atiende a un niño de 8 años con una lesión cavitada de una sola superficie en un molar temporal, sin dolor y con pulpa compatible con vitalidad según la evaluación clínica. No hay unidad dental ni lámpara de fotopolimerizar. Se cuenta con instrumental manual estéril y material para aislamiento relativo.",
+          "opciones": [
+            { "texto": "Remoción selectiva con instrumentos manuales y restauración con ionómero de vidrio de alta viscosidad, con seguimiento.", "correcta": true, "retro": "Correcto. Es el enfoque del tratamiento restaurativo atraumático: no requiere electricidad, tolera mejor la humedad y está respaldado en cavidades de una superficie y dientes temporales." },
+            { "texto": "Restaurar con resina compuesta sin fotopolimerizar, dejando que endurezca sola.", "correcta": false, "retro": "Las resinas fotopolimerizables no endurecen adecuadamente sin luz; la restauración fracasaría." },
+            { "texto": "Colocar amalgama a granel mezclada a mano.", "correcta": false, "retro": "El mercurio a granel aumenta la exposición; el Convenio de Minamata promueve alternativas y el uso exclusivo de cápsulas, y en niños se prefieren materiales sin mercurio." },
+            { "texto": "Posponer cualquier atención hasta que la comunidad tenga electricidad.", "correcta": false, "retro": "Existe una alternativa eficaz sin electricidad; posponer permite que la lesión progrese." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/12",
+          "proporcion": "16:9",
+          "alt": "Pasante de odontología con equipo de protección atendiendo a un niño en una brigada comunitaria con instrumental manual.",
+          "pie": "El ionómero de alta viscosidad permite restaurar con instrumentos manuales donde no hay equipo dental.",
+          "prompt": "Fotografía horizontal de estilo documental en un salón comunitario luminoso con luz natural de ventana, una pasante de odontología con bata, gorro, cubrebocas, lentes de protección y guantes de nitrilo atiende a un niño de unos ocho años recostado en una camilla portátil, visto de perfil parcial sin rostro identificable, con lentes de protección; sobre una mesa plegable cubierta con campo estéril, instrumental manual ordenado y cápsulas lisas. Colores naturales, ambiente cálido y profesional. Evitar: texto, logotipos, marcas, rostros identificables, sangre, falta de equipo de protección, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando restaures con ionómero de vidrio, protege la superficie durante el fraguado inicial con el agente de cobertura que indique el fabricante y explica al paciente que el material alcanza su resistencia de forma gradual, por lo que conviene evitar morder alimentos duros con ese diente durante el resto del día. Programa una revisión para evaluar el desgaste y la integridad marginal, sobre todo en zonas con carga oclusal."
+        }
+      ],
+      "glosario": [
+        { "termino": "Ionómero de vidrio", "definicion": "Material restaurador que endurece por reacción ácido-base entre un vidrio de fluoroaluminosilicato y un ácido polialquenoico." },
+        { "termino": "Reacción ácido-base", "definicion": "Reacción química entre un ácido y una base; en el ionómero, entre el ácido poliacrílico y el vidrio." },
+        { "termino": "Recarga de flúor", "definicion": "Capacidad del ionómero de captar flúor del entorno, por ejemplo de la pasta dental, y liberarlo después." },
+        { "termino": "Ionómero modificado con resina", "definicion": "Ionómero que incorpora monómeros como el HEMA y endurece por reacción ácido-base y por fotopolimerización." },
+        { "termino": "Compómero", "definicion": "Resina modificada con poliácidos que contiene componentes de ionómero y libera menos flúor que este." },
+        { "termino": "Silicato de calcio", "definicion": "Cemento que libera iones de calcio e hidroxilo y se usa sobre todo en terapia pulpar vital y endodoncia." }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.4-1",
+          "q": "¿Cómo se une el ionómero de vidrio al diente?",
+          "opciones": ["Solo por retención mecánica", "Por adhesión química con el calcio de la hidroxiapatita", "Por fusión térmica", "Por un adhesivo de grabado y enjuague obligatorio"],
+          "correcta": 1,
+          "explicacion": "Los grupos carboxilo forman enlaces iónicos con el calcio del esmalte y la dentina."
+        },
+        {
+          "id": "t9.4-2",
+          "q": "¿En qué situación respalda el consenso de 2016 el uso de ionómero de alta viscosidad?",
+          "opciones": ["En cavidades proximales grandes de molares permanentes con carga intensa", "Solo como material provisional de una semana", "En dientes temporales y cavidades de una sola superficie de dientes permanentes", "Únicamente en dientes anteriores por estética"],
+          "correcta": 2,
+          "explicacion": "Las revisiones recientes citadas en el consenso lo consideran una alternativa valiosa en esos casos."
+        },
+        {
+          "id": "t9.4-3",
+          "q": "¿Qué cuidado requiere el ionómero de vidrio durante su fraguado inicial?",
+          "opciones": ["Protegerlo de la absorción de agua y de la deshidratación con un agente de cobertura", "Secarlo con aire durante varios minutos", "Mojarlo con saliva para acelerar el fraguado", "Pulirlo con fuerza de inmediato"],
+          "correcta": 0,
+          "explicacion": "Es vulnerable a la contaminación con agua y a la deshidratación en sus primeras etapas."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en textos de materiales dentales sobre ionómeros de vidrio, materiales híbridos y cementos de silicato de calcio", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "9.5",
+      "titulo": "Elegir, colocar con seguridad y dar seguimiento",
+      "minutos": 13,
+      "enPocasPalabras": "El dentista elige el material pensando en el diente, en la caries y en ti. También cuida su seguridad y la tuya mientras trabaja. Después revisa las restauraciones en cada cita para repararlas a tiempo si algo falla.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Con lo aprendido en los temas anteriores ya puedes razonar como lo hace un clínico experimentado. La elección del material no se decide por costumbre ni por la marca de moda, sino cruzando cuatro grupos de información: **la lesión** (ubicación, extensión, profundidad, carga oclusal), **el paciente** (riesgo y actividad de caries, edad, salud general, saliva, posibilidad de cooperar, alergias, expectativas estéticas), **el entorno** (posibilidad de aislar, equipo disponible, tiempo clínico) y **los materiales** con sus propiedades y su evidencia clínica.\n\nRecuerda que la decisión final es del odontólogo tratante, que debe explicar las alternativas al paciente, incluidos sus costos y su duración esperada, y registrar la elección y el consentimiento en el expediente clínico."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/13",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección mostrando a un paciente, de espaldas, muestras de materiales en un modelo durante la planeación del tratamiento.",
+          "pie": "Explicar las alternativas de material, con sus ventajas y límites, forma parte del consentimiento informado.",
+          "prompt": "Fotografía horizontal en un consultorio dental moderno, una odontóloga con bata clínica, cubrebocas, lentes de protección y guantes de nitrilo sostiene un modelo tipodonto con restauraciones de distintos materiales y lo muestra a un paciente adulto sentado frente a ella, visto de espaldas y sin rostro visible. Sobre la mesa, una hoja de consentimiento sin texto legible. Luz natural cálida combinada con luz clínica, colores naturales, ambiente de confianza. Evitar: texto legible, logotipos, marcas, rostros identificables, sangre, falta de equipo de protección."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Escenarios frecuentes"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Orientaciones generales por escenario (la decisión es del odontólogo tratante)",
+          "columnas": ["Escenario", "Consideraciones principales", "Materiales que suelen valorarse"],
+          "filas": [
+            ["Cavidad oclusal pequeña en molar permanente, buen aislamiento", "Conservar tejido, estética", "Resina compuesta con sistema adhesivo"],
+            ["Cavidad de una superficie con aislamiento difícil o sin equipo", "Tolerancia a la humedad, técnica manual", "Ionómero de vidrio de alta viscosidad"],
+            ["Lesión radicular o cervical en persona con boca seca y riesgo alto", "Humedad, adhesión química, flúor", "Ionómero convencional o modificado con resina"],
+            ["Cavidad extensa con varias superficies y carga oclusal", "Resistencia mecánica, riesgo de fractura", "Resina compuesta, restauración indirecta o, donde aún se permita y esté indicada, amalgama"],
+            ["Lesión profunda tras remoción selectiva", "Sellado periférico, protección pulpar", "Restauración adhesiva bien sellada; forro según criterio del odontólogo"]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La tabla es una orientación didáctica, no un protocolo. Un mismo escenario puede resolverse con materiales distintos según la experiencia del operador, la evidencia disponible para cada producto y la preferencia informada del paciente. Lo que sí es constante es el orden de prioridades: **un buen sellado** para detener la lesión remanente, **la menor pérdida de tejido** posible y **una superficie que el paciente pueda mantener limpia**. En pacientes con riesgo alto, cualquier material dura menos si la enfermedad sigue activa; por eso la restauración siempre se acompaña del plan preventivo del paciente."
+        },
+        {
+          "tipo": "texto",
+          "md": "Hay situaciones en las que lo prudente es **referir**. Un diente con destrucción muy extensa, con varias superficies perdidas o con cúspides debilitadas puede necesitar una restauración indirecta que planee un especialista en prótesis o en odontología restauradora. Una lesión profunda con síntomas pulpares dudosos requiere el diagnóstico del programa de endodoncia antes de restaurar. Y un paciente con antecedentes de reacciones a materiales necesita valoración médica antes de elegir. Referir a tiempo no es un fracaso del generalista: es parte de una atención de calidad y protege al paciente de tratamientos que habría que repetir.\n\nTambién conviene hablar de **costos y duración** con transparencia. El paciente tiene derecho a saber que una restauración más económica puede requerir más mantenimiento, que una más estética puede ser más sensible a la técnica y que ninguna dura para siempre. Esa conversación evita expectativas irreales y mejora la adherencia a los controles."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m09/d5",
+          "pie": "Cuatro fuentes de información que se cruzan para elegir el material restaurador.",
+          "descripcion": "Cuatro círculos superpuestos tipo diagrama de Venn, de colores suaves distintos: «La lesión: ubicación, extensión, carga», «El paciente: riesgo, saliva, cooperación, alergias», «El entorno: aislamiento, equipo, tiempo» y «El material: propiedades y evidencia». En la zona central donde coinciden los cuatro, un rombo rotulado «Decisión del odontólogo con el paciente informado».",
+          "elementos": [
+            "La lesión: ubicación, extensión, carga",
+            "El paciente: riesgo, saliva, cooperación, alergias",
+            "El entorno: aislamiento, equipo, tiempo",
+            "El material: propiedades y evidencia",
+            "Decisión del odontólogo con el paciente informado"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seguridad del equipo dental con los materiales"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los materiales restauradores también son un tema de **salud ocupacional**. Los **monómeros de metacrilato** de adhesivos y resinas, y el HEMA de los ionómeros modificados con resina, son sensibilizantes de la piel: la dermatitis de contacto alérgica por acrilatos es una enfermedad reconocida en el personal dental. Estos monómeros pueden atravesar los guantes de látex y de nitrilo en poco tiempo, de modo que la regla es **no tocar el material sin polimerizar**, cambiar los guantes si se contaminan y usar instrumentos para manipularlo.\n\nLa **luz de fotopolimerizar** es una luz azul intensa que puede dañar la retina con exposiciones repetidas; mirarla directamente debe evitarse y se usan filtros naranjas en la lámpara o lentes con filtro para el operador y el asistente. El **mercurio**, cuando todavía se manipula amalgama, exige las medidas del tema 9.2. Y como en todo procedimiento clínico, se aplican las precauciones estándar: equipo de protección completo, instrumental procesado según la clasificación de Spaulding, manejo de residuos conforme a la normativa vigente y control de aerosoles con succión de alto volumen."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Lista breve de seguridad con materiales restauradores",
+          "items": [
+            "No tocar adhesivos, resinas ni ionómeros modificados sin polimerizar; cambiar los guantes si se contaminan.",
+            "Usar filtro naranja o lentes con filtro durante la fotopolimerización.",
+            "Emplear solo amalgama encapsulada cuando aún se use, con succión de alto volumen.",
+            "Mantener los envases cerrados y almacenados según las indicaciones del fabricante.",
+            "Separar los restos de amalgama de otros residuos y entregarlos al gestor autorizado.",
+            "Preguntar en la historia clínica por alergias a metales y acrilatos."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Alergias del paciente",
+          "md": "Aunque son poco frecuentes, existen alergias a componentes de los materiales restauradores, como los metacrilatos o algunos metales. Pregunta por ellas en la historia clínica, registra la respuesta y, ante un antecedente o una reacción sospechosa, consulta con el médico o el alergólogo antes de elegir el material. Una reacción en la mucosa vecina a una restauración debe valorarse por el odontólogo y, si es necesario, por el especialista."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/14",
+          "proporcion": "3:4",
+          "alt": "Asistente dental con guantes y lentes con filtro naranja sosteniendo una lámpara de fotopolimerizar apagada.",
+          "pie": "Lentes o escudos con filtro naranja protegen los ojos del equipo durante la fotopolimerización.",
+          "prompt": "Fotografía vertical en un consultorio dental luminoso, una asistente dental de pie con bata clínica, gorro, cubrebocas y lentes de protección con filtro naranja translúcido, sosteniendo con ambas manos enguantadas una lámpara de fotopolimerizar inalámbrica apagada; rostro no identificable gracias al cubrebocas, los lentes y un encuadre desde el mentón hacia abajo. Fondo desenfocado de unidad dental limpia, luz blanca neutra, colores naturales. Evitar: texto, logotipos, marcas, rostros identificables, sangre, falta de equipo de protección, luz azul encendida dirigida a los ojos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seguimiento y duración de las restauraciones"
+        },
+        {
+          "tipo": "texto",
+          "md": "Toda restauración necesita **control periódico**. En cada cita se revisan los márgenes, la integridad del material, el desgaste, los contactos y la superficie, y se buscan lesiones nuevas alrededor. Cuando aparece un defecto, se aplica la lógica del módulo 8: monitorear, reacondicionar o reparar antes de pensar en reemplazar. El consenso de 2016 añade un punto clave: una zona radiolúcida bajo una restauración con sellado íntegro y sin síntomas pulpares **no justifica** por sí sola el reemplazo; lo adecuado es vigilarla.\n\nPara evaluar la calidad de una práctica clínica se usa la **tasa de fracaso anual**, que expresa qué porcentaje de las restauraciones falla en promedio cada año. Calcularla con tus propios registros te permite comparar materiales, técnicas y grupos de pacientes con datos reales, y no solo con impresiones."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Tasa de fracaso anual promedio",
+          "instruccion": "En una auditoría de expedientes revisas las restauraciones de resina posteriores colocadas hace cinco años. Calcula una tasa de fracaso anual promedio (aproximación lineal sencilla, útil para comparar). Cambia los valores con los datos de tu práctica.",
+          "formula": "Tasa anual promedio (%) = restauraciones fracasadas ÷ restauraciones colocadas ÷ años de seguimiento × 100",
+          "variables": [
+            { "id": "fracasadas", "etiqueta": "Restauraciones fracasadas", "valor": 12, "unidad": "restauraciones" },
+            { "id": "colocadas", "etiqueta": "Restauraciones colocadas y seguidas", "valor": 150, "unidad": "restauraciones" },
+            { "id": "anios", "etiqueta": "Años de seguimiento", "valor": 5, "unidad": "años" }
+          ],
+          "resultado": { "expresion": "fracasadas / colocadas / anios * 100", "etiqueta": "Tasa de fracaso anual promedio", "unidad": "% por año", "decimales": 2 }
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El operador también es una variable",
+          "md": "En los estudios de longevidad de restauraciones, además del material y del riesgo de caries del paciente, influye quién y cómo coloca la restauración: la calidad del aislamiento, la técnica adhesiva y el acabado. Por eso las comparaciones entre materiales que se hacen con datos de consultorios reales suelen mostrar más variación que los ensayos controlados en universidades."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m09/15",
+          "proporcion": "4:3",
+          "alt": "Odontólogo con equipo de protección revisando con espejo y sonda una restauración en un modelo durante un control.",
+          "pie": "El control periódico permite detectar defectos pequeños y repararlos a tiempo.",
+          "prompt": "Fotografía clínica de primer plano sobre un modelo tipodonto de arcada inferior permanente montado en un simulador, un odontólogo con guantes de nitrilo sostiene un espejo bucal y una sonda periodontal de punta roma revisando el margen de una restauración del color del diente en un primer molar. Antebrazos con bata clínica visibles, luz de lámpara dental dirigida, fondo desenfocado de consultorio, colores naturales. Evitar: texto, logotipos, marcas, sangre, rostros, manos sin guantes, anatomía incorrecta, instrumental oxidado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Agrega a tu nota clínica de cada restauración tres datos que casi nunca se registran: **material y técnica adhesiva usados**, **calidad del aislamiento** (absoluto, relativo o deficiente) y **riesgo de caries del paciente** en ese momento. Con esos datos, en unos años podrás calcular tus propias tasas de fracaso por material y por tipo de paciente, y elegir con evidencia de tu propia práctica."
+        }
+      ],
+      "glosario": [
+        { "termino": "Tasa de fracaso anual", "definicion": "Porcentaje promedio de restauraciones que fallan cada año en un grupo seguido durante cierto tiempo." },
+        { "termino": "Dermatitis de contacto por acrilatos", "definicion": "Reacción alérgica de la piel a los monómeros de metacrilato, frecuente en personal dental expuesto." },
+        { "termino": "Filtro naranja", "definicion": "Escudo o lente que bloquea la luz azul de la lámpara de fotopolimerizar para proteger los ojos." },
+        { "termino": "HEMA", "definicion": "Monómero hidrofílico presente en adhesivos e ionómeros modificados con resina; es un sensibilizante de la piel." },
+        { "termino": "Consentimiento informado", "definicion": "Aceptación del tratamiento por el paciente después de recibir información sobre alternativas, beneficios, riesgos y costos." }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.5-1",
+          "q": "Un paciente de riesgo alto tiene una lesión radicular vestibular cerca de la encía, difícil de aislar. ¿Qué material suele valorarse?",
+          "opciones": ["Cerámica fresada", "Amalgama a granel", "Resina fluida sin adhesivo", "Ionómero de vidrio convencional o modificado con resina"],
+          "correcta": 3,
+          "explicacion": "Tolera mejor la humedad, se adhiere químicamente y libera flúor; la decisión final es del odontólogo."
+        },
+        {
+          "id": "t9.5-2",
+          "q": "¿Qué medida protege al equipo dental frente a los monómeros de metacrilato?",
+          "opciones": ["Usar doble capa de resina", "No tocar el material sin polimerizar y cambiar los guantes si se contaminan", "Lavar el material con agua caliente", "Fotopolimerizar sin filtro"],
+          "correcta": 1,
+          "explicacion": "Los monómeros atraviesan los guantes en poco tiempo; evitar el contacto es la medida clave."
+        },
+        {
+          "id": "t9.5-3",
+          "q": "Una radiografía muestra una zona radiolúcida bajo una restauración con sellado íntegro y sin síntomas. ¿Qué recomienda el consenso de 2016?",
+          "opciones": ["Reemplazarla de inmediato", "Indicar tratamiento de conductos", "Vigilarla en lugar de reemplazarla", "Extraer el diente"],
+          "correcta": 2,
+          "explicacion": "Sin defecto del sellado ni síntomas pulpares, el reemplazo no está justificado y se prefiere el monitoreo."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Guidelines for Infection Control in Dental Health-Care Settings", "autor": "Centers for Disease Control and Prevention", "anio": 2003 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de materiales dentales, salud ocupacional en odontología y longevidad de restauraciones", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: cada material con su rasgo",
+    "pares": [
+      { "a": "Amalgama", "b": "Retención mecánica y mercurio" },
+      { "a": "Resina compuesta", "b": "Matriz de metacrilato con relleno y silano" },
+      { "a": "Ionómero de vidrio", "b": "Adhesión química y liberación de flúor" },
+      { "a": "Capa híbrida", "b": "Colágeno dentinario infiltrado por resina" },
+      { "a": "Convenio de Minamata", "b": "Eliminación progresiva del mercurio" },
+      { "a": "Filtro naranja", "b": "Protege los ojos de la luz azul" },
+      { "a": "Ionómero de alta viscosidad", "b": "Tratamiento restaurativo atraumático" },
+      { "a": "Contracción de polimerización", "b": "Estrés en la interfase de la resina" }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m09-p01",
+        "q": "¿Qué funciones cumple una restauración en el manejo de la caries?",
+        "opciones": ["Sellar la cavidad, facilitar el control de la biopelícula, proteger el complejo dentinopulpar y devolver forma y función", "Eliminar todas las bacterias de la boca", "Sustituir la higiene y el flúor", "Blanquear los dientes vecinos"],
+        "correcta": 0,
+        "explicacion": "La restauración sella, devuelve una superficie limpiable, protege la pulpa y restituye forma, función y estética; no controla la enfermedad por sí sola."
+      },
+      {
+        "id": "m09-p02",
+        "q": "¿Cuál es el mecanismo de unión de la amalgama al diente?",
+        "opciones": ["Adhesión química", "Capa híbrida", "Retención mecánica", "Reacción ácido-base con el esmalte"],
+        "correcta": 2,
+        "explicacion": "La amalgama se sostiene por la forma retentiva de la cavidad."
+      },
+      {
+        "id": "m09-p03",
+        "q": "¿En qué tipo de pacientes encontraron los estudios citados por el consenso una buena longevidad de la amalgama frente a la resina?",
+        "opciones": ["Pacientes sin caries", "Pacientes con riesgo alto de caries", "Pacientes con dientes anteriores únicamente", "Pacientes menores de dos años"],
+        "correcta": 1,
+        "explicacion": "En riesgo alto, las resinas parecen más propensas a presentar caries alrededor de la restauración."
+      },
+      {
+        "id": "m09-p04",
+        "q": "¿Cómo clasifica el Convenio de Minamata a la amalgama dental?",
+        "opciones": ["Como medicamento", "Como residuo biológico-infeccioso", "Como material prohibido desde 2013", "Como producto con mercurio añadido"],
+        "correcta": 3,
+        "explicacion": "Por eso los países deben aplicar dos o más medidas para reducir su uso."
+      },
+      {
+        "id": "m09-p05",
+        "q": "¿Cuándo ratificó México el Convenio de Minamata?",
+        "opciones": ["En 2015", "En 2009", "En 2020", "En 2034"],
+        "correcta": 0,
+        "explicacion": "México lo firmó en 2013 y lo ratificó el 29 de septiembre de 2015."
+      },
+      {
+        "id": "m09-p06",
+        "q": "Una paciente embarazada tiene una amalgama antigua en buen estado y pregunta si debe retirarla. ¿Qué es lo adecuado?",
+        "opciones": ["Retirarla de inmediato sin aislamiento", "Explicarle que no se recomienda retirar amalgamas en buen estado y que se vigilará en sus controles", "Cambiarla por otra amalgama", "Indicarle un análisis de mercurio en sangre a toda la familia"],
+        "correcta": 1,
+        "explicacion": "Retirarla aumentaría temporalmente la exposición y eliminaría tejido sano; si se requiere una restauración nueva, se prefieren alternativas sin mercurio."
+      },
+      {
+        "id": "m09-p07",
+        "q": "¿Qué componente de la resina compuesta aporta resistencia y radiopacidad?",
+        "opciones": ["El silano", "La canforoquinona", "El relleno inorgánico", "El ácido fosfórico"],
+        "correcta": 2,
+        "explicacion": "Las partículas de vidrio, sílice o cerámica aportan resistencia, reducen la contracción y dan radiopacidad."
+      },
+      {
+        "id": "m09-p08",
+        "q": "¿Qué consecuencia puede tener la contracción de polimerización de la resina?",
+        "opciones": ["Mayor liberación de flúor", "Expansión del diente", "Fraguado más lento", "Estrés en la interfase con apertura de márgenes o sensibilidad posoperatoria"],
+        "correcta": 3,
+        "explicacion": "El material adherido a varias paredes genera estrés al contraerse."
+      },
+      {
+        "id": "m09-p09",
+        "q": "¿Qué característica define a los sistemas de autograbado?",
+        "opciones": ["Incorporan el barrillo dentinario a la capa híbrida sin lavado", "Requieren lavar el ácido fosfórico", "No contienen monómeros", "Solo se usan en amalgama"],
+        "correcta": 0,
+        "explicacion": "Los monómeros ácidos acondicionan e infiltran a la vez, sin enjuague."
+      },
+      {
+        "id": "m09-p10",
+        "q": "¿Qué se busca al usar un dique de hule en una restauración adhesiva?",
+        "opciones": ["Acelerar la polimerización", "Evitar la contaminación con saliva, que reduce la fuerza de unión", "Colorear la resina", "Sustituir el sistema adhesivo"],
+        "correcta": 1,
+        "explicacion": "La contaminación de la superficie acondicionada compromete el sellado."
+      },
+      {
+        "id": "m09-p11",
+        "q": "¿Cómo endurece un ionómero de vidrio convencional?",
+        "opciones": ["Por fotopolimerización exclusivamente", "Por evaporación de un solvente", "Por reacción ácido-base entre el vidrio y el ácido polialquenoico", "Por amalgamación con mercurio"],
+        "correcta": 2,
+        "explicacion": "El ácido libera iones del vidrio que entrelazan las cadenas del poliácido."
+      },
+      {
+        "id": "m09-p12",
+        "q": "¿Qué significa que un ionómero de vidrio pueda «recargarse» de flúor?",
+        "opciones": ["Que se vuelve más duro con el tiempo", "Que cambia de color", "Que debe reemplazarse cada año", "Que capta flúor del entorno, como el de la pasta dental, y lo libera después"],
+        "correcta": 3,
+        "explicacion": "Tras la liberación inicial, puede incorporar flúor tópico y volver a liberarlo."
+      },
+      {
+        "id": "m09-p13",
+        "q": "¿Cuál es una limitación de los ionómeros de vidrio frente a las resinas compuestas?",
+        "opciones": ["Menor resistencia a la fractura y mayor desgaste inicial", "No liberan flúor", "Necesitan mercurio", "No pueden usarse en dientes temporales"],
+        "correcta": 0,
+        "explicacion": "Sus propiedades mecánicas y estéticas son inferiores a las de las resinas."
+      },
+      {
+        "id": "m09-p14",
+        "q": "¿Qué componente de los ionómeros modificados con resina es un sensibilizante de la piel?",
+        "opciones": ["El fluoroaluminosilicato", "El HEMA", "El silano", "La plata"],
+        "correcta": 1,
+        "explicacion": "El HEMA es un monómero hidrofílico alergénico; no debe tocarse sin polimerizar."
+      },
+      {
+        "id": "m09-p15",
+        "q": "¿Para qué se usan principalmente los cementos de silicato de calcio?",
+        "opciones": ["Para restauraciones oclusales estéticas", "Para cementar coronas cerámicas", "Para la terapia pulpar vital y la endodoncia", "Para blanquear dientes"],
+        "correcta": 2,
+        "explicacion": "Liberan calcio e hidroxilo y favorecen la formación de dentina; se estudian en el programa de endodoncia."
+      },
+      {
+        "id": "m09-p16",
+        "q": "En una brigada sin electricidad, ¿qué material permite restaurar una cavidad de una superficie con instrumentos manuales?",
+        "opciones": ["Resina compuesta fotopolimerizable", "Cerámica fresada", "Amalgama a granel", "Ionómero de vidrio de alta viscosidad"],
+        "correcta": 3,
+        "explicacion": "Es el material del tratamiento restaurativo atraumático y no requiere lámpara ni pieza de mano."
+      },
+      {
+        "id": "m09-p17",
+        "q": "¿Por qué se usa un filtro naranja durante la fotopolimerización?",
+        "opciones": ["Para bloquear la luz azul que puede dañar la retina", "Para acelerar el endurecimiento", "Para cambiar el color de la resina", "Para esterilizar la punta de la lámpara"],
+        "correcta": 0,
+        "explicacion": "La luz azul intensa es un riesgo ocular con exposiciones repetidas."
+      },
+      {
+        "id": "m09-p18",
+        "q": "En una auditoría, 9 de 120 restauraciones fallaron en 3 años. ¿Cuál es la tasa de fracaso anual promedio aproximada?",
+        "opciones": ["7.5 % por año", "0.75 % por año", "2.5 % por año", "25 % por año"],
+        "correcta": 2,
+        "explicacion": "9 ÷ 120 = 0.075; 0.075 ÷ 3 = 0.025; × 100 = 2.5 % por año."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "Managing carious lesions: consensus recommendations on carious tissue removal (Advances in Dental Research 28(2):58-67)", "autor": "Schwendicke F., Frencken J. E., Bjørndal L., Maltz M., Manton D. J., Ricketts D., et al.", "anio": 2016 },
+    { "tipo": "oficial", "titulo": "Convenio de Minamata sobre el Mercurio", "autor": "Programa de las Naciones Unidas para el Medio Ambiente", "anio": 2013 },
+    { "tipo": "oficial", "titulo": "Minamata Convention COP-6 agrees to end use of dental amalgam by 2034 (comunicado)", "autor": "Programa de las Naciones Unidas para el Medio Ambiente", "anio": 2025, "url": "https://www.unep.org/news-and-stories/press-release/minamata-convention-cop-6-agrees-end-use-dental-amalgam-2034" },
+    { "tipo": "oficial", "titulo": "Guía de buenas prácticas de uso de mercurio en consultorios dentales", "autor": "Comisión Federal para la Protección contra Riesgos Sanitarios (COFEPRIS)" },
+    { "tipo": "oficial", "titulo": "Recommendations About the Use of Dental Amalgam in Certain High-Risk Populations: FDA Safety Communication", "autor": "U.S. Food and Drug Administration", "anio": 2020 }
+  ]
+}

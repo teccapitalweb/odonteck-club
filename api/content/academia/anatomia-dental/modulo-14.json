@@ -1,0 +1,1676 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 14,
+  "titulo": "Anatomía radiográfica de los dientes y sus estructuras de soporte",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Para reconocer lo anormal en una radiografía primero hay que dominar lo normal. En este módulo aprenderás por qué las estructuras se ven radiopacas o radiolúcidas, qué muestra cada estudio dental, desde la periapical y la aleta de mordida hasta la panorámica y la tomografía de haz cónico, y cómo se ven en salud el esmalte, la dentina, la pulpa, el ligamento periodontal, la lámina dura y la cresta alveolar. Recorrerás las referencias anatómicas del maxilar y de la mandíbula, las trampas que imitan patología y un método de lectura sistemática para tu práctica diaria.",
+  "objetivos": [
+    "Explicar la formación de la imagen radiográfica y diferenciar estructuras radiopacas y radiolúcidas según su densidad, composición y espesor.",
+    "Comparar los estudios periapical, aleta de mordida, oclusal, panorámica y tomografía de haz cónico según lo que muestran y sus limitaciones.",
+    "Identificar en imágenes normales el esmalte, la dentina, la pulpa, el espacio del ligamento periodontal, la lámina dura y la cresta alveolar.",
+    "Localizar las principales referencias anatómicas del maxilar y de la mandíbula en radiografías intraorales y panorámicas.",
+    "Distinguir las trampas anatómicas más frecuentes de lesiones verdaderas mediante criterios radiográficos y clínicos.",
+    "Aplicar una secuencia de lectura sistemática y describir los hallazgos con lenguaje preciso."
+  ],
+  "duracionMin": 110,
+  "portada": {
+    "id": "anatomia-dental/m14/portada",
+    "proporcion": "16:9",
+    "alt": "Monitor de un consultorio dental que muestra una radiografía panorámica normal junto a un sensor intraoral sobre la mesa.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental moderno con luz ambiental suave: en primer plano un monitor de alta resolución que muestra una radiografía panorámica dental simulada en escala de grises de un adulto con anatomía normal, sobre el escritorio un sensor digital intraoral con funda de barrera, un posicionador de paralelismo y unas gafas de protección, al fondo desenfocado el cabezal de rayos X intraoral montado en la pared, colores naturales, profundidad de campo corta, ambiente ordenado. Evitar: texto legible, nombres, datos del paciente, logotipos, marcas comerciales, marcas de agua, personas, desorden."
+  },
+  "temas": [
+    {
+      "n": "14.1",
+      "titulo": "Cómo se forma la imagen radiográfica y qué estudios se usan en odontología",
+      "minutos": 14,
+      "enPocasPalabras": "Una radiografía es como una sombra: lo duro, como el esmalte o el metal, detiene los rayos X y se ve blanco; lo blando o vacío los deja pasar y se ve oscuro. Hay radiografías pequeñas que muestran uno o pocos dientes y otras grandes que muestran toda la boca. El dentista elige la que realmente hace falta para usar la menor radiación posible.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Una radiografía no es una fotografía del interior del diente: es un **mapa de sombras**. Los rayos X atraviesan los tejidos y una parte de ellos es absorbida; lo que llega al receptor forma la imagen. Por eso, antes de memorizar estructuras, necesitas entender por qué unas zonas se ven blancas y otras negras, y por qué una imagen plana de un objeto tridimensional siempre esconde algo.\n\nEste módulo trata de la **anatomía radiográfica normal**: cómo se ven los dientes, el periodonto y los huesos maxilares cuando están sanos. Reconocer lo normal es requisito para identificar lo anormal. El diagnóstico radiográfico de la caries lo estudiarás en el módulo 4 del programa de caries dental, y la anatomía del periodonto de inserción la revisaste en el módulo 7 de este programa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Radiolúcido y radiopaco"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las estructuras que **absorben mucha radiación** impiden que llegue al receptor y aparecen **blancas o grises claras**: se llaman **radiopacas**. Las que **dejan pasar casi toda la radiación** aparecen **negras o grises oscuras**: son **radiolúcidas**. Entre ambos extremos hay una escala continua de grises.\n\nLa absorción depende sobre todo de tres factores: la **densidad** del tejido, su **composición**, porque los elementos de número atómico alto como el calcio o los metales absorben más, y su **espesor** en la dirección del haz. Por eso el esmalte, el tejido más mineralizado del cuerpo, es la estructura natural más radiopaca de la boca; la dentina y el hueso cortical le siguen; el hueso esponjoso es menos radiopaco; y la pulpa, el ligamento periodontal, los tejidos blandos y el aire son radiolúcidos. Los metales de restauraciones y coronas suelen verse casi completamente blancos."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m14/d1",
+          "pie": "Escala de radiodensidad de las estructuras orales, de la más radiopaca a la más radiolúcida.",
+          "descripcion": "Barra horizontal con degradado de blanco a negro de izquierda a derecha. Sobre la barra, marcadores que ubican de izquierda a derecha: metal de restauraciones, esmalte, dentina y hueso cortical, hueso trabecular, pulpa y ligamento periodontal, tejidos blandos, aire. Debajo del extremo blanco, la palabra radiopaco; debajo del extremo negro, la palabra radiolúcido.",
+          "elementos": [
+            "Radiopaco",
+            "Metal",
+            "Esmalte",
+            "Dentina y hueso cortical",
+            "Hueso trabecular",
+            "Pulpa y ligamento periodontal",
+            "Tejidos blandos",
+            "Aire",
+            "Radiolúcido"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El problema de las tres dimensiones",
+          "md": "Una radiografía convencional comprime en un plano todo lo que el haz atraviesa. Una raíz palatina y una vestibular pueden verse encimadas; el seno maxilar puede proyectarse sobre los ápices aunque esté por encima de ellos; un agujero del hueso puede caer justo sobre la punta de una raíz. Muchas de las «lesiones» que preocupan a quien empieza a interpretar son superposiciones de estructuras normales. Por eso, ante una imagen dudosa, se toma otra con distinta angulación: lo que es anatomía cambia de posición respecto al diente, y lo que pertenece al diente lo acompaña."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los estudios intraorales"
+        },
+        {
+          "tipo": "texto",
+          "md": "En los estudios **intraorales**, el receptor se coloca dentro de la boca. Hay tres tipos principales.\n\nLa **radiografía periapical** muestra uno a tres o cuatro dientes completos, desde la corona hasta más allá del ápice, con el hueso que los rodea. Se usa para valorar raíces, conductos, ligamento periodontal, lámina dura y tejido periapical. La técnica de **paralelismo**, con el receptor paralelo al eje del diente y un posicionador, es la preferida porque produce menos distorsión; la de **bisectriz del ángulo** se reserva para situaciones en que el paralelismo no es posible.\n\nLa **radiografía de aleta de mordida**, o *bitewing*, muestra las coronas de los dientes superiores e inferiores de un sector y las crestas alveolares, con el paciente mordiendo una aleta o un posicionador. Es la mejor proyección intraoral para las superficies proximales posteriores y para el nivel de las crestas.\n\nLa **radiografía oclusal** usa un receptor más grande colocado en el plano de oclusión. Muestra amplias zonas del paladar o del piso de boca y es útil para localizar dientes retenidos, valorar expansiones óseas o buscar cálculos en conductos salivales."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/01",
+          "proporcion": "16:9",
+          "alt": "Imagen radiográfica simulada de una serie de tres estudios: periapical de incisivos, aleta de mordida de premolares y molares, y oclusal maxilar.",
+          "pie": "Tres formatos intraorales: periapical, aleta de mordida y oclusal. Cada uno responde a una pregunta clínica distinta.",
+          "prompt": "Composición realista de tres radiografías dentales intraorales simuladas en escala de grises, colocadas lado a lado sobre fondo negro: a la izquierda una periapical vertical de incisivos centrales superiores con raíces y ápices completos y hueso circundante; al centro una aleta de mordida horizontal de premolares y molares superiores e inferiores que muestra coronas y crestas alveolares; a la derecha una radiografía oclusal maxilar con el arco dentario en forma de herradura. Anatomía normal de un adulto, contraste diagnóstico, sin restauraciones extensas. Evitar: texto, letras, números, nombres, fechas, marcas de orientación, flechas, etiquetas, logotipos, artefactos exagerados."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los estudios extraorales y tridimensionales"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **radiografía panorámica** u ortopantomografía obtiene en una sola imagen ambos maxilares, todos los dientes, las articulaciones temporomandibulares y parte de los senos maxilares. El tubo y el receptor giran alrededor de la cabeza y solo las estructuras ubicadas dentro de una franja curva llamada **capa de imagen** o **canal focal** se ven nítidas. Es muy útil como panorama general, para valorar terceros molares, la dentición mixta o lesiones extensas, pero tiene menos detalle que las intraorales, magnificación desigual y superposiciones propias que estudiarás en el tema 14.5.\n\nLa **tomografía computarizada de haz cónico** (TCHC, o CBCT por sus siglas en inglés) obtiene un volumen tridimensional que puede verse en cortes en los tres planos. Elimina la superposición y permite medir con precisión, por lo que es valiosa en implantología, endodoncia compleja, dientes retenidos y patología. Su dosis suele ser mayor que la de los estudios intraorales o la panorámica, así que **no es un estudio de rutina**: se indica cuando la pregunta clínica no puede resolverse con imágenes convencionales y se elige el campo de visión más pequeño que la responda."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Estudios de imagen dental y su uso principal",
+          "columnas": [
+            "Estudio",
+            "Qué muestra",
+            "Uso frecuente",
+            "Limitación principal"
+          ],
+          "filas": [
+            [
+              "Periapical",
+              "Uno a cuatro dientes completos y hueso periapical",
+              "Endodoncia, raíces, lámina dura, periápice",
+              "Área pequeña; superposición en dos dimensiones"
+            ],
+            [
+              "Aleta de mordida",
+              "Coronas de ambas arcadas y crestas alveolares",
+              "Caries proximales, nivel de crestas, ajuste de restauraciones",
+              "No muestra ápices"
+            ],
+            [
+              "Oclusal",
+              "Zonas amplias del paladar o piso de boca",
+              "Dientes retenidos, expansiones, cálculos salivales",
+              "Poca definición de detalles finos"
+            ],
+            [
+              "Panorámica",
+              "Ambos maxilares, dientes, ATM y senos",
+              "Panorama general, terceros molares, dentición mixta",
+              "Menos detalle, magnificación desigual, imágenes fantasma"
+            ],
+            [
+              "TCHC (CBCT)",
+              "Volumen tridimensional en cortes",
+              "Implantes, retenidos, endodoncia compleja, patología",
+              "Mayor dosis; requiere indicación precisa e interpretación del volumen completo"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/02",
+          "proporcion": "16:9",
+          "alt": "Imagen radiográfica panorámica simulada de un adulto con dentición permanente completa y anatomía normal.",
+          "pie": "La panorámica ofrece un panorama de ambos maxilares, pero con menos detalle que las radiografías intraorales.",
+          "prompt": "Radiografía panorámica dental simulada realista en escala de grises de un adulto joven con dentición permanente completa de 32 dientes bien alineados, ambos maxilares, ramas y cóndilos mandibulares visibles, senos maxilares y paladar duro en la parte superior, conducto mandibular tenue, contraste diagnóstico equilibrado, posicionamiento correcto con plano oclusal en ligera sonrisa, anatomía normal sin restauraciones ni lesiones. Evitar: texto, letras, números, nombres, fechas, marcas de lado, flechas, etiquetas, logotipos, artefactos de movimiento, dientes deformes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Receptores y protección radiológica"
+        },
+        {
+          "tipo": "texto",
+          "md": "La imagen puede registrarse en **película** convencional, que requiere revelado químico; en **placas de fósforo fotoestimulable**, que se leen con un escáner; o en **sensores digitales** de estado sólido, que entregan la imagen en segundos. Los receptores digitales permiten ajustar brillo y contraste en pantalla, pero esa manipulación no crea información que no se registró: una imagen mal tomada sigue siendo mala.\n\nLa protección radiológica descansa en tres principios internacionales: **justificación**, porque cada estudio debe tener un beneficio que supere su riesgo; **optimización**, conocida por el acrónimo ALARA (tan bajo como sea razonablemente posible) y sus variantes más recientes orientadas al diagnóstico; y **limitación de dosis** para el personal y el público. En la práctica significa elegir el estudio mínimo que responde la pregunta, no repetir tomas por errores de técnica, colimar el haz y mantener los equipos verificados. Los parámetros de exposición y los dispositivos de protección los define el profesional responsable conforme a la regulación vigente."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Qué cubre la NOM-229-SSA1-2002",
+          "md": "La **NOM-229-SSA1-2002**, sobre requisitos técnicos de las instalaciones, responsabilidades sanitarias, especificaciones técnicas de los equipos y protección radiológica en establecimientos de diagnóstico médico con rayos X, se publicó en el DOF en 2006 y figura como vigente en el sistema de normalización de la Secretaría de Economía. Su campo de aplicación **incluye los estudios panorámicos dentales** y **excluye las aplicaciones odontológicas convencionales**, es decir, la radiografía intraoral. Que la intraoral quede fuera de esa norma no la deja sin reglas: el odontólogo responsable debe conocer la regulación sanitaria aplicable a su consultorio y consultar el DOF ante cualquier actualización. Los detalles de protección del paciente se tratan en el módulo 4 del programa de caries dental."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/03",
+          "proporcion": "4:3",
+          "alt": "Asistente dental con guantes coloca un sensor digital en un posicionador de paralelismo sobre una charola.",
+          "pie": "Los posicionadores de paralelismo ayudan a obtener imágenes reproducibles y a evitar repeticiones.",
+          "prompt": "Fotografía clínica realista en primer plano de las manos de una asistente dental con guantes de nitrilo azul y bata desechable colocando un sensor digital intraoral cubierto con funda de barrera plástica transparente en un posicionador de paralelismo con anillo de alineación, sobre una charola clínica limpia, al fondo desenfocado el cabezal de un equipo de rayos X intraoral montado en la pared, iluminación clínica uniforme, colores naturales, enfoque nítido en el sensor y el posicionador. Evitar: texto, marcas comerciales, logotipos, marcas de agua, manos sin guantes, rostros, pacientes, desorden."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Una imagen deficiente no se interpreta: se corrige la causa",
+          "md": "Antes de leer una radiografía, valora su calidad: ¿se ven completos los ápices o las crestas que necesitabas?, ¿hay elongación, acortamiento o traslape de contactos?, ¿la imagen está movida, demasiado clara u oscura? Interpretar una imagen defectuosa conduce a errores, como confundir un acortamiento con una raíz corta o un traslape con una caries. Si la imagen no responde la pregunta, identifica qué falló en la técnica antes de repetirla, para no exponer de nuevo al paciente con el mismo error, y registra en el expediente cada toma realizada."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Elige el estudio adecuado",
+          "instruccion": "Relaciona cada pregunta clínica con el estudio que mejor la responde en primera instancia.",
+          "pares": [
+            {
+              "a": "¿Hay caries entre los molares y cómo están las crestas?",
+              "b": "Aleta de mordida"
+            },
+            {
+              "a": "¿Cómo están el conducto y el periápice de un incisivo?",
+              "b": "Periapical"
+            },
+            {
+              "a": "¿Dónde están los terceros molares y los gérmenes en un adolescente?",
+              "b": "Panorámica"
+            },
+            {
+              "a": "¿Hay un canino retenido hacia palatino en la zona anterior?",
+              "b": "Oclusal maxilar"
+            },
+            {
+              "a": "¿Cuál es el grosor óseo exacto para planear un implante?",
+              "b": "TCHC de campo reducido"
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** antes de indicar una radiografía, escribe en una línea la pregunta que quieres responder, por ejemplo «¿hay lesión periapical en el 36?» o «¿hay caries proximales en premolares?». Si no puedes formularla, probablemente el estudio no está justificado. Si puedes, esa pregunta te dirá qué estudio elegir y qué estructuras revisar primero al interpretarlo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Radiopaco",
+          "definicion": "Que absorbe gran parte de los rayos X y aparece blanco o gris claro en la imagen."
+        },
+        {
+          "termino": "Radiolúcido",
+          "definicion": "Que deja pasar la mayor parte de los rayos X y aparece negro o gris oscuro en la imagen."
+        },
+        {
+          "termino": "Radiografía periapical",
+          "definicion": "Estudio intraoral que muestra dientes completos, incluidos sus ápices y el hueso que los rodea."
+        },
+        {
+          "termino": "Aleta de mordida",
+          "definicion": "Estudio intraoral que muestra las coronas de ambas arcadas y las crestas alveolares de un sector; en inglés, bitewing."
+        },
+        {
+          "termino": "Capa de imagen",
+          "definicion": "Franja curva de la panorámica en la que las estructuras se ven nítidas; también llamada canal focal."
+        },
+        {
+          "termino": "TCHC",
+          "definicion": "Tomografía computarizada de haz cónico; obtiene un volumen tridimensional de la región maxilofacial."
+        },
+        {
+          "termino": "Justificación",
+          "definicion": "Principio de protección radiológica según el cual todo estudio debe aportar un beneficio que supere su riesgo."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t14.1-1",
+          "q": "¿Cuál es la estructura natural más radiopaca de la boca?",
+          "opciones": [
+            "La dentina",
+            "El hueso cortical mandibular",
+            "La lámina dura",
+            "El esmalte"
+          ],
+          "correcta": 3,
+          "explicacion": "El esmalte es el tejido más mineralizado del cuerpo; la dentina y el hueso cortical le siguen en radiopacidad."
+        },
+        {
+          "id": "t14.1-2",
+          "q": "¿Qué estudio es el más adecuado para valorar caries proximales posteriores y el nivel de las crestas?",
+          "opciones": [
+            "Aleta de mordida",
+            "Oclusal mandibular",
+            "Panorámica",
+            "Periapical con técnica de bisectriz"
+          ],
+          "correcta": 0,
+          "explicacion": "La aleta de mordida muestra coronas de ambas arcadas y crestas con poca distorsión."
+        },
+        {
+          "id": "t14.1-3",
+          "q": "Según su campo de aplicación, ¿qué estudios dentales incluye la NOM-229-SSA1-2002?",
+          "opciones": [
+            "Todas las radiografías intraorales",
+            "Solo la tomografía de haz cónico",
+            "Los estudios panorámicos dentales",
+            "Ningún estudio odontológico"
+          ],
+          "correcta": 2,
+          "explicacion": "La norma incluye expresamente los estudios panorámicos dentales y excluye las aplicaciones odontológicas convencionales."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+          "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+          "anio": 2025
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "NOM-229-SSA1-2002, Salud ambiental. Requisitos técnicos para las instalaciones, responsabilidades sanitarias, especificaciones técnicas para los equipos y protección radiológica en establecimientos de diagnóstico médico con rayos X",
+          "autor": "Secretaría de Salud",
+          "anio": 2006
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam) y la NOM-229-SSA1-2002",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "14.2",
+      "titulo": "El diente y su periodonto en la radiografía",
+      "minutos": 15,
+      "enPocasPalabras": "En una radiografía el esmalte se ve muy blanco, la dentina un poco menos y el nervio del diente como una franja oscura en el centro. Alrededor de la raíz hay una línea oscura muy fina y otra blanca que la acompaña: son señales de que el diente y el hueso están sanos. Conocer cómo se ven normalmente ayuda a notar cuando algo cambia.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La mayor parte de lo que interpretas en una radiografía intraoral ocurre en un espacio de pocos milímetros: el diente, la delgada franja que lo une al hueso y el hueso que lo rodea. Los cambios tempranos de muchas enfermedades, como la lesión periapical o la periodontitis, aparecen primero ahí. Por eso conviene que conozcas con detalle cómo se ve cada componente cuando está sano y qué variaciones son normales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Los tejidos duros del diente"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **esmalte** aparece como un casquete muy radiopaco que cubre la corona y se adelgaza hasta terminar en la unión amelocementaria. En las caras proximales se aprecia mejor porque el haz lo atraviesa de forma tangencial; en el centro de las caras oclusales se superpone con la dentina.\n\nLa **dentina** forma el cuerpo de la corona y de la raíz; es menos radiopaca que el esmalte y de aspecto homogéneo. La **unión amelodentinaria** se ve como una línea de cambio de densidad debajo del esmalte. El **cemento** que recubre la raíz es tan delgado y de densidad tan parecida a la dentina que normalmente **no se distingue** en la radiografía; solo se hace visible cuando está engrosado, como en la hipercementosis.\n\nLa **cámara pulpar** y los **conductos radiculares** son radiolúcidos y se extienden desde el centro de la corona hasta los ápices. Su tamaño disminuye con la edad por depósito de dentina secundaria, por lo que en un adolescente la cámara es amplia y los cuernos pulpares altos, y en un adulto mayor la cámara puede verse estrecha y los conductos casi filiformes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/04",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de un primer molar inferior sano con cámara pulpar, conductos, ligamento periodontal y lámina dura visibles.",
+          "pie": "Molar inferior sano: esmalte, dentina, cámara pulpar, conductos, espacio del ligamento periodontal y lámina dura continuos.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de un primer molar inferior permanente sano de un adulto joven con sus dos raíces mesial y distal completas hasta más allá de los ápices, esmalte muy radiopaco en la corona, dentina homogénea, cámara pulpar y conductos radiolúcidos, línea radiolúcida fina del ligamento periodontal y línea radiopaca continua de la lámina dura alrededor de ambas raíces, hueso trabecular mandibular de patrón grueso, crestas alveolares sanas, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, caries, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Los materiales también tienen su densidad",
+          "md": "Las restauraciones forman parte de la «anatomía» de casi todos los adultos. La amalgama, las coronas metálicas, los postes y la gutapercha de los conductos tratados son muy radiopacos. Las resinas compuestas actuales suelen incorporar rellenos que les dan una radiopacidad igual o mayor que la de la dentina, pero algunos materiales antiguos o ciertos adhesivos y bases son poco radiopacos y pueden verse grises u oscuros, imitando caries debajo de una restauración. Antes de concluir que hay caries secundaria, revisa el expediente para saber qué material se colocó."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Espacio del ligamento periodontal y lámina dura"
+        },
+        {
+          "tipo": "texto",
+          "md": "Alrededor de cada raíz verás una **línea radiolúcida fina y continua**: es el **espacio del ligamento periodontal**. Corresponde a las fibras de tejido conectivo que unen el cemento al hueso alveolar, que estudiaste en el módulo 7. Su anchura varía entre dientes y a lo largo de una misma raíz; suele ser algo mayor hacia la zona cervical y apical que en el tercio medio, y puede ensancharse en dientes sometidos a cargas intensas.\n\nPor fuera de ese espacio aparece una **línea radiopaca delgada**: la **lámina dura**. Es la imagen del hueso cortical que tapiza el alvéolo, el hueso alveolar propiamente dicho. Su radiopacidad no se debe a que sea mucho más denso, sino a que el haz lo atraviesa de forma tangencial a lo largo de una pared. Por eso su aspecto cambia con la angulación y no siempre se ve igual de nítida en todas las raíces.\n\nEn salud, ambas líneas son **continuas**: rodean la raíz y se unen sin interrupción con la cresta alveolar. La pérdida localizada de la lámina dura en el ápice, con ensanchamiento del espacio del ligamento, es uno de los primeros signos que se buscan en la patología periapical; de ahí la importancia de reconocer su continuidad normal."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m14/d2",
+          "pie": "Anatomía radiográfica de un diente unirradicular y su periodonto, con las estructuras que debes identificar en cada periapical.",
+          "descripcion": "Esquema en escala de grises de un premolar inferior unirradicular dentro del hueso, como se vería en una periapical. Líneas guía finas conectan cada estructura con su etiqueta a ambos lados: casquete de esmalte blanco brillante, dentina gris clara, cámara pulpar y conducto oscuros, unión amelocementaria, espacio del ligamento periodontal como línea oscura fina alrededor de la raíz, lámina dura como línea blanca que la acompaña, cresta alveolar entre dientes, hueso trabecular en malla y ápice radicular.",
+          "elementos": [
+            "Esmalte",
+            "Dentina",
+            "Cámara pulpar",
+            "Conducto radicular",
+            "Unión amelocementaria",
+            "Espacio del ligamento periodontal",
+            "Lámina dura",
+            "Cresta alveolar",
+            "Hueso trabecular",
+            "Ápice"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La cresta alveolar y el hueso de soporte"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **cresta alveolar** es el borde superior del hueso entre dos dientes. En una persona con periodonto sano, la cresta se ubica aproximadamente **1.5 a 2 mm por debajo de la unión amelocementaria** de los dientes vecinos, según los textos de radiología oral, y su contorno sigue una línea paralela a la que une las uniones amelocementarias de ambos dientes. Cuando los dientes vecinos están a distinta altura o inclinados, la cresta acompaña esa inclinación sin que eso signifique enfermedad.\n\nSu forma cambia por zonas. Entre dientes **anteriores**, donde el espacio interdental es estrecho, la cresta es **puntiaguda**; entre **posteriores**, donde el espacio es ancho, es **plana o ligeramente redondeada**, y continúa con la lámina dura de ambos dientes formando ángulos bien definidos. Una cresta con bordes difusos, con pérdida de la cortical o con un nivel claramente más apical que lo esperado sugiere cambio periodontal, pero el diagnóstico de periodontitis es clínico y la radiografía solo lo complementa.\n\nPor debajo de la cortical está el **hueso trabecular** o esponjoso, que aparece como una malla de trabéculas radiopacas separadas por espacios medulares radiolúcidos. Su patrón varía entre el maxilar y la mandíbula, como verás en los temas 14.3 y 14.4."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/05",
+          "proporcion": "4:3",
+          "alt": "Radiografía de aleta de mordida simulada de premolares y molares con crestas alveolares planas y corticales nítidas.",
+          "pie": "En la aleta de mordida las crestas posteriores sanas se ven planas, con cortical continua y cerca de las uniones amelocementarias.",
+          "prompt": "Radiografía dental de aleta de mordida simulada realista en escala de grises, orientación horizontal, de premolares y molares superiores e inferiores de un adulto joven sano, coronas con esmalte radiopaco y dentina, cámaras pulpares radiolúcidas, contactos proximales abiertos sin traslape, crestas alveolares interproximales planas con cortical radiopaca continua situadas poco por debajo de las uniones amelocementarias, hueso trabecular visible, contraste diagnóstico equilibrado. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, caries, restauraciones, cálculo, pérdida ósea, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Por qué la radiografía subestima el hueso perdido",
+          "md": "La radiografía muestra con claridad el hueso de las caras **proximales**, pero casi nada de las tablas **vestibular y lingual**, porque se superponen con la raíz. Además, para que una pérdida de mineral sea visible debe alcanzar cierto grado, de modo que los cambios iniciales pasan desapercibidos. Por eso la evaluación periodontal se basa en el sondaje y la radiografía la complementa, y por eso un defecto en una tabla vestibular puede no aparecer en la imagen. La angulación también influye: una periapical con angulación vertical excesiva puede proyectar la cresta más hacia oclusal o hacia apical de donde realmente está. Para medir niveles óseos con más fidelidad se prefieren aletas de mordida o periapicales con técnica de paralelismo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dientes en desarrollo y dentición temporal"
+        },
+        {
+          "tipo": "texto",
+          "md": "En niños y adolescentes encontrarás estructuras que no existen en el adulto. Cada germen dentario en formación está rodeado por un **folículo** que aparece como una zona radiolúcida delimitada por una línea cortical radiopaca. Las raíces en formación tienen **ápices abiertos**, en forma de embudo o con paredes divergentes, y en su extremo se observa una zona radiolúcida redondeada que corresponde a la **papila dental**. Es una imagen normal que puede confundirse con una lesión periapical si no se considera la edad del paciente.\n\nEn la dentición mixta, las raíces de los dientes temporales muestran **reabsorción fisiológica** por encima de los gérmenes permanentes, que aparecen entre las raíces de los molares temporales o por lingual de los incisivos. Los dientes temporales tienen esmalte y dentina más delgados y cámaras pulpares proporcionalmente más amplias, con cuernos pulpares altos, un dato que importa al valorar la profundidad de una caries en un niño."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/06",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de la zona de molares temporales inferiores de un niño con el germen del premolar entre sus raíces.",
+          "pie": "Dentición mixta: el germen del segundo premolar, rodeado por su folículo, se aloja entre las raíces del segundo molar temporal en reabsorción.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de la región posterior inferior de un niño de ocho años: segundo molar temporal con raíces divergentes parcialmente reabsorbidas, entre ellas el germen del segundo premolar con corona formada rodeado por un folículo radiolúcido con borde cortical fino, distal a ellos el primer molar permanente con raíces en formación y ápices abiertos, hueso trabecular normal, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, caries, restauraciones, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Lo que esperas ver en una periapical normal",
+          "columnas": [
+            "Estructura",
+            "Aspecto normal",
+            "Variación fisiológica a recordar"
+          ],
+          "filas": [
+            [
+              "Esmalte",
+              "Casquete muy radiopaco en la corona",
+              "Más delgado en dientes temporales"
+            ],
+            [
+              "Cámara y conductos",
+              "Radiolúcidos, centrados",
+              "Se estrechan con la edad; amplios en jóvenes"
+            ],
+            [
+              "Espacio del ligamento",
+              "Línea radiolúcida fina y continua",
+              "Algo más ancho en cervical y apical"
+            ],
+            [
+              "Lámina dura",
+              "Línea radiopaca continua",
+              "Nitidez variable según angulación"
+            ],
+            [
+              "Cresta alveolar",
+              "Aproximadamente 1.5 a 2 mm apical a la unión amelocementaria",
+              "Puntiaguda en anteriores, plana en posteriores"
+            ],
+            [
+              "Ápice en formación",
+              "Abierto, con papila radiolúcida",
+              "Normal mientras la raíz completa su desarrollo"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "La lámina dura como testigo",
+          "md": "Un paciente de 35 años refiere molestia vaga en la zona del 46, que tiene una resina oclusal profunda. En la periapical, la raíz mesial muestra espacio del ligamento y lámina dura continuos hasta el ápice; en la raíz distal, la lámina dura se interrumpe en el ápice y el espacio del ligamento se ve más ancho que en el resto de la raíz. Comparar con la raíz vecina sana te permite describir el hallazgo con precisión y correlacionarlo con las pruebas de sensibilidad pulpar antes de llegar a un diagnóstico."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "¿Normal o no?",
+          "afirmaciones": [
+            {
+              "texto": "El cemento radicular sano se distingue con claridad de la dentina en una periapical.",
+              "verdadero": false,
+              "explicacion": "Su densidad es parecida a la dentina y su espesor muy pequeño; normalmente no se distingue."
+            },
+            {
+              "texto": "La lámina dura se ve radiopaca en parte porque el haz la atraviesa de forma tangencial.",
+              "verdadero": true,
+              "explicacion": "El haz recorre la pared del alvéolo a lo largo, lo que suma densidad en la imagen."
+            },
+            {
+              "texto": "Una zona radiolúcida en el ápice abierto de un molar de un niño de 8 años es siempre una lesión.",
+              "verdadero": false,
+              "explicacion": "Puede ser la papila dental de una raíz en formación, una imagen normal."
+            },
+            {
+              "texto": "Entre incisivos inferiores sanos la cresta alveolar suele verse puntiaguda.",
+              "verdadero": true,
+              "explicacion": "El espacio interdental estrecho de los anteriores produce crestas en punta."
+            },
+            {
+              "texto": "La radiografía muestra con fidelidad la pérdida ósea en la tabla vestibular.",
+              "verdadero": false,
+              "explicacion": "Las tablas vestibular y lingual se superponen con la raíz; la imagen subestima esas pérdidas."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando revises cualquier periapical, recorre cada raíz con la vista desde la cresta mesial hasta el ápice y de regreso por distal, siguiendo la línea oscura del ligamento y la línea blanca de la lámina dura. Pregúntate si ambas son continuas. Ese recorrido de pocos segundos, repetido en cada diente, es la base para detectar cambios periapicales y periodontales tempranos."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Espacio del ligamento periodontal",
+          "definicion": "Línea radiolúcida fina que rodea la raíz y corresponde a las fibras del ligamento entre cemento y hueso."
+        },
+        {
+          "termino": "Lámina dura",
+          "definicion": "Línea radiopaca que tapiza el alvéolo; corresponde al hueso alveolar propiamente dicho."
+        },
+        {
+          "termino": "Cresta alveolar",
+          "definicion": "Borde coronal del hueso alveolar entre dos dientes; en salud se sitúa cerca de las uniones amelocementarias."
+        },
+        {
+          "termino": "Hueso trabecular",
+          "definicion": "Hueso esponjoso formado por trabéculas radiopacas y espacios medulares radiolúcidos."
+        },
+        {
+          "termino": "Folículo dental",
+          "definicion": "Saco de tejido que rodea al germen dentario; se ve como zona radiolúcida con borde cortical."
+        },
+        {
+          "termino": "Papila dental",
+          "definicion": "Tejido formador de la pulpa; en raíces en formación se ve como zona radiolúcida en el ápice abierto."
+        },
+        {
+          "termino": "Hipercementosis",
+          "definicion": "Depósito excesivo de cemento que engrosa la raíz y la hace visible en la radiografía."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t14.2-1",
+          "q": "¿Qué estructura corresponde a la línea radiolúcida fina que rodea la raíz?",
+          "opciones": [
+            "La lámina dura",
+            "El espacio del ligamento periodontal",
+            "El cemento radicular",
+            "La unión amelodentinaria"
+          ],
+          "correcta": 1,
+          "explicacion": "La línea oscura es el espacio del ligamento; la lámina dura es la línea blanca que lo acompaña por fuera."
+        },
+        {
+          "id": "t14.2-2",
+          "q": "En un periodonto sano, ¿dónde se ubica aproximadamente la cresta alveolar?",
+          "opciones": [
+            "A la altura del ápice radicular",
+            "Por encima de la unión amelocementaria",
+            "En el tercio medio de la raíz",
+            "Alrededor de 1.5 a 2 mm apical a la unión amelocementaria"
+          ],
+          "correcta": 3,
+          "explicacion": "Los textos de radiología oral sitúan la cresta sana a esa distancia aproximada de la unión amelocementaria."
+        },
+        {
+          "id": "t14.2-3",
+          "q": "En la periapical de un niño de 9 años, el primer molar permanente muestra una zona radiolúcida redondeada en un ápice de paredes divergentes. ¿Qué es lo más probable?",
+          "opciones": [
+            "La papila dental de una raíz en formación",
+            "Un absceso periapical crónico",
+            "Un quiste radicular",
+            "Una fractura radicular"
+          ],
+          "correcta": 0,
+          "explicacion": "El ápice abierto con papila es normal mientras la raíz se forma; la edad del paciente es clave para no confundirlo con patología."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+          "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+          "anio": 2025
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+          "autor": "Nelson S. J. (Elsevier)",
+          "anio": 2020
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam) y Nelson (Wheeler's)",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "14.3",
+      "titulo": "Referencias anatómicas del maxilar en la radiografía",
+      "minutos": 15,
+      "enPocasPalabras": "Encima de los dientes de arriba hay huecos y huesos que también aparecen en las radiografías: la nariz, los senos maxilares y un pequeño conducto detrás de los dientes de enfrente. Se ven como manchas oscuras o líneas blancas que son completamente normales. Conocerlos evita confundirlos con quistes o infecciones.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "El maxilar es un hueso lleno de espacios: aloja las fosas nasales, los senos maxilares y conductos para vasos y nervios. En una radiografía periapical superior, varias de esas estructuras se proyectan junto a los ápices o sobre ellos. Todas son normales y casi todas tienen una apariencia que, a primera vista, podría parecer una lesión. Aquí aprenderás a reconocerlas región por región, de la línea media hacia atrás, como si recorrieras una serie periapical completa."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Región incisiva: la línea media"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la periapical de incisivos centrales superiores encontrarás primero la **sutura intermaxilar** o palatina media: una **línea radiolúcida delgada** entre las raíces de los centrales, bordeada por dos líneas radiopacas finas, que asciende desde la cresta alveolar. No debe confundirse con una fractura.\n\nEntre las raíces de los centrales, por lo general a la altura de su tercio apical o por encima, aparece el **agujero incisivo**, también llamado foramen nasopalatino: una **zona radiolúcida** de forma ovalada, redonda o de corazón, de bordes más o menos nítidos. Es la salida del **conducto incisivo**, por donde pasan el nervio nasopalatino y vasos. Las paredes del conducto pueden verse como dos líneas radiopacas paralelas que suben hacia la fosa nasal.\n\nEl agujero incisivo es una de las trampas clásicas: si la angulación lo proyecta sobre el ápice de un central, parece una lesión periapical. La clave para distinguirlo es que el diente conserva su **espacio del ligamento y su lámina dura continuos** alrededor del ápice, y que el agujero cambia de posición respecto a la raíz al modificar la angulación horizontal."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/07",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de incisivos centrales superiores con sutura media, agujero incisivo y piso de la fosa nasal.",
+          "pie": "Periapical de centrales superiores: la sutura intermaxilar, el agujero incisivo entre las raíces y, arriba, el piso de las fosas nasales.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de incisivos centrales superiores permanentes sanos de un adulto, raíces completas con lámina dura continua, entre ambas raíces una línea radiolúcida delgada vertical de la sutura media y por encima de los ápices una zona radiolúcida ovalada del agujero incisivo, en la parte superior las fosas nasales radiolúcidas separadas por el tabique radiopaco y el piso nasal como línea blanca, espina nasal anterior en forma de V, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Agujero incisivo amplio o quiste del conducto nasopalatino",
+          "md": "El conducto incisivo puede dar origen al **quiste del conducto nasopalatino**, considerado el quiste no odontogénico más frecuente de los maxilares. Distinguirlo de un agujero incisivo amplio no siempre es posible con una sola periapical. Orientan hacia quiste un tamaño que aumenta en controles sucesivos, una radiolucidez bien delimitada con borde cortical que desplaza o separa las raíces de los centrales, asimetría marcada respecto a la línea media o síntomas como aumento de volumen palatino. Los incisivos centrales suelen responder normalmente a las pruebas de sensibilidad pulpar, lo que ayuda a descartar un origen endodóntico. La radiografía oclusal maxilar o un estudio tridimensional de campo reducido permiten valorar mejor el conducto cuando el clínico lo considera necesario."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Fosas nasales y región del canino"
+        },
+        {
+          "tipo": "texto",
+          "md": "Por encima de los ápices de los incisivos se proyectan las **fosas nasales**: dos zonas **radiolúcidas amplias**, separadas por el **tabique nasal**, una franja vertical radiopaca. El **piso de la fosa nasal** se ve como una línea radiopaca horizontal o ligeramente curva, y en la línea media sobresale hacia delante la **espina nasal anterior**, una proyección radiopaca en forma de V. En algunas imágenes se observan los **cornetes inferiores** como masas radiopacas difusas dentro de la fosa. La sombra de los **tejidos blandos de la nariz**, especialmente las alas nasales, puede proyectarse sobre las raíces de incisivos y caninos como un contorno ligeramente más radiopaco.\n\nEntre el incisivo lateral y el canino, el hueso es más delgado y puede verse una zona radiolúcida difusa: la **fosa lateral** o fosa incisiva. Como no tiene bordes definidos y no rompe la lámina dura de los dientes vecinos, se reconoce como variación anatómica.\n\nEn la periapical del canino superior a menudo aparece la **Y invertida** descrita por Ennis: la intersección de la pared anterior del seno maxilar con el piso de la fosa nasal forma dos líneas radiopacas que se unen como una Y al revés por encima del canino. Es una referencia útil para orientarte en la imagen."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m14/d3",
+          "pie": "Mapa de referencias anatómicas del maxilar, de la línea media a la tuberosidad, tal como se proyectan sobre una serie periapical superior.",
+          "descripcion": "Esquema horizontal de la hemiarcada superior derecha vista como en una serie periapical, con los dientes de incisivo central a tercer molar en la parte inferior. De izquierda a derecha y por encima de los ápices: sutura intermaxilar y agujero incisivo entre centrales, fosa nasal con tabique y espina nasal anterior, fosa lateral entre lateral y canino, Y invertida sobre el canino, seno maxilar extendido sobre premolares y molares con un tabique en su interior, apófisis cigomática en forma de U sobre el primer molar, tuberosidad distal al último molar y apófisis hamular detrás de ella. Debajo de la tuberosidad, la sombra triangular de la apófisis coronoides mandibular.",
+          "elementos": [
+            "Sutura intermaxilar",
+            "Agujero incisivo",
+            "Fosa nasal",
+            "Espina nasal anterior",
+            "Fosa lateral",
+            "Y invertida",
+            "Seno maxilar",
+            "Apófisis cigomática",
+            "Tuberosidad del maxilar",
+            "Apófisis hamular",
+            "Apófisis coronoides"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El seno maxilar"
+        },
+        {
+          "tipo": "texto",
+          "md": "En las periapicales de premolares y molares superiores, el **seno maxilar** aparece como una zona **radiolúcida amplia** delimitada por una **línea radiopaca delgada**, su pared cortical. Su piso suele dibujar una curva que desciende entre las raíces de los molares formando **recesos** alveolares; por superposición, las raíces pueden parecer «dentro» del seno aunque estén separadas por una lámina de hueso.\n\nDentro del seno pueden verse **tabiques** o septos: líneas radiopacas finas que lo dividen en compartimentos y que no deben confundirse con fracturas ni con raíces. También se observan **canales nutricios** en su pared lateral: líneas radiolúcidas estrechas con bordes radiopacos que corresponden a vasos. El seno se amplía con la edad y tiende a **neumatizarse** hacia el reborde alveolar después de las extracciones, un dato que importa en la planeación de implantes.\n\nUn engrosamiento del contorno del piso del seno, una imagen en forma de cúpula o una opacificación de su luz pueden corresponder a cambios inflamatorios o a otras condiciones; su valoración requiere correlación clínica y, a menudo, otros estudios."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/08",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de molares superiores con el seno maxilar, su piso curvo y la apófisis cigomática en forma de U.",
+          "pie": "Periapical de molares superiores: el piso del seno maxilar desciende entre las raíces y la apófisis cigomática dibuja una U por encima.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de premolares y molares superiores permanentes sanos de un adulto, sobre los ápices una zona radiolúcida amplia del seno maxilar limitada por una línea cortical radiopaca fina que desciende ligeramente entre las raíces de los molares, un tabique delgado dentro del seno, por encima del primer molar una radiopacidad en forma de U de la apófisis cigomática, hueso trabecular fino y granular, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, lesiones, opacificación del seno, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Región posterior: cigoma, tuberosidad y vecinos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Sobre los ápices del primer y segundo molar, la **apófisis cigomática del maxilar** aparece como una radiopacidad en forma de **U o de J** con la concavidad hacia arriba. Por encima y hacia atrás puede proyectarse el **hueso cigomático** como una banda radiopaca homogénea que, si es muy densa o la angulación vertical es inadecuada, oculta los ápices de los molares.\n\nDistal al último molar se encuentra la **tuberosidad del maxilar**, una prominencia redondeada de hueso trabecular rodeada de cortical. Por detrás de ella puede verse la **apófisis hamular** o gancho pterigoideo, una pequeña proyección radiopaca en forma de gancho que pertenece al esfenoides. En la misma zona aparece con frecuencia una sombra **triangular radiopaca** que no pertenece al maxilar: es la **apófisis coronoides de la mandíbula**, que al abrir la boca se desplaza hacia delante y se superpone sobre la tuberosidad.\n\nEl **hueso trabecular del maxilar** tiene un patrón fino, granular y denso, con espacios medulares pequeños, distinto del patrón más grueso de la mandíbula."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Referencias del maxilar: dónde buscarlas y cómo se ven",
+          "columnas": [
+            "Referencia",
+            "Región periapical",
+            "Aspecto"
+          ],
+          "filas": [
+            [
+              "Sutura intermaxilar",
+              "Incisivos centrales",
+              "Línea radiolúcida fina con bordes radiopacos"
+            ],
+            [
+              "Agujero incisivo",
+              "Entre raíces de centrales",
+              "Zona radiolúcida ovalada o de corazón"
+            ],
+            [
+              "Fosa nasal y tabique",
+              "Sobre incisivos",
+              "Radiolucidez amplia dividida por franja radiopaca"
+            ],
+            [
+              "Fosa lateral",
+              "Entre lateral y canino",
+              "Radiolucidez difusa sin bordes nítidos"
+            ],
+            [
+              "Y invertida",
+              "Canino",
+              "Dos líneas radiopacas que se unen sobre el canino"
+            ],
+            [
+              "Seno maxilar",
+              "Premolares y molares",
+              "Radiolucidez amplia con borde cortical, posibles tabiques"
+            ],
+            [
+              "Apófisis cigomática",
+              "Primer y segundo molar",
+              "Radiopacidad en U o J"
+            ],
+            [
+              "Apófisis coronoides",
+              "Tuberosidad",
+              "Sombra triangular radiopaca superpuesta"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/09",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de la tuberosidad del maxilar con tercer molar, apófisis hamular y sombra de la apófisis coronoides.",
+          "pie": "Región de la tuberosidad: la sombra triangular de la coronoides mandibular y la apófisis hamular aparecen detrás del último molar.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de la región posterior del maxilar de un adulto: segundo y tercer molar superiores sanos, distal a ellos la tuberosidad redondeada con cortical fina, detrás una pequeña proyección radiopaca en forma de gancho, y superpuesta en la parte inferior una sombra triangular radiopaca con el vértice hacia arriba que corresponde a la apófisis coronoides mandibular, seno maxilar radiolúcido en la parte superior, hueso trabecular fino, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "La sombra que no estaba en el diente",
+          "md": "Una pasante revisa la periapical del 21 de un paciente sin síntomas y observa una radiolucidez ovalada que parece tocar el ápice. Antes de anotar «lesión periapical», sigue la lámina dura del 21: es continua alrededor del ápice. Revisa la periapical del 11 tomada con otra angulación horizontal en la misma serie y ve que la radiolucidez ahora queda entre ambas raíces. El diente responde normal a la prueba de sensibilidad. Concluye que se trata del agujero incisivo proyectado sobre el ápice y lo documenta como variante anatómica."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Recorre el maxilar de adelante hacia atrás",
+          "instruccion": "Ordena estas referencias según su posición en una serie periapical superior, de la línea media hacia la parte posterior.",
+          "elementos": [
+            "Agujero incisivo",
+            "Fosa lateral",
+            "Y invertida",
+            "Apófisis cigomática",
+            "Tuberosidad del maxilar",
+            "Apófisis hamular"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Antes de indicar una extracción o un implante en molares superiores",
+          "md": "La proximidad entre las raíces de los molares superiores y el piso del seno varía mucho entre personas. Una periapical puede mostrar raíces «dentro» del seno por simple superposición, o sugerir una lámina ósea gruesa que en realidad es delgada. Cuando la relación con el seno es determinante para planear una extracción quirúrgica o la colocación de un implante, el profesional valora si se necesita un estudio tridimensional. Registrar esta relación en el expediente forma parte de la información que el paciente debe conocer antes de consentir el procedimiento."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** toma una serie periapical superior de un paciente con anatomía normal, con su autorización y sin datos que lo identifiquen si la usas para estudiar, y en cada imagen nombra en voz alta las referencias de la tabla antes de mirar los dientes. Cuando puedas hacerlo en menos de un minuto por imagen, las trampas del maxilar dejarán de sorprenderte."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Agujero incisivo",
+          "definicion": "Abertura del conducto incisivo en el paladar anterior; se ve como zona radiolúcida entre las raíces de los centrales superiores."
+        },
+        {
+          "termino": "Sutura intermaxilar",
+          "definicion": "Unión de ambos maxilares en la línea media; se ve como línea radiolúcida fina entre los centrales."
+        },
+        {
+          "termino": "Fosa lateral",
+          "definicion": "Depresión ósea entre incisivo lateral y canino superiores que produce una radiolucidez difusa normal."
+        },
+        {
+          "termino": "Y invertida",
+          "definicion": "Imagen en Y al revés sobre el canino superior formada por la pared del seno maxilar y el piso de la fosa nasal."
+        },
+        {
+          "termino": "Seno maxilar",
+          "definicion": "Cavidad neumática del maxilar que aparece radiolúcida sobre los ápices de premolares y molares."
+        },
+        {
+          "termino": "Apófisis cigomática",
+          "definicion": "Prolongación del maxilar hacia el hueso cigomático; se ve como radiopacidad en U sobre los molares."
+        },
+        {
+          "termino": "Apófisis hamular",
+          "definicion": "Gancho del ala medial de la apófisis pterigoides del esfenoides, visible detrás de la tuberosidad."
+        },
+        {
+          "termino": "Neumatización",
+          "definicion": "Expansión de una cavidad aérea como el seno maxilar hacia el hueso vecino."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t14.3-1",
+          "q": "¿Qué dato ayuda a distinguir el agujero incisivo de una lesión periapical del central superior?",
+          "opciones": [
+            "El agujero incisivo siempre es más radiopaco que una lesión",
+            "El agujero incisivo solo aparece en niños",
+            "Una lesión periapical nunca es radiolúcida",
+            "El diente conserva lámina dura y ligamento continuos en el ápice"
+          ],
+          "correcta": 3,
+          "explicacion": "Si el ápice conserva su lámina dura y su espacio del ligamento, y la radiolucidez cambia de posición con la angulación, se trata de anatomía."
+        },
+        {
+          "id": "t14.3-2",
+          "q": "¿Qué estructura produce una radiopacidad en forma de U sobre los ápices del primer molar superior?",
+          "opciones": [
+            "La apófisis hamular",
+            "La apófisis coronoides",
+            "La apófisis cigomática del maxilar",
+            "El tabique nasal"
+          ],
+          "correcta": 2,
+          "explicacion": "La apófisis cigomática del maxilar forma esa U o J. La coronoides es triangular y se proyecta sobre la tuberosidad."
+        },
+        {
+          "id": "t14.3-3",
+          "q": "En una periapical de tuberosidad aparece una sombra radiopaca triangular. ¿A qué hueso pertenece con mayor probabilidad?",
+          "opciones": [
+            "A la mandíbula",
+            "Al hueso cigomático",
+            "Al tabique nasal",
+            "Al hueso palatino"
+          ],
+          "correcta": 0,
+          "explicacion": "Es la apófisis coronoides de la mandíbula, que al abrir la boca se superpone sobre la región de la tuberosidad."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+          "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+          "anio": 2025
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam) y textos de anatomía radiográfica oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "14.4",
+      "titulo": "Referencias anatómicas de la mandíbula en la radiografía",
+      "minutos": 15,
+      "enPocasPalabras": "La mandíbula tiene un conducto por donde pasa el nervio que da sensibilidad al labio inferior y una salida de ese nervio cerca de las raíces de los premolares. También tiene crestas de hueso donde se sujetan músculos. Todo eso aparece en las radiografías y es normal; conocerlo protege al nervio durante tratamientos y evita diagnósticos equivocados.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La mandíbula es un hueso más compacto que el maxilar, con corticales gruesas y sin cavidades aéreas. Sus referencias radiográficas son, sobre todo, **inserciones musculares**, **conductos neurovasculares** y **depresiones** de la superficie ósea. Dos de ellas tienen enorme importancia clínica: el **conducto mandibular** y el **agujero mentoniano**, porque alojan el paquete neurovascular alveolar inferior y su rama mentoniana. La anatomía descriptiva de la mandíbula la estudiaste en el módulo 3 y la inervación en el módulo 4; aquí aprenderás cómo se ven en la imagen."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Región anterior: tubérculos geni y protuberancia mentoniana"
+        },
+        {
+          "tipo": "texto",
+          "md": "En la periapical de incisivos inferiores, por debajo de los ápices y en la línea media, suele aparecer un **anillo radiopaco** o una masa radiopaca redondeada: son los **tubérculos geni** o apófisis geni, pequeñas eminencias de la cara lingual donde se insertan los músculos geniogloso y geniohioideo. En su centro se ve con frecuencia un punto **radiolúcido** pequeño, el **agujero lingual**, por donde entra una rama vascular.\n\nPor la cara externa, la **protuberancia mentoniana** se proyecta como una **banda radiopaca** en forma de V invertida que asciende desde la región de premolares hacia la línea media, por debajo de los ápices de los incisivos. Encima de ella, la **fosa mentoniana**, una depresión de la cortical vestibular, produce una zona algo más radiolúcida sobre las raíces de los incisivos que puede interpretarse por error como pérdida ósea.\n\nEn esta región también son frecuentes los **canales nutricios**: líneas radiolúcidas verticales y estrechas entre las raíces de los incisivos, a veces con un pequeño punto radiolúcido en su terminación. Son más visibles cuando el hueso es delgado o hay pérdida ósea, y no deben confundirse con fracturas."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/10",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de incisivos inferiores con tubérculos geni y agujero lingual bajo los ápices.",
+          "pie": "Periapical de incisivos inferiores: el anillo radiopaco de los tubérculos geni con el agujero lingual en su centro, por debajo de los ápices.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de incisivos centrales y laterales inferiores permanentes sanos de un adulto, raíces completas con lámina dura continua, por debajo de los ápices en la línea media un anillo radiopaco redondeado con un pequeño punto radiolúcido central, una banda radiopaca tenue en forma de V invertida de la protuberancia mentoniana, canales nutricios finos verticales entre raíces, hueso trabecular mandibular, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, cálculo, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Agujero mentoniano y conducto mandibular"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **agujero mentoniano** se localiza en la cara vestibular del cuerpo mandibular, con mayor frecuencia cerca del ápice del **segundo premolar** o entre las raíces de ambos premolares, aunque su posición varía entre personas y entre lados. En la radiografía es una **zona radiolúcida redonda u ovalada**, a veces con bordes corticales nítidos y a veces difusa. Por él salen el nervio y los vasos mentonianos que dan sensibilidad al labio inferior y al mentón.\n\nCuando la angulación lo proyecta sobre el ápice del premolar, el agujero mentoniano imita una **lesión periapical**. Se distingue con los mismos criterios que el agujero incisivo: el premolar conserva **lámina dura y ligamento continuos**, el diente responde normal a las pruebas de sensibilidad y la radiolucidez **cambia de posición** respecto al ápice al tomar otra imagen con distinta angulación horizontal.\n\nEl **conducto mandibular** aparece como una **banda radiolúcida** limitada por dos **líneas radiopacas** finas, sus paredes corticales. Recorre el cuerpo de la mandíbula desde el agujero mandibular, en la cara interna de la rama, hacia abajo y adelante, pasando por debajo de los ápices de los molares hasta la región de premolares, donde da origen al agujero mentoniano. Su distancia a las raíces de los molares, en particular a las del **tercer molar inferior**, es variable, y sus paredes no siempre son visibles en toda su longitud."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/11",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de premolares inferiores con el agujero mentoniano cerca del ápice del segundo premolar.",
+          "pie": "Agujero mentoniano junto al ápice del segundo premolar: la lámina dura del diente permanece continua.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de canino y premolares inferiores permanentes sanos de un adulto, raíces completas con espacio del ligamento y lámina dura continuos, cerca del ápice del segundo premolar y ligeramente por debajo una zona radiolúcida ovalada de bordes suaves que corresponde al agujero mentoniano, hacia distal el inicio tenue del conducto mandibular como banda radiolúcida con bordes radiopacos, hueso trabecular de patrón grueso, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "El conducto y el agujero no se ven igual en todos los pacientes",
+          "md": "Antes de cualquier procedimiento quirúrgico en la región posterior mandibular, como una extracción de tercer molar o la colocación de un implante, el profesional valora la relación de las raíces o del sitio quirúrgico con el conducto mandibular y el agujero mentoniano. En dos dimensiones, el conducto puede parecer más lejos o más cerca de lo que está, y existen variantes como conductos bífidos o un **asa anterior** del nervio mentoniano que se extiende por delante del agujero. Cuando la imagen convencional sugiere contacto estrecho, el especialista decide si requiere un estudio tridimensional y lo explica al paciente como parte del consentimiento informado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Cuando se pierden los dientes, el agujero sube",
+          "md": "Tras la pérdida de los dientes, el hueso alveolar se reabsorbe con los años, pero el cuerpo basal de la mandíbula, donde corren el conducto mandibular y el agujero mentoniano, cambia mucho menos. En mandíbulas muy reabsorbidas, el agujero mentoniano puede quedar sobre la cresta del reborde, justo debajo de la mucosa. Por eso algunas personas que usan dentadura total refieren dolor o sensación eléctrica en el labio inferior al morder: la base de la prótesis comprime el nervio mentoniano. Reconocer esta posición en la radiografía orienta el ajuste de la prótesis."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Región posterior: líneas oblicuas y fosa submandibular"
+        },
+        {
+          "tipo": "texto",
+          "md": "En las periapicales de molares inferiores aparecen dos líneas radiopacas oblicuas que suelen confundirse entre sí. La **línea oblicua externa** es la continuación del borde anterior de la rama sobre la cara vestibular del cuerpo mandibular; se ve como una banda radiopaca que desciende hacia delante y en la imagen suele quedar **por encima**, cerca de las raíces o de la región cervical de los molares, y se desvanece hacia la zona de premolares.\n\nLa **línea milohioidea**, también llamada oblicua interna, está en la cara lingual y da inserción al músculo milohioideo, que forma el piso de la boca. En la imagen aparece **más abajo** que la oblicua externa, como una línea radiopaca que desciende hacia delante desde la región del tercer molar y a menudo se superpone con las raíces de los molares.\n\nPor debajo de la línea milohioidea, en la región de los molares, la cara lingual presenta una depresión que aloja la glándula submandibular: la **fosa submandibular**. En la radiografía se ve como una zona **radiolúcida** con trabéculas escasas y finas, limitada por arriba por la línea milohioidea y por abajo por la gruesa **cortical del borde inferior** de la mandíbula. Es otra imagen que puede confundirse con una lesión."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m14/d4",
+          "pie": "Referencias radiográficas de la mandíbula proyectadas sobre una hemiarcada inferior, de la línea media a la rama.",
+          "descripcion": "Esquema lateral de una hemimandíbula derecha con los dientes de incisivo central a tercer molar. En la línea media, bajo los incisivos, un anillo con un punto central. Una banda en V invertida bajo los incisivos. Cerca del ápice del segundo premolar, un óvalo oscuro. Desde ahí, una banda oscura con bordes blancos que se dirige hacia atrás bajo las raíces de los molares y sube hacia la rama. Dos líneas blancas oblicuas en la zona molar, una más alta continuando el borde anterior de la rama y otra más baja descendiendo desde el tercer molar; bajo la inferior, una zona oscura con pocas trabéculas, y en la base una banda blanca gruesa.",
+          "elementos": [
+            "Tubérculos geni",
+            "Agujero lingual",
+            "Protuberancia mentoniana",
+            "Agujero mentoniano",
+            "Conducto mandibular",
+            "Línea oblicua externa",
+            "Línea milohioidea",
+            "Fosa submandibular",
+            "Cortical del borde inferior"
+          ]
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Las dos líneas oblicuas, lado a lado",
+          "columnas": [
+            "Rasgo",
+            "Línea oblicua externa",
+            "Línea milohioidea (oblicua interna)"
+          ],
+          "filas": [
+            [
+              "Cara de la mandíbula",
+              "Vestibular",
+              "Lingual"
+            ],
+            [
+              "Origen",
+              "Continuación del borde anterior de la rama",
+              "Cresta de inserción del músculo milohioideo"
+            ],
+            [
+              "Posición habitual en la periapical",
+              "Más alta, cerca de la región cervical o radicular de los molares",
+              "Más baja, a menudo sobre las raíces de los molares"
+            ],
+            [
+              "Relación con la fosa submandibular",
+              "Ninguna directa",
+              "La fosa queda por debajo de ella"
+            ]
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/12",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical simulada de molares inferiores con líneas oblicua externa y milohioidea, conducto mandibular y fosa submandibular.",
+          "pie": "Molares inferiores: la línea oblicua externa arriba, la milohioidea más abajo y, por debajo, la fosa submandibular y el conducto mandibular.",
+          "prompt": "Radiografía periapical dental simulada realista en escala de grises, orientación vertical, de primer, segundo y tercer molar inferiores permanentes sanos de un adulto, una línea radiopaca oblicua que desciende hacia delante cerca de la región cervical de los molares, otra línea radiopaca más baja que cruza las raíces, por debajo de los ápices una banda radiolúcida horizontal con bordes radiopacos finos del conducto mandibular y una zona radiolúcida con trabéculas escasas, hueso trabecular de patrón grueso con trabéculas horizontales, contraste diagnóstico. Evitar: texto, letras, números, flechas, etiquetas, nombres, fechas, restauraciones, lesiones, artefactos, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El patrón óseo y las variantes"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **hueso trabecular mandibular** tiene un patrón más grueso que el del maxilar: trabéculas más gruesas, espacios medulares más amplios y, entre los molares, una orientación predominantemente **horizontal** de las trabéculas. En la región anterior el patrón es más denso. La cortical del borde inferior es gruesa y homogénea.\n\nEntre las variantes normales destacan los **toros mandibulares**, exostosis de hueso cortical en la cara lingual a la altura de caninos y premolares, que en la periapical aparecen como **radiopacidades** redondeadas superpuestas a las raíces. Su diagnóstico es clínico: se palpan como masas duras, lisas y generalmente bilaterales. También es frecuente encontrar zonas de **osteoesclerosis idiopática**, radiopacidades localizadas sin causa inflamatoria aparente; su valoración corresponde al profesional que interpreta el estudio."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Dos líneas que confundieron a un estudiante",
+          "md": "Al interpretar la periapical de un 37, un estudiante describe «pérdida ósea horizontal hasta el tercio medio de las raíces» porque ve una línea radiopaca que cruza las raíces a esa altura. Su profesora le pide que siga la línea: desciende de forma oblicua hacia mesial, cruza las raíces sin formar ángulo con la lámina dura y no se detiene entre los dientes como lo haría una cresta. Entre los molares, cerca de las uniones amelocementarias, encuentra las crestas reales con su cortical continua. La línea que cruzaba las raíces era la milohioidea. En la aleta de mordida, el nivel óseo resulta normal."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "¿Lesión o anatomía?",
+          "situacion": "Un hombre de 42 años acude a limpieza sin síntomas. En la periapical de premolares inferiores derechos aparece una radiolucidez ovalada que se proyecta sobre el ápice del 45. El diente no tiene caries ni restauraciones, responde normal a la prueba de sensibilidad pulpar y no duele a la percusión. Al revisar con lupa, la lámina dura del 45 se sigue continua alrededor del ápice.",
+          "opciones": [
+            {
+              "texto": "Considerar que probablemente es el agujero mentoniano, confirmarlo con una segunda periapical con distinta angulación horizontal si hay duda, y documentarlo.",
+              "correcta": true,
+              "retro": "Correcto. Diente vital, sin causa de infección y con lámina dura continua orientan a anatomía; el cambio de posición con la angulación lo confirma."
+            },
+            {
+              "texto": "Diagnosticar periodontitis apical e indicar tratamiento de conductos.",
+              "correcta": false,
+              "retro": "No hay causa ni signos clínicos, el diente responde normal y la lámina dura está íntegra; tratar sería un error con consecuencias irreversibles."
+            },
+            {
+              "texto": "Indicar de inmediato una tomografía de campo amplio.",
+              "correcta": false,
+              "retro": "No está justificado exponer al paciente a un estudio de mayor dosis cuando una evaluación clínica y, si hace falta, una periapical con otra angulación resuelven la duda."
+            },
+            {
+              "texto": "Ignorar el hallazgo y no registrarlo.",
+              "correcta": false,
+              "retro": "Todo hallazgo se documenta; registrarlo como variante anatómica evita confusiones en revisiones futuras."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en cada periapical de premolares inferiores que revises, busca activamente el agujero mentoniano y anota su posición respecto a los ápices. En las de molares inferiores, sigue con la vista el conducto mandibular de distal a mesial y diferencia las dos líneas oblicuas. Ese hábito te hará reconocer al instante estas estructuras cuando aparezcan donde no las esperabas."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Tubérculos geni",
+          "definicion": "Eminencias de la cara lingual de la sínfisis donde se insertan los músculos geniogloso y geniohioideo; se ven como anillo radiopaco."
+        },
+        {
+          "termino": "Agujero lingual",
+          "definicion": "Pequeño orificio vascular en el centro de los tubérculos geni; se ve como punto radiolúcido."
+        },
+        {
+          "termino": "Agujero mentoniano",
+          "definicion": "Orificio vestibular del cuerpo mandibular, cerca de los premolares, por donde salen el nervio y los vasos mentonianos."
+        },
+        {
+          "termino": "Conducto mandibular",
+          "definicion": "Conducto óseo del nervio y los vasos alveolares inferiores; se ve como banda radiolúcida con bordes radiopacos."
+        },
+        {
+          "termino": "Línea oblicua externa",
+          "definicion": "Cresta vestibular que continúa el borde anterior de la rama; se ve como línea radiopaca alta en la zona molar."
+        },
+        {
+          "termino": "Línea milohioidea",
+          "definicion": "Cresta lingual de inserción del músculo milohioideo; se ve como línea radiopaca más baja en la zona molar."
+        },
+        {
+          "termino": "Fosa submandibular",
+          "definicion": "Depresión lingual bajo la línea milohioidea que aloja la glándula submandibular; se ve más radiolúcida."
+        },
+        {
+          "termino": "Toro mandibular",
+          "definicion": "Exostosis ósea benigna en la cara lingual de la mandíbula, generalmente bilateral, que se ve radiopaca."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t14.4-1",
+          "q": "¿Cerca de qué diente se localiza con mayor frecuencia el agujero mentoniano?",
+          "opciones": [
+            "El incisivo lateral inferior",
+            "El primer molar inferior",
+            "El segundo premolar inferior",
+            "El tercer molar inferior"
+          ],
+          "correcta": 2,
+          "explicacion": "Suele estar cerca del ápice del segundo premolar o entre ambos premolares, con variación entre personas."
+        },
+        {
+          "id": "t14.4-2",
+          "q": "¿Cómo se ve el conducto mandibular en una periapical?",
+          "opciones": [
+            "Como una banda radiolúcida limitada por dos líneas radiopacas finas",
+            "Como un anillo radiopaco bajo los incisivos",
+            "Como una radiopacidad en forma de U sobre los molares",
+            "Como una línea radiolúcida vertical entre los incisivos"
+          ],
+          "correcta": 0,
+          "explicacion": "El conducto es radiolúcido y sus paredes corticales aparecen como líneas radiopacas. El anillo bajo los incisivos son los tubérculos geni."
+        },
+        {
+          "id": "t14.4-3",
+          "q": "¿Qué estructura produce una zona radiolúcida con pocas trabéculas por debajo de la línea milohioidea en la región molar?",
+          "opciones": [
+            "La fosa mentoniana",
+            "La fosa submandibular",
+            "El agujero lingual",
+            "La fosa lateral"
+          ],
+          "correcta": 1,
+          "explicacion": "La fosa submandibular aloja la glándula y adelgaza el hueso; la mentoniana está en la región incisiva y la lateral en el maxilar."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+          "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+          "anio": 2025
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam) y textos de anatomía radiográfica oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "14.5",
+      "titulo": "La radiografía panorámica, las trampas anatómicas y la lectura sistemática",
+      "minutos": 16,
+      "enPocasPalabras": "La radiografía panorámica muestra toda la boca en una sola imagen, pero también incluye la lengua, el aire de la garganta y algunas sombras duplicadas que pueden engañar. Varias zonas oscuras normales parecen caries o infecciones. Por eso el dentista revisa la imagen siempre en el mismo orden y compara con lo que ve en la boca.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Has aprendido a reconocer los dientes, el periodonto y las referencias de cada maxilar en las radiografías intraorales. La **panorámica** reúne todo eso en una imagen, añade estructuras que no aparecen en las periapicales y crea algunas imágenes propias de su técnica. En este tema verás su anatomía particular, las trampas anatómicas más frecuentes en cualquier tipo de radiografía y un método ordenado para leer las imágenes sin pasar nada por alto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Anatomía propia de la panorámica"
+        },
+        {
+          "tipo": "texto",
+          "md": "Además de dientes y maxilares, en la panorámica identificarás estructuras de la cabeza y el cuello. En la parte superior, el **paladar duro** se ve como una banda radiopaca horizontal por encima de los ápices superiores; sobre ella están las **fosas nasales** y, a los lados, los **senos maxilares**, a veces con el contorno inferior de las **órbitas**. Los **arcos cigomáticos** se proyectan como bandas radiopacas horizontales que se dirigen hacia atrás.\n\nEn los extremos de la imagen están las **articulaciones temporomandibulares**: los **cóndilos** dentro de las fosas glenoideas, por detrás de las **eminencias articulares**, y por delante, la **apófisis coronoides** y la escotadura sigmoidea. La **rama** y el **cuerpo mandibular** muestran el conducto mandibular y los agujeros mentonianos. Por debajo y detrás de la rama pueden aparecer la **apófisis estiloides**, como una espina radiopaca delgada dirigida hacia abajo y adelante, el **hueso hioides** y la **columna cervical**.\n\nTambién se ven **tejidos blandos**: el **dorso de la lengua**, el **paladar blando**, el **lóbulo de la oreja** y la nariz. Y se ven **espacios aéreos**, radiolúcidos, que atraviesan otras estructuras: el **espacio palatogloso**, entre el dorso de la lengua y el paladar, y las vías aéreas de la **nasofaringe** y la **orofaringe**, que cruzan la rama mandibular."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m14/d5",
+          "pie": "Mapa de estructuras anatómicas en una radiografía panorámica normal, incluidos tejidos blandos y espacios aéreos.",
+          "descripcion": "Esquema de una panorámica de adulto con dentición completa. Arriba al centro, banda horizontal del paladar duro con las fosas nasales encima y los senos maxilares a ambos lados; arcos cigomáticos hacia los extremos. En cada extremo superior, cóndilo dentro de la fosa glenoidea con la eminencia articular por delante, apófisis coronoides y escotadura. Rama y cuerpo mandibular con conducto mandibular y agujero mentoniano. Detrás de cada rama, apófisis estiloides; abajo al centro, hueso hioides. Una banda oscura sobre los ápices superiores marca el espacio palatogloso y una franja oscura vertical cruza cada rama como vía aérea. Con línea punteada, la sombra fantasma de la rama contralateral, más alta y difusa.",
+          "elementos": [
+            "Paladar duro",
+            "Fosas nasales",
+            "Seno maxilar",
+            "Arco cigomático",
+            "Cóndilo",
+            "Eminencia articular",
+            "Apófisis coronoides",
+            "Apófisis estiloides",
+            "Hueso hioides",
+            "Espacio palatogloso",
+            "Vía aérea faríngea",
+            "Imagen fantasma"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/13",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica simulada de un adulto con paladar duro, senos maxilares, cóndilos, apófisis estiloides e hioides visibles.",
+          "pie": "Panorámica normal: además de dientes y maxilares, aparecen articulaciones, apófisis estiloides, hioides, tejidos blandos y espacios aéreos.",
+          "prompt": "Radiografía panorámica dental simulada realista en escala de grises de un adulto con dentición permanente completa y anatomía normal, se aprecian el paladar duro como banda radiopaca horizontal sobre los ápices superiores, senos maxilares y fosas nasales, arcos cigomáticos, cóndilos y eminencias articulares a ambos lados, apófisis coronoides, ramas y conductos mandibulares, apófisis estiloides delgadas detrás de las ramas, hueso hioides en la parte inferior, posicionamiento correcto con lengua contra el paladar, contraste diagnóstico. Evitar: texto, letras, números, nombres, fechas, marcas de lado, flechas, etiquetas, logotipos, aretes, artefactos metálicos, dientes deformes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Imágenes fantasma, dobles y errores de posición"
+        },
+        {
+          "tipo": "texto",
+          "md": "Por la forma en que gira el equipo, algunas estructuras ubicadas entre la fuente de rayos X y el centro de rotación se proyectan en el **lado opuesto** de la imagen, **más altas, más borrosas y ampliadas** en sentido horizontal. Se llaman **imágenes fantasma**. Las más comunes son las de la rama y el borde inferior de la mandíbula contralateral, el hioides, la columna cervical y objetos metálicos como aretes o piercings. Por eso se pide retirar los objetos de cabeza y cuello antes del estudio.\n\nOtras estructuras de la línea media, como el paladar duro o el hioides, pueden aparecer **dos veces**, una a cada lado, como imágenes dobles. Y la **posición del paciente** cambia mucho la imagen: con la cabeza inclinada hacia abajo, el plano oclusal se curva en una «sonrisa» exagerada; inclinada hacia arriba, el plano se aplana o se invierte y el paladar se superpone a los ápices superiores; adelantada o atrasada respecto a la capa de imagen, los incisivos se ven estrechos o anchos y borrosos; girada, un lado se ve más ancho que el otro. Si la lengua no se apoya en el paladar, el espacio palatogloso forma una **banda radiolúcida** sobre los ápices superiores que puede ocultar o imitar lesiones."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/14",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica simulada con banda radiolúcida sobre los ápices superiores por la lengua separada del paladar.",
+          "pie": "Lengua separada del paladar: el espacio palatogloso aparece como una banda oscura sobre los ápices superiores.",
+          "prompt": "Radiografía panorámica dental simulada realista en escala de grises de un adulto con dentición permanente completa y anatomía normal, con una banda radiolúcida horizontal oscura que cruza por encima de los ápices de los dientes superiores entre el dorso de la lengua y el paladar duro, resto de la imagen con contraste diagnóstico, ramas y cóndilos simétricos, plano oclusal en ligera sonrisa, sin lesiones. Evitar: texto, letras, números, nombres, fechas, marcas de lado, flechas, etiquetas, logotipos, aretes, artefactos metálicos, dientes deformes, asimetrías exageradas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Trampas anatómicas que imitan patología"
+        },
+        {
+          "tipo": "texto",
+          "md": "Algunas imágenes normales aparecen en cualquier tipo de radiografía y se confunden con enfermedad. Ya conoces las de cada maxilar: el agujero incisivo, la fosa lateral, los recesos del seno, el agujero mentoniano, la fosa submandibular, la papila de los dientes en formación. Hay dos más que conviene dominar porque afectan el diagnóstico de caries.\n\nLa **radiolucidez cervical**, conocida en inglés como *cervical burnout*, es una banda o cuña radiolúcida en el cuello del diente, en las caras proximales, entre el borde del esmalte y la cresta alveolar. Se produce porque en esa franja el haz atraviesa menos tejido: no hay esmalte ni hueso que se sume a la raíz. Puede imitar una **caries radicular**. Orientan a anatomía la ausencia de lesión clínica, los bordes difusos que se desvanecen y el hecho de que aparece en varios dientes de forma simétrica.\n\nEl **efecto de banda de Mach** es una ilusión de la percepción visual: junto a un borde muy radiopaco, como el esmalte o una restauración metálica, el ojo percibe una franja más oscura de lo que es. Puede simular caries debajo del esmalte o en el margen de una restauración. Medir la densidad en pantalla o tapar la zona brillante ayuda a comprobarlo. El diagnóstico radiográfico de la caries y sus criterios se estudian a fondo en el módulo 4 del programa de caries dental."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Trampas anatómicas frecuentes y cómo desenmascararlas",
+          "columnas": [
+            "Imagen normal",
+            "Qué puede imitar",
+            "Clave para distinguirla"
+          ],
+          "filas": [
+            [
+              "Agujero incisivo",
+              "Lesión periapical de incisivo central superior",
+              "Lámina dura apical continua; cambia de posición con la angulación"
+            ],
+            [
+              "Agujero mentoniano",
+              "Lesión periapical de premolar inferior",
+              "Lámina dura continua, diente vital, se desplaza con la angulación"
+            ],
+            [
+              "Papila dental en ápice abierto",
+              "Lesión periapical en niños",
+              "Edad del paciente y raíz de paredes divergentes"
+            ],
+            [
+              "Fosa submandibular",
+              "Lesión radiolúcida mandibular",
+              "Situada bajo la línea milohioidea, sin borde definido, simétrica"
+            ],
+            [
+              "Radiolucidez cervical",
+              "Caries radicular proximal",
+              "Bordes difusos, simetría, ausencia de lesión clínica"
+            ],
+            [
+              "Banda de Mach",
+              "Caries bajo esmalte o junto a restauración",
+              "Desaparece al ocultar el borde brillante; sin hallazgo clínico"
+            ],
+            [
+              "Espacio palatogloso",
+              "Pérdida ósea o lesión maxilar en panorámica",
+              "Banda horizontal continua que rebasa los límites del hueso"
+            ],
+            [
+              "Canal nutricio",
+              "Fractura radicular u ósea",
+              "Línea radiolúcida con bordes corticales, a veces con punto terminal"
+            ]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La regla del desplazamiento del tubo",
+          "md": "Para saber si una estructura está por vestibular o por lingual de otra, se toman dos imágenes cambiando la **angulación horizontal** del haz. Según la regla de desplazamiento del tubo, atribuida a Clark y conocida en inglés con el acrónimo **SLOB** (*same lingual, opposite buccal*), el objeto que está por **lingual** se mueve en la **misma** dirección en que se desplazó el tubo, y el que está por **vestibular** se mueve en dirección **opuesta**. Así se localizan dientes retenidos, conductos superpuestos en premolares y molares y, en este contexto, se confirma que una radiolucidez anatómica como el agujero mentoniano, que está por vestibular de la raíz, se separa del ápice al cambiar la angulación. Una lesión que realmente rodea el ápice, en cambio, lo acompaña en ambas imágenes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Leer siempre en el mismo orden"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Lectura sistemática de una radiografía dental",
+          "pasos": [
+            {
+              "titulo": "Verificar la imagen",
+              "md": "Confirma que corresponde al paciente y a la fecha correctos, que su orientación es la adecuada y que la calidad permite responder la pregunta clínica."
+            },
+            {
+              "titulo": "Mirar el conjunto",
+              "md": "Antes de ir a los dientes, recorre la imagen completa: simetría de ambos lados, bordes corticales de los maxilares, senos, fosas nasales y, en la panorámica, articulaciones y tejidos blandos."
+            },
+            {
+              "titulo": "Revisar el hueso de soporte",
+              "md": "Sigue las crestas alveolares y la lámina dura de cada diente, y observa el patrón trabecular en busca de cambios localizados."
+            },
+            {
+              "titulo": "Revisar cada diente",
+              "md": "Cuenta los dientes, revisa el estado de formación, coronas, restauraciones, cámaras, conductos y regiones periapicales, uno por uno y en el mismo sentido."
+            },
+            {
+              "titulo": "Describir y correlacionar",
+              "md": "Para cada hallazgo, describe localización, tamaño, bordes, densidad interna y efecto sobre estructuras vecinas. Antes de concluir, descarta las trampas anatómicas y correlaciona con la exploración clínica."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m14/15",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con cubrebocas revisa una radiografía panorámica en un monitor en un consultorio con luz tenue.",
+          "pie": "La interpretación se hace en un monitor adecuado, con luz ambiental tenue y siguiendo siempre la misma secuencia.",
+          "prompt": "Fotografía realista en un consultorio dental moderno con luz ambiental tenue: un odontólogo con bata clínica y cubrebocas, visto de espaldas y de perfil parcial sin rostro identificable, observa en un monitor de alta resolución una radiografía panorámica dental en escala de grises de anatomía normal, la mano sobre el ratón, escritorio ordenado con modelos de estudio de yeso a un lado, iluminación suave que favorece la lectura de la pantalla, colores naturales. Evitar: texto legible en pantalla, nombres o datos del paciente, logotipos, marcas comerciales, marcas de agua, rostro identificable, desorden."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Desenmascara la trampa",
+          "instruccion": "Relaciona cada imagen normal con lo que puede imitar o con su aspecto característico.",
+          "pares": [
+            {
+              "a": "Radiolucidez cervical",
+              "b": "Caries radicular proximal"
+            },
+            {
+              "a": "Espacio palatogloso",
+              "b": "Banda oscura sobre los ápices superiores en la panorámica"
+            },
+            {
+              "a": "Imagen fantasma de la rama contralateral",
+              "b": "Radiopacidad difusa y alta sobre la rama opuesta"
+            },
+            {
+              "a": "Papila dental de raíz en formación",
+              "b": "Lesión periapical en un niño"
+            },
+            {
+              "a": "Banda de Mach junto a una restauración",
+              "b": "Caries secundaria en el margen"
+            }
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La imagen no sustituye a la exploración",
+          "md": "Ningún hallazgo radiográfico se interpreta aislado. Una radiolucidez sin síntomas, en un diente vital, con lámina dura continua y en el sitio de una referencia anatómica conocida probablemente es anatomía; la misma imagen en un diente con caries profunda, dolor a la percusión o fístula cuenta otra historia. Ante una imagen que no puedes explicar, no la omitas: descríbela con precisión, consulta y, si es necesario, refiere a un especialista en radiología oral y maxilofacial."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** imprime o guarda la secuencia de lectura de este tema junto a tu monitor y úsala en cada panorámica durante un mes, aunque te parezca lento. Al final de cada lectura, escribe al menos una referencia anatómica que hayas identificado fuera de los dientes. Con la repetición, la lectura sistemática se vuelve rápida y las trampas anatómicas dejan de convertirse en diagnósticos equivocados."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Radiografía panorámica",
+          "definicion": "Estudio extraoral que muestra ambos maxilares, los dientes y estructuras vecinas en una sola imagen."
+        },
+        {
+          "termino": "Imagen fantasma",
+          "definicion": "Proyección en el lado opuesto de la panorámica, más alta y borrosa, de una estructura situada entre la fuente y el centro de rotación."
+        },
+        {
+          "termino": "Espacio palatogloso",
+          "definicion": "Espacio aéreo entre el dorso de la lengua y el paladar; en la panorámica se ve como banda radiolúcida si la lengua no toca el paladar."
+        },
+        {
+          "termino": "Radiolucidez cervical",
+          "definicion": "Banda radiolúcida normal en el cuello del diente entre el esmalte y la cresta; en inglés, cervical burnout."
+        },
+        {
+          "termino": "Efecto de banda de Mach",
+          "definicion": "Ilusión visual que hace ver más oscura la zona junto a un borde muy radiopaco."
+        },
+        {
+          "termino": "Regla del desplazamiento del tubo",
+          "definicion": "Principio para ubicar estructuras en sentido vestibulolingual comparando dos imágenes con distinta angulación horizontal."
+        },
+        {
+          "termino": "Apófisis estiloides",
+          "definicion": "Proyección ósea delgada del hueso temporal que se ve en la panorámica detrás de la rama mandibular."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t14.5-1",
+          "q": "¿Cómo aparece una imagen fantasma en la panorámica?",
+          "opciones": [
+            "En el mismo lado, más pequeña y nítida",
+            "En el lado opuesto, más alta, borrosa y ampliada",
+            "Solo en la línea media, como una línea fina",
+            "Como una radiolucidez sobre los ápices superiores"
+          ],
+          "correcta": 1,
+          "explicacion": "Las imágenes fantasma se proyectan en el lado contrario, más altas y difusas. La radiolucidez sobre los ápices superiores suele ser el espacio palatogloso."
+        },
+        {
+          "id": "t14.5-2",
+          "q": "¿Qué dato orienta a que una radiolucidez en el cuello proximal de varios dientes es radiolucidez cervical y no caries?",
+          "opciones": [
+            "Que tiene bordes muy nítidos y forma de cráter",
+            "Que solo aparece en un diente",
+            "Que el diente tiene dolor espontáneo",
+            "Que se repite de forma simétrica, con bordes difusos y sin lesión clínica"
+          ],
+          "correcta": 3,
+          "explicacion": "La radiolucidez cervical es un efecto de espesor del tejido: difusa, simétrica y sin correlato clínico."
+        },
+        {
+          "id": "t14.5-3",
+          "q": "Según la regla del desplazamiento del tubo, si al mover el tubo hacia mesial una estructura se mueve también hacia mesial, ¿dónde está?",
+          "opciones": [
+            "Por vestibular del diente de referencia",
+            "Exactamente sobre el eje del diente",
+            "Por lingual del diente de referencia",
+            "Fuera del maxilar, en tejidos blandos"
+          ],
+          "correcta": 2,
+          "explicacion": "Lo lingual se mueve en la misma dirección que el tubo y lo vestibular en dirección opuesta."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+          "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+          "anio": 2025
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam) y textos de anatomía radiográfica oral",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "crucigrama",
+    "titulo": "Crucigrama: lo normal en la radiografía",
+    "pistas": [
+      {
+        "palabra": "RADIOPACO",
+        "pista": "Se dice de la estructura que absorbe rayos X y se ve blanca."
+      },
+      {
+        "palabra": "RADIOLUCIDO",
+        "pista": "Se dice de la estructura que deja pasar los rayos X y se ve oscura."
+      },
+      {
+        "palabra": "LAMINADURA",
+        "pista": "Línea radiopaca que tapiza el alvéolo alrededor de la raíz (dos palabras juntas)."
+      },
+      {
+        "palabra": "PERIAPICAL",
+        "pista": "Radiografía intraoral que muestra el diente completo y el hueso alrededor del ápice."
+      },
+      {
+        "palabra": "ALETA",
+        "pista": "Radiografía «de … de mordida», ideal para caras proximales y crestas."
+      },
+      {
+        "palabra": "PANORAMICA",
+        "pista": "Estudio extraoral que muestra ambos maxilares en una sola imagen."
+      },
+      {
+        "palabra": "MENTONIANO",
+        "pista": "Agujero de la mandíbula cercano al ápice del segundo premolar."
+      },
+      {
+        "palabra": "INCISIVO",
+        "pista": "Agujero entre las raíces de los centrales superiores que puede imitar una lesión."
+      },
+      {
+        "palabra": "MILOHIOIDEA",
+        "pista": "Línea oblicua interna de la mandíbula; bajo ella está la fosa submandibular."
+      },
+      {
+        "palabra": "SENO",
+        "pista": "Cavidad aérea del maxilar que se proyecta sobre los ápices de los molares superiores."
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m14-p01",
+        "q": "¿Por qué una estructura aparece radiolúcida en la radiografía?",
+        "opciones": [
+          "Porque absorbe la mayor parte de los rayos X",
+          "Porque deja pasar la mayor parte de los rayos X hacia el receptor",
+          "Porque contiene metales de número atómico alto",
+          "Porque es más gruesa que las estructuras vecinas"
+        ],
+        "correcta": 1,
+        "explicacion": "Lo radiolúcido deja pasar la radiación y se ve oscuro; lo que absorbe, contiene metales o es más grueso tiende a verse radiopaco."
+      },
+      {
+        "id": "m14-p02",
+        "q": "Ordenadas de mayor a menor radiopacidad, ¿cuál secuencia es correcta?",
+        "opciones": [
+          "Pulpa, dentina, esmalte, aire",
+          "Dentina, esmalte, hueso trabecular, metal",
+          "Hueso trabecular, esmalte, pulpa, dentina",
+          "Esmalte, dentina, hueso trabecular, pulpa"
+        ],
+        "correcta": 3,
+        "explicacion": "El esmalte es el tejido natural más radiopaco, seguido de la dentina; el hueso trabecular es menos denso y la pulpa es radiolúcida."
+      },
+      {
+        "id": "m14-p03",
+        "q": "¿Qué estudio intraoral es el más útil para valorar caras proximales posteriores y el nivel de las crestas?",
+        "opciones": [
+          "Aleta de mordida",
+          "Oclusal maxilar",
+          "Periapical de incisivos",
+          "Panorámica"
+        ],
+        "correcta": 0,
+        "explicacion": "La aleta de mordida muestra coronas de ambas arcadas y crestas con poca distorsión. La panorámica no es intraoral y tiene menos detalle."
+      },
+      {
+        "id": "m14-p04",
+        "q": "¿Cuál es una característica de la tomografía computarizada de haz cónico?",
+        "opciones": [
+          "Es el estudio de rutina en toda primera consulta",
+          "Tiene menor dosis que una periapical",
+          "Obtiene un volumen tridimensional y debe indicarse cuando la imagen convencional no responde la pregunta",
+          "Solo muestra tejidos blandos"
+        ],
+        "correcta": 2,
+        "explicacion": "La TCHC elimina la superposición, pero su dosis suele ser mayor que la de los estudios convencionales y requiere indicación precisa."
+      },
+      {
+        "id": "m14-p05",
+        "q": "Según su campo de aplicación, ¿qué establece la NOM-229-SSA1-2002 respecto a la odontología?",
+        "opciones": [
+          "Incluye todas las radiografías intraorales",
+          "Excluye todos los estudios dentales",
+          "Incluye los estudios panorámicos dentales y excluye las aplicaciones odontológicas convencionales",
+          "Solo regula la tomografía de haz cónico"
+        ],
+        "correcta": 2,
+        "explicacion": "La norma incluye expresamente los panorámicos dentales y excluye las aplicaciones odontológicas convencionales, es decir, la radiografía intraoral."
+      },
+      {
+        "id": "m14-p06",
+        "q": "¿Qué corresponde a la línea radiopaca delgada que rodea el alvéolo?",
+        "opciones": [
+          "La lámina dura",
+          "El espacio del ligamento periodontal",
+          "El cemento radicular",
+          "La cámara pulpar"
+        ],
+        "correcta": 0,
+        "explicacion": "La lámina dura es la cortical del alvéolo; el ligamento es la línea radiolúcida que queda entre ella y la raíz."
+      },
+      {
+        "id": "m14-p07",
+        "q": "¿Por qué normalmente no se distingue el cemento en una periapical?",
+        "opciones": [
+          "Porque es más radiopaco que el esmalte",
+          "Porque solo existe en dientes temporales",
+          "Porque se reabsorbe con la edad",
+          "Porque es muy delgado y de densidad parecida a la dentina"
+        ],
+        "correcta": 3,
+        "explicacion": "El cemento es delgado y de densidad similar a la dentina; solo se hace visible cuando está engrosado, como en la hipercementosis."
+      },
+      {
+        "id": "m14-p08",
+        "q": "¿Cómo se ve normalmente la cresta alveolar entre dos molares sanos?",
+        "opciones": [
+          "Puntiaguda y por encima de las uniones amelocementarias",
+          "Plana, con cortical continua y cerca de las uniones amelocementarias",
+          "Ausente, porque el hueso interproximal es radiolúcido",
+          "En el tercio apical de las raíces"
+        ],
+        "correcta": 1,
+        "explicacion": "Entre posteriores la cresta es plana y se sitúa aproximadamente 1.5 a 2 mm apical a las uniones amelocementarias; la cresta puntiaguda es propia de anteriores."
+      },
+      {
+        "id": "m14-p09",
+        "q": "¿Qué patrón trabecular es característico del maxilar comparado con la mandíbula?",
+        "opciones": [
+          "Fino, granular y denso, con espacios medulares pequeños",
+          "Grueso, con trabéculas horizontales y espacios amplios",
+          "Ausente; el maxilar es solo hueso cortical",
+          "Idéntico al de la mandíbula en todas las regiones"
+        ],
+        "correcta": 0,
+        "explicacion": "El maxilar muestra trabéculas finas y densas; la mandíbula, trabéculas más gruesas con espacios medulares mayores."
+      },
+      {
+        "id": "m14-p10",
+        "q": "¿Qué estructura forma una radiolucidez ovalada entre las raíces de los incisivos centrales superiores?",
+        "opciones": [
+          "La fosa lateral",
+          "El agujero incisivo",
+          "El agujero lingual",
+          "La fosa mentoniana"
+        ],
+        "correcta": 1,
+        "explicacion": "El agujero incisivo es la salida del conducto nasopalatino. La fosa lateral está entre lateral y canino; el agujero lingual y la fosa mentoniana son mandibulares."
+      },
+      {
+        "id": "m14-p11",
+        "q": "En la periapical del canino superior, ¿qué forman la pared anterior del seno maxilar y el piso de la fosa nasal?",
+        "opciones": [
+          "La apófisis hamular",
+          "El conducto incisivo",
+          "Una sombra triangular",
+          "La Y invertida"
+        ],
+        "correcta": 3,
+        "explicacion": "La intersección de ambas líneas radiopacas forma la Y invertida descrita por Ennis."
+      },
+      {
+        "id": "m14-p12",
+        "q": "Una periapical de tuberosidad muestra una sombra radiopaca triangular superpuesta. ¿Qué es lo más probable?",
+        "opciones": [
+          "Un tercer molar retenido",
+          "Una fractura de la tuberosidad",
+          "La apófisis coronoides de la mandíbula",
+          "La apófisis cigomática"
+        ],
+        "correcta": 2,
+        "explicacion": "Al abrir la boca la coronoides se desplaza hacia delante y se proyecta sobre la tuberosidad como triángulo radiopaco."
+      },
+      {
+        "id": "m14-p13",
+        "q": "¿Qué imagen producen los tubérculos geni en una periapical de incisivos inferiores?",
+        "opciones": [
+          "Una línea radiolúcida vertical entre los centrales",
+          "Un anillo radiopaco bajo los ápices, a menudo con un punto radiolúcido central",
+          "Una banda radiolúcida horizontal con bordes radiopacos",
+          "Una zona radiolúcida difusa entre lateral y canino"
+        ],
+        "correcta": 1,
+        "explicacion": "Los tubérculos geni se ven como anillo radiopaco; el punto central es el agujero lingual."
+      },
+      {
+        "id": "m14-p14",
+        "q": "¿Cómo se ve el conducto mandibular?",
+        "opciones": [
+          "Como una banda radiolúcida limitada por dos líneas radiopacas finas",
+          "Como una línea radiopaca gruesa sobre los ápices de los molares",
+          "Como una radiopacidad en U",
+          "Como un punto radiolúcido en la línea media"
+        ],
+        "correcta": 0,
+        "explicacion": "El conducto es radiolúcido y sus paredes corticales aparecen como líneas radiopacas; corre por debajo de los ápices de los molares."
+      },
+      {
+        "id": "m14-p15",
+        "q": "En una periapical de molares inferiores ves dos líneas radiopacas oblicuas. ¿Cuál suele quedar más alta en la imagen?",
+        "opciones": [
+          "La línea milohioidea",
+          "La cortical del borde inferior",
+          "La línea oblicua externa",
+          "El conducto mandibular"
+        ],
+        "correcta": 2,
+        "explicacion": "La oblicua externa continúa el borde anterior de la rama y suele verse más alta; la milohioidea aparece más baja, a menudo sobre las raíces."
+      },
+      {
+        "id": "m14-p16",
+        "q": "Una paciente sin síntomas tiene una radiolucidez sobre el ápice del 35. El diente responde normal a la prueba de sensibilidad y la lámina dura es continua. ¿Qué paso es más adecuado?",
+        "opciones": [
+          "Iniciar tratamiento de conductos",
+          "Indicar extracción",
+          "Indicar tomografía de campo amplio de inmediato",
+          "Considerar el agujero mentoniano y, si hay duda, tomar otra periapical con distinta angulación horizontal"
+        ],
+        "correcta": 3,
+        "explicacion": "Diente vital con lámina dura íntegra orienta a anatomía; el cambio de posición con la angulación lo confirma sin exposiciones innecesarias."
+      },
+      {
+        "id": "m14-p17",
+        "q": "En la periapical de un niño de 8 años, el incisivo central superior permanente muestra un ápice de paredes divergentes con una radiolucidez redondeada. ¿Cuál es la interpretación más probable?",
+        "opciones": [
+          "Quiste radicular",
+          "Reabsorción radicular externa",
+          "Fractura apical",
+          "Papila dental de una raíz en formación"
+        ],
+        "correcta": 3,
+        "explicacion": "A esa edad la raíz aún se forma; el ápice abierto con papila radiolúcida es normal."
+      },
+      {
+        "id": "m14-p18",
+        "q": "En una panorámica aparece una banda radiolúcida horizontal sobre los ápices de los dientes superiores. ¿Qué la explica con mayor frecuencia?",
+        "opciones": [
+          "Pérdida ósea generalizada del maxilar",
+          "La lengua separada del paladar, que deja visible el espacio palatogloso",
+          "Una imagen fantasma de la columna cervical",
+          "La sombra del lóbulo de la oreja"
+        ],
+        "correcta": 1,
+        "explicacion": "Si la lengua no se apoya en el paladar, el aire entre ambos forma esa banda; por eso se pide colocarla contra el paladar durante el estudio."
+      },
+      {
+        "id": "m14-p19",
+        "q": "¿Qué caracteriza a una imagen fantasma en la panorámica?",
+        "opciones": [
+          "Aparece en el mismo lado y más nítida que la estructura real",
+          "Solo se produce con radiografías intraorales",
+          "Aparece en el lado opuesto, más alta, borrosa y ampliada",
+          "Es siempre radiolúcida"
+        ],
+        "correcta": 2,
+        "explicacion": "Las estructuras entre la fuente y el centro de rotación se proyectan en el lado contrario, elevadas y difusas; por eso se retiran aretes y objetos metálicos."
+      },
+      {
+        "id": "m14-p20",
+        "q": "Una radiolucidez en forma de cuña aparece en el cuello proximal de varios premolares, de forma simétrica, con bordes difusos y sin lesión clínica. ¿Qué es lo más probable?",
+        "opciones": [
+          "Radiolucidez cervical por menor espesor de tejido",
+          "Caries radicular activa en todos los dientes",
+          "Reabsorción cervical invasiva",
+          "Fractura de las raíces"
+        ],
+        "correcta": 0,
+        "explicacion": "En esa franja el haz atraviesa menos tejido; los rasgos descritos orientan a la radiolucidez cervical y no a caries."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "academica",
+      "titulo": "White and Pharoah's Oral Radiology: Principles and Interpretation, 9.ª edición",
+      "autor": "Mallya S. M., Lam E. W. N. (Elsevier)",
+      "anio": 2025
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "NOM-229-SSA1-2002, Salud ambiental. Requisitos técnicos para las instalaciones, responsabilidades sanitarias, especificaciones técnicas para los equipos y protección radiológica en establecimientos de diagnóstico médico con rayos X",
+      "autor": "Secretaría de Salud",
+      "anio": 2006
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion, 11.ª edición",
+      "autor": "Nelson S. J. (Elsevier)",
+      "anio": 2020
+    },
+    {
+      "tipo": "propia",
+      "titulo": "Elaboración propia OdonTeck con base en White y Pharoah (Mallya y Lam), Nelson (Wheeler's) y la NOM-229-SSA1-2002",
+      "autor": "OdonTeck",
+      "anio": 2026
+    }
+  ]
+}

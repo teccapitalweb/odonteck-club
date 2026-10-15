@@ -1,0 +1,1699 @@
+{
+  "programa": "anatomia-dental",
+  "modulo": 9,
+  "titulo": "Dentición temporal y cronología de la erupción",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Los 20 dientes temporales acompañan al niño durante más de una década y preparan el camino para la dentición permanente. En este módulo estudiarás cómo se forman desde la vida intrauterina, en qué se diferencia su anatomía de la permanente y por qué esas diferencias importan en la clínica, la cronología de erupción y exfoliación con los rangos de la Asociación Dental Americana, las etapas de la dentición mixta y los mecanismos de espacio que hacen posible el recambio: espacios primates, planos terminales y espacio de deriva. Con esta base podrás orientar a las familias y detectar a tiempo lo que requiere seguimiento.",
+  "objetivos": [
+    "Explicar las funciones de la dentición temporal y la cronología de su formación, incluida la relación con el germen permanente.",
+    "Comparar la morfología de los dientes temporales con la de los permanentes e identificar los rasgos distintivos de cada diente temporal.",
+    "Interpretar los rangos de erupción y exfoliación de la ADA y reconocer las secuencias normales de erupción temporal y permanente.",
+    "Describir las etapas de la dentición mixta y distinguir cambios transitorios normales de hallazgos que requieren valoración.",
+    "Calcular el espacio de deriva y relacionar los espacios primates, el plano terminal y la pérdida prematura de molares temporales con el desarrollo de la oclusión."
+  ],
+  "duracionMin": 105,
+  "portada": {
+    "id": "anatomia-dental/m09/portada",
+    "proporcion": "16:9",
+    "alt": "Sonrisa de un niño en dentición mixta con incisivos permanentes nuevos junto a caninos temporales, en encuadre que solo muestra la boca.",
+    "prompt": "Fotografía realista de gran formato en primer plano de la sonrisa de un niño de unos ocho años, encuadre que solo muestra labios, dientes y barbilla sin ojos ni nariz, dentición mixta con incisivos centrales superiores permanentes grandes de bordes ondulados, un espacio donde se cayó un incisivo lateral temporal y caninos temporales pequeños y blancos, encía rosa sana, luz natural cálida y suave, fondo desenfocado en tonos claros, colores naturales. Evitar: texto, logotipos, rostro identificable, ojos, sangre, caries, aparatos de ortodoncia, dientes deformes."
+  },
+  "temas": [
+    {
+      "n": "9.1",
+      "titulo": "La dentición temporal: funciones, terminología y formación",
+      "minutos": 14,
+      "enPocasPalabras": "Los niños tienen 20 dientes temporales, conocidos como dientes de leche, que empiezan a formarse antes de nacer. Aunque se caen, son muy importantes: sirven para comer, hablar, sonreír y guardar el lugar de los dientes definitivos. Cuidarlos desde el primer diente evita dolor e infecciones y protege a los dientes que vendrán después.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Todavía es frecuente escuchar en la consulta: «son de leche, se van a caer». Esa frase resume un malentendido que tiene consecuencias. Los **dientes temporales** acompañan al niño durante una etapa decisiva de su crecimiento, desde los primeros meses de vida hasta los 11 o 12 años en el caso de los últimos que se exfolian. Durante ese tiempo cumplen funciones que ningún otro tejido puede sustituir, y su pérdida prematura, por caries o por traumatismo, altera el desarrollo de la oclusión permanente.\n\nEn este módulo estudiarás la dentición temporal desde la anatomía: cómo se forma, en qué se diferencia de la permanente, cuándo aparece cada diente, cómo se produce el recambio y qué mecanismos de espacio garantizan que los dientes permanentes encuentren su lugar."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Temporal, decidua, primaria o de leche"
+        },
+        {
+          "tipo": "texto",
+          "md": "La misma dentición recibe varios nombres. **Temporal** subraya que será reemplazada; **decidua** viene del latín *deciduus*, «que se cae», como las hojas de los árboles de hoja caduca; **primaria** es el término que prefieren la literatura en inglés y organismos como la Academia Americana de Odontología Pediátrica (AAPD), porque destaca que es la primera dentición y no algo pasajero o de menor valor. **De leche** es la expresión popular, relacionada con el color más blanco de estos dientes.\n\nEn la comunicación con las familias conviene elegir las palabras con intención. Hablar de «dientes de leche» es comprensible, pero vale la pena explicar enseguida que son dientes verdaderos, con esmalte, dentina y pulpa, que pueden doler, infectarse y afectar al diente permanente que se forma debajo."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/01",
+          "proporcion": "4:3",
+          "alt": "Sonrisa en primer plano de un niño pequeño con dentición temporal completa, sin mostrar ojos ni rostro completo.",
+          "pie": "La dentición temporal completa: 20 dientes pequeños, blancos y a menudo con espacios entre ellos.",
+          "prompt": "Fotografía clínica realista en primer plano de la boca de un niño de unos cuatro años sonriendo, encuadre que solo muestra labios y dientes sin ojos ni nariz, dentición temporal completa con incisivos pequeños y muy blancos, espacios fisiológicos visibles entre los incisivos, caninos temporales con punta definida, encía rosa sana, iluminación suave y natural, fondo desenfocado claro, colores naturales. Evitar: texto, logotipos, rostro identificable, ojos, caries, sangre, aparatos de ortodoncia, dientes permanentes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué importan: cinco funciones"
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Funciones de la dentición temporal",
+          "items": [
+            "**Masticación y nutrición:** permite pasar de la leche a una dieta sólida variada; un niño con dolor dental come menos y peor.",
+            "**Fonación:** los incisivos participan en la articulación de sonidos como /s/, /f/ y /t/; su pérdida temprana puede afectar el habla en desarrollo.",
+            "**Estética y desarrollo emocional:** la sonrisa influye en la autoestima y en la relación con otros niños.",
+            "**Mantenimiento de espacio y guía de erupción:** cada diente temporal ocupa el lugar de su sucesor y sus raíces orientan su erupción; si se pierde antes de tiempo, los vecinos pueden desplazarse y cerrar el espacio.",
+            "**Estímulo del crecimiento:** la función masticatoria participa en el desarrollo de los maxilares y de los músculos de la cara."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "La primera visita, con el primer diente",
+          "md": "La AAPD recomienda que la primera visita al odontólogo ocurra **cuando erupciona el primer diente y a más tardar a los 12 meses de edad**. El objetivo no es tratar, sino establecer un «hogar dental», evaluar el riesgo de caries, orientar a la familia sobre higiene, dieta y hábitos, y anticipar los cambios que vendrán. Muchas familias en México acuden por primera vez cuando el niño ya tiene dolor; cada consulta temprana que promuevas es una oportunidad de prevención."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Se forman antes de nacer"
+        },
+        {
+          "tipo": "texto",
+          "md": "Como viste en el módulo 5, los gérmenes dentarios se originan durante las primeras semanas de vida intrauterina. Para la dentición temporal, la **mineralización** de las coronas comienza a partir del cuarto mes de gestación: las tablas clásicas de Logan y Kronfeld, revisadas por Lunt y Law en 1974, ubican su inicio, en promedio, alrededor de la semana 14 en los incisivos centrales y alrededor de la semana 19 en los segundos molares, con variaciones de algunas semanas entre individuos. Al nacer, las coronas de los incisivos están casi completas y las de los molares parcialmente formadas; todas terminan de mineralizarse durante el primer año de vida.\n\nEsta cronología tiene una consecuencia clínica directa: cualquier alteración sistémica importante durante el embarazo o el primer año, como enfermedades febriles graves, deficiencias nutricionales o un nacimiento muy prematuro, puede dejar huella en el esmalte de los dientes temporales en forma de **defectos de desarrollo**, como hipoplasias u opacidades, que además aumentan la susceptibilidad a la caries.\n\nLas **raíces** se completan aproximadamente entre uno y uno y medio años después de que cada diente erupciona. Así, un niño de dos años tiene incisivos con raíces ya completas y molares cuyas raíces todavía se están formando."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m09/d1",
+          "pie": "Línea de tiempo del ciclo de vida de un diente temporal, de la formación a la exfoliación.",
+          "descripcion": "Línea horizontal que va desde el embarazo hasta los 12 años. Sobre ella se marcan en orden: inicio de la mineralización de las coronas en el segundo trimestre del embarazo, nacimiento con la línea neonatal, término de las coronas durante el primer año, erupción de los primeros dientes alrededor de los 6 meses, dentición temporal completa alrededor de los 3 años, término de las raíces entre uno y uno y medio años después de cada erupción, inicio de la reabsorción radicular por el sucesor y exfoliación entre los 6 y los 12 años. Cada etapa con un pequeño esquema de un incisivo temporal en ese momento.",
+          "elementos": [
+            "Inicio de la mineralización (cuarto mes de gestación)",
+            "Nacimiento: línea neonatal",
+            "Término de las coronas (primer año)",
+            "Primera erupción (alrededor de 6 meses)",
+            "Dentición temporal completa (alrededor de 3 años)",
+            "Reabsorción radicular",
+            "Exfoliación (6 a 12 años)"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "La línea neonatal: un registro del nacimiento en el esmalte",
+          "md": "El nacimiento supone un cambio fisiológico brusco: termina la nutrición a través de la placenta, cambian la oxigenación y el metabolismo del calcio. Los ameloblastos que están formando esmalte en ese momento registran ese estrés como una **línea de crecimiento acentuada**, visible al microscopio, llamada **línea neonatal**. Aparece en todos los dientes temporales y en las cúspides del **primer molar permanente**, cuya mineralización comienza alrededor del nacimiento. El esmalte que queda por encima de la línea se formó en el útero y el que queda por debajo, después de nacer. En antropología y odontología forense, la presencia de la línea neonatal en restos dentales permite inferir que un recién nacido sobrevivió al parto al menos unos días, y su posición se ha usado para estimar la edad al morir en restos infantiles."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/02",
+          "proporcion": "1:1",
+          "alt": "Microfotografía de esmalte dental con una línea oscura de crecimiento más marcada que las demás.",
+          "pie": "Al microscopio, la línea neonatal se ve como una estría más marcada que separa el esmalte prenatal del posnatal.",
+          "prompt": "Microfotografía realista de una lámina delgada de esmalte de un incisivo temporal humano vista con microscopio óptico de luz transmitida, se observan finas estrías incrementales paralelas en tonos marrón y ámbar y una sola línea oscura más gruesa y marcada que las cruza a la misma altura, textura prismática sutil, fondo uniforme, enfoque nítido y contraste moderado, aspecto de preparación histológica de laboratorio universitario. Evitar: texto, escalas numéricas, flechas, etiquetas, logotipos, colores artificiales, aspecto de dibujo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Vecinos muy cercanos: el temporal y su sucesor"
+        },
+        {
+          "tipo": "texto",
+          "md": "Mientras el diente temporal funciona en la boca, su **sucesor permanente** se forma dentro del hueso, muy cerca de sus raíces. En el sector anterior, el germen del incisivo o del canino permanente se ubica por lingual y apical de la raíz del temporal; en el sector posterior, el germen del premolar queda alojado **entre las raíces divergentes** del molar temporal, como en una cuna. Esta vecindad tiene dos caras.\n\nPor un lado, es la que hace posible el recambio ordenado: el folículo del diente permanente dirige la reabsorción de la raíz temporal, como verás en el tema 9.3. Por otro, significa que lo que le ocurre al temporal puede afectar al permanente. Una **infección periapical** de un molar temporal con caries profunda, o un **traumatismo** que empuja un incisivo temporal hacia el hueso, puede alterar la formación del esmalte del sucesor. El resultado es un diente permanente con una mancha o un defecto localizado, conocido como **diente de Turner** cuando se debe a la infección o al trauma del predecesor.\n\nPor eso la caries en dientes temporales no es un problema menor. La AAPD define la **caries de la infancia temprana** como la presencia de una o más superficies con caries, perdidas por caries u obturadas en cualquier diente temporal de un niño menor de seis años. Es una enfermedad frecuente, dolorosa y prevenible, y cada lesión que progresa hacia la pulpa pone en riesgo no solo al diente temporal, sino también al permanente que se forma debajo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Un absceso en un temporal no es «normal»",
+          "md": "Una fístula o una inflamación en la encía junto a un molar temporal indica una infección que ya salió del diente. Aunque el niño no se queje de dolor, la lesión está en contacto con el germen del premolar. Registra el hallazgo con su código FDI, informa a la familia que requiere valoración odontológica pronta y no la minimices con la idea de que «ya se va a caer». La decisión sobre el tratamiento y, en su caso, la prescripción corresponden al odontólogo o al odontopediatra."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mitos sobre los dientes temporales",
+          "afirmaciones": [
+            {
+              "texto": "Los dientes temporales no necesitan tratamiento porque se van a caer.",
+              "verdadero": false,
+              "explicacion": "Pueden doler e infectarse durante años antes de exfoliarse, y su pérdida temprana altera el espacio para los permanentes."
+            },
+            {
+              "texto": "La mineralización de los dientes temporales empieza antes del nacimiento.",
+              "verdadero": true,
+              "explicacion": "Comienza a partir del cuarto mes de vida intrauterina."
+            },
+            {
+              "texto": "La dentición temporal tiene premolares.",
+              "verdadero": false,
+              "explicacion": "Tiene incisivos, caninos y molares; los premolares son exclusivos de la dentición permanente."
+            },
+            {
+              "texto": "La primera visita dental se recomienda con el primer diente y antes de los 12 meses.",
+              "verdadero": true,
+              "explicacion": "Es la recomendación de la AAPD para establecer prevención temprana."
+            },
+            {
+              "texto": "Una enfermedad grave del bebé en los primeros meses puede dejar marcas en el esmalte de sus dientes temporales.",
+              "verdadero": true,
+              "explicacion": "El esmalte que se forma durante ese periodo puede mostrar hipoplasias u opacidades."
+            }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/03",
+          "proporcion": "16:9",
+          "alt": "Manos de una madre limpian con una gasa los primeros incisivos inferiores de un bebé, en encuadre que solo muestra boca y manos.",
+          "pie": "La higiene empieza con el primer diente: la orientación a la familia es parte del cuidado de la dentición temporal.",
+          "prompt": "Fotografía realista y cálida en un hogar con luz natural suave, encuadre cerrado de las manos de una persona adulta que limpian con una gasa húmeda enrollada en el dedo índice los dos primeros incisivos inferiores temporales de un bebé de unos ocho meses, solo se ven la boca entreabierta, la barbilla y las manos, encía rosa sana, colores naturales y tonos suaves. Evitar: texto, logotipos, marcas comerciales, rostro del bebé o del adulto, ojos, sangre, llanto, dientes de más, objetos peligrosos."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** prepara una explicación de una frase para las familias que dicen «son de leche». Por ejemplo: «Estos dientes le van a durar hasta los 10 o 12 años, le sirven para comer, hablar y guardar el lugar de los definitivos, y si se infectan pueden dañar al diente que está creciendo debajo». Repetirla con convicción en cada consulta cambia, poco a poco, la forma en que tu comunidad cuida la dentición temporal. Si además le muestras a la familia, con un espejo de mano, el diente temporal y el espacio donde se forma el permanente, la explicación se vuelve concreta y mucho más fácil de recordar."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Dentición temporal",
+          "definicion": "Primera dentición del ser humano, formada por 20 dientes que serán reemplazados; también llamada decidua o primaria."
+        },
+        {
+          "termino": "Exfoliación",
+          "definicion": "Caída fisiológica de un diente temporal tras la reabsorción de su raíz."
+        },
+        {
+          "termino": "Mineralización",
+          "definicion": "Depósito de sales minerales en la matriz orgánica del esmalte y la dentina durante la formación del diente."
+        },
+        {
+          "termino": "Línea neonatal",
+          "definicion": "Línea de crecimiento acentuada en el esmalte y la dentina que marca el momento del nacimiento."
+        },
+        {
+          "termino": "Hipoplasia del esmalte",
+          "definicion": "Defecto de desarrollo con menor cantidad de esmalte, por alteraciones durante su formación."
+        },
+        {
+          "termino": "Hogar dental",
+          "definicion": "Relación continua entre el niño, su familia y un odontólogo que ofrece atención integral y preventiva desde edades tempranas."
+        },
+        {
+          "termino": "Diente de Turner",
+          "definicion": "Diente permanente con un defecto localizado del esmalte causado por infección o traumatismo de su predecesor temporal."
+        },
+        {
+          "termino": "Caries de la infancia temprana",
+          "definicion": "Presencia de una o más superficies con caries, perdidas por caries u obturadas en dientes temporales de un niño menor de seis años."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.1-1",
+          "q": "¿Cuándo comienza la mineralización de las coronas de los dientes temporales?",
+          "opciones": [
+            "Al nacer",
+            "Alrededor de los 6 meses de edad",
+            "A partir del cuarto mes de vida intrauterina",
+            "Al año de edad"
+          ],
+          "correcta": 2,
+          "explicacion": "La mineralización temporal comienza en promedio entre la semana 14 (incisivos centrales) y la 19 (segundos molares) de gestación, según las tablas revisadas por Lunt y Law."
+        },
+        {
+          "id": "t9.1-2",
+          "q": "¿Qué recomienda la AAPD sobre la primera visita al odontólogo?",
+          "opciones": [
+            "Al erupcionar el primer diente y a más tardar a los 12 meses",
+            "A los 3 años, cuando la dentición está completa",
+            "Solo si el niño tiene dolor",
+            "A los 6 años, con el primer molar permanente"
+          ],
+          "correcta": 0,
+          "explicacion": "La AAPD recomienda la primera visita con el primer diente y no después del primer año de vida."
+        },
+        {
+          "id": "t9.1-3",
+          "q": "¿En qué diente permanente se encuentra también la línea neonatal?",
+          "opciones": [
+            "En el incisivo central superior",
+            "En el canino inferior",
+            "En el segundo premolar",
+            "En el primer molar permanente"
+          ],
+          "correcta": 3,
+          "explicacion": "El primer molar permanente empieza a mineralizarse alrededor del nacimiento, por eso sus cúspides registran la línea neonatal."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "Perinatal and Infant Oral Health Care (Reference Manual)",
+          "autor": "American Academy of Pediatric Dentistry"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "A review of the chronology of calcification of deciduous teeth",
+          "autor": "Lunt R. C., Law D. B. (Journal of the American Dental Association)",
+          "anio": 1974
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Ten Cate's Oral Histology: Development, Structure, and Function",
+          "autor": "Nanci A. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "9.2",
+      "titulo": "Morfología de los dientes temporales y sus diferencias con los permanentes",
+      "minutos": 16,
+      "enPocasPalabras": "Los dientes temporales no son copias pequeñas de los permanentes. Son más blancos, tienen el esmalte más delgado, el nervio más grande y más cerca de la superficie, y sus muelas tienen raíces abiertas como patas para dejar espacio al diente que crece debajo. Por eso una caries avanza más rápido en ellos y deben tratarse con técnicas propias.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Un error común al empezar en odontopediatría es pensar en los dientes temporales como versiones a escala de los permanentes. Su anatomía tiene diferencias que no son de tamaño, sino de **proporción, espesor de tejidos y forma de las raíces**, y cada una tiene consecuencias clínicas: en la progresión de la caries, en el diseño de una restauración, en el riesgo de exponer la pulpa y en la forma de planear una extracción. En este tema verás primero las diferencias generales y después los rasgos que distinguen a cada diente temporal."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Diferencias generales"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Dientes temporales frente a permanentes",
+          "columnas": [
+            "Característica",
+            "Dientes temporales",
+            "Dientes permanentes"
+          ],
+          "filas": [
+            [
+              "Tamaño",
+              "Menores en todas sus dimensiones",
+              "Mayores"
+            ],
+            [
+              "Color",
+              "Más blancos y opacos, de tono lechoso",
+              "Más amarillentos y translúcidos"
+            ],
+            [
+              "Proporción de la corona",
+              "Corta en sentido cervicoincisal u ocluso-cervical y ancha en sentido mesiodistal",
+              "Más alta en relación con su ancho"
+            ],
+            [
+              "Esmalte",
+              "Delgado, de espesor relativamente uniforme, alrededor de 1 mm",
+              "Más grueso y variable según la zona"
+            ],
+            [
+              "Dentina",
+              "Más delgada entre la cámara pulpar y el esmalte",
+              "Más gruesa"
+            ],
+            [
+              "Cámara pulpar",
+              "Grande en proporción a la corona, con cuernos pulpares altos, sobre todo el mesiovestibular de los molares",
+              "Proporcionalmente más pequeña"
+            ],
+            [
+              "Cuello",
+              "Constricción cervical marcada",
+              "Transición más gradual"
+            ],
+            [
+              "Cresta cervical",
+              "Prominente en vestibular, sobre todo en los primeros molares",
+              "Menos marcada"
+            ],
+            [
+              "Raíces",
+              "Largas y delgadas en relación con la corona; en molares, muy divergentes",
+              "Proporcionalmente más cortas y menos divergentes"
+            ],
+            [
+              "Tronco radicular",
+              "Corto: la furcación está muy cerca del cuello",
+              "Más largo"
+            ],
+            [
+              "Mesa oclusal",
+              "Estrecha en sentido vestibulolingual",
+              "Más amplia"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m09/d2",
+          "pie": "Corte mesiodistal comparado de un segundo molar temporal inferior y un primer molar permanente inferior, llevados a la misma escala visual.",
+          "descripcion": "Dos cortes longitudinales lado a lado. A la izquierda, el molar temporal: esmalte delgado y uniforme, dentina delgada, cámara pulpar amplia con cuernos altos que llegan cerca de las cúspides, cuello estrecho con cresta cervical abultada, tronco radicular corto y raíces largas, delgadas y muy separadas, con el germen de un premolar dibujado entre ellas. A la derecha, el molar permanente: esmalte más grueso, más dentina sobre la pulpa, cámara proporcionalmente menor, tronco radicular más largo y raíces menos divergentes. Líneas guía señalan cada diferencia.",
+          "elementos": [
+            "Esmalte delgado y uniforme",
+            "Cuernos pulpares altos",
+            "Constricción cervical",
+            "Cresta cervical prominente",
+            "Tronco radicular corto",
+            "Raíces divergentes",
+            "Germen del premolar entre las raíces"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Varias de estas diferencias se combinan en una idea clave: **en los dientes temporales la pulpa está más cerca de la superficie**. El esmalte y la dentina son más delgados y los cuernos pulpares, más altos. Por eso una lesión de caries que en un diente permanente tardaría en alcanzar la pulpa puede llegar a ella mucho antes en un molar temporal, y por eso la odontopediatría ha desarrollado técnicas restauradoras y pulpares propias.\n\nLas **raíces divergentes** de los molares temporales tampoco son un capricho anatómico: dejan espacio para el germen del premolar que se forma entre ellas. Esto explica que, al planear la extracción de un molar temporal, el odontólogo tenga en cuenta la posición del germen y que la radiografía previa sea indispensable. La **constricción cervical** marcada, junto con la cresta cervical prominente, influye en la forma en que se adaptan las coronas preformadas usadas en odontopediatría."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/04",
+          "proporcion": "16:9",
+          "alt": "Un segundo molar temporal inferior extraído junto a un primer molar permanente inferior sobre fondo gris, en vista vestibular.",
+          "pie": "El molar temporal es más pequeño, más blanco, con un cuello estrecho y raíces delgadas y muy separadas.",
+          "prompt": "Fotografía macro de estudio sobre fondo gris neutro de dos molares humanos extraídos, limpios y sanos, colocados lado a lado en vista vestibular: a la izquierda un segundo molar temporal inferior pequeño, blanco lechoso, con cuello muy estrecho, cresta cervical marcada y dos raíces largas, delgadas y muy divergentes; a la derecha un primer molar permanente inferior más grande, de tono marfil, con dos raíces más gruesas y menos separadas, iluminación difusa uniforme, enfoque nítido. Evitar: texto, etiquetas, números, flechas, logotipos, sangre, restos de tejido, caries, anatomía incorrecta de cúspides o raíces."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Prismas del esmalte y diseño de restauraciones",
+          "md": "En el tercio cervical de los dientes temporales, los prismas del esmalte se orientan hacia **oclusal**, mientras que en los permanentes, en esa misma zona, se inclinan hacia **gingival**. Los textos de anatomía y odontopediatría señalan esta diferencia porque influye en el diseño de las preparaciones cavitarias: en los temporales, el margen gingival de una caja proximal no requiere el mismo bisel que en los permanentes para dejar prismas soportados. Si a esto sumas el esmalte delgado, los cuernos pulpares altos y la mesa oclusal estrecha, entenderás por qué las preparaciones en dientes temporales se diseñan más conservadoras en profundidad y por qué no se trasladan sin más las reglas de la operatoria del adulto. La técnica concreta y la elección del material corresponden a los protocolos de odontopediatría y al criterio del profesional."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Diente por diente: los rasgos que los distinguen"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **incisivos temporales** carecen de mamelones y tienen raíces largas en relación con la corona. El **incisivo central superior temporal** destaca porque su corona es **más ancha en sentido mesiodistal que alta**, una proporción que no se repite en los incisivos permanentes. Los incisivos inferiores son pequeños y simétricos, y el central suele ser el primer diente que aparece en boca.\n\nLos **caninos temporales** tienen una cúspide puntiaguda. Un rasgo muy usado para identificarlos: en el **canino superior temporal**, la arista mesial de la cúspide es **más larga** que la distal, al revés que en el canino permanente; en el **canino inferior temporal**, la arista distal es la más larga.\n\nLos **molares temporales** son los que más se apartan de los permanentes:\n\n- El **primer molar superior temporal** tiene una corona que recuerda en parte a un premolar, con una cresta cervical vestibular marcada y, por lo general, tres raíces.\n- El **segundo molar superior temporal** se parece a un **primer molar superior permanente** en miniatura, con cuatro cúspides principales y, a menudo, un tubérculo de Carabelli.\n- El **primer molar inferior temporal** es el diente con la **morfología más singular** de ambas denticiones: no se parece a ningún otro, tiene una cresta cervical mesiovestibular muy prominente, una arista transversal marcada y dos raíces.\n- El **segundo molar inferior temporal** se parece a un **primer molar inferior permanente**, pero sus **tres cúspides vestibulares son casi del mismo tamaño**, mientras que en el permanente la distal es la más pequeña."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/05",
+          "proporcion": "4:3",
+          "alt": "Arcada superior de un niño de cinco años vista desde oclusal con espejo, mostrando incisivos, caninos y molares temporales.",
+          "pie": "Arcada superior temporal: el segundo molar se parece a un primer molar permanente en miniatura.",
+          "prompt": "Fotografía clínica intraoral realista vista oclusal con espejo de la arcada superior temporal completa de un niño de unos cinco años, diez dientes blancos lechosos en forma de semicírculo amplio con espacios entre los incisivos, caninos con cúspide puntiaguda, primeros molares temporales más pequeños y segundos molares temporales con cuatro cúspides y forma de molar permanente en miniatura, paladar rosado, iluminación clínica uniforme, colores naturales. Evitar: texto, números, etiquetas, logotipos, labios o rostro, sangre, caries, dientes permanentes, número incorrecto de dientes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "¿Temporal o permanente?",
+          "md": "En una revisión escolar ves en un niño de 10 años un diente posterior inferior derecho, entre el canino y el primer molar permanente, con corona baja, muy blanca y cuello estrecho. ¿Es el 85 o el 45? La forma de su cara oclusal te da la respuesta: tiene **tres cúspides vestibulares de tamaño similar** y dos linguales, como un molar en miniatura; un segundo premolar inferior tendría una cúspide vestibular y una o dos linguales. Es el **85**. Registrarlo bien importa: indica que el 45 todavía no ha erupcionado y que el recambio de ese sector está pendiente."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Un rasgo para cada diente temporal",
+          "instruccion": "Relaciona cada diente temporal con el rasgo que mejor lo distingue.",
+          "pares": [
+            {
+              "a": "Incisivo central superior temporal",
+              "b": "Corona más ancha en sentido mesiodistal que alta"
+            },
+            {
+              "a": "Canino superior temporal",
+              "b": "Arista mesial de la cúspide más larga que la distal"
+            },
+            {
+              "a": "Primer molar inferior temporal",
+              "b": "Morfología singular con cresta cervical mesiovestibular muy prominente"
+            },
+            {
+              "a": "Segundo molar superior temporal",
+              "b": "Parecido a un primer molar superior permanente en miniatura"
+            },
+            {
+              "a": "Segundo molar inferior temporal",
+              "b": "Tres cúspides vestibulares casi del mismo tamaño"
+            }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Raíces que se reabsorben"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una diferencia funcional cierra la lista: las raíces temporales están **destinadas a reabsorberse**. Por eso, al observar una radiografía de un niño, debes interpretar la longitud radicular según la edad. Una raíz corta en un molar temporal de un niño de 9 años probablemente es fisiológica y refleja la proximidad del premolar; la misma imagen en un niño de 4 años sugiere una reabsorción anormal, por ejemplo por infección. Los **conductos radiculares** de los molares temporales son estrechos, a menudo acintados, y el piso de la cámara pulpar presenta con frecuencia **conductos accesorios** hacia la furcación, lo que explica que las infecciones de estos dientes se manifiesten muchas veces como lesiones entre las raíces y no en el ápice."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Número de raíces en la dentición temporal",
+          "items": [
+            "Incisivos y caninos superiores e inferiores: una raíz, larga y estrecha; la del canino es la más larga de la dentición temporal.",
+            "Molares superiores: tres raíces, dos vestibulares y una palatina, finas y muy separadas; la palatina suele ser la más larga y divergente.",
+            "Molares inferiores: dos raíces, mesial y distal, aplanadas en sentido mesiodistal y abiertas como las patas de un compás.",
+            "En todos los molares, el tronco radicular es corto, de modo que la furcación queda muy cerca del cuello y de la cresta ósea."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La pulpa está más cerca de lo que parece",
+          "md": "Por el esmalte delgado y los cuernos pulpares altos, la eliminación de tejido cariado en un molar temporal puede exponer la pulpa con mucha facilidad, en especial en la zona del cuerno mesiovestibular. Antes de cualquier procedimiento, el odontólogo evalúa la profundidad de la lesión en una radiografía reciente. Si eres asistente o estudiante, recuerda que en estos dientes el aislamiento, la iluminación y el control del instrumental son todavía más importantes."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/06",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical de un molar temporal inferior con cámara pulpar amplia y raíces divergentes que rodean el germen de un premolar.",
+          "pie": "En la radiografía se aprecian la cámara pulpar amplia del molar temporal y el germen del premolar entre sus raíces.",
+          "prompt": "Radiografía periapical digital realista en escala de grises de la región de molares inferiores de un niño de unos seis años, primer molar temporal con esmalte delgado, cámara pulpar amplia y cuernos pulpares altos, raíces delgadas y divergentes que rodean el germen de un primer premolar con su corona en formación dentro de una cripta radiolúcida bien delimitada, hueso trabecular fino, contraste y nitidez de calidad diagnóstica. Evitar: texto, letras, números, escalas, marcas de agua, logotipos, restauraciones, lesiones, artefactos, aspecto de dibujo."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** consigue fotografías o modelos de un molar temporal y del permanente que lo reemplazará, y otro par con el molar temporal y el primer molar permanente vecino. Compáralos lado a lado y escribe tres diferencias visibles en cada par. Este ejercicio de comparación directa es la forma más rápida de dejar de confundir el 85 con el 45 o el 75 con el 36 en la consulta."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Constricción cervical",
+          "definicion": "Estrechamiento marcado del diente a la altura del cuello, característico de los dientes temporales."
+        },
+        {
+          "termino": "Cresta cervical",
+          "definicion": "Abultamiento del esmalte en el tercio cervical vestibular, muy prominente en los primeros molares temporales."
+        },
+        {
+          "termino": "Cuerno pulpar",
+          "definicion": "Prolongación de la cámara pulpar hacia una cúspide; en los temporales es alto y cercano a la superficie."
+        },
+        {
+          "termino": "Tronco radicular",
+          "definicion": "Porción de la raíz de un diente multirradicular comprendida entre el cuello y la furcación."
+        },
+        {
+          "termino": "Tubérculo de Carabelli",
+          "definicion": "Cúspide o relieve accesorio en la cara palatina de la cúspide mesiopalatina de algunos molares superiores."
+        },
+        {
+          "termino": "Mamelones",
+          "definicion": "Tres pequeñas elevaciones del borde incisal de los incisivos permanentes recién erupcionados; no existen en los temporales."
+        },
+        {
+          "termino": "Conducto accesorio",
+          "definicion": "Ramificación del sistema de conductos que comunica la pulpa con el ligamento, frecuente en el piso cameral de molares temporales."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.2-1",
+          "q": "¿Qué diente temporal tiene la morfología más singular, distinta de cualquier otro diente?",
+          "opciones": [
+            "El segundo molar superior temporal",
+            "El primer molar inferior temporal",
+            "El incisivo lateral inferior temporal",
+            "El canino inferior temporal"
+          ],
+          "correcta": 1,
+          "explicacion": "El primer molar inferior temporal no se parece a ningún otro diente; destaca su cresta cervical mesiovestibular prominente."
+        },
+        {
+          "id": "t9.2-2",
+          "q": "¿Por qué las raíces de los molares temporales son muy divergentes?",
+          "opciones": [
+            "Para soportar mayores fuerzas que los molares permanentes",
+            "Porque se forman después de la erupción del premolar",
+            "Para alojar entre ellas el germen del premolar sucesor",
+            "Porque carecen de ligamento periodontal"
+          ],
+          "correcta": 2,
+          "explicacion": "La divergencia deja espacio para el germen del premolar, que se desarrolla entre las raíces del molar temporal."
+        },
+        {
+          "id": "t9.2-3",
+          "q": "¿Qué característica de los dientes temporales explica que la caries alcance la pulpa con rapidez?",
+          "opciones": [
+            "Esmalte y dentina delgados con cuernos pulpares altos",
+            "Raíces más cortas que las permanentes",
+            "Color más blanco",
+            "Ausencia de cemento radicular"
+          ],
+          "correcta": 0,
+          "explicacion": "El esmalte y la dentina son delgados y los cuernos pulpares altos, de modo que la pulpa queda más cerca de la superficie."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "academica",
+          "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+          "autor": "Nelson S. J. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "McDonald and Avery's Dentistry for the Child and Adolescent",
+          "autor": "Dean J. A. (Elsevier)"
+        },
+        {
+          "tipo": "propia",
+          "titulo": "Elaboración propia OdonTeck con base en textos de anatomía dental y odontopediatría",
+          "autor": "OdonTeck",
+          "anio": 2026
+        }
+      ]
+    },
+    {
+      "n": "9.3",
+      "titulo": "Erupción y exfoliación de la dentición temporal",
+      "minutos": 16,
+      "enPocasPalabras": "El primer diente de un bebé suele aparecer alrededor de los seis meses y los 20 dientes temporales terminan de salir hacia los dos años y medio o tres años. Cada niño tiene su propio ritmo, por eso se habla de rangos de edad y no de fechas exactas. Años después, las raíces de estos dientes se van deshaciendo para que los permanentes ocupen su lugar.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Pocas preguntas escucharás tanto en la consulta pediátrica como «¿ya debería tener dientes?» y «¿cuándo se le va a caer este?». Para responderlas con seguridad necesitas conocer tres cosas: qué es exactamente la erupción, cuáles son los **rangos normales** de aparición y caída de cada diente temporal, y qué factores pueden adelantar o retrasar el proceso. En este tema usarás como referencia las tablas de la **Asociación Dental Americana (ADA)**, una de las fuentes más difundidas para orientar a profesionales y familias."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Qué es la erupción"
+        },
+        {
+          "tipo": "texto",
+          "md": "La **erupción dentaria** es el movimiento del diente desde su cripta dentro del hueso hasta su posición funcional en la boca, en contacto con su antagonista. Se describe en tres fases: una **preeruptiva**, en la que el germen crece y se reposiciona dentro del hueso; una **eruptiva prefuncional**, que comienza con la formación de la raíz e incluye el recorrido a través del hueso y de la mucosa; y una **funcional** o poseruptiva, que continúa toda la vida para compensar el desgaste y el crecimiento de los maxilares.\n\nEl momento que la familia identifica como «le salió un diente» es la **emergencia**: cuando la punta de la corona atraviesa la encía. Las tablas de cronología, incluidas las de la ADA, reportan en realidad la emergencia clínica. Conviene tenerlo en cuenta porque, cuando el diente asoma, ya lleva meses de recorrido dentro del hueso y su raíz todavía está incompleta: según el diente, suele tener formada aproximadamente entre la mitad y tres cuartas partes de su longitud final."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "El folículo dirige la erupción",
+          "md": "Durante mucho tiempo se pensó que el crecimiento de la raíz «empujaba» al diente hacia la boca. Los experimentos clásicos de Cahill y Marks en premolares de perros, publicados a partir de 1980, mostraron otra cosa: si se retira el **folículo dental**, el diente no erupciona y no se forma la vía de erupción en el hueso; en trabajos posteriores del mismo grupo, una réplica inerte colocada dentro del folículo en lugar del germen llegó a erupcionar. Además, se han descrito dientes que erupcionan aunque su raíz no se forme. Hoy se acepta que el folículo coordina dos procesos simultáneos: la **reabsorción ósea** por encima de la corona, mediada por osteoclastos que el propio folículo recluta, y la **formación de hueso** en la base de la cripta. El crecimiento radicular y el ligamento periodontal contribuyen al movimiento, pero no lo explican por sí solos. Estas señales del folículo son también el punto de partida para entender las fallas primarias de erupción."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La cronología según la ADA"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Erupción y exfoliación de los dientes temporales (Asociación Dental Americana)",
+          "columnas": [
+            "Diente",
+            "Arcada",
+            "Erupción",
+            "Exfoliación"
+          ],
+          "filas": [
+            [
+              "Incisivo central",
+              "Superior",
+              "8 a 12 meses",
+              "6 a 7 años"
+            ],
+            [
+              "Incisivo lateral",
+              "Superior",
+              "9 a 13 meses",
+              "7 a 8 años"
+            ],
+            [
+              "Canino",
+              "Superior",
+              "16 a 22 meses",
+              "10 a 12 años"
+            ],
+            [
+              "Primer molar",
+              "Superior",
+              "13 a 19 meses",
+              "9 a 11 años"
+            ],
+            [
+              "Segundo molar",
+              "Superior",
+              "25 a 33 meses",
+              "10 a 12 años"
+            ],
+            [
+              "Incisivo central",
+              "Inferior",
+              "6 a 10 meses",
+              "6 a 7 años"
+            ],
+            [
+              "Incisivo lateral",
+              "Inferior",
+              "10 a 16 meses",
+              "7 a 8 años"
+            ],
+            [
+              "Canino",
+              "Inferior",
+              "17 a 23 meses",
+              "9 a 12 años"
+            ],
+            [
+              "Primer molar",
+              "Inferior",
+              "14 a 18 meses",
+              "9 a 11 años"
+            ],
+            [
+              "Segundo molar",
+              "Inferior",
+              "23 a 31 meses",
+              "10 a 12 años"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m09/d3",
+          "pie": "Rangos de erupción de los dientes temporales según la ADA, representados como barras sobre una escala de meses.",
+          "descripcion": "Gráfica de barras horizontales sobre un eje de 0 a 36 meses. Diez barras, cinco para la arcada superior en un color y cinco para la inferior en otro, ordenadas por el inicio del rango: incisivo central inferior 6 a 10, incisivo central superior 8 a 12, incisivo lateral superior 9 a 13, incisivo lateral inferior 10 a 16, primer molar superior 13 a 19, primer molar inferior 14 a 18, canino superior 16 a 22, canino inferior 17 a 23, segundo molar inferior 23 a 31 y segundo molar superior 25 a 33. Una línea vertical discontinua marca los 12 meses como referencia de la primera visita dental.",
+          "elementos": [
+            "Incisivos centrales: 6 a 12 meses",
+            "Incisivos laterales: 9 a 16 meses",
+            "Primeros molares: 13 a 19 meses",
+            "Caninos: 16 a 23 meses",
+            "Segundos molares: 23 a 33 meses",
+            "Arcada superior y arcada inferior en colores distintos"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Al leer la tabla aparecen varios patrones útiles:\n\n- El **incisivo central inferior** suele ser el primero en aparecer, entre los 6 y los 10 meses.\n- En general, los dientes **inferiores preceden a los superiores**, aunque los incisivos laterales son una excepción frecuente: el superior suele aparecer antes que el inferior.\n- Los **primeros molares erupcionan antes que los caninos**, de modo que en la boca de un niño de año y medio puede haber un espacio entre el incisivo lateral y el primer molar donde todavía no asoma el canino.\n- Los **segundos molares** cierran la dentición temporal entre los 23 y los 33 meses: hacia los **tres años** la mayoría de los niños tiene sus 20 dientes temporales.\n- La exfoliación sigue un orden parecido al de la erupción: primero los incisivos, alrededor de los 6 a 8 años, y al final caninos y segundos molares, hasta los 12 años.\n\nLos rangos son amplios por una razón: la variación individual es grande. Un bebé sano puede tener su primer diente a los 4 meses y otro a los 12. Lo que importa es que la secuencia sea razonable, que los dientes homólogos de ambos lados aparezcan en tiempos similares y que el niño crezca y se desarrolle bien."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "¿Quién llega primero?",
+          "instruccion": "Ordena los grupos de dientes temporales según la secuencia habitual de erupción, del primero al último.",
+          "elementos": [
+            "Incisivos centrales inferiores",
+            "Incisivos centrales superiores",
+            "Incisivos laterales",
+            "Primeros molares",
+            "Caninos",
+            "Segundos molares"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/07",
+          "proporcion": "4:3",
+          "alt": "Primer plano de la boca de un bebé con los dos incisivos centrales inferiores recién emergidos.",
+          "pie": "Los incisivos centrales inferiores suelen ser los primeros dientes temporales en aparecer.",
+          "prompt": "Fotografía realista y tierna en primer plano de la boca entreabierta de un bebé de unos siete meses, encuadre que solo muestra labios, encía y barbilla sin ojos ni nariz, dos incisivos centrales inferiores temporales pequeños y muy blancos recién emergidos de una encía rosada y sana, saliva natural, luz de ventana suave, fondo desenfocado en tonos claros, colores naturales. Evitar: texto, logotipos, rostro identificable, ojos, sangre, llanto, dientes superiores ya erupcionados, objetos en la boca, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La «dentición» del bebé y otros hallazgos tempranos"
+        },
+        {
+          "tipo": "texto",
+          "md": "La emergencia de los dientes temporales puede acompañarse de **signos locales leves**: más salivación, ganas de morder objetos, frotarse la encía, irritabilidad y alteraciones pasajeras del sueño. La literatura pediátrica no respalda atribuir a la erupción la **fiebre alta**, la **diarrea** o los síntomas que duran varios días; ante ellos, el niño debe ser valorado por su médico, porque el riesgo es pasar por alto una enfermedad.\n\nOtros hallazgos que debes reconocer:\n\n- **Dientes natales y neonatales.** Los natales están presentes al nacer y los neonatales aparecen durante el primer mes. Con mayor frecuencia son **incisivos centrales inferiores** y, en la mayoría de los casos, son dientes de la propia dentición temporal que erupcionaron antes de tiempo, no supernumerarios. Pueden tener poca raíz y movilidad, y su borde puede ulcerar la cara inferior de la lengua del bebé al amamantar, lesión conocida como **enfermedad de Riga-Fede**. Su manejo lo decide el odontopediatra.\n- **Quiste o hematoma de erupción.** Es un abultamiento blando, translúcido o azulado, sobre un diente a punto de emerger. En general se resuelve solo cuando el diente atraviesa la encía; conviene que lo valore el odontólogo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Productos para la dentición: con cautela",
+          "md": "En 2018 la Administración de Alimentos y Medicamentos de Estados Unidos (FDA) advirtió contra el uso de productos con **benzocaína** para aliviar la dentición en bebés y niños pequeños, por el riesgo de una alteración grave de la sangre llamada metahemoglobinemia, y también contra los **collares y pulseras de dentición** (de ámbar u otros materiales) por el riesgo de asfixia y estrangulamiento. Las medidas de alivio recomendadas suelen ser sencillas, como un mordedor firme y limpio o el masaje suave de la encía con un dedo limpio. Cualquier medicamento para el dolor debe indicarlo el médico o el odontólogo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La exfoliación: una reabsorción programada"
+        },
+        {
+          "tipo": "texto",
+          "md": "La caída de un diente temporal es el final de un proceso de **reabsorción radicular** que comienza años antes. Las células del folículo del diente permanente y del ligamento del temporal reclutan **odontoclastos**, que reabsorben la raíz del temporal en la zona más cercana al sucesor. En los incisivos y caninos, el germen permanente está por lingual, de modo que la reabsorción empieza en la cara lingual de la raíz; en los molares, el premolar está entre las raíces y las reabsorbe desde dentro. Cuando queda poca raíz, el diente se afloja y cae, a menudo con ayuda de la masticación.\n\nCuando el permanente no sigue exactamente el camino del temporal, la reabsorción puede quedar incompleta. Un ejemplo muy frecuente se observa en los incisivos inferiores: el incisivo permanente **emerge por lingual** mientras el temporal sigue en su lugar, lo que las familias describen como «doble fila». Si el temporal se mueve, lo habitual es que se caiga pronto y la lengua lleve al permanente a su posición. Si el temporal está firme varias semanas después, conviene la valoración odontológica."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/08",
+          "proporcion": "4:3",
+          "alt": "Incisivos inferiores de un niño con un incisivo permanente emergiendo por detrás de los incisivos temporales.",
+          "pie": "Un incisivo permanente inferior que emerge por lingual del temporal: hallazgo frecuente que suele resolverse cuando el temporal se cae.",
+          "prompt": "Fotografía clínica intraoral realista en vista frontal ligeramente desde arriba de la región anterior inferior de un niño de unos seis años, con los labios separados por retractores pequeños, dos incisivos centrales inferiores temporales blancos y pequeños todavía en su lugar y, por detrás de ellos, un incisivo central permanente más grande con bordes ondulados emergiendo por lingual, encía rosa sana, iluminación clínica uniforme, colores naturales. Evitar: texto, números, logotipos, rostro, ojos, sangre, caries, instrumental, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué un niño se retrasa o se adelanta",
+          "md": "La edad de erupción depende sobre todo de la **herencia**, pero también influyen otros factores: los niños nacidos **muy prematuros** o con bajo peso al nacer suelen tener erupción temporal más tardía; algunas condiciones sistémicas, como el **hipotiroidismo**, el **hipopituitarismo** o el **síndrome de Down**, se asocian con retraso; y en la dentición permanente, las niñas suelen adelantarse a los niños. Por eso, más que comparar con un hermano o con un vecino, se compara con los rangos de referencia y con la secuencia del propio niño."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/09",
+          "proporcion": "1:1",
+          "alt": "Incisivo temporal recién exfoliado sobre un pañuelo blanco, con su raíz casi completamente reabsorbida.",
+          "pie": "Un incisivo temporal exfoliado: de su raíz queda muy poco porque fue reabsorbida por el avance del permanente.",
+          "prompt": "Fotografía macro de estudio de un incisivo central temporal humano recién caído, limpio, colocado sobre un pañuelo de tela blanca, corona pequeña y blanca intacta y la raíz casi completamente reabsorbida con un borde irregular en forma de cuenco, iluminación natural suave y difusa, fondo blanco, enfoque nítido en el diente, tonos cálidos y amables. Evitar: texto, etiquetas, números, logotipos, sangre, restos de tejido, aspecto macabro, raíz larga completa, caries."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** imprime o dibuja la tabla de la ADA de dientes temporales y tenla a la vista en tu área de trabajo. Cuando una familia pregunte por un diente, ubica primero el rango, explica que es un rango y no una fecha, y revisa si su homólogo del otro lado ya apareció. Esa respuesta concreta tranquiliza a la familia y te ayuda a detectar los casos que sí necesitan seguimiento."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Erupción dentaria",
+          "definicion": "Movimiento del diente desde su cripta en el hueso hasta su posición funcional en la boca."
+        },
+        {
+          "termino": "Emergencia",
+          "definicion": "Momento en que la corona atraviesa la encía y se hace visible en la boca."
+        },
+        {
+          "termino": "Folículo dental",
+          "definicion": "Tejido que rodea al germen y coordina la reabsorción y formación ósea necesarias para la erupción."
+        },
+        {
+          "termino": "Diente natal",
+          "definicion": "Diente presente en la boca al nacer; el neonatal aparece durante el primer mes de vida."
+        },
+        {
+          "termino": "Enfermedad de Riga-Fede",
+          "definicion": "Úlcera en la cara inferior de la lengua del lactante causada por el roce con un diente natal o neonatal."
+        },
+        {
+          "termino": "Odontoclasto",
+          "definicion": "Célula multinucleada que reabsorbe tejidos duros del diente, como la raíz temporal antes de la exfoliación."
+        },
+        {
+          "termino": "Quiste de erupción",
+          "definicion": "Abultamiento blando y translúcido o azulado de la encía sobre un diente a punto de emerger."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.3-1",
+          "q": "Según la ADA, ¿en qué rango suele erupcionar el incisivo central inferior temporal?",
+          "opciones": [
+            "16 a 22 meses",
+            "2 a 4 meses",
+            "25 a 33 meses",
+            "6 a 10 meses"
+          ],
+          "correcta": 3,
+          "explicacion": "El incisivo central inferior suele ser el primero en aparecer, entre los 6 y los 10 meses."
+        },
+        {
+          "id": "t9.3-2",
+          "q": "¿Qué grupo de dientes temporales suele erupcionar antes que los caninos?",
+          "opciones": [
+            "Los segundos molares",
+            "Los primeros molares",
+            "Los premolares",
+            "Los primeros molares permanentes"
+          ],
+          "correcta": 1,
+          "explicacion": "Los primeros molares temporales erupcionan entre los 13 y los 19 meses, antes que los caninos (16 a 23 meses). La dentición temporal no tiene premolares."
+        },
+        {
+          "id": "t9.3-3",
+          "q": "Una madre comenta que su hijo de 8 meses tiene fiebre alta y diarrea desde hace tres días y cree que es «por los dientes». ¿Qué le recomiendas?",
+          "opciones": [
+            "Que espere a que salgan los dientes",
+            "Que use un gel con benzocaína",
+            "Que el niño sea valorado por su médico, porque esos síntomas no deben atribuirse a la erupción",
+            "Que le ponga un collar de ámbar"
+          ],
+          "correcta": 2,
+          "explicacion": "La fiebre alta y la diarrea persistente no se atribuyen a la erupción; deben valorarse para no pasar por alto una enfermedad."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "Eruption Charts: Primary Tooth Development",
+          "autor": "American Dental Association (MouthHealthy)",
+          "url": "https://www.mouthhealthy.org/all-topics-a-z/eruption-charts"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Tooth eruption: evidence for the central role of the dental follicle",
+          "autor": "Cahill D. R., Marks S. C. Jr. (Journal of Oral Pathology)",
+          "anio": 1980
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Comunicados de seguridad sobre productos con benzocaína para la dentición y sobre collares y pulseras de dentición",
+          "autor": "U.S. Food and Drug Administration",
+          "anio": 2018
+        },
+        {
+          "tipo": "academica",
+          "titulo": "McDonald and Avery's Dentistry for the Child and Adolescent",
+          "autor": "Dean J. A. (Elsevier)"
+        }
+      ]
+    },
+    {
+      "n": "9.4",
+      "titulo": "Erupción de la dentición permanente y etapas de la dentición mixta",
+      "minutos": 16,
+      "enPocasPalabras": "Alrededor de los seis años empiezan a salir los dientes permanentes: primero las muelas de los seis años, que no reemplazan a ningún diente de leche, y los incisivos. Durante unos seis años conviven dientes temporales y permanentes; a esa etapa se le llama dentición mixta. Algunos cambios que preocupan a los padres, como los dientes de enfrente separados, suelen ser normales y pasajeros.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Entre los 6 y los 12 o 13 años, la boca de un niño cambia más que en cualquier otro momento de su vida. Se exfolian 20 dientes temporales, erupcionan 28 permanentes (sin contar los terceros molares) y los maxilares crecen para alojarlos. A este periodo en que conviven ambas denticiones se le llama **dentición mixta**. Conocer su cronología y sus etapas te permitirá distinguir lo normal de lo que necesita seguimiento, explicar a las familias lo que verán y detectar a tiempo los problemas de espacio o de erupción."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La cronología de la dentición permanente"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Erupción de los dientes permanentes (Asociación Dental Americana)",
+          "columnas": [
+            "Diente",
+            "Superior",
+            "Inferior"
+          ],
+          "filas": [
+            [
+              "Incisivo central",
+              "7 a 8 años",
+              "6 a 7 años"
+            ],
+            [
+              "Incisivo lateral",
+              "8 a 9 años",
+              "7 a 8 años"
+            ],
+            [
+              "Canino",
+              "11 a 12 años",
+              "9 a 10 años"
+            ],
+            [
+              "Primer premolar",
+              "10 a 11 años",
+              "10 a 12 años"
+            ],
+            [
+              "Segundo premolar",
+              "10 a 12 años",
+              "11 a 12 años"
+            ],
+            [
+              "Primer molar",
+              "6 a 7 años",
+              "6 a 7 años"
+            ],
+            [
+              "Segundo molar",
+              "12 a 13 años",
+              "11 a 13 años"
+            ],
+            [
+              "Tercer molar",
+              "17 a 21 años",
+              "17 a 21 años"
+            ]
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "De esta tabla se desprenden las **secuencias de erupción** más frecuentes. En la arcada inferior, el orden habitual es primer molar o incisivo central, incisivo lateral, **canino**, primer premolar, segundo premolar y segundo molar. En la superior, en cambio, el **canino suele erupcionar después de los premolares** o entre ellos: primer molar, incisivo central, incisivo lateral, primer premolar, segundo premolar o canino, y segundo molar. Esa erupción tardía del canino superior, que recorre un trayecto largo desde una posición alta en el maxilar, explica que sea el diente permanente que con más frecuencia queda **incluido** después de los terceros molares.\n\nComo en la dentición temporal, los rangos son orientativos. En la dentición permanente las **niñas suelen adelantarse** a los niños, y la secuencia importa tanto como la edad: un segundo molar inferior que erupciona antes que los premolares, por ejemplo, puede reducir el espacio disponible para ellos."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/10",
+          "proporcion": "16:9",
+          "alt": "Radiografía panorámica de un niño de unos nueve años con dientes temporales y gérmenes permanentes en distintos grados de desarrollo.",
+          "pie": "La panorámica en dentición mixta muestra al mismo tiempo los dientes temporales en boca y los permanentes que se forman debajo.",
+          "prompt": "Radiografía panorámica digital realista en escala de grises de un niño de unos nueve años en dentición mixta, incisivos y primeros molares permanentes erupcionados con raíces todavía en formación y ápices abiertos, caninos y molares temporales en boca con raíces en reabsorción, y por debajo los gérmenes de caninos, premolares y segundos molares permanentes en sus criptas, anatomía simétrica y correcta, calidad diagnóstica. Evitar: texto, letras, números, marcadores de lado, escalas, marcas de agua, logotipos, restauraciones metálicas, aparatos de ortodoncia, artefactos."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Tres etapas de la dentición mixta"
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m09/d4",
+          "pie": "Etapas de la dentición mixta en una línea de tiempo aproximada.",
+          "descripcion": "Línea de tiempo horizontal de los 5 a los 14 años dividida en tres bloques de color. Primer bloque, primera fase transicional (aproximadamente 6 a 8 años): iconos del primer molar permanente y de los incisivos permanentes reemplazando a los temporales. Segundo bloque, periodo intertransicional (aproximadamente 8 a 10 años): arcadas estables con incisivos y primeros molares permanentes y caninos y molares temporales. Tercer bloque, segunda fase transicional (aproximadamente 10 a 13 años): caninos, premolares y segundos molares permanentes. Al final, la dentición permanente establecida, con una nota aparte para los terceros molares de 17 a 21 años.",
+          "elementos": [
+            "Primera fase transicional: primeros molares e incisivos",
+            "Periodo intertransicional: etapa estable",
+            "Segunda fase transicional: caninos, premolares y segundos molares",
+            "Dentición permanente establecida",
+            "Terceros molares: 17 a 21 años"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "La dentición mixta suele describirse en tres etapas:\n\n1. **Primera fase transicional**, aproximadamente de los 6 a los 8 años. Erupcionan los **primeros molares permanentes** por detrás de los segundos molares temporales y se recambian los **incisivos**. Es una fase de grandes cambios en el sector anterior.\n2. **Periodo intertransicional**, aproximadamente de los 8 a los 10 años. La boca parece «estable»: incisivos y primeros molares permanentes conviven con caninos y molares temporales. Por dentro, sin embargo, los caninos y premolares permanentes avanzan y las raíces temporales se reabsorben.\n3. **Segunda fase transicional**, aproximadamente de los 10 a los 13 años. Se recambian caninos y molares temporales por caninos y premolares permanentes, y erupcionan los **segundos molares**. Es la fase en que se aprovecha el **espacio de deriva**, que estudiarás en el tema 9.5."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "La muela de los seis años no es de leche",
+          "md": "Muchas familias no saben que el **primer molar permanente** erupciona por detrás de los molares temporales sin que se caiga ningún diente. Al verlo aparecer, lo confunden con uno más «de leche» y no le dan importancia. Es un diente que debe durar toda la vida, aparece cuando el niño aún tiene poca destreza para cepillarse atrás y sus fosetas y fisuras profundas lo hacen muy susceptible a la caries en sus primeros años en boca. Señálalo a la familia en cada revisión a partir de los 5 o 6 años, y considera con el odontólogo las medidas preventivas indicadas, como los selladores de fosetas y fisuras."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cambios normales que preocupan"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los incisivos permanentes son bastante más grandes que los temporales a los que reemplazan. Esta diferencia, llamada a veces **compromiso incisivo**, se compensa con tres mecanismos: los **espacios fisiológicos** que ya existían entre los incisivos temporales, el **aumento del ancho de la arcada** a la altura de los caninos durante el recambio y la posición **más vestibular** de los incisivos permanentes. Por eso un niño de dentición temporal sin espacios entre los incisivos tiene más probabilidad de presentar apiñamiento anterior cuando erupcionen los permanentes.\n\nOtra situación que inquieta a muchos padres aparece entre los 8 y los 10 años: los incisivos centrales superiores se ven separados, con un **diastema en la línea media**, y con las coronas inclinadas hacia distal, en forma de abanico. Broadbent la describió en 1937 como la **etapa del «patito feo»**. Se debe a que las coronas de los incisivos laterales y, sobre todo, de los caninos en desarrollo presionan las raíces de los centrales. A medida que los caninos erupcionan, el espacio tiende a cerrarse y los incisivos se enderezan. Si el diastema es muy amplio o persiste después de la erupción de los caninos, conviene una valoración, porque puede relacionarse con un frenillo labial de inserción baja o con un **mesiodens**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/11",
+          "proporcion": "4:3",
+          "alt": "Incisivos centrales superiores permanentes de un niño con diastema en la línea media y coronas inclinadas hacia distal.",
+          "pie": "La etapa del «patito feo»: un diastema transitorio entre los incisivos centrales superiores durante la dentición mixta.",
+          "prompt": "Fotografía clínica intraoral realista en vista frontal de un niño de unos nueve años con los labios separados por retractores pequeños, incisivos centrales superiores permanentes grandes con bordes ligeramente ondulados, separados por un espacio en la línea media y con las coronas inclinadas hacia los lados en forma de abanico, incisivos laterales permanentes recién erupcionados, caninos temporales pequeños, encía rosa sana, iluminación clínica uniforme, colores naturales. Evitar: texto, números, logotipos, rostro, ojos, sangre, caries, aparatos de ortodoncia, número incorrecto de dientes."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Una mamá preocupada por los dientes separados",
+          "situacion": "Una madre trae a su hijo de 8 años porque los incisivos centrales superiores permanentes «salieron chuecos y separados». En la exploración observas un diastema moderado en la línea media, coronas inclinadas hacia distal, incisivos laterales recién erupcionados y caninos temporales en boca. El frenillo labial tiene inserción normal y la radiografía no muestra dientes supernumerarios; los caninos permanentes están en formación por encima de los laterales.",
+          "opciones": [
+            {
+              "texto": "Recomendar de inmediato aparatos para cerrar el espacio.",
+              "correcta": false,
+              "retro": "Cerrar ahora el espacio no está indicado: es probable que se reduzca solo con la erupción de los caninos."
+            },
+            {
+              "texto": "Explicar que es una etapa transitoria del desarrollo y programar revisiones para vigilar el cierre cuando erupcionen los caninos.",
+              "correcta": true,
+              "retro": "Correcto: corresponde a la etapa del «patito feo». Se vigila y se reevalúa si el diastema persiste tras la erupción de los caninos."
+            },
+            {
+              "texto": "Indicar la extracción de los caninos temporales para acelerar el cierre.",
+              "correcta": false,
+              "retro": "No hay indicación para extracciones; podría alterar el desarrollo del espacio en la arcada."
+            },
+            {
+              "texto": "Decirle que los dientes quedarán así para siempre.",
+              "correcta": false,
+              "retro": "La mayoría de estos diastemas se reducen con la erupción de los caninos; dar un pronóstico así genera angustia innecesaria."
+            }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "¿Cuándo preocuparse por un diente que no aparece? No existe un punto de corte único, pero hay señales que justifican una valoración con radiografía: un diente que supera con claridad el extremo de su rango de erupción; una **asimetría marcada** entre homólogos, en la que un lado erupcionó y el otro sigue sin hacerlo varios meses después (algunos autores proponen como referencia una diferencia de alrededor de seis meses); un diente temporal firme cuando su homólogo ya se exfolió y su sucesor erupcionó; o una alteración evidente de la secuencia. La radiografía permite descartar agenesia, dientes supernumerarios que obstruyen el camino, quistes o una posición anómala del germen."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Raíces que todavía se están formando"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando un diente permanente emerge, su raíz está incompleta. La formación radicular se completa aproximadamente **dos a tres años después de la erupción**: los incisivos centrales, que emergen hacia los 6 a 8 años, cierran su ápice hacia los 9 o 10, y los segundos molares, que emergen hacia los 12, lo hacen bien entrada la adolescencia. Mientras tanto, el diente tiene un **ápice abierto**, paredes radiculares delgadas y una pulpa muy amplia.\n\nEsto importa en la clínica: un traumatismo en un incisivo de un niño de 8 años o una caries profunda en un primer molar de 7 años se manejan con criterios diferentes a los del adulto, porque el objetivo es conservar la vitalidad de la pulpa para que la raíz termine de formarse. Ese manejo corresponde al odontopediatra o al endodoncista; desde la anatomía, lo que debes saber leer en la radiografía es si el ápice está abierto o cerrado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Edad dental frente a edad cronológica",
+          "md": "Como la formación de los dientes sigue una secuencia muy estable y está menos influida por el ambiente que otros indicadores de crecimiento, la **edad dental** se usa para estimar la madurez de un niño y, en contextos forenses o migratorios, su edad aproximada. El método más difundido es el de **Demirjian, Goldstein y Tanner**, publicado en 1973, que asigna a cada uno de siete dientes permanentes inferiores izquierdos un estadio de formación radiográfica de la A a la H, los convierte en puntajes y los suma para obtener una edad dental. Estudios posteriores mostraron que sus valores de referencia, obtenidos en niños franco-canadienses, tienden a **sobrestimar la edad** en otras poblaciones, por lo que se han propuesto adaptaciones por país. En ortodoncia, la edad dental ayuda a decidir el momento de las intervenciones; en peritajes, se combina siempre con otros indicadores y se reporta como un rango."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/12",
+          "proporcion": "3:4",
+          "alt": "Radiografía periapical de incisivos permanentes superiores de un niño con ápices abiertos en forma de embudo.",
+          "pie": "Incisivos recién erupcionados con ápices todavía abiertos: la raíz terminará de formarse en los siguientes dos o tres años.",
+          "prompt": "Radiografía periapical digital realista en escala de grises de la región anterior superior de un niño de unos ocho años, dos incisivos centrales permanentes erupcionados con raíces cortas de paredes delgadas que terminan en ápices amplios y abiertos en forma de embudo, cámaras pulpares grandes, por encima y a los lados los gérmenes de los caninos permanentes, hueso trabecular fino, contraste y nitidez de calidad diagnóstica. Evitar: texto, letras, números, escalas, marcas de agua, logotipos, restauraciones, fracturas, lesiones, aspecto de dibujo."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** en cada revisión de un niño entre 6 y 13 años, anota en el expediente la **etapa de la dentición mixta** en que se encuentra y compara los dientes presentes con la tabla de la ADA. Si un diente está fuera de su rango o su homólogo del otro lado erupcionó hace mucho, márcalo para seguimiento. Este registro sencillo convierte una revisión rutinaria en una vigilancia real del desarrollo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Dentición mixta",
+          "definicion": "Periodo en el que coexisten en boca dientes temporales y permanentes, aproximadamente de los 6 a los 12 o 13 años."
+        },
+        {
+          "termino": "Fase transicional",
+          "definicion": "Cada uno de los dos periodos de recambio activo de la dentición mixta."
+        },
+        {
+          "termino": "Periodo intertransicional",
+          "definicion": "Etapa relativamente estable de la dentición mixta entre las dos fases de recambio."
+        },
+        {
+          "termino": "Etapa del patito feo",
+          "definicion": "Fase normal de la dentición mixta con diastema y coronas de incisivos superiores inclinadas hacia distal, que suele corregirse con la erupción de los caninos."
+        },
+        {
+          "termino": "Diastema",
+          "definicion": "Espacio entre dos dientes vecinos, en especial entre los incisivos centrales."
+        },
+        {
+          "termino": "Ápice abierto",
+          "definicion": "Extremo de una raíz que todavía no termina de formarse, amplio y con paredes delgadas."
+        },
+        {
+          "termino": "Edad dental",
+          "definicion": "Estimación de la madurez basada en el grado de formación y erupción de los dientes."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.4-1",
+          "q": "Según la ADA, ¿en qué rango erupciona el primer molar permanente?",
+          "opciones": [
+            "6 a 7 años",
+            "9 a 10 años",
+            "11 a 13 años",
+            "17 a 21 años"
+          ],
+          "correcta": 0,
+          "explicacion": "El primer molar permanente, superior e inferior, erupciona entre los 6 y los 7 años, por detrás de los molares temporales."
+        },
+        {
+          "id": "t9.4-2",
+          "q": "¿Qué diferencia de secuencia existe entre las arcadas en la segunda fase transicional?",
+          "opciones": [
+            "En ambas arcadas el canino erupciona antes que los incisivos",
+            "En la inferior el segundo molar erupciona primero",
+            "En la inferior el canino suele erupcionar antes que los premolares; en la superior, después de ellos o entre ellos",
+            "En la superior los premolares erupcionan después del segundo molar"
+          ],
+          "correcta": 2,
+          "explicacion": "El canino inferior erupciona hacia los 9 a 10 años, antes que los premolares; el superior, hacia los 11 a 12, después de los premolares o entre ellos."
+        },
+        {
+          "id": "t9.4-3",
+          "q": "¿Cuánto tiempo después de la erupción se completa aproximadamente la raíz de un diente permanente?",
+          "opciones": [
+            "Antes de la erupción",
+            "Dos a tres meses",
+            "Diez años",
+            "Dos a tres años"
+          ],
+          "correcta": 3,
+          "explicacion": "La raíz permanente termina de formarse unos dos a tres años después de la erupción; mientras tanto el ápice está abierto."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "Eruption Charts: Permanent Tooth Development",
+          "autor": "American Dental Association (MouthHealthy)",
+          "url": "https://www.mouthhealthy.org/all-topics-a-z/eruption-charts"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "A new system of dental age assessment",
+          "autor": "Demirjian A., Goldstein H., Tanner J. M. (Human Biology)",
+          "anio": 1973
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Contemporary Orthodontics",
+          "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)"
+        },
+        {
+          "tipo": "oficial",
+          "titulo": "Management of the Developing Dentition and Occlusion in Pediatric Dentistry (Reference Manual)",
+          "autor": "American Academy of Pediatric Dentistry"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "The face of the normal child",
+          "autor": "Broadbent B. H. (The Angle Orthodontist)",
+          "anio": 1937
+        }
+      ]
+    },
+    {
+      "n": "9.5",
+      "titulo": "El espacio en la transición: espacios primates, planos terminales y espacio de deriva",
+      "minutos": 16,
+      "enPocasPalabras": "Para que los dientes permanentes quepan bien, la dentición temporal guarda espacio: los huecos entre los dientes de leche y el tamaño mayor de las muelas temporales. Si una muela de leche se pierde demasiado pronto, los dientes vecinos se recorren y el permanente puede quedarse sin lugar. Por eso cuidar los dientes temporales también es cuidar la posición de los definitivos.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La transición de la dentición temporal a la permanente es, en buena medida, un problema de **espacio**. Los incisivos permanentes son más grandes que los temporales, los molares permanentes necesitan acomodarse en una relación correcta con sus antagonistas, y todo debe ocurrir en arcadas que crecen de forma limitada. La dentición temporal sana trae consigo varios «ahorros» de espacio que hacen posible esta transición. En este tema los estudiarás desde la anatomía, junto con lo que ocurre cuando se pierden. La oclusión permanente en detalle la estudiarás en el módulo 13."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Arcadas con espacios y espacios primates"
+        },
+        {
+          "tipo": "texto",
+          "md": "Una dentición temporal típica muestra **espacios entre los incisivos**. Lejos de ser un defecto, son una reserva que ayudará a acomodar a los incisivos permanentes, más anchos. Baume describió en 1950 dos tipos de arcadas temporales: las de **tipo I**, con espacios generalizados, y las de **tipo II**, sin espacios o cerradas. Las arcadas cerradas tienen mayor probabilidad de presentar apiñamiento en el sector anterior durante el recambio.\n\nAdemás de los espacios generales, hay dos espacios más amplios y constantes llamados **espacios primates**, por su presencia habitual en otros primates:\n\n- En la **arcada superior**, se ubican entre el **incisivo lateral y el canino** temporales, es decir, por **mesial del canino**.\n- En la **arcada inferior**, se ubican entre el **canino y el primer molar** temporales, es decir, por **distal del canino**.\n\nEl espacio primate inferior tiene un papel especial: cuando erupcionan los primeros molares permanentes, pueden empujar a los molares temporales hacia mesial y cerrarlo, lo que ayuda a ajustar la relación de los molares. A este ajuste se le llama **desplazamiento mesial temprano**."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/13",
+          "proporcion": "16:9",
+          "alt": "Arcadas temporales de un niño en oclusión vistas de frente, con espacios entre los incisivos y junto a los caninos.",
+          "pie": "Una dentición temporal con espacios: una reserva valiosa para acomodar a los incisivos permanentes.",
+          "prompt": "Fotografía clínica intraoral realista en vista frontal con retractores de labios de un niño de unos cuatro años con dentición temporal completa en oclusión, incisivos superiores e inferiores pequeños y blancos con espacios visibles entre ellos, un espacio más amplio por mesial de los caninos superiores y por distal de los caninos inferiores, encía rosa sana, iluminación clínica uniforme con flash, colores naturales, alta nitidez. Evitar: texto, números, logotipos, rostro, ojos, sangre, caries, dientes permanentes, aparatos, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El plano terminal de los segundos molares temporales"
+        },
+        {
+          "tipo": "texto",
+          "md": "La relación entre las caras **distales** de los segundos molares temporales superior e inferior, vista de lado con los dientes en oclusión, se llama **plano terminal**. Es importante porque los primeros molares permanentes erupcionan guiados por esas caras distales, de modo que el plano terminal anticipa cómo se relacionarán los molares permanentes. Se describen tres tipos:"
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Tipos de plano terminal y su evolución más probable",
+          "columnas": [
+            "Plano terminal",
+            "Qué se observa",
+            "Evolución más probable de los primeros molares permanentes"
+          ],
+          "filas": [
+            [
+              "Recto",
+              "Las caras distales de ambos segundos molares temporales están al mismo nivel",
+              "Inicialmente en relación cúspide a cúspide; pueden pasar a clase I si la arcada inferior gana espacio hacia mesial (espacio primate o espacio de deriva)"
+            ],
+            [
+              "Escalón mesial",
+              "La cara distal del molar inferior está por mesial de la del superior",
+              "Con frecuencia, relación molar de clase I; si el escalón es muy marcado, tendencia a clase III"
+            ],
+            [
+              "Escalón distal",
+              "La cara distal del molar inferior está por distal de la del superior",
+              "Tendencia a relación molar de clase II"
+            ]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "anatomia-dental/m09/d5",
+          "pie": "Los tres tipos de plano terminal vistos desde vestibular.",
+          "descripcion": "Tres esquemas laterales lado a lado, cada uno con el segundo molar temporal superior ocluyendo sobre el inferior y, por detrás, el primer molar permanente en erupción. En el primero, las caras distales de ambos molares temporales forman una línea vertical continua (plano recto). En el segundo, la cara distal del molar inferior queda por delante de la del superior (escalón mesial). En el tercero, la cara distal del molar inferior queda por detrás (escalón distal). Debajo de cada esquema, una flecha hacia la relación molar permanente más probable.",
+          "elementos": [
+            "Plano terminal recto",
+            "Escalón mesial",
+            "Escalón distal",
+            "Segundo molar temporal superior",
+            "Segundo molar temporal inferior",
+            "Primer molar permanente en erupción"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El espacio de deriva"
+        },
+        {
+          "tipo": "texto",
+          "md": "El segundo gran ahorro de espacio está en el sector posterior. La suma de los anchos mesiodistales del **canino, el primer molar y el segundo molar temporales** es mayor que la de sus sucesores: **canino, primer premolar y segundo premolar permanentes**. La diferencia se conoce como **espacio de deriva** o *leeway space*, término propuesto por Nance. Los valores clásicos de Nance son de alrededor de **0.9 mm por lado en el maxilar** y **1.7 mm por lado en la mandíbula**; otros autores han reportado cifras distintas, y estudios recientes muestran que el valor varía según la población, de modo que debe tomarse como promedio y no como una medida de cada niño.\n\nLa mayor parte de esta diferencia se debe al **segundo molar temporal**, bastante más ancho que el segundo premolar que lo sustituye. Cuando ese molar se exfolia, el primer molar permanente inferior puede desplazarse hacia mesial y ocupar el espacio sobrante, lo que contribuye a establecer la relación molar de clase I; este ajuste se llama **desplazamiento mesial tardío**. En casos de apiñamiento leve, el ortodoncista puede decidir preservar ese espacio para aprovecharlo en la alineación."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Calcula el espacio de deriva de una hemiarcada",
+          "instruccion": "Introduce los anchos mesiodistales de los dientes temporales y de sus sucesores en una hemiarcada inferior. Los valores precargados son un ejemplo didáctico; en la práctica se miden en modelos o se estiman con métodos de análisis de dentición mixta.",
+          "formula": "Espacio de deriva = (canino + primer molar + segundo molar temporales) − (canino + primer premolar + segundo premolar permanentes)",
+          "variables": [
+            {
+              "id": "caninoTemporal",
+              "etiqueta": "Canino temporal",
+              "valor": 5,
+              "unidad": "mm"
+            },
+            {
+              "id": "primerMolarTemporal",
+              "etiqueta": "Primer molar temporal",
+              "valor": 7.7,
+              "unidad": "mm"
+            },
+            {
+              "id": "segundoMolarTemporal",
+              "etiqueta": "Segundo molar temporal",
+              "valor": 9.9,
+              "unidad": "mm"
+            },
+            {
+              "id": "caninoPermanente",
+              "etiqueta": "Canino permanente",
+              "valor": 6.9,
+              "unidad": "mm"
+            },
+            {
+              "id": "primerPremolar",
+              "etiqueta": "Primer premolar",
+              "valor": 7,
+              "unidad": "mm"
+            },
+            {
+              "id": "segundoPremolar",
+              "etiqueta": "Segundo premolar",
+              "valor": 7.1,
+              "unidad": "mm"
+            }
+          ],
+          "resultado": {
+            "expresion": "(caninoTemporal + primerMolarTemporal + segundoMolarTemporal) - (caninoPermanente + primerPremolar + segundoPremolar)",
+            "etiqueta": "Espacio de deriva en la hemiarcada",
+            "unidad": "mm",
+            "decimales": 1
+          }
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "El canino permanente, más ancho que su predecesor",
+          "md": "En el cálculo del espacio de deriva notarás que el **canino permanente** es más ancho que el temporal, y el primer premolar inferior es casi igual o algo menor que el primer molar temporal. El balance positivo depende casi por completo del segundo molar temporal. Por eso los odontopediatras insisten tanto en **conservar el segundo molar temporal** hasta su exfoliación natural: es el principal guardián del espacio del sector posterior."
+        },
+        {
+          "tipo": "texto",
+          "md": "En la clínica, los anchos de los caninos y premolares que todavía no erupcionan no se pueden medir directamente en la boca. Para estimarlos se usan los llamados **análisis de dentición mixta**. Algunos se basan en tablas de predicción que relacionan esos anchos con el de los incisivos inferiores permanentes ya erupcionados, como el de Moyers, o en ecuaciones simplificadas, como la de Tanaka y Johnston; otros miden los gérmenes en radiografías, corrigiendo la ampliación de la imagen. Con esa estimación se compara el **espacio disponible** en la arcada con el **espacio requerido** por los dientes que faltan por erupcionar. Si el espacio requerido es mayor, se habla de una **discrepancia** que el ortodoncista valorará. Para ti, lo importante es comprender la lógica: el espacio de deriva, los espacios primates y la integridad de los molares temporales son parte de ese balance, y cada molar temporal perdido sin control lo modifica."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuando un temporal se pierde antes de tiempo"
+        },
+        {
+          "tipo": "texto",
+          "md": "Si un molar temporal se pierde prematuramente por caries o por traumatismo, los dientes vecinos tienden a desplazarse hacia el espacio. El riesgo es mayor con la pérdida del **segundo molar temporal**, sobre todo si ocurre **antes de que erupcione el primer molar permanente**: este erupciona inclinado hacia mesial, ocupa parte del espacio del segundo premolar y puede dejarlo sin lugar, de modo que el premolar queda retenido o erupciona fuera de la arcada. Por eso, ante la pérdida prematura de un molar temporal, el odontólogo evalúa la indicación de un **mantenedor de espacio**, un dispositivo que conserva la distancia hasta que erupcione el sucesor. La AAPD dedica parte de su guía sobre el manejo de la dentición en desarrollo a estas decisiones, que dependen de la edad, del diente perdido, del estado del sucesor y de la oclusión.\n\nOtra alteración que debes reconocer es la **infraoclusión** de un molar temporal: el diente queda por debajo del plano de oclusión de sus vecinos porque está **anquilosado**, es decir, unido al hueso sin ligamento, como viste en el módulo 7. Afecta con más frecuencia a los molares temporales inferiores y puede asociarse a la ausencia del premolar sucesor."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Una extracción temporal también se planea",
+          "md": "Extraer un molar temporal no es un procedimiento menor. Antes de decidirlo, el odontólogo revisa en una radiografía reciente la posición y el desarrollo del germen sucesor, la cantidad de raíz restante y el espacio de la arcada, y define desde ese momento si hará falta un mantenedor de espacio. Retirar el diente sin esa planeación puede dañar el germen o provocar una pérdida de espacio difícil de recuperar."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/14",
+          "proporcion": "4:3",
+          "alt": "Modelo de estudio de la arcada inferior de un niño con un espacio de extracción reducido entre el primer molar temporal y el primer molar permanente.",
+          "pie": "Tras la pérdida prematura de un segundo molar temporal, el primer molar permanente puede inclinarse hacia el espacio y reducirlo.",
+          "prompt": "Fotografía realista de estudio de un modelo de yeso blanco de la arcada inferior de un niño en dentición mixta, vista oclusal ligeramente oblicua, en un lado falta el segundo molar temporal y el primer molar permanente aparece inclinado hacia mesial reduciendo el espacio disponible, en el otro lado la secuencia de canino, primer y segundo molares temporales y primer molar permanente está completa, iluminación difusa, fondo gris neutro, nitidez alta. Evitar: texto, números, etiquetas, logotipos, manos, rostros, modelos rotos, dientes deformes, aparatos."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Un molar temporal «hundido»",
+          "md": "En la revisión de una niña de 9 años notas que el segundo molar temporal inferior izquierdo, el 75, está unos milímetros por debajo del plano de oclusión de sus vecinos. Al percutirlo, el sonido es agudo y no tiene movilidad. Sospechas **anquilosis con infraoclusión**. La radiografía muestra que **no hay germen del 35**. Registras el hallazgo en el odontograma, explicas a la familia que el diente está «pegado» al hueso y que el permanente no se formó, y la refieres para valoración por odontopediatría u ortodoncia, porque el plan depende del grado de infraoclusión y del espacio que se quiera conservar o cerrar."
+        },
+        {
+          "tipo": "figura",
+          "id": "anatomia-dental/m09/15",
+          "proporcion": "16:9",
+          "alt": "Vista lateral de modelos de estudio de un niño en oclusión que muestra la relación entre los segundos molares temporales.",
+          "pie": "En los modelos en oclusión puede observarse el plano terminal de los segundos molares temporales.",
+          "prompt": "Fotografía realista de estudio en vista lateral de un par de modelos de yeso blanco de un niño de unos cinco años con dentición temporal completa, montados en oclusión sobre una base, encuadre centrado en la zona posterior donde se aprecian los segundos molares temporales superior e inferior con sus caras distales alineadas en un mismo plano vertical, iluminación lateral suave que marca el relieve, fondo gris oscuro, enfoque nítido. Evitar: texto, líneas dibujadas, números, etiquetas, logotipos, manos, rostros, modelos rotos, dientes permanentes, dientes deformes."
+        },
+        {
+          "tipo": "texto",
+          "md": "**Idea práctica:** cuando atiendas a un niño de 3 a 6 años, observa y registra tres datos en cada revisión: si su arcada tiene espacios o es cerrada, qué tipo de plano terminal presentan sus segundos molares temporales y si conserva todos sus molares temporales. Estos tres datos, obtenidos en un minuto, anticipan buena parte de lo que ocurrirá en la dentición mixta y te permiten referir a tiempo."
+        }
+      ],
+      "glosario": [
+        {
+          "termino": "Espacio primate",
+          "definicion": "Espacio constante de la dentición temporal por mesial del canino superior y por distal del canino inferior."
+        },
+        {
+          "termino": "Arcada de Baume tipo I",
+          "definicion": "Arcada temporal con espacios generalizados entre los dientes; la tipo II carece de ellos."
+        },
+        {
+          "termino": "Plano terminal",
+          "definicion": "Relación entre las caras distales de los segundos molares temporales superior e inferior en oclusión."
+        },
+        {
+          "termino": "Espacio de deriva",
+          "definicion": "Diferencia entre el ancho de canino y molares temporales y el de canino y premolares permanentes; también llamado leeway space."
+        },
+        {
+          "termino": "Desplazamiento mesial tardío",
+          "definicion": "Movimiento hacia mesial del primer molar permanente que aprovecha el espacio de deriva tras la exfoliación del segundo molar temporal."
+        },
+        {
+          "termino": "Mantenedor de espacio",
+          "definicion": "Dispositivo que conserva el espacio de un diente temporal perdido prematuramente hasta la erupción de su sucesor."
+        },
+        {
+          "termino": "Infraoclusión",
+          "definicion": "Posición de un diente por debajo del plano de oclusión de sus vecinos, frecuente en molares temporales anquilosados."
+        }
+      ],
+      "verificacion": [
+        {
+          "id": "t9.5-1",
+          "q": "¿Dónde se ubica el espacio primate en la arcada inferior temporal?",
+          "opciones": [
+            "Entre los incisivos centrales",
+            "Por mesial del canino",
+            "Por distal del canino, entre el canino y el primer molar",
+            "Entre el primer y el segundo molar temporal"
+          ],
+          "correcta": 2,
+          "explicacion": "En la arcada inferior el espacio primate está por distal del canino; en la superior, por mesial del canino."
+        },
+        {
+          "id": "t9.5-2",
+          "q": "¿Qué diente temporal aporta la mayor parte del espacio de deriva?",
+          "opciones": [
+            "El segundo molar temporal",
+            "El canino temporal",
+            "El incisivo lateral temporal",
+            "El primer molar temporal"
+          ],
+          "correcta": 0,
+          "explicacion": "El segundo molar temporal es bastante más ancho que el segundo premolar que lo sustituye; ahí se concentra la diferencia."
+        },
+        {
+          "id": "t9.5-3",
+          "q": "Un niño de 4 años tiene un plano terminal con escalón distal. ¿Qué relación molar permanente es la más probable?",
+          "opciones": [
+            "Clase I",
+            "Clase III",
+            "Mordida abierta posterior",
+            "Clase II"
+          ],
+          "correcta": 3,
+          "explicacion": "El escalón distal orienta a los primeros molares permanentes hacia una relación de clase II."
+        }
+      ],
+      "fuentes": [
+        {
+          "tipo": "oficial",
+          "titulo": "Management of the Developing Dentition and Occlusion in Pediatric Dentistry (Reference Manual)",
+          "autor": "American Academy of Pediatric Dentistry"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Physiological tooth migration and its significance for the development of occlusion. I. The biogenetic course of the deciduous dentition",
+          "autor": "Baume L. J. (Journal of Dental Research)",
+          "anio": 1950
+        },
+        {
+          "tipo": "academica",
+          "titulo": "Contemporary Orthodontics",
+          "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)"
+        },
+        {
+          "tipo": "academica",
+          "titulo": "McDonald and Avery's Dentistry for the Child and Adolescent",
+          "autor": "Dean J. A. (Elsevier)"
+        }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama: la cronología de los dientes",
+    "pares": [
+      {
+        "a": "Incisivo central inferior temporal",
+        "b": "Erupciona de 6 a 10 meses"
+      },
+      {
+        "a": "Segundo molar superior temporal",
+        "b": "Erupciona de 25 a 33 meses"
+      },
+      {
+        "a": "Primer molar permanente",
+        "b": "Erupciona de 6 a 7 años sin reemplazar a ningún diente"
+      },
+      {
+        "a": "Canino superior permanente",
+        "b": "Erupciona de 11 a 12 años"
+      },
+      {
+        "a": "Espacio primate superior",
+        "b": "Por mesial del canino temporal"
+      },
+      {
+        "a": "Escalón distal",
+        "b": "Tendencia a relación molar de clase II"
+      },
+      {
+        "a": "Etapa del patito feo",
+        "b": "Diastema transitorio entre incisivos centrales superiores"
+      },
+      {
+        "a": "Primer molar inferior temporal",
+        "b": "Morfología singular, distinta de cualquier otro diente"
+      }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m09-p01",
+        "q": "¿Cuántos dientes forman la dentición temporal completa?",
+        "opciones": [
+          "24",
+          "32",
+          "20",
+          "28"
+        ],
+        "correcta": 2,
+        "explicacion": "La dentición temporal tiene 20 dientes: dos incisivos, un canino y dos molares por hemiarcada."
+      },
+      {
+        "id": "m09-p02",
+        "q": "¿Qué diente temporal suele ser el primero en erupcionar?",
+        "opciones": [
+          "El incisivo central inferior",
+          "El incisivo central superior",
+          "El primer molar inferior",
+          "El canino superior"
+        ],
+        "correcta": 0,
+        "explicacion": "Según la ADA, el incisivo central inferior erupciona entre los 6 y los 10 meses, antes que cualquier otro."
+      },
+      {
+        "id": "m09-p03",
+        "q": "Según la ADA, ¿en qué rango erupciona el segundo molar superior temporal?",
+        "opciones": [
+          "6 a 10 meses",
+          "13 a 19 meses",
+          "16 a 22 meses",
+          "25 a 33 meses"
+        ],
+        "correcta": 3,
+        "explicacion": "El segundo molar superior temporal es el último en erupcionar, entre los 25 y los 33 meses."
+      },
+      {
+        "id": "m09-p04",
+        "q": "¿A qué edad suelen exfoliarse los incisivos centrales temporales?",
+        "opciones": [
+          "3 a 4 años",
+          "6 a 7 años",
+          "9 a 11 años",
+          "12 a 14 años"
+        ],
+        "correcta": 1,
+        "explicacion": "La ADA ubica la exfoliación de los incisivos centrales temporales, superiores e inferiores, entre los 6 y los 7 años."
+      },
+      {
+        "id": "m09-p05",
+        "q": "Una niña de 15 meses tiene ocho incisivos y los cuatro primeros molares temporales, pero ningún canino. Su madre está preocupada. ¿Qué le explicas?",
+        "opciones": [
+          "Es normal: los caninos temporales suelen erupcionar después de los primeros molares",
+          "Es un signo de agenesia de los caninos y requiere estudio urgente",
+          "Los caninos ya debieron erupcionar antes que los incisivos",
+          "Los caninos temporales no existen; erupcionan directamente los permanentes"
+        ],
+        "correcta": 0,
+        "explicacion": "Los primeros molares erupcionan de 13 a 19 meses y los caninos de 16 a 23 meses; a los 15 meses es esperable que aún no aparezcan."
+      },
+      {
+        "id": "m09-p06",
+        "q": "¿Qué rasgo distingue al incisivo central superior temporal?",
+        "opciones": [
+          "Tiene mamelones muy marcados",
+          "Tiene dos raíces",
+          "Su corona es más ancha en sentido mesiodistal que alta",
+          "Es más amarillo que el permanente"
+        ],
+        "correcta": 2,
+        "explicacion": "La corona del incisivo central superior temporal es más ancha que alta, proporción que no tienen los incisivos permanentes."
+      },
+      {
+        "id": "m09-p07",
+        "q": "¿A qué diente permanente se parece el segundo molar inferior temporal?",
+        "opciones": [
+          "Al segundo premolar inferior",
+          "Al primer molar inferior permanente",
+          "Al primer molar superior permanente",
+          "Al canino inferior"
+        ],
+        "correcta": 1,
+        "explicacion": "Se parece al primer molar inferior permanente, pero sus tres cúspides vestibulares son casi del mismo tamaño."
+      },
+      {
+        "id": "m09-p08",
+        "q": "En el canino superior temporal, ¿cómo son las aristas de la cúspide?",
+        "opciones": [
+          "Ambas tienen exactamente la misma longitud",
+          "No tiene cúspide, sino borde recto",
+          "La arista distal es más larga que la mesial",
+          "La arista mesial es más larga que la distal"
+        ],
+        "correcta": 3,
+        "explicacion": "En el canino superior temporal la arista mesial es más larga, al revés que en el canino permanente; en el canino inferior temporal la más larga es la distal."
+      },
+      {
+        "id": "m09-p09",
+        "q": "¿Qué dientes son con mayor frecuencia natales o neonatales?",
+        "opciones": [
+          "Los primeros molares superiores",
+          "Los caninos superiores",
+          "Los incisivos centrales inferiores",
+          "Los segundos molares inferiores"
+        ],
+        "correcta": 2,
+        "explicacion": "Los dientes natales y neonatales son con mayor frecuencia incisivos centrales inferiores, en general de la propia dentición temporal."
+      },
+      {
+        "id": "m09-p10",
+        "q": "¿Qué dientes erupcionan durante la primera fase transicional de la dentición mixta?",
+        "opciones": [
+          "Primeros molares e incisivos permanentes",
+          "Caninos y premolares",
+          "Segundos y terceros molares",
+          "Solo los segundos molares temporales"
+        ],
+        "correcta": 0,
+        "explicacion": "Entre los 6 y los 8 años erupcionan los primeros molares permanentes y se recambian los incisivos."
+      },
+      {
+        "id": "m09-p11",
+        "q": "Según la ADA, ¿en qué rango erupciona el canino inferior permanente?",
+        "opciones": [
+          "6 a 7 años",
+          "11 a 12 años",
+          "12 a 13 años",
+          "9 a 10 años"
+        ],
+        "correcta": 3,
+        "explicacion": "El canino inferior permanente erupciona entre los 9 y los 10 años, antes que los premolares inferiores."
+      },
+      {
+        "id": "m09-p12",
+        "q": "¿En qué momento suele erupcionar el canino superior permanente respecto a los premolares superiores?",
+        "opciones": [
+          "Antes que los incisivos centrales",
+          "Después de los premolares o entre ellos",
+          "Al mismo tiempo que el primer molar permanente",
+          "Después del segundo molar permanente en todos los casos"
+        ],
+        "correcta": 1,
+        "explicacion": "El canino superior erupciona hacia los 11 a 12 años, por lo general después de los premolares o entre ellos, tras un trayecto largo."
+      },
+      {
+        "id": "m09-p13",
+        "q": "Según los valores clásicos de Nance, ¿cuánto mide aproximadamente el espacio de deriva por lado en la mandíbula?",
+        "opciones": [
+          "0.2 mm",
+          "1.7 mm",
+          "4.5 mm",
+          "6.0 mm"
+        ],
+        "correcta": 1,
+        "explicacion": "Nance reportó alrededor de 1.7 mm por lado en la mandíbula y 0.9 mm por lado en el maxilar; son promedios que varían entre poblaciones."
+      },
+      {
+        "id": "m09-p14",
+        "q": "Un niño perdió por caries el 85 a los 5 años. A los 7, el 46 está inclinado hacia mesial y el espacio se redujo. ¿Cuál es el riesgo principal?",
+        "opciones": [
+          "Que el 46 se caiga pronto",
+          "Que el 41 erupcione antes de tiempo",
+          "Que el 45 no tenga espacio suficiente para erupcionar en la arcada",
+          "Que el 55 se anquilose"
+        ],
+        "correcta": 2,
+        "explicacion": "La pérdida prematura del segundo molar temporal permite la migración mesial del primer molar permanente, que ocupa el espacio del segundo premolar."
+      },
+      {
+        "id": "m09-p15",
+        "q": "¿Dónde se ubica el espacio primate en la arcada superior temporal?",
+        "opciones": [
+          "Por mesial del canino, entre el incisivo lateral y el canino",
+          "Por distal del canino",
+          "Entre los incisivos centrales",
+          "Por distal del segundo molar temporal"
+        ],
+        "correcta": 0,
+        "explicacion": "En la arcada superior el espacio primate está por mesial del canino; en la inferior, por distal."
+      },
+      {
+        "id": "m09-p16",
+        "q": "¿Qué describe la etapa del «patito feo»?",
+        "opciones": [
+          "La pérdida prematura de los incisivos temporales",
+          "El apiñamiento permanente de los incisivos inferiores",
+          "La erupción lingual de los incisivos inferiores",
+          "Un diastema transitorio con incisivos centrales superiores inclinados hacia distal"
+        ],
+        "correcta": 3,
+        "explicacion": "Descrita por Broadbent, es una fase normal en la que las coronas de laterales y caninos en desarrollo inclinan las raíces de los centrales; suele corregirse con la erupción de los caninos."
+      },
+      {
+        "id": "m09-p17",
+        "q": "Una niña de 9 años tiene el 75 por debajo del plano de oclusión, sin movilidad y con sonido agudo a la percusión. La radiografía no muestra germen del 35. ¿Qué es lo más probable?",
+        "opciones": [
+          "Exfoliación normal en curso",
+          "Erupción ectópica del 36",
+          "Anquilosis del 75 con infraoclusión y agenesia del 35",
+          "Quiste de erupción del 35"
+        ],
+        "correcta": 2,
+        "explicacion": "La falta de movilidad, el sonido agudo y la infraoclusión sugieren anquilosis; la ausencia del germen indica agenesia del sucesor."
+      },
+      {
+        "id": "m09-p18",
+        "q": "¿Cuándo se completa aproximadamente la raíz de un diente permanente?",
+        "opciones": [
+          "Antes de que emerja en la boca",
+          "Dos a tres años después de su erupción",
+          "Diez años después de su erupción",
+          "Al mismo tiempo que se exfolia el temporal"
+        ],
+        "correcta": 1,
+        "explicacion": "La raíz permanente termina de formarse unos dos a tres años después de la erupción; mientras tanto el ápice está abierto."
+      },
+      {
+        "id": "m09-p19",
+        "q": "¿Qué síntomas no deben atribuirse a la erupción de los dientes temporales y requieren valoración médica?",
+        "opciones": [
+          "Salivación aumentada",
+          "Ganas de morder objetos",
+          "Frotarse la encía",
+          "Fiebre alta y diarrea persistentes"
+        ],
+        "correcta": 3,
+        "explicacion": "La salivación, morder y frotarse la encía son signos leves habituales; la fiebre alta y la diarrea persistentes no se atribuyen a la erupción."
+      },
+      {
+        "id": "m09-p20",
+        "q": "En el tercio cervical de los dientes temporales, ¿hacia dónde se orientan los prismas del esmalte?",
+        "opciones": [
+          "Hacia oclusal",
+          "Hacia gingival",
+          "Paralelos al eje mayor del diente sin inclinación",
+          "Hacia la pulpa en forma radial"
+        ],
+        "correcta": 0,
+        "explicacion": "En los temporales los prismas cervicales se orientan hacia oclusal, mientras que en los permanentes se inclinan hacia gingival; esto influye en el diseño de las preparaciones."
+      }
+    ]
+  },
+  "fuentes": [
+    {
+      "tipo": "oficial",
+      "titulo": "Eruption Charts: Primary and Permanent Tooth Development",
+      "autor": "American Dental Association (MouthHealthy)",
+      "url": "https://www.mouthhealthy.org/all-topics-a-z/eruption-charts"
+    },
+    {
+      "tipo": "oficial",
+      "titulo": "Management of the Developing Dentition and Occlusion in Pediatric Dentistry (Reference Manual)",
+      "autor": "American Academy of Pediatric Dentistry"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Wheeler's Dental Anatomy, Physiology and Occlusion",
+      "autor": "Nelson S. J. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "McDonald and Avery's Dentistry for the Child and Adolescent",
+      "autor": "Dean J. A. (Elsevier)"
+    },
+    {
+      "tipo": "academica",
+      "titulo": "Contemporary Orthodontics",
+      "autor": "Proffit W. R., Fields H. W., Larson B. E., Sarver D. M. (Elsevier)"
+    }
+  ]
+}

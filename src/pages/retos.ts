@@ -696,9 +696,10 @@ function respDiaria(i: number) {
 
 // ══════════════ Celebración (3 intensidades, respeta reduced-motion) ══════════════
 type Intensidad = 'sutil' | 'normal' | 'grande';
-function celebrar(intensidad: Intensidad = 'normal') {
+/** También la usa la Academia al aprobar un módulo o completar un programa (anfitrión opcional). */
+export function celebrar(intensidad: Intensidad = 'normal', anfitrion?: HTMLElement | null) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const r = root(); if (!r) return;
+  const r = anfitrion ?? root(); if (!r) return;
   const host = document.createElement('div'); host.className = 'ar-confeti';
   const cols = ['#4fa899', '#4a7fc1', '#e0b341', '#20254b', '#6fbfb0'];
   const cant = intensidad === 'sutil' ? 12 : intensidad === 'normal' ? 26 : 50;

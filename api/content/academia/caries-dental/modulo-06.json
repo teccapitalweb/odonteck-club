@@ -1,0 +1,1109 @@
+{
+  "programa": "caries-dental",
+  "modulo": 6,
+  "titulo": "Selladores de fosetas y fisuras",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "Las fosetas y fisuras de los molares son el sitio donde más caries aparece en la niñez y la adolescencia, y también donde el flúor protege menos. En este módulo entiendes por qué, revisas la evidencia que respalda a los selladores, comparas los materiales disponibles y aprendes a decidir qué dientes sellar, incluidas las lesiones no cavitadas. Cierras con la técnica explicada como concepto, con énfasis en el aislamiento y la bioseguridad, y con el seguimiento y los programas escolares. Es una de las intervenciones preventivas con mejor evidencia y, aun así, de las más subutilizadas.",
+  "objetivos": [
+    "Explicar por qué la anatomía de fosetas y fisuras favorece la acumulación de biopelícula y la caries.",
+    "Resumir la evidencia de la guía ADA/AAPD de 2016 y de la revisión Cochrane de 2017 sobre la eficacia de los selladores.",
+    "Comparar los selladores de resina y los de ionómero de vidrio según su retención y su tolerancia a la humedad.",
+    "Seleccionar dientes y superficies candidatos a sellador, incluidas las lesiones no cavitadas, con base en el diagnóstico y el riesgo.",
+    "Describir las etapas conceptuales de la colocación de un sellador y su seguimiento con criterios de bioseguridad."
+  ],
+  "duracionMin": 95,
+  "portada": {
+    "id": "caries-dental/m06/portada",
+    "proporcion": "16:9",
+    "alt": "Vista oclusal de un primer molar permanente con un sellador translúcido bien adaptado en sus fisuras.",
+    "prompt": "Fotografía clínica macro realista en formato panorámico de la cara oclusal de un primer molar inferior permanente de un niño de unos siete años, con anatomía correcta de cinco cúspides. Las fosetas y fisuras están cubiertas por un sellador blanco opaco, delgado y bien adaptado, sin excesos. Esmalte de las cúspides limpio y brillante, encía sana rosa pálido en el borde y rollos de algodón desenfocados. Iluminación uniforme de lámpara dental, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, burbujas en el sellador, dientes deformes, número incorrecto de cúspides."
+  },
+  "temas": [
+    {
+      "n": "6.1",
+      "titulo": "Fosetas y fisuras: por qué ahí empieza la caries",
+      "minutos": 13,
+      "enPocasPalabras": "Las muelas tienen surcos muy finos en la parte de arriba, donde se quedan restos de comida y bacterias que el cepillo no alcanza. Por eso ahí empiezan muchas caries en los niños. Un sellador es una capa delgada que cubre esos surcos para protegerlos.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Si observas con lupa la cara oclusal de un molar permanente recién erupcionado, verás un relieve complejo: cúspides redondeadas separadas por surcos profundos que se cruzan en pequeñas depresiones llamadas **fosetas**. Esa anatomía es útil para triturar los alimentos, pero tiene un costo. Las **fisuras** pueden ser tan estrechas que una sola cerda del cepillo, de mayor diámetro, no alcanza su fondo, y en ellas la biopelícula se acumula protegida de la remoción mecánica.\n\nNo es casual que, en la niñez y la adolescencia, la mayor parte de las lesiones de caries de los dientes permanentes aparezca en las superficies oclusales. La guía de la Asociación Dental Americana y la Academia Americana de Odontología Pediátrica de 2016 señala además que la disminución de la caries en las últimas décadas ha sido menor en fosetas y fisuras que en superficies lisas, y que los fluoruros tópicos parecen proteger más las superficies lisas que las oclusales. Esa es la razón de ser de los selladores."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La forma de la fisura importa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las fisuras no son todas iguales. En cortes de molares se describen formas abiertas, en **V** o en **U**, cuyo fondo es relativamente accesible, y formas estrechas y profundas, en **I** o con una dilatación en el fondo semejante a una botella, a menudo llamada **IK**, que la clasificación clásica de Nagano describió a mediados del siglo XX. En las fisuras estrechas, la entrada puede medir menos que una cerda de cepillo y el fondo queda muy cerca de la unión amelodentinaria, porque el esmalte en esa zona es más delgado.\n\nEsta morfología tiene tres consecuencias clínicas. Primera, la biopelícula del fondo de la fisura es casi inaccesible para el cepillo. Segunda, las lesiones suelen iniciarse en las **paredes** de la fisura y no en su entrada, por lo que pueden avanzar sin verse desde la superficie. Tercera, como el esmalte del fondo es delgado, una lesión puede alcanzar la dentina relativamente pronto. Por eso, en el módulo 4 viste la importancia de secar bien la superficie y de buscar sombras de dentina en las fosas."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m06/d1",
+          "pie": "Formas de fisura en cortes transversales de molares: de las abiertas a las estrechas y profundas.",
+          "descripcion": "Cuatro cortes transversales esquemáticos de una fisura oclusal, dibujados lado a lado con el esmalte en color marfil y la dentina en amarillo claro. De izquierda a derecha: fisura en V, ancha en la entrada y que se estrecha hacia el fondo; fisura en U, de fondo redondeado; fisura en I, muy estrecha y profunda; fisura IK, estrecha en la entrada y dilatada en el fondo. En cada una, una línea punteada marca la unión amelodentinaria y un pequeño círculo representa el diámetro de una cerda de cepillo apoyado en la entrada.",
+          "elementos": [
+            "Fisura en V",
+            "Fisura en U",
+            "Fisura en I",
+            "Fisura IK",
+            "Esmalte",
+            "Dentina",
+            "Unión amelodentinaria",
+            "Cerda del cepillo"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/01",
+          "proporcion": "4:3",
+          "alt": "Vista oclusal ampliada de un molar permanente sano con fisuras profundas y estrechas.",
+          "pie": "Fisuras profundas y estrechas en un molar permanente: la biopelícula de su fondo queda fuera del alcance del cepillo.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar superior permanente sano de un niño de ocho años, con cuatro cúspides bien definidas, puente de esmalte y fisuras profundas y muy estrechas de color ligeramente más oscuro en su fondo, sin manchas de caries. Superficie limpia, seca y brillante, encía sana en el borde del encuadre, iluminación lateral suave que resalta el relieve de cúspides y surcos, fondo oscuro desenfocado. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, cavidades, restauraciones, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El momento de mayor riesgo: la erupción"
+        },
+        {
+          "tipo": "texto",
+          "md": "El primer molar permanente suele erupcionar alrededor de los seis años y el segundo alrededor de los doce, con variaciones entre personas. La erupción de un molar no es instantánea: pasan meses desde que asoma la primera cúspide hasta que el diente alcanza la oclusión con su antagonista. Durante ese periodo la superficie oclusal queda por debajo del plano de los demás dientes, a menudo parcialmente cubierta por encía, no participa en la masticación que ayuda a limpiarla y es difícil de alcanzar con el cepillo, sobre todo en niños que todavía se cepillan solos.\n\nA esto se suma que el esmalte recién erupcionado termina de madurar en la boca, en contacto con la saliva, y en ese tiempo es más susceptible. Por eso la ventana de mayor riesgo para la caries oclusal coincide con los primeros años después de la erupción de cada molar, y es también la ventana en la que un sellador ofrece más beneficio. Por eso no conviene esperar a «ver si aparece algo»: en un niño con riesgo, la valoración para sellador se programa en cuanto la cara oclusal del molar es accesible y puede controlarse la humedad, aunque sea con un material tolerante a ella."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/02",
+          "proporcion": "4:3",
+          "alt": "Primer molar inferior permanente en erupción, parcialmente cubierto por encía, junto a molares temporales.",
+          "pie": "Molar permanente en erupción: está por debajo del plano oclusal y parcialmente cubierto por encía, lo que dificulta su limpieza.",
+          "prompt": "Fotografía clínica intraoral realista de la hemiarcada inferior de un niño de seis años en dentición mixta temprana, encuadre cerrado solo de dientes y encía. Se ven el segundo molar temporal sano y, detrás de él, el primer molar permanente en erupción, con sus cúspides asomando y la parte distal de la cara oclusal todavía cubierta por un opérculo de encía rosa sana, por debajo del plano de los demás dientes. Iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, inflamación severa, rostro, número incorrecto de dientes, dientes deformes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Una cerda contra una fisura",
+          "md": "Las cerdas de los cepillos dentales tienen un diámetro de décimas de milímetro, mientras que la entrada de muchas fisuras estrechas es más fina. Por eso, aun con un cepillado excelente, el fondo de esas fisuras no se limpia por completo. El sellador resuelve el problema de otra manera: en lugar de intentar limpiar la fisura, la cubre para que la biopelícula no tenga dónde instalarse."
+        },
+        {
+          "tipo": "texto",
+          "md": "Un **sellador de fosetas y fisuras** es, según la NOM-013-SSA2-2015, un material químico de adherencia que actúa como barrera física e impide que las bacterias y restos de alimentos penetren en las zonas más susceptibles de los dientes. Funciona de dos maneras. Como **prevención primaria**, cubre fisuras sanas en dientes con riesgo antes de que aparezca una lesión. Como **control de lesiones no cavitadas**, aísla una lesión inicial del ambiente bucal: sin acceso a los azúcares de la dieta, las bacterias atrapadas bajo un sellador bien adaptado pierden su fuente de energía y la lesión tiende a detenerse.\n\nLos selladores no sustituyen al flúor ni a la higiene; se suman a ellos. El flúor protege mejor las superficies lisas y el sellador protege mejor las oclusales: juntos cubren casi todo el diente."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Otras superficies retentivas y la caries oculta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las fisuras de la cara oclusal no son las únicas zonas retentivas. La **foseta vestibular** de los molares inferiores, el **surco palatino** de los molares superiores y las **fosetas palatinas** de los incisivos laterales superiores también acumulan biopelícula y pueden desarrollar lesiones. Los molares temporales tienen fisuras, en general menos profundas que las de los permanentes, pero también son susceptibles en niños con riesgo elevado.\n\nHay un hallazgo que conviene conocer antes de sellar: la llamada **caries oculta**, una lesión que ya alcanzó la dentina bajo un esmalte oclusal que parece intacto o apenas cambiado. Se explica por la forma de las fisuras estrechas y por la exposición al fluoruro, que mantiene la superficie relativamente íntegra mientras la lesión avanza por debajo. Por eso, cuando en una fosa observas una sombra de dentina o tienes dudas, conviene valorar la aleta de mordida antes de decidir. Sellar una superficie no exime de diagnosticarla bien."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Los selladores en la NOM-013-SSA2-2015",
+          "md": "La norma incluye la aplicación de selladores en fosetas, fisuras y cíngulos profundos entre las medidas de protección específica contra la caries. En su apéndice indica promover el uso de selladores en la dentición temporal y al aparecer en boca la dentición permanente, con énfasis en el primer molar, realizar profilaxis con cepillo dental y cepillo rotatorio antes de colocarlos y aplicarlos de acuerdo con el riesgo de caries."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/03",
+          "proporcion": "3:4",
+          "alt": "Niña de espaldas cepillándose los dientes con ayuda de su padre frente al espejo.",
+          "pie": "El cepillado supervisado sigue siendo indispensable: el sellador protege las fisuras, pero no las superficies lisas ni la encía.",
+          "prompt": "Fotografía vertical realista en un baño familiar limpio con luz natural: una niña de unos siete años vista de espaldas, sin rostro identificable, se cepilla los dientes frente al lavabo mientras su padre, de pie detrás de ella y también de espaldas, la observa y le apoya una mano en el hombro. En el espejo solo se ven siluetas desenfocadas. Ambiente cálido, ordenado y alegre, colores suaves. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, rostros identificables, espuma excesiva, desorden, tubos de pasta con rótulos."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Fisuras y selladores: verdadero o falso",
+          "afirmaciones": [
+            { "texto": "Las cerdas del cepillo pueden limpiar por completo el fondo de cualquier fisura si el cepillado es correcto.", "verdadero": false, "explicacion": "Muchas fisuras son más estrechas que una cerda; su fondo no se limpia aunque el cepillado sea excelente." },
+            { "texto": "Las lesiones de caries en fisuras suelen iniciarse en las paredes de la fisura.", "verdadero": true, "explicacion": "Por eso pueden avanzar sin verse desde la entrada y requieren un examen con la superficie seca." },
+            { "texto": "El periodo de erupción es una etapa de alto riesgo para la caries oclusal de los molares permanentes.", "verdadero": true, "explicacion": "El molar está por debajo de la oclusión, es difícil de limpiar y su esmalte termina de madurar en la boca." },
+            { "texto": "Si un niño tiene selladores, ya no necesita pasta con flúor.", "verdadero": false, "explicacion": "El sellador protege las fisuras; el flúor y la higiene protegen las demás superficies." },
+            { "texto": "Un sellador bien adaptado puede ayudar a detener una lesión no cavitada que queda debajo.", "verdadero": true, "explicacion": "Al aislar la lesión de los azúcares de la dieta, las bacterias atrapadas pierden su fuente de energía." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para la consulta infantil"
+        },
+        {
+          "tipo": "texto",
+          "md": "En cada revisión de niñas y niños entre los cinco y los catorce años, anota qué molares permanentes están en erupción y en qué fase. Ese dato, junto con el riesgo de caries, te dirá cuándo programar la valoración para sellador y evitará que la ventana de mayor riesgo pase sin protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Foseta", "definicion": "Pequeña depresión en la superficie de un diente donde se unen dos o más surcos." },
+        { "termino": "Fisura", "definicion": "Surco estrecho y profundo de la cara oclusal, a menudo inaccesible para las cerdas del cepillo." },
+        { "termino": "Sellador de fosetas y fisuras", "definicion": "Material adherente que cubre fosetas y fisuras como barrera física contra la biopelícula y los restos de alimentos." },
+        { "termino": "Opérculo", "definicion": "Porción de encía que cubre parte de la cara oclusal de un molar en erupción." },
+        { "termino": "Prevención primaria", "definicion": "Medida que evita la aparición de la enfermedad en una superficie todavía sana." }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.1-1",
+          "q": "¿Por qué el flúor protege menos las fosetas y fisuras que las superficies lisas?",
+          "opciones": [
+            "Porque el esmalte de las fisuras no tiene mineral",
+            "Porque en las fisuras la biopelícula queda protegida de la remoción mecánica y su anatomía favorece el estancamiento",
+            "Porque la saliva no contiene fluoruro",
+            "Porque las fisuras solo existen en dientes temporales"
+          ],
+          "correcta": 1,
+          "explicacion": "La morfología estrecha y profunda de las fisuras protege a la biopelícula; el flúor protege mejor las superficies lisas."
+        },
+        {
+          "id": "t6.1-2",
+          "q": "¿Qué forma de fisura se describe como estrecha en la entrada y dilatada en el fondo?",
+          "opciones": [
+            "En V",
+            "En U",
+            "IK",
+            "Plana"
+          ],
+          "correcta": 2,
+          "explicacion": "La fisura IK tiene una entrada estrecha y una dilatación en el fondo, semejante a una botella."
+        },
+        {
+          "id": "t6.1-3",
+          "q": "¿Cuándo ofrece más beneficio un sellador en un molar permanente?",
+          "opciones": [
+            "Muchos años después de la erupción, en un diente sin riesgo",
+            "Solo cuando ya hay una cavidad con dentina expuesta",
+            "Únicamente en adultos mayores",
+            "En los primeros años después de la erupción, cuando el riesgo de caries oclusal es mayor"
+          ],
+          "correcta": 3,
+          "explicacion": "La ventana de mayor riesgo coincide con la erupción y los primeros años posteriores, cuando el molar es difícil de limpiar."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de anatomía oclusal, la clasificación de fisuras de Nagano y la cronología de erupción de los molares permanentes", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "6.2",
+      "titulo": "Qué dice la evidencia sobre los selladores",
+      "minutos": 13,
+      "enPocasPalabras": "Muchos estudios muestran que los selladores evitan buena parte de las caries en las muelas de niños y adolescentes. También funcionan mejor que solo aplicar barniz de flúor en esas superficies. Aun así, muchos niños no los reciben.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Los selladores se usan desde hace casi cinco décadas, y pocas intervenciones preventivas en odontología se han estudiado tanto. Aun así, su uso sigue siendo menor de lo que la evidencia justificaría. En este tema revisarás las dos síntesis de evidencia más citadas: la **guía de práctica clínica de la ADA y la AAPD de 2016** y la **revisión sistemática Cochrane de 2017**. Aprenderás a leer sus resultados, incluidos sus límites, para explicarlos con precisión a colegas, familias y autoridades escolares."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La guía ADA/AAPD de 2016"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un panel convocado por el Consejo de Asuntos Científicos de la ADA y la AAPD realizó una revisión sistemática de ensayos clínicos aleatorizados y, con la metodología GRADE, formuló recomendaciones sobre selladores en molares temporales y permanentes de niños y adolescentes. Sus hallazgos principales fueron:\n\n**Sellador frente a no sellar.** Con datos de 9 ensayos clínicos, en niños y adolescentes con superficies oclusales sanas, los selladores redujeron la incidencia de lesiones oclusales en molares permanentes en **76 %** después de 2 a 3 años de seguimiento. En una población mixta, con superficies sanas y lesiones no cavitadas, la reducción fue de **75 %**. El panel calificó la evidencia como de calidad moderada y emitió una **recomendación fuerte** a favor de sellar molares temporales y permanentes con superficies sanas o con lesiones no cavitadas.\n\n**Sellador frente a barniz de fluoruro.** Con datos de 3 ensayos, los selladores podrían reducir la incidencia de lesiones oclusales en molares permanentes en **73 %** en comparación con el barniz, con evidencia de calidad baja. El panel **sugirió** preferir el sellador al barniz en esas superficies.\n\n**Comparación entre materiales.** La evidencia fue de calidad muy baja y el panel no pudo determinar la superioridad de ningún tipo de sellador."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/04",
+          "proporcion": "16:9",
+          "alt": "Grupo de profesionales de la salud bucal con cubrebocas revisa documentos en una mesa de reuniones.",
+          "pie": "Las guías de práctica clínica resumen la evidencia de muchos ensayos para orientar decisiones en la consulta.",
+          "prompt": "Fotografía realista en formato panorámico de una sala de reuniones luminosa de una facultad de odontología: cuatro profesionales de la salud bucal con batas blancas y cubrebocas, vistos de perfil o de espaldas sin rostros identificables, revisan juntos documentos impresos y una computadora portátil cuya pantalla no muestra texto legible. Sobre la mesa, un modelo tipodonto y tazas de café. Luz natural suave desde ventanales, colores neutros y limpios, ambiente académico. Evitar: texto legible, logotipos, marcas comerciales, marcas de agua, rostros identificables, desorden."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m06/d2",
+          "pie": "Resultado absoluto estimado por la guía ADA/AAPD: lesiones oclusales en 1,000 molares sanos a 2 o 3 años, con riesgo inicial de 30 %.",
+          "descripcion": "Gráfica de dos barras verticales. La barra izquierda, sin sellador, alcanza 300 lesiones por cada 1,000 molares. La barra derecha, con sellador, alcanza aproximadamente 93 lesiones por cada 1,000 molares. Entre ambas, una llave indica 207 lesiones prevenidas. El eje vertical va de 0 a 350 lesiones por 1,000 molares.",
+          "elementos": [
+            "Sin sellador: 300 por 1,000",
+            "Con sellador: alrededor de 93 por 1,000",
+            "207 lesiones prevenidas",
+            "Lesiones oclusales por cada 1,000 molares",
+            "Seguimiento de 2 a 3 años"
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Los porcentajes relativos impresionan, pero en la consulta y en salud pública conviene pensar también en **números absolutos**. La guía estimó que, en una población con una prevalencia inicial de caries de 30 %, se evitarían **207 lesiones por cada 1,000 aplicaciones** de sellador en 2 a 3 años. Dicho de otro modo, sellar alrededor de cinco molares evita una lesión en ese plazo. En poblaciones con mayor riesgo, el número de lesiones evitadas es todavía mayor, por eso los programas suelen priorizar a los grupos de riesgo elevado."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Lesiones evitadas por cada 1,000 molares sellados",
+          "instruccion": "Escribe el porcentaje de molares que desarrollarían una lesión sin sellador y el porcentaje con sellador en el mismo plazo. Los valores iniciales reproducen la estimación de la guía ADA/AAPD de 2016 para una prevalencia de 30 %.",
+          "formula": "Lesiones evitadas por 1,000 = (porcentaje sin sellador − porcentaje con sellador) × 10",
+          "variables": [
+            { "id": "porcentajeSin", "etiqueta": "Molares con lesión sin sellador", "valor": 30, "unidad": "%" },
+            { "id": "porcentajeCon", "etiqueta": "Molares con lesión con sellador", "valor": 9.3, "unidad": "%" }
+          ],
+          "resultado": {
+            "expresion": "(porcentajeSin - porcentajeCon) * 10",
+            "etiqueta": "Lesiones evitadas por cada 1,000 molares sellados",
+            "unidad": "lesiones",
+            "decimales": 0
+          }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La revisión Cochrane de 2017"
+        },
+        {
+          "tipo": "texto",
+          "md": "La revisión Cochrane sobre selladores en dientes permanentes, actualizada en 2017, analizó 15 ensayos que compararon selladores de resina con no sellar. Encontró evidencia de **calidad moderada** de que los selladores de resina reducen la caries oclusal en niños y adolescentes: a los 24 meses, la reducción relativa se ubicó entre 11 % y 51 % según el riesgo de partida, con un beneficio similar hasta los 48 meses; con seguimientos más largos, la cantidad y la calidad de la evidencia disminuyen. Como ejemplo, la revisión calculó que si el 16 % de las superficies sin sellador desarrollaran caries en 24 meses, con sellador de resina esa proporción bajaría a alrededor de **5.2 %**. Para los selladores de ionómero de vidrio y para comparar materiales entre sí, la evidencia fue insuficiente."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Cómo leer una reducción relativa y una absoluta",
+          "md": "La **reducción relativa** compara la proporción de dientes con lesión en el grupo tratado con la del grupo control: «76 % menos lesiones». Es útil para comparar intervenciones, pero no dice cuántos pacientes se benefician. La **reducción absoluta** es la diferencia directa entre ambas proporciones; de ella se deriva el **número necesario a tratar**, que es el inverso de la reducción absoluta. Con 30 % de lesiones sin sellador y alrededor de 9.3 % con sellador, la reducción absoluta es de unos 20.7 puntos porcentuales y el número necesario a tratar es cercano a 5. Si el riesgo de partida fuera muy bajo, la misma reducción relativa produciría una reducción absoluta mucho menor y un número necesario a tratar mayor. Por eso la decisión de sellar se ajusta al riesgo del diente y del paciente. Además, la calidad de la evidencia, calificada con GRADE, indica cuánta confianza podemos tener en la estimación: moderada para sellar frente a no sellar, baja frente al barniz y muy baja para comparar materiales."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/05",
+          "proporcion": "4:3",
+          "alt": "Arcada inferior de un adolescente con selladores intactos en los primeros y segundos molares.",
+          "pie": "Selladores íntegros en primeros y segundos molares permanentes de un adolescente, sin lesiones en las superficies oclusales.",
+          "prompt": "Fotografía clínica intraoral realista, vista oclusal con espejo de la arcada inferior permanente completa de un adolescente de catorce años, con anatomía y número de dientes correctos. Los primeros y segundos molares tienen selladores blancos opacos, delgados e íntegros cubriendo sus fisuras; premolares, caninos e incisivos sanos. Encía rosa pálido sana, superficie limpia, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, brackets, amalgamas, cavidades, número incorrecto de dientes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seguridad y lo que todavía no se sabe"
+        },
+        {
+          "tipo": "texto",
+          "md": "La guía de 2016 revisó también los posibles efectos adversos. La preocupación más mencionada es el **bisfenol A** presente en algunos componentes de las resinas. El panel concluyó que la evidencia no respalda que la exposición transitoria a una cantidad pequeña de bisfenol A durante la colocación ponga a los pacientes en riesgo, y los ensayos que midieron eventos adversos no encontraron ninguno relacionado. Otro temor frecuente es que un sellador perdido deje al diente más vulnerable; los estudios que lo evaluaron no hallaron mayor riesgo de caries en dientes con selladores perdidos parcial o totalmente que en dientes nunca sellados.\n\nEntre los vacíos de evidencia, la guía señaló que **no se encontraron estudios en adultos**. Aun así, el panel sugirió que es razonable esperar efectos similares en otras edades, en especial en adultos con caries reciente. También pidió más estudios en dentición temporal y sobre la reaplicación de selladores.\n\nRecuerda que estas cifras provienen de ensayos en superficies oclusales de molares de niños y adolescentes. Cuando apliques la evidencia a otras superficies o edades, hazlo con prudencia y explícalo así a tus pacientes."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/06",
+          "proporcion": "1:1",
+          "alt": "Odontopediatra con equipo de protección revisa con espejo los molares de un niño sentado en la unidad.",
+          "pie": "La revisión periódica permite confirmar que el sellador sigue íntegro y que las superficies se mantienen sanas.",
+          "prompt": "Fotografía cuadrada realista en un consultorio de odontopediatría colorido y luminoso: una odontopediatra con cubrebocas, lentes de protección, gorro, bata clara y guantes de nitrilo revisa con espejo bucal los molares de un niño de unos nueve años recostado en la unidad con lentes de protección y babero; el encuadre muestra solo la boca abierta del niño y las manos de la profesional. Luz clínica blanca y luz natural suave, colores alegres pero sobrios. Evitar: texto, logotipos, marcas de agua, sangre, rostro identificable del niño, instrumental rotatorio, llanto."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Cuando los datos convencen a una escuela",
+          "md": "Una pasante en servicio social presenta al consejo escolar de una primaria la propuesta de una jornada de selladores en primeros molares de alumnos de primero y segundo grado. En lugar de decir solo «reducen la caries», muestra la gráfica de lesiones por cada 1,000 molares sellados y explica que, con el riesgo de partida de su comunidad, sellar unos cinco molares evitaría una lesión en dos o tres años. La claridad de los números facilita la autorización y el apoyo de las familias."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el estudio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Practica con la calculadora de este tema usando dos escenarios: una población de riesgo bajo, en la que el 10 % de los molares sin sellador desarrollaría una lesión, y una de riesgo alto, con 50 %. Aplica la misma reducción relativa de 76 % y compara cuántas lesiones se evitan por cada 1,000 molares. Verás por qué los programas priorizan a los grupos de mayor riesgo."
+        }
+      ],
+      "glosario": [
+        { "termino": "Guía de práctica clínica", "definicion": "Documento con recomendaciones basadas en una revisión sistemática de la evidencia para orientar decisiones clínicas." },
+        { "termino": "GRADE", "definicion": "Metodología que califica la calidad de la evidencia y la fuerza de las recomendaciones." },
+        { "termino": "Reducción relativa", "definicion": "Disminución proporcional del evento en el grupo tratado respecto al grupo control." },
+        { "termino": "Reducción absoluta", "definicion": "Diferencia directa entre la proporción de eventos en el grupo control y en el grupo tratado." },
+        { "termino": "Número necesario a tratar", "definicion": "Cantidad de pacientes o dientes que hay que tratar para evitar un evento; es el inverso de la reducción absoluta." },
+        { "termino": "Bisfenol A", "definicion": "Compuesto químico relacionado con algunos componentes de las resinas; la evidencia no muestra riesgo por la exposición breve durante la colocación de selladores." }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.2-1",
+          "q": "Según la guía ADA/AAPD de 2016, ¿cuánto redujeron los selladores la incidencia de lesiones oclusales en molares permanentes sanos frente a no sellar, a 2 o 3 años?",
+          "opciones": [
+            "76 %",
+            "11 %",
+            "25 %",
+            "100 %"
+          ],
+          "correcta": 0,
+          "explicacion": "Con datos de 9 ensayos, la reducción fue de 76 %, con evidencia de calidad moderada y recomendación fuerte."
+        },
+        {
+          "id": "t6.2-2",
+          "q": "¿Qué concluyó la guía sobre la comparación entre materiales de sellador?",
+          "opciones": [
+            "Que la resina es claramente superior",
+            "Que el ionómero de vidrio es claramente superior",
+            "Que la evidencia, de calidad muy baja, no permite determinar la superioridad de ninguno",
+            "Que solo deben usarse compómeros"
+          ],
+          "correcta": 2,
+          "explicacion": "El panel no pudo recomendar un material sobre otro y sugirió elegir según la posibilidad de aislamiento y la retención esperada."
+        },
+        {
+          "id": "t6.2-3",
+          "q": "Con 30 % de lesiones sin sellador y alrededor de 9.3 % con sellador, ¿cuál es aproximadamente el número necesario a tratar?",
+          "opciones": [
+            "50",
+            "5",
+            "1",
+            "100"
+          ],
+          "correcta": 1,
+          "explicacion": "La reducción absoluta es de unos 20.7 puntos porcentuales; su inverso es cercano a 5 molares sellados por lesión evitada."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Pit and fissure sealants for preventing dental decay in permanent teeth", "autor": "Ahovuo-Saloranta A., Forss H., Walsh T., Nordblad A., Mäkelä M., Worthington H. V. (Cochrane Database of Systematic Reviews)", "anio": 2017 }
+      ]
+    },
+    {
+      "n": "6.3",
+      "titulo": "Materiales para sellar: resina, ionómero y sus variantes",
+      "minutos": 13,
+      "enPocasPalabras": "Hay selladores de plástico dental, llamados resinas, y otros de un material que libera flúor, llamado ionómero de vidrio. Las resinas duran más si el diente se puede mantener bien seco. El ionómero tolera mejor la humedad y sirve en muelas que apenas están saliendo.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La guía ADA/AAPD de 2016 agrupó los selladores disponibles en cuatro familias, siguiendo una clasificación propuesta por Anusavice y colaboradores: **selladores de resina**, **selladores y cementos de ionómero de vidrio**, **selladores de resina modificados con poliácidos** (compómeros) y **selladores de ionómero de vidrio modificados con resina**. Todos buscan lo mismo, cubrir la fisura y mantenerse ahí, pero lo logran de formas distintas, y eso determina en qué situación clínica conviene cada uno."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Selladores de resina"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **selladores de resina** están formados por monómeros como el bisfenol A-glicidil metacrilato (Bis-GMA) o el uretano dimetacrilato (UDMA), que se polimerizan con un activador químico o, con más frecuencia, con luz de una longitud de onda e intensidad específicas. Pueden ser **sin relleno**, transparentes o con tinte, o **con relleno**, opacos y del color del diente o blancos. Los opacos o con tinte facilitan ver si el sellador sigue en su lugar en las revisiones.\n\nSu adhesión es **micromecánica**: antes de colocarlos se graba el esmalte con ácido fosfórico, que disuelve de forma selectiva la superficie de los prismas y crea microporosidades. La resina fluida penetra en ellas y, al polimerizar, forma prolongaciones llamadas **tags** que la anclan al esmalte. Esta unión es fuerte y duradera, pero tiene un requisito estricto: el esmalte grabado debe permanecer **seco y libre de saliva** hasta que el sellador polimeriza. Una contaminación mínima con saliva tapa las microporosidades y compromete la retención."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/07",
+          "proporcion": "4:3",
+          "alt": "Superficie oclusal de un molar con aspecto blanco tiza mate tras el grabado ácido, aislada con rollos de algodón.",
+          "pie": "El esmalte grabado y seco adquiere un aspecto blanco y mate: es la señal de que está listo para recibir un sellador de resina.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar inferior permanente de un niño, aislado con rollos de algodón y un eyector de saliva visible en el borde del encuadre. La superficie oclusal, recién grabada y seca, presenta un aspecto blanco tiza uniforme y mate en fosetas, fisuras y vertientes de las cúspides, sin restos de gel. Encía sana, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, saliva sobre la superficie, cavidades, anatomía incorrecta, manos sin guantes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Dos mecanismos de unión al esmalte",
+          "md": "El grabado ácido del esmalte, descrito por Buonocore a mediados del siglo XX, disuelve de manera diferencial los núcleos y las periferias de los prismas y aumenta la superficie y la energía superficial del esmalte. La resina de baja viscosidad moja esa superficie y fluye hacia las microporosidades por capilaridad; tras la polimerización, los tags de resina generan una retención micromecánica. La humedad es su enemigo porque el agua impide el contacto íntimo entre la resina hidrofóbica y el esmalte.\n\nEl ionómero de vidrio se une de otra forma. Resulta de la reacción ácido-base entre un polvo de vidrio de fluoroaluminosilicato y una solución acuosa de ácido poliacrílico. Los grupos carboxilo del poliácido forman enlaces iónicos con el calcio de la hidroxiapatita, una **unión química** que tolera mejor la humedad. Además, libera fluoruro y puede recargarse con fluoruro del medio. Su menor resistencia y su menor retención en fisuras explican por qué se pierde con más frecuencia, aunque restos del material pueden permanecer en el fondo de las fisuras."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Ionómero de vidrio y materiales híbridos"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los **selladores de ionómero de vidrio** se desarrollaron por su capacidad de liberar fluoruro y su tolerancia a la humedad. Son **hidrofílicos**, lo que los hace útiles cuando no se puede mantener el diente completamente seco. Su principal limitación es una retención menor que la de las resinas en la mayoría de los estudios. En la práctica, muchos clínicos lo usan como protección durante la erupción y, cuando el molar alcanza la oclusión y puede aislarse bien, revaloran la superficie y deciden si colocar una resina.\n\nLos **ionómeros modificados con resina** incorporan componentes resinosos al ionómero; conservan la liberación de fluoruro y la tolerancia relativa a la humedad, con un tiempo de trabajo más largo y menos sensibilidad al agua que el ionómero convencional. Los **compómeros** combinan la base de resina con algunas propiedades adhesivas y de liberación de fluoruro del ionómero.\n\nLa guía de 2016 propone una regla práctica para elegir: si el aislamiento seco es difícil, por ejemplo en un molar que no ha terminado de erupcionar y tiene encía sobre la zona a sellar, es preferible un material **más hidrofílico**, como el ionómero de vidrio; si el diente puede aislarse bien y se busca retención a largo plazo, es preferible un sellador de **resina**. En todos los casos recomienda seguir con cuidado las instrucciones del fabricante."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/08",
+          "proporcion": "4:3",
+          "alt": "Modelo tipodonto con un primer molar parcialmente erupcionado cubierto con un sellador de ionómero de vidrio blanco opaco.",
+          "pie": "En molares en erupción, un sellador de ionómero de vidrio puede colocarse aunque el aislamiento seco no sea posible.",
+          "prompt": "Fotografía realista de estudio de un modelo tipodonto de dentición mixta de un niño de seis años, con el primer molar inferior permanente simulado en erupción, más bajo que los molares temporales vecinos y con una banda de encía artificial rosa sobre su parte distal. Las fisuras visibles del molar están cubiertas por un material blanco opaco y mate, de aspecto ligeramente granular. Una mano con guante de nitrilo sostiene una sonda de punta roma junto al modelo. Luz suave de estudio, fondo claro. Evitar: texto, etiquetas, logotipos, marcas de agua, sangre, rostros, número incorrecto de dientes, manos sin guantes."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Detalles que influyen en el resultado"
+        },
+        {
+          "tipo": "texto",
+          "md": "Dentro de las resinas, las **sin relleno** son más fluidas y penetran con más facilidad en las fisuras estrechas; las **con relleno** son más resistentes al desgaste, pero su mayor viscosidad puede dificultar su entrada en el fondo de la fisura y, si quedan excesos, requieren ajuste oclusal. Algunas resinas incorporan compuestos que liberan fluoruro; la cantidad liberada es pequeña y su beneficio clínico adicional no está bien establecido, por lo que la retención sigue siendo el criterio principal.\n\nLa calidad del resultado también depende del equipo. Una lámpara de fotopolimerizar con su punta sucia, dañada o con baja potencia puede dejar el sellador sin polimerizar en su base, aunque la superficie se vea dura. Por eso conviene limpiar y revisar la punta, comprobar periódicamente la intensidad de la luz con un radiómetro y respetar el tiempo de exposición que indica el fabricante. Del mismo modo, los materiales deben almacenarse según sus instrucciones y no usarse después de su fecha de caducidad, porque sus propiedades cambian con el tiempo y la temperatura."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Comparación práctica de materiales de sellador",
+          "columnas": ["Material", "Unión al esmalte", "Tolerancia a la humedad", "Retención", "Uso típico"],
+          "filas": [
+            ["Resina sin relleno o con relleno", "Micromecánica tras grabado ácido", "Baja", "Alta si se aísla bien", "Molares completamente erupcionados con buen aislamiento"],
+            ["Ionómero de vidrio", "Química con el calcio del esmalte", "Alta", "Menor", "Molares en erupción o pacientes con aislamiento difícil"],
+            ["Ionómero modificado con resina", "Química y micromecánica", "Intermedia", "Intermedia", "Situaciones intermedias; libera fluoruro"],
+            ["Compómero", "Principalmente micromecánica", "Baja a intermedia", "Variable", "Alternativa según el criterio clínico y el fabricante"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m06/d3",
+          "pie": "Elegir el material según el aislamiento posible y la retención que se busca.",
+          "descripcion": "Gráfica cualitativa de dos ejes. El eje horizontal indica la tolerancia a la humedad, de baja a alta. El eje vertical indica la retención esperada en fisuras, de menor a mayor. Tres óvalos se ubican en la gráfica: resina arriba a la izquierda, ionómero de vidrio abajo a la derecha e ionómero modificado con resina en una posición intermedia. Debajo de la gráfica, dos flechas indican: buen aislamiento, elegir hacia la resina; aislamiento difícil, elegir hacia el ionómero.",
+          "elementos": [
+            "Tolerancia a la humedad",
+            "Retención en fisuras",
+            "Resina",
+            "Ionómero de vidrio",
+            "Ionómero modificado con resina",
+            "Buen aislamiento",
+            "Aislamiento difícil"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/09",
+          "proporcion": "4:3",
+          "alt": "Bandeja con jeringas y cápsulas de materiales de sellador sin etiquetas junto a una lámpara de fotopolimerizar.",
+          "pie": "Los selladores de resina se polimerizan con luz; los de ionómero endurecen por una reacción ácido-base.",
+          "prompt": "Fotografía de producto realista sobre una bandeja de consultorio cubierta con un campo desechable azul claro: dos jeringas pequeñas de material con puntas aplicadoras finas, una cápsula de ionómero de vidrio sin etiquetas, microaplicadores, rollos de algodón y, al lado, una lámpara de fotopolimerizar inalámbrica moderna de color blanco con su punta de fibra óptica y protector naranja. Iluminación suave y uniforme, colores limpios, enfoque nítido. Evitar: texto, etiquetas, marcas comerciales, logotipos, marcas de agua, sangre, manos sin guantes, desorden, luz azul encendida dirigida a la cámara."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Protege los ojos durante la fotopolimerización",
+          "md": "La luz de las lámparas de fotopolimerizar puede dañar la retina con exposiciones repetidas. Usa filtros o escudos naranjas sobre la punta de la lámpara o lentes con filtro para el operador, la asistente y el paciente, y nunca mires directamente la luz. La NOM-013-SSA2-2015 incluye proteger al paciente con anteojos especiales en los procedimientos de fotopolimerización."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada material o concepto con su característica",
+          "instruccion": "Une cada elemento con la descripción que le corresponde.",
+          "pares": [
+            { "a": "Sellador de resina", "b": "Se une por retención micromecánica tras el grabado ácido" },
+            { "a": "Ionómero de vidrio", "b": "Se une químicamente al calcio y tolera mejor la humedad" },
+            { "a": "Tags de resina", "b": "Prolongaciones que anclan el sellador a las microporosidades del esmalte" },
+            { "a": "Contaminación con saliva", "b": "Tapa las microporosidades y compromete la retención de la resina" },
+            { "a": "Sellador opaco o con tinte", "b": "Facilita comprobar en las revisiones que sigue en su lugar" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el consultorio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Revisa los selladores que tienes en tu consultorio y anota, para cada uno, su tipo, si es opaco o transparente y qué indica el fabricante sobre el grabado y la polimerización. Ten a la mano al menos una opción de resina y una de ionómero: así podrás elegir según el aislamiento posible en cada diente, en lugar de usar siempre el mismo material. Aprovecha también para medir la intensidad de tu lámpara y anotar la fecha de la revisión en una etiqueta del equipo."
+        }
+      ],
+      "glosario": [
+        { "termino": "Grabado ácido", "definicion": "Aplicación de ácido fosfórico sobre el esmalte para crear microporosidades que permiten la retención micromecánica de la resina." },
+        { "termino": "Retención micromecánica", "definicion": "Unión física que se logra cuando la resina penetra y polimeriza dentro de las microporosidades del esmalte grabado." },
+        { "termino": "Ionómero de vidrio", "definicion": "Material que endurece por reacción ácido-base, se une químicamente al diente, tolera la humedad y libera fluoruro." },
+        { "termino": "Fotopolimerización", "definicion": "Endurecimiento de una resina por medio de luz de una longitud de onda e intensidad específicas." },
+        { "termino": "Hidrofílico", "definicion": "Que tiene afinidad por el agua y tolera mejor un ambiente húmedo." }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.3-1",
+          "q": "¿Qué material de sellador es preferible en un molar parcialmente erupcionado con encía sobre la zona a sellar?",
+          "opciones": [
+            "Resina sin relleno, porque se retiene mejor",
+            "Ninguno; hay que esperar a que termine la erupción en todos los casos",
+            "Amalgama",
+            "Un material más hidrofílico, como el ionómero de vidrio"
+          ],
+          "correcta": 3,
+          "explicacion": "Cuando el aislamiento seco es difícil, la guía de 2016 sugiere un material más tolerante a la humedad."
+        },
+        {
+          "id": "t6.3-2",
+          "q": "¿Qué ocurre si el esmalte grabado se contamina con saliva antes de colocar un sellador de resina?",
+          "opciones": [
+            "Mejora la adhesión",
+            "Se tapan las microporosidades y se compromete la retención",
+            "El sellador endurece más rápido",
+            "No tiene ningún efecto"
+          ],
+          "correcta": 1,
+          "explicacion": "La resina es hidrofóbica; la saliva impide que penetre en las microporosidades del esmalte grabado."
+        },
+        {
+          "id": "t6.3-3",
+          "q": "¿Cómo se une el ionómero de vidrio al esmalte?",
+          "opciones": [
+            "Mediante enlaces iónicos entre el poliácido y el calcio del diente",
+            "Solo por retención micromecánica tras grabado con ácido fosfórico",
+            "Por fusión con calor",
+            "No se une; solo se apoya en la fisura"
+          ],
+          "correcta": 0,
+          "explicacion": "Los grupos carboxilo del ácido poliacrílico forman enlaces iónicos con el calcio de la hidroxiapatita."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en literatura de materiales dentales sobre adhesión por grabado ácido y química del ionómero de vidrio", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "6.4",
+      "titulo": "Indicaciones: qué dientes y qué lesiones sellar",
+      "minutos": 13,
+      "enPocasPalabras": "El dentista decide qué muelas sellar según qué tan profundos son sus surcos, si ya hay manchas de caries y qué tanto riesgo de caries tiene la persona. También se pueden sellar manchas iniciales para detenerlas. Las caries que ya tienen un hoyo grande necesitan otro tratamiento.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Saber que los selladores funcionan no responde la pregunta que te harás en la consulta: **¿sello este diente, hoy?** La decisión integra tres niveles de información que ya conoces. A nivel de la **superficie**, el diagnóstico con ICDAS II y la actividad de la lesión, que estudiaste en el módulo 4. A nivel del **diente**, su anatomía, su fase de erupción y la posibilidad de aislarlo. A nivel de la **persona**, su riesgo de caries, que estudiaste en el módulo 3, y su posibilidad de acudir a revisiones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Superficies sanas y lesiones no cavitadas"
+        },
+        {
+          "tipo": "texto",
+          "md": "La guía ADA/AAPD de 2016 recomienda sellar los molares temporales y permanentes de niños y adolescentes con **superficies oclusales sanas** o con **lesiones no cavitadas**. Esta segunda indicación es importante y todavía poco aplicada: sellar una lesión inicial, que corresponde en general a los códigos ICDAS 1 y 2, es una forma de **tratamiento microinvasivo** que ayuda a detener su progresión sin retirar tejido. La guía cita la definición del Sistema de Clasificación de Caries de la ADA, según la cual una lesión no cavitada se caracteriza por un cambio de color, brillo o estructura superficial, antes de que exista una ruptura macroscópica de la superficie.\n\nEn superficies sanas, el beneficio depende sobre todo del riesgo: en un molar con fisuras profundas, recién erupcionado, en una persona con lesiones activas en otros dientes, el beneficio esperado es alto. En un molar con fisuras poco profundas, erupcionado hace años y sin lesiones, en una persona con riesgo bajo, el beneficio es menor y la decisión se comparte con el paciente o su familia."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/10",
+          "proporcion": "4:3",
+          "alt": "Molar permanente con opacidades blancas en el fondo de las fisuras, sin cavidad, candidato a sellador.",
+          "pie": "Lesión no cavitada en fisuras: un candidato a sellado como tratamiento microinvasivo.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un segundo molar inferior permanente de un adolescente de trece años, con anatomía correcta. Las fisuras muestran opacidades blancas y ligeramente amarillentas en su fondo y paredes, visibles con el diente seco, sin ruptura del esmalte ni sombras oscuras. Superficie limpia, encía sana en el borde, rollos de algodón desenfocados, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, cavidades, restauraciones, anatomía incorrecta."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Qué pasa con las bacterias bajo un sellador",
+          "md": "Una preocupación tradicional era «dejar caries debajo» del sellador. Los estudios clínicos que evaluaron lesiones selladas mostraron que, mientras el sellador permanece íntegro y bien adaptado, el número de bacterias viables bajo él disminuye con el tiempo y la lesión tiende a no progresar. La explicación es ecológica, coherente con la hipótesis de la placa ecológica del módulo 1: las bacterias cariogénicas dependen de los azúcares de la dieta y, aisladas de ellos, su metabolismo se reduce de forma drástica. Por eso la integridad del sellado es la variable crítica. Un sellador con microfiltración en sus márgenes deja de aislar la lesión. Este principio también fundamenta otras técnicas de manejo mínimamente invasivo que estudiarás en el módulo 8."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cuándo el sellador no es la respuesta"
+        },
+        {
+          "tipo": "texto",
+          "md": "El sellador está pensado para superficies sin cavidad o con lesiones iniciales. Cuando existe una **cavidad con dentina expuesta** (códigos ICDAS 5 y 6), o una sombra de dentina con radiolucidez profunda en la aleta de mordida, la lesión requiere otro tipo de manejo, desde técnicas mínimamente invasivas hasta restauraciones, que se estudian en los módulos 8 y 9. Las situaciones intermedias, como una microcavidad en esmalte (código 3) o una sombra de dentina sin cavidad (código 4), requieren un juicio clínico más fino que integra la radiografía, la actividad y el riesgo, y se abordan en el contexto del manejo según ICCMS.\n\nTambién hay situaciones en las que conviene posponer o elegir otro material: un diente que no puede aislarse de ninguna forma, un paciente que no tolera el procedimiento ese día o una superficie con dudas diagnósticas que conviene revalorar. En esos casos, el barniz de fluoruro y el control de la biopelícula sirven como puente hasta la siguiente cita. Y la decisión no es definitiva: si el riesgo de la persona cambia, por ejemplo por un tratamiento de ortodoncia o por un cambio en su alimentación, vuelve a valorar las superficies que antes decidiste no sellar."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Orientación para decidir el sellado de una superficie oclusal",
+          "columnas": ["Situación de la superficie", "Orientación general", "Consideraciones"],
+          "filas": [
+            ["Sana, fisuras profundas, molar recién erupcionado, riesgo elevado", "Sellar", "Máximo beneficio esperado"],
+            ["Sana, fisuras poco profundas, riesgo bajo", "Decisión compartida", "Beneficio absoluto menor; valorar preferencias y seguimiento"],
+            ["Lesión no cavitada activa (ICDAS 1 o 2)", "Sellar como tratamiento microinvasivo", "Junto con control de biopelícula y fluoruro"],
+            ["Microcavidad o sombra de dentina (ICDAS 3 o 4)", "Juicio clínico individual", "Integrar radiografía, actividad y riesgo"],
+            ["Cavidad con dentina visible (ICDAS 5 o 6)", "Otro tipo de manejo", "Ver los módulos 8 y 9"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m06/d4",
+          "pie": "Ruta de decisión para el sellado de fosetas y fisuras.",
+          "descripcion": "Diagrama de flujo vertical. Inicio: superficie oclusal limpia y seca, examinada con ICDAS II. Primera pregunta: ¿hay cavidad con dentina visible? Sí lleva a manejo restaurador o mínimamente invasivo. No lleva a la segunda pregunta: ¿hay lesión no cavitada? Sí lleva a sellar como tratamiento microinvasivo. No lleva a la tercera pregunta: ¿el diente y la persona tienen riesgo elevado o fisuras profundas? Sí lleva a sellar como prevención primaria. No lleva a decisión compartida y vigilancia. Al pie de todas las ramas: elegir material según el aislamiento posible y programar revisión.",
+          "elementos": [
+            "Examen ICDAS II",
+            "¿Cavidad con dentina visible?",
+            "¿Lesión no cavitada?",
+            "¿Riesgo elevado o fisuras profundas?",
+            "Manejo restaurador o mínimamente invasivo",
+            "Sellar como tratamiento microinvasivo",
+            "Sellar como prevención primaria",
+            "Decisión compartida y vigilancia",
+            "Elegir material según el aislamiento"
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Más allá de los primeros molares"
+        },
+        {
+          "tipo": "texto",
+          "md": "Aunque los primeros molares permanentes son la prioridad clásica, las indicaciones son más amplias. La guía de 2016 incluye los **molares temporales**, y la NOM-013-SSA2-2015 promueve el uso de selladores en la dentición temporal. Los **segundos molares permanentes**, que erupcionan alrededor de los doce años, tienen la misma vulnerabilidad durante su erupción y a menudo se olvidan. Los **premolares** con fisuras profundas y los **cíngulos** o fosetas palatinas profundas de los incisivos laterales superiores también pueden beneficiarse en personas con riesgo; la norma menciona expresamente los cíngulos profundos. En **adultos**, la guía no encontró estudios, pero sugiere que es razonable esperar efectos semejantes, en especial si hay caries reciente."
+        },
+        {
+          "tipo": "texto",
+          "md": "La decisión de sellar se comunica y se comparte. Explica a la persona o a su familia qué es un sellador, qué superficie se va a proteger y por qué, cuánto tiempo suele durar, que no requiere anestesia ni desgaste del diente sano y que necesitará revisiones. Muchas familias preguntan si el sellador «es para siempre» o si sustituye al cepillado: aclarar ambas dudas desde el inicio evita frustraciones cuando un sellador se pierde o cuando aparece una lesión en una superficie lisa.\n\nEn personas con aparatos de ortodoncia fija, con boca seca o con discapacidades que dificultan la higiene, el riesgo aumenta y el sellado de superficies susceptibles adquiere más valor. En cambio, si no hay forma razonable de dar seguimiento, conviene priorizar los dientes y superficies con mayor riesgo y reforzar las medidas que la persona sí puede mantener en casa."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/11",
+          "proporcion": "4:3",
+          "alt": "Odontóloga con cubrebocas muestra a una madre y a su hijo, en un modelo tipodonto, qué superficies se van a sellar.",
+          "pie": "Explicar con un modelo qué se va a sellar y por qué facilita la decisión compartida con la familia.",
+          "prompt": "Fotografía realista en un consultorio dental luminoso: una odontóloga con cubrebocas, lentes de protección sobre la cabeza y bata blanca sostiene un modelo tipodonto de arcada inferior y señala con una sonda las fisuras de un molar. Frente a ella, una madre con cubrebocas y su hijo de unos diez años, ambos vistos de perfil parcial o de espaldas sin rostros identificables, observan el modelo. Luz natural suave, colores cálidos y neutros, ambiente tranquilo. Evitar: texto, logotipos, marcas de agua, sangre, rostros identificables, instrumental en uso, expresiones de miedo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/12",
+          "proporcion": "4:3",
+          "alt": "Cara palatina de un incisivo lateral superior con una foseta profunda en el cíngulo.",
+          "pie": "Las fosetas palatinas profundas de los incisivos laterales superiores también pueden sellarse en personas con riesgo.",
+          "prompt": "Fotografía clínica intraoral realista tomada con espejo de la cara palatina de los incisivos superiores permanentes de un adolescente, encuadre cerrado de dientes y paladar anterior. El incisivo lateral muestra un cíngulo prominente con una foseta palatina profunda y estrecha en su centro, sin cavidad ni manchas. Superficies limpias y secas, encía y mucosa palatina sanas, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, restauraciones, anatomía incorrecta, espejo empañado."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "El riesgo como criterio en la norma",
+          "md": "La NOM-013-SSA2-2015 indica aplicar selladores de fosetas y fisuras de acuerdo con el riesgo de caries y promover su uso en la dentición temporal y al aparecer la dentición permanente, con énfasis en el primer molar. Registrar en el expediente el riesgo de la persona y el diagnóstico de cada superficie justifica la decisión de sellar, o de no hacerlo, ante cualquier revisión institucional."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: ¿sellar o no sellar?",
+          "situacion": "Un adolescente de 12 años acude a revisión. Tiene dos lesiones activas en superficies lisas tratadas el año pasado. Sus segundos molares inferiores terminaron de erupcionar y tienen fisuras profundas; en el 37 observas opacidades blancas en el fondo de las fisuras, sin ruptura del esmalte (ICDAS 2), y el 47 está sano. El aislamiento con rollos de algodón es adecuado. ¿Qué decides?",
+          "opciones": [
+            { "texto": "Sellar el 37 como tratamiento microinvasivo y el 47 como prevención primaria, con refuerzo de higiene y fluoruro", "correcta": true, "retro": "Correcto. Hay riesgo elevado, fisuras profundas, una lesión no cavitada y buen aislamiento: ambos molares son candidatos." },
+            { "texto": "Restaurar el 37 con resina tras eliminar el tejido opaco y no sellar el 47", "correcta": false, "retro": "Una lesión ICDAS 2 sin cavidad no requiere remoción de tejido; el sellado la controla. Dejar el 47 sin protección ignora el riesgo del paciente." },
+            { "texto": "No hacer nada y revisar en dos años", "correcta": false, "retro": "Con riesgo elevado y una lesión activa, esperar dos años permite que la lesión progrese." },
+            { "texto": "Aplicar solo barniz de fluoruro en ambas superficies oclusales", "correcta": false, "retro": "El barniz es útil, pero la guía sugiere preferir el sellador al barniz en superficies oclusales de molares." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para el expediente"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando indiques un sellador, anota en el expediente tres datos que justifiquen la decisión: el código ICDAS II de la superficie, la fase de erupción del diente y el riesgo de caries de la persona. Cuando decidas no sellar, anota también por qué. Ese registro mejora tus decisiones y te protege ante cualquier auditoría."
+        }
+      ],
+      "glosario": [
+        { "termino": "Lesión no cavitada", "definicion": "Lesión de caries con cambio de color, brillo o estructura superficial, sin ruptura macroscópica de la superficie." },
+        { "termino": "Tratamiento microinvasivo", "definicion": "Manejo de una lesión que no retira tejido dental o retira una cantidad mínima, como el sellado de una lesión no cavitada." },
+        { "termino": "Cíngulo", "definicion": "Abultamiento de esmalte en el tercio cervical de la cara palatina o lingual de incisivos y caninos." },
+        { "termino": "Microfiltración", "definicion": "Paso de fluidos y bacterias por la interfase entre un material y el diente cuando el sellado no es hermético." },
+        { "termino": "Decisión compartida", "definicion": "Elección del tratamiento que el profesional y el paciente o su familia toman juntos tras conocer beneficios, riesgos y alternativas." }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.4-1",
+          "q": "Según la guía ADA/AAPD de 2016, ¿en qué superficies se recomienda sellar?",
+          "opciones": [
+            "Solo en superficies con cavidad y dentina visible",
+            "Solo en dientes temporales",
+            "En superficies oclusales sanas y con lesiones no cavitadas de molares temporales y permanentes",
+            "Solo en adultos mayores"
+          ],
+          "correcta": 2,
+          "explicacion": "La recomendación fuerte abarca superficies sanas y lesiones no cavitadas en molares de niños y adolescentes."
+        },
+        {
+          "id": "t6.4-2",
+          "q": "¿Por qué una lesión no cavitada tiende a detenerse bajo un sellador íntegro?",
+          "opciones": [
+            "Porque el sellador contiene antibióticos",
+            "Porque las bacterias atrapadas quedan aisladas de los azúcares de la dieta",
+            "Porque el sellador disuelve la lesión",
+            "Porque el sellador aumenta la saliva"
+          ],
+          "correcta": 1,
+          "explicacion": "Sin acceso a los azúcares, el metabolismo de las bacterias cariogénicas se reduce y la lesión deja de progresar."
+        },
+        {
+          "id": "t6.4-3",
+          "q": "¿Qué situación requiere un manejo distinto al sellador?",
+          "opciones": [
+            "Un molar con fisuras profundas recién erupcionado",
+            "Una lesión ICDAS 2 activa",
+            "Una foseta palatina profunda en un paciente con riesgo",
+            "Una cavidad con dentina visible, ICDAS 5"
+          ],
+          "correcta": 3,
+          "explicacion": "Las cavidades con dentina visible requieren manejo mínimamente invasivo o restaurador, no solo sellado."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 }
+      ]
+    },
+    {
+      "n": "6.5",
+      "titulo": "La colocación como concepto, el seguimiento y los programas escolares",
+      "minutos": 14,
+      "enPocasPalabras": "Para poner un sellador, el dentista limpia la muela, la mantiene seca, prepara la superficie, coloca el material y lo endurece. Después revisa que la mordida esté bien. En cada visita se comprueba que siga en su lugar, y en algunas escuelas se colocan selladores a muchos niños.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La eficacia que viste en los ensayos clínicos depende de que el sellador se coloque bien y se mantenga. Por eso este tema explica **la lógica de cada etapa**, no una receta: los tiempos, los productos y los pasos exactos dependen del material elegido y de las instrucciones del fabricante, y el procedimiento lo realiza personal capacitado bajo supervisión profesional, con todas las medidas de bioseguridad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La lógica de cada etapa"
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Colocación de un sellador de resina (concepto)",
+          "pasos": [
+            { "titulo": "Diagnóstico y selección", "md": "Se confirma con el diente limpio y seco que la superficie es candidata: sana con riesgo o con lesión no cavitada. Se elige el material según el aislamiento posible." },
+            { "titulo": "Limpieza de la superficie", "md": "Se retira la biopelícula de las fosetas y fisuras. La NOM-013-SSA2-2015 menciona la profilaxis con cepillo dental y cepillo rotatorio antes de colocar selladores." },
+            { "titulo": "Aislamiento", "md": "Se controla la humedad con rollos de algodón y eyector, o con aislamiento absoluto cuando es posible. Es la condición más importante para la retención de una resina." },
+            { "titulo": "Grabado del esmalte", "md": "Se aplica ácido fosfórico en la superficie a sellar durante el tiempo que indica el fabricante para crear las microporosidades." },
+            { "titulo": "Lavado y secado", "md": "Se retira el ácido con agua y se seca hasta que el esmalte se ve blanco y mate. Si se contamina con saliva, se repite el grabado." },
+            { "titulo": "Aplicación del sellador", "md": "Se coloca el material para que fluya en fosetas y fisuras, evitando burbujas y excesos en las vertientes de las cúspides." },
+            { "titulo": "Polimerización", "md": "Se endurece con la lámpara según las indicaciones del fabricante, con protección ocular para todos los presentes." },
+            { "titulo": "Verificación", "md": "Se comprueba con una sonda de punta roma que el sellador esté retenido y sin defectos, y se revisa la oclusión para retirar contactos prematuros si los hay." }
+          ]
+        },
+        {
+          "tipo": "texto",
+          "md": "Con un sellador de **ionómero de vidrio** la lógica cambia en dos puntos. En lugar del grabado con ácido fosfórico, suele usarse un acondicionador de ácido poliacrílico o se aplica el material directamente, según el fabricante, y el endurecimiento ocurre por la reacción química del material; en los ionómeros modificados con resina se completa con luz. El resto de las etapas, en especial la limpieza, el control de la humedad, la verificación y el seguimiento, se mantienen.\n\nEn todos los casos se trabaja con equipo de protección completo para el operador y la asistente (guantes, cubrebocas, protección ocular y bata), lentes de protección para el paciente, instrumental estéril o desechable y presentaciones que eviten la contaminación cruzada."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/13",
+          "proporcion": "16:9",
+          "alt": "Odontóloga y asistente con equipo de protección completo colocan un sellador en un niño, usando lámpara de fotopolimerizar con escudo naranja.",
+          "pie": "La colocación a cuatro manos facilita el aislamiento, que es la clave de la retención del sellador.",
+          "prompt": "Fotografía realista en formato panorámico de un consultorio dental infantil luminoso: una odontóloga y una asistente, ambas con cubrebocas, lentes de protección, gorro, bata desechable y guantes de nitrilo, trabajan a cuatro manos en la boca de un niño recostado con lentes de protección oscuros y babero; solo se ve la boca del niño, sin rostro identificable. La odontóloga sostiene una lámpara de fotopolimerizar con escudo naranja sobre un molar inferior y la asistente sostiene el eyector. Luz clínica blanca, colores limpios. Evitar: texto, logotipos, marcas de agua, sangre, rostro identificable, llanto, equipo de protección incompleto."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena las etapas de la colocación de un sellador de resina",
+          "instruccion": "Coloca las etapas en el orden lógico del procedimiento.",
+          "elementos": [
+            "Limpiar la superficie para retirar la biopelícula",
+            "Aislar el diente para controlar la humedad",
+            "Grabar el esmalte con ácido fosfórico",
+            "Lavar y secar hasta ver el esmalte blanco y mate",
+            "Aplicar el sellador evitando burbujas",
+            "Polimerizar con luz y protección ocular",
+            "Verificar la retención y la oclusión"
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Errores que acortan la vida del sellador",
+          "md": "Los fallos más frecuentes son la **contaminación con saliva** después del grabado, el **secado insuficiente**, las **burbujas** atrapadas en la fisura y los **excesos** que quedan sobre las vertientes de las cúspides y se fracturan con la masticación. Casi todos se previenen con buen aislamiento, trabajo a cuatro manos y una verificación cuidadosa al terminar."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seguimiento: el sellador también se revisa"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un sellador no es una intervención de «una vez y para siempre». En cada revisión se comprueba si está **completo, parcialmente perdido o ausente**, y si hay signos de lesión en los márgenes. El código ICDAS II ayuda a registrarlo: el primer dígito 1 indica sellador parcial y el 2, sellador completo. Un sellador perdido o con defectos se **repara o se reaplica**; la guía de 2016 señala que conviene vigilar con más frecuencia los selladores con mayor probabilidad de pérdida, como los de ionómero de vidrio.\n\nEl intervalo de revisión depende del riesgo de caries de la persona. El seguimiento también es una oportunidad para reforzar la higiene, el uso de pasta fluorurada y los hábitos de alimentación, porque el sellador protege las fisuras, pero no el resto del diente. Si en una revisión encuentras una lesión activa en el margen de un sellador, regístrala con el código correspondiente y valora su manejo como el de cualquier otra lesión, sin asumir que el sellador falló por completo."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m06/d5",
+          "pie": "Ciclo de seguimiento del sellador en las revisiones periódicas.",
+          "descripcion": "Diagrama circular con cuatro etapas unidas por flechas en sentido horario: revisión del sellador con la superficie limpia y seca; clasificación como completo, parcial o ausente; decisión de mantener, reparar o reaplicar; refuerzo de higiene, fluoruro y dieta. En el centro del círculo, la leyenda intervalo según el riesgo de caries.",
+          "elementos": [
+            "Revisión con superficie limpia y seca",
+            "Sellador completo, parcial o ausente",
+            "Mantener, reparar o reaplicar",
+            "Refuerzo de higiene, fluoruro y dieta",
+            "Intervalo según el riesgo de caries"
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/14",
+          "proporcion": "4:3",
+          "alt": "Molar permanente con un sellador parcialmente perdido en la fisura distal durante una revisión.",
+          "pie": "Sellador parcialmente perdido: se registra con el código 1 del primer dígito de ICDAS II y se valora repararlo.",
+          "prompt": "Fotografía clínica macro realista, vista oclusal de un primer molar inferior permanente de un niño de diez años, con anatomía correcta. Un sellador blanco opaco cubre la fosa central y la fisura mesial, pero falta en la fisura distal, donde se ve el esmalte natural de la fisura sin cavidad. Superficie limpia y seca, encía sana en el borde, rollos de algodón desenfocados, iluminación clínica uniforme, colores naturales, alta nitidez. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, rostro, cavidades, amalgamas, anatomía incorrecta."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Programas escolares de selladores"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los niños con mayor riesgo de caries suelen ser también los que menos acceso tienen al consultorio. Por eso, llevar los selladores a la escuela es una estrategia de salud pública con buena evidencia. En 2016, un informe de los CDC de Estados Unidos encontró que los niños de 6 a 11 años **sin selladores tenían casi tres veces más caries en los primeros molares** que quienes los tenían, que cerca de 60 % de los niños de familias de bajos ingresos no tenía selladores, y que los programas escolares dirigidos a escuelas con alumnado de mayor riesgo son una forma eficaz de aumentar su uso; el mismo informe estimó que estos programas llegan a ahorrar costos después de dos años.\n\nEn México, la NOM-013-SSA2-2015 promueve los selladores como parte de la atención preventiva infantil, y las jornadas escolares organizadas por los servicios de salud, las facultades de odontología y los pasantes en servicio social son una vía natural para aplicarlos. Un programa escolar requiere autorización de la escuela, consentimiento informado de madres, padres o tutores, un espacio con condiciones de bioseguridad, selección de dientes con examen previo y un plan de seguimiento para revisar y reaplicar.\n\nFuera del consultorio, la bioseguridad exige la misma disciplina que dentro: instrumental estéril en paquetes cerrados, superficies con barreras desechables, higiene de manos entre cada niño, equipo de protección completo y manejo de los residuos peligrosos biológico-infecciosos conforme a la normativa vigente. También conviene registrar a cada alumno con su código ICDAS II por superficie, para que la revisión de seguimiento compare datos y no impresiones."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una jornada escolar bien organizada",
+          "md": "Un equipo de pasantes planea una jornada en una primaria. Una semana antes envía a las familias el consentimiento informado con una explicación sencilla. El día de la jornada, una pareja examina y registra el código ICDAS II de los primeros molares, otra coloca los selladores a cuatro manos con unidad portátil, y una tercera hace educación en higiene con el resto del grupo. Seis meses después regresan a revisar retención y reaplicar donde hace falta."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m06/15",
+          "proporcion": "16:9",
+          "alt": "Jornada escolar de salud bucal con una unidad dental portátil en un salón y profesionales con equipo de protección.",
+          "pie": "Los programas escolares acercan los selladores a los niños con mayor riesgo y menor acceso al consultorio.",
+          "prompt": "Fotografía realista en formato panorámico de una jornada de salud bucal en el salón de usos múltiples de una primaria mexicana luminosa: una unidad dental portátil con sillón reclinable, una lámpara y una mesa con instrumental ordenado sobre campos desechables. Dos profesionales con cubrebocas, lentes de protección, gorro, bata y guantes atienden a un niño recostado, del que no se ve el rostro. Al fondo, desenfocados y de espaldas, niños con uniforme escolar esperan con una maestra. Luz natural abundante, colores alegres. Evitar: texto, letreros, logotipos, marcas de agua, sangre, rostros identificables de niños, desorden."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu servicio social o tu consultorio"
+        },
+        {
+          "tipo": "texto",
+          "md": "Revisa en tu agenda o en tu programa de servicio social cuántos niños de seis a ocho años y de once a trece años atendiste el último mes y cuántos tienen sus primeros o segundos molares sellados. Si la proporción es baja, organiza un bloque de citas o una jornada dedicada a selladores con seguimiento programado a seis meses."
+        }
+      ],
+      "glosario": [
+        { "termino": "Aislamiento", "definicion": "Control de la humedad del campo operatorio con rollos de algodón, eyector o dique de goma." },
+        { "termino": "Trabajo a cuatro manos", "definicion": "Técnica en la que el operador y la asistente trabajan coordinados para mejorar el aislamiento y la eficiencia." },
+        { "termino": "Retención del sellador", "definicion": "Permanencia del sellador en la superficie a lo largo del tiempo; se clasifica como completo, parcial o ausente." },
+        { "termino": "Reaplicación", "definicion": "Colocación de nuevo material sobre un sellador perdido o con defectos." },
+        { "termino": "Programa escolar de selladores", "definicion": "Estrategia de salud pública que coloca selladores en escuelas, con prioridad a niños de mayor riesgo." }
+      ],
+      "verificacion": [
+        {
+          "id": "t6.5-1",
+          "q": "¿Qué haces si el esmalte grabado se contamina con saliva antes de aplicar un sellador de resina?",
+          "opciones": [
+            "Lavar, secar y repetir el grabado antes de aplicar el sellador",
+            "Aplicar el sellador de todas formas",
+            "Secar solo con algodón y continuar",
+            "Cambiar a amalgama"
+          ],
+          "correcta": 0,
+          "explicacion": "La saliva tapa las microporosidades; hay que volver a grabar para recuperar la superficie adhesiva."
+        },
+        {
+          "id": "t6.5-2",
+          "q": "En el registro ICDAS II, ¿qué indica el primer dígito 1?",
+          "opciones": [
+            "Sellador completo",
+            "Restauración de amalgama",
+            "Sellador parcial",
+            "Diente ausente"
+          ],
+          "correcta": 2,
+          "explicacion": "El primer dígito 1 corresponde a sellador parcial y el 2 a sellador completo."
+        },
+        {
+          "id": "t6.5-3",
+          "q": "Según el informe de los CDC de 2016, ¿qué se observó en niños de 6 a 11 años sin selladores?",
+          "opciones": [
+            "Menos caries que los niños con selladores",
+            "La misma cantidad de caries",
+            "Más caries solo en los incisivos",
+            "Casi tres veces más caries en los primeros molares"
+          ],
+          "correcta": 3,
+          "explicacion": "Los niños sin selladores tenían casi tres veces más caries en los primeros molares que quienes los tenían."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Vital Signs: Dental Sealant Use and Untreated Tooth Decay Among U.S. School-Aged Children", "autor": "Griffin S. O., Wei L., Gooch B. F., Weno K., Espinoza L. (Centers for Disease Control and Prevention, MMWR)", "anio": 2016, "url": "https://www.cdc.gov/mmwr/volumes/65/wr/mm6541e1.htm" },
+        { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "memorama",
+    "titulo": "Memorama de los selladores",
+    "pares": [
+      { "a": "Fisura IK", "b": "Estrecha en la entrada y dilatada en el fondo" },
+      { "a": "Grabado ácido", "b": "Crea microporosidades en el esmalte" },
+      { "a": "Tags de resina", "b": "Anclan el sellador al esmalte grabado" },
+      { "a": "Ionómero de vidrio", "b": "Tolera la humedad y libera fluoruro" },
+      { "a": "Lesión no cavitada", "b": "Puede sellarse como tratamiento microinvasivo" },
+      { "a": "76 %", "b": "Reducción de lesiones oclusales con sellador frente a no sellar" },
+      { "a": "Primer dígito 2 de ICDAS", "b": "Sellador completo" },
+      { "a": "Escudo naranja", "b": "Protege los ojos durante la fotopolimerización" }
+    ]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m06-p01",
+        "q": "¿Por qué las fisuras oclusales acumulan biopelícula difícil de retirar?",
+        "opciones": [
+          "Porque su esmalte es más grueso",
+          "Porque muchas son más estrechas que una cerda de cepillo y protegen a la biopelícula de la remoción",
+          "Porque la saliva no llega a la cara oclusal",
+          "Porque solo existen en dientes temporales"
+        ],
+        "correcta": 1,
+        "explicacion": "La morfología estrecha y profunda impide que el cepillo alcance el fondo de la fisura."
+      },
+      {
+        "id": "m06-p02",
+        "q": "¿Dónde suelen iniciarse las lesiones de caries en una fisura?",
+        "opciones": [
+          "En las paredes de la fisura",
+          "En la punta de las cúspides",
+          "En la raíz del diente",
+          "En el borde incisal"
+        ],
+        "correcta": 0,
+        "explicacion": "Las lesiones empiezan en las paredes y pueden avanzar sin verse desde la entrada."
+      },
+      {
+        "id": "m06-p03",
+        "q": "¿Qué define la NOM-013-SSA2-2015 como sellador de fosetas y fisuras?",
+        "opciones": [
+          "Un medicamento que elimina bacterias",
+          "Una restauración de amalgama pequeña",
+          "Un material químico de adherencia que actúa como barrera física contra bacterias y restos de alimentos",
+          "Un gel de fluoruro de uso en casa"
+        ],
+        "correcta": 2,
+        "explicacion": "La norma lo define como barrera física que impide la entrada de bacterias y restos a las zonas más susceptibles."
+      },
+      {
+        "id": "m06-p04",
+        "q": "¿Por qué la erupción es una etapa de alto riesgo para la caries oclusal de un molar permanente?",
+        "opciones": [
+          "Porque el diente todavía no tiene esmalte",
+          "Porque el molar está fuera de la oclusión, es difícil de limpiar y su esmalte termina de madurar en la boca",
+          "Porque la saliva es más ácida en la infancia",
+          "Porque el flúor no llega a los molares"
+        ],
+        "correcta": 1,
+        "explicacion": "Durante meses el molar no participa en la masticación, acumula biopelícula y es más susceptible."
+      },
+      {
+        "id": "m06-p05",
+        "q": "Según la guía ADA/AAPD de 2016, ¿cuál fue la fuerza de la recomendación de sellar frente a no sellar molares con superficies sanas o lesiones no cavitadas?",
+        "opciones": [
+          "Condicional, con evidencia muy baja",
+          "No se emitió recomendación",
+          "En contra del sellado",
+          "Fuerte, con evidencia de calidad moderada"
+        ],
+        "correcta": 3,
+        "explicacion": "El panel emitió una recomendación fuerte basada en evidencia de calidad moderada de 9 ensayos."
+      },
+      {
+        "id": "m06-p06",
+        "q": "¿Qué sugirió la guía ADA/AAPD de 2016 al comparar selladores con barniz de fluoruro en superficies oclusales de molares?",
+        "opciones": [
+          "Preferir los selladores al barniz",
+          "Preferir el barniz a los selladores",
+          "Que ambos son equivalentes con evidencia alta",
+          "Usar solo enjuagues fluorurados"
+        ],
+        "correcta": 0,
+        "explicacion": "Con evidencia de calidad baja, los selladores podrían reducir 73 % las lesiones frente al barniz, y el panel sugirió preferirlos."
+      },
+      {
+        "id": "m06-p07",
+        "q": "En la revisión Cochrane de 2017, si el 16 % de las superficies sin sellador desarrollaban caries en 24 meses, ¿a cuánto se reducía con sellador de resina?",
+        "opciones": [
+          "A 0 %",
+          "A 15 %",
+          "A alrededor de 5.2 %",
+          "A 30 %"
+        ],
+        "correcta": 2,
+        "explicacion": "La revisión ilustró que la proporción bajaría a alrededor de 5.2 % con sellador de resina."
+      },
+      {
+        "id": "m06-p08",
+        "q": "Si la reducción absoluta de lesiones con sellador es de 20 puntos porcentuales, ¿cuál es el número necesario a tratar?",
+        "opciones": [
+          "20",
+          "2",
+          "50",
+          "5"
+        ],
+        "correcta": 3,
+        "explicacion": "El número necesario a tratar es el inverso de la reducción absoluta: 1 ÷ 0.20 = 5."
+      },
+      {
+        "id": "m06-p09",
+        "q": "¿Qué concluyó la guía de 2016 sobre el bisfenol A de algunos selladores?",
+        "opciones": [
+          "Que obliga a retirar todos los selladores",
+          "Que la evidencia no respalda que la exposición transitoria a una pequeña cantidad ponga en riesgo a los pacientes",
+          "Que causa caries bajo el sellador",
+          "Que solo afecta a los adultos"
+        ],
+        "correcta": 1,
+        "explicacion": "El panel no encontró evidencia de riesgo por la exposición breve, y los ensayos no reportaron eventos adversos."
+      },
+      {
+        "id": "m06-p10",
+        "q": "¿Cuál es el mecanismo de unión de un sellador de resina al esmalte?",
+        "opciones": [
+          "Retención micromecánica en las microporosidades creadas por el grabado ácido",
+          "Enlaces iónicos con el calcio",
+          "Fusión por calor",
+          "Simple apoyo en la fisura sin unión"
+        ],
+        "correcta": 0,
+        "explicacion": "La resina penetra en las microporosidades del esmalte grabado y forma tags al polimerizar."
+      },
+      {
+        "id": "m06-p11",
+        "q": "¿Qué propiedad hace útil al ionómero de vidrio en molares parcialmente erupcionados?",
+        "opciones": [
+          "Su mayor retención frente a la resina",
+          "Su color negro que facilita verlo",
+          "Su tolerancia a la humedad y su unión química al diente",
+          "Que no necesita limpieza previa de la superficie"
+        ],
+        "correcta": 2,
+        "explicacion": "Es hidrofílico y se une químicamente al calcio, por lo que funciona mejor cuando el aislamiento seco es difícil."
+      },
+      {
+        "id": "m06-p12",
+        "q": "¿Qué medida protege los ojos durante la fotopolimerización?",
+        "opciones": [
+          "Cerrar la persiana del consultorio",
+          "Apagar la lámpara de la unidad",
+          "Mirar la luz solo unos segundos",
+          "Usar escudos o lentes con filtro naranja y no mirar directamente la luz"
+        ],
+        "correcta": 3,
+        "explicacion": "Los filtros naranjas bloquean la luz azul de la lámpara; la NOM-013 incluye anteojos especiales para el paciente."
+      },
+      {
+        "id": "m06-p13",
+        "q": "¿Qué lesión es candidata a sellado como tratamiento microinvasivo?",
+        "opciones": [
+          "Una cavidad extensa con dentina visible (ICDAS 6)",
+          "Una lesión no cavitada en fisuras (ICDAS 2)",
+          "Una fractura de cúspide",
+          "Una caries radicular cavitada"
+        ],
+        "correcta": 1,
+        "explicacion": "Las lesiones no cavitadas pueden sellarse para detener su progresión; las cavidades con dentina requieren otro manejo."
+      },
+      {
+        "id": "m06-p14",
+        "q": "¿Qué superficies menciona expresamente la NOM-013-SSA2-2015 para la aplicación de selladores?",
+        "opciones": [
+          "Fosetas, fisuras y cíngulos profundos",
+          "Solo superficies proximales",
+          "Superficies radiculares expuestas",
+          "Bordes incisales"
+        ],
+        "correcta": 0,
+        "explicacion": "La norma indica aplicar selladores en fosetas, fisuras y cíngulos profundos."
+      },
+      {
+        "id": "m06-p15",
+        "q": "¿Cuál es la condición más importante para la retención de un sellador de resina?",
+        "opciones": [
+          "El color del material",
+          "La marca de la lámpara",
+          "La edad del paciente",
+          "El control de la humedad durante el procedimiento"
+        ],
+        "correcta": 3,
+        "explicacion": "La resina requiere un esmalte grabado seco y libre de saliva hasta que polimeriza."
+      },
+      {
+        "id": "m06-p16",
+        "q": "Según el informe de los CDC de 2016, ¿a partir de cuándo los programas escolares de selladores llegan a ahorrar costos?",
+        "opciones": [
+          "Desde el primer día",
+          "Después de diez años",
+          "Después de dos años",
+          "Nunca ahorran costos"
+        ],
+        "correcta": 2,
+        "explicacion": "El informe estimó que estos programas ahorran costos después de dos años."
+      },
+      {
+        "id": "m06-p17",
+        "q": "Caso clínico: en una revisión, un niño de 10 años tiene un sellador que falta en la fisura distal del 36, sin lesión en esa zona. Tiene riesgo de caries elevado. ¿Qué haces?",
+        "opciones": [
+          "Retirar todo el sellador restante",
+          "Registrar el sellador como parcial y reparar o reaplicar en la zona descubierta",
+          "Restaurar el molar con amalgama",
+          "No registrar nada porque el resto sigue en su lugar"
+        ],
+        "correcta": 1,
+        "explicacion": "Un sellador parcial (primer dígito 1 de ICDAS) se repara o se reaplica, sobre todo en una persona con riesgo elevado."
+      },
+      {
+        "id": "m06-p18",
+        "q": "Caso clínico: una niña de 6 años tiene el 46 en erupción, con encía sobre la mitad distal de la cara oclusal y fisuras profundas. Su riesgo de caries es elevado. No es posible mantener la superficie seca. ¿Qué es lo más adecuado?",
+        "opciones": [
+          "Colocar un sellador de ionómero de vidrio y revisar con más frecuencia, reforzando higiene y fluoruro",
+          "Esperar dos años sin ninguna medida",
+          "Colocar un sellador de resina aunque la superficie esté húmeda",
+          "Preparar una cavidad y restaurar"
+        ],
+        "correcta": 0,
+        "explicacion": "Con aislamiento difícil, un material hidrofílico es preferible; su menor retención exige un seguimiento más cercano."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "Evidence-based clinical practice guideline for the use of pit-and-fissure sealants: a report of the American Dental Association and the American Academy of Pediatric Dentistry", "autor": "Wright J. T., Crall J. J., Fontana M. y cols. (Journal of the American Dental Association)", "anio": 2016 },
+    { "tipo": "academica", "titulo": "Pit and fissure sealants for preventing dental decay in permanent teeth", "autor": "Ahovuo-Saloranta A., Forss H., Walsh T., Nordblad A., Mäkelä M., Worthington H. V. (Cochrane Database of Systematic Reviews)", "anio": 2017 },
+    { "tipo": "oficial", "titulo": "Vital Signs: Dental Sealant Use and Untreated Tooth Decay Among U.S. School-Aged Children", "autor": "Griffin S. O., Wei L., Gooch B. F., Weno K., Espinoza L. (Centers for Disease Control and Prevention, MMWR)", "anio": 2016, "url": "https://www.cdc.gov/mmwr/volumes/65/wr/mm6541e1.htm" },
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "academica", "titulo": "ICCMS Guide for Practitioners and Educators", "autor": "Pitts N. B., Ismail A. I., Martignon S., Ekstrand K., Douglas G. V. A., Longbottom C.", "anio": 2014 }
+  ]
+}

@@ -1,0 +1,950 @@
+{
+  "programa": "caries-dental",
+  "modulo": 10,
+  "titulo": "Caries en niños y caries de la infancia temprana",
+  "estado": "borrador",
+  "version": 1,
+  "resumen": "La caries de la infancia temprana es la enfermedad crónica más común en preescolares y una de las más prevenibles. En este módulo aprenderás a definirla con los criterios internacionales vigentes, a reconocer los factores de riesgo propios de bebés y niños pequeños, a identificar su patrón clínico y sus consecuencias, a construir un plan de prevención que empieza en el embarazo y a entender cómo se toman las decisiones de manejo en la dentición temporal. Todo con el marco de la NOM-013-SSA2-2015 y con un enfoque centrado en el niño y su familia.",
+  "objetivos": [
+    "Definir la caries de la infancia temprana y su forma severa con los criterios de la Declaración de Bangkok de la IAPD y de la AAPD.",
+    "Identificar los factores de riesgo de alimentación, higiene, biopelícula, esmalte y contexto social en niños menores de seis años.",
+    "Reconocer el patrón clínico de aparición y progresión de la enfermedad y sus consecuencias para la salud general del niño.",
+    "Diseñar una guía anticipatoria por edades para madres, padres y cuidadores, coherente con la NOM-013-SSA2-2015.",
+    "Comparar las opciones de manejo de lesiones en dientes temporales según actividad, riesgo y cooperación del niño.",
+    "Calcular e interpretar el índice ceo-d de un preescolar."
+  ],
+  "duracionMin": 100,
+  "portada": {
+    "id": "caries-dental/m10/portada",
+    "proporcion": "16:9",
+    "alt": "Niña pequeña vista de espaldas en el regazo de su madre mientras una odontóloga con equipo de protección le sonríe en un consultorio infantil.",
+    "prompt": "Fotografía realista de gran formato en un consultorio dental pediátrico luminoso y cálido, con colores suaves y juguetes ordenados al fondo. Una niña de unos tres años, vista de espaldas y sin mostrar su rostro, está sentada en el regazo de su madre, de quien solo se ven los brazos y el hombro. Frente a ellas, una odontóloga con bata azul, guantes de nitrilo, cubrebocas y lentes de protección sostiene un cepillo dental infantil y sonríe con los ojos. Luz natural lateral, profundidad de campo media, ambiente amable y tranquilo. Evitar: texto, letreros, logotipos, marcas de agua, rostro identificable de la niña, sangre, instrumental punzante a la vista, profesional sin guantes o sin cubrebocas."
+  },
+  "temas": [
+    {
+      "n": "10.1",
+      "titulo": "Qué es la caries de la infancia temprana y por qué importa",
+      "minutos": 13,
+      "enPocasPalabras": "La caries de la infancia temprana es la caries que aparece en los dientes de leche antes de los seis años. Empieza como manchas blancas cerca de la encía y, si no se atiende, avanza rápido y causa dolor. Se puede prevenir con cepillado, poca azúcar y visitas tempranas al dentista.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cuando una madre te dice «a mi hijo se le están picando los dientitos de enfrente», casi siempre está describiendo la **caries de la infancia temprana** (CIT), conocida en inglés como *early childhood caries* (ECC). No es una enfermedad distinta de la caries que estudiaste en los primeros módulos: es el mismo proceso mediado por la biopelícula y alimentado por los azúcares, pero que ocurre en una boca muy joven, en dientes con esmalte delgado y en un niño que depende por completo de los adultos para su higiene y su alimentación.\n\nEsa dependencia cambia todo. En un adulto puedes negociar hábitos directamente con el paciente; en un bebé de 18 meses, tu verdadero paciente para la prevención es la familia. Por eso este módulo combina la cariología que ya conoces con la manera de trabajar con madres, padres y cuidadores."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/01",
+          "proporcion": "4:3",
+          "alt": "Acercamiento de los incisivos superiores temporales de un niño pequeño con bandas blancas opacas junto al margen de la encía.",
+          "pie": "Lesiones iniciales de caries en los incisivos superiores temporales: bandas blancas opacas paralelas al margen gingival, todavía sin cavidad.",
+          "prompt": "Fotografía clínica macro de los cuatro incisivos superiores temporales de un niño de unos dos años, con el labio superior levantado suavemente por un dedo con guante de nitrilo azul. En el tercio cervical de la cara vestibular de cada incisivo se observa una banda blanca opaca y mate paralela al margen de la encía, sin cavidad; el resto del esmalte es blanco azulado y brillante. Encía rosa sana, dientes pequeños y con espacios fisiológicos entre ellos. Iluminación de lámpara dental neutra, enfoque nítido, fondo oscuro. Evitar: texto, flechas, logotipos, marcas de agua, sangre, rostro completo, dientes permanentes, cavidades profundas, mano sin guante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una definición que incluye las lesiones iniciales"
+        },
+        {
+          "tipo": "texto",
+          "md": "En 2018 un grupo de once expertos convocado por la Asociación Internacional de Odontología Pediátrica (IAPD) se reunió en Bangkok y publicó al año siguiente la **Declaración de Bangkok sobre la caries de la infancia temprana**. Su definición clínica es la que hoy se usa en todo el mundo: la presencia de **una o más superficies cariadas** (con lesión cavitada **o no cavitada**), **perdidas por caries** u **obturadas** en cualquier diente temporal de un niño **menor de seis años**. La Academia Americana de Odontología Pediátrica (AAPD) usa el mismo criterio, expresado como «71 meses de edad o menos».\n\nFíjate en un detalle que tiene consecuencias clínicas enormes: la definición cuenta las **lesiones no cavitadas**, es decir, las manchas blancas activas. Eso significa que un niño con una sola mancha blanca activa en un incisivo ya tiene caries de la infancia temprana, aunque no haya ningún «agujero». Para el niño es una gran noticia, porque en ese estadio la lesión puede detenerse con medidas no invasivas, y para ti es un llamado a no esperar a la cavidad para actuar.\n\nLa declaración también propone una descripción para el público: caries en niños preescolares, que es común, en su mayoría no tratada y que puede tener efectos profundos en su vida. Es una frase útil para explicarle a una familia por qué vale la pena atender los dientes de leche."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Caries de la infancia temprana y caries de la infancia temprana severa según la AAPD",
+          "columnas": ["Edad", "Caries de la infancia temprana (CIT)", "CIT severa (CIT-S)"],
+          "filas": [
+            ["Menos de 3 años", "Una o más superficies cariadas (cavitadas o no), perdidas por caries u obturadas en cualquier diente temporal", "Cualquier signo de caries en superficies lisas"],
+            ["3 años", "Mismo criterio", "Una o más superficies lisas cavitadas, perdidas por caries u obturadas en incisivos y caninos superiores temporales, o ceo-s mayor de 4"],
+            ["4 años", "Mismo criterio", "Mismo criterio en dientes anteriores superiores, o ceo-s mayor de 5"],
+            ["5 años", "Mismo criterio", "Mismo criterio en dientes anteriores superiores, o ceo-s mayor de 6"]
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "profundizar",
+          "titulo": "Umbral diagnóstico y cifras de prevalencia",
+          "md": "La prevalencia de la caries de la infancia temprana depende mucho del **umbral diagnóstico** que use cada estudio. Los índices tradicionales como el ceo-d registran solo lesiones cavitadas (umbral d3), mientras que la definición de Bangkok incluye lesiones no cavitadas (umbral d1 o d2). Un mismo grupo de niños puede mostrar prevalencias muy distintas según el umbral, por eso, al comparar estudios, revisa siempre qué criterio se usó.\n\nLa forma **severa** se define por superficies y no por dientes (ceo-s) porque un incisivo con lesión en sus caras vestibular, mesial y distal refleja una actividad de enfermedad mucho mayor que un diente con una sola superficie afectada. Además, las **superficies lisas** se incluyen como marcador de severidad: la caries en fosetas y fisuras es la más común en la población, mientras que la caries en caras lisas de un niño muy pequeño indica un desafío cariogénico intenso. Los sistemas ICDAS II e ICCMS son compatibles con este enfoque porque registran el estadio de la lesión y su actividad."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Una enfermedad muy frecuente y muy desigual"
+        },
+        {
+          "tipo": "texto",
+          "md": "Según la Organización Mundial de la Salud (OMS), alrededor de **514 millones de niñas y niños** en el mundo tienen caries en los dientes temporales, y la caries no tratada es la condición de salud más común del planeta cuando se suman todas las edades. El *Informe sobre la situación mundial de la salud bucodental* de la OMS (2022) muestra además que la carga se concentra en los grupos con menos recursos: las familias con menor ingreso, menor escolaridad y menos acceso a servicios tienen más caries y menos tratamiento.\n\nEn México, la Secretaría de Salud vigila las enfermedades bucales de quienes acuden a sus servicios mediante el **Sistema de Vigilancia Epidemiológica de Patologías Bucales (SIVEPAB)**. Sus informes periódicos son la referencia nacional para conocer el índice de caries por grupo de edad; consulta el informe más reciente de la Dirección General de Epidemiología antes de citar una cifra, porque los resultados cambian de una edición a otra."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "Lo que pide la NOM-013-SSA2-2015 para los más pequeños",
+          "md": "El apéndice normativo de la **NOM-013-SSA2-2015**, *Para la prevención y control de enfermedades bucales* (DOF 23/11/2016), dedica una sección a las personas de hasta 3 años de edad. Entre otras acciones, pide **promover la consulta estomatológica del lactante a partir del primer mes de vida**, valorar el riesgo de caries desde la erupción dental y **programar citas cada 6 meses cuando el riesgo es bajo o moderado y cada 3 meses cuando es alto**. También establece que el registro y la notificación de las patologías bucales se hacen mediante el SIVEPAB."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m10/d1",
+          "pie": "La ventana de la caries de la infancia temprana: desde la erupción del primer diente temporal hasta los seis años.",
+          "descripcion": "Línea de tiempo horizontal de 0 a 72 meses. Una franja sombreada marca el periodo de erupción de la dentición temporal (aproximadamente de 6 a 30 meses). Encima, una barra larga indica el rango de edad en el que se usa el término caries de la infancia temprana (hasta 71 meses). Debajo, tres marcas señalan los criterios de severidad: menos de 3 años, 3 a 5 años y 6 años como límite. Al final, un pequeño ícono de primer molar permanente asoma a los 72 meses.",
+          "elementos": ["Nacimiento", "Erupción del primer diente: ~6 meses", "Dentición temporal completa: ~30 meses", "CIT: hasta 71 meses", "CIT-S en menores de 3 años: cualquier caries en superficie lisa", "CIT-S de 3 a 5 años: criterio por edad", "Primer molar permanente: ~6 años"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Por qué los dientes temporales sí importan"
+        },
+        {
+          "tipo": "texto",
+          "md": "Todavía escucharás en la consulta la frase «no vale la pena, al cabo se le van a caer». Es una creencia que conviene desmontar con argumentos concretos. Los dientes temporales permiten **masticar y nutrirse**, participan en la **articulación de las palabras**, guían la erupción de los permanentes y **conservan el espacio** que estos necesitarán. Los molares temporales permanecen en boca hasta alrededor de los 10 a 12 años, así que un niño que pierde un molar a los cuatro años vivirá más de la mitad de su infancia con esa consecuencia.\n\nHay además un argumento de pronóstico: los niños que tienen caries siendo bebés o preescolares tienen una probabilidad mucho mayor de presentar nuevas lesiones tanto en la dentición temporal como en la permanente. La caries temprana no es un episodio aislado; es una señal de que los factores de riesgo de la familia están activos y seguirán actuando si nadie interviene."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/02",
+          "proporcion": "3:4",
+          "alt": "Manos de un padre cepillando los dientes de un niño pequeño recostado en su regazo, vistos desde arriba.",
+          "pie": "La higiene de un niño pequeño depende de un adulto: la posición con la cabeza del niño apoyada en el regazo da visibilidad y control.",
+          "prompt": "Fotografía realista vertical en un baño doméstico limpio con luz natural suave. Un niño de unos dos años está recostado boca arriba con la cabeza apoyada en el regazo de su padre; el encuadre muestra desde arriba las manos del adulto sosteniendo con delicadeza un cepillo dental infantil de cabeza pequeña y cerdas suaves sobre los dientes temporales del niño. Solo se ven la boca abierta con labios, la barbilla y las manos, sin mostrar ojos ni rostro completo. Tonos cálidos y naturales, ambiente tranquilo. Evitar: texto, logotipos, marcas de agua, marcas comerciales en el cepillo, rostro identificable, exceso de pasta dental, sangre, expresión de llanto."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "calculadora",
+          "titulo": "Índice ceo-d de un preescolar",
+          "instruccion": "El índice ceo-d suma los dientes temporales cariados (c), extraídos o con extracción indicada por caries (e) y obturados (o). Cambia los valores del caso de una niña de 4 años y observa cómo se construye el índice. Recuerda que el ceo-d tradicional cuenta solo lesiones cavitadas.",
+          "formula": "ceo-d = dientes cariados + dientes extraídos o indicados para extracción por caries + dientes obturados",
+          "variables": [
+            { "id": "c", "etiqueta": "Dientes temporales cariados", "valor": 4, "unidad": "dientes" },
+            { "id": "e", "etiqueta": "Extraídos o con extracción indicada por caries", "valor": 1, "unidad": "dientes" },
+            { "id": "o", "etiqueta": "Dientes temporales obturados", "valor": 2, "unidad": "dientes" }
+          ],
+          "resultado": { "expresion": "c + e + o", "etiqueta": "Índice ceo-d", "unidad": "dientes", "decimales": 0 }
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "En tu próxima revisión de un niño menor de seis años, registra las **lesiones no cavitadas** con el mismo cuidado que las cavidades y anota si están activas. Después, usa la definición de Bangkok para hablar con la familia: «tu hija ya tiene caries de la infancia temprana, pero está en una etapa en la que podemos detenerla sin tocar el diente». Esa frase convierte un hallazgo temprano en una oportunidad y abre la conversación sobre hábitos que verás en los siguientes temas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/03",
+          "proporcion": "16:9",
+          "alt": "Odontólogo con equipo de protección completo revisa la boca de un niño sentado en el sillón, visto desde detrás de la cabeza del niño.",
+          "pie": "La revisión temprana permite registrar lesiones iniciales y comenzar la prevención antes de que aparezca la cavidad.",
+          "prompt": "Fotografía realista horizontal de un consultorio dental infantil limpio y bien iluminado, con paredes de colores pastel. Un niño de unos cinco años está sentado en el sillón dental, visto desde detrás y ligeramente de lado, de modo que solo se aprecian su cabello y su hombro. Un odontólogo con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección examina su boca con un espejo dental, mientras la lámpara ilumina el campo. Al fondo, una charola ordenada con instrumental básico cubierto. Luz neutra, colores naturales. Evitar: texto, letreros, logotipos, marcas de agua, rostro del niño, sangre, instrumental punzante en primer plano, profesional sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Caries de la infancia temprana", "definicion": "Presencia de una o más superficies cariadas (con o sin cavidad), perdidas por caries u obturadas en cualquier diente temporal de un niño menor de seis años." },
+        { "termino": "CIT severa", "definicion": "Forma intensa de la caries de la infancia temprana; en menores de 3 años, cualquier signo de caries en superficies lisas." },
+        { "termino": "Lesión no cavitada", "definicion": "Lesión de caries en la que la superficie del esmalte sigue continua; se ve como mancha blanca o café y puede detenerse sin restauración." },
+        { "termino": "Índice ceo-d", "definicion": "Suma de dientes temporales cariados, extraídos o indicados para extracción por caries y obturados de una persona." },
+        { "termino": "SIVEPAB", "definicion": "Sistema de Vigilancia Epidemiológica de Patologías Bucales de la Secretaría de Salud de México." },
+        { "termino": "Umbral diagnóstico", "definicion": "Nivel de severidad de lesión a partir del cual un estudio o un índice la cuenta como caries." }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.1-1",
+          "q": "Según la Declaración de Bangkok, ¿cuál de estos niños tiene caries de la infancia temprana?",
+          "opciones": ["Un niño de 7 años con una cavidad en un molar temporal", "Una niña de 2 años con una mancha blanca activa en un incisivo superior", "Un niño de 4 años con dientes sanos y gingivitis", "Una niña de 5 años con fluorosis leve"],
+          "correcta": 1,
+          "explicacion": "La definición incluye lesiones no cavitadas en cualquier diente temporal de un niño menor de seis años. A los 7 años ya no aplica el término, y la gingivitis o la fluorosis no son caries."
+        },
+        {
+          "id": "t10.1-2",
+          "q": "En un niño menor de 3 años, ¿qué hallazgo define la caries de la infancia temprana severa según la AAPD?",
+          "opciones": ["Una lesión en la fisura de un molar", "Más de cuatro dientes ausentes", "Cualquier signo de caries en una superficie lisa", "Un ceo-d mayor de 2"],
+          "correcta": 2,
+          "explicacion": "En menores de 3 años, cualquier signo de caries en superficies lisas basta para hablar de forma severa, porque indica un desafío cariogénico intenso."
+        },
+        {
+          "id": "t10.1-3",
+          "q": "Según la NOM-013-SSA2-2015, ¿cada cuánto se programan las citas de un niño de hasta 3 años con riesgo alto de caries?",
+          "opciones": ["Cada 3 meses", "Cada 12 meses", "Cada 6 meses", "Solo cuando hay dolor"],
+          "correcta": 0,
+          "explicacion": "La norma indica citas cada 6 meses con riesgo bajo o moderado y cada 3 meses con riesgo alto."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "academica", "titulo": "Early Childhood Caries: IAPD Bangkok Declaration", "autor": "Pitts N. B. et al. (International Journal of Paediatric Dentistry)", "anio": 2019 },
+        { "tipo": "oficial", "titulo": "Policy on Early Childhood Caries (ECC): Classifications, Consequences, and Preventive Strategies", "autor": "American Academy of Pediatric Dentistry", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Global oral health status report: towards universal health coverage for oral health by 2030", "autor": "Organización Mundial de la Salud", "anio": 2022 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la definición de Bangkok, las políticas de la AAPD y el índice ceo-d", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "10.2",
+      "titulo": "Factores de riesgo en bebés y preescolares",
+      "minutos": 13,
+      "enPocasPalabras": "Los dientes de los niños se pican cuando comen o beben azúcar muchas veces al día, sobre todo de noche y con biberón, y cuando nadie les cepilla los dientes con pasta con flúor. También influyen el esmalte débil y las condiciones de la familia. Conocer estos factores ayuda a prevenir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La caries de la infancia temprana es, como toda caries, el resultado de un **desequilibrio entre factores de riesgo y factores protectores** que se mantiene en el tiempo. Lo que la hace particular es que casi todos esos factores dependen de las decisiones y las condiciones de vida de los adultos que cuidan al niño. Por eso, cuando evalúes el riesgo de un bebé, tu entrevista tiene que ir más allá de la boca: cómo come, cómo duerme, quién lo cuida, qué toma entre comidas y qué tan fácil le resulta a la familia llegar a la consulta.\n\nEn el módulo 3 aprendiste a evaluar el riesgo con CAMBRA e ICCMS. Aquí vamos a mirar con lupa los factores que pesan más en los primeros seis años."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Alimentación: frecuencia, momento y vehículo"
+        },
+        {
+          "tipo": "texto",
+          "md": "El factor dietético más importante no es solo cuánta azúcar consume el niño, sino **con qué frecuencia** y **en qué momento**. Cada toma de una bebida azucarada hace que el pH de la biopelícula baje durante un tiempo; si las tomas se repiten durante todo el día, el esmalte pasa más tiempo desmineralizándose que recuperándose.\n\nEl **biberón con líquidos azucarados** (leche con azúcar o saborizantes, jugos, aguas de sabor, atoles endulzados, té con azúcar) es el vehículo clásico, sobre todo cuando el niño se duerme con él. Durante el sueño el flujo salival disminuye mucho y el líquido queda en contacto con los incisivos superiores por horas. La AAPD recomienda **evitar la alimentación nocturna a demanda con biberón o pecho más allá de los 12 meses**, **evitar alimentos y bebidas con azúcares añadidos en menores de 2 años**, no dar jugo antes de los 12 meses y limitar el jugo 100 % natural en niños de 1 a 3 años.\n\nLa **lactancia materna** merece un comentario cuidadoso. Sus beneficios para la salud del niño están ampliamente demostrados y la NOM-013-SSA2-2015 pide promover la lactancia exclusiva hasta los 6 meses. El riesgo de caries aparece cuando, ya con dientes, se combina la toma nocturna frecuente y prolongada con otros azúcares en la dieta y sin higiene. Tu mensaje no es «deja de amamantar», sino «limpia los dientes después de la última toma y cuida los azúcares del resto del día»."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Jarabes y medicamentos con azúcar",
+          "md": "Muchos medicamentos pediátricos líquidos contienen azúcar para mejorar su sabor. En niños con enfermedades crónicas que los toman varias veces al día, sobre todo antes de dormir, esto suma exposiciones. No le pidas a la familia que suspenda un medicamento: pregunta por él en la historia clínica, refuerza la higiene después de la toma nocturna y, si lo consideras útil, comenta con el pediatra la existencia de presentaciones sin azúcar."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/04",
+          "proporcion": "4:3",
+          "alt": "Biberón con líquido de color naranja sobre una cuna junto a una cobija, en penumbra.",
+          "pie": "El biberón con bebidas azucaradas durante el sueño es uno de los factores de riesgo más conocidos de la caries de la infancia temprana.",
+          "prompt": "Fotografía realista en penumbra de la esquina de una cuna de madera clara con una cobija suave arrugada. Sobre el colchón descansa un biberón de plástico transparente a medio llenar con un líquido de color naranja que sugiere jugo, con la mamila hacia abajo y una pequeña gota en la punta. Luz cálida y tenue de lámpara de noche desde un lado, sombras suaves, ambiente doméstico tranquilo, profundidad de campo corta con el biberón en foco. No aparece ninguna persona. Evitar: texto, logotipos, marcas comerciales, etiquetas en el biberón, marcas de agua, bebé visible, colores saturados artificiales."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La biopelícula de un niño pequeño"
+        },
+        {
+          "tipo": "texto",
+          "md": "La boca de un recién nacido no tiene dientes, y los microorganismos asociados a la caries necesitan superficies duras para establecer una biopelícula madura. Con la erupción de los primeros dientes, alrededor de los 6 meses, aparece ese nicho. Las bacterias que lo colonizan provienen sobre todo de las personas que conviven con el niño, en especial de quien lo cuida de manera cotidiana.\n\nDurante años se habló de «contagio» de *Streptococcus mutans* de la madre al hijo. Hoy, con la hipótesis de la placa ecológica que estudiaste en el módulo 1, entendemos que la presencia de estas bacterias no basta: lo que las hace dominar es un ambiente con azúcares frecuentes. Aun así, que los cuidadores tengan **caries activa** aumenta la carga bacteriana que recibe el niño, y la NOM-013-SSA2-2015 recomienda evitar prácticas de intercambio de saliva como compartir cubiertos, probar o soplar los alimentos antes de dárselos o besarlo en la boca. El mensaje más poderoso es otro: cuando los adultos de la casa cuidan su propia boca, el niño recibe menos bacterias y mejores hábitos.\n\nLa **placa visible** en los incisivos superiores de un niño menor de 3 años es uno de los mejores predictores clínicos de caries. Si la ves, la higiene no se está haciendo o no se está haciendo bien."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El diente y el entorno"
+        },
+        {
+          "tipo": "texto",
+          "md": "Los dientes temporales recién erupcionados tienen un esmalte **más delgado y menos maduro** que el de los permanentes, y la distancia entre la superficie y la pulpa es corta. Además, los **defectos del desarrollo del esmalte**, como la hipoplasia, son más frecuentes en niños nacidos prematuros o con bajo peso al nacer; esas zonas rugosas retienen biopelícula y se desmineralizan con facilidad.\n\nPor último, el riesgo de caries tiene un fuerte componente **social**. Las condiciones de pobreza, la baja escolaridad de los cuidadores, el acceso limitado a servicios y a agua potable, los horarios de trabajo que dejan poco tiempo para la higiene nocturna y un ambiente donde las bebidas azucaradas son baratas y están en todas partes explican buena parte de las diferencias entre grupos. Reconocerlo no es culpar a la familia: es ajustar tus recomendaciones a lo que realmente pueden hacer."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Criterios de riesgo de caries en niños de hasta 3 años según la NOM-013-SSA2-2015",
+          "columnas": ["Factor", "Riesgo bajo", "Riesgo mediano", "Riesgo alto"],
+          "filas": [
+            ["Alimentación nocturna cariogénica", "No recibe", "1 a 3 veces por semana", "4 o más veces por semana"],
+            ["Higiene bucal", "Mínimo 2 veces al día", "No diaria o menos de 2 veces al día", "Ausente, o sin apoyo cuando el niño no puede hacerla solo"],
+            ["Carbohidratos refinados entre comidas", "Nula o hasta 2 veces al día", "3 o más veces al día", "4 o más veces al día"],
+            ["Esmalte y placa", "Esmalte sano, sin placa visible ni nuevas desmineralizaciones en 12 meses", "Placa visible o defectos del esmalte, fosetas y fisuras profundas", "Zonas desmineralizadas, incluidas las cavitadas"],
+            ["Saliva", "Abundante, mucosas húmedas", "Aceptable", "Escasa, mucosas y labios resecos"],
+            ["Padres o responsables", "Bucalmente sanos y comprometidos", "Con padecimientos bucales y comprometidos", "Con enfermedades bucales y sin compromiso con la salud del menor"]
+          ]
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m10/d2",
+          "pie": "La balanza de la caries en la primera infancia: los factores de riesgo y los protectores que dependen de la familia.",
+          "descripcion": "Balanza con dos platillos. En el platillo izquierdo, etiquetado como factores de riesgo, se apilan bloques con iconos sencillos de biberón nocturno, azúcar frecuente, placa visible, esmalte con defectos y cuidadores con caries activa. En el platillo derecho, etiquetado como factores protectores, se apilan bloques de cepillado con pasta fluorurada, agua simple, consulta temprana, barniz profesional y saliva normal. Debajo del fiel, una flecha bidireccional entre desmineralización y remineralización.",
+          "elementos": ["Factores de riesgo", "Factores protectores", "Biberón nocturno con azúcar", "Azúcar frecuente entre comidas", "Placa visible", "Defectos del esmalte", "Cuidadores con caries activa", "Cepillado con pasta fluorurada", "Agua simple", "Consulta temprana", "Desmineralización", "Remineralización"]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Una entrevista que va más allá de la boca",
+          "md": "Mateo tiene 20 meses y llega con placa visible en los incisivos superiores. Al preguntar cómo duerme, su madre cuenta que trabaja en turno vespertino y que la abuela lo duerme con un biberón de leche con chocolate. La abuela no sabía que los dientes se cepillan antes de dormir. El factor de riesgo principal no está en el niño: está en una rutina de la familia que nadie le había explicado a quien lo cuida. La recomendación eficaz incluye a la abuela."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/05",
+          "proporcion": "1:1",
+          "alt": "Vaso entrenador con agua y un plato con fruta picada sobre la mesa de una cocina.",
+          "pie": "Agua simple en vaso entrenador y fruta entera en las comidas: alternativas sencillas a las bebidas azucaradas entre comidas.",
+          "prompt": "Fotografía realista cuadrada de una mesa de cocina mexicana de madera clara con luz natural de mañana. En primer plano, un vaso entrenador infantil transparente con asas laterales lleno de agua simple, junto a un plato pequeño de cerámica blanca con trozos de papaya, plátano y manzana recién picados. Al fondo, desenfocado, un frutero con naranjas y una jarra de agua. Composición limpia y hogareña, colores naturales y frescos. No aparecen personas. Evitar: texto, logotipos, marcas comerciales, empaques, refrescos, dulces, marcas de agua, colores saturados artificiales."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "relacionar",
+          "titulo": "Relaciona cada factor con su mecanismo",
+          "instruccion": "Une cada factor de riesgo de la caries de la infancia temprana con la razón por la que aumenta el riesgo.",
+          "pares": [
+            { "a": "Biberón con leche azucarada al dormir", "b": "El flujo salival baja durante el sueño y el azúcar permanece horas sobre los incisivos" },
+            { "a": "Jugo varias veces al día", "b": "Exposiciones frecuentes que mantienen el pH de la biopelícula bajo" },
+            { "a": "Hipoplasia del esmalte", "b": "Superficie rugosa que retiene biopelícula y se desmineraliza con facilidad" },
+            { "a": "Cuidador con caries activa", "b": "Mayor carga de bacterias cariogénicas transmitidas en la convivencia diaria" },
+            { "a": "Placa visible en incisivos superiores", "b": "Indica que la higiene no se realiza o es insuficiente" }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Agrega a tu historia clínica infantil tres preguntas que rara vez fallan: **¿con qué se duerme el niño?**, **¿qué toma entre comidas y en qué recipiente?** y **¿quién le lava los dientes en la noche?** Las respuestas te dicen en dos minutos dónde está el desequilibrio y a quién tienes que dirigir tus recomendaciones. Registra los criterios de riesgo de la NOM-013-SSA2-2015 y usa ese nivel para decidir la frecuencia de las citas."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/06",
+          "proporcion": "16:9",
+          "alt": "Odontóloga con equipo de protección conversa con una abuela y una madre en el consultorio mientras un niño juega de espaldas.",
+          "pie": "La evaluación de riesgo en la primera infancia es una entrevista con toda la familia que cuida al niño.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental infantil luminoso. Una odontóloga con bata clara, cubrebocas, gorro y lentes de protección, con guantes de nitrilo, conversa sentada frente a dos mujeres adultas, una joven y una mayor, que escuchan con atención; las mujeres aparecen de perfil o parcialmente de espaldas, sin rostros nítidos. En el piso, un niño de unos dos años juega de espaldas con bloques de colores. Luz natural difusa, ambiente cordial, colores suaves. Evitar: texto, letreros, logotipos, marcas de agua, rostros identificables, sangre, instrumental a la vista, profesional sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Alimentación nocturna cariogénica", "definicion": "Toma de bebidas o alimentos con azúcares durante la noche o al dormir, cuando el flujo salival es mínimo." },
+        { "termino": "Azúcares añadidos", "definicion": "Azúcares que se agregan a alimentos y bebidas durante su preparación o fabricación." },
+        { "termino": "Hipoplasia del esmalte", "definicion": "Defecto del desarrollo en el que el esmalte se forma con menor espesor, con fosas o surcos." },
+        { "termino": "Vaso entrenador", "definicion": "Vaso infantil con asas que facilita la transición del biberón a beber en vaso." },
+        { "termino": "Determinantes sociales", "definicion": "Condiciones de vida, ingreso, escolaridad y acceso a servicios que influyen en la salud de una persona." }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.2-1",
+          "q": "¿Por qué el biberón con leche azucarada al dormir es especialmente dañino?",
+          "opciones": ["Porque la leche siempre contiene flúor", "Porque durante el sueño baja el flujo salival y el azúcar permanece en contacto con los dientes", "Porque el biberón desgasta mecánicamente el esmalte", "Porque el niño traga más aire"],
+          "correcta": 1,
+          "explicacion": "La saliva es el principal amortiguador; dormido, su flujo cae y la biopelícula se mantiene ácida por horas."
+        },
+        {
+          "id": "t10.2-2",
+          "q": "Según la AAPD, ¿qué se recomienda respecto a los azúcares añadidos en menores de 2 años?",
+          "opciones": ["Limitarlos a la comida principal", "Darlos solo con agua", "Usarlos únicamente en fruta", "Evitarlos"],
+          "correcta": 3,
+          "explicacion": "La política de la AAPD recomienda evitar alimentos y bebidas con azúcares añadidos en menores de 2 años."
+        },
+        {
+          "id": "t10.2-3",
+          "q": "Según la NOM-013-SSA2-2015, un niño de 2 años que recibe alimentación nocturna cariogénica 5 veces por semana se clasifica en riesgo:",
+          "opciones": ["Alto", "Bajo", "Mediano", "Sin riesgo si se cepilla"],
+          "correcta": 0,
+          "explicacion": "Cuatro o más veces por semana corresponde al criterio de riesgo alto."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Policy on Early Childhood Caries (ECC): Consequences and Preventive Strategies", "autor": "American Academy of Pediatric Dentistry", "anio": 2025 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (Apéndice A, cuidados para personas hasta 3 años)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Early Childhood Caries: IAPD Bangkok Declaration", "autor": "Pitts N. B. et al. (International Journal of Paediatric Dentistry)", "anio": 2019 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la hipótesis de la placa ecológica y la literatura sobre factores de riesgo de la caries de la infancia temprana", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "10.3",
+      "titulo": "Cómo se presenta: patrón clínico, progresión y consecuencias",
+      "minutos": 12,
+      "enPocasPalabras": "La caries de los niños pequeños suele empezar como una raya blanca en los dientes de arriba, junto a la encía. Después aparecen manchas cafés y cavidades, y puede llegar a los molares. Si no se atiende, causa dolor, infecciones y problemas para comer y dormir.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La caries de la infancia temprana tiene un **patrón de aparición** tan característico que, con un poco de práctica, lo reconocerás con solo levantar el labio del niño. Conocerlo te sirve para tres cosas: detectar la enfermedad en su etapa inicial, explicar a la familia qué está pasando y estimar qué dientes están en riesgo en los próximos meses."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El orden en que se afectan los dientes"
+        },
+        {
+          "tipo": "texto",
+          "md": "La enfermedad suele comenzar en las **caras vestibulares de los incisivos superiores**, cerca del margen de la encía, que son los primeros dientes en erupcionar en la arcada superior y los que más tiempo quedan bañados por el líquido del biberón. La primera señal es una **banda blanca opaca** paralela a la encía, que se aprecia mejor con el diente limpio y seco. Si el desafío continúa, la banda se vuelve amarillenta o café, el esmalte se rompe y la lesión avanza en anillo alrededor del cuello del diente.\n\nDespués suelen afectarse las **superficies oclusales de los primeros molares temporales**, que erupcionan alrededor del primer año y medio, y más tarde los caninos y los segundos molares. Los **incisivos inferiores suelen quedar relativamente protegidos**: durante la succión la lengua los cubre, y están cerca de la desembocadura de las glándulas submandibulares y sublinguales, cuya saliva los lava y amortigua. Cuando incluso los incisivos inferiores tienen caries, estás ante un desafío cariogénico muy intenso."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Por qué el avance es tan rápido",
+          "md": "El esmalte de los dientes temporales es aproximadamente **la mitad de grueso** que el de los permanentes y la cámara pulpar es proporcionalmente más grande. Una lesión que en un adulto tardaría años en llegar cerca de la pulpa puede hacerlo en meses en un preescolar. Por eso los intervalos de revisión en niños con riesgo alto son más cortos."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m10/d3",
+          "pie": "Secuencia típica de afectación de la caries de la infancia temprana sobre un esquema de la dentición temporal.",
+          "descripcion": "Esquema oclusal de las dos arcadas temporales completas (20 dientes). Los dientes se colorean con tres tonos según el orden habitual de afectación: incisivos superiores en el tono más intenso con el número 1, primeros molares superiores e inferiores con el número 2, caninos y segundos molares con el número 3. Los incisivos inferiores quedan en gris claro con una pequeña lengua esquemática que los cubre y gotas que indican la saliva de las glándulas submandibulares.",
+          "elementos": ["1. Incisivos superiores", "2. Primeros molares temporales", "3. Caninos y segundos molares", "Incisivos inferiores: relativamente protegidos", "Lengua", "Saliva submandibular y sublingual"]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/07",
+          "proporcion": "4:3",
+          "alt": "Incisivos superiores temporales con lesiones café que rodean el cuello de los dientes, vistos de frente con el labio levantado.",
+          "pie": "Lesiones moderadas en incisivos superiores temporales: la mancha blanca inicial se ha pigmentado y el esmalte cervical comienza a perderse.",
+          "prompt": "Fotografía clínica macro, vista frontal de los incisivos superiores temporales de un niño de unos tres años, con el labio superior levantado con delicadeza por un dedo con guante de nitrilo. En el tercio cervical de los cuatro incisivos se observan lesiones de color café claro y amarillento que rodean el cuello del diente, con pérdida superficial del esmalte en dos de ellos, sin exposición pulpar. Encía rosa con leve enrojecimiento marginal, sin sangrado. Incisivos inferiores sanos visibles en segundo plano. Iluminación de lámpara dental neutra, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, pus, abscesos, rostro completo, dientes permanentes, mano sin guante."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Cómo examinar a un bebé"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un niño menor de 3 años rara vez se queda quieto en el sillón dental, y no tiene por qué hacerlo. La técnica más usada es el **examen rodilla con rodilla**: el profesional y el cuidador se sientan frente a frente, con sus rodillas juntas; el niño se acuesta sobre las piernas de ambos, con la cabeza en el regazo del profesional y las manos sostenidas suavemente por el cuidador. Así tienes buena visibilidad, el niño se siente seguro con su familiar y la revisión dura solo unos minutos. El llanto, lejos de ser un problema, abre la boca y te permite observar.\n\nPara ver bien las lesiones iniciales, limpia los dientes con un cepillo o una gasa y sécalos con aire o con una gasa. Usa espejo y luz adecuada, y recuerda que no necesitas un explorador puntiagudo para diagnosticar: presionar una lesión no cavitada puede romper su superficie.\n\nEl examen también es una oportunidad educativa. Pide al cuidador que mire contigo los dientes de su hijo; ver la placa y las manchas blancas en vivo convence más que cualquier folleto."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "No toda mancha blanca es caries"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de registrar una lesión, descarta otras alteraciones del esmalte que también se ven blancas. La clave está en la **localización** y en la **relación con la placa**. Las lesiones de caries aparecen donde la biopelícula se acumula y se queda: junto al margen gingival, en fosetas y fisuras y en las zonas de contacto. Su forma sigue el contorno de la encía, y al limpiar el diente suele haber placa justo encima.\n\nLos **defectos del desarrollo** se formaron antes de la erupción y tienen otra distribución. Las **opacidades delimitadas** tienen bordes nítidos y pueden estar en cualquier parte de la corona, incluso cerca del borde incisal, donde casi nunca se acumula placa. La **hipoplasia** muestra fosas o surcos con pérdida de grosor del esmalte. La **fluorosis** produce líneas o moteado blanco difuso, simétrico en dientes homólogos, que no sigue el margen de la encía. Distinguirlas cambia el plan: un defecto del desarrollo no necesita control de la dieta como tratamiento, aunque sí vigilancia porque retiene biopelícula con facilidad."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Diferenciar la lesión inicial de caries de otras opacidades",
+          "columnas": ["Rasgo", "Lesión inicial de caries", "Defecto del desarrollo o fluorosis"],
+          "filas": [
+            ["Localización", "Donde se acumula la placa: margen gingival, fosetas, contactos", "Cualquier zona de la corona, incluido el borde incisal"],
+            ["Forma", "Sigue el contorno de la encía, en banda o media luna", "Bordes nítidos, líneas horizontales o moteado difuso"],
+            ["Simetría", "Variable, según la higiene de cada zona", "Frecuentemente simétrica en dientes homólogos"],
+            ["Relación con la placa", "Placa presente sobre la lesión", "Sin relación necesaria con la placa"]
+          ]
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "«Levanta el labio»: revisión en casa para madres, padres y cuidadores",
+          "pasos": [
+            { "titulo": "Buen momento y buena luz", "md": "Elige un momento tranquilo, de preferencia después del baño, con luz natural o una lámpara. Lávate las manos antes de empezar." },
+            { "titulo": "Posición cómoda", "md": "Recuesta al niño con la cabeza en tu regazo, de modo que lo veas desde arriba, igual que para cepillarlo." },
+            { "titulo": "Levanta el labio superior", "md": "Con un dedo, levanta con suavidad el labio de arriba hasta ver la encía de los dientes de enfrente." },
+            { "titulo": "Busca manchas", "md": "Observa la orilla del diente junto a la encía: busca rayas blancas opacas, manchas cafés o pequeños agujeros." },
+            { "titulo": "Actúa a tiempo", "md": "Si ves algo distinto, acude con el odontólogo sin esperar a que haya dolor. La NOM-013-SSA2-2015 recomienda promover que los padres revisen la boca de los niños con regularidad." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/08",
+          "proporcion": "16:9",
+          "alt": "Examen rodilla con rodilla: una odontóloga con equipo de protección y una madre sentadas frente a frente con un bebé recostado sobre sus piernas.",
+          "pie": "Examen rodilla con rodilla: el niño se recuesta con la cabeza en el regazo del profesional y las manos sostenidas por su cuidador.",
+          "prompt": "Fotografía realista horizontal en un consultorio dental infantil iluminado. Una odontóloga con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección y una madre están sentadas frente a frente en sillas bajas con las rodillas juntas. Un bebé de unos 15 meses está recostado sobre las piernas de ambas, con la cabeza en el regazo de la odontóloga, que sostiene un espejo dental pequeño; la madre sostiene con suavidad las manos del bebé. Encuadre lateral que no muestra el rostro del bebé ni el de la madre con nitidez. Luz suave, colores cálidos. Evitar: texto, logotipos, marcas de agua, rostros identificables, sangre, instrumental punzante, profesional sin equipo de protección, posturas forzadas."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Las consecuencias no se quedan en la boca"
+        },
+        {
+          "tipo": "texto",
+          "md": "Cuando la caries avanza sin atención llega a la pulpa y produce **dolor**, que en un niño pequeño se manifiesta como irritabilidad, rechazo a comer, despertares nocturnos o llevarse la mano a la cara. La infección puede extenderse al hueso y formar un **absceso** con una pequeña fístula en la encía y, en casos graves, una **celulitis facial** que es una urgencia médica.\n\nLas consecuencias afectan la vida entera del niño: dificultades para masticar y alimentarse, alteraciones del sueño, ausencias en la guardería o la escuela, problemas de autoestima por la apariencia de los dientes y, en la familia, días de trabajo perdidos y gastos. La pérdida prematura de molares temporales puede reducir el espacio para los permanentes. Muchos niños con caries extensa requieren tratamiento bajo sedación o anestesia general, con los costos y riesgos que eso implica. Prevenir siempre es más sencillo que reparar."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Inflamación facial con fiebre: no esperes",
+          "md": "Un niño con **aumento de volumen en la cara**, fiebre, decaimiento, dificultad para abrir la boca o para tragar, o con inflamación que se extiende hacia el ojo o el cuello, debe recibir **atención médica y odontológica urgente**. Las infecciones odontogénicas pueden progresar con rapidez en niños pequeños. El manejo y la indicación de cualquier medicamento corresponden al profesional que lo valora."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "ordenar",
+          "titulo": "Ordena la progresión típica de la caries de la infancia temprana",
+          "instruccion": "Coloca en orden, de lo más temprano a lo más avanzado, lo que se observa cuando la enfermedad no se controla.",
+          "elementos": ["Placa visible en el margen gingival de los incisivos superiores", "Banda blanca opaca junto a la encía", "Lesión pigmentada con pérdida superficial de esmalte", "Cavidad que rodea el cuello del incisivo", "Afectación de los primeros molares temporales", "Dolor e infección de origen pulpar"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Enseña la técnica de «levanta el labio» a cada familia con niños menores de seis años y pide que la practiquen frente a ti la primera vez. Comparte también la lista de señales de alarma: inflamación de la cara, fiebre o una «bolita» en la encía. Una familia que sabe mirar detecta antes y llega a tiempo."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/09",
+          "proporcion": "3:4",
+          "alt": "Madre levanta con un dedo el labio superior de su hijo para revisar sus dientes junto a una ventana.",
+          "pie": "La revisión «levanta el labio» en casa permite detectar manchas blancas antes de que aparezca la cavidad.",
+          "prompt": "Fotografía realista vertical en una sala doméstica junto a una ventana con luz natural suave. Encuadre cerrado sobre las manos de una madre que, con el dedo índice, levanta con delicadeza el labio superior de un niño de unos dos años para observar sus incisivos superiores temporales, sanos y blancos. Se ven solo la boca con los labios, la punta de la nariz y las manos, sin ojos ni rostro completo. Tonos cálidos, fondo desenfocado, ambiente tranquilo y afectuoso. Evitar: texto, logotipos, marcas de agua, rostro identificable, uñas largas o decoradas, sangre, lesiones visibles, expresión de llanto."
+        }
+      ],
+      "glosario": [
+        { "termino": "Examen rodilla con rodilla", "definicion": "Técnica de exploración de bebés en la que el profesional y el cuidador, sentados frente a frente, sostienen al niño recostado sobre sus piernas." },
+        { "termino": "Margen gingival", "definicion": "Borde libre de la encía que rodea el cuello del diente." },
+        { "termino": "Absceso", "definicion": "Acumulación localizada de pus causada por una infección; en los dientes suele originarse por necrosis de la pulpa." },
+        { "termino": "Fístula", "definicion": "Pequeño trayecto por el que drena una infección hacia la encía; se ve como una bolita o un punto en la mucosa." },
+        { "termino": "Celulitis facial", "definicion": "Infección que se difunde por los tejidos blandos de la cara; es una urgencia médica." },
+        { "termino": "Pérdida prematura", "definicion": "Pérdida de un diente temporal antes del momento natural de su exfoliación." }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.3-1",
+          "q": "¿Qué dientes suelen quedar relativamente protegidos en la caries de la infancia temprana?",
+          "opciones": ["Los incisivos superiores", "Los primeros molares temporales", "Los caninos superiores", "Los incisivos inferiores"],
+          "correcta": 3,
+          "explicacion": "La lengua los cubre durante la succión y la saliva de las glándulas submandibulares y sublinguales los lava y amortigua."
+        },
+        {
+          "id": "t10.3-2",
+          "q": "¿Cuál es la primera señal clínica de la caries de la infancia temprana en los incisivos superiores?",
+          "opciones": ["Una banda blanca opaca junto a la encía", "Una fístula en la encía", "Movilidad dental", "Una mancha negra en el borde incisal"],
+          "correcta": 0,
+          "explicacion": "La lesión inicial es una banda blanca opaca paralela al margen gingival, más visible con el diente limpio y seco."
+        },
+        {
+          "id": "t10.3-3",
+          "q": "Un niño de 4 años llega con inflamación de la mejilla que se extiende hacia el ojo y fiebre. ¿Qué es lo indicado?",
+          "opciones": ["Indicar compresas y revisar en seis meses", "Aplicar barniz y citar en un mes", "Atención médica y odontológica urgente", "Esperar a que la inflamación baje sola"],
+          "correcta": 2,
+          "explicacion": "La inflamación facial con fiebre y extensión hacia el ojo sugiere una infección que se difunde; requiere valoración urgente."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Policy on Early Childhood Caries (ECC): Consequences and Preventive Strategies", "autor": "American Academy of Pediatric Dentistry", "anio": 2025 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "academica", "titulo": "Dental Caries: The Disease and its Clinical Management (3.ª ed.)", "autor": "Fejerskov O., Nyvad B., Kidd E. (Wiley Blackwell)", "anio": 2015 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la literatura de odontopediatría sobre el patrón clínico de la caries de la infancia temprana", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "10.4",
+      "titulo": "Prevención desde el embarazo hasta los seis años",
+      "minutos": 13,
+      "enPocasPalabras": "Cuidar los dientes del bebé empieza en el embarazo y sigue con limpiar las encías, cepillar los dientes desde que salen, evitar el azúcar y llevarlo al dentista antes del primer año. El dentista puede aplicar productos con flúor si el niño lo necesita.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "La prevención de la caries de la infancia temprana tiene una ventaja enorme: puedes empezarla **antes de que exista el primer diente**. En este tema vas a construir una guía anticipatoria por edades, es decir, un conjunto de recomendaciones que se adelantan a lo que la familia va a vivir en cada etapa. En los módulos 5 y 6 estudiaste a fondo el flúor y los selladores; aquí verás cómo encajan en la vida de un niño pequeño."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El embarazo, primera oportunidad"
+        },
+        {
+          "tipo": "texto",
+          "md": "La NOM-013-SSA2-2015 incluye un apartado de cuidados bucales preventivos para **embarazadas**: reconocer la salud bucal como parte de la salud integral, dar seguimiento con base en el riesgo y realizar promoción de la salud bucal de la madre y del futuro bebé. El embarazo es un momento en que muchas mujeres están especialmente dispuestas a cambiar hábitos y en el que tienen contacto frecuente con los servicios de salud.\n\nTratar la caries activa de la madre y de otros cuidadores reduce la carga de bacterias cariogénicas en el ambiente del bebé, y explicar desde ahora cómo se limpian las encías, cuándo empieza el cepillado y por qué no se duerme al bebé con biberón azucarado prepara a la familia antes de que aparezca el problema."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La primera visita y la casa dental"
+        },
+        {
+          "tipo": "texto",
+          "md": "La AAPD recomienda establecer una **casa dental** (*dental home*), es decir, una relación continua con un consultorio que conozca al niño, **dentro de los 6 meses posteriores a la erupción del primer diente y a más tardar a los 12 meses de edad**. La NOM-013-SSA2-2015 va incluso más temprano: pide promover la consulta estomatológica del lactante **a partir del primer mes de vida** y establecer citas subsecuentes desde la erupción, según el riesgo.\n\nEn esa primera visita no se busca «arreglar» dientes: se evalúa el riesgo, se enseña a la familia a limpiar y revisar la boca, se revisa la alimentación y se acuerda la siguiente cita. Una familia que conoce a su odontólogo antes de que haya dolor vive las consultas como algo normal."
+        },
+        {
+          "tipo": "pasos",
+          "titulo": "Guía anticipatoria por edades (concepto)",
+          "pasos": [
+            { "titulo": "Desde el nacimiento hasta el primer diente", "md": "Limpiar las encías con una gasa o paño limpio y húmedo o con un dedal de silicona, como indica la NOM-013-SSA2-2015. Promover la lactancia materna y no endulzar biberones." },
+            { "titulo": "Primer diente (alrededor de los 6 meses)", "md": "Comenzar el cepillado con un cepillo infantil de cabeza pequeña, dos veces al día y con especial cuidado en la noche. Primera consulta dental si aún no se ha hecho." },
+            { "titulo": "De 12 a 24 meses", "md": "Transición del biberón al vaso entrenador; evitar la alimentación nocturna a demanda con biberón; agua simple entre comidas; evitar azúcares añadidos." },
+            { "titulo": "De 2 a 6 años", "md": "Cepillado supervisado por un adulto con pasta fluorurada en la cantidad que indique el odontólogo, revisiones según riesgo y aplicación profesional de flúor o selladores cuando estén indicados." },
+            { "titulo": "Hasta los 8 años", "md": "El adulto realiza o supervisa el cepillado. La NOM-013-SSA2-2015 pide capacitar a los cuidadores para supervisar la higiene del menor hasta los 8 años." }
+          ]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/10",
+          "proporcion": "1:1",
+          "alt": "Cepillo dental infantil con una cantidad mínima de pasta, del tamaño de un grano de arroz, junto a otro con una porción del tamaño de un chícharo.",
+          "pie": "Dos cantidades de pasta de uso común en las guías: una capa mínima, del tamaño de un grano de arroz, y una porción del tamaño de un chícharo.",
+          "prompt": "Fotografía realista cuadrada de estudio sobre una superficie blanca mate. Dos cepillos dentales infantiles idénticos de cabeza pequeña y cerdas suaves, colocados en paralelo. Sobre las cerdas del primero hay una capa mínima de pasta dental blanca del tamaño de un grano de arroz; sobre el segundo, una porción redonda del tamaño de un chícharo. Iluminación suave y uniforme, sombras ligeras, enfoque nítido en las cerdas, colores neutros. Evitar: texto, números, etiquetas, logotipos, marcas comerciales, empaques de pasta, marcas de agua, exceso de pasta, colores fluorescentes."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "mexico",
+          "titulo": "La pasta dental en menores: la NOM y las guías internacionales",
+          "md": "La **NOM-013-SSA2-2015** indica cepillar sin pasta al inicio de la erupción y hasta los 3 años, y de los 3 a los 5 años usar pasta con 550 ppm de fluoruro en una porción similar a una lenteja. Las guías internacionales más recientes, como las de la **AAPD**, recomiendan en cambio pasta **fluorurada** desde el primer diente, en una capa mínima del tamaño de un **grano de arroz** antes de los 3 años y del tamaño de un **chícharo** de los 3 a los 6 años, siempre aplicada por un adulto. Conoce ambas referencias: la norma es la obligatoria en México y su texto vigente es el que rige, mientras que la evidencia internacional sigue actualizándose. La indicación para cada niño la da el odontólogo según su riesgo de caries y de fluorosis, y la revisión del Diario Oficial de la Federación te dirá si la norma se ha modificado."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Dieta y rutinas"
+        },
+        {
+          "tipo": "texto",
+          "md": "Las recomendaciones dietéticas más útiles para esta edad son concretas: **agua simple** como bebida habitual, **leche sin azúcar ni saborizantes**, fruta entera en lugar de jugo, **sin bebidas azucaradas en biberón** y ningún alimento o bebida con azúcar después del último cepillado. La NOM-013-SSA2-2015 pide promover hábitos alimenticios bajos en azúcares, evitar carbohidratos refinados entre comidas y enfatizar el consumo de agua simple potable. En el módulo 7 estudiaste la guía de la OMS sobre azúcares libres; en la primera infancia, la meta práctica es que el niño no se acostumbre al sabor dulce como norma.\n\nLas **rutinas** importan tanto como los alimentos. Un horario de comidas y colaciones definido, en lugar de «picar» todo el día, da tiempo a la saliva para recuperar el pH entre exposiciones."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La prevención profesional"
+        },
+        {
+          "tipo": "texto",
+          "md": "En niños con riesgo, la AAPD recomienda la **aplicación profesional de barniz de flúor**. La NOM-013-SSA2-2015 establece que los fluoruros tópicos de uso profesional los aplica el estomatólogo o personal capacitado, en el consultorio, a partir de los 12 meses de edad y con intervalos definidos por el diagnóstico del profesional; en niños con riesgo mediano y alto contempla barniz de flúor o de clorhexidina y la colocación de **selladores** de acuerdo con el riesgo. La decisión del producto, la frecuencia y la técnica es siempre profesional.\n\nLa prevención también es **interprofesional**. Pediatras, médicos familiares y personal de enfermería ven al niño muchas más veces en sus primeros años que el odontólogo: en las consultas de control y vacunación pueden levantar el labio, detectar manchas blancas y referir. La AAPD recomienda trabajar con ellos para dar un mensaje unificado a las familias."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "sabias",
+          "titulo": "Un mensaje, muchas voces",
+          "md": "Cuando la familia escucha lo mismo del pediatra, de la enfermera del centro de salud y del odontólogo, la recomendación gana credibilidad. Si en tu comunidad trabajas cerca de un centro de salud, acordar tres mensajes comunes sobre biberón, cepillado nocturno y primera visita es una intervención sencilla y de gran alcance."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m10/d4",
+          "pie": "Hitos de prevención de la caries de 0 a 6 años, con la responsabilidad de la familia y del equipo de salud.",
+          "descripcion": "Línea de tiempo horizontal de la gestación a los 6 años, dividida en dos carriles. En el carril superior, acciones de la familia: limpieza de encías, inicio del cepillado, retiro del biberón nocturno, cepillado supervisado. En el carril inferior, acciones del equipo de salud: orientación prenatal, primera consulta, evaluación de riesgo periódica, barniz o selladores según riesgo. Las marcas de edad se colocan en gestación, nacimiento, 6, 12, 24 meses y 6 años.",
+          "elementos": ["Gestación: orientación prenatal", "Nacimiento: limpieza de encías", "~6 meses: primer diente y primer cepillado", "Antes de 12 meses: casa dental", "12 a 24 meses: adiós al biberón nocturno", "Evaluación de riesgo periódica", "Barniz y selladores según riesgo", "Hasta 8 años: cepillado supervisado"]
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/11",
+          "proporcion": "4:3",
+          "alt": "Mujer embarazada sentada en el sillón dental conversa con un odontólogo con equipo de protección, vista de perfil desde atrás.",
+          "pie": "La consulta durante el embarazo es una oportunidad para atender la salud bucal de la madre y preparar los hábitos del bebé.",
+          "prompt": "Fotografía realista en un consultorio dental moderno y luminoso. Una mujer con embarazo avanzado, de unos treinta años, está sentada en posición semirreclinada y cómoda en el sillón dental, vista de perfil desde atrás de modo que su rostro no se distingue; apoya una mano sobre el vientre. Frente a ella, un odontólogo con bata, guantes de nitrilo, cubrebocas, gorro y lentes de protección le muestra un cepillo dental infantil mientras conversan. Luz natural suave, colores cálidos y naturales, ambiente sereno. Evitar: texto, letreros, logotipos, marcas de agua, rostro identificable, jeringas, agujas, sangre, radiografías, profesional sin equipo de protección."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "vf",
+          "titulo": "Mito o realidad en la prevención infantil",
+          "afirmaciones": [
+            { "texto": "La primera visita al dentista debe esperar a que el niño tenga todos sus dientes temporales.", "verdadero": false, "explicacion": "La AAPD recomienda la casa dental a más tardar a los 12 meses y la NOM-013-SSA2-2015 promueve la consulta del lactante desde el primer mes." },
+            { "texto": "Un niño de 4 años puede cepillarse solo sin supervisión si ya sabe hacerlo.", "verdadero": false, "explicacion": "A esa edad no tiene la destreza suficiente; la norma pide que el adulto realice o supervise la higiene hasta los 8 años." },
+            { "texto": "Dormir al niño con biberón de agua simple no aumenta el riesgo de caries.", "verdadero": true, "explicacion": "El agua simple no aporta azúcares; el riesgo proviene de la leche azucarada, jugos y otras bebidas con azúcar." },
+            { "texto": "El barniz de flúor lo puede aplicar cualquier familiar en casa.", "verdadero": false, "explicacion": "Los fluoruros tópicos de uso profesional los aplica el estomatólogo o personal capacitado, según el diagnóstico." },
+            { "texto": "Cuidar la salud bucal de la madre durante el embarazo también protege al bebé.", "verdadero": true, "explicacion": "Reduce la carga de bacterias cariogénicas del entorno y prepara a la familia con hábitos antes de la erupción." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Prepara una hoja de guía anticipatoria de una sola cara, con dibujos y lenguaje sencillo, organizada por edades: qué hacer antes del primer diente, del primer diente al año y de uno a seis años. Entrégala en la primera consulta, repásala en voz alta con la familia y pídele que la pegue en el baño. En cada cita, pregunta qué parte le ha costado más trabajo y ajusta el plan."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/12",
+          "proporcion": "16:9",
+          "alt": "Enfermera con cubrebocas y guantes observa la boca de un bebé en brazos de su madre en un centro de salud, de espaldas.",
+          "pie": "El personal de enfermería y medicina que ve al niño en sus consultas de control puede detectar lesiones iniciales y referir a tiempo.",
+          "prompt": "Fotografía realista horizontal en un consultorio limpio de un centro de salud comunitario en México, con luz natural difusa. Una enfermera con uniforme, cubrebocas, guantes de nitrilo y lentes de protección observa con una pequeña linterna la boca de un bebé de alrededor de un año que está en brazos de su madre. La madre y el bebé aparecen de espaldas o de perfil sin rostros nítidos. Al fondo, una báscula pediátrica y un escritorio ordenado. Colores naturales, ambiente amable. Evitar: texto, carteles, logotipos institucionales, marcas de agua, rostros identificables, agujas o jeringas visibles, sangre, profesional sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Guía anticipatoria", "definicion": "Recomendaciones que se dan a la familia antes de que llegue cada etapa del desarrollo del niño, para prevenir problemas." },
+        { "termino": "Casa dental", "definicion": "Relación continua entre el niño, su familia y un consultorio que conoce su historia y coordina su atención bucal." },
+        { "termino": "Barniz de flúor", "definicion": "Producto de aplicación profesional que se adhiere al diente y libera fluoruro; su indicación depende del riesgo de caries." },
+        { "termino": "ppm", "definicion": "Partes por millón; unidad que expresa la concentración de fluoruro en una pasta dental u otro producto." },
+        { "termino": "Fluorosis dental", "definicion": "Alteración del esmalte causada por la ingesta excesiva de fluoruro durante la formación del diente." }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.4-1",
+          "q": "Según la AAPD, ¿cuándo debe establecerse la casa dental?",
+          "opciones": ["Al cumplir 3 años", "Cuando aparezca la primera cavidad", "Al entrar a la primaria", "Dentro de los 6 meses posteriores al primer diente y a más tardar a los 12 meses"],
+          "correcta": 3,
+          "explicacion": "La AAPD la recomienda dentro de los 6 meses posteriores a la erupción del primer diente y no después de los 12 meses."
+        },
+        {
+          "id": "t10.4-2",
+          "q": "¿Qué indica la NOM-013-SSA2-2015 sobre la supervisión de la higiene bucal del menor?",
+          "opciones": ["Que el adulto la realice o supervise hasta los 8 años", "Que el niño se cepille solo desde los 2 años", "Que la supervisión termina al erupcionar el primer molar", "Que solo se supervise en la noche"],
+          "correcta": 0,
+          "explicacion": "La norma pide capacitar a los cuidadores para realizar o supervisar la higiene del menor hasta los 8 años."
+        },
+        {
+          "id": "t10.4-3",
+          "q": "¿Quién decide la aplicación de barniz de flúor a un niño y con qué frecuencia?",
+          "opciones": ["La familia según el sabor", "El odontólogo con base en el riesgo de caries", "La escuela, una vez al año", "El fabricante del producto"],
+          "correcta": 1,
+          "explicacion": "La aplicación profesional de fluoruros y su intervalo dependen del diagnóstico y del riesgo que establece el profesional."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Policy on Early Childhood Caries (ECC): Consequences and Preventive Strategies", "autor": "American Academy of Pediatric Dentistry", "anio": 2025 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales (numerales 7.9 y Apéndice A)", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "oficial", "titulo": "Use of Toothpaste and Toothbrushing Patterns Among Children and Adolescents — United States, 2013–2016 (MMWR)", "autor": "Centers for Disease Control and Prevention", "anio": 2019 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en la guía anticipatoria de la AAPD y la NOM-013-SSA2-2015", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    },
+    {
+      "n": "10.5",
+      "titulo": "Manejo de la caries en la dentición temporal: decisiones centradas en el niño",
+      "minutos": 13,
+      "enPocasPalabras": "Cuando un niño ya tiene caries, primero se controlan las causas en casa y después se decide qué hacer con cada diente: detener la lesión, sellarla, restaurarla o, si no hay otra opción, extraerla. La edad del niño, su cooperación y lo que la familia puede hacer cuentan en la decisión.",
+      "bloques": [
+        {
+          "tipo": "texto",
+          "md": "Cuando la caries de la infancia temprana ya está presente, tienes que resolver dos problemas a la vez: **controlar la enfermedad**, que vive en los hábitos de la familia y en la biopelícula, y **atender las lesiones**, que viven en los dientes. Si solo restauras sin cambiar los factores de riesgo, verás aparecer lesiones nuevas alrededor de tus restauraciones en pocos meses. Si solo das consejos y no atiendes una lesión profunda, el niño puede acabar con dolor o infección.\n\nLos detalles técnicos de la remoción selectiva y de los materiales los estudiaste en los módulos 8 y 9. Este tema se centra en cómo cambia la toma de decisiones cuando el paciente es un niño pequeño."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Primero la enfermedad, después los dientes"
+        },
+        {
+          "tipo": "texto",
+          "md": "El plan comienza siempre con las medidas que actúan sobre toda la boca: higiene supervisada con pasta fluorurada, cambios concretos en la alimentación nocturna y entre comidas, flúor profesional según el riesgo y citas frecuentes de seguimiento. Estas medidas detienen muchas lesiones iniciales sin necesidad de tocar el diente.\n\nDespués evalúas cada lesión con dos preguntas: **¿está activa o detenida?** y **¿hay cavidad?** Una lesión activa suele verse blanca, opaca y rugosa, o con dentina blanda y amarillenta; una detenida se ve brillante, lisa y dura, con frecuencia más oscura. A eso se suman la **profundidad** (¿hay signos o síntomas de compromiso pulpar?), el **tiempo que falta para la exfoliación** del diente y la **capacidad del niño para cooperar**."
+        },
+        {
+          "tipo": "tabla",
+          "titulo": "Opciones de manejo de lesiones en dientes temporales (visión general)",
+          "columnas": ["Opción", "Idea central", "Cuándo se considera"],
+          "filas": [
+            ["Control no operatorio", "Detener la lesión con higiene, dieta y flúor", "Lesiones no cavitadas activas o cavidades limpiables en superficies accesibles"],
+            ["Agentes de detención como el fluoruro diamino de plata", "Detener lesiones cavitadas sin preparar el diente", "Riesgo alto, niños que no pueden cooperar con tratamientos largos o acceso limitado a la atención"],
+            ["Sellado de lesiones", "Aislar la lesión de la biopelícula", "Lesiones no cavitadas o microcavidades en fosetas y fisuras"],
+            ["Restauración mínimamente invasiva", "Remoción selectiva y material adhesivo o bioactivo", "Cavidades que retienen biopelícula y no pueden limpiarse"],
+            ["Coronas preformadas", "Cubrir el diente para sellar la lesión y protegerlo", "Molares con lesiones extensas o de varias superficies"],
+            ["Terapia pulpar o extracción", "Resolver la afectación pulpar o eliminar un foco infeccioso", "Signos de compromiso pulpar irreversible o infección; la decide el profesional"]
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "El fluoruro diamino de plata, en su justa dimensión"
+        },
+        {
+          "tipo": "texto",
+          "md": "El **fluoruro diamino de plata** (FDP, en inglés *silver diamine fluoride*) es un líquido de aplicación profesional que combina el efecto antibacteriano de la plata con el efecto remineralizante del fluoruro. Se aplica sobre la lesión sin necesidad de anestesia ni de preparar el diente, y puede **detener lesiones cavitadas** en dentición temporal. La AAPD lo reconoce como parte de un plan continuo de manejo de la caries y lo considera especialmente útil en niños con riesgo alto y lesiones cavitadas, con dificultades de conducta o médicas para recibir tratamientos convencionales, con muchas lesiones que requerirían varias citas o con acceso limitado a la atención.\n\nTiene una consecuencia que debes explicar siempre antes de aplicarlo: la lesión tratada **se tiñe de negro de manera permanente**. Para muchas familias eso es aceptable a cambio de evitar dolor o una anestesia general; para otras, sobre todo en dientes anteriores, no lo es. Por eso su uso requiere una conversación honesta, fotografías de ejemplo y **consentimiento informado**. Puede requerir reaplicaciones y seguimiento para comprobar que la lesión se mantiene detenida. La indicación, el producto, la técnica y la frecuencia son decisión del odontólogo."
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "atencion",
+          "titulo": "Lo que el fluoruro diamino de plata no hace",
+          "md": "No sustituye a la terapia pulpar cuando el diente ya tiene dolor espontáneo, absceso o fístula, y no está indicado en lesiones con signos de afectación pulpar irreversible. Tampoco reemplaza los cambios de hábitos: si la familia no controla los azúcares y la higiene, aparecerán lesiones nuevas en otras superficies."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/13",
+          "proporcion": "4:3",
+          "alt": "Molar temporal en un modelo didáctico con una lesión oclusal detenida, oscura y brillante.",
+          "pie": "Lesión de caries detenida en un molar temporal: superficie dura, lisa y oscura. El seguimiento confirma que se mantiene inactiva.",
+          "prompt": "Fotografía clínica macro realista de un modelo didáctico de alta calidad de la arcada inferior temporal, enfocada en el primer molar temporal inferior derecho visto desde oclusal. En el centro de su cara oclusal hay una lesión poco profunda de bordes definidos, de color negro brillante y superficie lisa y dura, que representa una lesión detenida; el resto del esmalte es blanco natural. Molares y caninos temporales con anatomía correcta alrededor. Iluminación de lámpara dental uniforme, fondo neutro oscuro, enfoque nítido. Evitar: texto, flechas, etiquetas, logotipos, marcas de agua, sangre, encía inflamada, dientes permanentes, instrumental en el campo."
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "La conducta del niño también es parte del plan"
+        },
+        {
+          "tipo": "texto",
+          "md": "Un buen plan de tratamiento es aquel que el niño puede tolerar. Las técnicas básicas de guía de la conducta, como **decir, mostrar y hacer** (explicar con palabras sencillas, enseñar el instrumento y después usarlo), el refuerzo positivo y la presencia del cuidador, permiten atender a la mayoría de los preescolares con citas cortas y planeadas. Empezar por los procedimientos más sencillos, como profilaxis o barniz, construye confianza para los que siguen.\n\nCuando un niño muy pequeño tiene muchas lesiones extensas, dolor o infección y no puede cooperar, el odontopediatra puede valorar otras estrategias, como la estabilización protectora con consentimiento, la sedación o la atención bajo anestesia general en un entorno hospitalario. Son decisiones de especialista que se toman con la familia, con evaluación médica y con conciencia de sus riesgos y costos. El odontólogo general tiene un papel clave en **referir a tiempo** y en mantener la prevención antes y después."
+        },
+        {
+          "tipo": "lista",
+          "titulo": "Criterios orientadores para referir al odontopediatra",
+          "items": [
+            "Caries extensa en varios cuadrantes en un niño menor de 3 años.",
+            "Signos de afectación pulpar o infección que requieren terapia pulpar o extracciones múltiples.",
+            "Conducta que impide una atención segura con técnicas básicas.",
+            "Condiciones médicas o del desarrollo que requieren manejo especializado.",
+            "Lesiones que progresan pese a un plan preventivo bien llevado."
+          ]
+        },
+        {
+          "tipo": "recuadro",
+          "variante": "ejemplo",
+          "titulo": "Decidir con la familia",
+          "md": "Valeria, de 3 años, tiene lesiones cavitadas en los cuatro incisivos superiores y en dos molares, sin dolor ni fístulas. Llora intensamente en el sillón. La odontóloga explica tres caminos: detener las lesiones con fluoruro diamino de plata y cambios en casa, con el tinte negro como consecuencia; restaurar en varias citas cortas; o referir al odontopediatra para valorar tratamiento con sedación. La familia elige empezar por la detención y los cambios de hábitos, con revisión en tres meses. La decisión queda registrada en el consentimiento informado."
+        },
+        {
+          "tipo": "diagrama",
+          "id": "caries-dental/m10/d5",
+          "pie": "Ruta de decisión simplificada para una lesión de caries en un diente temporal.",
+          "descripcion": "Diagrama de flujo vertical. Empieza en un recuadro de control de la enfermedad que siempre se aplica. Luego una pregunta en rombo: ¿signos de afectación pulpar o infección? Si la respuesta es sí, flecha a terapia pulpar, extracción o referencia. Si es no, otro rombo: ¿lesión cavitada? Si no, flecha a control no operatorio o sellado. Si sí, rombo final: ¿cooperación y acceso para restaurar? Si sí, restauración mínimamente invasiva o corona preformada; si no, agente de detención y seguimiento o referencia al odontopediatra. Todas las ramas terminan en un recuadro de seguimiento según riesgo.",
+          "elementos": ["Control de la enfermedad en casa", "¿Afectación pulpar o infección?", "Terapia pulpar, extracción o referencia", "¿Lesión cavitada?", "Control no operatorio o sellado", "¿Cooperación y acceso para restaurar?", "Restauración mínimamente invasiva o corona", "Agente de detención o referencia", "Seguimiento según riesgo"]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Seguimiento y llegada del primer molar permanente"
+        },
+        {
+          "tipo": "texto",
+          "md": "Ninguna decisión sobre una lesión temporal es definitiva sin **seguimiento**. En cada cita revisa si las lesiones que decidiste controlar siguen duras y brillantes, si aparecieron lesiones nuevas y si los hábitos acordados se cumplen. Fotografiar las lesiones con autorización de la familia te permite comparar con objetividad de una visita a otra. El intervalo lo marca el riesgo: recuerda que la NOM-013-SSA2-2015 propone citas trimestrales para los niños con riesgo alto.\n\nAlrededor de los 6 años erupciona el **primer molar permanente** detrás del último molar temporal, muchas veces sin que la familia lo note porque no sustituye a ningún diente. Durante su erupción, que puede tardar meses, su superficie oclusal queda por debajo del plano de oclusión, es difícil de cepillar y acumula biopelícula. En un niño que tuvo caries de la infancia temprana, ese molar llega a una boca con factores de riesgo que ya demostraron su fuerza. Avisa a la familia antes de que aparezca, enséñale a cepillarlo colocando el cepillo de lado y valora con oportunidad su protección, como estudiaste en el módulo de selladores."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/14",
+          "proporcion": "4:3",
+          "alt": "Primer molar permanente inferior en erupción detrás del segundo molar temporal, con la encía cubriendo parte de su cara distal.",
+          "pie": "Primer molar permanente en erupción: su superficie oclusal queda por debajo del plano de oclusión y es difícil de limpiar.",
+          "prompt": "Fotografía clínica macro, vista oclusal de la hemiarcada inferior derecha de un niño de unos seis años, con el labio y la mejilla retraídos con suavidad por un espejo dental sostenido con guante de nitrilo. Se observan los molares temporales sanos y, detrás del segundo molar temporal, un primer molar permanente en erupción con sus cúspides visibles y la encía cubriendo todavía parte de su cara distal; fisuras profundas limpias, sin cavidades. Encía rosa sana. Iluminación de lámpara dental neutra, enfoque nítido. Evitar: texto, flechas, logotipos, marcas de agua, sangre, inflamación severa, rostro, número incorrecto de cúspides, dientes deformes, mano sin guante."
+        },
+        {
+          "tipo": "actividad",
+          "actividad": "caso",
+          "titulo": "Caso clínico: Diego, 26 meses",
+          "situacion": "Diego tiene 26 meses. Su madre lo lleva porque notó manchas en los dientes de enfrente. Se duerme cada noche con biberón de leche con azúcar y no le cepillan los dientes antes de dormir. En el examen rodilla con rodilla observas placa abundante y bandas blancas opacas, rugosas y sin cavidad en los cuatro incisivos superiores. No hay dolor ni inflamación.",
+          "opciones": [
+            { "texto": "Explicar que tiene caries de la infancia temprana en etapa inicial, acordar el retiro del biberón azucarado nocturno, enseñar el cepillado supervisado, valorar flúor profesional según el riesgo y citar en un intervalo corto.", "correcta": true, "retro": "Correcto. Las lesiones son activas pero no cavitadas: pueden detenerse si se corrigen los factores de riesgo. El seguimiento cercano confirma si el plan funciona." },
+            { "texto": "Preparar cavidades en los incisivos y colocar restauraciones.", "correcta": false, "retro": "Las lesiones no cavitadas no necesitan preparación. Restaurar sin cambiar hábitos tampoco controla la enfermedad." },
+            { "texto": "Tranquilizar a la madre porque son dientes de leche y se van a caer.", "correcta": false, "retro": "Los incisivos temporales permanecen varios años y la lesión puede avanzar rápido. Además, la caries temprana predice caries futura." },
+            { "texto": "Indicar que regrese cuando aparezca dolor.", "correcta": false, "retro": "Esperar al dolor desperdicia la etapa en la que la lesión se puede detener sin tratamiento invasivo." }
+          ]
+        },
+        {
+          "tipo": "subtitulo",
+          "texto": "Idea práctica para tu consulta"
+        },
+        {
+          "tipo": "texto",
+          "md": "Antes de proponer cualquier tratamiento a un preescolar, escribe en el expediente dos planes en paralelo: el **plan de control de la enfermedad** (qué cambia en casa y qué medidas preventivas haces tú) y el **plan por diente** (qué decides para cada lesión y por qué). Revisa ambos en cada cita. Si las lesiones nuevas siguen apareciendo, el problema está en el primer plan, no en tus restauraciones."
+        },
+        {
+          "tipo": "figura",
+          "id": "caries-dental/m10/15",
+          "proporcion": "16:9",
+          "alt": "Odontopediatra con equipo de protección muestra un espejo dental a un niño sentado en el sillón, visto de espaldas.",
+          "pie": "La técnica de decir, mostrar y hacer: el niño conoce el instrumento antes de que se use en su boca.",
+          "prompt": "Fotografía realista horizontal en un consultorio de odontopediatría colorido y bien iluminado. Una odontopediatra con bata de colores suaves, guantes de nitrilo, cubrebocas, gorro y lentes de protección sostiene un espejo dental y lo muestra a un niño de unos cuatro años sentado en el sillón, que aparece de espaldas y solo deja ver su cabello y la mano extendida hacia el espejo. Una asistente con el mismo equipo de protección observa al fondo. Luz cálida y uniforme, ambiente lúdico y calmado. Evitar: texto, letreros, logotipos, marcas de agua, rostro del niño, jeringas, agujas, sangre, instrumental punzante en primer plano, profesionales sin equipo de protección."
+        }
+      ],
+      "glosario": [
+        { "termino": "Lesión activa", "definicion": "Lesión de caries que está progresando; suele verse opaca y rugosa en esmalte, o blanda en dentina." },
+        { "termino": "Lesión detenida", "definicion": "Lesión de caries que dejó de progresar; suele verse lisa, brillante y dura, con frecuencia más oscura." },
+        { "termino": "Fluoruro diamino de plata", "definicion": "Agente de aplicación profesional que combina plata y fluoruro para detener lesiones de caries; tiñe de negro la lesión tratada." },
+        { "termino": "Corona preformada", "definicion": "Corona prefabricada que cubre un diente temporal con destrucción extensa para protegerlo y sellar la lesión." },
+        { "termino": "Decir, mostrar y hacer", "definicion": "Técnica de guía de la conducta en la que se explica, se muestra y luego se realiza cada paso del tratamiento." },
+        { "termino": "Exfoliación", "definicion": "Caída natural de un diente temporal cuando su raíz se reabsorbe para dar paso al permanente." }
+      ],
+      "verificacion": [
+        {
+          "id": "t10.5-1",
+          "q": "¿Qué efecto visible del fluoruro diamino de plata debe explicarse a la familia antes de aplicarlo?",
+          "opciones": ["Que blanquea el diente", "Que deja el diente sensible por meses", "Que forma una capa rosada temporal", "Que tiñe de negro la lesión tratada"],
+          "correcta": 3,
+          "explicacion": "El tinte negro permanente de la lesión es la principal consideración estética y debe quedar en el consentimiento informado."
+        },
+        {
+          "id": "t10.5-2",
+          "q": "¿Por qué restaurar sin cambiar los hábitos de la familia suele fracasar?",
+          "opciones": ["Porque los materiales no se adhieren a dientes temporales", "Porque la enfermedad sigue activa y aparecen lesiones nuevas", "Porque las restauraciones duran menos de una semana", "Porque la NOM prohíbe restaurar dientes temporales"],
+          "correcta": 1,
+          "explicacion": "La caries es una enfermedad de la biopelícula y la dieta; si esos factores no cambian, surgen lesiones en otras superficies."
+        },
+        {
+          "id": "t10.5-3",
+          "q": "¿Cuál de estas situaciones es un criterio orientador para referir al odontopediatra?",
+          "opciones": ["Una mancha blanca aislada en un niño cooperador", "Una revisión de rutina de un niño sin caries", "Caries extensa en varios cuadrantes en un niño menor de 3 años", "Un niño que pide un cepillo nuevo"],
+          "correcta": 2,
+          "explicacion": "La caries extensa en edades muy tempranas suele requerir manejo especializado de la conducta y del tratamiento."
+        }
+      ],
+      "fuentes": [
+        { "tipo": "oficial", "titulo": "Policy on the Use of Silver Diamine Fluoride for Pediatric Dental Patients", "autor": "American Academy of Pediatric Dentistry", "anio": 2018 },
+        { "tipo": "academica", "titulo": "Use of silver diamine fluoride for dental caries management in children and adolescents, including those with special health care needs", "autor": "Crystal Y. O. et al. (Pediatric Dentistry)", "anio": 2017 },
+        { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+        { "tipo": "propia", "titulo": "Elaboración propia OdonTeck con base en los principios de manejo de la caries de ICCMS y las recomendaciones de la AAPD para dentición temporal", "autor": "OdonTeck", "anio": 2026 }
+      ]
+    }
+  ],
+  "minijuego": {
+    "tipo": "sopa",
+    "titulo": "Sopa de letras: la caries en la primera infancia",
+    "palabras": ["BIBERON", "INCISIVOS", "TEMPORALES", "AZUCARES", "BARNIZ", "CEPILLADO", "FLUORURO", "PREESCOLAR", "LACTANCIA", "SELLADOR"]
+  },
+  "examen": {
+    "aprobar": 70,
+    "mostrar": 10,
+    "preguntas": [
+      {
+        "id": "m10-p01",
+        "q": "¿Hasta qué edad se usa el término caries de la infancia temprana según la Declaración de Bangkok?",
+        "opciones": ["Menores de 3 años", "Menores de 6 años", "Menores de 12 años", "Hasta la erupción del primer premolar"],
+        "correcta": 1,
+        "explicacion": "La definición aplica a cualquier diente temporal de un niño menor de seis años (71 meses o menos según la AAPD)."
+      },
+      {
+        "id": "m10-p02",
+        "q": "¿Qué tipo de lesiones cuenta la definición actual de caries de la infancia temprana?",
+        "opciones": ["Solo cavidades visibles", "Solo dientes extraídos", "Lesiones cavitadas y no cavitadas, dientes perdidos por caries y obturados", "Solo lesiones con dolor"],
+        "correcta": 2,
+        "explicacion": "Incluye superficies cariadas con o sin cavidad, perdidas por caries u obturadas."
+      },
+      {
+        "id": "m10-p03",
+        "q": "Un niño de 2 años presenta una lesión inicial en la cara vestibular lisa de un incisivo superior. Según la AAPD, se clasifica como:",
+        "opciones": ["Caries de la infancia temprana severa", "Fluorosis", "Sin caries, porque no hay cavidad", "Caries de fisuras"],
+        "correcta": 0,
+        "explicacion": "En menores de 3 años, cualquier signo de caries en superficies lisas indica la forma severa."
+      },
+      {
+        "id": "m10-p04",
+        "q": "¿Qué mide el índice ceo-d?",
+        "opciones": ["Superficies con placa entre superficies examinadas", "El número de dientes permanentes sanos", "La concentración de fluoruro en la pasta", "Dientes temporales cariados, extraídos o indicados para extracción por caries y obturados"],
+        "correcta": 3,
+        "explicacion": "Es la suma de dientes temporales cariados, extraídos o con extracción indicada y obturados."
+      },
+      {
+        "id": "m10-p05",
+        "q": "Según la OMS, ¿cuántos niños en el mundo tienen caries en dientes temporales, aproximadamente?",
+        "opciones": ["514 millones", "5 millones", "50 millones", "5,000 millones"],
+        "correcta": 0,
+        "explicacion": "La OMS estima alrededor de 514 millones de niños con caries en la dentición temporal."
+      },
+      {
+        "id": "m10-p06",
+        "q": "¿Qué recomienda la AAPD sobre la alimentación nocturna a demanda con biberón o pecho?",
+        "opciones": ["Mantenerla hasta los 3 años", "Sustituirla por jugo natural", "Evitarla más allá de los 12 meses", "Hacerla solo con leche saborizada"],
+        "correcta": 2,
+        "explicacion": "La AAPD recomienda evitar la alimentación nocturna a demanda con biberón o pecho más allá de los 12 meses."
+      },
+      {
+        "id": "m10-p07",
+        "q": "¿Cuál es el mensaje adecuado sobre lactancia materna y caries?",
+        "opciones": ["Suspender la lactancia al aparecer el primer diente", "Mantener la lactancia y limpiar los dientes después de la última toma, cuidando los azúcares del resto del día", "Endulzar la leche materna para que el bebé coma mejor", "La lactancia materna no tiene relación con la salud bucal"],
+        "correcta": 1,
+        "explicacion": "La lactancia tiene beneficios demostrados; el riesgo surge al combinar tomas nocturnas frecuentes con otros azúcares y sin higiene."
+      },
+      {
+        "id": "m10-p08",
+        "q": "Según la NOM-013-SSA2-2015, ¿cuál de estos hallazgos corresponde a riesgo alto en un niño de hasta 3 años?",
+        "opciones": ["Higiene dos veces al día", "Saliva abundante", "Sin alimentación nocturna cariogénica", "Carbohidratos refinados entre comidas 4 o más veces al día"],
+        "correcta": 3,
+        "explicacion": "La ingesta de carbohidratos refinados entre comidas 4 o más veces al día es un criterio de riesgo alto."
+      },
+      {
+        "id": "m10-p09",
+        "q": "¿Por qué la caries avanza más rápido en dientes temporales que en permanentes?",
+        "opciones": ["Porque tienen esmalte más delgado y una pulpa proporcionalmente más grande", "Porque no tienen dentina", "Porque no reciben saliva", "Porque tienen más fluoruro"],
+        "correcta": 0,
+        "explicacion": "El esmalte temporal es aproximadamente la mitad de grueso y la distancia a la pulpa es corta."
+      },
+      {
+        "id": "m10-p10",
+        "q": "¿Qué dientes suelen afectarse primero en la caries de la infancia temprana?",
+        "opciones": ["Incisivos inferiores", "Segundos molares temporales", "Incisivos superiores, en su cara vestibular cerca de la encía", "Primeros molares permanentes"],
+        "correcta": 2,
+        "explicacion": "Son los primeros en erupcionar en la arcada superior y los que más tiempo quedan expuestos al líquido del biberón."
+      },
+      {
+        "id": "m10-p11",
+        "q": "¿En qué consiste el examen rodilla con rodilla?",
+        "opciones": ["En revisar al niño sentado solo en el sillón dental", "En que el profesional y el cuidador, frente a frente, sostienen al niño recostado sobre sus piernas", "En examinar al niño de pie frente a un espejo", "En pedir al niño que se arrodille"],
+        "correcta": 1,
+        "explicacion": "Es la técnica habitual para revisar bebés: da visibilidad al profesional y seguridad al niño."
+      },
+      {
+        "id": "m10-p12",
+        "q": "Un niño de 3 años presenta inflamación facial, fiebre y decaimiento por un molar con caries profunda. ¿Qué haces?",
+        "opciones": ["Aplicar barniz de flúor y citar en seis meses", "Indicar enjuague con agua y sal y revisar en un mes", "Explicar que es normal con la erupción", "Gestionar atención médica y odontológica urgente"],
+        "correcta": 3,
+        "explicacion": "La inflamación facial con signos sistémicos sugiere una infección que se difunde y requiere valoración urgente."
+      },
+      {
+        "id": "m10-p13",
+        "q": "Según la AAPD, ¿cuándo debe establecerse la casa dental?",
+        "opciones": ["Dentro de los 6 meses posteriores al primer diente y a más tardar a los 12 meses", "A los 3 años", "Cuando el niño coopere en el sillón", "Al iniciar la primaria"],
+        "correcta": 0,
+        "explicacion": "La AAPD la recomienda dentro de los 6 meses posteriores a la erupción del primer diente y no después del año de edad."
+      },
+      {
+        "id": "m10-p14",
+        "q": "¿Desde cuándo pide la NOM-013-SSA2-2015 promover la consulta estomatológica del lactante?",
+        "opciones": ["Desde los 2 años", "Desde la erupción de los molares", "Desde el primer mes de vida", "Desde los 6 años"],
+        "correcta": 2,
+        "explicacion": "La norma pide promover la consulta del lactante a partir del primer mes de vida."
+      },
+      {
+        "id": "m10-p15",
+        "q": "¿Qué diferencia hay entre la NOM-013-SSA2-2015 y las guías de la AAPD sobre la pasta dental en menores de 3 años?",
+        "opciones": ["Ambas indican no cepillar antes de los 3 años", "La NOM indica cepillar sin pasta hasta los 3 años y la AAPD recomienda una capa mínima de pasta fluorurada desde el primer diente", "La AAPD prohíbe la pasta fluorurada y la NOM la recomienda", "Ninguna menciona la pasta dental"],
+        "correcta": 1,
+        "explicacion": "La norma mexicana indica cepillar sin pasta hasta los 3 años; la AAPD recomienda pasta fluorurada en cantidad mínima desde el primer diente."
+      },
+      {
+        "id": "m10-p16",
+        "q": "¿Cuál es la principal consideración estética del fluoruro diamino de plata?",
+        "opciones": ["Produce manchas blancas", "Desgasta el esmalte", "Vuelve los dientes translúcidos", "Tiñe de negro la lesión tratada"],
+        "correcta": 3,
+        "explicacion": "La lesión tratada se tiñe de negro de forma permanente; debe explicarse y registrarse en el consentimiento."
+      },
+      {
+        "id": "m10-p17",
+        "q": "Una niña de 3 años con varias lesiones cavitadas sin dolor no coopera con tratamientos largos y su familia vive lejos del consultorio. ¿Qué opción se ajusta mejor a la indicación general del fluoruro diamino de plata según la AAPD?",
+        "opciones": ["Detener las lesiones con fluoruro diamino de plata dentro de un plan continuo, con consentimiento y seguimiento", "Extraer todos los dientes afectados", "No hacer nada hasta que tenga 6 años", "Colocar selladores sobre las cavidades sin evaluar"],
+        "correcta": 0,
+        "explicacion": "Riesgo alto, lesiones cavitadas, dificultad de conducta y acceso limitado son situaciones en las que la AAPD considera útil el agente de detención."
+      },
+      {
+        "id": "m10-p18",
+        "q": "¿Qué describe mejor una lesión de caries detenida?",
+        "opciones": ["Blanca, opaca y rugosa", "Blanda y amarillenta", "Lisa, brillante y dura, con frecuencia oscura", "Con dolor al masticar"],
+        "correcta": 2,
+        "explicacion": "Las lesiones detenidas son duras y brillantes; las activas suelen ser opacas, rugosas o blandas."
+      }
+    ]
+  },
+  "fuentes": [
+    { "tipo": "academica", "titulo": "Early Childhood Caries: IAPD Bangkok Declaration", "autor": "Pitts N. B. et al. (International Journal of Paediatric Dentistry)", "anio": 2019 },
+    { "tipo": "oficial", "titulo": "Policy on Early Childhood Caries (ECC): Consequences and Preventive Strategies", "autor": "American Academy of Pediatric Dentistry", "anio": 2025 },
+    { "tipo": "oficial", "titulo": "Policy on the Use of Silver Diamine Fluoride for Pediatric Dental Patients", "autor": "American Academy of Pediatric Dentistry", "anio": 2018 },
+    { "tipo": "oficial", "titulo": "NOM-013-SSA2-2015, Para la prevención y control de enfermedades bucales", "autor": "Secretaría de Salud", "anio": 2016 },
+    { "tipo": "oficial", "titulo": "Global oral health status report: towards universal health coverage for oral health by 2030", "autor": "Organización Mundial de la Salud", "anio": 2022 }
+  ]
+}
