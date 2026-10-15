@@ -250,8 +250,26 @@ function avatarProfesional(p: Pick<PerfilDirectorio, 'nombre' | 'foto'>, clase =
 
 const botonReportar = (tipo: 'perfil' | 'oportunidad', id: string, nombre: string) => `<button class="network-report" type="button" data-network-report data-type="${tipo}" data-id="${esc(id)}" data-name="${esc(nombre)}" aria-label="Denunciar ${tipo === 'perfil' ? 'perfil' : 'oportunidad'}"><i data-lucide="flag" class="i"></i></button>`;
 
+// Color de la tarjeta: por especialidad cuando se reconoce (mismo color = misma área clínica)
+// y, si no, uno estable por persona. Los 6 tonos viven en comunidad.css (.network-person--tone-N).
+const TONOS_ESPECIALIDAD: [RegExp, number][] = [
+  [/endodon/i, 1], // violeta
+  [/rehabilit|pr[oó]tesis|restaurador/i, 4], // cobre
+  [/odontopediatr|pediatr/i, 2], // teal
+  [/ortodon/i, 5], // cian
+  [/periodon/i, 3], // malva
+  [/cirug|maxilofacial|implant/i, 0], // azul
+];
+function tonoPerfil(p: Pick<PerfilDirectorio, 'uid' | 'especialidades' | 'titular'>) {
+  for (const texto of [p.especialidades.join(' '), p.titular]) {
+    const tono = TONOS_ESPECIALIDAD.find(([re]) => re.test(texto || ''));
+    if (tono) return tono[1];
+  }
+  return Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 6;
+}
+
 function tarjetaPersona(p: PerfilDirectorio) {
-  const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
+  const tono = tonoPerfil(p);
   const especialidad = p.especialidades[0] || etiqueta(p.etapa);
   return `<article class="network-card network-person network-person--tone-${tono}">
     <div class="network-person__portrait ${p.foto ? 'has-photo' : 'is-fallback'}">
@@ -272,7 +290,7 @@ function tarjetaPersona(p: PerfilDirectorio) {
 }
 
 function detallePersona(p: PerfilDirectorio) {
-  const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
+  const tono = tonoPerfil(p);
   const especialidad = p.especialidades[0] || etiqueta(p.etapa);
   const experiencia = p.experiencia ?? [];
   const formacion = p.formacion ?? [];

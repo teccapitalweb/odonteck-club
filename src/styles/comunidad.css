@@ -301,9 +301,28 @@
 .network-person__portrait::before { width: 52%; aspect-ratio: 1; right: -17%; top: -22%; border: 1px solid rgba(255,255,255,.2); box-shadow: 0 0 0 26px rgba(255,255,255,.035), 0 0 0 54px rgba(255,255,255,.02); }
 .network-person__portrait::after { inset: 36% 0 0; border-radius: 0; background: linear-gradient(180deg, transparent, rgba(6,18,38,.54)); opacity: .86; }
 .network-person__portrait.has-photo::after { inset: 38% 0 0; background: linear-gradient(180deg, transparent, rgba(7,18,34,.72)); }
-.network-person--tone-1 .network-person__portrait { background: radial-gradient(circle at 24% 20%, rgba(255,255,255,.24), transparent 36%), linear-gradient(145deg, #29386f, #7a6aaa); }
-.network-person--tone-2 .network-person__portrait { background: radial-gradient(circle at 78% 18%, rgba(255,255,255,.24), transparent 36%), linear-gradient(145deg, #17485b, #48a88f); }
-.network-person--tone-3 .network-person__portrait { background: radial-gradient(circle at 28% 18%, rgba(255,255,255,.22), transparent 34%), linear-gradient(145deg, #43365f, #ae6d80); }
+/* ── Tono por tarjeta (tonoPerfil en pages/comunidad.ts) ──
+   --tono: color del área · --tono-ink: versión para texto (AA) · --tono-a/b: degradado de portada.
+   Aplica a la tarjeta y a la ficha ampliada (el <dialog> lleva la misma clase de tono). */
+.network-person--tone-0 { --tono: #2f6fb5; --tono-ink: #1f4f8a; --tono-a: #153462; --tono-b: #2c8a91; }
+.network-person--tone-1 { --tono: #7a6aaa; --tono-ink: #4f4285; --tono-a: #29386f; --tono-b: #7a6aaa; }
+.network-person--tone-2 { --tono: #2f8f7f; --tono-ink: #1d6457; --tono-a: #17485b; --tono-b: #48a88f; }
+.network-person--tone-3 { --tono: #b0607a; --tono-ink: #8a3f58; --tono-a: #43365f; --tono-b: #ae6d80; }
+.network-person--tone-4 { --tono: #c27b3e; --tono-ink: #85501f; --tono-a: #4a3424; --tono-b: #c27b3e; }
+.network-person--tone-5 { --tono: #1f8aa3; --tono-ink: #12637a; --tono-a: #12405a; --tono-b: #2aa0b8; }
+:root[data-theme="dark"] [class*="network-person--tone-"] { --tono-ink: color-mix(in srgb, var(--tono) 52%, #fff); }
+.network-person { border-color: color-mix(in srgb, var(--tono, var(--primary)) 30%, var(--line)); background: linear-gradient(180deg, color-mix(in srgb, var(--tono, var(--primary)) 24%, var(--surface)) 0, color-mix(in srgb, var(--tono, var(--primary)) 9%, var(--surface)) 44%, var(--surface) 74%); }
+.network-person .network-person__specialty { width: fit-content; margin-bottom: 7px; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--tono, var(--primary)) 13%, var(--surface)); }
+.network-person .btn--ghost { color: var(--tono-ink, var(--text-2)); }
+.network-person .btn--ghost:hover { background: color-mix(in srgb, var(--tono, var(--primary)) 10%, var(--surface)); }
+.network-person:hover { border-color: color-mix(in srgb, var(--tono, var(--primary)) 48%, var(--line)); box-shadow: 0 22px 50px color-mix(in srgb, var(--tono, var(--primary)) 24%, transparent); }
+.network-person .network-person__portrait { background: radial-gradient(circle at 75% 18%, rgba(255,255,255,.26), transparent 36%), linear-gradient(145deg, var(--tono-a, #153462), var(--tono-b, #2c8a91)); box-shadow: 0 0 0 1px color-mix(in srgb, var(--tono, var(--primary)) 30%, transparent); }
+.network-person .network-person__portrait.has-photo::after { background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--tono-a, #071222) 82%, transparent)); }
+.network-person .network-person__specialty { color: var(--tono-ink, var(--primary)); }
+.network-person .network-person__title h3 .i { color: var(--tono-ink, var(--accent)); fill: color-mix(in srgb, var(--tono, var(--accent)) 16%, transparent); }
+.network-person .network-meta .i, .network-person .network-availability .i { color: var(--tono, var(--primary)); }
+.network-person .network-tags span, .network-profile-sheet[class*="network-person--tone-"] .network-tags span { background: color-mix(in srgb, var(--tono, var(--primary)) 11%, var(--surface)); color: var(--tono-ink, var(--text-2)); }
+.network-person > footer { border-top-color: color-mix(in srgb, var(--tono, var(--primary)) 18%, var(--line)); }
 .network-avatar--profile { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 0; background: transparent; font-size: clamp(2.6rem, 6vw, 4.8rem); box-shadow: none; transition: transform .55s var(--ease), filter .35s var(--ease); }
 .network-avatar--profile img { object-position: center 24%; transition: transform .65s var(--ease), filter .35s var(--ease); }
 .network-person:hover .network-avatar--profile { transform: scale(1.025); }
@@ -440,9 +459,8 @@
 .network-profile-sheet__cover { position: relative; min-height: 166px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 22px 68px 22px 26px; overflow: hidden; background: linear-gradient(135deg, #153462, #1b7e88); color: #fff; }
 .network-profile-sheet__cover > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .network-profile-sheet__cover.has-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, rgba(5,20,45,.7), rgba(5,20,45,.13)), linear-gradient(180deg, transparent 45%, rgba(5,20,45,.5)); }
-.network-person--tone-1 .network-profile-sheet__cover { background: linear-gradient(135deg, #26376f, #7f6abb); }
-.network-person--tone-2 .network-profile-sheet__cover { background: linear-gradient(135deg, #17485b, #47a98f); }
-.network-person--tone-3 .network-profile-sheet__cover { background: linear-gradient(135deg, #43365f, #b56d80); }
+.network-profile-sheet[class*="network-person--tone-"] .network-profile-sheet__cover { background: linear-gradient(135deg, var(--tono-a), var(--tono-b)); }
+.network-profile-sheet[class*="network-person--tone-"] .network-person__specialty { color: var(--tono-ink); }
 .network-profile-sheet__cover::before { content: ''; position: absolute; width: 260px; height: 260px; right: -80px; top: -145px; border: 1px solid rgba(255,255,255,.23); border-radius: 50%; box-shadow: 0 0 0 39px rgba(255,255,255,.045), 0 0 0 84px rgba(255,255,255,.025); }
 .network-profile-sheet__cover > span, .network-profile-sheet__cover > b { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(4,21,45,.2); font-size: 9px; font-weight: 750; backdrop-filter: blur(12px); }
 .network-profile-sheet__cover .i { width: 13px; }
