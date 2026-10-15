@@ -1,5 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scrollbar-gutter: stable; overflow-y: scroll; }
+/* iOS Safari hace zoom a toda la página al enfocar un campo con letra menor de 16px, y la deja así. Solo en pantallas táctiles. */
+@media (hover: none) and (pointer: coarse) {
+  input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select { font-size: max(16px, 1em) !important; }
+}
 body {
   margin: 0;
   background: var(--bg);
