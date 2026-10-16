@@ -2,13 +2,13 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 16 de octubre de 2026 (corte público `10e56bd`; curso gratis obligatorio y Brújula permanecen como trabajo local no desplegado)
+- **Actualizado:** 16 de octubre de 2026 (corte público `13797ef`; curso gratis obligatorio y Brújula publicados)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit funcional público verificado:** `10e56bd` (`origin/main`). El commit de este documento puede ser posterior sin cambiar el runtime.
+- **Commit funcional público verificado:** `13797ef` (`origin/main`, PR `#18`). El commit de este documento puede ser posterior sin cambiar el runtime.
 - **Web pública:** `https://www.odonteckconsulting.com/` mediante GitHub Pages y el workflow `Pages`.
 - **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado local verificado:** TypeScript 0 errores; build de producción con `VITE_API_URL` limpio; API pasa 176 pruebas (175 exitosas, 0 fallos y 1 omitida por requerir emuladores); pipeline 67/67 y guía 66/66. El runtime público aún no incluye la elección obligatoria del curso gratis ni la Brújula. El detalle del corte candidato, infraestructura observada, bloqueos y rollback está en `docs/PRODUCTION-READINESS-2026-10-16.md`.
+- **Estado verificado:** TypeScript 0 errores; build de producción con `VITE_API_URL` limpio; API pasa 176 pruebas (175 exitosas, 0 fallos y 1 omitida por requerir emuladores); pipeline 67/67 y guía 66/66. El runtime público incluye la elección obligatoria del curso gratis y la Brújula. GitHub Pages `38976464505` y Railway `28536ee0-32f0-475f-980a-4278205c4a64` publicaron el mismo merge `13797ef`; queda pendiente el smoke autenticado con cuentas reales. El detalle está en `docs/PRODUCTION-READINESS-2026-10-16.md`.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 

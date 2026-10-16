@@ -6,11 +6,11 @@
 
 - Repositorio: `https://github.com/teccapitalweb/odonteck-club.git`
 - Rama: `main`
-- Corte público verificado: `10e56bd`
+- Corte público verificado: `13797ef`
 - Dominio: `https://www.odonteckconsulting.com/`
-- Frontend: GitHub Pages mediante el workflow `Pages`; última ejecución pública verificada `38685087891` (`success`, commit `10e56bd`)
+- Frontend: GitHub Pages mediante el workflow `Pages`; última ejecución pública verificada `38976464505` (`success`, commit `13797ef`)
 - API: `https://api-production-db314.up.railway.app`
-- Railway: proyecto `odonteck-club-v2`, servicio `api`, despliegue funcional `ddbca91f-864b-4e9c-80b4-3301bb161009` (`SUCCESS`, commit `10e56bd`)
+- Railway: proyecto `odonteck-club-v2`, servicio `api`, despliegue funcional `28536ee0-32f0-475f-980a-4278205c4a64` (`SUCCESS`, commit `13797ef`)
 
 Un commit posterior que sólo cambie documentación no implica un runtime distinto. Verifica siempre Git, Cloudflare y Railway por separado.
 
@@ -233,14 +233,14 @@ Si una implementación cambia producción, reglas comerciales, puntos, logros, r
 
 El miembro gratis elige un curso; queda abierto menos la última clase y los demás se cierran. Ver la sección de reglas comerciales en `CONTEXTO-MAESTRO.md`. Rama `feat/curso-gratis-elegible`. Al desplegar la API, quien ya avanzó en el curso gratis anterior lo conserva solo; el resto verá el anuncio al entrar. No requiere índices ni reglas nuevas (la colección `v2_curso_gratis` la escribe solo el servidor).
 
-## 2026-10-16 · Brújula profesional (local, no desplegada)
+## 2026-10-16 · Brújula profesional (publicada)
 
-En la rama local `feat/brujula-profesional`, la entrevista inicial continúa con una Brújula opcional de ocho decisiones. El servidor calcula y persiste tres áreas afines y tres estilos de trabajo; el cliente muestra un informe, recomienda cursos combinando esas señales con los intereses elegidos y mantiene una advertencia explícita de orientación no diagnóstica. No entrega puntos, puede posponerse 14 días y no bloquea a miembros existentes. Archivos principales: `api/src/lib/brujula.js`, `src/core/brujula.ts`, `src/pages/brujula.ts` y `src/styles/brujula.css`. La implementación quedó en `767514c` y la preparación de dominio canónico en `f53ada8`; no se ha hecho push, merge ni deploy.
+La entrevista inicial continúa con una Brújula opcional de ocho decisiones. El servidor calcula y persiste tres áreas afines y tres estilos de trabajo; el cliente muestra un informe, recomienda cursos combinando esas señales con los intereses elegidos y mantiene una advertencia explícita de orientación no diagnóstica. No entrega puntos, puede posponerse 14 días y no bloquea a miembros existentes. Archivos principales: `api/src/lib/brujula.js`, `src/core/brujula.ts`, `src/pages/brujula.ts` y `src/styles/brujula.css`. La implementación `767514c` y la preparación de dominio canónico `f53ada8` llegaron a `main` mediante el PR `#18` y el merge `13797ef`.
 
-## 2026-10-16 · Elección obligatoria del curso gratis (local, no desplegada)
+## 2026-10-16 · Elección obligatoria del curso gratis (publicada)
 
-La elección es el primer paso de una cuenta gratis: antes de entrevista, Brújula o módulos, una cuenta sin elección confirmada sólo puede usar `#/curso-gratis`; cualquier otra ruta redirige a esa pantalla independiente, sin sidebar. Después de elegir continúa en `#/bienvenida`, luego puede contestar o posponer la Brújula y finalmente entra al club. La guardia cubre navegación, URL directa, recarga y Atrás. No aplica a VIP, administradores reales, migrados ni miembros que ya eligieron. El anuncio ya no ofrece cerrar, Escape ni «Decidir después». Un fallo de `GET /curso-gratis` tampoco se convierte en una falsa ausencia de elección, para evitar bloqueos por red. Las recomendaciones posteriores de la Brújula abren la ficha del curso sugerido, sin repetir el selector inicial. Los cambios están versionados localmente en la serie `99e6af8..f53ada8`; no se ha hecho push, merge ni deploy.
+La elección es el primer paso de una cuenta gratis: antes de entrevista, Brújula o módulos, una cuenta sin elección confirmada sólo puede usar `#/curso-gratis`; cualquier otra ruta redirige a esa pantalla independiente, sin sidebar. Después de elegir continúa en `#/bienvenida`, luego puede contestar o posponer la Brújula y finalmente entra al club. La guardia cubre navegación, URL directa, recarga y Atrás. No aplica a VIP, administradores reales, migrados ni miembros que ya eligieron. El anuncio ya no ofrece cerrar, Escape ni «Decidir después». Un fallo de `GET /curso-gratis` tampoco se convierte en una falsa ausencia de elección, para evitar bloqueos por red. Las recomendaciones posteriores de la Brújula abren la ficha del curso sugerido, sin repetir el selector inicial. La serie `99e6af8..f53ada8` está publicada mediante el PR `#18` y el merge `13797ef`.
 
 ## 2026-10-16 · Preparación de producción
 
-El corte candidato y sus verificaciones están documentados en `docs/PRODUCTION-READINESS-2026-10-16.md`. La rama está basada directamente en el `origin/main` público `10e56bd`. GitHub Pages y Railway siguen `main`, por lo que fusionar dispara ambos despliegues automáticamente. No fusionar hasta contar con autorización explícita. Railway no tiene `STRIPE_WEBHOOK_SECRET`: el checkout v2 permanece deliberadamente desactivado y el flujo heredado debe conservarse.
+El corte y sus verificaciones están documentados en `docs/PRODUCTION-READINESS-2026-10-16.md`. El PR `#18` se fusionó con autorización explícita y publicó el merge `13797ef`: GitHub Pages `38976464505` y Railway `28536ee0-32f0-475f-980a-4278205c4a64` terminaron correctamente. El dominio, landing, catálogo público, `/health` y CORS respondieron correctamente. Railway no tiene `STRIPE_WEBHOOK_SECRET`: el checkout v2 permanece deliberadamente desactivado y el flujo heredado debe conservarse. Falta el smoke autenticado con cuentas gratis, VIP/heredada y admin reales.
