@@ -134,6 +134,10 @@ describe('encuestas de miembro', () => {
     formato: ['video', 'casos'],
     reto: 'tiempo',
   };
+  const brujula = {
+    problema: 'patrones', jornada: 'variada', detalle: 'imagenes', resultado: 'funcion', pacientes: 'complejos',
+    fortalezas: ['analisis', 'organizar', 'investigar'], aprender: 'evidencia', proyecto: 'academia',
+  };
 
   test('entrevista inicial: aparece una vez, valida y guarda sin tocar miembros', async () => {
     const antes = env.db.leer('miembros/free1');
@@ -169,6 +173,37 @@ describe('encuestas de miembro', () => {
     assert.deepEqual(admin.body.pendientes, []);
   });
 
+  test('Brújula aparece después de la entrevista, calcula afinidades y no se presenta como diagnóstico', async () => {
+    await request(env.app).post('/encuestas/brujula-v1/responder').set(bearer(TOKENS.free)).send({ respuestas: brujula }).expect(409);
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.free)).send({ respuestas: bienvenida }).expect(201);
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    const encuesta = pendientes.body.pendientes.find((x) => x.tipo === 'brujula');
+    assert.equal(encuesta.clave, 'brujula-v1');
+    assert.equal(encuesta.preguntas.length, 8);
+    assert.equal(JSON.stringify(encuesta).includes('pesos'), false);
+    await request(env.app).post('/encuestas/brujula-v1/responder').set(bearer(TOKENS.free))
+      .send({ respuestas: { ...brujula, fortalezas: ['analisis', 'manos', 'explicar', 'organizar'] } }).expect(400);
+    const guardada = await request(env.app).post('/encuestas/brujula-v1/responder').set(bearer(TOKENS.free)).send({ respuestas: brujula }).expect(201);
+    assert.equal(guardada.body.resultado.alcance, 'orientacion_no_diagnostica');
+    assert.equal(guardada.body.resultado.areas.length, 3);
+    assert.equal(guardada.body.resultado.estilos.length, 3);
+    assert.equal(guardada.body.recompensas.puntosGanados, 0);
+    assert.deepEqual(env.db.leer('v2_encuestas_respuestas/free1__brujula-v1').resultado, guardada.body.resultado);
+    const despues = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
+    assert.deepEqual(despues.body.perfil.brujula, guardada.body.resultado);
+    assert.equal(despues.body.pendientes.some((x) => x.tipo === 'brujula'), false);
+    await request(env.app).post('/encuestas/brujula-v1/responder').set(bearer(TOKENS.free)).send({ respuestas: brujula }).expect(409);
+  });
+
+  test('Brújula se puede posponer 14 días sin bloquear las demás encuestas', async () => {
+    await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(TOKENS.vip)).send({ respuestas: bienvenida }).expect(201);
+    const aplazada = await request(env.app).post('/encuestas/brujula-v1/posponer').set(bearer(TOKENS.vip)).send({}).expect(200);
+    assert.equal(aplazada.body.dias, 14);
+    const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
+    assert.equal(pendientes.body.pendientes.some((x) => x.tipo === 'brujula'), false);
+    assert.equal(env.db.leer('v2_encuestas_estado/vip1').pospuestas['brujula-v1'].veces, 1);
+  });
+
   test('al terminar un curso aparece su evaluación una sola vez', async () => {
     for (const n of [1, 2, 3]) await vista(TOKENS.vip, 'curso-a', n).expect(200);
     const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.vip)).expect(200);
@@ -190,6 +225,7 @@ describe('encuestas de miembro', () => {
   const prepararExperiencia = async (token, uid, primeraVista = '2026-08-20T12:00:00.000Z') => {
     await request(env.app).get('/encuestas/pendientes').set(bearer(token)).expect(200);
     await request(env.app).post('/encuestas/bienvenida-v2/responder').set(bearer(token)).send({ respuestas: bienvenida }).expect(201);
+    await request(env.app).post('/encuestas/brujula-v1/responder').set(bearer(token)).send({ respuestas: brujula }).expect(201);
     env.db.docs.set(`v2_encuestas_estado/${uid}`, { ...env.db.leer(`v2_encuestas_estado/${uid}`), primeraVista });
   };
 
@@ -198,7 +234,7 @@ describe('encuestas de miembro', () => {
     const pendientes = await request(env.app).get('/encuestas/pendientes').set(bearer(TOKENS.free)).expect(200);
     assert.equal(pendientes.body.pendientes[0].clave, EXPERIENCIA);
     assert.equal(pendientes.body.vip, false);
-    assert.deepEqual(pendientes.body.respondidas, ['bienvenida-v2']);
+    assert.deepEqual(pendientes.body.respondidas, ['bienvenida-v2', 'brujula-v1']);
     // Hasta 2 en "qué falta"; un promotor no debe contestar motivo ni contacto; una cuenta gratis no ve "renovar".
     await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.free)).send({ respuestas: { ...experiencia, falta: ['casos', 'app', 'descargas'] } }).expect(400);
     await request(env.app).post(`/encuestas/${EXPERIENCIA}/responder`).set(bearer(TOKENS.free)).send({ respuestas: { ...experiencia, vip_que: 'precio', renovar: 'si', motivo: 'x', contacto: 'si' } }).expect(201);

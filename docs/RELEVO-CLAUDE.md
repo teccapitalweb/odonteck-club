@@ -43,6 +43,7 @@ Publicado y conectado en modo API:
 - Retos V2 respaldado por API para quiz relámpago/práctica;
 - Comunidad visual respaldada por `/foro`;
 - entrevista inicial, encuestas posteriores e intereses editables;
+- Brújula profesional opcional (`brujula-v1`) con resultado no diagnóstico y recomendaciones combinadas;
 - landing y Alexia Concierge;
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
 - evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje;
@@ -230,3 +231,11 @@ Si una implementación cambia producción, reglas comerciales, puntos, logros, r
 ## 2026-10-15 · Regla freemium nueva: «Escoge tu curso gratis»
 
 El miembro gratis elige un curso; queda abierto menos la última clase y los demás se cierran. Ver la sección de reglas comerciales en `CONTEXTO-MAESTRO.md`. Rama `feat/curso-gratis-elegible`. Al desplegar la API, quien ya avanzó en el curso gratis anterior lo conserva solo; el resto verá el anuncio al entrar. No requiere índices ni reglas nuevas (la colección `v2_curso_gratis` la escribe solo el servidor).
+
+## 2026-10-16 · Brújula profesional (local, no desplegada)
+
+En la rama local `feat/brujula-profesional`, la entrevista inicial continúa con una Brújula opcional de ocho decisiones. El servidor calcula y persiste tres áreas afines y tres estilos de trabajo; el cliente muestra un informe, recomienda cursos combinando esas señales con los intereses elegidos y mantiene una advertencia explícita de orientación no diagnóstica. No entrega puntos, puede posponerse 14 días y no bloquea a miembros existentes. Archivos principales: `api/src/lib/brujula.js`, `src/core/brujula.ts`, `src/pages/brujula.ts` y `src/styles/brujula.css`. No se ha hecho push, merge ni deploy.
+
+## 2026-10-16 · Elección obligatoria del curso gratis (local, no desplegada)
+
+La elección es el primer paso de una cuenta gratis: antes de entrevista, Brújula o módulos, una cuenta sin elección confirmada sólo puede usar `#/curso-gratis`; cualquier otra ruta redirige a esa pantalla independiente, sin sidebar. Después de elegir continúa en `#/bienvenida`, luego puede contestar o posponer la Brújula y finalmente entra al club. La guardia cubre navegación, URL directa, recarga y Atrás. No aplica a VIP, administradores reales, migrados ni miembros que ya eligieron. El anuncio ya no ofrece cerrar, Escape ni «Decidir después». Un fallo de `GET /curso-gratis` tampoco se convierte en una falsa ausencia de elección, para evitar bloqueos por red. Las recomendaciones posteriores de la Brújula abren la ficha del curso sugerido, sin repetir el selector inicial. Cambios locales, sin commit, push, merge ni deploy.

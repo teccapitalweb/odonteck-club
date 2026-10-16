@@ -121,7 +121,7 @@ Saldo central y logros del miembro, escrito únicamente por la API:
 
 - Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
 - Las clases suman 10, terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
-- Desglose vigente: clase vista 10; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
+- Desglose vigente: clase vista 10; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; Brújula profesional 0; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
 - La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
 - Los nueve materiales propios premium incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
 - Cuando una respuesta autenticada incluye `recompensas`, `src/main.ts` dispara el evento `recompensas:ganadas`: muestra un aviso inmediato de puntos y otro por cada logro nuevo. La API guarda además los avisos no leídos en `notificaciones`; la campana los contabiliza y los marca como leídos al abrirla. La clave idempotente del movimiento evita avisos y puntos duplicados por recarga o reintento.
@@ -148,11 +148,15 @@ Sirve para programar recordatorios sin bloquear el acceso. La entrevista inicial
 La encuesta de experiencia (`experiencia-v2--<AAAA>T<n>`, una clave por trimestre) sale a los 21 días de la primera visita, o desde el día 7 si ya vio 8 clases, y se repite cuando pasan 90 días desde la última respuesta. Sus preguntas pueden llevar `mostrarSi` (`{ pregunta, valores | hasta }` o `{ vip }`): la API ignora respuestas a preguntas que no aplican y sólo exige las que sí.
 
 ### `v2_encuestas_respuestas/{uid}__{clave}`
-`{ uid, clave, encuestaId, version, tipo, cursoId?, cursoTitulo?, vip, respuestas, enviado, avisoPrivacidad, correoContacto? }`
+`{ uid, clave, encuestaId, version, tipo, cursoId?, cursoTitulo?, vip, respuestas, resultado?, enviado, avisoPrivacidad, correoContacto? }`
 
 `vip` es el plan al responder (para segmentar agregados). `correoContacto` sólo existe si la persona calificó bajo en la encuesta de experiencia y eligió "Sí, escríbanme"; es el único dato con identidad que ve el admin.
 
 Las plantillas son versionadas en código para conservar preguntas comparables. La entrevista inicial vigente es `bienvenida-v2` (siete preguntas: `situacion`, `experiencia`, `como_conocio`, `objetivo`, `intereses` (hasta 3), `formato` (hasta 2) y `reto`); el cliente la presenta como página propia en `#/bienvenida`. Cambiar preguntas u opciones exige subir la versión en `api/src/lib/encuestas.js` y en su espejo demo `src/core/encuestas.ts` (la v2 se ajustó en sitio el 2 de octubre de 2026 porque aún no se había desplegado ni recibido respuestas reales). El cliente nunca envía el UID. El panel administrativo sólo recibe agregados y comentarios sin UID, nombre ni correo.
+
+Después de `bienvenida-v2` queda disponible `brujula-v1`, una orientación opcional de ocho decisiones en `#/brujula`. Su `resultado` contiene tres áreas y tres estilos de trabajo ordenados, con `alcance: "orientacion_no_diagnostica"`. No es prueba psicométrica, no mide aptitud, no determina especialidad y no entrega puntos. Puede posponerse 14 días. La API calcula y guarda el resultado; el cliente sólo lo usa para explicar afinidades y sumar señales a las recomendaciones sin sustituir los intereses declarados.
+
+La Brújula sigue siendo opcional, pero la elección del curso de bienvenida no: una cuenta gratis con estado de curso confirmado y `cursoId: null` queda limitada en el cliente exclusivamente a `#/curso-gratis` hasta completar `POST /curso-gratis`. La selección precede a `#/bienvenida`; la Brújula sólo queda disponible después de la entrevista. VIP, administradores reales, migrados y elecciones existentes quedan exentos. El cliente no activa esta guardia si no pudo confirmar el estado remoto o si no hay cursos elegibles.
 
 ### `v2_config/general`
 `{ precios: { mensual: 199, anual: 1899 }, descuentoVIP: 20, whatsappSoporte, canalWhatsApp, praxiaUrl, stripePriceMensual, stripePriceAnual }`
@@ -205,8 +209,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | PATCH | `/directorio/conexiones/:id` | Destinatario acepta o rechaza; aceptación habilita contacto |
 | POST | `/directorio/reportes` | Denuncia privada de perfil u oportunidad; deduplicada y limitada a 10/24 h |
 | POST | `/eventos/:id/reserva` | → `{ reservado: boolean }` (alterna) |
-| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (respuestas de la entrevista inicial: objetivo, formato, situacion y reto; `intereses` usa la preferencia editable de `v2_perfiles` cuando existe) |
-| POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada y su evento de puntos |
+| GET | `/encuestas/pendientes` | `{ pendientes: Encuesta[] }` · entrevista inicial, Brújula, fin de curso y experiencia en la plataforma · devuelve también `respondidas` (claves), `vip` y `perfil` (entrevista, intereses editables y resultado de Brújula cuando existe) |
+| POST | `/encuestas/:clave/responder` | `{ respuestas }` → registra una sola respuesta versionada; devuelve `resultado` para Brújula y evento de puntos sólo para las encuestas que puntúan |
 | POST | `/encuestas/:clave/posponer` | → difiere el recordatorio sin bloquear al miembro |
 | POST | `/stripe/checkout` | `{ plan: 'mensual'|'anual' }` → `{ url }` |
 | POST | `/stripe/portal` | → `{ url }` |

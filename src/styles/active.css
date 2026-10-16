@@ -297,11 +297,12 @@ a.lesson:hover { text-decoration: none; }
 }
 
 @media (min-width: 1025px) and (max-height: 820px) {
-  .user-card { grid-template-columns: 40px minmax(0,1fr) 32px; min-height: 66px; gap: 9px; padding: 9px; border-radius: 20px; }
+  .user-card { grid-template-columns: minmax(0,1fr) 32px; min-height: 66px; gap: 8px; padding: 9px; border-radius: 20px; }
+  .user-card__link { grid-template-columns: 40px minmax(0,1fr); gap: 10px; }
   .user-card__avatar { width: 40px; height: 40px; }
   .user-card__name { -webkit-line-clamp: 1; font-size: 12.5px; }
   .user-card__plan { margin-top: 4px; padding: 3px 7px; font-size: 8px; }
-  .user-card .user-card__action { width: 32px; min-height: 32px; }
+  .user-card__logout { width: 32px; height: 32px; }
 }
 
 /* "A continuación" bajo el video */

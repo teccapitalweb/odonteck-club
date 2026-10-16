@@ -15,8 +15,11 @@ export const ETIQUETA_INTERES: Record<string, string> = {
   rehabilitacion: 'Rehabilitación oral', medicina_bucal: 'Medicina bucal',
 };
 
-/** Intereses contestados en la entrevista (en el orden en que los eligió), o lista vacía. */
-export const interesesDelMiembro = () => perfilEncuesta()?.intereses ?? [];
+/** Intereses declarados primero y, después, señales de la Brújula. Nunca sustituye lo que eligió la persona. */
+export const interesesDelMiembro = () => {
+  const perfil = perfilEncuesta();
+  return [...new Set([...(perfil?.intereses ?? []), ...(perfil?.brujula?.areas.map((a) => a.id) ?? [])])];
+};
 
 /** Cursos de las áreas de cada interés, tomando uno de cada interés por ronda para no cargar todo hacia el primero. */
 export function cursosPorIntereses(intereses: string[], n = 3, { excluir = () => false }: { excluir?: (c: Curso) => boolean } = {}): Curso[] {

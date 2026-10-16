@@ -116,7 +116,9 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
     const nueva: Promise<void> = (async () => {
       void Recompensas.cargar().catch(() => null);
       // La elección del curso gratis decide qué se ve abierto; se pide junto con el catálogo.
-      const cursoGratisP = CursoGratis.cargar().catch(() => { CursoGratis.hidratar({ cursoId: null, origen: null, elegido: null, puedeCambiar: false, cambiaHasta: null }); return null; });
+      // No confundimos un fallo de red con «todavía no eligió». La pantalla obligatoria
+      // solo puede bloquear cuando el servidor confirmó el estado de la elección.
+      const cursoGratisP = CursoGratis.cargar().catch(() => { CursoGratis.hidratar(null); return null; });
       // /catalogo lee los desbloqueos del estado guardado; la sincronización de recompensas solo suma puntos y logros.
       const [catalogo, progreso] = await Promise.all([
         api<CatalogoRemoto>('/catalogo'),

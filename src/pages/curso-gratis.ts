@@ -1,8 +1,9 @@
-// Módulo «Escoge tu curso gratis»: página propia para explorar, comparar y elegir el curso
-// gratis. El curso elegido queda abierto completo excepto la última clase (regla del servidor).
+// Pantalla independiente «Escoge tu curso gratis»: aparece antes del Club, sin navegación
+// de módulos. El curso elegido queda abierto excepto la última clase (regla del servidor).
 import { cursos } from '../core/catalogo';
 import { Acceso } from '../core/acceso';
 import { CursoGratis } from '../core/curso-gratis';
+import { encuestaPendiente } from '../core/encuestas';
 import { cursosPorIntereses, etiquetaIntereses, interesesDelMiembro } from '../core/recomendaciones';
 import type { Curso } from '../core/datos';
 import { esc } from '../ui/partials';
@@ -57,15 +58,33 @@ export function cursoGratisPagina(_: Record<string, string>, query: URLSearchPar
   const areas = [...new Set(lista.map((c) => c.area))];
   const mosaico = [...lista, ...lista].slice(0, 16);
   const preseleccion = query.get('curso') || '';
+  const requerido = !vip && !elegido;
+  const faltaEntrevista = encuestaPendiente()?.tipo === 'bienvenida';
+  const accionSuperior = requerido
+    ? `<button type="button" class="cgm-screen__logout" data-salir aria-label="Cerrar sesión"><i data-lucide="log-out" class="i"></i><span>Cerrar sesión</span></button>`
+    : `<div class="cgm-screen__actions"><a class="cgm-screen__enter" href="${faltaEntrevista ? '#/bienvenida' : '#/'}" aria-label="${faltaEntrevista ? 'Continuar bienvenida' : 'Entrar al Club'}"><span>${faltaEntrevista ? 'Continuar bienvenida' : 'Entrar al Club'}</span><i data-lucide="arrow-right" class="i"></i></a><button type="button" class="cgm-screen__logout" data-salir aria-label="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button></div>`;
 
   const heroCopy = vip
     ? `<span class="cgm-pill"><i data-lucide="crown" class="i"></i>Miembro VIP</span><h1>Ya tienes <em>todos los cursos</em> abiertos.</h1><p>Como VIP no necesitas elegir: aprovecha el catálogo completo, la biblioteca y los retos.</p><div class="cgm-hero__actions"><a class="btn btn--white btn--lg" href="#/cursos"><i data-lucide="graduation-cap" class="i"></i>Ir al catálogo</a></div>`
     : elegido
-      ? `<span class="cgm-pill"><i data-lucide="gift" class="i"></i>Tu curso gratis</span><h1>${esc(elegido.titulo)}</h1><p>${elegido.clases.length - 1} clases gratis para aprender a tu ritmo. La clase final y el certificado se abren con VIP.${estado?.puedeCambiar ? ' Todavía puedes cambiarlo una vez.' : ''}</p><div class="cgm-hero__actions"><a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${esc(elegido.id)}">Continuar mi curso <span class="arrow"><i data-lucide="play" class="i"></i></span></a>${estado?.puedeCambiar ? '<a class="cgm-link" href="#cgm-explorar">Ver otros cursos</a>' : '<a class="cgm-link" href="#/suscripcion">Abrir todos con VIP</a>'}</div>`
-      : `<span class="cgm-pill"><i data-lucide="gift" class="i"></i>Regalo de bienvenida</span><h1>Tu primer curso<br><em>va por nuestra cuenta.</em></h1><p>Elige el curso que más te sirva hoy y tómalo gratis: todas sus clases menos la final. Sin tarjeta, sin compromiso.</p><div class="cgm-hero__actions"><a class="btn btn--white btn--lg btn--pill-arrow" href="#cgm-explorar" data-cgm-scroll>Elegir mi curso <span class="arrow"><i data-lucide="arrow-down" class="i"></i></span></a><a class="cgm-link" href="#cgm-como" data-cgm-scroll>¿Cómo funciona?</a></div>`;
+      ? `<span class="cgm-pill"><i data-lucide="badge-check" class="i"></i>Elección confirmada</span><h1>Tu curso gratis<br><em>ya está listo.</em></h1><p><b class="cgm-hero__course">${esc(elegido.titulo)}</b>${elegido.clases.length - 1} clases gratis para aprender a tu ritmo. La clase final y el certificado se abren con VIP.${estado?.puedeCambiar ? ' Todavía puedes cambiarlo una vez.' : ''}</p><div class="cgm-hero__actions"><a class="btn btn--white btn--lg btn--pill-arrow" href="#/curso/${esc(elegido.id)}">Continuar mi curso <span class="arrow"><i data-lucide="play" class="i"></i></span></a>${estado?.puedeCambiar ? '<a class="cgm-link" href="#cgm-explorar">Ver otros cursos</a>' : '<a class="cgm-link" href="#/suscripcion">Abrir todos con VIP</a>'}</div>`
+      : `<span class="cgm-pill"><i data-lucide="gift" class="i"></i>Un regalo para empezar</span><span class="cgm-required"><i data-lucide="lock-keyhole" class="i"></i>Tu primer paso en OdonTeck</span><h1>Escoge tu<br><em>curso gratis.</em></h1><p>Elige el tema que más te inspire y empieza hoy: todas sus clases menos la final, sin tarjeta y a tu propio ritmo.</p><div class="cgm-hero__actions"><a class="btn btn--white btn--lg btn--pill-arrow" href="#cgm-explorar" data-cgm-scroll>Descubrir mi curso <span class="arrow"><i data-lucide="arrow-down" class="i"></i></span></a><a class="cgm-link" href="#cgm-como" data-cgm-scroll>Ver qué incluye</a></div>`;
 
-  return `<section class="cgm" data-cgm data-preseleccion="${esc(preseleccion)}" data-cambio="${elegido && estado?.puedeCambiar ? '1' : ''}">
+  return `<div class="cgm-screen${requerido ? ' is-required' : ' is-complete'}">
+    <header class="cgm-screen__topbar">
+      <a class="cgm-screen__brand" href="#/curso-gratis" aria-label="OdonTeck"><img data-logo src="/brand/logo-horizontal.png" alt="OdonTeck"></a>
+      <div class="cgm-screen__status"><span>Tu bienvenida personalizada</span><strong>${requerido ? 'Paso 1 de 3 · Elige tu curso' : faltaEntrevista ? 'Paso 2 de 3 · Cuéntanos sobre ti' : 'Bienvenida completa'}</strong></div>
+      ${accionSuperior}
+    </header>
+    <nav class="cgm-screen__journey" aria-label="Progreso de bienvenida">
+      <span class="${requerido ? 'is-active' : 'is-done'}" ${requerido ? 'aria-current="step"' : ''}><i data-lucide="${requerido ? 'gift' : 'check'}" class="i"></i><b>1</b><em>Elegir tu curso</em></span>
+      <span class="${requerido ? '' : faltaEntrevista ? 'is-active' : 'is-done'}" ${!requerido && faltaEntrevista ? 'aria-current="step"' : ''}><i data-lucide="${!requerido && !faltaEntrevista ? 'check' : 'user-round'}" class="i"></i><b>2</b><em>Conocerte</em></span>
+      <span class="${!requerido && !faltaEntrevista ? 'is-active' : ''}" ${!requerido && !faltaEntrevista ? 'aria-current="step"' : ''}><i data-lucide="layout-dashboard" class="i"></i><b>3</b><em>Entrar al Club</em></span>
+    </nav>
+    <main class="cgm-screen__content">
+    <section class="cgm" data-cgm data-preseleccion="${esc(preseleccion)}" data-cambio="${elegido && estado?.puedeCambiar ? '1' : ''}">
     <header class="cgm-hero">
+      <div class="cgm-hero__glow" aria-hidden="true"><i></i><i></i></div>
       <div class="cgm-hero__mosaic" aria-hidden="true">${[0, 1].map((fila) => `<div class="cgm-hero__row cgm-hero__row--${fila}">${[...mosaico, ...mosaico].map((c) => `<img src="${esc(c.portada)}" alt="" loading="lazy">`).join('')}</div>`).join('')}</div>
       <div class="cgm-hero__copy">${heroCopy}</div>
       <div class="cgm-hero__facts">
@@ -75,49 +94,31 @@ export function cursoGratisPagina(_: Record<string, string>, query: URLSearchPar
       </div>
     </header>
 
-    <section class="cgm-como" id="cgm-como" aria-label="Cómo funciona">
-      <article><span class="cgm-como__n">1</span><i data-lucide="mouse-pointer-click" class="i"></i><h3>Elige un curso</h3><p>El que quieras, de cualquier especialidad. Revisa su temario antes de decidir.</p></article>
-      <article><span class="cgm-como__n">2</span><i data-lucide="play-circle" class="i"></i><h3>Apréndelo gratis</h3><p>Todas sus clases menos la final, con quiz por clase y avance guiado.</p></article>
-      <article><span class="cgm-como__n">3</span><i data-lucide="award" class="i"></i><h3>Termina con VIP</h3><p>La clase final, el certificado con folio y todos los demás cursos.</p></article>
+    <section class="cgm-assurance" id="cgm-como" aria-label="Qué incluye tu curso gratis">
+      <div class="cgm-assurance__lead"><span class="eyebrow">Una elección simple</span><strong>Elige hoy. Aprende a tu ritmo.</strong></div>
+      <div><i data-lucide="credit-card" class="i"></i><span><b>Sin tarjeta</b><small>No pedimos datos de pago</small></span></div>
+      <div><i data-lucide="badge-check" class="i"></i><span><b>Clases y quizzes</b><small>Tu avance queda guardado</small></span></div>
+      <div><i data-lucide="refresh-cw" class="i"></i><span><b>Elección protegida</b><small>Un cambio durante 24 horas</small></span></div>
     </section>
 
-    ${recomendados.length ? `<section class="cgm-recs"><div class="cgm-head"><span class="eyebrow">Recomendado para ti</span><h2>Según tus intereses: <em>${esc(etiquetaIntereses(intereses).toLowerCase())}</em></h2></div><div class="cgm-grid cgm-grid--recs">${recomendados.map((c) => tarjeta(c, true)).join('')}</div></section>` : ''}
+    ${recomendados.length ? `<section class="cgm-recs"><div class="cgm-head cgm-head--editorial"><span class="eyebrow">Selección OdonTeck · Para ti</span><h2>Empieza por lo que más conecta contigo.</h2><p>Elegimos estas opciones según tu perfil: ${esc(etiquetaIntereses(intereses).toLowerCase())}.</p></div><div class="cgm-grid cgm-grid--recs">${recomendados.map((c) => tarjeta(c, true)).join('')}</div></section>` : ''}
 
     ${vip ? '' : `<section class="cgm-explorar" id="cgm-explorar">
-      <div class="cgm-head"><span class="eyebrow">${puedeElegir ? 'Explora el catálogo' : 'Catálogo'}</span><h2>${puedeElegir ? 'Escoge tu curso gratis' : 'Abre todos los cursos con VIP'}</h2><p>${puedeElegir ? 'Solo puedes elegir uno. Los demás se abren con la membresía VIP.' : 'Tu curso gratis ya está definido. Con VIP tienes acceso a todo el catálogo.'}</p></div>
+      <div class="cgm-head cgm-head--editorial"><span class="eyebrow">${puedeElegir ? 'Todas las opciones' : 'Catálogo'}</span><h2>${puedeElegir ? 'Encuentra el curso que es para ti.' : 'Explora lo que sigue.'}</h2><p>${puedeElegir ? `${lista.length} cursos y ${areas.length} especialidades. Elige uno; los demás se abren con VIP.` : 'Tu curso gratis ya está definido. Con VIP tienes acceso a todo el catálogo.'}</p></div>
       <div class="cgm-toolbar">
         <label class="cgm-search"><i data-lucide="search" class="i"></i><input type="search" placeholder="Busca por tema, especialidad o ponente" data-cgm-buscar aria-label="Buscar cursos"></label>
         <div class="cgm-areas" role="tablist" aria-label="Filtrar por especialidad"><button type="button" class="is-active" data-cgm-area="">Todas</button>${areas.map((a) => `<button type="button" data-cgm-area="${esc(a)}">${esc(a)}</button>`).join('')}</div>
         <label class="cgm-orden"><span>Ordenar</span><select data-cgm-orden><option value="">Destacados</option><option value="corto">Más cortos</option><option value="largo">Más completos</option></select></label>
       </div>
-      <div class="cgm-grid" data-cgm-grid>${lista.map((c) => tarjeta(c)).join('')}</div>
+      <div class="cgm-grid cgm-grid--collapsed" data-cgm-grid>${lista.map((c) => tarjeta(c)).join('')}</div>
       <p class="cgm-vacio" data-cgm-vacio hidden><i data-lucide="search-x" class="i"></i>No encontramos cursos con ese filtro.</p>
+      <button type="button" class="cgm-more" data-cgm-expand><span>Ver los ${lista.length} cursos</span><i data-lucide="chevron-down" class="i"></i></button>
     </section>`}
 
-    <section class="cgm-compara" aria-label="Gratis y VIP">
-      <div class="cgm-head"><span class="eyebrow">Gratis y VIP</span><h2>Empieza gratis, crece cuando quieras</h2></div>
-      <div class="cgm-tabla" role="table">
-        <div role="row" class="cgm-tabla__head"><span role="columnheader"></span><span role="columnheader">Gratis</span><span role="columnheader" class="is-vip"><i data-lucide="crown" class="i"></i>VIP</span></div>
-        ${[
-          ['Tu curso elegido', 'Todas las clases menos la final', 'Completo'],
-          ['Los demás cursos', '—', 'Todos abiertos'],
-          ['Certificado con folio', '—', 'Incluido'],
-          ['Quiz por clase', 'En tu curso', 'En todos'],
-          ['Biblioteca clínica', 'Material gratuito', 'Completa'],
-          ['Retos y casos clínicos', 'Versión de prueba', 'Todos'],
-          ['Comunidad', 'Lectura', 'Publicar y responder'],
-        ].map(([f, g, v]) => `<div role="row"><span role="rowheader">${f}</span><span role="cell" class="${g === '—' ? 'is-no' : ''}">${g}</span><span role="cell" class="is-vip">${v}</span></div>`).join('')}
-      </div>
-    </section>
+    <footer class="cgm-note"><i data-lucide="shield-check" class="i"></i><p><strong>Tu elección queda vinculada a tu cuenta.</strong><span>Puedes cambiar una vez durante las primeras 24 horas si aún no avanzaste más de una clase.</span></p>${requerido ? '<span class="cgm-note__secure"><i data-lucide="lock-keyhole" class="i"></i>Paso necesario</span>' : '<a href="#/suscripcion">Conocer VIP <i data-lucide="arrow-up-right" class="i"></i></a>'}</footer>
 
-    <section class="cgm-faq">
-      <div class="cgm-head"><span class="eyebrow">Preguntas frecuentes</span><h2>Antes de elegir</h2></div>
-      <details><summary>¿Puedo cambiar de curso después?</summary><p>Una sola vez, en las primeras 24 horas y solo si no has avanzado más de una clase. Después tu curso gratis queda definido.</p></details>
-      <details><summary>¿Por qué la última clase es VIP?</summary><p>La clase final cierra el curso y da acceso al certificado con folio verificable. Se abre con la membresía VIP, junto con todo el catálogo.</p></details>
-      <details><summary>¿Necesito tarjeta para empezar?</summary><p>No. Tu curso gratis no pide ningún pago. Solo pagas si decides hacerte VIP.</p></details>
-      <details><summary>¿Qué pasa con mi avance si me hago VIP?</summary><p>Se conserva todo: tus clases vistas, quizzes y puntos. Solo se abren el resto de las clases y cursos.</p></details>
+      <aside class="cgm-drawer" data-cgm-drawer aria-hidden="true"><div class="cgm-drawer__panel" role="dialog" aria-modal="true" aria-label="Detalle del curso" data-cgm-panel></div></aside>
     </section>
-
-    <aside class="cgm-drawer" data-cgm-drawer aria-hidden="true"><div class="cgm-drawer__panel" role="dialog" aria-modal="true" aria-label="Detalle del curso" data-cgm-panel></div></aside>
-  </section>`;
+    </main>
+  </div>`;
 }

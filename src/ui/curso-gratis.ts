@@ -1,5 +1,5 @@
 // «Escoge tu curso gratis»: anuncio de bienvenida (primera entrada) y el controlador del
-// módulo #/curso-gratis (filtros, panel de detalle, confirmación y celebración).
+// pantalla independiente #/curso-gratis (filtros, panel de detalle, confirmación y celebración).
 import { createIcons, icons } from 'lucide';
 import { cursos } from '../core/catalogo';
 import { CursoGratis } from '../core/curso-gratis';
@@ -9,23 +9,21 @@ import { navigate } from '../core/router';
 import { detalleCursoGratis } from '../pages/curso-gratis';
 import { esc } from './partials';
 
-const POSPUESTO_KEY = 'odonteck-club:curso-gratis:pospuesto';
 type Toast = (msg: string, icon?: string) => void;
 const elegibles = () => cursos.filter((c) => c.publicado !== false && c.clases.length >= 2);
 
-/** Debe aparecer el anuncio: miembro gratis, ya sabemos que no ha elegido y no lo pospuso. */
+/** Debe aparecer el anuncio: miembro gratis y estado de elección confirmado. */
 export function debeMostrarCursoGratis() {
   if (!Auth.usuario || Acceso.vip() || !CursoGratis.cargado() || CursoGratis.id()) return false;
   if (!elegibles().length || location.hash.startsWith('#/curso-gratis')) return false;
-  try { if (sessionStorage.getItem(POSPUESTO_KEY)) return false; } catch {}
   return true;
 }
 
 /**
- * Anuncio de bienvenida. Con `cursoId` o `forzar` (botones de la app) lleva directo al módulo.
+ * Anuncio de bienvenida. Con `cursoId` o `forzar` (botones de la app) lleva directo a la pantalla.
  * Devuelve true si quedó algo abierto (para no encimar el recorrido de bienvenida).
  */
-export function mostrarEleccionCursoGratis(toast: Toast, opciones: { forzar?: boolean; cursoId?: string } = {}) {
+export function mostrarEleccionCursoGratis(_toast: Toast, opciones: { forzar?: boolean; cursoId?: string } = {}) {
   if (opciones.forzar || opciones.cursoId) {
     navigate(`/curso-gratis${opciones.cursoId ? `?curso=${encodeURIComponent(opciones.cursoId)}` : ''}`);
     return true;
@@ -41,7 +39,6 @@ export function mostrarEleccionCursoGratis(toast: Toast, opciones: { forzar?: bo
   el.setAttribute('aria-label', 'Regalo de bienvenida: escoge tu curso gratis');
   el.innerHTML = `
     <div class="cga__card">
-      <button type="button" class="cga__x" data-cga-later aria-label="Decidir después"><i data-lucide="x" class="i"></i></button>
       <div class="cga__visual" aria-hidden="true">
         <div class="cga__stack">${portadas.map((c, i) => `<img src="${esc(c.portada)}" alt="" style="--i:${i};left:${4 + (i % 3) * 31 + (i % 2) * 3}%;top:${5 + Math.floor(i / 3) * 29 + ((i + 1) % 2) * 5}%">`).join('')}</div>
         <span class="cga__ribbon"><i data-lucide="gift" class="i"></i>GRATIS</span>
@@ -55,32 +52,27 @@ export function mostrarEleccionCursoGratis(toast: Toast, opciones: { forzar?: bo
           <li><i data-lucide="check" class="i"></i>Quiz por clase y avance guiado</li>
           <li><i data-lucide="check" class="i"></i>Sin tarjeta, sin compromiso</li>
         </ul>
-        <div class="cga__actions"><button type="button" class="btn btn--brand btn--lg btn--pill-arrow" data-cga-ir>Escoger mi curso gratis <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button><button type="button" class="cga__later" data-cga-later>Decidir después</button></div>
+        <div class="cga__actions"><button type="button" class="btn btn--brand btn--lg btn--pill-arrow" data-cga-ir>Escoger mi curso gratis <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button></div>
       </div>
     </div>`;
   document.body.appendChild(el);
   document.documentElement.classList.add('cg-open');
   createIcons({ icons });
-  const cerrar = (posponer: boolean) => {
-    if (posponer) { try { sessionStorage.setItem(POSPUESTO_KEY, '1'); } catch {} }
+  const cerrar = () => {
     el.classList.add('is-leaving');
-    document.removeEventListener('keydown', teclado);
     setTimeout(() => { el.remove(); document.documentElement.classList.remove('cg-open'); }, 220);
   };
-  const teclado = (e: KeyboardEvent) => { if (e.key === 'Escape') { cerrar(true); toast('Puedes elegirlo cuando quieras desde el menú «Curso gratis».', 'gift'); } };
-  document.addEventListener('keydown', teclado);
   el.addEventListener('click', (e) => {
     const t = e.target as HTMLElement;
-    if (t === el || t.closest('[data-cga-later]')) { cerrar(true); toast('Puedes elegirlo cuando quieras desde el menú «Curso gratis».', 'gift'); return; }
-    if (t.closest('[data-cga-ir]')) { cerrar(false); navigate('/curso-gratis'); }
+    if (t.closest('[data-cga-ir]')) { cerrar(); navigate('/curso-gratis'); }
   });
   return true;
 }
 
-// ── Módulo #/curso-gratis ──
+// ── Pantalla independiente #/curso-gratis ──
 let quitarModulo: (() => void) | null = null;
 
-/** Quita el panel del módulo (vive en <body>) al salir de la ruta. */
+/** Quita el panel de selección (vive en <body>) al salir de la ruta. */
 export function desmontarCursoGratis() {
   quitarModulo?.();
   document.querySelectorAll('body > .cgm-drawer').forEach((d) => d.remove());
@@ -99,11 +91,13 @@ export function montarCursoGratis(toast: Toast) {
   const panel = drawer.querySelector<HTMLElement>('[data-cgm-panel]')!;
   const grid = raiz.querySelector<HTMLElement>('[data-cgm-grid]');
   const vacio = raiz.querySelector<HTMLElement>('[data-cgm-vacio]');
+  const expandir = raiz.querySelector<HTMLButtonElement>('[data-cgm-expand]');
   const cambio = raiz.dataset.cambio === '1';
   const puedeElegir = !Acceso.vip() && (!CursoGratis.id() || cambio);
   let area = '';
   let texto = '';
   let orden = '';
+  let expandido = false;
 
   const filtrar = () => {
     if (!grid) return;
@@ -114,6 +108,9 @@ export function montarCursoGratis(toast: Toast) {
       t.hidden = !ok; if (ok) visibles++;
     });
     if (orden) tarjetas.sort((a, b) => (Number(a.dataset.min) - Number(b.dataset.min)) * (orden === 'corto' ? 1 : -1)).forEach((t) => grid.appendChild(t));
+    const explorando = !!(area || texto || orden);
+    grid.classList.toggle('cgm-grid--collapsed', !expandido && !explorando);
+    if (expandir) expandir.hidden = expandido || explorando;
     if (vacio) vacio.hidden = visibles > 0;
   };
 
@@ -154,6 +151,7 @@ export function montarCursoGratis(toast: Toast) {
     if (verOtros) { e.preventDefault(); raiz.querySelector(verOtros.getAttribute('href')!)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     const filtro = t.closest<HTMLButtonElement>('[data-cgm-area]');
     if (filtro) { area = filtro.dataset.cgmArea || ''; raiz.querySelectorAll('[data-cgm-area]').forEach((b) => b.classList.toggle('is-active', b === filtro)); filtrar(); return; }
+    if (t.closest('[data-cgm-expand]')) { expandido = true; grid?.classList.remove('cgm-grid--collapsed'); if (expandir) expandir.hidden = true; return; }
     const ver = t.closest<HTMLElement>('[data-cgm-ver]');
     if (ver) { abrir(ver.dataset.cgmVer || ''); return; }
     if (t.closest('[data-cgm-cerrar]') || t === drawer) { cerrar(); return; }
@@ -162,7 +160,6 @@ export function montarCursoGratis(toast: Toast) {
       elegir.disabled = true; elegir.classList.add('is-loading');
       try {
         await CursoGratis.elegir(elegir.dataset.cgmElegir || '');
-        try { sessionStorage.removeItem(POSPUESTO_KEY); } catch {}
         celebrar(elegir.dataset.cgmElegir || '');
         window.dispatchEvent(new CustomEvent('curso-gratis:elegido'));
       } catch (err) { elegir.disabled = false; elegir.classList.remove('is-loading'); toast(err instanceof Error ? err.message : 'No pudimos guardar tu elección.', 'alert-triangle'); }

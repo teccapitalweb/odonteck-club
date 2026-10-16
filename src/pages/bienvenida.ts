@@ -308,8 +308,8 @@ export function montarBienvenida(toast: Toast) {
   function salir() {
     if (saliendo) return;
     saliendo = true; clearTimeout(auto); clearTimeout(salida);
-    let destino = '/';
-    try { destino = sessionStorage.getItem(DESTINO_KEY) || '/'; sessionStorage.removeItem(DESTINO_KEY); } catch {}
+    let destino = paso >= total ? '/brujula' : '/';
+    try { destino = sessionStorage.getItem(DESTINO_KEY) || destino; sessionStorage.removeItem(DESTINO_KEY); } catch {}
     if (quieto) { navigate(destino); return; }
     raiz!.classList.add('is-saliendo');
     setTimeout(() => navigate(destino), 330);

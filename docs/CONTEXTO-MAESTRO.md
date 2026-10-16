@@ -114,6 +114,7 @@ La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso
 - **Verificación pública** (`src/pages/certificados.ts → verificar()`): página pública sin login, usa `montar('solo')`. Muestra certificado válido (verde) o no encontrado (rojo). Auth bypass en `onBeforeRender`.
 - **Flashcards mejoradas** (`src/core/juegos.ts` + `src/pages/retos.ts`): motor SR corregido (bug off-by-one en intervalos), intervalos extendidos hasta 365 días, calificación de 3 niveles (otra vez / difícil / fácil), mazo barajado, undo con Ctrl+Z, atajos de teclado (Espacio, 1/2/3), estadísticas de sesión en pantalla final.
 - **Bienvenida** (`src/pages/bienvenida.ts` + `src/styles/bienvenida.css`, octubre 2026): mientras la entrevista `bienvenida-v2` esté pendiente, `onBeforeRender` redirige cualquier ruta de miembro a `#/bienvenida` (cascarón `solo`). Portada, siete pasos (etapa, experiencia, cómo conoció OdonTeck, objetivo, intereses, formato preferido y reto) y cierre con hasta tres cursos sugeridos según los intereses. Los logotipos de Instagram, Facebook, TikTok, Google y WhatsApp son SVG locales, sin peticiones externas. Guarda un borrador en `sessionStorage`, permite regresar, avanza sola al elegir una opción única y se puede posponer 3 días (“Responder después”). Las preguntas y opciones viven en la plantilla versionada (`api/src/lib/encuestas.js` y su espejo demo en `src/core/encuestas.ts`); la página sólo aporta presentación. Los administradores no la reciben en modo API. La v1 de cinco preguntas nunca se desplegó. `/encuestas/pendientes` devuelve además `perfil` (intereses, objetivo, formato, etapa y reto, sin PII); `src/core/recomendaciones.ts` lo usa para la sección "Recomendado para ti" del inicio (según intereses, con relleno por área cercana) y la pestaña "Para ti" del catálogo (`#/cursos?tab=para-ti`). Desde `#/perfil`, el miembro puede cambiar de uno a tres intereses: en API se guardan en `v2_perfiles` y en demo en una clave separada de `localStorage`; la respuesta original de `bienvenida-v2` queda inmutable para conservar el valor histórico de la encuesta.
+- **Brújula profesional** (`src/pages/brujula.ts`, `src/core/brujula.ts`, `src/styles/brujula.css`): después de terminar la bienvenida, el flujo propone `#/brujula`. Son ocho decisiones sin respuesta correcta sobre problemas, jornada, detalles, resultados, pacientes, fortalezas, aprendizaje y proyecto futuro. El servidor (`api/src/lib/brujula.js`) calcula tres áreas afines y tres estilos; guarda `resultado` junto a `brujula-v1` y lo devuelve dentro de `perfil`. Es orientación explícitamente no diagnóstica: no mide aptitud ni decide una especialidad. Se puede posponer 14 días, no bloquea el club y no entrega puntos. Las afinidades complementan —no reemplazan— los intereses declarados en Inicio y “Para ti”. El resultado queda accesible en la navegación, “Más” y Perfil.
 - **Iconos custom**: Quiz, Detective Dental, Flashcards y Reto Diario usan imágenes generadas (`public/brand/icon-*.jpg`) con efecto glow CSS en lugar de iconos Lucide genéricos.
 
 ## 3. Arquitectura
@@ -145,6 +146,7 @@ Rutas de miembro:
 #/configuracion           #/mas
 #/buscar?q=...            #/verificar/:folio (pública, sin auth)
 #/bienvenida (entrevista inicial; sólo mientras esté pendiente)
+#/brujula (orientación profesional opcional y resultado personal)
 ```
 
 Rutas admin:
@@ -244,19 +246,21 @@ La regla comercial unificada es:
 
 **Regla vigente desde 2026-10-15: «Escoge tu curso gratis».**
 
-- Cada miembro gratis **elige un curso** del catálogo en un anuncio de bienvenida que aparece al entrar por primera vez (después de la encuesta inicial y antes del recorrido).
+- Cada miembro gratis **debe elegir primero un curso** del catálogo, antes de la entrevista inicial, la Brújula o cualquier módulo. Hasta guardar esa elección, la única ruta de miembro disponible es `#/curso-gratis`; pegar una URL, recargar o usar Atrás no evita el paso.
 - Ese curso queda abierto **completo excepto su última clase**, que junto con el certificado requiere VIP.
 - **Los demás cursos se cierran por completo** para cuentas gratis. VIP ve todo.
 - La elección es **definitiva**, con **un solo cambio** permitido en las primeras 24 horas si no ha visto más de una clase.
 - Quien ya tenía avance en el curso gratis anterior (el que tenía clases con `gratis: true`) **lo conserva automáticamente**, sin elegir (origen `migracion`).
+- VIP, administradores y miembros migrados o con una elección guardada no reciben el bloqueo. Si `GET /curso-gratis` falla, el cliente no interpreta el error como «sin elección» y no encierra a la persona por un problema de red.
 - Administración puede **reiniciar la elección** desde el detalle del miembro; el miembro vuelve a ver el anuncio y su progreso no se borra.
+- Al confirmar el curso, el flujo continúa con `#/bienvenida`; después queda disponible la Brújula opcional y finalmente el club. La pantalla `#/curso-gratis` usa un cascarón independiente, sin sidebar ni navegación de módulos.
 
 Implementación:
 
 - Colección `v2_curso_gratis/{uid}` (`cursoId`, `origen` eleccion|migracion|reinicio, `elegido`, `cambios`). Solo la escribe el servidor.
 - API: `GET/POST /curso-gratis`, `DELETE /admin/miembros/:uid/curso-gratis`; `api/src/lib/curso-gratis.js` (lectura con migración perezosa y ventana de cambio).
 - `api/src/lib/acceso.js`: `tieneAccesoAClase(curso, cursoId, n, vip, cursoGratisId)`. La marca `gratis` por clase **ya no abre contenido**; solo identifica el curso gratis anterior para migrar y para textos de landing.
-- Frontend: `src/core/curso-gratis.ts` (demo en localStorage), `src/ui/curso-gratis.ts` (anuncio de 2 pasos + celebración), `Acceso.cursoGratis/claseLibre` aplican la misma regla que el servidor.
+- Frontend: `src/core/curso-gratis.ts` (demo en localStorage), guardia de navegación en `src/main.ts`, `src/ui/curso-gratis.ts` (selección sin opción de posponer + celebración) y `Acceso.cursoGratis/claseLibre` aplican la misma regla que el servidor.
 - Pruebas: `api/test/lib.test.js` y el bloque «escoge tu curso gratis» de `api/test/rutas-miembro.test.js`.
 
 ### Material gratuito

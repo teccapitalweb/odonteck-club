@@ -1,4 +1,3 @@
-import { CursoGratis } from '../core/curso-gratis';
 // Cascarón de la app: barra lateral, barra superior, barra inferior móvil, salida del router.
 import { Perfil } from '../core/perfil';
 import { Auth } from '../core/auth';
@@ -15,12 +14,11 @@ export const NAV = [
   { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
   { href: '#/retos', icon: 'gamepad-2', label: 'Retos', match: /^\/retos/ },
-  // Solo para cuentas gratis: el módulo para escoger (o ver) su curso gratis.
-  { href: '#/curso-gratis', icon: 'gift', label: 'Curso gratis', match: /^\/curso-gratis/, soloGratis: true },
   { group: 'Herramientas' },
   { href: '#/herramientas', icon: 'wrench', label: 'Herramientas Pro', match: /^\/herramientas/ },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
   { group: 'Tu progreso' },
+  { href: '#/brujula', icon: 'compass', label: 'Mi Brújula', match: /^\/brujula/ },
   { href: '#/recompensas', icon: 'gift', label: 'Recompensas', match: /^\/recompensas/ },
   { href: '#/logros', icon: 'flame', label: 'Logros', match: /^\/logros/ },
   { href: '#/certificados', icon: 'award', label: 'Certificados', match: /^\/certificados/ },
@@ -33,11 +31,11 @@ export function shellHTML() {
   const saldo = puntos();
   const clasesVistas = Progreso.totalVistas();
   const cursosCompletados = Progreso.completados().length;
-  // «Curso gratis» solo existe para cuentas gratis; mientras no elija, lleva la etiqueta «Elige».
-  const items = NAV.filter((n) => !('soloGratis' in n) || !Acceso.vip()).map((n) =>
+  // La elección del curso gratis vive fuera de los módulos: es una pantalla de acceso obligatoria.
+  const items = NAV.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`
-      : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && proximos() ? `<span class="badge">${proximos()}</span>` : ''}${'soloGratis' in n && !CursoGratis.id() ? '<span class="nav__new">Elige</span>' : ''}</a>`
+      : `<a class="nav__item" href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}${'badge' in n && proximos() ? `<span class="badge">${proximos()}</span>` : ''}</a>`
   ).join('');
   const bottom = NAV.filter((n) => 'href' in n).slice(0, 4).map((n: any) =>
     `<a href="${n.href}" data-nav><i data-lucide="${n.icon}" class="i"></i>${n.label}</a>`).join('') +
