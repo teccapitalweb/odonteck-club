@@ -81,7 +81,7 @@ La garantía “cada clase” se resolverá con cobertura verificable, no con un
 
 El pipeline trabajará en `dry-run` por defecto: inventario → transcripción → borrador → validación automática → revisión clínica → PDF → publicación privada. Una clase no podrá figurar como “paquete completo” hasta tener transcripción, quiz aprobado y PDF aprobado. El panel mostrará una matriz de cobertura `77/77` para quiz, PDF y revisión.
 
-Cada quiz generado tendrá cinco interacciones distintas —selección clínica, selección múltiple, secuencia, relación y completar— y una marca `mm:ss` verificable contra la transcripción. Al concluir el video, Bunny Player.js registra el evento `ended`, marca la clase de forma idempotente y abre el reto; el botón “Finalizar y abrir reto” queda como respaldo accesible.
+Cada quiz generado tendrá cinco interacciones distintas —selección clínica, selección múltiple, secuencia, relación y completar— y una marca `mm:ss` verificable contra la transcripción. En la rama local `feat/juegos-cierre-clase`, al concluir el video Bunny Player.js registra el evento `ended`, marca la clase de forma idempotente y abre una misión lúdica antes del reto; el botón “Finalizar y jugar” queda como respaldo accesible. La misión no califica criterio clínico ni suma puntos: practica el recuerdo con los conceptos y tiempos ya publicados. `npm run audit:class-games` exige cobertura completa y actualmente informa 77/77 clases. Tras completarla se abre el quiz aprobado o se continúa a la siguiente clase cuando la evaluación permanece en revisión.
 
 ## 4. Entregas seguras
 

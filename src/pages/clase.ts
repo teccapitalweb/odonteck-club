@@ -237,11 +237,12 @@ export function clase(params: Record<string, string>) {
             <div class="lesson-progress" style="margin-top:8px"><div class="progress progress--thin"><span style="width:${Progreso.porcentaje(c)}%"></span></div>${Progreso.de(c.id).vistas.length} de ${c.clases.length} vistas · ${Progreso.porcentaje(c)}%</div></div>
           <div class="row" style="flex-wrap:nowrap">
             ${prev ? `<a class="btn btn--secondary" href="#/curso/${c.id}/clase/${prev.n}"><i data-lucide="chevron-left" class="i"></i>Anterior</a>` : ''}
+            ${vista ? `<button class="btn btn--secondary" data-abrir-juego="${c.id}:${n}"><i data-lucide="gamepad-2" class="i"></i>Jugar cierre</button>` : ''}
             ${vista && quizDisponible ? `<button class="btn btn--brand" data-abrir-quiz="${c.id}:${n}"><i data-lucide="brain-circuit" class="i"></i>Resolver reto</button>` : ''}
             ${vista
               ? (next ? `<a class="btn btn--secondary btn--pill-arrow" href="#/curso/${c.id}/clase/${next.n}">Siguiente clase <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>`
                       : `<a class="btn btn--gradient btn--pill-arrow" href="#/curso/${c.id}">Curso completado <span class="arrow"><i data-lucide="award" class="i"></i></span></a>`)
-              : `<button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}" ${quizDisponible ? 'data-abrir-quiz-al-final' : ''}>${quizDisponible ? 'Finalizar y abrir reto' : 'Marcar vista y seguir'} <span class="arrow"><i data-lucide="${quizDisponible ? 'brain-circuit' : 'arrow-right'}" class="i"></i></span></button>`}
+              : `<button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}">Finalizar y jugar <span class="arrow"><i data-lucide="gamepad-2" class="i"></i></span></button>`}
           </div>
         </div>
         ${next ? `
