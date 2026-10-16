@@ -2,13 +2,13 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 12 de octubre de 2026 (corte público `225ded8`; Directorio y evaluaciones avanzadas permanecen como trabajo local no desplegado)
+- **Actualizado:** 16 de octubre de 2026 (corte público `10e56bd`; curso gratis obligatorio y Brújula permanecen como trabajo local no desplegado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit funcional auditado:** `225ded8` (`main`). El commit de este documento puede ser posterior sin cambiar el runtime.
-- **Web pública:** `https://www.odonteckconsulting.com/` mediante Cloudflare Pages (`odonteck-club`).
+- **Commit funcional público verificado:** `10e56bd` (`origin/main`). El commit de este documento puede ser posterior sin cambiar el runtime.
+- **Web pública:** `https://www.odonteckconsulting.com/` mediante GitHub Pages y el workflow `Pages`.
 - **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado local verificado:** TypeScript 0 errores; `vite build` limpio; API pasa 138 pruebas (137 exitosas, 0 fallos y 1 omitida por requerir emuladores). El runtime público no incluye todavía el Directorio endurecido ni el resto de cambios locales. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado local verificado:** TypeScript 0 errores; build de producción con `VITE_API_URL` limpio; API pasa 176 pruebas (175 exitosas, 0 fallos y 1 omitida por requerir emuladores); pipeline 67/67 y guía 66/66. El runtime público aún no incluye la elección obligatoria del curso gratis ni la Brújula. El detalle del corte candidato, infraestructura observada, bloqueos y rollback está en `docs/PRODUCTION-READINESS-2026-10-16.md`.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
