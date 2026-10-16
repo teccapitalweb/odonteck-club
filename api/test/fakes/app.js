@@ -5,7 +5,7 @@ import { crearAuthFalso, crearMaterialesFalsos, crearStorageFalso, crearStripeFa
 
 export const AHORA_ISO = '2026-09-17T12:00:00.000Z';
 export const WEBHOOK_SECRET = 'whsec_prueba_local';
-export const ORIGEN_OK = 'https://club.odonteckconsulting.com';
+export const ORIGEN_OK = 'https://www.odonteckconsulting.com';
 
 export const TOKENS = {
   vip: 'tk-vip',

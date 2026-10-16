@@ -252,8 +252,8 @@ STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
 STRIPE_PRICE_MENSUAL=
 STRIPE_PRICE_ANUAL=
-APP_URL=https://club.odonteckconsulting.com
-ALLOWED_ORIGINS=http://localhost:5179,https://club.odonteckconsulting.com
+APP_URL=https://www.odonteckconsulting.com
+ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,https://www.odonteckconsulting.com
 PORT=8080
 ```
 

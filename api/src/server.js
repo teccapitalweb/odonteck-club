@@ -50,7 +50,7 @@ const app = crearApp({
     ttlSeconds: Number(env.BUNNY_TOKEN_TTL_SECONDS) || 300,
   },
   config: {
-    appUrl: env.APP_URL || 'https://club.odonteckconsulting.com',
+    appUrl: env.APP_URL || 'https://www.odonteckconsulting.com',
     allowedOrigins: String(env.ALLOWED_ORIGINS || '').split(','),
     storageBucket: env.FIREBASE_STORAGE_BUCKET || '',
     stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET || '',
