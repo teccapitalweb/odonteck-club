@@ -4,6 +4,7 @@
 import { createIcons, icons } from 'lucide';
 import { Auth } from './auth';
 import { Datos, type Material } from './datos';
+import { CursoGratis } from './curso-gratis';
 import type { Curso } from './catalogo';
 
 export const VIP_SIM = 'odonteck-club:vip-sim';
@@ -14,10 +15,13 @@ export const Acceso = {
   activarVipDemo() { try { localStorage.setItem(VIP_SIM, '1'); } catch {} },
   quitarVipDemo() { try { localStorage.removeItem(VIP_SIM); } catch {} },
 
-  cursoGratis(curso: Curso): boolean { return curso.orden === 1; },
+  // «Escoge tu curso gratis»: el curso que eligió el miembro, completo menos su última clase.
+  // En modo API el servidor aplica exactamente la misma regla a los videos.
+  cursoGratis(curso: Curso): boolean { return !!curso && CursoGratis.id() === curso.id; },
   claseLibre(curso: Curso, n: number): boolean {
-    if (curso.orden === 1) return n < curso.clases.length;
-    return false;
+    if (!this.cursoGratis(curso)) return false;
+    const numeros = curso.clases.map((k) => k.n).sort((a, b) => a - b);
+    return numeros.length > 1 && numeros.includes(n) && n !== numeros[numeros.length - 1];
   },
   claseAccesible(curso: Curso, n: number) { return this.vip() || this.claseLibre(curso, n); },
 

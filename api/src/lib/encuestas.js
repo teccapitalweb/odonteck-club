@@ -47,6 +47,21 @@ export const ENCUESTAS = Object.freeze({
       ] },
     ],
   }),
+  brujula: Object.freeze({
+    id: 'brujula', version: 1, tipo: 'brujula', prioridad: 90,
+    titulo: 'Descubre tu brújula profesional',
+    descripcion: 'Explora qué áreas y formas de trabajo conectan mejor con lo que disfrutas. No hay respuestas correctas.',
+    preguntas: [
+      { id: 'problema', tipo: 'opcion', requerida: true, texto: '¿Qué tipo de problema disfrutas resolver más?', opciones: [opcion('patrones', 'Detectar patrones y llegar a un diagnóstico'), opcion('transformar', 'Transformar forma, función y apariencia'), opcion('precision', 'Resolver procedimientos de alta precisión'), opcion('plan', 'Construir un plan que evoluciona durante meses')] },
+      { id: 'jornada', tipo: 'opcion', requerida: true, texto: 'Tu jornada ideal se parece más a…', opciones: [opcion('planificada', 'Casos planificados y seguimiento de largo plazo'), opcion('variada', 'Problemas distintos y decisiones clínicas variadas'), opcion('intensa', 'Intervenciones concretas y ritmo intenso'), opcion('acompanamiento', 'Acompañar, explicar y generar confianza')] },
+      { id: 'detalle', tipo: 'opcion', requerida: true, texto: '¿Qué detalle suele captar primero tu atención?', opciones: [opcion('imagenes', 'Los patrones en imágenes y signos clínicos'), opcion('simetria', 'La simetría, proporción y color'), opcion('tejidos', 'El estado de tejidos y mucosas'), opcion('oclusion', 'La mordida, función y relación entre estructuras')] },
+      { id: 'resultado', tipo: 'opcion', requerida: true, texto: '¿Qué resultado profesional te daría más satisfacción?', opciones: [opcion('dolor', 'Resolver dolor o una urgencia con seguridad'), opcion('sonrisa', 'Recuperar una sonrisa natural y armónica'), opcion('crecimiento', 'Guiar crecimiento, hábitos y desarrollo'), opcion('funcion', 'Devolver función estable a largo plazo')] },
+      { id: 'pacientes', tipo: 'opcion', requerida: true, texto: '¿Con qué contexto te imaginas trabajando con mayor comodidad?', opciones: [opcion('ninos', 'Niñas, niños y sus familias'), opcion('ansiosos', 'Personas ansiosas que necesitan calma y claridad'), opcion('complejos', 'Casos complejos que requieren investigar'), opcion('seguimiento', 'Pacientes que requieren seguimiento constante')] },
+      { id: 'fortalezas', tipo: 'multiple', requerida: true, max: 3, texto: '¿Qué fortalezas te gustaría usar más en tu carrera?', ayuda: 'Elige hasta tres.', opciones: [opcion('analisis', 'Analizar información'), opcion('manos', 'Trabajar con precisión manual'), opcion('explicar', 'Explicar y generar confianza'), opcion('organizar', 'Organizar planes y procesos'), opcion('presion', 'Decidir bajo presión'), opcion('investigar', 'Enseñar e investigar')] },
+      { id: 'aprender', tipo: 'opcion', requerida: true, texto: '¿Cómo aprendes mejor algo clínico?', opciones: [opcion('casos', 'Comparando casos y diagnósticos'), opcion('protocolos', 'Siguiendo protocolos claros'), opcion('simulacion', 'Practicando técnicas y movimientos'), opcion('visual', 'Observando diseño, forma y resultados'), opcion('evidencia', 'Leyendo evidencia y discutiendo hallazgos')] },
+      { id: 'proyecto', tipo: 'opcion', requerida: true, texto: '¿Qué proyecto futuro te emociona más?', opciones: [opcion('integral', 'Una consulta integral y resolutiva'), opcion('estudio', 'Un espacio enfocado en estética y rehabilitación'), opcion('quirurgico', 'Un entorno de procedimientos y urgencias'), opcion('academia', 'Combinar clínica, docencia e investigación')] },
+    ],
+  }),
   curso: Object.freeze({
     id: 'curso-final', version: 1, tipo: 'curso', prioridad: 80,
     titulo: 'Tu experiencia con el curso',
@@ -124,6 +139,7 @@ export const ENCUESTAS = Object.freeze({
 
 export const DIA_MS_ENCUESTAS = 864e5;
 export const claveBienvenida = () => `bienvenida-v${ENCUESTAS.bienvenida.version}`;
+export const claveBrujula = () => `brujula-v${ENCUESTAS.brujula.version}`;
 export const claveCurso = (cursoId) => `curso-final-v${ENCUESTAS.curso.version}--${cursoId}`;
 // Un trimestre por clave: así cada periodo cuenta como una encuesta nueva y el NPS se puede comparar en el tiempo.
 export const periodoExperiencia = (ahoraMs) => { const d = new Date(ahoraMs); return `${d.getUTCFullYear()}T${Math.floor(d.getUTCMonth() / 3) + 1}`; };
@@ -141,6 +157,7 @@ export function experienciaDisponible(primeraVistaMs, clasesVistas, ahoraMs, ult
 
 export function plantillaPorClave(clave) {
   if (clave === claveBienvenida()) return ENCUESTAS.bienvenida;
+  if (clave === claveBrujula()) return ENCUESTAS.brujula;
   if (typeof clave !== 'string') return null;
   if (clave.startsWith(`${ENCUESTAS.pulso.id}-v${ENCUESTAS.pulso.version}--`)) return ENCUESTAS.pulso;
   if (clave.startsWith(`curso-final-v${ENCUESTAS.curso.version}--`)) return ENCUESTAS.curso;
@@ -221,7 +238,7 @@ export function filtrarPorPlan(respuestas, plan) {
 /** Agregados sin PII. `plan` segmenta; `periodos` (sólo experiencia) permite comparar trimestres. */
 export function resumirEncuestas(todas, { plan = null } = {}) {
   const respuestas = filtrarPorPlan(todas, plan);
-  const plantillas = [ENCUESTAS.bienvenida, ENCUESTAS.curso, ENCUESTAS.pulso];
+  const plantillas = [ENCUESTAS.bienvenida, ENCUESTAS.brujula, ENCUESTAS.curso, ENCUESTAS.pulso];
   const encuestas = plantillas.map((plantilla) => {
     const docs = respuestas.filter((r) => r.encuestaId === plantilla.id && r.version === plantilla.version);
     const preguntas = plantilla.preguntas.map((p) => {

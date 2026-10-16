@@ -1,6 +1,7 @@
 import { Auth, api } from './auth';
 import { Datos } from './datos';
 import { Progreso } from './progreso';
+import { calcularBrujula, type ResultadoBrujula } from './brujula';
 
 export type TipoPreguntaEncuesta = 'opcion' | 'multiple' | 'escala' | 'texto';
 
@@ -25,7 +26,7 @@ export interface EncuestaPendiente {
   clave: string;
   id: string;
   version: number;
-  tipo: 'bienvenida' | 'curso' | 'pulso';
+  tipo: 'bienvenida' | 'brujula' | 'curso' | 'pulso';
   titulo: string;
   descripcion: string;
   cursoId?: string | null;
@@ -76,6 +77,20 @@ const PLANTILLAS = {
       { id: 'intereses', tipo: 'multiple' as const, requerida: true, max: 3, texto: '¿Qué áreas te interesan más?', ayuda: 'Con esto ordenamos tu inicio y el catálogo "Para ti".', opciones: [opcion('diagnostico', 'Diagnóstico y cariología'), opcion('ortodoncia', 'Ortodoncia'), opcion('endodoncia', 'Endodoncia'), opcion('restauradora', 'Odontología restauradora'), opcion('estetica', 'Estética dental'), opcion('cirugia', 'Cirugía bucal'), opcion('periodoncia', 'Periodoncia'), opcion('pediatria', 'Odontopediatría'), opcion('rehabilitacion', 'Rehabilitación oral'), opcion('medicina_bucal', 'Medicina bucal')] },
       { id: 'formato', tipo: 'multiple' as const, requerida: true, max: 2, texto: '¿Cómo prefieres aprender?', ayuda: 'Nos ayuda a decidir qué producir primero.', opciones: [opcion('video', 'Clases cortas en video'), opcion('casos', 'Casos clínicos paso a paso'), opcion('en_vivo', 'Sesiones en vivo'), opcion('guias', 'Guías y protocolos'), opcion('quizzes', 'Quizzes y retos')] },
       { id: 'reto', tipo: 'opcion' as const, requerida: true, texto: '¿Qué es lo que más te dificulta seguir formándote?', ayuda: 'Queremos quitar ese obstáculo, no sumar otro.', opciones: [opcion('tiempo', 'Falta de tiempo'), opcion('costo', 'El costo de los cursos'), opcion('confianza', 'Encontrar contenido confiable'), opcion('practica', 'Llevar la teoría a la práctica'), opcion('constancia', 'Mantener la constancia'), opcion('otro', 'Otro motivo')] },
+    ],
+  },
+  brujula: {
+    clave: 'brujula-v1', id: 'brujula', version: 1, tipo: 'brujula' as const, prioridad: 90,
+    titulo: 'Descubre tu brújula profesional', descripcion: 'Explora qué áreas y formas de trabajo conectan mejor con lo que disfrutas. No hay respuestas correctas.',
+    preguntas: [
+      { id:'problema',tipo:'opcion' as const,requerida:true,texto:'¿Qué tipo de problema disfrutas resolver más?',opciones:[opcion('patrones','Detectar patrones y llegar a un diagnóstico'),opcion('transformar','Transformar forma, función y apariencia'),opcion('precision','Resolver procedimientos de alta precisión'),opcion('plan','Construir un plan que evoluciona durante meses')]},
+      { id:'jornada',tipo:'opcion' as const,requerida:true,texto:'Tu jornada ideal se parece más a…',opciones:[opcion('planificada','Casos planificados y seguimiento de largo plazo'),opcion('variada','Problemas distintos y decisiones clínicas variadas'),opcion('intensa','Intervenciones concretas y ritmo intenso'),opcion('acompanamiento','Acompañar, explicar y generar confianza')]},
+      { id:'detalle',tipo:'opcion' as const,requerida:true,texto:'¿Qué detalle suele captar primero tu atención?',opciones:[opcion('imagenes','Los patrones en imágenes y signos clínicos'),opcion('simetria','La simetría, proporción y color'),opcion('tejidos','El estado de tejidos y mucosas'),opcion('oclusion','La mordida, función y relación entre estructuras')]},
+      { id:'resultado',tipo:'opcion' as const,requerida:true,texto:'¿Qué resultado profesional te daría más satisfacción?',opciones:[opcion('dolor','Resolver dolor o una urgencia con seguridad'),opcion('sonrisa','Recuperar una sonrisa natural y armónica'),opcion('crecimiento','Guiar crecimiento, hábitos y desarrollo'),opcion('funcion','Devolver función estable a largo plazo')]},
+      { id:'pacientes',tipo:'opcion' as const,requerida:true,texto:'¿Con qué contexto te imaginas trabajando con mayor comodidad?',opciones:[opcion('ninos','Niñas, niños y sus familias'),opcion('ansiosos','Personas ansiosas que necesitan calma y claridad'),opcion('complejos','Casos complejos que requieren investigar'),opcion('seguimiento','Pacientes que requieren seguimiento constante')]},
+      { id:'fortalezas',tipo:'multiple' as const,requerida:true,max:3,texto:'¿Qué fortalezas te gustaría usar más en tu carrera?',ayuda:'Elige hasta tres.',opciones:[opcion('analisis','Analizar información'),opcion('manos','Trabajar con precisión manual'),opcion('explicar','Explicar y generar confianza'),opcion('organizar','Organizar planes y procesos'),opcion('presion','Decidir bajo presión'),opcion('investigar','Enseñar e investigar')]},
+      { id:'aprender',tipo:'opcion' as const,requerida:true,texto:'¿Cómo aprendes mejor algo clínico?',opciones:[opcion('casos','Comparando casos y diagnósticos'),opcion('protocolos','Siguiendo protocolos claros'),opcion('simulacion','Practicando técnicas y movimientos'),opcion('visual','Observando diseño, forma y resultados'),opcion('evidencia','Leyendo evidencia y discutiendo hallazgos')]},
+      { id:'proyecto',tipo:'opcion' as const,requerida:true,texto:'¿Qué proyecto futuro te emociona más?',opciones:[opcion('integral','Una consulta integral y resolutiva'),opcion('estudio','Un espacio enfocado en estética y rehabilitación'),opcion('quirurgico','Un entorno de procedimientos y urgencias'),opcion('academia','Combinar clínica, docencia e investigación')]},
     ],
   },
   curso: {
@@ -137,10 +152,10 @@ const RESPUESTAS_KEY = 'odonteck-club:encuestas-respuestas:v1';
 const INTERESES_KEY = 'odonteck-club:intereses:v1';
 const DIA = 864e5;
 interface EstadoDemo { primeraVista: string; respondidas: string[]; pospuestas: Record<string, string>; veces?: Record<string, number> }
-interface RespuestaDemo { clave: string; encuestaId: string; version: number; tipo: string; cursoId?: string | null; cursoTitulo?: string | null; vip?: boolean; correoContacto?: string; respuestas: Record<string, unknown>; enviado: string }
+interface RespuestaDemo { clave: string; encuestaId: string; version: number; tipo: string; cursoId?: string | null; cursoTitulo?: string | null; vip?: boolean; correoContacto?: string; respuestas: Record<string, unknown>; resultado?: ResultadoBrujula; enviado: string }
 
 /** Lo que la entrevista inicial dijo del miembro (sin PII); alimenta las recomendaciones del club. */
-export interface PerfilEncuesta { intereses?: string[]; objetivo?: string; formato?: string[]; situacion?: string; reto?: string }
+export interface PerfilEncuesta { intereses?: string[]; objetivo?: string; formato?: string[]; situacion?: string; reto?: string; brujula?: ResultadoBrujula }
 const CAMPOS_PERFIL: (keyof PerfilEncuesta)[] = ['intereses', 'objetivo', 'formato', 'situacion', 'reto'];
 const estado = { pendientes: [] as EncuestaPendiente[], respondidas: [] as string[], vip: null as boolean | null, perfil: null as PerfilEncuesta | null, cargado: false };
 const leer = <T>(key: string, fallback: T): T => { try { return JSON.parse(localStorage.getItem(key) || '') as T; } catch { return fallback; } };
@@ -157,6 +172,9 @@ function pendientesDemo(): EncuestaPendiente[] {
   const e = estadoDemo();
   const salida: EncuestaPendiente[] = [];
   if (disponible(e, PLANTILLAS.bienvenida.clave)) salida.push(PLANTILLAS.bienvenida);
+  // Igual que la API: posponer la entrevista no equivale a responderla. La Brújula sólo
+  // aparece cuando ya existe el contexto básico de bienvenida.
+  if (e.respondidas.includes(PLANTILLAS.bienvenida.clave) && disponible(e, PLANTILLAS.brujula.clave)) salida.push(PLANTILLAS.brujula);
   for (const c of Progreso.completados()) {
     const clave = `${PLANTILLAS.curso.clave}--${c.id}`;
     if (disponible(e, clave)) salida.push({ ...PLANTILLAS.curso, clave, titulo: `${PLANTILLAS.curso.titulo}: ${c.titulo}`, cursoId: c.id, cursoTitulo: c.titulo });
@@ -193,16 +211,18 @@ async function leerEncuestas() {
     estado.respondidas = estadoDemo().respondidas;
     estado.vip = Auth.usuario?.esVip ?? null;
     const bienvenida = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []).filter((d) => d.encuestaId === PLANTILLAS.bienvenida.id).sort((a, b) => b.enviado.localeCompare(a.enviado))[0];
+    const brujula = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []).filter((d) => d.encuestaId === PLANTILLAS.brujula.id).sort((a, b) => b.enviado.localeCompare(a.enviado))[0];
     const perfilInicial = bienvenida ? Object.fromEntries(CAMPOS_PERFIL.filter((k) => bienvenida.respuestas[k] !== undefined).map((k) => [k, bienvenida.respuestas[k]])) as PerfilEncuesta : null;
     const interesesActuales = leer<string[] | null>(INTERESES_KEY, null);
     estado.perfil = perfilInicial || interesesActuales
-      ? { ...(perfilInicial ?? {}), ...(interesesActuales?.length ? { intereses: interesesActuales } : {}) }
+      ? { ...(perfilInicial ?? {}), ...(interesesActuales?.length ? { intereses: interesesActuales } : {}), ...(brujula?.resultado ? { brujula: brujula.resultado } : {}) }
       : null;
   }
   estado.cargado = true;
 }
 
 export function encuestaPendiente() { return estado.pendientes[0] ?? null; }
+export function encuestaPendientePorTipo(tipo: EncuestaPendiente['tipo']) { return estado.pendientes.find((e) => e.tipo === tipo) ?? null; }
 /** Plan del miembro al momento de contestar (para las preguntas condicionales por plan). */
 export function esVipParaEncuestas() { return estado.vip ?? Auth.usuario?.esVip ?? null; }
 /** Si ya respondió alguna versión/periodo de una encuesta (p. ej. 'experiencia'): alimenta el logro "Voz del club". */
@@ -226,8 +246,10 @@ export async function guardarIntereses(intereses: string[]) {
 export function encuestaRespondida(id: string) { return estado.respondidas.some((c) => c === id || c.startsWith(`${id}-`)); }
 
 export async function responderEncuesta(encuesta: EncuestaPendiente, respuestas: Record<string, unknown>) {
+  let resultadoBrujula: ResultadoBrujula | undefined;
   if (Datos.modo === 'api') {
-    const resultado = await api<{ recompensas?: { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] } }>(`/encuestas/${encodeURIComponent(encuesta.clave)}/responder`, { method: 'POST', json: { respuestas } });
+    const resultado = await api<{ resultado?: ResultadoBrujula; recompensas?: { puntosGanados?: number; logrosNuevos?: { titulo?: string }[] } }>(`/encuestas/${encodeURIComponent(encuesta.clave)}/responder`, { method: 'POST', json: { respuestas } });
+    resultadoBrujula = resultado.resultado;
     if (resultado.recompensas?.puntosGanados || resultado.recompensas?.logrosNuevos?.length) {
       window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: resultado.recompensas }));
     }
@@ -235,20 +257,22 @@ export async function responderEncuesta(encuesta: EncuestaPendiente, respuestas:
   else {
     const todas = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []);
     const vip = Auth.usuario?.esVip ?? false;
-    const doc: RespuestaDemo = { clave: encuesta.clave, encuestaId: encuesta.id, version: encuesta.version, tipo: encuesta.tipo, cursoId: encuesta.cursoId, cursoTitulo: encuesta.cursoTitulo, vip, respuestas, enviado: new Date().toISOString() };
+    resultadoBrujula = encuesta.tipo === 'brujula' ? calcularBrujula(respuestas) : undefined;
+    const doc: RespuestaDemo = { clave: encuesta.clave, encuestaId: encuesta.id, version: encuesta.version, tipo: encuesta.tipo, cursoId: encuesta.cursoId, cursoTitulo: encuesta.cursoTitulo, vip, respuestas, ...(resultadoBrujula ? { resultado: resultadoBrujula } : {}), enviado: new Date().toISOString() };
     if (respuestas.contacto === 'si' && Auth.usuario?.email) doc.correoContacto = Auth.usuario.email;
     todas.push(doc);
     guardar(RESPUESTAS_KEY, todas);
     const e = estadoDemo(); e.respondidas = [...new Set([...e.respondidas, encuesta.clave])]; guardar(ESTADO_KEY, e);
   }
   await cargarEncuestas(true);
+  return resultadoBrujula;
 }
 
 export async function posponerEncuesta(encuesta: EncuestaPendiente) {
   if (Datos.modo === 'api') await api(`/encuestas/${encodeURIComponent(encuesta.clave)}/posponer`, { method: 'POST' });
   else {
     const e = estadoDemo();
-    const dias = encuesta.tipo === 'bienvenida' ? 3 : encuesta.tipo === 'curso' ? 7 : 14;
+    const dias = encuesta.tipo === 'bienvenida' ? 3 : encuesta.tipo === 'brujula' ? 14 : encuesta.tipo === 'curso' ? 7 : 14;
     e.pospuestas[encuesta.clave] = new Date(Date.now() + dias * DIA).toISOString();
     e.veces = { ...(e.veces ?? {}), [encuesta.clave]: (e.veces?.[encuesta.clave] ?? 0) + 1 };
     guardar(ESTADO_KEY, e);
@@ -272,7 +296,7 @@ export function calcularNps(valores: number[]) {
 export function resumenEncuestasDemo(plan: 'vip' | 'gratis' | null = null): ResumenEncuestas {
   const todas = leer<RespuestaDemo[]>(RESPUESTAS_KEY, []);
   const docs = plan === 'vip' ? todas.filter((d) => d.vip === true) : plan === 'gratis' ? todas.filter((d) => d.vip === false) : todas;
-  const plantillas = [PLANTILLAS.bienvenida, PLANTILLAS.curso, PLANTILLAS.pulso];
+  const plantillas = [PLANTILLAS.bienvenida, PLANTILLAS.brujula, PLANTILLAS.curso, PLANTILLAS.pulso];
   const encuestas = plantillas.map((p) => {
     const grupo = docs.filter((d) => d.encuestaId === p.id && d.version === p.version);
     const preguntas: PreguntaResumenEncuesta[] = (p.preguntas as PreguntaEncuesta[]).map((q) => {

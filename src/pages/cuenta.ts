@@ -1,3 +1,4 @@
+import { Datos } from '../core/datos';
 import { Perfil } from '../core/perfil';
 import { BRAND, wa } from '../core/brand';
 import { Progreso } from '../core/progreso';
@@ -37,6 +38,7 @@ export function praxia() {
 export function perfil() {
   const p = Perfil.get();
   const intereses = perfilEncuesta()?.intereses ?? [];
+  const brujula = perfilEncuesta()?.brujula;
   const opciones = opcionesIntereses();
   const plan = BRAND.planes.find((x) => x.id === p.plan);
   const esCortesia = p.plan === 'cortesia';
@@ -117,6 +119,13 @@ export function perfil() {
         </fieldset>
         <div class="account-card__actions"><span>Elige de 1 a 3. Puedes cambiarlos cuando quieras.</span><button class="btn btn--brand btn--pill-arrow">Guardar intereses <span class="arrow"><i data-lucide="sparkles" class="i"></i></span></button></div>
       </form>
+      <section class="card account-card" style="overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--brand-navy) 7%,var(--surface)),color-mix(in srgb,var(--brand-teal) 8%,var(--surface)))">
+        <div class="account-card__head">
+          <span class="account-card__icon account-card__icon--teal"><i data-lucide="compass" class="i"></i></span>
+          <div><span class="eyebrow">Orientación personal</span><h2>Tu Brújula profesional</h2><p>${brujula ? `Tus señales principales: ${brujula.areas.map((a) => esc(a.etiqueta)).join(', ')}.` : 'Explora afinidades clínicas y formas de trabajo para recibir sugerencias más personales.'}</p></div>
+        </div>
+        <div class="account-card__actions"><span><i data-lucide="shield-check" class="i"></i>No es un diagnóstico ni te encasilla.</span><a class="btn btn--brand btn--pill-arrow" href="#/brujula">${brujula ? 'Ver mi resultado' : 'Descubrir mi brújula'} <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a></div>
+      </section>
       </div>
       <aside class="account-aside">
         <div class="membership-card">
@@ -266,6 +275,7 @@ export function configuracion() {
           ${sw('nuevos', 'sparkles', 'Nuevos cursos y materiales', 'Entérate cuando publiquemos contenido nuevo.')}
           ${sw('comunidad', 'messages-square', 'Actividad en Comunidad', 'Avisos cuando respondan a tus publicaciones.')}
         </section>
+        ${Datos.modo === 'demo' ? `<section class="card settings-card" id="ajustes-demo"><div class="settings-card__head"><div><span class="eyebrow">Prototipo local</span><h2>Probar como usuario nuevo (demo)</h2><p>Borra lo guardado en este navegador y vuelve a vivir la primera entrada: elección obligatoria del curso gratis, entrevista y Brújula.</p></div></div><div class="row" style="gap:10px;flex-wrap:wrap"><button type="button" class="btn btn--brand" data-demo-reiniciar-todo><i data-lucide="user-plus" class="i"></i>Empezar como usuario nuevo</button><button type="button" class="btn btn--secondary" data-curso-gratis-reiniciar-demo><i data-lucide="rotate-ccw" class="i"></i>Reiniciar mi curso gratis</button></div></section>` : ''}
         <section class="card settings-card" id="ajustes-app">
           <div class="settings-card__head"><div><span class="eyebrow">Acceso rápido</span><h2>Aplicación</h2><p>Lleva tu aprendizaje contigo sin abrir primero el navegador.</p></div><span class="account-card__icon"><i data-lucide="smartphone" class="i"></i></span></div>
           <div class="setting-row setting-row--feature"><span class="setting-row__icon"><i data-lucide="download" class="i"></i></span><div><strong>Instalar OdonTeck</strong><span>Acceso desde tu inicio, pantalla completa y una experiencia más rápida.</span></div><button class="btn btn--brand btn--sm" type="button" data-install-btn><i data-lucide="download" class="i"></i>Instalar</button></div>
@@ -283,7 +293,7 @@ export function configuracion() {
 }
 
 export function mas() {
-  const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/directorio', 'contact-round', 'Directorio'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/herramientas', 'wrench', 'Herramientas Pro'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
+  const items = [...(Auth.usuario?.esAdmin ? [['#/admin', 'shield-check', 'Panel admin']] : []), ['#/comunidad', 'messages-square', 'Comunidad'], ['#/directorio', 'contact-round', 'Directorio'], ['#/brujula', 'compass', 'Mi Brújula'], ['#/logros', 'flame', 'Logros'], ['#/certificados', 'award', 'Certificados'], ['#/herramientas', 'wrench', 'Herramientas Pro'], ['#/praxia', 'stethoscope', 'Prueba Praxia'], ['#/perfil', 'user', 'Mi perfil'], ['#/suscripcion', 'credit-card', 'Suscripción'], ['#/configuracion', 'settings', 'Configuración']];
   return `
   <section class="stack" style="gap:16px">
     <div class="row" style="gap:12px">${avatarUsuario(Auth.usuario?.foto, Perfil.iniciales(), 'avatar avatar--lg')}<div><div class="display" style="font-size:var(--fs-lg)">${esc(Perfil.get().nombre)}</div><span class="user-card__plan"><i data-lucide="crown" class="i"></i>${Perfil.planNombre()}</span></div></div>

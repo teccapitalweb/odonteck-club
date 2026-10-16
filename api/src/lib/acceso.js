@@ -75,9 +75,20 @@ export function claseDesbloqueada(curso, n, vistas = []) {
   return vistas.map(Number).includes(numeros[i - 1]);
 }
 
-/** Acceso por membresía: VIP o clase marcada como gratis. */
-export function tieneAccesoAClase(clase, vip) {
-  return vip === true || clase?.gratis === true;
+/** En el curso gratis elegido se abren todas las clases menos la última (cierre VIP). */
+export function claseLibreEnCursoGratis(curso, n) {
+  const numeros = numerosDeClase(curso);
+  return numeros.length > 1 && numeros.includes(Number(n)) && Number(n) !== numeros.at(-1);
+}
+
+/**
+ * Acceso por membresía: VIP ve todo; un miembro gratis solo ve el curso que eligió
+ * («Escoge tu curso gratis»), excepto su última clase. La marca `gratis` por clase ya no
+ * abre contenido: solo identifica el curso gratis anterior para migrar a quien ya avanzó.
+ */
+export function tieneAccesoAClase(curso, cursoId, n, vip, cursoGratisId) {
+  if (vip === true) return true;
+  return !!cursoGratisId && String(cursoId) === String(cursoGratisId) && claseLibreEnCursoGratis(curso, n);
 }
 
 /** true cuando todas las clases del curso están en `vistas`. */

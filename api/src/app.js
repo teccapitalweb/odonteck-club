@@ -12,7 +12,7 @@ import { rutasPublicas } from './routes/publicas.js';
 import { rutasStripe, webhookStripe } from './routes/stripe.js';
 
 const CONFIG_POR_DEFECTO = {
-  appUrl: 'https://club.odonteckconsulting.com',
+  appUrl: 'https://www.odonteckconsulting.com',
   allowedOrigins: [],
   storageBucket: '',
   stripeWebhookSecret: '',

@@ -1,3 +1,5 @@
+import { CursoGratis } from '../core/curso-gratis';
+import { Acceso } from '../core/acceso';
 import { cursos, areas, buscar } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { tarjetaCurso, esc } from '../ui/partials';
@@ -31,6 +33,7 @@ export function catalogo(_: Record<string, string>, query: URLSearchParams) {
   const completados = Progreso.completados().length;
   return `
   <section class="catalog-page stack">
+    ${!Acceso.vip() && !CursoGratis.id() ? `<div class="cg-cta"><span class="cg-cta__ic"><i data-lucide="gift" class="i"></i></span><div><strong>Escoge tu curso gratis</strong><small>Elige cualquiera del catálogo y tenlo completo, menos la clase final.</small></div><button class="btn" data-curso-gratis-abrir><i data-lucide="sparkles" class="i"></i>Elegir ahora</button></div>` : ''}
     <div class="catalog-band">
       <div class="catalog-band__copy">
         <span class="hero__kicker"><i data-lucide="graduation-cap" class="i" style="width:14px;height:14px"></i>Catálogo OdonTeck</span>

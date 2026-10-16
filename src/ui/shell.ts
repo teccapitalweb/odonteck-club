@@ -9,7 +9,7 @@ import { avatarUsuario, esc } from './partials';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
-  { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/curso/ },
+  { href: '#/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/(cursos|curso\/)/ },
   { href: '#/materiales', icon: 'library', label: 'Materiales', match: /^\/materiales/ },
   { href: '#/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/comunidad/, badge: 2 },
   { href: '#/directorio', icon: 'contact-round', label: 'Directorio', match: /^\/directorio/ },
@@ -18,6 +18,7 @@ export const NAV = [
   { href: '#/herramientas', icon: 'wrench', label: 'Herramientas Pro', match: /^\/herramientas/ },
   { href: '#/praxia', icon: 'stethoscope', label: 'Prueba Praxia', match: /^\/praxia/ },
   { group: 'Tu progreso' },
+  { href: '#/brujula', icon: 'compass', label: 'Mi Brújula', match: /^\/brujula/ },
   { href: '#/recompensas', icon: 'gift', label: 'Recompensas', match: /^\/recompensas/ },
   { href: '#/logros', icon: 'flame', label: 'Logros', match: /^\/logros/ },
   { href: '#/certificados', icon: 'award', label: 'Certificados', match: /^\/certificados/ },
@@ -30,6 +31,7 @@ export function shellHTML() {
   const saldo = puntos();
   const clasesVistas = Progreso.totalVistas();
   const cursosCompletados = Progreso.completados().length;
+  // La elección del curso gratis vive fuera de los módulos: es una pantalla de acceso obligatoria.
   const items = NAV.map((n) =>
     'group' in n
       ? `<div class="nav__label eyebrow">${n.group}</div>`

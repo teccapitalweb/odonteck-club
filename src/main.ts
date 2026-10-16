@@ -6,6 +6,7 @@ import './styles/base.css';
 import './styles/components.css';
 import './styles/active.css';
 import './styles/inicio.css';
+import './styles/curso-gratis.css';
 import './styles/admin.css';
 import './styles/login.css';
 import './styles/arcade.css';
@@ -13,6 +14,7 @@ import './styles/herramientas.css';
 import './styles/comunidad.css';
 import './styles/encuestas.css';
 import './styles/bienvenida.css';
+import './styles/brujula.css';
 import './styles/encuesta-modal.css';
 import './styles/perfil.css';
 import './styles/recompensas.css';
@@ -27,7 +29,7 @@ import { Datos, type Pregunta } from './core/datos';
 import { Progreso } from './core/progreso';
 import { Perfil } from './core/perfil';
 import { Comunidad } from './core/comunidad';
-import { curso as getCurso } from './core/catalogo';
+import { curso as getCurso, cursos as catalogoCursos } from './core/catalogo';
 import { esc } from './ui/partials';
 import { inicio } from './pages/inicio';
 import { catalogo } from './pages/cursos';
@@ -44,9 +46,13 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
+import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
+import { cursoGratisPagina } from './pages/curso-gratis';
+import { CursoGratis } from './core/curso-gratis';
 import { cargarEncuestas, encuestaPendiente, guardarIntereses, reiniciarEncuestas } from './core/encuestas';
 import { mostrarEncuestaPendiente } from './ui/encuesta';
 import { bienvenida, montarBienvenida, DESTINO_KEY } from './pages/bienvenida';
+import { brujula, montarBrujula } from './pages/brujula';
 import { certificados, certificado, verificar } from './pages/certificados';
 import { buscar } from './pages/buscar';
 import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta';
@@ -392,7 +398,7 @@ onBeforeRender(async (path) => {
     return true;
   }
   clearTimeout(esqueletoPendiente);
-  const esqueleto = path !== '/bienvenida' && path !== rutaPintada
+  const esqueleto = path !== '/bienvenida' && path !== '/curso-gratis' && path !== rutaPintada
     ? window.setTimeout(() => { if (current().path === path && rutaPintada !== path) pintarEsqueleto(u.uid); }, 150)
     : 0;
   esqueletoPendiente = esqueleto;
@@ -403,7 +409,20 @@ onBeforeRender(async (path) => {
   if (Auth.usuario?.uid !== u.uid || current().path !== path) return false;
   // El cascarón montado antes de tener catálogo y puntos se vuelve a pintar con los datos ya cargados.
   if (cascaronProvisional) { cascaronProvisional = false; if (shellActual === 'miembro') shellActual = null; }
-  // Primera entrada: la entrevista de bienvenida ocupa su propia página hasta responderla o posponerla.
+  // Primera decisión de una cuenta gratis: elegir el curso de bienvenida antes de cualquier
+  // entrevista o módulo. Se valida aquí para cubrir URL pegada, Atrás y recarga;
+  // VIP, admin, migrados y elecciones ya guardadas quedan fuera del bloqueo.
+  const hayCursosElegibles = catalogoCursos.some((c) => c.publicado !== false && c.clases.length >= 2);
+  // La cuenta demo lleva esAdmin=true para permitir revisar el panel, pero en rutas de
+  // miembro debe vivir el mismo onboarding que una cuenta gratis real.
+  const administradorReal = Datos.modo === 'api' && Auth.usuario?.esAdmin;
+  const sinCursoGratis = !administradorReal && !Acceso.vip() && CursoGratis.cargado() && !CursoGratis.id() && hayCursosElegibles;
+  if (sinCursoGratis && path !== '/curso-gratis') {
+    navigate('/curso-gratis'); return false;
+  }
+  // La selección no pertenece al cascarón de módulos: nunca pinta sidebar, topbar ni navegación móvil.
+  if (path === '/curso-gratis') { montar('solo'); return true; }
+  // Después de elegir, la entrevista de bienvenida ocupa su propia página hasta responderla o posponerla.
   const entrevista = encuestaPendiente()?.tipo === 'bienvenida';
   if (encuestasListas) recordarBienvenida(u.uid, !entrevista);
   if (path === '/bienvenida') {
@@ -420,6 +439,7 @@ onBeforeRender(async (path) => {
 // ── Rutas del miembro ──
 route('/login', login);
 route('/bienvenida', bienvenida);
+route('/brujula', brujula);
 route('/', inicio);
 route('/cursos', catalogo);
 route('/curso/:id', curso);
@@ -431,6 +451,7 @@ route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/directorio', directorio);
+route('/curso-gratis', cursoGratisPagina);
 route('/logros', paginaLogros);
 route('/recompensas', paginaRecompensas);
 route('/retos', retos);
@@ -473,10 +494,15 @@ onRender(() => {
   cargarVideos();
   if (path.startsWith('/retos')) montarArcade();
   if (path.endsWith('/visor')) montarVisor();
+  if (path.startsWith('/curso-gratis')) montarCursoGratis(toast); else desmontarCursoGratis();
   if (path === '/bienvenida') montarBienvenida(toast);
+  if (path === '/brujula') montarBrujula(toast);
   hidratarNotas();
   createIcons({ icons });
-  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast)) mostrarOnboarding();
+  // Primera entrada: elección obligatoria → entrevista → Brújula/recorrido.
+  // El recorrido no interrumpe una clase ni la elección del curso gratis: aparece en la siguiente pantalla.
+  const sinRecorrido = /\/clase\/|^\/(curso-gratis|brujula)/.test(path);
+  if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !sinRecorrido && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding();
 });
 instalarAccionesAdmin(toast);
 startRouter();
@@ -490,7 +516,8 @@ window.addEventListener('recompensas:ganadas', (e) => {
   logros.forEach((logro: { titulo?: string }) => toast(`Logro desbloqueado: ${logro.titulo || 'nuevo logro'}`, 'trophy'));
   Recompensas.aplicarPremio(detalle);
 });
-window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro') mostrarOnboarding(); });
+window.addEventListener('encuesta:cerrada', () => { if (shellActual === 'miembro' && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding(); });
+window.addEventListener('curso-gratis:elegido', () => { if (shellActual === 'miembro') render(); });
 
 function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {}) {
   const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(`${cursoId}:${n}`)}"]`);
@@ -618,6 +645,14 @@ document.addEventListener('click', async (e) => {
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
 
   if (el.closest('[data-guia]')) { mostrarOnboarding(true); return; }
+  const abrirCursoGratis = el.closest<HTMLElement>('[data-curso-gratis-abrir]');
+  if (abrirCursoGratis) { mostrarEleccionCursoGratis(toast, { forzar: true, cursoId: abrirCursoGratis.dataset.cursoGratisAbrir || undefined }); return; }
+  if (el.closest('[data-demo-reiniciar-todo]') && Datos.modo === 'demo') {
+    if (!confirm('¿Empezar el prototipo como un usuario nuevo? Se borra todo lo guardado en este navegador para el demo.')) return;
+    try { Object.keys(localStorage).filter((k) => k.startsWith('odonteck-club:')).forEach((k) => localStorage.removeItem(k)); sessionStorage.clear(); indexedDB.deleteDatabase('odonteck-club-directorio-docs'); } catch {}
+    location.replace(`${location.pathname}#/login`); location.reload(); return;
+  }
+  if (el.closest('[data-curso-gratis-reiniciar-demo]')) { CursoGratis.reiniciarDemo(); toast('Listo: deberás elegir de nuevo tu curso gratis para continuar', 'gift'); navigate('/'); return; }
 
   if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 

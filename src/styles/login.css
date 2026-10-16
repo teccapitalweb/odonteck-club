@@ -251,16 +251,19 @@ html:has(.login-page) {
 @media (max-width: 1024px) {
   html:has(.login-page) {
     overflow-y: auto !important;
+    overflow-x: clip !important;
   }
   body:has(.login-page),
   #app:has(.login-page),
   #outlet:has(> .login-page) {
     overflow: visible !important;
+    overflow-x: clip !important;
     height: auto !important;
     max-height: none !important;
   }
   .login-page {
     overflow: visible !important;
+    overflow-x: clip !important;
     height: auto !important;
     min-height: 100dvh;
     max-height: none !important;
@@ -272,7 +275,7 @@ html:has(.login-page) {
     height: auto;
     min-height: 100dvh;
     max-height: none;
-    overflow: visible;
+    overflow: clip visible;
   }
   .login__form {
     order: 1;
@@ -293,7 +296,7 @@ html:has(.login-page) {
     min-height: 560px;
     max-height: none;
     padding: 36px 24px;
-    overflow: visible;
+    overflow: hidden;
   }
   .login__story {
     padding-top: 140px;

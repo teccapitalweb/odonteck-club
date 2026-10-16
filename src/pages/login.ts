@@ -54,7 +54,7 @@ export function login(_: Record<string, string>, query: URLSearchParams) {
           <p class="login__story-copy">Contenido odontológico para estudiar a tu ritmo, reforzar decisiones clínicas y seguir construyendo tu trayectoria profesional.</p>
           <div class="login__free-card">
             <span class="login__free-icon"><i data-lucide="gift" class="i"></i></span>
-            <div><strong>Empieza con acceso gratuito</strong><p>Explora el primer curso casi completo, la primera clase de los demás cursos, el Atlas ICDAS y una muestra de Retos.</p></div>
+            <div><strong>Empieza con acceso gratuito</strong><p>Elige un curso y explóralo casi completo, consulta el Atlas ICDAS y prueba una muestra de Retos.</p></div>
           </div>
           <div class="login__benefits">
             <div><span><i data-lucide="graduation-cap" class="i"></i></span><strong>Cursos a tu ritmo</strong><small>Clases claras y organizadas</small></div>

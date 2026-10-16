@@ -6,11 +6,11 @@
 
 - Repositorio: `https://github.com/teccapitalweb/odonteck-club.git`
 - Rama: `main`
-- Corte funcional verificado antes de este relevo: `225ded8`
+- Corte público verificado: `10e56bd`
 - Dominio: `https://www.odonteckconsulting.com/`
-- Cloudflare Pages: proyecto `odonteck-club`, despliegue funcional `8e404a77-4afa-4cce-9a09-700d21cb9c6f`
+- Frontend: GitHub Pages mediante el workflow `Pages`; última ejecución pública verificada `38685087891` (`success`, commit `10e56bd`)
 - API: `https://api-production-db314.up.railway.app`
-- Railway: proyecto `odonteck-club-v2`, servicio `api`, despliegue funcional `6c9283b5-0d0d-4c6f-9578-85cded5e1b87` (`SUCCESS`)
+- Railway: proyecto `odonteck-club-v2`, servicio `api`, despliegue funcional `ddbca91f-864b-4e9c-80b4-3301bb161009` (`SUCCESS`, commit `10e56bd`)
 
 Un commit posterior que sólo cambie documentación no implica un runtime distinto. Verifica siempre Git, Cloudflare y Railway por separado.
 
@@ -43,6 +43,7 @@ Publicado y conectado en modo API:
 - Retos V2 respaldado por API para quiz relámpago/práctica;
 - Comunidad visual respaldada por `/foro`;
 - entrevista inicial, encuestas posteriores e intereses editables;
+- Brújula profesional opcional (`brujula-v1`) con resultado no diagnóstico y recomendaciones combinadas;
 - landing y Alexia Concierge;
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
 - evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje;
@@ -214,7 +215,7 @@ Para diseño local puede usarse:
 npm run dev -- --host 127.0.0.1 --port 5173
 ```
 
-Antes de afirmar que algo está en producción, comprobar el commit fuente, el despliegue de Cloudflare, el despliegue `SUCCESS` de Railway y un smoke del dominio/API. Un build local no basta.
+Antes de afirmar que algo está en producción, comprobar el commit fuente, el workflow `Pages`, el despliegue `SUCCESS` de Railway y un smoke del dominio/API. Un build local no basta.
 
 ## 10. Documentos que deben mantenerse juntos
 
@@ -222,7 +223,24 @@ Antes de afirmar que algo está en producción, comprobar el commit fuente, el d
 - `docs/RELEVO-CLAUDE.md`: corte operativo vigente.
 - `docs/HANDOFF-DIRECTORIO-CV-2026-10-14.md`: estado exacto del perfil tipo CV, diff local, privacidad, QA y secuencia segura de continuación.
 - `docs/CONTEXTO-MAESTRO.md`: contexto completo, historia y decisiones.
+- `docs/PRODUCTION-READINESS-2026-10-16.md`: corte preparado de curso gratis + Brújula y secuencia exacta de publicación.
 - `docs/contrato.md`: esquema y contrato API.
 - `scripts/pipeline/README.md`: contenido, transcripciones y revisión clínica.
 
 Si una implementación cambia producción, reglas comerciales, puntos, logros, rutas, seguridad o pendientes, actualiza estos documentos en el mismo commit.
+
+## 2026-10-15 · Regla freemium nueva: «Escoge tu curso gratis»
+
+El miembro gratis elige un curso; queda abierto menos la última clase y los demás se cierran. Ver la sección de reglas comerciales en `CONTEXTO-MAESTRO.md`. Rama `feat/curso-gratis-elegible`. Al desplegar la API, quien ya avanzó en el curso gratis anterior lo conserva solo; el resto verá el anuncio al entrar. No requiere índices ni reglas nuevas (la colección `v2_curso_gratis` la escribe solo el servidor).
+
+## 2026-10-16 · Brújula profesional (local, no desplegada)
+
+En la rama local `feat/brujula-profesional`, la entrevista inicial continúa con una Brújula opcional de ocho decisiones. El servidor calcula y persiste tres áreas afines y tres estilos de trabajo; el cliente muestra un informe, recomienda cursos combinando esas señales con los intereses elegidos y mantiene una advertencia explícita de orientación no diagnóstica. No entrega puntos, puede posponerse 14 días y no bloquea a miembros existentes. Archivos principales: `api/src/lib/brujula.js`, `src/core/brujula.ts`, `src/pages/brujula.ts` y `src/styles/brujula.css`. La implementación quedó en `767514c` y la preparación de dominio canónico en `f53ada8`; no se ha hecho push, merge ni deploy.
+
+## 2026-10-16 · Elección obligatoria del curso gratis (local, no desplegada)
+
+La elección es el primer paso de una cuenta gratis: antes de entrevista, Brújula o módulos, una cuenta sin elección confirmada sólo puede usar `#/curso-gratis`; cualquier otra ruta redirige a esa pantalla independiente, sin sidebar. Después de elegir continúa en `#/bienvenida`, luego puede contestar o posponer la Brújula y finalmente entra al club. La guardia cubre navegación, URL directa, recarga y Atrás. No aplica a VIP, administradores reales, migrados ni miembros que ya eligieron. El anuncio ya no ofrece cerrar, Escape ni «Decidir después». Un fallo de `GET /curso-gratis` tampoco se convierte en una falsa ausencia de elección, para evitar bloqueos por red. Las recomendaciones posteriores de la Brújula abren la ficha del curso sugerido, sin repetir el selector inicial. Los cambios están versionados localmente en la serie `99e6af8..f53ada8`; no se ha hecho push, merge ni deploy.
+
+## 2026-10-16 · Preparación de producción
+
+El corte candidato y sus verificaciones están documentados en `docs/PRODUCTION-READINESS-2026-10-16.md`. La rama está basada directamente en el `origin/main` público `10e56bd`. GitHub Pages y Railway siguen `main`, por lo que fusionar dispara ambos despliegues automáticamente. No fusionar hasta contar con autorización explícita. Railway no tiene `STRIPE_WEBHOOK_SECRET`: el checkout v2 permanece deliberadamente desactivado y el flujo heredado debe conservarse.

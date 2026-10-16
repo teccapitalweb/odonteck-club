@@ -1,3 +1,5 @@
+import { CursoGratis } from '../core/curso-gratis';
+import { Acceso } from '../core/acceso';
 import { cursos } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { tarjetaCurso, encabezado, esc } from '../ui/partials';
@@ -66,13 +68,21 @@ export function inicio() {
         <div><span class="eyebrow">Continúa aprendiendo</span><h1>${esc(reciente.titulo)}</h1><p>Clase ${n} de ${reciente.clases.length} · ${esc(clase.titulo)}</p></div>
         <div class="home-resume__actions"><a class="btn btn--white btn--pill-arrow" href="#/curso/${reciente.id}/clase/${n}">Reanudar clase <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a href="#/cursos">Ver mis cursos <i data-lucide="arrow-right" class="i"></i></a></div>
       </div>`;
+  } else if (!Acceso.vip() && !CursoGratis.id()) {
+    hero = `
+      <div class="home-resume__copy">
+        <span class="home-resume__kicker"><i data-lucide="gift" class="i"></i>${saludo()}, ${esc(Perfil.tratamiento())}</span>
+        <div><span class="eyebrow">Regalo de bienvenida</span><h1>Escoge tu curso gratis</h1><p>Elige cualquiera de los ${cursos.length} cursos y tenlo completo, menos la clase final.</p></div>
+        <div class="home-resume__actions"><button class="btn btn--white btn--pill-arrow" data-curso-gratis-abrir>Elegir mi curso <span class="arrow"><i data-lucide="gift" class="i"></i></span></button><a href="#/cursos">Explorar catálogo <i data-lucide="arrow-right" class="i"></i></a></div>
+      </div>`;
   } else {
-    const primero = cursos[0];
+    const elegido = !Acceso.vip() ? cursos.find((x) => x.id === CursoGratis.id()) : null;
+    const primero = elegido ?? cursos[0];
     hero = `
       <div class="home-resume__copy">
         <span class="home-resume__kicker"><i data-lucide="sparkles" class="i"></i>${saludo()}, ${esc(Perfil.tratamiento())}</span>
-        <div><span class="eyebrow">Tu primer paso</span><h1>${esc(primero.titulo)}</h1><p>${cursos.length} cursos grabados con casos reales de consultorio.</p></div>
-        <div class="home-resume__actions"><a class="btn btn--white btn--pill-arrow" href="#/curso/${primero.id}">Empezar gratis <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a href="#/cursos">Explorar catálogo <i data-lucide="arrow-right" class="i"></i></a></div>
+        <div><span class="eyebrow">${elegido ? 'Tu curso gratis' : 'Tu primer paso'}</span><h1>${esc(primero.titulo)}</h1><p>${elegido ? `${primero.clases.length - 1} clases gratis para empezar hoy.` : `${cursos.length} cursos grabados con casos reales de consultorio.`}</p></div>
+        <div class="home-resume__actions"><a class="btn btn--white btn--pill-arrow" href="#/curso/${primero.id}">${elegido ? 'Empezar mi curso' : 'Empezar'} <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a href="#/cursos">Explorar catálogo <i data-lucide="arrow-right" class="i"></i></a></div>
       </div>`;
   }
 

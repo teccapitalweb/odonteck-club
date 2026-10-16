@@ -216,7 +216,7 @@ export function montarGuia(fuente: Fuente) {
       case 'gratis': {
         const datos = datosDisponibles();
         const primero = datos?.cursos.find((curso) => curso.accesoGratis);
-        responder('Puedes explorar casi completo el primer curso; sólo su última clase requiere VIP. En Materiales, el Atlas de caries · Clasificación ICDAS es gratuito. El resto conserva el acceso indicado por el club.', [opcion('Ver cursos', 'buscar'), opcion('Conocer la membresía', 'membresia')], primero ? [primero.id] : undefined, undefined, 'orientar');
+        responder('Puedes elegir cualquier curso y explorarlo casi completo; sólo su última clase requiere VIP. En Materiales, el Atlas de caries · Clasificación ICDAS es gratuito. El resto conserva el acceso indicado por el club.', [opcion('Ver cursos', 'buscar'), opcion('Conocer la membresía', 'membresia')], primero ? [primero.id] : undefined, undefined, 'orientar');
         break;
       }
       case 'membresia':

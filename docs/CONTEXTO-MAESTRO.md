@@ -2,13 +2,13 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 12 de octubre de 2026 (corte público `225ded8`; Directorio y evaluaciones avanzadas permanecen como trabajo local no desplegado)
+- **Actualizado:** 16 de octubre de 2026 (corte público `10e56bd`; curso gratis obligatorio y Brújula permanecen como trabajo local no desplegado)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit funcional auditado:** `225ded8` (`main`). El commit de este documento puede ser posterior sin cambiar el runtime.
-- **Web pública:** `https://www.odonteckconsulting.com/` mediante Cloudflare Pages (`odonteck-club`).
+- **Commit funcional público verificado:** `10e56bd` (`origin/main`). El commit de este documento puede ser posterior sin cambiar el runtime.
+- **Web pública:** `https://www.odonteckconsulting.com/` mediante GitHub Pages y el workflow `Pages`.
 - **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado local verificado:** TypeScript 0 errores; `vite build` limpio; API pasa 138 pruebas (137 exitosas, 0 fallos y 1 omitida por requerir emuladores). El runtime público no incluye todavía el Directorio endurecido ni el resto de cambios locales. El lector `#/materiales/:id/visor` fue recorrido en escritorio y móvil con PDF real, doble/una página, navegación y bloqueo de un recurso de 250 puntos; no mostró errores de consola. La página `#/recompensas` fue recorrida en escritorio y 390×844 sin desbordes ni errores de consola; las pruebas cubren idempotencia, logro, los diez materiales propios empaquetados, acceso gratuito, canje permanente por puntos, rechazo de acceso no autorizado y solicitud pendiente de Praxia. Retos V2 y el nuevo feed de Comunidad fueron recorridos en escritorio y móvil sin desbordes ni errores de consola; crear publicación y marcar como útil continúan funcionando. La guía pasa 66 comprobaciones (6 de datos, 7 de recomendación, 11 de capas y 42 de movimiento) y fue recorrida en escritorio y móvil: tres posturas, catálogo, límite clínico, recomendación por objetivo/área/nivel, búsqueda por tema, persistencia y consola sin errores. La identidad visual activa es Alexia v04: adulta joven, piel clara, cabello rubio corto y vestuario sastre marfil/aqua de aspecto más cute; v01, v02 y v03 quedan sólo como respaldos versionados. La bienvenida y la edición de intereses también se recorrieron en escritorio y móvil: persistencia, recomendaciones, teclado, borrador, posponer y resumen admin.
+- **Estado local verificado:** TypeScript 0 errores; build de producción con `VITE_API_URL` limpio; API pasa 176 pruebas (175 exitosas, 0 fallos y 1 omitida por requerir emuladores); pipeline 67/67 y guía 66/66. El runtime público aún no incluye la elección obligatoria del curso gratis ni la Brújula. El detalle del corte candidato, infraestructura observada, bloqueos y rollback está en `docs/PRODUCTION-READINESS-2026-10-16.md`.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -114,6 +114,7 @@ La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso
 - **Verificación pública** (`src/pages/certificados.ts → verificar()`): página pública sin login, usa `montar('solo')`. Muestra certificado válido (verde) o no encontrado (rojo). Auth bypass en `onBeforeRender`.
 - **Flashcards mejoradas** (`src/core/juegos.ts` + `src/pages/retos.ts`): motor SR corregido (bug off-by-one en intervalos), intervalos extendidos hasta 365 días, calificación de 3 niveles (otra vez / difícil / fácil), mazo barajado, undo con Ctrl+Z, atajos de teclado (Espacio, 1/2/3), estadísticas de sesión en pantalla final.
 - **Bienvenida** (`src/pages/bienvenida.ts` + `src/styles/bienvenida.css`, octubre 2026): mientras la entrevista `bienvenida-v2` esté pendiente, `onBeforeRender` redirige cualquier ruta de miembro a `#/bienvenida` (cascarón `solo`). Portada, siete pasos (etapa, experiencia, cómo conoció OdonTeck, objetivo, intereses, formato preferido y reto) y cierre con hasta tres cursos sugeridos según los intereses. Los logotipos de Instagram, Facebook, TikTok, Google y WhatsApp son SVG locales, sin peticiones externas. Guarda un borrador en `sessionStorage`, permite regresar, avanza sola al elegir una opción única y se puede posponer 3 días (“Responder después”). Las preguntas y opciones viven en la plantilla versionada (`api/src/lib/encuestas.js` y su espejo demo en `src/core/encuestas.ts`); la página sólo aporta presentación. Los administradores no la reciben en modo API. La v1 de cinco preguntas nunca se desplegó. `/encuestas/pendientes` devuelve además `perfil` (intereses, objetivo, formato, etapa y reto, sin PII); `src/core/recomendaciones.ts` lo usa para la sección "Recomendado para ti" del inicio (según intereses, con relleno por área cercana) y la pestaña "Para ti" del catálogo (`#/cursos?tab=para-ti`). Desde `#/perfil`, el miembro puede cambiar de uno a tres intereses: en API se guardan en `v2_perfiles` y en demo en una clave separada de `localStorage`; la respuesta original de `bienvenida-v2` queda inmutable para conservar el valor histórico de la encuesta.
+- **Brújula profesional** (`src/pages/brujula.ts`, `src/core/brujula.ts`, `src/styles/brujula.css`): después de terminar la bienvenida, el flujo propone `#/brujula`. Son ocho decisiones sin respuesta correcta sobre problemas, jornada, detalles, resultados, pacientes, fortalezas, aprendizaje y proyecto futuro. El servidor (`api/src/lib/brujula.js`) calcula tres áreas afines y tres estilos; guarda `resultado` junto a `brujula-v1` y lo devuelve dentro de `perfil`. Es orientación explícitamente no diagnóstica: no mide aptitud ni decide una especialidad. Se puede posponer 14 días, no bloquea el club y no entrega puntos. Las afinidades complementan —no reemplazan— los intereses declarados en Inicio y “Para ti”. El resultado queda accesible en la navegación, “Más” y Perfil.
 - **Iconos custom**: Quiz, Detective Dental, Flashcards y Reto Diario usan imágenes generadas (`public/brand/icon-*.jpg`) con efecto glow CSS en lugar de iconos Lucide genéricos.
 
 ## 3. Arquitectura
@@ -145,6 +146,7 @@ Rutas de miembro:
 #/configuracion           #/mas
 #/buscar?q=...            #/verificar/:folio (pública, sin auth)
 #/bienvenida (entrevista inicial; sólo mientras esté pendiente)
+#/brujula (orientación profesional opcional y resultado personal)
 ```
 
 Rutas admin:
@@ -242,16 +244,24 @@ Las portadas finales de cursos conviven con portadas numeradas antiguas en `publ
 
 La regla comercial unificada es:
 
-- **Primer curso** (identificado por `orden === 1`, "Diagnóstico en Ortodoncia"): todas las clases gratuitas **excepto la última** (clase 5 requiere VIP).
-- **Demás cursos**: solo la **primera clase** es gratuita; el resto requiere VIP.
+**Regla vigente desde 2026-10-15: «Escoge tu curso gratis».**
 
-Esta regla está implementada de forma coherente en:
+- Cada miembro gratis **debe elegir primero un curso** del catálogo, antes de la entrevista inicial, la Brújula o cualquier módulo. Hasta guardar esa elección, la única ruta de miembro disponible es `#/curso-gratis`; pegar una URL, recargar o usar Atrás no evita el paso.
+- Ese curso queda abierto **completo excepto su última clase**, que junto con el certificado requiere VIP.
+- **Los demás cursos se cierran por completo** para cuentas gratis. VIP ve todo.
+- La elección es **definitiva**, con **un solo cambio** permitido en las primeras 24 horas si no ha visto más de una clase.
+- Quien ya tenía avance en el curso gratis anterior (el que tenía clases con `gratis: true`) **lo conserva automáticamente**, sin elegir (origen `migracion`).
+- VIP, administradores y miembros migrados o con una elección guardada no reciben el bloqueo. Si `GET /curso-gratis` falla, el cliente no interpreta el error como «sin elección» y no encierra a la persona por un problema de red.
+- Administración puede **reiniciar la elección** desde el detalle del miembro; el miembro vuelve a ver el anuncio y su progreso no se borra.
+- Al confirmar el curso, el flujo continúa con `#/bienvenida`; después queda disponible la Brújula opcional y finalmente el club. La pantalla `#/curso-gratis` usa un cascarón independiente, sin sidebar ni navegación de módulos.
 
-- `src/data/catalogo.json`: campo `gratis` por clase (clases 1–4 del primer curso son `true`, clase 5 es `false`; en los demás, solo clase 1 es `true`).
-- `src/core/acceso.ts`: `claseLibre()` usa `curso.orden === 1` para identificar el primer curso de forma estable.
-- API (`api/src/lib/acceso.js`): `tieneAccesoAClase()` usa `clase.gratis === true`.
-- Textos de landing, onboarding y login reflejan que el primer curso es casi completo gratis.
-- `api/test/lib.test.js`: 9 pruebas de límite validan los escenarios: primer curso primera/penúltima/última clase, segundo curso primera/segunda clase, sin membresía, VIP activo, VIP vencido, admin.
+Implementación:
+
+- Colección `v2_curso_gratis/{uid}` (`cursoId`, `origen` eleccion|migracion|reinicio, `elegido`, `cambios`). Solo la escribe el servidor.
+- API: `GET/POST /curso-gratis`, `DELETE /admin/miembros/:uid/curso-gratis`; `api/src/lib/curso-gratis.js` (lectura con migración perezosa y ventana de cambio).
+- `api/src/lib/acceso.js`: `tieneAccesoAClase(curso, cursoId, n, vip, cursoGratisId)`. La marca `gratis` por clase **ya no abre contenido**; solo identifica el curso gratis anterior para migrar y para textos de landing.
+- Frontend: `src/core/curso-gratis.ts` (demo en localStorage), guardia de navegación en `src/main.ts`, `src/ui/curso-gratis.ts` (selección sin opción de posponer + celebración) y `Acceso.cursoGratis/claseLibre` aplican la misma regla que el servidor.
+- Pruebas: `api/test/lib.test.js` y el bloque «escoge tu curso gratis» de `api/test/rutas-miembro.test.js`.
 
 ### Material gratuito
 

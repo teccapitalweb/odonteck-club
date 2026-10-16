@@ -4,6 +4,7 @@ import { DIA_MS, aMillis } from '../lib/fechas.js';
 import {
   ENCUESTAS,
   claveBienvenida,
+  claveBrujula,
   claveCurso,
   clavePulso,
   encuestaPublica,
@@ -11,6 +12,7 @@ import {
   plantillaPorClave,
   validarRespuestas,
 } from '../lib/encuestas.js';
+import { calcularBrujula } from '../lib/brujula.js';
 import { conflicto, invalido } from '../lib/errores.js';
 import { otorgarEventos, REGLAS_PUNTOS } from '../lib/recompensas.js';
 import { cuerpo, idDocumento } from '../lib/validacion.js';
@@ -67,12 +69,14 @@ async function calcularPendientes(ctx, usuario) {
   ]);
   const respondidas = new Set(respuestasSnap.docs.map((d) => d.data().clave));
   // Perfil de la entrevista inicial (sin PII) para personalizar el club: intereses, objetivo, formato, etapa y reto.
-  const docBienvenida = respuestasSnap.docs.map((d) => d.data()).filter((r) => r.encuestaId === ENCUESTAS.bienvenida.id).sort((a, b) => String(b.enviado).localeCompare(String(a.enviado)))[0];
+  const docsRespuesta = respuestasSnap.docs.map((d) => d.data());
+  const docBienvenida = docsRespuesta.filter((r) => r.encuestaId === ENCUESTAS.bienvenida.id).sort((a, b) => String(b.enviado).localeCompare(String(a.enviado)))[0];
+  const docBrujula = docsRespuesta.filter((r) => r.encuestaId === ENCUESTAS.brujula.id).sort((a, b) => String(b.enviado).localeCompare(String(a.enviado)))[0];
   const perfilInicial = docBienvenida ? Object.fromEntries(['intereses', 'objetivo', 'formato', 'situacion', 'reto'].filter((k) => docBienvenida.respuestas?.[k] !== undefined).map((k) => [k, docBienvenida.respuestas[k]])) : null;
   // La entrevista conserva el dato histórico; el perfil puede guardar preferencias actuales editables.
   const interesesActuales = Array.isArray(perfilCuenta?.intereses) && perfilCuenta.intereses.length ? perfilCuenta.intereses : null;
   const perfil = perfilInicial || interesesActuales
-    ? { ...(perfilInicial ?? {}), ...(interesesActuales ? { intereses: interesesActuales } : {}) }
+    ? { ...(perfilInicial ?? {}), ...(interesesActuales ? { intereses: interesesActuales } : {}), ...(docBrujula?.resultado ? { brujula: docBrujula.resultado } : {}) }
     : null;
   const ahoraMs = ctx.now().getTime();
   const salida = [];
@@ -80,6 +84,10 @@ async function calcularPendientes(ctx, usuario) {
   const bienvenida = claveBienvenida();
   if (!respondidas.has(bienvenida) && !estaPospuesta(estado, bienvenida, ahoraMs)) {
     salida.push({ ...encuestaPublica(ENCUESTAS.bienvenida, { clave: bienvenida }), prioridad: ENCUESTAS.bienvenida.prioridad });
+  }
+  const brujula = claveBrujula();
+  if (respondidas.has(bienvenida) && !respondidas.has(brujula) && !estaPospuesta(estado, brujula, ahoraMs)) {
+    salida.push({ ...encuestaPublica(ENCUESTAS.brujula, { clave: brujula }), prioridad: ENCUESTAS.brujula.prioridad });
   }
 
   const completos = progresoSnap.docs
@@ -139,6 +147,7 @@ export function rutasEncuestas(ctx) {
       enviado: ctx.now().toISOString(),
       avisoPrivacidad: '2026-10-02',
     };
+    if (plantilla.tipo === 'brujula') doc.resultado = calcularBrujula(respuestas);
     // El correo sólo se guarda si la persona pidió que le escribamos; es lo único con identidad que ve el admin.
     if (respuestas.contacto === 'si' && req.usuario.email) doc.correoContacto = req.usuario.email;
     try { await ref.create(doc); }
@@ -150,16 +159,16 @@ export function rutasEncuestas(ctx) {
       ? REGLAS_PUNTOS.encuestaBienvenida
       : plantilla.tipo === 'curso'
         ? REGLAS_PUNTOS.encuestaCurso
-        : REGLAS_PUNTOS.encuestaExperiencia;
-    const recompensas = await otorgarEventos(ctx, COL, req.usuario.uid, [{
+        : plantilla.tipo === 'pulso' ? REGLAS_PUNTOS.encuestaExperiencia : 0;
+    const recompensas = puntos ? await otorgarEventos(ctx, COL, req.usuario.uid, [{
       clave: `encuesta:${clave}`,
       tipo: 'encuesta',
       puntos,
       contador: 'encuestas',
       detalle: plantilla.tipo === 'bienvenida' ? 'Entrevista inicial respondida' : plantilla.tipo === 'curso' ? 'Encuesta de curso respondida' : 'Encuesta de experiencia respondida',
-    }]);
+    }]) : { puntosGanados: 0, logrosNuevos: [] };
     // Responder sólo retira esta clave de la lista: el resto de las condiciones no cambia.
-    res.status(201).json({ ok: true, clave, recompensas, siguiente: pendientes.find((p) => p.clave !== clave) ?? null });
+    res.status(201).json({ ok: true, clave, resultado: doc.resultado ?? null, recompensas, siguiente: pendientes.find((p) => p.clave !== clave) ?? null });
   }));
 
   r.post('/encuestas/:clave/posponer', auth, h(async (req, res) => {
@@ -171,7 +180,7 @@ export function rutasEncuestas(ctx) {
     if (plantilla.tipo === 'curso' && cuerpo(req).cursoId !== undefined) idDocumento(cuerpo(req).cursoId, 'cursoId');
     const ref = ctx.db.collection(COL.encuestasEstado).doc(req.usuario.uid);
     const actual = (await ref.get()).data() ?? { uid: req.usuario.uid, pospuestas: {} };
-    const dias = plantilla.tipo === 'bienvenida' ? 3 : plantilla.tipo === 'curso' ? 7 : 14;
+    const dias = plantilla.tipo === 'bienvenida' ? 3 : plantilla.tipo === 'brujula' ? 14 : plantilla.tipo === 'curso' ? 7 : 14;
     const previa = actual.pospuestas?.[clave] ?? {};
     const pospuestas = {
       ...(actual.pospuestas ?? {}),

@@ -30,7 +30,7 @@ export function mostrarEncuestaPendiente(toast: Toast) {
   const encuesta = encuestaPendiente();
   if (document.querySelector('.encuesta-modal')) return true;
   // La entrevista inicial tiene su propia página (#/bienvenida); aquí sólo van las encuestas ligeras.
-  if (!encuesta || encuesta.tipo === 'bienvenida' || document.querySelector('.onb, .paywall')) return false;
+  if (!encuesta || encuesta.tipo === 'bienvenida' || encuesta.tipo === 'brujula' || document.querySelector('.onb, .paywall')) return false;
   abrir(encuesta, toast);
   return true;
 }
