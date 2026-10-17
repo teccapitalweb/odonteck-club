@@ -48,6 +48,7 @@ import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco }
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { abrirJuegoClase } from './ui/juego-clase';
+import { obtenerPuntajeJuego } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -551,6 +552,7 @@ function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actua
     n,
     cursoTitulo: c.titulo,
     claseTitulo: k.titulo,
+    portadaCurso: c.portada,
     notas: k.notas,
     quizDisponible,
     siguienteTitulo: siguiente?.titulo,
@@ -872,7 +874,18 @@ document.addEventListener('click', async (e) => {
   }
 
   const abrirJuego = el.closest<HTMLElement>('[data-abrir-juego]');
-  if (abrirJuego) { const [id, n] = abrirJuego.dataset.abrirJuego!.split(':'); abrirJuegoDeClase(id, Number(n)); return; }
+  if (abrirJuego) { const [id, n] = abrirJuego.dataset.abrirJuego!.split(':'); abrirJuegoDeClase(id, Number(n), { actualizarAlCerrar: true }); return; }
+
+  const irSiguiente = el.closest<HTMLElement>('[data-ir-siguiente]');
+  if (irSiguiente) {
+    const clave = irSiguiente.dataset.irSiguiente || '';
+    const [id, n] = clave.split(':');
+    if (id && n && obtenerPuntajeJuego(clave) === 0) {
+      e.preventDefault();
+      abrirJuegoDeClase(id, Number(n), { anunciar: true, actualizarAlCerrar: true });
+      return;
+    }
+  }
 
   const abrirQuiz = el.closest<HTMLElement>('[data-abrir-quiz]');
   if (abrirQuiz) { const [id, n] = abrirQuiz.dataset.abrirQuiz!.split(':'); abrirQuizDeClase(id, Number(n)); return; }

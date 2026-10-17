@@ -399,10 +399,10 @@ Advertencias del build:
 12. Revisar accesibilidad, móvil, estados de carga/error y funcionamiento PWA.
 13. ~~Mejorar compatibilidad futura de Vite.~~ `vite.config.ts` ya usa `import.meta.dirname`; sigue pendiente dividir el chunk de datos.
 
-## 13. Orden recomendado para Claude
+## 13. Orden recomendado para Claude / Agente
 
-1. Leer `docs/RELEVO-CLAUDE.md`, este documento y `docs/contrato.md`.
-2. Revisar `git status` y preservar los archivos sin seguimiento.
+1. Leer `docs/HANDOFF-MIGRACION-EQUIPO-2026-10-16.md`, `docs/RELEVO-CLAUDE.md`, este documento y `docs/contrato.md`.
+2. Revisar `git status` y las ramas remotas (`git branch -a`), en especial `feat/juegos-cierre-clase` (los 5 juegos visuales de cierre de clase y los 18 prompts `3:4` en `docs/prompts-rompecabezas-3x4.md`).
 3. Confirmar repositorio `teccapitalweb/odonteck-club`, rama `main`; no trabajar en copias históricas ni en el ZIP de Descargas.
 4. Usar el demo local sólo para revisión visual. Para afirmar algo sobre producción, compilar con `VITE_API_URL` y comprobar el API/despliegue correspondiente.
 5. Prioridad técnica: smoke del panel admin con un claim `admin: true` (resumen, CRUD, quiz, cortesía, moderación, aviso, config y upload firmado).
