@@ -35,7 +35,7 @@ import { clase } from './pages/clase';
 import { biblioteca, material } from './pages/materiales';
 import { visor, montarVisor } from './pages/visor';
 import { toggleReserva } from './pages/envivo';
-import { comunidad, hilo } from './pages/comunidad';
+import { comunidad, directorio, hilo } from './pages/comunidad';
 import { paginaLogros } from './pages/logros';
 import { paginaRecompensas } from './pages/recompensas';
 import { retos, montarArcade } from './pages/retos';
@@ -386,6 +386,7 @@ route('/materiales/:id', material);
 route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
+route('/directorio', directorio);
 route('/logros', paginaLogros);
 route('/recompensas', paginaRecompensas);
 route('/retos', retos);
@@ -1020,7 +1021,7 @@ document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
   if (f.matches('[data-network-search]')) {
     e.preventDefault(); const d = new FormData(f); const q = String(d.get('q') || '').trim(); const vista = String(d.get('vista') || 'personas');
-    navigate(`/comunidad?tab=directorio&vista=${encodeURIComponent(vista)}${q ? `&q=${encodeURIComponent(q)}` : ''}`); return;
+    navigate(`/directorio?vista=${encodeURIComponent(vista)}${q ? `&q=${encodeURIComponent(q)}` : ''}`); return;
   }
   if (f.matches('[data-network-profile-form]')) {
     e.preventDefault(); const d = new FormData(f); const csv = (k: string) => String(d.get(k) || '').split(',').map((x) => x.trim()).filter(Boolean);
@@ -1032,12 +1033,12 @@ document.addEventListener('submit', async (e) => {
   }
   if (f.matches('[data-network-job-form]')) {
     e.preventDefault(); const d = new FormData(f); const especialidades = String(d.get('especialidades') || '').split(',').map((x) => x.trim()).filter(Boolean);
-    try { await Directorio.publicar({ titulo: String(d.get('titulo')), tipo: String(d.get('tipo')), organizacion: String(d.get('organizacion')), modalidad: String(d.get('modalidad')), ciudad: String(d.get('ciudad') || ''), entidad: String(d.get('entidad') || ''), especialidades, resumen: String(d.get('resumen')), requisitos: String(d.get('requisitos') || ''), compensacion: String(d.get('compensacion') || '') }); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Oportunidad publicada por 45 días', 'briefcase-business'); navigate('/comunidad?tab=directorio&vista=oportunidades'); }
+    try { await Directorio.publicar({ titulo: String(d.get('titulo')), tipo: String(d.get('tipo')), organizacion: String(d.get('organizacion')), modalidad: String(d.get('modalidad')), ciudad: String(d.get('ciudad') || ''), entidad: String(d.get('entidad') || ''), especialidades, resumen: String(d.get('resumen')), requisitos: String(d.get('requisitos') || ''), compensacion: String(d.get('compensacion') || '') }); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Oportunidad publicada por 45 días', 'briefcase-business'); navigate('/directorio?vista=oportunidades'); }
     catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
   }
   if (f.matches('[data-network-connect-form]')) {
     e.preventDefault(); const d = new FormData(f);
-    try { await Directorio.conectar(String(d.get('paraUid')), String(d.get('oportunidadId') || '') || null, String(d.get('mensaje') || '').trim()); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Solicitud enviada de forma privada', 'send'); navigate('/comunidad?tab=directorio&vista=conexiones'); }
+    try { await Directorio.conectar(String(d.get('paraUid')), String(d.get('oportunidadId') || '') || null, String(d.get('mensaje') || '').trim()); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Solicitud enviada de forma privada', 'send'); navigate('/directorio?vista=conexiones'); }
     catch (err) { toast(mensajeError(err), 'alert-triangle'); } return;
   }
   if (f.matches('[data-network-report-form]')) {

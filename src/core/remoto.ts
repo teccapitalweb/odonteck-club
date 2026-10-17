@@ -76,13 +76,13 @@ async function cargarComunidadDeRuta(path: string) {
     return;
   }
   Comunidad.hidratar(await api<Hilo[]>('/foro'));
-  await Directorio.cargar();
 }
 
 async function cargarExtrasDeRuta(path: string) {
   await Promise.all([
     cargarQuizDeRuta(path),
     cargarComunidadDeRuta(path),
+    path === '/directorio' ? Directorio.cargar() : Promise.resolve(),
     path.startsWith('/certificados') ? api<CertificadoRemoto[]>('/certificados').then((lista) => Certificados.hidratar(lista)) : Promise.resolve(),
     path === '/retos' ? RetosRemotos.cargar() : Promise.resolve(),
     path === '/recompensas' || path === '/logros' || path.startsWith('/materiales') ? Recompensas.cargar().catch(() => null) : Promise.resolve(),
