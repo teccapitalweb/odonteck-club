@@ -18,9 +18,7 @@ type OpcionesJuego = {
   claseTitulo: string;
   portadaCurso?: string;
   notas?: Nota;
-  quizDisponible: boolean;
   siguienteTitulo?: string;
-  onReto(): void;
   onContinuar(): void;
   onCerrar?(): void;
 };
@@ -37,32 +35,32 @@ function guardarMejorPuntaje(clave: string, puntaje: number) {
 const META_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo: string; descripcion: string; icono: string }> = {
   rompecabezas: {
     etiqueta: 'Rompecabezas visual',
-    titulo: 'Arma la escena clínica',
-    descripcion: 'Intercambia o arrastra las piezas hasta reconstruir la imagen clínica de la clase.',
+    titulo: 'Reconstruye la imagen',
+    descripcion: 'Intercambia cuatro piezas para completar la imagen.',
     icono: 'puzzle',
   },
   sopa: {
     etiqueta: 'Sopa de letras',
     titulo: 'Encuentra los conceptos clave',
-    descripcion: 'Arrastra sobre las letras o toca el inicio y el final de cada término clínico.',
+    descripcion: 'Encuentra tres conceptos de esta clase.',
     icono: 'grid-3x3',
   },
   ahorcado: {
     etiqueta: 'El ahorcado clínico',
     titulo: 'Descubre el término oculto',
-    descripcion: 'Lee la pista de la clase y adivina la palabra letra por letra antes de agotar las 6 vidas.',
-    icono: 'shield-alert',
+    descripcion: 'Descubre dos términos a partir de sus pistas.',
+    icono: 'scan-search',
   },
   memorama: {
     etiqueta: 'Memorama clínico',
     titulo: 'Conecta cada concepto con su idea',
-    descripcion: 'Voltea dos tarjetas por turno para emparejar cada término clave con su aplicación en la clase.',
+    descripcion: 'Une tres conceptos con sus ideas clave.',
     icono: 'layers',
   },
   palabra: {
     etiqueta: 'Palabra secreta',
     titulo: 'Ordena las letras del concepto',
-    descripcion: 'Toca las fichas de letras en el orden correcto para formar el término clínico de la pista.',
+    descripcion: 'Ordena las letras de dos conceptos.',
     icono: 'spell-check',
   },
 };
@@ -100,38 +98,15 @@ function escudoDentalSVG(errores: number, maxErrores: number) {
 
 function resultadoHTML(opciones: OpcionesJuego, juego: JuegoClase, puntaje: number) {
   const meta = META_JUEGO[juego.tipo];
-  const titulo = puntaje >= 90 ? '¡Misión clínica superada!' : puntaje >= 75 ? '¡Excelente repaso!' : '¡Juego completado!';
-  return `<section class="lesson-game__result" aria-live="polite">
-    <div class="lesson-game__result-card">
-      <div class="lesson-game__result-banner">
-        <img src="${esc(juego.imagen)}" alt="${esc(opciones.claseTitulo)}">
-        <div class="lesson-game__result-overlay">
-          <span class="lesson-game__result-icon"><i data-lucide="trophy"></i></span>
-          <div>
-            <span class="lesson-game__eyebrow">${meta.etiqueta} · Clase ${opciones.n}</span>
-            <h2>${titulo}</h2>
-          </div>
-          <div class="lesson-game__score"><strong>${puntaje}%</strong><span>Dominio</span></div>
-        </div>
-      </div>
-      <div class="lesson-game__review">
-        <h3>Ideas clave que reforzaste en esta clase</h3>
-        <ol>
-          ${juego.terminos.slice(0, 4).map((t) => `<li>
-            <span><i data-lucide="check"></i></span>
-            <div><strong>${esc(t.etiqueta)}</strong><p>${esc(t.pista)}</p></div>
-          </li>`).join('')}
-        </ol>
-      </div>
-      <div class="lesson-game__result-actions">
-        <button type="button" class="btn btn--secondary" data-game-retry><i data-lucide="rotate-ccw"></i>Jugar otra vez</button>
-        <button type="button" class="btn btn--brand" data-game-next>
-          ${opciones.quizDisponible
-            ? '<i data-lucide="brain-circuit"></i>Continuar al reto clínico'
-            : `<i data-lucide="arrow-right"></i>${opciones.siguienteTitulo ? 'Ir a la siguiente clase' : 'Volver al curso'}`}
-        </button>
-      </div>
-    </div>
+  const idea = juego.terminos[0];
+  return `<section class="lesson-game__result lesson-game__result--simple" aria-live="polite">
+    <div class="game-result__medal"><span class="lesson-game__result-icon"><i data-lucide="sparkles"></i></span><span class="game-result__orbit" aria-hidden="true"></span></div>
+    <span class="lesson-game__eyebrow">${meta.etiqueta} · Clase ${opciones.n}</span>
+    <h2>¡Buen repaso!</h2>
+    <p class="game-result__lesson">${esc(opciones.claseTitulo)}</p>
+    <div class="game-result__score" role="img" aria-label="Precisión del repaso: ${puntaje} por ciento" style="--score:${puntaje}%"><strong>${puntaje}%</strong><span>precisión</span></div>
+    ${idea ? `<p class="lesson-game__result-takeaway"><strong>${esc(idea.etiqueta)}:</strong> ${esc(idea.pistaCorta)}</p>` : ''}
+    <button type="button" class="btn btn--brand" data-game-next><i data-lucide="arrow-right"></i>${opciones.siguienteTitulo ? 'Siguiente clase' : 'Terminar curso'}</button>
   </section>`;
 }
 
@@ -152,6 +127,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
   dialogo.dataset.lessonGame = juego.clave;
 
   const tipo = juego.tipo;
+  dialogo.dataset.gameType = tipo;
   const meta = META_JUEGO[tipo];
   let accionFinal = false;
 
@@ -209,7 +185,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
     const porcentaje = Math.round((colocadasBien / piezas.length) * 100);
     const conceptoDestacado = piezas[Math.min(piezas.length - 1, colocadasBien)]?.concepto || opciones.claseTitulo;
 
-    return `<div class="game-layout">
+    return `<div class="game-layout game-layout--rompecabezas">
       <aside class="game-showcase">
         <div class="game-showcase__top">
           <span class="game-badge"><i data-lucide="${meta.icono}"></i>${meta.etiqueta} · Clase ${opciones.n}</span>
@@ -272,7 +248,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
         </div>
 
         <div class="image-puzzle-strip">
-          ${juego.terminos.slice(0, 3).map((t, idx) => {
+          ${juego.terminos.slice(0, 2).map((t, idx) => {
             const desbloqueado = colocadasBien >= (idx + 1) * 2;
             return `<div class="image-puzzle-fact ${desbloqueado ? 'is-unlocked' : ''}">
               <span class="image-puzzle-fact__icon"><i data-lucide="${desbloqueado ? 'check-circle-2' : 'lock'}"></i></span>
@@ -304,7 +280,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
       })
       .join('');
 
-    return `<div class="game-layout">
+    return `<div class="game-layout game-layout--sopa">
       <aside class="game-showcase">
         <div class="game-showcase__top">
           <span class="game-badge"><i data-lucide="${meta.icono}"></i>${meta.etiqueta} · Clase ${opciones.n}</span>
@@ -386,25 +362,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
       `<span class="hangman-clue__blank">${ganada || perdida ? esc(actual.etiqueta) : '_______'}</span>`,
     );
 
-    return `<div class="game-layout">
-      <aside class="game-showcase">
-        <div class="game-showcase__top">
-          <span class="game-badge"><i data-lucide="${meta.icono}"></i>${meta.etiqueta} · Clase ${opciones.n}</span>
-          <h2>${meta.titulo}</h2>
-          <p>${meta.descripcion}</p>
-        </div>
-
-        ${escudoDentalSVG(erroresAhorcado, MAX_ERRORES)}
-
-        <div class="game-showcase__photo">
-          <img src="${esc(juego.imagen)}" alt="${esc(opciones.claseTitulo)}">
-          <div class="game-showcase__photo-caption">
-            <small>Palabra ${rondaAhorcado + 1} de ${totalRondas}</small>
-            <strong>${esc(opciones.claseTitulo)}</strong>
-          </div>
-        </div>
-      </aside>
-
+    return `<div class="game-layout game-layout--ahorcado">
       <section class="game-stage">
         <div class="game-stage__bar">
           <div class="hangman-rounds">
@@ -413,6 +371,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
               ${juego.ahorcado.map((_, i) => `<i class="${i < rondaAhorcado ? 'is-done' : i === rondaAhorcado ? 'is-current' : ''}"></i>`).join('')}
             </div>
           </div>
+          ${escudoDentalSVG(erroresAhorcado, MAX_ERRORES)}
           ${!terminadaRonda ? `<button type="button" class="btn btn--secondary btn--sm" data-hangman-hint><i data-lucide="lightbulb"></i>Revelar 1 letra</button>` : ''}
         </div>
 
@@ -457,7 +416,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
   const renderMemorama = () => {
     const cartas = juego.memorama;
     const totalPares = Math.floor(cartas.length / 2);
-    return `<div class="game-layout">
+    return `<div class="game-layout game-layout--memorama">
       <aside class="game-showcase">
         <div class="game-showcase__top">
           <span class="game-badge"><i data-lucide="${meta.icono}"></i>${meta.etiqueta} · Clase ${opciones.n}</span>
@@ -536,7 +495,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
       `<span class="hangman-clue__blank">${completada ? esc(actual.etiqueta) : '_______'}</span>`,
     );
 
-    return `<div class="game-layout">
+    return `<div class="game-layout game-layout--palabra">
       <aside class="game-showcase">
         <div class="game-showcase__top">
           <span class="game-badge"><i data-lucide="${meta.icono}"></i>${meta.etiqueta} · Clase ${opciones.n}</span>
@@ -626,6 +585,17 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
 
     dialogo.innerHTML = `<div class="lesson-game__shell">
       <button type="button" class="lesson-game__close" data-game-close aria-label="Cerrar juego"><i data-lucide="x"></i></button>
+      <header class="game-dialog__header">
+        <div class="game-dialog__hero" style="--game-hero-image:url('${esc(juego.imagen)}')">
+          <div class="game-dialog__hero-content">
+            <div class="game-dialog__meta"><span><i data-lucide="${meta.icono}"></i>${meta.etiqueta}</span><span>Repaso de clase</span></div>
+            <h2>${meta.titulo}</h2>
+            <p>${meta.descripcion}</p>
+            <div class="game-dialog__lesson"><i data-lucide="book-open-check"></i><span>Clase ${opciones.n}</span><b aria-hidden="true">·</b><strong>${esc(opciones.claseTitulo)}</strong></div>
+          </div>
+          <span class="game-dialog__hero-mark" aria-hidden="true"><i data-lucide="${meta.icono}"></i><span></span></span>
+        </div>
+      </header>
       ${contenido}
     </div>`;
     createIcons({ icons, attrs: { 'aria-hidden': 'true' } });
@@ -862,8 +832,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
     if (boton.matches('[data-game-next]')) {
       accionFinal = true;
       dialogo.close();
-      if (opciones.quizDisponible) opciones.onReto();
-      else opciones.onContinuar();
+      opciones.onContinuar();
       return;
     }
 

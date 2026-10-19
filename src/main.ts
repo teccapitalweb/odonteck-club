@@ -546,7 +546,6 @@ function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actua
   const k = c?.clases.find((clase) => clase.n === n);
   if (!c || !k) return false;
   const siguiente = c.clases.find((clase) => clase.n === n + 1);
-  const quizDisponible = Datos.quiz(cursoId, n)?.estado === 'aprobado';
   const abierto = abrirJuegoClase({
     cursoId,
     n,
@@ -554,27 +553,12 @@ function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actua
     claseTitulo: k.titulo,
     portadaCurso: c.portada,
     notas: k.notas,
-    quizDisponible,
     siguienteTitulo: siguiente?.titulo,
-    onReto: () => {
-      if (actualizarAlCerrar) {
-        render();
-        requestAnimationFrame(() => abrirQuizDeClase(cursoId, n));
-      } else abrirQuizDeClase(cursoId, n);
-    },
     onContinuar: () => navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`),
     onCerrar: actualizarAlCerrar ? () => render() : undefined,
   });
   if (abierto && anunciar) toast('Clase terminada · tu juego de cierre está listo', 'gamepad-2');
-  if (!abierto) {
-    if (quizDisponible) {
-      if (actualizarAlCerrar) {
-        render();
-        requestAnimationFrame(() => abrirQuizDeClase(cursoId, n, { anunciar }));
-      } else abrirQuizDeClase(cursoId, n, { anunciar });
-    }
-    else navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`);
-  }
+  if (!abierto) navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`);
   return abierto;
 }
 
@@ -600,14 +584,12 @@ async function registrarVistaClase(cursoId: string, n: number) {
 
 async function finalizarVideo(cursoId: string, n: number) {
   const clave = `${cursoId}:${n}`;
-  if (videosFinalizados.has(clave)) {
-    refrescarYAbrirJuego(cursoId, n, { anunciar: true });
-    return;
-  }
+  if (videosFinalizados.has(clave)) return;
   videosFinalizados.add(clave);
   try {
     await registrarVistaClase(cursoId, n);
-    refrescarYAbrirJuego(cursoId, n, { anunciar: true });
+    render();
+    toast('Video terminado · tu juego de repaso ya está listo', 'gamepad-2');
   } catch (err) {
     videosFinalizados.delete(clave);
     toast(mensajeError(err), 'alert-triangle');

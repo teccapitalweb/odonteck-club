@@ -33,7 +33,7 @@ export type SopaDeLetras = {
 };
 
 export type PiezaImagen = {
-  indiceCorrecto: number; // 0..5 (3 columnas × 2 filas)
+  indiceCorrecto: number; // 0..3 (tablero 2 × 2)
   fila: number;
   col: number;
   concepto: string;
@@ -88,32 +88,32 @@ export function obtenerPuntajeJuego(clave: string): number {
 export const INFO_TIPO_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo: string; resumen: string; icono: string }> = {
   rompecabezas: {
     etiqueta: 'Rompecabezas visual',
-    titulo: 'Arma la escena clínica de la clase',
-    resumen: 'Reconstruye la fotografía clínica de esta clase en 6 piezas interactivas y desbloquea sus puntos clave.',
+    titulo: 'Arma la imagen de la clase',
+    resumen: 'Reconstruye la imagen clínica en cuatro piezas.',
     icono: 'puzzle',
   },
   sopa: {
     etiqueta: 'Sopa de letras clínica',
     titulo: 'Encuentra los conceptos clave',
-    resumen: 'Localiza en el tablero los 5 términos clínicos esenciales explicados durante la clase.',
+    resumen: 'Encuentra tres conceptos de la clase.',
     icono: 'grid-3x3',
   },
   ahorcado: {
     etiqueta: 'El ahorcado clínico',
     titulo: 'Descubre el término oculto',
-    resumen: 'Adivina el concepto clínico letra por letra a partir de la pista de la clase sin agotar las 6 vidas.',
+    resumen: 'Descubre dos términos con sus pistas.',
     icono: 'shield-alert',
   },
   memorama: {
     etiqueta: 'Memorama clínico 3D',
     titulo: 'Conecta cada concepto con su idea',
-    resumen: 'Voltea las tarjetas ilustradas para emparejar cada término de la clase con su aplicación clínica.',
+    resumen: 'Une tres conceptos con sus ideas clave.',
     icono: 'layers',
   },
   palabra: {
     etiqueta: 'Palabra secreta',
     titulo: 'Ordena las letras del concepto',
-    resumen: 'Forma el término clínico correcto tocando las fichas de letras desordenadas con apoyo de la pista.',
+    resumen: 'Ordena las letras de dos conceptos.',
     icono: 'spell-check',
   },
 };
@@ -443,9 +443,9 @@ export function crearJuegoClase(
   const tipo = elegirTipoJuego(cursoId, n);
   const imagen = resolverImagenClase(cursoId, n, portadaCurso);
 
-  // 1. Rompecabezas visual 3:4 vertical (2 columnas x 3 filas = 6 piezas grandes y claras)
+  // 1. Rompecabezas visual breve (2 × 2 piezas)
   const cols = 2;
-  const rows = 3;
+  const rows = 2;
   const totalPiezas = cols * rows;
   const textosConceptos = notas.conceptos.map((c) => c.texto);
   const piezas: PiezaImagen[] = Array.from({ length: totalPiezas }, (_, idx) => ({
@@ -457,17 +457,17 @@ export function crearJuegoClase(
   const baseIndices = piezas.map((p) => p.indiceCorrecto);
   let ordenInicial = barajar(baseIndices, semilla + 19);
   if (ordenInicial.every((val, i) => val === i)) {
-    ordenInicial = [3, 0, 5, 1, 4, 2];
+    ordenInicial = [2, 0, 3, 1];
   }
 
   // 2. Sopa de letras
-  const sopa = construirSopa(terminos, semilla);
+  const sopa = construirSopa(terminos.slice(0, 3), semilla);
 
   // 3. El ahorcado (3 palabras)
-  const ahorcado = barajar(terminos, semilla + 29).slice(0, Math.min(3, terminos.length));
+  const ahorcado = barajar(terminos, semilla + 29).slice(0, Math.min(2, terminos.length));
 
   // 4. Memorama (4 pares = 8 cartas)
-  const paresBase = terminos.slice(0, Math.min(4, terminos.length));
+  const paresBase = terminos.slice(0, Math.min(3, terminos.length));
   const cartasSinBarajar: CartaMemorama[] = paresBase.flatMap((t, idx) => [
     {
       uid: `${t.id}-term`,
@@ -488,8 +488,8 @@ export function crearJuegoClase(
   ]);
   const memorama = barajar(cartasSinBarajar, semilla + 71);
 
-  // 5. Retos de armar la palabra (3 palabras con fichas de letras desordenadas)
-  const retosPalabra: RetoPalabra[] = terminos.slice(0, Math.min(3, terminos.length)).map((t, idx) => {
+  // 5. Retos breves de armar la palabra (hasta 2 conceptos)
+  const retosPalabra: RetoPalabra[] = terminos.slice(0, Math.min(2, terminos.length)).map((t, idx) => {
     const letrasBase = t.palabra.split('').map((letra, lIdx) => ({
       id: `${t.id}-L${lIdx}`,
       letra,
