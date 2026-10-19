@@ -46,7 +46,7 @@ Publicado y conectado en modo API:
 - Brújula profesional opcional (`brujula-v1`) con resultado no diagnóstico y recomendaciones combinadas;
 - landing y Alexia Concierge;
 - perfil, sesiones/eventos y panel admin cableado a `/admin/*`.
-- evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje;
+- evaluaciones v2 con autoría administrativa, versión de contenido y calificación de selección, selección múltiple, ordenar, relacionar y completar; las soluciones se conservan en servidor. En la clase, el miembro ve un reto guiado paso a paso con descarte de distractores, bitácora privada, confianza obligatoria, calibración posterior, feedback por pregunta, puntaje visual y ordenamiento accesible mediante controles subir/bajar. La API conserva los diez intentos más recientes, mejor puntuación y aprobación histórica sin duplicar puntos; la metacognición no cambia el puntaje. En la rama local `feat/juegos-cierre-clase`, antes del reto aparece además una misión de memoria ligada a las notas de esa clase; no entrega puntos ni contiene soluciones clínicas nuevas;
 - corte local posterior a producción: Retos reutiliza el banco v2 en modo práctica para selección múltiple, ordenar, relacionar y completar, con crédito parcial, controles accesibles y solución sólo después de responder. Simulación sigue limitada a selección. El admin controla la elegibilidad con `compatibleRetos`; todavía no está desplegado;
 - corte local posterior a producción: Directorio es un módulo principal independiente en `#/directorio` (la URL anterior dentro de Comunidad redirige), con perfiles visuales tipo CV, foto, portada, años de experiencia, idiomas, trayectoria, formación, credenciales, oportunidades y conexiones privadas. La configuración admite listas repetibles y la ficha pública muestra métricas y línea de tiempo sin exponer contacto. Se endureció con ocultar/eliminar perfil, cierre de oportunidades, cursores estables, límites anti-spam, conexiones idempotentes, bloqueo de vencidas, verificación real de foto/portada en Storage y denuncia/moderación administrativa. La suite local pasa, pero reglas, índices y runtime todavía no están desplegados;
 - pestaña de ficha por clase y descarga privada firmada cuando la ficha está aprobada. Aún no hay fichas clínicas aprobadas: no confundir infraestructura lista con contenido revisado.
@@ -195,7 +195,7 @@ Corrección a la nota previa: el fallo `Unable to establish loopback connection`
 6. Auditar licencias antes de publicar nuevos libros/materiales.
 7. Resolver accesibilidad pendiente y dividir el chunk grande del build demo.
 8. Migrar los 68 quizzes aprobados y regenerar/revisar el catálogo completo con el formato avanzado de 5 interacciones por clase. El piloto local de Ortodoncia ya tiene revisión editorial documentada en `docs/REVISION-CLINICA-PILOTO-ORTODONCIA.md` y cuatro grupos de redacción clínica corregidos, pero continúa en `borrador` hasta que un odontólogo u ortodoncista firme las 25 actividades y cinco fichas. El pipeline exige evidencia `mm:ss` y diversidad (`seleccion`, `seleccion_multiple`, `ordenar`, `relacionar`, `completar`); no afirmar que los 77 videos fueron analizados. También faltan revisión odontológica del resto del catálogo y las demás fichas PDF/Storage.
-9. El reproductor carga la API oficial Player.js de Bunny: al emitir `ended`, registra la vista una sola vez y abre el quiz de la clase. El botón “Finalizar y abrir reto” cubre bloqueadores de red/script y accesibilidad.
+9. En la rama `feat/juegos-cierre-clase` (subida a `origin`), cada clase cuenta con **1 juego clásico visual único** (sin repetir tipo en clases consecutivas del mismo curso) entre 5 mecánicas: **Rompecabezas visual `3:4` (`2×2`, cuatro piezas)** (18 clases, 1 garantizado por curso), **Sopa de letras clínica** (15 clases), **El ahorcado clínico con monitor dental SVG** (14 clases), **Memorama clínico 3D** (15 clases) y **Palabra secreta** (15 clases). Al terminar el video se registra la vista y el juego queda listo; se abre al pulsar «Finalizar y jugar» o «Siguiente clase →», sin interponer un segundo quiz. También aparece en `.lesson-closing-card` debajo del reproductor. Cobertura verificada 77/77 clases con `npm run audit:class-games`. Los 18 prompts `3:4` para las ilustraciones de rompecabezas están en `docs/prompts-rompecabezas-3x4.md`.
 
 ## 9. Flujo seguro de trabajo
 
@@ -220,10 +220,13 @@ Antes de afirmar que algo está en producción, comprobar el commit fuente, el w
 ## 10. Documentos que deben mantenerse juntos
 
 - `CLAUDE.md`: reglas de entrada.
+- `docs/HANDOFF-MIGRACION-EQUIPO-2026-10-16.md`: guía completa de migración de equipo, ramas respaldadas en GitHub y trabajo del 16 de octubre de 2026.
+- `docs/HANDOFF-CLAUDE-A-CODEX-2026-10-15.md`: corte previo de PRs abiertos y pendientes.
 - `docs/RELEVO-CLAUDE.md`: corte operativo vigente.
 - `docs/HANDOFF-DIRECTORIO-CV-2026-10-14.md`: estado exacto del perfil tipo CV, diff local, privacidad, QA y secuencia segura de continuación.
 - `docs/CONTEXTO-MAESTRO.md`: contexto completo, historia y decisiones.
 - `docs/PRODUCTION-READINESS-2026-10-16.md`: corte preparado de curso gratis + Brújula y secuencia exacta de publicación.
+- `docs/prompts-rompecabezas-3x4.md`: los 18 prompts verticales `3:4` (`1080×1440`) para los rompecabezas de cierre de clase.
 - `docs/contrato.md`: esquema y contrato API.
 - `scripts/pipeline/README.md`: contenido, transcripciones y revisión clínica.
 
@@ -244,3 +247,8 @@ La elección es el primer paso de una cuenta gratis: antes de entrevista, Brúju
 ## 2026-10-16 · Preparación de producción
 
 El corte y sus verificaciones están documentados en `docs/PRODUCTION-READINESS-2026-10-16.md`. El PR `#18` se fusionó con autorización explícita y publicó el merge `13797ef`: GitHub Pages `38976464505` y Railway `28536ee0-32f0-475f-980a-4278205c4a64` terminaron correctamente. El dominio, landing, catálogo público, `/health` y CORS respondieron correctamente. Railway no tiene `STRIPE_WEBHOOK_SECRET`: el checkout v2 permanece deliberadamente desactivado y el flujo heredado debe conservarse. Falta el smoke autenticado con cuentas gratis, VIP/heredada y admin reales.
+
+## 2026-10-16 · Rediseño de Juegos de Cierre de Clase y Respaldo para Migración de Equipo
+
+En la rama `feat/juegos-cierre-clase` se reemplazaron los juegos basados en marcas de tiempo por 5 juegos clásicos visuales (`rompecabezas` 3:4 de 6 piezas, `sopa` de letras clínica, `ahorcado` con monitor dental SVG, `memorama` 3D y `palabra` secreta), asignando 1 juego único por clase sin repetir dentro del mismo curso y garantizando 1 rompecabezas por cada uno de los 18 cursos. Se añadió la tarjeta `.lesson-closing-card` bajo el reproductor, la apertura automática al terminar la clase o pulsar «Siguiente clase →», el paquete visual del Curso 1 y los 18 prompts `3:4` en `docs/prompts-rompecabezas-3x4.md`. Todas las ramas locales fueron respaldadas en `origin` y documentadas en `docs/HANDOFF-MIGRACION-EQUIPO-2026-10-16.md`.
+

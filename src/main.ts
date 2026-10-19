@@ -19,6 +19,7 @@ import './styles/encuesta-modal.css';
 import './styles/perfil.css';
 import './styles/recompensas.css';
 import './styles/visor.css';
+import './styles/juego-clase.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
@@ -46,6 +47,8 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
+import { abrirJuegoClase } from './ui/juego-clase';
+import { obtenerPuntajeJuego } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -538,9 +541,29 @@ function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {})
   return !!form;
 }
 
-function refrescarYAbrirQuiz(cursoId: string, n: number, { anunciar = false } = {}) {
-  render();
-  requestAnimationFrame(() => abrirQuizDeClase(cursoId, n, { anunciar }));
+function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actualizarAlCerrar = false } = {}) {
+  const c = getCurso(cursoId);
+  const k = c?.clases.find((clase) => clase.n === n);
+  if (!c || !k) return false;
+  const siguiente = c.clases.find((clase) => clase.n === n + 1);
+  const abierto = abrirJuegoClase({
+    cursoId,
+    n,
+    cursoTitulo: c.titulo,
+    claseTitulo: k.titulo,
+    portadaCurso: c.portada,
+    notas: k.notas,
+    siguienteTitulo: siguiente?.titulo,
+    onContinuar: () => navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`),
+    onCerrar: actualizarAlCerrar ? () => render() : undefined,
+  });
+  if (abierto && anunciar) toast('Clase terminada · tu juego de cierre está listo', 'gamepad-2');
+  if (!abierto) navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`);
+  return abierto;
+}
+
+function refrescarYAbrirJuego(cursoId: string, n: number, { anunciar = false } = {}) {
+  requestAnimationFrame(() => abrirJuegoDeClase(cursoId, n, { anunciar, actualizarAlCerrar: true }));
 }
 
 async function registrarVistaClase(cursoId: string, n: number) {
@@ -565,7 +588,8 @@ async function finalizarVideo(cursoId: string, n: number) {
   videosFinalizados.add(clave);
   try {
     await registrarVistaClase(cursoId, n);
-    refrescarYAbrirQuiz(cursoId, n, { anunciar: true });
+    render();
+    toast('Video terminado · tu juego de repaso ya está listo', 'gamepad-2');
   } catch (err) {
     videosFinalizados.delete(clave);
     toast(mensajeError(err), 'alert-triangle');
@@ -825,11 +849,24 @@ document.addEventListener('click', async (e) => {
   if (marcar) {
     const [id, n] = marcar.dataset.marcarVista!.split(':');
     try {
-      const { hayNext } = await registrarVistaClase(id, Number(n));
-      if (marcar.hasAttribute('data-abrir-quiz-al-final')) refrescarYAbrirQuiz(id, Number(n), { anunciar: true });
-      else navigate(hayNext ? `/curso/${id}/clase/${Number(n) + 1}` : `/curso/${id}`);
+      await registrarVistaClase(id, Number(n));
+      refrescarYAbrirJuego(id, Number(n), { anunciar: true });
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
     return;
+  }
+
+  const abrirJuego = el.closest<HTMLElement>('[data-abrir-juego]');
+  if (abrirJuego) { const [id, n] = abrirJuego.dataset.abrirJuego!.split(':'); abrirJuegoDeClase(id, Number(n), { actualizarAlCerrar: true }); return; }
+
+  const irSiguiente = el.closest<HTMLElement>('[data-ir-siguiente]');
+  if (irSiguiente) {
+    const clave = irSiguiente.dataset.irSiguiente || '';
+    const [id, n] = clave.split(':');
+    if (id && n && obtenerPuntajeJuego(clave) === 0) {
+      e.preventDefault();
+      abrirJuegoDeClase(id, Number(n), { anunciar: true, actualizarAlCerrar: true });
+      return;
+    }
   }
 
   const abrirQuiz = el.closest<HTMLElement>('[data-abrir-quiz]');

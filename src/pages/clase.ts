@@ -3,6 +3,7 @@ import { Progreso } from '../core/progreso';
 import { esc, placeholder } from '../ui/partials';
 import { Datos, type Clase } from '../core/datos';
 import { Acceso } from '../core/acceso';
+import { elegirTipoJuego, INFO_TIPO_JUEGO, obtenerPuntajeJuego, resolverImagenClase } from '../core/juego-clase';
 
 const vacioTab = (icon: string, titulo: string, texto: string, color = 'primary') => `<div class="stack" style="gap:10px;text-align:center;padding:20px 0"><span class="circle-btn" style="width:48px;height:48px;background:var(--${color}-soft);color:var(--${color});margin:0 auto"><i data-lucide="${icon}" class="i"></i></span><strong>${titulo}</strong><p class="muted" style="font-size:var(--fs-sm)">${texto}</p></div>`;
 
@@ -210,6 +211,10 @@ export function clase(params: Record<string, string>) {
   const prev = c.clases.find((x) => x.n === n - 1);
   const next = c.clases.find((x) => x.n === n + 1);
   const quizDisponible = Datos.quiz(c.id, n)?.estado === 'aprobado';
+  const tipoJuego = elegirTipoJuego(c.id, n);
+  const infoJuego = INFO_TIPO_JUEGO[tipoJuego];
+  const imagenClase = resolverImagenClase(c.id, n, c.portada);
+  const puntajeJuego = obtenerPuntajeJuego(`${c.id}:${n}`);
 
   // Provisional: embed directo. En Fase 2 el backend firma la URL (token + expires).
   const embed = `https://iframe.mediadelivery.net/embed/${LIBRARY_ID}/${k.videoId}?autoplay=false&preload=true&responsive=true`;
@@ -237,18 +242,38 @@ export function clase(params: Record<string, string>) {
             <div class="lesson-progress" style="margin-top:8px"><div class="progress progress--thin"><span style="width:${Progreso.porcentaje(c)}%"></span></div>${Progreso.de(c.id).vistas.length} de ${c.clases.length} vistas · ${Progreso.porcentaje(c)}%</div></div>
           <div class="row" style="flex-wrap:nowrap">
             ${prev ? `<a class="btn btn--secondary" href="#/curso/${c.id}/clase/${prev.n}"><i data-lucide="chevron-left" class="i"></i>Anterior</a>` : ''}
-            ${vista && quizDisponible ? `<button class="btn btn--brand" data-abrir-quiz="${c.id}:${n}"><i data-lucide="brain-circuit" class="i"></i>Resolver reto</button>` : ''}
-            ${vista
-              ? (next ? `<a class="btn btn--secondary btn--pill-arrow" href="#/curso/${c.id}/clase/${next.n}">Siguiente clase <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>`
-                      : `<a class="btn btn--gradient btn--pill-arrow" href="#/curso/${c.id}">Curso completado <span class="arrow"><i data-lucide="award" class="i"></i></span></a>`)
-              : `<button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}" ${quizDisponible ? 'data-abrir-quiz-al-final' : ''}>${quizDisponible ? 'Finalizar y abrir reto' : 'Marcar vista y seguir'} <span class="arrow"><i data-lucide="${quizDisponible ? 'brain-circuit' : 'arrow-right'}" class="i"></i></span></button>`}
+            ${vista && quizDisponible ? `<button class="btn btn--secondary" data-abrir-quiz="${c.id}:${n}"><i data-lucide="brain-circuit" class="i"></i>Resolver reto</button>` : ''}
+            <button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}">${vista ? `Jugar ${infoJuego.etiqueta.toLowerCase()}` : 'Finalizar clase y jugar'} <span class="arrow"><i data-lucide="${infoJuego.icono}" class="i"></i></span></button>
+            ${vista && next ? `<a class="btn btn--secondary btn--pill-arrow" href="#/curso/${c.id}/clase/${next.n}" data-ir-siguiente="${c.id}:${n}">Siguiente clase <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>` : ''}
           </div>
         </div>
+
+        <article class="lesson-closing-card" aria-label="Actividad de cierre de la clase">
+          <div class="lesson-closing-card__media" ${vista ? `data-abrir-juego="${c.id}:${n}"` : `data-marcar-vista="${c.id}:${n}"`}>
+            <img src="${esc(imagenClase)}" alt="${esc(k.titulo)}">
+            <span class="lesson-closing-card__tag"><i data-lucide="${infoJuego.icono}" class="i"></i>${esc(infoJuego.etiqueta)}</span>
+          </div>
+          <div class="lesson-closing-card__body">
+            <div class="lesson-closing-card__meta">
+              <span class="lesson-closing-card__eyebrow"><i data-lucide="sparkles" class="i"></i>Al finalizar esta clase · Juego ${n} de ${c.clases.length}</span>
+              ${puntajeJuego > 0 ? `<span class="lesson-closing-card__score"><i data-lucide="trophy" class="i"></i>Completado · ${puntajeJuego}%</span>` : `<span class="lesson-closing-card__pending">Se abre automáticamente al terminar el video</span>`}
+            </div>
+            <h3>${esc(infoJuego.titulo)}</h3>
+            <p>${esc(infoJuego.resumen)}</p>
+          </div>
+          <div class="lesson-closing-card__cta">
+            <button type="button" class="btn btn--brand" ${vista ? `data-abrir-juego="${c.id}:${n}"` : `data-marcar-vista="${c.id}:${n}"`}>
+              <i data-lucide="${infoJuego.icono}" class="i"></i>
+              <span>${puntajeJuego > 0 ? 'Volver a jugar' : vista ? 'Abrir juego ahora' : 'Finalizar y abrir juego'}</span>
+            </button>
+          </div>
+        </article>
+
         ${next ? `
         <div class="upnext">
-          <div class="upnext__thumb"><img src="${c.portada}" alt=""><i data-lucide="${Progreso.desbloqueada(c, next.n) || vista ? 'play' : 'lock'}" class="i"></i></div>
+          <div class="upnext__thumb"><img src="${esc(resolverImagenClase(c.id, next.n, c.portada))}" alt=""><i data-lucide="${Progreso.desbloqueada(c, next.n) || vista ? 'play' : 'lock'}" class="i"></i></div>
           <div><span class="eyebrow">A continuación · clase ${next.n}</span><div class="upnext__title">${esc(next.titulo)}</div><p class="faint" style="font-size:var(--fs-xs);margin-top:4px">${vista ? 'Ya puedes verla.' : 'Se desbloquea al marcar esta clase como vista.'}</p></div>
-          ${vista ? `<a class="circle-btn" href="#/curso/${c.id}/clase/${next.n}" aria-label="Ir a la siguiente"><i data-lucide="arrow-right" class="i"></i></a>` : `<span class="circle-btn" style="background:var(--surface-3);color:var(--text-3)"><i data-lucide="lock" class="i"></i></span>`}
+          ${vista ? `<a class="circle-btn" href="#/curso/${c.id}/clase/${next.n}" data-ir-siguiente="${c.id}:${n}" aria-label="Ir a la siguiente"><i data-lucide="arrow-right" class="i"></i></a>` : `<span class="circle-btn" style="background:var(--surface-3);color:var(--text-3)"><i data-lucide="lock" class="i"></i></span>`}
         </div>` : `
         <div class="upnext" style="background:var(--accent-soft);border-color:transparent">
           <span class="circle-btn" style="background:var(--accent);width:56px;height:56px"><i data-lucide="award" class="i" style="width:24px;height:24px"></i></span>
