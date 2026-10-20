@@ -68,6 +68,7 @@ export interface PremioRecompensas {
 }
 
 const DEMO_KEY = 'odonteck-club:recompensas-demo:v1';
+const JUEGOS_DEMO_KEY = 'odonteck-club:juegos-clase:v1';
 const catalogoDemo: Omit<Recompensa, 'canjeada' | 'incluidaVip' | 'alcanza' | 'disponible'>[] = [
   { id: 'guia-diagnostico-ortodoncico', titulo: 'Guía de diagnóstico ortodóncico', descripcion: 'Desbloqueo permanente de una guía clínica propia de OdonTeck.', puntos: 250, tipo: 'material', materialId: 'guia-diagnostico-ortodoncico', icono: 'book-open' },
   { id: 'consentimiento-informado', titulo: 'Formato de consentimiento informado', descripcion: 'Desbloqueo permanente del formato clínico propio de OdonTeck.', puntos: 300, tipo: 'material', materialId: 'consentimiento-informado', icono: 'file-signature' },
@@ -91,7 +92,12 @@ const progresoDemo = () => {
   const cursos = Progreso.completados().length;
   const temas = Comunidad.misHilos().length;
   const encuestas = encuestaRespondida('experiencia') ? 1 : 0;
-  const actividad = clases * 10 + cursos * 50 + temas * 10 + encuestas * 40;
+  let juegos = 0;
+  try {
+    const guardados = JSON.parse(localStorage.getItem(JUEGOS_DEMO_KEY) || '{}');
+    juegos = guardados && typeof guardados === 'object' && !Array.isArray(guardados) ? Object.keys(guardados).length : 0;
+  } catch {}
+  const actividad = clases * 10 + cursos * 50 + temas * 10 + encuestas * 40 + juegos * 5;
   // El saldo mínimo permite recorrer el canje durante la demostración local; producción nunca usa este valor.
   return Math.max(actividad, 720);
 };
@@ -108,12 +114,18 @@ function demo(): ResumenRecompensas {
     ['certificado', 'Primer certificado', 'Terminaste tu primer curso.', 'award', 'cursos', 1],
     ['mente-clinica', 'Mente clínica', 'Aprobaste 3 evaluaciones.', 'brain', 'quizzes', 3],
     ['retador', 'Retador constante', 'Ganaste 100 puntos practicando en Retos.', 'gamepad-2', 'puntosRetos', 100],
+    ['repaso-constante', 'Repaso constante', 'Completaste 10 juegos de repaso al terminar tus clases.', 'puzzle', 'juegosClase', 10],
     ['voz', 'Voz de la comunidad', 'Publicaste tu primer tema.', 'message-circle', 'temas', 1],
     ['especialista', 'Especialista', 'Terminaste 3 cursos.', 'badge-check', 'cursos', 3],
     ['maestro', 'Maestro OdonTeck', 'Terminaste 10 cursos.', 'crown', 'cursos', 10],
     ['miembro-club', 'Miembro del club', 'Activaste una membresía pagada.', 'gem', 'membresias', 1],
   ] as const;
-  const contadores: Record<string, number> = { clases: Progreso.totalVistas(), cursos: Progreso.completados().length, temas: Comunidad.misHilos().length, quizzes: 0, puntosRetos: 0, membresias: 0 };
+  let juegosClase = 0;
+  try {
+    const guardados = JSON.parse(localStorage.getItem(JUEGOS_DEMO_KEY) || '{}');
+    juegosClase = guardados && typeof guardados === 'object' && !Array.isArray(guardados) ? Object.keys(guardados).length : 0;
+  } catch {}
+  const contadores: Record<string, number> = { clases: Progreso.totalVistas(), cursos: Progreso.completados().length, temas: Comunidad.misHilos().length, quizzes: 0, puntosRetos: 0, membresias: 0, juegosClase };
   const canjes = Array.isArray(guardado.canjes) ? guardado.canjes : [];
   return {
     saldo, ganados, gastados: Number(guardado.gastados || 0), contadores,

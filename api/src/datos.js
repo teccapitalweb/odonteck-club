@@ -8,6 +8,7 @@ export const COL = Object.freeze({
   perfiles: 'v2_perfiles',
   cursos: 'v2_cursos',
   progreso: 'v2_progreso',
+  juegosClase: 'v2_juegos_clase',
   certificados: 'v2_certificados',
   materiales: 'v2_materiales',
   eventos: 'v2_eventos',

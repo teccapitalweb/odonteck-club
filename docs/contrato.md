@@ -72,6 +72,10 @@ y el cliente muestra “Por confirmar” en lugar de inventar un importe.
 ### `v2_progreso/{uid}_{cursoId}`
 `{ uid, cursoId, vistas: number[], ultima: number, historial: ISO[], actualizado }`
 
+### `v2_juegos_clase/{uid}_{cursoId}_{n}`
+`{ uid, cursoId, n, tipo, completado, mejorPuntaje: 0..100, intentos, primeraVez, ultimoIntento, actualizado }`.
+El registro es privado por UID y se lee mediante `GET /juegos-clase`; el miembro no escribe Firestore directamente. La API exige que la vista de esa clase ya esté registrada. El primer juego completado de cada clase acredita 5 puntos; reintentos actualizan intentos y mejor puntaje sin volver a acreditar puntos. Mecánicas aceptadas: `rompecabezas`, `sopa`, `ahorcado`, `memorama` y `palabra`.
+
 ### `v2_certificados/{folio}`
 `{ folio: 'ODT-AAAA-NNNNN', uid, nombre, cursoId, cursoTitulo, area, clases, emitido: ISO }` · lectura pública por folio.
 
@@ -120,8 +124,8 @@ Saldo central y logros del miembro, escrito únicamente por la API:
 `{ uid, saldo, ganados, gastados, contadores, logros, desbloqueos: { materiales: id[] }, notificaciones, actualizado }`.
 
 - Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
-- Las clases suman 10, terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
-- Desglose vigente: clase vista 10; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; Brújula profesional 0; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
+- Las clases suman 10, completar su juego de repaso suma 5 (una sola vez por clase), terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
+- Desglose vigente: clase vista 10; juego de repaso completado 5 por clase; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; Brújula profesional 0; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
 - La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
 - Los nueve materiales propios premium incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
 - Cuando una respuesta autenticada incluye `recompensas`, `src/main.ts` dispara el evento `recompensas:ganadas`: muestra un aviso inmediato de puntos y otro por cada logro nuevo. La API guarda además los avisos no leídos en `notificaciones`; la campana los contabiliza y los marca como leídos al abrirla. La clave idempotente del movimiento evita avisos y puntos duplicados por recarga o reintento.
@@ -178,6 +182,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/progreso` | `{ [cursoId]: { vistas, ultima, historial, actualizado } }` |
 | POST | `/progreso/:cursoId/abrir` | `{ n }` → progreso del curso |
 | POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado?, recompensas }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
+| GET | `/juegos-clase` | Registros de juegos del miembro autenticado; no expone UID |
+| POST | `/juegos-clase/:cursoId/:n` | `{ tipo, puntaje: 0..100 }` → `{ juego, recompensas }`; exige clase vista y acceso; 5 puntos idempotentes por primera finalización de cada clase |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
 | GET | `/clases/:cursoId/:n/ficha` | `{ url }` temporal de 10 min al PDF privado; exige ficha `aprobada`, acceso a la clase y desbloqueo secuencial. La ruta interna `archivo` nunca sale en `/catalogo`. |
 | GET | `/materiales/:id/descarga` | `{ url }` URL temporal de 10 min al PDF privado empaquetado o a Storage · VIP, material con `gratis: true` o desbloqueo permanente canjeado. El frontend la consume desde `#/materiales/:id/visor` y renderiza el documento en memoria con PDF.js; la URL no se persiste. |

@@ -76,7 +76,49 @@ export type JuegoClase = {
 
 export const PROGRESO_JUEGO_KEY = 'odonteck-club:juegos-clase:v1';
 
+export type RegistroJuegoClase = {
+  cursoId: string;
+  n: number;
+  tipo: TipoJuegoClase;
+  completado: boolean;
+  mejorPuntaje: number;
+  intentos: number;
+  primeraVez?: string;
+  ultimoIntento?: string;
+  actualizado?: string;
+};
+
+let modoJuegosAPI = false;
+const juegosAPI = new Map<string, RegistroJuegoClase>();
+const claveJuego = (cursoId: string, n: number) => `${cursoId}:${n}`;
+
+/** Los juegos de un miembro autenticado viven en la API; localStorage solo queda para demo. */
+export function configurarJuegosClaseAPI(activo: boolean) {
+  modoJuegosAPI = activo;
+  juegosAPI.clear();
+}
+
+export function hidratarJuegosClase(registros: RegistroJuegoClase[]) {
+  juegosAPI.clear();
+  for (const registro of registros) {
+    if (registro?.cursoId && Number.isInteger(registro.n) && registro.completado) {
+      juegosAPI.set(claveJuego(registro.cursoId, registro.n), registro);
+    }
+  }
+}
+
+export function registrarJuegoClaseRemoto(registro: RegistroJuegoClase) {
+  if (!registro?.cursoId || !Number.isInteger(registro.n)) return;
+  const clave = claveJuego(registro.cursoId, registro.n);
+  const anterior = juegosAPI.get(clave);
+  juegosAPI.set(clave, {
+    ...registro,
+    mejorPuntaje: Math.max(Number(anterior?.mejorPuntaje) || 0, Number(registro.mejorPuntaje) || 0),
+  });
+}
+
 export function obtenerPuntajeJuego(clave: string): number {
+  if (modoJuegosAPI) return Number(juegosAPI.get(clave)?.mejorPuntaje || 0);
   try {
     const datos = JSON.parse(localStorage.getItem(PROGRESO_JUEGO_KEY) || '{}');
     return Number(datos?.[clave]?.mejorPuntaje || 0);
@@ -86,6 +128,7 @@ export function obtenerPuntajeJuego(clave: string): number {
 }
 
 export function juegoClaseCompletado(clave: string): boolean {
+  if (modoJuegosAPI) return juegosAPI.has(clave);
   try {
     const datos = JSON.parse(localStorage.getItem(PROGRESO_JUEGO_KEY) || '{}');
     return Object.prototype.hasOwnProperty.call(datos, clave);

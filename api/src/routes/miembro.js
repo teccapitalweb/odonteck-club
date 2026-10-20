@@ -63,6 +63,7 @@ const MAX_HISTORIAL = 500;
 const MAX_HISTORIAL_QUIZ = 10;
 const MAX_BYTES_RESPUESTAS_QUIZ = 20_000;
 const APROBATORIO = 0.7;
+const TIPOS_JUEGO_CLASE = new Set(['rompecabezas', 'sopa', 'ahorcado', 'memorama', 'palabra']);
 const WHATSAPP = /^\+?[\d\s().-]{7,20}$/;
 const INTERESES_VALIDOS = new Set(ENCUESTAS.bienvenida.preguntas.find((p) => p.id === 'intereses').opciones.map((o) => o.valor));
 
@@ -74,11 +75,12 @@ export function rutasMiembro(ctx) {
   const { db } = ctx;
 
   async function sincronizarRecompensas(usuario) {
-    const [progresoSnap, intentosSnap, respuestasSnap, foroSnap, retos, actual, membresia] = await Promise.all([
+    const [progresoSnap, intentosSnap, respuestasSnap, foroSnap, juegosSnap, retos, actual, membresia] = await Promise.all([
       db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
       db.collection(COL.intentos).where('uid', '==', usuario.uid).get(),
       db.collection(COL.encuestasRespuestas).where('uid', '==', usuario.uid).get(),
       db.collection(COL.foro).where('autorUid', '==', usuario.uid).get(),
+      db.collection(COL.juegosClase).where('uid', '==', usuario.uid).get(),
       leerDoc(db, COL.retosEstado, usuario.uid),
       leerDoc(db, COL.recompensasEstado, usuario.uid),
       estadoMembresia(ctx, usuario),
@@ -109,6 +111,13 @@ export function rutasMiembro(ctx) {
     foroSnap.docs.forEach((doc) => eventos.push({
       clave: `tema:${doc.id}`, tipo: 'comunidad', puntos: REGLAS_PUNTOS.temaComunidad, contador: 'temas', detalle: 'Tema publicado en Comunidad',
     }));
+    juegosSnap.docs.forEach((doc) => {
+      const juego = doc.data();
+      eventos.push({
+        clave: `juego-clase:${juego.cursoId}:${Number(juego.n)}`,
+        tipo: 'juego-clase', puntos: REGLAS_PUNTOS.juegoClase, contador: 'juegosClase', detalle: `Repaso completado: clase ${Number(juego.n)}`,
+      });
+    });
     if (membresia.membresiaPagada && !estadoActual.contadores.membresias) {
       eventos.push({
         clave: 'membresia:historica:v1',
@@ -539,6 +548,63 @@ export function rutasMiembro(ctx) {
     const salida = { progreso: progresoPublico(resultado.progreso), recompensas: resultado.recompensas };
     if (resultado.certificado) salida.certificado = resultado.certificado;
     res.json(salida);
+  }));
+
+  // ---------- Juegos breves de repaso por clase ----------
+  r.get('/juegos-clase', auth, h(async (req, res) => {
+    const snap = await db.collection(COL.juegosClase).where('uid', '==', req.usuario.uid).get();
+    res.json(snap.docs.map((doc) => {
+      const { uid: _uid, ...juego } = doc.data();
+      return juego;
+    }));
+  }));
+
+  r.post('/juegos-clase/:cursoId/:n', auth, h(async (req, res) => {
+    const { u, n, curso, progRef } = await prepararClase(req, req.params.cursoId, req.params.n);
+    const { tipo, puntaje: puntajeEntrada } = cuerpo(req);
+    if (!TIPOS_JUEGO_CLASE.has(tipo)) throw invalido('El tipo de juego no es válido.');
+    const puntaje = entero(puntajeEntrada, { campo: 'puntaje', min: 0, max: 100 });
+    const fecha = ctx.now();
+    const fechaISO = fecha.toISOString();
+    const juegoRef = db.collection(COL.juegosClase).doc(`${u.uid}_${curso.id}_${n}`);
+    const resultado = await db.runTransaction(async (tx) => {
+      const [juegoSnap, progresoSnap] = await tx.getAll(juegoRef, progRef);
+      const progreso = progresoSnap.exists ? progresoSnap.data() : null;
+      if (!Array.isArray(progreso?.vistas) || !progreso.vistas.includes(n)) {
+        throw conflicto('Primero termina la clase para guardar su repaso.', 'clase_no_vista');
+      }
+      const anterior = juegoSnap.exists ? juegoSnap.data() : null;
+      const juego = {
+        uid: u.uid,
+        cursoId: curso.id,
+        n,
+        tipo: anterior?.tipo || tipo,
+        completado: true,
+        mejorPuntaje: Math.max(Number(anterior?.mejorPuntaje) || 0, puntaje),
+        intentos: Math.max(0, Number(anterior?.intentos) || 0) + 1,
+        primeraVez: anterior?.primeraVez || fechaISO,
+        ultimoIntento: fechaISO,
+        actualizado: fechaISO,
+      };
+      const recompensas = await otorgarEventosTx({
+        tx,
+        db,
+        colecciones: COL,
+        uid: u.uid,
+        ahora: fecha,
+        eventos: [{
+          clave: `juego-clase:${curso.id}:${n}`,
+          tipo: 'juego-clase',
+          puntos: REGLAS_PUNTOS.juegoClase,
+          contador: 'juegosClase',
+          detalle: `Repaso completado: ${curso.titulo}, clase ${n}`,
+        }],
+      });
+      tx.set(juegoRef, juego);
+      return { juego, recompensas };
+    });
+    const { uid: _uid, ...juego } = resultado.juego;
+    res.json({ juego, recompensas: resultado.recompensas });
   }));
 
   // ---------- Video ----------

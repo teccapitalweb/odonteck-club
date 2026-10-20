@@ -2,6 +2,12 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
+## Actualización local pendiente de publicar · 2026-10-20
+
+En `feat/juegos-clase-perfil-puntos-20261020` se conecta el minijuego de cierre de clase a la API autenticada: guardar mecánica, finalización, mejor puntaje, intentos y fechas por UID; 5 puntos por la primera finalización de cada clase, idempotentes incluso en reintentos; contador/logro de diez juegos. Se valida que la vista de clase ya exista antes de guardar. API: `GET /juegos-clase`, `POST /juegos-clase/:cursoId/:n`; colección `v2_juegos_clase`. La UI conserva el resultado y ofrece reintentar el guardado si la red falla.
+
+Tests API del corte: 178 pasaron, 0 fallaron, 1 omitido intencional; `npm run check`, `npm run build` con URL API de producción, `npm run audit:class-games` (77/77) y `git diff --check` pasan. **No asumir desplegado**: falta PR/merge, desplegar y verificar Railway API primero, luego Cloudflare Pages y hacer smoke. El endpoint de lista es necesario para hidratar el perfil; no publicar frontend antes del API. No se probó con sesión de usuario real. No tocar la rama/árbol de trabajo paralelo `odonteck-club-wt-herramientas`, ni modificar pagos, webhooks o membresías.
+
 ## 1. Fuente de verdad
 
 - Repositorio: `https://github.com/teccapitalweb/odonteck-club.git`
