@@ -551,6 +551,34 @@ export function rutasMiembro(ctx) {
   }));
 
   // ---------- Juegos breves de repaso por clase ----------
+  r.get('/notas-clase/:cursoId/:n', auth, h(async (req, res) => {
+    const { u, n, curso } = await prepararClase(req, req.params.cursoId, req.params.n);
+    const ref = db.collection(COL.notasClase).doc(`${u.uid}_${curso.id}_${n}`);
+    const snap = await ref.get();
+    const datos = snap.exists ? snap.data() : {};
+    res.json({
+      repasados: Array.isArray(datos.repasados) ? datos.repasados : [],
+      bitacora: typeof datos.bitacora === 'string' ? datos.bitacora : '',
+      actualizado: typeof datos.actualizado === 'string' ? datos.actualizado : null,
+    });
+  }));
+
+  r.put('/notas-clase/:cursoId/:n', auth, h(async (req, res) => {
+    const { u, n, curso, clase } = await prepararClase(req, req.params.cursoId, req.params.n);
+    const b = cuerpo(req);
+    if (!Array.isArray(b.repasados)) throw invalido('La lista de conceptos repasados no es válida.');
+    const total = Array.isArray(clase.notas?.conceptos) ? clase.notas.conceptos.length : 0;
+    const repasados = [...new Set(b.repasados.map((valor) => entero(valor, { campo: 'repasado', min: 0, max: Math.max(0, total - 1) })))].sort((a, z) => a - z);
+    if (repasados.some((indice) => indice >= total)) throw invalido('El concepto repasado no existe en esta clase.');
+    const bitacora = texto(b.bitacora, { campo: 'bitacora', max: 1800, multilinea: true }) || '';
+    const actualizado = ctx.now().toISOString();
+    const ref = db.collection(COL.notasClase).doc(`${u.uid}_${curso.id}_${n}`);
+    if (!repasados.length && !bitacora) await ref.delete();
+    else await ref.set({ uid: u.uid, cursoId: curso.id, n, repasados, bitacora, actualizado });
+    res.json({ repasados, bitacora, actualizado });
+  }));
+
+  // ---------- Juegos breves de repaso por clase ----------
   r.get('/juegos-clase', auth, h(async (req, res) => {
     const snap = await db.collection(COL.juegosClase).where('uid', '==', req.usuario.uid).get();
     res.json(snap.docs.map((doc) => {

@@ -605,6 +605,36 @@
 }
 
 /* ═══ Notas de clase ═══ */
+.notas-launcher { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--brand-teal) 6%, var(--surface))); box-shadow: 0 10px 28px rgba(21,38,72,.06); }
+.notas-launcher__icon { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 16px; color: var(--brand-teal); background: color-mix(in srgb, var(--brand-teal) 11%, var(--surface)); }
+.notas-launcher__icon .i { width: 23px; height: 23px; }
+.notas-launcher__copy { min-width: 0; }
+.notas-launcher__copy h3 { margin-top: 3px; font: 700 var(--fs-md)/1.2 var(--font-display); }
+.notas-launcher__copy p { margin-top: 4px; color: var(--text-2); font-size: var(--fs-sm); line-height: 1.45; }
+.notas-launcher__open { min-height: 44px; white-space: nowrap; }
+.notas-dialog { width: min(1180px, calc(100vw - 40px)); max-width: none; height: min(92dvh, 940px); max-height: calc(100dvh - 32px); padding: 0; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 85%, transparent); border-radius: 24px; color: var(--text); background: var(--surface); box-shadow: 0 28px 100px rgba(9,19,40,.32); }
+.notas-dialog::backdrop { background: rgba(11,19,37,.64); backdrop-filter: blur(6px); }
+.notas-dialog[open] { animation: notas-dialog-in .18s ease-out both; }
+.notas-dialog__frame { display: grid; grid-template-rows: auto minmax(0, 1fr); width: 100%; height: 100%; min-height: 0; }
+.notas-dialog__bar { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px clamp(18px, 3vw, 36px); border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 94%, var(--brand-teal)); }
+.notas-dialog__bar > div { display: grid; gap: 3px; min-width: 0; }
+.notas-dialog__bar .eyebrow { overflow: hidden; color: var(--text-3); text-overflow: ellipsis; white-space: nowrap; }
+.notas-dialog__bar strong { font: 700 var(--fs-md)/1.2 var(--font-display); }
+.notas-dialog__close { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--text-2); background: var(--surface); }
+.notas-dialog__close:hover { color: var(--text); background: var(--surface-2); }
+.notas-dialog__close:focus-visible, .notas-launcher__open:focus-visible { outline: 3px solid color-mix(in srgb, var(--brand-teal) 55%, white); outline-offset: 3px; }
+.notas-dialog__body { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: clamp(18px, 3vw, 36px); scrollbar-gutter: stable; }
+.notas-dialog__body .notas-pro { max-width: 1040px; margin-inline: auto; }
+@keyframes notas-dialog-in { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 620px) {
+  .notas-launcher { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; padding: 15px; }
+  .notas-launcher__icon { width: 42px; height: 42px; border-radius: 13px; }
+  .notas-launcher__open { grid-column: 1 / -1; width: 100%; }
+  .notas-dialog { width: 100vw; height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0; }
+  .notas-dialog__bar { padding-top: max(12px, env(safe-area-inset-top)); }
+  .notas-dialog__body { padding: 16px 14px max(22px, env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) { .notas-dialog[open] { animation: none; } }
 .notas-pro { display: grid; gap: 14px; color: var(--text); container-type: inline-size; }
 .notas-pro__hero { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 20px; border-radius: 22px; color: #fff; background: linear-gradient(120deg, #132653 0%, #174b6e 58%, #15988e 130%); box-shadow: 0 18px 40px rgba(15,38,78,.18); }
 .notas-pro__hero::before { content: ''; position: absolute; z-index: -1; inset: 0; opacity: .18; background-image: linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(90deg, transparent, #000 48%, #000); }
@@ -703,6 +733,8 @@
 .notas-personal__footer span { display: inline-flex; align-items: center; gap: 6px; }
 .notas-personal__footer span .i { width: 13px; height: 13px; color: var(--brand-teal); }
 .notas-personal__footer b { font-weight: 700; }
+.notas-personal__retry { padding: 3px 8px; border-radius: 8px; color: var(--primary); background: var(--primary-soft); font-size: 10px; font-weight: 700; }
+.notas-personal__retry[hidden] { display: none; }
 .notas-personal__footer strong { font-family: var(--font-mono); font-weight: 500; }
 .notas-pro__footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 18px; padding: 1px 4px; color: var(--text-3); font-size: var(--fs-xs); }
 .notas-pro__footer span { display: inline-flex; align-items: center; gap: 6px; }

@@ -18,7 +18,7 @@ describe('públicas, autenticación y cabeceras', () => {
   });
 
   test('401 sin token, con token inválido y con token revocado', async () => {
-    for (const ruta of ['/me', '/catalogo', '/progreso', '/certificados', '/foro', '/juegos-clase']) {
+    for (const ruta of ['/me', '/catalogo', '/progreso', '/certificados', '/foro', '/juegos-clase', '/notas-clase/curso-a/1']) {
       const res = await request(env.app).get(ruta).expect(401);
       assert.equal(res.body.error, 'no_autenticado');
       assert.equal(typeof res.body.mensaje, 'string');
@@ -469,6 +469,34 @@ describe('materiales', () => {
 });
 
 describe('recompensas y puntos', () => {
+  test('el cuaderno de clase se guarda en privado por UID y valida sus campos', async () => {
+    await vista(TOKENS.free, 'curso-a', 1).expect(200);
+    const vacio = await request(env.app).get('/notas-clase/curso-a/1').set(bearer(TOKENS.free)).expect(200);
+    assert.deepEqual(vacio.body.repasados, []);
+    assert.equal(vacio.body.bitacora, '');
+
+    const guardado = await request(env.app).put('/notas-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ repasados: [1, 0, 1], bitacora: 'Repasar anatomía antes del siguiente caso.' }).expect(200);
+    assert.deepEqual(guardado.body.repasados, [0, 1]);
+    assert.equal(guardado.body.bitacora, 'Repasar anatomía antes del siguiente caso.');
+    assert.equal('uid' in guardado.body, false);
+    assert.deepEqual(env.db.leer('v2_notas_clase/free1_curso-a_1').repasados, [0, 1]);
+
+    const otroUsuario = await request(env.app).get('/notas-clase/curso-a/1').set(bearer(TOKENS.vip)).expect(200);
+    assert.deepEqual(otroUsuario.body.repasados, []);
+    assert.equal(otroUsuario.body.bitacora, '');
+    await request(env.app).put('/notas-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ repasados: [-1], bitacora: '' }).expect(400);
+    await request(env.app).put('/notas-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ repasados: [2], bitacora: '' }).expect(400);
+    await request(env.app).put('/notas-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ repasados: [], bitacora: 'x'.repeat(1801) }).expect(400);
+    await request(env.app).get('/notas-clase/curso-a/3').set(bearer(TOKENS.free)).expect(403);
+    await request(env.app).put('/notas-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ repasados: [], bitacora: '' }).expect(200);
+    assert.equal(env.db.leer('v2_notas_clase/free1_curso-a_1'), undefined, 'vaciar cuaderno elimina el documento privado');
+  });
+
   test('un juego se guarda en el perfil y acredita puntos una sola vez, tras ver la clase', async () => {
     const sinVer = await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
       .send({ tipo: 'memorama', puntaje: 80 }).expect(409);

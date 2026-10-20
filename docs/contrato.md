@@ -76,6 +76,10 @@ y el cliente muestra “Por confirmar” en lugar de inventar un importe.
 `{ uid, cursoId, n, tipo, completado, mejorPuntaje: 0..100, intentos, primeraVez, ultimoIntento, actualizado }`.
 El registro es privado por UID y se lee mediante `GET /juegos-clase`; el miembro no escribe Firestore directamente. La API exige que la vista de esa clase ya esté registrada. El primer juego completado de cada clase acredita 5 puntos; reintentos actualizan intentos y mejor puntaje sin volver a acreditar puntos. Mecánicas aceptadas: `rompecabezas`, `sopa`, `ahorcado`, `memorama` y `palabra`.
 
+### `v2_notas_clase/{uid}_{cursoId}_{n}`
+`{ uid, cursoId, n, repasados: number[], bitacora: string (máx. 1800), actualizado }`.
+Cuaderno privado del miembro autenticado; no contiene respuestas de quiz ni sustituye las notas editoriales del curso. La API valida acceso/desbloqueo de la clase, limita los índices a los conceptos publicados y sólo expone al titular `GET /notas-clase/:cursoId/:n`; `PUT` sobrescribe su propia bitácora y marcas. El modo demo guarda localmente en este navegador. En modo API no se lee ni se escribe `localStorage` para este cuaderno. No hay puntos por editarlo.
+
 ### `v2_certificados/{folio}`
 `{ folio: 'ODT-AAAA-NNNNN', uid, nombre, cursoId, cursoTitulo, area, clases, emitido: ISO }` · lectura pública por folio.
 
@@ -184,6 +188,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | POST | `/progreso/:cursoId/vista` | `{ n }` → `{ progreso, certificado?, recompensas }` · exige desbloqueo secuencial y acceso (VIP o clase gratis) |
 | GET | `/juegos-clase` | Registros de juegos del miembro autenticado; no expone UID |
 | POST | `/juegos-clase/:cursoId/:n` | `{ tipo, puntaje: 0..100 }` → `{ juego, recompensas }`; exige clase vista y acceso; 5 puntos idempotentes por primera finalización de cada clase |
+| GET | `/notas-clase/:cursoId/:n` | `{ repasados: number[], bitacora: string, actualizado }` del miembro autenticado; valida acceso/desbloqueo de la clase |
+| PUT | `/notas-clase/:cursoId/:n` | `{ repasados: number[], bitacora: string }` → cuaderno validado y guardado sólo bajo el UID autenticado; sin recompensa de puntos |
 | POST | `/video/token` | `{ cursoId, n }` → `{ embedUrl, expires }` · mismas reglas de acceso |
 | GET | `/clases/:cursoId/:n/ficha` | `{ url }` temporal de 10 min al PDF privado; exige ficha `aprobada`, acceso a la clase y desbloqueo secuencial. La ruta interna `archivo` nunca sale en `/catalogo`. |
 | GET | `/materiales/:id/descarga` | `{ url }` URL temporal de 10 min al PDF privado empaquetado o a Storage · VIP, material con `gratis: true` o desbloqueo permanente canjeado. El frontend la consume desde `#/materiales/:id/visor` y renderiza el documento en memoria con PDF.js; la URL no se persiste. |

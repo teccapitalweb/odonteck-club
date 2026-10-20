@@ -2,7 +2,17 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
-## Actualización desplegada y verificada · 2026-10-20
+## Corte operativo confirmado · 2026-10-20
+
+La versión pública confirmada incluye PR #25, merge `57944994ae576caffdcaf522a16d8117298e65d5`. Cloudflare Pages deployment `9b2b5f62-e069-4fb5-a87c-931878f2ea4f` sirvió el commit `5794499`; `odonteck-club.pages.dev` y `www.odonteckconsulting.com` respondieron HTTP 200 y el bundle incluyó el arreglo de encabezado responsivo de Notas (`container-type:inline-size`). Esto sólo corrigió el encabezado que se aplastaba en una columna estrecha: **no** creó el cuaderno en pantalla amplia ni guardaba notas personales en perfil.
+
+En la rama local `feat/cuaderno-dialogo-amplio-20261020` se implementó el acceso compacto, diálogo amplio y sincronización autenticada por UID a la API, más documentación y pruebas. Este trabajo aún **no** forma parte de producción. No se mezcla el `localStorage` previo con cuentas autenticadas; no se otorgan puntos por escribir/repasar cuaderno. El alcance, las decisiones y la separación local/producción están en [`DECISIONES-CUADERNO-CLASE-2026-10-20.md`](DECISIONES-CUADERNO-CLASE-2026-10-20.md).
+
+PR #23 sigue siendo el antecedente funcional del minijuego persistido: guarda mecánica, finalización, mejor puntaje, intentos y fechas por UID; acredita 5 puntos por primera finalización por clase de forma idempotente y añade contador/logro. Su API es `GET /juegos-clase`, `POST /juegos-clase/:cursoId/:n`; colección `v2_juegos_clase`. No se debe mezclar ese flujo con el cuaderno.
+
+Los párrafos de incidentes y cortes anteriores de este archivo son históricos. Para publicar, comprobar el commit y despliegue actual por separado; GitHub Pages, Cloudflare Pages y Railway son señales distintas. No realizar un despliegue nuevo sin autorización explícita.
+
+### Actualización desplegada y verificada · 2026-10-20 (antecedente PR #23)
 
 PR #23 está integrado en `main` (`879d87d`). El minijuego de cierre de clase se conecta a la API autenticada: guarda mecánica, finalización, mejor puntaje, intentos y fechas por UID; acredita 5 puntos por la primera finalización de cada clase, idempotentes incluso en reintentos; añade contador/logro de diez juegos. Se valida que la vista de clase ya exista antes de guardar. API: `GET /juegos-clase`, `POST /juegos-clase/:cursoId/:n`; colección `v2_juegos_clase`. La UI conserva el resultado y ofrece reintentar el guardado si la red falla.
 
@@ -12,17 +22,17 @@ Railway deployment `7f12434b-30df-4996-929e-13eeb97d48cd`; Cloudflare Pages depl
 
 - Repositorio: `https://github.com/teccapitalweb/odonteck-club.git`
 - Rama: `main`
-- Corte público verificado más reciente: `0b2c4c25dbca68d64ceb69c9a4ed932b4aa59f66` (PR #20)
+- Corte público verificado más reciente: `57944994ae576caffdcaf522a16d8117298e65d5` (merge PR #25; frontend)
 - Dominio: `https://www.odonteckconsulting.com/`
-- Frontend: GitHub Pages mediante el workflow `Pages`; ejecución más reciente comprobada `39331567580` (`success`, commit `0b2c4c2`)
+- Frontend de dominio oficial: Cloudflare Pages; deployment comprobado `9b2b5f62-e069-4fb5-a87c-931878f2ea4f`, commit `5794499`. El workflow de GitHub Pages es una señal de CI/publicación separada, no prueba por sí solo qué atiende el dominio.
 - API: `https://api-production-db314.up.railway.app`
-- Railway: proyecto `odonteck-club-v2`, servicio `api`, deployment `113b194e-7d46-4e1d-b570-8a858ba079ac` (`SUCCESS`, commit `0b2c4c2`, 2026-10-20 00:37 UTC)
+- Railway: proyecto `odonteck-club-v2`, servicio `api`; último deployment de backend registrado en este relevo: `7f12434b-30df-4996-929e-13eeb97d48cd` (PR #23, commit `879d87d`). No hubo cambio de API en PR #24 ni #25. Revalidar Railway si se va a desplegar backend.
 
-### Incidente vigente: compra y retorno Stripe (2026-10-20)
+### Registro histórico por revalidar: compra y retorno Stripe (2026-10-20)
 
 El bundle público todavía envía el botón de plan a `vip-auth.html?tab=register`; esa URL sirve la SPA y por eso la navegación vuelve al inicio/landing. En el worktree de PR #21 el botón ya usa checkout directo; además, en este turno se corrigieron localmente los retornos a `/#/suscripcion`, se añadió estado de confirmación y soporte al evento de pago diferido. Estos cambios locales aún no están desplegados. La evidencia y las pruebas están en [`INCIDENTE-RETORNO-STRIPE-2026-10-20.md`](INCIDENTE-RETORNO-STRIPE-2026-10-20.md).
 
-Railway lista el nombre `STRIPE_WEBHOOK_SECRET`, pero sus valores están ocultos en esta auditoría: no dar por confirmado que el valor sea válido/no vacío. No se inició Checkout ni se tocó configuración. Antes de publicar, verificar webhook y completar un recorrido en Stripe Test Mode. No fusionar PR #21 ni desplegar sin autorización explícita. El documento anterior sobre ausencia del secreto corresponde al corte del 16 de octubre y es histórico; este inventario tampoco confirma su valor funcional.
+En la captura de ese corte Railway listaba el nombre `STRIPE_WEBHOOK_SECRET`, pero el valor no se verificó. No usar este registro para inferir el estado actual del flujo ni del secreto. Antes de cualquier cambio Stripe, revalidar el bundle público, el código/PR integrado y los webhooks en Dashboard/Test Mode; no iniciar una compra real. No se tocó configuración Stripe en esta auditoría. El documento [`INCIDENTE-RETORNO-STRIPE-2026-10-20.md`](INCIDENTE-RETORNO-STRIPE-2026-10-20.md) conserva la evidencia de aquel momento, no una garantía actual.
 
 Un commit posterior que sólo cambie documentación no implica un runtime distinto. Verifica siempre Git, Cloudflare y Railway por separado.
 
