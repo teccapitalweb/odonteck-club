@@ -147,7 +147,7 @@ export function perfil() {
   </section>`;
 }
 
-export function suscripcion() {
+export function suscripcion(_params: Record<string, string> = {}, query = new URLSearchParams()) {
   const p = Perfil.get();
   const esVip = Acceso.vip();
   const mensual = BRAND.planes.find((x) => x.id === 'mensual');
@@ -155,6 +155,12 @@ export function suscripcion() {
   const precioMesDesdAnual = anual ? Math.round(anual.precio / 12) : 0;
   const totalCursos = cursos.length;
   const totalClases = cursos.reduce((s, c) => s + c.clases.length, 0);
+  const pago = query.get('pago');
+  const avisoPago = pago === 'exito'
+    ? `<div role="status" class="card card--pad" style="border-color:color-mix(in srgb,var(--brand-teal) 38%,var(--line));background:color-mix(in srgb,var(--brand-teal) 8%,var(--surface));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"><div><strong style="display:block">${esVip ? 'Tu membresía está activa' : 'Estamos confirmando tu pago'}</strong><p class="muted" style="font-size:var(--fs-xs);margin-top:4px">${esVip ? 'Ya puedes disfrutar tus beneficios VIP.' : 'Stripe confirmó tu regreso. La activación llega en cuanto el servidor reciba la confirmación segura; no necesitas volver a pagar.'}</p></div>${esVip ? '' : '<button type="button" class="btn btn--secondary btn--sm" data-refrescar-pago><i data-lucide="refresh-cw" class="i"></i>Actualizar estado</button>'}</div>`
+    : pago === 'cancelado'
+      ? '<div role="status" class="card card--pad" style="border-color:var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"><div><strong style="display:block">No terminaste el pago</strong><p class="muted" style="font-size:var(--fs-xs);margin-top:4px">No se cambió tu plan. Puedes volver a intentarlo cuando quieras.</p></div><i data-lucide="circle-x" class="i" aria-hidden="true"></i></div>'
+      : '';
 
   const beneficio = (ico: string, titulo: string, desc: string) =>
     `<div style="display:flex;gap:14px;align-items:flex-start"><span style="width:40px;height:40px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex-shrink:0"><i data-lucide="${ico}" class="i" style="width:18px;height:18px"></i></span><div><strong style="font-size:var(--fs-sm)">${titulo}</strong><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">${desc}</p></div></div>`;
@@ -197,6 +203,7 @@ export function suscripcion() {
 
   return `
   <section class="stack" style="gap:24px;max-width:860px;margin:0 auto">
+    ${avisoPago}
     <div style="text-align:center;display:grid;gap:8px;justify-items:center">
       <span class="chip chip--primary"><i data-lucide="crown" class="i"></i>Membresía VIP</span>
       <h1 class="display display--black" style="font-size:clamp(var(--fs-xl),3.5vw,var(--fs-2xl))">Invierte en tu práctica profesional</h1>

@@ -5,6 +5,7 @@ import { cursos } from '../core/catalogo';
 import { CursoGratis } from '../core/curso-gratis';
 import { Acceso } from '../core/acceso';
 import { Auth } from '../core/auth';
+import { encuestaPendiente } from '../core/encuestas';
 import { navigate } from '../core/router';
 import { detalleCursoGratis } from '../pages/curso-gratis';
 import { esc } from './partials';
@@ -128,6 +129,7 @@ export function montarCursoGratis(toast: Toast) {
 
   const celebrar = (id: string) => {
     const c = cursos.find((x) => x.id === id)!;
+    const faltaEntrevista = encuestaPendiente()?.tipo === 'bienvenida';
     cerrar();
     const el = document.createElement('div');
     el.className = 'cgm-done';
@@ -136,8 +138,10 @@ export function montarCursoGratis(toast: Toast) {
       <img class="cgm-done__img" src="${esc(c.portada)}" alt="">
       <span class="cgm-done__ic"><i data-lucide="party-popper" class="i"></i></span>
       <span class="eyebrow">¡Es tuyo!</span><h2>${esc(c.titulo)}</h2>
-      <p>Tienes ${c.clases.length - 1} clases gratis para empezar hoy. Cuando quieras la clase final, el certificado y todo el catálogo, hazte VIP.</p>
-      <div class="cgm-done__actions"><a class="btn btn--brand btn--lg btn--pill-arrow" href="#/curso/${esc(c.id)}/clase/1">Empezar la clase 1 <span class="arrow"><i data-lucide="play" class="i"></i></span></a><a class="btn btn--secondary" href="#/curso/${esc(c.id)}">Ver el temario</a></div></div>`;
+      <p>${faltaEntrevista
+        ? `Tu curso ya quedó guardado: tienes ${c.clases.length - 1} clases gratis. Antes del video te haremos 7 preguntas rápidas (menos de un minuto); después abriremos la clase 1. Si prefieres, puedes posponerlas y empezar.`
+        : `Tienes ${c.clases.length - 1} clases gratis para empezar hoy. Cuando quieras la clase final, el certificado y todo el catálogo, hazte VIP.`}</p>
+      <div class="cgm-done__actions"><a class="btn btn--brand btn--lg btn--pill-arrow" href="#/curso/${esc(c.id)}/clase/1">${faltaEntrevista ? 'Responder y empezar' : 'Empezar la clase 1'} <span class="arrow"><i data-lucide="${faltaEntrevista ? 'arrow-right' : 'play'}" class="i"></i></span></a>${faltaEntrevista ? '' : `<a class="btn btn--secondary" href="#/curso/${esc(c.id)}">Ver el temario</a>`}</div></div>`;
     document.body.appendChild(el);
     createIcons({ icons });
     el.addEventListener('click', (e) => { const t = e.target as HTMLElement; if (t === el || t.closest('a')) el.remove(); });

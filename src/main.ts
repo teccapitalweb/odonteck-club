@@ -27,6 +27,7 @@ import { adminShellHTML, marcarAdminActivo } from './admin/shell';
 import { instalarAccionesAdmin } from './admin/acciones';
 import { Auth, api, mensajeError } from './core/auth';
 import { Datos, type Pregunta } from './core/datos';
+import { descargarRepasoPDF } from './core/repaso-pdf';
 import { Progreso } from './core/progreso';
 import { Perfil } from './core/perfil';
 import { Comunidad } from './core/comunidad';
@@ -911,6 +912,19 @@ document.addEventListener('click', async (e) => {
     finally { ficha.disabled = false; }
   }
 
+  const repaso = el.closest<HTMLButtonElement>('[data-descargar-repaso]');
+  if (repaso) {
+    repaso.disabled = true;
+    try {
+      const [cursoId, n] = repaso.dataset.descargarRepaso!.split(':');
+      const curso = Datos.cursos().find((item) => item.id === cursoId);
+      const clase = curso?.clases.find((item) => item.n === Number(n));
+      if (!curso || !clase) throw new Error('No encontré los datos de esta clase.');
+      await descargarRepasoPDF(curso, clase);
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+    finally { repaso.disabled = false; }
+  }
+
   if (el.closest('[data-pregunta-rapida]')) {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
     navigate('/comunidad?tab=foro'); setTimeout(() => { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }, 100); return; }
@@ -1049,15 +1063,41 @@ document.addEventListener('click', async (e) => {
 
   const plan = el.closest<HTMLElement>('[data-cambiar-plan]');
   if (plan) {
-    if (Datos.modo === 'api' && import.meta.env.VITE_STRIPE_CHECKOUT_ENABLED !== 'true') {
-      location.href = 'https://www.odonteckconsulting.com/vip-auth.html?tab=register';
+    if (Datos.modo === 'api') {
+      const btn = plan as HTMLButtonElement;
+      const previo = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Conectando con Stripe…';
+      try {
+        const r = await api<{ url: string }>('/stripe/checkout', { method: 'POST', json: { plan: plan.dataset.cambiarPlan } });
+        if (r?.url) {
+          location.href = r.url;
+        } else {
+          throw new Error('No se recibió la dirección de pago de Stripe.');
+        }
+      } catch (err) {
+        toast(mensajeError(err), 'alert-triangle');
+        btn.disabled = false;
+        btn.innerHTML = previo;
+      }
     }
-    else if (Datos.modo === 'api') { try { const r = await api<{ url: string }>('/stripe/checkout', { method: 'POST', json: { plan: plan.dataset.cambiarPlan } }); location.href = r.url; } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     else toast('En el demo no se cobra. Con el backend conectado abre el pago seguro de Stripe.', 'credit-card');
   }
   if (el.closest('[data-portal-stripe]')) {
     if (Datos.modo === 'api') { try { const r = await api<{ url: string }>('/stripe/portal', { method: 'POST' }); location.href = r.url; } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     else toast('El portal de facturación de Stripe se abre con el backend conectado.', 'credit-card');
+  }
+  if (el.closest('[data-refrescar-pago]')) {
+    const boton = el.closest<HTMLButtonElement>('[data-refrescar-pago]')!;
+    boton.disabled = true;
+    try {
+      await Auth.refrescarPerfil();
+      render();
+      toast(Auth.usuario?.esVip ? 'Membresía activada. ¡Bienvenido a VIP!' : 'El pago aún se está confirmando. Vuelve a revisar en unos segundos.', Auth.usuario?.esVip ? 'badge-check' : 'clock-3');
+    } catch (err) {
+      boton.disabled = false;
+      toast(mensajeError(err), 'alert-triangle');
+    }
   }
 
   if (el.closest('[data-imprimir]')) window.print();

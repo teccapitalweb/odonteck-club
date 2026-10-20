@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
 import Stripe from 'stripe';
 import request from 'supertest';
-import { TOKENS, WEBHOOK_SECRET, bearer, crearEntorno } from './fakes/app.js';
+import { ORIGEN_OK, TOKENS, WEBHOOK_SECRET, bearer, crearEntorno } from './fakes/app.js';
 
 let env;
 beforeEach(() => {
@@ -242,6 +242,8 @@ describe('stripe', () => {
     assert.deepEqual(p.subscription_data.metadata, p.metadata);
     assert.deepEqual(p.line_items, [{ price: 'price_anual_test', quantity: 1 }]);
     assert.equal(p.customer_email, 'carla@example.com');
+    assert.equal(p.success_url, `${ORIGEN_OK}/#/suscripcion?pago=exito&session_id={CHECKOUT_SESSION_ID}`);
+    assert.equal(p.cancel_url, `${ORIGEN_OK}/#/suscripcion?pago=cancelado`);
   });
 
   test('checkout: plan inválido 400, ya VIP 409, sin token 401, sin Stripe o webhook 503', async () => {
@@ -262,6 +264,7 @@ describe('stripe', () => {
     const r = await request(env.app).post('/stripe/portal').set(bearer(TOKENS.free)).expect(200);
     assert.match(r.body.url, /billing\.stripe\.test/);
     assert.equal(env.stripe.creadas.portal.at(-1).customer, 'cus_123');
+    assert.equal(env.stripe.creadas.portal.at(-1).return_url, `${ORIGEN_OK}/#/suscripcion`);
   });
 
   test('portal reconoce el cliente Stripe de una membresía heredada por correo', async () => {
@@ -353,5 +356,21 @@ describe('stripe', () => {
     const recompensas = env.db.leer('v2_recompensas_estado/free1');
     assert.equal(recompensas.saldo, 300);
     assert.equal(recompensas.contadores.membresias, 1);
+  });
+
+  test('checkout.session.async_payment_succeeded activa el plan al confirmarse el método diferido', async () => {
+    env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
+    const evento = {
+      id: 'evt_async_paid',
+      object: 'event',
+      type: 'checkout.session.async_payment_succeeded',
+      created: 1_790_000_200,
+      data: { object: { id: 'cs_async', object: 'checkout.session', mode: 'subscription', client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', payment_status: 'paid' } },
+    };
+    const { payload, firma } = eventoFirmado(evento);
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.resultado, 'suscripcion_guardada');
+    assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'active');
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 300);
   });
 });

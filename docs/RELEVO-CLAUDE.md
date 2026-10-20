@@ -6,11 +6,17 @@
 
 - Repositorio: `https://github.com/teccapitalweb/odonteck-club.git`
 - Rama: `main`
-- Corte público verificado: `13797ef`
+- Corte público verificado más reciente: `0b2c4c25dbca68d64ceb69c9a4ed932b4aa59f66` (PR #20)
 - Dominio: `https://www.odonteckconsulting.com/`
-- Frontend: GitHub Pages mediante el workflow `Pages`; última ejecución pública verificada `38976464505` (`success`, commit `13797ef`)
+- Frontend: GitHub Pages mediante el workflow `Pages`; ejecución más reciente comprobada `39331567580` (`success`, commit `0b2c4c2`)
 - API: `https://api-production-db314.up.railway.app`
-- Railway: proyecto `odonteck-club-v2`, servicio `api`, despliegue funcional `28536ee0-32f0-475f-980a-4278205c4a64` (`SUCCESS`, commit `13797ef`)
+- Railway: proyecto `odonteck-club-v2`, servicio `api`, deployment `113b194e-7d46-4e1d-b570-8a858ba079ac` (`SUCCESS`, commit `0b2c4c2`, 2026-10-20 00:37 UTC)
+
+### Incidente vigente: compra y retorno Stripe (2026-10-20)
+
+El bundle público todavía envía el botón de plan a `vip-auth.html?tab=register`; esa URL sirve la SPA y por eso la navegación vuelve al inicio/landing. En el worktree de PR #21 el botón ya usa checkout directo; además, en este turno se corrigieron localmente los retornos a `/#/suscripcion`, se añadió estado de confirmación y soporte al evento de pago diferido. Estos cambios locales aún no están desplegados. La evidencia y las pruebas están en [`INCIDENTE-RETORNO-STRIPE-2026-10-20.md`](INCIDENTE-RETORNO-STRIPE-2026-10-20.md).
+
+Railway lista el nombre `STRIPE_WEBHOOK_SECRET`, pero sus valores están ocultos en esta auditoría: no dar por confirmado que el valor sea válido/no vacío. No se inició Checkout ni se tocó configuración. Antes de publicar, verificar webhook y completar un recorrido en Stripe Test Mode. No fusionar PR #21 ni desplegar sin autorización explícita. El documento anterior sobre ausencia del secreto corresponde al corte del 16 de octubre y es histórico; este inventario tampoco confirma su valor funcional.
 
 Un commit posterior que sólo cambie documentación no implica un runtime distinto. Verifica siempre Git, Cloudflare y Railway por separado.
 
@@ -188,7 +194,7 @@ Corrección a la nota previa: el fallo `Unable to establish loopback connection`
 ## 8. Pendientes reales, por prioridad
 
 1. Smoke autenticado del panel admin con custom claim `admin: true`, incluido upload firmado cuando Storage exista.
-2. Configurar y validar `STRIPE_WEBHOOK_SECRET` en v2 antes de habilitar checkout nuevo. Mientras tanto, conservar el flujo anterior y los beneficios heredados.
+2. Confirmar que `STRIPE_WEBHOOK_SECRET` tenga valor no vacío y verificar el endpoint/eventos desde Stripe sin copiar el secreto; reparar compra y retorno según `INCIDENTE-RETORNO-STRIPE-2026-10-20.md`. Hasta pasar pruebas en Stripe Test Mode, no habilitar el Checkout v2 ni quitar el flujo heredado.
 3. Ejecutar pruebas de reglas Firestore/Storage con emuladores. **CUMPLIDO LOCALMENTE el 2026-10-12** (`npm run test:rules` PASS 3/3 con emuladores en este host; ver §7). La validación en producción no está incluida aquí: sigue abierta como parte de #4.
 4. Desplegar y hacer smoke autenticado del Directorio (reglas, índices, miembro y admin) antes de abrirlo masivamente, incluyendo el **despliegue y la validación de reglas Firestore/Storage en el runtime público** (local ≠ producción). El código local ya incluye consentimiento opt-in, privacidad, anti-spam y moderación.
 5. Habilitar Storage para futuras cargas administradas; no es necesario para los diez PDF empaquetados actuales.

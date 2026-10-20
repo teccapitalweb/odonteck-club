@@ -73,6 +73,15 @@ export const Auth = {
     return listo;
   },
   perfil(): Promise<void> { return perfilListo ?? Promise.resolve(); },
+  async refrescarPerfil(): Promise<void> {
+    if (Datos.modo !== 'api' || !usuario) return;
+    const uid = usuario.uid;
+    const me = await api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me');
+    if (!usuario || usuario.uid !== uid) return;
+    usuario = { ...usuario, esVip: me.esVip, esAdmin: me.esAdmin === true || usuario.esAdmin, nombre: me.perfil?.nombre || usuario.nombre };
+    if (me.perfil) Perfil.hidratar(me.perfil, me.plan, me.vence);
+    perfilResuelto = true;
+  },
   /** false mientras /me no responde: el cascarón no debe pintarse con esVip o perfil provisionales. */
   perfilResuelto(): boolean { return perfilResuelto; },
 

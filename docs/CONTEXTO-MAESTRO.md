@@ -2,13 +2,13 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
 
-- **Actualizado:** 16 de octubre de 2026 (corte público `13797ef`; curso gratis obligatorio y Brújula publicados)
+- **Actualizado:** 20 de octubre de 2026 (último corte público comprobado `0b2c4c2`; ver incidente Stripe)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit funcional público verificado:** `13797ef` (`origin/main`, PR `#18`). El commit de este documento puede ser posterior sin cambiar el runtime.
+- **Commit funcional público verificado:** `0b2c4c25dbca68d64ceb69c9a4ed932b4aa59f66` (merge del PR #20). El PR #21 está abierto y no está desplegado.
 - **Web pública:** `https://www.odonteckconsulting.com/` mediante GitHub Pages y el workflow `Pages`.
 - **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado verificado:** TypeScript 0 errores; build de producción con `VITE_API_URL` limpio; API pasa 176 pruebas (175 exitosas, 0 fallos y 1 omitida por requerir emuladores); pipeline 67/67 y guía 66/66. El runtime público incluye la elección obligatoria del curso gratis y la Brújula. GitHub Pages `38976464505` y Railway `28536ee0-32f0-475f-980a-4278205c4a64` publicaron el mismo merge `13797ef`; queda pendiente el smoke autenticado con cuentas reales. El detalle está en `docs/PRODUCTION-READINESS-2026-10-16.md`.
+- **Estado de despliegue comprobado el 2026-10-20:** GitHub Pages run `39331567580` y Railway deployment `113b194e-7d46-4e1d-b570-8a858ba079ac` están en `SUCCESS` sobre `0b2c4c2`; `/health` respondió 200. La compilación y las pruebas hechas ahora corresponden a la rama de trabajo `b3fd63c` (PR #21), no al runtime. El flujo de compra/retorno Stripe tiene los defectos descritos en `docs/INCIDENTE-RETORNO-STRIPE-2026-10-20.md`.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -105,7 +105,7 @@ En modo API el frontend utiliza:
 - `/admin/encuestas/resumen?plan=` para tendencias agregadas (NPS, bases condicionales, trimestres, segmentación VIP/gratis), promedios por curso y comentarios sin identidad; `/admin/encuestas/contactos` para los correos de quienes pidieron que se les escriba;
 - `/admin/materiales/:id/subida` para subir PDF y portada directamente a Storage mediante URL firmada, sin exponer credenciales.
 
-La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. La capa administrativa (`src/core/admin.ts`) carga solo los recursos que necesita cada pantalla y conserva respuestas API en memoria, no en `localStorage`. El checkout nuevo está desactivado mientras no exista `STRIPE_WEBHOOK_SECRET`; las altas se envían temporalmente al portal anterior.
+La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. La capa administrativa (`src/core/admin.ts`) carga solo los recursos que necesita cada pantalla y conserva respuestas API en memoria, no en `localStorage`. **Estado Stripe actualizado 2026-10-20:** producción sigue en PR #20 y aún usa el alias heredado en el botón; en la rama local de PR #21 ya se llama al checkout directo. En este turno se corrigieron localmente los retornos de Checkout/portal hacia `/#/suscripcion`, el estado visible de confirmación y el webhook de pagos diferidos. El código local pasó build y suite API, pero el webhook real y Checkout Test Mode aún no se han verificado; los cambios no están desplegados. Seguir `docs/INCIDENTE-RETORNO-STRIPE-2026-10-20.md` y no afirmar que producción está corregida.
 
 ### Módulos nuevos incorporados (septiembre 2026)
 
@@ -180,7 +180,8 @@ La ruta pública `#/verificar/:folio` ya existe. No requiere autenticación (usa
 - `/health`, CORS desde `https://www.odonteckconsulting.com`, Firebase Auth, lectura de membresía, catálogo, video gratuito firmado con Bunny y quiz sin respuestas expuestas pasaron la prueba autenticada `api/scripts/smoke-v2.mjs`.
 - Se sembraron 18 documentos en `v2_cursos` y 68 en `v2_quizzes`; no se modificaron `miembros`, suscripciones ni el webhook anterior.
 - No se sembraron `v2_materiales`: los diez recursos propios aprobados se sirven desde el lote privado de la API; los libros completos sin licencia confirmada continúan excluidos.
-- `STRIPE_WEBHOOK_SECRET` no está definido en el servicio v2. El alta de pago sigue usando `vip-auth.html` y el webhook anterior; el API v2 rechaza además cualquier intento directo de crear un Checkout nuevo mientras falte ese secreto.
+- En el corte de octubre 16, `STRIPE_WEBHOOK_SECRET` no figuraba en el servicio v2 y el alta se mantenía en el flujo heredado. Esa observación es histórica; ver el estado comprobado el 20 de octubre abajo.
+- **Actualización importante del 2026-10-20:** esa observación era del corte anterior. Railway ahora lista el nombre `STRIPE_WEBHOOK_SECRET`, pero el valor está redactado y no se confirmó si es no vacío ni si corresponde al webhook activo. El frontend público aún dirige el botón al alias `vip-auth.html?tab=register`, que devuelve la SPA y termina en inicio; los `success_url`, `cancel_url` y `return_url` actuales usan la ruta inexistente `/#/cuenta`. Ver [`INCIDENTE-RETORNO-STRIPE-2026-10-20.md`](INCIDENTE-RETORNO-STRIPE-2026-10-20.md). No habilitar ni publicar el checkout hasta terminar prueba autenticada en Stripe Test Mode.
 - El frontend público nuevo ya consume este API. Se conservaron `vip-auth.html`, `vip-panel.html` y el sistema de membresías anterior para no cortar cobros ni beneficios existentes.
 - El build con `VITE_API_URL` elimina libros/PDF y reemplaza semillas de cursos, materiales, miembros y quizzes por estructuras vacías; el contenido real se hidrata desde el API. El control redujo el artefacto de 3.36 GB a 10.74 MB y verificó 0 PDF, 0 libros y 0 referencias a miembros demo o `videoId`.
 - Compatibilidad heredada añadida: además de `miembros/{uid}`, la API busca el correo autenticado en los documentos `miembros/email_...`, reconoce `esRegalo` y las tres fechas históricas (`expiraEn`, `fechaFinAcceso`, `fechaProximaRenovacion`). El portal de Stripe también recupera el `stripeCustomerId` encontrado por correo.
@@ -390,7 +391,7 @@ Advertencias del build:
 3. ~~Conectar el panel admin a los endpoints reales.~~ Resuelto en código; pendiente verificación E2E contra el despliegue con claim admin.
 4. ~~Sacar quizzes, comunidad, perfil, progreso y certificados reales de `localStorage`.~~ Resuelto en modo API; demo conserva datos locales deliberadamente.
 5. ~~Agregar verificación pública de certificados en frontend.~~ Resuelto con `#/verificar/:folio` (página pública sin auth).
-6. Completar el entorno v2 paralelo: API y frontend publicados; los materiales propios aprobados se empaquetan de forma privada en la API. Faltan configurar el webhook Stripe nuevo y ejecutar el smoke del admin conectado antes del corte.
+6. Completar el entorno v2 paralelo: API y frontend publicados; los materiales propios aprobados se empaquetan de forma privada en la API. Confirmar y probar el webhook Stripe nuevo en Test Mode, reparar destinos del botón y de regreso a rutas existentes, y ejecutar smoke admin conectado antes de un corte.
 7. ~~Liga y clasificación del club.~~ Resuelto visualmente: podio, ranking y mini-card; en producción permanece como próxima función hasta contar con endpoint, consentimiento y privacidad.
 8. ~~Búsqueda global.~~ Resuelto: `#/buscar?q=...` busca cursos, clases y materiales.
 9. ~~Motor de flashcards mejorado.~~ Resuelto: 3 niveles, undo, atajos, stats, bug de intervalos corregido.

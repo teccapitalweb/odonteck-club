@@ -63,8 +63,8 @@ export function rutasStripe(ctx) {
       metadata,
       subscription_data: { metadata },
       allow_promotion_codes: true,
-      success_url: `${appUrl}/#/cuenta?pago=exito&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${appUrl}/#/cuenta?pago=cancelado`,
+      success_url: `${appUrl}/#/suscripcion?pago=exito&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/#/suscripcion?pago=cancelado`,
       locale: 'es',
     };
     if (customer) params.customer = customer;
@@ -82,7 +82,7 @@ export function rutasStripe(ctx) {
     if (!customer) throw noEncontrado('No encontramos una suscripción de Stripe asociada a tu cuenta.');
     const session = await stripe.billingPortal.sessions.create({
       customer,
-      return_url: `${ctx.config.appUrl.replace(/\/$/, '')}/#/cuenta`,
+      return_url: `${ctx.config.appUrl.replace(/\/$/, '')}/#/suscripcion`,
     });
     res.json({ url: session.url });
   }));
@@ -122,7 +122,8 @@ export function webhookStripe(ctx) {
 async function procesarEvento(ctx, evento) {
   const obj = evento.data?.object ?? {};
   switch (evento.type) {
-    case 'checkout.session.completed': {
+    case 'checkout.session.completed':
+    case 'checkout.session.async_payment_succeeded': {
       if (obj.mode !== 'subscription') return 'ignorado_no_suscripcion';
       const uid = obj.client_reference_id || obj.metadata?.uid;
       if (!uid) return 'ignorado_sin_uid';
@@ -140,7 +141,7 @@ async function procesarEvento(ctx, evento) {
         return 'checkout_sin_suscripcion';
       }
       const resultado = await guardarSuscripcion(ctx, uid, sub, evento, datos);
-      if (ESTADOS_ACTIVOS.includes(sub.status)) {
+      if (ESTADOS_ACTIVOS.includes(sub.status) && (obj.payment_status !== 'unpaid' || evento.type === 'checkout.session.async_payment_succeeded')) {
         await otorgarEventos(ctx, COL, uid, [{
           clave: `membresia:${obj.id || sub.id}`,
           tipo: 'membresia',
