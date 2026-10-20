@@ -9,6 +9,7 @@ import { iniciales, esc, placeholder, avatarUsuario } from '../ui/partials';
 import { envivoPanel } from './envivo';
 import { puntos } from '../core/logros';
 import { Directorio, type PerfilDirectorio, type OportunidadDirectorio } from '../core/directorio';
+import { navigate } from '../core/router';
 
 // ── Miembros simulados (demo) ──────────────────────────────────────────────
 const MIEMBROS_DEMO = [
@@ -253,11 +254,19 @@ function tarjetaPersona(p: PerfilDirectorio) {
   const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
   const especialidad = p.especialidades[0] || etiqueta(p.etapa);
   return `<article class="network-card network-person network-person--tone-${tono}">
-    <div class="network-person__cover"><span><i data-lucide="sparkles" class="i"></i>Disponible para ${etiqueta(p.disponibilidad[0] || 'conectar')}</span>${p.esMio ? '<b>Tu perfil</b>' : '<b><i data-lucide="badge-check" class="i"></i>Comunidad OdonTeck</b>'}</div>
-    <header>${avatarProfesional(p, 'network-avatar--profile')}<div><span class="network-person__specialty">${esc(especialidad)}</span><h3>${esc(p.nombre)}</h3><p>${esc(p.titular)}</p></div></header>
-    <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div>
-    <p class="network-bio">${esc(p.bio)}</p>
-    <div class="network-tags">${[...p.especialidades, ...p.habilidades.slice(0, 2)].map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+    <div class="network-person__portrait ${p.foto ? 'has-photo' : 'is-fallback'}">
+      ${avatarProfesional(p, 'network-avatar--profile')}
+      <i data-lucide="sparkles" class="i network-person__watermark" aria-hidden="true"></i>
+      <div class="network-person__badges"><span><i data-lucide="circle-dot" class="i"></i>${etiqueta(p.disponibilidad[0] || 'conectar')}</span>${p.esMio ? '<b>Tu perfil</b>' : '<b><i data-lucide="badge-check" class="i"></i>Verificado</b>'}</div>
+    </div>
+    <div class="network-person__body">
+      <span class="network-person__specialty">${esc(especialidad)}</span>
+      <div class="network-person__title"><h3>${esc(p.nombre)} <i data-lucide="badge-check" class="i" aria-label="Perfil de la comunidad OdonTeck"></i></h3>${p.esMio ? '<span class="network-own">Tu perfil</span>' : ''}</div>
+      <p class="network-person__role">${esc(p.titular)}</p>
+      <p class="network-bio">${esc(p.bio)}</p>
+      <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div>
+      <div class="network-tags">${[...p.especialidades, ...p.habilidades.slice(0, 2)].map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+    </div>
     <footer><div class="network-availability">${p.disponibilidad.slice(0, 2).map((x) => `<small><i data-lucide="check" class="i"></i>${etiqueta(x)}</small>`).join('')}</div><div class="network-card__actions"><button class="btn btn--ghost btn--sm" data-network-view data-uid="${esc(p.uid)}">Ver perfil</button>${p.esMio ? '<button class="btn btn--secondary btn--sm" data-network-profile><i data-lucide="pencil" class="i"></i>Editar</button>' : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand btn--sm" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div></footer>
   </article>`;
 }
@@ -305,10 +314,10 @@ function directorioPanel(query: URLSearchParams) {
       <div class="network-hero__actions"><button class="btn btn--secondary" data-network-profile><i data-lucide="contact" class="i"></i>${data.miPerfil ? 'Editar mi perfil' : 'Crear mi perfil'}</button><button class="btn btn--brand" data-network-job><i data-lucide="plus" class="i"></i>Publicar oportunidad</button></div>
     </div>
     <div class="network-toolbar">
-      <nav><a class="${vista === 'personas' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas">Personas <span>${data.perfiles.length}</span></a><a class="${vista === 'oportunidades' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=oportunidades">Oportunidades <span>${data.oportunidades.length}</span></a><a class="${vista === 'conexiones' ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=conexiones">Mis conexiones ${pendientes ? `<span>${pendientes}</span>` : ''}</a></nav>
+      <nav><a class="${vista === 'personas' ? 'is-active' : ''}" href="#/directorio?vista=personas">Personas <span>${data.perfiles.length}</span></a><a class="${vista === 'oportunidades' ? 'is-active' : ''}" href="#/directorio?vista=oportunidades">Oportunidades <span>${data.oportunidades.length}</span></a><a class="${vista === 'conexiones' ? 'is-active' : ''}" href="#/directorio?vista=conexiones">Mis conexiones ${pendientes ? `<span>${pendientes}</span>` : ''}</a></nav>
       <form data-network-search><label><i data-lucide="search" class="i"></i><input name="q" value="${esc(query.get('q') || '')}" placeholder="Especialidad, ciudad o habilidad"><input type="hidden" name="vista" value="${esc(vista)}"></label></form>
     </div>
-    ${vista === 'personas' ? `<div class="network-affinities"><span><i data-lucide="sparkles" class="i"></i>Explora por afinidad</span><a class="${!q ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas">Todo</a>${afinidades.map((x) => `<a class="${q === x.toLocaleLowerCase('es-MX') ? 'is-active' : ''}" href="#/comunidad?tab=directorio&vista=personas&q=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>` : ''}
+    ${vista === 'personas' ? `<div class="network-affinities"><span><i data-lucide="sparkles" class="i"></i>Explora por afinidad</span><a class="${!q ? 'is-active' : ''}" href="#/directorio?vista=personas">Todo</a>${afinidades.map((x) => `<a class="${q === x.toLocaleLowerCase('es-MX') ? 'is-active' : ''}" href="#/directorio?vista=personas&q=${encodeURIComponent(x)}">${esc(x)}</a>`).join('')}</div>` : ''}
     <div class="network-grid">
       ${vista === 'personas' ? (perfiles.length ? perfiles.map(tarjetaPersona).join('') : '<div class="community-empty"><i data-lucide="search-x" class="i"></i><h3>No encontramos perfiles</h3><p>Prueba con otra especialidad o ciudad.</p></div>') : ''}
       ${vista === 'oportunidades' ? (oportunidades.length ? oportunidades.map(tarjetaOportunidad).join('') : '<div class="community-empty"><i data-lucide="briefcase-business" class="i"></i><h3>No hay oportunidades con ese filtro</h3><p>Puedes publicar una nueva si eres miembro VIP.</p></div>') : ''}
@@ -352,6 +361,12 @@ function directorioPanel(query: URLSearchParams) {
 
 export function comunidad(_: Record<string, string>, query: URLSearchParams) {
   const tab = query.get('tab') || 'foro';
+  if (tab === 'directorio') {
+    const siguiente = new URLSearchParams(query);
+    siguiente.delete('tab');
+    queueMicrotask(() => navigate(`/directorio${siguiente.size ? `?${siguiente}` : ''}`));
+    return '<section class="community-page"><div class="community-empty"><i data-lucide="loader-circle" class="i"></i><h3>Abriendo Directorio</h3><p>Ahora tiene su propio espacio dentro del Club.</p></div></section>';
+  }
   const filtro = query.get('curso');
   const areaFiltro = query.get('area');
   const hilos = filtro
@@ -374,12 +389,15 @@ export function comunidad(_: Record<string, string>, query: URLSearchParams) {
       <a class="${tab === 'foro' ? 'is-active' : ''}" href="#/comunidad?tab=foro"><i data-lucide="layout-grid" class="i"></i>Feed</a>
       <a class="${tab === 'en-vivo' ? 'is-active' : ''}" href="#/comunidad?tab=en-vivo"><i data-lucide="radio" class="i"></i>En vivo</a>
       <a class="${tab === 'actividad' ? 'is-active' : ''}" href="#/comunidad?tab=actividad"><i data-lucide="activity" class="i"></i>Actividad</a>
-      <a class="${tab === 'directorio' ? 'is-active' : ''}" href="#/comunidad?tab=directorio"><i data-lucide="network" class="i"></i>Directorio</a>
     </nav>
     <div class="community-view">
-      ${tab === 'en-vivo' ? envivoPanel() : tab === 'directorio' ? directorioPanel(query) : tab === 'actividad' ? actividadPanel() : foroPanel(filtro, areaFiltro, hilos, opciones)}
+      ${tab === 'en-vivo' ? envivoPanel() : tab === 'actividad' ? actividadPanel() : foroPanel(filtro, areaFiltro, hilos, opciones)}
     </div>
   </section>`;
+}
+
+export function directorio(_: Record<string, string>, query: URLSearchParams) {
+  return `<section class="directory-page" aria-label="Directorio profesional OdonTeck">${directorioPanel(query)}</section>`;
 }
 
 // ── Detalle de hilo ─────────────────────────────────────────────────────────

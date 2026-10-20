@@ -107,11 +107,11 @@
           },
           {
             "id": "extraer",
-            "texto": "Puede requerir extracción para favorecer la oclusión"
+            "texto": "Puede requerir observación, extracción o manejo interdisciplinario según su ubicación y riesgo"
           },
           {
             "id": "limite",
-            "texto": "Obliga a explicar límites de línea media o reposición"
+            "texto": "Requiere decidir entre cierre o apertura de espacio y posible reposición"
           }
         ],
         "pares": {
@@ -119,7 +119,7 @@
           "supernumerario": "extraer",
           "ausencia": "limite"
         },
-        "explicacion": "La clase distingue la discrepancia de tamaño, la presencia de piezas extra y la ausencia dentaria porque no se resuelven de la misma forma. Reconocer la causa permite anticipar rehabilitación, extracción o límites del resultado."
+        "explicacion": "La clase distingue discrepancia de tamaño, piezas supernumerarias y ausencia dentaria porque no se resuelven igual. La relación propuesta identifica la conversación clínica principal, pero no prescribe una conducta automática: ubicación, espacio, riesgo, objetivos y trabajo interdisciplinario determinan observación, extracción, cierre, apertura o rehabilitación."
       },
       {
         "tipo": "completar",
@@ -370,7 +370,7 @@
         "opciones": [
           "Número y posición de los dientes",
           "Supernumerarios, lesiones o reabsorciones visibles",
-          "Cantidad de hueso y morfología general de los cóndilos",
+          "Patrones óseos generales y morfología condilar aparente, reconociendo distorsión y superposición",
           "La medida cefalométrica final sin una lateral de cráneo"
         ],
         "correctas": [
@@ -378,7 +378,7 @@
           1,
           2
         ],
-        "explicacion": "El docente usa la panorámica para revisar dentición, anomalías, raíces, hueso y morfología condilar general. La proyección panorámica no determina por sí sola la posición funcional de la ATM, y el trazado cefalométrico requiere la lateral correspondiente."
+        "explicacion": "La panorámica permite una revisión general de dentición, anomalías, raíces y patrones óseos o condilares aparentes. No cuantifica por sí sola el volumen óseo ni determina la posición funcional de la ATM; además, el trazado cefalométrico requiere la proyección correspondiente."
       },
       {
         "tipo": "ordenar",
@@ -459,7 +459,7 @@
           },
           {
             "id": "ubicacion",
-            "texto": "Ubicación vestibular, palatina o lingual de una pieza"
+            "texto": "Orientación vestibular, palatina o lingual aproximada en casos seleccionados"
           },
           {
             "id": "tridimensional",
@@ -473,7 +473,7 @@
           "oclusal": "ubicacion",
           "tomografia": "tridimensional"
         },
-        "explicacion": "Cada modalidad responde a una pregunta distinta. La selección debe partir de la historia clínica, la exploración, las imágenes previas y del impacto esperado sobre el manejo; pedir todos los estudios sin propósito añade exposición sin mejorar la ruta diagnóstica."
+        "explicacion": "Cada modalidad responde a una pregunta distinta. La selección parte de historia clínica, exploración, imágenes previas e impacto esperado sobre el manejo. La oclusal puede aportar orientación bucolingual aproximada en casos seleccionados; si no basta y el resultado cambiaría el manejo, se valora imagen 3D justificada."
       },
       {
         "tipo": "completar",
@@ -805,19 +805,19 @@
         "derecha": [
           {
             "id": "frontonasal",
-            "texto": "Unión de frontal y nasal"
+            "texto": "Punto más anterior de la sutura frontonasal en el plano medio"
           },
           {
             "id": "silla",
-            "texto": "Centro de la silla turca"
+            "texto": "Centro geométrico de la silla turca"
           },
           {
             "id": "maxilar",
-            "texto": "Concavidad anterior del maxilar"
+            "texto": "Punto más profundo de la concavidad anterior del maxilar"
           },
           {
             "id": "mandibula",
-            "texto": "Concavidad anterior de la mandíbula"
+            "texto": "Punto más profundo de la concavidad anterior de la mandíbula"
           }
         ],
         "pares": {
@@ -826,7 +826,7 @@
           "a": "maxilar",
           "b": "mandibula"
         },
-        "explicacion": "La clase define N en la unión frontonasal, S en la silla turca, A en la concavidad maxilar y B en la concavidad mandibular. La precisión anatómica precede a cualquier interpretación angular."
+        "explicacion": "N se localiza en el punto más anterior de la sutura frontonasal del plano medio; S, en el centro geométrico de la silla turca; A y B, en los puntos más profundos de las concavidades anteriores maxilar y mandibular. La identificación reproducible precede a cualquier interpretación angular."
       },
       {
         "tipo": "completar",
