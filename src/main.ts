@@ -49,7 +49,7 @@ import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco }
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { abrirJuegoClase } from './ui/juego-clase';
-import { obtenerPuntajeJuego } from './core/juego-clase';
+import { juegoClaseCompletado } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -863,7 +863,7 @@ document.addEventListener('click', async (e) => {
   if (irSiguiente) {
     const clave = irSiguiente.dataset.irSiguiente || '';
     const [id, n] = clave.split(':');
-    if (id && n && obtenerPuntajeJuego(clave) === 0) {
+    if (id && n && !juegoClaseCompletado(clave)) {
       e.preventDefault();
       abrirJuegoDeClase(id, Number(n), { anunciar: true, actualizarAlCerrar: true });
       return;

@@ -1,6 +1,7 @@
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 
 const catalogo = JSON.parse(await readFile(new URL('../src/data/catalogo.json', import.meta.url), 'utf8'));
+const fuenteJuego = await readFile(new URL('../src/core/juego-clase.ts', import.meta.url), 'utf8');
 
 function hash(texto) {
   let valor = 2166136261;
@@ -49,6 +50,9 @@ const clases = catalogo.cursos.flatMap((curso) => curso.clases.map((clase) => ({
 const sinNotas = clases.filter(({ clase }) => !clase.notas?.conceptos?.length);
 const conMenosDe3Terminos = [];
 const reparto = Object.fromEntries(secuencia.map((t) => [t, 0]));
+const rompecabezas = [];
+const imagenesFaltantes = [];
+const imagenesSinMapa = [];
 
 for (const { curso, clase } of clases) {
   const frases = [
@@ -66,7 +70,20 @@ for (const { curso, clase } of clases) {
   if (usados.size < 3) conMenosDe3Terminos.push(`${curso.id}:${clase.n}`);
   const tipo = elegirTipoJuego(curso.id, clase.n);
   reparto[tipo] += 1;
+  if (tipo === 'rompecabezas') {
+    const archivo = `${curso.id}-clase-${clase.n}.jpg`;
+    const ruta = new URL(`../public/juegos/rompecabezas/${archivo}`, import.meta.url);
+    rompecabezas.push(`${curso.id}:${clase.n}`);
+    try {
+      await access(ruta);
+    } catch {
+      imagenesFaltantes.push(archivo);
+    }
+    if (!fuenteJuego.includes(archivo)) imagenesSinMapa.push(archivo);
+  }
 }
+
+const tablero16Piezas = fuenteJuego.includes('const cols = 4;') && fuenteJuego.includes('const rows = 4;');
 
 console.log(JSON.stringify({
   cursos: catalogo.cursos.length,
@@ -75,6 +92,10 @@ console.log(JSON.stringify({
   sinNotas: sinNotas.map(({ curso, clase }) => `${curso.id}:${clase.n}`),
   conMenosDe3Terminos,
   reparto,
+  rompecabezasConImagen: rompecabezas.length - imagenesFaltantes.length,
+  rompecabezasSinImagen: imagenesFaltantes,
+  imagenesSinMapa,
+  piezasPorRompecabezas: tablero16Piezas ? 16 : null,
 }, null, 2));
 
-if (sinNotas.length || conMenosDe3Terminos.length || clases.length === 0) process.exitCode = 1;
+if (sinNotas.length || conMenosDe3Terminos.length || clases.length === 0 || rompecabezas.length !== 18 || imagenesFaltantes.length || imagenesSinMapa.length || !tablero16Piezas) process.exitCode = 1;

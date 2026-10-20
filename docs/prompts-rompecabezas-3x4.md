@@ -1,5 +1,7 @@
 # Prompts para Rompecabezas Clínicos OdonTeck · Formato 3:4 (1080×1440)
 
+> **Histórico / no vigente:** la propuesta de 6 piezas que sigue no está conectada al catálogo actual. No regenerar ni reutilizar esos archivos `puzzle-##`. La versión implementada, con una ilustración original por clase y 16 piezas, está documentada en [ROMPECABEZAS-IMAGENES.md](./ROMPECABEZAS-IMAGENES.md).
+
 Estos **18 prompts** (uno para el rompecabezas de cada uno de los 18 cursos del catálogo) están diseñados específicamente para funcionar como **rompecabezas visuales de 6 piezas (2 columnas × 3 filas)** en proporción vertical **3:4**:
 
 - **Sin texto ni logotipos** (para que ninguna pieza quede con letras cortadas).
