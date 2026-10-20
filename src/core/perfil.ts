@@ -18,7 +18,7 @@ export const Perfil = {
     const actual = plan || Perfil.get().plan;
     return ({ mensual: 'VIP mensual', anual: 'VIP anual', cortesia: 'VIP cortesía', admin: 'VIP administrador', invitado: 'Plan gratis' } as Record<PlanPerfil, string>)[actual];
   },
-  iniciales() { return this.get().nombre.replace(/^(Dra?\.|Ing\.|Lic\.)\s*/i, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'OT'; },
+  iniciales() { const n = this.get().nombre?.trim() || 'OT'; return n.replace(/^(Dra?\.|Ing\.|Lic\.)\s*/i, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || 'OT'; },
   primerNombre() { return this.get().nombre.replace(/^(Dra?\.|Ing\.|Lic\.)\s*/i, '').split(' ')[0]; },
   tratamiento() { const n = this.get().nombre; const m = n.match(/^(Dra?\.)/i); return m ? `${m[1]} ${n.replace(/^(Dra?\.)\s*/i, '').split(' ').pop()}` : n.split(' ')[0]; },
 };

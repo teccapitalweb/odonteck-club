@@ -197,7 +197,7 @@ export function montarBienvenida(toast: Toast) {
     return `<div class="bv-fin">
       <span class="bv-fin__sello">${CHECK}</span>
       <h2 class="bv-q__t display" tabindex="-1">${pal(`Listo${nombre ? `, ${nombre}` : ''}.`)} <em>${pal('Tu club ya te conoce.')}</em></h2>
-      <p class="bv-ayuda">Gracias por tomarte el minuto. Tus respuestas ya ordenan tu inicio y el catálogo "Para ti", y nos ayudan a decidir qué contenido producir.</p>
+      <p class="bv-ayuda">Gracias por tomarte el minuto. Tus respuestas ya ordenan tu inicio y el catálogo "Para ti". La Brújula profesional es opcional; puedes explorarla después desde "Mi Brújula".</p>
       <ul class="bv-fin__resumen" aria-label="Tus respuestas">${preguntas.flatMap((p) => etiquetas(p)).map((e, i) => `<li style="--i:${i}">${esc(e)}</li>`).join('')}</ul>
       ${recs.length ? `<div class="bv-recs">
         <span class="bv-eti">Para empezar, según tus intereses</span>
@@ -243,8 +243,16 @@ export function montarBienvenida(toast: Toast) {
 
   function pintarPie() {
     const flecha = (icono: string) => `<span class="arrow"><i data-lucide="${icono}" class="i${icono === 'loader-circle' ? ' spin' : ''}"></i></span>`;
+    const destinoGuardado = (() => { try { return sessionStorage.getItem(DESTINO_KEY) || ''; } catch { return ''; } })();
+    const etiquetaSalida = /^\/curso\/[^/]+\/clase\/\d+/.test(destinoGuardado)
+      ? 'Empezar mi clase'
+      : /^\/curso\//.test(destinoGuardado)
+        ? 'Volver a mi curso'
+        : destinoGuardado.startsWith('/curso-gratis')
+          ? 'Volver a mi curso gratis'
+          : 'Entrar al club';
     if (paso === INTRO) pie.innerHTML = `<span class="bv__nota">Puedes regresar y cambiar tus respuestas antes de terminar.</span><button class="btn btn--brand btn--lg btn--pill-arrow" type="button" data-bv-accion="seguir">Empezar ${flecha('arrow-right')}</button>`;
-    else if (paso >= total) pie.innerHTML = `<span class="bv__nota">Tus respuestas quedaron guardadas.</span><button class="btn btn--brand btn--lg btn--pill-arrow" type="button" data-bv-accion="seguir">Entrar al club ${flecha('arrow-right')}</button>`;
+    else if (paso >= total) pie.innerHTML = `<span class="bv__nota">Tus respuestas quedaron guardadas.</span><button class="btn btn--brand btn--lg btn--pill-arrow" type="button" data-bv-accion="seguir">${etiquetaSalida} ${flecha('arrow-right')}</button>`;
     else {
       const ultimo = paso === total - 1;
       pie.innerHTML = `<button class="btn btn--ghost" type="button" data-bv-accion="atras" ${enviando ? 'disabled' : ''}><i data-lucide="arrow-left" class="i"></i>Atrás</button>
@@ -308,7 +316,7 @@ export function montarBienvenida(toast: Toast) {
   function salir() {
     if (saliendo) return;
     saliendo = true; clearTimeout(auto); clearTimeout(salida);
-    let destino = paso >= total ? '/brujula' : '/';
+    let destino = '/';
     try { destino = sessionStorage.getItem(DESTINO_KEY) || destino; sessionStorage.removeItem(DESTINO_KEY); } catch {}
     if (quieto) { navigate(destino); return; }
     raiz!.classList.add('is-saliendo');

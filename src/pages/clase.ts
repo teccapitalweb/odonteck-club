@@ -3,7 +3,7 @@ import { Progreso } from '../core/progreso';
 import { esc, placeholder } from '../ui/partials';
 import { Datos, type Clase } from '../core/datos';
 import { Acceso } from '../core/acceso';
-import { elegirTipoJuego, INFO_TIPO_JUEGO, obtenerPuntajeJuego, resolverImagenClase } from '../core/juego-clase';
+import { elegirTipoJuego, INFO_TIPO_JUEGO } from '../core/juego-clase';
 
 const vacioTab = (icon: string, titulo: string, texto: string, color = 'primary') => `<div class="stack" style="gap:10px;text-align:center;padding:20px 0"><span class="circle-btn" style="width:48px;height:48px;background:var(--${color}-soft);color:var(--${color});margin:0 auto"><i data-lucide="${icon}" class="i"></i></span><strong>${titulo}</strong><p class="muted" style="font-size:var(--fs-sm)">${texto}</p></div>`;
 
@@ -61,25 +61,18 @@ function notasHTML(k: Clase, cursoId: string) {
   </div>`;
 }
 
-function fichaHTML(k: Clase, cursoId: string) {
-  const lista = `<ul class="study-sheet__list"><li><i data-lucide="file-check-2" class="i"></i>Resumen visual de la clase</li><li><i data-lucide="list-checks" class="i"></i>Conceptos y checklist de repaso</li><li><i data-lucide="brain" class="i"></i>Preguntas de recuperación activa</li></ul>`;
-  if (k.ficha?.estado === 'aprobada') return `<div class="study-sheet study-sheet--ready">
-    <div class="study-sheet__cover"><span>ODT</span><i data-lucide="file-text" class="i"></i><small>FICHA DE ESTUDIO</small></div>
-    <div class="study-sheet__content"><span class="study-sheet__status"><i data-lucide="badge-check" class="i"></i>Revisada y disponible</span><h3>Tu repaso de esta clase</h3><p>Una guía breve para fijar lo importante sin volver a buscar cada minuto del video.</p>${lista}
-      <button class="btn btn--brand" data-descargar-ficha="${esc(cursoId)}:${k.n}"><i data-lucide="download" class="i"></i>Descargar PDF</button>
-      <small>Versión ${esc(k.ficha.version || '1.0')}${k.ficha.actualizada ? ` · ${new Date(k.ficha.actualizada).toLocaleDateString('es-MX')}` : ''}</small>
-    </div></div>`;
-  const vistaPreviaLocal = k.ficha?.estado === 'borrador' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && k.ficha.vistaPreviaLocal;
-  if (vistaPreviaLocal) return `<div class="study-sheet study-sheet--pending study-sheet--preview">
-    <div class="study-sheet__cover"><span>ODT</span><i data-lucide="file-search" class="i"></i><small>BORRADOR 0.9</small></div>
-    <div class="study-sheet__content"><span class="study-sheet__status"><i data-lucide="shield-alert" class="i"></i>Vista editorial local</span><h3>Ficha lista para revisión clínica</h3><p>Ya puedes comprobar la maquetación, las actividades y la clave razonada. El archivo no se publicará hasta que un odontólogo apruebe el contenido.</p>${lista}
-      <a class="btn btn--brand" href="${esc(vistaPreviaLocal)}" target="_blank" rel="noopener"><i data-lucide="external-link" class="i"></i>Abrir borrador PDF</a>
-      <small>Solo visible en localhost · Pendiente de revisión clínica</small>
-    </div></div>`;
-  return `<div class="study-sheet study-sheet--pending">
-    <div class="study-sheet__cover"><span>ODT</span><i data-lucide="file-clock" class="i"></i><small>EN REVISIÓN</small></div>
-    <div class="study-sheet__content"><span class="study-sheet__status"><i data-lucide="shield-check" class="i"></i>Control de calidad clínica</span><h3>Ficha de estudio en preparación</h3><p>No publicamos resúmenes automáticos sin validar. Esta ficha se activará cuando contenido, referencias y respuestas hayan sido revisados.</p>${lista}<small>El video y las notas siguen disponibles mientras termina la revisión.</small></div>
-  </div>`;
+function fichaHTML(k: Clase, cursoId: string, cursoTitulo: string) {
+  const notas = k.notas;
+  if (!notas) return vacioTab('file-text', 'Repaso no disponible', 'Esta clase aún no tiene notas para preparar su documento.');
+  return `<section class="study-sheet study-sheet--ready" aria-label="Repaso de la clase">
+    <header class="study-sheet__heading">
+      <span class="study-sheet__mark"><i data-lucide="notebook-text" class="i"></i></span>
+      <div class="study-sheet__title"><span class="study-sheet__eyebrow">REPASO DE CLASE · ${String(k.n).padStart(2, '0')}</span><h3>${esc(k.titulo)}</h3><p>${esc(cursoTitulo)}</p></div>
+      <button class="btn btn--brand study-sheet__download" type="button" data-descargar-repaso="${esc(cursoId)}:${k.n}"><i data-lucide="download" class="i"></i><span>Descargar PDF</span></button>
+    </header>
+    <div class="study-sheet__summary"><span>Resumen</span><p>${esc(notas.resumen)}</p></div>
+    ${notas.conceptos.length ? `<section class="study-sheet__recap"><div class="study-sheet__recap-head"><h4>Conceptos clave</h4><span>${notas.conceptos.length} ${notas.conceptos.length === 1 ? 'punto' : 'puntos'}</span></div><ol>${notas.conceptos.map((concepto, i) => `<li><span class="study-sheet__concept-index">${String(i + 1).padStart(2, '0')}</span><div><small>${esc(concepto.t)}</small><p>${esc(concepto.texto)}</p></div></li>`).join('')}</ol></section>` : ''}
+  </section>`;
 }
 
 function quizHTML(cursoId: string, n: number) {
@@ -210,11 +203,8 @@ export function clase(params: Record<string, string>) {
   const vista = Progreso.de(c.id).vistas.includes(n);
   const prev = c.clases.find((x) => x.n === n - 1);
   const next = c.clases.find((x) => x.n === n + 1);
-  const quizDisponible = Datos.quiz(c.id, n)?.estado === 'aprobado';
   const tipoJuego = elegirTipoJuego(c.id, n);
   const infoJuego = INFO_TIPO_JUEGO[tipoJuego];
-  const imagenClase = resolverImagenClase(c.id, n, c.portada);
-  const puntajeJuego = obtenerPuntajeJuego(`${c.id}:${n}`);
 
   // Provisional: embed directo. En Fase 2 el backend firma la URL (token + expires).
   const embed = `https://iframe.mediadelivery.net/embed/${LIBRARY_ID}/${k.videoId}?autoplay=false&preload=true&responsive=true`;
@@ -242,50 +232,18 @@ export function clase(params: Record<string, string>) {
             <div class="lesson-progress" style="margin-top:8px"><div class="progress progress--thin"><span style="width:${Progreso.porcentaje(c)}%"></span></div>${Progreso.de(c.id).vistas.length} de ${c.clases.length} vistas · ${Progreso.porcentaje(c)}%</div></div>
           <div class="row" style="flex-wrap:nowrap">
             ${prev ? `<a class="btn btn--secondary" href="#/curso/${c.id}/clase/${prev.n}"><i data-lucide="chevron-left" class="i"></i>Anterior</a>` : ''}
-            ${vista && quizDisponible ? `<button class="btn btn--secondary" data-abrir-quiz="${c.id}:${n}"><i data-lucide="brain-circuit" class="i"></i>Resolver reto</button>` : ''}
-            <button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}">${vista ? `Jugar ${infoJuego.etiqueta.toLowerCase()}` : 'Finalizar clase y jugar'} <span class="arrow"><i data-lucide="${infoJuego.icono}" class="i"></i></span></button>
-            ${vista && next ? `<a class="btn btn--secondary btn--pill-arrow" href="#/curso/${c.id}/clase/${next.n}" data-ir-siguiente="${c.id}:${n}">Siguiente clase <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>` : ''}
+            ${vista
+              ? `<a class="btn btn--brand btn--pill-arrow" href="${next ? `#/curso/${c.id}/clase/${next.n}` : `#/curso/${c.id}`}" data-ir-siguiente="${c.id}:${n}">${next ? 'Siguiente clase' : 'Terminar curso'} <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></a>`
+              : `<button class="btn btn--brand btn--pill-arrow" data-marcar-vista="${c.id}:${n}">Terminar clase y jugar <span class="arrow"><i data-lucide="${infoJuego.icono}" class="i"></i></span></button>`}
           </div>
         </div>
-
-        <article class="lesson-closing-card" aria-label="Actividad de cierre de la clase">
-          <div class="lesson-closing-card__media" ${vista ? `data-abrir-juego="${c.id}:${n}"` : `data-marcar-vista="${c.id}:${n}"`}>
-            <img src="${esc(imagenClase)}" alt="${esc(k.titulo)}">
-            <span class="lesson-closing-card__tag"><i data-lucide="${infoJuego.icono}" class="i"></i>${esc(infoJuego.etiqueta)}</span>
-          </div>
-          <div class="lesson-closing-card__body">
-            <div class="lesson-closing-card__meta">
-              <span class="lesson-closing-card__eyebrow"><i data-lucide="sparkles" class="i"></i>Al finalizar esta clase · Juego ${n} de ${c.clases.length}</span>
-              ${puntajeJuego > 0 ? `<span class="lesson-closing-card__score"><i data-lucide="trophy" class="i"></i>Completado · ${puntajeJuego}%</span>` : `<span class="lesson-closing-card__pending">Se abre automáticamente al terminar el video</span>`}
-            </div>
-            <h3>${esc(infoJuego.titulo)}</h3>
-            <p>${esc(infoJuego.resumen)}</p>
-          </div>
-          <div class="lesson-closing-card__cta">
-            <button type="button" class="btn btn--brand" ${vista ? `data-abrir-juego="${c.id}:${n}"` : `data-marcar-vista="${c.id}:${n}"`}>
-              <i data-lucide="${infoJuego.icono}" class="i"></i>
-              <span>${puntajeJuego > 0 ? 'Volver a jugar' : vista ? 'Abrir juego ahora' : 'Finalizar y abrir juego'}</span>
-            </button>
-          </div>
-        </article>
-
-        ${next ? `
-        <div class="upnext">
-          <div class="upnext__thumb"><img src="${esc(resolverImagenClase(c.id, next.n, c.portada))}" alt=""><i data-lucide="${Progreso.desbloqueada(c, next.n) || vista ? 'play' : 'lock'}" class="i"></i></div>
-          <div><span class="eyebrow">A continuación · clase ${next.n}</span><div class="upnext__title">${esc(next.titulo)}</div><p class="faint" style="font-size:var(--fs-xs);margin-top:4px">${vista ? 'Ya puedes verla.' : 'Se desbloquea al marcar esta clase como vista.'}</p></div>
-          ${vista ? `<a class="circle-btn" href="#/curso/${c.id}/clase/${next.n}" data-ir-siguiente="${c.id}:${n}" aria-label="Ir a la siguiente"><i data-lucide="arrow-right" class="i"></i></a>` : `<span class="circle-btn" style="background:var(--surface-3);color:var(--text-3)"><i data-lucide="lock" class="i"></i></span>`}
-        </div>` : `
-        <div class="upnext" style="background:var(--accent-soft);border-color:transparent">
-          <span class="circle-btn" style="background:var(--accent);width:56px;height:56px"><i data-lucide="award" class="i" style="width:24px;height:24px"></i></span>
-          <div><span class="eyebrow">Última clase</span><div class="upnext__title">Al marcarla como vista, el curso queda completado y se emite tu certificado.</div></div>
-        </div>`}
       </div>
       <div class="card card--pad stack lesson-tools" data-tabs style="gap:16px">
         <div class="tabs lesson-tools__tabs"><button data-for="temario" class="is-active"><i data-lucide="list-video" class="i"></i>Temario</button><button data-for="notas"><i data-lucide="notebook-tabs" class="i"></i>Notas</button><button data-for="quiz"><i data-lucide="brain" class="i"></i>Quiz</button><button data-for="ficha"><i data-lucide="file-down" class="i"></i>Ficha</button></div>
         <div data-tab="temario" class="stack" style="gap:10px;font-size:var(--fs-sm)">${temario}</div>
         <div data-tab="notas" hidden class="stack" style="gap:10px">${notasHTML(k, c.id)}</div>
         <div data-tab="quiz" hidden class="stack" style="gap:12px">${quizHTML(c.id, n)}</div>
-        <div data-tab="ficha" hidden class="stack" style="gap:12px">${fichaHTML(k, c.id)}</div>
+        <div data-tab="ficha" hidden class="stack" style="gap:12px">${fichaHTML(k, c.id, c.titulo)}</div>
       </div>
     </div>
   </section>`;

@@ -118,7 +118,9 @@ export const Directorio = {
         bannerPropio = true;
       }
       await api('/directorio/perfil', { method: 'PUT', json: { ...v, ...(fotoPropia ? { foto: 'propia' } : quitarFoto ? { foto: null } : {}), ...(bannerPropio ? { banner: 'propio' } : quitarBanner ? { banner: null } : {}) } });
-      this.invalidar(); return estado;
+      this.invalidar();
+      await this.cargar();
+      return estado;
     }
     const fotoFinal = quitarFoto ? null : foto ? await blobADataUrl(foto.blob) : estado.miPerfil?.foto ?? null;
     const bannerFinal = quitarBanner ? null : banner ? await blobADataUrl(banner.blob) : estado.miPerfil?.banner ?? null;
@@ -144,7 +146,12 @@ export const Directorio = {
     const op = estado.oportunidades.find((x) => x.id === id); if (op) op.estado = 'cerrada'; guardar(); return estado;
   },
   async eliminarPerfil() {
-    if (Datos.modo === 'api') { await api('/directorio/perfil', { method: 'DELETE' }); this.invalidar(); return estado; }
+    if (Datos.modo === 'api') {
+      await api('/directorio/perfil', { method: 'DELETE' });
+      this.invalidar();
+      await this.cargar();
+      return estado;
+    }
     estado.perfiles = estado.perfiles.filter((p) => !p.esMio && p.uid !== 'demo');
     estado.oportunidades.forEach((o) => { if (o.esMia || o.autorUid === 'demo') o.estado = 'cerrada'; });
     estado.conexiones = estado.conexiones.map((c) => c.estado === 'pendiente' ? { ...c, estado: 'rechazada' } : c);
