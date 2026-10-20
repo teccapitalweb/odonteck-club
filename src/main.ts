@@ -82,10 +82,20 @@ const reproductoresVideo = new Map<string, PlayerJsInstance>();
 const NOTAS_REPASO_KEY = 'odonteck-club:notas-repaso:v1';
 const NOTAS_PERSONALES_KEY = 'odonteck-club:notas-personales:v1';
 const INTENTOS_QUIZ_KEY = 'odonteck-club:intentos:v2';
+type NotaRemota = { repasados: number[]; bitacora: string };
+const notasRemotas = new Map<string, NotaRemota>();
+const temporizadoresNotas = new Map<string, number>();
+const revisionesNotas = new Map<string, number>();
+const colasNotas = new Map<string, Promise<void>>();
+const claveRemotaNotas = (clave: string, uid = Auth.usuario?.uid || '') => `${uid}:${clave}`;
 
 type ResumenIntentoQuiz = { numero: number; mejorPuntaje: number; aprobadoAlgunaVez: boolean; versionQuiz: number; fecha: string };
 
 function leerNotasRepasadas(): Record<string, number[]> {
+  if (Datos.modo === 'api') {
+    const prefijo = `${Auth.usuario?.uid || ''}:`;
+    return Object.fromEntries([...notasRemotas].filter(([clave]) => clave.startsWith(prefijo)).map(([clave, nota]) => [clave.slice(prefijo.length), nota.repasados]));
+  }
   try {
     const valor = JSON.parse(localStorage.getItem(NOTAS_REPASO_KEY) || '{}');
     return valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
@@ -93,10 +103,23 @@ function leerNotasRepasadas(): Record<string, number[]> {
 }
 
 function escribirNotasRepasadas(valor: Record<string, number[]>) {
+  if (Datos.modo === 'api') {
+    for (const [clave, repasados] of Object.entries(valor)) {
+      const claveUid = claveRemotaNotas(clave);
+      const anterior = notasRemotas.get(claveUid) || { repasados: [], bitacora: '' };
+      notasRemotas.set(claveUid, { ...anterior, repasados });
+      programarGuardadoNotas(clave);
+    }
+    return;
+  }
   try { localStorage.setItem(NOTAS_REPASO_KEY, JSON.stringify(valor)); } catch {}
 }
 
 function leerNotasPersonales(): Record<string, string> {
+  if (Datos.modo === 'api') {
+    const prefijo = `${Auth.usuario?.uid || ''}:`;
+    return Object.fromEntries([...notasRemotas].filter(([clave]) => clave.startsWith(prefijo)).map(([clave, nota]) => [clave.slice(prefijo.length), nota.bitacora]));
+  }
   try {
     const valor = JSON.parse(localStorage.getItem(NOTAS_PERSONALES_KEY) || '{}');
     return valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
@@ -104,7 +127,94 @@ function leerNotasPersonales(): Record<string, string> {
 }
 
 function escribirNotasPersonales(valor: Record<string, string>) {
+  if (Datos.modo === 'api') {
+    for (const [clave, bitacora] of Object.entries(valor)) {
+      const claveUid = claveRemotaNotas(clave);
+      const anterior = notasRemotas.get(claveUid) || { repasados: [], bitacora: '' };
+      notasRemotas.set(claveUid, { ...anterior, bitacora });
+      programarGuardadoNotas(clave);
+    }
+    return;
+  }
   try { localStorage.setItem(NOTAS_PERSONALES_KEY, JSON.stringify(valor)); } catch {}
+}
+
+function estadoGuardadoNotas(panel: HTMLElement, mensaje: string) {
+  const estado = panel.querySelector<HTMLElement>('[data-notas-save-state]');
+  const retry = panel.querySelector<HTMLButtonElement>('[data-notas-retry]');
+  if (estado) estado.textContent = mensaje;
+  if (retry) {
+    retry.hidden = !mensaje.includes('Reintenta');
+    retry.dataset.notasRetryMode = mensaje.startsWith('No se pudo cargar') ? 'load' : 'save';
+  }
+}
+
+function habilitarEdicionNotas(panel: HTMLElement, habilitar: boolean) {
+  panel.querySelectorAll<HTMLButtonElement>('[data-nota-check]').forEach((button) => { button.disabled = !habilitar; });
+  const textarea = panel.querySelector<HTMLTextAreaElement>('[data-notas-personal]');
+  if (textarea) textarea.disabled = !habilitar;
+}
+
+async function cargarNotasRemotas(panel: HTMLElement) {
+  const clave = panel.dataset.notasBoard || '';
+  const uid = Auth.usuario?.uid || '';
+  if (!uid) { estadoGuardadoNotas(panel, 'Inicia sesión para sincronizar tus notas.'); return; }
+  const [cursoId, n] = clave.split(':');
+  if (!cursoId || !n) return;
+  panel.dataset.notasLoading = 'true';
+  habilitarEdicionNotas(panel, false);
+  estadoGuardadoNotas(panel, 'Cargando tus notas…');
+  try {
+    const datos = await api<NotaRemota>(`/notas-clase/${encodeURIComponent(cursoId)}/${encodeURIComponent(n)}`);
+    const nota = { repasados: Array.isArray(datos.repasados) ? datos.repasados : [], bitacora: typeof datos.bitacora === 'string' ? datos.bitacora : '' };
+    if (Auth.usuario?.uid !== uid) return;
+    notasRemotas.set(claveRemotaNotas(clave, uid), nota);
+    panel.dataset.notasLoading = 'false';
+    refrescarNotas(panel);
+    refrescarNotaPersonal(panel);
+    habilitarEdicionNotas(panel, true);
+    estadoGuardadoNotas(panel, 'Sincronizado con tu cuenta');
+  } catch {
+    if (Auth.usuario?.uid !== uid) return;
+    panel.dataset.notasLoading = 'error';
+    estadoGuardadoNotas(panel, 'No se pudo cargar. Reintenta la sincronización.');
+  }
+}
+
+function programarGuardadoNotas(clave: string) {
+  if (Datos.modo !== 'api') return;
+  const uid = Auth.usuario?.uid || '';
+  if (!uid) return;
+  const claveUid = claveRemotaNotas(clave, uid);
+  const panel = [...document.querySelectorAll<HTMLElement>('[data-notas-board]')].find((x) => x.dataset.notasBoard === clave);
+  if (!panel || panel.dataset.notasLoading === 'true' || panel.dataset.notasLoading === 'error') return;
+  const [cursoId, n] = clave.split(':');
+  const revision = (revisionesNotas.get(claveUid) || 0) + 1;
+  revisionesNotas.set(claveUid, revision);
+  const anterior = temporizadoresNotas.get(claveUid);
+  if (anterior) window.clearTimeout(anterior);
+  estadoGuardadoNotas(panel, 'Guardando en tu cuenta…');
+  temporizadoresNotas.set(claveUid, window.setTimeout(() => {
+    temporizadoresNotas.delete(claveUid);
+    const previo = colasNotas.get(claveUid) || Promise.resolve();
+    const trabajo = previo.catch(() => {}).then(async () => {
+      if (Auth.usuario?.uid !== uid) return;
+      const nota = notasRemotas.get(claveUid) || { repasados: [], bitacora: '' };
+      try {
+        const guardada = await api<NotaRemota>(`/notas-clase/${encodeURIComponent(cursoId)}/${encodeURIComponent(n)}`, {
+          method: 'PUT', json: nota,
+        });
+        if (revisionesNotas.get(claveUid) === revision && Auth.usuario?.uid === uid) {
+          notasRemotas.set(claveUid, { repasados: guardada.repasados, bitacora: guardada.bitacora });
+          estadoGuardadoNotas(panel, 'Guardado en tu cuenta');
+        }
+      } catch {
+        if (revisionesNotas.get(claveUid) === revision && Auth.usuario?.uid === uid) estadoGuardadoNotas(panel, 'No se pudo guardar. Reintenta la sincronización.');
+      }
+    });
+    colasNotas.set(claveUid, trabajo);
+    void trabajo.finally(() => { if (colasNotas.get(claveUid) === trabajo) colasNotas.delete(claveUid); });
+  }, 500));
 }
 
 function refrescarNotaPersonal(panel: HTMLElement) {
@@ -147,6 +257,7 @@ function hidratarNotas() {
   document.querySelectorAll<HTMLElement>('[data-notas-board]').forEach((panel) => {
     refrescarNotas(panel);
     refrescarNotaPersonal(panel);
+    if (Datos.modo === 'api') void cargarNotasRemotas(panel);
   });
 }
 
@@ -672,6 +783,14 @@ function mostrarResumenCuenta(abierto: boolean) {
 // ── Interacciones globales del miembro ──
 document.addEventListener('click', async (e) => {
   const el = e.target as HTMLElement;
+  const abrirCuaderno = el.closest<HTMLButtonElement>('[data-notas-open]');
+  if (abrirCuaderno) {
+    const dialog = document.getElementById(abrirCuaderno.dataset.notasOpen || '') as HTMLDialogElement | null;
+    if (dialog && !dialog.open) dialog.showModal();
+    return;
+  }
+  const dialogNotas = el.closest<HTMLDialogElement>('.notas-dialog');
+  if (dialogNotas && (el.closest('[data-notas-close]') || e.target === dialogNotas)) { dialogNotas.close(); return; }
   const pw = el.closest<HTMLElement>('[data-paywall]');
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
 
@@ -731,6 +850,14 @@ document.addEventListener('click', async (e) => {
     if (espacio) espacio.dataset.lessonMode = tab.dataset.for === 'quiz' ? 'quiz' : 'default';
   }
 
+  const retryNotas = el.closest<HTMLButtonElement>('[data-notas-retry]');
+  if (retryNotas) {
+    const tablero = retryNotas.closest<HTMLElement>('[data-notas-board]');
+    if (tablero && retryNotas.dataset.notasRetryMode === 'save') programarGuardadoNotas(tablero.dataset.notasBoard || '');
+    else if (tablero) await cargarNotasRemotas(tablero);
+    return;
+  }
+
   const marcarNota = el.closest<HTMLButtonElement>('[data-nota-check]');
   if (marcarNota) {
     const tablero = marcarNota.closest<HTMLElement>('[data-notas-board]'); if (!tablero) return;
@@ -764,6 +891,7 @@ document.addEventListener('click', async (e) => {
 
   const irQuizDesdeNotas = el.closest<HTMLButtonElement>('[data-notas-go-quiz]');
   if (irQuizDesdeNotas) {
+    irQuizDesdeNotas.closest<HTMLDialogElement>('.notas-dialog')?.close();
     const herramientas = irQuizDesdeNotas.closest<HTMLElement>('[data-tabs]');
     const botonQuiz = herramientas?.querySelector<HTMLButtonElement>('.tabs button[data-for="quiz"]');
     if (!herramientas || !botonQuiz) return;
@@ -1167,7 +1295,7 @@ document.addEventListener('input', (e) => {
   const contador = tablero.querySelector<HTMLElement>('[data-notas-characters]');
   const guardado = tablero.querySelector<HTMLElement>('[data-notas-save-state]');
   if (contador) contador.textContent = String(textarea.value.length);
-  if (guardado) guardado.textContent = textarea.value ? 'Cambios guardados automáticamente' : 'Guardado sólo en este dispositivo';
+  if (guardado && Datos.modo === 'demo') guardado.textContent = 'Guardado sólo en este dispositivo';
 });
 
 document.addEventListener('change', async (e) => {

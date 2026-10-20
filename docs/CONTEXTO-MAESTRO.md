@@ -1,14 +1,16 @@
 # Contexto maestro · OdonTeck Club
 
-> Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto.
+> Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
-- **Actualizado:** 20 de octubre de 2026 (último corte público comprobado `0b2c4c2`; ver incidente Stripe)
+- **Actualizado:** 20 de octubre de 2026 (frontend público verificado en `5794499`; véase el relevo operativo para fuentes de despliegue)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
-- **Commit funcional público verificado:** `0b2c4c25dbca68d64ceb69c9a4ed932b4aa59f66` (merge del PR #20). El PR #21 está abierto y no está desplegado.
-- **Web pública:** `https://www.odonteckconsulting.com/` mediante GitHub Pages y el workflow `Pages`.
-- **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`).
-- **Estado de despliegue comprobado el 2026-10-20:** GitHub Pages run `39331567580` y Railway deployment `113b194e-7d46-4e1d-b570-8a858ba079ac` están en `SUCCESS` sobre `0b2c4c2`; `/health` respondió 200. La compilación y las pruebas hechas ahora corresponden a la rama de trabajo `b3fd63c` (PR #21), no al runtime. El flujo de compra/retorno Stripe tiene los defectos descritos en `docs/INCIDENTE-RETORNO-STRIPE-2026-10-20.md`.
+- **Commit frontend público verificado:** `57944994ae576caffdcaf522a16d8117298e65d5` (merge PR #25; Cloudflare Pages deployment `9b2b5f62-e069-4fb5-a87c-931878f2ea4f`). Incluye un ajuste responsive del encabezado de Notas; **no** incluye el cuaderno en diálogo amplio.
+- **Web pública:** `https://www.odonteckconsulting.com/` servida por Cloudflare Pages (`odonteck-club.pages.dev`). El workflow de GitHub Pages no debe tomarse por sí solo como prueba del runtime del dominio.
+- **API pública:** `https://api-production-db314.up.railway.app` mediante Railway (`odonteck-club-v2/api`); el despliegue confirmado del backend de juegos por PR #23 fue `7f12434b-30df-4996-929e-13eeb97d48cd`.
+- **Estado de despliegue comprobado el 2026-10-20:** Cloudflare Pages atendió el dominio oficial con frontend `5794499`; Railway/API y GitHub Pages son despliegues separados. La compilación de una rama local no prueba cambios en ninguno de esos servicios. El incidente Stripe documentado en la sección histórica debe revalidarse antes de tomarlo como estado actual.
+
+> **Corrección de relevo (2026-10-20):** las líneas y secciones históricas que aún mencionan PR #20, `0b2c4c2` y GitHub Pages como origen del dominio describen cortes anteriores. Para el corte público posterior, usa el commit/deployment Cloudflare indicados arriba y el estado operativo en [`RELEVO-CLAUDE.md`](RELEVO-CLAUDE.md). No supongas que cambios locales están incluidos en ese runtime.
 
 Antes de crear este relevo ya existían cambios locales sin seguimiento:
 
@@ -69,6 +71,12 @@ Este repositorio pertenece únicamente a OdonTeck. Visión Pecuaria y Agrotec Am
 - Encuestas versionadas: pendientes y respuestas autenticadas, disparadores por primer ingreso/curso completado/21 días y resumen administrativo sin PII.
 - Directorio profesional opt-in como módulo principal en `#/directorio`: perfiles visibles con tarjeta editorial y ficha tipo CV, foto y portada propias, resumen, años de experiencia, idiomas, trayectoria, formación y credenciales; oportunidades VIP y conexiones privadas. El editor permite agregar/quitar registros repetibles, mantiene compatibilidad con perfiles anteriores y conserva el contacto fuera de toda proyección pública. El endurecimiento local añade ocultar/eliminar, cierre, paginación estable, límites anti-spam, idempotencia, validación real de foto/portada en Storage, denuncia y moderación administrativa sin exponer al reportante. La URL anterior dentro de Comunidad redirige para conservar compatibilidad.
 
+### Cuaderno de repaso por clase — estado del flujo
+
+La pestaña **Notas** pertenece al repaso de la clase y se mantiene separada de Temario, Quiz, Ficha y del minijuego de cierre. El acuerdo de diseño es un acceso compacto en la pestaña que abre el cuaderno completo en un diálogo amplio, accesible y responsive; véase [`DECISIONES-CUADERNO-CLASE-2026-10-20.md`](DECISIONES-CUADERNO-CLASE-2026-10-20.md) para contrato, alcance y pruebas. El despliegue de PR #25 sólo arregló el encabezado que se aplastaba; el diálogo ampliado y sincronización de bitácora por UID son locales pendientes de integración/publicación.
+
+El contenido estructurado (resumen, conceptos con marcas de tiempo y preguntas de recuperación) se deriva de las notas disponibles por clase. Producción todavía guarda marcas y bitácora en `localStorage`; la rama local añade `/notas-clase/:cursoId/:n` y colección privada `v2_notas_clase` por UID, sin migrar datos viejos del navegador ni dar puntos por escribir. El minijuego tiene su propio registro remoto e idempotente. No afirmar que las notas ya siguen a la persona hasta desplegar/probar frontend y backend.
+
 ### Brecha principal
 
 La experiencia de miembro ya consume la API en modo producción. El panel admin quedó conectado en el código a `/admin/*`, con autorización por claim, estados de carga/error/reintento y subidas firmadas de materiales; todavía falta probarlo con una cuenta admin real contra el despliegue nuevo antes del corte. Los diez materiales propios aprobados ahora se incluyen en el despliegue privado de la API y se entregan mediante enlaces temporales después de validar acceso; Firebase Storage queda para cargas futuras del panel. Las brechas principales quedan en la liga real y la validación de producción. En modo demo se conserva `localStorage` para recorrer la maqueta sin servicios externos.
@@ -105,7 +113,7 @@ En modo API el frontend utiliza:
 - `/admin/encuestas/resumen?plan=` para tendencias agregadas (NPS, bases condicionales, trimestres, segmentación VIP/gratis), promedios por curso y comentarios sin identidad; `/admin/encuestas/contactos` para los correos de quienes pidieron que se les escriba;
 - `/admin/materiales/:id/subida` para subir PDF y portada directamente a Storage mediante URL firmada, sin exponer credenciales.
 
-La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. La capa administrativa (`src/core/admin.ts`) carga solo los recursos que necesita cada pantalla y conserva respuestas API en memoria, no en `localStorage`. **Estado Stripe actualizado 2026-10-20:** producción sigue en PR #20 y aún usa el alias heredado en el botón; en la rama local de PR #21 ya se llama al checkout directo. En este turno se corrigieron localmente los retornos de Checkout/portal hacia `/#/suscripcion`, el estado visible de confirmación y el webhook de pagos diferidos. El código local pasó build y suite API, pero el webhook real y Checkout Test Mode aún no se han verificado; los cambios no están desplegados. Seguir `docs/INCIDENTE-RETORNO-STRIPE-2026-10-20.md` y no afirmar que producción está corregida.
+La capa de hidratación remota (`src/core/remoto.ts`) carga catálogo y progreso antes de renderizar cualquier ruta autenticada, y solicita foro/certificados/quizzes según la ruta. La capa administrativa (`src/core/admin.ts`) carga solo los recursos que necesita cada pantalla y conserva respuestas API en memoria, no en `localStorage`. **Registro Stripe del corte 2026-10-20 (requiere revalidación):** el documento [`INCIDENTE-RETORNO-STRIPE-2026-10-20.md`](INCIDENTE-RETORNO-STRIPE-2026-10-20.md) conserva el hallazgo, propuestas y pruebas de aquel corte. Como la fuente pública cambió después, no tomar sus referencias a PR #20/#21 ni al checkout como estado actual. Antes de tocar Stripe, confirmar el flujo desplegado y la configuración real en Dashboard/Test Mode; no iniciar un pago real ni afirmar estado actual con este registro histórico.
 
 ### Módulos nuevos incorporados (septiembre 2026)
 

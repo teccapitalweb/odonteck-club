@@ -21,7 +21,17 @@ function notasHTML(k: Clase, cursoId: string) {
   ];
   const practicas = practicasBase.filter((x, i, lista) => lista.findIndex((y) => y.texto === x.texto) === i).slice(0, 4);
   const bloques = 1 + total + practicas.length;
-  return `<div class="notas-pro" data-notas-board="${esc(clave)}" data-notas-total="${total}">
+  const dialogId = `cuaderno-${clave.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+  return `<section class="notas-launcher" aria-label="Cuaderno de repaso de la clase">
+    <span class="notas-launcher__icon"><i data-lucide="notebook-pen" class="i"></i></span>
+    <div class="notas-launcher__copy"><span class="eyebrow">Repaso de clase</span><h3>Tu cuaderno clínico</h3><p>${total} conceptos, recuperación activa y espacio para tus notas personales.</p></div>
+    <button type="button" class="btn btn--brand notas-launcher__open" data-notas-open="${esc(dialogId)}" aria-haspopup="dialog"><i data-lucide="expand" class="i"></i>Abrir cuaderno</button>
+  </section>
+  <dialog class="notas-dialog" id="${esc(dialogId)}" aria-label="Cuaderno clínico de ${esc(k.titulo)}">
+    <div class="notas-dialog__frame">
+      <header class="notas-dialog__bar"><div><span class="eyebrow">${esc(k.titulo)}</span><strong>Cuaderno clínico</strong></div><button type="button" class="notas-dialog__close" data-notas-close aria-label="Cerrar cuaderno"><i data-lucide="x" class="i"></i></button></header>
+      <div class="notas-dialog__body">
+  <div class="notas-pro" data-notas-board="${esc(clave)}" data-notas-total="${total}">
     <header class="notas-pro__hero">
       <span class="notas-pro__hero-icon"><i data-lucide="notebook-pen" class="i"></i></span>
       <div><span class="eyebrow">Cuaderno clínico 360°</span><h3>De mirar la clase a dominarla</h3><p>Comprende, recupera de memoria, vuelve a la evidencia y construye tus propias notas.</p></div>
@@ -54,11 +64,14 @@ function notasHTML(k: Clase, cursoId: string) {
       <section class="notas-personal">
         <div class="notas-module__head"><span class="notas-module__icon"><i data-lucide="pencil-ruler" class="i"></i></span><div><span class="eyebrow">Tu espacio privado</span><h4>Bitácora de la clase</h4><p>Escribe conexiones, dudas o aplicaciones para tu práctica.</p></div></div>
         <div class="notas-personal__paper"><textarea class="input" data-notas-personal maxlength="1800" rows="8" placeholder="Ejemplo: El concepto que debo volver a revisar es…&#10;&#10;En mi práctica esto se relaciona con…" aria-label="Notas personales de esta clase"></textarea><span class="notas-personal__lines" aria-hidden="true"></span></div>
-        <footer class="notas-personal__footer"><span><i data-lucide="hard-drive" class="i"></i><b data-notas-save-state>Guardado sólo en este dispositivo</b></span><strong><b data-notas-characters>0</b>/1800</strong></footer>
+        <footer class="notas-personal__footer"><span><i data-lucide="${Datos.modo === 'api' ? 'cloud' : 'hard-drive'}" class="i"></i><b data-notas-save-state aria-live="polite">${Datos.modo === 'api' ? 'Cargando tus notas…' : 'Guardado sólo en este dispositivo'}</b></span><button type="button" class="notas-personal__retry" data-notas-retry hidden>Reintentar</button><strong><b data-notas-characters>0</b>/1800</strong></footer>
       </section>
     </div>
     <footer class="notas-pro__footer"><span><i data-lucide="badge-check" class="i"></i>Sistema disponible en todas las clases del catálogo</span><span><i data-lucide="shield-check" class="i"></i>Los datos clínicos visibles provienen del material ya cargado</span></footer>
-  </div>`;
+  </div>
+      </div>
+    </div>
+  </dialog>`;
 }
 
 function fichaHTML(k: Clase, cursoId: string, cursoTitulo: string) {

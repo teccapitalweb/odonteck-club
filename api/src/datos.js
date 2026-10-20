@@ -9,6 +9,7 @@ export const COL = Object.freeze({
   cursos: 'v2_cursos',
   progreso: 'v2_progreso',
   juegosClase: 'v2_juegos_clase',
+  notasClase: 'v2_notas_clase',
   certificados: 'v2_certificados',
   materiales: 'v2_materiales',
   eventos: 'v2_eventos',
