@@ -4,9 +4,13 @@
 
 ## Corte operativo confirmado · 2026-10-20
 
-La versión pública confirmada incluye PR #25, merge `57944994ae576caffdcaf522a16d8117298e65d5`. Cloudflare Pages deployment `9b2b5f62-e069-4fb5-a87c-931878f2ea4f` sirvió el commit `5794499`; `odonteck-club.pages.dev` y `www.odonteckconsulting.com` respondieron HTTP 200 y el bundle incluyó el arreglo de encabezado responsivo de Notas (`container-type:inline-size`). Esto sólo corrigió el encabezado que se aplastaba en una columna estrecha: **no** creó el cuaderno en pantalla amplia ni guardaba notas personales en perfil.
+La versión pública confirmada del corte anterior incluye PR #25, merge `57944994ae576caffdcaf522a16d8117298e65d5`. Cloudflare Pages deployment `9b2b5f62-e069-4fb5-a87c-931878f2ea4f` sirvió `5794499`.
 
-En la rama local `feat/cuaderno-dialogo-amplio-20261020` se implementó el acceso compacto, diálogo amplio y sincronización autenticada por UID a la API, más documentación y pruebas. Este trabajo aún **no** forma parte de producción. No se mezcla el `localStorage` previo con cuentas autenticadas; no se otorgan puntos por escribir/repasar cuaderno. El alcance, las decisiones y la separación local/producción están en [`DECISIONES-CUADERNO-CLASE-2026-10-20.md`](DECISIONES-CUADERNO-CLASE-2026-10-20.md).
+PR #26 (`64d87af560ac29df55b262be54000906527b448b`) ya está integrado en `main`; sus pruebas y el workflow de GitHub Pages pasaron. **Eso no significa que el dominio oficial tenga este corte:** el CNAME de `www.odonteckconsulting.com` apunta a Cloudflare Pages (`odonteck-club.pages.dev`), cuyo deployment más reciente sigue siendo `9b2b5f62-e069-4fb5-a87c-931878f2ea4f` / `5794499`. El artifact de GitHub Pages para `64d87af` sí se construyó, pero es otra superficie.
+
+El API de Railway sigue en el deployment `7f12434b-30df-4996-929e-13eeb97d48cd` / `879d87d`; el endpoint nuevo `GET /notas-clase/curso-a/1` respondió `404` sin token (el código nuevo debe responder `401`). Un trigger manual al servicio existente devolvió `Deploys have been paused temporarily`; el código de Railway no se ha actualizado. **No desplegar el frontend nuevo en Cloudflare hasta que Railway publique el API `64d87af` y el endpoint autenticado verifique `401` sin token.** Luego desplegar `dist/` con Wrangler al proyecto `odonteck-club`, rama `main`, y verificar ambos hashes y el dominio oficial. No cambiar variables, dominio ni pagos.
+
+PR #26 implementa el acceso compacto, diálogo amplio y sincronización autenticada por UID. No se mezcla el `localStorage` previo con cuentas autenticadas; no se otorgan puntos por escribir/repasar cuaderno. El alcance y las decisiones están en [`DECISIONES-CUADERNO-CLASE-2026-10-20.md`](DECISIONES-CUADERNO-CLASE-2026-10-20.md).
 
 PR #23 sigue siendo el antecedente funcional del minijuego persistido: guarda mecánica, finalización, mejor puntaje, intentos y fechas por UID; acredita 5 puntos por primera finalización por clase de forma idempotente y añade contador/logro. Su API es `GET /juegos-clase`, `POST /juegos-clase/:cursoId/:n`; colección `v2_juegos_clase`. No se debe mezclar ese flujo con el cuaderno.
 
