@@ -1087,6 +1087,18 @@ document.addEventListener('click', async (e) => {
     if (Datos.modo === 'api') { try { const r = await api<{ url: string }>('/stripe/portal', { method: 'POST' }); location.href = r.url; } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     else toast('El portal de facturación de Stripe se abre con el backend conectado.', 'credit-card');
   }
+  if (el.closest('[data-refrescar-pago]')) {
+    const boton = el.closest<HTMLButtonElement>('[data-refrescar-pago]')!;
+    boton.disabled = true;
+    try {
+      await Auth.refrescarPerfil();
+      render();
+      toast(Auth.usuario?.esVip ? 'Membresía activada. ¡Bienvenido a VIP!' : 'El pago aún se está confirmando. Vuelve a revisar en unos segundos.', Auth.usuario?.esVip ? 'badge-check' : 'clock-3');
+    } catch (err) {
+      boton.disabled = false;
+      toast(mensajeError(err), 'alert-triangle');
+    }
+  }
 
   if (el.closest('[data-imprimir]')) window.print();
   const share = el.closest<HTMLElement>('[data-compartir-cert], [data-compartir]');
