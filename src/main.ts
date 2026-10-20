@@ -49,7 +49,7 @@ import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco }
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { abrirJuegoClase } from './ui/juego-clase';
-import { juegoClaseCompletado } from './core/juego-clase';
+import { juegoClaseCompletado, type RegistroJuegoClase, type TipoJuegoClase } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -555,6 +555,12 @@ function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actua
     portadaCurso: c.portada,
     notas: k.notas,
     siguienteTitulo: siguiente?.titulo,
+    onCompletar: Datos.modo === 'api' ? async (puntaje: number, tipo: TipoJuegoClase) => {
+      const resultado = await api<{ juego: RegistroJuegoClase; recompensas?: NonNullable<PremioActividad> }>(`/juegos-clase/${encodeURIComponent(cursoId)}/${n}`, {
+        method: 'POST', json: { puntaje, tipo },
+      });
+      return resultado;
+    } : undefined,
     onContinuar: () => navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`),
     onCerrar: actualizarAlCerrar ? () => render() : undefined,
   });

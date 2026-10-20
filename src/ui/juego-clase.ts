@@ -2,10 +2,13 @@ import { createIcons, icons } from 'lucide';
 import {
   crearJuegoClase,
   lineaEntreCeldas,
+  registrarJuegoClaseRemoto,
+  type RegistroJuegoClase,
   type JuegoClase,
   type TipoJuegoClase,
 } from '../core/juego-clase';
 import type { Nota } from '../core/datos';
+import type { PremioRecompensas } from '../core/recompensas';
 import { esc } from './partials';
 
 const PROGRESO_KEY = 'odonteck-club:juegos-clase:v1';
@@ -19,6 +22,7 @@ type OpcionesJuego = {
   portadaCurso?: string;
   notas?: Nota;
   siguienteTitulo?: string;
+  onCompletar?(puntaje: number, tipo: TipoJuegoClase): Promise<{ juego: RegistroJuegoClase; recompensas?: PremioRecompensas }>;
   onContinuar(): void;
   onCerrar?(): void;
 };
@@ -166,8 +170,28 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
   let fichasElegidas: string[] = []; // IDs de letrasBarajadas
   let pistasPalabra = 0;
 
-  const terminar = (puntaje: number) => {
-    guardarMejorPuntaje(juego.clave, puntaje);
+  let guardandoResultado = false;
+  let puntajePendiente: number | null = null;
+  const terminar = async (puntaje: number) => {
+    if (guardandoResultado) return;
+    guardandoResultado = true;
+    puntajePendiente = puntaje;
+    if (opciones.onCompletar) {
+      dialogo.innerHTML = `<div class="lesson-game__shell lesson-game__shell--result"><section class="lesson-game__result lesson-game__result--simple" role="status" aria-live="polite"><span class="lesson-game__result-icon"><i data-lucide="cloud-upload"></i></span><h2>Guardando tu repaso…</h2><p class="game-result__lesson">Tus puntos se añadirán a tu perfil.</p></section></div>`;
+      createIcons({ icons, attrs: { 'aria-hidden': 'true' } });
+      try {
+        const guardado = await opciones.onCompletar(puntaje, tipo);
+        registrarJuegoClaseRemoto(guardado.juego);
+        if (guardado.recompensas) window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: guardado.recompensas }));
+      } catch {
+        guardandoResultado = false;
+        dialogo.innerHTML = `<div class="lesson-game__shell lesson-game__shell--result"><button type="button" class="lesson-game__close" data-game-close aria-label="Cerrar juego"><i data-lucide="x"></i></button><section class="lesson-game__result lesson-game__result--simple" role="alert"><span class="lesson-game__result-icon"><i data-lucide="cloud-off"></i></span><h2>No se guardó todavía</h2><p class="game-result__lesson">Conservamos tu resultado en esta pantalla. Reintenta para guardar el avance y los puntos en tu perfil.</p><button type="button" class="btn btn--brand" data-game-save-retry><i data-lucide="rotate-cw"></i>Reintentar guardado</button></section></div>`;
+        createIcons({ icons, attrs: { 'aria-hidden': 'true' } });
+        return;
+      }
+    } else {
+      guardarMejorPuntaje(juego.clave, puntaje);
+    }
     window.dispatchEvent(new CustomEvent('juego-clase:completado', {
       detail: { cursoId: opciones.cursoId, n: opciones.n, puntaje, tipo },
     }));
@@ -175,6 +199,8 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
       <button type="button" class="lesson-game__close" data-game-close aria-label="Cerrar juego"><i data-lucide="x"></i></button>
       ${resultadoHTML(opciones, juego, puntaje)}
     </div>`;
+    guardandoResultado = false;
+    puntajePendiente = null;
     createIcons({ icons, attrs: { 'aria-hidden': 'true' } });
   };
 
@@ -800,6 +826,11 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
 
     if (boton.matches('[data-game-close]')) {
       dialogo.close();
+      return;
+    }
+
+    if (boton.matches('[data-game-save-retry]') && puntajePendiente !== null) {
+      void terminar(puntajePendiente);
       return;
     }
 

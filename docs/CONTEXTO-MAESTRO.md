@@ -465,3 +465,8 @@ OdonTeck no está listo únicamente porque compile o se vea completo. Para decla
 - dominio, CORS, Auth y PWA verificados en móvil;
 - sin secretos ni datos de pacientes en cliente, logs o repositorio;
 - rollback documentado antes del cambio definitivo.
+# Actualización local · perfil, puntos y juegos por clase · 2026-10-20
+
+El cierre de cada clase ahora contempla persistencia de minijuegos en API (rama local `feat/juegos-clase-perfil-puntos-20261020`, aún no publicada en este corte). Cada registro queda ligado al UID autenticado en `v2_juegos_clase`, contiene mecánica, completado, mejor puntaje, cantidad de intentos y marcas de tiempo; se consulta por `GET /juegos-clase`. El guardado exige que la vista de la clase exista. La primera finalización acredita 5 puntos por clase mediante el libro mayor idempotente de recompensas; volver a jugar permite mejorar el puntaje, pero no duplicar puntos. Se añade el contador/logro `Repaso constante` (10 juegos) y en demo se refleja el mismo progreso local.
+
+Verificación local del cambio: `api npm run check`, `api npm test` (178 pass, 0 fail, 1 skip intencional; 179 pruebas totales). Build frontend y auditoría de cobertura ya pasan; sigue pendiente smoke de interfaz/API real. Este cambio no está desplegado: publicar API antes del frontend porque el cliente API requiere `GET /juegos-clase` durante hidratación. No se hicieron pruebas autenticadas con cuentas reales ni se modificaron Stripe, membresías o canjes.

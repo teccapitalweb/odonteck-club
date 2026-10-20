@@ -7,6 +7,7 @@ import { Certificados, type CertificadoRemoto } from './certificados';
 import { RetosRemotos } from './retos-remotos';
 import { Recompensas } from './recompensas';
 import { Directorio } from './directorio';
+import { configurarJuegosClaseAPI, hidratarJuegosClase, type RegistroJuegoClase } from './juego-clase';
 
 interface CatalogoRemoto {
   cursos?: unknown[];
@@ -112,6 +113,7 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
   if (cargado && !forzar) return cargarExtrasDeRuta(path, mismaRuta);
 
   if (!pendiente) {
+    configurarJuegosClaseAPI(true);
     const gen = generacion;
     const nueva: Promise<void> = (async () => {
       void Recompensas.cargar().catch(() => null);
@@ -120,9 +122,10 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
       // solo puede bloquear cuando el servidor confirmó el estado de la elección.
       const cursoGratisP = CursoGratis.cargar().catch(() => { CursoGratis.hidratar(null); return null; });
       // /catalogo lee los desbloqueos del estado guardado; la sincronización de recompensas solo suma puntos y logros.
-      const [catalogo, progreso] = await Promise.all([
+      const [catalogo, progreso, juegosClase] = await Promise.all([
         api<CatalogoRemoto>('/catalogo'),
         api<Record<string, ProgresoCurso>>('/progreso').catch(() => null),
+        api<RegistroJuegoClase[]>('/juegos-clase'),
       ]);
       if (gen !== generacion) return;
       await cursoGratisP;
@@ -144,6 +147,7 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
       Datos.hidratarAdmin('config', config);
 
       if (progreso) Progreso.hidratar(progreso);
+      hidratarJuegosClase(juegosClase);
 
       cargado = true;
     })().finally(() => { if (pendiente === nueva) pendiente = null; });
@@ -174,4 +178,5 @@ export function invalidarClub() {
   Comunidad.hidratar([]);
   invalidarDirectorio();
   Directorio.hidratar({ perfiles: [], oportunidades: [], conexiones: [], miPerfil: null });
+  configurarJuegosClaseAPI(false);
 }

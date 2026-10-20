@@ -18,7 +18,7 @@ describe('públicas, autenticación y cabeceras', () => {
   });
 
   test('401 sin token, con token inválido y con token revocado', async () => {
-    for (const ruta of ['/me', '/catalogo', '/progreso', '/certificados', '/foro']) {
+    for (const ruta of ['/me', '/catalogo', '/progreso', '/certificados', '/foro', '/juegos-clase']) {
       const res = await request(env.app).get(ruta).expect(401);
       assert.equal(res.body.error, 'no_autenticado');
       assert.equal(typeof res.body.mensaje, 'string');
@@ -28,6 +28,7 @@ describe('públicas, autenticación y cabeceras', () => {
     const revocado = await request(env.app).get('/me').set(bearer(TOKENS.revocado)).expect(401);
     assert.equal(revocado.body.error, 'sesion_revocada');
     await request(env.app).post('/video/token').send({ cursoId: 'curso-a', n: 1 }).expect(401);
+    await request(env.app).post('/juegos-clase/curso-a/1').send({ tipo: 'memorama', puntaje: 100 }).expect(401);
   });
 
   test('verifyIdToken se llama con checkRevoked = true', async () => {
@@ -468,6 +469,52 @@ describe('materiales', () => {
 });
 
 describe('recompensas y puntos', () => {
+  test('un juego se guarda en el perfil y acredita puntos una sola vez, tras ver la clase', async () => {
+    const sinVer = await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ tipo: 'memorama', puntaje: 80 }).expect(409);
+    assert.equal(sinVer.body.error, 'clase_no_vista');
+
+    await vista(TOKENS.free, 'curso-a', 1).expect(200);
+    const primero = await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ tipo: 'memorama', puntaje: 80 }).expect(200);
+    assert.equal(primero.body.juego.cursoId, 'curso-a');
+    assert.equal(primero.body.juego.n, 1);
+    assert.equal(primero.body.juego.tipo, 'memorama');
+    assert.equal(primero.body.juego.mejorPuntaje, 80);
+    assert.equal(primero.body.juego.intentos, 1);
+    assert.equal('uid' in primero.body.juego, false);
+    assert.equal(primero.body.recompensas.puntosGanados, 5);
+    assert.equal(primero.body.recompensas.saldo, 15, 'incluye 10 por clase y 5 por juego');
+
+    const segundo = await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ tipo: 'memorama', puntaje: 65 }).expect(200);
+    assert.equal(segundo.body.juego.mejorPuntaje, 80, 'conserva el mejor resultado');
+    assert.equal(segundo.body.juego.intentos, 2);
+    assert.equal(segundo.body.recompensas.puntosGanados, 0, 'el reintento no genera puntos extra');
+    assert.equal(segundo.body.recompensas.saldo, 15);
+
+    const perfil = await request(env.app).get('/juegos-clase').set(bearer(TOKENS.free)).expect(200);
+    assert.deepEqual(perfil.body.map(({ cursoId, n, tipo, completado, mejorPuntaje, intentos }) => ({ cursoId, n, tipo, completado, mejorPuntaje, intentos })), [
+      { cursoId: 'curso-a', n: 1, tipo: 'memorama', completado: true, mejorPuntaje: 80, intentos: 2 },
+    ]);
+    assert.equal(env.db.rutas('v2_juegos_clase').length, 1);
+
+    const recompensas = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
+    assert.equal(recompensas.body.saldo, 15);
+    assert.equal(recompensas.body.contadores.juegosClase, 1);
+    assert.equal(recompensas.body.movimientos.filter((m) => m.tipo === 'juego-clase').length, 1);
+  });
+
+  test('el endpoint de juegos valida mecánica, puntaje y acceso a la clase', async () => {
+    await vista(TOKENS.free, 'curso-a', 1).expect(200);
+    await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ tipo: 'quiz', puntaje: 100 }).expect(400);
+    await request(env.app).post('/juegos-clase/curso-a/1').set(bearer(TOKENS.free))
+      .send({ tipo: 'sopa', puntaje: 101 }).expect(400);
+    await request(env.app).post('/juegos-clase/curso-a/3').set(bearer(TOKENS.free))
+      .send({ tipo: 'rompecabezas', puntaje: 90 }).expect(403);
+  });
+
   test('reconoce una vez la membresía pagada de usuarios anteriores', async () => {
     const primero = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.vip)).expect(200);
     assert.equal(primero.body.saldo, 300);
