@@ -36,7 +36,7 @@ const META_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo: string; des
   rompecabezas: {
     etiqueta: 'Rompecabezas visual',
     titulo: 'Reconstruye la imagen',
-    descripcion: 'Intercambia cuatro piezas para completar la imagen.',
+    descripcion: 'Intercambia 16 piezas para completar la imagen.',
     icono: 'puzzle',
   },
   sopa: {
@@ -131,7 +131,7 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
   const meta = META_JUEGO[tipo];
   let accionFinal = false;
 
-  // ── 1. Estado Rompecabezas Visual (Imagen 3x2) ──
+  // ── 1. Estado Rompecabezas Visual (16 piezas) ──
   let ordenPiezas = [...juego.rompecabezasImagen.ordenInicial];
   let piezaSeleccionadaPos: number | null = null;
   let mostrarGuia = false;
@@ -249,7 +249,8 @@ export function abrirJuegoClase(opciones: OpcionesJuego) {
 
         <div class="image-puzzle-strip">
           ${juego.terminos.slice(0, 2).map((t, idx) => {
-            const desbloqueado = colocadasBien >= (idx + 1) * 2;
+            const piezasParaDesbloquear = Math.ceil(piezas.length * (idx + 1) / 3);
+            const desbloqueado = colocadasBien >= piezasParaDesbloquear;
             return `<div class="image-puzzle-fact ${desbloqueado ? 'is-unlocked' : ''}">
               <span class="image-puzzle-fact__icon"><i data-lucide="${desbloqueado ? 'check-circle-2' : 'lock'}"></i></span>
               <div>

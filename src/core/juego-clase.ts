@@ -33,7 +33,7 @@ export type SopaDeLetras = {
 };
 
 export type PiezaImagen = {
-  indiceCorrecto: number; // 0..3 (tablero 2 × 2)
+  indiceCorrecto: number;
   fila: number;
   col: number;
   concepto: string;
@@ -85,11 +85,20 @@ export function obtenerPuntajeJuego(clave: string): number {
   }
 }
 
+export function juegoClaseCompletado(clave: string): boolean {
+  try {
+    const datos = JSON.parse(localStorage.getItem(PROGRESO_JUEGO_KEY) || '{}');
+    return Object.prototype.hasOwnProperty.call(datos, clave);
+  } catch {
+    return false;
+  }
+}
+
 export const INFO_TIPO_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo: string; resumen: string; icono: string }> = {
   rompecabezas: {
     etiqueta: 'Rompecabezas visual',
     titulo: 'Arma la imagen de la clase',
-    resumen: 'Reconstruye la imagen clínica en cuatro piezas.',
+    resumen: 'Reconstruye la imagen clínica en 16 piezas.',
     icono: 'puzzle',
   },
   sopa: {
@@ -126,7 +135,31 @@ const IMAGENES_ORTODONCIA: Record<number, string> = {
   5: '/cursos/diagnostico-en-ortodoncia-para-odontologos-generales/clase-05-trazado-casos.png',
 };
 
+/** Una ilustración original por cada clase que tiene rompecabezas. */
+export const IMAGENES_ROMPECABEZAS: Record<string, string> = {
+  'diagnostico-en-ortodoncia-para-odontologos-generales:1': '/juegos/rompecabezas/diagnostico-en-ortodoncia-para-odontologos-generales-clase-1.jpg',
+  'diagnostico-y-clasificacion-de-la-caries-dental:3': '/juegos/rompecabezas/diagnostico-y-clasificacion-de-la-caries-dental-clase-3.jpg',
+  'endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos:1': '/juegos/rompecabezas/endodoncia-pediatrica-manejo-de-los-canales-radiculares-en-ninos-clase-1.jpg',
+  'extracciones-simples:3': '/juegos/rompecabezas/extracciones-simples-clase-3.jpg',
+  'ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales:2': '/juegos/rompecabezas/ferulas-de-contencion-en-odontopediatria-tipos-tiempos-y-materiales-clase-2.jpg',
+  'manejo-de-abscesos-periodontales:3': '/juegos/rompecabezas/manejo-de-abscesos-periodontales-clase-3.jpg',
+  'materiales-dentales-restauradores-indicaciones-y-usos:3': '/juegos/rompecabezas/materiales-dentales-restauradores-indicaciones-y-usos-clase-3.jpg',
+  'ortodoncia-lingual-y-estetica:2': '/juegos/rompecabezas/ortodoncia-lingual-y-estetica-clase-2.jpg',
+  'patologias-dentales-mas-comunes-en-la-infancia:3': '/juegos/rompecabezas/patologias-dentales-mas-comunes-en-la-infancia-clase-3.jpg',
+  'periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa:2': '/juegos/rompecabezas/periodoncia-estetica-manejo-de-encia-y-diseno-de-sonrisa-clase-2.jpg',
+  'periodoncia-estetica-y-plastica:3': '/juegos/rompecabezas/periodoncia-estetica-y-plastica-clase-3.jpg',
+  'raspado-y-alisado-radicular:1': '/juegos/rompecabezas/raspado-y-alisado-radicular-clase-1.jpg',
+  'rehabilitacion-oral-estetica-con-coronas-y-puentes:3': '/juegos/rompecabezas/rehabilitacion-oral-estetica-con-coronas-y-puentes-clase-3.jpg',
+  'resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion:2': '/juegos/rompecabezas/resinas-compuestas-seleccion-manipulacion-y-tecnicas-de-estratificacion-clase-2.jpg',
+  'retroobturacion-en-endodoncia-tecnicas-y-materiales:2': '/juegos/rompecabezas/retroobturacion-en-endodoncia-tecnicas-y-materiales-clase-2.jpg',
+  'salud-oral-en-pacientes-con-condiciones-sistemicas:2': '/juegos/rompecabezas/salud-oral-en-pacientes-con-condiciones-sistemicas-clase-2.jpg',
+  'tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal:2': '/juegos/rompecabezas/tratamientos-periodontales-no-quirurgicos-tecnicas-clinicas-para-el-control-de-la-enfermedad-periodontal-clase-2.jpg',
+  'traumatismos-dentales-en-ninos:1': '/juegos/rompecabezas/traumatismos-dentales-en-ninos-clase-1.jpg',
+};
+
 export function resolverImagenClase(cursoId: string, n: number, portadaCurso?: string): string {
+  const imagenRompecabezas = IMAGENES_ROMPECABEZAS[`${cursoId}:${n}`];
+  if (imagenRompecabezas) return imagenRompecabezas;
   if (cursoId === 'diagnostico-en-ortodoncia-para-odontologos-generales' && IMAGENES_ORTODONCIA[n]) {
     return IMAGENES_ORTODONCIA[n];
   }
@@ -441,11 +474,12 @@ export function crearJuegoClase(
   if (terminos.length < 3) return null;
 
   const tipo = elegirTipoJuego(cursoId, n);
+  if (tipo === 'rompecabezas' && !IMAGENES_ROMPECABEZAS[`${cursoId}:${n}`]) return null;
   const imagen = resolverImagenClase(cursoId, n, portadaCurso);
 
-  // 1. Rompecabezas visual breve (2 × 2 piezas)
-  const cols = 2;
-  const rows = 2;
+  // 1. Rompecabezas visual (4 × 4 piezas)
+  const cols = 4;
+  const rows = 4;
   const totalPiezas = cols * rows;
   const textosConceptos = notas.conceptos.map((c) => c.texto);
   const piezas: PiezaImagen[] = Array.from({ length: totalPiezas }, (_, idx) => ({
@@ -457,7 +491,7 @@ export function crearJuegoClase(
   const baseIndices = piezas.map((p) => p.indiceCorrecto);
   let ordenInicial = barajar(baseIndices, semilla + 19);
   if (ordenInicial.every((val, i) => val === i)) {
-    ordenInicial = [2, 0, 3, 1];
+    ordenInicial = [...baseIndices.slice(1), baseIndices[0]];
   }
 
   // 2. Sopa de letras
