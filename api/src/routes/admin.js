@@ -1,4 +1,5 @@
 // Rutas de administración (claim `admin: true`).
+import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
   COL,
@@ -379,7 +380,8 @@ export function rutasAdmin(ctx) {
 
   // ---------- Cupones (días de acceso canjeables) ----------
   const ALFABETO_CUPON = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sin O/0/I/1 para evitar confusiones
-  const generarCodigo = () => Array.from({ length: 8 }, () => ALFABETO_CUPON[Math.floor(Math.random() * ALFABETO_CUPON.length)]).join('');
+  // Los códigos funcionan como un secreto (dan acceso): aleatoriedad criptográfica y 12 caracteres (~32^12) para que no se puedan adivinar por fuerza bruta.
+  const generarCodigo = () => Array.from({ length: 12 }, () => ALFABETO_CUPON[randomInt(ALFABETO_CUPON.length)]).join('');
   const normalizarCodigo = (v) => String(v ?? '').trim().toUpperCase().replace(/\s+/g, '');
   const CODIGO_VALIDO = /^[A-Z0-9-]{4,24}$/;
 

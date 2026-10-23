@@ -19,7 +19,7 @@ describe('cupones: administración', () => {
 
   test('crear genera código, usosMax por defecto 1 y aparece en la lista', async () => {
     const r = await admin('post', '/admin/cupones').send({ dias: 30, etiqueta: 'Bienvenida' }).expect(201);
-    assert.match(r.body.codigo, /^[A-Z0-9]{8}$/);
+    assert.match(r.body.codigo, /^[A-Z0-9]{12}$/);
     assert.equal(r.body.dias, 30);
     assert.equal(r.body.usosMax, 1);
     assert.equal(r.body.usados, 0);
@@ -103,5 +103,11 @@ describe('cupones: canje por el miembro', () => {
   test('canjear exige sesión', async () => {
     await crear({ codigo: 'AUTH', dias: 30 });
     await request(env.app).post('/cupones/canjear').send({ codigo: 'AUTH' }).expect(401);
+  });
+
+  test('limita los intentos de canje por usuario (anti fuerza bruta)', async () => {
+    for (let i = 0; i < 10; i++) await canjear(TOKENS.free, 'NOEXISTEX').expect(404);
+    const r = await canjear(TOKENS.free, 'NOEXISTEX').expect(429);
+    assert.equal(r.body.error, 'limite_alcanzado');
   });
 });

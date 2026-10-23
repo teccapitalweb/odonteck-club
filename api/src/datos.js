@@ -33,6 +33,7 @@ export const COL = Object.freeze({
   cursoGratis: 'v2_curso_gratis',
   cupones: 'v2_cupones',
   cuponesCanjes: 'v2_cupones_canjes',
+  cuponesIntentos: 'v2_cupones_intentos',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

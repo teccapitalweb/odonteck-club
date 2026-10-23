@@ -8,7 +8,7 @@ import {
 } from '../lib/acceso.js';
 import { firmarEmbedBunny } from '../lib/bunny.js';
 import { MAX_VISTAS_PARA_CAMBIAR, enVentanaDeCambio, estadoCursoGratis, leerCursoGratis } from '../lib/curso-gratis.js';
-import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
+import { HttpError, conflicto, demasiadasSolicitudes, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
 import { DIA_MS, aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
@@ -1164,6 +1164,15 @@ export function rutasMiembro(ctx) {
     if (!/^[A-Z0-9-]{4,24}$/.test(codigo)) throw invalido('Ese código no es válido.', 'codigo_invalido');
     const uid = req.usuario.uid;
     const ahora = ctx.now();
+    // Rate limit por usuario: el código es un secreto que da acceso, así que limitamos los intentos para frenar la fuerza bruta.
+    const intentosRef = db.collection(COL.cuponesIntentos).doc(uid);
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(intentosRef);
+      const desde = ahora.getTime() - 60 * 60 * 1000;
+      const recientes = (snap.exists ? snap.data().intentos ?? [] : []).filter((t) => (aMillis(t) ?? 0) > desde);
+      if (recientes.length >= 10) throw demasiadasSolicitudes('Demasiados intentos de canje. Espera un momento e inténtalo de nuevo.');
+      tx.set(intentosRef, { uid, intentos: [...recientes, ahora.toISOString()].slice(-10) });
+    });
     const cuponRef = db.collection(COL.cupones).doc(codigo);
     const canjeRef = db.collection(COL.cuponesCanjes).doc(`${codigo}__${uid}`);
     const cortesiaRef = db.collection(COL.cortesias).doc(uid);
