@@ -427,7 +427,8 @@ function setTheme(t: 'light' | 'dark') {
 function toast(msg: string, icon = 'check') {
   let host = document.querySelector('.toast-host');
   if (!host) { host = document.createElement('div'); host.className = 'toast-host'; document.body.appendChild(host); }
-  const t = document.createElement('div'); t.className = 'toast'; t.innerHTML = `<i data-lucide="${icon}" class="i"></i>${esc(msg)}`;
+  const esError = icon === 'alert-triangle' || icon === 'shield-alert' || icon === 'x-circle';
+  const t = document.createElement('div'); t.className = `toast${esError ? ' toast--error' : ''}`; t.innerHTML = `<i data-lucide="${icon}" class="i"></i>${esc(msg)}`;
   host.appendChild(t); createIcons({ icons }); setTimeout(() => t.remove(), 3200);
 }
 

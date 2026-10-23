@@ -15,13 +15,15 @@ export function adminCursos() {
   return `
   ${adminHead('Cursos', `${l.length} cursos · ${l.reduce((a, c) => a + c.clases.length, 0)} clases · ${l.filter((c) => c.publicado !== false).length} publicados`,
     `<a class="btn btn--brand btn--pill-arrow" href="#/admin/cursos/nuevo">Nuevo curso <span class="arrow"><i data-lucide="plus" class="i"></i></span></a>`)}
-  <div class="card dtable-wrap"><table class="dtable">
-    <thead><tr><th style="width:44px">#</th><th>Curso</th><th>Área</th><th>Clases</th><th>Títulos</th><th>Quizzes</th><th>Estado</th><th style="width:120px"></th></tr></thead>
+  <div data-bulk-cursos></div>
+  <div class="card dtable-wrap"><table class="dtable" data-tabla="cursos">
+    <thead><tr><th class="dtable__check"><input type="checkbox" data-bulk-all aria-label="Seleccionar todos"></th><th style="width:60px">#</th><th>Curso</th><th>Área</th><th>Clases</th><th>Títulos</th><th>Quizzes</th><th>Estado</th><th style="width:120px"></th></tr></thead>
     <tbody>${l.map((c, i) => {
       const genericos = c.clases.filter((k) => /^Clase \d+$/.test(k.titulo)).length;
       const qz = quizzes.filter((q) => q.cursoId === c.id);
-      return `<tr>
-        <td class="mono faint">${i + 1}</td>
+      return `<tr data-curso-fila="${c.id}">
+        <td class="dtable__check"><input type="checkbox" data-bulk-item="${c.id}" aria-label="Seleccionar ${esc(c.titulo)}"></td>
+        <td class="mono faint"><span class="row" style="gap:6px;align-items:center;flex-wrap:nowrap"><span class="drag-handle" draggable="true" data-arrastre="${c.id}" title="Arrastra para reordenar"><i data-lucide="grip-vertical" class="i"></i></span>${i + 1}</span></td>
         <td><a class="dtable__main" href="#/admin/cursos/${c.id}"><img src="${c.portada}" alt=""><span><strong>${esc(c.titulo)}</strong><br><span class="faint">${esc(c.instructor)}</span></span></a></td>
         <td>${esc(c.area)}</td><td class="mono">${c.clases.length}</td>
         <td>${genericos ? `<span class="chip chip--warn">${genericos} sin título</span>` : '<span class="chip chip--accent">Completos</span>'}</td>
@@ -186,9 +188,11 @@ export function adminMateriales() {
   return `
   ${adminHead('Materiales', `${l.length} recursos · ${l.filter((m) => m.estado === 'disponible').length} disponibles`,
     `<a class="btn btn--brand btn--pill-arrow" href="#/admin/materiales/nuevo">Nuevo material <span class="arrow"><i data-lucide="plus" class="i"></i></span></a>`)}
-  <div class="card dtable-wrap"><table class="dtable">
-    <thead><tr><th>Material</th><th>Tipo</th><th>Área</th><th>Págs.</th><th>Estado</th><th style="width:60px"></th></tr></thead>
-    <tbody>${l.map((m) => `<tr>
+  <div data-bulk-materiales></div>
+  <div class="card dtable-wrap"><table class="dtable" data-tabla="materiales">
+    <thead><tr><th class="dtable__check"><input type="checkbox" data-bulk-all aria-label="Seleccionar todos"></th><th>Material</th><th>Tipo</th><th>Área</th><th>Págs.</th><th>Estado</th><th style="width:60px"></th></tr></thead>
+    <tbody>${l.map((m) => `<tr data-material-fila="${m.id}">
+      <td class="dtable__check"><input type="checkbox" data-bulk-item="${m.id}" aria-label="Seleccionar ${esc(m.titulo)}"></td>
       <td><a class="dtable__main dtable__main--book" href="#/admin/materiales/${m.id}"><img src="${m.portada}" alt=""><span><strong>${esc(m.titulo)}</strong><br><span class="faint">${esc(m.categoria)}</span></span></a></td>
       <td>${esc(m.tipo)}</td><td>${esc(m.area)}</td><td class="mono">${m.paginas}</td><td>${estado(m.estado)}</td>
       <td><a class="btn btn--ghost btn--icon btn--xs" href="#/admin/materiales/${m.id}"><i data-lucide="pencil" class="i"></i></a></td></tr>`).join('')}</tbody></table></div>`;
