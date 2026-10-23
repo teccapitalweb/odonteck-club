@@ -207,6 +207,27 @@ export async function reordenarCursosAdmin(ids: string[]) {
   Datos.hidratarAdmin('cursos', lista);
 }
 
+export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: boolean) {
+  if (Datos.modo === 'demo') {
+    ids.forEach((id) => { const c = Datos.cursos().find((x) => x.id === id); if (c) { c.publicado = publicado; Datos.guardarCurso(c); } });
+    return;
+  }
+  await Promise.all(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { publicado } })));
+  const lista = Datos.cursos();
+  ids.forEach((id) => { const c = lista.find((x) => x.id === id); if (c) c.publicado = publicado; });
+  Datos.hidratarAdmin('cursos', lista);
+  cargados.add('cursos');
+}
+
+export async function borrarCursosAdmin(ids: string[]) {
+  if (Datos.modo === 'demo') { ids.forEach((id) => Datos.borrarCurso(id)); return; }
+  const resultados = await Promise.allSettled(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'DELETE' })));
+  const ok = ids.filter((_, i) => resultados[i].status === 'fulfilled');
+  Datos.hidratarAdmin('cursos', Datos.cursos().filter((c) => !ok.includes(c.id)));
+  const fallido = resultados.find((r) => r.status === 'rejected');
+  if (fallido) throw (fallido as PromiseRejectedResult).reason;
+}
+
 const materialParaApi = (m: Material) => ({
   id: m.id, titulo: m.titulo, tipo: m.tipo, categoria: m.categoria, area: m.area, autor: m.autor, paginas: m.paginas,
   portada: m.portada || null, cursoId: m.cursoId || null, descripcion: m.descripcion, estado: m.estado, gratis: m.gratis === true,
@@ -240,6 +261,27 @@ export async function guardarMaterialAdmin(m: Material, nuevo: boolean, archivos
 export async function borrarMaterialAdmin(id: string) {
   if (Datos.modo === 'demo') Datos.borrarMaterial(id);
   else { await api(`/admin/materiales/${encodeURIComponent(id)}`, { method: 'DELETE' }); Datos.hidratarAdmin('materiales', Datos.materiales().filter((m) => m.id !== id)); }
+}
+
+export async function cambiarEstadoMaterialesAdmin(ids: string[], estado: Material['estado']) {
+  if (Datos.modo === 'demo') {
+    ids.forEach((id) => { const m = Datos.materiales().find((x) => x.id === id); if (m) { m.estado = estado; Datos.guardarMaterial(m); } });
+    return;
+  }
+  await Promise.all(ids.map((id) => api(`/admin/materiales/${encodeURIComponent(id)}`, { method: 'PATCH', json: { estado } })));
+  const lista = Datos.materiales();
+  ids.forEach((id) => { const m = lista.find((x) => x.id === id); if (m) m.estado = estado; });
+  Datos.hidratarAdmin('materiales', lista);
+  cargados.add('materiales');
+}
+
+export async function borrarMaterialesAdmin(ids: string[]) {
+  if (Datos.modo === 'demo') { ids.forEach((id) => Datos.borrarMaterial(id)); return; }
+  const resultados = await Promise.allSettled(ids.map((id) => api(`/admin/materiales/${encodeURIComponent(id)}`, { method: 'DELETE' })));
+  const ok = ids.filter((_, i) => resultados[i].status === 'fulfilled');
+  Datos.hidratarAdmin('materiales', Datos.materiales().filter((m) => !ok.includes(m.id)));
+  const fallido = resultados.find((r) => r.status === 'rejected');
+  if (fallido) throw (fallido as PromiseRejectedResult).reason;
 }
 
 export async function guardarEventoAdmin(e: Evento, nuevo: boolean) {
