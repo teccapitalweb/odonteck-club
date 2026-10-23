@@ -10,7 +10,7 @@ import { firmarEmbedBunny } from '../lib/bunny.js';
 import { MAX_VISTAS_PARA_CAMBIAR, enVentanaDeCambio, estadoCursoGratis, leerCursoGratis } from '../lib/curso-gratis.js';
 import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
-import { aMillis } from '../lib/fechas.js';
+import { DIA_MS, aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
 import { materialOficialPorId, materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
@@ -1156,6 +1156,35 @@ export function rutasMiembro(ctx) {
       return true;
     });
     res.json({ reservado });
+  }));
+
+  // Canjear un cupón: agrega días de acceso (cortesía) de forma idempotente por usuario.
+  r.post('/cupones/canjear', auth, h(async (req, res) => {
+    const codigo = String(cuerpo(req).codigo ?? '').trim().toUpperCase().replace(/\s+/g, '');
+    if (!/^[A-Z0-9-]{4,24}$/.test(codigo)) throw invalido('Ese código no es válido.', 'codigo_invalido');
+    const uid = req.usuario.uid;
+    const ahora = ctx.now();
+    const cuponRef = db.collection(COL.cupones).doc(codigo);
+    const canjeRef = db.collection(COL.cuponesCanjes).doc(`${codigo}__${uid}`);
+    const cortesiaRef = db.collection(COL.cortesias).doc(uid);
+    const resultado = await db.runTransaction(async (tx) => {
+      const [cuponSnap, canjeSnap, cortesiaSnap] = await Promise.all([tx.get(cuponRef), tx.get(canjeRef), tx.get(cortesiaRef)]);
+      if (!cuponSnap.exists) throw noEncontrado('Ese cupón no existe o ya no está disponible.');
+      const cupon = cuponSnap.data();
+      if (cupon.estado !== 'activo') throw conflicto('Este cupón ya no está disponible.', 'cupon_no_disponible');
+      if (cupon.vence && (aMillis(cupon.vence) ?? 0) < ahora.getTime()) throw conflicto('Este cupón ya venció.', 'cupon_vencido');
+      if (cupon.usosMax > 0 && (cupon.usados ?? 0) >= cupon.usosMax) throw conflicto('Este cupón ya alcanzó su límite de usos.', 'cupon_agotado');
+      if (canjeSnap.exists) throw conflicto('Ya habías canjeado este cupón.', 'cupon_ya_canjeado');
+      const dias = cupon.dias;
+      const hastaPrevio = cortesiaSnap.exists ? (aMillis(cortesiaSnap.data().hasta) ?? 0) : 0;
+      const base = hastaPrevio > ahora.getTime() ? hastaPrevio : ahora.getTime();
+      const hasta = new Date(base + dias * DIA_MS).toISOString();
+      tx.set(cortesiaRef, { uid, hasta, motivo: `Cupón ${codigo}`, otorgadaPor: `cupon:${codigo}`, fecha: ahora.toISOString() });
+      tx.set(canjeRef, { codigo, uid, dias, fecha: ahora.toISOString() });
+      tx.set(cuponRef, { ...cupon, usados: (cupon.usados ?? 0) + 1, actualizado: ahora.toISOString() });
+      return { dias, hasta };
+    });
+    res.status(201).json({ ok: true, dias: resultado.dias, hasta: resultado.hasta });
   }));
 
   return r;

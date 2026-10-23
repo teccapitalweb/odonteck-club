@@ -1,5 +1,5 @@
 // Admin · resumen, miembros, comunidad, avisos y ajustes.
-import { Datos, type MiembroDemo } from '../core/datos';
+import { Datos, type Cupon, type MiembroDemo } from '../core/datos';
 import { Comunidad, hace } from '../core/comunidad';
 import { Progreso } from '../core/progreso';
 import { Admin } from '../core/admin';
@@ -210,6 +210,46 @@ export function adminAvisos() {
       <div><strong>${esc(a.titulo)}</strong><p class="muted" style="font-size:var(--fs-sm)">${esc(a.texto)}</p><span class="faint" style="font-size:var(--fs-xs)">${hace(a.fecha)}${a.enlace ? ` · ${esc(a.enlace)}` : ''}</span></div>
       ${Datos.modo === 'demo' ? `<button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>` : ''}
     </div>`).join('') || vacio('Sin avisos publicados', 'El primero aparecerá en la campana de todos los miembros.')}</div>`;
+}
+
+// ═══ CUPONES ═══
+export function adminCupones() {
+  const l = Datos.cupones();
+  const activos = l.filter((c) => c.estado === 'activo').length;
+  const estadoChip = (c: Cupon) => {
+    if (c.estado === 'revocado') return '<span class="chip">Revocado</span>';
+    if (c.vence && new Date(c.vence).getTime() < Date.now()) return '<span class="chip chip--warn">Vencido</span>';
+    if (c.usosMax > 0 && c.usados >= c.usosMax) return '<span class="chip chip--warn">Agotado</span>';
+    return '<span class="chip chip--accent">Activo</span>';
+  };
+  const dias = (d: number) => (d === 365 ? '1 año' : d === 30 ? '1 mes' : d === 60 ? '2 meses' : d === 90 ? '3 meses' : `${d} días`);
+  return `
+  ${adminHead('Cupones', `${l.length} cupones · ${activos} activos · días de acceso gratis que la gente canjea`)}
+  ${callout('Cómo funcionan', 'Creas un código con cierta cantidad de <b>días de acceso</b>. La persona lo escribe en su página de <b>Suscripción</b> y obtiene esos días de VIP (se suman a lo que ya tenga). Con usos máximos de 1 es un código personal; con más, es un código compartido.')}
+  <form class="card card--pad stack" style="gap:14px;max-width:820px" data-form="cupon">
+    <h3 class="admin-card-title">Nuevo cupón</h3>
+    <div class="form-grid">
+      <div class="field"><label>Días de acceso</label><div class="row" style="gap:6px;margin-bottom:6px">${[30, 60, 90, 365].map((d) => `<button type="button" class="chip chip--outline" data-cupon-dias="${d}">${dias(d)}</button>`).join('')}</div><input class="input" type="number" min="1" max="3650" name="dias" value="30" required></div>
+      <div class="field"><label>Usos máximos <span class="faint">(0 = ilimitado)</span></label><input class="input" type="number" min="0" max="100000" name="usosMax" value="1"><span class="faint" style="font-size:var(--fs-xs)">1 = código personal · más = compartido</span></div>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Etiqueta <span class="faint">(para identificarlo)</span></label><input class="input" name="etiqueta" maxlength="120" placeholder="Campaña verano, ponente invitada…"></div>
+      <div class="field"><label>Vence <span class="faint">(opcional)</span></label><input class="input" type="date" name="vence"></div>
+    </div>
+    <div class="field"><label>Código <span class="faint">(opcional · se genera solo si lo dejas vacío)</span></label><input class="input mono" name="codigo" maxlength="24" placeholder="VERANO30" style="text-transform:uppercase"></div>
+    <div class="row" style="justify-content:flex-end"><button class="btn btn--brand btn--pill-arrow">Crear cupón <span class="arrow"><i data-lucide="ticket" class="i"></i></span></button></div>
+  </form>
+  ${l.length ? `<div class="card dtable-wrap"><table class="dtable"><thead><tr><th>Código</th><th>Etiqueta</th><th>Días</th><th>Usos</th><th>Vence</th><th>Estado</th><th style="width:150px"></th></tr></thead><tbody>
+    ${l.map((c) => `<tr>
+      <td><button type="button" class="btn btn--ghost btn--sm" data-copiar-cupon="${esc(c.codigo)}" title="Copiar código"><span class="mono" style="font-weight:700">${esc(c.codigo)}</span><i data-lucide="copy" class="i" style="width:14px;height:14px"></i></button></td>
+      <td>${esc(c.etiqueta || '—')}</td>
+      <td class="mono">${dias(c.dias)}</td>
+      <td class="mono">${c.usados}${c.usosMax > 0 ? ` / ${c.usosMax}` : ' / ∞'}</td>
+      <td>${c.vence ? fecha(c.vence) : '—'}</td>
+      <td>${estadoChip(c)}</td>
+      <td><button class="btn btn--sm ${c.estado === 'activo' ? 'btn--danger' : 'btn--secondary'}" data-cupon-estado="${esc(c.codigo)}:${c.estado === 'activo' ? 'revocado' : 'activo'}">${c.estado === 'activo' ? 'Revocar' : 'Reactivar'}</button></td>
+    </tr>`).join('')}
+  </tbody></table></div>` : vacio('Sin cupones todavía', 'Crea el primero arriba. El código que generes lo compartes y la gente lo canjea en su página de Suscripción.')}`;
 }
 
 // ═══ ENCUESTAS ═══

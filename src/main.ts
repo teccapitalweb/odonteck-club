@@ -46,7 +46,7 @@ import { paginaRecompensas } from './pages/recompensas';
 import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
-import { Admin, cargarAdmin } from './core/admin';
+import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { abrirJuegoClase } from './ui/juego-clase';
 import { juegoClaseCompletado, type RegistroJuegoClase, type TipoJuegoClase } from './core/juego-clase';
@@ -66,7 +66,7 @@ import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
 import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type ImagenDirectorioPreparada } from './core/directorio';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
-import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
+import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas, adminCupones } from './admin/gestion';
 
 type PlayerJsInstance = {
   on(evento: string, callback: (datos?: unknown) => void): void;
@@ -597,6 +597,7 @@ route('/admin/en-vivo/:id', paginaAdmin(adminEvento));
 route('/admin/miembros', paginaAdmin(adminMiembros));
 route('/admin/miembros/:uid', paginaAdmin(adminMiembro));
 route('/admin/comunidad', paginaAdmin(adminComunidad));
+route('/admin/cupones', paginaAdmin(adminCupones));
 route('/admin/avisos', paginaAdmin(adminAvisos));
 route('/admin/encuestas', paginaAdmin(adminEncuestas));
 route('/admin/ajustes', paginaAdmin(adminAjustes));
@@ -1356,6 +1357,19 @@ document.addEventListener('change', async (e) => {
 
 document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
+  if (f.matches('[data-canjear-cupon]')) {
+    e.preventDefault();
+    const boton = f.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const codigo = String(new FormData(f).get('codigo') || '').trim();
+    if (!codigo) return;
+    if (boton) boton.disabled = true;
+    try {
+      const r = await canjearCuponMiembro(codigo);
+      toast(`¡Listo! Se agregaron ${r.dias} días de acceso.`, 'party-popper');
+      setTimeout(() => location.reload(), 900);
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; }
+    return;
+  }
   if (f.matches('[data-network-search]')) {
     e.preventDefault(); const d = new FormData(f); const q = String(d.get('q') || '').trim(); const vista = String(d.get('vista') || 'personas');
     navigate(`/directorio?vista=${encodeURIComponent(vista)}${q ? `&q=${encodeURIComponent(q)}` : ''}`); return;

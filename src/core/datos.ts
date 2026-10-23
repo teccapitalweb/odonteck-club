@@ -29,6 +29,10 @@ export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrado
 export interface MiembroDemo { uid: string; nombre: string; email: string; plan: string | null; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; esVip?: boolean; esAdmin?: boolean; cortesiaHasta?: string | null; cortesiaMotivo?: string }
 export interface Aviso { id: string; titulo: string; texto: string; enlace?: string | null; fecha: string; autor?: string }
 export interface Config { precioMensual: number; precioAnual: number; descuentoVIP: number; whatsappSoporte: string; canalWhatsApp: string; praxiaUrl: string }
+export interface Cupon {
+  codigo: string; dias: number; usosMax: number; usados: number; vence: string | null;
+  etiqueta: string; estado: 'activo' | 'revocado'; creado: string; creadoPor?: string; actualizado?: string;
+}
 
 const PREFIX = 'odonteck-club:datos:v1:';
 const remoto = new Map<string, unknown>();
@@ -97,6 +101,24 @@ export const Datos = {
 
   config: () => ({ ...CONFIG_DEF, ...leer<Partial<Config>>('config', {}) }),
   guardarConfig(c: Config) { escribir('config', c); },
+
+  cupones: () => leer<Cupon[]>('cupones', []).sort((a, b) => (b.creado || '').localeCompare(a.creado || '')),
+  guardarCupon(c: Cupon) { const l = this.cupones(); const i = l.findIndex((x) => x.codigo === c.codigo); i >= 0 ? (l[i] = c) : l.unshift(c); escribir('cupones', l); },
+  // Canje de cupón en modo demo: valida, consume un uso y simula el acceso VIP (vip-sim).
+  canjearCuponDemo(codigo: string): { dias: number } {
+    const code = codigo.trim().toUpperCase().replace(/\s+/g, '');
+    const c = this.cupones().find((x) => x.codigo === code);
+    if (!c) throw new Error('Ese cupón no existe o ya no está disponible.');
+    if (c.estado !== 'activo') throw new Error('Este cupón ya no está disponible.');
+    if (c.vence && new Date(c.vence).getTime() < Date.now()) throw new Error('Este cupón ya venció.');
+    if (c.usosMax > 0 && c.usados >= c.usosMax) throw new Error('Este cupón ya alcanzó su límite de usos.');
+    const canjes = leer<string[]>('cupones:canjes', []);
+    if (canjes.includes(code)) throw new Error('Ya habías canjeado este cupón.');
+    c.usados += 1; c.actualizado = hoy(); this.guardarCupon(c);
+    escribir('cupones:canjes', [...canjes, code]);
+    try { localStorage.setItem('odonteck-club:vip-sim', '1'); } catch { /* sin almacenamiento */ }
+    return { dias: c.dias };
+  },
 
   restablecerDemo() { Object.keys(localStorage).filter((k) => k.startsWith(PREFIX)).forEach((k) => localStorage.removeItem(k)); window.dispatchEvent(new CustomEvent('datos:cambio', { detail: '*' })); },
 
