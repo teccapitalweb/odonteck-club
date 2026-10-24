@@ -8,7 +8,8 @@ import { Auth } from '../core/auth';
 import { iniciales, esc, placeholder, avatarUsuario } from '../ui/partials';
 import { envivoPanel } from './envivo';
 import { puntos } from '../core/logros';
-import { Directorio, type PerfilDirectorio, type OportunidadDirectorio } from '../core/directorio';
+import { TIPOS_DOCUMENTO } from '../core/directorio-docs';
+import { Directorio, type PerfilDirectorio, type OportunidadDirectorio, type DocumentoDirectorio } from '../core/directorio';
 import { navigate } from '../core/router';
 
 // ── Miembros simulados (demo) ──────────────────────────────────────────────
@@ -253,9 +254,10 @@ const botonReportar = (tipo: 'perfil' | 'oportunidad', id: string, nombre: strin
 function tarjetaPersona(p: PerfilDirectorio) {
   const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
   const especialidad = p.especialidades[0] || etiqueta(p.etapa);
-  return `<article class="network-card network-person network-person--tone-${tono}">
+  return `<article class="network-card network-person network-person--tone-${tono}" data-network-card data-uid="${esc(p.uid)}" data-href="#/directorio/perfil/${encodeURIComponent(p.uid)}" tabindex="0" aria-label="Ver el perfil completo de ${esc(p.nombre)}">
     <div class="network-person__portrait ${p.foto ? 'has-photo' : 'is-fallback'}">
       ${avatarProfesional(p, 'network-avatar--profile')}
+      <span class="network-person__peek" aria-hidden="true"><i data-lucide="eye" class="i"></i>Ver perfil completo</span>
       <i data-lucide="sparkles" class="i network-person__watermark" aria-hidden="true"></i>
       <div class="network-person__badges"><span><i data-lucide="circle-dot" class="i"></i>${etiqueta(p.disponibilidad[0] || 'conectar')}</span>${p.esMio ? '<b>Tu perfil</b>' : '<b><i data-lucide="badge-check" class="i"></i>Verificado</b>'}</div>
     </div>
@@ -264,33 +266,127 @@ function tarjetaPersona(p: PerfilDirectorio) {
       <div class="network-person__title"><h3>${esc(p.nombre)} <i data-lucide="badge-check" class="i" aria-label="Perfil de la comunidad OdonTeck"></i></h3>${p.esMio ? '<span class="network-own">Tu perfil</span>' : ''}</div>
       <p class="network-person__role">${esc(p.titular)}</p>
       <p class="network-bio">${esc(p.bio)}</p>
-      <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div>
-      <div class="network-tags">${[...p.especialidades, ...p.habilidades.slice(0, 2)].map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+      <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span>${p.anosExperiencia ? `<span><i data-lucide="timer" class="i"></i>${p.anosExperiencia} ${p.anosExperiencia === 1 ? 'año' : 'años'}</span>` : ''}</div>
+      <div class="network-tags">${[...p.especialidades, ...p.habilidades.slice(0, 2)].slice(0, 4).map((x) => `<span>${esc(x)}</span>`).join('')}</div>
+      ${p.documentos?.length ? `<span class="network-person__docs"><i data-lucide="paperclip" class="i"></i>${p.documentos.length} ${p.documentos.length === 1 ? 'documento adjunto' : 'documentos adjuntos'}</span>` : ''}
     </div>
-    <footer><div class="network-availability">${p.disponibilidad.slice(0, 2).map((x) => `<small><i data-lucide="check" class="i"></i>${etiqueta(x)}</small>`).join('')}</div><div class="network-card__actions"><button class="btn btn--ghost btn--sm" data-network-view data-uid="${esc(p.uid)}">Ver perfil</button>${p.esMio ? '<button class="btn btn--secondary btn--sm" data-network-profile><i data-lucide="pencil" class="i"></i>Editar</button>' : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand btn--sm" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div></footer>
+    <footer><div class="network-card__actions"><a class="btn btn--ghost btn--sm" href="#/directorio/perfil/${encodeURIComponent(p.uid)}"><i data-lucide="id-card" class="i"></i>Ver perfil</a>${p.esMio ? '<button class="btn btn--secondary btn--sm" data-network-profile><i data-lucide="pencil" class="i"></i>Editar</button>' : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand btn--sm" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div></footer>
   </article>`;
 }
 
-function detallePersona(p: PerfilDirectorio) {
+const tamanoLegible = (bytes: number) => !bytes ? '' : bytes < 1_000_000 ? `${Math.max(1, Math.round(bytes / 1000))} KB` : `${(bytes / 1_000_000).toFixed(1)} MB`;
+
+function tarjetaDocumento(uid: string, d: DocumentoDirectorio, esMio: boolean) {
+  const tipo = TIPOS_DOCUMENTO[d.tipo] ?? 'Documento';
+  const detalle = [d.mime === 'application/pdf' ? (d.paginas ? `PDF · ${d.paginas} ${d.paginas === 1 ? 'pág.' : 'págs.'}` : 'PDF') : 'Imagen', tamanoLegible(d.bytes)].filter(Boolean).join(' · ');
+  const visibilidad = d.visibilidad === 'conexiones'
+    ? '<span class="dir-doc__vis is-private"><i data-lucide="lock" class="i"></i>Solo conexiones</span>'
+    : '<span class="dir-doc__vis"><i data-lucide="users" class="i"></i>Miembros</span>';
+  if (!d.accesible) {
+    return `<article class="dir-doc is-locked">
+      <div class="dir-doc__frame"><div class="dir-doc__lock"><i data-lucide="lock-keyhole" class="i"></i><b>Visible al conectar</b><small>Se desbloquea cuando acepte tu solicitud.</small></div></div>
+      <div class="dir-doc__info"><span class="dir-doc__type">${esc(tipo)}</span><strong>${esc(d.nombre)}</strong><small>${esc(detalle)}</small></div>
+    </article>`;
+  }
+  return `<article class="dir-doc">
+    <button type="button" class="dir-doc__frame" data-doc-frame data-doc-open data-uid="${esc(uid)}" data-id="${esc(d.id)}" aria-label="Ampliar ${esc(d.nombre)}">
+      <img alt="" data-doc-thumb data-uid="${esc(uid)}" data-id="${esc(d.id)}" decoding="async">
+      <span class="dir-doc__skeleton" aria-hidden="true"><i data-lucide="${d.mime === 'application/pdf' ? 'file-text' : 'image'}" class="i"></i></span>
+      <span class="dir-doc__zoom" aria-hidden="true"><i data-lucide="maximize-2" class="i"></i>Ampliar</span>
+    </button>
+    <div class="dir-doc__info"><span class="dir-doc__type">${esc(tipo)}</span><strong title="${esc(d.nombre)}">${esc(d.nombre)}</strong><small>${esc(detalle)}</small>
+      <div class="dir-doc__foot">${visibilidad}${esMio ? `<span class="dir-doc__tools"><button type="button" data-doc-visibilidad data-id="${esc(d.id)}" data-valor="${d.visibilidad === 'conexiones' ? 'miembros' : 'conexiones'}" title="${d.visibilidad === 'conexiones' ? 'Mostrar a todos los miembros' : 'Mostrar solo a mis conexiones'}" aria-label="Cambiar quién puede verlo"><i data-lucide="${d.visibilidad === 'conexiones' ? 'eye' : 'eye-off'}" class="i"></i></button><button type="button" data-doc-quitar data-id="${esc(d.id)}" data-name="${esc(d.nombre)}" title="Quitar documento" aria-label="Quitar ${esc(d.nombre)}"><i data-lucide="trash-2" class="i"></i></button></span>` : ''}</div>
+    </div>
+  </article>`;
+}
+
+export function perfilDirectorio(params: Record<string, string>) {
+  const uid = decodeURIComponent(params.uid || '');
+  const data = Directorio.get();
+  const ficha = Directorio.ficha(uid);
+  if (!ficha) return `<section class="dir-profile-page"><a class="dir-back" href="#/directorio"><i data-lucide="arrow-left" class="i"></i>Volver al Directorio</a><div class="community-empty"><i data-lucide="user-round-x" class="i"></i><h3>Este perfil ya no está disponible</h3><p>Puede que la persona lo haya ocultado o retirado del directorio.</p><a class="btn btn--brand" href="#/directorio">Explorar perfiles</a></div></section>`;
+  const p = ficha.perfil;
+  const mio = data.miPerfil;
+  const esMio = !!p.esMio;
   const tono = Math.abs([...p.uid].reduce((n, c) => n + c.charCodeAt(0), 0)) % 4;
   const especialidad = p.especialidades[0] || etiqueta(p.etapa);
   const experiencia = p.experiencia ?? [];
   const formacion = p.formacion ?? [];
   const credenciales = p.credenciales ?? [];
   const idiomas = p.idiomas ?? [];
-  return `<dialog class="network-profile-sheet network-person--tone-${tono}" data-network-view-dialog="${esc(p.uid)}">
-    <button class="network-profile-sheet__close" type="button" data-network-close aria-label="Cerrar perfil"><i data-lucide="x" class="i"></i></button>
-    <div class="network-profile-sheet__cover ${p.banner ? 'has-banner' : ''}">${p.banner ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}" width="1600" height="560" loading="lazy" decoding="async">` : ''}<span><i data-lucide="badge-check" class="i"></i>Perfil profesional OdonTeck</span><b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b></div>
-    <div class="network-profile-sheet__body">
-      <div class="network-profile-sheet__identity">${avatarProfesional(p, 'network-avatar--sheet')}<div><span class="network-person__specialty">${esc(especialidad)}</span><h3>${esc(p.nombre)}</h3><p>${esc(p.titular)}</p><div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta')}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span></div></div></div>
-      <div class="network-profile-sheet__metrics"><span><strong>${p.anosExperiencia ?? '—'}</strong><small>años de experiencia</small></span><span><strong>${experiencia.length}</strong><small>experiencias</small></span><span><strong>${formacion.length + credenciales.length}</strong><small>formaciones y credenciales</small></span></div>
-      <div class="network-profile-sheet__content">
-        <section class="network-profile-sheet__main"><span class="eyebrow">Perfil profesional</span><h4>Sobre su práctica</h4><p>${esc(p.bio)}</p>${experiencia.length ? `<div class="network-profile-sheet__section"><strong>Experiencia</strong><div class="network-timeline">${experiencia.map((x) => `<article><span></span><div><small>${esc(x.periodo)}</small><h5>${esc(x.puesto)}</h5><b>${esc(x.organizacion)}</b>${x.descripcion ? `<p>${esc(x.descripcion)}</p>` : ''}</div></article>`).join('')}</div></div>` : ''}${formacion.length ? `<div class="network-profile-sheet__section"><strong>Formación académica</strong><div class="network-profile-list">${formacion.map((x) => `<article><i data-lucide="graduation-cap" class="i"></i><div><h5>${esc(x.programa)}</h5><p>${esc(x.institucion)} · ${esc(x.periodo)}</p></div></article>`).join('')}</div></div>` : ''}</section>
-        <aside><span class="eyebrow">Afinidad profesional</span><h4>Disponible para</h4><div class="network-profile-sheet__availability">${p.disponibilidad.map((x) => `<span><i data-lucide="check-circle-2" class="i"></i>${etiqueta(x)}</span>`).join('')}</div><h4>Modalidad</h4><div class="network-profile-sheet__availability">${p.modalidades.map((x) => `<span><i data-lucide="map" class="i"></i>${etiqueta(x)}</span>`).join('')}</div>${credenciales.length ? `<h4>Credenciales</h4><div class="network-profile-credentials">${credenciales.map((x) => `<article><i data-lucide="award" class="i"></i><span><b>${esc(x.nombre)}</b><small>${esc([x.emisor, x.anio].filter(Boolean).join(' · '))}</small></span></article>`).join('')}</div>` : ''}${idiomas.length ? `<h4>Idiomas</h4><div class="network-profile-sheet__availability">${idiomas.map((x) => `<span><i data-lucide="languages" class="i"></i>${esc(x)}</span>`).join('')}</div>` : ''}<h4>Áreas y habilidades</h4><div class="network-tags">${[...p.especialidades, ...p.habilidades].map((x) => `<span>${esc(x)}</span>`).join('')}</div><p><i data-lucide="shield-check" class="i"></i>El contacto permanece privado hasta aceptar una conexión.</p></aside>
-      </div>
-      <footer><div><span class="eyebrow">Una buena red empieza con contexto</span><p>Preséntate y explica qué colaboración buscas.</p></div><div class="network-profile-sheet__actions">${p.esMio ? '<button class="btn btn--brand" data-network-profile><i data-lucide="pencil" class="i"></i>Editar mi perfil</button>' : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="send" class="i"></i>Enviar solicitud</button>`}</div></footer>
+  const docs = ficha.documentos;
+  const norm = (x: string) => x.trim().toLocaleLowerCase('es-MX');
+  const mias = new Set([...(mio?.especialidades ?? []), ...(mio?.habilidades ?? [])].map(norm));
+  const compartidas = mio && !esMio ? [...new Set([...p.especialidades, ...p.habilidades])].filter((x) => mias.has(norm(x))) : [];
+  const afinidad = !mio || esMio ? '' : `<div class="network-affinity ${compartidas.length ? '' : 'is-empty'}"><span class="network-affinity__icon"><i data-lucide="${compartidas.length ? 'sparkles' : 'compass'}" class="i"></i></span><div><strong>${compartidas.length ? `Tienen ${compartidas.length} ${compartidas.length === 1 ? 'área' : 'áreas'} en común` : 'Perfil complementario al tuyo'}</strong><p>${compartidas.length ? compartidas.map((x) => `<b>${esc(x)}</b>`).join('') : 'No comparten áreas declaradas: puede ser una buena alianza para referir pacientes o colaborar.'}</p></div></div>`;
+  const primerNombre = esc(p.nombre.split(' ').slice(0, 2).join(' '));
+  const ubicacion = esc([p.ciudad, p.estado].filter(Boolean).join(', ') || 'Ubicación abierta');
+  const bloqueados = docs.filter((d) => !d.accesible).length;
+  const documentos = `<section class="dir-docs" id="documentos">
+    <header><div><span class="eyebrow">Trayectoria documentada</span><h4>Documentos y CV</h4><p>${esMio ? 'Adjunta tu CV, títulos, constancias o portafolio. Tú decides quién puede verlos.' : docs.length ? 'Toca un documento para verlo en grande.' : `${primerNombre} todavía no adjunta documentos.`}</p></div>${esMio ? `<span class="dir-docs__count">${docs.length}/6</span>` : ''}</header>
+    ${bloqueados && !esMio ? `<p class="dir-docs__notice"><i data-lucide="shield-check" class="i"></i>${bloqueados === 1 ? 'Un documento se comparte' : `${bloqueados} documentos se comparten`} solo con conexiones aceptadas.</p>` : ''}
+    <div class="dir-docs__grid">
+      ${docs.map((d) => tarjetaDocumento(p.uid, d, esMio)).join('')}
+      ${esMio && docs.length < 6 ? `<label class="dir-doc dir-doc--add"><input type="file" accept="application/pdf,image/jpeg,image/png,image/webp" data-doc-input hidden><span class="dir-doc__plus"><i data-lucide="file-up" class="i"></i></span><strong>Adjuntar documento</strong><small>PDF hasta 10 MB o imagen JPG, PNG o WebP</small></label>` : ''}
+      ${!docs.length && !esMio ? '<div class="dir-docs__empty"><i data-lucide="folder-open" class="i"></i><span>Sin documentos por ahora</span></div>' : ''}
     </div>
-  </dialog>`;
+  </section>`;
+  return `<section class="dir-profile-page network-person--tone-${tono}">
+    <a class="dir-back" href="#/directorio"><i data-lucide="arrow-left" class="i"></i>Volver al Directorio</a>
+    <div class="dir-hero">
+      <div class="dir-hero__cover network-profile-sheet__cover ${p.banner ? 'has-banner' : ''}">
+        ${p.banner ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}" width="1600" height="560" decoding="async">` : ''}
+        <span><i data-lucide="badge-check" class="i"></i>Perfil profesional OdonTeck</span>
+        ${esMio ? `<div class="dir-hero__edit"><label class="dir-chip-btn"><input type="file" accept="image/jpeg,image/png,image/webp" data-dir-banner-inline hidden><i data-lucide="image-up" class="i"></i>${p.banner ? 'Cambiar portada' : 'Agregar portada'}</label>${p.banner ? '<button type="button" class="dir-chip-btn" data-dir-banner-quitar><i data-lucide="image-minus" class="i"></i>Quitar</button>' : ''}</div>` : `<b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b>`}
+      </div>
+      <div class="dir-hero__body">
+        <div class="dir-hero__avatar">
+          ${avatarProfesional(p, 'network-avatar--sheet')}
+          ${esMio ? `<label class="dir-hero__camera" title="Cambiar foto"><input type="file" accept="image/jpeg,image/png,image/webp" data-dir-photo-inline hidden><i data-lucide="camera" class="i"></i><span class="sr-only">Cambiar foto</span></label>` : ''}
+        </div>
+        <div class="dir-hero__identity">
+          <span class="network-person__specialty">${esc(especialidad)}</span>
+          <h1>${esc(p.nombre)} <i data-lucide="badge-check" class="i" aria-label="Perfil de la comunidad OdonTeck"></i></h1>
+          <p>${esc(p.titular)}</p>
+          <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${ubicacion}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span>${p.anosExperiencia ? `<span><i data-lucide="timer" class="i"></i>${p.anosExperiencia} ${p.anosExperiencia === 1 ? 'año' : 'años'} de experiencia</span>` : ''}</div>
+        </div>
+        <div class="dir-hero__actions">${esMio
+          ? `<button class="btn btn--secondary" data-network-profile><i data-lucide="pencil" class="i"></i>Editar perfil</button>${p.foto ? '<button type="button" class="btn btn--ghost btn--sm" data-dir-photo-quitar>Quitar foto</button>' : ''}`
+          : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div>
+      </div>
+    </div>
+    <div class="network-profile-sheet__metrics"><span><i data-lucide="timer" class="i"></i><strong>${p.anosExperiencia ?? '—'}</strong><small>años de experiencia</small></span><span><i data-lucide="briefcase-business" class="i"></i><strong>${experiencia.length}</strong><small>${experiencia.length === 1 ? 'experiencia' : 'experiencias'}</small></span><span><i data-lucide="graduation-cap" class="i"></i><strong>${formacion.length + credenciales.length}</strong><small>formación y credenciales</small></span><span><i data-lucide="paperclip" class="i"></i><strong>${docs.length}</strong><small>${docs.length === 1 ? 'documento' : 'documentos'}</small></span></div>
+    ${afinidad}
+    <div class="dir-profile-grid network-profile-sheet__content">
+      <div class="dir-profile-main">
+        <section class="dir-panel"><span class="eyebrow">Perfil profesional</span><h4>Sobre su práctica</h4><p class="dir-bio">${esc(p.bio)}</p>
+        ${experiencia.length ? `<div class="network-profile-sheet__section"><strong>Experiencia</strong><div class="network-timeline">${experiencia.map((x) => `<article><span></span><div><small>${esc(x.periodo)}</small><h5>${esc(x.puesto)}</h5><b>${esc(x.organizacion)}</b>${x.descripcion ? `<p>${esc(x.descripcion)}</p>` : ''}</div></article>`).join('')}</div></div>` : ''}
+        ${formacion.length ? `<div class="network-profile-sheet__section"><strong>Formación académica</strong><div class="network-profile-list">${formacion.map((x) => `<article><i data-lucide="graduation-cap" class="i"></i><div><h5>${esc(x.programa)}</h5><p>${esc(x.institucion)} · ${esc(x.periodo)}</p></div></article>`).join('')}</div></div>` : ''}
+        </section>
+        ${documentos}
+      </div>
+      <aside><span class="eyebrow">Afinidad profesional</span><h4>Disponible para</h4><div class="network-profile-sheet__availability">${p.disponibilidad.map((x) => `<span><i data-lucide="check-circle-2" class="i"></i>${etiqueta(x)}</span>`).join('')}</div><h4>Modalidad</h4><div class="network-profile-sheet__availability">${p.modalidades.map((x) => `<span><i data-lucide="map" class="i"></i>${etiqueta(x)}</span>`).join('')}</div>${credenciales.length ? `<h4>Credenciales</h4><div class="network-profile-credentials">${credenciales.map((x) => `<article><i data-lucide="award" class="i"></i><span><b>${esc(x.nombre)}</b><small>${esc([x.emisor, x.anio].filter(Boolean).join(' · '))}</small></span></article>`).join('')}</div>` : ''}${idiomas.length ? `<h4>Idiomas</h4><div class="network-profile-sheet__availability">${idiomas.map((x) => `<span><i data-lucide="languages" class="i"></i>${esc(x)}</span>`).join('')}</div>` : ''}<h4>Áreas y habilidades</h4><div class="network-tags">${[...p.especialidades, ...p.habilidades].map((x) => `<span>${esc(x)}</span>`).join('')}</div><p><i data-lucide="shield-check" class="i"></i>El contacto permanece privado hasta aceptar una conexión.</p>
+      ${esMio ? '' : `<ol class="network-steps network-steps--stack" aria-label="Cómo funciona la conexión"><li><span>1</span><div><b>Envías tu solicitud</b><small>Con un mensaje breve de presentación.</small></div></li><li><span>2</span><div><b>${primerNombre} la revisa</b><small>Puede aceptarla o declinarla.</small></div></li><li><span>3</span><div><b>Se comparte el contacto</b><small>Y los documentos privados, solo entre ustedes.</small></div></li></ol>`}
+      </aside>
+    </div>
+    ${esMio ? '' : `<div class="dir-sticky-cta"><div><strong>${primerNombre}</strong><small>${esc(p.titular)}</small></div>${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="send" class="i"></i>Enviar solicitud</button></div>`}
+    ${Datos.modo === 'demo' ? '<p class="community-demo-note"><i data-lucide="monitor" class="i"></i>Perfil y documentos ficticios del prototipo local. Lo que adjuntes se guarda solo en este navegador.</p>' : ''}
+    <dialog class="network-dialog network-dialog--small dir-doc-dialog" data-doc-dialog>
+      <form method="dialog" data-doc-form>
+        <header><div><span class="eyebrow">Nuevo documento</span><h3>Revisa cómo se verá</h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header>
+        <div class="dir-doc-dialog__preview"><img alt="Vista previa del documento" data-doc-preview><small data-doc-preview-info></small></div>
+        <label>Nombre visible<input class="input" name="nombre" required maxlength="90" data-doc-nombre placeholder="Ej. CV 2026"></label>
+        <label>Tipo<select class="input" name="tipo">${Object.entries(TIPOS_DOCUMENTO).map(([v, t]) => `<option value="${v}">${esc(t)}</option>`).join('')}</select></label>
+        <fieldset class="dir-doc-dialog__vis"><legend>¿Quién puede verlo?</legend>
+          <label><input type="radio" name="visibilidad" value="miembros" checked><span><b><i data-lucide="users" class="i"></i>Miembros del club</b><small>Cualquier miembro que visite tu perfil.</small></span></label>
+          <label><input type="radio" name="visibilidad" value="conexiones"><span><b><i data-lucide="lock" class="i"></i>Solo conexiones</b><small>Recomendado si incluye teléfono, correo o domicilio.</small></span></label>
+        </fieldset>
+        <p class="dir-doc-dialog__hint"><i data-lucide="info" class="i"></i>No subas expedientes ni datos de pacientes.</p>
+        <footer><button type="button" class="btn btn--ghost" data-network-close>Cancelar</button><button class="btn btn--brand"><i data-lucide="paperclip" class="i"></i>Adjuntar</button></footer>
+      </form>
+    </dialog>
+    ${dialogosDirectorio(data)}
+  </section>`;
 }
 
 function tarjetaOportunidad(o: OportunidadDirectorio) {
@@ -351,8 +447,12 @@ function directorioPanel(query: URLSearchParams) {
     </div>
     ${hayMas ? `<div class="network-more"><button class="btn btn--secondary" data-network-load-more="${vista === 'personas' ? 'perfiles' : 'oportunidades'}"><i data-lucide="chevrons-down" class="i"></i>Cargar más ${vista}</button></div>` : ''}
     ${Datos.modo === 'demo' ? '<p class="community-demo-note"><i data-lucide="monitor" class="i"></i>Perfiles y oportunidades ficticios para visualizar el prototipo local.</p>' : ''}
-    ${vista === 'personas' ? perfiles.map(detallePersona).join('') : ''}
-    <dialog class="network-dialog network-dialog--profile" data-network-profile-dialog>
+    ${dialogosDirectorio(data)}
+  </section>`;
+}
+
+function dialogosDirectorio(data: ReturnType<typeof Directorio.get>) {
+  return `<dialog class="network-dialog network-dialog--profile" data-network-profile-dialog>
       <form method="dialog" data-network-profile-form>
         <header><div><span class="eyebrow">Perfil profesional</span><h3>Construye una presencia que cuente tu trayectoria.</h3><p>Tu ficha funcionará como un CV visual dentro de la red OdonTeck.</p></div><div class="network-profile-progress"><span><b>${completitudPerfil(data.miPerfil)}%</b> completo</span><i><b style="width:${completitudPerfil(data.miPerfil)}%"></b></i></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header>
         <section class="network-banner-editor ${data.miPerfil?.banner ? 'has-banner' : ''}" data-network-banner-frame>
@@ -395,8 +495,7 @@ function directorioPanel(query: URLSearchParams) {
     </dialog>
     <dialog class="network-dialog" data-network-job-dialog><form method="dialog" data-network-job-form><header><div><span class="eyebrow">Nueva oportunidad</span><h3>Publica una propuesta clara y profesional.</h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><div class="network-form-grid"><label class="network-form-wide">Título<input class="input" name="titulo" required minlength="8" maxlength="120" placeholder="Odontólogo general para clínica multidisciplinaria"></label><label>Tipo<select class="input" name="tipo"><option value="empleo">Empleo</option><option value="colaboracion">Colaboración</option><option value="mentoria">Mentoría</option><option value="suplencia">Suplencia</option><option value="practicas">Prácticas</option><option value="consultorio">Compartir consultorio</option></select></label><label>Modalidad<select class="input" name="modalidad"><option value="presencial">Presencial</option><option value="remoto">Remoto</option><option value="hibrido">Híbrida</option></select></label><label>Organización<input class="input" name="organizacion" required maxlength="120"></label><label>Ciudad<input class="input" name="ciudad"></label><label>Estado<input class="input" name="entidad"></label><label>Especialidades<input class="input" name="especialidades" placeholder="Odontología general, Rehabilitación"></label><label class="network-form-wide">Descripción<textarea class="input" name="resumen" minlength="40" maxlength="1000" rows="4" required></textarea></label><label class="network-form-wide">Requisitos<textarea class="input" name="requisitos" maxlength="1000" rows="2"></textarea></label><label class="network-form-wide">Compensación o condiciones<input class="input" name="compensacion" maxlength="180" placeholder="Sé transparente; evita datos sensibles"></label></div><footer><p>Visible durante 45 días. Publicar requiere VIP.</p><button class="btn btn--brand">Publicar oportunidad</button></footer></form></dialog>
     <dialog class="network-dialog network-dialog--small" data-network-connect-dialog><form method="dialog" data-network-connect-form><header><div><span class="eyebrow">Solicitud privada</span><h3>Conectar con <span data-network-name>Colega</span></h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><input type="hidden" name="paraUid"><input type="hidden" name="oportunidadId"><label>Mensaje<textarea class="input" name="mensaje" required minlength="20" maxlength="500" rows="5" placeholder="Preséntate y explica por qué te gustaría conversar."></textarea></label><footer><p>La otra persona decide si comparte su contacto.</p><button class="btn btn--brand">Enviar solicitud</button></footer></form></dialog>
-    <dialog class="network-dialog network-dialog--small" data-network-report-dialog><form method="dialog" data-network-report-form><header><div><span class="eyebrow">Comunidad segura</span><h3>Denunciar <span data-network-report-name>contenido</span></h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><input type="hidden" name="tipo"><input type="hidden" name="objetivoId"><div class="network-form-grid"><label class="network-form-wide">Motivo<select class="input" name="motivo" required><option value="spam">Spam o publicidad engañosa</option><option value="suplantacion">Suplantación de identidad</option><option value="contenido_inapropiado">Contenido inapropiado</option><option value="datos_falsos">Información profesional falsa</option><option value="otro">Otro motivo</option></select></label><label class="network-form-wide">Cuéntanos qué sucede<textarea class="input" name="detalle" maxlength="500" rows="4" placeholder="No incluyas datos clínicos ni información de pacientes."></textarea></label></div><footer><p><i data-lucide="shield-check" class="i"></i>El equipo revisará la denuncia; la otra persona no verá quién la envió.</p><button class="btn btn--brand"><i data-lucide="flag" class="i"></i>Enviar denuncia</button></footer></form></dialog>
-  </section>`;
+    <dialog class="network-dialog network-dialog--small" data-network-report-dialog><form method="dialog" data-network-report-form><header><div><span class="eyebrow">Comunidad segura</span><h3>Denunciar <span data-network-report-name>contenido</span></h3></div><button type="button" data-network-close aria-label="Cerrar"><i data-lucide="x" class="i"></i></button></header><input type="hidden" name="tipo"><input type="hidden" name="objetivoId"><div class="network-form-grid"><label class="network-form-wide">Motivo<select class="input" name="motivo" required><option value="spam">Spam o publicidad engañosa</option><option value="suplantacion">Suplantación de identidad</option><option value="contenido_inapropiado">Contenido inapropiado</option><option value="datos_falsos">Información profesional falsa</option><option value="otro">Otro motivo</option></select></label><label class="network-form-wide">Cuéntanos qué sucede<textarea class="input" name="detalle" maxlength="500" rows="4" placeholder="No incluyas datos clínicos ni información de pacientes."></textarea></label></div><footer><p><i data-lucide="shield-check" class="i"></i>El equipo revisará la denuncia; la otra persona no verá quién la envió.</p><button class="btn btn--brand"><i data-lucide="flag" class="i"></i>Enviar denuncia</button></footer></form></dialog>`;
 }
 
 // ── Página principal ────────────────────────────────────────────────────────
