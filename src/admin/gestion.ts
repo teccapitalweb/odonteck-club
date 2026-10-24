@@ -118,22 +118,64 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
 }
 
 // ═══ MIEMBROS ═══
-export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
-  const q = (query.get('q') || '').toLowerCase();
-  const f = query.get('estado') || '';
+// Aplica los mismos filtros de la vista de Miembros (búsqueda + estado); lo reusa la exportación CSV.
+export function filtrarMiembros(q: string, f: string) {
   let l = Datos.miembros();
   if (q) l = l.filter((m) => (m.nombre + m.email).toLowerCase().includes(q));
   if (f === 'vip') l = l.filter((m) => estadoMiembro(m).vip && !m.cortesiaHasta);
   if (f === 'cortesia') l = l.filter((m) => m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now());
   if (f === 'sin') l = l.filter((m) => !estadoMiembro(m).vip);
-  const chip = (k: string, t: string) => `<a class="chip ${f === k ? 'chip--primary' : 'chip--outline'}" href="#/admin/miembros?${new URLSearchParams({ q, estado: k })}">${t}</a>`;
+  return l;
+}
+
+// Rango de estado para ordenar (de más a menos acceso).
+const RANK_ESTADO: Record<string, number> = { 'Administrador': 0, 'VIP anual': 1, 'VIP mensual': 2, 'VIP activo': 3, 'Cortesía': 4, 'Sin membresía': 5 };
+// Ordena la lista de miembros por una columna; las fechas ausentes quedan siempre al final.
+function ordenarMiembros(l: MiembroDemo[], orden: string, dir: string) {
+  if (!orden) return l;
+  const signo = dir === 'desc' ? -1 : 1;
+  const ms = (v?: string | null) => (v ? new Date(v.length === 10 ? v + 'T12:00:00' : v).getTime() : NaN);
+  const val = (m: MiembroDemo): number | string => {
+    switch (orden) {
+      case 'nombre': return m.nombre.toLowerCase();
+      case 'estado': return RANK_ESTADO[estadoMiembro(m).etiqueta] ?? 9;
+      case 'vence': return ms(m.cortesiaHasta || m.vence);
+      case 'clases': return m.clasesVistas;
+      case 'actividad': return ms(m.ultimaActividad);
+      default: return 0;
+    }
+  };
+  return [...l].sort((a, b) => {
+    const va = val(a), vb = val(b);
+    const na = typeof va === 'number' && Number.isNaN(va);
+    const nb = typeof vb === 'number' && Number.isNaN(vb);
+    if (na || nb) return na && nb ? 0 : na ? 1 : -1;
+    if (typeof va === 'string') return signo * va.localeCompare(vb as string, 'es');
+    return signo * ((va as number) - (vb as number));
+  });
+}
+
+export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
+  const q = (query.get('q') || '').toLowerCase();
+  const f = query.get('estado') || '';
+  const orden = query.get('orden') || '';
+  const dir = query.get('dir') === 'desc' ? 'desc' : 'asc';
+  const l = ordenarMiembros(filtrarMiembros(q, f), orden, dir);
+  const chip = (k: string, t: string) => `<a class="chip ${f === k ? 'chip--primary' : 'chip--outline'}" href="#/admin/miembros?${new URLSearchParams({ q, estado: k, ...(orden ? { orden, dir } : {}) })}">${t}</a>`;
+  const th = (campo: string, etiqueta: string) => {
+    const activo = orden === campo;
+    const sig = activo && dir === 'asc' ? 'desc' : 'asc';
+    const icono = !activo ? 'chevrons-up-down' : dir === 'asc' ? 'arrow-up' : 'arrow-down';
+    const url = `#/admin/miembros?${new URLSearchParams({ q, estado: f, orden: campo, dir: sig })}`;
+    return `<th><a href="${url}" style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:${activo ? 'var(--text)' : 'inherit'};font-weight:${activo ? '700' : 'inherit'};text-decoration:none">${etiqueta}<i data-lucide="${icono}" class="i" style="width:13px;height:13px;opacity:${activo ? '1' : '.45'}"></i></a></th>`;
+  };
   return `
-  ${adminHead('Miembros', `${Datos.miembros().length} cuentas · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`)}
+  ${adminHead('Miembros', `${Datos.miembros().length} cuentas · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`, `<button class="btn btn--secondary" data-exportar-miembros${l.length ? '' : ' disabled'}><i data-lucide="download" class="i"></i>Exportar CSV</button>`)}
   <div class="row" style="justify-content:space-between">
     <form class="search" style="flex:1;max-width:420px" data-form="buscar-miembro"><i data-lucide="search" class="i"></i><input class="input" name="q" value="${esc(q)}" placeholder="Buscar por nombre o correo"></form>
     <div class="row" style="gap:6px">${chip('', 'Todos')}${chip('vip', 'VIP')}${chip('cortesia', 'Cortesía')}${chip('sin', 'Sin membresía')}</div>
   </div>
-  ${l.length ? `<div class="card dtable-wrap"><table class="dtable"><thead><tr><th>Miembro</th><th>Estado</th><th>Vence</th><th>Clases vistas</th><th>Última actividad</th><th></th></tr></thead><tbody>
+  ${l.length ? `<div class="card dtable-wrap"><table class="dtable"><thead><tr>${th('nombre', 'Miembro')}${th('estado', 'Estado')}${th('vence', 'Vence')}${th('clases', 'Clases vistas')}${th('actividad', 'Última actividad')}<th></th></tr></thead><tbody>
     ${l.map((m) => { const e = estadoMiembro(m); return `<tr>
       <td><a class="dtable__main" href="#/admin/miembros/${m.uid}"><span class="avatar" style="width:34px;height:34px;font-size:12px">${iniciales(m.nombre)}</span><span><strong>${esc(m.nombre)}</strong><br><span class="faint">${esc(m.email)}</span></span></a></td>
       <td><span class="chip ${e.chip}">${e.etiqueta}</span></td><td>${fecha(m.cortesiaHasta || m.vence)}</td><td class="mono">${m.clasesVistas}</td><td>${hace(m.ultimaActividad)}</td>
