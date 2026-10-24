@@ -305,7 +305,7 @@ export function configuracion() {
       <div class="settings-content">
         <section class="card settings-card" id="ajustes-apariencia">
           <div class="settings-card__head"><div><span class="eyebrow">Experiencia</span><h2>Apariencia</h2><p>Ajusta cómo se ve OdonTeck en este dispositivo.</p></div><span class="account-card__icon"><i data-lucide="palette" class="i"></i></span></div>
-          <div class="setting-row"><span class="setting-row__icon"><i data-lucide="moon-star" class="i"></i></span><div><strong>Modo oscuro</strong><span>Reduce el brillo durante esta sesión; la siguiente inicia en modo claro.</span></div><button class="btn btn--secondary btn--sm" type="button" data-theme-toggle><i data-lucide="moon" class="i"></i>Cambiar</button></div>
+          <div class="setting-row"><span class="setting-row__icon"><i data-lucide="moon-star" class="i"></i></span><div><strong>Modo oscuro</strong><span>Reduce el brillo. Recordamos tu preferencia; en la primera visita seguimos la de tu sistema.</span></div><button class="btn btn--secondary btn--sm" type="button" data-theme-toggle><i data-lucide="moon" class="i"></i>Cambiar</button></div>
         </section>
         <section class="card settings-card" id="ajustes-avisos">
           <div class="settings-card__head"><div><span class="eyebrow">Preferencias</span><h2>Notificaciones</h2><p>Elige qué novedades quieres recibir del club.</p></div><span class="account-card__icon account-card__icon--teal"><i data-lucide="bell-ring" class="i"></i></span></div>

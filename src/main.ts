@@ -405,7 +405,8 @@ function renumerarOrdenQuiz(lista: HTMLElement) {
   });
 }
 
-// ── Tema: claro por defecto, siempre. El cambio solo dura la sesión ──
+// ── Tema: index.html resuelve el inicial (preferencia guardada o la del sistema);
+//    el toggle lo cambia y lo recuerda entre sesiones ──
 const root = document.documentElement;
 function setTheme(t: 'light' | 'dark') {
   root.dataset.theme = t;
@@ -824,7 +825,7 @@ document.addEventListener('click', async (e) => {
   }
   if (el.closest('[data-curso-gratis-reiniciar-demo]')) { CursoGratis.reiniciarDemo(); toast('Listo: deberás elegir de nuevo tu curso gratis para continuar', 'gift'); navigate('/'); return; }
 
-  if (el.closest('[data-theme-toggle]')) setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  if (el.closest('[data-theme-toggle]')) { const nuevoTema = root.dataset.theme === 'dark' ? 'light' : 'dark'; setTheme(nuevoTema); try { localStorage.setItem('odt:tema', nuevoTema); } catch {} }
 
   const repasarVideo = el.closest<HTMLButtonElement>('[data-video-seek]');
   if (repasarVideo) {

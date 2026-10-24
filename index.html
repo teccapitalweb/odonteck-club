@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    // Tema recordado entre sesiones; en la primera visita respeta el del sistema.
+    // Va temprano, antes de pintar, para evitar el parpadeo de claro a oscuro.
+    try { var _t = localStorage.getItem('odt:tema'); document.documentElement.dataset.theme = (_t === 'dark' || _t === 'light') ? _t : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
+  </script>
   <meta name="theme-color" content="#f6f5f1" />
   <link rel="icon" type="image/png" href="/brand/favicon-64.png" />
   <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
