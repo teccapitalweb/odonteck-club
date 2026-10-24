@@ -49,7 +49,6 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
-import { abrirJuegoClase } from './ui/juego-clase';
 import { juegoClaseCompletado, type RegistroJuegoClase, type TipoJuegoClase } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
@@ -659,11 +658,14 @@ function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {})
   return !!form;
 }
 
-function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actualizarAlCerrar = false } = {}) {
+async function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actualizarAlCerrar = false } = {}) {
   const c = getCurso(cursoId);
   const k = c?.clases.find((clase) => clase.n === n);
   if (!c || !k) return false;
   const siguiente = c.clases.find((clase) => clase.n === n + 1);
+  // Los juegos de cierre (5 mecánicas visuales) son un módulo grande que solo
+  // se necesita al terminar una clase: se carga bajo demanda, no en el arranque.
+  const { abrirJuegoClase } = await import('./ui/juego-clase');
   const abierto = abrirJuegoClase({
     cursoId,
     n,
