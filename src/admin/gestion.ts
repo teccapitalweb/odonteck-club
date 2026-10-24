@@ -105,17 +105,23 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
 }
 
 // ═══ MIEMBROS ═══
-export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
-  const q = (query.get('q') || '').toLowerCase();
-  const f = query.get('estado') || '';
+// Aplica los mismos filtros de la vista de Miembros (búsqueda + estado); lo reusa la exportación CSV.
+export function filtrarMiembros(q: string, f: string) {
   let l = Datos.miembros();
   if (q) l = l.filter((m) => (m.nombre + m.email).toLowerCase().includes(q));
   if (f === 'vip') l = l.filter((m) => estadoMiembro(m).vip && !m.cortesiaHasta);
   if (f === 'cortesia') l = l.filter((m) => m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now());
   if (f === 'sin') l = l.filter((m) => !estadoMiembro(m).vip);
+  return l;
+}
+
+export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
+  const q = (query.get('q') || '').toLowerCase();
+  const f = query.get('estado') || '';
+  const l = filtrarMiembros(q, f);
   const chip = (k: string, t: string) => `<a class="chip ${f === k ? 'chip--primary' : 'chip--outline'}" href="#/admin/miembros?${new URLSearchParams({ q, estado: k })}">${t}</a>`;
   return `
-  ${adminHead('Miembros', `${Datos.miembros().length} cuentas · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`)}
+  ${adminHead('Miembros', `${Datos.miembros().length} cuentas · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`, `<button class="btn btn--secondary" data-exportar-miembros${l.length ? '' : ' disabled'}><i data-lucide="download" class="i"></i>Exportar CSV</button>`)}
   <div class="row" style="justify-content:space-between">
     <form class="search" style="flex:1;max-width:420px" data-form="buscar-miembro"><i data-lucide="search" class="i"></i><input class="input" name="q" value="${esc(q)}" placeholder="Buscar por nombre o correo"></form>
     <div class="row" style="gap:6px">${chip('', 'Todos')}${chip('vip', 'VIP')}${chip('cortesia', 'Cortesía')}${chip('sin', 'Sin membresía')}</div>

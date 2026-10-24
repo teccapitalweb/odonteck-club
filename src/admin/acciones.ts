@@ -11,6 +11,7 @@ import {
   reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
+import { estadoMiembro, filtrarMiembros } from './gestion';
 import { confirmar } from '../ui/dialogo';
 import { createIcons, icons } from 'lucide';
 
@@ -120,6 +121,25 @@ function exportarEncuestasCsv() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   a.download = `odonteck-encuestas${plan ? `-${plan}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+// Lista de miembros (con los filtros activos de la vista) como CSV descargable.
+function exportarMiembrosCsv() {
+  const q = (current().query.get('q') || '').toLowerCase();
+  const f = current().query.get('estado') || '';
+  const l = filtrarMiembros(q, f);
+  if (!l.length) return;
+  const planes: Record<string, string> = { mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan', admin: 'Administrador', regalo: 'Regalo' };
+  const dia = (v?: string | null) => (v ? String(v).slice(0, 10) : '');
+  const celda = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const filas: unknown[][] = [['nombre', 'correo', 'plan', 'estado', 'vence', 'cortesia_hasta', 'clases_vistas', 'ultima_actividad', 'alta', 'uid']];
+  for (const m of l) filas.push([m.nombre, m.email, planes[m.plan || 'ninguno'] || m.plan || '', estadoMiembro(m).etiqueta, dia(m.vence), dia(m.cortesiaHasta), m.clasesVistas, dia(m.ultimaActividad), dia(m.alta), m.uid]);
+  const csv = '﻿' + filas.map((fr) => fr.map(celda).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = `odonteck-miembros${f ? `-${f}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -290,6 +310,7 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (el.closest('[data-restablecer-demo]') && await confirmar({ titulo: 'Restablecer demo', mensaje: 'Esto borra todos los cambios hechos en el demo y vuelve a los datos iniciales.', confirmar: 'Restablecer', peligro: true })) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
     if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
     if (el.closest('[data-exportar-encuestas]')) { exportarEncuestasCsv(); toast('CSV descargado', 'download'); }
+    if (el.closest('[data-exportar-miembros]')) { exportarMiembrosCsv(); toast('CSV descargado', 'download'); }
 
     const bulk = el.closest<HTMLButtonElement>('[data-bulk-accion]');
     if (bulk) {
