@@ -63,7 +63,7 @@ export function fichaLibro(m: Material, compacto: boolean) {
   const disponible = m.estado === 'disponible' && acc && (Datos.modo === 'api' || !!m.url);
   return `
   <div class="book">
-    <div class="book__cover"><img src="${m.portada}" alt=""><span class="chip"><i data-lucide="${tipoIcon[m.tipo] || 'file'}" class="i"></i>${m.tipo} · ${m.paginas} ${m.tipo === 'Presentación' ? 'láminas' : 'págs'}</span></div>
+    <div class="book__cover"><img src="${m.portada}" alt="" loading="lazy" decoding="async"><span class="chip"><i data-lucide="${tipoIcon[m.tipo] || 'file'}" class="i"></i>${m.tipo} · ${m.paginas} ${m.tipo === 'Presentación' ? 'láminas' : 'págs'}</span></div>
     <div>
       <span class="eyebrow">${esc(m.categoria)} · ${esc(m.area)}</span>
       <h2 class="display book__title" style="margin-top:8px">${compacto ? `<a href="#/materiales/${m.id}" style="color:inherit">${esc(m.titulo)}</a>` : esc(m.titulo)}</h2>
