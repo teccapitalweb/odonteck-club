@@ -168,10 +168,11 @@ describe('admin: miembros y cortesías', () => {
   });
 
   test('lista con filtros y detalle', async () => {
+    // Incluye a TODOS los usuarios de Firebase Auth (logueados), no solo los que tienen doc en Firestore.
     const todos = await admin('get', '/admin/miembros').expect(200);
-    assert.deepEqual(todos.body.map((m) => m.uid).sort(), ['free1', 'vencido1', 'vip1', 'vip2']);
+    assert.deepEqual(todos.body.map((m) => m.uid).sort(), ['adm1', 'free1', 'legacy-auth-uid', 'solo_auth', 'vencido1', 'vip1', 'vip2']);
     const vip = await admin('get', '/admin/miembros?estado=vip').expect(200);
-    assert.deepEqual(vip.body.map((m) => m.uid).sort(), ['vip1', 'vip2']);
+    assert.deepEqual(vip.body.map((m) => m.uid).sort(), ['adm1', 'vip1', 'vip2']);
     const q = await admin('get', '/admin/miembros?q=CARLA').expect(200);
     assert.deepEqual(q.body.map((m) => m.uid), ['free1']);
     await admin('get', '/admin/miembros?estado=raro').expect(400);

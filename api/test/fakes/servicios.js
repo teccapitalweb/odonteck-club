@@ -33,6 +33,13 @@ export function crearAuthFalso({ tokens = {}, usuarios = {} } = {}) {
       }
       return { uid, ...u };
     },
+    async listUsers(maxResults = 1000, pageToken) {
+      const todos = Object.entries(usuarios).map(([uid, u]) => ({ uid, ...u, metadata: u.metadata ?? {} }));
+      const inicio = pageToken ? Number(pageToken) : 0;
+      const users = todos.slice(inicio, inicio + maxResults);
+      const siguiente = inicio + maxResults;
+      return { users, pageToken: siguiente < todos.length ? String(siguiente) : undefined };
+    },
   };
 }
 
