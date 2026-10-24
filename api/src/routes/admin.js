@@ -1,4 +1,5 @@
 // Rutas de administración (claim `admin: true`).
+import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
   COL,
@@ -11,7 +12,7 @@ import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMateri
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
 import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
-import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, textoRequerido, unoDe, url } from '../lib/validacion.js';
+import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, texto, textoRequerido, unoDe, url } from '../lib/validacion.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
 
@@ -375,6 +376,59 @@ export function rutasAdmin(ctx) {
     if (!(await ref.get()).exists) throw noEncontrado('Ese miembro no tiene cortesía.');
     await ref.delete();
     res.json({ ok: true, uid });
+  }));
+
+  // ---------- Cupones (días de acceso canjeables) ----------
+  const ALFABETO_CUPON = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sin O/0/I/1 para evitar confusiones
+  // Los códigos funcionan como un secreto (dan acceso): aleatoriedad criptográfica y 12 caracteres (~32^12) para que no se puedan adivinar por fuerza bruta.
+  const generarCodigo = () => Array.from({ length: 12 }, () => ALFABETO_CUPON[randomInt(ALFABETO_CUPON.length)]).join('');
+  const normalizarCodigo = (v) => String(v ?? '').trim().toUpperCase().replace(/\s+/g, '');
+  const CODIGO_VALIDO = /^[A-Z0-9-]{4,24}$/;
+
+  r.get('/admin/cupones', h(async (req, res) => {
+    const lista = docs(await db.collection(COL.cupones).get()).sort((a, b) => String(b.creado ?? '').localeCompare(String(a.creado ?? '')));
+    res.json(lista);
+  }));
+
+  r.post('/admin/cupones', h(async (req, res) => {
+    const b = cuerpo(req);
+    const dias = entero(b.dias, { campo: 'dias', min: 1, max: 3650 });
+    const usosMax = entero(b.usosMax, { campo: 'usosMax', min: 0, max: 100000, requerido: false }) ?? 1;
+    const etiqueta = texto(b.etiqueta, { campo: 'etiqueta', max: LIMITES.corto }) ?? '';
+    let vence = null;
+    if (b.vence !== undefined && b.vence !== null && b.vence !== '') {
+      const ms = aMillis(b.vence);
+      if (ms === null || Number.isNaN(ms)) throw invalido('La fecha de vencimiento no es válida.', 'vence_invalido');
+      vence = new Date(ms).toISOString();
+    }
+    const codigo = b.codigo ? normalizarCodigo(b.codigo) : generarCodigo();
+    if (!CODIGO_VALIDO.test(codigo)) throw invalido('El código debe tener de 4 a 24 letras, números o guiones.', 'codigo_invalido');
+    const doc = { codigo, dias, usosMax, usados: 0, vence, etiqueta, estado: 'activo', creadoPor: req.usuario.email || req.usuario.uid, creado: ahoraISO(), actualizado: ahoraISO() };
+    try {
+      await db.collection(COL.cupones).doc(codigo).create(doc);
+    } catch (e) {
+      if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto(`Ya existe un cupón con el código "${codigo}".`, 'ya_existe');
+      throw e;
+    }
+    res.status(201).json(doc);
+  }));
+
+  r.patch('/admin/cupones/:codigo', h(async (req, res) => {
+    const codigo = normalizarCodigo(req.params.codigo);
+    const b = cuerpo(req);
+    const cambios = {};
+    if (b.estado !== undefined) cambios.estado = unoDe(b.estado, ['activo', 'revocado'], { campo: 'estado', requerido: true });
+    if (b.etiqueta !== undefined) cambios.etiqueta = texto(b.etiqueta, { campo: 'etiqueta', max: LIMITES.corto });
+    if (Object.keys(cambios).length === 0) throw invalido('No enviaste ningún campo para actualizar.');
+    const ref = db.collection(COL.cupones).doc(codigo);
+    const actualizado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado(`No existe un cupón con el código "${codigo}".`);
+      const nuevo = { ...snap.data(), ...cambios, codigo, actualizado: ahoraISO() };
+      tx.set(ref, nuevo);
+      return nuevo;
+    });
+    res.json(actualizado);
   }));
 
   // ---------- Foro ----------

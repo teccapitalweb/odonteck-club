@@ -1,6 +1,6 @@
 import { api, mensajeError } from './auth';
 import { Comunidad } from './comunidad';
-import { Datos, type Aviso, type Config, type Curso, type Evento, type Material, type MiembroDemo, type Quiz } from './datos';
+import { Datos, type Aviso, type Config, type Cupon, type Curso, type Evento, type Material, type MiembroDemo, type Quiz } from './datos';
 import type { ContactoEncuesta, ResumenEncuestas } from './encuestas';
 
 export interface ResumenAdmin {
@@ -104,6 +104,9 @@ const cargarEventos = (forzar = false) => cargar('eventos', async () => {
 const cargarQuizzes = (forzar = false) => cargar('quizzes', async () => {
   Datos.hidratarAdmin('quizzes', await api<Quiz[]>('/admin/quizzes'));
 }, forzar);
+const cargarCupones = (forzar = false) => cargar('cupones', async () => {
+  Datos.hidratarAdmin('cupones', await api<Cupon[]>('/admin/cupones'));
+}, forzar);
 
 export const Admin = {
   get resumen() { return estado.resumen; },
@@ -163,6 +166,8 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
       const plan = query.get('plan') === 'vip' || query.get('plan') === 'gratis' ? query.get('plan') : '';
       tareas.push(cargar(`encuestas:${plan}`, async () => { estado.encuestas = await api<ResumenEncuestas>(`/admin/encuestas/resumen${plan ? `?plan=${plan}` : ''}`); }, true));
       tareas.push(cargar('encuestas:contactos', async () => { estado.contactosEncuestas = await api<ContactoEncuesta[]>('/admin/encuestas/contactos'); }, forzar));
+    } else if (path === '/admin/cupones') {
+      tareas.push(cargarCupones(forzar));
     } else if (path === '/admin/ajustes') {
       tareas.push(cargar('config', async () => { Datos.hidratarAdmin('config', adaptarConfig(await api('/admin/config'))); }, forzar));
     }
@@ -350,6 +355,39 @@ export async function publicarAvisoAdmin(aviso: Omit<Aviso, 'id' | 'fecha'>) {
   const guardado = await api<Aviso>('/admin/avisos', { method: 'POST', json: { ...aviso, enlace: enlace || null } });
   Datos.hidratarAdmin('avisos', [guardado, ...Datos.avisos()]);
   cargados.add('avisos');
+}
+
+const generarCodigoCupon = () => { const a = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; return Array.from({ length: 8 }, () => a[Math.floor(Math.random() * a.length)]).join(''); };
+
+export async function crearCuponAdmin(datos: { codigo?: string; dias: number; usosMax: number; vence: string | null; etiqueta: string }): Promise<Cupon> {
+  if (Datos.modo === 'demo') {
+    const codigo = (datos.codigo || generarCodigoCupon()).trim().toUpperCase().replace(/\s+/g, '');
+    if (!/^[A-Z0-9-]{4,24}$/.test(codigo)) throw new Error('El código debe tener de 4 a 24 letras, números o guiones.');
+    if (Datos.cupones().some((c) => c.codigo === codigo)) throw new Error(`Ya existe un cupón con el código "${codigo}".`);
+    const cupon: Cupon = { codigo, dias: datos.dias, usosMax: datos.usosMax, usados: 0, vence: datos.vence, etiqueta: datos.etiqueta, estado: 'activo', creado: new Date().toISOString() };
+    Datos.guardarCupon(cupon);
+    return cupon;
+  }
+  const cupon = await api<Cupon>('/admin/cupones', { method: 'POST', json: datos });
+  Datos.hidratarAdmin('cupones', [cupon, ...Datos.cupones()]);
+  cargados.add('cupones');
+  return cupon;
+}
+
+export async function cambiarEstadoCuponAdmin(codigo: string, estado: 'activo' | 'revocado') {
+  if (Datos.modo === 'demo') {
+    const c = Datos.cupones().find((x) => x.codigo === codigo);
+    if (c) { c.estado = estado; Datos.guardarCupon(c); }
+    return;
+  }
+  const cupon = await api<Cupon>(`/admin/cupones/${encodeURIComponent(codigo)}`, { method: 'PATCH', json: { estado } });
+  Datos.hidratarAdmin('cupones', Datos.cupones().map((c) => (c.codigo === cupon.codigo ? cupon : c)));
+  cargados.add('cupones');
+}
+
+export async function canjearCuponMiembro(codigo: string): Promise<{ dias: number; hasta?: string }> {
+  if (Datos.modo === 'demo') return Datos.canjearCuponDemo(codigo);
+  return api<{ dias: number; hasta?: string }>('/cupones/canjear', { method: 'POST', json: { codigo } });
 }
 
 export async function guardarConfigAdmin(c: Config) {

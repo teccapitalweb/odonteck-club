@@ -4,8 +4,9 @@ import { Comunidad } from '../core/comunidad';
 import { mensajeError } from '../core/auth';
 import { resumenEncuestasDemo } from '../core/encuestas';
 import {
-  Admin, borrarCursoAdmin, borrarCursosAdmin, borrarEventoAdmin, borrarMaterialAdmin, borrarMaterialesAdmin, cambiarEstadoMaterialesAdmin,
-  cambiarPublicadoCursosAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
+  Admin, borrarCursoAdmin, borrarCursosAdmin, borrarEventoAdmin, borrarMaterialAdmin, borrarMaterialesAdmin,
+  cambiarEstadoCuponAdmin, cambiarEstadoMaterialesAdmin, cambiarPublicadoCursosAdmin, cargarAdmin, crearCuponAdmin,
+  guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
   reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
@@ -190,6 +191,18 @@ export function instalarAccionesAdmin(toast: Toast) {
         await publicarAvisoAdmin({ titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), enlace: String(d.get('enlace')).trim() || undefined });
         toast('Aviso publicado', 'megaphone'); render();
       }
+      if (tipo === 'cupon') {
+        const venceStr = String(d.get('vence') || '').trim();
+        const cupon = await crearCuponAdmin({
+          codigo: String(d.get('codigo') || '').trim() || undefined,
+          dias: Number(d.get('dias')) || 30,
+          usosMax: Math.max(0, Number(d.get('usosMax')) || 0),
+          vence: venceStr ? new Date(venceStr + 'T23:59:59').toISOString() : null,
+          etiqueta: String(d.get('etiqueta') || '').trim(),
+        });
+        try { await navigator.clipboard?.writeText(cupon.codigo); } catch { /* sin portapapeles */ }
+        toast(`Cupón ${cupon.codigo} creado · código copiado`, 'ticket'); render();
+      }
       if (tipo === 'config') {
         await guardarConfigAdmin({ precioMensual: Number(d.get('precioMensual')), precioAnual: Number(d.get('precioAnual')), descuentoVIP: Number(d.get('descuentoVIP')),
           whatsappSoporte: String(d.get('whatsappSoporte')).trim(), canalWhatsApp: String(d.get('canalWhatsApp')).trim(), praxiaUrl: String(d.get('praxiaUrl')).trim() });
@@ -235,6 +248,18 @@ export function instalarAccionesAdmin(toast: Toast) {
 
     const dias = el.closest<HTMLElement>('[data-dias]');
     if (dias) { const inp = dias.closest('form')!.querySelector<HTMLInputElement>('[name="dias"]')!; inp.value = dias.dataset.dias!; }
+
+    const cuponDias = el.closest<HTMLElement>('[data-cupon-dias]');
+    if (cuponDias) { cuponDias.closest('form')!.querySelector<HTMLInputElement>('[name="dias"]')!.value = cuponDias.dataset.cuponDias!; return; }
+    const copiar = el.closest<HTMLElement>('[data-copiar-cupon]');
+    if (copiar) { try { await navigator.clipboard.writeText(copiar.dataset.copiarCupon!); toast('Código copiado', 'copy'); } catch { toast('No se pudo copiar', 'alert-triangle'); } return; }
+    const cuponEstado = el.closest<HTMLElement>('[data-cupon-estado]');
+    if (cuponEstado) {
+      const [codigo, estado] = cuponEstado.dataset.cuponEstado!.split(':') as [string, 'activo' | 'revocado'];
+      if (estado === 'revocado' && !(await confirmar({ titulo: 'Revocar cupón', mensaje: `El cupón ${codigo} dejará de poder canjearse.`, confirmar: 'Revocar', peligro: true }))) return;
+      try { await cambiarEstadoCuponAdmin(codigo, estado); toast(estado === 'revocado' ? 'Cupón revocado' : 'Cupón reactivado', 'ticket'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+      return;
+    }
 
     const rcg = el.closest<HTMLElement>('[data-reiniciar-curso-gratis]');
     if (rcg && await confirmar({ titulo: 'Reiniciar curso gratis', mensaje: 'El miembro volverá a ver el anuncio para elegir. Su progreso no se borra.', confirmar: 'Reiniciar', icono: 'rotate-ccw' })) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }

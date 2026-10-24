@@ -244,6 +244,14 @@ export function suscripcion(_params: Record<string, string> = {}, query = new UR
       <a class="btn btn--brand btn--sm" href="/vip-panel.html" target="_blank" rel="noopener"><i data-lucide="external-link" class="i"></i>Abrir portal anterior</a>
     </div>` : ''}
 
+    <form class="card card--pad" data-canjear-cupon style="display:grid;gap:12px">
+      <div style="display:flex;gap:12px;align-items:center"><span style="width:40px;height:40px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex-shrink:0"><i data-lucide="ticket" class="i" style="width:18px;height:18px"></i></span><div><h3 style="font-size:var(--fs-sm)">¿Tienes un cupón?</h3><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">Canjéalo y obtén días de acceso gratis al club.</p></div></div>
+      <div class="row" style="gap:8px;flex-wrap:nowrap">
+        <input class="input mono" name="codigo" placeholder="Escribe tu código" maxlength="24" style="text-transform:uppercase;flex:1" required>
+        <button class="btn btn--brand" type="submit"><i data-lucide="gift" class="i"></i>Canjear</button>
+      </div>
+    </form>
+
     <p style="text-align:center;font-size:var(--fs-xs);color:var(--text-3)">Pagos seguros con Stripe · Cancela en cualquier momento · Sin permanencia</p>
   </section>`;
 }
