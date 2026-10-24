@@ -23,8 +23,6 @@ import './styles/juego-clase.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
 import { shellHTML, marcarNavActivo } from './ui/shell';
-import { adminShellHTML, marcarAdminActivo } from './admin/shell';
-import { instalarAccionesAdmin } from './admin/acciones';
 import { Auth, api, mensajeError } from './core/auth';
 import { Datos, type Pregunta } from './core/datos';
 import { descargarRepasoPDF } from './core/repaso-pdf';
@@ -66,8 +64,6 @@ import { login } from './pages/login';
 import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
 import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type DocumentoPreparado, type ImagenDirectorioPreparada, type TipoDocumento, type VisibilidadDocumento } from './core/directorio';
-import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
-import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas, adminCupones } from './admin/gestion';
 
 type PlayerJsInstance = {
   on(evento: string, callback: (datos?: unknown) => void): void;
@@ -446,6 +442,17 @@ document.addEventListener('error', (e) => {
   if (img instanceof HTMLImageElement && img.matches('[data-avatar-image]')) img.remove();
 }, true);
 
+// ── Panel admin: se carga bajo demanda (solo los administradores lo usan) ──
+// Así todo el código del panel queda en un chunk aparte, fuera del bundle de miembro.
+type AdminUI = typeof import('./admin/index');
+let adminUI: AdminUI | null = null;
+let accionesAdminInstaladas = false;
+async function cargarAdminUI(): Promise<AdminUI> {
+  const ui = adminUI ?? (adminUI = await import('./admin/index'));
+  if (!accionesAdminInstaladas) { accionesAdminInstaladas = true; ui.instalarAccionesAdmin(toast); }
+  return ui;
+}
+
 // ── Cascarones: miembro, admin o pantalla sola (login) ──
 let shellActual: 'miembro' | 'admin' | 'solo' | null = null;
 let fotoDirectorioPendiente: ImagenDirectorioPreparada | null = null;
@@ -463,7 +470,7 @@ function limpiarFotoDirectorioPendiente() {
 function montar(tipo: 'miembro' | 'admin' | 'solo') {
   if (shellActual === tipo) return;
   shellActual = tipo;
-  document.getElementById('app')!.innerHTML = tipo === 'miembro' ? shellHTML() : tipo === 'admin' ? adminShellHTML() : '<main id="outlet"></main>';
+  document.getElementById('app')!.innerHTML = tipo === 'miembro' ? shellHTML() : tipo === 'admin' ? adminUI!.adminShellHTML() : '<main id="outlet"></main>';
   setTheme(root.dataset.theme === 'dark' ? 'dark' : 'light');
   actualizarNotifs();
 }
@@ -507,6 +514,8 @@ onBeforeRender(async (path) => {
     if (!Auth.usuario?.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
     // El panel hidrata el foro con su propia vista y modera el directorio: al volver se recargan.
     invalidarComunidad(); invalidarDirectorio();
+    await cargarAdminUI();
+    if (current().path !== path) return false;
     montar('admin');
     const outlet = document.getElementById('outlet');
     if (outlet) outlet.innerHTML = '<div class="card card--pad row" style="justify-content:center;min-height:180px"><i data-lucide="loader-circle" class="i spin"></i><span>Cargando datos administrativos…</span></div>';
@@ -589,27 +598,30 @@ route('/mas', mas);
 const paginaAdmin = (pagina: (params: Record<string, string>, query: URLSearchParams) => string) => (params: Record<string, string>, query: URLSearchParams) => Admin.error
   ? `<div class="card card--pad stack" style="max-width:720px;margin:auto;text-align:center;gap:14px"><i data-lucide="server-off" class="i" style="width:34px;height:34px;margin:auto"></i><h1 class="display" style="font-size:var(--fs-xl)">No se pudo cargar el panel</h1><p class="muted">${esc(Admin.error)}</p><button class="btn btn--brand" style="justify-self:center" data-reintentar-admin><i data-lucide="refresh-cw" class="i"></i>Reintentar</button></div>`
   : pagina(params, query);
-route('/admin', paginaAdmin(adminResumen));
-route('/admin/cursos', paginaAdmin(adminCursos));
-route('/admin/cursos/:id', paginaAdmin(adminCurso));
-route('/admin/quizzes', paginaAdmin(adminQuizzes));
-route('/admin/quizzes/:cursoId/:n', paginaAdmin(adminQuiz));
-route('/admin/materiales', paginaAdmin(adminMateriales));
-route('/admin/materiales/:id', paginaAdmin(adminMaterial));
-route('/admin/en-vivo', paginaAdmin(adminEnVivo));
-route('/admin/en-vivo/:id', paginaAdmin(adminEvento));
-route('/admin/miembros', paginaAdmin(adminMiembros));
-route('/admin/miembros/:uid', paginaAdmin(adminMiembro));
-route('/admin/comunidad', paginaAdmin(adminComunidad));
-route('/admin/cupones', paginaAdmin(adminCupones));
-route('/admin/avisos', paginaAdmin(adminAvisos));
-route('/admin/encuestas', paginaAdmin(adminEncuestas));
-route('/admin/ajustes', paginaAdmin(adminAjustes));
+// El módulo del panel ya está cargado cuando se renderiza una ruta /admin (lo carga onBeforeRender); aquí sólo se elige la página.
+const rutaAdmin = (pick: (ui: AdminUI) => (params: Record<string, string>, query: URLSearchParams) => string) =>
+  async (params: Record<string, string>, query: URLSearchParams) => paginaAdmin(pick(await cargarAdminUI()))(params, query);
+route('/admin', rutaAdmin((ui) => ui.adminResumen));
+route('/admin/cursos', rutaAdmin((ui) => ui.adminCursos));
+route('/admin/cursos/:id', rutaAdmin((ui) => ui.adminCurso));
+route('/admin/quizzes', rutaAdmin((ui) => ui.adminQuizzes));
+route('/admin/quizzes/:cursoId/:n', rutaAdmin((ui) => ui.adminQuiz));
+route('/admin/materiales', rutaAdmin((ui) => ui.adminMateriales));
+route('/admin/materiales/:id', rutaAdmin((ui) => ui.adminMaterial));
+route('/admin/en-vivo', rutaAdmin((ui) => ui.adminEnVivo));
+route('/admin/en-vivo/:id', rutaAdmin((ui) => ui.adminEvento));
+route('/admin/miembros', rutaAdmin((ui) => ui.adminMiembros));
+route('/admin/miembros/:uid', rutaAdmin((ui) => ui.adminMiembro));
+route('/admin/comunidad', rutaAdmin((ui) => ui.adminComunidad));
+route('/admin/cupones', rutaAdmin((ui) => ui.adminCupones));
+route('/admin/avisos', rutaAdmin((ui) => ui.adminAvisos));
+route('/admin/encuestas', rutaAdmin((ui) => ui.adminEncuestas));
+route('/admin/ajustes', rutaAdmin((ui) => ui.adminAjustes));
 
 onRender(() => {
   const { path } = current();
   rutaPintada = path;
-  if (shellActual === 'admin') marcarAdminActivo(path); else marcarNavActivo(path);
+  if (shellActual === 'admin') adminUI?.marcarAdminActivo(path); else marcarNavActivo(path);
   const crumb = document.querySelector('[data-crumb]'); if (crumb) crumb.textContent = document.querySelector('#outlet h1')?.textContent?.trim() || 'Administración';
   cargarVideos();
   if (path.startsWith('/retos')) montarArcade();
@@ -625,7 +637,6 @@ onRender(() => {
   const sinRecorrido = /\/clase\/|^\/(curso-gratis|brujula)/.test(path);
   if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !sinRecorrido && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding();
 });
-instalarAccionesAdmin(toast);
 startRouter();
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
 window.addEventListener('recompensas:cambio', actualizarNotifs);
