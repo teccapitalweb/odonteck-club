@@ -9,6 +9,7 @@ import {
   perfilConDefectos,
 } from '../datos.js';
 import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMaterial, validarPreguntas } from '../lib/esquemas.js';
+import { logrosPublicos, normalizarEstadoRecompensas } from '../lib/recompensas.js';
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
 import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
@@ -288,7 +289,7 @@ export function rutasAdmin(ctx) {
 
   r.get('/admin/miembros/:uid', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
-    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis] = await Promise.all([
+    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis, recDoc] = await Promise.all([
       leerDoc(db, COL.miembros, uid),
       leerDoc(db, COL.cortesias, uid),
       leerDoc(db, COL.perfiles, uid),
@@ -298,7 +299,9 @@ export function rutasAdmin(ctx) {
       db.collection(COL.cursos).get(),
       usuarioAuth(uid),
       leerDoc(db, COL.cursoGratis, uid),
+      leerDoc(db, COL.recompensasEstado, uid),
     ]);
+    const rec = normalizarEstadoRecompensas(recDoc, uid);
     if (!m && !c && !perfil && !usuario && progSnap.empty) throw noEncontrado('No existe ese miembro.');
     const esAdmin = usuario?.customClaims?.admin === true;
     const estado = calcularEstado(m, c, esAdmin, ctx.now());
@@ -338,6 +341,7 @@ export function rutasAdmin(ctx) {
         })),
       certificados: certSnap.docs.map((d) => d.data()).sort((a, b) => String(b.emitido).localeCompare(String(a.emitido))),
       cursoGratis: cursoGratis?.cursoId ? { cursoId: cursoGratis.cursoId, titulo: cursos.get(cursoGratis.cursoId)?.titulo ?? cursoGratis.cursoId, origen: cursoGratis.origen, elegido: cursoGratis.elegido, cambios: cursoGratis.cambios ?? 0 } : null,
+      recompensas: { saldo: rec.saldo, ganados: rec.ganados, logros: logrosPublicos(recDoc) },
     });
   }));
 
