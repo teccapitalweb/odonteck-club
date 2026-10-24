@@ -4,14 +4,52 @@ import { Comunidad } from '../core/comunidad';
 import { mensajeError } from '../core/auth';
 import { resumenEncuestasDemo } from '../core/encuestas';
 import {
-  Admin, borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cambiarEstadoCuponAdmin, cargarAdmin, crearCuponAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
+  Admin, borrarCursoAdmin, borrarCursosAdmin, borrarEventoAdmin, borrarMaterialAdmin, borrarMaterialesAdmin,
+  cambiarEstadoCuponAdmin, cambiarEstadoMaterialesAdmin, cambiarPublicadoCursosAdmin, cargarAdmin, crearCuponAdmin,
+  guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
   reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
+import { confirmar } from '../ui/dialogo';
+import { createIcons, icons } from 'lucide';
 
 type Toast = (msg: string, icon?: string) => void;
 const cursosNuevos = new Set<string>();
+let arrastreCursoId: string | null = null;
+
+// Lee los IDs marcados en una tabla con selección (cursos o materiales).
+function idsSeleccionados(tabla: string): string[] {
+  return [...document.querySelectorAll<HTMLInputElement>(`[data-tabla="${tabla}"] [data-bulk-item]:checked`)].map((i) => i.dataset.bulkItem!);
+}
+
+// Repinta la barra de acciones masivas y marca las filas seleccionadas, sin re-render completo.
+function actualizarBulk(tabla: 'cursos' | 'materiales') {
+  const contenedor = document.querySelector<HTMLElement>(`[data-bulk-${tabla}]`);
+  const tablaEl = document.querySelector<HTMLElement>(`[data-tabla="${tabla}"]`);
+  if (!contenedor || !tablaEl) return;
+  const seleccion = new Set(idsSeleccionados(tabla));
+  tablaEl.querySelectorAll<HTMLElement>('[data-bulk-item]').forEach((inp) => {
+    inp.closest('tr')?.classList.toggle('is-selected', seleccion.has((inp as HTMLInputElement).dataset.bulkItem!));
+  });
+  const todos = tablaEl.querySelector<HTMLInputElement>('[data-bulk-all]');
+  const total = tablaEl.querySelectorAll('[data-bulk-item]').length;
+  if (todos) { todos.checked = total > 0 && seleccion.size === total; todos.indeterminate = seleccion.size > 0 && seleccion.size < total; }
+  if (!seleccion.size) { contenedor.innerHTML = ''; return; }
+  const n = seleccion.size;
+  const acciones = tabla === 'cursos'
+    ? `<button class="btn btn--secondary btn--sm" data-bulk-accion="cursos:publicar"><i data-lucide="eye" class="i"></i>Publicar</button>
+       <button class="btn btn--secondary btn--sm" data-bulk-accion="cursos:ocultar"><i data-lucide="eye-off" class="i"></i>Ocultar</button>`
+    : `<button class="btn btn--secondary btn--sm" data-bulk-accion="materiales:ocultar"><i data-lucide="eye-off" class="i"></i>Ocultar</button>`;
+  contenedor.innerHTML = `<div class="bulkbar">
+    <span class="bulkbar__count">${n} seleccionado${n === 1 ? '' : 's'}</span>
+    ${acciones}
+    <span class="bulkbar__sep"></span>
+    <button class="btn btn--danger btn--sm" data-bulk-accion="${tabla}:borrar"><i data-lucide="trash-2" class="i"></i>Borrar</button>
+    <button class="btn btn--ghost btn--sm" data-bulk-accion="${tabla}:limpiar">Cancelar</button>
+  </div>`;
+  createIcons({ icons });
+}
 
 function cursoDesdeForm(f: HTMLFormElement): Curso {
   const d = new FormData(f);
@@ -192,7 +230,7 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (ca) {
       const f = ca.closest('form') as HTMLFormElement; const c = cursoDesdeForm(f); const [acc, idx] = ca.dataset.claseAccion!.split(':'); const i = Number(idx);
       if (acc === 'agregar') c.clases.push({ n: c.clases.length + 1, titulo: `Clase ${c.clases.length + 1}`, videoId: '', duracion: null, gratis: c.clases.length === 0 });
-      if (acc === 'quitar') { if (!confirm('¿Quitar esta clase del curso?')) return; c.clases.splice(i, 1); }
+      if (acc === 'quitar') { if (!(await confirmar({ titulo: 'Quitar clase', mensaje: '¿Quitar esta clase del curso? Podrás volver a agregarla.', confirmar: 'Quitar', peligro: true }))) return; c.clases.splice(i, 1); }
       if (acc === 'subir' && i > 0) [c.clases[i - 1], c.clases[i]] = [c.clases[i], c.clases[i - 1]];
       if (acc === 'bajar' && i < c.clases.length - 1) [c.clases[i + 1], c.clases[i]] = [c.clases[i], c.clases[i + 1]];
       c.clases.forEach((k, n) => (k.n = n + 1));
@@ -218,42 +256,76 @@ export function instalarAccionesAdmin(toast: Toast) {
     const cuponEstado = el.closest<HTMLElement>('[data-cupon-estado]');
     if (cuponEstado) {
       const [codigo, estado] = cuponEstado.dataset.cuponEstado!.split(':') as [string, 'activo' | 'revocado'];
-      if (estado === 'revocado' && !confirm(`¿Revocar el cupón ${codigo}? Dejará de poder canjearse.`)) return;
+      if (estado === 'revocado' && !(await confirmar({ titulo: 'Revocar cupón', mensaje: `El cupón ${codigo} dejará de poder canjearse.`, confirmar: 'Revocar', peligro: true }))) return;
       try { await cambiarEstadoCuponAdmin(codigo, estado); toast(estado === 'revocado' ? 'Cupón revocado' : 'Cupón reactivado', 'ticket'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
       return;
     }
 
     const rcg = el.closest<HTMLElement>('[data-reiniciar-curso-gratis]');
-    if (rcg && confirm('¿Reiniciar la elección de curso gratis? El miembro volverá a elegir.')) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
+    if (rcg && await confirmar({ titulo: 'Reiniciar curso gratis', mensaje: 'El miembro volverá a ver el anuncio para elegir. Su progreso no se borra.', confirmar: 'Reiniciar', icono: 'rotate-ccw' })) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
     const rev = el.closest<HTMLElement>('[data-revocar-cortesia]');
-    if (rev && confirm('¿Revocar la cortesía ahora?')) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (rev && await confirmar({ titulo: 'Revocar cortesía', mensaje: 'El acceso de cortesía terminará de inmediato.', confirmar: 'Revocar', peligro: true })) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
 
     const bc = el.closest<HTMLElement>('[data-borrar-curso]');
-    if (bc && confirm('¿Borrar este curso? No se puede deshacer.')) { try { await borrarCursoAdmin(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (bc && await confirmar({ titulo: 'Borrar curso', mensaje: 'No se puede deshacer. Si alguien ya lo empezó, el backend lo impedirá.', confirmar: 'Borrar', peligro: true })) { try { await borrarCursoAdmin(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const bm = el.closest<HTMLElement>('[data-borrar-material]');
-    if (bm && confirm('¿Borrar este material?')) { try { await borrarMaterialAdmin(bm.dataset.borrarMaterial!); toast('Material borrado', 'trash-2'); navigate('/admin/materiales'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (bm && await confirmar({ titulo: 'Borrar material', mensaje: 'Si solo quieres esconderlo, cambia su estado a Oculto en vez de borrarlo.', confirmar: 'Borrar', peligro: true })) { try { await borrarMaterialAdmin(bm.dataset.borrarMaterial!); toast('Material borrado', 'trash-2'); navigate('/admin/materiales'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const be = el.closest<HTMLElement>('[data-borrar-evento]');
-    if (be && confirm('¿Borrar esta clase en vivo?')) { try { await borrarEventoAdmin(be.dataset.borrarEvento!); toast('Clase borrada', 'trash-2'); navigate('/admin/en-vivo'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (be && await confirmar({ titulo: 'Borrar clase en vivo', mensaje: 'Se quitará del inicio y de En vivo para todos los miembros.', confirmar: 'Borrar', peligro: true })) { try { await borrarEventoAdmin(be.dataset.borrarEvento!); toast('Clase borrada', 'trash-2'); navigate('/admin/en-vivo'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const ba = el.closest<HTMLElement>('[data-borrar-aviso]');
-    if (ba && Datos.modo === 'demo' && confirm('¿Borrar este aviso?')) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
+    if (ba && Datos.modo === 'demo' && await confirmar({ titulo: 'Borrar aviso', confirmar: 'Borrar', peligro: true })) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
     const oh = el.closest<HTMLElement>('[data-ocultar-hilo]');
     if (oh) { const hilo = Comunidad.todos().find((h) => h.id === oh.dataset.ocultarHilo); try { await moderarHiloAdmin(oh.dataset.ocultarHilo!, !hilo?.oculto); await cargarAdmin(current().path, current().query, true); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const rd = el.closest<HTMLButtonElement>('[data-directorio-reporte]');
     if (rd) {
       const [id, estado, accion] = rd.dataset.directorioReporte!.split(':') as [string, 'revisado' | 'descartado', 'ninguna' | 'ocultar' | 'cerrar'];
-      const mensaje = accion === 'ocultar' ? '¿Ocultar el perfil denunciado?' : accion === 'cerrar' ? '¿Cerrar la oportunidad denunciada?' : '¿Descartar esta denuncia sin retirar contenido?';
-      if (!confirm(mensaje)) return;
+      const dialogo = accion === 'ocultar' ? { titulo: 'Ocultar perfil', mensaje: 'El perfil denunciado dejará de aparecer en el directorio.', confirmar: 'Ocultar', peligro: true }
+        : accion === 'cerrar' ? { titulo: 'Cerrar oportunidad', mensaje: 'La oportunidad denunciada se cerrará y dejará de mostrarse.', confirmar: 'Cerrar', peligro: true }
+        : { titulo: 'Descartar denuncia', mensaje: 'Se marca como revisada sin retirar ningún contenido.', confirmar: 'Descartar' };
+      if (!(await confirmar(dialogo))) return;
       rd.disabled = true;
       try { await moderarReporteDirectorioAdmin(id, estado, accion); await cargarAdmin(current().path, current().query, true); toast('Denuncia revisada', 'shield-check'); render(); }
       catch (err) { toast(mensajeError(err), 'alert-triangle'); rd.disabled = false; }
     }
-    if (el.closest('[data-restablecer-demo]') && confirm('Esto borra todos los cambios hechos en el demo. ¿Continuar?')) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
+    if (el.closest('[data-restablecer-demo]') && await confirmar({ titulo: 'Restablecer demo', mensaje: 'Esto borra todos los cambios hechos en el demo y vuelve a los datos iniciales.', confirmar: 'Restablecer', peligro: true })) { Datos.restablecerDemo(); toast('Demo restablecido', 'rotate-ccw'); render(); }
     if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
     if (el.closest('[data-exportar-encuestas]')) { exportarEncuestasCsv(); toast('CSV descargado', 'download'); }
+
+    const bulk = el.closest<HTMLButtonElement>('[data-bulk-accion]');
+    if (bulk) {
+      const [tabla, accion] = bulk.dataset.bulkAccion!.split(':') as ['cursos' | 'materiales', string];
+      if (accion === 'limpiar') { document.querySelectorAll<HTMLInputElement>(`[data-tabla="${tabla}"] [data-bulk-item]:checked`).forEach((c) => { c.checked = false; }); actualizarBulk(tabla); return; }
+      const ids = idsSeleccionados(tabla);
+      if (!ids.length) return;
+      try {
+        if (tabla === 'cursos' && accion === 'publicar') { await cambiarPublicadoCursosAdmin(ids, true); toast(`${ids.length} curso${ids.length === 1 ? '' : 's'} publicado${ids.length === 1 ? '' : 's'}`); render(); }
+        else if (tabla === 'cursos' && accion === 'ocultar') { await cambiarPublicadoCursosAdmin(ids, false); toast(`${ids.length} curso${ids.length === 1 ? '' : 's'} oculto${ids.length === 1 ? '' : 's'}`); render(); }
+        else if (tabla === 'materiales' && accion === 'ocultar') { await cambiarEstadoMaterialesAdmin(ids, 'oculto'); toast(`${ids.length} material${ids.length === 1 ? '' : 'es'} oculto${ids.length === 1 ? '' : 's'}`); render(); }
+        else if (accion === 'borrar') {
+          const ok = await confirmar({ titulo: `Borrar ${ids.length} ${tabla === 'cursos' ? (ids.length === 1 ? 'curso' : 'cursos') : (ids.length === 1 ? 'material' : 'materiales')}`, mensaje: 'No se puede deshacer. Los que tengan progreso o estén protegidos no se borrarán.', confirmar: 'Borrar', peligro: true });
+          if (!ok) return;
+          if (tabla === 'cursos') await borrarCursosAdmin(ids); else await borrarMaterialesAdmin(ids);
+          toast('Elementos borrados', 'trash-2'); render();
+        }
+      } catch (err) { toast(mensajeError(err), 'alert-triangle'); render(); }
+      return;
+    }
   });
 
   document.addEventListener('change', async (e) => {
     const inp = e.target as HTMLInputElement;
+    if (inp.matches('[data-bulk-item]')) {
+      const tabla = inp.closest('[data-tabla]')?.getAttribute('data-tabla');
+      if (tabla === 'cursos' || tabla === 'materiales') actualizarBulk(tabla);
+      return;
+    }
+    if (inp.matches('[data-bulk-all]')) {
+      const tablaEl = inp.closest('[data-tabla]');
+      const tabla = tablaEl?.getAttribute('data-tabla');
+      tablaEl?.querySelectorAll<HTMLInputElement>('[data-bulk-item]').forEach((c) => { c.checked = inp.checked; });
+      if (tabla === 'cursos' || tabla === 'materiales') actualizarBulk(tabla);
+      return;
+    }
     if (inp.matches('[data-quiz-tipo]')) {
       const f = inp.closest('form') as HTMLFormElement;
       const q = quizDesdeForm(f); q.estado = 'borrador'; Datos.guardarQuiz(q); render(); return;
@@ -268,4 +340,53 @@ export function instalarAccionesAdmin(toast: Toast) {
       toast('Imagen lista · guarda para aplicar', 'image');
     } catch { toast('No se pudo leer la imagen', 'alert-triangle'); }
   });
+
+  // Búsqueda de miembros en vivo: filtra las filas ya cargadas sin recargar la ruta.
+  document.addEventListener('input', (e) => {
+    const inp = e.target as HTMLInputElement;
+    if (!inp.matches('[data-form="buscar-miembro"] input[name="q"]') || current().path !== '/admin/miembros') return;
+    const q = inp.value.trim().toLowerCase();
+    document.querySelectorAll<HTMLTableRowElement>('.dtable tbody tr').forEach((tr) => {
+      tr.style.display = !q || (tr.textContent || '').toLowerCase().includes(q) ? '' : 'none';
+    });
+  });
+
+  // Reordenar cursos arrastrando (las flechas ↑↓ siguen como alternativa accesible).
+  document.addEventListener('dragstart', (e) => {
+    const h = (e.target as HTMLElement).closest<HTMLElement>('[data-arrastre]');
+    if (!h || !current().path.startsWith('/admin/cursos')) return;
+    arrastreCursoId = h.dataset.arrastre!;
+    h.closest('tr')?.classList.add('is-dragging');
+    if (e.dataTransfer) { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', arrastreCursoId); }
+  });
+  document.addEventListener('dragover', (e) => {
+    if (!arrastreCursoId) return;
+    const fila = (e.target as HTMLElement).closest<HTMLElement>('[data-curso-fila]');
+    if (!fila) return;
+    e.preventDefault();
+    if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+    document.querySelectorAll('.is-dropzone').forEach((x) => x.classList.remove('is-dropzone'));
+    if (fila.dataset.cursoFila !== arrastreCursoId) fila.classList.add('is-dropzone');
+  });
+  document.addEventListener('drop', async (e) => {
+    if (!arrastreCursoId) return;
+    const fila = (e.target as HTMLElement).closest<HTMLElement>('[data-curso-fila]');
+    e.preventDefault();
+    const arrastrado = arrastreCursoId;
+    limpiarArrastre();
+    if (!fila || fila.dataset.cursoFila === arrastrado) return;
+    const rect = fila.getBoundingClientRect();
+    const despues = e.clientY > rect.top + rect.height / 2;
+    const ids = Datos.cursos().map((c) => c.id).filter((id) => id !== arrastrado);
+    let idx = ids.indexOf(fila.dataset.cursoFila!);
+    if (despues) idx += 1;
+    ids.splice(idx, 0, arrastrado);
+    try { await reordenarCursosAdmin(ids); toast('Orden actualizado'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+  });
+  document.addEventListener('dragend', limpiarArrastre);
+}
+
+function limpiarArrastre() {
+  arrastreCursoId = null;
+  document.querySelectorAll('.is-dragging, .is-dropzone').forEach((x) => x.classList.remove('is-dragging', 'is-dropzone'));
 }

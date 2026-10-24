@@ -1,0 +1,60 @@
+name: Deploy a Cloudflare Pages
+
+# Publica el frontend (club + landing) en Cloudflare Pages, que es lo que sirve
+# el dominio www.odonteckconsulting.com. Se dispara al fusionar a `main` (y a mano
+# con "Run workflow"). La API se despliega aparte a Railway (api.yml); el workflow
+# pages.yml publica en GitHub Pages, que es OTRA superficie (no el dominio).
+#
+# Requiere dos secretos del repo (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN   token con permiso "Cloudflare Pages: Edit"
+#   CLOUDFLARE_ACCOUNT_ID  id de la cuenta de Cloudflare
+# Y la variable del repo VITE_API_URL (la misma que ya usa pages.yml).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Un solo deploy a la vez; no cancelar uno en curso.
+concurrency:
+  group: cloudflare-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - run: npm ci
+
+      # VITE_API_URL llega desde la variable del repo. Sin ella el build caería a
+      # modo demo; este paso lo impide para no publicar el demo por error.
+      - name: Build (modo producción con API)
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: |
+          if [ -z "$VITE_API_URL" ]; then
+            echo "::error::Falta la variable del repo VITE_API_URL (Settings -> Variables)."
+            exit 1
+          fi
+          npm run build
+
+      - name: Publicar a Cloudflare Pages
+        # Acción de terceros anclada al SHA del commit (no a la etiqueta móvil @v3):
+        # recibe el token de Cloudflare, así que se fija la versión exacta por seguridad.
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '3.114.17'
+          command: pages deploy dist --project-name=odonteck-club --branch=main --commit-hash=${{ github.sha }}
