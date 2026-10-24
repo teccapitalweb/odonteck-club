@@ -235,12 +235,27 @@ export function rutasAdmin(ctx) {
     return { miembros: mapa(miembrosSnap), cortesias: mapa(cortesiasSnap), perfiles: mapa(perfilesSnap), progreso: progresoSnap.docs.map((d) => d.data()) };
   }
 
+  // Lista TODOS los usuarios de Firebase Auth (quienes ya iniciaron sesión), aunque no tengan
+  // perfil ni membresía todavía, para que el admin los vea a todos. Paginado por seguridad.
+  async function listarUsuariosAuth() {
+    const mapa = new Map();
+    if (typeof ctx.auth?.listUsers !== 'function') return mapa;
+    let pageToken;
+    let paginas = 0;
+    do {
+      const r = await ctx.auth.listUsers(1000, pageToken);
+      for (const u of r.users ?? []) mapa.set(u.uid, u);
+      pageToken = r.pageToken;
+    } while (pageToken && ++paginas < 20);
+    return mapa;
+  }
+
   r.get('/admin/miembros', h(async (req, res) => {
     const q = String(req.query.q ?? '').trim().toLowerCase().slice(0, 100);
     const filtro = req.query.estado === undefined || req.query.estado === '' ? 'todos' : String(req.query.estado);
     unoDe(filtro, ['todos', 'vip', 'no_vip', 'cortesia'], { campo: 'estado' });
     const ahora = ctx.now();
-    const { miembros, cortesias, perfiles, progreso } = await cargarMapas();
+    const [{ miembros, cortesias, perfiles, progreso }, authUsers] = await Promise.all([cargarMapas(), listarUsuariosAuth()]);
 
     const actividad = new Map();
     for (const p of progreso) {
@@ -251,22 +266,28 @@ export function rutasAdmin(ctx) {
       actividad.set(p.uid, a);
     }
 
-    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...perfiles.keys()]);
+    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...perfiles.keys(), ...authUsers.keys()]);
+    const aISODesde = (fecha) => { const ms = fecha ? new Date(fecha).getTime() : NaN; return Number.isNaN(ms) ? null : new Date(ms).toISOString(); };
     let lista = [...uids].map((uid) => {
       const m = miembros.get(uid) ?? null;
       const c = cortesias.get(uid) ?? null;
-      const estado = calcularEstado(m, c, false, ahora);
+      const au = authUsers.get(uid) ?? null;
+      const esAdmin = au?.customClaims?.admin === true;
+      const estado = calcularEstado(m, c, esAdmin, ahora);
       const a = actividad.get(uid) ?? { clasesVistas: 0, ultimaActividad: null };
       return {
         uid,
-        nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? '',
-        email: m?.email ?? '',
+        nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? au?.displayName ?? '',
+        email: m?.email ?? au?.email ?? '',
         esVip: estado.esVip,
+        esAdmin,
         plan: estado.plan,
         vence: estado.vence,
         cortesiaHasta: estado.cortesiaVigente ? aISO(c.hasta) : null,
         clasesVistas: a.clasesVistas,
-        ultimaActividad: a.ultimaActividad,
+        // Sin actividad de clases, se usa el último inicio de sesión de Firebase Auth.
+        ultimaActividad: a.ultimaActividad ?? aISODesde(au?.metadata?.lastSignInTime),
+        alta: aISODesde(au?.metadata?.creationTime),
       };
     });
 
