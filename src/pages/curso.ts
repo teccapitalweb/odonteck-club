@@ -35,7 +35,7 @@ export function curso(params: Record<string, string>) {
         : '';
     const inner = `
       <div class="lesson__num">${num}</div>
-      <div class="lesson__thumb"><img src="${c.portada}" alt=""><i data-lucide="${ico}" class="i"></i></div>
+      <div class="lesson__thumb"><img src="${c.portada}" alt="" loading="lazy" decoding="async"><i data-lucide="${ico}" class="i"></i></div>
       <div><div class="lesson__title">${esc(k.titulo)}${chip}</div>
         <div class="lesson__dur">${k.duracion ? fmtMin(k.duracion) : 'Clase ' + k.n}</div></div>`;
     return abierta
@@ -60,7 +60,7 @@ export function curso(params: Record<string, string>) {
   <section class="stack" style="gap:24px">
     <a class="section-head__cta" href="#/cursos" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>Catálogo</a>
     <div class="course-hero">
-      <img src="${c.portada}" alt="">
+      <img src="${c.portada}" alt="" fetchpriority="high" decoding="async">
       <div class="course-hero__body">
         <div class="row"><span class="chip">${c.area}</span><span class="chip"><i data-lucide="signal" class="i"></i>${c.nivel}</span><span class="chip"><i data-lucide="play-circle" class="i"></i>${c.clases.length} clases</span>${done ? '<span class="chip chip--accent"><i data-lucide="check" class="i"></i>Completado</span>' : bloqueado ? '<span class="chip" style="background:rgba(255,255,255,.15)"><i data-lucide="crown" class="i"></i>VIP</span>' : esGratis ? '<span class="chip chip--accent">Gratis</span>' : ''}</div>
         <h1 class="display display--black course-hero__title">${esc(c.titulo)}</h1>
