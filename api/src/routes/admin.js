@@ -48,21 +48,60 @@ export function rutasAdmin(ctx) {
   r.get('/admin/resumen', h(async (req, res) => {
     const ahora = ctx.now();
     const desde = ahora.getTime() - 30 * DIA_MS;
-    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap] = await Promise.all([
+    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap, susSnap, perfilesSnap, config] = await Promise.all([
       db.collection(COL.miembros).get(),
       db.collection(COL.cortesias).get(),
       db.collection(COL.progreso).get(),
       db.collection(COL.certificados).get(),
       db.collection(COL.foro).get(),
       db.collection(COL.cursos).get(),
+      db.collection(COL.suscripciones).get(),
+      db.collection(COL.perfiles).get(),
+      leerConfig(db),
     ]);
     const miembros = new Map(miembrosSnap.docs.map((d) => [d.id, d.data()]));
     const cortesias = new Map(cortesiasSnap.docs.map((d) => [d.id, d.data()]));
-    const uids = new Set([...miembros.keys(), ...cortesias.keys()]);
-    let miembrosActivos = 0;
-    for (const uid of uids) {
-      if (calcularEstado(miembros.get(uid) ?? null, cortesias.get(uid) ?? null, false, ahora).esVip) miembrosActivos++;
+    const suscripciones = new Map(susSnap.docs.map((d) => [d.id, d.data()]));
+    const perfiles = new Map(perfilesSnap.docs.map((d) => [d.id, d.data()]));
+    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...suscripciones.keys()]);
+    // Última actividad por uid (para detectar inactivos en riesgo de baja).
+    const ultimaActividadMs = new Map();
+    for (const d of progresoSnap.docs) {
+      const p = d.data();
+      if (!p.uid) continue;
+      const ult = Math.max(0, ...((p.historial ?? []).map((f) => aMillis(f) ?? 0)));
+      if (ult > (ultimaActividadMs.get(p.uid) ?? 0)) ultimaActividadMs.set(p.uid, ult);
     }
+    const precioMensual = Number(config.precios?.mensual) || 0;
+    const precioAnual = Number(config.precios?.anual) || 0;
+    const limite7 = ahora.getTime() + 7 * DIA_MS;
+    const hace14 = ahora.getTime() - 14 * DIA_MS;
+    let miembrosActivos = 0;
+    let mensualActivos = 0;
+    let anualActivos = 0;
+    let cortesiaActivos = 0;
+    let inactivos = 0;
+    const porVencer = [];
+    for (const uid of uids) {
+      const m = miembros.get(uid) ?? null;
+      const estado = calcularEstado(m, cortesias.get(uid) ?? null, false, ahora, suscripciones.get(uid) ?? null);
+      if (!estado.esVip) continue;
+      miembrosActivos++;
+      if (estado.plan === 'cortesia') cortesiaActivos++;
+      else if (estado.plan === 'anual') anualActivos++;
+      else if (estado.plan === 'mensual') mensualActivos++;
+      const venceMs = estado.vence ? (aMillis(estado.vence) ?? null) : null;
+      if (estado.plan !== 'cortesia' && venceMs !== null && venceMs > ahora.getTime() && venceMs <= limite7) {
+        porVencer.push({ uid, nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? '', plan: estado.plan, vence: estado.vence });
+      }
+      if ((ultimaActividadMs.get(uid) ?? 0) < hace14) inactivos++;
+    }
+    const mrr = mensualActivos * precioMensual + Math.round((anualActivos * precioAnual) / 12);
+    const meses = Array.from({ length: 6 }, (_, i) => { const d = new Date(ahora); d.setDate(1); d.setMonth(d.getMonth() - 5 + i); return d; });
+    const altasPorMes = meses.map((d) => ({
+      mes: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
+      total: [...miembros.values()].filter((mm) => { const a = primeraFecha(mm, CAMPOS_ALTA); if (a === null) return false; const f = new Date(a); return f.getFullYear() === d.getFullYear() && f.getMonth() === d.getMonth(); }).length,
+    }));
     let altas30d = 0;
     let bajas30d = 0;
     for (const m of miembros.values()) {
@@ -92,6 +131,13 @@ export function rutasAdmin(ctx) {
       certificados30d: certSnap.docs.filter((d) => (aMillis(d.data().emitido) ?? 0) >= desde).length,
       temasForo30d: foroSnap.docs.filter((d) => (aMillis(d.data().fecha) ?? 0) >= desde).length,
       cursosTop,
+      mrr,
+      mensualActivos,
+      anualActivos,
+      cortesiaActivos,
+      inactivos,
+      altasPorMes,
+      porVencer: porVencer.sort((a, b) => String(a.vence).localeCompare(String(b.vence))).slice(0, 20),
     });
   }));
 
