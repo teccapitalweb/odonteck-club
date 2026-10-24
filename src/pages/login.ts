@@ -12,10 +12,10 @@ export function login(_: Record<string, string>, query: URLSearchParams) {
     registro: 'Empieza a explorar OdonTeck y descubre qué puede aportar a tu práctica.',
     recuperar: 'Te enviaremos un enlace seguro para crear una contraseña nueva.',
   }[modo];
-  const campo = (nombre: string, etiqueta: string, tipo: string, icono: string, autocomplete: string, extra = '') => `
+  const campo = (nombre: string, etiqueta: string, tipo: string, icono: string, autocomplete: string, extra = '', verToggle = false) => `
     <label class="login__field">
       <span>${etiqueta}</span>
-      <span class="login__control"><i data-lucide="${icono}" class="i"></i><input class="input" name="${nombre}" type="${tipo}" placeholder="${etiqueta}" required autocomplete="${autocomplete}" ${extra}></span>
+      <span class="login__control"><i data-lucide="${icono}" class="i"></i><input class="input${verToggle ? ' input--con-toggle' : ''}" name="${nombre}" type="${tipo}" placeholder="${etiqueta}" required autocomplete="${autocomplete}" ${extra}>${verToggle ? '<button type="button" class="login__toggle-pass" data-ver-pass aria-label="Mostrar u ocultar la contraseña" aria-pressed="false"><i data-lucide="eye" class="i"></i></button>' : ''}</span>
     </label>`;
   const form = modo === 'recuperar' ? `
       <form class="login__fields" data-login-form="recuperar">
@@ -28,7 +28,7 @@ export function login(_: Record<string, string>, query: URLSearchParams) {
       <form class="login__fields" data-login-form="${modo}">
         ${modo === 'registro' ? campo('nombre', 'Nombre completo', 'text', 'user-round', 'name') : ''}
         ${campo('email', 'Correo electrónico', 'email', 'mail', 'email')}
-        ${campo('pass', 'Contraseña', 'password', 'lock-keyhole', modo === 'registro' ? 'new-password' : 'current-password', 'minlength="6"')}
+        ${campo('pass', 'Contraseña', 'password', 'lock-keyhole', modo === 'registro' ? 'new-password' : 'current-password', 'minlength="6"', true)}
         <p class="login__error" data-login-error hidden></p>
         <button class="btn btn--brand btn--lg btn--pill-arrow login__submit">${modo === 'registro' ? 'Crear mi cuenta' : 'Entrar al club'} <span class="arrow"><i data-lucide="arrow-right" class="i"></i></span></button>
       </form>

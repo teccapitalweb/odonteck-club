@@ -1264,6 +1264,17 @@ document.addEventListener('click', async (e) => {
   }
 
   if (el.closest('[data-imprimir]')) window.print();
+  const verPass = el.closest<HTMLElement>('[data-ver-pass]');
+  if (verPass) {
+    const inp = verPass.closest('.login__control')?.querySelector<HTMLInputElement>('input');
+    if (inp) {
+      const mostrar = inp.type === 'password';
+      inp.type = mostrar ? 'text' : 'password';
+      verPass.setAttribute('aria-pressed', String(mostrar));
+      verPass.innerHTML = `<i data-lucide="${mostrar ? 'eye-off' : 'eye'}" class="i"></i>`;
+      createIcons({ icons });
+    }
+  }
   const share = el.closest<HTMLElement>('[data-compartir-cert], [data-compartir]');
   if (share) {
     const url = share.dataset.compartirUrl ? new URL(share.dataset.compartirUrl, location.href).href : location.href;

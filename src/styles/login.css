@@ -108,6 +108,10 @@ html:has(.login-page) {
 .login .login__control .input { min-height: 48px; padding: 0 16px 0 44px; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb,var(--surface-2) 72%,var(--surface)); font-size: var(--fs-xs); }
 .login .login__control .input:focus { border-color: var(--primary); background: var(--surface); }
 .login__control:focus-within > .i { color: var(--primary); }
+.login .login__control .input--con-toggle { padding-right: 46px; }
+.login__toggle-pass { position: absolute; z-index: 2; top: 50%; right: 8px; translate: 0 -50%; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--text-3); cursor: pointer; transition: color var(--t-fast), background var(--t-fast); }
+.login__toggle-pass:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
+.login__toggle-pass .i { width: 17px; height: 17px; }
 
 .login__submit { width: 100%; min-height: 50px; margin-top: 4px; justify-content: space-between; border-radius: 14px; box-shadow: 0 14px 24px -14px rgba(20,42,92,.8); font-size: var(--fs-xs); }
 .login__error { margin: -2px 0 0; color: var(--danger); font-size: var(--fs-xs); }
