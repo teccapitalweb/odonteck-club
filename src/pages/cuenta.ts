@@ -165,6 +165,27 @@ export function suscripcion(_params: Record<string, string> = {}, query = new UR
   const beneficio = (ico: string, titulo: string, desc: string) =>
     `<div style="display:flex;gap:14px;align-items:flex-start"><span style="width:40px;height:40px;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;flex-shrink:0"><i data-lucide="${ico}" class="i" style="width:18px;height:18px"></i></span><div><strong style="font-size:var(--fs-sm)">${titulo}</strong><p class="muted" style="font-size:var(--fs-xs);margin-top:2px">${desc}</p></div></div>`;
 
+  // Apartado de confianza para el momento del pago (solo datos reales; nada de reseñas inventadas).
+  const confia = (ico: string, titulo: string, desc: string) =>
+    `<div style="display:grid;gap:9px;justify-items:center;text-align:center"><span style="width:46px;height:46px;border-radius:14px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center"><i data-lucide="${ico}" class="i" style="width:21px;height:21px"></i></span><strong style="font-size:var(--fs-sm)">${titulo}</strong><span class="muted" style="font-size:var(--fs-xs);line-height:1.45">${desc}</span></div>`;
+  const payBadge = (t: string) => `<span style="border:1px solid rgba(255,255,255,.28);border-radius:7px;padding:4px 9px;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;white-space:nowrap">${t}</span>`;
+  const bandaConfianza = `
+    <div class="card" style="padding:0;overflow:hidden;border-radius:var(--r-2xl);box-shadow:var(--shadow-sm)">
+      <div style="background:linear-gradient(120deg,var(--brand-navy),color-mix(in srgb,var(--brand-navy) 68%,var(--brand-teal)));color:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:14px;min-width:0">
+          <span style="width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex-shrink:0"><i data-lucide="shield-check" class="i" style="width:24px;height:24px;color:#fff"></i></span>
+          <div style="min-width:0"><strong style="font-family:var(--font-display);font-size:var(--fs-lg);display:block;line-height:1.1">Compra con total confianza</strong><span style="font-size:var(--fs-xs);color:rgba(255,255,255,.78)">Pago cifrado · procesado por Stripe · nunca guardamos tu tarjeta</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">${['VISA', 'Mastercard', 'AMEX', 'Apple Pay'].map(payBadge).join('')}</div>
+      </div>
+      <div style="padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:22px">
+        ${confia('lock', 'Pago 100% seguro', 'Cifrado de extremo a extremo con Stripe, líder mundial en pagos.')}
+        ${confia('rotate-ccw', 'Cancela cuando quieras', 'Sin contratos ni permanencia: tú tienes el control.')}
+        ${confia('badge-check', 'Certificados verificables', 'Folio único y público en cada curso que completas.')}
+        ${confia('headphones', 'Soporte de verdad', 'Te respondemos rápido por WhatsApp si necesitas algo.')}
+      </div>
+    </div>`;
+
   const planCard = (pl: typeof BRAND.planes[0], recomendado: boolean) => {
     const activo = p.plan === pl.id;
     const precioMes = pl.id === 'anual' ? precioMesDesdAnual : pl.precio;
@@ -214,6 +235,8 @@ export function suscripcion(_params: Record<string, string> = {}, query = new UR
       ${mensual ? planCard(mensual, false) : ''}
       ${anual ? planCard(anual, true) : ''}
     </div>
+
+    ${bandaConfianza}
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
       ${beneficio('play-circle', 'Cursos completos', `${totalCursos} cursos con ${totalClases}+ clases en video HD.`)}
