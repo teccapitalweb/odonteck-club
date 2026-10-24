@@ -134,6 +134,11 @@ export function adminMiembro(params: Record<string, string>) {
   if (!m) return vacio('Miembro no encontrado', '', '<a class="btn btn--brand" href="#/admin/miembros">Volver</a>');
   const e = estadoMiembro(m);
   const cortesiaVigente = m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now();
+  const perfil = (detalle?.perfil ?? {}) as Record<string, any>;
+  const sus = (detalle?.suscripcion ?? null) as Record<string, any> | null;
+  const rec = detalle?.recompensas;
+  const estadosStripe: Record<string, string> = { active: 'Activa', trialing: 'En prueba', past_due: 'Pago vencido', canceled: 'Cancelada', unpaid: 'Sin pagar', incomplete: 'Incompleta', incomplete_expired: 'Expirada' };
+  const sinPerfil = !perfil.whatsapp && !perfil.especialidad && !perfil.ciudad && !(Array.isArray(perfil.intereses) && perfil.intereses.length);
   return `
   <a class="section-head__cta" href="#/admin/miembros" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>Miembros</a>
   <div class="card card--pad row" style="gap:18px;align-items:center">
@@ -156,11 +161,38 @@ export function adminMiembro(params: Record<string, string>) {
     </form>
     <div class="card card--pad stack" style="gap:10px">
       <h3 class="admin-card-title">Suscripción en Stripe</h3>
-      <p class="muted" style="font-size:var(--fs-sm)">Cancelar, reembolsar o cambiar de plan se hace desde Stripe para que los cobros y la membresía nunca se desincronicen. Con el backend conectado, aquí aparece el historial de pagos y el enlace directo al cliente en Stripe.</p>
-      <div class="row"><button class="btn btn--secondary" disabled><i data-lucide="credit-card" class="i"></i>Ver en Stripe</button><button class="btn btn--secondary" disabled><i data-lucide="x-circle" class="i"></i>Cancelar al final del periodo</button></div>
+      ${sus ? `<div class="stack" style="gap:7px;font-size:var(--fs-sm)">
+        <div class="row" style="justify-content:space-between"><span class="faint">Estado</span><span class="chip ${['active', 'trialing'].includes(String(sus.estado)) ? 'chip--accent' : 'chip--warn'}">${esc(estadosStripe[String(sus.estado)] || String(sus.estado || '—'))}</span></div>
+        ${sus.plan ? `<div class="row" style="justify-content:space-between"><span class="faint">Plan</span><span>${esc(String(sus.plan))}</span></div>` : ''}
+        ${sus.periodoFin ? `<div class="row" style="justify-content:space-between"><span class="faint">Próximo cobro / fin de periodo</span><span>${fecha(String(sus.periodoFin))}</span></div>` : ''}
+      </div>
+      <p class="faint" style="font-size:var(--fs-xs)">Cancelar, reembolsar o cambiar de plan se hace desde Stripe para no desincronizar cobros y membresía.</p>
+      <div class="row">${sus.customerId ? `<a class="btn btn--secondary btn--sm" href="https://dashboard.stripe.com/customers/${esc(String(sus.customerId))}" target="_blank" rel="noopener"><i data-lucide="credit-card" class="i"></i>Ver en Stripe</a>` : ''}</div>`
+      : `<p class="muted" style="font-size:var(--fs-sm)">Sin suscripción de Stripe registrada. Cuando el miembro contrate un plan de pago, aquí aparecerá su estado, próximo cobro y el enlace directo a su cliente en Stripe.</p>`}
     </div>
   </div>
   ${detalle ? `<div class="admin-grid admin-grid--even">
+    <div class="card card--pad stack" style="gap:10px">
+      <h3 class="admin-card-title">Contacto y perfil</h3>
+      <div class="stack" style="gap:8px;font-size:var(--fs-sm)">
+        <div class="row" style="gap:8px"><i data-lucide="mail" class="i" style="width:16px;height:16px;color:var(--text-3)"></i><a href="mailto:${esc(m.email)}">${esc(m.email)}</a></div>
+        ${perfil.whatsapp ? `<div class="row" style="gap:8px"><i data-lucide="message-circle" class="i" style="width:16px;height:16px;color:var(--brand-teal)"></i><a href="https://wa.me/${String(perfil.whatsapp).replace(/\D/g, '')}" target="_blank" rel="noopener">${esc(String(perfil.whatsapp))}</a></div>` : ''}
+        ${perfil.especialidad ? `<div class="row" style="gap:8px"><i data-lucide="stethoscope" class="i" style="width:16px;height:16px;color:var(--text-3)"></i>${esc(String(perfil.especialidad))}</div>` : ''}
+        ${perfil.ciudad ? `<div class="row" style="gap:8px"><i data-lucide="map-pin" class="i" style="width:16px;height:16px;color:var(--text-3)"></i>${esc(String(perfil.ciudad))}</div>` : ''}
+      </div>
+      ${Array.isArray(perfil.intereses) && perfil.intereses.length ? `<div><span class="faint" style="font-size:var(--fs-xs)">Intereses</span><div class="row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${perfil.intereses.map((i: unknown) => `<span class="chip chip--outline">${esc(String(i))}</span>`).join('')}</div></div>` : ''}
+      ${sinPerfil ? '<p class="muted" style="font-size:var(--fs-sm)">Este miembro aún no completó su perfil profesional.</p>' : ''}
+    </div>
+    <div class="card card--pad stack" style="gap:12px">
+      <h3 class="admin-card-title">Recompensas</h3>
+      <div class="row" style="gap:28px">
+        <div><strong class="kpi__val" style="font-size:var(--fs-xl)">${rec?.saldo ?? 0}</strong><br><span class="faint" style="font-size:var(--fs-xs)">puntos disponibles</span></div>
+        <div><strong class="kpi__val" style="font-size:var(--fs-xl)">${rec?.ganados ?? 0}</strong><br><span class="faint" style="font-size:var(--fs-xs)">ganados en total</span></div>
+      </div>
+      ${rec && rec.logros.some((l) => l.logrado) ? `<div><span class="faint" style="font-size:var(--fs-xs)">Logros · ${rec.logros.filter((l) => l.logrado).length}/${rec.logros.length}</span><div class="row" style="gap:6px;flex-wrap:wrap;margin-top:6px">${rec.logros.filter((l) => l.logrado).map((l) => `<span class="chip chip--accent" title="${esc(l.descripcion)}"><i data-lucide="${esc(l.icono)}" class="i"></i>${esc(l.titulo)}</span>`).join('')}</div></div>` : '<p class="muted" style="font-size:var(--fs-sm)">Todavía sin logros desbloqueados.</p>'}
+    </div>
+  </div>
+  <div class="admin-grid admin-grid--even">
     ${detalle ? `<div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Curso gratis elegido</h3>${detalle.cursoGratis ? `<p style="font-size:var(--fs-sm)"><strong>${esc(detalle.cursoGratis.titulo)}</strong> · ${detalle.cursoGratis.origen === 'migracion' ? 'asignado por su avance previo' : detalle.cursoGratis.cambios ? 'elegido (ya usó su cambio)' : 'elegido por el miembro'}${detalle.cursoGratis.elegido ? ` · ${fecha(detalle.cursoGratis.elegido)}` : ''}</p><div class="row"><button type="button" class="btn btn--secondary btn--sm" data-reiniciar-curso-gratis="${m.uid}"><i data-lucide="rotate-ccw" class="i"></i>Reiniciar elección</button></div><p class="muted" style="font-size:var(--fs-xs)">Al reiniciar, el miembro vuelve a ver el anuncio para elegir. Su progreso no se borra.</p>` : '<p class="muted" style="font-size:var(--fs-sm)">Aún no elige su curso gratis.</p>'}</div>` : ''}
     <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Progreso por curso</h3>${detalle.progreso.length ? detalle.progreso.map((p) => `<div class="hbar"><span class="hbar__lbl">${esc(p.titulo)}</span><div class="progress"><span style="width:${p.total ? Math.round((p.vistas.length / p.total) * 100) : 0}%"></span></div><span class="mono faint">${p.vistas.length}/${p.total}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Todavía no ha iniciado cursos.</p>'}</div>
     <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Certificados</h3>${detalle.certificados.length ? detalle.certificados.map((c) => `<div class="todo"><i data-lucide="award" class="i"></i><span><strong>${esc(c.cursoTitulo)}</strong><br><span class="faint">${esc(c.folio)} · ${fecha(c.emitido)}</span></span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin certificados emitidos.</p>'}</div>

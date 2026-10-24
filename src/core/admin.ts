@@ -21,6 +21,7 @@ export interface DetalleMiembroAdmin extends MiembroDemo {
   progreso: { cursoId: string; titulo: string; vistas: number[]; total: number; ultima: number | null; actualizado: string | null; certificado?: string | null }[];
   certificados: { folio: string; cursoTitulo: string; emitido: string }[];
   cursoGratis?: { cursoId: string; titulo: string; origen: string; elegido: string | null; cambios: number } | null;
+  recompensas?: { saldo: number; ganados: number; logros: { id: string; titulo: string; descripcion: string; icono: string; progreso: number; meta: number; logrado: boolean; fecha: string | null }[] };
 }
 
 export interface ReporteDirectorioAdmin {
