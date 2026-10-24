@@ -350,7 +350,7 @@ export function perfilDirectorio(params: Record<string, string>) {
           <p>${esc(p.titular)}</p>
           <div class="network-meta"><span><i data-lucide="map-pin" class="i"></i>${ubicacion}</span><span><i data-lucide="briefcase-business" class="i"></i>${etiqueta(p.etapa)}</span>${p.anosExperiencia ? `<span><i data-lucide="timer" class="i"></i>${p.anosExperiencia} ${p.anosExperiencia === 1 ? 'año' : 'años'} de experiencia</span>` : ''}</div>
         </div>
-        <div class="dir-hero__actions">${esMio
+        <div class="dir-hero__actions"><button class="btn btn--ghost" data-compartir data-compartir-url="#/directorio/perfil/${encodeURIComponent(p.uid)}" aria-label="Compartir este perfil"><i data-lucide="share-2" class="i"></i>Compartir</button>${esMio
           ? `<button class="btn btn--secondary" data-network-profile><i data-lucide="pencil" class="i"></i>Editar perfil</button>${p.foto ? '<button type="button" class="btn btn--ghost btn--sm" data-dir-photo-quitar>Quitar foto</button>' : ''}`
           : `${botonReportar('perfil', p.uid, p.nombre)}<button class="btn btn--brand" data-network-connect data-uid="${esc(p.uid)}" data-name="${esc(p.nombre)}"><i data-lucide="user-plus" class="i"></i>Conectar</button>`}</div>
       </div>
