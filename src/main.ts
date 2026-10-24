@@ -40,7 +40,7 @@ import { clase } from './pages/clase';
 import { biblioteca, material } from './pages/materiales';
 import { visor, montarVisor } from './pages/visor';
 import { toggleReserva } from './pages/envivo';
-import { comunidad, directorio, hilo, perfilDirectorio } from './pages/comunidad';
+import { comunidad, directorio, editarPerfilDirectorio, hilo, perfilDirectorio } from './pages/comunidad';
 import { abrirVisorDocumento, montarDocumentosDirectorio, prepararDocumento } from './core/directorio-docs';
 import { paginaLogros } from './pages/logros';
 import { paginaRecompensas } from './pages/recompensas';
@@ -568,6 +568,7 @@ route('/en-vivo', () => { navigate('/comunidad?tab=en-vivo'); return ''; });
 route('/comunidad', comunidad);
 route('/comunidad/:id', hilo);
 route('/directorio', directorio);
+route('/directorio/editar-perfil', editarPerfilDirectorio);
 route('/directorio/perfil/:uid', perfilDirectorio);
 route('/curso-gratis', cursoGratisPagina);
 route('/logros', paginaLogros);
@@ -1100,7 +1101,7 @@ document.addEventListener('click', async (e) => {
     catch (err) { quitarImagen.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
-  if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); const dialog = document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]'); if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return; }
+  if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); navigate('/directorio/editar-perfil'); return; }
   if (el.closest('[data-network-job]')) {
     if (!Auth.usuario?.esVip && Datos.modo === 'api') { mostrarPaywall('Publicar oportunidades es un beneficio VIP. Puedes explorar perfiles y conectar gratis.'); return; }
     document.querySelector<HTMLDialogElement>('[data-network-job-dialog]')?.showModal(); return;
@@ -1180,8 +1181,7 @@ document.addEventListener('click', async (e) => {
     eliminarPerfil.disabled = true;
     try {
       await Directorio.eliminarPerfil(); limpiarFotoDirectorioPendiente();
-      eliminarPerfil.closest<HTMLDialogElement>('dialog')?.close();
-      toast('Perfil retirado del directorio', 'user-round-x'); render();
+      toast('Perfil retirado del directorio', 'user-round-x'); navigate('/directorio');
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); eliminarPerfil.disabled = false; }
     return;
   }
@@ -1453,7 +1453,7 @@ document.addEventListener('submit', async (e) => {
     const boton = f.querySelector<HTMLButtonElement>('footer button[type="submit"], footer button:not([type])'); if (boton) boton.disabled = true;
     try {
       await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), idiomas: csv('idiomas'), anosExperiencia: anosExperiencia ? Number(anosExperiencia) : null, experiencia, formacion, credenciales, bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio, bannerDirectorioPendiente, quitarBannerDirectorio);
-      limpiarFotoDirectorioPendiente(); f.closest<HTMLDialogElement>('dialog')?.close(); toast('Perfil profesional actualizado', 'badge-check'); render();
+      limpiarFotoDirectorioPendiente(); toast('Perfil profesional actualizado', 'badge-check'); navigate('/directorio');
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
   }
   if (f.matches('[data-doc-form]')) {
