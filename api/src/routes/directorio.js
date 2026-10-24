@@ -349,6 +349,11 @@ export function rutasDirectorio(ctx) {
     const snap = await ctx.db.collection(COL.directorioPerfiles).doc(uid).get();
     if (!snap.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
     if ((snap.data().documentos ?? []).length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
+    // Rate limit por usuario: cada /subida emite URLs firmadas que no se cuentan hasta finalizar, así que
+    // limitamos las emisiones por hora para que no se pueda rebasar el tope de documentos ni abusar del Storage.
+    const ahoraMs = ctx.now().getTime();
+    const recientes = (snap.data().subidasRecientes ?? []).filter((t) => new Date(t).getTime() > ahoraMs - 60 * 60 * 1000);
+    if (recientes.length >= 20) throw demasiadasSolicitudes('Demasiadas subidas en poco tiempo. Intenta de nuevo en un rato.');
     const b = cuerpo(req);
     const mime = unoDe(b.contentType, Object.keys(DOC_MIME), { campo: 'contentType', requerido: true });
     const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: DOC_MIME[mime] });
@@ -360,6 +365,7 @@ export function rutasDirectorio(ctx) {
       bucket.file(docArchivoPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: mime }),
       bucket.file(docMiniaturaPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE }),
     ]);
+    await ctx.db.collection(COL.directorioPerfiles).doc(uid).update({ subidasRecientes: [...recientes, new Date(ahoraMs).toISOString()].slice(-20) });
     res.json({ id, uploadUrl, contentType: mime, bytes, miniaturaUploadUrl, miniaturaContentType: FOTO_CONTENT_TYPE, miniaturaBytes, expira: new Date(expires).toISOString() });
   }));
 
