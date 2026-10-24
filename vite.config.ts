@@ -50,6 +50,18 @@ export default defineConfig({
         club: resolve(import.meta.dirname, 'index.html'),
         landing: resolve(import.meta.dirname, 'landing/index.html'),
       },
+      output: {
+        // El set completo de íconos de lucide y el SDK de Firebase son
+        // dependencias grandes y estables. Separarlas del código de la app
+        // baja el chunk principal y las deja cacheadas entre despliegues
+        // (el código de la app cambia en cada deploy; estas librerías no).
+        manualChunks(id) {
+          const ruta = id.replace(/\\/g, '/');
+          if (ruta.includes('/node_modules/lucide')) return 'lucide';
+          if (ruta.includes('/node_modules/@firebase') || ruta.includes('/node_modules/firebase')) return 'firebase';
+          return undefined;
+        },
+      },
     },
   },
 });
