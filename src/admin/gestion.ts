@@ -17,6 +17,20 @@ export function estadoMiembro(m: MiembroDemo, ahora = Date.now()) {
 }
 const fecha = (iso?: string | null) => iso ? new Date(iso.length === 10 ? iso + 'T12:00:00' : iso).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 
+// ═══ RETENCIÓN ═══
+const soloDigitos = (s?: string) => (s || '').replace(/\D/g, '');
+const saludo = (nombre: string) => `Hola ${(nombre || '').trim() || 'de nuevo'}`;
+const msgVence = (nombre: string, venceStr: string) => `${saludo(nombre)}, te escribo de OdonTeck Club 👋 Tu acceso vence el ${venceStr}. ¿Te ayudo a renovar para que no pierdas tus cursos y certificados?`;
+const msgInactivo = (nombre: string) => `${saludo(nombre)}, te saludo de OdonTeck Club 👋 Vi que no has entrado últimamente, ¿puedo ayudarte a retomar tus cursos?`;
+// Fila de un miembro en riesgo con recordatorio por WhatsApp en 1 clic (si tiene teléfono en su perfil).
+function filaRiesgo(uid: string, nombre: string, sub: string, whatsapp: string | undefined, mensaje: string) {
+  const tel = soloDigitos(whatsapp);
+  const wa = tel
+    ? `<a class="btn btn--ghost btn--icon btn--xs" href="https://wa.me/${tel}?text=${encodeURIComponent(mensaje)}" target="_blank" rel="noopener" title="Recordar por WhatsApp" aria-label="Recordar a ${esc(nombre || 'este miembro')} por WhatsApp"><i data-lucide="message-circle" class="i" style="width:16px;height:16px;color:var(--brand-teal)"></i></a>`
+    : '';
+  return `<div class="todo" style="gap:10px"><div class="avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">${iniciales(nombre || 'M')}</div><a href="#/admin/miembros/${uid}" style="flex:1;min-width:0;color:inherit;text-decoration:none"><strong>${esc(nombre || 'Miembro')}</strong><br><span class="faint">${sub}</span></a>${wa}<a class="btn btn--ghost btn--icon btn--xs" href="#/admin/miembros/${uid}" aria-label="Ver detalle"><i data-lucide="chevron-right" class="i"></i></a></div>`;
+}
+
 // ═══ RESUMEN ═══
 export function adminResumen() {
   if (Datos.modo === 'api' && Admin.resumen) return adminResumenReal(Admin.resumen);
@@ -61,17 +75,24 @@ export function adminResumen() {
   </div>
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Pendientes de contenido</h3>
-      <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico "Clase N"</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > ahora).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
-    </div>
-    <div class="card card--pad stack" style="gap:10px">
       <h3 class="admin-card-title">Vencen en 7 días</h3>
-      ${porVencer.length ? porVencer.map((m) => `<a class="todo" href="#/admin/miembros/${m.uid}"><div class="avatar" style="width:30px;height:30px;font-size:11px">${iniciales(m.nombre)}</div><span><strong>${esc(m.nombre)}</strong><br><span class="faint">${m.plan} · vence ${fecha(m.vence)}</span></span><i data-lucide="chevron-right" class="i"></i></a>`).join('')
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Recuérdales renovar antes de que pierdan el acceso.</p>
+      ${porVencer.length ? porVencer.map((m) => filaRiesgo(m.uid, m.nombre, `${m.plan} · vence ${fecha(m.vence)}`, m.whatsapp, msgVence(m.nombre, fecha(m.vence)))).join('')
         : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
     </div>
+    <div class="card card--pad stack" style="gap:10px">
+      <h3 class="admin-card-title">Inactivos en riesgo</h3>
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
+      ${inactivos.length ? inactivos.slice(0, 20).map((m) => filaRiesgo(m.uid, m.nombre, `sin entrar desde ${fecha(m.ultimaActividad)}`, m.whatsapp, msgInactivo(m.nombre))).join('')
+        : '<p class="muted" style="font-size:var(--fs-sm)">Nadie en riesgo por inactividad. 🎉</p>'}
+    </div>
+  </div>
+  <div class="card card--pad stack" style="gap:10px">
+    <h3 class="admin-card-title">Pendientes de contenido</h3>
+    <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico "Clase N"</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > ahora).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
   </div>`;
 }
 
@@ -104,16 +125,22 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   </div>
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Pendientes de contenido</h3>
-      <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
-      <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > Date.now()).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
+      <h3 class="admin-card-title">Vencen en 7 días</h3>
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Recuérdales renovar antes de que pierdan el acceso.</p>
+      ${(r.porVencer ?? []).length ? r.porVencer!.map((m) => filaRiesgo(m.uid, m.nombre, `${esc(m.plan)} · vence ${fecha(m.vence)}`, m.whatsapp, msgVence(m.nombre, fecha(m.vence)))).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
     </div>
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Vencen en 7 días</h3>
-      ${(r.porVencer ?? []).length ? r.porVencer!.map((m) => `<a class="todo" href="#/admin/miembros/${m.uid}"><span class="avatar" style="width:30px;height:30px;font-size:11px">${iniciales(m.nombre || 'M')}</span><span><strong>${esc(m.nombre || 'Miembro')}</strong><br><span class="faint">${esc(m.plan)} · vence ${fecha(m.vence)}</span></span><i data-lucide="chevron-right" class="i"></i></a>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
+      <h3 class="admin-card-title">Inactivos en riesgo</h3>
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
+      ${(r.inactivosLista ?? []).length ? r.inactivosLista!.map((m) => filaRiesgo(m.uid, m.nombre, m.ultimaActividad ? `sin entrar desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', m.whatsapp, msgInactivo(m.nombre))).join('') : `<p class="muted" style="font-size:var(--fs-sm)">${(r.inactivos ?? 0) > 0 ? 'Sin datos de contacto de los inactivos.' : 'Nadie en riesgo por inactividad. 🎉'}</p>`}
     </div>
+  </div>
+  <div class="card card--pad stack" style="gap:10px">
+    <h3 class="admin-card-title">Pendientes de contenido</h3>
+    <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
+    <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > Date.now()).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
   </div>`;
 }
 
