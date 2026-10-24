@@ -32,6 +32,20 @@ describe('admin: autorización', () => {
     assert.deepEqual(r.body.cursosTop, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', vistas: 1 }]);
   });
 
+  test('resumen · retención: inactivos y por-vencer traen contacto para recordatorios', async () => {
+    // vip2 no tiene progreso registrado, así que siempre cuenta como inactivo.
+    env.db.docs.set('v2_perfiles/vip2', { nombre: 'Dr. Beto VIP', whatsapp: '+52 55 1234 5678', email: 'beto@example.com' });
+    const r = await admin('get', '/admin/resumen').expect(200);
+    assert.ok(Array.isArray(r.body.porVencer));
+    assert.ok(Array.isArray(r.body.inactivosLista));
+    const beto = r.body.inactivosLista.find((x) => x.uid === 'vip2');
+    assert.ok(beto, 'vip2 debe aparecer en inactivosLista');
+    assert.equal(beto.whatsapp, '+52 55 1234 5678');
+    assert.equal(beto.plan, 'anual');
+    assert.ok('ultimaActividad' in beto);
+    for (const m of r.body.porVencer) assert.equal(typeof m.whatsapp, 'string');
+  });
+
   test('encuestas: entrega agregados útiles sin UID ni correo', async () => {
     env.db.docs.set('v2_encuestas_respuestas/u1__bienvenida-v2', {
       uid: 'u1', clave: 'bienvenida-v2', encuestaId: 'bienvenida', version: 2, tipo: 'bienvenida',

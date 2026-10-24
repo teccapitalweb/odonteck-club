@@ -1,14 +1,136 @@
 [
-  { "uid": "demo-01", "nombre": "Miembro demo 01", "email": "demo01@ejemplo.com", "plan": "anual", "vence": "2027-03-15", "alta": "2026-03-15", "clasesVistas": 41, "ultimaActividad": "2026-09-16T19:20:00Z" },
-  { "uid": "demo-02", "nombre": "Miembro demo 02", "email": "demo02@ejemplo.com", "plan": "mensual", "vence": "2026-10-02", "alta": "2026-06-02", "clasesVistas": 18, "ultimaActividad": "2026-09-15T12:05:00Z" },
-  { "uid": "demo-03", "nombre": "Miembro demo 03", "email": "demo03@ejemplo.com", "plan": "mensual", "vence": "2026-09-28", "alta": "2026-08-28", "clasesVistas": 6, "ultimaActividad": "2026-09-12T08:40:00Z" },
-  { "uid": "demo-04", "nombre": "Miembro demo 04", "email": "demo04@ejemplo.com", "plan": "anual", "vence": "2027-01-10", "alta": "2026-01-10", "clasesVistas": 63, "ultimaActividad": "2026-09-17T10:10:00Z" },
-  { "uid": "demo-05", "nombre": "Miembro demo 05", "email": "demo05@ejemplo.com", "plan": "ninguno", "vence": "2026-08-20", "alta": "2026-05-20", "clasesVistas": 12, "ultimaActividad": "2026-08-18T21:00:00Z" },
-  { "uid": "demo-06", "nombre": "Miembro demo 06", "email": "demo06@ejemplo.com", "plan": "cortesia", "vence": null, "alta": "2026-09-01", "clasesVistas": 3, "ultimaActividad": "2026-09-14T16:30:00Z", "cortesiaHasta": "2026-10-01", "cortesiaMotivo": "Ponente invitada" },
-  { "uid": "demo-07", "nombre": "Miembro demo 07", "email": "demo07@ejemplo.com", "plan": "mensual", "vence": "2026-10-11", "alta": "2026-09-11", "clasesVistas": 2, "ultimaActividad": "2026-09-11T20:15:00Z" },
-  { "uid": "demo-08", "nombre": "Miembro demo 08", "email": "demo08@ejemplo.com", "plan": "anual", "vence": "2027-07-04", "alta": "2026-07-04", "clasesVistas": 27, "ultimaActividad": "2026-09-13T09:45:00Z" },
-  { "uid": "demo-09", "nombre": "Miembro demo 09", "email": "demo09@ejemplo.com", "plan": "ninguno", "vence": "2026-07-30", "alta": "2026-04-30", "clasesVistas": 9, "ultimaActividad": "2026-07-28T18:00:00Z" },
-  { "uid": "demo-10", "nombre": "Miembro demo 10", "email": "demo10@ejemplo.com", "plan": "mensual", "vence": "2026-10-05", "alta": "2026-08-05", "clasesVistas": 14, "ultimaActividad": "2026-09-16T22:30:00Z" },
-  { "uid": "demo-11", "nombre": "Miembro demo 11", "email": "demo11@ejemplo.com", "plan": "mensual", "vence": "2026-09-30", "alta": "2026-07-30", "clasesVistas": 22, "ultimaActividad": "2026-09-10T11:00:00Z" },
-  { "uid": "demo-12", "nombre": "Miembro demo 12", "email": "demo12@ejemplo.com", "plan": "anual", "vence": "2027-02-22", "alta": "2026-02-22", "clasesVistas": 55, "ultimaActividad": "2026-09-17T07:50:00Z" }
+  {
+    "uid": "demo-01",
+    "nombre": "Miembro demo 01",
+    "email": "demo01@ejemplo.com",
+    "plan": "anual",
+    "vence": "2027-03-15",
+    "alta": "2026-03-15",
+    "clasesVistas": 41,
+    "ultimaActividad": "2026-09-16T19:20:00Z",
+    "whatsapp": "+52 55 4000 0000"
+  },
+  {
+    "uid": "demo-02",
+    "nombre": "Miembro demo 02",
+    "email": "demo02@ejemplo.com",
+    "plan": "mensual",
+    "vence": "2026-10-02",
+    "alta": "2026-06-02",
+    "clasesVistas": 18,
+    "ultimaActividad": "2026-09-15T12:05:00Z",
+    "whatsapp": "+52 55 4123 4567"
+  },
+  {
+    "uid": "demo-03",
+    "nombre": "Miembro demo 03",
+    "email": "demo03@ejemplo.com",
+    "plan": "mensual",
+    "vence": "2026-09-28",
+    "alta": "2026-08-28",
+    "clasesVistas": 6,
+    "ultimaActividad": "2026-09-12T08:40:00Z",
+    "whatsapp": "+52 55 4246 9134"
+  },
+  {
+    "uid": "demo-04",
+    "nombre": "Miembro demo 04",
+    "email": "demo04@ejemplo.com",
+    "plan": "anual",
+    "vence": "2027-01-10",
+    "alta": "2026-01-10",
+    "clasesVistas": 63,
+    "ultimaActividad": "2026-09-17T10:10:00Z",
+    "whatsapp": "+52 55 4370 3701"
+  },
+  {
+    "uid": "demo-05",
+    "nombre": "Miembro demo 05",
+    "email": "demo05@ejemplo.com",
+    "plan": "ninguno",
+    "vence": "2026-08-20",
+    "alta": "2026-05-20",
+    "clasesVistas": 12,
+    "ultimaActividad": "2026-08-18T21:00:00Z",
+    "whatsapp": "+52 55 4493 8268"
+  },
+  {
+    "uid": "demo-06",
+    "nombre": "Miembro demo 06",
+    "email": "demo06@ejemplo.com",
+    "plan": "cortesia",
+    "vence": null,
+    "alta": "2026-09-01",
+    "clasesVistas": 3,
+    "ultimaActividad": "2026-09-14T16:30:00Z",
+    "cortesiaHasta": "2026-10-01",
+    "cortesiaMotivo": "Ponente invitada",
+    "whatsapp": "+52 55 4617 2835"
+  },
+  {
+    "uid": "demo-07",
+    "nombre": "Miembro demo 07",
+    "email": "demo07@ejemplo.com",
+    "plan": "mensual",
+    "vence": "2026-10-11",
+    "alta": "2026-09-11",
+    "clasesVistas": 2,
+    "ultimaActividad": "2026-09-11T20:15:00Z",
+    "whatsapp": "+52 55 4740 7402"
+  },
+  {
+    "uid": "demo-08",
+    "nombre": "Miembro demo 08",
+    "email": "demo08@ejemplo.com",
+    "plan": "anual",
+    "vence": "2027-07-04",
+    "alta": "2026-07-04",
+    "clasesVistas": 27,
+    "ultimaActividad": "2026-09-13T09:45:00Z",
+    "whatsapp": "+52 55 4864 1969"
+  },
+  {
+    "uid": "demo-09",
+    "nombre": "Miembro demo 09",
+    "email": "demo09@ejemplo.com",
+    "plan": "ninguno",
+    "vence": "2026-07-30",
+    "alta": "2026-04-30",
+    "clasesVistas": 9,
+    "ultimaActividad": "2026-07-28T18:00:00Z",
+    "whatsapp": "+52 55 4987 6536"
+  },
+  {
+    "uid": "demo-10",
+    "nombre": "Miembro demo 10",
+    "email": "demo10@ejemplo.com",
+    "plan": "mensual",
+    "vence": "2026-10-05",
+    "alta": "2026-08-05",
+    "clasesVistas": 14,
+    "ultimaActividad": "2026-09-16T22:30:00Z",
+    "whatsapp": "+52 55 5111 1103"
+  },
+  {
+    "uid": "demo-11",
+    "nombre": "Miembro demo 11",
+    "email": "demo11@ejemplo.com",
+    "plan": "mensual",
+    "vence": "2026-09-30",
+    "alta": "2026-07-30",
+    "clasesVistas": 22,
+    "ultimaActividad": "2026-09-10T11:00:00Z",
+    "whatsapp": "+52 55 5234 5670"
+  },
+  {
+    "uid": "demo-12",
+    "nombre": "Miembro demo 12",
+    "email": "demo12@ejemplo.com",
+    "plan": "anual",
+    "vence": "2027-02-22",
+    "alta": "2026-02-22",
+    "clasesVistas": 55,
+    "ultimaActividad": "2026-09-17T07:50:00Z",
+    "whatsapp": "+52 55 5358 0237"
+  }
 ]

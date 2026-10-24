@@ -82,6 +82,7 @@ export function rutasAdmin(ctx) {
     let cortesiaActivos = 0;
     let inactivos = 0;
     const porVencer = [];
+    const inactivosLista = [];
     for (const uid of uids) {
       const m = miembros.get(uid) ?? null;
       const estado = calcularEstado(m, cortesias.get(uid) ?? null, false, ahora, suscripciones.get(uid) ?? null);
@@ -90,11 +91,18 @@ export function rutasAdmin(ctx) {
       if (estado.plan === 'cortesia') cortesiaActivos++;
       else if (estado.plan === 'anual') anualActivos++;
       else if (estado.plan === 'mensual') mensualActivos++;
+      // Contacto para los recordatorios de retención (el WhatsApp sale del perfil del miembro).
+      const perfil = perfiles.get(uid) ?? {};
+      const contacto = { nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '' };
       const venceMs = estado.vence ? (aMillis(estado.vence) ?? null) : null;
       if (estado.plan !== 'cortesia' && venceMs !== null && venceMs > ahora.getTime() && venceMs <= limite7) {
-        porVencer.push({ uid, nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? '', plan: estado.plan, vence: estado.vence });
+        porVencer.push({ uid, ...contacto, plan: estado.plan, vence: estado.vence });
       }
-      if ((ultimaActividadMs.get(uid) ?? 0) < hace14) inactivos++;
+      const actMs = ultimaActividadMs.get(uid) ?? 0;
+      if (actMs < hace14) {
+        inactivos++;
+        inactivosLista.push({ uid, ...contacto, plan: estado.plan, ultimaActividad: actMs ? new Date(actMs).toISOString() : null });
+      }
     }
     const mrr = mensualActivos * precioMensual + Math.round((anualActivos * precioAnual) / 12);
     const meses = Array.from({ length: 6 }, (_, i) => { const d = new Date(ahora); d.setDate(1); d.setMonth(d.getMonth() - 5 + i); return d; });
@@ -138,6 +146,7 @@ export function rutasAdmin(ctx) {
       inactivos,
       altasPorMes,
       porVencer: porVencer.sort((a, b) => String(a.vence).localeCompare(String(b.vence))).slice(0, 20),
+      inactivosLista: inactivosLista.sort((a, b) => String(a.ultimaActividad ?? '').localeCompare(String(b.ultimaActividad ?? ''))).slice(0, 20),
     });
   }));
 
