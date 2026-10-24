@@ -11,7 +11,7 @@ import {
   reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
-import { estadoMiembro, filtrarMiembros } from './gestion';
+import { estadoMiembro, filtrarMiembros, miembrosEnRiesgo, type MiembroRiesgo } from './gestion';
 import { confirmar } from '../ui/dialogo';
 import { createIcons, icons } from 'lucide';
 
@@ -148,6 +148,19 @@ function exportarMiembrosCsv() {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
   a.download = `odonteck-miembros${f ? `-${f}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+// Lista de miembros en riesgo (vencen / inactivos) como CSV.
+function exportarRiesgoCSV(secciones: { titulo: string; filas: MiembroRiesgo[] }[], archivo: string) {
+  const planes: Record<string, string> = { mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', regalo: 'Regalo', admin: 'Admin' };
+  const filas: unknown[][] = [['lista', 'nombre', 'plan', 'estado', 'whatsapp', 'correo']];
+  for (const sec of secciones) for (const m of sec.filas) filas.push([sec.titulo, m.nombre, planes[m.plan] ?? m.plan ?? '', m.detalle, m.whatsapp ?? '', m.email ?? '']);
+  const csv = '﻿' + filas.map((fr) => fr.map(celdaCsv).join(',')).join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = archivo;
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -319,6 +332,28 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (el.closest('[data-reintentar-admin]')) { await cargarAdmin(current().path, current().query, true); render(); }
     if (el.closest('[data-exportar-encuestas]')) { exportarEncuestasCsv(); toast('CSV descargado', 'download'); }
     if (el.closest('[data-exportar-miembros]')) { exportarMiembrosCsv(); toast('CSV descargado', 'download'); }
+    const expRiesgo = el.closest<HTMLElement>('[data-export-riesgo]');
+    if (expRiesgo) {
+      const [formato, tipo] = (expRiesgo.dataset.exportRiesgo || '').split(':');
+      const { porVencer, inactivos } = miembrosEnRiesgo();
+      const secciones = tipo === 'vencen'
+        ? [{ titulo: 'Vencen en 7 días', etiqueta: 'Vence', filas: porVencer }]
+        : [{ titulo: 'Inactivos en riesgo', etiqueta: 'Sin entrar desde', filas: inactivos }];
+      const total = secciones.reduce((a, s) => a + s.filas.length, 0);
+      if (!total) { toast('No hay miembros en esta lista', 'info'); return; }
+      const base = `odonteck-retencion-${tipo}-${new Date().toISOString().slice(0, 10)}`;
+      if (formato === 'pdf') {
+        try {
+          const { descargarRiesgoPDF } = await import('../core/retencion-pdf');
+          await descargarRiesgoPDF({ subtitulo: tipo === 'vencen' ? 'Miembros por vencer' : 'Inactivos en riesgo', archivo: `${base}.pdf`, secciones: secciones.map((s) => ({ titulo: s.titulo, etiquetaDetalle: s.etiqueta, filas: s.filas })) });
+          toast('PDF generado', 'file-text');
+        } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+      } else {
+        exportarRiesgoCSV(secciones, `${base}.csv`);
+        toast('CSV descargado', 'download');
+      }
+      return;
+    }
 
     const bulk = el.closest<HTMLButtonElement>('[data-bulk-accion]');
     if (bulk) {

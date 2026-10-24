@@ -13,12 +13,12 @@ type JsPdfInstance = {
   internal: { pageSize: { getWidth: () => number; getHeight: () => number } };
 };
 
-type JsPdfConstructor = new (options: { unit: string; format: string }) => JsPdfInstance;
+export type JsPdfConstructor = new (options: { unit: string; format: string }) => JsPdfInstance;
 type JsPdfWindow = Window & { jspdf?: { jsPDF?: JsPdfConstructor } };
 
 let cargarLibreria: Promise<JsPdfConstructor> | undefined;
 
-function cargarJsPdf(): Promise<JsPdfConstructor> {
+export function cargarJsPdf(): Promise<JsPdfConstructor> {
   const actual = (window as JsPdfWindow).jspdf?.jsPDF;
   if (actual) return Promise.resolve(actual);
   if (!cargarLibreria) {

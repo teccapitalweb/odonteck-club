@@ -31,6 +31,30 @@ function filaRiesgo(uid: string, nombre: string, sub: string, whatsapp: string |
   return `<div class="todo" style="gap:10px"><div class="avatar" style="width:30px;height:30px;font-size:11px;flex-shrink:0">${iniciales(nombre || 'M')}</div><a href="#/admin/miembros/${uid}" style="flex:1;min-width:0;color:inherit;text-decoration:none"><strong>${esc(nombre || 'Miembro')}</strong><br><span class="faint">${sub}</span></a>${wa}<a class="btn btn--ghost btn--icon btn--xs" href="#/admin/miembros/${uid}" aria-label="Ver detalle"><i data-lucide="chevron-right" class="i"></i></a></div>`;
 }
 
+export interface MiembroRiesgo { uid: string; nombre: string; plan: string; detalle: string; mensaje: string; whatsapp?: string; email?: string }
+// Fuente única de los miembros en riesgo (demo o API), compartida por el render y la exportación PDF/CSV.
+export function miembrosEnRiesgo(): { porVencer: MiembroRiesgo[]; inactivos: MiembroRiesgo[] } {
+  if (Datos.modo === 'api' && Admin.resumen) {
+    const r = Admin.resumen;
+    return {
+      porVencer: (r.porVencer ?? []).map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan, detalle: `vence ${fecha(m.vence)}`, mensaje: msgVence(m.nombre, fecha(m.vence)), whatsapp: m.whatsapp, email: m.email })),
+      inactivos: (r.inactivosLista ?? []).map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan, detalle: m.ultimaActividad ? `sin entrar desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
+    };
+  }
+  const ms = Datos.miembros();
+  const ahora = Date.now();
+  return {
+    porVencer: ms.filter((m) => m.vence && new Date(m.vence).getTime() > ahora && new Date(m.vence).getTime() - ahora < 7 * DIA)
+      .map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan ?? '', detalle: `vence ${fecha(m.vence)}`, mensaje: msgVence(m.nombre, fecha(m.vence)), whatsapp: m.whatsapp, email: m.email })),
+    inactivos: ms.filter((m) => estadoMiembro(m).vip && ahora - new Date(m.ultimaActividad).getTime() > 14 * DIA)
+      .map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan ?? '', detalle: `sin entrar desde ${fecha(m.ultimaActividad)}`, mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
+  };
+}
+// Botones de exportación (PDF/CSV) para una lista de riesgo; solo si hay datos.
+const btnExportRiesgo = (tipo: 'vencen' | 'inactivos', hayDatos: boolean) => hayDatos
+  ? `<div class="row" style="gap:6px"><button class="btn btn--secondary btn--xs" data-export-riesgo="pdf:${tipo}"><i data-lucide="file-text" class="i"></i>PDF</button><button class="btn btn--ghost btn--xs" data-export-riesgo="csv:${tipo}"><i data-lucide="download" class="i"></i>CSV</button></div>`
+  : '';
+
 // ═══ RESUMEN ═══
 export function adminResumen() {
   if (Datos.modo === 'api' && Admin.resumen) return adminResumenReal(Admin.resumen);
@@ -75,13 +99,13 @@ export function adminResumen() {
   </div>
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Vencen en 7 días</h3>
+      <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Vencen en 7 días</h3>${btnExportRiesgo('vencen', porVencer.length > 0)}</div>
       <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Recuérdales renovar antes de que pierdan el acceso.</p>
       ${porVencer.length ? porVencer.map((m) => filaRiesgo(m.uid, m.nombre, `${m.plan} · vence ${fecha(m.vence)}`, m.whatsapp, msgVence(m.nombre, fecha(m.vence)))).join('')
         : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
     </div>
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Inactivos en riesgo</h3>
+      <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Inactivos en riesgo</h3>${btnExportRiesgo('inactivos', inactivos.length > 0)}</div>
       <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
       ${inactivos.length ? inactivos.slice(0, 20).map((m) => filaRiesgo(m.uid, m.nombre, `sin entrar desde ${fecha(m.ultimaActividad)}`, m.whatsapp, msgInactivo(m.nombre))).join('')
         : '<p class="muted" style="font-size:var(--fs-sm)">Nadie en riesgo por inactividad. 🎉</p>'}
@@ -125,12 +149,12 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   </div>
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Vencen en 7 días</h3>
+      <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Vencen en 7 días</h3>${btnExportRiesgo('vencen', (r.porVencer ?? []).length > 0)}</div>
       <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Recuérdales renovar antes de que pierdan el acceso.</p>
       ${(r.porVencer ?? []).length ? r.porVencer!.map((m) => filaRiesgo(m.uid, m.nombre, `${esc(m.plan)} · vence ${fecha(m.vence)}`, m.whatsapp, msgVence(m.nombre, fecha(m.vence)))).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
     </div>
     <div class="card card--pad stack" style="gap:10px">
-      <h3 class="admin-card-title">Inactivos en riesgo</h3>
+      <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Inactivos en riesgo</h3>${btnExportRiesgo('inactivos', (r.inactivosLista ?? []).length > 0)}</div>
       <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
       ${(r.inactivosLista ?? []).length ? r.inactivosLista!.map((m) => filaRiesgo(m.uid, m.nombre, m.ultimaActividad ? `sin entrar desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', m.whatsapp, msgInactivo(m.nombre))).join('') : `<p class="muted" style="font-size:var(--fs-sm)">${(r.inactivos ?? 0) > 0 ? 'Sin datos de contacto de los inactivos.' : 'Nadie en riesgo por inactividad. 🎉'}</p>`}
     </div>
