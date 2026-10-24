@@ -42,7 +42,6 @@ import { comunidad, directorio, editarPerfilDirectorio, hilo, perfilDirectorio }
 import { abrirVisorDocumento, montarDocumentosDirectorio, prepararDocumento } from './core/directorio-docs';
 import { paginaLogros } from './pages/logros';
 import { paginaRecompensas } from './pages/recompensas';
-import { retos, montarArcade } from './pages/retos';
 import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
@@ -581,7 +580,9 @@ route('/directorio/perfil/:uid', perfilDirectorio);
 route('/curso-gratis', cursoGratisPagina);
 route('/logros', paginaLogros);
 route('/recompensas', paginaRecompensas);
-route('/retos', retos);
+// El arcade de Retos (hub + quiz relámpago, casos y flashcards) es una mini-app
+// autónoma y pesada: se carga bajo demanda al entrar a /retos, no en el arranque.
+route('/retos', async () => (await import('./pages/retos')).retos());
 route('/certificados', certificados);
 route('/certificados/:id', certificado);
 route('/verificar/:folio', verificar);
@@ -623,7 +624,7 @@ onRender(() => {
   if (shellActual === 'admin') adminUI?.marcarAdminActivo(path); else marcarNavActivo(path);
   const crumb = document.querySelector('[data-crumb]'); if (crumb) crumb.textContent = document.querySelector('#outlet h1')?.textContent?.trim() || 'Administración';
   cargarVideos();
-  if (path.startsWith('/retos')) montarArcade();
+  if (path.startsWith('/retos')) import('./pages/retos').then((m) => m.montarArcade());
   if (path.endsWith('/visor')) montarVisor();
   if (path.startsWith('/directorio/perfil/')) montarDocumentosDirectorio();
   if (path.startsWith('/curso-gratis')) montarCursoGratis(toast); else desmontarCursoGratis();
