@@ -1,0 +1,6 @@
+# OdonTeck Club — https://www.odonteckconsulting.com
+# El club (rutas con #/) va detrás de inicio de sesión; la página pública es la landing.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.odonteckconsulting.com/sitemap.xml
