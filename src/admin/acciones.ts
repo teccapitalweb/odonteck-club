@@ -102,12 +102,20 @@ function quizDesdeForm(f: HTMLFormElement): Quiz {
   return { id: f.dataset.id!, cursoId: f.dataset.curso!, n: Number(f.dataset.n), estado: previo?.estado || 'borrador', preguntas, actualizado: '' };
 }
 
+// Celda CSV: escapa comillas y neutraliza inyección de fórmulas (=, +, -, @, tab, CR)
+// anteponiendo un apóstrofo, para que Excel/Sheets no ejecute el valor al abrirlo.
+function celdaCsv(v: unknown) {
+  let s = String(v ?? '');
+  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
+  return `"${s.replace(/"/g, '""')}"`;
+}
+
 // Agregados de encuestas (lo mismo que ve el panel, sin PII) como CSV descargable.
 function exportarEncuestasCsv() {
   const plan = current().query.get('plan');
   const r = Datos.modo === 'api' ? Admin.encuestas : resumenEncuestasDemo(plan === 'vip' ? 'vip' : plan === 'gratis' ? 'gratis' : null);
   if (!r) return;
-  const celda = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const celda = celdaCsv;
   const filas: unknown[][] = [['encuesta', 'version', 'pregunta', 'tipo', 'opcion_o_metrica', 'total', 'porcentaje_o_valor']];
   for (const e of r.encuestas) for (const p of e.preguntas) {
     if (p.tipo === 'escala') {
@@ -133,7 +141,7 @@ function exportarMiembrosCsv() {
   if (!l.length) return;
   const planes: Record<string, string> = { mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan', admin: 'Administrador', regalo: 'Regalo' };
   const dia = (v?: string | null) => (v ? String(v).slice(0, 10) : '');
-  const celda = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const celda = celdaCsv;
   const filas: unknown[][] = [['nombre', 'correo', 'plan', 'estado', 'vence', 'cortesia_hasta', 'clases_vistas', 'ultima_actividad', 'alta', 'uid']];
   for (const m of l) filas.push([m.nombre, m.email, planes[m.plan || 'ninguno'] || m.plan || '', estadoMiembro(m).etiqueta, dia(m.vence), dia(m.cortesiaHasta), m.clasesVistas, dia(m.ultimaActividad), dia(m.alta), m.uid]);
   const csv = '﻿' + filas.map((fr) => fr.map(celda).join(',')).join('\r\n');
