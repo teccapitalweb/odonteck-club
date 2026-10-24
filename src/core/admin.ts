@@ -11,6 +11,13 @@ export interface ResumenAdmin {
   certificados30d: number;
   temasForo30d: number;
   cursosTop: { cursoId: string; titulo: string; vistas: number }[];
+  mrr?: number;
+  mensualActivos?: number;
+  anualActivos?: number;
+  cortesiaActivos?: number;
+  inactivos?: number;
+  altasPorMes?: { mes: string; total: number }[];
+  porVencer?: { uid: string; nombre: string; plan: string; vence: string }[];
 }
 
 export interface DetalleMiembroAdmin extends MiembroDemo {

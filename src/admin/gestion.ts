@@ -80,26 +80,39 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   const qz = Datos.quizzes();
   const genericos = cursos.reduce((a, c) => a + c.clases.filter((k) => /^Clase \d+$/.test(k.titulo)).length, 0);
   const maxV = Math.max(1, ...r.cursosTop.map((t) => t.vistas));
-  const kpi = (icon: string, label: string, valor: number, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
+  const altasMes = r.altasPorMes ?? [];
+  const maxAlta = Math.max(1, ...altasMes.map((x) => x.total));
+  const mesCorto = (mes: string) => new Date(mes + '-01T12:00:00').toLocaleDateString('es-MX', { month: 'short' });
+  const kpi = (icon: string, label: string, valor: number | string, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
   return `
   ${adminHead('Resumen', new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}
   <div class="kpis">
-    ${kpi('users', 'Miembros activos', r.miembrosActivos, 'membresía, cortesía o admin vigente')}
-    ${kpi('user-plus', 'Altas en 30 días', r.altas30d, `${r.bajas30d} bajas registradas`)}
-    ${kpi('play-circle', 'Clases vistas', r.clasesVistas30d, 'durante los últimos 30 días')}
-    ${kpi('award', 'Certificados', r.certificados30d, `${r.temasForo30d} temas nuevos en comunidad`)}
+    ${kpi('users', 'Miembros activos', r.miembrosActivos, `${r.mensualActivos ?? 0} mensual · ${r.anualActivos ?? 0} anual · ${r.cortesiaActivos ?? 0} cortesía`)}
+    ${kpi('trending-up', 'Ingreso mensual estimado', `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, 'MXN · anual prorrateado')}
+    ${kpi('user-plus', 'Altas en 30 días', r.altas30d, `${r.bajas30d} bajas · ${r.certificados30d} certificados`)}
+    ${kpi('alert-triangle', 'Sin actividad 14+ días', r.inactivos ?? 0, 'miembros activos en riesgo de baja')}
   </div>
   <div class="admin-grid admin-grid--even">
+    <div class="card card--pad stack" style="gap:14px">
+      <h3 class="admin-card-title">Altas por mes</h3>
+      ${altasMes.length ? `<div class="bars">${altasMes.map((x) => `<div class="bars__col"><span class="bars__val mono">${x.total}</span><div class="bars__bar" style="height:${(x.total / maxAlta) * 100}%"></div><span class="bars__lbl">${mesCorto(x.mes)}</span></div>`).join('')}</div>` : '<p class="muted" style="font-size:var(--fs-sm)">Sin datos de altas por mes.</p>'}
+    </div>
     <div class="card card--pad stack" style="gap:12px">
       <h3 class="admin-card-title">Cursos más vistos · 30 días</h3>
       ${r.cursosTop.length ? r.cursosTop.map((t) => `<div class="hbar"><span class="hbar__lbl">${esc(t.titulo)}</span><div class="progress"><span style="width:${(t.vistas / maxV) * 100}%"></span></div><span class="mono faint">${t.vistas}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Todavía no hay vistas en este periodo.</p>'}
     </div>
+  </div>
+  <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:10px">
       <h3 class="admin-card-title">Pendientes de contenido</h3>
       <a class="todo" href="#/admin/cursos"><i data-lucide="type" class="i"></i><span><strong>${genericos} clases</strong> con título genérico</span><i data-lucide="chevron-right" class="i"></i></a>
       <a class="todo" href="#/admin/quizzes"><i data-lucide="brain" class="i"></i><span><strong>${qz.filter((q) => q.estado === 'borrador').length} quizzes</strong> esperando revisión</span><i data-lucide="chevron-right" class="i"></i></a>
       <a class="todo" href="#/admin/materiales"><i data-lucide="library" class="i"></i><span><strong>${Datos.materiales().filter((m) => m.estado !== 'disponible').length} materiales</strong> sin publicar</span><i data-lucide="chevron-right" class="i"></i></a>
       <a class="todo" href="#/admin/en-vivo"><i data-lucide="radio" class="i"></i><span><strong>${Datos.eventos().filter((e) => new Date(e.fecha).getTime() > Date.now()).length} clases en vivo</strong> programadas</span><i data-lucide="chevron-right" class="i"></i></a>
+    </div>
+    <div class="card card--pad stack" style="gap:10px">
+      <h3 class="admin-card-title">Vencen en 7 días</h3>
+      ${(r.porVencer ?? []).length ? r.porVencer!.map((m) => `<a class="todo" href="#/admin/miembros/${m.uid}"><span class="avatar" style="width:30px;height:30px;font-size:11px">${iniciales(m.nombre || 'M')}</span><span><strong>${esc(m.nombre || 'Miembro')}</strong><br><span class="faint">${esc(m.plan)} · vence ${fecha(m.vence)}</span></span><i data-lucide="chevron-right" class="i"></i></a>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Nadie vence esta semana.</p>'}
     </div>
   </div>`;
 }
