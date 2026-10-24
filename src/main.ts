@@ -1068,11 +1068,10 @@ document.addEventListener('click', async (e) => {
     if (!Acceso.puedeComunidad()) { mostrarPaywall('Publicar en la comunidad es para miembros VIP. Puedes leer todos los temas gratis.'); return; }
     const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) { f.hidden = false; f.querySelector('input')?.focus(); } }
   if (el.closest('[data-cancelar-hilo]')) { const f = document.querySelector<HTMLElement>('[data-form-hilo]'); if (f) f.hidden = true; }
-  const verPerfil = el.closest<HTMLElement>('[data-network-view]');
-  if (verPerfil) {
-    const dialog = [...document.querySelectorAll<HTMLDialogElement>('[data-network-view-dialog]')].find((d) => d.dataset.networkViewDialog === verPerfil.dataset.uid);
-    if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return;
-  }
+  // Toda la tarjeta de una persona abre su ficha, salvo sus botones (conectar, denunciar, editar).
+  const tarjetaRed = el.closest<HTMLElement>('[data-network-card]');
+  const verPerfil = el.closest<HTMLElement>('[data-network-view]') || (tarjetaRed && !el.closest('button, a, input, select, textarea, label') ? tarjetaRed : null);
+  if (verPerfil) { abrirFichaDirectorio(verPerfil.dataset.uid || ''); return; }
   if (el.closest('[data-network-profile]')) { limpiarFotoDirectorioPendiente(); el.closest<HTMLDialogElement>('dialog')?.close(); const dialog = document.querySelector<HTMLDialogElement>('[data-network-profile-dialog]'); if (dialog) { dialog.scrollTop = 0; dialog.showModal(); } return; }
   if (el.closest('[data-network-job]')) {
     if (!Auth.usuario?.esVip && Datos.modo === 'api') { mostrarPaywall('Publicar oportunidades es un beneficio VIP. Puedes explorar perfiles y conectar gratis.'); return; }
@@ -1279,8 +1278,15 @@ document.addEventListener('click', async (e) => {
   }
 });
 
+function abrirFichaDirectorio(uid: string) {
+  const dialog = [...document.querySelectorAll<HTMLDialogElement>('[data-network-view-dialog]')].find((d) => d.dataset.networkViewDialog === uid);
+  if (dialog) { dialog.scrollTop = 0; dialog.showModal(); }
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') mostrarResumenCuenta(false);
+  const objetivo = e.target as HTMLElement | null;
+  if (objetivo?.matches?.('[data-network-card]') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); abrirFichaDirectorio(objetivo.dataset.uid || ''); }
 });
 
 function remontarDesdeLogin() { shellActual = null; const v = sessionStorage.getItem('odt:volver') || '/'; sessionStorage.removeItem('odt:volver'); const antes = location.hash; navigate(v === '/login' ? '/' : v); if (location.hash === antes) render(); }
