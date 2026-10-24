@@ -101,8 +101,6 @@ function validarPerfil(body, anterior, usuario, nombre, bucket) {
     banner: body.banner === null ? null : body.banner === 'propio' && bucket ? assetUrl(bucket, bannerPath(usuario.uid)) : anterior?.banner ?? null,
     // Los documentos solo cambian por sus rutas propias; guardar el perfil los conserva.
     documentos: anterior?.documentos ?? [],
-    // Preserva el contador de rate limit de subidas: guardar el perfil no debe reiniciarlo.
-    subidasRecientes: anterior?.subidasRecientes ?? [],
   });
 }
 
@@ -353,17 +351,20 @@ export function rutasDirectorio(ctx) {
     const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: DOC_MIME[mime] });
     const miniaturaBytes = entero(b.miniaturaBytes, { campo: 'miniaturaBytes', min: 1, max: DOC_MINIATURA_MAX });
     const ref = ctx.db.collection(COL.directorioPerfiles).doc(uid);
+    // El contador del rate limit vive en una colección aparte (v2_directorio_subidas) para que
+    // guardar o borrar/recrear el perfil no lo reinicie.
+    const subidasRef = ctx.db.collection(COL.directorioSubidas).doc(uid);
     const ahoraMs = ctx.now().getTime();
     // Perfil, tope de documentos y rate limit, atómicos (lecturas antes que escrituras, como los límites
     // de conexiones y reportes). Cada /subida emite URLs firmadas que no se cuentan hasta finalizar, así
-    // que se limitan 20 emisiones por hora por usuario; guardar el perfil preserva subidasRecientes aparte.
+    // que se limitan 20 emisiones por hora por usuario.
     await ctx.db.runTransaction(async (tx) => {
-      const snap = await tx.get(ref);
+      const [snap, subidasSnap] = await Promise.all([tx.get(ref), tx.get(subidasRef)]);
       if (!snap.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
       if ((snap.data().documentos ?? []).length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
-      const recientes = (snap.data().subidasRecientes ?? []).filter((t) => new Date(t).getTime() > ahoraMs - 60 * 60 * 1000);
+      const recientes = (subidasSnap.exists ? subidasSnap.data().recientes ?? [] : []).filter((t) => new Date(t).getTime() > ahoraMs - 60 * 60 * 1000);
       if (recientes.length >= 20) throw demasiadasSolicitudes('Demasiadas subidas en poco tiempo. Intenta de nuevo en un rato.');
-      tx.update(ref, { subidasRecientes: [...recientes, new Date(ahoraMs).toISOString()].slice(-20) });
+      tx.set(subidasRef, { uid, recientes: [...recientes, new Date(ahoraMs).toISOString()].slice(-20) });
     });
     const id = randomBytes(12).toString('hex');
     const bucket = ctx.storage.bucket(ctx.config.storageBucket);

@@ -30,6 +30,7 @@ export const COL = Object.freeze({
   directorioOportunidades: 'v2_directorio_oportunidades',
   directorioConexiones: 'v2_directorio_conexiones',
   directorioReportes: 'v2_directorio_reportes',
+  directorioSubidas: 'v2_directorio_subidas',
   cursoGratis: 'v2_curso_gratis',
   cupones: 'v2_cupones',
   cuponesCanjes: 'v2_cupones_canjes',
