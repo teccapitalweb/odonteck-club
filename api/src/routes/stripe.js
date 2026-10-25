@@ -17,8 +17,8 @@ const segundosAISO = (s) => (Number.isFinite(s) ? new Date(s * 1000).toISOString
 async function preciosStripe(ctx) {
   const config = await leerConfig(ctx.db);
   return {
-    mensual: ctx.config.stripePrices?.mensual || config.stripePriceMensual || '',
-    anual: ctx.config.stripePrices?.anual || config.stripePriceAnual || '',
+    mensual: config.stripePriceMensual || ctx.config.stripePrices?.mensual || '',
+    anual: config.stripePriceAnual || ctx.config.stripePrices?.anual || '',
   };
 }
 

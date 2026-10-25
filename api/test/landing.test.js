@@ -25,7 +25,7 @@ describe('Catálogo público de la landing', () => {
   });
 
   test('sin configuración no inventa precios ni convierte un catálogo vacío en semillas', async () => {
-    const { app } = crearEntorno({ semilla: {} });
+    const { app } = crearEntorno({ semilla: {}, sinStripe: true });
     const { body } = await request(app).get('/landing/catalogo').expect(200);
     assert.deepEqual(body.cursos, []);
     assert.deepEqual(body.planes, { mensual: null, anual: null });

@@ -73,6 +73,13 @@ y el cliente muestra “Por confirmar” en lugar de inventar un importe.
 `{ uid, cursoId, vistas: number[], ultima: number, historial: ISO[], actualizado }`
 
 ### `v2_certificados/{folio}`
+
+### Actividad administrativa y reinicio seguro
+
+- `v2_sesiones_acceso/{uid}` conserva hasta las últimas 100 marcas de inicio de sesión del usuario: `{ uid, sesiones: ISO[], ultimoInicio, actualizado }`. Se registra al completar inicio de sesión por correo, registro o Google; un reintento en 60 segundos se deduplica. No se recopila IP, agente de usuario ni identificador de dispositivo.
+- `v2_admin_auditoria/{id}` registra operaciones administrativas sensibles y cambios de precios con actor, objetivo, alcance y estado. Nunca guardar secretos de Stripe ni tokens.
+- El reinicio de aprendizaje elimina progreso, intentos de evaluaciones, estado de retos y respuestas `bienvenida-v2`/`brujula-v1`; libera solo el estado de posposición de esas dos encuestas. Requiere que el admin escriba el correo exacto y no permite reiniciar su propia cuenta. Se conservan identidad/perfil, pagos y membresía, elección del curso gratis, ledger/saldo/logros/canjes, certificados, otras encuestas e historial de acceso. El ledger conserva idempotencia; responder de nuevo una encuesta no vuelve a otorgar sus puntos históricos.
+- Los cambios de precio crean un nuevo `Price` recurrente MXN sobre el producto del precio vigente y actualizan el puntero usado para nuevas compras. No se modifican ni cancelan suscripciones existentes y no se desactiva el precio viejo. Si Stripe crea el precio pero Firestore no puede activar el puntero, queda auditoría `precio_creado_no_activado` y la API indica no reintentar a ciegas.
 `{ folio: 'ODT-AAAA-NNNNN', uid, nombre, cursoId, cursoTitulo, area, clases, emitido: ISO }` · lectura pública por folio.
 
 ### `v2_materiales/{id}`
@@ -172,6 +179,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/health` **pública** | `{ ok: true }` |
 | GET | `/landing/catalogo` **pública** | `{ fuente:'api', verificadoEn, cursos:[{ id,titulo,area,imagen,nivel,instructor,descripcion,clases,accesoGratis }], planes:{ mensual,anual } }` |
 | GET | `/me` | `{ uid, email, esVip, esAdmin, plan, vence, perfil }` |
+| POST | `/sesion/inicio` | Marca un inicio de sesión autenticado, limitado a 100 marcas y sin IP/dispositivo |
 | PATCH | `/me/perfil` | `{ nombre?, whatsapp?, especialidad?, ciudad?, avisos? }` → perfil |
 | PATCH | `/me/intereses` | `{ intereses: string[] }` (1 a 3 valores únicos y válidos) → `{ intereses }`; guarda la preferencia actual sin alterar la entrevista inicial |
 | GET | `/catalogo` | `{ cursos: Curso[] (sin videoId), materiales: Material[] (incluye `desbloqueadoConPuntos` y `puntosRequeridos`), eventos: Evento[], config }` |
@@ -220,6 +228,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | Método | Ruta | Descripción |
 |---|---|---|
 | GET | `/admin/resumen` | `{ miembrosActivos, altas30d, bajas30d, clasesVistas30d, certificados30d, temasForo30d, cursosTop: [{ cursoId, titulo, vistas }] }` |
+| GET | `/admin/actividad` | Accesos de 30 días: conteo por hora/día de `America/Mexico_City`, usuarios únicos de hoy y hasta 30 entradas recientes identificadas; sin IP ni huella de dispositivo |
 | GET · POST | `/admin/cursos` | Lista completa (con videoId) · crear |
 | PATCH · DELETE | `/admin/cursos/:id` | Editar campos o clases · borrar (solo si no tiene progreso) |
 | GET · POST · PATCH · DELETE | `/admin/materiales(/:id)` | CRUD |
@@ -227,6 +236,8 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET · POST · PATCH · DELETE | `/admin/eventos(/:id)` | CRUD |
 | GET | `/admin/miembros?q=&estado=` | `[{ uid, nombre, email, esVip, plan, vence, cortesiaHasta, clasesVistas, ultimaActividad }]` |
 | GET | `/admin/miembros/:uid` | Detalle + progreso por curso + certificados |
+| GET | `/admin/miembros/:uid/reinicio-aprendizaje` | Vista previa de conteos y alcance que se conserva/elimina |
+| POST | `/admin/miembros/:uid/reinicio-aprendizaje` | `{ confirmarEmail }`; reinicio acotado, no permite auto-reinicio y genera auditoría |
 | POST | `/admin/miembros/:uid/cortesia` | `{ dias, motivo }` → cortesía |
 | DELETE | `/admin/miembros/:uid/cortesia` | Revoca |
 | GET | `/admin/foro` | Todos, incluidos ocultos |
@@ -239,6 +250,7 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/admin/encuestas/resumen?plan=vip|gratis` | Totales, distribuciones, promedios, NPS (0-10), bases de preguntas condicionales, `planes` y `periodos` por trimestre; nunca UID ni correo |
 | GET | `/admin/encuestas/contactos` | Correos de quienes calificaron 0-6 y pidieron que se les escriba (con su calificación y motivo) |
 | GET · PATCH | `/admin/config` | Configuración general |
+| POST | `/admin/precios/:plan` | `mensual|anual`, `{ monto }` y `Idempotency-Key`; crea precio nuevo en Stripe y lo activa para futuras compras. Las suscripciones en curso mantienen su precio. `/admin/config` también informa `checkoutNuevoHabilitado`. |
 
 ## Variables de entorno (backend)
 

@@ -10,6 +10,7 @@ export const ADMIN_NAV = [
   { href: '#/admin/quizzes', icon: 'brain', label: 'Quizzes', match: /^\/admin\/quizzes/ },
   { group: 'Personas' },
   { href: '#/admin/miembros', icon: 'users', label: 'Miembros', match: /^\/admin\/miembros/ },
+  { href: '#/admin/actividad', icon: 'chart-no-axes-combined', label: 'Actividad', match: /^\/admin\/actividad/ },
   { href: '#/admin/comunidad', icon: 'messages-square', label: 'Comunidad', match: /^\/admin\/comunidad/ },
   { href: '#/admin/avisos', icon: 'megaphone', label: 'Avisos', match: /^\/admin\/avisos/ },
   { href: '#/admin/encuestas', icon: 'clipboard-list', label: 'Encuestas', match: /^\/admin\/encuestas/ },

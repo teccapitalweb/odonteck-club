@@ -13,6 +13,17 @@ export interface ResumenAdmin {
   cursosTop: { cursoId: string; titulo: string; vistas: number }[];
 }
 
+export interface ActividadAdmin {
+  zonaHoraria: string;
+  desde: string;
+  hasta: string;
+  inicios30d: number;
+  usuariosHoy: number;
+  porHora: number[];
+  porDia: { dia: string; total: number }[];
+  recientes: { uid: string; nombre: string; email: string; fecha: string }[];
+}
+
 export interface DetalleMiembroAdmin extends MiembroDemo {
   perfil?: Record<string, unknown>;
   miembro?: Record<string, unknown> | null;
@@ -20,7 +31,9 @@ export interface DetalleMiembroAdmin extends MiembroDemo {
   cortesia?: { hasta?: string; motivo?: string } | null;
   progreso: { cursoId: string; titulo: string; vistas: number[]; total: number; ultima: number | null; actualizado: string | null; certificado?: string | null }[];
   certificados: { folio: string; cursoTitulo: string; emitido: string }[];
+  iniciosSesion: string[];
   cursoGratis?: { cursoId: string; titulo: string; origen: string; elegido: string | null; cambios: number } | null;
+  reinicioConteo?: { progreso: number; intentos: number; onboarding: number; estadoRetos: number; total: number };
 }
 
 export interface ReporteDirectorioAdmin {
@@ -40,6 +53,7 @@ interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; 
 
 const estado = {
   resumen: null as ResumenAdmin | null,
+  actividad: null as ActividadAdmin | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
   reportesDirectorio: [] as ReporteDirectorioAdmin[],
@@ -79,6 +93,7 @@ const adaptarConfig = (v: any): Config => {
     whatsappSoporte: v?.whatsappSoporte || actual.whatsappSoporte,
     canalWhatsApp: v?.canalWhatsApp || actual.canalWhatsApp,
     praxiaUrl: v?.praxiaUrl || actual.praxiaUrl,
+    checkoutNuevoHabilitado: v?.checkoutNuevoHabilitado === true,
   };
 };
 
@@ -107,6 +122,7 @@ const cargarQuizzes = (forzar = false) => cargar('quizzes', async () => {
 
 export const Admin = {
   get resumen() { return estado.resumen; },
+  get actividad() { return estado.actividad; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
   get reportesDirectorio() { return estado.reportesDirectorio; },
@@ -123,6 +139,8 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     if (/^\/admin\/?$/.test(path)) {
       tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, forzar));
       tareas.push(cargarCursos(forzar), cargarMateriales(forzar), cargarEventos(forzar), cargarQuizzes(forzar));
+    } else if (path === '/admin/actividad') {
+      tareas.push(cargar('actividad', async () => { estado.actividad = await api<ActividadAdmin>('/admin/actividad'); }, forzar));
     } else if (path.startsWith('/admin/cursos')) {
       tareas.push(cargarCursos(forzar), cargarQuizzes(forzar));
     } else if (path.startsWith('/admin/quizzes')) {
@@ -152,6 +170,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
           ...d,
           ...adaptarMiembro({ ...d, clasesVistas: progreso.reduce((n: number, p: any) => n + (Array.isArray(p.vistas) ? p.vistas.length : 0), 0), ultimaActividad }),
           cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [], cursoGratis: d.cursoGratis ?? null,
+          iniciosSesion: Array.isArray(d.iniciosSesion) ? d.iniciosSesion : [],
         };
       }, true));
     } else if (path === '/admin/comunidad') {
@@ -281,6 +300,15 @@ export async function reiniciarCursoGratisAdmin(uid: string) {
   cargados.delete(`miembro:${uid}`);
 }
 
+export async function reiniciarAprendizajeAdmin(uid: string, confirmarEmail: string) {
+  if (Datos.modo === 'demo') throw new Error('El reinicio de aprendizaje solo está disponible con el backend conectado.');
+  const resultado = await api<{ ok: boolean; conteoEliminado: { total: number } }>(`/admin/miembros/${encodeURIComponent(uid)}/reinicio-aprendizaje`, {
+    method: 'POST', json: { confirmarEmail },
+  });
+  cargados.delete(`miembro:${uid}`);
+  return resultado;
+}
+
 export async function revocarCortesiaAdmin(uid: string) {
   if (Datos.modo === 'demo') { const m = Datos.miembros().find((x) => x.uid === uid)!; m.cortesiaHasta = null; m.cortesiaMotivo = ''; Datos.guardarMiembro(m); return; }
   await api(`/admin/miembros/${encodeURIComponent(uid)}/cortesia`, { method: 'DELETE' });
@@ -312,7 +340,17 @@ export async function publicarAvisoAdmin(aviso: Omit<Aviso, 'id' | 'fecha'>) {
 
 export async function guardarConfigAdmin(c: Config) {
   if (Datos.modo === 'demo') { Datos.guardarConfig(c); return; }
-  const guardada = adaptarConfig(await api('/admin/config', { method: 'PATCH', json: { precios: { mensual: c.precioMensual, anual: c.precioAnual }, descuentoVIP: c.descuentoVIP, whatsappSoporte: c.whatsappSoporte, canalWhatsApp: c.canalWhatsApp, praxiaUrl: c.praxiaUrl } }));
+  const guardada = adaptarConfig(await api('/admin/config', { method: 'PATCH', json: { descuentoVIP: c.descuentoVIP, whatsappSoporte: c.whatsappSoporte, canalWhatsApp: c.canalWhatsApp, praxiaUrl: c.praxiaUrl } }));
   Datos.hidratarAdmin('config', guardada);
   cargados.add('config');
+}
+
+export async function publicarPrecioStripeAdmin(plan: 'mensual' | 'anual', monto: number, idempotencyKey: string) {
+  if (Datos.modo === 'demo') throw new Error('Publicar un precio de Stripe requiere el backend conectado.');
+  const guardado = await api<{ ok: boolean; monto: number; priceId: string }>(`/admin/precios/${plan}`, {
+    method: 'POST', headers: { 'Idempotency-Key': idempotencyKey }, json: { monto },
+  });
+  const config = Datos.config();
+  Datos.hidratarAdmin('config', { ...config, ...(plan === 'mensual' ? { precioMensual: guardado.monto } : { precioAnual: guardado.monto }) });
+  return guardado;
 }

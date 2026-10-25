@@ -90,15 +90,23 @@ export const Auth = {
   async entrarCorreo(email: string, pass: string) {
     if (!fb) await cargarFirebase();
     await fb!.signInWithEmailAndPassword(authInst!, email, pass); listo = null; await this.iniciar();
+    await this.registrarInicioSesion();
   },
   async registrar(nombre: string, email: string, pass: string) {
     if (!fb) await cargarFirebase();
     const cred = await fb!.createUserWithEmailAndPassword(authInst!, email, pass);
     await fb!.updateProfile(cred.user, { displayName: nombre }); listo = null; await this.iniciar();
+    await this.registrarInicioSesion();
   },
   async entrarGoogle() {
     if (!fb) await cargarFirebase();
     await fb!.signInWithPopup(authInst!, new fb!.GoogleAuthProvider()); listo = null; await this.iniciar();
+    await this.registrarInicioSesion();
+  },
+  async registrarInicioSesion() {
+    if (Datos.modo !== 'api' || !usuario) return;
+    // El registro analítico nunca debe impedir el acceso si falla la telemetría.
+    try { await api('/sesion/inicio', { method: 'POST', json: {} }); } catch { /* login exitoso primero */ }
   },
   async recuperar(email: string) {
     if (!fb) await cargarFirebase();

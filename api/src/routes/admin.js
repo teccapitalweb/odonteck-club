@@ -8,7 +8,7 @@ import {
   perfilConDefectos,
 } from '../datos.js';
 import { ESTADOS_QUIZ, validarConfig, validarCurso, validarEvento, validarMaterial, validarPreguntas } from '../lib/esquemas.js';
-import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
+import { HttpError, conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
 import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
 import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, textoRequerido, unoDe, url } from '../lib/validacion.js';
@@ -23,6 +23,13 @@ const TIPOS_SUBIDA = {
 // El club viejo no tiene un esquema fijo de fechas de alta/baja: se prueban los nombres conocidos.
 const CAMPOS_ALTA = ['fechaAlta', 'creadoEn', 'creado', 'fechaInicio', 'fechaRegistro', 'createdAt'];
 const CAMPOS_BAJA = ['canceladoEn', 'fechaBaja', 'fechaCancelacion'];
+const ZONA_ADMIN = 'America/Mexico_City';
+const fechaLocal = (valor) => {
+  const partes = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_ADMIN, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(valor);
+  const porTipo = Object.fromEntries(partes.map((p) => [p.type, p.value]));
+  return `${porTipo.year}-${porTipo.month}-${porTipo.day}`;
+};
+const horaLocal = (valor) => Number(new Intl.DateTimeFormat('en-US', { timeZone: ZONA_ADMIN, hour: '2-digit', hourCycle: 'h23' }).format(valor));
 
 const primeraFecha = (obj, campos) => {
   for (const c of campos) {
@@ -91,6 +98,50 @@ export function rutasAdmin(ctx) {
       temasForo30d: foroSnap.docs.filter((d) => (aMillis(d.data().fecha) ?? 0) >= desde).length,
       cursosTop,
     });
+  }));
+
+  // Analítica de acceso deliberadamente acotada: sólo marcas de login, sin IP ni huella del dispositivo.
+  r.get('/admin/actividad', h(async (req, res) => {
+    const ahora = ctx.now();
+    const desde = ahora.getTime() - 30 * DIA_MS;
+    const [accesosSnap, perfilesSnap, miembrosSnap] = await Promise.all([
+      db.collection(COL.sesionesAcceso).get(),
+      db.collection(COL.perfiles).get(),
+      db.collection(COL.miembros).get(),
+    ]);
+    const perfiles = new Map(perfilesSnap.docs.map((d) => [d.id, d.data()]));
+    const miembros = new Map(miembrosSnap.docs.map((d) => [d.id, d.data()]));
+    const sesiones = [];
+    for (const doc of accesosSnap.docs) {
+      const datos = doc.data();
+      for (const fecha of Array.isArray(datos.sesiones) ? datos.sesiones : []) {
+        const ms = aMillis(fecha);
+        if (ms !== null && ms >= desde && ms <= ahora.getTime()) sesiones.push({ uid: datos.uid || doc.id, fecha: new Date(ms).toISOString(), ms });
+      }
+    }
+    sesiones.sort((a, b) => b.ms - a.ms);
+    const porHora = Array(24).fill(0);
+    const porDiaMap = new Map();
+    const hoy = fechaLocal(ahora);
+    const dias = Array.from({ length: 30 }, (_, i) => fechaLocal(new Date(ahora.getTime() - (29 - i) * DIA_MS)));
+    for (const dia of dias) porDiaMap.set(dia, 0);
+    const usuariosHoy = new Set();
+    for (const sesion of sesiones) {
+      porHora[horaLocal(new Date(sesion.ms))]++;
+      const dia = fechaLocal(new Date(sesion.ms));
+      if (porDiaMap.has(dia)) porDiaMap.set(dia, porDiaMap.get(dia) + 1);
+      if (dia === hoy) usuariosHoy.add(sesion.uid);
+    }
+    const authUsers = new Map();
+    const recientes = await Promise.all(sesiones.slice(0, 30).map(async ({ uid, fecha }) => {
+      const perfil = perfiles.get(uid) ?? {};
+      const miembro = miembros.get(uid) ?? {};
+      if (!authUsers.has(uid)) authUsers.set(uid, usuarioAuth(uid));
+      const authUser = await authUsers.get(uid);
+      return { uid, nombre: perfil.nombre || miembro.nombre || authUser?.displayName || 'Miembro', email: miembro.email || authUser?.email || '', fecha };
+    }));
+    res.json({ zonaHoraria: ZONA_ADMIN, desde: new Date(desde).toISOString(), hasta: ahora.toISOString(), inicios30d: sesiones.length,
+      usuariosHoy: usuariosHoy.size, porHora, porDia: [...porDiaMap].map(([dia, total]) => ({ dia, total })), recientes });
   }));
 
   // ---------- Encuestas (solo agregados; nunca expone UID ni correo) ----------
@@ -287,7 +338,7 @@ export function rutasAdmin(ctx) {
 
   r.get('/admin/miembros/:uid', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
-    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis] = await Promise.all([
+    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis, accesos] = await Promise.all([
       leerDoc(db, COL.miembros, uid),
       leerDoc(db, COL.cortesias, uid),
       leerDoc(db, COL.perfiles, uid),
@@ -297,6 +348,7 @@ export function rutasAdmin(ctx) {
       db.collection(COL.cursos).get(),
       usuarioAuth(uid),
       leerDoc(db, COL.cursoGratis, uid),
+      leerDoc(db, COL.sesionesAcceso, uid),
     ]);
     if (!m && !c && !perfil && !usuario && progSnap.empty) throw noEncontrado('No existe ese miembro.');
     const esAdmin = usuario?.customClaims?.admin === true;
@@ -337,7 +389,82 @@ export function rutasAdmin(ctx) {
         })),
       certificados: certSnap.docs.map((d) => d.data()).sort((a, b) => String(b.emitido).localeCompare(String(a.emitido))),
       cursoGratis: cursoGratis?.cursoId ? { cursoId: cursoGratis.cursoId, titulo: cursos.get(cursoGratis.cursoId)?.titulo ?? cursoGratis.cursoId, origen: cursoGratis.origen, elegido: cursoGratis.elegido, cambios: cursoGratis.cambios ?? 0 } : null,
+      iniciosSesion: Array.isArray(accesos?.sesiones) ? accesos.sesiones.slice(-20).reverse() : [],
+      reinicioConteo: await vistaPreviaReinicio(uid),
     });
+  }));
+
+  // Reinicio acotado y auditable: aprendizaje + onboarding. No toca identidad,
+  // pagos, membresía, selección del curso gratis, recompensas ni certificados.
+  async function vistaPreviaReinicio(uid) {
+    const [progreso, intentos, respuestas, retos] = await Promise.all([
+      db.collection(COL.progreso).where('uid', '==', uid).get(),
+      db.collection(COL.intentos).where('uid', '==', uid).get(),
+      Promise.all(['bienvenida-v2', 'brujula-v1'].map((clave) => db.collection(COL.encuestasRespuestas).doc(`${uid}__${clave}`).get())),
+      db.collection(COL.retosEstado).doc(uid).get(),
+    ]);
+    return {
+      progreso: progreso.size,
+      intentos: intentos.size,
+      onboarding: respuestas.filter((d) => d.exists).length,
+      estadoRetos: retos.exists ? 1 : 0,
+      total: progreso.size + intentos.size + respuestas.filter((d) => d.exists).length + (retos.exists ? 1 : 0),
+    };
+  }
+
+  r.get('/admin/miembros/:uid/reinicio-aprendizaje', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const [usuario, miembro, conteo] = await Promise.all([usuarioAuth(uid), leerDoc(db, COL.miembros, uid), vistaPreviaReinicio(uid)]);
+    if (!usuario && !miembro) throw noEncontrado('No existe ese miembro.');
+    res.json({ uid, email: usuario?.email || miembro?.email || '', conteo,
+      conserva: ['identidad y perfil', 'pagos y membresía', 'curso gratis elegido', 'puntos, logros y canjes', 'certificados', 'historial de acceso'],
+      elimina: ['progreso de clases', 'intentos de evaluación', 'estado de retos', 'entrevista inicial y brújula vocacional'] });
+  }));
+
+  r.post('/admin/miembros/:uid/reinicio-aprendizaje', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const usuario = await usuarioAuth(uid);
+    const miembro = await leerDoc(db, COL.miembros, uid);
+    if (!usuario && !miembro) throw noEncontrado('No existe ese miembro.');
+    if (uid === req.usuario.uid) throw conflicto('No puedes reiniciar tu propia cuenta desde esta acción.', 'reinicio_propio');
+    const email = String(usuario?.email || miembro?.email || '').trim().toLowerCase();
+    const confirmado = String(cuerpo(req).confirmarEmail || '').trim().toLowerCase();
+    if (!email || confirmado !== email) throw conflicto('Escribe exactamente el correo del miembro para confirmar el reinicio.', 'confirmacion_invalida');
+
+    const antes = await vistaPreviaReinicio(uid);
+    const [progreso, intentos] = await Promise.all([
+      db.collection(COL.progreso).where('uid', '==', uid).get(),
+      db.collection(COL.intentos).where('uid', '==', uid).get(),
+    ]);
+    const eliminar = [...progreso.docs, ...intentos.docs];
+    const respuestasRef = ['bienvenida-v2', 'brujula-v1'].map((clave) => db.collection(COL.encuestasRespuestas).doc(`${uid}__${clave}`));
+    const respuestasSnap = await Promise.all(respuestasRef.map((ref) => ref.get()));
+    eliminar.push(...respuestasRef.filter((_, i) => respuestasSnap[i].exists).map((ref) => ({ ref })));
+    const retosRef = db.collection(COL.retosEstado).doc(uid);
+    if ((await retosRef.get()).exists) eliminar.push({ ref: retosRef });
+
+    const auditoriaRef = db.collection(COL.adminAuditoria).doc();
+    await auditoriaRef.set({ accion: 'reinicio_aprendizaje_onboarding', uid,
+      actorUid: req.usuario.uid, actorEmail: req.usuario.email || '', conteoSolicitado: antes,
+      estado: 'iniciado', creado: ahoraISO(),
+      preservado: ['pagos', 'membresia', 'identidad', 'curso_gratis', 'recompensas', 'certificados'] });
+    // Firestore limita lotes a 500 escrituras; mantener margen para futuras extensiones.
+    for (let inicio = 0; inicio < eliminar.length; inicio += 400) {
+      const batch = db.batch();
+      for (const item of eliminar.slice(inicio, inicio + 400)) batch.delete(item.ref ?? item);
+      await batch.commit();
+    }
+    const estadoEncuestasRef = db.collection(COL.encuestasEstado).doc(uid);
+    const estadoEncuestasSnap = await estadoEncuestasRef.get();
+    if (estadoEncuestasSnap.exists) {
+      const estadoEncuestas = estadoEncuestasSnap.data();
+      const pospuestas = { ...(estadoEncuestas.pospuestas ?? {}) };
+      delete pospuestas['bienvenida-v2'];
+      delete pospuestas['brujula-v1'];
+      await estadoEncuestasRef.set({ ...estadoEncuestas, pospuestas, actualizado: ahoraISO() });
+    }
+    await auditoriaRef.update({ estado: 'completado', completado: ahoraISO(), conteoEliminado: antes });
+    res.json({ ok: true, uid, conteoEliminado: antes, preservado: ['pagos', 'membresia', 'identidad', 'curso_gratis', 'recompensas', 'certificados'] });
   }));
 
   r.post('/admin/miembros/:uid/cortesia', h(async (req, res) => {
@@ -530,15 +657,87 @@ export function rutasAdmin(ctx) {
 
   // ---------- Config ----------
   r.get('/admin/config', h(async (req, res) => {
-    res.json(await leerConfig(db));
+    const config = await leerConfig(db);
+    const precios = { ...config.precios };
+    if (ctx.stripe?.prices?.retrieve) {
+      for (const plan of ['mensual', 'anual']) {
+        const id = config[plan === 'mensual' ? 'stripePriceMensual' : 'stripePriceAnual'] || ctx.config.stripePrices?.[plan];
+        if (!id) continue;
+        try {
+          const precio = await ctx.stripe.prices.retrieve(id);
+          const intervalo = plan === 'mensual' ? 'month' : 'year';
+          if (precio.active === true && precio.type === 'recurring' && precio.currency === 'mxn'
+            && precio.recurring?.interval === intervalo && precio.recurring?.interval_count === 1
+            && Number.isInteger(precio.unit_amount)) precios[plan] = precio.unit_amount / 100;
+        } catch { /* conserva el último valor guardado y permite ver el resto de ajustes */ }
+      }
+    }
+    res.json({ ...config, precios, checkoutNuevoHabilitado: Boolean(ctx.stripe && ctx.config.stripeWebhookSecret) });
   }));
 
   r.patch('/admin/config', h(async (req, res) => {
     if (!esObjeto(req.body)) throw invalido('El cuerpo debe ser un objeto.');
     const cambios = validarConfig(req.body);
     if (Object.keys(cambios).length === 0) throw invalido('No enviaste ningún campo válido para actualizar.');
+    if (cambios.precios !== undefined || cambios.stripePriceMensual !== undefined || cambios.stripePriceAnual !== undefined) {
+      throw conflicto('Los precios deben cambiarse con la acción que crea un nuevo precio real en Stripe. Las suscripciones actuales conservarán el suyo.', 'precio_requiere_stripe');
+    }
     await db.collection(COL.config).doc('general').set({ ...cambios, actualizado: ahoraISO() }, { merge: true });
     res.json(await leerConfig(db));
+  }));
+
+  r.post('/admin/precios/:plan', h(async (req, res) => {
+    const plan = unoDe(req.params.plan, ['mensual', 'anual'], { campo: 'plan', requerido: true });
+    const stripe = ctx.stripe;
+    if (!stripe?.prices?.retrieve || !stripe?.prices?.create) throw noConfigurado('Stripe no está configurado para crear precios.');
+    const monto = entero(cuerpo(req).monto, { campo: 'monto', min: 1, max: 1_000_000 });
+    const clave = String(req.get('idempotency-key') || '');
+    if (!/^[A-Za-z0-9_-]{16,100}$/.test(clave)) throw invalido('Falta una clave de idempotencia válida para evitar precios duplicados.');
+    const config = await leerConfig(db);
+    const precioActual = config[plan === 'mensual' ? 'stripePriceMensual' : 'stripePriceAnual']
+      || ctx.config.stripePrices?.[plan] || '';
+    if (!precioActual) throw noConfigurado(`No existe un precio Stripe base para el plan ${plan}.`);
+    let base;
+    try { base = await stripe.prices.retrieve(precioActual); }
+    catch { throw noConfigurado(`No se pudo leer el precio Stripe actual (${plan}); no se hizo ningún cambio.`); }
+    const intervalo = plan === 'mensual' ? 'month' : 'year';
+    if (base.active !== true || base.currency !== 'mxn' || base.type !== 'recurring'
+      || base.recurring?.interval !== intervalo || base.recurring?.interval_count !== 1
+      || !(typeof base.product === 'string' || base.product?.id)) {
+      throw conflicto('El precio base de Stripe no corresponde a un plan recurrente válido en MXN. No se hizo ningún cambio.', 'precio_base_invalido');
+    }
+    const auditoriaRef = db.collection(COL.adminAuditoria).doc();
+    await auditoriaRef.set({ accion: 'precio_stripe_nuevas_compras', plan, monto,
+      actorUid: req.usuario.uid, actorEmail: req.usuario.email || '', creado: ahoraISO(), estado: 'iniciado' });
+    let nuevo;
+    try {
+      nuevo = await stripe.prices.create({
+        product: typeof base.product === 'string' ? base.product : base.product.id,
+        currency: 'mxn', unit_amount: monto * 100,
+        recurring: { interval: intervalo, interval_count: 1 },
+        nickname: `OdonTeck ${plan} · nuevas compras · ${monto} MXN`,
+      }, { idempotencyKey: clave });
+    } catch (error) {
+      await auditoriaRef.update({ estado: 'fallo_stripe', actualizado: ahoraISO() });
+      throw error;
+    }
+    const campoId = plan === 'mensual' ? 'stripePriceMensual' : 'stripePriceAnual';
+    const precios = { ...(config.precios ?? {}), [plan]: monto };
+    try {
+      await db.collection(COL.config).doc('general').set({ [campoId]: nuevo.id, precios, actualizado: ahoraISO() }, { merge: true });
+    } catch (error) {
+      ctx.logger.error?.('[admin] Stripe creó el precio pero no se pudo activar en configuración; requiere reconciliación.', { plan, priceId: nuevo.id });
+      await auditoriaRef.update({ estado: 'precio_creado_no_activado', priceId: nuevo.id, precioAnterior: precioActual, actualizado: ahoraISO() });
+      throw new HttpError(503, 'precio_no_activado', `Stripe creó ${nuevo.id}, pero no se pudo activar. No repitas a ciegas; revisa configuración antes de intentar de nuevo.`);
+    }
+    try {
+      await auditoriaRef.update({ estado: 'completado', priceId: nuevo.id, precioAnterior: precioActual, completado: ahoraISO(),
+        nota: 'Las suscripciones activas conservaron su precio contratado.' });
+    } catch (error) {
+      // El precio ya está activo: la falla de anotación no debe presentarse como si el cambio hubiera fallado.
+      ctx.logger.error?.('[admin] precio activo pero auditoría sin cierre; registro iniciado conserva actor y monto.', { plan, priceId: nuevo.id });
+    }
+    res.status(201).json({ ok: true, plan, monto, currency: 'mxn', priceId: nuevo.id, priceAnterior: precioActual, aplicaA: 'nuevas_compras' });
   }));
 
   return r;

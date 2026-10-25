@@ -81,7 +81,7 @@ function quizHTML(cursoId: string, n: number) {
   if (!q || (q.estado !== 'aprobado' && !borradorLocal)) return vacioTab('brain', 'Quiz de la clase', 'Preguntas cortas para reforzar lo aprendido. Aparecen aquí cuando OdonTeck las revisa y aprueba.', 'accent');
   const total = q.preguntas.length;
   return `<form class="stack lesson-quiz" style="gap:14px" data-quiz-miembro="${cursoId}:${n}" data-paso="0" novalidate>
-    <div class="lesson-quiz__intro"><span class="lesson-quiz__icon"><i data-lucide="brain-circuit" class="i"></i></span><div><span class="eyebrow">OdonTeck Clinical Lab</span><strong>Simulación de decisión clínica</strong><p>${total} interacciones con razonamiento, calibración de confianza y evidencia trazable al video.</p></div><div class="lesson-quiz__badges">${borradorLocal ? '<span class="lesson-quiz__draft"><i data-lucide="shield-alert" class="i"></i>Vista editorial · revisión clínica pendiente</span>' : ''}<span class="lesson-quiz__time"><i data-lucide="timer" class="i"></i>${Math.max(2, Math.ceil(total * 1.5))} min</span></div></div>
+    <div class="lesson-quiz__intro"><span class="lesson-quiz__icon"><i data-lucide="brain-circuit" class="i"></i></span><div><span class="eyebrow">OdonTeck Clinical Lab</span><strong>Reto clínico de la clase</strong><p>Resuelve cada caso y revisa tu criterio al terminar.</p></div><div class="lesson-quiz__badges">${borradorLocal ? '<span class="lesson-quiz__draft"><i data-lucide="shield-alert" class="i"></i>Vista editorial · revisión clínica pendiente</span>' : ''}<span class="lesson-quiz__time"><i data-lucide="timer" class="i"></i>${Math.max(2, Math.ceil(total * 1.5))} min</span></div></div>
     <div class="quiz-journey" aria-label="Progreso de la evaluación">
       <div class="quiz-journey__meta"><span data-quiz-progress-text>Pregunta 1 de ${total}</span><strong data-quiz-progress-percent>${Math.round(100 / total)}%</strong></div>
       <div class="quiz-journey__track"><span data-quiz-progress-fill style="width:${100 / total}%"></span></div>
@@ -90,8 +90,7 @@ function quizHTML(cursoId: string, n: number) {
     <div class="quiz-studio">
       <div class="quiz-studio__main">
     ${q.preguntas.map((p, i) => `<fieldset class="quiz-q ${i === 0 ? 'is-active' : ''}" data-pregunta="${i}" data-tipo="${p.tipo || 'seleccion'}" data-competencia="${esc(p.competencia || 'Criterio clínico aplicado')}" data-nivel="${esc(p.nivelCognitivo || 'Aplicar')}" tabindex="-1" ${i === 0 ? '' : 'hidden'}>
-      <legend><span class="quiz-q__number">${i + 1}</span><span>Pregunta ${i + 1} de ${q.preguntas.length}</span><button type="button" class="quiz-q__flag" data-quiz-flag="${i}" aria-pressed="false" title="Marcar para revisar"><i data-lucide="bookmark" class="i"></i><span>Revisar</span></button><span class="quiz-q__type">${({ seleccion: 'Una respuesta', seleccion_multiple: 'Varias respuestas', ordenar: 'Ordenar', relacionar: 'Relacionar', completar: 'Completar' } as Record<string, string>)[p.tipo || 'seleccion']}</span></legend>
-      <div class="quiz-thinking-path" aria-label="Ruta de razonamiento"><span><b>01</b> Analiza</span><i data-lucide="chevron-right" class="i"></i><span><b>02</b> Decide</span><i data-lucide="chevron-right" class="i"></i><span><b>03</b> Calibra</span></div>
+      <legend><span class="quiz-q__number">${i + 1}</span><button type="button" class="quiz-q__flag" data-quiz-flag="${i}" aria-pressed="false" title="Marcar para revisar"><i data-lucide="bookmark" class="i"></i><span>Revisar</span></button><span class="quiz-q__type">${({ seleccion: 'Una respuesta', seleccion_multiple: 'Varias respuestas', ordenar: 'Ordenar', relacionar: 'Relacionar', completar: 'Completar' } as Record<string, string>)[p.tipo || 'seleccion']}</span></legend>
       ${(p.casoClinico || p.competencia || p.nivelCognitivo) ? `<article class="quiz-case">
         <span class="quiz-case__icon"><i data-lucide="clipboard-check" class="i"></i></span>
         <div class="quiz-case__body"><span class="eyebrow">Situación clínica</span>${p.casoClinico ? `<p>${esc(p.casoClinico)}</p>` : ''}
@@ -106,16 +105,9 @@ function quizHTML(cursoId: string, n: number) {
       <p class="quiz__calibration" hidden></p>
     </fieldset>`).join('')}
       </div>
-      <aside class="quiz-coach" aria-label="Panel de decisión clínica">
-        <div class="quiz-coach__head"><span><i data-lucide="activity" class="i"></i></span><div><small>Panel clínico</small><strong>Tu ruta de decisión</strong></div></div>
+      <aside class="quiz-coach" aria-label="Resumen del reto">
         <div class="quiz-coach__focus"><small>Competencia activa</small><strong data-coach-competencia>${esc(q.preguntas[0]?.competencia || 'Criterio clínico aplicado')}</strong><span data-coach-nivel>${esc(q.preguntas[0]?.nivelCognitivo || 'Aplicar')}</span></div>
-        <div class="quiz-coach__checklist">
-          <span><i data-lucide="scan-search" class="i"></i><b>Analiza</b><small>Identifica los datos que sí cambian la decisión.</small></span>
-          <span><i data-lucide="git-branch" class="i"></i><b>Decide</b><small>Construye tu respuesta antes de comparar.</small></span>
-          <span><i data-lucide="gauge" class="i"></i><b>Calibra</b><small>Declara cuánta confianza tienes en tu criterio.</small></span>
-        </div>
         <div class="quiz-coach__stats"><span><b data-coach-complete>0/${total}</b><small>completadas</small></span><span><b data-coach-flags>0</b><small>por revisar</small></span></div>
-        <p class="quiz-coach__safe"><i data-lucide="shield-check" class="i"></i>La solución permanece protegida hasta entregar el reto.</p>
       </aside>
     </div>
     <div class="quiz__resultado" hidden></div>
@@ -222,7 +214,7 @@ export function clase(params: Record<string, string>) {
   return `
   <section class="stack" style="gap:20px">
     <a class="section-head__cta" href="#/curso/${c.id}" style="align-self:flex-start"><span class="circle-btn circle-btn--glass" style="width:34px;height:34px"><i data-lucide="arrow-left" class="i" style="width:15px;height:15px"></i></span>${esc(c.titulo)}</a>
-    <div class="grid lesson-workspace" data-lesson-workspace data-lesson-mode="default">
+    <div class="grid lesson-workspace" data-lesson-workspace>
       <div class="stack lesson-stage" style="gap:16px">
         <div class="player" style="aspect-ratio:16/9;background:#0a0d18">
           <iframe id="video-${esc(c.id)}-${n}" ${Datos.modo === 'demo' ? `src="${embed}"` : ''} data-video="${c.id}:${n}" title="${esc(k.titulo)}" loading="lazy" style="border:0;position:absolute;inset:0;width:100%;height:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen></iframe>
@@ -238,13 +230,28 @@ export function clase(params: Record<string, string>) {
           </div>
         </div>
       </div>
-      <div class="card card--pad stack lesson-tools" data-tabs style="gap:16px">
-        <div class="tabs lesson-tools__tabs"><button data-for="temario" class="is-active"><i data-lucide="list-video" class="i"></i>Temario</button><button data-for="notas"><i data-lucide="notebook-tabs" class="i"></i>Notas</button><button data-for="quiz"><i data-lucide="brain" class="i"></i>Quiz</button><button data-for="ficha"><i data-lucide="file-down" class="i"></i>Ficha</button></div>
-        <div data-tab="temario" class="stack" style="gap:10px;font-size:var(--fs-sm)">${temario}</div>
-        <div data-tab="notas" hidden class="stack" style="gap:10px">${notasHTML(k, c.id)}</div>
-        <div data-tab="quiz" hidden class="stack" style="gap:12px">${quizHTML(c.id, n)}</div>
-        <div data-tab="ficha" hidden class="stack" style="gap:12px">${fichaHTML(k, c.id, c.titulo)}</div>
-      </div>
+      <aside class="lesson-launcher" aria-label="Herramientas de la clase">
+        <div class="lesson-launcher__intro"><span class="eyebrow">ESPACIO DE CLASE</span><h2>Tu mesa de estudio</h2><p>Elige un recurso para abrirlo en grande.</p></div>
+        <div class="lesson-launcher__list">
+          <button type="button" class="lesson-launcher__item" data-lesson-open="temario" aria-haspopup="dialog" aria-controls="lesson-study-dialog"><span class="lesson-launcher__icon"><i data-lucide="list-video" class="i"></i></span><span><strong>Temario</strong></span></button>
+          <button type="button" class="lesson-launcher__item" data-lesson-open="notas" aria-haspopup="dialog" aria-controls="lesson-study-dialog"><span class="lesson-launcher__icon"><i data-lucide="notebook-tabs" class="i"></i></span><span><strong>Notas</strong></span></button>
+          <button type="button" class="lesson-launcher__item" data-lesson-open="quiz" aria-haspopup="dialog" aria-controls="lesson-study-dialog"><span class="lesson-launcher__icon"><i data-lucide="brain" class="i"></i></span><span><strong>Quiz clínico</strong></span></button>
+          <button type="button" class="lesson-launcher__item" data-lesson-open="ficha" aria-haspopup="dialog" aria-controls="lesson-study-dialog"><span class="lesson-launcher__icon"><i data-lucide="file-down" class="i"></i></span><span><strong>Ficha de repaso</strong></span></button>
+        </div>
+        <div class="lesson-launcher__foot"><i data-lucide="sparkles" class="i"></i><span>Material de apoyo de esta clase</span></div>
+      </aside>
+      <dialog class="lesson-dialog" id="lesson-study-dialog" data-lesson-dialog aria-labelledby="lesson-dialog-heading" aria-modal="true">
+        <header class="lesson-dialog__header"><div><span class="eyebrow">CLASE ${n} · ESPACIO DE ESTUDIO</span><h2 id="lesson-dialog-heading">${esc(k.titulo)}</h2><p data-lesson-dialog-label>Temario del curso</p></div><button type="button" class="circle-btn lesson-dialog__close" data-lesson-close aria-label="Cerrar espacio de estudio"><i data-lucide="x" class="i"></i></button></header>
+        <div class="lesson-tools" data-tabs>
+          <div class="tabs lesson-tools__tabs"><button type="button" data-for="temario" class="is-active"><i data-lucide="list-video" class="i"></i>Temario</button><button type="button" data-for="notas"><i data-lucide="notebook-tabs" class="i"></i>Notas</button><button type="button" data-for="quiz"><i data-lucide="brain" class="i"></i>Quiz</button><button type="button" data-for="ficha"><i data-lucide="file-down" class="i"></i>Ficha</button></div>
+          <div class="lesson-tools__content">
+            <div data-tab="temario" class="stack" style="gap:10px;font-size:var(--fs-sm)">${temario}</div>
+            <div data-tab="notas" hidden class="stack" style="gap:10px">${notasHTML(k, c.id)}</div>
+            <div data-tab="quiz" hidden class="stack" style="gap:12px">${quizHTML(c.id, n)}</div>
+            <div data-tab="ficha" hidden class="stack" style="gap:12px">${fichaHTML(k, c.id, c.titulo)}</div>
+          </div>
+        </div>
+      </dialog>
     </div>
   </section>`;
 }

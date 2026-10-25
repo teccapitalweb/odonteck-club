@@ -6,7 +6,7 @@ import { resumenEncuestasDemo } from '../core/encuestas';
 import {
   Admin, borrarCursoAdmin, borrarEventoAdmin, borrarMaterialAdmin, cargarAdmin, guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
-  reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
+  reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin, reiniciarAprendizajeAdmin, publicarPrecioStripeAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
 
@@ -158,6 +158,31 @@ export function instalarAccionesAdmin(toast: Toast) {
           whatsappSoporte: String(d.get('whatsappSoporte')).trim(), canalWhatsApp: String(d.get('canalWhatsApp')).trim(), praxiaUrl: String(d.get('praxiaUrl')).trim() });
         toast('Ajustes guardados');
       }
+      if (tipo === 'precio-stripe') {
+        const plan = f.dataset.plan as 'mensual' | 'anual';
+        const monto = Number(d.get('monto'));
+        if (!Number.isInteger(monto) || monto < 1 || monto > 1_000_000) { toast('Indica un monto entero entre $1 y $1,000,000 MXN', 'alert-triangle'); return; }
+        const nombrePlan = plan === 'mensual' ? 'mensual' : 'anual';
+        if (!confirm(`Se creará un nuevo precio recurrente de $${monto.toLocaleString('es-MX')} MXN ${nombrePlan}, y se usará para nuevas compras. Las suscripciones existentes no cambian. ¿Continuar?`)) return;
+        const idempotencyKey = f.dataset.idempotencyKey || crypto.randomUUID();
+        f.dataset.idempotencyKey = idempotencyKey;
+        const resultado = await publicarPrecioStripeAdmin(plan, monto, idempotencyKey);
+        delete f.dataset.idempotencyKey;
+        toast(`Precio ${nombrePlan} actualizado para nuevas compras · ${resultado.priceId}`, 'badge-dollar-sign');
+        await cargarAdmin('/admin/ajustes', new URLSearchParams(), true); render();
+      }
+      if (tipo === 'reinicio-aprendizaje') {
+        const uid = f.dataset.uid!;
+        const confirmarEmail = String(d.get('confirmarEmail') || '').trim();
+        const miembro = Admin.detalleMiembro;
+        if (!miembro || miembro.uid !== uid || confirmarEmail.toLowerCase() !== miembro.email.trim().toLowerCase()) {
+          toast('El correo debe coincidir exactamente con el del miembro', 'alert-triangle'); return;
+        }
+        if (!confirm(`Vas a borrar el aprendizaje y onboarding de ${miembro.nombre} (${miembro.email}). Se conservan pagos, membresía, perfil, puntos, canjes, certificados y curso gratis elegido. Esta acción no se puede deshacer. ¿Confirmas?`)) return;
+        const resultado = await reiniciarAprendizajeAdmin(uid, confirmarEmail);
+        await cargarAdmin(current().path, current().query, true);
+        toast(`Reinicio completado · ${resultado.conteoEliminado.total} registros`, 'rotate-ccw'); render();
+      }
       if (tipo === 'buscar-miembro') {
         const p = current().query; p.set('q', String(d.get('q'))); navigate('/admin/miembros?' + p.toString());
       }
@@ -168,6 +193,12 @@ export function instalarAccionesAdmin(toast: Toast) {
   document.addEventListener('click', async (e) => {
     const el = e.target as HTMLElement;
     if (!current().path.startsWith('/admin')) return;
+
+    if (el.closest('[data-actividad-refresh]')) {
+      try { await cargarAdmin(current().path, current().query, true); render(); }
+      catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+      return;
+    }
 
     const pub = el.closest<HTMLElement>('[data-toggle-publicado]');
     if (pub) { const c = Datos.cursos().find((x) => x.id === pub.dataset.togglePublicado)!; c.publicado = c.publicado === false; try { await guardarCursoAdmin(c, false); toast(c.publicado ? 'Curso publicado' : 'Curso oculto'); render(); } catch (err) { c.publicado = !c.publicado; toast(mensajeError(err), 'alert-triangle'); } }

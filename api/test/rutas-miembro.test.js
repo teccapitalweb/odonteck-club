@@ -35,6 +35,15 @@ describe('públicas, autenticación y cabeceras', () => {
     assert.deepEqual(env.auth.llamadas.at(-1), { token: TOKENS.vip, checkRevoked: true });
   });
 
+  test('registra inicios de sesión autenticados con marcas acotadas y deduplica reintentos inmediatos', async () => {
+    await request(env.app).post('/sesion/inicio').expect(401);
+    await request(env.app).post('/sesion/inicio').set(bearer(TOKENS.vip)).send({}).expect(201, { registrado: true });
+    await request(env.app).post('/sesion/inicio').set(bearer(TOKENS.vip)).send({}).expect(200, { registrado: false });
+    assert.deepEqual(env.db.leer('v2_sesiones_acceso/vip1'), {
+      uid: 'vip1', sesiones: [AHORA_ISO], ultimoInicio: AHORA_ISO, actualizado: AHORA_ISO,
+    });
+  });
+
   test('rutas autenticadas mandan Cache-Control: no-store (también en 401)', async () => {
     const ok = await request(env.app).get('/me').set(bearer(TOKENS.vip)).expect(200);
     assert.equal(ok.headers['cache-control'], 'no-store');

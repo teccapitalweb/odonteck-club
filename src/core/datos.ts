@@ -28,7 +28,7 @@ export interface Pregunta {
 export interface Quiz { id: string; cursoId: string; n: number; estado: 'borrador' | 'aprobado'; version?: number; preguntas: Pregunta[]; actualizado: string }
 export interface MiembroDemo { uid: string; nombre: string; email: string; plan: string | null; vence: string | null; alta: string; clasesVistas: number; ultimaActividad: string; esVip?: boolean; esAdmin?: boolean; cortesiaHasta?: string | null; cortesiaMotivo?: string }
 export interface Aviso { id: string; titulo: string; texto: string; enlace?: string | null; fecha: string; autor?: string }
-export interface Config { precioMensual: number; precioAnual: number; descuentoVIP: number; whatsappSoporte: string; canalWhatsApp: string; praxiaUrl: string }
+export interface Config { precioMensual: number; precioAnual: number; descuentoVIP: number; whatsappSoporte: string; canalWhatsApp: string; praxiaUrl: string; checkoutNuevoHabilitado?: boolean }
 
 const PREFIX = 'odonteck-club:datos:v1:';
 const remoto = new Map<string, unknown>();

@@ -29,6 +29,8 @@ export const COL = Object.freeze({
   directorioConexiones: 'v2_directorio_conexiones',
   directorioReportes: 'v2_directorio_reportes',
   cursoGratis: 'v2_curso_gratis',
+  sesionesAcceso: 'v2_sesiones_acceso',
+  adminAuditoria: 'v2_admin_auditoria',
   // Añadidas por el backend (no están en el contrato, ver README):
   suscripciones: 'v2_suscripciones',
   contadores: 'v2_contadores',

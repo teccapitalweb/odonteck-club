@@ -104,6 +104,35 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   </div>`;
 }
 
+// ═══ ACTIVIDAD ═══
+export function adminActividad() {
+  const r = Admin.actividad;
+  if (Datos.modo !== 'api') return `${adminHead('Actividad', 'Sesiones de acceso y hábitos de uso, sin datos reales en modo demo.')}${callout('Analítica real no disponible en demo', 'Al usar la API, el panel registra la hora de inicio de sesión. No recopila IP, dispositivo ni agente de navegador.')}`;
+  if (!r) return vacio('No se pudo cargar la actividad', 'Revisa la conexión e inténtalo de nuevo.');
+  const maxHora = Math.max(1, ...r.porHora);
+  const totalDia = Math.max(1, ...r.porDia.map((d) => d.total));
+  const fechaHora = (iso: string) => new Date(iso).toLocaleString('es-MX', { timeZone: r.zonaHoraria, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  const fechaCorta = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('es-MX', { timeZone: r.zonaHoraria, day: 'numeric', month: 'short' });
+  return `
+  ${adminHead('Actividad', 'Inicios de sesión registrados durante los últimos 30 días · horario de Ciudad de México.', '<button class="btn btn--secondary btn--sm" data-actividad-refresh><i data-lucide="refresh-cw" class="i"></i>Actualizar</button>')}
+  <div class="kpis">
+    <div class="kpi"><span class="kpi__ic"><i data-lucide="log-in" class="i"></i></span><span class="kpi__label">Inicios de sesión</span><strong class="kpi__val">${r.inicios30d}</strong><span class="kpi__nota">últimos 30 días</span></div>
+    <div class="kpi"><span class="kpi__ic"><i data-lucide="users-round" class="i"></i></span><span class="kpi__label">Personas activas hoy</span><strong class="kpi__val">${r.usuariosHoy}</strong><span class="kpi__nota">cuentas con al menos un ingreso</span></div>
+  </div>
+  <section class="card card--pad stack" style="gap:14px">
+    <div><span class="eyebrow">Patrón de acceso</span><h2 class="admin-card-title" style="margin-top:4px">¿A qué hora suele entrar la comunidad?</h2><p class="faint" style="font-size:var(--fs-xs);margin-top:4px">Cada barra representa una hora local. Las horas vacías también se muestran para evitar lecturas engañosas.</p></div>
+    <div class="activity-hours" role="img" aria-label="Inicios de sesión por hora, zona horaria Ciudad de México">${r.porHora.map((n, h) => `<div class="activity-hours__col" title="${String(h).padStart(2, '0')}:00 · ${n} ${n === 1 ? 'inicio' : 'inicios'}"><span>${n || ''}</span><i style="height:${Math.max(n ? 8 : 2, (n / maxHora) * 100)}%"></i><small>${String(h).padStart(2, '0')}</small></div>`).join('')}</div>
+  </section>
+  <section class="card card--pad stack" style="gap:14px">
+    <div><span class="eyebrow">Constancia</span><h2 class="admin-card-title" style="margin-top:4px">Actividad día a día</h2></div>
+    <div class="activity-days" role="img" aria-label="Inicios de sesión por día durante los últimos treinta días">${r.porDia.map((d, i) => `<div class="activity-days__col" title="${fechaCorta(d.dia)} · ${d.total} ${d.total === 1 ? 'inicio' : 'inicios'}"><i style="height:${Math.max(d.total ? 7 : 2, (d.total / totalDia) * 100)}%"></i>${i % 5 === 0 || i === r.porDia.length - 1 ? `<small>${fechaCorta(d.dia)}</small>` : '<small aria-hidden="true">&nbsp;</small>'}</div>`).join('')}</div>
+  </section>
+  <section class="card dtable-wrap">
+    <div class="card--pad" style="padding-bottom:0"><span class="eyebrow">Registro reciente</span><h2 class="admin-card-title" style="margin-top:4px">Quién inició sesión y cuándo</h2><p class="faint" style="font-size:var(--fs-xs);margin-top:4px">Se muestran hasta 30 eventos recientes; no se guarda dirección IP ni información del dispositivo.</p></div>
+    ${r.recientes.length ? `<table class="dtable"><thead><tr><th>Miembro</th><th>Correo</th><th>Fecha y hora</th></tr></thead><tbody>${r.recientes.map((s) => `<tr><td><a href="#/admin/miembros/${encodeURIComponent(s.uid)}"><strong>${esc(s.nombre)}</strong></a></td><td>${s.email ? `<a href="mailto:${esc(s.email)}">${esc(s.email)}</a>` : '<span class="faint">—</span>'}</td><td class="mono">${fechaHora(s.fecha)}</td></tr>`).join('')}</tbody></table>` : '<p class="card--pad muted">Aún no hay inicios de sesión registrados en este periodo.</p>'}
+  </section>`;
+}
+
 // ═══ MIEMBROS ═══
 export function adminMiembros(_: Record<string, string>, query: URLSearchParams) {
   const q = (query.get('q') || '').toLowerCase();
@@ -164,6 +193,13 @@ export function adminMiembro(params: Record<string, string>) {
     ${detalle ? `<div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Curso gratis elegido</h3>${detalle.cursoGratis ? `<p style="font-size:var(--fs-sm)"><strong>${esc(detalle.cursoGratis.titulo)}</strong> · ${detalle.cursoGratis.origen === 'migracion' ? 'asignado por su avance previo' : detalle.cursoGratis.cambios ? 'elegido (ya usó su cambio)' : 'elegido por el miembro'}${detalle.cursoGratis.elegido ? ` · ${fecha(detalle.cursoGratis.elegido)}` : ''}</p><div class="row"><button type="button" class="btn btn--secondary btn--sm" data-reiniciar-curso-gratis="${m.uid}"><i data-lucide="rotate-ccw" class="i"></i>Reiniciar elección</button></div><p class="muted" style="font-size:var(--fs-xs)">Al reiniciar, el miembro vuelve a ver el anuncio para elegir. Su progreso no se borra.</p>` : '<p class="muted" style="font-size:var(--fs-sm)">Aún no elige su curso gratis.</p>'}</div>` : ''}
     <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Progreso por curso</h3>${detalle.progreso.length ? detalle.progreso.map((p) => `<div class="hbar"><span class="hbar__lbl">${esc(p.titulo)}</span><div class="progress"><span style="width:${p.total ? Math.round((p.vistas.length / p.total) * 100) : 0}%"></span></div><span class="mono faint">${p.vistas.length}/${p.total}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Todavía no ha iniciado cursos.</p>'}</div>
     <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Certificados</h3>${detalle.certificados.length ? detalle.certificados.map((c) => `<div class="todo"><i data-lucide="award" class="i"></i><span><strong>${esc(c.cursoTitulo)}</strong><br><span class="faint">${esc(c.folio)} · ${fecha(c.emitido)}</span></span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">Sin certificados emitidos.</p>'}</div>
+    <div class="card card--pad stack" style="gap:10px"><h3 class="admin-card-title">Inicios de sesión recientes</h3>${detalle.iniciosSesion.length ? detalle.iniciosSesion.map((s) => `<div class="todo"><i data-lucide="clock-3" class="i"></i><span>${esc(new Date(s).toLocaleString('es-MX', { timeZone: 'America/Mexico_City', dateStyle: 'medium', timeStyle: 'short' }))}</span></div>`).join('') : '<p class="muted" style="font-size:var(--fs-sm)">No hay marcas de inicio de sesión recientes. El registro empezó al activar esta función.</p>'}</div>
+    <section class="card card--pad stack admin-reset-learning" style="gap:10px;grid-column:1/-1">
+      <div><span class="eyebrow">Acción sensible · confirmación requerida</span><h3 class="admin-card-title" style="margin-top:4px">Reiniciar aprendizaje y onboarding</h3>
+      <p class="muted" style="font-size:var(--fs-sm)">Se reiniciarán ${detalle.reinicioConteo?.progreso ?? 0} avances, ${detalle.reinicioConteo?.intentos ?? 0} intentos, ${detalle.reinicioConteo?.estadoRetos ?? 0} estados de retos y ${detalle.reinicioConteo?.onboarding ?? 0} respuestas de entrevista/brújula. No puede deshacerse.</p>
+      <p class="faint" style="font-size:var(--fs-xs)">Se conservan cuenta, perfil, membresía y pagos, curso gratis elegido, puntos/logros/canjes, certificados e historial de acceso. No genera puntos nuevos.</p></div>
+      ${Datos.modo === 'api' ? `<form class="row admin-reset-learning__form" data-form="reinicio-aprendizaje" data-uid="${esc(m.uid)}"><div class="field" style="flex:1;min-width:220px"><label>Escribe el correo exacto del miembro para habilitarlo</label><input class="input" type="email" name="confirmarEmail" autocomplete="off" required></div><button class="btn btn--danger" type="submit"><i data-lucide="rotate-ccw" class="i"></i>Reiniciar aprendizaje</button></form>` : '<p class="faint" style="font-size:var(--fs-xs)">Disponible solo con el backend conectado; la vista demo no modifica datos.</p>'}
+    </section>
   </div>` : ''}`;
 }
 
@@ -267,14 +303,18 @@ export function adminAjustes() {
   const c = Datos.config();
   return `
   ${adminHead('Ajustes', 'Precios, contacto y administración del club.')}
+  ${Datos.modo === 'api' ? `<div class="admin-callout" style="max-width:1100px;margin-bottom:16px"><i data-lucide="${c.checkoutNuevoHabilitado ? 'circle-check' : 'triangle-alert'}" class="i"></i><div><strong>${c.checkoutNuevoHabilitado ? 'Checkout nuevo habilitado' : 'Checkout nuevo actualmente bloqueado'}</strong><p>${c.checkoutNuevoHabilitado ? 'Los nuevos precios quedarán disponibles en la compra una vez activados.' : 'Puedes preparar el precio real en Stripe, pero las compras seguirán bloqueadas hasta configurar y verificar el webhook de Stripe.'}</p></div></div>` : ''}
+  <div class="admin-grid admin-grid--even" style="max-width:1100px;margin-bottom:16px">
+    ${(['mensual', 'anual'] as const).map((plan) => { const monto = plan === 'mensual' ? c.precioMensual : c.precioAnual; const etiqueta = plan === 'mensual' ? 'Mensual' : 'Anual'; return `<form class="card card--pad stack" style="gap:12px" data-form="precio-stripe" data-plan="${plan}">
+      <span class="eyebrow">Stripe · nuevas compras</span><h3 class="admin-card-title">Precio ${etiqueta}</h3>
+      <div class="field"><label>Monto en pesos mexicanos</label><input class="input" type="number" name="monto" min="1" max="1000000" step="1" value="${monto}" ${Datos.modo === 'demo' ? 'disabled' : ''} required></div>
+      <p class="faint" style="font-size:var(--fs-xs)">Crea un precio recurrente real en Stripe y lo activa para nuevas compras. Las suscripciones actuales conservan su precio contratado. El precio anterior no se elimina.</p>
+      <div class="row" style="justify-content:flex-end"><button class="btn btn--brand" type="submit" ${Datos.modo === 'demo' ? 'disabled title="Disponible solo con backend conectado"' : ''}><i data-lucide="badge-dollar-sign" class="i"></i>${Datos.modo === 'demo' ? 'Backend conectado requerido' : `Publicar precio ${etiqueta.toLowerCase()}`}</button></div>
+    </form>`; }).join('')}
+  </div>
   <form class="card card--pad stack" style="gap:14px;max-width:820px" data-form="config">
-    <h3 class="admin-card-title">Membresía</h3>
-    <div class="form-grid form-grid--3">
-      <div class="field"><label>Precio mensual (MXN)</label><input class="input" type="number" min="0" name="precioMensual" value="${c.precioMensual}"></div>
-      <div class="field"><label>Precio anual (MXN)</label><input class="input" type="number" min="0" name="precioAnual" value="${c.precioAnual}"></div>
-      <div class="field"><label>Descuento VIP en vivo (%)</label><input class="input" type="number" min="0" max="100" name="descuentoVIP" value="${c.descuentoVIP}"></div>
-    </div>
-    <p class="faint" style="font-size:var(--fs-xs)">Los precios que se cobran los define Stripe. Cambiarlos aquí actualiza lo que se muestra; con el backend conectado se valida que coincidan con los precios de Stripe.</p>
+    <h3 class="admin-card-title">Beneficios y contacto</h3>
+    <div class="field" style="max-width:240px"><label>Descuento VIP en vivo (%)</label><input class="input" type="number" min="0" max="100" name="descuentoVIP" value="${c.descuentoVIP}"></div>
     <h3 class="admin-card-title" style="margin-top:8px">Contacto</h3>
     <div class="form-grid">
       <div class="field"><label>WhatsApp de soporte (con lada, solo números)</label><input class="input mono" name="whatsappSoporte" value="${esc(c.whatsappSoporte)}" pattern="[0-9]{10,15}"></div>

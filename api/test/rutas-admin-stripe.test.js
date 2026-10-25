@@ -13,7 +13,7 @@ const admin = (metodo, ruta) => request(env.app)[metodo](ruta).set(bearer(TOKENS
 
 describe('admin: autorización', () => {
   test('403 para usuarios sin claim admin (aunque sean VIP) y 401 sin token', async () => {
-    for (const ruta of ['/admin/resumen', '/admin/cursos', '/admin/miembros', '/admin/config', '/admin/foro']) {
+    for (const ruta of ['/admin/resumen', '/admin/actividad', '/admin/cursos', '/admin/miembros', '/admin/config', '/admin/foro', '/admin/precios/mensual', '/admin/miembros/free1/reinicio-aprendizaje']) {
       const r = await request(env.app).get(ruta).set(bearer(TOKENS.vip)).expect(403);
       assert.equal(r.body.error, 'prohibido');
       await request(env.app).get(ruta).expect(401);
@@ -30,6 +30,20 @@ describe('admin: autorización', () => {
     assert.equal(r.body.clasesVistas30d, 1);
     assert.equal(r.body.temasForo30d, 2);
     assert.deepEqual(r.body.cursosTop, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', vistas: 1 }]);
+  });
+
+  test('actividad agrega horarios locales y muestra inicios recientes identificables solo al admin', async () => {
+    env.db.docs.set('v2_sesiones_acceso/vip1', { uid: 'vip1', sesiones: ['2026-09-17T09:00:00.000Z', '2026-09-17T12:00:00.000Z'] });
+    const r = await admin('get', '/admin/actividad').expect(200);
+    assert.equal(r.body.zonaHoraria, 'America/Mexico_City');
+    assert.equal(r.body.inicios30d, 2);
+    assert.equal(r.body.usuariosHoy, 1);
+    assert.equal(r.body.porHora[3], 1);
+    assert.equal(r.body.porHora[6], 1);
+    assert.equal(r.body.recientes[0].uid, 'vip1');
+    assert.equal(r.body.recientes[0].email, 'ana@example.com');
+    assert.equal('ip' in r.body.recientes[0], false);
+    assert.equal('userAgent' in r.body.recientes[0], false);
   });
 
   test('encuestas: entrega agregados útiles sin UID ni correo', async () => {
@@ -224,10 +238,70 @@ describe('admin: foro, quizzes, avisos y config', () => {
     assert.equal((await admin('get', '/admin/avisos').expect(200)).body.length, 1);
     await admin('post', '/admin/avisos').send({ titulo: 'x', texto: '<a href=x>clic</a>' }).expect(400);
 
-    const cfg = await admin('patch', '/admin/config').send({ precios: { mensual: 249 }, descuentoVIP: 25 }).expect(200);
-    assert.deepEqual(cfg.body.precios, { mensual: 249, anual: 1899 });
+    const cfg = await admin('patch', '/admin/config').send({ descuentoVIP: 25 }).expect(200);
     assert.equal(cfg.body.descuentoVIP, 25);
+    await admin('patch', '/admin/config').send({ precios: { mensual: 249 } }).expect(409);
     await admin('patch', '/admin/config').send({ stripePriceAnual: 'no-es-price' }).expect(400);
+  });
+
+  test('reinicio aprendizaje requiere confirmación exacta y preserva pagos, perfil, curso y recompensas', async () => {
+    env.db.docs.set('v2_progreso/free1_curso-a', { uid: 'free1', cursoId: 'curso-a', vistas: [1, 2] });
+    env.db.docs.set('v2_intentos/free1_curso-a_1', { uid: 'free1', cursoId: 'curso-a', n: 1, aprobado: true });
+    env.db.docs.set('v2_retos_estados/free1', { uid: 'free1', racha: 4 });
+    env.db.docs.set('v2_encuestas_respuestas/free1__bienvenida-v2', { uid: 'free1', clave: 'bienvenida-v2', tipo: 'bienvenida' });
+    env.db.docs.set('v2_encuestas_respuestas/free1__brujula-v1', { uid: 'free1', clave: 'brujula-v1', tipo: 'brujula' });
+    env.db.docs.set('v2_encuestas_respuestas/free1__experiencia-v2--2026T3', { uid: 'free1', clave: 'experiencia-v2--2026T3', tipo: 'pulso' });
+    env.db.docs.set('v2_encuestas_estado/free1', { uid: 'free1', pospuestas: { 'bienvenida-v2': { veces: 2 }, 'experiencia-v2--2026T3': { veces: 1 } } });
+    env.db.docs.set('v2_recompensas_estado/free1', { uid: 'free1', saldo: 125, ganados: 125 });
+    env.db.docs.set('v2_recompensas_movimientos/mov1', { uid: 'free1', puntos: 125 });
+    env.db.docs.set('v2_suscripciones/free1', { uid: 'free1', subscriptionId: 'sub_keep', estado: 'active' });
+    env.db.docs.set('v2_perfiles/free1', { nombre: 'Carla', ciudad: 'Puebla' });
+
+    const previo = await admin('get', '/admin/miembros/free1/reinicio-aprendizaje').expect(200);
+    assert.equal(previo.body.conteo.total, 5);
+    assert.ok(previo.body.conserva.includes('puntos, logros y canjes'));
+    await admin('post', '/admin/miembros/free1/reinicio-aprendizaje').send({ confirmarEmail: 'otro@example.com' }).expect(409);
+    await admin('post', '/admin/miembros/adm1/reinicio-aprendizaje').send({ confirmarEmail: 'admin@example.com' }).expect(409, { error: 'reinicio_propio', mensaje: 'No puedes reiniciar tu propia cuenta desde esta acción.' });
+    const hecho = await admin('post', '/admin/miembros/free1/reinicio-aprendizaje').send({ confirmarEmail: 'carla@example.com' }).expect(200);
+    assert.equal(hecho.body.conteoEliminado.total, 5);
+    assert.equal(env.db.leer('v2_progreso/free1_curso-a'), undefined);
+    assert.equal(env.db.leer('v2_intentos/free1_curso-a_1'), undefined);
+    assert.equal(env.db.leer('v2_retos_estados/free1'), undefined);
+    assert.equal(env.db.leer('v2_encuestas_respuestas/free1__bienvenida-v2'), undefined);
+    assert.equal(env.db.leer('v2_encuestas_respuestas/free1__brujula-v1'), undefined);
+    assert.ok(env.db.leer('v2_encuestas_respuestas/free1__experiencia-v2--2026T3'));
+    assert.equal(env.db.leer('v2_encuestas_estado/free1').pospuestas['bienvenida-v2'], undefined);
+    assert.ok(env.db.leer('v2_encuestas_estado/free1').pospuestas['experiencia-v2--2026T3']);
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 125);
+    assert.ok(env.db.leer('v2_recompensas_movimientos/mov1'));
+    assert.equal(env.db.leer('v2_suscripciones/free1').subscriptionId, 'sub_keep');
+    assert.equal(env.db.leer('v2_curso_gratis/free1').cursoId, 'curso-a');
+    assert.equal(env.db.leer('v2_perfiles/free1').nombre, 'Carla');
+    assert.equal(env.db.rutas('v2_admin_auditoria').length, 1);
+    assert.equal(env.db.leer(env.db.rutas('v2_admin_auditoria')[0]).estado, 'completado');
+  });
+
+  test('nuevo precio mensual real en Stripe aplica a nuevas compras y no modifica suscripciones existentes', async () => {
+    env.db.docs.set('v2_suscripciones/vip1', { uid: 'vip1', subscriptionId: 'sub_existing', priceId: 'price_anterior', estado: 'active' });
+    const r = await admin('post', '/admin/precios/mensual').set('Idempotency-Key', 'precio-mensual-cambio-50').send({ monto: 50 }).expect(201);
+    assert.equal(r.body.monto, 50);
+    assert.equal(r.body.aplicaA, 'nuevas_compras');
+    assert.equal(env.db.leer('v2_config/general').stripePriceMensual, r.body.priceId);
+    assert.equal(env.db.leer('v2_config/general').precios.mensual, 50);
+    assert.equal(env.db.leer('v2_suscripciones/vip1').priceId, 'price_anterior');
+    const ajustes = await admin('get', '/admin/config').expect(200);
+    assert.equal(ajustes.body.precios.mensual, 50);
+    assert.equal(ajustes.body.checkoutNuevoHabilitado, true);
+    const repetir = await admin('post', '/admin/precios/mensual').set('Idempotency-Key', 'precio-mensual-cambio-50').send({ monto: 50 }).expect(201);
+    assert.equal(repetir.body.priceId, r.body.priceId);
+    assert.equal(env.stripe.creadas.precios.length, 1, 'la clave de idempotencia evita duplicar el precio Stripe');
+    const checkout = await request(env.app).post('/stripe/checkout').set(bearer(TOKENS.free)).send({ plan: 'mensual' }).expect(200);
+    assert.equal(checkout.body.url.startsWith('https://checkout.stripe.test/'), true);
+    assert.equal(env.stripe.creadas.checkout.at(-1).line_items[0].price, r.body.priceId);
+    assert.equal(env.stripe.creadas.precios.at(-1).params.unit_amount, 5000);
+    const landing = await request(env.app).get('/landing/catalogo').expect(200);
+    assert.equal(landing.body.planes.mensual, 50, 'la landing toma el nuevo Price aunque su caché anterior siga vigente');
+    await admin('post', '/admin/precios/anual').send({ monto: 100 }).expect(400);
   });
 });
 

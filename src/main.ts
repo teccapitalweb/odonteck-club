@@ -49,7 +49,7 @@ import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco }
 import { Admin, cargarAdmin } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { abrirJuegoClase } from './ui/juego-clase';
-import { obtenerPuntajeJuego } from './core/juego-clase';
+import { juegoClaseCompletado } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -66,7 +66,7 @@ import { Recompensas } from './core/recompensas';
 import { puntos } from './core/logros';
 import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type ImagenDirectorioPreparada } from './core/directorio';
 import { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './admin/contenido';
-import { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
+import { adminResumen, adminActividad, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas } from './admin/gestion';
 
 type PlayerJsInstance = {
   on(evento: string, callback: (datos?: unknown) => void): void;
@@ -475,6 +475,7 @@ const paginaAdmin = (pagina: (params: Record<string, string>, query: URLSearchPa
   ? `<div class="card card--pad stack" style="max-width:720px;margin:auto;text-align:center;gap:14px"><i data-lucide="server-off" class="i" style="width:34px;height:34px;margin:auto"></i><h1 class="display" style="font-size:var(--fs-xl)">No se pudo cargar el panel</h1><p class="muted">${esc(Admin.error)}</p><button class="btn btn--brand" style="justify-self:center" data-reintentar-admin><i data-lucide="refresh-cw" class="i"></i>Reintentar</button></div>`
   : pagina(params, query);
 route('/admin', paginaAdmin(adminResumen));
+route('/admin/actividad', paginaAdmin(adminActividad));
 route('/admin/cursos', paginaAdmin(adminCursos));
 route('/admin/cursos/:id', paginaAdmin(adminCurso));
 route('/admin/quizzes', paginaAdmin(adminQuizzes));
@@ -526,13 +527,7 @@ window.addEventListener('curso-gratis:elegido', () => { if (shellActual === 'mie
 function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {}) {
   const iframe = document.querySelector<HTMLIFrameElement>(`iframe[data-video="${CSS.escape(`${cursoId}:${n}`)}"]`);
   const herramientas = iframe?.closest('section')?.querySelector<HTMLElement>('[data-tabs]');
-  const boton = herramientas?.querySelector<HTMLButtonElement>('.tabs button[data-for="quiz"]');
-  if (!herramientas || !boton) return false;
-  boton.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === boton));
-  herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
-  const espacio = herramientas.closest<HTMLElement>('[data-lesson-workspace]');
-  if (espacio) espacio.dataset.lessonMode = 'quiz';
-  herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!herramientas || !abrirHerramientaClase(herramientas, 'quiz')) return false;
   const form = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
   if (form) {
     if (!form.dataset.quizInicio) form.dataset.quizInicio = String(Date.now());
@@ -540,6 +535,41 @@ function abrirQuizDeClase(cursoId: string, n: number, { anunciar = false } = {})
     if (anunciar) toast('Video terminado · tu reto clínico está listo', 'brain-circuit');
   } else if (anunciar) toast('Video terminado · la evaluación está en revisión clínica', 'shield-check');
   return !!form;
+}
+
+const etiquetasHerramientaClase: Record<string, string> = {
+  temario: 'Temario del curso',
+  notas: 'Notas de la clase',
+  quiz: 'Quiz clínico',
+  ficha: 'Ficha de repaso',
+};
+
+function activarHerramientaClase(herramientas: HTMLElement, id: string) {
+  const boton = herramientas.querySelector<HTMLButtonElement>(`.tabs button[data-for="${id}"]`);
+  if (!boton) return false;
+  boton.parentElement?.querySelectorAll('button').forEach((b) => {
+    const activo = b === boton;
+    b.classList.toggle('is-active', activo);
+    b.setAttribute('aria-selected', String(activo));
+  });
+  herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== id; });
+  const etiqueta = herramientas.closest<HTMLDialogElement>('[data-lesson-dialog]')?.querySelector<HTMLElement>('[data-lesson-dialog-label]');
+  if (etiqueta) etiqueta.textContent = etiquetasHerramientaClase[id] || 'Material de la clase';
+  return true;
+}
+
+function abrirHerramientaClase(herramientas: HTMLElement, id: string) {
+  if (!activarHerramientaClase(herramientas, id)) return false;
+  const dialogo = herramientas.closest<HTMLDialogElement>('[data-lesson-dialog]');
+  if (dialogo && !dialogo.open) dialogo.showModal();
+  if (id === 'quiz') {
+    const form = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
+    if (form) {
+      if (!form.dataset.quizInicio) form.dataset.quizInicio = String(Date.now());
+      mostrarPasoQuiz(form, Number(form.dataset.paso || 0));
+    }
+  }
+  return true;
 }
 
 function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false, actualizarAlCerrar = false } = {}) {
@@ -666,6 +696,17 @@ function mostrarResumenCuenta(abierto: boolean) {
 // ── Interacciones globales del miembro ──
 document.addEventListener('click', async (e) => {
   const el = e.target as HTMLElement;
+  const cerrarHerramientas = el.closest<HTMLButtonElement>('[data-lesson-close]');
+  if (cerrarHerramientas) { cerrarHerramientas.closest<HTMLDialogElement>('[data-lesson-dialog]')?.close(); return; }
+  const abrirHerramienta = el.closest<HTMLButtonElement>('[data-lesson-open]');
+  if (abrirHerramienta) {
+    const dialogo = abrirHerramienta.closest('section')?.querySelector<HTMLDialogElement>('[data-lesson-dialog]');
+    const herramientas = dialogo?.querySelector<HTMLElement>('[data-tabs]');
+    if (herramientas) abrirHerramientaClase(herramientas, abrirHerramienta.dataset.lessonOpen || 'temario');
+    return;
+  }
+  const dialogo = el.closest<HTMLDialogElement>('[data-lesson-dialog]');
+  if (dialogo && el === dialogo) { dialogo.close(); return; }
   const pw = el.closest<HTMLElement>('[data-paywall]');
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
 
@@ -718,11 +759,12 @@ document.addEventListener('click', async (e) => {
 
   const tab = el.closest<HTMLButtonElement>('.tabs button[data-for]');
   if (tab) {
-    tab.parentElement!.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === tab));
     const herramientas = tab.closest<HTMLElement>('[data-tabs]');
-    herramientas?.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => (p.hidden = p.dataset.tab !== tab.dataset.for));
-    const espacio = herramientas?.closest<HTMLElement>('[data-lesson-workspace]');
-    if (espacio) espacio.dataset.lessonMode = tab.dataset.for === 'quiz' ? 'quiz' : 'default';
+    if (herramientas) activarHerramientaClase(herramientas, tab.dataset.for || 'temario');
+    if (tab.dataset.for === 'quiz' && herramientas) {
+      const form = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
+      if (form) { if (!form.dataset.quizInicio) form.dataset.quizInicio = String(Date.now()); mostrarPasoQuiz(form, Number(form.dataset.paso || 0)); }
+    }
   }
 
   const marcarNota = el.closest<HTMLButtonElement>('[data-nota-check]');
@@ -759,15 +801,7 @@ document.addEventListener('click', async (e) => {
   const irQuizDesdeNotas = el.closest<HTMLButtonElement>('[data-notas-go-quiz]');
   if (irQuizDesdeNotas) {
     const herramientas = irQuizDesdeNotas.closest<HTMLElement>('[data-tabs]');
-    const botonQuiz = herramientas?.querySelector<HTMLButtonElement>('.tabs button[data-for="quiz"]');
-    if (!herramientas || !botonQuiz) return;
-    botonQuiz.parentElement?.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === botonQuiz));
-    herramientas.querySelectorAll<HTMLElement>('[data-tab]').forEach((p) => { p.hidden = p.dataset.tab !== 'quiz'; });
-    const espacio = herramientas.closest<HTMLElement>('[data-lesson-workspace]');
-    if (espacio) espacio.dataset.lessonMode = 'quiz';
-    herramientas.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const quiz = herramientas.querySelector<HTMLFormElement>('[data-quiz-miembro]');
-    if (quiz) mostrarPasoQuiz(quiz, Number(quiz.dataset.paso || 0));
+    if (!herramientas || !abrirHerramientaClase(herramientas, 'quiz')) return;
     createIcons({ icons });
     return;
   }
@@ -863,7 +897,7 @@ document.addEventListener('click', async (e) => {
   if (irSiguiente) {
     const clave = irSiguiente.dataset.irSiguiente || '';
     const [id, n] = clave.split(':');
-    if (id && n && obtenerPuntajeJuego(clave) === 0) {
+    if (id && n && !juegoClaseCompletado(clave)) {
       e.preventDefault();
       abrirJuegoDeClase(id, Number(n), { anunciar: true, actualizarAlCerrar: true });
       return;

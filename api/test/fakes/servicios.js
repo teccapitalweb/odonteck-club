@@ -99,7 +99,11 @@ export function crearMaterialesFalsos(ids = []) {
  */
 export function crearStripeFalso({ suscripciones = {} } = {}) {
   const real = new Stripe('sk_test_solo_para_firmas_locales');
-  const creadas = { checkout: [], portal: [] };
+  const creadas = { checkout: [], portal: [], precios: [] };
+  const precios = new Map([
+    ['price_mensual_test', { id: 'price_mensual_test', active: true, currency: 'mxn', type: 'recurring', product: 'prod_odonteck_test', unit_amount: 19900, recurring: { interval: 'month', interval_count: 1 } }],
+    ['price_anual_test', { id: 'price_anual_test', active: true, currency: 'mxn', type: 'recurring', product: 'prod_odonteck_test', unit_amount: 189900, recurring: { interval: 'year', interval_count: 1 } }],
+  ]);
   return {
     creadas,
     webhooks: real.webhooks,
@@ -124,6 +128,22 @@ export function crearStripeFalso({ suscripciones = {} } = {}) {
         const s = suscripciones[id];
         if (!s) throw new Error(`No such subscription: ${id}`);
         return structuredClone(s);
+      },
+    },
+    prices: {
+      async retrieve(id) {
+        const precio = precios.get(id);
+        if (!precio) throw new Error(`No such price: ${id}`);
+        return structuredClone(precio);
+      },
+      async create(params, opciones = {}) {
+        const previo = precios.get(`idem:${opciones.idempotencyKey}`);
+        if (previo) return structuredClone(previo);
+        const precio = { id: `price_nuevo_${precios.size}`, active: true, type: 'recurring', ...structuredClone(params) };
+        precios.set(precio.id, precio);
+        precios.set(`idem:${opciones.idempotencyKey}`, precio);
+        creadas.precios.push({ params: structuredClone(params), opciones: structuredClone(opciones), precio: structuredClone(precio) });
+        return structuredClone(precio);
       },
     },
   };

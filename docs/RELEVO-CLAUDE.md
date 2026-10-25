@@ -258,3 +258,28 @@ El corte y sus verificaciones están documentados en `docs/PRODUCTION-READINESS-
 
 En la rama `feat/juegos-cierre-clase` se reemplazaron los juegos basados en marcas de tiempo por 5 juegos clásicos visuales (`rompecabezas` 3:4 de 6 piezas, `sopa` de letras clínica, `ahorcado` con monitor dental SVG, `memorama` 3D y `palabra` secreta), asignando 1 juego único por clase sin repetir dentro del mismo curso y garantizando 1 rompecabezas por cada uno de los 18 cursos. Se añadió la tarjeta `.lesson-closing-card` bajo el reproductor, la apertura automática al terminar la clase o pulsar «Siguiente clase →», el paquete visual del Curso 1 y los 18 prompts `3:4` en `docs/prompts-rompecabezas-3x4.md`. Todas las ramas locales fueron respaldadas en `origin` y documentadas en `docs/HANDOFF-MIGRACION-EQUIPO-2026-10-16.md`.
 
+## 2026-10-20 · Panel administrativo ampliado (trabajo local, no desplegado)
+
+Continuación en `C:\dev\02_CLIENTES\OdonTeck\odonteck-club-wt-herramientas`, rama local `feat/admin-completo-analytics`. No se ha hecho commit, push, merge, deploy ni operación sobre cuentas reales.
+
+- **Actividad:** los accesos explícitos de login por correo, alta y Google llaman `POST /sesion/inicio`. Firestore guarda UID y hasta 100 timestamps por persona; no guarda IP/dispositivo. El módulo `#/admin/actividad` agrega 30 días, franja horaria y días en `America/Mexico_City`, personas únicas hoy y últimas 30 entradas. Los registros previos a activar la ruta no se reconstruyen.
+- **Reinicio por persona:** GET de vista previa + POST con doble confirmación (correo exacto y diálogo) reinicia aprendizaje/onboarding. Elimina progreso, intentos, estado de Retos y entrevista/Brújula; quita solo las posposiciones de bienvenida/Brújula. Conserva perfil/identidad, pagos/membresía, curso gratis elegido, saldo/puntos/movimientos/logros/canjes, certificados, otras encuestas y accesos. No permite reiniciar la cuenta admin ni suma puntos al volver a responder. Operación queda auditada en `v2_admin_auditoria`.
+- **Precios:** `/admin/precios/:plan` consulta el Price base real, crea un Price recurrente MXN de importe entero y guarda su ID activo en `v2_config/general`; cuenta con idempotency key y auditoría. El Checkout prefiere este ID guardado sobre el de entorno. Suscripciones existentes conservan su precio, el Price anterior no se elimina. Ajustes avisa si el Checkout nuevo está bloqueado por falta de `STRIPE_WEBHOOK_SECRET`; configurar un precio no habilita por sí mismo las compras.
+- Verificación local de este corte: `npm run build` PASS (permanece aviso del chunk grande); `cd api && npm run check` PASS; `cd api && npm test -- --test-reporter=dot` PASS, 180 passed, 1 skipped, 0 failed. Los tests cubren privacidad de analítica, confirmación y alcance de reinicio, y precio Stripe nuevo/idempotencia/suscripción existente.
+- Antes de lanzar la telemetría, revisar/actualizar el aviso de privacidad del sitio para declarar que administración registra hasta 100 marcas de inicio de sesión por cuenta con fines de seguridad/analítica operacional.
+- Siguiente: revisión visual del admin, pruebas integrales de `Google sign-in`, despliegue separado de API y frontend solo con autorización nueva, smoke autenticado admin y verificación Stripe Test Mode. No editar cuentas reales ni subir cambios sin OK explícito.
+
+## 2026-10-20 · Preparación del corte de juegos, admin y Stripe (local, no publicado)
+
+El usuario pidió preparar el conjunto para producción. Estado verificado en este corte:
+
+- `HEAD` local `b8da860` coincide con `origin/main`; el árbol de trabajo conserva cambios no confirmados en admin/API, retorno de Stripe, juegos de clase, documentación y 18 imágenes originales. No se ha creado commit ni se han enviado estos cambios locales.
+- `npm run build`: PASS; permanece advertencia por chunks mayores de 500 kB.
+- `npm run audit:class-games`: PASS, 77/77 clases listas; 18 rompecabezas con imagen mapeada, tablero de 16 piezas, sin archivos faltantes.
+- `cd api && npm run check`: PASS; `cd api && npm test -- --test-reporter=dot`: 180 PASS, 1 omitido, 0 fallos.
+- `npm run audit:learning-packs`: 77 notas, 64 quizzes aprobados, 0 fichas PDF aprobadas y 0 paquetes completos. Las fichas requieren autoría, fuente/transcripción y revisión odontológica antes de anunciarse como descargables.
+- No se verificó un recorrido real de compra en Stripe Test Mode ni un smoke con cuenta administradora en producción. El valor del webhook no queda confirmado por ver sólo su nombre en Railway. El aviso de privacidad debe revisarse antes de activar el registro de inicios de sesión del admin.
+- No se comprobó un despliegue de Pages/Railway correspondiente a `b8da860`; el último estado de producción anotado arriba es histórico y no demuestra que este commit esté activo.
+
+Decisión operativa: no publicar el árbol completo todavía. Antes del corte, hacer revisión visual del admin, probar Google sign-in y la compra/retorno con Stripe Test Mode, actualizar el aviso de privacidad, y confirmar Pages/Railway contra el commit objetivo. No cambiar datos de miembros reales. Separar las fichas PDF clínicas del lanzamiento si todavía no están aprobadas.
+

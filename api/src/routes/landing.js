@@ -11,36 +11,48 @@ const imagen = (valor) => typeof valor === 'string' && /^\/(?!\/)/.test(valor) ?
 export function rutasLanding(ctx) {
   const r = express.Router();
   let preciosStripe = null;
-  let preciosPendientes = null;
+  const preciosPendientes = new Map();
 
   async function planesConfirmados(config) {
+    const ids = Object.fromEntries(['mensual', 'anual'].map((plan) => [
+      plan,
+      config?.[plan === 'mensual' ? 'stripePriceMensual' : 'stripePriceAnual'] || ctx.config.stripePrices?.[plan] || '',
+    ]));
+    const llavePrecios = `${ids.mensual}|${ids.anual}`;
     const guardados = {
       mensual: importe(config?.precios?.mensual),
       anual: importe(config?.precios?.anual),
     };
     if (!ctx.stripe?.prices?.retrieve) return guardados;
-    if (!preciosStripe || Date.now() - preciosStripe.ts > 60_000) {
-      preciosPendientes ??= Promise.all(['mensual', 'anual'].map(async (plan) => {
-        const id = ctx.config.stripePrices?.[plan];
-        if (!id) return [plan, null];
-        try {
-          const precio = await ctx.stripe.prices.retrieve(id);
-          const intervalo = plan === 'mensual' ? 'month' : 'year';
-          const valido = precio.active === true && precio.currency === 'mxn' && precio.type === 'recurring'
-            && precio.recurring?.interval === intervalo && precio.recurring?.interval_count === 1
-            && importe(precio.unit_amount) !== null;
-          return [plan, valido ? precio.unit_amount / 100 : null];
-        } catch {
-          return [plan, null];
-        }
-      })).then((entradas) => {
-        preciosStripe = { ts: Date.now(), planes: Object.fromEntries(entradas) };
-      }).finally(() => { preciosPendientes = null; });
-      await preciosPendientes;
+    let cache = preciosStripe;
+    if (!preciosStripe || preciosStripe.llave !== llavePrecios || Date.now() - preciosStripe.ts > 60_000) {
+      let pendiente = preciosPendientes.get(llavePrecios);
+      if (!pendiente) {
+        pendiente = Promise.all(['mensual', 'anual'].map(async (plan) => {
+          const id = ids[plan];
+          if (!id) return [plan, null];
+          try {
+            const precio = await ctx.stripe.prices.retrieve(id);
+            const intervalo = plan === 'mensual' ? 'month' : 'year';
+            const valido = precio.active === true && precio.currency === 'mxn' && precio.type === 'recurring'
+              && precio.recurring?.interval === intervalo && precio.recurring?.interval_count === 1
+              && importe(precio.unit_amount) !== null;
+            return [plan, valido ? precio.unit_amount / 100 : null];
+          } catch {
+            return [plan, null];
+          }
+        })).then((entradas) => {
+          const cache = { ts: Date.now(), llave: llavePrecios, planes: Object.fromEntries(entradas) };
+          preciosStripe = cache;
+          return cache;
+        }).finally(() => { preciosPendientes.delete(llavePrecios); });
+        preciosPendientes.set(llavePrecios, pendiente);
+      }
+      cache = await pendiente;
     }
     return {
-      mensual: preciosStripe.planes.mensual ?? guardados.mensual,
-      anual: preciosStripe.planes.anual ?? guardados.anual,
+      mensual: cache.planes.mensual ?? guardados.mensual,
+      anual: cache.planes.anual ?? guardados.anual,
     };
   }
 

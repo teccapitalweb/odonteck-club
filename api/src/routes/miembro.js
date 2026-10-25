@@ -73,6 +73,26 @@ export function rutasMiembro(ctx) {
   const auth = requireAuth(ctx);
   const { db } = ctx;
 
+  // Telemetría mínima de inicio de sesión: solo UID y hasta 100 marcas de tiempo.
+  // No se guardan IP, agente de usuario ni identificadores del dispositivo.
+  r.post('/sesion/inicio', auth, h(async (req, res) => {
+    const uid = req.usuario.uid;
+    const ref = db.collection(COL.sesionesAcceso).doc(uid);
+    const ahora = ctx.now();
+    const iso = ahora.toISOString();
+    const resultado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const anterior = snap.exists ? snap.data() : {};
+      const sesiones = Array.isArray(anterior.sesiones) ? anterior.sesiones : [];
+      const ultima = aMillis(sesiones.at(-1));
+      // Evita duplicados por doble submit/reintento sin confundir cada recarga con un login.
+      if (ultima !== null && ahora.getTime() - ultima < 60_000) return { registrado: false };
+      tx.set(ref, { uid, sesiones: [...sesiones, iso].slice(-100), ultimoInicio: iso, actualizado: iso });
+      return { registrado: true };
+    });
+    res.status(resultado.registrado ? 201 : 200).json(resultado);
+  }));
+
   async function sincronizarRecompensas(usuario) {
     const [progresoSnap, intentosSnap, respuestasSnap, foroSnap, retos, actual, membresia] = await Promise.all([
       db.collection(COL.progreso).where('uid', '==', usuario.uid).get(),
