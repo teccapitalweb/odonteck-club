@@ -13,6 +13,7 @@ import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/
 import { DIA_MS, aMillis } from '../lib/fechas.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
+import { leerCatalogoRecompensas } from '../lib/recompensas-catalogo.js';
 import { materialOficialPorId, materialesOficialesComoProximamente } from '../lib/materiales-oficiales.js';
 import {
   estadoRetosPublico,
@@ -205,9 +206,11 @@ export function rutasMiembro(ctx) {
 
   // ---------- Puntos, logros y recompensas ----------
   r.get('/recompensas/resumen', auth, h(async (req, res) => {
-    const [{ estado, membresia }, materialesSnap] = await Promise.all([
+    const [{ estado, membresia }, materialesSnap, catalogo, canjesSnap] = await Promise.all([
       sincronizarRecompensas(req.usuario),
       db.collection(COL.materiales).get(),
+      leerCatalogoRecompensas(db),
+      db.collection(COL.recompensasCanjes).where('uid','==',req.usuario.uid).get(),
     ]);
     // Después de sincronizar, para que aparezcan los movimientos que se acaban de otorgar.
     const movimientosSnap = await db.collection(COL.recompensasMovimientos).where('uid', '==', req.usuario.uid).get();
@@ -223,7 +226,10 @@ export function rutasMiembro(ctx) {
       gastados: estado.gastados,
       contadores: estado.contadores,
       logros: logrosPublicos(estado),
-      recompensas: catalogoRecompensas(estado, membresia.esVip, materialesDisponibles),
+      moneda: { nombre: 'OdonCoins', simbolo: 'OC', equivalenciaPunto: 1 },
+      recompensas: catalogoRecompensas(estado, membresia.esVip, materialesDisponibles, catalogo, canjesSnap.docs.map(d=>d.data())),
+      personalizacion: estado.personalizacion,
+      canjes: canjesSnap.docs.map(d=>{const c=d.data();return {id:d.id,recompensaId:c.recompensaId,titulo:c.titulo,puntos:c.puntos,estatus:c.estatus,solicitado:c.solicitado,nota:c.nota??null,plazo:c.plazo??null};}).sort((a,b)=>String(b.solicitado).localeCompare(String(a.solicitado))),
       movimientos,
       notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
       actualizado: estado.actualizado,
@@ -233,7 +239,9 @@ export function rutasMiembro(ctx) {
   r.post('/recompensas/canjear', auth, h(async (req, res) => {
     const { membresia } = await sincronizarRecompensas(req.usuario);
     const recompensaId = slug(cuerpo(req).recompensaId, { campo: 'recompensaId' });
-    const resultado = await canjearRecompensa(ctx, COL, req.usuario, recompensaId, membresia.esVip);
+    const precioEsperado=cuerpo(req).precioEsperado;
+    if(precioEsperado!==undefined&&(!Number.isInteger(precioEsperado)||precioEsperado<1))throw invalido('El importe de confirmación no es válido.');
+    const resultado = await canjearRecompensa(ctx, COL, req.usuario, recompensaId, membresia.esVip, precioEsperado);
     res.status(201).json({
       saldo: resultado.estado.saldo,
       recompensa: resultado.recompensa,

@@ -1,0 +1,1417 @@
+{
+  "agenda-semanal": {
+    "titulo": "Agenda semanal",
+    "objetivo": "Distribuye tus sesiones de aprendizaje y deja tiempo para repasar.",
+    "secciones": [
+      {
+        "titulo": "Prioridades de la semana",
+        "columnas": [
+          "Objetivo",
+          "Por qué importa",
+          "Resultado esperado"
+        ],
+        "filas": 3
+      },
+      {
+        "titulo": "Bloques de estudio",
+        "columnas": [
+          "Día",
+          "Horario",
+          "Tema",
+          "Actividad",
+          "Completado"
+        ],
+        "filas": 7
+      },
+      {
+        "titulo": "Cierre semanal",
+        "columnas": [
+          "Qué aprendí",
+          "Qué ajustaré",
+          "Siguiente paso"
+        ],
+        "filas": 3
+      }
+    ],
+    "consejos": [
+      "Elige tres prioridades alcanzables.",
+      "Reserva tiempo para practicar sin consultar tus apuntes.",
+      "Revisa al final de la semana qué bloques sí funcionaron."
+    ]
+  },
+  "planificador-mensual": {
+    "titulo": "Planificador mensual",
+    "objetivo": "Organiza un mes de estudio con hitos y revisiones semanales.",
+    "secciones": [
+      {
+        "titulo": "Meta del mes",
+        "columnas": [
+          "Meta",
+          "Evidencia de avance",
+          "Fecha límite"
+        ],
+        "filas": 3
+      },
+      {
+        "titulo": "Plan por semana",
+        "columnas": [
+          "Semana",
+          "Contenido",
+          "Entregable",
+          "Revisión"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Balance",
+        "columnas": [
+          "Avance",
+          "Dificultad",
+          "Ajuste para el próximo mes"
+        ],
+        "filas": 3
+      }
+    ],
+    "consejos": [
+      "Divide una meta grande en entregables pequeños.",
+      "Deja margen para imprevistos."
+    ]
+  },
+  "calendario-de-evaluaciones": {
+    "titulo": "Calendario de evaluaciones",
+    "objetivo": "Prepara cada evaluación con fechas, temas y ensayos de práctica.",
+    "secciones": [
+      {
+        "titulo": "Evaluaciones",
+        "columnas": [
+          "Materia",
+          "Fecha",
+          "Temas",
+          "Formato",
+          "Prioridad"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Preparación",
+        "columnas": [
+          "Evaluación",
+          "Primera revisión",
+          "Práctica",
+          "Repaso final"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Resultados",
+        "columnas": [
+          "Evaluación",
+          "Resultado",
+          "Tema por reforzar"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Planea desde la fecha de la evaluación hacia atrás.",
+      "Registra dudas para consultarlas con tu docente."
+    ]
+  },
+  "plantilla-de-repaso-espaciado": {
+    "titulo": "Plantilla de repaso espaciado",
+    "objetivo": "Programa revisiones sucesivas según lo que recuerdes de cada tema.",
+    "secciones": [
+      {
+        "titulo": "Tarjetas de repaso",
+        "columnas": [
+          "Tema",
+          "Pregunta de recuperación",
+          "Fuente",
+          "Dificultad"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Seguimiento",
+        "columnas": [
+          "Tema",
+          "Primer repaso",
+          "Segundo repaso",
+          "Tercer repaso",
+          "Próxima fecha"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Dudas pendientes",
+        "columnas": [
+          "Pregunta",
+          "Dónde verificar",
+          "Estado"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Intenta recordar antes de abrir la fuente.",
+      "Ajusta los intervalos según tu desempeño, sin convertirlos en una obligación rígida."
+    ]
+  },
+  "bitacora-de-lecturas": {
+    "titulo": "Bitácora de lecturas",
+    "objetivo": "Conserva referencias, ideas y preguntas de tus lecturas.",
+    "secciones": [
+      {
+        "titulo": "Referencias",
+        "columnas": [
+          "Título",
+          "Autor",
+          "Año",
+          "Enlace o DOI"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Notas de lectura",
+        "columnas": [
+          "Referencia",
+          "Idea central",
+          "Evidencia",
+          "Limitaciones"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Preguntas",
+        "columnas": [
+          "Pregunta",
+          "Fuente para contrastar",
+          "Seguimiento"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Distingue las ideas del autor de tus interpretaciones.",
+      "Añade página o sección cuando cites."
+    ]
+  },
+  "mapa-conceptual-editable": {
+    "titulo": "Mapa conceptual editable",
+    "objetivo": "Construye relaciones entre conceptos y comprueba cómo se conectan.",
+    "secciones": [
+      {
+        "titulo": "Concepto central",
+        "columnas": [
+          "Tema",
+          "Pregunta principal",
+          "Alcance"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Nodos y relaciones",
+        "columnas": [
+          "Concepto A",
+          "Relación",
+          "Concepto B",
+          "Fuente"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Síntesis",
+        "columnas": [
+          "Conexión importante",
+          "Ejemplo",
+          "Duda"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Usa verbos concretos para describir cada relación.",
+      "Reorganiza el mapa después de contrastarlo con tus fuentes."
+    ]
+  },
+  "cuaderno-de-apuntes": {
+    "titulo": "Cuaderno de apuntes",
+    "objetivo": "Toma notas organizadas con preguntas de recuperación y una síntesis propia.",
+    "secciones": [
+      {
+        "titulo": "Referencia de la sesión",
+        "columnas": [
+          "Curso",
+          "Clase",
+          "Fecha",
+          "Fuente"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Apuntes",
+        "columnas": [
+          "Pregunta o pista",
+          "Nota",
+          "Marca de tiempo"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Síntesis y acción",
+        "columnas": [
+          "Resumen propio",
+          "Duda por resolver",
+          "Próximo repaso"
+        ],
+        "filas": 3
+      }
+    ],
+    "consejos": [
+      "Escribe con tus palabras.",
+      "Deja las dudas visibles para volver a ellas."
+    ]
+  },
+  "matriz-de-prioridades": {
+    "titulo": "Matriz de prioridades",
+    "objetivo": "Decide qué estudiar primero según fecha, dificultad y relevancia.",
+    "secciones": [
+      {
+        "titulo": "Pendientes",
+        "columnas": [
+          "Actividad",
+          "Fecha",
+          "Impacto",
+          "Esfuerzo",
+          "Prioridad"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Plan de acción",
+        "columnas": [
+          "Prioridad",
+          "Primer paso",
+          "Tiempo reservado",
+          "Estado"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Prioriza lo que tenga una fecha cercana y un objetivo claro.",
+      "Divide las tareas que no caben en una sesión."
+    ]
+  },
+  "seguimiento-de-metas-de-90-dias": {
+    "titulo": "Seguimiento de metas de 90 días",
+    "objetivo": "Da seguimiento a tres meses de objetivos con entregables verificables.",
+    "secciones": [
+      {
+        "titulo": "Objetivos",
+        "columnas": [
+          "Objetivo",
+          "Situación inicial",
+          "Evidencia final"
+        ],
+        "filas": 3
+      },
+      {
+        "titulo": "Hitos",
+        "columnas": [
+          "Periodo",
+          "Entregable",
+          "Fecha",
+          "Estado"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Revisión quincenal",
+        "columnas": [
+          "Fecha",
+          "Avance",
+          "Obstáculo",
+          "Ajuste"
+        ],
+        "filas": 6
+      }
+    ],
+    "consejos": [
+      "Define cómo reconocerás el avance.",
+      "Revisa tu plan cada dos semanas."
+    ]
+  },
+  "organizador-de-congresos": {
+    "titulo": "Organizador de congresos",
+    "objetivo": "Planifica sesiones, contactos y aprendizajes de un congreso.",
+    "secciones": [
+      {
+        "titulo": "Antes de asistir",
+        "columnas": [
+          "Evento",
+          "Fechas",
+          "Objetivo",
+          "Pendientes"
+        ],
+        "filas": 2
+      },
+      {
+        "titulo": "Agenda",
+        "columnas": [
+          "Sesión",
+          "Horario",
+          "Lugar",
+          "Pregunta para el ponente"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Después del evento",
+        "columnas": [
+          "Aprendizaje",
+          "Referencia",
+          "Acción",
+          "Fecha"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Selecciona sesiones según tus objetivos.",
+      "Registra contactos solo con su consentimiento."
+    ]
+  },
+  "cv-editable": {
+    "titulo": "CV editable",
+    "objetivo": "Prepara un currículum claro con experiencia, formación y resultados verificables.",
+    "secciones": [
+      {
+        "titulo": "Datos profesionales",
+        "columnas": [
+          "Nombre",
+          "Título profesional real",
+          "Ciudad",
+          "Contacto"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Perfil",
+        "columnas": [
+          "Resumen profesional",
+          "Áreas de interés"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Experiencia",
+        "columnas": [
+          "Puesto",
+          "Organización",
+          "Periodo",
+          "Responsabilidades y resultados"
+        ],
+        "filas": 4
+      },
+      {
+        "titulo": "Formación",
+        "columnas": [
+          "Programa",
+          "Institución",
+          "Fecha",
+          "Documento de respaldo"
+        ],
+        "filas": 4
+      },
+      {
+        "titulo": "Competencias",
+        "columnas": [
+          "Competencia",
+          "Evidencia",
+          "Nivel declarado"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Incluye solo credenciales que puedas acreditar.",
+      "Adapta el resumen a la oportunidad.",
+      "Evita datos de pacientes y contactos de terceros sin permiso."
+    ]
+  },
+  "portafolio-profesional": {
+    "titulo": "Portafolio profesional",
+    "objetivo": "Presenta proyectos propios y sus resultados en un dossier editable.",
+    "secciones": [
+      {
+        "titulo": "Presentación",
+        "columnas": [
+          "Nombre",
+          "Enfoque profesional",
+          "Contacto"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Proyectos",
+        "columnas": [
+          "Proyecto",
+          "Objetivo",
+          "Mi participación",
+          "Resultado",
+          "Enlace autorizado"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Reflexión",
+        "columnas": [
+          "Proyecto",
+          "Qué aprendí",
+          "Próxima mejora"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Aclara tu participación en trabajos de equipo.",
+      "Usa ejemplos anonimizados y material con permiso de publicación."
+    ]
+  },
+  "carta-de-presentacion": {
+    "titulo": "Carta de presentación",
+    "objetivo": "Estructura una carta específica para una oportunidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Destinatario",
+        "columnas": [
+          "Organización",
+          "Puesto",
+          "Persona de contacto",
+          "Fecha"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Borrador de carta",
+        "columnas": [
+          "Apertura y motivo",
+          "Experiencia pertinente",
+          "Aporte propuesto",
+          "Cierre"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Revisión",
+        "columnas": [
+          "Requisito de la vacante",
+          "Evidencia propia",
+          "Verificado"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Evita frases genéricas: conecta tu experiencia con la oportunidad.",
+      "Verifica nombres y datos antes de enviarla."
+    ]
+  },
+  "biografia-profesional": {
+    "titulo": "Biografía profesional",
+    "objetivo": "Redacta versiones breve y extendida de tu presentación profesional.",
+    "secciones": [
+      {
+        "titulo": "Base",
+        "columnas": [
+          "Nombre",
+          "Formación verificada",
+          "Enfoque",
+          "Experiencia relevante"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Versiones",
+        "columnas": [
+          "Uso",
+          "Extensión objetivo",
+          "Texto"
+        ],
+        "filas": 3
+      },
+      {
+        "titulo": "Control editorial",
+        "columnas": [
+          "Dato",
+          "Fuente o respaldo",
+          "Revisado"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Prepara una versión para tu perfil y otra para presentaciones.",
+      "Describe tu trayectoria sin prometer resultados clínicos."
+    ]
+  },
+  "propuesta-de-proyecto-docente": {
+    "titulo": "Propuesta de proyecto docente",
+    "objetivo": "Organiza objetivos, actividades y evaluación de un proyecto educativo.",
+    "secciones": [
+      {
+        "titulo": "Contexto",
+        "columnas": [
+          "Público",
+          "Necesidad",
+          "Alcance",
+          "Duración"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Diseño",
+        "columnas": [
+          "Objetivo de aprendizaje",
+          "Actividad",
+          "Recurso",
+          "Evidencia de aprendizaje"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Operación",
+        "columnas": [
+          "Tarea",
+          "Responsable",
+          "Fecha",
+          "Recurso necesario"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Evaluación",
+        "columnas": [
+          "Indicador",
+          "Cómo se observa",
+          "Momento de revisión"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Relaciona cada actividad con un objetivo.",
+      "Identifica el material que requiere revisión académica."
+    ]
+  },
+  "presentacion-profesional-editable": {
+    "titulo": "Presentación profesional editable",
+    "objetivo": "Planea una presentación con una idea central por diapositiva.",
+    "secciones": [
+      {
+        "titulo": "Brief",
+        "columnas": [
+          "Audiencia",
+          "Objetivo",
+          "Duración",
+          "Mensaje principal"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Guion de diapositivas",
+        "columnas": [
+          "Número",
+          "Título",
+          "Idea central",
+          "Visual autorizado",
+          "Notas"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Ensayo",
+        "columnas": [
+          "Tiempo real",
+          "Transición por mejorar",
+          "Ajuste"
+        ],
+        "filas": 3
+      }
+    ],
+    "consejos": [
+      "Reduce el texto y explica las ideas oralmente.",
+      "Cita tus fuentes y revisa la legibilidad."
+    ]
+  },
+  "guia-de-preparacion-para-entrevistas": {
+    "titulo": "Guía de preparación para entrevistas",
+    "objetivo": "Prepara respuestas basadas en experiencias y preguntas para la organización.",
+    "secciones": [
+      {
+        "titulo": "Oportunidad",
+        "columnas": [
+          "Puesto",
+          "Requisitos",
+          "Mi evidencia",
+          "Pregunta pendiente"
+        ],
+        "filas": 4
+      },
+      {
+        "titulo": "Experiencias",
+        "columnas": [
+          "Situación",
+          "Tarea",
+          "Acción propia",
+          "Resultado"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Ensayo",
+        "columnas": [
+          "Pregunta",
+          "Respuesta breve",
+          "Ajuste"
+        ],
+        "filas": 6
+      }
+    ],
+    "consejos": [
+      "Usa ejemplos reales.",
+      "También pregunta por responsabilidades, acompañamiento y condiciones del puesto."
+    ]
+  },
+  "organizador-de-postulaciones": {
+    "titulo": "Organizador de postulaciones",
+    "objetivo": "Controla requisitos y fechas de tus postulaciones a programas de formación.",
+    "secciones": [
+      {
+        "titulo": "Programas",
+        "columnas": [
+          "Programa",
+          "Institución",
+          "Fecha límite",
+          "Enlace oficial"
+        ],
+        "filas": 5
+      },
+      {
+        "titulo": "Requisitos",
+        "columnas": [
+          "Programa",
+          "Documento",
+          "Estado",
+          "Fecha de preparación"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Seguimiento",
+        "columnas": [
+          "Programa",
+          "Envío",
+          "Respuesta",
+          "Siguiente acción"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Confirma requisitos en la institución correspondiente.",
+      "No guardes contraseñas ni documentos personales de otras personas."
+    ]
+  },
+  "mapa-de-objetivos-profesionales": {
+    "titulo": "Mapa de objetivos profesionales",
+    "objetivo": "Conecta tus intereses con acciones concretas de desarrollo.",
+    "secciones": [
+      {
+        "titulo": "Punto de partida",
+        "columnas": [
+          "Interés",
+          "Fortaleza",
+          "Evidencia",
+          "Área por desarrollar"
+        ],
+        "filas": 4
+      },
+      {
+        "titulo": "Opciones",
+        "columnas": [
+          "Opción",
+          "Qué exige",
+          "Qué me atrae",
+          "Información pendiente"
+        ],
+        "filas": 4
+      },
+      {
+        "titulo": "Acciones",
+        "columnas": [
+          "Objetivo",
+          "Primer paso",
+          "Apoyo necesario",
+          "Fecha"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Trata el mapa como una herramienta de reflexión.",
+      "Revisa tus opciones con docentes o mentores que conozcan tu contexto."
+    ]
+  },
+  "dossier-de-servicios": {
+    "titulo": "Dossier de servicios",
+    "objetivo": "Describe tus servicios, su alcance y la forma de contactar contigo.",
+    "secciones": [
+      {
+        "titulo": "Identidad",
+        "columnas": [
+          "Nombre profesional",
+          "Contacto",
+          "Ubicación",
+          "Horario"
+        ],
+        "filas": 1
+      },
+      {
+        "titulo": "Servicios",
+        "columnas": [
+          "Servicio",
+          "Alcance",
+          "Modalidad",
+          "Información para solicitarlo"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Preguntas frecuentes",
+        "columnas": [
+          "Pregunta",
+          "Respuesta",
+          "Fuente de la información"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Describe únicamente servicios que estés autorizado a ofrecer.",
+      "No incluyas garantías de resultados ni testimonios sin permiso."
+    ]
+  },
+  "agenda-administrativa": {
+    "titulo": "Agenda administrativa",
+    "objetivo": "Organiza agenda administrativa con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Día",
+          "Horario",
+          "Actividad administrativa",
+          "Responsable",
+          "Estado"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Reservas y pendientes",
+        "columnas": [
+          "Pendiente",
+          "Fecha",
+          "Responsable"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "inventario-de-insumos": {
+    "titulo": "Inventario de insumos",
+    "objetivo": "Organiza inventario de insumos con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Artículo",
+          "Unidad",
+          "Existencia",
+          "Mínimo interno",
+          "Ubicación"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Reposición",
+        "columnas": [
+          "Artículo",
+          "Cantidad",
+          "Fecha solicitada"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "comparador-de-proveedores": {
+    "titulo": "Comparador de proveedores",
+    "objetivo": "Organiza comparador de proveedores con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Proveedor",
+          "Producto",
+          "Cotización",
+          "Vigencia",
+          "Entrega"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Criterios",
+        "columnas": [
+          "Criterio",
+          "Importancia",
+          "Observaciones"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "registro-de-gastos": {
+    "titulo": "Registro de gastos",
+    "objetivo": "Organiza registro de gastos con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Fecha",
+          "Concepto",
+          "Categoría",
+          "Importe",
+          "Comprobante"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Revisión",
+        "columnas": [
+          "Periodo",
+          "Total revisado",
+          "Observación"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "calendario-de-mantenimiento": {
+    "titulo": "Calendario de mantenimiento",
+    "objetivo": "Organiza calendario de mantenimiento con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Equipo",
+          "Servicio indicado por fabricante",
+          "Última fecha",
+          "Próxima fecha",
+          "Responsable"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Seguimiento",
+        "columnas": [
+          "Orden",
+          "Proveedor",
+          "Estado"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "organizador-de-turnos": {
+    "titulo": "Organizador de turnos",
+    "objetivo": "Organiza organizador de turnos con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Persona",
+          "Rol",
+          "Día",
+          "Entrada",
+          "Salida"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Coberturas",
+        "columnas": [
+          "Fecha",
+          "Necesidad",
+          "Acuerdo"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "tablero-de-tareas": {
+    "titulo": "Tablero de tareas",
+    "objetivo": "Organiza tablero de tareas con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Tarea",
+          "Responsable",
+          "Fecha",
+          "Prioridad",
+          "Estado"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Bloqueos",
+        "columnas": [
+          "Tarea",
+          "Bloqueo",
+          "Siguiente paso"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "lista-de-apertura-y-cierre-administrativo": {
+    "titulo": "Lista de apertura y cierre administrativo",
+    "objetivo": "Organiza lista de apertura y cierre administrativo con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Momento",
+          "Tarea administrativa",
+          "Responsable",
+          "Completado"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Incidencias",
+        "columnas": [
+          "Fecha",
+          "Situación",
+          "Acción"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "registro-de-reuniones": {
+    "titulo": "Registro de reuniones",
+    "objetivo": "Organiza registro de reuniones con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Fecha",
+          "Objetivo",
+          "Participantes",
+          "Temas"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Acuerdos",
+        "columnas": [
+          "Acuerdo",
+          "Responsable",
+          "Fecha de seguimiento"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "panel-de-indicadores-operativos": {
+    "titulo": "Panel de indicadores operativos",
+    "objetivo": "Organiza panel de indicadores operativos con una plantilla editable y un registro de seguimiento.",
+    "secciones": [
+      {
+        "titulo": "Registro principal",
+        "columnas": [
+          "Indicador",
+          "Definición",
+          "Periodo",
+          "Meta interna",
+          "Resultado"
+        ],
+        "filas": 8
+      },
+      {
+        "titulo": "Análisis",
+        "columnas": [
+          "Indicador",
+          "Cambio observado",
+          "Acción"
+        ],
+        "filas": 5
+      }
+    ],
+    "consejos": [
+      "Personaliza los campos a la operación de tu equipo.",
+      "Usa esta plantilla para organización administrativa; no sustituye registros clínicos, contables o normativos.",
+      "No registres datos identificables de pacientes."
+    ]
+  },
+  "tarjeta-con-qr": {
+    "titulo": "Tarjeta profesional · espacio para QR",
+    "objetivo": "Organiza la información de tu tarjeta y el enlace que usarás en un código QR. Esta plantilla no genera el código QR.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Nombre",
+          "Enlace público de contacto",
+          "Mensaje",
+          "Ubicación del QR"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "firma-de-correo": {
+    "titulo": "Firma de correo",
+    "objetivo": "Crea firma de correo con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Nombre",
+          "Cargo real",
+          "Teléfono profesional",
+          "Enlace",
+          "Aviso breve"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "papeleria-personalizada": {
+    "titulo": "Papelería personalizada",
+    "objetivo": "Crea papelería personalizada con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Marca",
+          "Datos profesionales",
+          "Encabezado",
+          "Pie de página"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "plantillas-de-carruseles": {
+    "titulo": "Plantillas de carruseles",
+    "objetivo": "Crea plantillas de carruseles con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Diapositiva",
+          "Mensaje",
+          "Visual propio",
+          "Llamado a la acción"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "kit-de-bienvenida": {
+    "titulo": "Kit de bienvenida",
+    "objetivo": "Crea kit de bienvenida con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Destinatario",
+          "Mensaje de bienvenida",
+          "Información de contacto",
+          "Siguiente paso"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "portadas-para-redes": {
+    "titulo": "Portadas para redes",
+    "objetivo": "Crea portadas para redes con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Canal",
+          "Título",
+          "Subtítulo",
+          "Visual autorizado",
+          "Medidas requeridas"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "anuncios-de-horarios": {
+    "titulo": "Anuncios de horarios",
+    "objetivo": "Crea anuncios de horarios con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Periodo",
+          "Días",
+          "Horario",
+          "Canal de contacto"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "calendario-de-publicaciones": {
+    "titulo": "Calendario de publicaciones",
+    "objetivo": "Crea calendario de publicaciones con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Fecha",
+          "Canal",
+          "Tema no clínico",
+          "Formato",
+          "Estado"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "guion-para-video-de-presentacion": {
+    "titulo": "Guion para video de presentación",
+    "objetivo": "Crea guion para video de presentación con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Escena",
+          "Qué decir",
+          "Qué mostrar",
+          "Duración"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  },
+  "presentacion-del-consultorio": {
+    "titulo": "Presentación del consultorio",
+    "objetivo": "Crea presentación del consultorio con una estructura editable para tu identidad profesional.",
+    "secciones": [
+      {
+        "titulo": "Diseño y contenido",
+        "columnas": [
+          "Sección",
+          "Información",
+          "Imagen autorizada",
+          "Contacto"
+        ],
+        "filas": 6
+      },
+      {
+        "titulo": "Lista de revisión",
+        "columnas": [
+          "Elemento",
+          "Revisado",
+          "Ajuste pendiente"
+        ],
+        "filas": 4
+      }
+    ],
+    "consejos": [
+      "Sustituye los campos por información real y autorizada.",
+      "Usa imágenes propias o con licencia.",
+      "Evita datos de pacientes y afirmaciones clínicas no revisadas."
+    ]
+  }
+}

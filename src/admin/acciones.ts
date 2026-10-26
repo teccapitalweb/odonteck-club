@@ -1,7 +1,7 @@
 // Interacciones del panel de administración (formularios y botones).
 import { Datos, slug, imagenAWebp, type Curso, type Material, type Evento, type Quiz, type Pregunta } from '../core/datos';
 import { Comunidad } from '../core/comunidad';
-import { mensajeError } from '../core/auth';
+import { api, mensajeError } from '../core/auth';
 import { resumenEncuestasDemo } from '../core/encuestas';
 import {
   Admin, borrarCursoAdmin, borrarCursosAdmin, borrarEventoAdmin, borrarMaterialAdmin, borrarMaterialesAdmin,
@@ -175,6 +175,20 @@ export function instalarAccionesAdmin(toast: Toast) {
     const boton = (e as SubmitEvent).submitter as HTMLButtonElement | null;
     if (boton) boton.disabled = true;
     try {
+      if(tipo==='recompensa-buscar'){const p=new URLSearchParams();d.forEach((v,k)=>{if(String(v))p.set(k,String(v));});navigate(`/admin/recompensas?${p}`);return;}
+      if(tipo==='recompensa-config'||tipo==='recompensa-nueva'){
+        const payload:Record<string,unknown>={titulo:String(d.get('titulo')||''),descripcion:String(d.get('descripcion')||''),puntos:Number(d.get('puntos'))};
+        if(tipo==='recompensa-nueva'){payload.id=String(d.get('id'));payload.estado='proximamente';}
+        else{payload.estado=String(d.get('estado'));if(d.has('cupo')&&String(d.get('cupo'))!=='')payload.cupo=Number(d.get('cupo'));if(d.has('plazo'))payload.plazo=String(d.get('plazo'));if(d.has('instrucciones'))payload.instrucciones=String(d.get('instrucciones'));if(f.querySelector('[name=revisionProfesional]'))payload.revisionProfesional=d.get('revisionProfesional')==='on';}
+        await api(`/admin/recompensas${tipo==='recompensa-config'?`/${encodeURIComponent(f.dataset.id!)}`:''}`,{method:tipo==='recompensa-config'?'PATCH':'POST',json:payload});
+        toast('Recompensa guardada','coins');await cargarAdmin('/admin/recompensas',current().query,true);render();return;
+      }
+      if(tipo==='recompensa-resolver'){
+        const estatus=boton?.value;
+        if(!await confirmar({titulo:estatus==='cancelado'?'Cancelar y devolver OdonCoins':'Confirmar entrega',mensaje:estatus==='cancelado'?'El miembro recuperará sus monedas una sola vez.':'Confirma únicamente después de entregar la recompensa.',confirmar:estatus==='cancelado'?'Cancelar y devolver':'Marcar entregado',peligro:estatus==='cancelado'}))return;
+        await api(`/admin/recompensas/canjes/${encodeURIComponent(f.dataset.id!)}/resolver`,{method:'POST',json:{estatus,nota:String(d.get('nota')||'')}});
+        toast(estatus==='cancelado'?'Canje cancelado y OdonCoins devueltos':'Entrega confirmada','check');await cargarAdmin('/admin/recompensas',current().query,true);render();return;
+      }
       if (tipo === 'curso') {
         const c = cursoDesdeForm(f);
         if (!f.dataset.id && Datos.cursos().some((x) => x.id === c.id)) { toast('Ya existe un curso con ese título', 'alert-triangle'); return; }

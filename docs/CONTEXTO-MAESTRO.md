@@ -2,6 +2,24 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
+## 2026-10-26 · Tienda OdonCoins y primera tanda de 120 recompensas
+
+Implementación sobre main c436833 (PR #52, corrección del editor de perfil ya publicada). La moneda visible pasa a OdonCoins (OC), con equivalencia 1:1 y sin migrar ni reiniciar saldos, movimientos, logros o materiales existentes. Las reglas de obtención siguen iguales.
+
+Catálogo base en api/src/data/recompensas.json: 120 entradas únicas en 12 categorías. Hay 60 preparadas: nueve materiales aprobados existentes, Praxia por solicitud manual, seis marcos, cuatro portadas y 40 plantillas originales no clínicas. Las plantillas son HTML editables, descargables, imprimibles y funcionales sin conexión; las cuatro familias cubren estudio, carrera, administración y comunicación. No son cursos, asesorías ni herramientas interactivas. La tarjeta reserva espacio para un QR y no genera códigos.
+
+Las otras 60 propuestas permanecen Próximamente, sin canje ni descuento. Talleres, paquetes clínicos, acompañamiento, beneficios, herramientas futuras y premios físicos requieren contenido o capacidad real de entrega. Las propuestas clínicas exigen confirmación administrativa de revisión humana antes de habilitarse; no se generó ni publicó contenido clínico nuevo.
+
+La tienda ofrece búsqueda, categoría, orden, filtro de saldo, páginas de 18, detalle/confirmación con precio y saldo restante, colección y seguimiento. El servidor valida precio vigente y saldo en transacción, bloquea duplicados y reserva cupos. Descargas requieren propiedad de la recompensa. VIP conserva sus materiales incluidos; no obtiene automáticamente las nuevas plantillas y diseños. Un diseño canjeado se aplica o retira gratuitamente del directorio. Subir otra portada desactiva el diseño sin borrar su propiedad ni la imagen anterior al activar un diseño.
+
+Administración: /admin/recompensas permite crear propuestas manuales, cambiar precio/estado/cupos y definir responsable/plazo; requiere claim admin validado en vivo. Cancelar un canje manual pendiente devuelve sus OC y cupo exactamente una vez, sin bajar ganados. Un canje entregado no puede cancelarse por esa ruta. Cada recompensa admite un canje por miembro, incluso después de una cancelación; no se habilitaron compras repetidas.
+
+Firebase: nueva colección v2_recompensas_catalogo para ajustes y propuestas creadas por admin. Se inspeccionaron las reglas remotas: el cierre por defecto bloquea acceso directo a todas las colecciones v2 de recompensas. No se desplegaron reglas ni se alteraron membresías reales, Stripe, DNS o parámetros de facturación. Las pruebas autenticadas usan cuentas temporales identificadas y eliminadas al terminar.
+
+Verificación previa: build con API real, check y 212 pruebas API aprobadas (0 fallidas; 1 suite de emuladores omitida localmente). Prueba con Firebase real y backend/assets locales: gratis/VIP/admin, propiedad de archivos, canje y recarga, reglas REST denegadas, aplicación de marco, edición/guardado/reapertura de plantilla y cancelación administrativa con reembolso único. Escritorio 1440 y móvil 390 sin desbordamiento ni errores de página. El despliegue público se comprobará tras fusionar; esta sección no confunde esa prueba previa con producción.
+
+La reinstalación detectó body-parser vulnerable; se actualizó únicamente su entrada del lock a 1.20.9 (parche de GHSA-27r3-jxmh-p828). La auditoría npm ya no reporta vulnerabilidades. Reversión: revertir interfaz y API juntas, conservar las colecciones y saldos; no borrar canjes ni ajustes, y resolver solicitudes pendientes antes de retirar las rutas de entrega.
+
 ## Actualización · 2026-10-26 · Storage activo y persistencia verificada
 
 PR #50 y #51 están publicados; el último corte comprobado de límites es `aabaece`, Cloudflare run `40373181802` y Railway deployment `4f8e089a-cd0f-47f3-bc5d-9d9c2f40978e`. El usuario autorizó Blaze, delegó elegir cuenta y seleccionó alertas sobre 100 MXN/mes. Se activó y verificó la cuenta «Pago de Firebase» terminación 1F21EF, presupuesto exclusivo del proyecto con alertas de 50/80/100 MXN y bucket `club-odonteck.firebasestorage.app` en US-CENTRAL1. Reglas Storage publicadas tras CI aprobado; Firestore sin cambios. Las notas antiguas de falta de acceso/bucket son históricas.

@@ -89,7 +89,7 @@ export function shellHTML() {
           </div>
           <a class="account-quick__reward" href="#/recompensas">
             <span class="account-quick__reward-icon"><i data-lucide="gift" class="i"></i></span>
-            <div><span>Saldo para recompensas</span><strong><b data-account-points>${saldo}</b> puntos disponibles</strong><small>Canjéalos por libros y beneficios.</small></div>
+            <div><span>Tu monedero OdonCoins</span><strong><b data-account-points>${saldo}</b> OC disponibles</strong><small>Elige diseños, plantillas y beneficios.</small></div>
             <i data-lucide="chevron-right" class="i"></i>
           </a>
           <nav class="account-quick__links" aria-label="Accesos de cuenta">

@@ -5,6 +5,7 @@ import { Progreso } from '../core/progreso';
 import { Datos } from '../core/datos';
 import { Perfil } from '../core/perfil';
 import { Auth } from '../core/auth';
+import { claseDiseno } from '../ui/disenos-recompensa';
 import { iniciales, esc, placeholder, avatarUsuario } from '../ui/partials';
 import { envivoPanel } from './envivo';
 import { puntos } from '../core/logros';
@@ -245,8 +246,8 @@ function foroPanel(filtro: string | null, areaFiltro: string | null, hilos: Hilo
 const etiqueta = (v: string) => esc(v.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()));
 const listaCSV = (v: string[]) => esc(v.join(', '));
 
-function avatarProfesional(p: Pick<PerfilDirectorio, 'nombre' | 'foto'>, clase = '') {
-  return `<span class="network-avatar ${clase}"><span aria-hidden="true">${ini(p.nombre)}</span>${p.foto ? `<img src="${esc(p.foto)}" alt="Foto de ${esc(p.nombre)}" width="720" height="720" loading="lazy" decoding="async" data-avatar-image>` : ''}</span>`;
+function avatarProfesional(p: Pick<PerfilDirectorio, 'nombre' | 'foto' | 'personalizacion'>, clase = '') {
+  return `<span class="network-avatar ${clase} ${claseDiseno(p.personalizacion?.marco)}"><span aria-hidden="true">${ini(p.nombre)}</span>${p.foto ? `<img src="${esc(p.foto)}" alt="Foto de ${esc(p.nombre)}" width="720" height="720" loading="lazy" decoding="async" data-avatar-image>` : ''}</span>`;
 }
 
 const botonReportar = (tipo: 'perfil' | 'oportunidad', id: string, nombre: string) => `<button class="network-report" type="button" data-network-report data-type="${tipo}" data-id="${esc(id)}" data-name="${esc(nombre)}" aria-label="Denunciar ${tipo === 'perfil' ? 'perfil' : 'oportunidad'}"><i data-lucide="flag" class="i"></i></button>`;
@@ -334,8 +335,8 @@ export function perfilDirectorio(params: Record<string, string>) {
   return `<section class="dir-profile-page network-person--tone-${tono}">
     <a class="dir-back" href="#/directorio"><i data-lucide="arrow-left" class="i"></i>Volver al Directorio</a>
     <div class="dir-hero">
-      <div class="dir-hero__cover network-profile-sheet__cover ${p.banner ? 'has-banner' : ''}">
-        ${p.banner ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}" width="1600" height="560" decoding="async">` : ''}
+      <div class="dir-hero__cover network-profile-sheet__cover ${p.banner ? 'has-banner' : ''} ${claseDiseno(p.personalizacion?.portada)}">
+        ${p.banner && !claseDiseno(p.personalizacion?.portada) ? `<img src="${esc(p.banner)}" alt="Portada profesional de ${esc(p.nombre)}" width="1600" height="560" decoding="async">` : ''}
         <span><i data-lucide="badge-check" class="i"></i>Perfil profesional OdonTeck</span>
         ${esMio ? `<div class="dir-hero__edit"><label class="dir-chip-btn"><input type="file" accept="image/jpeg,image/png,image/webp" data-dir-banner-inline hidden><i data-lucide="image-up" class="i"></i>${p.banner ? 'Cambiar portada' : 'Agregar portada'}</label>${p.banner ? '<button type="button" class="dir-chip-btn" data-dir-banner-quitar><i data-lucide="image-minus" class="i"></i>Quitar</button>' : ''}</div>` : `<b>${etiqueta(p.disponibilidad[0] || 'conectar')}</b>`}
       </div>
@@ -459,10 +460,11 @@ function formularioPerfilDirectorio(data: ReturnType<typeof Directorio.get>) {
           <div><span class="eyebrow"><i data-lucide="panel-top" class="i"></i>Portada de tu perfil</span><h4>Dale identidad a tu trayectoria.</h4><p>Usa una imagen horizontal de tu consultorio, espacio de trabajo o una composición profesional sin datos de pacientes.</p><span><label class="btn btn--secondary btn--sm"><i data-lucide="image-up" class="i"></i>${data.miPerfil?.banner ? 'Cambiar portada' : 'Subir portada'}<input type="file" accept="image/jpeg,image/png,image/webp" data-network-banner-input hidden></label><button type="button" class="btn btn--ghost btn--sm" data-network-banner-remove ${data.miPerfil?.banner ? '' : 'hidden'}>Quitar</button></span></div>
         </section>
         <section class="network-photo-editor">
-          <div class="network-photo-editor__avatar" data-network-photo-frame><span data-network-photo-fallback>${ini(data.miPerfil?.nombre || Perfil.get().nombre)}</span>${data.miPerfil?.foto ? `<img src="${esc(data.miPerfil.foto)}" alt="Tu foto profesional" width="720" height="720" loading="lazy" decoding="async" data-network-photo-preview>` : '<img alt="Tu foto profesional" data-network-photo-preview hidden>'}<b><i data-lucide="camera" class="i"></i></b></div>
+          <div class="network-photo-editor__avatar ${claseDiseno(data.miPerfil?.personalizacion?.marco)}" data-network-photo-frame><span data-network-photo-fallback>${ini(data.miPerfil?.nombre || Perfil.get().nombre)}</span>${data.miPerfil?.foto ? `<img src="${esc(data.miPerfil.foto)}" alt="Tu foto profesional" width="720" height="720" loading="lazy" decoding="async" data-network-photo-preview>` : '<img alt="Tu foto profesional" data-network-photo-preview hidden>'}<b><i data-lucide="camera" class="i"></i></b></div>
           <div class="network-photo-editor__copy"><span class="eyebrow">Tu imagen profesional</span><h4>Una foto cercana inspira confianza.</h4><p>La recortamos al centro y la optimizamos automáticamente. JPG, PNG o WebP de hasta 8 MB.</p><div><label class="btn btn--secondary btn--sm"><i data-lucide="upload" class="i"></i>${data.miPerfil?.foto ? 'Cambiar foto' : 'Subir foto'}<input type="file" accept="image/jpeg,image/png,image/webp" data-network-photo-input hidden></label><button type="button" class="btn btn--ghost btn--sm" data-network-photo-remove ${data.miPerfil?.foto ? '' : 'hidden'}>Quitar</button></div></div>
           <span class="network-photo-editor__privacy"><i data-lucide="eye" class="i"></i>Visible en tu tarjeta del directorio</span>
         </section>
+        <p class="reward-note">${data.miPerfil?.personalizacion?.portada ? 'Tienes una portada de colección activa. Si subes una imagen aquí, se mostrará tu nueva imagen al guardar. ' : ''}<a href="#/recompensas?vista=coleccion">Administrar marcos y portadas de mi colección</a></p>
         <div class="network-form-heading"><span>01</span><div><h4>Identidad profesional</h4><p>Una introducción clara ayuda a que las conexiones adecuadas te encuentren.</p></div></div>
         <div class="network-form-grid">
           <label>Titular profesional<input class="input" name="titular" value="${esc(data.miPerfil?.titular || '')}" required maxlength="100" placeholder="Odontóloga general · rehabilitación oral"></label>

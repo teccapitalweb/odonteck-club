@@ -5,6 +5,7 @@ import { h } from '../middleware/errores.js';
 import { COL, estadoMembresia, nombreVisible } from '../datos.js';
 import { conflicto, demasiadasSolicitudes, invalido, noConfigurado, noEncontrado, prohibido } from '../lib/errores.js';
 import { booleano, cuerpo, entero, idDocumento, listaDeTextos, sinIndefinidos, texto, textoRequerido, unoDe } from '../lib/validacion.js';
+import { normalizarEstadoRecompensas } from '../lib/recompensas.js';
 
 const ETAPAS = ['estudiante', 'general', 'especialista', 'docente', 'investigador', 'otro'];
 const MODALIDADES = ['presencial', 'remoto', 'hibrido'];
@@ -92,6 +93,7 @@ const perfilPublico = (p, uid) => ({
   anosExperiencia: p.anosExperiencia ?? null, idiomas: p.idiomas ?? [], experiencia: p.experiencia ?? [],
   formacion: p.formacion ?? [], credenciales: p.credenciales ?? [], actualizado: p.actualizado,
   documentos: (p.documentos ?? []).map(documentoPublico),
+  personalizacion: p.personalizacion ?? {},
   esMio: p.uid === uid,
 });
 
@@ -131,6 +133,7 @@ function validarPerfil(body, anterior, usuario, nombre, bucket) {
     banner: body.banner === null ? null : body.banner === 'propio' && bucket ? assetUrl(bucket, bannerPath(usuario.uid)) : anterior?.banner ?? null,
     // Los documentos solo cambian por sus rutas propias; guardar el perfil los conserva.
     documentos: anterior?.documentos ?? [],
+    personalizacion: anterior?.personalizacion ?? {},
   });
 }
 
@@ -288,15 +291,28 @@ export function rutasDirectorio(ctx) {
 
   r.put('/directorio/perfil', auth, h(async (req, res) => {
     const ref = ctx.db.collection(COL.directorioPerfiles).doc(req.usuario.uid);
-    const previo = await ref.get();
     const estado = await estadoMembresia(ctx, req.usuario);
     const nombre = await nombreVisible(ctx, req.usuario, estado.miembro);
     const body = cuerpo(req);
     if (body.foto === 'propia') await validarAssetSubido(ctx, req.usuario.uid, 'foto');
     if (body.banner === 'propio') await validarAssetSubido(ctx, req.usuario.uid, 'banner');
-    const datos = validarPerfil(body, previo.exists ? previo.data() : null, req.usuario, nombre, ctx.config.storageBucket);
-    const guardado = { ...datos, actualizado: ctx.now().toISOString() };
-    await ref.set(guardado);
+    const guardado = await ctx.db.runTransaction(async tx => {
+      const previo = await tx.get(ref);
+      const datos = validarPerfil(body, previo.exists ? previo.data() : null, req.usuario, nombre, ctx.config.storageBucket);
+      const ahora = ctx.now().toISOString();
+      // Una portada subida debe verse de inmediato; conserva el diseño comprado en la colección.
+      if (body.banner === 'propio' || body.banner === null) {
+        const eRef = ctx.db.collection(COL.recompensasEstado).doc(req.usuario.uid);
+        const eSnap = await tx.get(eRef);
+        datos.personalizacion = { ...datos.personalizacion, portada: null };
+        if (eSnap.exists) {
+          const e = normalizarEstadoRecompensas(eSnap.data(), req.usuario.uid);
+          e.personalizacion.portada = null; e.actualizado = ahora; tx.set(eRef, e);
+        }
+      }
+      const perfil = { ...datos, actualizado: ahora };
+      tx.set(ref, perfil); return perfil;
+    });
     res.json({ ...perfilPublico(guardado, req.usuario.uid), visible: guardado.visible });
   }));
 
@@ -369,8 +385,16 @@ export function rutasDirectorio(ctx) {
     if (!ctx.storage || !ctx.config.storageBucket) throw noConfigurado('El almacenamiento de portadas no está configurado en el servidor.');
     await ctx.storage.bucket(ctx.config.storageBucket).file(bannerPath(req.usuario.uid)).delete({ ignoreNotFound: true });
     const ref = ctx.db.collection(COL.directorioPerfiles).doc(req.usuario.uid);
-    const snap = await ref.get();
-    if (snap.exists) await ref.update({ banner: null, actualizado: ctx.now().toISOString() });
+    await ctx.db.runTransaction(async tx => {
+      const eRef = ctx.db.collection(COL.recompensasEstado).doc(req.usuario.uid);
+      const [snap, eSnap] = await tx.getAll(ref, eRef);
+      const ahora = ctx.now().toISOString();
+      if (snap.exists) tx.update(ref, { banner: null, 'personalizacion.portada': null, actualizado: ahora });
+      if (eSnap.exists) {
+        const e = normalizarEstadoRecompensas(eSnap.data(), req.usuario.uid);
+        e.personalizacion.portada = null; e.actualizado = ahora; tx.set(eRef, e);
+      }
+    });
     res.json({ ok: true });
   }));
 

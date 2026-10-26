@@ -2,6 +2,7 @@ import { api } from './auth';
 import { Datos } from './datos';
 
 export interface PerfilDirectorio {
+  personalizacion?: {marco?: string|null; portada?: string|null};
   uid: string; nombre: string; titular: string; etapa: string; especialidades: string[];
   ciudad: string; estado: string; modalidades: string[]; disponibilidad: string[];
   habilidades: string[]; bio: string; foto?: string | null; banner?: string | null;
