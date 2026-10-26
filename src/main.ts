@@ -1125,20 +1125,20 @@ document.addEventListener('click', async (e) => {
   if (el.closest('[data-network-photo-remove]')) {
     if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
     fotoDirectorioPendiente = null; quitarFotoDirectorio = true;
-    const dialog = el.closest<HTMLDialogElement>('dialog');
-    const preview = dialog?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
+    const form = el.closest<HTMLFormElement>('[data-network-profile-form]');
+    const preview = form?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
     if (preview) { preview.hidden = true; preview.removeAttribute('src'); }
-    const boton = dialog?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = true;
+    const boton = form?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = true;
     toast('La foto se quitará al guardar el perfil', 'image-minus'); return;
   }
   if (el.closest('[data-network-banner-remove]')) {
     if (bannerDirectorioPendiente) URL.revokeObjectURL(bannerDirectorioPendiente.preview);
     bannerDirectorioPendiente = null; quitarBannerDirectorio = true;
-    const dialog = el.closest<HTMLDialogElement>('dialog');
-    const preview = dialog?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
+    const form = el.closest<HTMLFormElement>('[data-network-profile-form]');
+    const preview = form?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
     if (preview) { preview.hidden = true; preview.removeAttribute('src'); }
-    dialog?.querySelector('[data-network-banner-frame]')?.classList.remove('has-banner');
-    const boton = dialog?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = true;
+    form?.querySelector('[data-network-banner-frame]')?.classList.remove('has-banner');
+    const boton = form?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = true;
     toast('La portada se quitará al guardar el perfil', 'image-minus'); return;
   }
   const agregarFila = el.closest<HTMLButtonElement>('[data-network-add-row]');
@@ -1401,11 +1401,12 @@ document.addEventListener('change', async (e) => {
       const preparada = await prepararFotoDirectorio(file);
       if (fotoDirectorioPendiente) URL.revokeObjectURL(fotoDirectorioPendiente.preview);
       fotoDirectorioPendiente = preparada; quitarFotoDirectorio = false;
-      const dialog = input.closest<HTMLDialogElement>('dialog');
-      const preview = dialog?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
+      const form = input.closest<HTMLFormElement>('[data-network-profile-form]');
+      const preview = form?.querySelector<HTMLImageElement>('[data-network-photo-preview]');
       if (preview) { preview.src = preparada.preview; preview.hidden = false; }
-      const boton = dialog?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = false;
-      toast('Foto lista · la optimizamos para tu perfil', 'wand-sparkles');
+      const boton = form?.querySelector<HTMLElement>('[data-network-photo-remove]'); if (boton) boton.hidden = false;
+      input.value = '';
+      toast('Foto preparada · pulsa Guardar perfil para conservarla', 'wand-sparkles');
     } catch (err) { input.value = ''; toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
@@ -1415,12 +1416,13 @@ document.addEventListener('change', async (e) => {
       const preparada = await prepararBannerDirectorio(file);
       if (bannerDirectorioPendiente) URL.revokeObjectURL(bannerDirectorioPendiente.preview);
       bannerDirectorioPendiente = preparada; quitarBannerDirectorio = false;
-      const dialog = input.closest<HTMLDialogElement>('dialog');
-      const preview = dialog?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
+      const form = input.closest<HTMLFormElement>('[data-network-profile-form]');
+      const preview = form?.querySelector<HTMLImageElement>('[data-network-banner-preview]');
       if (preview) { preview.src = preparada.preview; preview.hidden = false; }
-      dialog?.querySelector('[data-network-banner-frame]')?.classList.add('has-banner');
-      const boton = dialog?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = false;
-      toast('Portada lista · la ajustamos al formato de tu perfil', 'wand-sparkles');
+      form?.querySelector('[data-network-banner-frame]')?.classList.add('has-banner');
+      const boton = form?.querySelector<HTMLElement>('[data-network-banner-remove]'); if (boton) boton.hidden = false;
+      input.value = '';
+      toast('Portada preparada · pulsa Guardar perfil para conservarla', 'wand-sparkles');
     } catch (err) { input.value = ''; toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
