@@ -197,8 +197,8 @@
     ]
   },
   "mapa-conceptual-editable": {
-    "titulo": "Mapa conceptual editable",
-    "objetivo": "Construye relaciones entre conceptos y comprueba cómo se conectan.",
+    "titulo": "Planificador de mapa conceptual",
+    "objetivo": "Organiza conceptos y relaciones en tablas antes de dibujar tu mapa conceptual.",
     "secciones": [
       {
         "titulo": "Concepto central",
@@ -383,8 +383,8 @@
     ]
   },
   "cv-editable": {
-    "titulo": "CV editable",
-    "objetivo": "Prepara un currículum claro con experiencia, formación y resultados verificables.",
+    "titulo": "Hoja de trabajo para tu CV",
+    "objetivo": "Organiza experiencia, formación y competencias en tablas editables para preparar tu currículum.",
     "secciones": [
       {
         "titulo": "Datos profesionales",
@@ -441,8 +441,8 @@
     ]
   },
   "portafolio-profesional": {
-    "titulo": "Portafolio profesional",
-    "objetivo": "Presenta proyectos propios y sus resultados en un dossier editable.",
+    "titulo": "Planificador de portafolio profesional",
+    "objetivo": "Reúne proyectos, resultados y enlaces en tablas para preparar tu portafolio.",
     "secciones": [
       {
         "titulo": "Presentación",
@@ -480,8 +480,8 @@
     ]
   },
   "carta-de-presentacion": {
-    "titulo": "Carta de presentación",
-    "objetivo": "Estructura una carta específica para una oportunidad profesional.",
+    "titulo": "Guion de carta de presentación",
+    "objetivo": "Organiza el destinatario, los argumentos y el cierre de tu carta en una hoja de trabajo.",
     "secciones": [
       {
         "titulo": "Destinatario",
@@ -606,8 +606,8 @@
     ]
   },
   "presentacion-profesional-editable": {
-    "titulo": "Presentación profesional editable",
-    "objetivo": "Planea una presentación con una idea central por diapositiva.",
+    "titulo": "Guion de presentación profesional",
+    "objetivo": "Planea el contenido y las notas de cada diapositiva en tablas editables. Entrega un guion HTML, sin diapositivas diseñadas.",
     "secciones": [
       {
         "titulo": "Brief",
@@ -765,8 +765,8 @@
     ]
   },
   "dossier-de-servicios": {
-    "titulo": "Dossier de servicios",
-    "objetivo": "Describe tus servicios, su alcance y la forma de contactar contigo.",
+    "titulo": "Planificador de dossier de servicios",
+    "objetivo": "Organiza la información de tus servicios en una hoja de trabajo para preparar tu dossier.",
     "secciones": [
       {
         "titulo": "Identidad",
@@ -1112,8 +1112,8 @@
     ]
   },
   "tarjeta-con-qr": {
-    "titulo": "Tarjeta profesional · espacio para QR",
-    "objetivo": "Organiza la información de tu tarjeta y el enlace que usarás en un código QR. Esta plantilla no genera el código QR.",
+    "titulo": "Plan de tarjeta profesional y QR",
+    "objetivo": "Organiza los datos, el enlace y la ubicación prevista del QR en una tabla. No genera códigos QR ni una tarjeta gráfica.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1142,8 +1142,8 @@
     ]
   },
   "firma-de-correo": {
-    "titulo": "Firma de correo",
-    "objetivo": "Crea firma de correo con una estructura editable para tu identidad profesional.",
+    "titulo": "Hoja para preparar tu firma de correo",
+    "objetivo": "Reúne los datos y el texto de tu firma en tablas editables. No instala ni genera una firma para tu correo.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1173,8 +1173,8 @@
     ]
   },
   "papeleria-personalizada": {
-    "titulo": "Papelería personalizada",
-    "objetivo": "Crea papelería personalizada con una estructura editable para tu identidad profesional.",
+    "titulo": "Plan de papelería profesional",
+    "objetivo": "Define datos, encabezado y pie de página en una hoja de trabajo. No incluye papelería gráfica terminada.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1203,8 +1203,8 @@
     ]
   },
   "plantillas-de-carruseles": {
-    "titulo": "Plantillas de carruseles",
-    "objetivo": "Crea plantillas de carruseles con una estructura editable para tu identidad profesional.",
+    "titulo": "Guion para carruseles",
+    "objetivo": "Planea mensajes, imágenes y llamados a la acción por diapositiva en tablas. No incluye piezas gráficas para publicar.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1233,8 +1233,8 @@
     ]
   },
   "kit-de-bienvenida": {
-    "titulo": "Kit de bienvenida",
-    "objetivo": "Crea kit de bienvenida con una estructura editable para tu identidad profesional.",
+    "titulo": "Plan de mensajes de bienvenida",
+    "objetivo": "Prepara destinatarios, mensajes, información de contacto y siguientes pasos en una hoja de trabajo.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1263,8 +1263,8 @@
     ]
   },
   "portadas-para-redes": {
-    "titulo": "Portadas para redes",
-    "objetivo": "Crea portadas para redes con una estructura editable para tu identidad profesional.",
+    "titulo": "Planificador de portadas para redes",
+    "objetivo": "Organiza títulos, imágenes previstas y medidas por canal en tablas. No incluye imágenes de portada terminadas.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1294,8 +1294,8 @@
     ]
   },
   "anuncios-de-horarios": {
-    "titulo": "Anuncios de horarios",
-    "objetivo": "Crea anuncios de horarios con una estructura editable para tu identidad profesional.",
+    "titulo": "Planificador de anuncios de horarios",
+    "objetivo": "Prepara fechas, horarios y datos de contacto en una tabla antes de diseñar tu anuncio.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
@@ -1385,8 +1385,8 @@
     ]
   },
   "presentacion-del-consultorio": {
-    "titulo": "Presentación del consultorio",
-    "objetivo": "Crea presentación del consultorio con una estructura editable para tu identidad profesional.",
+    "titulo": "Guion de presentación del consultorio",
+    "objetivo": "Planea secciones, textos y referencias visuales en tablas. No incluye una presentación gráfica terminada.",
     "secciones": [
       {
         "titulo": "Diseño y contenido",
