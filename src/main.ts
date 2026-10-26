@@ -22,7 +22,7 @@ import './styles/visor.css';
 import './styles/juego-clase.css';
 import { createIcons, icons } from 'lucide';
 import { route, startRouter, onRender, onBeforeRender, current, navigate, render } from './core/router';
-import { shellHTML, marcarNavActivo } from './ui/shell';
+import { shellHTML, marcarNavActivo, actualizarMonedero } from './ui/shell';
 import { Auth, api, mensajeError } from './core/auth';
 import { Datos, type Pregunta } from './core/datos';
 import { descargarRepasoPDF } from './core/repaso-pdf';
@@ -60,7 +60,6 @@ import { praxia, perfil, suscripcion, configuracion, mas } from './pages/cuenta'
 import { herramientas, herramienta } from './pages/herramientas';
 import { login } from './pages/login';
 import { Recompensas } from './core/recompensas';
-import { puntos } from './core/logros';
 import { Directorio, prepararBannerDirectorio, prepararFotoDirectorio, type DocumentoPreparado, type ImagenDirectorioPreparada, type TipoDocumento, type VisibilidadDocumento } from './core/directorio';
 
 type PlayerJsInstance = {
@@ -621,6 +620,7 @@ route('/admin/encuestas', rutaAdmin((ui) => ui.adminEncuestas));
 route('/admin/ajustes', rutaAdmin((ui) => ui.adminAjustes));
 
 onRender(() => {
+  actualizarMonedero();
   const { path } = current();
   rutaPintada = path;
   if (shellActual === 'admin') adminUI?.marcarAdminActivo(path); else marcarNavActivo(path);
@@ -641,7 +641,7 @@ onRender(() => {
 });
 startRouter();
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
-window.addEventListener('recompensas:cambio', actualizarNotifs);
+window.addEventListener('recompensas:cambio', () => { actualizarNotifs(); actualizarMonedero(); });
 window.addEventListener('recompensas:ganadas', (e) => {
   const detalle = (e as CustomEvent).detail;
   const puntos = Number(detalle?.puntosGanados || 0);
@@ -791,7 +791,7 @@ function mostrarResumenCuenta(abierto: boolean) {
   const toggle = document.querySelector<HTMLElement>('[data-account-toggle]');
   if (!drawer || !scrim || !toggle) return;
   if (abierto) {
-    document.querySelectorAll<HTMLElement>('[data-account-points]').forEach((x) => { x.textContent = String(puntos()); });
+    actualizarMonedero();
     const vistas = document.querySelector<HTMLElement>('[data-account-views]');
     const completos = document.querySelector<HTMLElement>('[data-account-courses]');
     if (vistas) vistas.textContent = String(Progreso.totalVistas());

@@ -103,7 +103,8 @@ async function cargarExtrasDeRuta(path: string, mismaRuta: boolean) {
     (path === '/directorio' || path === '/directorio/editar-perfil' || path.startsWith('/directorio/perfil/')) && !(Directorio.cargado() && (mismaRuta || Directorio.vigente(TTL))) ? Directorio.cargar() : Promise.resolve(),
     path.startsWith('/directorio/perfil/') && !Directorio.fichaVigente(decodeURIComponent(path.slice('/directorio/perfil/'.length)), TTL) ? Directorio.cargarFicha(decodeURIComponent(path.slice('/directorio/perfil/'.length))).catch(() => null) : Promise.resolve(),
     path.startsWith('/certificados') ? api<CertificadoRemoto[]>('/certificados').then((lista) => Certificados.hidratar(lista)) : Promise.resolve(),
-    path === '/' || path === '/perfil' || path === '/logros' || path === '/recompensas' || path === '/retos' || path.startsWith('/comunidad') || path.startsWith('/materiales') ? Recompensas.cargar().catch(() => null) : Promise.resolve(),
+    // El monedero superior acompaña todas las rutas del miembro; la caché evita repetir peticiones.
+    Recompensas.cargar().catch(() => null),
   ]);
 }
 

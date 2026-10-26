@@ -141,8 +141,14 @@
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
-.topbar .search { flex: 1; max-width: 480px; }
+.topbar .search { flex: 1; min-width: 0; max-width: 480px; }
 .topbar__right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.topbar__coins { display: inline-flex; align-items: center; flex-shrink: 0; gap: 7px; min-height: 40px; padding: 5px 12px 5px 6px; border: 1px solid color-mix(in srgb,var(--brand-teal) 45%,var(--line)); border-radius: var(--r-full); background: color-mix(in srgb,var(--brand-teal) 9%,var(--surface)); color: var(--text); white-space: nowrap; font-size: 13px; transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast); }
+.topbar__coins:hover { text-decoration: none; background: color-mix(in srgb,var(--brand-teal) 18%,var(--surface)); border-color: var(--brand-teal); box-shadow: 0 4px 12px -8px var(--brand-navy); }
+.topbar__coins strong { font-variant-numeric: tabular-nums; font-weight: 750; }
+.topbar__coin { display: grid; place-items: center; flex-shrink: 0; width: 27px; height: 27px; border-radius: 50%; background: linear-gradient(145deg,#266c7b,#182e50); color: #b7eee0; border: 1px solid #79c6b4; box-shadow: inset 0 0 0 2px #193d58; font-size: 9px; font-weight: 800; letter-spacing: -.02em; }
+.topbar__coin-label { color: var(--text-2); font-size: 12px; }
+@media (max-width: 780px) { .topbar__coin-label { display: none; } }
 .content { max-width: var(--content-max); margin: 0 auto; padding: 28px; }
 
 /* Tarjeta instalar app (fija en la barra lateral, sin popups) */
@@ -574,6 +580,15 @@
   .lesson__dur { grid-column: 3; }
 }
 @media (max-width: 520px) { .grid--3, .grid--4 { grid-template-columns: 1fr 1fr; } .shelf { grid-template-columns: repeat(2, 1fr); } }
+
+@media (max-width: 640px) {
+  .topbar { height: auto; min-height: var(--topbar-h); flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+  .topbar .search { flex: 1 0 100%; max-width: none; order: 2; }
+  .topbar__right { width: 100%; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+  .topbar__coins { margin-right: auto; padding-right: 9px; gap: 6px; }
+  .topbar__right .btn--icon { width: 36px; min-height: 40px; flex-shrink: 0; }
+  .topbar__right .avatar { width: 32px; height: 32px; }
+}
 
 /* ═══ Paywall (regla de oro freemium) ═══ */
 .paywall { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px;
