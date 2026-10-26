@@ -79,6 +79,9 @@ describe('directorio profesional', () => {
     assert.equal(firma.body.path, 'directorio/perfiles/free1/avatar.webp');
     assert.match(firma.body.publicUrl, /directorio%2Fperfiles%2Ffree1%2Favatar\.webp/);
     assert.equal(env.storage.firmadas.at(-1).contentType, 'image/webp');
+    assert.deepEqual(env.storage.firmadas.at(-1).extensionHeaders, { 'x-goog-content-length-range': '1,125000', 'cache-control': 'public,max-age=86400' });
+    assert.equal(firma.body.uploadHeaders['x-goog-content-length-range'], '1,125000');
+    assert.equal(firma.body.uploadHeaders['Content-Type'], 'image/webp');
     await request(env.app).post('/directorio/perfil/foto/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/png', bytes: 10 }).expect(400);
     await request(env.app).post('/directorio/perfil/foto/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/webp', bytes: 2_000_001 }).expect(400);
     await perfil(TOKENS.free, { foto: 'propia' }).expect(200);
@@ -93,6 +96,8 @@ describe('directorio profesional', () => {
     await perfil(TOKENS.free).expect(200);
     const firma = await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/webp', bytes: 250000 }).expect(200);
     assert.equal(firma.body.path, 'directorio/perfiles/free1/banner.webp');
+    assert.equal(env.storage.firmadas.at(-1).extensionHeaders['x-goog-content-length-range'], '1,250000');
+    assert.equal(firma.body.uploadHeaders['x-goog-content-length-range'], '1,250000');
     assert.match(firma.body.publicUrl, /directorio%2Fperfiles%2Ffree1%2Fbanner\.webp/);
     await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/png', bytes: 10 }).expect(400);
     await request(env.app).post('/directorio/perfil/banner/subida').set(bearer(TOKENS.free)).send({ contentType: 'image/webp', bytes: 3_000_001 }).expect(400);
@@ -101,6 +106,46 @@ describe('directorio profesional', () => {
     assert.match(listado.body.perfiles.find((p) => p.uid === 'free1').banner, /banner\.webp/);
     await request(env.app).delete('/directorio/perfil/banner').set(bearer(TOKENS.free)).expect(200);
     assert.equal(env.db.leer('v2_directorio_perfiles/free1').banner, null);
+  });
+
+  test('limita atómicamente las autorizaciones de archivos por usuario durante 24 horas', async () => {
+    await perfil(TOKENS.free).expect(200);
+    const solicitar = (tipo, token = TOKENS.free) => request(env.app).post(`/directorio/perfil/${tipo}/subida`).set(bearer(token))
+      .send({ contentType: 'image/webp', bytes: 125000 });
+    const resultados = await Promise.all(Array.from({ length: 25 }, (_, i) => solicitar(i % 2 ? 'foto' : 'banner')));
+    assert.equal(resultados.filter((r) => r.status === 200).length, 20);
+    assert.equal(resultados.filter((r) => r.status === 429).length, 5);
+    assert.equal(env.storage.firmadas.length, 20);
+    await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free))
+      .send({ contentType: 'application/pdf', bytes: 1000, miniaturaBytes: 100 }).expect(429);
+    await request(env.app).delete('/directorio/perfil').set(bearer(TOKENS.free)).expect(200);
+    await perfil(TOKENS.free).expect(200);
+    await solicitar('foto').expect(429);
+    await solicitar('foto', TOKENS.vip).expect(200);
+    await solicitar('foto', TOKENS.admin).expect(200);
+    env.reloj.ahora = new Date(new Date(env.reloj.ahora).getTime() + 24 * 60 * 60 * 1000).toISOString();
+    await solicitar('foto').expect(200);
+    assert.equal(env.db.leer('v2_directorio_subidas/free1').recientes.length, 1);
+  });
+
+  test('rechaza tamaños inválidos y falta de sesión sin consumir cupo ni emitir firmas', async () => {
+    await request(env.app).post('/directorio/perfil/foto/subida').send({ contentType: 'image/webp', bytes: 100 }).expect(401);
+    await request(env.app).post('/directorio/perfil/foto/subida').set(bearer(TOKENS.free))
+      .send({ contentType: 'image/webp', bytes: 2_000_001 }).expect(400);
+    assert.equal(env.storage.firmadas.length, 0);
+    assert.equal(env.db.leer('v2_directorio_subidas/free1'), undefined);
+  });
+
+  test('firma también el límite de documento y miniatura sin hacerlos públicos', async () => {
+    await perfil(TOKENS.free).expect(200);
+    const r = await request(env.app).post('/directorio/perfil/documentos/subida').set(bearer(TOKENS.free))
+      .send({ contentType: 'application/pdf', bytes: 400000, miniaturaBytes: 30000 }).expect(200);
+    assert.equal(r.body.uploadHeaders['x-goog-content-length-range'], '1,400000');
+    assert.equal(r.body.miniaturaUploadHeaders['x-goog-content-length-range'], '1,30000');
+    assert.equal(env.storage.firmadas.at(-2).extensionHeaders['x-goog-content-length-range'], '1,400000');
+    assert.equal(env.storage.firmadas.at(-1).extensionHeaders['x-goog-content-length-range'], '1,30000');
+    assert.equal(r.body.uploadHeaders['cache-control'], undefined);
+    assert.equal(env.db.leer('v2_directorio_subidas/free1').recientes.length, 1);
   });
 
   test('valida límites y texto seguro del CV profesional', async () => {

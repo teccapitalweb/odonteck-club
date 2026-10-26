@@ -42,6 +42,7 @@ export interface PaginacionDirectorio {
 export interface EstadoDirectorio { perfiles: PerfilDirectorio[]; oportunidades: OportunidadDirectorio[]; conexiones: ConexionDirectorio[]; miPerfil: PerfilDirectorio | null; paginacion?: PaginacionDirectorio }
 export interface ImagenDirectorioPreparada { blob: Blob; preview: string }
 export type FotoPreparada = ImagenDirectorioPreparada;
+interface FirmaSubida { uploadUrl: string; contentType: string; uploadHeaders?: Record<string, string> }
 
 const KEY = 'odonteck-club:directorio:v1';
 // Documentos ficticios del prototipo local (marcados como demostrativos dentro del propio archivo).
@@ -123,10 +124,10 @@ export const Directorio = {
   },
   async adjuntarDocumento(prep: DocumentoPreparado, meta: { nombre: string; tipo: TipoDocumento; visibilidad: VisibilidadDocumento }) {
     if (Datos.modo === 'api') {
-      const firma = await api<{ id: string; uploadUrl: string; contentType: string; miniaturaUploadUrl: string; miniaturaContentType: string }>('/directorio/perfil/documentos/subida', { method: 'POST', json: { contentType: prep.mime, bytes: prep.archivo.size, miniaturaBytes: prep.miniatura.size } });
+      const firma = await api<FirmaSubida & { id: string; miniaturaUploadUrl: string; miniaturaContentType: string; miniaturaUploadHeaders?: Record<string, string> }>('/directorio/perfil/documentos/subida', { method: 'POST', json: { contentType: prep.mime, bytes: prep.archivo.size, miniaturaBytes: prep.miniatura.size } });
       const [a, m] = await Promise.all([
-        fetch(firma.uploadUrl, { method: 'PUT', headers: { 'Content-Type': firma.contentType }, body: prep.archivo }),
-        fetch(firma.miniaturaUploadUrl, { method: 'PUT', headers: { 'Content-Type': firma.miniaturaContentType }, body: prep.miniatura }),
+        fetch(firma.uploadUrl, { method: 'PUT', headers: firma.uploadHeaders ?? { 'Content-Type': firma.contentType }, body: prep.archivo }),
+        fetch(firma.miniaturaUploadUrl, { method: 'PUT', headers: firma.miniaturaUploadHeaders ?? { 'Content-Type': firma.miniaturaContentType }, body: prep.miniatura }),
       ]);
       if (!a.ok || !m.ok) throw new Error(`No pudimos subir el documento (${a.ok ? m.status : a.status}).`);
       await api('/directorio/perfil/documentos', { method: 'POST', json: { id: firma.id, ...meta, paginas: prep.paginas } });
@@ -160,8 +161,8 @@ export const Directorio = {
     if (Datos.modo === 'api') {
       const ruta = tipo === 'foto' ? '/directorio/perfil/foto' : '/directorio/perfil/banner';
       if (!img) { await api(ruta, { method: 'DELETE' }); this.invalidar(); return; }
-      const firma = await api<{ uploadUrl: string; contentType: string }>(`${ruta}/subida`, { method: 'POST', json: { contentType: 'image/webp', bytes: img.blob.size } });
-      const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: { 'Content-Type': firma.contentType }, body: img.blob });
+      const firma = await api<FirmaSubida>(`${ruta}/subida`, { method: 'POST', json: { contentType: 'image/webp', bytes: img.blob.size } });
+      const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: firma.uploadHeaders ?? { 'Content-Type': firma.contentType }, body: img.blob });
       if (!subida.ok) throw new Error(`No pudimos subir la ${tipo === 'foto' ? 'foto' : 'portada'} (${subida.status}).`);
       const { uid: _u, nombre: _n, actualizado: _a, esMio: _e, foto: _f, banner: _b, documentos: _d, ...resto } = mio;
       await api('/directorio/perfil', { method: 'PUT', json: { ...resto, contacto: { canal: mio.contacto?.canal ?? 'correo', valor: mio.contacto?.valor ?? '' }, ...(tipo === 'foto' ? { foto: 'propia' } : { banner: 'propio' }) } });
@@ -195,15 +196,15 @@ export const Directorio = {
       if (quitarBanner) await api('/directorio/perfil/banner', { method: 'DELETE' });
       let fotoPropia = false;
       if (foto) {
-        const firma = await api<{ uploadUrl: string; publicUrl: string; contentType: string }>('/directorio/perfil/foto/subida', { method: 'POST', json: { contentType: 'image/webp', bytes: foto.blob.size } });
-        const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: { 'Content-Type': firma.contentType }, body: foto.blob });
+        const firma = await api<FirmaSubida>('/directorio/perfil/foto/subida', { method: 'POST', json: { contentType: 'image/webp', bytes: foto.blob.size } });
+        const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: firma.uploadHeaders ?? { 'Content-Type': firma.contentType }, body: foto.blob });
         if (!subida.ok) throw new Error(`No pudimos subir la foto (${subida.status}).`);
         fotoPropia = true;
       }
       let bannerPropio = false;
       if (banner) {
-        const firma = await api<{ uploadUrl: string; publicUrl: string; contentType: string }>('/directorio/perfil/banner/subida', { method: 'POST', json: { contentType: 'image/webp', bytes: banner.blob.size } });
-        const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: { 'Content-Type': firma.contentType }, body: banner.blob });
+        const firma = await api<FirmaSubida>('/directorio/perfil/banner/subida', { method: 'POST', json: { contentType: 'image/webp', bytes: banner.blob.size } });
+        const subida = await fetch(firma.uploadUrl, { method: 'PUT', headers: firma.uploadHeaders ?? { 'Content-Type': firma.contentType }, body: banner.blob });
         if (!subida.ok) throw new Error(`No pudimos subir la portada (${subida.status}).`);
         bannerPropio = true;
       }

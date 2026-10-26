@@ -2,6 +2,16 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
+## 2026-10-26 · Preparación de Storage con controles de uso
+
+La corrección visual del PR #50 está publicada: merge `818cb3056200ed1a0a3d8aa71015c837328dbce3`, Cloudflare run `40364545579`, bundle oficial `club-Dv6x6vFn.js` verificado byte a byte. Firebase y Railway ya tienen acceso autorizado en este equipo. Se confirmó que la API usa `club-odonteck.firebasestorage.app`, que no existe, y que el proyecto no tiene facturación activa.
+
+El usuario autorizó activar Blaze con controles de uso, delegó elegir la cuenta y eligió alertas sobre **100 MXN mensuales**. Se seleccionó «Pago de Firebase», terminación **1F21EF**, porque ya atiende otros clubes de formación. No interpretar esto como un tope garantizado: las alertas no detienen cargos, y Storage no figura entre los servicios compatibles con spend caps de Firebase. Activación y verificación real siguen pendientes en este corte de código.
+
+Controles preparados: 20 autorizaciones de subida de archivos del perfil por UID en 24 horas, compartidas entre foto, portada y documentos; contador transaccional independiente del perfil. Los PUT firmados exigen `x-goog-content-length-range` y el frontend reenvía `uploadHeaders`/`miniaturaUploadHeaders`. Se conservan límites de 2 MB para foto y 3 MB para portada, rutas fijas por UID y validación posterior al guardar. Las imágenes públicas reciben caché de 24 horas. No limita descargas ni la reutilización de una URL ya firmada durante sus 10 minutos de vigencia.
+
+Validación local: build con API de producción; API `check` y 199 pruebas aprobadas, 0 fallidas, 1 omitida. La omisión es la suite de reglas sin emuladores. Se añade un job de reglas en Linux/Java 21 porque el emulador local de Firestore falla al abrir su socket loopback en Windows. Confirmar ese job antes de publicar reglas. Secuencia: publicar cliente/API, configurar alertas y bucket, conservar/consultar reglas remotas antes de desplegar Storage y probar subida, rechazo por tamaño, guardado y lectura autenticados con datos temporales. No cambiar reglas Firestore ni miembros reales.
+
 ## 2026-10-26 · Corrección de foto y portada del directorio
 
 La fuente de esta corrección parte de `main` / `5bef28b281ffbab88ddff08dd96b9ff66a9590ef`, publicado previamente por Cloudflare Pages (workflow `40144680513`). Los cortes del 20 de octubre que siguen son históricos. El usuario autorizó publicar esta corrección en producción; el resultado del nuevo despliegue debe comprobarse en el workflow `Deploy a Cloudflare Pages` y en el dominio oficial.

@@ -2,6 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
+## Actualización · 2026-10-26 · Límites y activación autorizada de Storage
+
+PR #50 publicado en Cloudflare desde `818cb30`, workflow `40364545579`, con foto/portada visibles al seleccionarlas. Se verificaron acceso a Firebase/Railway, bucket configurado inexistente y facturación desactivada. El usuario autorizó Blaze, delegó elegir cuenta y seleccionó alertas sobre 100 MXN/mes; cuenta elegida «Pago de Firebase» terminación 1F21EF. El cambio de facturación, el bucket y la persistencia real deben verificarse después; este corte documenta la preparación.
+
+El contrato añade cabeceras obligatorias devueltas por la firma para limitar bytes en Storage, caché pública de imágenes de 24 horas y 20 autorizaciones conjuntas de archivos del perfil por UID en 24 horas. `v2_directorio_subidas` mantiene el contador aunque se borre el perfil. No es un máximo monetario ni limita descargas o reutilización de firmas vigentes. Build y API aprobados (199 pass, 0 fail, 1 skip); reglas pasan a validarse también en CI con emuladores Linux. Consultar el relevo operativo y `contrato.md` para alcance y secuencia.
+
 ## Actualización · 2026-10-26 · Imágenes del perfil profesional
 
 La corrección parte del `main` vigente `5bef28b281ffbab88ddff08dd96b9ff66a9590ef`, cuyo workflow de Cloudflare Pages `40144680513` fue satisfactorio. El usuario autorizó publicar el arreglo del editor del directorio. La foto y la portada ahora actualizan sus vistas previas dentro del formulario de la página, sin depender del antiguo diálogo; también se pueden quitar y volver a seleccionar. Los avisos recuerdan pulsar «Guardar perfil». El flujo remoto sigue siendo subida firmada de WebP y `PUT /directorio/perfil` autenticado, sin cambios al backend ni a la privacidad.

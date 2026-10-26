@@ -13,6 +13,8 @@ const TIPOS = ['empleo', 'colaboracion', 'mentoria', 'suplencia', 'practicas', '
 const FOTO_CONTENT_TYPE = 'image/webp';
 const FOTO_MAX_BYTES = 2_000_000;
 const BANNER_MAX_BYTES = 3_000_000;
+const MAX_SUBIDAS_PERFIL_DIA = 20;
+const VENTANA_SUBIDAS_MS = 24 * 60 * 60 * 1000;
 const LIMITE_PAGINA = 24;
 const LIMITE_CONEXIONES = 100;
 const MAX_CONEXIONES_DIA = 10;
@@ -34,6 +36,34 @@ const docArchivoPath = (uid, id) => `${docBase(uid, id)}/archivo`;
 const docMiniaturaPath = (uid, id) => `${docBase(uid, id)}/miniatura.webp`;
 const documentoPublico = (d) => ({ id: d.id, nombre: d.nombre, tipo: d.tipo, visibilidad: d.visibilidad, mime: d.mime, bytes: d.bytes, paginas: d.paginas ?? null, creado: d.creado });
 const assetUrl = (bucket, path) => `https://firebasestorage.googleapis.com/v0/b/${bucket}/o/${encodeURIComponent(path)}?alt=media`;
+
+// Comparte el cupo entre foto, portada y documentos. Guardar, borrar o recrear
+// el perfil no reinicia el contador; la transacción también cubre solicitudes simultáneas.
+async function reservarSubidaPerfil(ctx, uid, documento = false) {
+  const ref = ctx.db.collection(COL.directorioSubidas).doc(uid);
+  const ahora = ctx.now().getTime();
+  await ctx.db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    if (documento) {
+      const perfil = await tx.get(ctx.db.collection(COL.directorioPerfiles).doc(uid));
+      if (!perfil.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
+      if ((perfil.data().documentos ?? []).length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
+    }
+    const recientes = (snap.exists ? snap.data().recientes ?? [] : [])
+      .filter((t) => new Date(t).getTime() > ahora - VENTANA_SUBIDAS_MS);
+    if (recientes.length >= MAX_SUBIDAS_PERFIL_DIA) throw demasiadasSolicitudes('Alcanzaste el límite de 20 subidas de archivos del perfil en 24 horas. Intenta más tarde.');
+    tx.set(ref, { uid, recientes: [...recientes, new Date(ahora).toISOString()] });
+  });
+}
+
+async function firmarSubidaLimitada(archivo, contentType, bytes, expires, publica = false) {
+  // El límite forma parte de la firma: Storage rechaza un cuerpo mayor antes
+  // de guardarlo, incluso si alguien modifica o evita la validación del navegador.
+  const extensionHeaders = { 'x-goog-content-length-range': `1,${bytes}` };
+  if (publica) extensionHeaders['cache-control'] = 'public,max-age=86400';
+  const [uploadUrl] = await archivo.getSignedUrl({ version: 'v4', action: 'write', expires, contentType, extensionHeaders });
+  return { uploadUrl, uploadHeaders: { 'Content-Type': contentType, ...extensionHeaders } };
+}
 const idEstable = (...partes) => createHash('sha256').update(partes.join('|')).digest('hex').slice(0, 40);
 const unicoPorId = (lista) => [...new Map(lista.map((v) => [v.id ?? v.uid, v])).values()];
 const cursor = (valor, campo) => valor === undefined ? null : idDocumento(String(valor), campo);
@@ -305,11 +335,12 @@ export function rutasDirectorio(ctx) {
     const b = cuerpo(req);
     if (b.contentType !== FOTO_CONTENT_TYPE) throw invalido('La foto debe procesarse como WebP.', 'tipo_no_permitido');
     const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: FOTO_MAX_BYTES });
+    await reservarSubidaPerfil(ctx, req.usuario.uid);
     const bucket = ctx.storage.bucket(ctx.config.storageBucket);
     const path = fotoPath(req.usuario.uid);
     const expires = ctx.now().getTime() + 10 * 60 * 1000;
-    const [uploadUrl] = await bucket.file(path).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE });
-    res.json({ uploadUrl, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
+    const firma = await firmarSubidaLimitada(bucket.file(path), FOTO_CONTENT_TYPE, bytes, expires, true);
+    res.json({ ...firma, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
   }));
 
   r.delete('/directorio/perfil/foto', auth, h(async (req, res) => {
@@ -326,11 +357,12 @@ export function rutasDirectorio(ctx) {
     const b = cuerpo(req);
     if (b.contentType !== FOTO_CONTENT_TYPE) throw invalido('La portada debe procesarse como WebP.', 'tipo_no_permitido');
     const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: BANNER_MAX_BYTES });
+    await reservarSubidaPerfil(ctx, req.usuario.uid);
     const bucket = ctx.storage.bucket(ctx.config.storageBucket);
     const path = bannerPath(req.usuario.uid);
     const expires = ctx.now().getTime() + 10 * 60 * 1000;
-    const [uploadUrl] = await bucket.file(path).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE });
-    res.json({ uploadUrl, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
+    const firma = await firmarSubidaLimitada(bucket.file(path), FOTO_CONTENT_TYPE, bytes, expires, true);
+    res.json({ ...firma, path, publicUrl: assetUrl(bucket.name, path), contentType: FOTO_CONTENT_TYPE, bytes, expira: new Date(expires).toISOString() });
   }));
 
   r.delete('/directorio/perfil/banner', auth, h(async (req, res) => {
@@ -350,30 +382,15 @@ export function rutasDirectorio(ctx) {
     const mime = unoDe(b.contentType, Object.keys(DOC_MIME), { campo: 'contentType', requerido: true });
     const bytes = entero(b.bytes, { campo: 'bytes', min: 1, max: DOC_MIME[mime] });
     const miniaturaBytes = entero(b.miniaturaBytes, { campo: 'miniaturaBytes', min: 1, max: DOC_MINIATURA_MAX });
-    const ref = ctx.db.collection(COL.directorioPerfiles).doc(uid);
-    // El contador del rate limit vive en una colección aparte (v2_directorio_subidas) para que
-    // guardar o borrar/recrear el perfil no lo reinicie.
-    const subidasRef = ctx.db.collection(COL.directorioSubidas).doc(uid);
-    const ahoraMs = ctx.now().getTime();
-    // Perfil, tope de documentos y rate limit, atómicos (lecturas antes que escrituras, como los límites
-    // de conexiones y reportes). Cada /subida emite URLs firmadas que no se cuentan hasta finalizar, así
-    // que se limitan 20 emisiones por hora por usuario.
-    await ctx.db.runTransaction(async (tx) => {
-      const [snap, subidasSnap] = await Promise.all([tx.get(ref), tx.get(subidasRef)]);
-      if (!snap.exists) throw conflicto('Crea tu perfil del directorio antes de adjuntar documentos.', 'sin_perfil');
-      if ((snap.data().documentos ?? []).length >= DOC_MAX) throw conflicto(`Puedes adjuntar hasta ${DOC_MAX} documentos. Retira uno para subir otro.`, 'limite_documentos');
-      const recientes = (subidasSnap.exists ? subidasSnap.data().recientes ?? [] : []).filter((t) => new Date(t).getTime() > ahoraMs - 60 * 60 * 1000);
-      if (recientes.length >= 20) throw demasiadasSolicitudes('Demasiadas subidas en poco tiempo. Intenta de nuevo en un rato.');
-      tx.set(subidasRef, { uid, recientes: [...recientes, new Date(ahoraMs).toISOString()].slice(-20) });
-    });
+    await reservarSubidaPerfil(ctx, uid, true);
     const id = randomBytes(12).toString('hex');
     const bucket = ctx.storage.bucket(ctx.config.storageBucket);
     const expires = ctx.now().getTime() + 10 * 60 * 1000;
-    const [[uploadUrl], [miniaturaUploadUrl]] = await Promise.all([
-      bucket.file(docArchivoPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: mime }),
-      bucket.file(docMiniaturaPath(uid, id)).getSignedUrl({ version: 'v4', action: 'write', expires, contentType: FOTO_CONTENT_TYPE }),
+    const [archivo, miniatura] = await Promise.all([
+      firmarSubidaLimitada(bucket.file(docArchivoPath(uid, id)), mime, bytes, expires),
+      firmarSubidaLimitada(bucket.file(docMiniaturaPath(uid, id)), FOTO_CONTENT_TYPE, miniaturaBytes, expires),
     ]);
-    res.json({ id, uploadUrl, contentType: mime, bytes, miniaturaUploadUrl, miniaturaContentType: FOTO_CONTENT_TYPE, miniaturaBytes, expira: new Date(expires).toISOString() });
+    res.json({ id, ...archivo, contentType: mime, bytes, miniaturaUploadUrl: miniatura.uploadUrl, miniaturaUploadHeaders: miniatura.uploadHeaders, miniaturaContentType: FOTO_CONTENT_TYPE, miniaturaBytes, expira: new Date(expires).toISOString() });
   }));
 
   r.post('/directorio/perfil/documentos', auth, h(async (req, res) => {
