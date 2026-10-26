@@ -50,7 +50,7 @@
   {
     "id": "plantilla-nota-clinica-receta",
     "titulo": "Plantilla de nota clínica y receta",
-    "descripcion": "Formato editable para documentar la consulta diaria.",
+    "descripcion": "PDF imprimible de nota clínica y receta, sin campos digitales rellenables.",
     "puntos": 400,
     "tipo": "material",
     "materialId": "plantilla-nota-clinica-receta",
@@ -145,8 +145,8 @@
   },
   {
     "id": "praxia-30-dias",
-    "titulo": "30 días de Praxia Medical",
-    "descripcion": "Solicitud de activación por 30 días. El equipo confirma el beneficio antes de iniciarlo.",
+    "titulo": "Praxia Medical · solicitud de 30 días",
+    "descripcion": "Solicita 30 días de acceso. La activación es manual y queda pendiente de confirmación del equipo; canjear no activa una licencia.",
     "puntos": 1500,
     "tipo": "manual",
     "icono": "stethoscope",
@@ -154,7 +154,9 @@
     "estado": "disponible",
     "entrega": "Solicitud con seguimiento del equipo",
     "incluye": [
-      "30 días de acceso después de la confirmación del equipo"
+      "Solicitud registrada en Mis recompensas",
+      "30 días de acceso después de la activación confirmada por el equipo",
+      "Devolución de OC si el equipo cancela la solicitud"
     ],
     "fase": 1
   },
@@ -358,7 +360,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Distribuye tus sesiones de aprendizaje y deja tiempo para repasar.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Prioridades de la semana",
       "Bloques de estudio",
@@ -375,7 +377,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza un mes de estudio con hitos y revisiones semanales.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Meta del mes",
       "Plan por semana",
@@ -392,7 +394,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Prepara cada evaluación con fechas, temas y ensayos de práctica.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Evaluaciones",
       "Preparación",
@@ -409,7 +411,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Programa revisiones sucesivas según lo que recuerdes de cada tema.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Tarjetas de repaso",
       "Seguimiento",
@@ -426,7 +428,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Conserva referencias, ideas y preguntas de tus lecturas.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Referencias",
       "Notas de lectura",
@@ -435,15 +437,15 @@
   },
   {
     "id": "mapa-conceptual-editable",
-    "titulo": "Mapa conceptual editable",
+    "titulo": "Planificador de mapa conceptual",
     "categoria": "Organización del estudio",
     "puntos": 70,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Construye relaciones entre conceptos y comprueba cómo se conectan.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza conceptos y relaciones en tablas antes de dibujar tu mapa conceptual.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Concepto central",
       "Nodos y relaciones",
@@ -460,7 +462,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Toma notas organizadas con preguntas de recuperación y una síntesis propia.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Referencia de la sesión",
       "Apuntes",
@@ -477,7 +479,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Decide qué estudiar primero según fecha, dificultad y relevancia.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Pendientes",
       "Plan de acción"
@@ -493,7 +495,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Da seguimiento a tres meses de objetivos con entregables verificables.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Objetivos",
       "Hitos",
@@ -510,7 +512,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Planifica sesiones, contactos y aprendizajes de un congreso.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Antes de asistir",
       "Agenda",
@@ -519,15 +521,15 @@
   },
   {
     "id": "cv-editable",
-    "titulo": "CV editable",
+    "titulo": "Hoja de trabajo para tu CV",
     "categoria": "Desarrollo profesional",
     "puntos": 150,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Prepara un currículum claro con experiencia, formación y resultados verificables.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza experiencia, formación y competencias en tablas editables para preparar tu currículum.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Datos profesionales",
       "Perfil",
@@ -538,15 +540,15 @@
   },
   {
     "id": "portafolio-profesional",
-    "titulo": "Portafolio profesional",
+    "titulo": "Planificador de portafolio profesional",
     "categoria": "Desarrollo profesional",
     "puntos": 200,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Presenta proyectos propios y sus resultados en un dossier editable.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Reúne proyectos, resultados y enlaces en tablas para preparar tu portafolio.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Presentación",
       "Proyectos",
@@ -555,15 +557,15 @@
   },
   {
     "id": "carta-de-presentacion",
-    "titulo": "Carta de presentación",
+    "titulo": "Guion de carta de presentación",
     "categoria": "Desarrollo profesional",
     "puntos": 120,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Estructura una carta específica para una oportunidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza el destinatario, los argumentos y el cierre de tu carta en una hoja de trabajo.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Destinatario",
       "Borrador de carta",
@@ -580,7 +582,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Redacta versiones breve y extendida de tu presentación profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Base",
       "Versiones",
@@ -597,7 +599,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza objetivos, actividades y evaluación de un proyecto educativo.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Contexto",
       "Diseño",
@@ -607,15 +609,15 @@
   },
   {
     "id": "presentacion-profesional-editable",
-    "titulo": "Presentación profesional editable",
+    "titulo": "Guion de presentación profesional",
     "categoria": "Desarrollo profesional",
     "puntos": 180,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Planea una presentación con una idea central por diapositiva.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Planea el contenido y las notas de cada diapositiva en tablas editables. Entrega un guion HTML, sin diapositivas diseñadas.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Brief",
       "Guion de diapositivas",
@@ -632,7 +634,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Prepara respuestas basadas en experiencias y preguntas para la organización.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Oportunidad",
       "Experiencias",
@@ -649,7 +651,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Controla requisitos y fechas de tus postulaciones a programas de formación.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Programas",
       "Requisitos",
@@ -666,7 +668,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Conecta tus intereses con acciones concretas de desarrollo.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Punto de partida",
       "Opciones",
@@ -675,15 +677,15 @@
   },
   {
     "id": "dossier-de-servicios",
-    "titulo": "Dossier de servicios",
+    "titulo": "Planificador de dossier de servicios",
     "categoria": "Desarrollo profesional",
     "puntos": 250,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Describe tus servicios, su alcance y la forma de contactar contigo.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza la información de tus servicios en una hoja de trabajo para preparar tu dossier.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Identidad",
       "Servicios",
@@ -700,7 +702,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza agenda administrativa con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Reservas y pendientes"
@@ -716,7 +718,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza inventario de insumos con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Reposición"
@@ -732,7 +734,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza comparador de proveedores con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Criterios"
@@ -748,7 +750,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza registro de gastos con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Revisión"
@@ -764,7 +766,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza calendario de mantenimiento con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Seguimiento"
@@ -780,7 +782,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza organizador de turnos con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Coberturas"
@@ -796,7 +798,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza tablero de tareas con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Bloqueos"
@@ -812,7 +814,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza lista de apertura y cierre administrativo con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Incidencias"
@@ -828,7 +830,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza registro de reuniones con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Acuerdos"
@@ -844,7 +846,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Organiza panel de indicadores operativos con una plantilla editable y un registro de seguimiento.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Registro principal",
       "Análisis"
@@ -852,32 +854,32 @@
   },
   {
     "id": "tarjeta-con-qr",
-    "titulo": "Tarjeta profesional · espacio para QR",
+    "titulo": "Plan de tarjeta profesional y QR",
     "categoria": "Comunicación profesional",
     "puntos": 120,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Plantilla editable para organizar los datos de tu tarjeta profesional y reservar un espacio para un QR que hayas creado.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza los datos, el enlace y la ubicación prevista del QR en una tabla. No genera códigos QR ni una tarjeta gráfica.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
-      "Datos profesionales y enlace de contacto",
-      "Espacio indicado para tu código QR",
-      "Archivo HTML editable e imprimible; no genera códigos QR"
+      "Tabla de datos profesionales y enlace de contacto",
+      "Campo para anotar la ubicación prevista del QR",
+      "Hoja de trabajo HTML; no genera QR ni una tarjeta gráfica"
     ]
   },
   {
     "id": "firma-de-correo",
-    "titulo": "Firma de correo",
+    "titulo": "Hoja para preparar tu firma de correo",
     "categoria": "Comunicación profesional",
     "puntos": 100,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea firma de correo con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Reúne los datos y el texto de tu firma en tablas editables. No instala ni genera una firma para tu correo.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -885,15 +887,15 @@
   },
   {
     "id": "papeleria-personalizada",
-    "titulo": "Papelería personalizada",
+    "titulo": "Plan de papelería profesional",
     "categoria": "Comunicación profesional",
     "puntos": 180,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea papelería personalizada con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Define datos, encabezado y pie de página en una hoja de trabajo. No incluye papelería gráfica terminada.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -901,15 +903,15 @@
   },
   {
     "id": "plantillas-de-carruseles",
-    "titulo": "Plantillas de carruseles",
+    "titulo": "Guion para carruseles",
     "categoria": "Comunicación profesional",
     "puntos": 200,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea plantillas de carruseles con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Planea mensajes, imágenes y llamados a la acción por diapositiva en tablas. No incluye piezas gráficas para publicar.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -917,15 +919,15 @@
   },
   {
     "id": "kit-de-bienvenida",
-    "titulo": "Kit de bienvenida",
+    "titulo": "Plan de mensajes de bienvenida",
     "categoria": "Comunicación profesional",
     "puntos": 200,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea kit de bienvenida con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Prepara destinatarios, mensajes, información de contacto y siguientes pasos en una hoja de trabajo.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -933,15 +935,15 @@
   },
   {
     "id": "portadas-para-redes",
-    "titulo": "Portadas para redes",
+    "titulo": "Planificador de portadas para redes",
     "categoria": "Comunicación profesional",
     "puntos": 150,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea portadas para redes con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Organiza títulos, imágenes previstas y medidas por canal en tablas. No incluye imágenes de portada terminadas.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -949,15 +951,15 @@
   },
   {
     "id": "anuncios-de-horarios",
-    "titulo": "Anuncios de horarios",
+    "titulo": "Planificador de anuncios de horarios",
     "categoria": "Comunicación profesional",
     "puntos": 100,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea anuncios de horarios con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Prepara fechas, horarios y datos de contacto en una tabla antes de diseñar tu anuncio.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -973,7 +975,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Crea calendario de publicaciones con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -989,7 +991,7 @@
     "estado": "disponible",
     "fase": 1,
     "descripcion": "Crea guion para video de presentación con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"
@@ -997,15 +999,15 @@
   },
   {
     "id": "presentacion-del-consultorio",
-    "titulo": "Presentación del consultorio",
+    "titulo": "Guion de presentación del consultorio",
     "categoria": "Comunicación profesional",
     "puntos": 250,
     "tipo": "archivo",
     "icono": "file-pen-line",
     "estado": "disponible",
     "fase": 1,
-    "descripcion": "Crea presentación del consultorio con una estructura editable para tu identidad profesional.",
-    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "descripcion": "Planea secciones, textos y referencias visuales en tablas. No incluye una presentación gráfica terminada.",
+    "entrega": "Hoja de trabajo HTML con tablas editables, descargable e imprimible",
     "incluye": [
       "Diseño y contenido",
       "Lista de revisión"

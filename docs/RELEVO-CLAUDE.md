@@ -2,6 +2,14 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
+## 2026-10-26 · Auditoría completa de entrega de recompensas
+
+Auditoría sobre la API y el frontend públicos, con tres cuentas temporales gratis/VIP/admin eliminadas al terminar: 49 archivos descargados y 10 diseños aplicados, visibles y persistidos tras recargar. Las 40 hojas HTML conservaron texto y filas añadidas al guardar y reabrir sin conexión, sin desbordamiento a 390 px; se comprobó el botón de impresión. Los nueve PDF abren y sus 46 páginas se renderizan; no tienen campos AcroForm. Las descargas repetidas no cobran y una cuenta sin propiedad recibe 403. Los 60 canjes próximos se rechazaron sin descontar OC.
+
+Praxia registra una solicitud pendiente con seguimiento; se verificó cancelación y devolución única de OC. **No existe activación automática de licencia ni se verificó una entrega real por parte del proveedor.** La tienda separa ahora 59 entregas automáticas y una solicitud manual. La segunda tanda de 150 sigue siendo solo un plan.
+
+Se corrigieron títulos/descripciones de 14 hojas para reflejar el archivo real: guiones, planificadores y tablas editables, no piezas gráficas, diapositivas ni firmas terminadas. La hoja de tarjeta contiene un campo para planear dónde irá un QR, no un espacio gráfico ni un generador. La nota clínica se describe como PDF imprimible, sin campos digitales rellenables. IDs, precios, propiedad y contenido clínico permanecen iguales. Este corte de textos requiere verificar el nuevo despliegue; la auditoría de entrega anterior no se usa como prueba de su publicación. Validación de este corte: build con API real, npm ci/check y 212 pruebas aprobadas (una suite de reglas omitida localmente); catálogo y 14 descargas corregidas comprobados con backend/assets locales y Firebase real, UI 1440/390 sin errores, cuenta temporal eliminada.
+
 ## 2026-10-26 · Tienda OdonCoins y primera tanda de 120 recompensas
 
 **Publicación verificada:** PR #53 integrado en main 870ea9cf7bfa715ba034c669e996bc059d082d61. Cloudflare workflow 40386187680 satisfactorio, deployment 38d1f4f8, bundle público club-DRQuBE2S.js idéntico al build aprobado. El intento automático de Railway c32bb278-bb6f-476c-93c2-d85814d99956 falló al descargar el snapshot de GitHub. Se envió un archivo del directorio api extraído del mismo commit, sin secretos ni archivos locales, al mismo servicio: deployment b492a501-0a52-4ae4-8c1d-7942f9b3ff6c SUCCESS. No se cambiaron variables, dominios ni configuración de servicios.
@@ -10,7 +18,7 @@ La verificación posterior usó exclusivamente el frontend y la API públicos: t
 
 Implementación sobre main c436833 (PR #52, corrección del editor de perfil ya publicada). La moneda visible pasa a OdonCoins (OC), con equivalencia 1:1 y sin migrar ni reiniciar saldos, movimientos, logros o materiales existentes. Las reglas de obtención siguen iguales.
 
-Catálogo base en api/src/data/recompensas.json: 120 entradas únicas en 12 categorías. Hay 60 preparadas: nueve materiales aprobados existentes, Praxia por solicitud manual, seis marcos, cuatro portadas y 40 plantillas originales no clínicas. Las plantillas son HTML editables, descargables, imprimibles y funcionales sin conexión; las cuatro familias cubren estudio, carrera, administración y comunicación. No son cursos, asesorías ni herramientas interactivas. La tarjeta reserva espacio para un QR y no genera códigos.
+Catálogo base en api/src/data/recompensas.json: 120 entradas únicas en 12 categorías. Hay 60 preparadas: nueve materiales aprobados existentes, Praxia por solicitud manual, seis marcos, cuatro portadas y 40 plantillas originales no clínicas. Las plantillas son HTML editables, descargables, imprimibles y funcionales sin conexión; las cuatro familias cubren estudio, carrera, administración y comunicación. No son cursos, asesorías ni herramientas interactivas. La hoja de tarjeta permite anotar la ubicación prevista de un QR; no genera códigos ni una tarjeta gráfica.
 
 Las otras 60 propuestas permanecen Próximamente, sin canje ni descuento. Talleres, paquetes clínicos, acompañamiento, beneficios, herramientas futuras y premios físicos requieren contenido o capacidad real de entrega. Las propuestas clínicas exigen confirmación administrativa de revisión humana antes de habilitarse; no se generó ni publicó contenido clínico nuevo.
 
