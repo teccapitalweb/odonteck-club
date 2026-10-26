@@ -129,13 +129,13 @@ Estado personal del entrenamiento clínico, escrito únicamente por la API:
 
 ### `v2_recompensas_estado/{uid}`
 Saldo central y logros del miembro, escrito únicamente por la API:
-`{ uid, saldo, ganados, gastados, contadores, logros, desbloqueos: { materiales: id[] }, notificaciones, actualizado }`.
+`{ uid, saldo, ganados, gastados, contadores, logros, desbloqueos: { materiales: id[], recompensas: id[] }, personalizacion: { marco: id|null, portada: id|null }, notificaciones, actualizado }`.
 
 - Cada actividad tiene una clave única; reintentar una petición, recargar o volver a completar lo mismo no duplica puntos.
 - Las clases suman 10, completar su juego de repaso suma 5 (una sola vez por clase), terminar un curso 50, aprobar una evaluación 20, Retos 2 o 10 por primer intento diario, encuestas 20 a 40, Comunidad 5 o 10 y una membresía confirmada 300.
 - Desglose vigente: clase vista 10; juego de repaso completado 5 por clase; curso completado 50; quiz aprobado 20; respuesta correcta de Retos 10 o intento 2; bienvenida 25; Brújula profesional 0; encuesta de curso 20; encuesta de experiencia 40; tema de Comunidad 10; respuesta 5; membresía confirmada 300.
 - La primera lectura de `/recompensas/resumen` reconoce progreso, certificados, quizzes, encuestas, temas y XP de Retos ya existentes para conservar a miembros anteriores.
-- Los nueve materiales propios premium incluidos explícitamente en `api/src/lib/recompensas.js` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
+- Los nueve materiales propios premium incluidos explícitamente en `api/src/data/recompensas.json` pueden desbloquearse permanentemente con puntos; Atlas ICDAS permanece gratuito. Los diez PDF aprobados viajan dentro del despliegue privado de la API y se entregan con enlaces firmados de 10 minutos. Storage sigue disponible para materiales futuros administrados desde el panel.
 - Cuando una respuesta autenticada incluye `recompensas`, `src/main.ts` dispara el evento `recompensas:ganadas`: muestra un aviso inmediato de puntos y otro por cada logro nuevo. La API guarda además los avisos no leídos en `notificaciones`; la campana los contabiliza y los marca como leídos al abrirla. La clave idempotente del movimiento evita avisos y puntos duplicados por recarga o reintento.
 - Logros vigentes: primer paso (1 clase), en marcha (5 clases), primer certificado (1 curso), mente clínica (3 quizzes), retador constante (100 puntos de Retos), voz de comunidad (primer tema), especialista (3 cursos), maestro (10 cursos) y miembro del club (membresía pagada).
 
@@ -143,8 +143,13 @@ Saldo central y logros del miembro, escrito únicamente por la API:
 Libro mayor inmutable: `{ uid, clave, tipo, puntos, detalle, fecha }`. El ID es un hash de `uid + clave` para garantizar idempotencia.
 
 ### `v2_recompensas_canjes/{hash}`
-`{ uid, recompensaId, titulo, puntos, tipo, estatus:'entregado'|'pendiente', solicitado }`.
-Los materiales se entregan automáticamente. Praxia se registra como `pendiente`; nunca se presenta como activado hasta que el equipo lo confirme.
+`{ uid, recompensaId, titulo, puntos, tipo, estatus:'entregado'|'pendiente'|'cancelado', solicitado, reservaCupo, plazo, nota?, resuelto?, resueltoPor? }`.
+Materiales, plantillas y diseños se entregan automáticamente; los demás beneficios crean solicitudes pendientes. Resolver exige admin; cancelar devuelve el importe original una sola vez y repone el cupo reservado, preservando ganados. Un canje por recompensa y miembro, incluso si fue cancelado.
+
+### `v2_recompensas_catalogo/{id}`
+Ajustes sobre el catálogo estático y nuevas propuestas manuales: título, descripción, precio, estado, cupo, plazo, instrucciones internas, confirmación de revisión profesional y auditoría de actualización. El miembro nunca recibe instrucciones internas ni identidad del editor. API únicamente; las reglas remotas mantienen su cierre por defecto.
+
+120 propuestas base, 60 preparadas y 60 próximas. Las 40 plantillas HTML originales se empaquetan en `api/private/recompensas/plantillas.json`; descarga autenticada requiere canje. Los diseños se aplican desde su ruta dedicada y no pueden adjudicarse mediante PUT de perfil. Subir/quitar una portada propia desactiva la portada de colección de forma transaccional. OdonCoins conserva el saldo anterior 1:1 y las reglas existentes de obtención. VIP mantiene materiales incluidos; las nuevas plantillas y diseños se canjean con OC.
 
 ### `v2_cortesias/{uid}`
 `{ uid, hasta: ISO, motivo, otorgadaPor, fecha }`
@@ -198,7 +203,13 @@ Errores: `{ error: 'codigo_corto', mensaje: 'texto para humanos' }` con el statu
 | GET | `/clases/:cursoId/:n/ficha` | `{ url }` temporal de 10 min al PDF privado; exige ficha `aprobada`, acceso a la clase y desbloqueo secuencial. La ruta interna `archivo` nunca sale en `/catalogo`. |
 | GET | `/materiales/:id/descarga` | `{ url }` URL temporal de 10 min al PDF privado empaquetado o a Storage · VIP, material con `gratis: true` o desbloqueo permanente canjeado. El frontend la consume desde `#/materiales/:id/visor` y renderiza el documento en memoria con PDF.js; la URL no se persiste. |
 | GET | `/recompensas/resumen` | Saldo, contadores, logros, catálogo de recompensas, movimientos y notificaciones no leídas; sincroniza actividad histórica |
-| POST | `/recompensas/canjear` | `{ recompensaId }` → descuenta una sola vez y entrega material o crea solicitud pendiente de Praxia |
+| POST | `/recompensas/canjear` | `{ recompensaId, precioEsperado? }` → valida precio, saldo, propiedad, disponibilidad y cupo; descuenta una sola vez, entrega o crea solicitud. Precio cambiado devuelve 409 sin cobrar |
+| GET | `/recompensas/:id/archivo` | Descarga HTML privado; exige propiedad, no-store |
+| POST | `/recompensas/personalizacion` | `{ ranura: marco/portada, recompensaId: id/null }`; exige diseño adquirido y perfil existente |
+| GET | `/admin/recompensas` | Catálogo con configuración interna y últimos 100 canjes; claim admin en vivo |
+| POST | `/admin/recompensas` | Crea propuesta manual con identificador único; inicia Próximamente |
+| PATCH | `/admin/recompensas/:id` | Edita precio, estado y entrega; no admite cambiar tipo ni archivo |
+| POST | `/admin/recompensas/canjes/:id/resolver` | `{ estatus: entregado/cancelado, nota }`; solo manuales pendientes, devolución idempotente |
 | POST | `/recompensas/notificaciones/leidas` | Marca como leídos los avisos personales de logros y canjes |
 | GET | `/certificados` | `Certificado[]` del usuario |
 | GET | `/verificar/:folio` **pública** | `{ valido, nombre, cursoTitulo, emitido }` |

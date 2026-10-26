@@ -2,6 +2,13 @@ import { api, mensajeError } from './auth';
 import { Comunidad } from './comunidad';
 import { Datos, type Aviso, type Config, type Cupon, type Curso, type Evento, type Material, type MiembroDemo, type Quiz } from './datos';
 import type { ContactoEncuesta, ResumenEncuestas } from './encuestas';
+import type { Recompensa } from './recompensas';
+
+export interface PanelRecompensasAdmin {
+  catalogo: (Recompensa & {instrucciones?:string;revisionProfesional?:boolean;requiereRevision?:boolean})[];
+  canjes: {id:string;uid:string;recompensaId:string;titulo:string;puntos:number;tipo:string;estatus:string;solicitado:string;nota?:string}[];
+  limiteCanjes:number;
+}
 
 export interface ResumenAdmin {
   miembrosActivos: number;
@@ -48,6 +55,7 @@ export interface ReporteDirectorioAdmin {
 interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; publicUrl?: string }
 
 const estado = {
+  recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
@@ -118,6 +126,7 @@ const cargarCupones = (forzar = false) => cargar('cupones', async () => {
 }, forzar);
 
 export const Admin = {
+  get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
@@ -177,6 +186,9 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
       tareas.push(cargar('encuestas:contactos', async () => { estado.contactosEncuestas = await api<ContactoEncuesta[]>('/admin/encuestas/contactos'); }, forzar));
     } else if (path === '/admin/cupones') {
       tareas.push(cargarCupones(forzar));
+    } else if (path === '/admin/recompensas') {
+      estado.recompensas=null;
+      tareas.push(cargar('recompensas',async()=>{estado.recompensas=await api<PanelRecompensasAdmin>('/admin/recompensas');},true));
     } else if (path === '/admin/ajustes') {
       tareas.push(cargar('config', async () => { Datos.hidratarAdmin('config', adaptarConfig(await api('/admin/config'))); }, forzar));
     }

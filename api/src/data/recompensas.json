@@ -1,0 +1,2094 @@
+[
+  {
+    "id": "guia-diagnostico-ortodoncico",
+    "titulo": "Guía de diagnóstico ortodóncico",
+    "descripcion": "Desbloqueo permanente de una guía clínica propia de OdonTeck.",
+    "puntos": 250,
+    "tipo": "material",
+    "materialId": "guia-diagnostico-ortodoncico",
+    "icono": "book-open",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "consentimiento-informado",
+    "titulo": "Formato de consentimiento informado",
+    "descripcion": "Desbloqueo permanente del formato clínico propio de OdonTeck.",
+    "puntos": 300,
+    "tipo": "material",
+    "materialId": "consentimiento-informado",
+    "icono": "file-signature",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "tabla-dosis-anestesicas",
+    "titulo": "Tabla de dosis anestésicas",
+    "descripcion": "Referencia rápida de dosis máximas para la práctica clínica.",
+    "puntos": 350,
+    "tipo": "material",
+    "materialId": "tabla-dosis-anestesicas",
+    "icono": "syringe",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "plantilla-nota-clinica-receta",
+    "titulo": "Plantilla de nota clínica y receta",
+    "descripcion": "Formato editable para documentar la consulta diaria.",
+    "puntos": 400,
+    "tipo": "material",
+    "materialId": "plantilla-nota-clinica-receta",
+    "icono": "notebook-pen",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "protocolo-abscesos",
+    "titulo": "Protocolo de manejo de abscesos",
+    "descripcion": "Desbloqueo permanente del protocolo clínico de OdonTeck.",
+    "puntos": 450,
+    "tipo": "material",
+    "materialId": "protocolo-abscesos",
+    "icono": "clipboard-plus",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "guia-materiales-restauradores",
+    "titulo": "Guía de materiales restauradores",
+    "descripcion": "Consulta rápida para seleccionar materiales por indicación.",
+    "puntos": 500,
+    "tipo": "material",
+    "materialId": "guia-materiales-restauradores",
+    "icono": "layers-3",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "checklist-urgencias-pediatricas",
+    "titulo": "Checklist de urgencias odontopediátricas",
+    "descripcion": "Lista práctica para orientar la atención inicial de urgencias.",
+    "puntos": 500,
+    "tipo": "material",
+    "materialId": "checklist-urgencias-pediatricas",
+    "icono": "list-checks",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "guia-instrumentacion-endodontica",
+    "titulo": "Guía de instrumentación endodóntica",
+    "descripcion": "Secuencia clínica propia para consulta permanente.",
+    "puntos": 550,
+    "tipo": "material",
+    "materialId": "guia-instrumentacion-endodontica",
+    "icono": "route",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "manual-estratificacion-resinas",
+    "titulo": "Manual de estratificación de resinas",
+    "descripcion": "Desbloqueo permanente del manual clínico ilustrado de OdonTeck.",
+    "puntos": 600,
+    "tipo": "material",
+    "materialId": "manual-estratificacion-resinas",
+    "icono": "library",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Acceso permanente en biblioteca",
+    "incluye": [
+      "Material propio disponible en tu biblioteca"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "praxia-30-dias",
+    "titulo": "30 días de Praxia Medical",
+    "descripcion": "Solicitud de activación por 30 días. El equipo confirma el beneficio antes de iniciarlo.",
+    "puntos": 1500,
+    "tipo": "manual",
+    "icono": "stethoscope",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "entrega": "Solicitud con seguimiento del equipo",
+    "incluye": [
+      "30 días de acceso después de la confirmación del equipo"
+    ],
+    "fase": 1
+  },
+  {
+    "id": "marco-orbita",
+    "titulo": "Marco Órbita",
+    "categoria": "Personalización",
+    "puntos": 30,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco órbita para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "orbita",
+    "ranura": "marco"
+  },
+  {
+    "id": "marco-nacar",
+    "titulo": "Marco Nácar",
+    "categoria": "Personalización",
+    "puntos": 55,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco nácar para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "nacar",
+    "ranura": "marco"
+  },
+  {
+    "id": "marco-grafito",
+    "titulo": "Marco Grafito",
+    "categoria": "Personalización",
+    "puntos": 80,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco grafito para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "grafito",
+    "ranura": "marco"
+  },
+  {
+    "id": "marco-turquesa",
+    "titulo": "Marco Turquesa",
+    "categoria": "Personalización",
+    "puntos": 105,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco turquesa para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "turquesa",
+    "ranura": "marco"
+  },
+  {
+    "id": "marco-aurora",
+    "titulo": "Marco Aurora",
+    "categoria": "Personalización",
+    "puntos": 130,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco aurora para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "aurora",
+    "ranura": "marco"
+  },
+  {
+    "id": "marco-prisma",
+    "titulo": "Marco Prisma",
+    "categoria": "Personalización",
+    "puntos": 155,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un marco prisma para destacar tu foto en el directorio. Puedes activarlo y quitarlo cuando quieras.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Marco decorativo permanente",
+      "Visible en tu ficha y tarjeta del directorio",
+      "Conserva tu foto actual"
+    ],
+    "estilo": "prisma",
+    "ranura": "marco"
+  },
+  {
+    "id": "portada-minimal",
+    "titulo": "Portada Minimal",
+    "categoria": "Personalización",
+    "puntos": 100,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un fondo minimal para tu perfil profesional, compatible con tu foto y datos.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Diseño de portada permanente",
+      "Activación desde tu colección",
+      "Tu banner subido se conserva al cambiar de diseño"
+    ],
+    "estilo": "minimal",
+    "ranura": "portada"
+  },
+  {
+    "id": "portada-geometria",
+    "titulo": "Portada Geometría",
+    "categoria": "Personalización",
+    "puntos": 125,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un fondo geometría para tu perfil profesional, compatible con tu foto y datos.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Diseño de portada permanente",
+      "Activación desde tu colección",
+      "Tu banner subido se conserva al cambiar de diseño"
+    ],
+    "estilo": "geometria",
+    "ranura": "portada"
+  },
+  {
+    "id": "portada-atlas",
+    "titulo": "Portada Atlas",
+    "categoria": "Personalización",
+    "puntos": 150,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un fondo atlas para tu perfil profesional, compatible con tu foto y datos.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Diseño de portada permanente",
+      "Activación desde tu colección",
+      "Tu banner subido se conserva al cambiar de diseño"
+    ],
+    "estilo": "atlas",
+    "ranura": "portada"
+  },
+  {
+    "id": "portada-nocturna",
+    "titulo": "Portada Nocturna",
+    "categoria": "Personalización",
+    "puntos": 175,
+    "tipo": "personalizacion",
+    "icono": "palette",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Un fondo nocturna para tu perfil profesional, compatible con tu foto y datos.",
+    "entrega": "Diseño permanente para tu perfil",
+    "incluye": [
+      "Diseño de portada permanente",
+      "Activación desde tu colección",
+      "Tu banner subido se conserva al cambiar de diseño"
+    ],
+    "estilo": "nocturna",
+    "ranura": "portada"
+  },
+  {
+    "id": "agenda-semanal",
+    "titulo": "Agenda semanal",
+    "categoria": "Organización del estudio",
+    "puntos": 60,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Distribuye tus sesiones de aprendizaje y deja tiempo para repasar.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Prioridades de la semana",
+      "Bloques de estudio",
+      "Cierre semanal"
+    ]
+  },
+  {
+    "id": "planificador-mensual",
+    "titulo": "Planificador mensual",
+    "categoria": "Organización del estudio",
+    "puntos": 80,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza un mes de estudio con hitos y revisiones semanales.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Meta del mes",
+      "Plan por semana",
+      "Balance"
+    ]
+  },
+  {
+    "id": "calendario-de-evaluaciones",
+    "titulo": "Calendario de evaluaciones",
+    "categoria": "Organización del estudio",
+    "puntos": 90,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Prepara cada evaluación con fechas, temas y ensayos de práctica.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Evaluaciones",
+      "Preparación",
+      "Resultados"
+    ]
+  },
+  {
+    "id": "plantilla-de-repaso-espaciado",
+    "titulo": "Plantilla de repaso espaciado",
+    "categoria": "Organización del estudio",
+    "puntos": 100,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Programa revisiones sucesivas según lo que recuerdes de cada tema.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Tarjetas de repaso",
+      "Seguimiento",
+      "Dudas pendientes"
+    ]
+  },
+  {
+    "id": "bitacora-de-lecturas",
+    "titulo": "Bitácora de lecturas",
+    "categoria": "Organización del estudio",
+    "puntos": 80,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Conserva referencias, ideas y preguntas de tus lecturas.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Referencias",
+      "Notas de lectura",
+      "Preguntas"
+    ]
+  },
+  {
+    "id": "mapa-conceptual-editable",
+    "titulo": "Mapa conceptual editable",
+    "categoria": "Organización del estudio",
+    "puntos": 70,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Construye relaciones entre conceptos y comprueba cómo se conectan.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Concepto central",
+      "Nodos y relaciones",
+      "Síntesis"
+    ]
+  },
+  {
+    "id": "cuaderno-de-apuntes",
+    "titulo": "Cuaderno de apuntes",
+    "categoria": "Organización del estudio",
+    "puntos": 60,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Toma notas organizadas con preguntas de recuperación y una síntesis propia.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Referencia de la sesión",
+      "Apuntes",
+      "Síntesis y acción"
+    ]
+  },
+  {
+    "id": "matriz-de-prioridades",
+    "titulo": "Matriz de prioridades",
+    "categoria": "Organización del estudio",
+    "puntos": 70,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Decide qué estudiar primero según fecha, dificultad y relevancia.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Pendientes",
+      "Plan de acción"
+    ]
+  },
+  {
+    "id": "seguimiento-de-metas-de-90-dias",
+    "titulo": "Seguimiento de metas de 90 días",
+    "categoria": "Organización del estudio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Da seguimiento a tres meses de objetivos con entregables verificables.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Objetivos",
+      "Hitos",
+      "Revisión quincenal"
+    ]
+  },
+  {
+    "id": "organizador-de-congresos",
+    "titulo": "Organizador de congresos",
+    "categoria": "Organización del estudio",
+    "puntos": 120,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Planifica sesiones, contactos y aprendizajes de un congreso.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Antes de asistir",
+      "Agenda",
+      "Después del evento"
+    ]
+  },
+  {
+    "id": "cv-editable",
+    "titulo": "CV editable",
+    "categoria": "Desarrollo profesional",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Prepara un currículum claro con experiencia, formación y resultados verificables.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Datos profesionales",
+      "Perfil",
+      "Experiencia",
+      "Formación",
+      "Competencias"
+    ]
+  },
+  {
+    "id": "portafolio-profesional",
+    "titulo": "Portafolio profesional",
+    "categoria": "Desarrollo profesional",
+    "puntos": 200,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Presenta proyectos propios y sus resultados en un dossier editable.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Presentación",
+      "Proyectos",
+      "Reflexión"
+    ]
+  },
+  {
+    "id": "carta-de-presentacion",
+    "titulo": "Carta de presentación",
+    "categoria": "Desarrollo profesional",
+    "puntos": 120,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Estructura una carta específica para una oportunidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Destinatario",
+      "Borrador de carta",
+      "Revisión"
+    ]
+  },
+  {
+    "id": "biografia-profesional",
+    "titulo": "Biografía profesional",
+    "categoria": "Desarrollo profesional",
+    "puntos": 120,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Redacta versiones breve y extendida de tu presentación profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Base",
+      "Versiones",
+      "Control editorial"
+    ]
+  },
+  {
+    "id": "propuesta-de-proyecto-docente",
+    "titulo": "Propuesta de proyecto docente",
+    "categoria": "Desarrollo profesional",
+    "puntos": 250,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza objetivos, actividades y evaluación de un proyecto educativo.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Contexto",
+      "Diseño",
+      "Operación",
+      "Evaluación"
+    ]
+  },
+  {
+    "id": "presentacion-profesional-editable",
+    "titulo": "Presentación profesional editable",
+    "categoria": "Desarrollo profesional",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Planea una presentación con una idea central por diapositiva.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Brief",
+      "Guion de diapositivas",
+      "Ensayo"
+    ]
+  },
+  {
+    "id": "guia-de-preparacion-para-entrevistas",
+    "titulo": "Guía de preparación para entrevistas",
+    "categoria": "Desarrollo profesional",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Prepara respuestas basadas en experiencias y preguntas para la organización.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Oportunidad",
+      "Experiencias",
+      "Ensayo"
+    ]
+  },
+  {
+    "id": "organizador-de-postulaciones",
+    "titulo": "Organizador de postulaciones",
+    "categoria": "Desarrollo profesional",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Controla requisitos y fechas de tus postulaciones a programas de formación.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Programas",
+      "Requisitos",
+      "Seguimiento"
+    ]
+  },
+  {
+    "id": "mapa-de-objetivos-profesionales",
+    "titulo": "Mapa de objetivos profesionales",
+    "categoria": "Desarrollo profesional",
+    "puntos": 140,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Conecta tus intereses con acciones concretas de desarrollo.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Punto de partida",
+      "Opciones",
+      "Acciones"
+    ]
+  },
+  {
+    "id": "dossier-de-servicios",
+    "titulo": "Dossier de servicios",
+    "categoria": "Desarrollo profesional",
+    "puntos": 250,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Describe tus servicios, su alcance y la forma de contactar contigo.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Identidad",
+      "Servicios",
+      "Preguntas frecuentes"
+    ]
+  },
+  {
+    "id": "agenda-administrativa",
+    "titulo": "Agenda administrativa",
+    "categoria": "Organización del consultorio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza agenda administrativa con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Reservas y pendientes"
+    ]
+  },
+  {
+    "id": "inventario-de-insumos",
+    "titulo": "Inventario de insumos",
+    "categoria": "Organización del consultorio",
+    "puntos": 200,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza inventario de insumos con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Reposición"
+    ]
+  },
+  {
+    "id": "comparador-de-proveedores",
+    "titulo": "Comparador de proveedores",
+    "categoria": "Organización del consultorio",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza comparador de proveedores con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Criterios"
+    ]
+  },
+  {
+    "id": "registro-de-gastos",
+    "titulo": "Registro de gastos",
+    "categoria": "Organización del consultorio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza registro de gastos con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Revisión"
+    ]
+  },
+  {
+    "id": "calendario-de-mantenimiento",
+    "titulo": "Calendario de mantenimiento",
+    "categoria": "Organización del consultorio",
+    "puntos": 220,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza calendario de mantenimiento con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Seguimiento"
+    ]
+  },
+  {
+    "id": "organizador-de-turnos",
+    "titulo": "Organizador de turnos",
+    "categoria": "Organización del consultorio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza organizador de turnos con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Coberturas"
+    ]
+  },
+  {
+    "id": "tablero-de-tareas",
+    "titulo": "Tablero de tareas",
+    "categoria": "Organización del consultorio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza tablero de tareas con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Bloqueos"
+    ]
+  },
+  {
+    "id": "lista-de-apertura-y-cierre-administrativo",
+    "titulo": "Lista de apertura y cierre administrativo",
+    "categoria": "Organización del consultorio",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza lista de apertura y cierre administrativo con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Incidencias"
+    ]
+  },
+  {
+    "id": "registro-de-reuniones",
+    "titulo": "Registro de reuniones",
+    "categoria": "Organización del consultorio",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza registro de reuniones con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Acuerdos"
+    ]
+  },
+  {
+    "id": "panel-de-indicadores-operativos",
+    "titulo": "Panel de indicadores operativos",
+    "categoria": "Organización del consultorio",
+    "puntos": 300,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Organiza panel de indicadores operativos con una plantilla editable y un registro de seguimiento.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Registro principal",
+      "Análisis"
+    ]
+  },
+  {
+    "id": "tarjeta-con-qr",
+    "titulo": "Tarjeta profesional · espacio para QR",
+    "categoria": "Comunicación profesional",
+    "puntos": 120,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Plantilla editable para organizar los datos de tu tarjeta profesional y reservar un espacio para un QR que hayas creado.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Datos profesionales y enlace de contacto",
+      "Espacio indicado para tu código QR",
+      "Archivo HTML editable e imprimible; no genera códigos QR"
+    ]
+  },
+  {
+    "id": "firma-de-correo",
+    "titulo": "Firma de correo",
+    "categoria": "Comunicación profesional",
+    "puntos": 100,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea firma de correo con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "papeleria-personalizada",
+    "titulo": "Papelería personalizada",
+    "categoria": "Comunicación profesional",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea papelería personalizada con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "plantillas-de-carruseles",
+    "titulo": "Plantillas de carruseles",
+    "categoria": "Comunicación profesional",
+    "puntos": 200,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea plantillas de carruseles con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "kit-de-bienvenida",
+    "titulo": "Kit de bienvenida",
+    "categoria": "Comunicación profesional",
+    "puntos": 200,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea kit de bienvenida con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "portadas-para-redes",
+    "titulo": "Portadas para redes",
+    "categoria": "Comunicación profesional",
+    "puntos": 150,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea portadas para redes con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "anuncios-de-horarios",
+    "titulo": "Anuncios de horarios",
+    "categoria": "Comunicación profesional",
+    "puntos": 100,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea anuncios de horarios con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "calendario-de-publicaciones",
+    "titulo": "Calendario de publicaciones",
+    "categoria": "Comunicación profesional",
+    "puntos": 180,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea calendario de publicaciones con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "guion-para-video-de-presentacion",
+    "titulo": "Guion para video de presentación",
+    "categoria": "Comunicación profesional",
+    "puntos": 200,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea guion para video de presentación con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "presentacion-del-consultorio",
+    "titulo": "Presentación del consultorio",
+    "categoria": "Comunicación profesional",
+    "puntos": 250,
+    "tipo": "archivo",
+    "icono": "file-pen-line",
+    "estado": "disponible",
+    "fase": 1,
+    "descripcion": "Crea presentación del consultorio con una estructura editable para tu identidad profesional.",
+    "entrega": "Plantilla HTML editable, descargable e imprimible",
+    "incluye": [
+      "Diseño y contenido",
+      "Lista de revisión"
+    ]
+  },
+  {
+    "id": "planificador-de-repaso",
+    "titulo": "Planificador de repaso",
+    "categoria": "Herramientas digitales",
+    "puntos": 300,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Planificador de repaso. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Planificador de repaso",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "notas-con-etiquetas",
+    "titulo": "Notas con etiquetas",
+    "categoria": "Herramientas digitales",
+    "puntos": 325,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Notas con etiquetas. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Notas con etiquetas",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "gestor-de-lecturas",
+    "titulo": "Gestor de lecturas",
+    "categoria": "Herramientas digitales",
+    "puntos": 350,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Gestor de lecturas. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Gestor de lecturas",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "creador-de-mapas-conceptuales",
+    "titulo": "Creador de mapas conceptuales",
+    "categoria": "Herramientas digitales",
+    "puntos": 375,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Creador de mapas conceptuales. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Creador de mapas conceptuales",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "tarjetas-de-estudio-personales",
+    "titulo": "Tarjetas de estudio personales",
+    "categoria": "Herramientas digitales",
+    "puntos": 400,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Tarjetas de estudio personales. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Tarjetas de estudio personales",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "temporizador-de-concentracion",
+    "titulo": "Temporizador de concentración",
+    "categoria": "Herramientas digitales",
+    "puntos": 425,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Temporizador de concentración. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Temporizador de concentración",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "seguimiento-de-metas-digital",
+    "titulo": "Seguimiento de metas digital",
+    "categoria": "Herramientas digitales",
+    "puntos": 450,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Seguimiento de metas digital. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Seguimiento de metas digital",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "exportacion-de-portafolio-a-pdf",
+    "titulo": "Exportación de portafolio a PDF",
+    "categoria": "Herramientas digitales",
+    "puntos": 475,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Exportación de portafolio a PDF. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Exportación de portafolio a PDF",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "organizador-de-documentos",
+    "titulo": "Organizador de documentos",
+    "categoria": "Herramientas digitales",
+    "puntos": 500,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Organizador de documentos. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Organizador de documentos",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "reporte-visual-de-avance",
+    "titulo": "Reporte visual de avance",
+    "categoria": "Herramientas digitales",
+    "puntos": 525,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Reporte visual de avance. Requiere terminar la herramienta y probar su guardado.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Reporte visual de avance",
+      "Requiere terminar la herramienta y probar su guardado."
+    ],
+    "motivoPendiente": "Requiere terminar la herramienta y probar su guardado.",
+    "requiereRevision": false
+  },
+  {
+    "id": "paquete-de-anatomia-dental",
+    "titulo": "Paquete de anatomía dental",
+    "categoria": "Estudio odontológico",
+    "puntos": 400,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de anatomía dental. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de anatomía dental",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-histologia",
+    "titulo": "Paquete de histología",
+    "categoria": "Estudio odontológico",
+    "puntos": 425,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de histología. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de histología",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-nomenclatura",
+    "titulo": "Paquete de nomenclatura",
+    "categoria": "Estudio odontológico",
+    "puntos": 450,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de nomenclatura. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de nomenclatura",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-instrumental",
+    "titulo": "Paquete de instrumental",
+    "categoria": "Estudio odontológico",
+    "puntos": 475,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de instrumental. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de instrumental",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-materiales-dentales",
+    "titulo": "Paquete de materiales dentales",
+    "categoria": "Estudio odontológico",
+    "puntos": 500,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de materiales dentales. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de materiales dentales",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-endodoncia",
+    "titulo": "Paquete de endodoncia",
+    "categoria": "Estudio odontológico",
+    "puntos": 525,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de endodoncia. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de endodoncia",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-periodoncia",
+    "titulo": "Paquete de periodoncia",
+    "categoria": "Estudio odontológico",
+    "puntos": 550,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de periodoncia. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de periodoncia",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-ortodoncia",
+    "titulo": "Paquete de ortodoncia",
+    "categoria": "Estudio odontológico",
+    "puntos": 575,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de ortodoncia. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de ortodoncia",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-odontopediatria",
+    "titulo": "Paquete de odontopediatría",
+    "categoria": "Estudio odontológico",
+    "puntos": 600,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de odontopediatría. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de odontopediatría",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "paquete-de-protesis",
+    "titulo": "Paquete de prótesis",
+    "categoria": "Estudio odontológico",
+    "puntos": 625,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Paquete de prótesis. Contenido en preparación; requiere revisión profesional.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de prótesis",
+      "Contenido en preparación; requiere revisión profesional."
+    ],
+    "motivoPendiente": "Contenido en preparación; requiere revisión profesional.",
+    "requiereRevision": true
+  },
+  {
+    "id": "taller-de-organizacion-del-estudio",
+    "titulo": "Taller de organización del estudio",
+    "categoria": "Talleres grabados",
+    "puntos": 600,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de organización del estudio. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de organización del estudio",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-lectura-critica",
+    "titulo": "Taller de lectura crítica",
+    "categoria": "Talleres grabados",
+    "puntos": 625,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de lectura crítica. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de lectura crítica",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-busqueda-bibliografica",
+    "titulo": "Taller de búsqueda bibliográfica",
+    "categoria": "Talleres grabados",
+    "puntos": 650,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de búsqueda bibliográfica. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de búsqueda bibliográfica",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-presentaciones-academicas",
+    "titulo": "Taller de presentaciones académicas",
+    "categoria": "Talleres grabados",
+    "puntos": 675,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de presentaciones académicas. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de presentaciones académicas",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-comunicacion-profesional",
+    "titulo": "Taller de comunicación profesional",
+    "categoria": "Talleres grabados",
+    "puntos": 700,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de comunicación profesional. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de comunicación profesional",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-gestion-de-agenda",
+    "titulo": "Taller de gestión de agenda",
+    "categoria": "Talleres grabados",
+    "puntos": 725,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de gestión de agenda. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de gestión de agenda",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-fotografia-del-consultorio",
+    "titulo": "Taller de fotografía del consultorio",
+    "categoria": "Talleres grabados",
+    "puntos": 750,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de fotografía del consultorio. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de fotografía del consultorio",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-diseno-de-portafolio",
+    "titulo": "Taller de diseño de portafolio",
+    "categoria": "Talleres grabados",
+    "puntos": 775,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de diseño de portafolio. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de diseño de portafolio",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-herramientas-digitales",
+    "titulo": "Taller de herramientas digitales",
+    "categoria": "Talleres grabados",
+    "puntos": 800,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de herramientas digitales. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de herramientas digitales",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taller-de-trayectoria-profesional",
+    "titulo": "Taller de trayectoria profesional",
+    "categoria": "Talleres grabados",
+    "puntos": 825,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 2,
+    "descripcion": "Taller de trayectoria profesional. Pendiente de producción y autorización del taller.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taller de trayectoria profesional",
+      "Pendiente de producción y autorización del taller."
+    ],
+    "motivoPendiente": "Pendiente de producción y autorización del taller.",
+    "requiereRevision": false
+  },
+  {
+    "id": "revision-de-cv",
+    "titulo": "Revisión de CV",
+    "categoria": "Acompañamiento",
+    "puntos": 1200,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Revisión de CV. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Revisión de CV",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "revision-de-portafolio",
+    "titulo": "Revisión de portafolio",
+    "categoria": "Acompañamiento",
+    "puntos": 1225,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Revisión de portafolio. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Revisión de portafolio",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "revision-del-perfil-del-directorio",
+    "titulo": "Revisión del perfil del directorio",
+    "categoria": "Acompañamiento",
+    "puntos": 1250,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Revisión del perfil del directorio. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Revisión del perfil del directorio",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "orientacion-de-trayectoria",
+    "titulo": "Orientación de trayectoria",
+    "categoria": "Acompañamiento",
+    "puntos": 1275,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Orientación de trayectoria. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Orientación de trayectoria",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "simulacro-de-entrevista",
+    "titulo": "Simulacro de entrevista",
+    "categoria": "Acompañamiento",
+    "puntos": 1300,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Simulacro de entrevista. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Simulacro de entrevista",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "revision-de-diapositivas",
+    "titulo": "Revisión de diapositivas",
+    "categoria": "Acompañamiento",
+    "puntos": 1325,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Revisión de diapositivas. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Revisión de diapositivas",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "retroalimentacion-de-redaccion-academica",
+    "titulo": "Retroalimentación de redacción académica",
+    "categoria": "Acompañamiento",
+    "puntos": 1350,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Retroalimentación de redacción académica. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Retroalimentación de redacción académica",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "sesion-de-organizacion-del-estudio",
+    "titulo": "Sesión de organización del estudio",
+    "categoria": "Acompañamiento",
+    "puntos": 1375,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Sesión de organización del estudio. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Sesión de organización del estudio",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "revision-de-propuesta-de-proyecto",
+    "titulo": "Revisión de propuesta de proyecto",
+    "categoria": "Acompañamiento",
+    "puntos": 1400,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Revisión de propuesta de proyecto. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Revisión de propuesta de proyecto",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "encuentro-grupal-con-docente",
+    "titulo": "Encuentro grupal con docente",
+    "categoria": "Acompañamiento",
+    "puntos": 1425,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Encuentro grupal con docente. Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Encuentro grupal con docente",
+      "Se habilitará al confirmar responsable, cupos y plazo de entrega."
+    ],
+    "motivoPendiente": "Se habilitará al confirmar responsable, cupos y plazo de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "pase-vip-de-24-horas",
+    "titulo": "Pase VIP de 24 horas",
+    "categoria": "Beneficios especiales",
+    "puntos": 1500,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Pase VIP de 24 horas. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Pase VIP de 24 horas",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "pase-vip-de-3-dias",
+    "titulo": "Pase VIP de 3 días",
+    "categoria": "Beneficios especiales",
+    "puntos": 1525,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Pase VIP de 3 días. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Pase VIP de 3 días",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "pase-vip-de-7-dias",
+    "titulo": "Pase VIP de 7 días",
+    "categoria": "Beneficios especiales",
+    "puntos": 1550,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Pase VIP de 7 días. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Pase VIP de 7 días",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "acceso-a-curso-durante-7-dias",
+    "titulo": "Acceso a curso durante 7 días",
+    "categoria": "Beneficios especiales",
+    "puntos": 1575,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Acceso a curso durante 7 días. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Acceso a curso durante 7 días",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "acceso-a-curso-durante-30-dias",
+    "titulo": "Acceso a curso durante 30 días",
+    "categoria": "Beneficios especiales",
+    "puntos": 1600,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Acceso a curso durante 30 días. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Acceso a curso durante 30 días",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "entrada-a-masterclass",
+    "titulo": "Entrada a masterclass",
+    "categoria": "Beneficios especiales",
+    "puntos": 1625,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Entrada a masterclass. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Entrada a masterclass",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "descuento-en-taller",
+    "titulo": "Descuento en taller",
+    "categoria": "Beneficios especiales",
+    "puntos": 1650,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Descuento en taller. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Descuento en taller",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "descuento-en-curso-especial",
+    "titulo": "Descuento en curso especial",
+    "categoria": "Beneficios especiales",
+    "puntos": 1675,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Descuento en curso especial. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Descuento en curso especial",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "paquete-de-herramientas-durante-30-dias",
+    "titulo": "Paquete de herramientas durante 30 días",
+    "categoria": "Beneficios especiales",
+    "puntos": 1700,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Paquete de herramientas durante 30 días. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Paquete de herramientas durante 30 días",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "entrada-a-evento-en-linea",
+    "titulo": "Entrada a evento en línea",
+    "categoria": "Beneficios especiales",
+    "puntos": 1725,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Entrada a evento en línea. Pendiente de condiciones y capacidad de activación.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Entrada a evento en línea",
+      "Pendiente de condiciones y capacidad de activación."
+    ],
+    "motivoPendiente": "Pendiente de condiciones y capacidad de activación.",
+    "requiereRevision": false
+  },
+  {
+    "id": "stickers-odonteck",
+    "titulo": "Stickers OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2000,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Stickers OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Stickers OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "separadores-odonteck",
+    "titulo": "Separadores OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2025,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Separadores OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Separadores OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "libreta-odonteck",
+    "titulo": "Libreta OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2050,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Libreta OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Libreta OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "pluma-odonteck",
+    "titulo": "Pluma OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2075,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Pluma OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Pluma OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "portagafete-odonteck",
+    "titulo": "Portagafete OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2100,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Portagafete OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Portagafete OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "cordon-para-gafete-odonteck",
+    "titulo": "Cordón para gafete OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2125,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Cordón para gafete OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Cordón para gafete OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "taza-odonteck",
+    "titulo": "Taza OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2150,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Taza OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Taza OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "termo-odonteck",
+    "titulo": "Termo OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2175,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Termo OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Termo OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "bolsa-reutilizable-odonteck",
+    "titulo": "Bolsa reutilizable OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2200,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Bolsa reutilizable OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Bolsa reutilizable OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  },
+  {
+    "id": "tapete-de-escritorio-odonteck",
+    "titulo": "Tapete de escritorio OdonTeck",
+    "categoria": "Premios físicos",
+    "puntos": 2225,
+    "tipo": "manual",
+    "icono": "gift",
+    "estado": "proximamente",
+    "fase": 3,
+    "descripcion": "Tapete de escritorio OdonTeck. Pendiente de proveedor, existencias y condiciones de entrega.",
+    "entrega": "Se anunciará al estar lista",
+    "incluye": [
+      "Tapete de escritorio OdonTeck",
+      "Pendiente de proveedor, existencias y condiciones de entrega."
+    ],
+    "motivoPendiente": "Pendiente de proveedor, existencias y condiciones de entrega.",
+    "requiereRevision": false
+  }
+]

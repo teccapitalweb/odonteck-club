@@ -41,7 +41,7 @@ import { toggleReserva } from './pages/envivo';
 import { comunidad, directorio, editarPerfilDirectorio, hilo, perfilDirectorio } from './pages/comunidad';
 import { abrirVisorDocumento, montarDocumentosDirectorio, prepararDocumento } from './core/directorio-docs';
 import { paginaLogros } from './pages/logros';
-import { paginaRecompensas } from './pages/recompensas';
+import { paginaRecompensas, detalleRecompensa } from './pages/recompensas';
 import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
@@ -615,6 +615,7 @@ route('/admin/miembros', rutaAdmin((ui) => ui.adminMiembros));
 route('/admin/miembros/:uid', rutaAdmin((ui) => ui.adminMiembro));
 route('/admin/comunidad', rutaAdmin((ui) => ui.adminComunidad));
 route('/admin/cupones', rutaAdmin((ui) => ui.adminCupones));
+route('/admin/recompensas', rutaAdmin((ui) => ui.adminRecompensas));
 route('/admin/avisos', rutaAdmin((ui) => ui.adminAvisos));
 route('/admin/encuestas', rutaAdmin((ui) => ui.adminEncuestas));
 route('/admin/ajustes', rutaAdmin((ui) => ui.adminAjustes));
@@ -645,7 +646,7 @@ window.addEventListener('recompensas:ganadas', (e) => {
   const detalle = (e as CustomEvent).detail;
   const puntos = Number(detalle?.puntosGanados || 0);
   const logros = detalle?.logrosNuevos || [];
-  if (puntos > 0) toast(`+${puntos} puntos añadidos a tus recompensas`, 'sparkles');
+  if (puntos > 0) toast(`+${puntos} OdonCoins añadidos a tu monedero`, 'coins');
   logros.forEach((logro: { titulo?: string }) => toast(`Logro desbloqueado: ${logro.titulo || 'nuevo logro'}`, 'trophy'));
   Recompensas.aplicarPremio(detalle);
 });
@@ -1112,7 +1113,7 @@ document.addEventListener('click', async (e) => {
   if (quitarImagen) {
     const tipo = quitarImagen.matches('[data-dir-photo-quitar]') ? 'foto' : 'banner';
     quitarImagen.disabled = true;
-    try { await Directorio.actualizarImagen(tipo, null); toast(tipo === 'foto' ? 'Foto retirada' : 'Portada retirada', 'image-minus'); await refrescarFichaDirectorio(); }
+    try { await Directorio.actualizarImagen(tipo, null); Recompensas.invalidar(); toast(tipo === 'foto' ? 'Foto retirada' : 'Portada retirada', 'image-minus'); await refrescarFichaDirectorio(); }
     catch (err) { quitarImagen.disabled = false; toast(mensajeError(err), 'alert-triangle'); }
     return;
   }
@@ -1296,21 +1297,29 @@ document.addEventListener('click', async (e) => {
     try { if (navigator.share) await navigator.share({ title: 'OdonTeck Club', url }); else { await navigator.clipboard.writeText(url); toast('Enlace copiado', 'link'); } } catch {}
   }
 
+  const detallePremio=el.closest<HTMLButtonElement>('[data-reward-detail]');
+  if(detallePremio){const s=Recompensas.resumen(),r=s?.recompensas.find(x=>x.id===detallePremio.dataset.rewardDetail),d=document.querySelector<HTMLDialogElement>('#reward-detail');if(r&&s&&d){d.innerHTML=detalleRecompensa(r,s.saldo);createIcons({icons});d.showModal();}return;}
+  if(el.closest('[data-reward-retry]')){try{await Recompensas.cargar(true);render();}catch(err){toast(mensajeError(err),'alert-triangle');}return;}
+  const descargarPremio=el.closest<HTMLButtonElement>('[data-reward-download]');
+  if(descargarPremio){descargarPremio.disabled=true;try{await Recompensas.descargar(descargarPremio.dataset.rewardDownload!);toast('Plantilla descargada. Ábrela para editar y guardar tu copia.','download');}catch(err){toast(mensajeError(err),'alert-triangle');}finally{descargarPremio.disabled=false;}return;}
+  const aplicarPremio=el.closest<HTMLButtonElement>('[data-reward-apply]');
+  if(aplicarPremio){aplicarPremio.disabled=true;try{await Recompensas.aplicar(aplicarPremio.dataset.remove==='1'?null:aplicarPremio.dataset.rewardApply!,aplicarPremio.dataset.slot as 'marco'|'portada');Directorio.invalidar();toast('Diseño de perfil actualizado','palette');render();}catch(err){toast(mensajeError(err),'alert-triangle');aplicarPremio.disabled=false;}return;}
   const canje = el.closest<HTMLButtonElement>('[data-canjear-recompensa]');
   if (canje) {
     const id = canje.dataset.canjearRecompensa!;
     const recompensa = Recompensas.resumen()?.recompensas.find((r) => r.id === id);
-    if (!recompensa || !confirm(`¿Canjear ${recompensa.puntos.toLocaleString('es-MX')} puntos por “${recompensa.titulo}”?`)) return;
+    if (!recompensa || (!canje.closest('#reward-detail')&&!confirm(`¿Canjear ${recompensa.puntos.toLocaleString('es-MX')} OdonCoins por “${recompensa.titulo}”?`))) return;
     canje.disabled = true;
     try {
-      const resultado = await Recompensas.canjear(id);
+      const resultado = await Recompensas.canjear(id, Number(canje.dataset.precio ?? recompensa.puntos));
       if (Datos.modo === 'demo' && recompensa.materialId) {
         const material = Datos.materiales().find((m) => m.id === recompensa.materialId);
         if (material) Datos.guardarMaterial({ ...material, desbloqueadoConPuntos: true });
       } else if (Datos.modo === 'api') await cargarClub(current().path, true);
-      toast(resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Te confirmaremos la activación.' : 'Recompensa desbloqueada en tu biblioteca', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
+      document.querySelector<HTMLDialogElement>('#reward-detail')?.close();
+      toast(resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Consulta el seguimiento en Mis recompensas.' : 'Recompensa añadida a tu colección', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
       render();
-    } catch (err) { toast(mensajeError(err), 'alert-triangle'); canje.disabled = false; }
+    } catch (err) { toast(mensajeError(err), 'alert-triangle'); document.querySelector<HTMLDialogElement>('#reward-detail')?.close(); await Recompensas.cargar(true).catch(()=>null); render(); }
   }
   if (el.closest('[data-guardar]')) toast('Guardado en tu biblioteca', 'bookmark');
 
@@ -1390,7 +1399,7 @@ document.addEventListener('change', async (e) => {
     toast(tipo === 'foto' ? 'Subiendo tu foto…' : 'Subiendo tu portada…', 'loader-circle');
     try {
       const prep = await (tipo === 'foto' ? prepararFotoDirectorio(file) : prepararBannerDirectorio(file));
-      await Directorio.actualizarImagen(tipo, prep); URL.revokeObjectURL(prep.preview);
+      await Directorio.actualizarImagen(tipo, prep); Recompensas.invalidar(); URL.revokeObjectURL(prep.preview);
       toast(tipo === 'foto' ? 'Foto actualizada' : 'Portada actualizada', 'badge-check'); await refrescarFichaDirectorio();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
     return;
@@ -1451,6 +1460,7 @@ document.addEventListener('change', async (e) => {
 
 document.addEventListener('submit', async (e) => {
   const f = e.target as HTMLFormElement;
+  if(f.matches('[data-reward-filter]')){e.preventDefault();const p=new URLSearchParams();new FormData(f).forEach((v,k)=>{if(String(v))p.set(k,String(v));});navigate(`/recompensas?${p}`);return;}
   if (f.matches('[data-canjear-cupon]')) {
     e.preventDefault();
     const boton = f.querySelector<HTMLButtonElement>('button[type="submit"]');
@@ -1480,7 +1490,7 @@ document.addEventListener('submit', async (e) => {
     const anosExperiencia = String(d.get('anosExperiencia') || '').trim();
     const boton = f.querySelector<HTMLButtonElement>('footer button[type="submit"], footer button:not([type])'); if (boton) boton.disabled = true;
     try {
-      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), idiomas: csv('idiomas'), anosExperiencia: anosExperiencia ? Number(anosExperiencia) : null, experiencia, formacion, credenciales, bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio, bannerDirectorioPendiente, quitarBannerDirectorio);
+      await Directorio.guardarPerfil({ titular: String(d.get('titular') || '').trim(), etapa: String(d.get('etapa')), especialidades: csv('especialidades'), ciudad: String(d.get('ciudad') || '').trim(), estado: String(d.get('estado') || '').trim(), modalidades: [String(d.get('modalidad'))], disponibilidad: d.getAll('disponibilidad').map(String), habilidades: csv('habilidades'), idiomas: csv('idiomas'), anosExperiencia: anosExperiencia ? Number(anosExperiencia) : null, experiencia, formacion, credenciales, bio: String(d.get('bio') || '').trim(), visible: d.get('visible') === '1', contacto: { canal: String(d.get('contactoCanal')), valor: String(d.get('contactoValor') || '').trim() } }, fotoDirectorioPendiente, quitarFotoDirectorio, bannerDirectorioPendiente, quitarBannerDirectorio); Recompensas.invalidar();
       limpiarFotoDirectorioPendiente(); toast('Perfil profesional actualizado', 'badge-check'); navigate('/directorio');
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); if (boton) boton.disabled = false; } return;
   }

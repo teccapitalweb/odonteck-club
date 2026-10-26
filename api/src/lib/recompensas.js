@@ -1,5 +1,7 @@
 import { createHash } from 'node:crypto';
 import { conflicto, noEncontrado } from './errores.js';
+import { RECOMPENSAS, CATALOGO_COL, combinarRecompensa, puedeEntregar, recompensaPublica, esEntregaAutomatica, leerCatalogoRecompensas } from './recompensas-catalogo.js';
+import { tienePlantilla } from './recompensas-archivos.js';
 
 export const REGLAS_PUNTOS = Object.freeze({
   clase: 10,
@@ -16,97 +18,8 @@ export const REGLAS_PUNTOS = Object.freeze({
   membresia: 300,
 });
 
-export const RECOMPENSAS = Object.freeze([
-  {
-    id: 'guia-diagnostico-ortodoncico',
-    titulo: 'Guía de diagnóstico ortodóncico',
-    descripcion: 'Desbloqueo permanente de una guía clínica propia de OdonTeck.',
-    puntos: 250,
-    tipo: 'material',
-    materialId: 'guia-diagnostico-ortodoncico',
-    icono: 'book-open',
-  },
-  {
-    id: 'consentimiento-informado',
-    titulo: 'Formato de consentimiento informado',
-    descripcion: 'Desbloqueo permanente del formato clínico propio de OdonTeck.',
-    puntos: 300,
-    tipo: 'material',
-    materialId: 'consentimiento-informado',
-    icono: 'file-signature',
-  },
-  {
-    id: 'tabla-dosis-anestesicas',
-    titulo: 'Tabla de dosis anestésicas',
-    descripcion: 'Referencia rápida de dosis máximas para la práctica clínica.',
-    puntos: 350,
-    tipo: 'material',
-    materialId: 'tabla-dosis-anestesicas',
-    icono: 'syringe',
-  },
-  {
-    id: 'plantilla-nota-clinica-receta',
-    titulo: 'Plantilla de nota clínica y receta',
-    descripcion: 'Formato editable para documentar la consulta diaria.',
-    puntos: 400,
-    tipo: 'material',
-    materialId: 'plantilla-nota-clinica-receta',
-    icono: 'notebook-pen',
-  },
-  {
-    id: 'protocolo-abscesos',
-    titulo: 'Protocolo de manejo de abscesos',
-    descripcion: 'Desbloqueo permanente del protocolo clínico de OdonTeck.',
-    puntos: 450,
-    tipo: 'material',
-    materialId: 'protocolo-abscesos',
-    icono: 'clipboard-plus',
-  },
-  {
-    id: 'guia-materiales-restauradores',
-    titulo: 'Guía de materiales restauradores',
-    descripcion: 'Consulta rápida para seleccionar materiales por indicación.',
-    puntos: 500,
-    tipo: 'material',
-    materialId: 'guia-materiales-restauradores',
-    icono: 'layers-3',
-  },
-  {
-    id: 'checklist-urgencias-pediatricas',
-    titulo: 'Checklist de urgencias odontopediátricas',
-    descripcion: 'Lista práctica para orientar la atención inicial de urgencias.',
-    puntos: 500,
-    tipo: 'material',
-    materialId: 'checklist-urgencias-pediatricas',
-    icono: 'list-checks',
-  },
-  {
-    id: 'guia-instrumentacion-endodontica',
-    titulo: 'Guía de instrumentación endodóntica',
-    descripcion: 'Secuencia clínica propia para consulta permanente.',
-    puntos: 550,
-    tipo: 'material',
-    materialId: 'guia-instrumentacion-endodontica',
-    icono: 'route',
-  },
-  {
-    id: 'manual-estratificacion-resinas',
-    titulo: 'Manual de estratificación de resinas',
-    descripcion: 'Desbloqueo permanente del manual clínico ilustrado de OdonTeck.',
-    puntos: 600,
-    tipo: 'material',
-    materialId: 'manual-estratificacion-resinas',
-    icono: 'library',
-  },
-  {
-    id: 'praxia-30-dias',
-    titulo: '30 días de Praxia Medical',
-    descripcion: 'Solicitud de activación por 30 días. El equipo confirma el beneficio antes de iniciarlo.',
-    puntos: 1500,
-    tipo: 'manual',
-    icono: 'stethoscope',
-  },
-]);
+export { RECOMPENSAS } from './recompensas-catalogo.js';
+
 
 export const LOGROS_RECOMPENSA = Object.freeze([
   { id: 'primer-paso', titulo: 'Primer paso', descripcion: 'Completaste tu primera clase.', icono: 'footprints', contador: 'clases', meta: 1 },
@@ -132,7 +45,8 @@ export const estadoRecompensasVacio = (uid = '') => ({
   gastados: 0,
   contadores: {},
   logros: {},
-  desbloqueos: { materiales: [] },
+  desbloqueos: { materiales: [], recompensas: [] },
+  personalizacion: { marco: null, portada: null },
   notificaciones: [],
   actualizado: null,
 });
@@ -147,7 +61,8 @@ export function normalizarEstadoRecompensas(valor, uid = '') {
     gastados: Math.max(0, numero(v.gastados)),
     contadores: Object.fromEntries(Object.entries(objeto(v.contadores)).map(([k, n]) => [k, Math.max(0, numero(n))])),
     logros: objeto(v.logros),
-    desbloqueos: { materiales: Array.isArray(desbloqueos.materiales) ? [...new Set(desbloqueos.materiales.filter((x) => typeof x === 'string'))] : [] },
+    desbloqueos: { materiales: Array.isArray(desbloqueos.materiales) ? [...new Set(desbloqueos.materiales.filter((x) => typeof x === 'string'))] : [], recompensas: Array.isArray(desbloqueos.recompensas) ? [...new Set(desbloqueos.recompensas.filter(x=>typeof x==='string'))] : [] },
+    personalizacion: { marco: typeof v.personalizacion?.marco==='string'?v.personalizacion.marco:null, portada: typeof v.personalizacion?.portada==='string'?v.personalizacion.portada:null },
     notificaciones: Array.isArray(v.notificaciones) ? v.notificaciones.filter((n) => n && typeof n === 'object').slice(-30) : [],
     actualizado: typeof v.actualizado === 'string' ? v.actualizado : null,
   };
@@ -264,79 +179,56 @@ export function logrosPublicos(estado) {
   }));
 }
 
-export function catalogoRecompensas(estado, esVip = false, materialesDisponibles = null) {
+export function catalogoRecompensas(estado, esVip = false, materialesDisponibles = null, catalogo = RECOMPENSAS, canjes = []) {
   const e = normalizarEstadoRecompensas(estado);
-  return RECOMPENSAS.map((r) => {
-    const canjeada = r.tipo === 'material'
-      ? e.desbloqueos.materiales.includes(r.materialId)
-      : !!e.contadores[`canje:${r.id}`];
-    return {
-      ...r,
-      canjeada,
-      incluidaVip: r.tipo === 'material' && esVip,
-      alcanza: e.saldo >= r.puntos,
-      disponible: r.tipo !== 'material' || materialesDisponibles === null || materialesDisponibles.has(r.materialId),
+  const porId = new Map(canjes.map(c=>[c.recompensaId,c]));
+  return catalogo.map(r => {
+    const registro=porId.get(r.id);
+    const canjeada=r.tipo==='material'?e.desbloqueos.materiales.includes(r.materialId):e.desbloqueos.recompensas.includes(r.id)||!!e.contadores[`canje:${r.id}`];
+    return { ...recompensaPublica(r), canjeada, incluidaVip:r.tipo==='material'&&esVip, alcanza:e.saldo>=r.puntos,
+      disponible:puedeEntregar(r)&&(r.tipo!=='archivo'||tienePlantilla(r.id))&&(r.tipo!=='material'||materialesDisponibles===null||materialesDisponibles.has(r.materialId)),
+      estatus:registro?.estatus??(canjeada?(esEntregaAutomatica(r)?'entregado':'pendiente'):null),
+      aplicado:r.tipo==='personalizacion'&&e.personalizacion[r.ranura]===r.id,
     };
   });
 }
 
-export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId, esVip = false) {
-  const recompensa = RECOMPENSAS.find((r) => r.id === recompensaId);
-  if (!recompensa) throw noEncontrado('Esa recompensa no existe.');
-  if (esVip && recompensa.tipo === 'material') throw conflicto('Tu membresía VIP ya incluye este material.', 'recompensa_incluida');
-  const { db } = ctx;
-  if (recompensa.tipo === 'material') {
-    const materialSnap = await db.collection(colecciones.materiales).doc(recompensa.materialId).get();
-    const publicadoEnStorage = materialSnap.exists && materialSnap.data().estado === 'disponible' && !!materialSnap.data().archivo;
-    const publicadoEnApi = ctx.materiales?.tiene(recompensa.materialId) === true;
-    if (!publicadoEnStorage && !publicadoEnApi) {
-      throw conflicto('Esta recompensa estará disponible cuando publiquemos el material autorizado.', 'recompensa_no_disponible');
-    }
+export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId, esVip = false, precioEsperado) {
+  const base=RECOMPENSAS.find(r=>r.id===recompensaId)??(await leerCatalogoRecompensas(ctx.db)).find(r=>r.id===recompensaId);
+  if(!base)throw noEncontrado('Esa recompensa no existe.');
+  if(esVip&&base.tipo==='material')throw conflicto('Tu membresía VIP ya incluye este material.','recompensa_incluida');
+  const {db}=ctx;
+  if(base.tipo==='material') {
+    const m=await db.collection(colecciones.materiales).doc(base.materialId).get();
+    if(!(m.exists&&m.data().estado==='disponible'&&m.data().archivo)&&ctx.materiales?.tiene(base.materialId)!==true)throw conflicto('Esta recompensa estará disponible cuando publiquemos el material autorizado.','recompensa_no_disponible');
   }
-  const estadoRef = db.collection(colecciones.recompensasEstado).doc(usuario.uid);
-  const canjeRef = db.collection(colecciones.recompensasCanjes).doc(idMovimiento(usuario.uid, `canje:${recompensa.id}`));
-  const movimientoRef = db.collection(colecciones.recompensasMovimientos).doc(idMovimiento(usuario.uid, `gasto:${recompensa.id}`));
-  return db.runTransaction(async (tx) => {
-    const [estadoSnap, canjeSnap] = await Promise.all([tx.get(estadoRef), tx.get(canjeRef)]);
-    if (canjeSnap.exists) throw conflicto('Esta recompensa ya fue canjeada.', 'recompensa_ya_canjeada');
-    const estado = normalizarEstadoRecompensas(estadoSnap.exists ? estadoSnap.data() : null, usuario.uid);
-    if (estado.saldo < recompensa.puntos) throw conflicto(`Necesitas ${recompensa.puntos - estado.saldo} puntos más.`, 'puntos_insuficientes');
-    const ahoraISO = ctx.now().toISOString();
-    estado.saldo -= recompensa.puntos;
-    estado.gastados += recompensa.puntos;
-    estado.contadores[`canje:${recompensa.id}`] = 1;
-    if (recompensa.tipo === 'material') estado.desbloqueos.materiales = [...new Set([...estado.desbloqueos.materiales, recompensa.materialId])];
-    const estatus = recompensa.tipo === 'material' ? 'entregado' : 'pendiente';
-    const notificacion = {
-      id: `canje-${recompensa.id}-${ahoraISO}`,
-      tipo: 'recompensa',
-      titulo: recompensa.tipo === 'material' ? 'Recurso desbloqueado' : 'Solicitud de recompensa recibida',
-      texto: recompensa.tipo === 'material' ? `${recompensa.titulo} ya está disponible en tu biblioteca.` : 'El equipo confirmará la activación de Praxia antes de iniciar tus 30 días.',
-      enlace: recompensa.tipo === 'material' ? `#/materiales/${recompensa.materialId}` : '#/recompensas',
-      fecha: ahoraISO,
-      leida: false,
-    };
-    estado.notificaciones = [...estado.notificaciones, notificacion].slice(-30);
-    estado.actualizado = ahoraISO;
-    tx.set(estadoRef, estado);
-    tx.create(canjeRef, {
-      uid: usuario.uid,
-      recompensaId: recompensa.id,
-      titulo: recompensa.titulo,
-      puntos: recompensa.puntos,
-      tipo: recompensa.tipo,
-      estatus,
-      solicitado: ahoraISO,
-    });
-    tx.create(movimientoRef, {
-      uid: usuario.uid,
-      clave: `gasto:${recompensa.id}`,
-      tipo: 'canje',
-      puntos: -recompensa.puntos,
-      detalle: `Canje: ${recompensa.titulo}`,
-      fecha: ahoraISO,
-    });
-    return { estado, recompensa: { ...recompensa, estatus }, notificacion };
+  if(base.tipo==='archivo'&&!tienePlantilla(base.id))throw conflicto('El archivo todavía no está preparado.','recompensa_no_disponible');
+  const estadoRef=db.collection(colecciones.recompensasEstado).doc(usuario.uid);
+  const canjeRef=db.collection(colecciones.recompensasCanjes).doc(idMovimiento(usuario.uid,`canje:${base.id}`));
+  const movimientoRef=db.collection(colecciones.recompensasMovimientos).doc(idMovimiento(usuario.uid,`gasto:${base.id}`));
+  const configRef=db.collection(CATALOGO_COL).doc(base.id);
+  return db.runTransaction(async tx=>{
+    const [estadoSnap,canjeSnap,configSnap]=await tx.getAll(estadoRef,canjeRef,configRef);
+    if(canjeSnap.exists)throw conflicto('Esta recompensa ya tiene un canje registrado.','recompensa_ya_canjeada');
+    const recompensa=combinarRecompensa(base,configSnap.exists?configSnap.data():{});
+    if(!puedeEntregar(recompensa))throw conflicto('Esta recompensa todavía no está disponible o no tiene cupos.','recompensa_no_disponible');
+    if(precioEsperado!==undefined&&precioEsperado!==recompensa.puntos)throw conflicto('El precio cambió. Actualiza la tienda y confirma el nuevo importe.','precio_actualizado');
+    const estado=normalizarEstadoRecompensas(estadoSnap.exists?estadoSnap.data():null,usuario.uid);
+    if(estado.contadores[`canje:${recompensa.id}`]||estado.desbloqueos.recompensas.includes(recompensa.id)||(recompensa.materialId&&estado.desbloqueos.materiales.includes(recompensa.materialId)))throw conflicto('Ya tienes esta recompensa en tu colección.','recompensa_ya_canjeada');
+    if(estado.saldo<recompensa.puntos)throw conflicto(`Necesitas ${recompensa.puntos-estado.saldo} OdonCoins más.`,'puntos_insuficientes');
+    const ahoraISO=ctx.now().toISOString();
+    estado.saldo-=recompensa.puntos;estado.gastados+=recompensa.puntos;estado.contadores[`canje:${recompensa.id}`]=1;
+    if(recompensa.tipo==='material')estado.desbloqueos.materiales=[...new Set([...estado.desbloqueos.materiales,recompensa.materialId])];
+    else if(esEntregaAutomatica(recompensa))estado.desbloqueos.recompensas=[...new Set([...estado.desbloqueos.recompensas,recompensa.id])];
+    const estatus=esEntregaAutomatica(recompensa)?'entregado':'pendiente';
+    const notificacion={id:`canje-${recompensa.id}-${ahoraISO}`,tipo:'recompensa',titulo:estatus==='entregado'?'Recompensa desbloqueada':'Solicitud de recompensa recibida',texto:estatus==='entregado'?`${recompensa.titulo} ya está en tu colección.`:'Tu solicitud quedó registrada. Puedes seguir su estado en Mis recompensas.',enlace:recompensa.tipo==='material'?`#/materiales/${recompensa.materialId}`:'#/recompensas?vista=coleccion',fecha:ahoraISO,leida:false};
+    estado.notificaciones=[...estado.notificaciones,notificacion].slice(-30);estado.actualizado=ahoraISO;
+    const reservaCupo=recompensa.tipo==='manual'&&Number.isInteger(recompensa.cupo);
+    if(reservaCupo)tx.set(configRef,{...configSnap.data(),cupo:recompensa.cupo-1,actualizado:ahoraISO});
+    tx.set(estadoRef,estado);
+    tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null});
+    tx.create(movimientoRef,{uid:usuario.uid,clave:`gasto:${recompensa.id}`,tipo:'canje',puntos:-recompensa.puntos,detalle:`Canje: ${recompensa.titulo}`,fecha:ahoraISO});
+    return {estado,recompensa:{...recompensaPublica(recompensa),estatus},notificacion};
   });
 }
 
