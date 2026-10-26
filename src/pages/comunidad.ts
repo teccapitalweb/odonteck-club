@@ -452,7 +452,7 @@ function directorioPanel(query: URLSearchParams) {
 }
 
 function formularioPerfilDirectorio(data: ReturnType<typeof Directorio.get>) {
-  return `<form method="dialog" data-network-profile-form>
+  return `<form data-network-profile-form>
         <header><div><span class="eyebrow">Perfil profesional</span><h3>Construye una presencia que cuente tu trayectoria.</h3><p>Tu ficha funcionará como un CV visual dentro de la red OdonTeck.</p></div><div class="network-profile-progress"><span><b>${completitudPerfil(data.miPerfil)}%</b> completo</span><i><b style="width:${completitudPerfil(data.miPerfil)}%"></b></i></div></header>
         <section class="network-banner-editor ${data.miPerfil?.banner ? 'has-banner' : ''}" data-network-banner-frame>
           ${data.miPerfil?.banner ? `<img src="${esc(data.miPerfil.banner)}" alt="Tu portada profesional" width="1600" height="560" loading="lazy" decoding="async" data-network-banner-preview>` : '<img alt="Tu portada profesional" data-network-banner-preview hidden>'}

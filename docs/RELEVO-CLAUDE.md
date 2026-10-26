@@ -2,6 +2,16 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
+## 2026-10-26 · Corrección de foto y portada del directorio
+
+La fuente de esta corrección parte de `main` / `5bef28b281ffbab88ddff08dd96b9ff66a9590ef`, publicado previamente por Cloudflare Pages (workflow `40144680513`). Los cortes del 20 de octubre que siguen son históricos. El usuario autorizó publicar esta corrección en producción; el resultado del nuevo despliegue debe comprobarse en el workflow `Deploy a Cloudflare Pages` y en el dominio oficial.
+
+El editor migró a una página, pero sus manejadores de foto/portada seguían buscando un `dialog` inexistente. Ahora buscan el formulario del perfil: seleccionar, quitar y volver a seleccionar el mismo archivo actualiza la vista previa. Se elimina `method="dialog"` y los avisos indican que hay que pulsar «Guardar perfil». Se conserva el contrato existente de subida firmada y guardado autenticado.
+
+Validación: build con la API de producción; API `npm run check` y suite con 196 pruebas aprobadas, 0 fallidas y 1 omitida; prueba de navegador aislado en 1440×1000 y 390×844 de ambas imágenes, eliminación, reselección y guardado/recarga en demo, sin errores de página ni desbordamiento horizontal. El guardado del demo no demuestra persistencia remota.
+
+Pendiente crítico: verificar/configurar Firebase Storage y probar el guardado con una cuenta real. Los buckets `club-odonteck.firebasestorage.app` y `club-odonteck.appspot.com` devuelven públicamente 404 «The specified bucket does not exist»; no se pudo inspeccionar la variable efectiva de Railway porque su conexión requiere autenticación, y Firebase CLI no tiene cuentas autorizadas. Esto no prueba la ausencia de cualquier otro bucket. No se modificaron API, reglas, variables ni datos de miembros. `/health` responde 200 y la solicitud de subida sin sesión responde 401. Reversión: revertir el commit de esta corrección y dejar que el workflow de Cloudflare publique el revert; no revertir cambios ajenos posteriores.
+
 ## Corte operativo confirmado · 2026-10-20
 
 La versión pública confirmada del corte anterior incluye PR #25, merge `57944994ae576caffdcaf522a16d8117298e65d5`. Cloudflare Pages deployment `9b2b5f62-e069-4fb5-a87c-931878f2ea4f` sirvió `5794499`.

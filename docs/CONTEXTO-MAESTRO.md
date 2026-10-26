@@ -2,6 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
+## Actualización · 2026-10-26 · Imágenes del perfil profesional
+
+La corrección parte del `main` vigente `5bef28b281ffbab88ddff08dd96b9ff66a9590ef`, cuyo workflow de Cloudflare Pages `40144680513` fue satisfactorio. El usuario autorizó publicar el arreglo del editor del directorio. La foto y la portada ahora actualizan sus vistas previas dentro del formulario de la página, sin depender del antiguo diálogo; también se pueden quitar y volver a seleccionar. Los avisos recuerdan pulsar «Guardar perfil». El flujo remoto sigue siendo subida firmada de WebP y `PUT /directorio/perfil` autenticado, sin cambios al backend ni a la privacidad.
+
+Build con API real y comprobaciones API aprobados (196 pass, 0 fail, 1 skip). Prueba visual y funcional en escritorio y móvil aprobada; guardado y recarga probados únicamente en demo. Falta comprobar persistencia en una cuenta real: los dos nombres habituales de bucket del proyecto devuelven 404, Firebase CLI no tiene sesión y Railway requiere reconexión para inspeccionar su configuración efectiva. No afirmar que Storage está listo ni que se guardaron imágenes remotas. Detalles y reversión en el relevo operativo. Los hashes y estados que siguen corresponden al corte histórico del 20 de octubre.
+
 - **Actualizado:** 20 de octubre de 2026 (frontend público verificado en `5794499`; véase el relevo operativo para fuentes de despliegue)
 - **Repositorio definitivo:** `https://github.com/teccapitalweb/odonteck-club.git`
 - **Rama:** `main`
