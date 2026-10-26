@@ -4,7 +4,7 @@ import { Auth } from '../core/auth';
 import { Datos } from '../core/datos';
 import { Acceso } from '../core/acceso';
 import { Progreso } from '../core/progreso';
-import { puntos } from '../core/logros';
+import { Recompensas } from '../core/recompensas';
 import { avatarUsuario, esc } from './partials';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
@@ -24,11 +24,29 @@ export const NAV = [
   { href: '#/certificados', icon: 'award', label: 'Certificados', match: /^\/certificados/ },
 ] as const;
 
+function saldoMonedero() {
+  const saldo = Recompensas.resumen()?.saldo;
+  const texto = typeof saldo === 'number' && Number.isFinite(saldo) ? saldo.toLocaleString('es-MX') : '—';
+  return { texto, etiqueta: texto === '—' ? 'Abrir Recompensas. Saldo por consultar.' : `${texto} OdonCoins disponibles. Abrir Recompensas.` };
+}
+
+export function actualizarMonedero() {
+  const { texto, etiqueta } = saldoMonedero();
+  document.querySelectorAll<HTMLElement>('[data-odoncoins-balance], [data-account-points]').forEach((el) => {
+    if (el.textContent !== texto) el.textContent = texto;
+  });
+  const enlace = document.querySelector<HTMLAnchorElement>('[data-odoncoins-wallet]');
+  if (enlace) {
+    enlace.setAttribute('aria-label', etiqueta);
+    enlace.title = etiqueta;
+  }
+}
+
 export function shellHTML() {
   const foto = Auth.usuario?.foto;
   const avatar = (clases = 'avatar') => avatarUsuario(foto, Perfil.iniciales(), clases);
   const perfil = Perfil.get();
-  const saldo = puntos();
+  const { texto: saldo, etiqueta: etiquetaSaldo } = saldoMonedero();
   const clasesVistas = Progreso.totalVistas();
   const cursosCompletados = Progreso.completados().length;
   const nombreVisible = perfil.nombre?.trim() || Auth.usuario?.nombre?.trim() || (Auth.usuario?.email ? Auth.usuario.email.split("@")[0] : "Mi cuenta");
@@ -65,6 +83,7 @@ export function shellHTML() {
       <header class="topbar">
         <form class="search" data-search><i data-lucide="search" class="i"></i><input class="input" name="q" placeholder="Buscar cursos, clases o materiales…" autocomplete="off" /></form>
         <div class="topbar__right">
+          <a class="topbar__coins" href="#/recompensas" data-odoncoins-wallet aria-label="${etiquetaSaldo}" title="${etiquetaSaldo}"><span class="topbar__coin" aria-hidden="true">OC</span><strong data-odoncoins-balance aria-live="polite" aria-atomic="true">${saldo}</strong><span class="topbar__coin-label" aria-hidden="true">OdonCoins</span></a>
           <button class="btn btn--ghost btn--icon" data-guia aria-label="Guía de la plataforma"><i data-lucide="help-circle" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <button class="btn btn--ghost btn--icon topbar__logout" type="button" data-salir aria-label="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button>
@@ -83,7 +102,7 @@ export function shellHTML() {
         </div>
         <div class="account-quick__body">
           <div class="account-quick__stats" aria-label="Actividad">
-            <div><strong data-account-points>${saldo}</strong><span>Puntos</span></div>
+            <div><strong data-account-points>${saldo}</strong><span>OdonCoins</span></div>
             <div><strong data-account-views>${clasesVistas}</strong><span>Clases</span></div>
             <div><strong data-account-courses>${cursosCompletados}</strong><span>Cursos</span></div>
           </div>
