@@ -6,6 +6,7 @@ import {
 } from '../core/recompensas';
 import { esc } from '../ui/partials';
 import { claseDiseno } from '../ui/disenos-recompensa';
+import { CursoGratis } from '../core/curso-gratis';
 
 const numero = (n: number) => n.toLocaleString('es-MX');
 const precio = (puntos: number) => puntos === 0 ? 'Gratis' : `${numero(puntos)} OC`;
@@ -82,6 +83,28 @@ function solicitudes(s: ResumenRecompensas) {
   return lista.length
     ? `<section class="card reward-panel"><h2>Seguimiento de solicitudes</h2><p class="reward-request-intro">Aquí conservas los códigos y el estado de los beneficios que requieren confirmación del equipo.</p>${lista.map((c) => `<article class="reward-request"><div><strong>${esc(c.titulo)}</strong><small>${fecha(c.solicitado)} · ${numero(c.puntos)} OC</small><p>${esc(c.nota || c.plazo || 'El equipo confirmará los detalles de la entrega.')}</p>${c.codigoEntrega ? `<div class="reward-claim-code"><span>Tu código de seguimiento Praxia</span><code>${esc(c.codigoEntrega)}</code><small>Identifica tu solicitud mientras Praxia confirma la activación.</small><button type="button" class="btn btn--secondary btn--sm" data-reward-code-copy="${esc(c.codigoEntrega)}"><i data-lucide="copy" class="i"></i>Copiar código</button></div>` : ''}</div><span class="chip">${c.estatus === 'entregado' ? 'Entregado' : c.estatus === 'cancelado' ? 'Cancelado · reembolsado' : 'Pendiente'}</span></article>`).join('')}</section>`
     : '';
+}
+
+function paqueteBienvenida(s: ResumenRecompensas) {
+  const kit = s.recompensas.find((recompensa) => recompensa.id === 'kit-bienvenida-canal-30');
+  const kitRegistrado = !!kit?.canjeada;
+  const cursoId = CursoGratis.id();
+  const curso = cursoId ? Datos.cursos().find((item) => item.id === cursoId) : null;
+  const estadoEleccion = kitRegistrado ? 'Pendiente de elección con el equipo' : 'Se reserva al validar el kit';
+  const regalos = [
+    {
+      icono: 'graduation-cap',
+      titulo: 'Tu curso gratis',
+      texto: curso ? esc(curso.titulo) : 'Elige un curso del catálogo para empezar.',
+      estado: curso ? 'Confirmado' : 'Por elegir',
+      enlace: curso ? `#/curso/${encodeURIComponent(curso.id)}` : '#/curso-gratis',
+      accion: curso ? 'Abrir mi curso' : 'Elegir mi curso',
+    },
+    { icono: 'file-pen-line', titulo: '1 plantilla profesional editable', texto: 'Elige una plantilla disponible para tu práctica.', estado: estadoEleccion },
+    { icono: 'book-open-check', titulo: '1 material profesional', texto: 'Un recurso propio publicado en la biblioteca.', estado: estadoEleccion },
+    { icono: 'stethoscope', titulo: '1 guía clínica aprobada', texto: 'Una guía propia disponible, a elección.', estado: estadoEleccion },
+  ];
+  return `<section class="welcome-kit card"><div class="welcome-kit__head"><div><span class="eyebrow">TUS REGALOS DE BIENVENIDA</span><h2>Todo tu paquete, en un solo lugar</h2><p>${kitRegistrado ? 'Tu lugar está reservado. Aquí podrás consultar qué recibes mientras el equipo confirma las tres elecciones.' : 'El curso se elige desde el Club. Las otras tres elecciones se reservan con el Kit de bienvenida del canal oficial.'}</p></div><span class="chip ${kitRegistrado ? '' : 'chip--outline'}">${kitRegistrado ? 'Kit registrado' : 'Kit por activar'}</span></div><div class="welcome-kit__grid">${regalos.map((regalo) => `<article class="welcome-kit__item"><span class="welcome-kit__icon"><i data-lucide="${regalo.icono}" class="i"></i></span><div><strong>${regalo.titulo}</strong><p>${regalo.texto}</p><small class="welcome-kit__state"><i data-lucide="${regalo.estado === 'Confirmado' ? 'badge-check' : 'clock-3'}" class="i"></i>${regalo.estado}</small>${regalo.enlace ? `<a class="welcome-kit__link" href="${regalo.enlace}">${regalo.accion} <i data-lucide="arrow-up-right" class="i"></i></a>` : ''}</div></article>`).join('')}</div><div class="welcome-kit__foot">${kitRegistrado ? '<span><i data-lucide="message-circle-more" class="i"></i>El equipo confirmará tus elecciones por el canal oficial.</span>' : kit ? `<button type="button" class="btn btn--brand" data-reward-detail="${kit.id}"><i data-lucide="gift" class="i"></i>Ver y registrar mi Kit de bienvenida</button>` : ''}<a href="#/recompensas?vista=coleccion">Ver mis solicitudes <i data-lucide="arrow-right" class="i"></i></a></div></section>`;
 }
 
 export function paginaRecompensas(
@@ -185,5 +208,5 @@ export function paginaRecompensas(
     ['gamepad-2', 'Primer intento diario de Retos', '2–10 OC'],
     ['clipboard-check', 'Responder encuestas', '20–40 OC'],
   ];
-  return `<section class="rewards-page stack">${cabecera(s)}${tabs}${vista === 'historial' ? historial(s) : grid}${vista === 'coleccion' ? solicitudes(s) : ''}<section class="card reward-panel"><div class="reward-panel__head"><div><span class="eyebrow">SIGUE SUMANDO</span><h2>Tu aprendizaje cuenta</h2></div><span class="reward-safe">Sin duplicar actividades</span></div><div class="earn-list">${actividades.map(([icon, t, p]) => `<div class="earn-item"><span><i data-lucide="${icon}" class="i"></i></span><strong>${t}</strong><b>+${p}</b></div>`).join('')}</div><p class="reward-note">Los OdonCoins son créditos del club. Conservas tu saldo anterior y tus materiales incluidos en VIP. Las recompensas que requieren preparación se habilitan cuando su entrega está lista.</p></section><dialog id="reward-detail" class="reward-dialog" aria-label="Detalle y confirmación de recompensa"></dialog></section>`;
+  return `<section class="rewards-page stack">${cabecera(s)}${tabs}${vista === 'historial' ? historial(s) : grid}${vista === 'coleccion' ? `${paqueteBienvenida(s)}${solicitudes(s)}` : ''}<section class="card reward-panel"><div class="reward-panel__head"><div><span class="eyebrow">SIGUE SUMANDO</span><h2>Tu aprendizaje cuenta</h2></div><span class="reward-safe">Sin duplicar actividades</span></div><div class="earn-list">${actividades.map(([icon, t, p]) => `<div class="earn-item"><span><i data-lucide="${icon}" class="i"></i></span><strong>${t}</strong><b>+${p}</b></div>`).join('')}</div><p class="reward-note">Los OdonCoins son créditos del club. Conservas tu saldo anterior y tus materiales incluidos en VIP. Las recompensas que requieren preparación se habilitan cuando su entrega está lista.</p></section><dialog id="reward-detail" class="reward-dialog" aria-label="Detalle y confirmación de recompensa"></dialog></section>`;
 }
