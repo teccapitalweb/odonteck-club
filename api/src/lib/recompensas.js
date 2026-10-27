@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { conflicto, noEncontrado } from './errores.js';
+import { conflicto, invalido, noEncontrado } from './errores.js';
 import { RECOMPENSAS, CATALOGO_COL, combinarRecompensa, puedeEntregar, recompensaPublica, esEntregaAutomatica, leerCatalogoRecompensas } from './recompensas-catalogo.js';
 import { tienePlantilla } from './recompensas-archivos.js';
 
@@ -37,6 +37,14 @@ export const LOGROS_RECOMPENSA = Object.freeze([
 const numero = (valor) => Number.isFinite(Number(valor)) ? Number(valor) : 0;
 const objeto = (valor) => valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
 const idMovimiento = (uid, clave) => createHash('sha256').update(`${uid}:${clave}`).digest('hex').slice(0, 40);
+const codigoCampana = (valor) => typeof valor === 'string' && /^[A-Z0-9-]{8,32}$/.test(valor.trim().toUpperCase().replace(/\s+/g, ''))
+  ? valor.trim().toUpperCase().replace(/\s+/g, '')
+  : '';
+const hashCodigoCampana = (valor) => createHash('sha256').update(codigoCampana(valor)).digest('hex');
+// Nunca se importan en el cliente: el catálogo del navegador sólo recibe `requiereCodigo`.
+const CODIGOS_CAMPANA_HASH = Object.freeze({
+  'kit-bienvenida-canal-30': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
+});
 
 export const estadoRecompensasVacio = (uid = '') => ({
   uid,
@@ -193,9 +201,11 @@ export function catalogoRecompensas(estado, esVip = false, materialesDisponibles
   });
 }
 
-export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId, esVip = false, precioEsperado) {
+export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId, esVip = false, precioEsperado, codigo) {
   const base=RECOMPENSAS.find(r=>r.id===recompensaId)??(await leerCatalogoRecompensas(ctx.db)).find(r=>r.id===recompensaId);
   if(!base)throw noEncontrado('Esa recompensa no existe.');
+  const codigoEsperado=CODIGOS_CAMPANA_HASH[base.id];
+  if(base.requiereCodigo===true&&(!codigoEsperado||!codigoCampana(codigo)||hashCodigoCampana(codigo)!==codigoEsperado))throw invalido('El código de acceso no es válido. Revisa el mensaje del canal oficial.','codigo_invalido');
   if(esVip&&base.tipo==='material')throw conflicto('Tu membresía VIP ya incluye este material.','recompensa_incluida');
   const {db}=ctx;
   if(base.tipo==='material') {

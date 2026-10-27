@@ -50,6 +50,7 @@ export interface Recompensa {
   estilo?: string;
   aplicado?: boolean;
   cupo?: number;
+  requiereCodigo?: boolean;
   plazo?: string;
   materialId?: string;
   icono: string;
@@ -176,7 +177,7 @@ export const Recompensas = {
       notificaciones: Array.isArray(premio.notificaciones) ? premio.notificaciones : cache.notificaciones,
     });
   },
-  async canjear(recompensaId: string, precioEsperado?: number) {
+  async canjear(recompensaId: string, precioEsperado?: number, codigoCampana?: string) {
     if (Datos.modo === 'demo') {
       const actual = demo();
       const recompensa = actual.recompensas.find((r) => r.id === recompensaId);
@@ -190,7 +191,7 @@ export const Recompensas = {
       return { saldo: cache!.saldo, recompensa: { ...recompensa, estatus: recompensa.tipo !== 'manual' ? 'entregado' as const : 'pendiente' as const } };
     }
     const precio = precioEsperado ?? cache?.recompensas.find(r=>r.id===recompensaId)?.puntos;
-    const resultado = await api<{ saldo: number; recompensa: Recompensa; notificacion: NotificacionRecompensa }>('/recompensas/canjear', { method: 'POST', json: { recompensaId, ...(precio === undefined ? {} : { precioEsperado: precio }) } });
+    const resultado = await api<{ saldo: number; recompensa: Recompensa; notificacion: NotificacionRecompensa }>('/recompensas/canjear', { method: 'POST', json: { recompensaId, ...(precio === undefined ? {} : { precioEsperado: precio }), ...(codigoCampana === undefined ? {} : { codigoCampana }) } });
     await this.cargar(true);
     return resultado;
   },

@@ -1309,9 +1309,11 @@ document.addEventListener('click', async (e) => {
     const id = canje.dataset.canjearRecompensa!;
     const recompensa = Recompensas.resumen()?.recompensas.find((r) => r.id === id);
     if (!recompensa || (!canje.closest('#reward-detail')&&!confirm(`¿Canjear ${recompensa.puntos.toLocaleString('es-MX')} OdonCoins por “${recompensa.titulo}”?`))) return;
+    const codigo = canje.closest('#reward-detail')?.querySelector<HTMLInputElement>('[data-reward-code]')?.value.trim();
+    if (recompensa.requiereCodigo && !codigo) { toast('Escribe el código que recibiste en el canal oficial.', 'alert-triangle'); canje.closest('#reward-detail')?.querySelector<HTMLInputElement>('[data-reward-code]')?.focus(); return; }
     canje.disabled = true;
     try {
-      const resultado = await Recompensas.canjear(id, Number(canje.dataset.precio ?? recompensa.puntos));
+      const resultado = await Recompensas.canjear(id, Number(canje.dataset.precio ?? recompensa.puntos), codigo);
       if (Datos.modo === 'demo' && recompensa.materialId) {
         const material = Datos.materiales().find((m) => m.id === recompensa.materialId);
         if (material) Datos.guardarMaterial({ ...material, desbloqueadoConPuntos: true });

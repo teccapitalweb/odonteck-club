@@ -610,9 +610,14 @@ describe('recompensas y puntos', () => {
     assert.equal(kit.puntos, 0);
     assert.equal(kit.cupo, 30);
     assert.equal(kit.disponible, true);
+    assert.equal(kit.requiereCodigo, true);
+    assert.equal('codigoHash' in kit, false);
+
+    await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0, codigoCampana: 'incorrecto' }).expect(400);
 
     const solicitado = await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
-      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0 }).expect(201);
+      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0, codigoCampana: 'odon-k7m4-r9q2' }).expect(201);
     assert.equal(solicitado.body.saldo, antes.body.saldo);
     assert.equal(solicitado.body.recompensa.estatus, 'pendiente');
     const canje = env.db.rutas('v2_recompensas_canjes').map((ruta) => env.db.leer(ruta))
@@ -621,7 +626,7 @@ describe('recompensas y puntos', () => {
     assert.equal(canje.reservaCupo, true);
     assert.equal(env.db.leer('v2_recompensas_catalogo/kit-bienvenida-canal-30').cupo, 29);
     await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
-      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0 }).expect(409);
+      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0, codigoCampana: 'ODON-K7M4-R9Q2' }).expect(409);
   });
 
   test('los diez materiales propios se publican desde la API privada y respetan gratis, VIP o canje', async () => {

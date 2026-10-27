@@ -2357,6 +2357,7 @@
     "icono": "gift",
     "estado": "disponible",
     "cupo": 30,
+    "requiereCodigo": true,
     "fase": 4,
     "descripcion": "Solicitud gratuita para las primeras 30 personas del canal oficial de OdonTeck. El equipo valida el lugar y te escribe para confirmar tus elecciones.",
     "entrega": "Solicitud gratuita con validación del canal oficial",
@@ -2367,7 +2368,7 @@
       "1 guía clínica propia ya aprobada y publicada, a elección",
       "Orientación para elegir tu curso gratis disponible; sus reglas de acceso se mantienen"
     ],
-    "instrucciones": "Antes de marcar entregado, confirmar que la persona forma parte del canal oficial de WhatsApp y pedir por escrito sus elecciones. Ofrecer únicamente materiales y plantillas que estén disponibles en el catálogo. No incluir cuadernillos visuales ni otro material sin revisión profesional. Para el curso, dirigir a #/curso-gratis y no prometer certificado ni la clase final fuera de las reglas vigentes.",
+    "instrucciones": "Confirmar el código entregado exclusivamente en el canal oficial de WhatsApp, validar que la persona forma parte del canal y pedir por escrito sus elecciones. Ofrecer únicamente materiales y plantillas que estén disponibles en el catálogo. No incluir cuadernillos visuales ni otro material sin revisión profesional. Para el curso, dirigir a #/curso-gratis y no prometer certificado ni la clase final fuera de las reglas vigentes.",
     "requiereRevision": false
   }
 ]
