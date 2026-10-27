@@ -12,7 +12,7 @@ import { cursosPorIntereses, etiquetaIntereses, interesesDelMiembro } from '../c
 import { Recompensas } from '../core/recompensas';
 import { Auth } from '../core/auth';
 
-const PRAXIA_REWARDS = new Set(['praxia-bienvenida-30-dias', 'praxia-regalo-privado-30-dias']);
+const PRAXIA_REWARDS = new Set(['praxia-bienvenida-30-dias', 'praxia-regalo-privado-30-dias', 'praxia-regalo-privado-2-30-dias']);
 const praxiaDeferKey = () => `odonteck-club:praxia-code-deferred-until:${Auth.usuario?.uid || 'anon'}`;
 
 function bienvenidaPraxia() {

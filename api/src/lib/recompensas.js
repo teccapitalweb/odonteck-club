@@ -46,6 +46,7 @@ const CODIGOS_CAMPANA_HASH = Object.freeze({
   'kit-bienvenida-canal-30': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
   'praxia-bienvenida-30-dias': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
   'praxia-regalo-privado-30-dias': 'e6ec1844fa274632759308d0fd1d1eff117b8ef8850e0d95b83209b7b17f22f9',
+  'praxia-regalo-privado-2-30-dias': 'd537ebb10cc9dd6952754d8866cb4ac385a9dd5004f6a0bf1820e59beef574f6',
 });
 const codigoSolicitudPraxia = () => {
   const token = randomBytes(5).toString('hex').toUpperCase();
@@ -242,7 +243,7 @@ export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId,
     const reservaCupo=recompensa.tipo==='manual'&&Number.isInteger(recompensa.cupo);
     if(reservaCupo)tx.set(configRef,{...configSnap.data(),cupo:recompensa.cupo-1,actualizado:ahoraISO});
     tx.set(estadoRef,estado);
-    const codigoEntrega=['praxia-bienvenida-30-dias','praxia-regalo-privado-30-dias'].includes(recompensa.id)?codigoSolicitudPraxia():null;
+    const codigoEntrega=['praxia-bienvenida-30-dias','praxia-regalo-privado-30-dias','praxia-regalo-privado-2-30-dias'].includes(recompensa.id)?codigoSolicitudPraxia():null;
     tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null,...(codigoEntrega?{codigoEntrega}: {})});
     tx.create(movimientoRef,{uid:usuario.uid,clave:`gasto:${recompensa.id}`,tipo:'canje',puntos:-recompensa.puntos,detalle:`Canje: ${recompensa.titulo}`,fecha:ahoraISO});
     return {estado,recompensa:{...recompensaPublica(recompensa),estatus,...(codigoEntrega?{codigoEntrega}: {})},notificacion};

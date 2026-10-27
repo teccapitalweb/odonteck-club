@@ -203,6 +203,27 @@
     "fase": 1
   },
   {
+    "id": "praxia-regalo-privado-2-30-dias",
+    "titulo": "Praxia Medical · 1 mes personal II",
+    "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y conserva el código de seguimiento en Mis recompensas.",
+    "puntos": 0,
+    "tipo": "manual",
+    "icono": "stethoscope",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "cupo": 1,
+    "requiereCodigo": true,
+    "plazo": "Código de seguimiento inmediato · activación tras confirmación de Praxia",
+    "instrucciones": "El beneficio está reservado para la persona que recibió el segundo código privado. Confirma la activación con Praxia usando el código de seguimiento generado después del canje.",
+    "entrega": "Código de seguimiento y solicitud prioritaria",
+    "incluye": [
+      "Un único canje sin costo",
+      "Código de seguimiento visible en Mis recompensas",
+      "Un mes de acceso después de la activación confirmada por Praxia"
+    ],
+    "fase": 1
+  },
+  {
     "id": "marco-orbita",
     "titulo": "Marco Órbita",
     "categoria": "Personalización",
