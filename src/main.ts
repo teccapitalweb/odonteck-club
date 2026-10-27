@@ -78,7 +78,7 @@ const NOTAS_REPASO_KEY = 'odonteck-club:notas-repaso:v1';
 const NOTAS_PERSONALES_KEY = 'odonteck-club:notas-personales:v1';
 const INTENTOS_QUIZ_KEY = 'odonteck-club:intentos:v2';
 const PRAXIA_CODE_DEFER_DAYS = 7;
-const PRAXIA_CODE_DEFER_PREFIX = 'odonteck-club:praxia-code-deferred-until:';
+const PRAXIA_CODE_DEFER_PREFIX = 'odonteck-club:praxia-code-community-v2-deferred-until:';
 const praxiaCodeDeferKey = () => `${PRAXIA_CODE_DEFER_PREFIX}${Auth.usuario?.uid || 'anon'}`;
 type NotaRemota = { repasados: number[]; bitacora: string };
 const notasRemotas = new Map<string, NotaRemota>();
