@@ -867,12 +867,12 @@ document.addEventListener('click', async (e) => {
     }
     if (input) input.value = codigo;
     if (error) error.hidden = true;
-    // Los códigos personales se enrutan a su cupo individual; el resto usa la campaña de 50 lugares.
+    // Los códigos personales se enrutan a su cupo individual; el código de comunidad usa la nueva campaña.
     const recompensaId = codigo.startsWith('PRA-DOS-')
       ? 'praxia-regalo-privado-2-30-dias'
       : codigo.startsWith('PRA-UNO-')
         ? 'praxia-regalo-privado-30-dias'
-        : 'praxia-bienvenida-30-dias';
+        : 'praxia-comunidad-30-dias';
     activarCodigoPraxia.disabled = true;
     activarCodigoPraxia.setAttribute('aria-busy', 'true');
     try {

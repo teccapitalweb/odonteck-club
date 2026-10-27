@@ -46,10 +46,11 @@ const hashCodigoCampana = (valor) => createHash('sha256').update(codigoCampana(v
 const CODIGOS_CAMPANA_HASH = Object.freeze({
   'kit-bienvenida-canal-30': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
   'praxia-bienvenida-30-dias': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
+  'praxia-comunidad-30-dias': '17e2291e597c9c14e74dcb4a1e8e7bd0e9b76a56ab2115084f069b5e0c6d9506',
   'praxia-regalo-privado-30-dias': 'e6ec1844fa274632759308d0fd1d1eff117b8ef8850e0d95b83209b7b17f22f9',
   'praxia-regalo-privado-2-30-dias': 'd537ebb10cc9dd6952754d8866cb4ac385a9dd5004f6a0bf1820e59beef574f6',
 });
-const RECOMPENSAS_PRAXIA = new Set(['praxia-bienvenida-30-dias', 'praxia-regalo-privado-30-dias', 'praxia-regalo-privado-2-30-dias']);
+const RECOMPENSAS_PRAXIA = new Set(['praxia-bienvenida-30-dias', 'praxia-comunidad-30-dias', 'praxia-regalo-privado-30-dias', 'praxia-regalo-privado-2-30-dias']);
 const CUPON_PRAXIA = /^PRX-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
 export const estadoRecompensasVacio = (uid = '') => ({

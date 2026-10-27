@@ -182,6 +182,28 @@
     "fase": 1
   },
   {
+    "id": "praxia-comunidad-30-dias",
+    "titulo": "Praxia Medical · 1 mes para la comunidad",
+    "descripcion": "Nueva oportunidad para la comunidad OdonTeck. Registra el código oficial y recibe un cupón personal real para activar un mes de Praxia.",
+    "puntos": 0,
+    "tipo": "manual",
+    "icono": "sparkles",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "cupo": 50,
+    "requiereCodigo": true,
+    "plazo": "Cupón personal inmediato para activar en Praxia",
+    "instrucciones": "Copia tu cupón personal desde Mis recompensas y canjéalo en Praxia → Suscripción.",
+    "entrega": "Cupón real de Praxia, personal y de un uso",
+    "incluye": [
+      "Nueva oportunidad, independiente del beneficio de bienvenida",
+      "Código personal visible en Mis recompensas al canjear",
+      "Un mes de acceso después de la activación confirmada por Praxia",
+      "Uno de los primeros 50 lugares de la comunidad"
+    ],
+    "fase": 1
+  },
+  {
     "id": "praxia-regalo-privado-30-dias",
     "titulo": "Praxia Medical · 1 mes personal",
     "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y obtén un cupón real de Praxia en Mis recompensas.",
