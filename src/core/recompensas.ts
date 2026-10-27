@@ -189,7 +189,8 @@ export const Recompensas = {
       publicar(demo());
       return { saldo: cache!.saldo, recompensa: { ...recompensa, estatus: recompensa.tipo !== 'manual' ? 'entregado' as const : 'pendiente' as const } };
     }
-    const resultado = await api<{ saldo: number; recompensa: Recompensa; notificacion: NotificacionRecompensa }>('/recompensas/canjear', { method: 'POST', json: { recompensaId, precioEsperado: precioEsperado ?? cache?.recompensas.find(r=>r.id===recompensaId)?.puntos } });
+    const precio = precioEsperado ?? cache?.recompensas.find(r=>r.id===recompensaId)?.puntos;
+    const resultado = await api<{ saldo: number; recompensa: Recompensa; notificacion: NotificacionRecompensa }>('/recompensas/canjear', { method: 'POST', json: { recompensaId, ...(precio === undefined ? {} : { precioEsperado: precio }) } });
     await this.cargar(true);
     return resultado;
   },

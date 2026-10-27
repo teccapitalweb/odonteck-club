@@ -240,7 +240,7 @@ export function rutasMiembro(ctx) {
     const { membresia } = await sincronizarRecompensas(req.usuario);
     const recompensaId = slug(cuerpo(req).recompensaId, { campo: 'recompensaId' });
     const precioEsperado=cuerpo(req).precioEsperado;
-    if(precioEsperado!==undefined&&(!Number.isInteger(precioEsperado)||precioEsperado<1))throw invalido('El importe de confirmación no es válido.');
+    if(precioEsperado!==undefined&&(!Number.isInteger(precioEsperado)||precioEsperado<0))throw invalido('El importe de confirmación no es válido.');
     const resultado = await canjearRecompensa(ctx, COL, req.usuario, recompensaId, membresia.esVip, precioEsperado);
     res.status(201).json({
       saldo: resultado.estado.saldo,

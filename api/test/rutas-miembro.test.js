@@ -604,6 +604,26 @@ describe('recompensas y puntos', () => {
     assert.equal(canje.estatus, 'pendiente');
   });
 
+  test('el kit de bienvenida reserva un cupo sin gastar OdonCoins y queda para validación manual', async () => {
+    const antes = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
+    const kit = antes.body.recompensas.find((r) => r.id === 'kit-bienvenida-canal-30');
+    assert.equal(kit.puntos, 0);
+    assert.equal(kit.cupo, 30);
+    assert.equal(kit.disponible, true);
+
+    const solicitado = await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0 }).expect(201);
+    assert.equal(solicitado.body.saldo, antes.body.saldo);
+    assert.equal(solicitado.body.recompensa.estatus, 'pendiente');
+    const canje = env.db.rutas('v2_recompensas_canjes').map((ruta) => env.db.leer(ruta))
+      .find((x) => x.recompensaId === 'kit-bienvenida-canal-30');
+    assert.equal(canje.puntos, 0);
+    assert.equal(canje.reservaCupo, true);
+    assert.equal(env.db.leer('v2_recompensas_catalogo/kit-bienvenida-canal-30').cupo, 29);
+    await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'kit-bienvenida-canal-30', precioEsperado: 0 }).expect(409);
+  });
+
   test('los diez materiales propios se publican desde la API privada y respetan gratis, VIP o canje', async () => {
     env = crearEntorno({ materialesEmpaquetados: MATERIALES_OFICIALES.map((m) => m.id) });
     const catalogo = await request(env.app).get('/catalogo').set(bearer(TOKENS.free)).expect(200);
