@@ -872,7 +872,9 @@ document.addEventListener('click', async (e) => {
       ? 'praxia-regalo-privado-2-30-dias'
       : codigo.startsWith('PRA-UNO-')
         ? 'praxia-regalo-privado-30-dias'
-        : 'praxia-comunidad-30-dias';
+        : codigo.startsWith('PRA-PRUEBA-')
+          ? 'praxia-prueba-admin-30-dias'
+          : 'praxia-comunidad-30-dias';
     activarCodigoPraxia.disabled = true;
     activarCodigoPraxia.setAttribute('aria-busy', 'true');
     try {

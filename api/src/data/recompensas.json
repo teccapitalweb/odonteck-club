@@ -204,6 +204,27 @@
     "fase": 1
   },
   {
+    "id": "praxia-prueba-admin-30-dias",
+    "titulo": "Praxia Medical · prueba privada",
+    "descripcion": "Beneficio privado de prueba de un solo lugar. Registra el código personal recibido y obtén un cupón real de Praxia.",
+    "puntos": 0,
+    "tipo": "manual",
+    "icono": "shield-check",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "cupo": 1,
+    "requiereCodigo": true,
+    "plazo": "Cupón personal inmediato para activar en Praxia",
+    "instrucciones": "Copia tu cupón personal desde Mis recompensas y canjéalo en Praxia → Suscripción.",
+    "entrega": "Cupón real de Praxia, personal y de un uso",
+    "incluye": [
+      "Un único canje privado de prueba",
+      "Cupón real visible en Mis recompensas",
+      "Un mes de acceso después de la activación confirmada por Praxia"
+    ],
+    "fase": 1
+  },
+  {
     "id": "praxia-regalo-privado-30-dias",
     "titulo": "Praxia Medical · 1 mes personal",
     "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y obtén un cupón real de Praxia en Mis recompensas.",
