@@ -1,7 +1,8 @@
-import { createHash, randomBytes } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { conflicto, invalido, noEncontrado } from './errores.js';
 import { RECOMPENSAS, CATALOGO_COL, combinarRecompensa, puedeEntregar, recompensaPublica, esEntregaAutomatica, leerCatalogoRecompensas } from './recompensas-catalogo.js';
 import { tienePlantilla } from './recompensas-archivos.js';
+import { emitirCuponPraxia } from './praxia-cupones.js';
 
 export const REGLAS_PUNTOS = Object.freeze({
   clase: 10,
@@ -48,10 +49,8 @@ const CODIGOS_CAMPANA_HASH = Object.freeze({
   'praxia-regalo-privado-30-dias': 'e6ec1844fa274632759308d0fd1d1eff117b8ef8850e0d95b83209b7b17f22f9',
   'praxia-regalo-privado-2-30-dias': 'd537ebb10cc9dd6952754d8866cb4ac385a9dd5004f6a0bf1820e59beef574f6',
 });
-const codigoSolicitudPraxia = () => {
-  const token = randomBytes(5).toString('hex').toUpperCase();
-  return `PRA-${token.slice(0, 5)}-${token.slice(5)}`;
-};
+const RECOMPENSAS_PRAXIA = new Set(['praxia-bienvenida-30-dias', 'praxia-regalo-privado-30-dias', 'praxia-regalo-privado-2-30-dias']);
+const CUPON_PRAXIA = /^PRX-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
 export const estadoRecompensasVacio = (uid = '') => ({
   uid,
@@ -208,6 +207,29 @@ export function catalogoRecompensas(estado, esVip = false, materialesDisponibles
   });
 }
 
+/** Emite (o recupera de forma idempotente) el cupón real de un canje Praxia. */
+export async function emitirCuponPraxiaPendiente(ctx, colecciones, usuario, recompensaId) {
+  if (!RECOMPENSAS_PRAXIA.has(recompensaId)) throw invalido('Esta recompensa no corresponde a Praxia.');
+  const canjeRef = ctx.db.collection(colecciones.recompensasCanjes).doc(idMovimiento(usuario.uid, `canje:${recompensaId}`));
+  const canjeSnap = await canjeRef.get();
+  if (!canjeSnap.exists || canjeSnap.data().uid !== usuario.uid) throw noEncontrado('No encontramos ese canje de Praxia.');
+  const canje = canjeSnap.data();
+  if (typeof canje.codigoEntrega === 'string' && CUPON_PRAXIA.test(canje.codigoEntrega)) {
+    return { ok: true, codigo: canje.codigoEntrega, vence: canje.cuponVence ?? null };
+  }
+
+  const entrega = await emitirCuponPraxia(ctx.config, { requestId: canjeRef.id, rewardId: recompensaId });
+  if (!entrega.ok) return entrega;
+  await canjeRef.update({
+    codigoEntrega: entrega.codigo,
+    estatus: 'entregado',
+    cuponVence: entrega.vence,
+    entregado: ctx.now().toISOString(),
+    plazo: 'Cupón personal listo para activar en Praxia.',
+  });
+  return entrega;
+}
+
 export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId, esVip = false, precioEsperado, codigo) {
   const base=RECOMPENSAS.find(r=>r.id===recompensaId)??(await leerCatalogoRecompensas(ctx.db)).find(r=>r.id===recompensaId);
   if(!base)throw noEncontrado('Esa recompensa no existe.');
@@ -224,7 +246,7 @@ export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId,
   const canjeRef=db.collection(colecciones.recompensasCanjes).doc(idMovimiento(usuario.uid,`canje:${base.id}`));
   const movimientoRef=db.collection(colecciones.recompensasMovimientos).doc(idMovimiento(usuario.uid,`gasto:${base.id}`));
   const configRef=db.collection(CATALOGO_COL).doc(base.id);
-  return db.runTransaction(async tx=>{
+  const resultado = await db.runTransaction(async tx=>{
     const [estadoSnap,canjeSnap,configSnap]=await tx.getAll(estadoRef,canjeRef,configRef);
     if(canjeSnap.exists)throw conflicto('Esta recompensa ya tiene un canje registrado.','recompensa_ya_canjeada');
     const recompensa=combinarRecompensa(base,configSnap.exists?configSnap.data():{});
@@ -243,11 +265,18 @@ export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId,
     const reservaCupo=recompensa.tipo==='manual'&&Number.isInteger(recompensa.cupo);
     if(reservaCupo)tx.set(configRef,{...configSnap.data(),cupo:recompensa.cupo-1,actualizado:ahoraISO});
     tx.set(estadoRef,estado);
-    const codigoEntrega=['praxia-bienvenida-30-dias','praxia-regalo-privado-30-dias','praxia-regalo-privado-2-30-dias'].includes(recompensa.id)?codigoSolicitudPraxia():null;
-    tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null,...(codigoEntrega?{codigoEntrega}: {})});
+    tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null});
     tx.create(movimientoRef,{uid:usuario.uid,clave:`gasto:${recompensa.id}`,tipo:'canje',puntos:-recompensa.puntos,detalle:`Canje: ${recompensa.titulo}`,fecha:ahoraISO});
-    return {estado,recompensa:{...recompensaPublica(recompensa),estatus,...(codigoEntrega?{codigoEntrega}: {})},notificacion};
+    return {estado,recompensa:{...recompensaPublica(recompensa),estatus},notificacion};
   });
+  if (!RECOMPENSAS_PRAXIA.has(recompensaId)) return resultado;
+  const entrega = await emitirCuponPraxiaPendiente(ctx, colecciones, usuario, recompensaId);
+  if (!entrega.ok) {
+    ctx.logger.warn?.(`[praxia] Canje ${recompensaId} pendiente para ${usuario.uid}: ${entrega.motivo}`);
+    return resultado;
+  }
+  resultado.recompensa = { ...resultado.recompensa, estatus: 'entregado', codigoEntrega: entrega.codigo };
+  return resultado;
 }
 
 export const materialDesbloqueado = (estado, materialId) => normalizarEstadoRecompensas(estado).desbloqueos.materiales.includes(materialId);

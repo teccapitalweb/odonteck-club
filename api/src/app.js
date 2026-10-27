@@ -18,6 +18,8 @@ const CONFIG_POR_DEFECTO = {
   storageBucket: '',
   stripeWebhookSecret: '',
   stripePrices: { mensual: '', anual: '' },
+  praxiaCouponApiUrl: '',
+  praxiaCouponApiSecret: '',
 };
 
 export const normalizarOrigen = (o) => String(o ?? '').trim().replace(/\/+$/, '');

@@ -570,7 +570,7 @@ describe('recompensas y puntos', () => {
     assert.equal(env.db.rutas('v2_recompensas_movimientos').filter((ruta) => env.db.leer(ruta).tipo === 'clase').length, 1);
   });
 
-  test('un usuario gratis canjea una guía propia y obtiene acceso permanente; Praxia queda pendiente', async () => {
+  test('un usuario gratis canjea una guía propia y obtiene acceso permanente; Praxia queda pendiente sin integración configurada', async () => {
     env.db.docs.set('v2_recompensas_estado/free1', {
       uid: 'free1', saldo: 1750, ganados: 1750, gastados: 0, contadores: {}, logros: {},
       desbloqueos: { materiales: [] }, notificaciones: [], actualizado: AHORA_ISO,
@@ -600,14 +600,16 @@ describe('recompensas y puntos', () => {
       .send({ recompensaId: 'praxia-bienvenida-30-dias', precioEsperado: 0, codigoCampana: 'ODON-K7M4-R9Q2' }).expect(201);
     assert.equal(praxia.body.saldo, 1500);
     assert.equal(praxia.body.recompensa.estatus, 'pendiente');
-    assert.match(praxia.body.recompensa.codigoEntrega, /^PRA-[A-F0-9]{5}-[A-F0-9]{5}$/);
+    assert.equal(praxia.body.recompensa.codigoEntrega, undefined);
     const canje = env.db.rutas('v2_recompensas_canjes').map((ruta) => env.db.leer(ruta)).find((x) => x.recompensaId === 'praxia-bienvenida-30-dias');
     assert.equal(canje.estatus, 'pendiente');
     assert.equal(canje.puntos, 0);
     assert.equal(canje.reservaCupo, true);
-    assert.equal(canje.codigoEntrega, praxia.body.recompensa.codigoEntrega);
+    assert.equal(canje.codigoEntrega, undefined);
     const resumenConPraxia = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
-    assert.equal(resumenConPraxia.body.canjes.find((c) => c.recompensaId === 'praxia-bienvenida-30-dias').codigoEntrega, praxia.body.recompensa.codigoEntrega);
+    assert.equal(resumenConPraxia.body.canjes.find((c) => c.recompensaId === 'praxia-bienvenida-30-dias').codigoEntrega, null);
+    await request(env.app).post('/recompensas/praxia/cupon').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'praxia-bienvenida-30-dias' }).expect(503);
   });
 
   test('el kit de bienvenida reserva un cupo sin gastar OdonCoins y queda para validación manual', async () => {

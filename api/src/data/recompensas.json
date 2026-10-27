@@ -163,7 +163,7 @@
   {
     "id": "praxia-bienvenida-30-dias",
     "titulo": "Praxia Medical · 1 mes de bienvenida",
-    "descripcion": "Canjea gratis con el código del canal oficial. Recibirás un código personal de seguimiento; la activación del mes requiere confirmación de Praxia.",
+    "descripcion": "Canjea gratis con el código del canal oficial. OdonTeck emitirá un cupón personal real para activar un mes de Praxia.",
     "puntos": 0,
     "tipo": "manual",
     "icono": "stethoscope",
@@ -171,9 +171,9 @@
     "estado": "disponible",
     "cupo": 50,
     "requiereCodigo": true,
-    "plazo": "Código personal inmediato · activación tras confirmación de Praxia",
-    "instrucciones": "Verifica la pertenencia al canal oficial y usa el código personal del canje para confirmar la activación con Praxia.",
-    "entrega": "Código de seguimiento y solicitud prioritaria",
+    "plazo": "Cupón personal inmediato para activar en Praxia",
+    "instrucciones": "Copia tu cupón personal desde Mis recompensas y canjéalo en Praxia → Suscripción.",
+    "entrega": "Cupón real de Praxia, personal y de un uso",
     "incluye": [
       "Código personal visible en Mis recompensas al canjear",
       "Un mes de acceso después de la activación confirmada por Praxia",
@@ -184,7 +184,7 @@
   {
     "id": "praxia-regalo-privado-30-dias",
     "titulo": "Praxia Medical · 1 mes personal",
-    "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y conserva el código de seguimiento en Mis recompensas.",
+    "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y obtén un cupón real de Praxia en Mis recompensas.",
     "puntos": 0,
     "tipo": "manual",
     "icono": "stethoscope",
@@ -192,12 +192,12 @@
     "estado": "disponible",
     "cupo": 1,
     "requiereCodigo": true,
-    "plazo": "Código de seguimiento inmediato · activación tras confirmación de Praxia",
-    "instrucciones": "El beneficio está reservado para la persona que recibió el código privado. Confirma la activación con Praxia usando el código de seguimiento generado después del canje.",
-    "entrega": "Código de seguimiento y solicitud prioritaria",
+    "plazo": "Cupón personal inmediato para activar en Praxia",
+    "instrucciones": "El beneficio está reservado para la persona que recibió el código privado. Copia el cupón real desde Mis recompensas y canjéalo en Praxia.",
+    "entrega": "Cupón real de Praxia, personal y de un uso",
     "incluye": [
       "Un único canje sin costo",
-      "Código de seguimiento visible en Mis recompensas",
+      "Cupón real visible en Mis recompensas",
       "Un mes de acceso después de la activación confirmada por Praxia"
     ],
     "fase": 1
@@ -205,7 +205,7 @@
   {
     "id": "praxia-regalo-privado-2-30-dias",
     "titulo": "Praxia Medical · 1 mes personal II",
-    "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y conserva el código de seguimiento en Mis recompensas.",
+    "descripcion": "Beneficio privado de un solo uso. Canjea con el código personal que recibiste y obtén un cupón real de Praxia en Mis recompensas.",
     "puntos": 0,
     "tipo": "manual",
     "icono": "stethoscope",
@@ -213,12 +213,12 @@
     "estado": "disponible",
     "cupo": 1,
     "requiereCodigo": true,
-    "plazo": "Código de seguimiento inmediato · activación tras confirmación de Praxia",
-    "instrucciones": "El beneficio está reservado para la persona que recibió el segundo código privado. Confirma la activación con Praxia usando el código de seguimiento generado después del canje.",
-    "entrega": "Código de seguimiento y solicitud prioritaria",
+    "plazo": "Cupón personal inmediato para activar en Praxia",
+    "instrucciones": "El beneficio está reservado para la persona que recibió el segundo código privado. Copia el cupón real desde Mis recompensas y canjéalo en Praxia.",
+    "entrega": "Cupón real de Praxia, personal y de un uso",
     "incluye": [
       "Un único canje sin costo",
-      "Código de seguimiento visible en Mis recompensas",
+      "Cupón real visible en Mis recompensas",
       "Un mes de acceso después de la activación confirmada por Praxia"
     ],
     "fase": 1

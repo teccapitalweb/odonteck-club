@@ -196,6 +196,12 @@ export const Recompensas = {
     await this.cargar(true);
     return resultado;
   },
+  async emitirCuponPraxia(recompensaId: string) {
+    if (Datos.modo === 'demo') throw new Error('El cupón real de Praxia se emite al iniciar sesión en el Club.');
+    const resultado = await api<{ codigoEntrega: string; vence: string | null }>('/recompensas/praxia/cupon', { method: 'POST', json: { recompensaId } });
+    await this.cargar(true);
+    return resultado;
+  },
   async descargar(id: string) {
     if(Datos.modo==='demo') throw new Error('La descarga protegida está disponible al iniciar sesión en el club.');
     const token=await Auth.token();

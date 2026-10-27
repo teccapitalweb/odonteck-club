@@ -25,6 +25,7 @@ import {
 import {
   canjearRecompensa,
   catalogoRecompensas,
+  emitirCuponPraxiaPendiente,
   logrosPublicos,
   materialDesbloqueado,
   normalizarEstadoRecompensas,
@@ -248,6 +249,19 @@ export function rutasMiembro(ctx) {
       recompensa: resultado.recompensa,
       notificacion: resultado.notificacion,
     });
+  }));
+
+  // Reintento explícito para canjes antiguos o una caída temporal de Praxia.
+  // La solicitud remota usa el id estable del canje, por lo que nunca duplica
+  // un cupón aunque el miembro pulse el botón más de una vez.
+  r.post('/recompensas/praxia/cupon', auth, h(async (req, res) => {
+    const recompensaId = slug(cuerpo(req).recompensaId, { campo: 'recompensaId' });
+    const entrega = await emitirCuponPraxiaPendiente(ctx, COL, req.usuario, recompensaId);
+    if (!entrega.ok) {
+      res.status(503).json({ error: 'praxia_pendiente', mensaje: entrega.motivo });
+      return;
+    }
+    res.json({ codigoEntrega: entrega.codigo, vence: entrega.vence ?? null });
   }));
 
   r.post('/recompensas/notificaciones/leidas', auth, h(async (req, res) => {

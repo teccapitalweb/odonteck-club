@@ -33,7 +33,7 @@ function bienvenidaPraxia() {
       <p id="praxia-code-description">Si recibiste un código de OdonTeck, escríbelo aquí para registrarlo desde tu cuenta.</p>
       <label class="praxia-code-gate__label" for="praxia-welcome-code">Código de acceso</label>
       <input id="praxia-welcome-code" class="praxia-code-gate__input" data-praxia-code-input autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Ej. ODON-XXXX-XXXX" aria-describedby="praxia-code-help" />
-      <p id="praxia-code-help" class="praxia-code-gate__help">Al completarlo, te mostraremos tu código de seguimiento y quedará guardado en tus recompensas.</p>
+      <p id="praxia-code-help" class="praxia-code-gate__help">Al completarlo, emitiremos tu cupón real y quedará guardado en tus recompensas.</p>
       <p class="praxia-code-gate__error" data-praxia-code-error role="alert" hidden></p>
       <button type="button" class="btn btn--brand praxia-code-gate__submit" data-praxia-code-claim><i data-lucide="gift" class="i"></i>Activar mi mes gratis</button>
       <button type="button" class="praxia-code-gate__defer" data-praxia-code-defer>No tengo un código ahora</button>
