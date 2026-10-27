@@ -1,0 +1,24 @@
+.praxia-code-gate { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: 24px; }
+.praxia-code-gate__backdrop { position: absolute; inset: 0; background: rgba(8, 19, 43, .72); backdrop-filter: blur(7px); }
+.praxia-code-gate__card { position: relative; width: min(100%, 470px); display: grid; justify-items: center; gap: 12px; padding: 34px; border: 1px solid rgba(112, 213, 198, .4); border-radius: 28px; background: radial-gradient(circle at 100% 0, rgba(71, 179, 192, .2), transparent 38%), #fff; box-shadow: 0 28px 85px rgba(3, 12, 31, .42); text-align: center; }
+.praxia-code-gate__seal { display: grid; width: 50px; height: 50px; place-items: center; border-radius: 16px; background: linear-gradient(145deg, #193767, #1d8192); color: #fff; box-shadow: 0 10px 24px rgba(23, 77, 114, .24); }
+.praxia-code-gate__seal .i { width: 23px; height: 23px; }
+.praxia-code-gate__eyebrow { color: var(--brand-teal, #187d87); font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.praxia-code-gate h2 { max-width: 15ch; margin: 0; color: var(--brand-navy, #172957); font-family: var(--font-display); font-size: clamp(1.65rem, 3vw, 2.15rem); font-weight: 800; line-height: 1.02; letter-spacing: -.045em; }
+.praxia-code-gate p { margin: 0; color: #59667d; font-size: var(--fs-sm); line-height: 1.5; }
+.praxia-code-gate__label { width: 100%; margin-top: 6px; color: #263656; font-size: var(--fs-xs); font-weight: 750; text-align: left; }
+.praxia-code-gate__input { width: 100%; min-height: 49px; padding: 0 15px; border: 1px solid #becbd8; border-radius: 13px; outline: 0; background: #f8fbfd; color: #18274a; font-family: var(--font-mono); font-size: .86rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.praxia-code-gate__input:focus { border-color: #278f9a; box-shadow: 0 0 0 4px rgba(38, 151, 161, .16); }
+.praxia-code-gate__help { width: 100%; color: #728097 !important; font-size: var(--fs-xs) !important; text-align: left; }
+.praxia-code-gate__error { width: 100%; padding: 9px 11px; border-radius: 10px; background: #fff0ef; color: #b52d25 !important; font-size: var(--fs-xs) !important; font-weight: 650; text-align: left; }
+.praxia-code-gate__submit { width: 100%; min-height: 48px; margin-top: 4px; justify-content: center; }
+.praxia-code-gate__submit:disabled { cursor: wait; opacity: .68; }
+.praxia-code-gate__defer { padding: 3px; border: 0; background: transparent; color: #52617b; font: inherit; font-size: var(--fs-xs); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.praxia-code-gate__defer:hover { color: var(--brand-navy, #172957); }
+.praxia-code-gate small { color: #8b96a8; font-size: 10px; }
+
+@media (max-width: 540px) {
+  .praxia-code-gate { align-items: end; padding: 12px; }
+  .praxia-code-gate__card { border-radius: 23px; padding: 27px 20px 22px; }
+  .praxia-code-gate h2 { font-size: 1.7rem; }
+}

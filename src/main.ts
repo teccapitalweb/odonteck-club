@@ -18,6 +18,7 @@ import './styles/brujula.css';
 import './styles/encuesta-modal.css';
 import './styles/perfil.css';
 import './styles/recompensas.css';
+import './styles/praxia-code-gate.css';
 import './styles/visor.css';
 import './styles/juego-clase.css';
 import { createIcons, icons } from 'lucide';
@@ -76,6 +77,9 @@ const reproductoresVideo = new Map<string, PlayerJsInstance>();
 const NOTAS_REPASO_KEY = 'odonteck-club:notas-repaso:v1';
 const NOTAS_PERSONALES_KEY = 'odonteck-club:notas-personales:v1';
 const INTENTOS_QUIZ_KEY = 'odonteck-club:intentos:v2';
+const PRAXIA_CODE_DEFER_DAYS = 7;
+const PRAXIA_CODE_DEFER_PREFIX = 'odonteck-club:praxia-code-deferred-until:';
+const praxiaCodeDeferKey = () => `${PRAXIA_CODE_DEFER_PREFIX}${Auth.usuario?.uid || 'anon'}`;
 type NotaRemota = { repasados: number[]; bitacora: string };
 const notasRemotas = new Map<string, NotaRemota>();
 const temporizadoresNotas = new Map<string, number>();
@@ -815,6 +819,47 @@ document.addEventListener('click', async (e) => {
   if (dialogNotas && (el.closest('[data-notas-close]') || e.target === dialogNotas)) { dialogNotas.close(); return; }
   const pw = el.closest<HTMLElement>('[data-paywall]');
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
+
+  const posponerCodigoPraxia = el.closest<HTMLButtonElement>('[data-praxia-code-defer]');
+  if (posponerCodigoPraxia) {
+    try { localStorage.setItem(praxiaCodeDeferKey(), String(Date.now() + PRAXIA_CODE_DEFER_DAYS * 86_400_000)); } catch {}
+    render();
+    return;
+  }
+
+  const activarCodigoPraxia = el.closest<HTMLButtonElement>('[data-praxia-code-claim]');
+  if (activarCodigoPraxia) {
+    const puerta = activarCodigoPraxia.closest<HTMLElement>('[data-praxia-code-gate]');
+    const input = puerta?.querySelector<HTMLInputElement>('[data-praxia-code-input]');
+    const error = puerta?.querySelector<HTMLElement>('[data-praxia-code-error]');
+    const codigo = (input?.value || '').trim().toUpperCase().replace(/\s+/g, '');
+    if (!codigo) {
+      if (error) { error.textContent = 'Escribe tu código de acceso para continuar.'; error.hidden = false; }
+      input?.focus();
+      return;
+    }
+    if (input) input.value = codigo;
+    if (error) error.hidden = true;
+    // Los códigos privados empiezan con PRA-UNO; el resto se valida contra la campaña de 50 lugares.
+    const recompensaId = codigo.startsWith('PRA-UNO-') ? 'praxia-regalo-privado-30-dias' : 'praxia-bienvenida-30-dias';
+    activarCodigoPraxia.disabled = true;
+    activarCodigoPraxia.setAttribute('aria-busy', 'true');
+    try {
+      const resultado = await Recompensas.canjear(recompensaId, 0, codigo);
+      try { localStorage.removeItem(praxiaCodeDeferKey()); } catch {}
+      await cargarClub(current().path, true).catch(() => {});
+      toast(resultado.recompensa.codigoEntrega
+        ? `¡Listo! Tu código de seguimiento de Praxia es ${resultado.recompensa.codigoEntrega}. También quedó guardado en Mis recompensas.`
+        : '¡Listo! Tu beneficio de Praxia quedó registrado en Mis recompensas.', 'gift');
+      render();
+    } catch (err) {
+      if (error) { error.textContent = mensajeError(err); error.hidden = false; }
+      activarCodigoPraxia.disabled = false;
+      activarCodigoPraxia.removeAttribute('aria-busy');
+      input?.focus();
+    }
+    return;
+  }
 
   if (el.closest('[data-guia]')) { mostrarOnboarding(true); return; }
   const abrirCursoGratis = el.closest<HTMLElement>('[data-curso-gratis-abrir]');

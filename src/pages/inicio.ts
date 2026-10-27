@@ -9,6 +9,38 @@ import { proximoEvento } from './envivo';
 import { racha, puntos } from '../core/logros';
 import { Comunidad } from '../core/comunidad';
 import { cursosPorIntereses, etiquetaIntereses, interesesDelMiembro } from '../core/recomendaciones';
+import { Recompensas } from '../core/recompensas';
+import { Auth } from '../core/auth';
+
+const PRAXIA_REWARDS = new Set(['praxia-bienvenida-30-dias', 'praxia-regalo-privado-30-dias']);
+const praxiaDeferKey = () => `odonteck-club:praxia-code-deferred-until:${Auth.usuario?.uid || 'anon'}`;
+
+function bienvenidaPraxia() {
+  const resumen = Recompensas.resumen();
+  const yaCanjeada = resumen?.canjes?.some((canje) => PRAXIA_REWARDS.has(canje.recompensaId))
+    || resumen?.recompensas.some((recompensa) => PRAXIA_REWARDS.has(recompensa.id) && recompensa.canjeada);
+  let pospuesta = false;
+  try { pospuesta = Number(localStorage.getItem(praxiaDeferKey()) || '0') > Date.now(); } catch {}
+  if (yaCanjeada || pospuesta) return '';
+
+  return `
+  <section class="praxia-code-gate" role="dialog" aria-modal="true" aria-labelledby="praxia-code-title" aria-describedby="praxia-code-description" data-praxia-code-gate>
+    <div class="praxia-code-gate__backdrop" aria-hidden="true"></div>
+    <div class="praxia-code-gate__card">
+      <div class="praxia-code-gate__seal" aria-hidden="true"><i data-lucide="sparkles" class="i"></i></div>
+      <span class="praxia-code-gate__eyebrow">Beneficio de bienvenida</span>
+      <h2 id="praxia-code-title">Activa tu mes gratis de Praxia</h2>
+      <p id="praxia-code-description">Si recibiste un código de OdonTeck, escríbelo aquí para registrarlo desde tu cuenta.</p>
+      <label class="praxia-code-gate__label" for="praxia-welcome-code">Código de acceso</label>
+      <input id="praxia-welcome-code" class="praxia-code-gate__input" data-praxia-code-input autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Ej. ODON-XXXX-XXXX" aria-describedby="praxia-code-help" />
+      <p id="praxia-code-help" class="praxia-code-gate__help">Al completarlo, te mostraremos tu código de seguimiento y quedará guardado en tus recompensas.</p>
+      <p class="praxia-code-gate__error" data-praxia-code-error role="alert" hidden></p>
+      <button type="button" class="btn btn--brand praxia-code-gate__submit" data-praxia-code-claim><i data-lucide="gift" class="i"></i>Activar mi mes gratis</button>
+      <button type="button" class="praxia-code-gate__defer" data-praxia-code-defer>No tengo un código ahora</button>
+      <small>Si lo pospones, volveremos a mostrártelo en 7 días.</small>
+    </div>
+  </section>`;
+}
 
 function widgets() {
   const ev = proximoEvento();
@@ -118,5 +150,6 @@ export function inicio() {
   <section class="stack" style="gap:20px">
     ${encabezado('Recomendado para ti', tituloRecs, `<a class="section-head__cta" href="${porIntereses.length ? '#/cursos?tab=para-ti' : '#/cursos'}">Ver los ${cursos.length} cursos <span class="circle-btn"><i data-lucide="arrow-up-right" class="i"></i></span></a>`)}
     <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${recomendados.map(tarjetaCurso).join('')}</div>
-  </section>`;
+  </section>
+  ${bienvenidaPraxia()}`;
 }
