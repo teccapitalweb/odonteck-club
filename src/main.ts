@@ -806,6 +806,20 @@ function mostrarResumenCuenta(abierto: boolean) {
   toggle.setAttribute('aria-expanded', String(abierto));
 }
 
+function mostrarExitoRecompensa(recompensa: { titulo: string; codigoEntrega?: string | null }) {
+  document.querySelector<HTMLDialogElement>('[data-reward-success-dialog]')?.close();
+  const confeti = Array.from({ length: 30 }, (_, indice) => `<i style="--x:${(indice * 37) % 100};--h:${[176, 205, 43, 330, 18][indice % 5]};--r:${(indice * 47) % 180}deg;--d:${(indice % 9) * 55}ms"></i>`).join('');
+  const codigo = recompensa.codigoEntrega || '';
+  const dialogo = document.createElement('dialog');
+  dialogo.className = 'reward-success-dialog';
+  dialogo.dataset.rewardSuccessDialog = '';
+  dialogo.innerHTML = `<section class="reward-success" aria-labelledby="reward-success-title"><div class="reward-success__confetti" aria-hidden="true">${confeti}</div><div class="reward-success__seal" aria-hidden="true"><i data-lucide="party-popper" class="i"></i></div><span class="reward-success__eyebrow">Canje registrado</span><h2 id="reward-success-title">¡Tu recompensa ya es tuya!</h2><p>${codigo ? 'Tu solicitud de Praxia quedó registrada. Conserva este código: identifica tu activación mientras el equipo la confirma.' : `“${esc(recompensa.titulo)}” quedó guardada en tu colección.`}</p>${codigo ? `<div class="reward-success__code"><span>Tu código de seguimiento Praxia</span><code>${esc(codigo)}</code><small>También quedará disponible en Recompensas → Mis recompensas → Seguimiento de solicitudes.</small><button type="button" class="btn btn--secondary btn--sm" data-reward-code-copy="${esc(codigo)}"><i data-lucide="copy" class="i"></i>Copiar código</button></div>` : ''}<div class="reward-success__actions"><button type="button" class="btn btn--brand" data-reward-success-collection><i data-lucide="gift" class="i"></i>Ver mis recompensas</button><button type="button" class="reward-success__close" data-reward-success-close>Seguir explorando el Club</button></div></section>`;
+  document.body.append(dialogo);
+  createIcons({ icons });
+  dialogo.addEventListener('close', () => dialogo.remove(), { once: true });
+  dialogo.showModal();
+}
+
 // ── Interacciones globales del miembro ──
 document.addEventListener('click', async (e) => {
   const el = e.target as HTMLElement;
@@ -819,6 +833,18 @@ document.addEventListener('click', async (e) => {
   if (dialogNotas && (el.closest('[data-notas-close]') || e.target === dialogNotas)) { dialogNotas.close(); return; }
   const pw = el.closest<HTMLElement>('[data-paywall]');
   if (pw) { mostrarPaywall(pw.dataset.paywall || undefined); return; }
+
+  const cerrarExitoRecompensa = el.closest<HTMLButtonElement>('[data-reward-success-close]');
+  if (cerrarExitoRecompensa) { cerrarExitoRecompensa.closest<HTMLDialogElement>('[data-reward-success-dialog]')?.close(); return; }
+  const verColeccionRecompensas = el.closest<HTMLButtonElement>('[data-reward-success-collection]');
+  if (verColeccionRecompensas) { verColeccionRecompensas.closest<HTMLDialogElement>('[data-reward-success-dialog]')?.close(); navigate('/recompensas?vista=coleccion'); return; }
+  const copiarCodigoRecompensa = el.closest<HTMLButtonElement>('[data-reward-code-copy]');
+  if (copiarCodigoRecompensa) {
+    const codigo = copiarCodigoRecompensa.dataset.rewardCodeCopy || '';
+    try { await navigator.clipboard.writeText(codigo); toast('Código Praxia copiado', 'copy'); }
+    catch { toast('Selecciona y copia el código manualmente.', 'copy'); }
+    return;
+  }
 
   const posponerCodigoPraxia = el.closest<HTMLButtonElement>('[data-praxia-code-defer]');
   if (posponerCodigoPraxia) {
@@ -848,9 +874,7 @@ document.addEventListener('click', async (e) => {
       const resultado = await Recompensas.canjear(recompensaId, 0, codigo);
       try { localStorage.removeItem(praxiaCodeDeferKey()); } catch {}
       await cargarClub(current().path, true).catch(() => {});
-      toast(resultado.recompensa.codigoEntrega
-        ? `¡Listo! Tu código de seguimiento de Praxia es ${resultado.recompensa.codigoEntrega}. También quedó guardado en Mis recompensas.`
-        : '¡Listo! Tu beneficio de Praxia quedó registrado en Mis recompensas.', 'gift');
+      mostrarExitoRecompensa(resultado.recompensa);
       render();
     } catch (err) {
       if (error) { error.textContent = mensajeError(err); error.hidden = false; }
@@ -1364,7 +1388,7 @@ document.addEventListener('click', async (e) => {
         if (material) Datos.guardarMaterial({ ...material, desbloqueadoConPuntos: true });
       } else if (Datos.modo === 'api') await cargarClub(current().path, true);
       document.querySelector<HTMLDialogElement>('#reward-detail')?.close();
-      toast(resultado.recompensa.codigoEntrega ? `Código Praxia generado: ${resultado.recompensa.codigoEntrega}. También queda guardado en Mis recompensas.` : resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Consulta el seguimiento en Mis recompensas.' : 'Recompensa añadida a tu colección', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
+      mostrarExitoRecompensa(resultado.recompensa);
       render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); document.querySelector<HTMLDialogElement>('#reward-detail')?.close(); await Recompensas.cargar(true).catch(()=>null); render(); }
   }
