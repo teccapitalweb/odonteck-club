@@ -17,6 +17,8 @@ const fecha = (s: string) =>
         year: 'numeric',
       }).format(new Date(s));
 function arte(r: Recompensa) {
+  if (r.imagen)
+    return `<div class="reward-art reward-art--image ${r.disponible ? '' : 'reward-art--soon'}"><img src="${esc(r.imagen)}" alt="" loading="lazy"></div>`;
   if (r.tipo === 'personalizacion')
     return `<div class="reward-art reward-art--design ${r.ranura === 'portada' ? claseDiseno(r.id) : ''}"><span class="reward-art__avatar ${r.ranura === 'marco' ? claseDiseno(r.id) : ''}">OT</span><span>${r.ranura === 'marco' ? 'MARCO DE PERFIL' : 'PORTADA DE PERFIL'}</span></div>`;
   if (r.tipo === 'archivo')

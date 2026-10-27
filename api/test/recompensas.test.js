@@ -65,9 +65,9 @@ beforeEach(() => {
   for (const uid of ['free1', 'vip1', 'vip2', 'adm1']) saldo(uid);
 });
 
-test('120 propuestas, 40 archivos reales y sin contenido clínico nuevo habilitado', () => {
-  assert.equal(RECOMPENSAS.length, 120);
-  assert.equal(new Set(RECOMPENSAS.map((r) => r.id)).size, 120);
+test('135 propuestas, 40 archivos reales y sin contenido clínico nuevo habilitado', () => {
+  assert.equal(RECOMPENSAS.length, 135);
+  assert.equal(new Set(RECOMPENSAS.map((r) => r.id)).size, 135);
   assert.equal(RECOMPENSAS.filter((r) => r.estado === 'disponible').length, 60);
   const archivos = RECOMPENSAS.filter((r) => r.tipo === 'archivo');
   assert.equal(archivos.length, 40);
@@ -83,6 +83,8 @@ test('120 propuestas, 40 archivos reales y sin contenido clínico nuevo habilita
       (r) => r.estado === 'proximamente',
     ),
   );
+  assert.equal(RECOMPENSAS.filter((r) => r.categoria === 'Cuadernillos visuales').length, 15);
+  assert(RECOMPENSAS.filter((r) => r.categoria === 'Cuadernillos visuales').every((r) => r.tipo === 'material' && r.requiereRevision && typeof r.imagen === 'string'));
 });
 test('normaliza el saldo anterior sin perder materiales ni diseños adquiridos', () => {
   const e = normalizarEstadoRecompensas(

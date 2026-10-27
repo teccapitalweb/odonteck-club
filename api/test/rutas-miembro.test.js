@@ -629,8 +629,14 @@ describe('recompensas y puntos', () => {
 
     const resumen = await request(env.app).get('/recompensas/resumen').set(bearer(TOKENS.free)).expect(200);
     const materiales = resumen.body.recompensas.filter((r) => r.tipo === 'material');
-    assert.equal(materiales.length, 9);
-    assert.equal(materiales.every((r) => r.disponible === true), true);
+    const disponibles = materiales.filter((r) => r.disponible === true);
+    const cuadernillos = materiales.filter((r) => r.categoria === 'Cuadernillos visuales');
+    assert.equal(disponibles.length, 9);
+    assert.equal(disponibles.every((r) => r.disponible === true), true);
+    assert.equal(cuadernillos.length, 15);
+    assert.equal(cuadernillos.every((r) => r.disponible === false && r.estado === 'proximamente'), true);
+    await request(env.app).post('/recompensas/canjear').set(bearer(TOKENS.free))
+      .send({ recompensaId: 'cuadernillo-mapa-denticion-permanente' }).expect(409);
   });
 });
 

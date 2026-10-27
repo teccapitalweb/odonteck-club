@@ -2,6 +2,12 @@
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
+## 2026-10-27 · Cuadernillos visuales OdonCoins en revisión
+
+La colección incorpora quince cubiertas originales de cuadernillos en `docs/assets/cuadernillos-visuales/`, copiadas a `public/recompensas/cuadernillos/` para vista previa de las tarjetas. Cada tarjeta de «Cuadernillos visuales» está en `proximamente`, usa `requiereRevision: true` y no tiene entrega habilitada: no descuenta OdonCoins ni concede un archivo. Las imágenes no incluyen texto ni instrucciones clínicas y no deben presentarse como PDF terminado.
+
+El paso a una recompensa disponible requiere fuentes documentadas, guion editorial, revisión y firma de un odontólogo responsable, composición accesible del texto, pruebas de PDF en móvil/escritorio/impresión y archivo privado configurado. El expediente de control es `docs/CUADERNILLOS-VISUALES-ODONCOINS.md`. No generar ni publicar contenido clínico final solo a partir de las cubiertas.
+
 ## 2026-10-26 · Monedero OdonCoins en la barra superior
 
 La barra del miembro muestra su saldo disponible de OdonCoins con distintivo OC propio y acceso a /recompensas. Usa exclusivamente Recompensas.resumen(), compartido con la tienda y el resumen de cuenta; se actualiza mediante recompensas:cambio y al renderizar rutas. Cuando aún no hay saldo remoto se muestra un guion, sin inferir monedas del progreso. La carga se consulta en todas las rutas del miembro reutilizando su caché, y reintenta tras un fallo al navegar. En móvil conserva saldo y controles en la primera fila y búsqueda en la siguiente; el visor inmersivo y las pantallas de acceso mantienen su disposición propia.

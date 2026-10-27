@@ -45,6 +45,7 @@ export interface Recompensa {
   entrega?: string;
   incluye?: string[];
   motivoPendiente?: string;
+  imagen?: string;
   ranura?: 'marco' | 'portada';
   estilo?: string;
   aplicado?: boolean;

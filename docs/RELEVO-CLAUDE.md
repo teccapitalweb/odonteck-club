@@ -2,6 +2,12 @@
 
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
+## 2026-10-27 · Cuadernillos visuales OdonCoins en revisión
+
+Se añadieron quince cubiertas originales para futuros cuadernillos visuales en `docs/assets/cuadernillos-visuales/` y sus copias de vista previa en `public/recompensas/cuadernillos/`. El catálogo contiene sus quince tarjetas dentro de «Cuadernillos visuales», todas con estado `proximamente`, `requiereRevision: true` y sin ruta de entrega; por tanto no pueden canjearse ni descontar OdonCoins. La interfaz muestra la cubierta, pero no presenta el arte como material clínico terminado.
+
+Antes de habilitar cualquiera se requieren fuentes, guion clínico, revisión humana firmada, PDF accesible y archivo privado configurado. El expediente y la lista de cubiertas están en `docs/CUADERNILLOS-VISUALES-ODONCOINS.md`. No sustituir esos pasos por la sola aprobación de la imagen ni publicar recomendaciones clínicas generadas.
+
 ## 2026-10-26 · Monedero OdonCoins en la barra superior
 
 La barra del miembro muestra su saldo disponible de OdonCoins con distintivo OC propio y acceso a /recompensas. Usa exclusivamente Recompensas.resumen(), compartido con la tienda y el resumen de cuenta; se actualiza mediante recompensas:cambio y al renderizar rutas. Cuando aún no hay saldo remoto se muestra un guion, sin inferir monedas del progreso. La carga se consulta en todas las rutas del miembro reutilizando su caché, y reintenta tras un fallo al navegar. En móvil conserva saldo y controles en la primera fila y búsqueda en la siguiente; el visor inmersivo y las pantallas de acceso mantienen su disposición propia.
