@@ -80,7 +80,7 @@ function solicitudes(s: ResumenRecompensas) {
       s.recompensas.find((r) => r.id === c.recompensaId)?.tipo === 'manual',
   );
   return lista.length
-    ? `<section class="card reward-panel"><h2>Seguimiento de solicitudes</h2>${lista.map((c) => `<article class="reward-request"><div><strong>${esc(c.titulo)}</strong><small>${fecha(c.solicitado)} · ${numero(c.puntos)} OC</small><p>${esc(c.nota || c.plazo || 'El equipo confirmará los detalles de la entrega.')}</p></div><span class="chip">${c.estatus === 'entregado' ? 'Entregado' : c.estatus === 'cancelado' ? 'Cancelado · reembolsado' : 'Pendiente'}</span></article>`).join('')}</section>`
+    ? `<section class="card reward-panel"><h2>Seguimiento de solicitudes</h2>${lista.map((c) => `<article class="reward-request"><div><strong>${esc(c.titulo)}</strong><small>${fecha(c.solicitado)} · ${numero(c.puntos)} OC</small><p>${esc(c.nota || c.plazo || 'El equipo confirmará los detalles de la entrega.')}</p>${c.codigoEntrega ? `<p class="reward-claim-code"><span>Tu código de seguimiento Praxia</span><code>${esc(c.codigoEntrega)}</code><small>Guárdalo: identifica tu solicitud mientras Praxia confirma la activación.</small></p>` : ''}</div><span class="chip">${c.estatus === 'entregado' ? 'Entregado' : c.estatus === 'cancelado' ? 'Cancelado · reembolsado' : 'Pendiente'}</span></article>`).join('')}</section>`
     : '';
 }
 

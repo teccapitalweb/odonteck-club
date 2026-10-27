@@ -229,7 +229,7 @@ export function rutasMiembro(ctx) {
       moneda: { nombre: 'OdonCoins', simbolo: 'OC', equivalenciaPunto: 1 },
       recompensas: catalogoRecompensas(estado, membresia.esVip, materialesDisponibles, catalogo, canjesSnap.docs.map(d=>d.data())),
       personalizacion: estado.personalizacion,
-      canjes: canjesSnap.docs.map(d=>{const c=d.data();return {id:d.id,recompensaId:c.recompensaId,titulo:c.titulo,puntos:c.puntos,estatus:c.estatus,solicitado:c.solicitado,nota:c.nota??null,plazo:c.plazo??null};}).sort((a,b)=>String(b.solicitado).localeCompare(String(a.solicitado))),
+      canjes: canjesSnap.docs.map(d=>{const c=d.data();return {id:d.id,recompensaId:c.recompensaId,titulo:c.titulo,puntos:c.puntos,estatus:c.estatus,solicitado:c.solicitado,nota:c.nota??null,plazo:c.plazo??null,codigoEntrega:typeof c.codigoEntrega==='string'?c.codigoEntrega:null};}).sort((a,b)=>String(b.solicitado).localeCompare(String(a.solicitado))),
       movimientos,
       notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
       actualizado: estado.actualizado,

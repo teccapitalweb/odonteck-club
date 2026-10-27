@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { conflicto, invalido, noEncontrado } from './errores.js';
 import { RECOMPENSAS, CATALOGO_COL, combinarRecompensa, puedeEntregar, recompensaPublica, esEntregaAutomatica, leerCatalogoRecompensas } from './recompensas-catalogo.js';
 import { tienePlantilla } from './recompensas-archivos.js';
@@ -44,7 +44,12 @@ const hashCodigoCampana = (valor) => createHash('sha256').update(codigoCampana(v
 // Nunca se importan en el cliente: el catálogo del navegador sólo recibe `requiereCodigo`.
 const CODIGOS_CAMPANA_HASH = Object.freeze({
   'kit-bienvenida-canal-30': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
+  'praxia-bienvenida-30-dias': '8998c23a37ac10aa77f0f558fc522ed3e38105ea14b42059fb853bf9a36cca21',
 });
+const codigoSolicitudPraxia = () => {
+  const token = randomBytes(5).toString('hex').toUpperCase();
+  return `PRA-${token.slice(0, 5)}-${token.slice(5)}`;
+};
 
 export const estadoRecompensasVacio = (uid = '') => ({
   uid,
@@ -236,9 +241,10 @@ export async function canjearRecompensa(ctx, colecciones, usuario, recompensaId,
     const reservaCupo=recompensa.tipo==='manual'&&Number.isInteger(recompensa.cupo);
     if(reservaCupo)tx.set(configRef,{...configSnap.data(),cupo:recompensa.cupo-1,actualizado:ahoraISO});
     tx.set(estadoRef,estado);
-    tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null});
+    const codigoEntrega=recompensa.id==='praxia-bienvenida-30-dias'?codigoSolicitudPraxia():null;
+    tx.create(canjeRef,{uid:usuario.uid,recompensaId:recompensa.id,titulo:recompensa.titulo,puntos:recompensa.puntos,tipo:recompensa.tipo,estatus,solicitado:ahoraISO,reservaCupo,plazo:recompensa.plazo??null,...(codigoEntrega?{codigoEntrega}: {})});
     tx.create(movimientoRef,{uid:usuario.uid,clave:`gasto:${recompensa.id}`,tipo:'canje',puntos:-recompensa.puntos,detalle:`Canje: ${recompensa.titulo}`,fecha:ahoraISO});
-    return {estado,recompensa:{...recompensaPublica(recompensa),estatus},notificacion};
+    return {estado,recompensa:{...recompensaPublica(recompensa),estatus,...(codigoEntrega?{codigoEntrega}: {})},notificacion};
   });
 }
 

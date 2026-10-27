@@ -161,6 +161,27 @@
     "fase": 1
   },
   {
+    "id": "praxia-bienvenida-30-dias",
+    "titulo": "Praxia Medical · 1 mes de bienvenida",
+    "descripcion": "Canjea gratis con el código del canal oficial. Recibirás un código personal de seguimiento; la activación del mes requiere confirmación de Praxia.",
+    "puntos": 0,
+    "tipo": "manual",
+    "icono": "stethoscope",
+    "categoria": "Biblioteca y Praxia",
+    "estado": "disponible",
+    "cupo": 50,
+    "requiereCodigo": true,
+    "plazo": "Código personal inmediato · activación tras confirmación de Praxia",
+    "instrucciones": "Verifica la pertenencia al canal oficial y usa el código personal del canje para confirmar la activación con Praxia.",
+    "entrega": "Código de seguimiento y solicitud prioritaria",
+    "incluye": [
+      "Código personal visible en Mis recompensas al canjear",
+      "Un mes de acceso después de la activación confirmada por Praxia",
+      "Uno de los primeros 50 lugares de bienvenida"
+    ],
+    "fase": 1
+  },
+  {
     "id": "marco-orbita",
     "titulo": "Marco Órbita",
     "categoria": "Personalización",

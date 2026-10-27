@@ -59,10 +59,11 @@ export interface Recompensa {
   alcanza: boolean;
   disponible: boolean;
   estatus?: 'entregado' | 'pendiente' | 'cancelado' | null;
+  codigoEntrega?: string | null;
 }
 
 export interface ResumenRecompensas {
-  canjes?: { id: string; recompensaId: string; titulo: string; puntos: number; estatus: string; solicitado: string; nota?: string|null; plazo?: string|null }[];
+  canjes?: { id: string; recompensaId: string; titulo: string; puntos: number; estatus: string; solicitado: string; nota?: string|null; plazo?: string|null; codigoEntrega?: string|null }[];
   personalizacion?: {marco:string|null;portada:string|null};
   saldo: number;
   ganados: number;

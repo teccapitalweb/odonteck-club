@@ -65,10 +65,10 @@ beforeEach(() => {
   for (const uid of ['free1', 'vip1', 'vip2', 'adm1']) saldo(uid);
 });
 
-test('136 propuestas, 40 archivos reales y sin contenido clínico nuevo habilitado', () => {
-  assert.equal(RECOMPENSAS.length, 136);
-  assert.equal(new Set(RECOMPENSAS.map((r) => r.id)).size, 136);
-  assert.equal(RECOMPENSAS.filter((r) => r.estado === 'disponible').length, 61);
+test('137 propuestas, 40 archivos reales y sin contenido clínico nuevo habilitado', () => {
+  assert.equal(RECOMPENSAS.length, 137);
+  assert.equal(new Set(RECOMPENSAS.map((r) => r.id)).size, 137);
+  assert.equal(RECOMPENSAS.filter((r) => r.estado === 'disponible').length, 62);
   const archivos = RECOMPENSAS.filter((r) => r.tipo === 'archivo');
   assert.equal(archivos.length, 40);
   for (const r of archivos) {

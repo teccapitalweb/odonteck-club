@@ -1319,7 +1319,7 @@ document.addEventListener('click', async (e) => {
         if (material) Datos.guardarMaterial({ ...material, desbloqueadoConPuntos: true });
       } else if (Datos.modo === 'api') await cargarClub(current().path, true);
       document.querySelector<HTMLDialogElement>('#reward-detail')?.close();
-      toast(resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Consulta el seguimiento en Mis recompensas.' : 'Recompensa añadida a tu colección', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
+      toast(resultado.recompensa.codigoEntrega ? `Código Praxia generado: ${resultado.recompensa.codigoEntrega}. También queda guardado en Mis recompensas.` : resultado.recompensa.estatus === 'pendiente' ? 'Solicitud registrada. Consulta el seguimiento en Mis recompensas.' : 'Recompensa añadida a tu colección', resultado.recompensa.estatus === 'pendiente' ? 'clock-3' : 'gift');
       render();
     } catch (err) { toast(mensajeError(err), 'alert-triangle'); document.querySelector<HTMLDialogElement>('#reward-detail')?.close(); await Recompensas.cargar(true).catch(()=>null); render(); }
   }
