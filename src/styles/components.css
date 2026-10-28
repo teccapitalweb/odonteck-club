@@ -148,6 +148,16 @@
 .topbar__coins strong { font-variant-numeric: tabular-nums; font-weight: 750; }
 .topbar__coin { display: grid; place-items: center; flex-shrink: 0; width: 27px; height: 27px; border-radius: 50%; background: linear-gradient(145deg,#266c7b,#182e50); color: #b7eee0; border: 1px solid #79c6b4; box-shadow: inset 0 0 0 2px #193d58; font-size: 9px; font-weight: 800; letter-spacing: -.02em; }
 .topbar__coin-label { color: var(--text-2); font-size: 12px; }
+.topbar__praxia-gift { position: relative; isolation: isolate; display: inline-flex; align-items: center; flex-shrink: 0; gap: 7px; min-height: 40px; padding: 4px 10px 4px 5px; overflow: hidden; border: 1px solid rgba(63, 139, 221, .5); border-radius: var(--r-full); background: linear-gradient(115deg, #132f68, #226fa1 62%, #53a9a9); color: #fff; box-shadow: 0 7px 18px -11px rgba(17, 63, 125, .85); cursor: pointer; transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast); }
+.topbar__praxia-gift::before { content: ''; position: absolute; z-index: -1; top: -90%; left: -24%; width: 42%; height: 280%; transform: rotate(22deg); background: rgba(255,255,255,.25); animation: praxia-gift-shine 3.8s ease-in-out infinite; }
+.topbar__praxia-gift:hover, .topbar__praxia-gift:focus-visible { transform: translateY(-1px); border-color: #a7f1e4; box-shadow: 0 10px 22px -10px rgba(11, 47, 105, .9); outline: none; }
+.topbar__praxia-gift-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.18); box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); }
+.topbar__praxia-gift-icon .i { width: 16px; height: 16px; color: #fff; }
+.topbar__praxia-gift-copy { display: grid; gap: 1px; text-align: left; line-height: 1; white-space: nowrap; }
+.topbar__praxia-gift-copy b { font-size: 11px; letter-spacing: -.01em; }
+.topbar__praxia-gift-copy small { color: rgba(255,255,255,.77); font-size: 8px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.topbar__praxia-gift-count { display: grid; place-items: center; width: 19px; height: 19px; margin-left: 1px; border-radius: 50%; background: #fff; color: #184c82; box-shadow: 0 2px 7px rgba(0,0,0,.18); font-family: var(--font-mono); font-size: 10px; font-weight: 900; }
+@keyframes praxia-gift-shine { 0%, 38% { left: -38%; opacity: 0; } 49% { opacity: 1; } 66%, 100% { left: 126%; opacity: 0; } }
 @media (max-width: 780px) { .topbar__coin-label { display: none; } }
 .content { max-width: var(--content-max); margin: 0 auto; padding: 28px; }
 
@@ -586,6 +596,9 @@
   .topbar .search { flex: 1 0 100%; max-width: none; order: 2; }
   .topbar__right { width: 100%; flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
   .topbar__coins { margin-right: auto; padding-right: 9px; gap: 6px; }
+  .topbar__praxia-gift { padding-right: 7px; gap: 5px; }
+  .topbar__praxia-gift-copy { display: none; }
+  .topbar__praxia-gift-count { position: absolute; top: -2px; right: -2px; width: 17px; height: 17px; font-size: 9px; }
   .topbar__right .btn--icon { width: 36px; min-height: 40px; flex-shrink: 0; }
   .topbar__right .avatar { width: 32px; height: 32px; }
 }

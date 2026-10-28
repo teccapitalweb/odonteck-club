@@ -84,6 +84,11 @@ export function shellHTML() {
         <form class="search" data-search><i data-lucide="search" class="i"></i><input class="input" name="q" placeholder="Buscar cursos, clases o materiales…" autocomplete="off" /></form>
         <div class="topbar__right">
           <a class="topbar__coins" href="#/recompensas" data-odoncoins-wallet aria-label="${etiquetaSaldo}" title="${etiquetaSaldo}"><span class="topbar__coin" aria-hidden="true">OC</span><strong data-odoncoins-balance aria-live="polite" aria-atomic="true">${saldo}</strong><span class="topbar__coin-label" aria-hidden="true">OdonCoins</span></a>
+          <button class="topbar__praxia-gift" type="button" data-praxia-code-open aria-label="Abrir tu regalo: un mes gratis de Praxia. Campaña de 50 lugares." title="Tienes un mes gratis de Praxia · 50 lugares">
+            <span class="topbar__praxia-gift-icon" aria-hidden="true"><i data-lucide="gift" class="i"></i></span>
+            <span class="topbar__praxia-gift-copy"><b>1 mes Praxia</b><small>Regalo especial</small></span>
+            <span class="topbar__praxia-gift-count" aria-hidden="true">50</span>
+          </button>
           <button class="btn btn--ghost btn--icon" data-guia aria-label="Guía de la plataforma"><i data-lucide="help-circle" class="i"></i></button>
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <button class="btn btn--ghost btn--icon topbar__logout" type="button" data-salir aria-label="Cerrar sesión"><i data-lucide="log-out" class="i"></i></button>

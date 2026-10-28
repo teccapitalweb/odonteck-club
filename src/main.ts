@@ -913,6 +913,20 @@ document.addEventListener('click', async (e) => {
 
   if (el.closest('[data-theme-toggle]')) { const nuevoTema = root.dataset.theme === 'dark' ? 'light' : 'dark'; setTheme(nuevoTema); try { localStorage.setItem('odt:tema', nuevoTema); } catch {} }
 
+  const abrirRegaloPraxia = el.closest<HTMLElement>('[data-praxia-code-open]');
+  if (abrirRegaloPraxia) {
+    const resumen = Recompensas.resumen();
+    const yaCanjeado = resumen?.canjes?.some((canje) => canje.recompensaId === 'praxia-comunidad-30-dias')
+      || resumen?.recompensas.some((recompensa) => recompensa.id === 'praxia-comunidad-30-dias' && recompensa.canjeada);
+    if (yaCanjeado) { navigate('/recompensas?vista=coleccion'); return; }
+    // El botón superior es una forma intencional de volver a abrir el acceso
+    // aun cuando la persona eligió “No tengo un código ahora”.
+    try { localStorage.removeItem(`odonteck-club:praxia-code-community-v2-deferred-until:${Auth.usuario?.uid || 'anon'}`); } catch {}
+    if (current().path === '/') render();
+    else navigate('/');
+    return;
+  }
+
   const repasarVideo = el.closest<HTMLButtonElement>('[data-video-seek]');
   if (repasarVideo) {
     const clave = repasarVideo.dataset.videoKey || '';
