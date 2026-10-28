@@ -1,10 +1,14 @@
 # Relevo operativo para Claude · OdonTeck Club
 
-## 2026-10-28 · Reparación Stripe (en publicación)
+## 2026-10-28 · Reparación Stripe publicada y verificada
 
 Auditoría autorizada: tres checkouts v2 pagados de una cuenta sin suscripción v2; un cargo ya reembolsado. El destino registrado seguía siendo el servidor antiguo. Stripe rechazó otro destino por límite de 16. Se verificó en memoria que ambos servidores tienen el mismo secreto de firma.
 
-Se prepara reutilizar el destino OdonTeck existente con la URL `/stripe/webhook` del API v2. Procesa sólo `metadata.origen=odonteck-club-v2`; el resto se reenvía al servidor antiguo conservando cuerpo y firma después de validarlos. Si el antiguo falla devuelve 503 para reintento. Checkout pendiente no activa ni premia. No se cancelan suscripciones ni reembolsan cargos automáticamente. Verificación de publicación y recuperación pendiente de registrar.
+Se reutilizó el destino OdonTeck existente `we_1Tf35hA7If2CqXs9HakeWqlt` con la URL `https://api-production-db314.up.railway.app/stripe/webhook`. Procesa sólo `metadata.origen=odonteck-club-v2`; el resto se reenvía al servidor antiguo conservando cuerpo y firma después de validarlos. Si el antiguo falla devuelve 503 para reintento. Checkout pendiente no activa ni premia. Se conservaron los eventos previos y se añadieron `checkout.session.async_payment_succeeded` y `customer.subscription.created`. No se cambió el secreto ni la versión API del destino.
+
+Commit funcional `c3dad663d422935ae9ba6e53baa16ae0ddd5a207`, Railway `09fe8da5-78d0-4ce5-861e-25389e64e6bd` SUCCESS. Build y check aprobados; 216 pruebas API pasan y una de emuladores se omite. Probe firmado inocuo del puente devuelve 200. Stripe generó una notificación real `customer.subscription.updated` al añadir metadata de conciliación a la suscripción original pagada y no reembolsada: se recibió y registró automáticamente, sin escritura directa del documento. `/me` autenticado confirmó VIP mensual y periodo hasta 2026-11-26; otro checkout devolvió 409 `ya_es_vip`. Cuenta gratis y admin conservan sus permisos, y webhook sin firma devuelve 400. No se realizó una compra nueva: verificación de entrega real de actualización y tests locales del checkout.
+
+Pendiente comercial: la cuenta afectada mantiene tres suscripciones activas y dos cargos sin reembolso (el tercero ya estaba reembolsado). No se cancelaron ni reembolsaron; requieren decisión del responsable para evitar cobros futuros. La reparación de acceso no equivale a resolver los duplicados. No registrar datos personales en este documento.
 
 Reversión: devolver la URL del mismo destino Stripe a `https://odonteck-production.up.railway.app/stripe/webhook`. No borrar suscripciones ni documentos restaurados. Las notas antiguas de webhook no habilitado son históricas.
 

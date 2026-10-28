@@ -2,7 +2,7 @@
 
 ## Reparación Stripe · 2026-10-28
 
-Se autoriza reparar la activación VIP de pagos confirmados. El destino OdonTeck anterior se reutilizará para el API v2 por límite de 16 destinos. El API valida firma y origen v2; reenvía eventos heredados al servidor anterior conservando cuerpo y firma, y devuelve 503 si no confirma. No activa checkouts pendientes. Ver `RELEVO-CLAUDE.md` para publicación y verificación. Las notas históricas siguientes no describen el estado vigente.
+Reparación autorizada y publicada en `c3dad66`, Railway `09fe8da5-78d0-4ce5-861e-25389e64e6bd` SUCCESS. El destino OdonTeck anterior apunta ahora al API v2 por límite de 16 destinos. El API valida firma y origen v2; reenvía eventos heredados al servidor anterior conservando cuerpo y firma, y devuelve 503 si no confirma. No activa checkouts pendientes. Se verificó recepción real de Stripe y recuperación de VIP mensual para la cuenta con pago confirmado, `/me` autenticado y bloqueo de nueva compra con 409. Gratis y admin conservan permisos; 216 pruebas pasan. No se efectuó una compra nueva ni se resolvieron los cargos/suscripciones duplicados. Ver `RELEVO-CLAUDE.md` para evidencia y reversión. Las notas históricas siguientes no describen el estado vigente.
 
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
