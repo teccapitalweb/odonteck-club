@@ -1,5 +1,13 @@
 # Relevo operativo para Claude · OdonTeck Club
 
+## 2026-10-28 · Reparación Stripe (en publicación)
+
+Auditoría autorizada: tres checkouts v2 pagados de una cuenta sin suscripción v2; un cargo ya reembolsado. El destino registrado seguía siendo el servidor antiguo. Stripe rechazó otro destino por límite de 16. Se verificó en memoria que ambos servidores tienen el mismo secreto de firma.
+
+Se prepara reutilizar el destino OdonTeck existente con la URL `/stripe/webhook` del API v2. Procesa sólo `metadata.origen=odonteck-club-v2`; el resto se reenvía al servidor antiguo conservando cuerpo y firma después de validarlos. Si el antiguo falla devuelve 503 para reintento. Checkout pendiente no activa ni premia. No se cancelan suscripciones ni reembolsan cargos automáticamente. Verificación de publicación y recuperación pendiente de registrar.
+
+Reversión: devolver la URL del mismo destino Stripe a `https://odonteck-production.up.railway.app/stripe/webhook`. No borrar suscripciones ni documentos restaurados. Las notas antiguas de webhook no habilitado son históricas.
+
 > Lee este archivo antes de trabajar. Es el corte corto y vigente; `CONTEXTO-MAESTRO.md` conserva el detalle histórico y `contrato.md` define datos y endpoints.
 
 ## 2026-10-27 · Cuadernillos visuales OdonCoins en revisión

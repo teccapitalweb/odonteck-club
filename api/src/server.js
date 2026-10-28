@@ -54,6 +54,7 @@ const app = crearApp({
     allowedOrigins: String(env.ALLOWED_ORIGINS || '').split(','),
     storageBucket: env.FIREBASE_STORAGE_BUCKET || '',
     stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET || '',
+    stripeLegacyForward: true,
     stripePrices: { mensual: env.STRIPE_PRICE_MENSUAL || '', anual: env.STRIPE_PRICE_ANUAL || '' },
     praxiaCouponApiUrl: env.PRAXIA_COUPON_API_URL || '',
     praxiaCouponApiSecret: env.PRAXIA_COUPON_API_SECRET || '',

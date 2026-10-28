@@ -17,6 +17,7 @@ const CONFIG_POR_DEFECTO = {
   allowedOrigins: [],
   storageBucket: '',
   stripeWebhookSecret: '',
+  stripeLegacyForward: false,
   stripePrices: { mensual: '', anual: '' },
   praxiaCouponApiUrl: '',
   praxiaCouponApiSecret: '',

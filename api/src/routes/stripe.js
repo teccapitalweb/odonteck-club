@@ -1,6 +1,6 @@
 // Stripe: checkout y portal (autenticados) y webhook (público, firmado).
 // IMPORTANTE: el webhook escribe SOLO en v2_suscripciones/{uid}; nunca en miembros/{uid}.
-// No se registra en Stripe hasta el cambio definitivo (el webhook viejo sigue activo).
+// El endpoint v2 sólo procesa eventos de su propio checkout; Stripe es compartido.
 import express from 'express';
 import { COL, estadoMembresia, leerConfig, leerDoc, leerMiembroHeredado } from '../datos.js';
 import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errores.js';
@@ -109,6 +109,21 @@ export function webhookStripe(ctx) {
       throw new HttpError(400, 'firma_invalida', 'La firma del webhook de Stripe no es válida.');
     }
 
+    // Se reutiliza el destino Stripe existente. Conserva el receptor heredado
+    // para renovaciones antiguas: mismos bytes y firma, sólo tras validarla aquí.
+    if (evento.data?.object?.metadata?.origen !== 'odonteck-club-v2' && ctx.config.stripeLegacyForward) {
+      try {
+        const respuesta = await fetch('https://odonteck-production.up.railway.app/stripe/webhook', {
+          method: 'POST', headers: { 'content-type': 'application/json', 'stripe-signature': firma },
+          body: req.body, signal: AbortSignal.timeout(8000), redirect: 'error',
+        });
+        if (!respuesta.ok) throw new Error('Receptor heredado no confirmó');
+        return res.json({ recibido: true, resultado: 'reenviado_heredado' });
+      } catch {
+        throw new HttpError(503, 'heredado_no_disponible', 'La confirmación heredada se reintentará.');
+      }
+    }
+
     // Idempotencia: Stripe reintenta; un evento ya procesado se confirma sin repetir.
     const marcaRef = ctx.db.collection(COL.stripeEventos).doc(evento.id);
     if ((await marcaRef.get()).exists) return res.json({ recibido: true, duplicado: true });
@@ -121,10 +136,12 @@ export function webhookStripe(ctx) {
 
 async function procesarEvento(ctx, evento) {
   const obj = evento.data?.object ?? {};
+  if (obj.metadata?.origen !== 'odonteck-club-v2') return 'ignorado_otro_origen';
   switch (evento.type) {
     case 'checkout.session.completed':
     case 'checkout.session.async_payment_succeeded': {
       if (obj.mode !== 'subscription') return 'ignorado_no_suscripcion';
+      if (!['paid', 'no_payment_required'].includes(obj.payment_status)) return 'pendiente_pago';
       const uid = obj.client_reference_id || obj.metadata?.uid;
       if (!uid) return 'ignorado_sin_uid';
       let sub = null;

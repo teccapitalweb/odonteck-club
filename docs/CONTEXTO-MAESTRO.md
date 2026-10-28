@@ -1,5 +1,9 @@
 # Contexto maestro · OdonTeck Club
 
+## Reparación Stripe · 2026-10-28
+
+Se autoriza reparar la activación VIP de pagos confirmados. El destino OdonTeck anterior se reutilizará para el API v2 por límite de 16 destinos. El API valida firma y origen v2; reenvía eventos heredados al servidor anterior conservando cuerpo y firma, y devuelve 503 si no confirma. No activa checkouts pendientes. Ver `RELEVO-CLAUDE.md` para publicación y verificación. Las notas históricas siguientes no describen el estado vigente.
+
 > Documento de relevo para continuar el desarrollo sin confundir una experiencia visual terminada con una integración de producción terminada. Debe leerse completo antes de modificar el proyecto. Los cortes operativos vigentes están en `docs/RELEVO-CLAUDE.md`; los snapshots antiguos de secciones posteriores son historial, no evidencia del runtime actual.
 
 ## 2026-10-27 · Cuadernillos visuales OdonCoins en revisión

@@ -308,7 +308,7 @@ describe('stripe', () => {
         status: 'active',
         cancel_at_period_end: false,
         canceled_at: null,
-        metadata: { uid: 'free1', plan: 'mensual' },
+        metadata: { uid: 'free1', plan: 'mensual', origen: 'odonteck-club-v2' },
         items: { data: [{ price: { id: 'price_mensual_test' }, current_period_end: 1_792_000_000 }] },
       },
     },
@@ -347,7 +347,7 @@ describe('stripe', () => {
     assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'active');
 
     // Sin metadata.uid se resuelve por customerId.
-    const obj = { ...eventoSuscripcion().data.object, metadata: {}, status: 'canceled', canceled_at: 1_791_000_000 };
+    const obj = { ...eventoSuscripcion().data.object, metadata: { origen: 'odonteck-club-v2' }, status: 'canceled', canceled_at: 1_791_000_000 };
     const baja = eventoFirmado(eventoSuscripcion({ id: 'evt_2', type: 'customer.subscription.deleted', created: 1_791_000_000, data: { object: obj } }));
     await request(env.app).post('/stripe/webhook').set('Stripe-Signature', baja.firma).set('Content-Type', 'application/json').send(baja.payload).expect(200);
     assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'canceled');
@@ -361,7 +361,7 @@ describe('stripe', () => {
       object: 'event',
       type: 'checkout.session.completed',
       created: 1_790_000_100,
-      data: { object: { id: 'cs_1', object: 'checkout.session', mode: 'subscription', client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'carla@example.com' } } },
+      data: { object: { id: 'cs_1', object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'carla@example.com' } } },
     };
     const { payload, firma } = eventoFirmado(evento);
     await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
@@ -380,12 +380,54 @@ describe('stripe', () => {
       object: 'event',
       type: 'checkout.session.async_payment_succeeded',
       created: 1_790_000_200,
-      data: { object: { id: 'cs_async', object: 'checkout.session', mode: 'subscription', client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', payment_status: 'paid' } },
+      data: { object: { id: 'cs_async', object: 'checkout.session', mode: 'subscription', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', payment_status: 'paid' } },
     };
     const { payload, firma } = eventoFirmado(evento);
     const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
     assert.equal(r.body.resultado, 'suscripcion_guardada');
     assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'active');
     assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 300);
+  });
+
+  test('eventos de otra consultora no activan usuarios ni otorgan puntos', async () => {
+    const evento = eventoSuscripcion();
+    evento.data.object.metadata.origen = 'otra-plataforma';
+    const { payload, firma } = eventoFirmado(evento);
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.resultado, 'ignorado_otro_origen');
+    assert.equal(env.db.rutas('v2_suscripciones').length, 0);
+  });
+
+  test('puente heredado conserva bytes y firma y devuelve 503 si falla', async (t) => {
+    const { webhookStripe } = await import('../src/routes/stripe.js');
+    const evento = eventoSuscripcion();
+    evento.data.object.metadata.origen = 'odonteck-panel';
+    const { payload, firma } = eventoFirmado(evento);
+    const req = { body: Buffer.from(payload), headers: { 'stripe-signature': firma } };
+    const res = { set() {}, json(value) { this.body = value; } };
+    const ctx = { stripe: env.stripe, config: { stripeWebhookSecret: WEBHOOK_SECRET, stripeLegacyForward: true } };
+    const mock = t.mock.method(globalThis, 'fetch', async (url, options) => {
+      assert.equal(url, 'https://odonteck-production.up.railway.app/stripe/webhook');
+      assert.equal(options.body.toString(), payload);
+      assert.equal(options.headers['stripe-signature'], firma);
+      return { ok: true };
+    });
+    let error;
+    await webhookStripe(ctx)(req, res, (e) => { error = e; });
+    assert.equal(error, undefined);
+    assert.equal(res.body.resultado, 'reenviado_heredado');
+    mock.mock.mockImplementation(async () => ({ ok: false }));
+    await webhookStripe(ctx)(req, res, (e) => { error = e; });
+    assert.equal(error.status, 503);
+  });
+
+  test('checkout no pagado no activa acceso ni puntos', async () => {
+    const evento = { id: 'evt_unpaid', type: 'checkout.session.completed', created: 1790000000,
+      data: { object: { mode: 'subscription', metadata: { origen: 'odonteck-club-v2' }, payment_status: 'unpaid', client_reference_id: 'free1', subscription: 'sub_1' } } };
+    const { payload, firma } = eventoFirmado(evento);
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.resultado, 'pendiente_pago');
+    assert.equal(env.db.rutas('v2_suscripciones').length, 0);
+    assert.equal(env.db.rutas('v2_recompensas_estado').length, 0);
   });
 });

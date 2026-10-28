@@ -14,8 +14,8 @@ Si algo cambia aquí, cambia en los tres lados.
 3. **Admin real.** Custom claim `admin: true` en Firebase Auth, puesto con `api/scripts/set-admin.mjs`.
    Se verifica en el backend (middleware) y en las reglas. Nunca listas de correos en el cliente.
 4. **Videos de Bunny siempre firmados** desde el backend (biblioteca 725453). El cliente nunca ve la llave.
-5. **Stripe convive.** El webhook viejo en Railway (`odonteck-production`) sigue recibiendo eventos.
-   El endpoint `/stripe/webhook` nuevo existe y está probado, pero **no se registra en Stripe hasta el cambio**.
+5. **Stripe convive.** El destino existente se dirige al API v2 durante la reparación de octubre 28.
+   `/stripe/webhook` verifica firma, procesa el origen `odonteck-club-v2` y reenvía los demás eventos al receptor antiguo, conservando bytes y firma. Un fallo del receptor antiguo devuelve 503 para reintento. Checkout sin pago confirmado no activa beneficios.
 
 ## Modo de datos del frontend
 
