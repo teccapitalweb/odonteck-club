@@ -26,9 +26,9 @@ export function tarjetaCurso(c: Curso) {
   // La ruta de regreso siempre gana: si ya empezó un curso, destacamos dónde
   // se quedó. Antes de empezar, destacamos el regalo que eligió.
   const destacado = esReciente
-    ? { clase: 'pcard--resume', icono: 'play-circle', texto: 'Continúa aquí' }
+    ? { clase: 'pcard--resume', icono: 'play-circle', ceja: 'TU SIGUIENTE PASO', texto: 'Continúa aquí' }
     : esCursoGratis
-      ? { clase: 'pcard--gift', icono: 'gift', texto: 'Tu curso gratis' }
+      ? { clase: 'pcard--gift', icono: 'gift', ceja: 'BENEFICIO ACTIVADO', texto: 'Tu curso gratis' }
       : null;
   const chip = done
     ? `<span class="chip chip--accent"><i data-lucide="check" class="i"></i>Completado</span>`
@@ -39,7 +39,7 @@ export function tarjetaCurso(c: Curso) {
   <a class="pcard${destacado ? ` ${destacado.clase}` : ''}" href="#/curso/${c.id}">
     <img src="${c.portada}" alt="" loading="lazy">
     <div class="pcard__top">${chip}<span class="circle-btn circle-btn--glass" style="width:36px;height:36px"><i data-lucide="${icon}" class="i" style="width:15px;height:15px"></i></span></div>
-    ${destacado ? `<span class="pcard__spotlight"><i data-lucide="${destacado.icono}" class="i"></i>${destacado.texto}</span>` : !Acceso.vip() && CursoGratis.id() ? '<span class="pcard__lock"><i data-lucide="crown" class="i"></i>VIP</span>' : ''}
+    ${destacado ? `<span class="pcard__spotlight"><span class="pcard__spotlight-icon"><i data-lucide="${destacado.icono}" class="i"></i></span><span class="pcard__spotlight-copy"><small>${destacado.ceja}</small><strong>${destacado.texto}</strong></span><i data-lucide="arrow-up-right" class="pcard__spotlight-arrow"></i></span>` : !Acceso.vip() && CursoGratis.id() ? '<span class="pcard__lock"><i data-lucide="crown" class="i"></i>VIP</span>' : ''}
     <div class="pcard__body">
       <div class="pcard__title">${esc(c.titulo)}</div>
       <div class="pcard__meta"><span><i data-lucide="play-circle" class="i"></i>${meta(c)}</span><span><i data-lucide="signal" class="i"></i>${c.nivel}</span></div>
