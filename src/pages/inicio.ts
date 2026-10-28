@@ -29,6 +29,7 @@ function bienvenidaPraxia() {
   <section class="praxia-code-gate" role="dialog" aria-modal="true" aria-labelledby="praxia-code-title" aria-describedby="praxia-code-description" data-praxia-code-gate>
     <div class="praxia-code-gate__backdrop" aria-hidden="true"></div>
     <div class="praxia-code-gate__card">
+      <button type="button" class="praxia-code-gate__close" data-praxia-code-defer aria-label="Cerrar y mostrar este beneficio después" title="Cerrar por ahora"><i data-lucide="x" class="i"></i></button>
       <div class="praxia-code-gate__seal" aria-hidden="true"><i data-lucide="sparkles" class="i"></i></div>
       <span class="praxia-code-gate__eyebrow">Nueva oportunidad para la comunidad</span>
       <h2 id="praxia-code-title">Activa otro mes gratis de Praxia</h2>
