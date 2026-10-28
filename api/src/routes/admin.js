@@ -13,6 +13,7 @@ import { logrosPublicos, normalizarEstadoRecompensas } from '../lib/recompensas.
 import { conflicto, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { DIA_MS, aISO, aMillis } from '../lib/fechas.js';
 import { contactosEncuestas, resumirEncuestas } from '../lib/encuestas.js';
+import { reporteCuponesPraxia } from '../lib/praxia-cupones.js';
 import { LIMITES, booleano, cuerpo, entero, esObjeto, idDocumento, texto, textoRequerido, unoDe, url } from '../lib/validacion.js';
 import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -25,6 +26,8 @@ const TIPOS_SUBIDA = {
 // El club viejo no tiene un esquema fijo de fechas de alta/baja: se prueban los nombres conocidos.
 const CAMPOS_ALTA = ['fechaAlta', 'creadoEn', 'creado', 'fechaInicio', 'fechaRegistro', 'createdAt'];
 const CAMPOS_BAJA = ['canceladoEn', 'fechaBaja', 'fechaCancelacion'];
+const CAMPANA_PRAXIA_COMUNIDAD = 'praxia-comunidad-30-dias';
+const CUPO_PRAXIA_COMUNIDAD = 50;
 
 const primeraFecha = (obj, campos) => {
   for (const c of campos) {
@@ -147,6 +150,39 @@ export function rutasAdmin(ctx) {
       altasPorMes,
       porVencer: porVencer.sort((a, b) => String(a.vence).localeCompare(String(b.vence))).slice(0, 20),
       inactivosLista: inactivosLista.sort((a, b) => String(a.ultimaActividad ?? '').localeCompare(String(b.ultimaActividad ?? ''))).slice(0, 20),
+    });
+  }));
+
+  // La visualización de campaña usa sólo cifras agregadas. Nunca retorna
+  // códigos, correos, organizaciones ni datos clínicos desde Praxia.
+  r.get('/admin/recompensas/praxia/comunidad/reporte', h(async (req, res) => {
+    const solicitudesSnap = await db.collection(COL.recompensasCanjes)
+      .where('recompensaId', '==', CAMPANA_PRAXIA_COMUNIDAD)
+      .get();
+    const reporte = await reporteCuponesPraxia(ctx.config, { campaignId: CAMPANA_PRAXIA_COMUNIDAD });
+    const solicitudes = solicitudesSnap.size;
+    if (!reporte.ok) {
+      return res.json({
+        disponible: false,
+        cupo: CUPO_PRAXIA_COMUNIDAD,
+        solicitudes,
+        emitidos: 0,
+        activados: 0,
+        pendientesEmision: solicitudes,
+        pendientesActivacion: 0,
+        activity: [],
+        mensaje: reporte.motivo,
+      });
+    }
+    res.json({
+      disponible: true,
+      cupo: CUPO_PRAXIA_COMUNIDAD,
+      solicitudes,
+      emitidos: reporte.issued,
+      activados: reporte.redeemed,
+      pendientesEmision: Math.max(0, solicitudes - reporte.issued),
+      pendientesActivacion: Math.max(0, reporte.issued - reporte.redeemed),
+      activity: reporte.activity,
     });
   }));
 

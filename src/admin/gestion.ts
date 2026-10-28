@@ -120,6 +120,36 @@ export function adminResumen() {
   </div>`;
 }
 
+function panelCampanaPraxia() {
+  const reporte = Admin.campanaPraxia;
+  if (!reporte) {
+    return `<section class="card card--pad campaign-report stack" style="gap:8px"><div class="campaign-report__head"><div><span class="campaign-report__eyebrow">RECOMPENSAS · PRAXIA</span><h3 class="admin-card-title">Campaña Comunidad · 30 días</h3></div><span class="chip chip--primary">Actualizando</span></div><p class="muted" style="font-size:var(--fs-sm)">Preparando las cifras agregadas de la campaña…</p></section>`;
+  }
+  const avance = reporte.cupo ? Math.min(100, Math.round((reporte.solicitudes / reporte.cupo) * 100)) : 0;
+  const actividad = reporte.activity.slice(-12);
+  const maxActividad = Math.max(1, ...actividad.flatMap((fila) => [fila.issued, fila.redeemed]));
+  const dia = (valor: string) => new Date(`${valor}T12:00:00`).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+  const metrica = (icono: string, etiqueta: string, valor: number, nota: string, tono = '') => `<div class="campaign-report__metric ${tono}"><span><i data-lucide="${icono}" class="i"></i>${etiqueta}</span><strong>${valor}</strong><small>${nota}</small></div>`;
+  const grafica = actividad.length
+    ? `<div class="campaign-report__chart" role="img" aria-label="Gráfica de cupones emitidos y activados por día">${actividad.map((fila) => `<div class="campaign-report__day"><div class="campaign-report__bars"><i class="campaign-report__bar campaign-report__bar--issued" title="${fila.issued} emitidos" style="height:${Math.max(5, (fila.issued / maxActividad) * 100)}%"></i><i class="campaign-report__bar campaign-report__bar--redeemed" title="${fila.redeemed} activados" style="height:${Math.max(fila.redeemed ? 5 : 0, (fila.redeemed / maxActividad) * 100)}%"></i></div><span>${dia(fila.day)}</span></div>`).join('')}</div>`
+    : `<p class="muted" style="font-size:var(--fs-sm)">Aún no hay emisiones registradas para graficar.</p>`;
+  const aviso = reporte.disponible
+    ? ''
+    : `<p class="campaign-report__notice"><i data-lucide="circle-alert" class="i"></i>${esc(reporte.mensaje || 'No pudimos actualizar Praxia en este momento.')}</p>`;
+  return `<section class="card card--pad campaign-report stack" style="gap:16px">
+    <div class="campaign-report__head"><div><span class="campaign-report__eyebrow">RECOMPENSAS · PRAXIA</span><h3 class="admin-card-title">Campaña Comunidad · 30 días</h3><p>Seguimiento agregado del cupón de bienvenida. No incluye códigos ni datos personales.</p></div><span class="chip ${reporte.disponible ? 'chip--accent' : 'chip--warn'}">${reporte.disponible ? 'Datos en vivo' : 'Sin conexión'}</span></div>
+    <div class="campaign-report__metrics">
+      ${metrica('users-round', 'Solicitudes', reporte.solicitudes, `de ${reporte.cupo} lugares`)}
+      ${metrica('ticket-check', 'Cupones emitidos', reporte.emitidos, `${reporte.pendientesEmision} por emitir`, 'campaign-report__metric--blue')}
+      ${metrica('circle-check-big', 'Activados en Praxia', reporte.activados, `${reporte.pendientesActivacion} aún sin activar`, 'campaign-report__metric--green')}
+      ${metrica('pie-chart', 'Cupo utilizado', avance, `${avance}% de la campaña`, 'campaign-report__metric--purple')}
+    </div>
+    <div class="campaign-report__progress"><span style="width:${avance}%"></span></div>
+    <div class="campaign-report__graph"><div class="campaign-report__graph-head"><div><strong>Actividad por día</strong><small>Emisión ≠ activación: una activación ocurre cuando la persona usa el cupón en Praxia.</small></div><div class="campaign-report__legend"><span><i class="campaign-report__dot campaign-report__dot--issued"></i>Emitidos</span><span><i class="campaign-report__dot campaign-report__dot--redeemed"></i>Activados</span></div></div>${grafica}</div>
+    ${aviso}
+  </section>`;
+}
+
 function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   const cursos = Datos.cursos();
   const qz = Datos.quizzes();
@@ -137,6 +167,7 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
     ${kpi('user-plus', 'Altas en 30 días', r.altas30d, `${r.bajas30d} bajas · ${r.certificados30d} certificados`)}
     ${kpi('alert-triangle', 'Sin actividad 14+ días', r.inactivos ?? 0, 'miembros activos en riesgo de baja')}
   </div>
+  ${panelCampanaPraxia()}
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:14px">
       <h3 class="admin-card-title">Altas por mes</h3>

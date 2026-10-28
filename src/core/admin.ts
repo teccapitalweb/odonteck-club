@@ -28,6 +28,18 @@ export interface ResumenAdmin {
   inactivosLista?: { uid: string; nombre: string; plan: string; ultimaActividad: string | null; whatsapp?: string; email?: string }[];
 }
 
+export interface ReporteCampanaPraxia {
+  disponible: boolean;
+  cupo: number;
+  solicitudes: number;
+  emitidos: number;
+  activados: number;
+  pendientesEmision: number;
+  pendientesActivacion: number;
+  activity: { day: string; issued: number; redeemed: number }[];
+  mensaje?: string;
+}
+
 export interface DetalleMiembroAdmin extends MiembroDemo {
   perfil?: Record<string, unknown>;
   miembro?: Record<string, unknown> | null;
@@ -57,6 +69,7 @@ interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; 
 const estado = {
   recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
+  campanaPraxia: null as ReporteCampanaPraxia | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
   reportesDirectorio: [] as ReporteDirectorioAdmin[],
@@ -128,6 +141,7 @@ const cargarCupones = (forzar = false) => cargar('cupones', async () => {
 export const Admin = {
   get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
+  get campanaPraxia() { return estado.campanaPraxia; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
   get reportesDirectorio() { return estado.reportesDirectorio; },
@@ -143,6 +157,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
   try {
     if (/^\/admin\/?$/.test(path)) {
       tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, forzar));
+      tareas.push(cargar('campana-praxia-comunidad', async () => { estado.campanaPraxia = await api<ReporteCampanaPraxia>('/admin/recompensas/praxia/comunidad/reporte'); }, forzar));
       tareas.push(cargarCursos(forzar), cargarMateriales(forzar), cargarEventos(forzar), cargarQuizzes(forzar));
     } else if (path.startsWith('/admin/cursos')) {
       tareas.push(cargarCursos(forzar), cargarQuizzes(forzar));

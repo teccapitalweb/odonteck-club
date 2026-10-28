@@ -71,6 +71,39 @@ textarea.input { padding: 10px 14px; resize: vertical; }
 .admin-callout .i { color: var(--primary); flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; }
 .admin-callout p { color: var(--text-2); margin-top: 2px; }
 
+/* Campaña de recompensas Praxia */
+.campaign-report { overflow: hidden; background: linear-gradient(135deg, color-mix(in srgb, var(--primary-soft) 50%, var(--surface)) 0%, var(--surface) 54%, color-mix(in srgb, var(--brand-teal) 9%, var(--surface)) 100%); }
+.campaign-report__head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.campaign-report__head > div { display: grid; gap: 4px; }
+.campaign-report__head p { color: var(--text-2); font-size: var(--fs-sm); }
+.campaign-report__eyebrow { color: var(--primary); font-family: var(--font-mono); font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.campaign-report__metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.campaign-report__metric { min-width: 0; display: grid; gap: 4px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-lg); background: color-mix(in srgb, var(--surface) 82%, transparent); }
+.campaign-report__metric > span { display: flex; gap: 6px; align-items: center; color: var(--text-3); font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.campaign-report__metric .i { width: 14px; height: 14px; color: var(--primary); }
+.campaign-report__metric strong { font-family: var(--font-display); font-size: var(--fs-xl); line-height: 1; }
+.campaign-report__metric small { color: var(--text-2); font-size: var(--fs-xs); }
+.campaign-report__metric--blue .i, .campaign-report__bar--issued, .campaign-report__dot--issued { color: var(--primary); background: var(--primary); }
+.campaign-report__metric--green .i, .campaign-report__bar--redeemed, .campaign-report__dot--redeemed { color: var(--success); background: var(--success); }
+.campaign-report__metric--purple .i { color: #7859c7; }
+.campaign-report__progress { height: 8px; overflow: hidden; border-radius: var(--r-full); background: var(--surface-2); }
+.campaign-report__progress span { display: block; height: 100%; min-width: 3px; border-radius: inherit; background: var(--brand-gradient); transition: width .3s var(--ease); }
+.campaign-report__graph { display: grid; gap: 12px; padding: 14px; border-radius: var(--r-lg); border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 76%, transparent); }
+.campaign-report__graph-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.campaign-report__graph-head > div:first-child { display: grid; gap: 3px; }
+.campaign-report__graph-head strong { font-size: var(--fs-sm); }
+.campaign-report__graph-head small { color: var(--text-2); font-size: var(--fs-xs); }
+.campaign-report__legend { display: flex; gap: 12px; flex-wrap: wrap; color: var(--text-2); font-size: var(--fs-xs); white-space: nowrap; }
+.campaign-report__legend span { display: flex; gap: 5px; align-items: center; }
+.campaign-report__dot { width: 8px; height: 8px; border-radius: 50%; }
+.campaign-report__chart { height: 148px; display: flex; align-items: stretch; gap: 10px; padding-top: 6px; }
+.campaign-report__day { min-width: 28px; flex: 1; display: grid; grid-template-rows: 1fr auto; gap: 7px; align-items: end; text-align: center; }
+.campaign-report__day > span { color: var(--text-3); font-size: 10px; white-space: nowrap; }
+.campaign-report__bars { min-height: 0; height: 100%; display: flex; justify-content: center; align-items: end; gap: 4px; border-bottom: 1px solid var(--line); }
+.campaign-report__bar { display: block; width: min(18px, 42%); min-height: 0; border-radius: 6px 6px 2px 2px; transition: height .3s var(--ease); }
+.campaign-report__notice { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: var(--r-md); background: var(--warning-soft); color: var(--text-2); font-size: var(--fs-sm); }
+.campaign-report__notice .i { width: 17px; height: 17px; color: var(--warning); flex-shrink: 0; }
+
 /* Acordeón de quizzes */
 .acc summary { list-style: none; display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; }
 .acc summary::-webkit-details-marker { display: none; }
@@ -124,11 +157,12 @@ textarea.input { padding: 10px 14px; resize: vertical; }
 
 @media (max-width: 1024px) {
   .admin-grid, .admin-grid--even, .form-grid--3 { grid-template-columns: 1fr; }
+  .campaign-report__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .learning-coverage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bottom-nav--admin { display: flex; }
   .app--admin .bottom-nav { display: none; }
 }
-@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .hbar { grid-template-columns: 1fr 80px 24px; } .learning-coverage { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .hbar { grid-template-columns: 1fr 80px 24px; } .learning-coverage { grid-template-columns: 1fr; } .campaign-report__head, .campaign-report__graph-head { flex-direction: column; } .campaign-report__metrics { grid-template-columns: 1fr 1fr; gap: 8px; } .campaign-report__metric { padding: 11px; } .campaign-report__metric > span { font-size: 9px; letter-spacing: 0; } .campaign-report__chart { gap: 5px; } .campaign-report__day { min-width: 19px; } .campaign-report__day > span { font-size: 8px; } }
 @media (max-width: 640px) { .admin-directory-report { grid-template-columns: auto minmax(0, 1fr); } .admin-directory-report__actions { grid-column: 2; justify-content: flex-start; } }
 .bottom-nav--admin { display: none; }
 @media (max-width: 1024px) { .bottom-nav--admin { display: flex; } }
