@@ -22,6 +22,9 @@ let usuario: Usuario | null = null;
 let listo: Promise<void> | null = null;
 let perfilListo: Promise<void> | null = null;
 let perfilResuelto = true;
+let firebaseListo: Promise<void> | null = null;
+let quitarObservador: (() => void) | null = null;
+let generacionAuth = 0;
 
 if (API) {
   try {
@@ -33,10 +36,16 @@ if (API) {
 }
 
 async function cargarFirebase() {
-  const [{ initializeApp }, modAuth] = await Promise.all([import('firebase/app'), import('firebase/auth')]);
-  fb = modAuth;
-  authInst = fb.getAuth(initializeApp(FIREBASE_CONFIG));
-  await fb.setPersistence(authInst, fb.browserLocalPersistence);
+  if (!firebaseListo) firebaseListo = (async () => {
+    const [{ initializeApp }, modAuth] = await Promise.all([import('firebase/app'), import('firebase/auth')]);
+    fb = modAuth;
+    // Firebase migra una sesión previa de localStorage y utiliza el almacén disponible.
+    authInst = fb.initializeAuth(initializeApp(FIREBASE_CONFIG), {
+      persistence: [fb.indexedDBLocalPersistence, fb.browserLocalPersistence],
+      popupRedirectResolver: fb.browserPopupRedirectResolver,
+    });
+  })().catch((e) => { firebaseListo = null; throw e; });
+  return firebaseListo;
 }
 
 export const Auth = {
@@ -50,34 +59,47 @@ export const Auth = {
         usuario = localStorage.getItem(DEMO_KEY) ? { uid: 'demo', email: 'demo@odonteck.club', nombre: 'Modo demo', foto: '', esAdmin: true, esVip: !!localStorage.getItem('odonteck-club:vip-sim') } : null;
         return;
       }
-      if (localStorage.getItem(DEMO_KEY)) localStorage.removeItem(DEMO_KEY);
+      try { localStorage.removeItem(DEMO_KEY); } catch {}
       await cargarFirebase();
-      await new Promise<void>((ok) => {
-        fb!.onAuthStateChanged(authInst!, async (u) => {
-          if (!u) { usuario = null; perfilListo = null; perfilResuelto = true; ok(); return; }
-          const tok = await u.getIdTokenResult();
-          usuario = { uid: u.uid, email: u.email || '', nombre: u.displayName || u.email?.split('@')[0] || '', foto: u.photoURL || '', esAdmin: tok.claims.admin === true, esVip: false };
-          // esVip solo llega con /me: lo que decida paywalls o acceso admin debe esperar Auth.perfil().
-          perfilResuelto = false;
-          perfilListo = api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me').then((me) => {
-            const actual = usuario;
-            if (!actual || actual.uid !== u.uid) return;
-            usuario = { ...actual, esVip: me.esVip, esAdmin: me.esAdmin === true || actual.esAdmin, nombre: me.perfil?.nombre || actual.nombre };
-            if (me.perfil) Perfil.hidratar(me.perfil, me.plan, me.vence);
-          }).catch(() => { /* el backend dirá si no hay acceso */ })
-            .finally(() => { if (usuario?.uid === u.uid) perfilResuelto = true; });
-          ok();
+      quitarObservador?.();
+      await new Promise<void>((ok, fail) => {
+        quitarObservador = fb!.onAuthStateChanged(authInst!, async (u) => {
+          const gen = ++generacionAuth;
+          const anterior = usuario?.uid ?? null;
+          const cambioCuenta = anterior !== null && anterior !== (u?.uid ?? null);
+          Perfil.seleccionarCuenta(u?.uid ?? null);
+          if (!u) { usuario = null; perfilListo = null; perfilResuelto = true; ok(); if (cambioCuenta) window.dispatchEvent(new Event('auth:cuenta-cambio')); return; }
+          try {
+            const tok = await u.getIdTokenResult();
+            if (gen !== generacionAuth) { ok(); return; }
+            usuario = { uid: u.uid, email: u.email || '', nombre: u.displayName || u.email?.split('@')[0] || '', foto: u.photoURL || '', esAdmin: tok.claims.admin === true, esVip: false };
+            // esVip solo llega con /me: lo que decida paywalls o acceso admin debe esperar Auth.perfil().
+            perfilResuelto = false;
+            perfilListo = api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me').then((me) => {
+              const actual = usuario;
+              if (!actual || actual.uid !== u.uid || gen !== generacionAuth) return;
+              usuario = { ...actual, esVip: me.esVip, esAdmin: me.esAdmin === true || actual.esAdmin, nombre: me.perfil?.nombre || actual.nombre };
+              if (me.perfil) Perfil.hidratar(me.perfil, me.plan, me.vence);
+              perfilResuelto = true;
+            }).catch(() => { /* No convertir un fallo de red en perfil gratis confirmado. */ });
+            ok();
+            if (cambioCuenta) window.dispatchEvent(new Event('auth:cuenta-cambio'));
+          } catch (error) { perfilResuelto = false; listo = null; fail(error); }
         });
       });
-    })();
+    })().catch((error) => { listo = null; throw error; });
     return listo;
   },
-  perfil(): Promise<void> { return perfilListo ?? Promise.resolve(); },
+  async perfil(): Promise<void> {
+    await perfilListo;
+    if (Datos.modo === 'api' && usuario && !perfilResuelto) await this.refrescarPerfil();
+  },
   async refrescarPerfil(): Promise<void> {
     if (Datos.modo !== 'api' || !usuario) return;
     const uid = usuario.uid;
+    const gen = generacionAuth;
     const me = await api<{ esVip: boolean; esAdmin?: boolean; plan?: string | null; vence?: string | null; perfil?: Partial<PerfilDatos> }>('/me');
-    if (!usuario || usuario.uid !== uid) return;
+    if (!usuario || usuario.uid !== uid || gen !== generacionAuth) return;
     usuario = { ...usuario, esVip: me.esVip, esAdmin: me.esAdmin === true || usuario.esAdmin, nombre: me.perfil?.nombre || usuario.nombre };
     if (me.perfil) Perfil.hidratar(me.perfil, me.plan, me.vence);
     perfilResuelto = true;
@@ -105,9 +127,11 @@ export const Auth = {
     await fb!.sendPasswordResetEmail(authInst!, email);
   },
   async salir() {
+    generacionAuth++;
     if (Datos.modo === 'demo') localStorage.removeItem(DEMO_KEY);
     else if (authInst) await fb!.signOut(authInst);
     usuario = null; listo = null; perfilListo = null; perfilResuelto = true;
+    Perfil.seleccionarCuenta(null);
   },
   async token() { return authInst?.currentUser ? authInst.currentUser.getIdToken() : null; },
 };

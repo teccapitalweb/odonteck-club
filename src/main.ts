@@ -46,7 +46,7 @@ import { abrirVisorDocumento, montarDocumentosDirectorio, prepararDocumento } fr
 import { paginaLogros } from './pages/logros';
 import { paginaRecompensas, detalleRecompensa } from './pages/recompensas';
 import { Acceso, mostrarPaywall } from './core/acceso';
-import { cargarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
+import { cargarClub, clubCargado, invalidarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
 import { juegoClaseCompletado, type RegistroJuegoClase, type TipoJuegoClase } from './core/juego-clase';
@@ -503,9 +503,14 @@ function pintarEsqueleto(uid: string) {
   createIcons({ icons });
 }
 
+function mostrarRecuperacionCuenta() {
+  montar('solo');
+  document.getElementById('outlet')!.innerHTML = `<section class="card card--pad stack" role="alert" style="max-width:480px;margin:12vh auto;padding:32px;text-align:center"><h1>Vamos a recuperar tu cuenta</h1><p>No pudimos consultar tu información guardada. Revisa tu conexión y vuelve a intentarlo; no necesitas elegir otro curso ni repetir tu bienvenida.</p><button class="btn btn--brand" type="button" data-reintentar-cuenta>Reintentar</button><button class="btn btn--ghost" type="button" data-salir>Ir al inicio de sesión</button></section>`;
+}
+
 onBeforeRender(async (path) => {
   clearTimeout(esqueletoPendiente);
-  await Auth.iniciar();
+  try { await Auth.iniciar(); } catch { if (current().path === path) mostrarRecuperacionCuenta(); return false; }
   const u = Auth.usuario;
   if (path.startsWith('/verificar')) { montar('solo'); return true; }
   if (path === '/login') {
@@ -514,7 +519,7 @@ onBeforeRender(async (path) => {
   }
   if (!u) { sessionStorage.setItem('odt:volver', location.hash.slice(1) || '/'); navigate('/login'); return false; }
   if (path.startsWith('/admin')) {
-    await Auth.perfil();
+    try { await Auth.perfil(); } catch { if (current().path === path) mostrarRecuperacionCuenta(); return false; }
     if (!Auth.usuario?.esAdmin) { toast('Tu cuenta no tiene acceso al panel de administración', 'shield-alert'); navigate('/'); return false; }
     // El panel hidrata el foro con su propia vista y modera el directorio: al volver se recargan.
     invalidarComunidad(); invalidarDirectorio();
@@ -533,10 +538,11 @@ onBeforeRender(async (path) => {
     : 0;
   esqueletoPendiente = esqueleto;
   // Auth.perfil() trae esVip desde /me: los paywalls del render dependen de él.
-  const [, , encuestasListas] = await Promise.all([Auth.perfil(), cargarClub(path, false, path === rutaPintada).catch(() => {}), cargarEncuestas().then(() => true, () => false)]);
+  const [perfilListo, , encuestasListas] = await Promise.all([Auth.perfil().then(() => true, () => false), cargarClub(path, false, path === rutaPintada).catch(() => {}), cargarEncuestas().then(() => true, () => false)]);
   clearTimeout(esqueleto);
   // Render superado (cierre de sesión, otra ruta o el admin) mientras se cargaba: no montar nada desde aquí.
   if (Auth.usuario?.uid !== u.uid || current().path !== path) return false;
+  if (!perfilListo || !clubCargado() || !encuestasListas) { mostrarRecuperacionCuenta(); return false; }
   // El cascarón montado antes de tener catálogo y puntos se vuelve a pintar con los datos ya cargados.
   if (cascaronProvisional) { cascaronProvisional = false; if (shellActual === 'miembro') shellActual = null; }
   // Primera decisión de una cuenta gratis: elegir el curso de bienvenida antes de cualquier
@@ -646,6 +652,13 @@ onRender(() => {
   if (shellActual === 'miembro' && !mostrarEncuestaPendiente(toast) && !sinRecorrido && !mostrarEleccionCursoGratis(toast)) mostrarOnboarding();
 });
 startRouter();
+window.addEventListener('auth:cuenta-cambio', () => {
+  invalidarClub(); reiniciarEncuestas(); shellActual = null; rutaPintada = null;
+  document.querySelectorAll('.onb, .cga').forEach((el) => el.remove());
+  document.documentElement.classList.remove('cg-open');
+  if (!Auth.usuario) { sessionStorage.removeItem('odt:volver'); navigate('/login'); return; }
+  void render();
+});
 window.addEventListener('datos:cambio', (e) => { if ((e as CustomEvent).detail === 'avisos') actualizarNotifs(); });
 window.addEventListener('recompensas:cambio', () => { actualizarNotifs(); actualizarMonedero(); });
 window.addEventListener('recompensas:ganadas', (e) => {
@@ -1434,7 +1447,8 @@ document.addEventListener('click', async (e) => {
     if (Datos.modo === 'demo') { await Auth.entrarDemo(); remontarDesdeLogin(); return; }
     try { await Auth.entrarGoogle(); remontarDesdeLogin(); } catch (err) { mostrarErrorLogin(err); }
   }
-  if (el.closest('[data-salir]')) { await Auth.salir(); reiniciarEncuestas(); shellActual = null; navigate('/login'); }
+  if (el.closest('[data-reintentar-cuenta]')) { void render(); return; }
+  if (el.closest('[data-salir]')) { await Auth.salir(); invalidarClub(); reiniciarEncuestas(); shellActual = null; navigate('/login'); }
 
   // Opción de quiz marcada visualmente (el input está oculto)
   const opt = el.closest<HTMLLabelElement>('.quiz__opt');

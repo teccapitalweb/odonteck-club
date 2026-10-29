@@ -191,7 +191,10 @@ function pendientesDemo(): EncuestaPendiente[] {
 
 let cargando: Promise<void> | null = null;
 let generacion = 0;
+let cuentaCargada: string | null = null;
 export async function cargarEncuestas(forzar = false) {
+  const uid = Auth.usuario?.uid ?? null;
+  if (uid !== cuentaCargada) { reiniciarEncuestas(); cuentaCargada = uid; }
   if (estado.cargado && !forzar) return;
   if (!forzar && cargando) return cargando;
   const carga: Promise<void> = leerEncuestas().finally(() => { if (cargando === carga) cargando = null; });

@@ -1,14 +1,17 @@
 // Perfil del miembro. Provisional en localStorage; en Fase 2 viene de Firebase Auth + miembros/{uid}.
 export type PlanPerfil = 'mensual' | 'anual' | 'cortesia' | 'admin' | 'invitado';
-export interface Perfil { nombre: string; whatsapp: string; especialidad: string; ciudad: string; plan: PlanPerfil; vence: string; avisos: { enVivo: boolean; nuevos: boolean; comunidad: boolean } }
+export interface Perfil { nombre: string; whatsapp: string; especialidad: string; ciudad: string; plan: PlanPerfil; vence: string; recorridoVisto?: boolean; avisos: { enVivo: boolean; nuevos: boolean; comunidad: boolean } }
 const KEY = 'odonteck-club:perfil:v1';
 const DEF: Perfil = { nombre: 'Dra. Fernanda Ramírez', whatsapp: '', especialidad: '', ciudad: '', plan: 'anual', vence: '2027-03-15', avisos: { enVivo: true, nuevos: true, comunidad: false } };
 const DEF_API: Perfil = { nombre: 'Mi cuenta', whatsapp: '', especialidad: '', ciudad: '', plan: 'invitado', vence: '', avisos: { enVivo: true, nuevos: true, comunidad: true } };
 const api = !!import.meta.env.VITE_API_URL;
+let cuenta: string | null = null;
+let actualApi: Perfil = { ...DEF_API };
 
 export const Perfil = {
-  get(): Perfil { const base = api ? DEF_API : DEF; try { return { ...base, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return base; } },
-  set(p: Partial<Perfil>) { try { localStorage.setItem(KEY, JSON.stringify({ ...this.get(), ...p })); } catch {} },
+  seleccionarCuenta(uid: string | null) { if (cuenta !== uid) { cuenta = uid; actualApi = { ...DEF_API }; } },
+  get(): Perfil { if (api) return actualApi; try { return { ...DEF, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return DEF; } },
+  set(p: Partial<Perfil>) { if (api) { actualApi = { ...actualApi, ...p }; return; } try { localStorage.setItem(KEY, JSON.stringify({ ...this.get(), ...p })); } catch {} },
   hidratar(perfil: Partial<Perfil>, plan?: string | null, vence?: string | null) {
     const planes: PlanPerfil[] = ['mensual', 'anual', 'cortesia', 'admin', 'invitado'];
     const planUi: PlanPerfil = planes.includes(plan as PlanPerfil) ? plan as PlanPerfil : 'invitado';

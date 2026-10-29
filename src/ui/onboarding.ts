@@ -1,6 +1,12 @@
 // Tour de bienvenida para nuevos miembros. Rápido (6 pasos), bonito y saltable.
-// Se muestra una vez (localStorage) y se puede reabrir con el botón de ayuda.
+// Se recuerda por cuenta en el servidor y se puede reabrir con el botón de ayuda.
 import { createIcons, icons } from 'lucide';
+import { api, Auth } from '../core/auth';
+import { Datos } from '../core/datos';
+import { Perfil } from '../core/perfil';
+import { CursoGratis } from '../core/curso-gratis';
+import { encuestaRespondida } from '../core/encuestas';
+import { Progreso } from '../core/progreso';
 
 export const ONBOARDING_KEY = 'odonteck-club:bienvenida-vista';
 
@@ -21,11 +27,26 @@ const PASOS: Paso[] = [
 ];
 
 let i = 0;
+const guardando = new Set<string>();
+function recordarRecorrido(uid: string) {
+  try { localStorage.setItem(`${ONBOARDING_KEY}:${uid}`, '1'); } catch {}
+  if (Datos.modo !== 'api' || Perfil.get().recorridoVisto || guardando.has(uid)) return;
+  guardando.add(uid);
+  void api('/me/recorrido-visto', { method: 'POST' }).then(() => {
+    if (Auth.usuario?.uid === uid) Perfil.set({ recorridoVisto: true });
+  }).catch(() => { /* La marca local permite reintentar sin volver a interrumpir. */ }).finally(() => guardando.delete(uid));
+}
 
 export function mostrarOnboarding(forzar = false) {
-  try { if (!forzar && localStorage.getItem(ONBOARDING_KEY)) return; } catch {}
+  const uid = Auth.usuario?.uid;
+  if (!uid || (Datos.modo === 'api' && !Auth.perfilResuelto())) return;
+  let vistoLocal = false;
+  try { vistoLocal = localStorage.getItem(`${ONBOARDING_KEY}:${uid}`) === '1'; } catch {}
+  // Una elección o actividad ya guardada también identifica a quien vuelve desde otro dispositivo.
+  const yaEmpezo = !!CursoGratis.id() || encuestaRespondida('bienvenida') || Progreso.totalVistas() > 0;
+  if (!forzar && (vistoLocal || Perfil.get().recorridoVisto || yaEmpezo)) { recordarRecorrido(uid); return; }
   if (document.querySelector('.onb')) return;
-  try { localStorage.setItem(ONBOARDING_KEY, '1'); } catch {}
+  recordarRecorrido(uid);
   i = 0;
   const el = document.createElement('div');
   el.className = 'onb';

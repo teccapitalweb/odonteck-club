@@ -140,6 +140,7 @@ export function perfilConDefectos(perfil, miembro, usuario) {
     especialidad: perfil?.especialidad ?? '',
     ciudad: perfil?.ciudad ?? '',
     intereses: Array.isArray(perfil?.intereses) ? perfil.intereses : [],
+    recorridoVisto: perfil?.recorridoVisto === true,
     avisos: { ...AVISOS_POR_DEFECTO, ...(perfil?.avisos ?? {}) },
     actualizado: perfil?.actualizado ?? null,
   };

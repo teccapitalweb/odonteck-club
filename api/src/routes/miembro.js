@@ -156,6 +156,13 @@ export function rutasMiembro(ctx) {
     });
   }));
 
+  // Preferencia de la cuenta, compartida por navegador y app instalada.
+  // Sólo puede marcarse como visto, nunca reiniciarse desde el cliente.
+  r.post('/me/recorrido-visto', auth, h(async (req, res) => {
+    await db.collection(COL.perfiles).doc(req.usuario.uid).set({ recorridoVisto: true }, { merge: true });
+    res.json({ recorridoVisto: true });
+  }));
+
   r.patch('/me/perfil', auth, h(async (req, res) => {
     const u = req.usuario;
     const b = cuerpo(req);
@@ -183,7 +190,8 @@ export function rutasMiembro(ctx) {
       avisos: { ...base.avisos, ...(cambios.avisos ?? {}) },
       actualizado: ctx.now().toISOString(),
     };
-    await db.collection(COL.perfiles).doc(u.uid).set(perfil);
+    const { recorridoVisto: _recorrido, ...persistir } = perfil;
+    await db.collection(COL.perfiles).doc(u.uid).set(persistir, { merge: true });
     res.json(perfil);
   }));
 
@@ -201,7 +209,8 @@ export function rutasMiembro(ctx) {
     const [actual, miembro] = await Promise.all([leerDoc(db, COL.perfiles, u.uid), leerMiembroHeredado(ctx, u)]);
     const base = perfilConDefectos(actual, miembro, u);
     const perfil = { ...base, intereses: [...intereses], actualizado: ctx.now().toISOString() };
-    await db.collection(COL.perfiles).doc(u.uid).set(perfil);
+    const { recorridoVisto: _recorrido, ...persistir } = perfil;
+    await db.collection(COL.perfiles).doc(u.uid).set(persistir, { merge: true });
     res.json({ intereses: perfil.intereses });
   }));
 

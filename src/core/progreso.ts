@@ -4,11 +4,14 @@ import { cursos, type Curso } from './catalogo';
 
 export interface ProgresoCurso { vistas: number[]; ultima: number; actualizado: string; historial?: string[]; }
 const KEY = 'odonteck-club:progreso:v1';
+const modoApi = !!import.meta.env.VITE_API_URL;
+let remoto: Record<string, ProgresoCurso> = {};
 
 function leer(): Record<string, ProgresoCurso> {
+  if (modoApi) return remoto;
   try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; }
 }
-function escribir(p: Record<string, ProgresoCurso>) { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch {} }
+function escribir(p: Record<string, ProgresoCurso>) { if (modoApi) { remoto = p; return; } try { localStorage.setItem(KEY, JSON.stringify(p)); } catch {} }
 
 export const Progreso = {
   de(cursoId: string): ProgresoCurso { return leer()[cursoId] || { vistas: [], ultima: 1, actualizado: '' }; },

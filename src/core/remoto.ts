@@ -122,15 +122,14 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
       // La elección del curso gratis decide qué se ve abierto; se pide junto con el catálogo.
       // No confundimos un fallo de red con «todavía no eligió». La pantalla obligatoria
       // solo puede bloquear cuando el servidor confirmó el estado de la elección.
-      const cursoGratisP = CursoGratis.cargar().catch(() => { CursoGratis.hidratar(null); return null; });
       // /catalogo lee los desbloqueos del estado guardado; la sincronización de recompensas solo suma puntos y logros.
       const [catalogo, progreso, juegosClase] = await Promise.all([
         api<CatalogoRemoto>('/catalogo'),
-        api<Record<string, ProgresoCurso>>('/progreso').catch(() => null),
+        api<Record<string, ProgresoCurso>>('/progreso'),
         api<RegistroJuegoClase[]>('/juegos-clase'),
+        CursoGratis.cargar(),
       ]);
-      if (gen !== generacion) return;
-      await cursoGratisP;
+      if (gen !== generacion || Auth.usuario?.uid !== uid) return;
 
       Datos.hidratarAdmin('cursos', (catalogo.cursos || []).map(adaptarCurso));
       Datos.hidratarAdmin('materiales', (catalogo.materiales || []).map(adaptarMaterial));
@@ -148,7 +147,7 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
       };
       Datos.hidratarAdmin('config', config);
 
-      if (progreso) Progreso.hidratar(progreso);
+      Progreso.hidratar(progreso);
       hidratarJuegosClase(juegosClase);
 
       cargado = true;
@@ -164,6 +163,7 @@ export async function cargarClub(path = '/', forzar = false, mismaRuta = false) 
   await extras;
 }
 
+export function clubCargado() { return Datos.modo !== 'api' || (cargado && CursoGratis.cargado()); }
 export function invalidarComunidad() { foroEn = 0; hiloFresco = null; }
 export function invalidarDirectorio() { Directorio.invalidar(); }
 export function marcarHiloFresco(id: string) { hiloFresco = { id, en: Date.now() }; }
@@ -171,6 +171,8 @@ export function marcarHiloFresco(id: string) { hiloFresco = { id, en: Date.now()
 export function invalidarClub() {
   generacion++;
   cargado = false;
+  pendiente = null;
+  Progreso.hidratar({});
   quizzesCargados.clear();
   Datos.invalidarAdmin('cursos', 'materiales', 'eventos', 'config');
   RetosRemotos.limpiar();

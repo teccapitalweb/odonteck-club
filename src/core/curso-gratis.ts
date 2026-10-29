@@ -1,7 +1,7 @@
 // «Escoge tu curso gratis»: el miembro gratis elige un curso del catálogo y lo tiene
 // completo excepto la última clase. En modo API la elección vive en el servidor
 // (v2_curso_gratis) y es lo que realmente abre los videos; aquí solo se refleja.
-import { api } from './auth';
+import { api, Auth } from './auth';
 import { Datos } from './datos';
 
 export interface EstadoCursoGratis {
@@ -14,6 +14,7 @@ const VISTAS_KEY = 'odonteck-club:progreso:v1';
 const CAMBIO_MS = 24 * 60 * 60 * 1000;
 let estado: EstadoCursoGratis | null = null;
 let cambios = 0;
+let generacion = 0;
 
 function vistasDemo(cursoId: string): number {
   try {
@@ -41,15 +42,21 @@ export const CursoGratis = {
   id(): string | null { if (Datos.modo !== 'api') estado = leerDemo(); return estado?.cursoId ?? null; },
   estado(): EstadoCursoGratis | null { if (Datos.modo !== 'api') estado = leerDemo(); return estado; },
   hidratar(v: EstadoCursoGratis | null) { estado = v; },
-  limpiar() { estado = null; },
+  limpiar() { generacion++; estado = null; },
   async cargar() {
     if (Datos.modo !== 'api') { estado = leerDemo(); return estado; }
-    estado = await api<EstadoCursoGratis>('/curso-gratis');
+    const gen = generacion, uid = Auth.usuario?.uid;
+    const respuesta = await api<EstadoCursoGratis>('/curso-gratis');
+    if (gen !== generacion || uid !== Auth.usuario?.uid) return null;
+    estado = respuesta;
     return estado;
   },
   async elegir(cursoId: string): Promise<EstadoCursoGratis> {
     if (Datos.modo === 'api') {
-      estado = await api<EstadoCursoGratis>('/curso-gratis', { method: 'POST', json: { cursoId } });
+      const gen = generacion, uid = Auth.usuario?.uid;
+      const respuesta = await api<EstadoCursoGratis>('/curso-gratis', { method: 'POST', json: { cursoId } });
+      if (gen !== generacion || uid !== Auth.usuario?.uid) throw new Error('La cuenta cambió. Vuelve a abrir tu curso.');
+      estado = respuesta;
       return estado;
     }
     const actual = leerDemo();
