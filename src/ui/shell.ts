@@ -6,6 +6,7 @@ import { Acceso } from '../core/acceso';
 import { Progreso } from '../core/progreso';
 import { Recompensas } from '../core/recompensas';
 import { avatarUsuario, esc } from './partials';
+import { installButtonHTML } from './install-app';
 const proximos = () => Datos.eventos().filter((e) => e.publicado !== false && new Date(e.fecha).getTime() > Date.now()).length;
 export const NAV = [
   { href: '#/', icon: 'home', label: 'Inicio', match: /^\/$/ },
@@ -83,6 +84,7 @@ export function shellHTML() {
       <header class="topbar">
         <form class="search" data-search><i data-lucide="search" class="i"></i><input class="input" name="q" placeholder="Buscar cursos, clases o materiales…" autocomplete="off" /></form>
         <div class="topbar__right">
+          ${installButtonHTML()}
           <a class="topbar__coins" href="#/recompensas" data-odoncoins-wallet aria-label="${etiquetaSaldo}" title="${etiquetaSaldo}"><span class="topbar__coin" aria-hidden="true">OC</span><strong data-odoncoins-balance aria-live="polite" aria-atomic="true">${saldo}</strong><span class="topbar__coin-label" aria-hidden="true">OdonCoins</span></a>
           <button class="topbar__praxia-gift" type="button" data-praxia-code-open aria-label="Abrir tu regalo: un mes gratis de Praxia. Campaña de 50 lugares." title="Tienes un mes gratis de Praxia · 50 lugares">
             <span class="topbar__praxia-gift-icon" aria-hidden="true"><i data-lucide="gift" class="i"></i></span>

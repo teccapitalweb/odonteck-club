@@ -1,0 +1,24 @@
+.topbar__install { display: inline-flex; flex-shrink: 0; align-items: center; gap: 7px; min-height: 42px; padding: 8px 12px; border: 1px solid color-mix(in srgb, var(--brand-teal) 55%, var(--line)); border-radius: var(--r-full); background: linear-gradient(120deg, color-mix(in srgb, var(--brand-teal) 16%, var(--surface)), var(--surface)); color: var(--text); font-size: 12px; font-weight: 750; white-space: nowrap; box-shadow: 0 3px 12px -8px var(--brand-teal); }
+.topbar__install .i { width: 19px; height: 19px; color: var(--text); }
+.topbar__install:hover { border-color: var(--brand-teal); background: color-mix(in srgb, var(--brand-teal) 23%, var(--surface)); }
+.topbar__install:focus-visible { outline: 3px solid var(--brand-teal); outline-offset: 3px; }
+.pwa-installed [data-install] { display: none !important; }
+.install-guide { position: fixed; inset: 0; margin: auto; width: min(460px, calc(100% - 28px)); max-height: calc(100dvh - 40px); overflow-y: auto; padding: 30px; border: 1px solid var(--line); border-radius: 26px; background: var(--surface); color: var(--text); box-shadow: var(--shadow-lg); }
+.install-guide::backdrop { background: rgba(13, 24, 47, .64); backdrop-filter: blur(7px); }
+.install-guide__close { position: absolute; top: 12px; right: 12px; }
+.install-guide__close button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--surface-2); font-size: 26px; }
+.install-guide__icon { display: block; border-radius: 18px; box-shadow: 0 6px 22px -10px #386b80; margin-bottom: 20px; }
+.install-guide .eyebrow { color: var(--text-2); font-size: 10px; }
+.install-guide h2 { margin: 8px 0 12px; font-family: var(--font-display); font-size: 28px; line-height: 1.15; }
+.install-guide h3 { margin: 20px 0 10px; font-size: 15px; }
+.install-guide p { font-size: 13px; line-height: 1.65; color: var(--text-2); overflow-wrap: anywhere; }
+.install-guide ol { padding-left: 22px; margin: 12px 0; font-size: 14px; line-height: 1.65; }
+.install-guide li { padding: 4px 0 4px 4px; }
+.install-guide li::marker { color: var(--text-2); font-weight: 800; }
+.install-guide details { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.install-guide summary { cursor: pointer; font-weight: 700; font-size: 14px; }
+.install-guide__desktop { margin-top: 16px; }
+.install-guide .install-guide__note { padding: 12px; margin: 20px 0; border-radius: 12px; background: var(--surface-2); font-size: 12px; }
+.install-guide > form:last-child .btn { width: 100%; }
+@media (min-width: 641px) and (max-width: 1200px) { .topbar__install { width: 42px; justify-content: center; padding: 8px; } .topbar__install span { display: none; } }
+@media (max-width: 640px) { .topbar__install { min-height: 40px; padding: 6px 10px; font-size: 11px; } .install-guide { padding: 24px; } }

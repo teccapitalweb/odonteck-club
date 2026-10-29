@@ -4,6 +4,8 @@ import '@fontsource-variable/jetbrains-mono/index.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
+import './styles/install-app.css';
+import { initAppInstallation } from './ui/install-app';
 import './styles/active.css';
 import './styles/inicio.css';
 import './styles/curso-gratis.css';
@@ -1813,15 +1815,6 @@ document.addEventListener('submit', async (e) => {
   }
 });
 
-// ── PWA: service worker y botón de instalar fijo, nunca popups ──
+// ── PWA: instalación y ayuda solo al tocar el botón ──
 if ('serviceWorker' in navigator && import.meta.env.PROD) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
-let deferred: any = null;
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; });
-window.addEventListener('appinstalled', () => { document.querySelectorAll('[data-install]').forEach((x) => x.remove()); toast('OdonTeck quedó instalado en tu dispositivo', 'smartphone'); });
-document.addEventListener('click', async (e) => {
-  if (!(e.target as HTMLElement).closest('[data-install-btn]')) return;
-  if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; return; }
-  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  toast(ios ? 'En iPhone: toca Compartir y luego "Agregar a inicio".' : 'En Chrome: menú ⋮ → "Instalar app" o "Agregar a pantalla principal".', 'smartphone');
-});
-if (window.matchMedia('(display-mode: standalone)').matches) document.addEventListener('DOMContentLoaded', () => document.querySelectorAll('[data-install]').forEach((x) => x.remove()));
+initAppInstallation(() => toast('OdonTeck quedó instalado en tu dispositivo', 'smartphone'));

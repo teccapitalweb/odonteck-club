@@ -1,5 +1,6 @@
 // Cascarón del panel de administración.
 import { Datos } from '../core/datos';
+import { installButtonHTML } from '../ui/install-app';
 
 export const ADMIN_NAV = [
   { href: '#/admin', icon: 'layout-dashboard', label: 'Resumen', match: /^\/admin\/?$/ },
@@ -37,6 +38,7 @@ export function adminShellHTML() {
       <header class="topbar">
         <div class="admin-crumb" data-crumb>Panel de administración</div>
         <div class="topbar__right">
+          ${installButtonHTML()}
           <button class="btn btn--ghost btn--icon" data-theme-toggle aria-label="Cambiar tema"><i data-lucide="moon" class="i"></i></button>
           <span class="chip chip--primary"><i data-lucide="shield-check" class="i"></i>TEC Capital</span>
         </div>
