@@ -1,8 +1,8 @@
 // OdonTeck Club · service worker
 // Navegación: red primero, sin red la última copia. Estáticos propios: responde con caché y actualiza por detrás.
 // Nunca toca el backend, Firebase, Stripe ni Bunny.
-const VERSION = 'odonteck-club-v3';
-const SHELL = ['/', '/manifest.webmanifest', '/brand/icon-192.png', '/brand/logo-horizontal.png', '/offline.html'];
+const VERSION = 'odonteck-club-v4';
+const SHELL = ['/', '/manifest.webmanifest', '/brand/app-white-192.png', '/brand/logo-horizontal.png', '/offline.html'];
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
