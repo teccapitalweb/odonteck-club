@@ -10,6 +10,10 @@ import { vacio, callout } from './contenido';
 
 const DIA = 864e5;
 export function estadoMiembro(m: MiembroDemo, ahora = Date.now()) {
+  if (m.origenAcceso) {
+    const etiquetas: Record<string, string> = { suscripcion: 'Suscripción vigente', historica: 'Membresía histórica', regalo: 'Regalo vigente', prueba: 'Periodo de prueba', cortesia: 'Cortesía', administrador: 'Administrador', sin_acceso: 'Sin membresía' };
+    return { vip: m.esVip === true, etiqueta: etiquetas[m.origenAcceso] || 'Por verificar', chip: m.esVip ? 'chip--accent' : '' };
+  }
   if (m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > ahora) return { vip: true, etiqueta: 'Cortesía', chip: 'chip--primary' };
   if (m.esVip === true) return { vip: true, etiqueta: m.esAdmin ? 'Administrador' : m.plan === 'anual' ? 'VIP anual' : m.plan === 'mensual' ? 'VIP mensual' : 'VIP activo', chip: 'chip--accent' };
   if ((m.plan === 'mensual' || m.plan === 'anual') && m.vence && new Date(m.vence).getTime() > ahora) return { vip: true, etiqueta: m.plan === 'anual' ? 'VIP anual' : 'VIP mensual', chip: 'chip--accent' };
@@ -21,7 +25,7 @@ const fecha = (iso?: string | null) => iso ? new Date(iso.length === 10 ? iso + 
 const soloDigitos = (s?: string) => (s || '').replace(/\D/g, '');
 const saludo = (nombre: string) => `Hola ${(nombre || '').trim() || 'de nuevo'}`;
 const msgVence = (nombre: string, venceStr: string) => `${saludo(nombre)}, te escribo de OdonTeck Club 👋 Tu acceso vence el ${venceStr}. ¿Te ayudo a renovar para que no pierdas tus cursos y certificados?`;
-const msgInactivo = (nombre: string) => `${saludo(nombre)}, te saludo de OdonTeck Club 👋 Vi que no has entrado últimamente, ¿puedo ayudarte a retomar tus cursos?`;
+const msgInactivo = (nombre: string) => `${saludo(nombre)}, te saludo de OdonTeck Club 👋 Vi que no hay clases recientes registradas, ¿puedo ayudarte a retomar tus cursos?`;
 // Fila de un miembro en riesgo con recordatorio por WhatsApp en 1 clic (si tiene teléfono en su perfil).
 function filaRiesgo(uid: string, nombre: string, sub: string, whatsapp: string | undefined, mensaje: string) {
   const tel = soloDigitos(whatsapp);
@@ -38,7 +42,7 @@ export function miembrosEnRiesgo(): { porVencer: MiembroRiesgo[]; inactivos: Mie
     const r = Admin.resumen;
     return {
       porVencer: (r.porVencer ?? []).map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan, detalle: `vence ${fecha(m.vence)}`, mensaje: msgVence(m.nombre, fecha(m.vence)), whatsapp: m.whatsapp, email: m.email })),
-      inactivos: (r.inactivosLista ?? []).map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan, detalle: m.ultimaActividad ? `sin entrar desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
+      inactivos: (r.inactivosLista ?? []).map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan, detalle: m.ultimaActividad ? `sin clases desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
     };
   }
   const ms = Datos.miembros();
@@ -47,7 +51,7 @@ export function miembrosEnRiesgo(): { porVencer: MiembroRiesgo[]; inactivos: Mie
     porVencer: ms.filter((m) => m.vence && new Date(m.vence).getTime() > ahora && new Date(m.vence).getTime() - ahora < 7 * DIA)
       .map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan ?? '', detalle: `vence ${fecha(m.vence)}`, mensaje: msgVence(m.nombre, fecha(m.vence)), whatsapp: m.whatsapp, email: m.email })),
     inactivos: ms.filter((m) => estadoMiembro(m).vip && ahora - new Date(m.ultimaActividad).getTime() > 14 * DIA)
-      .map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan ?? '', detalle: `sin entrar desde ${fecha(m.ultimaActividad)}`, mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
+      .map((m) => ({ uid: m.uid, nombre: m.nombre, plan: m.plan ?? '', detalle: `sin clases desde ${fecha(m.ultimaActividad)}`, mensaje: msgInactivo(m.nombre), whatsapp: m.whatsapp, email: m.email })),
   };
 }
 // Botones de exportación (PDF/CSV) para una lista de riesgo; solo si hay datos.
@@ -82,9 +86,9 @@ export function adminResumen() {
   ${Datos.modo === 'demo' ? callout('Datos de demostración', 'Los miembros de esta pantalla son ficticios. Con el backend conectado, estos números salen de Firebase y Stripe en tiempo real.') : ''}
   <div class="kpis">
     ${kpi('users', 'Miembros activos', String(activos.length), `${mensual} mensual · ${anual} anual · ${activos.length - mensual - anual} cortesía`)}
-    ${kpi('trending-up', 'Ingreso mensual estimado', `$${mrr.toLocaleString('es-MX')}`, 'MXN · anual prorrateado')}
+    ${kpi('trending-up', 'Ingreso mensual estimado', `$${mrr.toLocaleString('es-MX')}`, 'Estimación por tarifa, no cobros confirmados')}
     ${kpi('user-plus', 'Altas en 30 días', String(altas30), `${porVencer.length} vencen esta semana`)}
-    ${kpi('alert-triangle', 'Sin actividad 14+ días', String(inactivos.length), 'miembros activos en riesgo de baja')}
+    ${kpi('alert-triangle', 'Sin clases 14+ días', String(inactivos.length), 'sin clases registradas; no mide inicios de sesión')}
   </div>
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:14px">
@@ -106,8 +110,8 @@ export function adminResumen() {
     </div>
     <div class="card card--pad stack" style="gap:10px">
       <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Inactivos en riesgo</h3>${btnExportRiesgo('inactivos', inactivos.length > 0)}</div>
-      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
-      ${inactivos.length ? inactivos.slice(0, 20).map((m) => filaRiesgo(m.uid, m.nombre, `sin entrar desde ${fecha(m.ultimaActividad)}`, m.whatsapp, msgInactivo(m.nombre))).join('')
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Cuentas con acceso sin clases registradas en 14+ días. Su último inicio de sesión puede ser más reciente.</p>
+      ${inactivos.length ? inactivos.slice(0, 20).map((m) => filaRiesgo(m.uid, m.nombre, `sin clases desde ${fecha(m.ultimaActividad)}`, m.whatsapp, msgInactivo(m.nombre))).join('')
         : '<p class="muted" style="font-size:var(--fs-sm)">Nadie en riesgo por inactividad. 🎉</p>'}
     </div>
   </div>
@@ -162,11 +166,12 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   return `
   ${adminHead('Resumen', new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}
   <div class="kpis">
-    ${kpi('users', 'Miembros activos', r.miembrosActivos, `${r.mensualActivos ?? 0} mensual · ${r.anualActivos ?? 0} anual · ${r.cortesiaActivos ?? 0} cortesía`)}
-    ${kpi('trending-up', 'Ingreso mensual estimado', `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, 'MXN · anual prorrateado')}
-    ${kpi('user-plus', 'Altas en 30 días', r.altas30d, `${r.bajas30d} bajas · ${r.certificados30d} certificados`)}
-    ${kpi('alert-triangle', 'Sin actividad 14+ días', r.inactivos ?? 0, 'miembros activos en riesgo de baja')}
+    ${kpi('users', 'Cuentas con acceso', r.miembrosActivos, `${r.registrados ?? 0} cuentas identificadas · desglose debajo`)}
+    ${kpi('trending-up', 'Ingreso mensual estimado', `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, 'Estimación por tarifa, no cobros confirmados')}
+    ${kpi('user-plus', 'Altas históricas · 30 días', r.altas30d, `${r.bajas30d} bajas · ${r.certificados30d} certificados`)}
+    ${kpi('alert-triangle', 'Sin clases 14+ días', r.inactivos ?? 0, 'sin clases registradas; no mide inicios de sesión')}
   </div>
+  ${r.accesos ? `<section class="card card--pad admin-access" aria-label="Origen de los accesos"><div class="section-head"><div><span class="eyebrow">Una cuenta, un estado</span><h2 class="admin-card-title">De dónde viene cada acceso</h2></div><a class="btn btn--secondary btn--sm" href="#/admin/bitacora"><i data-lucide="history" class="i"></i>Ver bitácora</a></div><div class="admin-access__grid">${Object.entries({ suscripcion: 'Suscripciones vigentes', historica: 'Membresías históricas', cortesia: 'Cortesías', regalo: 'Regalos', prueba: 'Periodos de prueba', administrador: 'Acceso administrador', sin_acceso: 'Sin membresía' }).map(([k, label]) => `<a href="#/admin/miembros?origen=${k}" class="admin-access__item"><strong>${r.accesos?.[k] ?? 0}</strong><span>${label}</span></a>`).join('')}</div><p class="muted">${r.registrados ?? 0} cuentas identificadas. La vigencia de acceso no acredita un cobro. Los registros históricos requieren conciliación de pago.</p></section>` : ''}
   ${panelCampanaPraxia()}
   <div class="admin-grid admin-grid--even">
     <div class="card card--pad stack" style="gap:14px">
@@ -186,8 +191,8 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
     </div>
     <div class="card card--pad stack" style="gap:10px">
       <div class="row" style="justify-content:space-between;align-items:center;gap:8px"><h3 class="admin-card-title">Inactivos en riesgo</h3>${btnExportRiesgo('inactivos', (r.inactivosLista ?? []).length > 0)}</div>
-      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Activos que no entran hace 14+ días. Reengánchalos antes de que se vayan.</p>
-      ${(r.inactivosLista ?? []).length ? r.inactivosLista!.map((m) => filaRiesgo(m.uid, m.nombre, m.ultimaActividad ? `sin entrar desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', m.whatsapp, msgInactivo(m.nombre))).join('') : `<p class="muted" style="font-size:var(--fs-sm)">${(r.inactivos ?? 0) > 0 ? 'Sin datos de contacto de los inactivos.' : 'Nadie en riesgo por inactividad. 🎉'}</p>`}
+      <p class="faint" style="font-size:var(--fs-xs);margin-top:-4px">Cuentas con acceso sin clases registradas en 14+ días. Su último inicio de sesión puede ser más reciente.</p>
+      ${(r.inactivosLista ?? []).length ? r.inactivosLista!.map((m) => filaRiesgo(m.uid, m.nombre, m.ultimaActividad ? `sin clases desde ${fecha(m.ultimaActividad)}` : 'sin actividad registrada', m.whatsapp, msgInactivo(m.nombre))).join('') : `<p class="muted" style="font-size:var(--fs-sm)">${(r.inactivos ?? 0) > 0 ? 'Sin datos de contacto de los inactivos.' : 'Nadie en riesgo por inactividad. 🎉'}</p>`}
     </div>
   </div>
   <div class="card card--pad stack" style="gap:10px">
@@ -204,8 +209,8 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
 export function filtrarMiembros(q: string, f: string) {
   let l = Datos.miembros();
   if (q) l = l.filter((m) => (m.nombre + m.email).toLowerCase().includes(q));
-  if (f === 'vip') l = l.filter((m) => estadoMiembro(m).vip && !m.cortesiaHasta);
-  if (f === 'cortesia') l = l.filter((m) => m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now());
+  if (f === 'vip') l = l.filter((m) => estadoMiembro(m).vip);
+  if (f === 'cortesia') l = l.filter((m) => m.cortesiaHasta && (Datos.modo === 'api' || new Date(m.cortesiaHasta).getTime() > Date.now()));
   if (f === 'sin') l = l.filter((m) => !estadoMiembro(m).vip);
   return l;
 }
@@ -221,7 +226,7 @@ function ordenarMiembros(l: MiembroDemo[], orden: string, dir: string) {
     switch (orden) {
       case 'nombre': return m.nombre.toLowerCase();
       case 'estado': return RANK_ESTADO[estadoMiembro(m).etiqueta] ?? 9;
-      case 'vence': return ms(m.cortesiaHasta || m.vence);
+      case 'vence': return ms(m.vence || m.cortesiaHasta);
       case 'clases': return m.clasesVistas;
       case 'actividad': return ms(m.ultimaActividad);
       default: return 0;
@@ -241,6 +246,8 @@ export function adminMiembros(_: Record<string, string>, query: URLSearchParams)
   const q = (query.get('q') || '').toLowerCase();
   const f = query.get('estado') || '';
   const orden = query.get('orden') || '';
+  const origen = query.get('origen') || '';
+  const etiquetaOrigen: Record<string,string> = { suscripcion: 'Suscripciones vigentes', historica: 'Membresías históricas', regalo: 'Regalos vigentes', prueba: 'Periodos de prueba', cortesia: 'Cortesías', administrador: 'Acceso administrador', sin_acceso: 'Sin membresía' };
   const dir = query.get('dir') === 'desc' ? 'desc' : 'asc';
   const l = ordenarMiembros(filtrarMiembros(q, f), orden, dir);
   const chip = (k: string, t: string) => `<a class="chip ${f === k ? 'chip--primary' : 'chip--outline'}" href="#/admin/miembros?${new URLSearchParams({ q, estado: k, ...(orden ? { orden, dir } : {}) })}">${t}</a>`;
@@ -248,11 +255,12 @@ export function adminMiembros(_: Record<string, string>, query: URLSearchParams)
     const activo = orden === campo;
     const sig = activo && dir === 'asc' ? 'desc' : 'asc';
     const icono = !activo ? 'chevrons-up-down' : dir === 'asc' ? 'arrow-up' : 'arrow-down';
-    const url = `#/admin/miembros?${new URLSearchParams({ q, estado: f, orden: campo, dir: sig })}`;
+    const url = `#/admin/miembros?${new URLSearchParams({ q, estado: f, orden: campo, dir: sig, ...(origen ? { origen } : {}) })}`;
     return `<th><a href="${url}" style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:${activo ? 'var(--text)' : 'inherit'};font-weight:${activo ? '700' : 'inherit'};text-decoration:none">${etiqueta}<i data-lucide="${icono}" class="i" style="width:13px;height:13px;opacity:${activo ? '1' : '.45'}"></i></a></th>`;
   };
   return `
-  ${adminHead('Miembros', `${Datos.miembros().length} cuentas · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`, `<button class="btn btn--secondary" data-exportar-miembros${l.length ? '' : ' disabled'}><i data-lucide="download" class="i"></i>Exportar CSV</button>`)}
+  ${adminHead('Miembros', `${Datos.miembros().length} cuentas en esta consulta · ${Datos.miembros().filter((m) => estadoMiembro(m).vip).length} con acceso`, `<button class="btn btn--secondary" data-exportar-miembros${l.length ? '' : ' disabled'}><i data-lucide="download" class="i"></i>Exportar CSV</button>`)}
+  ${origen ? `<p class="muted">Filtro: <strong>${esc(etiquetaOrigen[origen] || origen)}</strong> · <a href="#/admin/miembros">Ver todas las cuentas</a></p>` : ''}
   <div class="row" style="justify-content:space-between">
     <form class="search" style="flex:1;max-width:420px" data-form="buscar-miembro"><i data-lucide="search" class="i"></i><input class="input" name="q" value="${esc(q)}" placeholder="Buscar por nombre o correo"></form>
     <div class="row" style="gap:6px">${chip('', 'Todos')}${chip('vip', 'VIP')}${chip('cortesia', 'Cortesía')}${chip('sin', 'Sin membresía')}</div>
@@ -260,7 +268,7 @@ export function adminMiembros(_: Record<string, string>, query: URLSearchParams)
   ${l.length ? `<div class="card dtable-wrap"><table class="dtable"><thead><tr>${th('nombre', 'Miembro')}${th('estado', 'Estado')}${th('vence', 'Vence')}${th('clases', 'Clases vistas')}${th('actividad', 'Última actividad')}<th></th></tr></thead><tbody>
     ${l.map((m) => { const e = estadoMiembro(m); return `<tr>
       <td><a class="dtable__main" href="#/admin/miembros/${m.uid}"><span class="avatar" style="width:34px;height:34px;font-size:12px">${iniciales(m.nombre)}</span><span><strong>${esc(m.nombre)}</strong><br><span class="faint">${esc(m.email)}</span></span></a></td>
-      <td><span class="chip ${e.chip}">${e.etiqueta}</span></td><td>${fecha(m.cortesiaHasta || m.vence)}</td><td class="mono">${m.clasesVistas}</td><td>${hace(m.ultimaActividad)}</td>
+      <td><span class="chip ${e.chip}">${e.etiqueta}</span></td><td>${fecha(m.vence || m.cortesiaHasta)}</td><td class="mono">${m.clasesVistas}</td><td>${hace(m.ultimaActividad)}</td>
       <td><a class="btn btn--ghost btn--icon btn--xs" href="#/admin/miembros/${m.uid}"><i data-lucide="chevron-right" class="i"></i></a></td></tr>`; }).join('')}
   </tbody></table></div>` : vacio('Sin resultados', 'Prueba con otro nombre o filtro.')}`;
 }
@@ -270,7 +278,7 @@ export function adminMiembro(params: Record<string, string>) {
   const m = detalle || Datos.miembros().find((x) => x.uid === params.uid);
   if (!m) return vacio('Miembro no encontrado', '', '<a class="btn btn--brand" href="#/admin/miembros">Volver</a>');
   const e = estadoMiembro(m);
-  const cortesiaVigente = m.cortesiaHasta && new Date(m.cortesiaHasta).getTime() > Date.now();
+  const cortesiaVigente = m.cortesiaHasta && (Datos.modo === 'api' || new Date(m.cortesiaHasta).getTime() > Date.now());
   const perfil = (detalle?.perfil ?? {}) as Record<string, any>;
   const sus = (detalle?.suscripcion ?? null) as Record<string, any> | null;
   const rec = detalle?.recompensas;
@@ -284,7 +292,7 @@ export function adminMiembro(params: Record<string, string>) {
     <span class="chip ${e.chip}" style="height:32px;font-size:var(--fs-sm)">${e.etiqueta}</span>
   </div>
   <div class="kpis">
-    <div class="kpi"><span class="kpi__label">Plan</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${({ mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan', admin: 'Administrador', regalo: 'Regalo' } as Record<string, string>)[m.plan || 'ninguno'] || esc(m.plan || 'Sin plan')}</strong><span class="kpi__nota">vence ${fecha(m.vence)}</span></div>
+    <div class="kpi"><span class="kpi__label">${e.vip ? 'Plan de acceso' : 'Último plan registrado'}</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${({ mensual: 'Mensual', anual: 'Anual', cortesia: 'Cortesía', ninguno: 'Sin plan', admin: 'Administrador', regalo: 'Regalo' } as Record<string, string>)[m.plan || 'ninguno'] || esc(m.plan || 'Sin plan')}</strong><span class="kpi__nota">vence ${fecha(m.vence)}</span></div>
     <div class="kpi"><span class="kpi__label">Clases vistas</span><strong class="kpi__val">${m.clasesVistas}</strong><span class="kpi__nota">de ${Datos.cursos().reduce((a, c) => a + c.clases.length, 0)}</span></div>
     <div class="kpi"><span class="kpi__label">Última actividad</span><strong class="kpi__val" style="font-size:var(--fs-lg)">${hace(m.ultimaActividad)}</strong><span class="kpi__nota">${fecha(m.ultimaActividad)}</span></div>
   </div>
@@ -294,7 +302,7 @@ export function adminMiembro(params: Record<string, string>) {
       ${cortesiaVigente ? `<p style="font-size:var(--fs-sm)">Vigente hasta <strong>${fecha(m.cortesiaHasta)}</strong>${m.cortesiaMotivo ? ` · ${esc(m.cortesiaMotivo)}` : ''}</p>` : '<p class="muted" style="font-size:var(--fs-sm)">Da acceso VIP sin cobro por un periodo: ponentes, alianzas, compensaciones.</p>'}
       <div class="form-grid"><div class="field"><label>Días</label><div class="row" style="gap:6px">${[7, 15, 30, 90].map((d) => `<button type="button" class="chip chip--outline" data-dias="${d}">${d}</button>`).join('')}</div><input class="input" type="number" min="1" max="730" name="dias" value="30" required></div>
       <div class="field"><label>Motivo (queda registrado)</label><input class="input" name="motivo" required placeholder="Ponente invitada, compensación…"></div></div>
-      <div class="row"><button class="btn btn--brand"><i data-lucide="gift" class="i"></i>${cortesiaVigente ? 'Extender cortesía' : 'Dar cortesía'}</button>${cortesiaVigente ? `<button type="button" class="btn btn--danger" data-revocar-cortesia="${m.uid}">Revocar</button>` : ''}</div>
+      <div class="row"><button class="btn btn--brand"><i data-lucide="gift" class="i"></i>${cortesiaVigente ? 'Actualizar cortesía' : 'Dar cortesía'}</button>${cortesiaVigente ? `<button type="button" class="btn btn--danger" data-revocar-cortesia="${m.uid}">Revocar</button>` : ''}</div>
     </form>
     <div class="card card--pad stack" style="gap:10px">
       <h3 class="admin-card-title">Suscripción en Stripe</h3>
@@ -476,6 +484,7 @@ export function adminAjustes() {
   const c = Datos.config();
   return `
   ${adminHead('Ajustes', 'Precios, contacto y administración del club.')}
+  <a class="btn btn--secondary" href="#/admin/bitacora" style="justify-self:start"><i data-lucide="history" class="i"></i>Bitácora de administración</a>
   <form class="card card--pad stack" style="gap:14px;max-width:820px" data-form="config">
     <h3 class="admin-card-title">Membresía</h3>
     <div class="form-grid form-grid--3">

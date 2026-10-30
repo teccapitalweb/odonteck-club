@@ -6,3 +6,5 @@ export { adminRecompensas } from './recompensas';
 export { instalarAccionesAdmin } from './acciones';
 export { adminCursos, adminCurso, adminQuizzes, adminQuiz, adminMateriales, adminMaterial, adminEnVivo, adminEvento } from './contenido';
 export { adminResumen, adminMiembros, adminMiembro, adminComunidad, adminAvisos, adminAjustes, adminEncuestas, adminCupones } from './gestion';
+
+export { adminBitacora } from './bitacora';

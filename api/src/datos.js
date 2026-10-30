@@ -5,6 +5,7 @@ import { aISO } from './lib/fechas.js';
 export const COL = Object.freeze({
   // Colección vieja: SOLO LECTURA hasta el cambio definitivo.
   miembros: 'miembros',
+  adminAuditoria: 'v2_admin_auditoria',
   perfiles: 'v2_perfiles',
   cursos: 'v2_cursos',
   progreso: 'v2_progreso',

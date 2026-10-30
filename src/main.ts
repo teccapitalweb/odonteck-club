@@ -613,6 +613,7 @@ const paginaAdmin = (pagina: (params: Record<string, string>, query: URLSearchPa
 // El módulo del panel ya está cargado cuando se renderiza una ruta /admin (lo carga onBeforeRender); aquí sólo se elige la página.
 const rutaAdmin = (pick: (ui: AdminUI) => (params: Record<string, string>, query: URLSearchParams) => string) =>
   async (params: Record<string, string>, query: URLSearchParams) => paginaAdmin(pick(await cargarAdminUI()))(params, query);
+route('/admin/bitacora', rutaAdmin((ui) => ui.adminBitacora));
 route('/admin', rutaAdmin((ui) => ui.adminResumen));
 route('/admin/cursos', rutaAdmin((ui) => ui.adminCursos));
 route('/admin/cursos/:id', rutaAdmin((ui) => ui.adminCurso));

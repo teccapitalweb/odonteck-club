@@ -1,3 +1,4 @@
+import { registrarAuditoria } from '../lib/auditoria.js';
 import { Router } from 'express';
 import { createHash } from 'node:crypto';
 import { COL } from '../datos.js';
@@ -142,12 +143,14 @@ export function rutasRecompensas(ctx) {
       await db.runTransaction(async (tx) => {
         const snap = await tx.get(ref);
         if (snap.exists) throw conflicto('Este identificador ya existe.');
-        tx.create(ref, {
+        const nuevo = {
           ...base,
           ...ajuste,
           actualizado: ctx.now().toISOString(),
           actualizadoPor: req.usuario.uid,
-        });
+        };
+        tx.create(ref, nuevo);
+        registrarAuditoria(ctx, tx, req, { ref, accion: 'crear_recompensa', despues: nuevo });
       });
       res.status(201).json({ id });
     }),
@@ -170,6 +173,7 @@ export function rutasRecompensas(ctx) {
         siguiente.actualizado = ctx.now().toISOString();
         siguiente.actualizadoPor = req.usuario.uid;
         tx.set(ref, siguiente);
+        registrarAuditoria(ctx, tx, req, { ref, accion: 'configurar_recompensa', antes: { ...base, ...(snap.exists ? snap.data() : {}) }, despues: { ...base, ...siguiente } });
         return siguiente;
       });
       res.json({ id, ...ajuste });
@@ -259,6 +263,7 @@ export function rutasRecompensas(ctx) {
           resuelto: ahora,
           resueltoPor: req.usuario.uid,
         });
+        registrarAuditoria(ctx, tx, req, { ref, accion: 'resolver_canje', antes: c, despues: { ...c, estatus: b.estatus }, motivo: b.nota, extra: { puntos: b.estatus === 'cancelado' ? c.puntos : 0, saldo: estado.saldo, cupo: b.estatus === 'cancelado' && c.reservaCupo ? 1 : 0 } });
         return { ok: true, estatus: b.estatus, saldo: estado.saldo };
       });
       res.json(resultado);

@@ -316,10 +316,12 @@ export function instalarAccionesAdmin(toast: Toast) {
       return;
     }
 
+    let motivoCambio = '';
+    const recibirMotivo = (motivo: string) => { motivoCambio = motivo; };
     const rcg = el.closest<HTMLElement>('[data-reiniciar-curso-gratis]');
-    if (rcg && await confirmar({ titulo: 'Reiniciar curso gratis', mensaje: 'El miembro volverá a ver el anuncio para elegir. Su progreso no se borra.', confirmar: 'Reiniciar', icono: 'rotate-ccw' })) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
+    if (rcg && await confirmar({ titulo: 'Reiniciar curso gratis', recibirMotivo, mensaje: 'El miembro volverá a ver el anuncio para elegir. Su progreso no se borra.', confirmar: 'Reiniciar', icono: 'rotate-ccw' })) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!, motivoCambio); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
     const rev = el.closest<HTMLElement>('[data-revocar-cortesia]');
-    if (rev && await confirmar({ titulo: 'Revocar cortesía', mensaje: 'El acceso de cortesía terminará de inmediato.', confirmar: 'Revocar', peligro: true })) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    if (rev && await confirmar({ titulo: 'Revocar cortesía', recibirMotivo, mensaje: 'El acceso de cortesía terminará de inmediato.', confirmar: 'Revocar', peligro: true })) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!, motivoCambio); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
 
     const bc = el.closest<HTMLElement>('[data-borrar-curso]');
     if (bc && await confirmar({ titulo: 'Borrar curso', mensaje: 'No se puede deshacer. Si alguien ya lo empezó, el backend lo impedirá.', confirmar: 'Borrar', peligro: true })) { try { await borrarCursoAdmin(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
@@ -422,6 +424,16 @@ export function instalarAccionesAdmin(toast: Toast) {
   // Búsqueda de miembros en vivo: filtra las filas ya cargadas sin recargar la ruta.
   document.addEventListener('input', (e) => {
     const inp = e.target as HTMLInputElement;
+    if (inp.matches('[data-audit-search]')) {
+      let visibles = 0;
+      document.querySelectorAll<HTMLElement>('[data-audit-event]').forEach((fila) => {
+        fila.hidden = !(fila.textContent || '').toLocaleLowerCase('es').includes(inp.value.trim().toLocaleLowerCase('es'));
+        if (!fila.hidden) visibles++;
+      });
+      const vacio = document.querySelector<HTMLElement>('[data-audit-empty]');
+      if (vacio) vacio.hidden = visibles > 0;
+      return;
+    }
     if (!inp.matches('[data-form="buscar-miembro"] input[name="q"]') || current().path !== '/admin/miembros') return;
     const q = inp.value.trim().toLowerCase();
     document.querySelectorAll<HTMLTableRowElement>('.dtable tbody tr').forEach((tr) => {

@@ -11,6 +11,9 @@ export interface PanelRecompensasAdmin {
 }
 
 export interface ResumenAdmin {
+  registrados?: number;
+  accesos?: Record<string, number>;
+  calculadoEn?: string;
   miembrosActivos: number;
   altas30d: number;
   bajas30d: number;
@@ -66,7 +69,15 @@ export interface ReporteDirectorioAdmin {
 
 interface SubidaFirmada { uploadUrl: string; path: string; contentType: string; publicUrl?: string }
 
+export interface EventoAuditoria {
+  id: string; fecha: string; actorUid: string; actor: string; tipo: string; recurso: string;
+  accion: string; motivo: string; motivoManual: boolean; campos: string[];
+  antes: Record<string, unknown> | null; despues: Record<string, unknown> | null;
+  efectos?: Record<string, unknown>;
+}
+export interface PaginaBitacora { eventos: EventoAuditoria[]; siguiente: string | null; consultadoEn: string }
 const estado = {
+  bitacora: null as PaginaBitacora | null,
   recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
   campanaPraxia: null as ReporteCampanaPraxia | null,
@@ -139,6 +150,7 @@ const cargarCupones = (forzar = false) => cargar('cupones', async () => {
 }, forzar);
 
 export const Admin = {
+  get bitacora() { return estado.bitacora; },
   get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
   get campanaPraxia() { return estado.campanaPraxia; },
@@ -156,7 +168,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
   const tareas: Promise<void>[] = [];
   try {
     if (/^\/admin\/?$/.test(path)) {
-      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, forzar));
+      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, true));
       tareas.push(cargar('campana-praxia-comunidad', async () => { estado.campanaPraxia = await api<ReporteCampanaPraxia>('/admin/recompensas/praxia/comunidad/reporte'); }, forzar));
       tareas.push(cargarCursos(forzar), cargarMateriales(forzar), cargarEventos(forzar), cargarQuizzes(forzar));
     } else if (path.startsWith('/admin/cursos')) {
@@ -171,14 +183,17 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
       const q = query.get('q') || '';
       const filtro = query.get('estado') || '';
       const estadoApi = filtro === 'sin' ? 'no_vip' : filtro;
-      const clave = `miembros:${q}:${estadoApi}`;
+      const origen = query.get('origen') || '';
+      const clave = `miembros:${q}:${estadoApi}:${origen}`;
       tareas.push(cargar(clave, async () => {
         const qs = new URLSearchParams();
         if (q) qs.set('q', q);
+        if (origen) qs.set('origen', origen);
         if (estadoApi) qs.set('estado', estadoApi);
         Datos.hidratarAdmin('miembros', (await api<any[]>(`/admin/miembros${qs.size ? `?${qs}` : ''}`)).map(adaptarMiembro));
       }, true));
     } else if (path.startsWith('/admin/miembros/')) {
+      tareas.push(cargarCursos(forzar));
       const uid = decodeURIComponent(path.slice('/admin/miembros/'.length));
       tareas.push(cargar(`miembro:${uid}`, async () => {
         const d = await api<any>(`/admin/miembros/${encodeURIComponent(uid)}`);
@@ -204,6 +219,10 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path === '/admin/recompensas') {
       estado.recompensas=null;
       tareas.push(cargar('recompensas',async()=>{estado.recompensas=await api<PanelRecompensasAdmin>('/admin/recompensas');},true));
+    } else if (path === '/admin/bitacora') {
+      estado.bitacora = null;
+      const cursor = query.get('cursor');
+      tareas.push(cargar(`bitacora:${cursor || ''}`, async () => { estado.bitacora = await api<PaginaBitacora>(`/admin/bitacora${cursor ? `?cursor=${encodeURIComponent(cursor)}` : ''}`); }, true));
     } else if (path === '/admin/ajustes') {
       tareas.push(cargar('config', async () => { Datos.hidratarAdmin('config', adaptarConfig(await api('/admin/config'))); }, forzar));
     }
@@ -356,18 +375,21 @@ export async function guardarCortesiaAdmin(uid: string, dias: number, motivo: st
   }
   await api(`/admin/miembros/${encodeURIComponent(uid)}/cortesia`, { method: 'POST', json: { dias, motivo } });
   cargados.delete(`miembro:${uid}`);
+  cargados.delete('resumen');
 }
 
-export async function reiniciarCursoGratisAdmin(uid: string) {
+export async function reiniciarCursoGratisAdmin(uid: string, motivoAuditoria: string) {
   if (Datos.modo === 'demo') return;
-  await api(`/admin/miembros/${encodeURIComponent(uid)}/curso-gratis`, { method: 'DELETE' });
+  await api(`/admin/miembros/${encodeURIComponent(uid)}/curso-gratis`, { method: 'DELETE', json: { motivoAuditoria } });
   cargados.delete(`miembro:${uid}`);
+  cargados.delete('resumen');
 }
 
-export async function revocarCortesiaAdmin(uid: string) {
+export async function revocarCortesiaAdmin(uid: string, motivoAuditoria: string) {
   if (Datos.modo === 'demo') { const m = Datos.miembros().find((x) => x.uid === uid)!; m.cortesiaHasta = null; m.cortesiaMotivo = ''; Datos.guardarMiembro(m); return; }
-  await api(`/admin/miembros/${encodeURIComponent(uid)}/cortesia`, { method: 'DELETE' });
+  await api(`/admin/miembros/${encodeURIComponent(uid)}/cortesia`, { method: 'DELETE', json: { motivoAuditoria } });
   cargados.delete(`miembro:${uid}`);
+  cargados.delete('resumen');
 }
 
 export async function moderarHiloAdmin(id: string, oculto: boolean) {

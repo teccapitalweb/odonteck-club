@@ -17,6 +17,7 @@ export const ADMIN_NAV = [
   { href: '#/admin/avisos', icon: 'megaphone', label: 'Avisos', match: /^\/admin\/avisos/ },
   { href: '#/admin/encuestas', icon: 'clipboard-list', label: 'Encuestas', match: /^\/admin\/encuestas/ },
   { group: 'Sistema' },
+  { href: '#/admin/bitacora', icon: 'history', label: 'Bitácora', match: /^\/admin\/bitacora/ },
   { href: '#/admin/ajustes', icon: 'sliders-horizontal', label: 'Ajustes', match: /^\/admin\/ajustes/ },
 ] as const;
 

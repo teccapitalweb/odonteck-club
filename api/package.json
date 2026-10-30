@@ -22,7 +22,7 @@
     "storage:ensure": "node scripts/ensure-storage-bucket.mjs",
     "set-admin": "node scripts/set-admin.mjs",
     "seed": "node scripts/seed-v2.mjs",
-    "test:firestore-games": "npx --yes firebase-tools@15 --project demo-odonteck-juegos --config firebase.emuladores.json emulators:exec --only firestore \"node --test --test-concurrency=1 test/juegos-firestore.test.js test/retos-firestore.test.js\""
+    "test:firestore-games": "npx --yes firebase-tools@15 --project demo-odonteck-juegos --config firebase.emuladores.json emulators:exec --only firestore \"node --test --test-concurrency=1 test/juegos-firestore.test.js test/retos-firestore.test.js test/admin-firestore.test.js\""
   },
   "dependencies": {
     "compression": "^1.8.2",

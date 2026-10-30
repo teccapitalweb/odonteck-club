@@ -1,9 +1,11 @@
 // Rutas de administración (claim `admin: true`).
+import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
+import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
 import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
   COL,
-  calcularEstado,
+  leerMiembroHeredado,
   leerConfig,
   leerDoc,
   perfilConDefectos,
@@ -47,11 +49,25 @@ export function rutasAdmin(ctx) {
 
   const ahoraISO = () => ctx.now().toISOString();
 
+  // Sólo lectura: cada cambio se escribe en la misma transacción que su bitácora.
+  r.get('/admin/bitacora', h(async (req, res) => {
+    let consulta = db.collection(COL.adminAuditoria).orderBy('fecha', 'desc');
+    if (req.query.cursor) {
+      const cursor = idDocumento(String(req.query.cursor), 'cursor');
+      const snap = await db.collection(COL.adminAuditoria).doc(cursor).get();
+      if (!snap.exists) throw invalido('La página solicitada ya no está disponible.');
+      consulta = consulta.startAfter(snap);
+    }
+    const snap = await consulta.limit(51).get();
+    const pagina = snap.docs.slice(0, 50);
+    res.json({ eventos: pagina.map((d) => ({ ...d.data(), id: d.id })), siguiente: snap.size > 50 ? pagina.at(-1).id : null, consultadoEn: ahoraISO() });
+  }));
+
   // ---------- Resumen ----------
   r.get('/admin/resumen', h(async (req, res) => {
     const ahora = ctx.now();
     const desde = ahora.getTime() - 30 * DIA_MS;
-    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap, susSnap, perfilesSnap, config] = await Promise.all([
+    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap, susSnap, perfilesSnap, config, authUsers] = await Promise.all([
       db.collection(COL.miembros).get(),
       db.collection(COL.cortesias).get(),
       db.collection(COL.progreso).get(),
@@ -61,12 +77,13 @@ export function rutasAdmin(ctx) {
       db.collection(COL.suscripciones).get(),
       db.collection(COL.perfiles).get(),
       leerConfig(db),
+      listarUsuariosAuth(),
     ]);
-    const miembros = new Map(miembrosSnap.docs.map((d) => [d.id, d.data()]));
+    const miembros = normalizarMiembros(new Map(miembrosSnap.docs.map((d) => [d.id, d.data()])), authUsers, ahora);
     const cortesias = new Map(cortesiasSnap.docs.map((d) => [d.id, d.data()]));
     const suscripciones = new Map(susSnap.docs.map((d) => [d.id, d.data()]));
     const perfiles = new Map(perfilesSnap.docs.map((d) => [d.id, d.data()]));
-    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...suscripciones.keys()]);
+    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...suscripciones.keys(), ...perfiles.keys(), ...authUsers.keys()]);
     // Última actividad por uid (para detectar inactivos en riesgo de baja).
     const ultimaActividadMs = new Map();
     for (const d of progresoSnap.docs) {
@@ -79,6 +96,7 @@ export function rutasAdmin(ctx) {
     const precioAnual = Number(config.precios?.anual) || 0;
     const limite7 = ahora.getTime() + 7 * DIA_MS;
     const hace14 = ahora.getTime() - 14 * DIA_MS;
+    const accesos = { suscripcion: 0, historica: 0, regalo: 0, prueba: 0, cortesia: 0, administrador: 0, sin_acceso: 0 };
     let miembrosActivos = 0;
     let mensualActivos = 0;
     let anualActivos = 0;
@@ -88,21 +106,24 @@ export function rutasAdmin(ctx) {
     const inactivosLista = [];
     for (const uid of uids) {
       const m = miembros.get(uid) ?? null;
-      const estado = calcularEstado(m, cortesias.get(uid) ?? null, false, ahora, suscripciones.get(uid) ?? null);
+      const estado = estadoAdministrativo(m, cortesias.get(uid) ?? null, authUsers.get(uid)?.customClaims?.admin === true, ahora, suscripciones.get(uid) ?? null);
+      accesos[estado.origenAcceso]++;
       if (!estado.esVip) continue;
       miembrosActivos++;
-      if (estado.plan === 'cortesia') cortesiaActivos++;
-      else if (estado.plan === 'anual') anualActivos++;
-      else if (estado.plan === 'mensual') mensualActivos++;
+      if (['cortesia', 'regalo'].includes(estado.origenAcceso)) cortesiaActivos++;
+      else if (['suscripcion', 'historica'].includes(estado.origenAcceso)) {
+        if (estado.plan === 'anual') anualActivos++;
+        else if (estado.plan === 'mensual') mensualActivos++;
+      }
       // Contacto para los recordatorios de retención (el WhatsApp sale del perfil del miembro).
       const perfil = perfiles.get(uid) ?? {};
       const contacto = { nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '' };
       const venceMs = estado.vence ? (aMillis(estado.vence) ?? null) : null;
-      if (estado.plan !== 'cortesia' && venceMs !== null && venceMs > ahora.getTime() && venceMs <= limite7) {
+      if (['suscripcion', 'historica'].includes(estado.origenAcceso) && venceMs !== null && venceMs > ahora.getTime() && venceMs <= limite7) {
         porVencer.push({ uid, ...contacto, plan: estado.plan, vence: estado.vence });
       }
       const actMs = ultimaActividadMs.get(uid) ?? 0;
-      if (actMs < hace14) {
+      if (estado.origenAcceso !== 'administrador' && actMs < hace14) {
         inactivos++;
         inactivosLista.push({ uid, ...contacto, plan: estado.plan, ultimaActividad: actMs ? new Date(actMs).toISOString() : null });
       }
@@ -136,6 +157,7 @@ export function rutasAdmin(ctx) {
       .map(([cursoId, vistas]) => ({ cursoId, titulo: titulos.get(cursoId) ?? cursoId, vistas }));
     res.json({
       miembrosActivos,
+      registrados: uids.size, accesos, calculadoEn: ahora.toISOString(),
       altas30d,
       bajas30d,
       clasesVistas30d,
@@ -211,7 +233,7 @@ export function rutasAdmin(ctx) {
       const ref = db.collection(coleccion).doc(datos.id);
       const doc = { ...datos, actualizado: ahoraISO() };
       try {
-        await ref.create(doc);
+        await escribirAuditado(ctx, req, ref, doc, { modo: 'create', accion: 'crear' });
       } catch (e) {
         if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto(`Ya existe ${nombre} con id "${datos.id}".`, 'ya_existe');
         throw e;
@@ -229,6 +251,7 @@ export function rutasAdmin(ctx) {
         if (!snap.exists) throw noEncontrado(`No existe ${nombre} con id "${id}".`);
         const nuevo = { ...snap.data(), ...cambios, id, actualizado: ahoraISO() };
         tx.set(ref, nuevo);
+        registrarAuditoria(ctx, tx, req, { ref, accion: 'actualizar', antes: snap.data(), despues: nuevo });
         return nuevo;
       });
       res.json(actualizado);
@@ -240,7 +263,7 @@ export function rutasAdmin(ctx) {
       const snap = await ref.get();
       if (!snap.exists) throw noEncontrado(`No existe ${nombre} con id "${id}".`);
       if (antesDeBorrar) await antesDeBorrar(id, snap.data());
-      await ref.delete();
+      await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'eliminar', requiereExistir: true });
       if (despuesDeBorrar) await despuesDeBorrar(id, snap.data());
       res.json({ ok: true, id });
     }));
@@ -316,21 +339,22 @@ export function rutasAdmin(ctx) {
 
   // ---------- Miembros ----------
   async function cargarMapas() {
-    const [miembrosSnap, cortesiasSnap, perfilesSnap, progresoSnap] = await Promise.all([
+    const [miembrosSnap, cortesiasSnap, perfilesSnap, progresoSnap, susSnap] = await Promise.all([
       db.collection(COL.miembros).get(),
       db.collection(COL.cortesias).get(),
       db.collection(COL.perfiles).get(),
       db.collection(COL.progreso).get(),
+      db.collection(COL.suscripciones).get(),
     ]);
     const mapa = (snap) => new Map(snap.docs.map((d) => [d.id, d.data()]));
-    return { miembros: mapa(miembrosSnap), cortesias: mapa(cortesiasSnap), perfiles: mapa(perfilesSnap), progreso: progresoSnap.docs.map((d) => d.data()) };
+    return { suscripciones: mapa(susSnap), miembros: mapa(miembrosSnap), cortesias: mapa(cortesiasSnap), perfiles: mapa(perfilesSnap), progreso: progresoSnap.docs.map((d) => d.data()) };
   }
 
   // Lista TODOS los usuarios de Firebase Auth (quienes ya iniciaron sesión), aunque no tengan
   // perfil ni membresía todavía, para que el admin los vea a todos. Paginado por seguridad.
   async function listarUsuariosAuth() {
     const mapa = new Map();
-    if (typeof ctx.auth?.listUsers !== 'function') return mapa;
+    if (typeof ctx.auth?.listUsers !== 'function') throw noConfigurado('No se pudo consultar el registro de usuarios.');
     let pageToken;
     let paginas = 0;
     do {
@@ -338,6 +362,7 @@ export function rutasAdmin(ctx) {
       for (const u of r.users ?? []) mapa.set(u.uid, u);
       pageToken = r.pageToken;
     } while (pageToken && ++paginas < 20);
+    if (pageToken) throw noConfigurado('El registro supera el límite de esta consulta. No se mostrará un total parcial.');
     return mapa;
   }
 
@@ -346,8 +371,9 @@ export function rutasAdmin(ctx) {
     const filtro = req.query.estado === undefined || req.query.estado === '' ? 'todos' : String(req.query.estado);
     unoDe(filtro, ['todos', 'vip', 'no_vip', 'cortesia'], { campo: 'estado' });
     const ahora = ctx.now();
-    const [{ miembros, cortesias, perfiles, progreso }, authUsers] = await Promise.all([cargarMapas(), listarUsuariosAuth()]);
+    const [{ miembros: miembrosRaw, cortesias, perfiles, progreso, suscripciones }, authUsers] = await Promise.all([cargarMapas(), listarUsuariosAuth()]);
 
+    const miembros = normalizarMiembros(miembrosRaw, authUsers, ahora);
     const actividad = new Map();
     for (const p of progreso) {
       if (!p.uid) continue;
@@ -357,20 +383,21 @@ export function rutasAdmin(ctx) {
       actividad.set(p.uid, a);
     }
 
-    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...perfiles.keys(), ...authUsers.keys()]);
+    const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...perfiles.keys(), ...authUsers.keys(), ...suscripciones.keys()]);
     const aISODesde = (fecha) => { const ms = fecha ? new Date(fecha).getTime() : NaN; return Number.isNaN(ms) ? null : new Date(ms).toISOString(); };
     let lista = [...uids].map((uid) => {
       const m = miembros.get(uid) ?? null;
       const c = cortesias.get(uid) ?? null;
       const au = authUsers.get(uid) ?? null;
       const esAdmin = au?.customClaims?.admin === true;
-      const estado = calcularEstado(m, c, esAdmin, ahora);
+      const estado = estadoAdministrativo(m, c, esAdmin, ahora, suscripciones.get(uid) ?? null);
       const a = actividad.get(uid) ?? { clasesVistas: 0, ultimaActividad: null };
       return {
         uid,
         nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? au?.displayName ?? '',
         email: m?.email ?? au?.email ?? '',
         esVip: estado.esVip,
+        origenAcceso: estado.origenAcceso,
         esAdmin,
         plan: estado.plan,
         vence: estado.vence,
@@ -383,6 +410,10 @@ export function rutasAdmin(ctx) {
     });
 
     if (q) lista = lista.filter((x) => [x.uid, x.nombre, x.email].some((v) => String(v).toLowerCase().includes(q)));
+    if (req.query.origen) {
+      const origen = unoDe(String(req.query.origen), ['suscripcion', 'historica', 'regalo', 'prueba', 'cortesia', 'administrador', 'sin_acceso'], { campo: 'origen' });
+      lista = lista.filter((x) => x.origenAcceso === origen);
+    }
     if (filtro === 'vip') lista = lista.filter((x) => x.esVip);
     if (filtro === 'no_vip') lista = lista.filter((x) => !x.esVip);
     if (filtro === 'cortesia') lista = lista.filter((x) => x.cortesiaHasta);
@@ -401,28 +432,29 @@ export function rutasAdmin(ctx) {
 
   r.get('/admin/miembros/:uid', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
-    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, usuario, cursoGratis, recDoc] = await Promise.all([
-      leerDoc(db, COL.miembros, uid),
+    const usuario = await usuarioAuth(uid);
+    const [m, c, perfil, sus, progSnap, certSnap, cursosSnap, cursoGratis, recDoc] = await Promise.all([
+      leerMiembroHeredado(ctx, { uid, email: usuario?.email }),
       leerDoc(db, COL.cortesias, uid),
       leerDoc(db, COL.perfiles, uid),
       leerDoc(db, COL.suscripciones, uid),
       db.collection(COL.progreso).where('uid', '==', uid).get(),
       db.collection(COL.certificados).where('uid', '==', uid).get(),
       db.collection(COL.cursos).get(),
-      usuarioAuth(uid),
       leerDoc(db, COL.cursoGratis, uid),
       leerDoc(db, COL.recompensasEstado, uid),
     ]);
     const rec = normalizarEstadoRecompensas(recDoc, uid);
-    if (!m && !c && !perfil && !usuario && progSnap.empty) throw noEncontrado('No existe ese miembro.');
+    if (!m && !c && !sus && !perfil && !usuario && progSnap.empty) throw noEncontrado('No existe ese miembro.');
     const esAdmin = usuario?.customClaims?.admin === true;
-    const estado = calcularEstado(m, c, esAdmin, ctx.now());
+    const estado = estadoAdministrativo(m, c, esAdmin, ctx.now(), sus);
     const cursos = new Map(cursosSnap.docs.map((d) => [d.id, d.data()]));
     res.json({
       uid,
       nombre: perfil?.nombre ?? m?.nombre ?? usuario?.displayName ?? '',
       email: m?.email ?? usuario?.email ?? '',
       esVip: estado.esVip,
+      origenAcceso: estado.origenAcceso,
       esAdmin,
       plan: estado.plan,
       vence: estado.vence,
@@ -472,7 +504,7 @@ export function rutasAdmin(ctx) {
       otorgadaPor: req.usuario.email || req.usuario.uid,
       fecha: ahora.toISOString(),
     };
-    await db.collection(COL.cortesias).doc(uid).set(cortesia);
+    await escribirAuditado(ctx, req, db.collection(COL.cortesias).doc(uid), cortesia, { accion: 'otorgar_cortesia', motivo });
     res.status(201).json(cortesia);
   }));
 
@@ -481,8 +513,7 @@ export function rutasAdmin(ctx) {
   r.delete('/admin/miembros/:uid/curso-gratis', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
     const ref = db.collection(COL.cursoGratis).doc(uid);
-    const previo = await ref.get();
-    await ref.set({ uid, cursoId: null, origen: 'reinicio', anterior: previo.exists ? previo.data().cursoId ?? null : null, reiniciadoPor: req.usuario.email || req.usuario.uid, elegido: null, cambios: 0, fecha: ctx.now().toISOString() });
+    await escribirAuditado(ctx, req, ref, (previo) => ({ uid, cursoId: null, origen: 'reinicio', anterior: previo?.cursoId ?? null, reiniciadoPor: req.usuario.email || req.usuario.uid, elegido: null, cambios: 0, fecha: ctx.now().toISOString() }), { accion: 'reiniciar_curso_gratis' });
     res.json({ ok: true, uid });
   }));
 
@@ -490,7 +521,7 @@ export function rutasAdmin(ctx) {
     const uid = idDocumento(req.params.uid, 'uid');
     const ref = db.collection(COL.cortesias).doc(uid);
     if (!(await ref.get()).exists) throw noEncontrado('Ese miembro no tiene cortesía.');
-    await ref.delete();
+    await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'revocar_cortesia', requiereExistir: true });
     res.json({ ok: true, uid });
   }));
 
@@ -521,7 +552,7 @@ export function rutasAdmin(ctx) {
     if (!CODIGO_VALIDO.test(codigo)) throw invalido('El código debe tener de 4 a 24 letras, números o guiones.', 'codigo_invalido');
     const doc = { codigo, dias, usosMax, usados: 0, vence, etiqueta, estado: 'activo', creadoPor: req.usuario.email || req.usuario.uid, creado: ahoraISO(), actualizado: ahoraISO() };
     try {
-      await db.collection(COL.cupones).doc(codigo).create(doc);
+      await escribirAuditado(ctx, req, db.collection(COL.cupones).doc(codigo), doc, { modo: 'create', accion: 'crear_cupon' });
     } catch (e) {
       if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) throw conflicto(`Ya existe un cupón con el código "${codigo}".`, 'ya_existe');
       throw e;
@@ -542,6 +573,7 @@ export function rutasAdmin(ctx) {
       if (!snap.exists) throw noEncontrado(`No existe un cupón con el código "${codigo}".`);
       const nuevo = { ...snap.data(), ...cambios, codigo, actualizado: ahoraISO() };
       tx.set(ref, nuevo);
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'actualizar', antes: snap.exists ? snap.data() : null, despues: nuevo });
       return nuevo;
     });
     res.json(actualizado);
@@ -563,10 +595,10 @@ export function rutasAdmin(ctx) {
     if (b.respuestaId !== undefined) {
       const respRef = hiloRef.collection(COL.respuestas).doc(idDocumento(b.respuestaId, 'respuestaId'));
       if (!(await respRef.get()).exists) throw noEncontrado('Esa respuesta no existe.');
-      await respRef.update({ oculto });
+      await escribirAuditado(ctx, req, respRef, { oculto }, { modo: 'merge', accion: 'moderar_respuesta', requiereExistir: true });
       return res.json({ id: respRef.id, hiloId: id, oculto });
     }
-    await hiloRef.update({ oculto });
+    await escribirAuditado(ctx, req, hiloRef, { oculto }, { modo: 'merge', accion: 'moderar_tema', requiereExistir: true });
     res.json({ id, oculto });
   }));
 
@@ -616,10 +648,13 @@ export function rutasAdmin(ctx) {
       if (objetivoRef) {
         const objetivo = await tx.get(objetivoRef);
         if (!objetivo.exists) throw noEncontrado('El contenido denunciado ya no existe.');
-        tx.update(objetivoRef, reporte.tipo === 'perfil' ? { visible: false, actualizado } : { estado: 'cerrada', actualizado });
+        const cambioObjetivo = reporte.tipo === 'perfil' ? { visible: false, actualizado } : { estado: 'cerrada', actualizado };
+        tx.update(objetivoRef, cambioObjetivo);
+        registrarAuditoria(ctx, tx, req, { ref: objetivoRef, accion: 'moderar_directorio', antes: objetivo.data(), despues: { ...objetivo.data(), ...cambioObjetivo } });
       }
       const cambio = { estado, accion, actualizado, revisadoPor: req.usuario.email || req.usuario.uid };
       tx.update(ref, cambio);
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'resolver_reporte', antes: reporte, despues: { ...reporte, ...cambio } });
       return { ...reporte, ...cambio, id };
     });
     res.json({ id: resultado.id, estado: resultado.estado, accion: resultado.accion, actualizado: resultado.actualizado });
@@ -673,6 +708,7 @@ export function rutasAdmin(ctx) {
         nuevo.revisadoPor = req.usuario.email || req.usuario.uid;
       }
       tx.set(ref, nuevo);
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'actualizar', antes: snap.exists ? snap.data() : null, despues: nuevo });
       return nuevo;
     });
     res.json({ id, ...resultado });
@@ -694,7 +730,7 @@ export function rutasAdmin(ctx) {
       fecha: ahoraISO(),
       autor: req.usuario.email || req.usuario.uid,
     };
-    await ref.set(aviso);
+    await escribirAuditado(ctx, req, ref, aviso, { modo: 'create', accion: 'publicar_aviso' });
     res.status(201).json(aviso);
   }));
 
@@ -707,7 +743,7 @@ export function rutasAdmin(ctx) {
     if (!esObjeto(req.body)) throw invalido('El cuerpo debe ser un objeto.');
     const cambios = validarConfig(req.body);
     if (Object.keys(cambios).length === 0) throw invalido('No enviaste ningún campo válido para actualizar.');
-    await db.collection(COL.config).doc('general').set({ ...cambios, actualizado: ahoraISO() }, { merge: true });
+    await escribirAuditado(ctx, req, db.collection(COL.config).doc('general'), { ...cambios, actualizado: ahoraISO() }, { modo: 'merge', accion: 'configurar' });
     res.json(await leerConfig(db));
   }));
 

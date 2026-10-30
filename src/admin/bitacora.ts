@@ -1,0 +1,30 @@
+import { Admin, type EventoAuditoria } from '../core/admin';
+import { esc } from '../ui/partials';
+import { adminHead } from './shell';
+
+const acciones: Record<string, string> = { crear: 'Registro creado', actualizar: 'Registro actualizado', eliminar: 'Registro eliminado', otorgar_cortesia: 'Cortesía otorgada', revocar_cortesia: 'Cortesía revocada', reiniciar_curso_gratis: 'Elección de curso reiniciada', crear_cupon: 'Cupón creado', configurar: 'Ajustes actualizados', publicar_aviso: 'Aviso publicado', crear_recompensa: 'Recompensa creada', configurar_recompensa: 'Recompensa actualizada', resolver_canje: 'Canje resuelto', moderar_tema: 'Tema moderado', moderar_respuesta: 'Respuesta moderada', resolver_reporte: 'Reporte resuelto', moderar_directorio: 'Directorio moderado' };
+const tipos: Record<string, string> = { v2_cortesias: 'Cortesías', v2_curso_gratis: 'Curso de bienvenida', v2_cupones: 'Cupones', v2_cursos: 'Cursos', v2_materiales: 'Materiales', v2_eventos: 'Eventos', v2_config: 'Configuración', v2_quizzes: 'Quizzes', v2_avisos: 'Avisos', v2_recompensas_canjes: 'Canjes', v2_recompensas_catalogo: 'Recompensas', v2_foro: 'Comunidad' };
+const nombres: Record<string,string> = { hasta: 'Acceso hasta', dias: 'Días de acceso', usosMax: 'Cupo máximo', usados: 'Canjes usados', vence: 'Vencimiento', etiqueta: 'Campaña', estado: 'Estado', estatus: 'Estado', cursoId: 'Curso elegido', puntos: 'OdonCoins', cupo: 'Lugares disponibles', publicado: 'Publicado', clases: 'Clases', preguntas: 'Preguntas', titulo: 'Título' };
+const valor = (v: unknown): string => v === undefined || v === null ? 'Sin dato' : typeof v === 'boolean' ? (v ? 'Sí' : 'No') : typeof v === 'object' && v && 'huella' in v ? ('elementos' in v ? `${v.elementos} elementos · versión registrada` : 'Versión registrada') : typeof v === 'object' ? JSON.stringify(v) : typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)) ? new Date(v).toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }) : String(v);
+
+function fila(e: EventoAuditoria) {
+  const campos = e.campos.filter((k) => !['uid', 'id', 'fecha', 'creado'].includes(k) && (k in (e.antes ?? {}) || k in (e.despues ?? {})));
+  return `<article class="audit-event" data-audit-event>
+    <span class="audit-event__icon" aria-hidden="true"><i data-lucide="history" class="i"></i></span>
+    <div class="audit-event__body"><div class="audit-event__heading"><div><span class="eyebrow">${esc(tipos[e.tipo] || e.tipo.replace(/^v2_/, '').replaceAll('_', ' '))}</span><h2>${esc(acciones[e.accion] || e.accion)}</h2></div><time datetime="${esc(e.fecha)}">${esc(new Date(e.fecha).toLocaleString('es-MX', { dateStyle: 'medium', timeStyle: 'short' }))}</time></div>
+    <p class="audit-event__actor">${esc(e.actor)} <span>· ${esc(e.recurso)}</span></p>
+    <p class="audit-event__reason">${esc(e.motivo)}${e.motivoManual ? '' : ' · descripción automática'}</p>
+    <details><summary>Ver cambios y referencia</summary><div class="audit-changes">${campos.map((k) => `<div class="audit-change"><strong>${esc(nombres[k] || k)}</strong><span><small>Antes</small>${esc(valor(e.antes?.[k]))}</span><span><small>Después</small>${esc(valor(e.despues?.[k]))}</span></div>`).join('') || '<p>No hay valores públicos que mostrar para esta operación.</p>'}</div>${e.efectos ? `<p class="muted">Efectos: ${esc(Object.entries(e.efectos).map(([k,v]) => `${k}: ${valor(v)}`).join(' · '))}</p>` : ''}<p class="audit-event__ref">Referencia ${esc(e.id)} · responsable ${esc(e.actorUid)}</p><p class="faint">Los textos privados y códigos se omiten. El contenido extenso conserva una huella para identificar su versión.</p></details>
+    </div></article>`;
+}
+
+export function adminBitacora(_: Record<string, string>, query: URLSearchParams) {
+  const pagina = Admin.bitacora;
+  const eventos = pagina?.eventos ?? [];
+  return `${adminHead('Bitácora', 'Quién cambió qué, cuándo y por qué.', '<a class="btn btn--secondary btn--sm" href="#/admin">Volver al resumen</a>')}
+    <section class="audit-intro"><span class="audit-intro__icon"><i data-lucide="shield-check" class="i"></i></span><div><span class="eyebrow">Control de operaciones</span><h2>Cada cambio deja rastro</h2><p>Historial de cambios del panel desde esta actualización. Los registros anteriores no se reconstruyen y este historial no incluye operaciones realizadas fuera del panel.</p></div><span class="chip chip--primary">Solo lectura</span></section>
+    <section class="card card--pad audit-panel"><div class="audit-toolbar"><div><h2 class="admin-card-title">Movimientos administrativos</h2><p class="muted">${eventos.length} registros en esta página${pagina?.consultadoEn ? ` · consultado a las ${esc(new Date(pagina.consultadoEn).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }))}` : ''}</p></div><button class="btn btn--secondary btn--sm" data-reintentar-admin><i data-lucide="refresh-cw" class="i"></i>Actualizar</button></div>
+    ${eventos.length ? '<label class="field audit-filter">Buscar en esta página<input class="input" type="search" data-audit-search placeholder="Responsable, recurso o acción…"></label>' : ''}
+    <div class="audit-list">${eventos.map(fila).join('') || '<div class="audit-empty"><i data-lucide="clipboard-check" class="i"></i><h3>Aún no hay movimientos</h3><p>El próximo cambio que guardes desde el panel aparecerá aquí con su responsable y sus valores anteriores.</p></div>'}</div><p class="muted" data-audit-empty hidden>No hay coincidencias en esta página.</p>
+    <nav class="audit-pagination" aria-label="Páginas del historial">${query.get('cursor') ? '<a class="btn btn--secondary" href="#/admin/bitacora">Más recientes</a>' : '<span class="muted">Mostrando los más recientes</span>'}${pagina?.siguiente ? `<a class="btn btn--brand" href="#/admin/bitacora?cursor=${encodeURIComponent(pagina.siguiente)}">Más antiguos <i data-lucide="arrow-right" class="i"></i></a>` : '<span class="faint">Fin del historial</span>'}</nav></section>`;
+}

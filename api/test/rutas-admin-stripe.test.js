@@ -24,7 +24,8 @@ describe('admin: autorización', () => {
   test('resumen', async () => {
     env.db.docs.set('v2_progreso/vip1_curso-a', { uid: 'vip1', cursoId: 'curso-a', vistas: [1, 2], historial: ['2026-09-10T00:00:00Z', '2026-01-01T00:00:00Z'], actualizado: '2026-09-10T00:00:00Z' });
     const r = await admin('get', '/admin/resumen').expect(200);
-    assert.equal(r.body.miembrosActivos, 2);
+    assert.equal(r.body.miembrosActivos, 3); // Incluye la cuenta administradora, separada por origen.
+    assert.equal(r.body.accesos.administrador, 1);
     assert.equal(r.body.altas30d, 1);
     assert.equal(r.body.bajas30d, 1);
     assert.equal(r.body.clasesVistas30d, 1);
