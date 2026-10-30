@@ -157,7 +157,7 @@ export const INFO_TIPO_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo:
     icono: 'shield-alert',
   },
   memorama: {
-    etiqueta: 'Memorama clínico 3D',
+    etiqueta: 'Memorama clínico',
     titulo: 'Conecta cada concepto con su idea',
     resumen: 'Une tres conceptos con sus ideas clave.',
     icono: 'layers',
@@ -269,6 +269,24 @@ const TERMINOS_PRIORITARIOS = new Set([
   'TOMOGRAFIA', 'LESION', 'LESIONES', 'PACIENTE', 'CLINICO', 'CLINICA', 'ESTETICA',
   'ARCADA', 'ARCADAS', 'RAICES', 'HUESO', 'DIENTE', 'DIENTES', 'PRIMARIO', 'PRIMARIOS',
   'PERMANENTE', 'SIMETRIA', 'PERFIL', 'HABITOS', 'CARIOGENICO', 'DIETA', 'SECADO',
+  'CEFALOMETRICO', 'MANDIBULA', 'MAXILAR', 'MAXILARES', 'CRANEOFACIAL', 'ESQUELETICAS',
+  'MECANICAS', 'ANATOMIA', 'RETENCION', 'REABSORBIBLE', 'REABSORCION', 'APEXOGENESIS',
+  'APEXIFICACION', 'PULPOTOMIA', 'PULPECTOMIA', 'RADIOGRAFICOS', 'RADIOGRAFICA',
+  'COMORBILIDADES', 'POSTOPERATORIO', 'POSTOPERATORIAS', 'LINGUAL', 'TRANSPALATINO',
+  'MANTENEDORES', 'APIÑAMIENTO', 'MOVILIDAD', 'ABSCESO', 'ABSCESOS', 'DRENAJE', 'EXUDADO',
+  'FURCA', 'PLACA', 'PERIAPICAL', 'DESBRIDAMIENTO', 'IONOMERO', 'AMALGAMA', 'CEMENTOS',
+  'PROVISIONALES', 'PULPAR', 'TORQUE', 'ATTACHMENTS', 'CERAMICOS', 'RECIDIVA', 'INCISIVO',
+  'FRENILLO', 'ANQUILOGLOSIA', 'CRONOLOGIA', 'GINGIVAL', 'PAPILA', 'CENIT', 'RECESIONES',
+  'INJERTO', 'CONECTIVO', 'CORONARIO', 'BIOLOGICO', 'REBORDE', 'CURETAS', 'GRACEY',
+  'ULTRASONICO', 'ULTRASONICAS', 'ERGONOMIA', 'AFILADO', 'REEVALUACION', 'MANTENIMIENTO',
+  'IMPRESION', 'SILICONA', 'CHAMFER', 'ZIRCONIA', 'DISILICATO', 'PONTICO', 'PROVISIONAL',
+  'ESTRATIFICACION', 'PULIDO', 'CONTRACCION', 'CIRUGIA', 'RESECCION', 'RETROGRADA',
+  'RETROOBTURACION', 'BIOCIRAMICOS', 'DIABETES', 'ANTICOAGULADOS', 'HEMOSTASIA',
+  'ENDOCARDITIS', 'BIFOSFONATOS', 'OSTEONECROSIS', 'MRONJ', 'HIPERTENSION', 'VASOCONSTRICTOR',
+  'EMBARAZO', 'PRESION', 'CLORHEXIDINA', 'SANGRADO', 'BOLSAS', 'TABAQUISMO', 'CONCUSION',
+  'SUBLUXACION', 'LUXACIONES', 'FRACTURAS', 'PROTECTOR', 'BUCAL', 'FERULIZACION',
+  'CORREDORES', 'BUCALES', 'CONTORNO', 'PAPILAS', 'SONRISA',
+  'ANGLE', 'OVERJET', 'OVERBITE', 'MALOCLUSION', 'DEGLUCION', 'SUCCION', 'RESPIRACION',
 ]);
 
 const PALABRAS_EXCLUIDAS = new Set([
@@ -290,6 +308,8 @@ const PALABRAS_EXCLUIDAS = new Set([
   'INICIAL', 'PRINCIPAL', 'INDIVIDUAL', 'ACOMPANE', 'REQUIERE', 'COLOCARLO', 'CONSERVAR',
   'RETIRAR', 'ENTENDERLA', 'BUSCAR', 'JUSTIFICAR', 'SIRVEN', 'PLANIFICAR', 'MANEJO',
   'VALORACION', 'SELECCION', 'RELACION', 'REVISION', 'COMPLETA', 'COMPLETO', 'CONTROL',
+  'HISTORIA', 'DENTARIO', 'DENTARIA', 'DENTALES', 'CLINICO', 'CLINICA', 'PACIENTE',
+  'PERMANENTE', 'PRIMARIOS', 'PRIMARIO', 'DIENTE', 'DIENTES',
 ]);
 
 function capitalizar(texto: string) {
@@ -300,7 +320,7 @@ function capitalizar(texto: string) {
 
 function ocultarEnPista(pista: string, etiqueta: string) {
   const escapada = etiqueta.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])(${escapada})(?=$|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])`, 'i');
+  const regex = new RegExp(`(^|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])(${escapada})(?=$|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ])`, 'gi');
   if (regex.test(pista)) {
     return pista.replace(regex, (_, previo) => `${previo}_____`);
   }
@@ -309,8 +329,7 @@ function ocultarEnPista(pista: string, etiqueta: string) {
 
 function recortarPista(pista: string, etiqueta: string) {
   const sinPalabra = ocultarEnPista(pista, etiqueta).replace('_____', '•••');
-  if (sinPalabra.length <= 92) return sinPalabra;
-  return `${sinPalabra.slice(0, 89).trim()}…`;
+  return sinPalabra;
 }
 
 function extraerTerminos(notas?: Nota, cursoTitulo = '', claseTitulo = ''): TerminoClinico[] {
@@ -343,6 +362,7 @@ function extraerTerminos(notas?: Nota, cursoTitulo = '', claseTitulo = ''): Term
 
   const puntuarCandidato = (w: string) => {
     let pts = 0;
+    if (['HISTORIA', 'DENTARIO', 'DENTARIA', 'DENTALES', 'CLINICO', 'CLINICA', 'PACIENTE', 'GEOMETRIA', 'ANATOMIA'].includes(w)) pts -= 45;
     if (TERMINOS_PRIORITARIOS.has(w)) pts += 30;
     if (w.length >= 6 && w.length <= 9) pts += 8;
     return pts + w.length;
@@ -353,7 +373,7 @@ function extraerTerminos(notas?: Nota, cursoTitulo = '', claseTitulo = ''): Term
     const tokens = frase.split(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/).filter(Boolean);
     const candidatos = tokens
       .map((raw) => ({ raw, w: normalizarPalabra(raw) }))
-      .filter((x) => x.w.length >= 5 && x.w.length <= 10 && !PALABRAS_EXCLUIDAS.has(x.w) && !usados.has(x.w));
+      .filter((x) => x.w.length >= 4 && x.w.length <= 14 && TERMINOS_PRIORITARIOS.has(x.w) && !PALABRAS_EXCLUIDAS.has(x.w) && !usados.has(x.w));
     candidatos.sort((a, b) => puntuarCandidato(b.w) - puntuarCandidato(a.w));
     const mejor = candidatos[0];
     if (mejor) {
@@ -378,7 +398,7 @@ function extraerTerminos(notas?: Nota, cursoTitulo = '', claseTitulo = ''): Term
       const tokens = frase.split(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/).filter(Boolean);
       const candidatos = tokens
         .map((raw) => ({ raw, w: normalizarPalabra(raw) }))
-        .filter((x) => x.w.length >= 4 && x.w.length <= 10 && !PALABRAS_EXCLUIDAS.has(x.w) && !usados.has(x.w));
+        .filter((x) => x.w.length >= 4 && x.w.length <= 14 && TERMINOS_PRIORITARIOS.has(x.w) && !PALABRAS_EXCLUIDAS.has(x.w) && !usados.has(x.w));
       candidatos.sort((a, b) => puntuarCandidato(b.w) - puntuarCandidato(a.w));
       for (const cand of candidatos) {
         if (terminos.length >= 6) break;
@@ -405,7 +425,7 @@ function extraerTerminos(notas?: Nota, cursoTitulo = '', claseTitulo = ''): Term
 function construirSopa(terminos: TerminoClinico[], semilla: number): SopaDeLetras {
   const seleccion = terminos.slice(0, 5);
   const maxLong = Math.max(8, ...seleccion.map((t) => t.palabra.length));
-  const lado = Math.max(10, Math.min(11, maxLong + 1));
+  const lado = Math.max(10, Math.min(15, maxLong + 1));
   const filas = lado;
   const columnas = lado;
   const matriz: string[][] = Array.from({ length: filas }, () => Array.from({ length: columnas }, () => ''));

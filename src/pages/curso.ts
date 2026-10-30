@@ -3,6 +3,7 @@ import { curso as getCurso, cursos, fmtMin } from '../core/catalogo';
 import { Progreso } from '../core/progreso';
 import { Acceso } from '../core/acceso';
 import { esc, tarjetaCurso, placeholder } from '../ui/partials';
+import '../styles/repaso-pro.css';
 
 export function curso(params: Record<string, string>) {
   const c = getCurso(params.id);
@@ -77,6 +78,12 @@ export function curso(params: Record<string, string>) {
         <p class="muted" style="font-size:var(--fs-md)">${esc(c.descripcion)}</p>
         <h3 style="font-size:var(--fs-md);margin-top:8px">Temario</h3>
         <div class="syllabus">${temario}</div>
+        <section class="rp-closure-card" aria-label="Cierre especial del curso">
+          <div><small>EL ÚLTIMO PASO · 3 MOMENTOS</small><h2>Conecta lo que aprendiste</h2>
+          <p>Recuerda, aplica e integra. Termina con tus aciertos, lo que conviene reforzar y las clases para repasarlo.</p>
+          ${done ? '<p>Tu avance se guarda en tu cuenta. Puedes retomarlo aquí.</p>' : '<p>Se abre al completar todas las clases del curso.</p>'}</div>
+          <button type="button" data-cierre-curso="${c.id}" ${done ? '' : 'disabled'}>${done ? 'Abrir mi cierre' : 'Completa el curso para abrirlo'}</button>
+        </section>
       </div>
       <div class="stack" style="position:sticky;top:88px">
         ${sinElegir ? `

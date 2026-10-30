@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "node scripts/generate-game-engine.mjs --check && tsc && vite build",
     "preview": "vite preview",
     "test:guia": "node scripts/test-guia-datos.mjs && node scripts/test-guia-inteligencia.mjs && node scripts/test-guia-capas.mjs && node scripts/test-movimiento-guia.mjs",
     "audit:learning-packs": "node scripts/audit-learning-packs.mjs",

@@ -49,7 +49,7 @@ import { Acceso, mostrarPaywall } from './core/acceso';
 import { cargarClub, clubCargado, invalidarClub, invalidarComunidad, invalidarDirectorio, marcarHiloFresco } from './core/remoto';
 import { Admin, cargarAdmin, canjearCuponMiembro } from './core/admin';
 import { mostrarOnboarding } from './ui/onboarding';
-import { juegoClaseCompletado, type RegistroJuegoClase, type TipoJuegoClase } from './core/juego-clase';
+import { juegoClaseCompletado } from './core/juego-clase';
 import { desmontarCursoGratis, mostrarEleccionCursoGratis, montarCursoGratis } from './ui/curso-gratis';
 import { cursoGratisPagina } from './pages/curso-gratis';
 import { CursoGratis } from './core/curso-gratis';
@@ -699,7 +699,7 @@ async function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false,
   // Los juegos de cierre (5 mecánicas visuales) son un módulo grande que solo
   // se necesita al terminar una clase: se carga bajo demanda, no en el arranque.
   const { abrirJuegoClase } = await import('./ui/juego-clase');
-  const abierto = abrirJuegoClase({
+  const abierto = await abrirJuegoClase({
     cursoId,
     n,
     cursoTitulo: c.titulo,
@@ -707,13 +707,10 @@ async function abrirJuegoDeClase(cursoId: string, n: number, { anunciar = false,
     portadaCurso: c.portada,
     notas: k.notas,
     siguienteTitulo: siguiente?.titulo,
-    onCompletar: Datos.modo === 'api' ? async (puntaje: number, tipo: TipoJuegoClase) => {
-      const resultado = await api<{ juego: RegistroJuegoClase; recompensas?: NonNullable<PremioActividad> }>(`/juegos-clase/${encodeURIComponent(cursoId)}/${n}`, {
-        method: 'POST', json: { puntaje, tipo },
-      });
-      return resultado;
-    } : undefined,
-    onContinuar: () => navigate(siguiente ? `/curso/${cursoId}/clase/${siguiente.n}` : `/curso/${cursoId}`),
+    onContinuar: () => {
+      if (siguiente) navigate(`/curso/${cursoId}/clase/${siguiente.n}`);
+      else { navigate(`/curso/${cursoId}`); void import('./ui/cierre-curso').then(m => m.abrirCierreCurso(cursoId)); }
+    },
     onCerrar: actualizarAlCerrar ? () => render() : undefined,
   });
   if (abierto && anunciar) toast('Clase terminada · tu juego de cierre está listo', 'gamepad-2');
@@ -1127,6 +1124,11 @@ document.addEventListener('click', async (e) => {
   }
 
   const abrirJuego = el.closest<HTMLElement>('[data-abrir-juego]');
+  const cierreCurso = el.closest<HTMLElement>('[data-cierre-curso]');
+  if (cierreCurso?.dataset.cierreCurso) {
+    const { abrirCierreCurso } = await import('./ui/cierre-curso');
+    await abrirCierreCurso(cierreCurso.dataset.cierreCurso); return;
+  }
   if (abrirJuego) { const [id, n] = abrirJuego.dataset.abrirJuego!.split(':'); abrirJuegoDeClase(id, Number(n), { actualizarAlCerrar: true }); return; }
 
   const irSiguiente = el.closest<HTMLElement>('[data-ir-siguiente]');
@@ -1137,6 +1139,12 @@ document.addEventListener('click', async (e) => {
       e.preventDefault();
       abrirJuegoDeClase(id, Number(n), { anunciar: true, actualizarAlCerrar: true });
       return;
+    }
+    const cursoActual = id ? getCurso(id) : undefined;
+    if (cursoActual && Number(n) === Math.max(...cursoActual.clases.map(k => k.n))) {
+      e.preventDefault(); navigate(`/curso/${id}`);
+      const { abrirCierreCurso } = await import('./ui/cierre-curso');
+      await abrirCierreCurso(id); return;
     }
   }
 
