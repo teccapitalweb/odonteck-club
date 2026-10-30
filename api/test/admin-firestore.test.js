@@ -18,6 +18,9 @@ test('admin Firestore: transacción conserva cambios concurrentes, pagina empate
     await Promise.all([dar(7), dar(14)]);
     const eventos = (await db.collection('v2_admin_auditoria').get()).docs.map((d) => d.data());
     assert.equal(eventos.length, 2);
+    const personal = await request(app).get('/admin/miembros/free1/expediente?seccion=historial').set(bearer(TOKENS.admin)).expect(200);
+    assert.equal(personal.body.registros.length, 2);
+    assert.deepEqual(new Set(personal.body.registros.map(x => x.id)), new Set(eventos.map(x => x.id)));
     const primero = eventos.find((e) => !e.antes);
     const segundo = eventos.find((e) => e.antes);
     assert.equal(segundo.antes.hasta, primero.despues.hasta);
@@ -46,5 +49,12 @@ test('admin Firestore: transacción conserva cambios concurrentes, pagina empate
     const dos = (await request(app).get(`/admin/bitacora?cursor=${uno.siguiente}`).set(bearer(TOKENS.admin)).expect(200)).body;
     assert.equal(new Set([...uno.eventos, ...dos.eventos].map((e) => e.id)).size, 58);
     assert.equal(dos.siguiente, null);
+    const movimientos = db.batch();
+    for (let n = 0; n < 33; n++) movimientos.set(db.doc(`v2_recompensas_movimientos/exp-${n}`), { uid: 'free1', fecha: AHORA_ISO, puntos: 1, tipo: 'prueba' });
+    await movimientos.commit();
+    const pagina1 = (await request(app).get('/admin/miembros/free1/expediente?seccion=movimientos').set(bearer(TOKENS.admin)).expect(200)).body;
+    const pagina2 = (await request(app).get(`/admin/miembros/free1/expediente?seccion=movimientos&cursor=${pagina1.siguiente}`).set(bearer(TOKENS.admin)).expect(200)).body;
+    assert.equal(new Set([...pagina1.registros, ...pagina2.registros].map(x => x.id)).size, 33);
+
   } finally { await db.terminate(); await deleteApp(fb); }
 });

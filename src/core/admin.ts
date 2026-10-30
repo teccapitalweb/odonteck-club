@@ -44,6 +44,9 @@ export interface ReporteCampanaPraxia {
 }
 
 export interface DetalleMiembroAdmin extends MiembroDemo {
+  ultimoInicioSesion?: string | null;
+  cuentaDeshabilitada?: boolean | null;
+  consultadoEn?: string;
   perfil?: Record<string, unknown>;
   miembro?: Record<string, unknown> | null;
   suscripcion?: Record<string, unknown> | null;
@@ -51,7 +54,7 @@ export interface DetalleMiembroAdmin extends MiembroDemo {
   progreso: { cursoId: string; titulo: string; vistas: number[]; total: number; ultima: number | null; actualizado: string | null; certificado?: string | null }[];
   certificados: { folio: string; cursoTitulo: string; emitido: string }[];
   cursoGratis?: { cursoId: string; titulo: string; origen: string; elegido: string | null; cambios: number } | null;
-  recompensas?: { saldo: number; ganados: number; logros: { id: string; titulo: string; descripcion: string; icono: string; progreso: number; meta: number; logrado: boolean; fecha: string | null }[] };
+  recompensas?: { registrado?: boolean; actualizado?: string | null; gastados?: number; desbloqueos?: { materiales: string[]; recompensas: string[] }; contadores?: Record<string, number>; saldo: number; ganados: number; logros: { id: string; titulo: string; descripcion: string; icono: string; progreso: number; meta: number; logrado: boolean; fecha: string | null }[] };
 }
 
 export interface ReporteDirectorioAdmin {
@@ -76,7 +79,13 @@ export interface EventoAuditoria {
   efectos?: Record<string, unknown>;
 }
 export interface PaginaBitacora { eventos: EventoAuditoria[]; siguiente: string | null; consultadoEn: string }
+export interface PaginaExpediente {
+  uid: string; seccion: string; consultadoEn: string; registros: Record<string, any>[]; siguiente: string | null;
+  coleccion?: { id: string; titulo: string; tipo: string }[];
+  disponible?: boolean; mensaje?: string; motivo?: string; clientes?: string[]; cliente?: string | null;
+}
 const estado = {
+  expediente: null as { uid: string; seccion: string; pagina: PaginaExpediente | null; error: string } | null,
   bitacora: null as PaginaBitacora | null,
   recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
@@ -150,6 +159,7 @@ const cargarCupones = (forzar = false) => cargar('cupones', async () => {
 }, forzar);
 
 export const Admin = {
+  get expediente() { return estado.expediente; },
   get bitacora() { return estado.bitacora; },
   get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
@@ -162,8 +172,10 @@ export const Admin = {
   limpiarError() { estado.error = ''; },
 };
 
+let cargaAdmin = 0;
 export async function cargarAdmin(path: string, query = new URLSearchParams(), forzar = false) {
   if (Datos.modo !== 'api') return;
+  const turno = ++cargaAdmin;
   estado.error = '';
   const tareas: Promise<void>[] = [];
   try {
@@ -195,16 +207,27 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path.startsWith('/admin/miembros/')) {
       tareas.push(cargarCursos(forzar));
       const uid = decodeURIComponent(path.slice('/admin/miembros/'.length));
-      tareas.push(cargar(`miembro:${uid}`, async () => {
+      const seccion = query.get('vista') || 'resumen';
+      const apartado = { uid, seccion, pagina: null as PaginaExpediente | null, error: '' };
+      estado.expediente = apartado;
+      if (['pagos', 'movimientos', 'recompensas', 'historial'].includes(seccion)) {
+        const qs = new URLSearchParams({ seccion });
+        for (const k of ['cursor', 'cliente']) if (query.get(k)) qs.set(k, query.get(k)!);
+        tareas.push(api<PaginaExpediente>(`/admin/miembros/${encodeURIComponent(uid)}/expediente?${qs}`)
+          .then((pagina) => { apartado.pagina = pagina; })
+          .catch((error) => { apartado.error = mensajeError(error); }));
+      }
+      tareas.push((async () => {
         const d = await api<any>(`/admin/miembros/${encodeURIComponent(uid)}`);
         const progreso = Array.isArray(d.progreso) ? d.progreso : [];
         const ultimaActividad = progreso.map((p: any) => p.actualizado || '').sort().at(-1) || '';
+        if (turno !== cargaAdmin) return;
         estado.detalleMiembro = {
           ...d,
           ...adaptarMiembro({ ...d, clasesVistas: progreso.reduce((n: number, p: any) => n + (Array.isArray(p.vistas) ? p.vistas.length : 0), 0), ultimaActividad }),
           cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [], cursoGratis: d.cursoGratis ?? null,
         };
-      }, true));
+      })());
     } else if (path === '/admin/comunidad') {
       tareas.push(cargar('foro', async () => { Comunidad.hidratar(await api<any[]>('/admin/foro')); }, forzar));
       tareas.push(cargar('directorio-reportes', async () => { estado.reportesDirectorio = await api<ReporteDirectorioAdmin[]>('/admin/directorio/reportes'); }, forzar));
@@ -228,7 +251,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     }
     await Promise.all(tareas);
   } catch (e) {
-    estado.error = mensajeError(e);
+    if (turno === cargaAdmin) estado.error = mensajeError(e);
   }
 }
 

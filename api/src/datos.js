@@ -6,6 +6,7 @@ export const COL = Object.freeze({
   // Colección vieja: SOLO LECTURA hasta el cambio definitivo.
   miembros: 'miembros',
   adminAuditoria: 'v2_admin_auditoria',
+  adminAuditoriaMiembros: 'v2_admin_auditoria_miembros',
   perfiles: 'v2_perfiles',
   cursos: 'v2_cursos',
   progreso: 'v2_progreso',

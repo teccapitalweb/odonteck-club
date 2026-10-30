@@ -1,3 +1,4 @@
+import { paginaAlumno, movimientosAlumno, recompensasAlumno, pagosAlumno } from '../lib/admin-expediente.js';
 // Rutas de administración (claim `admin: true`).
 import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
 import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
@@ -430,6 +431,23 @@ export function rutasAdmin(ctx) {
     }
   }
 
+  r.get('/admin/miembros/:uid/expediente', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const seccion = unoDe(String(req.query.seccion ?? ''), ['pagos', 'movimientos', 'recompensas', 'historial'], { campo: 'seccion' });
+    const usuario = await usuarioAuth(uid);
+    const [miembro, sus, perfil, cortesia, avance] = await Promise.all([
+      leerMiembroHeredado(ctx, { uid, email: usuario?.email }), leerDoc(db, COL.suscripciones, uid), leerDoc(db, COL.perfiles, uid),
+      leerDoc(db, COL.cortesias, uid), db.collection(COL.progreso).where('uid', '==', uid).limit(1).get(),
+    ]);
+    if (!usuario && !miembro && !sus && !perfil && !cortesia && avance.empty) throw noEncontrado('No existe ese miembro.');
+    let datos;
+    if (seccion === 'pagos') datos = await pagosAlumno(ctx, miembro, sus, req.query);
+    else if (seccion === 'movimientos') datos = await movimientosAlumno(ctx, uid, req.query.cursor);
+    else if (seccion === 'recompensas') datos = await recompensasAlumno(ctx, uid, req.query.cursor);
+    else datos = await paginaAlumno(db, COL.adminAuditoriaMiembros, uid, 'fecha', req.query.cursor, { subcoleccion: true });
+    res.json({ uid, seccion, consultadoEn: ahoraISO(), ...datos });
+  }));
+
   r.get('/admin/miembros/:uid', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
     const usuario = await usuarioAuth(uid);
@@ -451,6 +469,10 @@ export function rutasAdmin(ctx) {
     const cursos = new Map(cursosSnap.docs.map((d) => [d.id, d.data()]));
     res.json({
       uid,
+      alta: usuario?.metadata?.creationTime ? new Date(usuario.metadata.creationTime).toISOString() : null,
+      ultimoInicioSesion: usuario?.metadata?.lastSignInTime ? new Date(usuario.metadata.lastSignInTime).toISOString() : null,
+      cuentaDeshabilitada: usuario ? usuario.disabled === true : null,
+      consultadoEn: ahoraISO(),
       nombre: perfil?.nombre ?? m?.nombre ?? usuario?.displayName ?? '',
       email: m?.email ?? usuario?.email ?? '',
       esVip: estado.esVip,
@@ -477,7 +499,7 @@ export function rutasAdmin(ctx) {
         .map((p) => ({
           cursoId: p.cursoId,
           titulo: cursos.get(p.cursoId)?.titulo ?? p.cursoId,
-          vistas: p.vistas ?? [],
+          vistas: [...new Set((Array.isArray(p.vistas) ? p.vistas : []).map(Number))].filter((n) => (cursos.get(p.cursoId)?.clases ?? []).some((c) => Number(c.n) === n)),
           total: (cursos.get(p.cursoId)?.clases ?? []).length,
           ultima: p.ultima ?? null,
           actualizado: p.actualizado ?? null,
@@ -485,7 +507,7 @@ export function rutasAdmin(ctx) {
         })),
       certificados: certSnap.docs.map((d) => d.data()).sort((a, b) => String(b.emitido).localeCompare(String(a.emitido))),
       cursoGratis: cursoGratis?.cursoId ? { cursoId: cursoGratis.cursoId, titulo: cursos.get(cursoGratis.cursoId)?.titulo ?? cursoGratis.cursoId, origen: cursoGratis.origen, elegido: cursoGratis.elegido, cambios: cursoGratis.cambios ?? 0 } : null,
-      recompensas: { saldo: rec.saldo, ganados: rec.ganados, logros: logrosPublicos(recDoc) },
+      recompensas: { registrado: !!recDoc, actualizado: rec.actualizado, saldo: rec.saldo, ganados: rec.ganados, gastados: rec.gastados, desbloqueos: rec.desbloqueos, contadores: rec.contadores, logros: logrosPublicos(recDoc) },
     });
   }));
 

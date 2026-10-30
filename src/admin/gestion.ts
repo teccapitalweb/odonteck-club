@@ -1,3 +1,4 @@
+import { expedienteMiembro } from './expediente';
 // Admin · resumen, miembros, comunidad, avisos y ajustes.
 import { Datos, type Cupon, type MiembroDemo } from '../core/datos';
 import { Comunidad, hace } from '../core/comunidad';
@@ -273,7 +274,11 @@ export function adminMiembros(_: Record<string, string>, query: URLSearchParams)
   </tbody></table></div>` : vacio('Sin resultados', 'Prueba con otro nombre o filtro.')}`;
 }
 
-export function adminMiembro(params: Record<string, string>) {
+export function adminMiembro(params: Record<string, string>, query = new URLSearchParams()) {
+  if (Datos.modo === 'api' && Admin.detalleMiembro?.uid === params.uid) return expedienteMiembro(Admin.detalleMiembro, query);
+  return adminMiembroDemo(params);
+}
+function adminMiembroDemo(params: Record<string, string>) {
   const detalle = Datos.modo === 'api' && Admin.detalleMiembro?.uid === params.uid ? Admin.detalleMiembro : null;
   const m = detalle || Datos.miembros().find((x) => x.uid === params.uid);
   if (!m) return vacio('Miembro no encontrado', '', '<a class="btn btn--brand" href="#/admin/miembros">Volver</a>');

@@ -63,6 +63,22 @@
         { "fieldPath": "reportanteUid", "order": "ASCENDING" },
         { "fieldPath": "creado", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "v2_recompensas_movimientos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "uid", "order": "ASCENDING" },
+        { "fieldPath": "fecha", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "v2_recompensas_canjes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "uid", "order": "ASCENDING" },
+        { "fieldPath": "solicitado", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

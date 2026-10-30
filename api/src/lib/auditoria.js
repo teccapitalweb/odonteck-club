@@ -33,6 +33,9 @@ export function registrarAuditoria(ctx, tx, req, { ref, accion, antes = null, de
     ...(extra ? { efectos: resumenAuditable(extra) } : {}),
   };
   tx.create(ctx.db.collection(COL.adminAuditoria).doc(id), evento);
+  const objetivoUid = [COL.cortesias, COL.cursoGratis, COL.perfiles].includes(tipo) ? ref.id
+    : tipo === COL.recompensasCanjes ? (despues?.uid || antes?.uid) : null;
+  if (objetivoUid) tx.create(ctx.db.collection(COL.adminAuditoriaMiembros).doc(objetivoUid).collection('eventos').doc(id), evento);
   return evento;
 }
 
