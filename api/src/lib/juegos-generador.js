@@ -51,7 +51,7 @@ export const INFO_TIPO_JUEGO = {
     rompecabezas: {
         etiqueta: 'Rompecabezas visual',
         titulo: 'Arma la imagen de la clase',
-        resumen: 'Reconstruye la imagen clínica en 16 piezas.',
+        resumen: 'Reconstruye la imagen clínica en 30 piezas. Reto avanzado con ayudas limitadas.',
         icono: 'puzzle',
     },
     sopa: {
@@ -413,7 +413,7 @@ export function elegirTipoJuego(cursoId, n) {
     const posicionSinRompe = claseActual < claseRompecabezas ? claseActual - 1 : claseActual - 2;
     return otros[(offset + posicionSinRompe) % otros.length];
 }
-export function crearJuegoClase(cursoId, n, notas, cursoTitulo = '', claseTitulo = '', portadaCurso) {
+export function crearJuegoClase(cursoId, n, notas, cursoTitulo = '', claseTitulo = '', portadaCurso, intento = '') {
     if (!notas?.conceptos?.length)
         return null;
     const clave = `${cursoId}:${n}`;
@@ -425,8 +425,8 @@ export function crearJuegoClase(cursoId, n, notas, cursoTitulo = '', claseTitulo
     if (tipo === 'rompecabezas' && !IMAGENES_ROMPECABEZAS[`${cursoId}:${n}`])
         return null;
     const imagen = resolverImagenClase(cursoId, n, portadaCurso);
-    const cols = 4;
-    const rows = 4;
+    const cols = 5;
+    const rows = 6;
     const totalPiezas = cols * rows;
     const textosConceptos = notas.conceptos.map((c) => c.texto);
     const piezas = Array.from({ length: totalPiezas }, (_, idx) => ({
@@ -436,9 +436,11 @@ export function crearJuegoClase(cursoId, n, notas, cursoTitulo = '', claseTitulo
         concepto: textosConceptos[idx % textosConceptos.length] || notas.resumen || claseTitulo,
     }));
     const baseIndices = piezas.map((p) => p.indiceCorrecto);
-    let ordenInicial = barajar(baseIndices, semilla + 19);
-    if (ordenInicial.every((val, i) => val === i)) {
-        ordenInicial = [...baseIndices.slice(1), baseIndices[0]];
+    const ordenInicial = [...baseIndices];
+    const azarPiezas = aleatorio(hash(`${clave}:piezas:${intento}`));
+    for (let i = ordenInicial.length - 1; i > 0; i--) {
+        const j = Math.floor(azarPiezas() * i);
+        [ordenInicial[i], ordenInicial[j]] = [ordenInicial[j], ordenInicial[i]];
     }
     const sopa = construirSopa(terminos.slice(0, 3), semilla);
     const ahorcado = barajar(terminos, semilla + 29).slice(0, Math.min(2, terminos.length));
@@ -486,6 +488,9 @@ export function crearJuegoClase(cursoId, n, notas, cursoTitulo = '', claseTitulo
         imagen,
         terminos,
         rompecabezasImagen: {
+            nivel: 'avanzado',
+            maxAyudas: 2,
+            maxVistasGuia: 3,
             columnas: cols,
             filas: rows,
             piezas,

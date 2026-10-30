@@ -2,24 +2,32 @@
 export const VERSION_JUEGOS = 2;
 export function reproducirPartida(g, eventos = []) {
   if (!Array.isArray(eventos) || eventos.length > 1200 || JSON.stringify(eventos).length > 90000) throw Error('Partida demasiado larga. Empieza un nuevo intento.');
-  const s = { orden: [...g.rompecabezasImagen.ordenInicial], encontradas: [], pares: [], ronda: 0, letras: [], palabra: '', aciertos: 0, errores: 0, ayudas: 0, fallosRonda: 0, terminada: false, mensaje: '', puntaje: 0 };
+  const s = { orden: [...g.rompecabezasImagen.ordenInicial], encontradas: [], pares: [], ronda: 0, letras: [], palabra: '', aciertos: 0, errores: 0, ayudas: 0, guias: 0, acomodadas: 0, movimientos: 0, fallosRonda: 0, terminada: false, mensaje: '', puntaje: 0 };
   if(g.tipo==='rompecabezas')s.aciertos=s.orden.filter((id,i)=>id===i).length;
   const requerir = (ok) => { if (!ok) throw Error('La jugada no corresponde a esta partida.'); };
   for (const a of eventos) {
     requerir(a && typeof a === 'object' && !s.terminada);
-    const campos={cambiar:['tipo','x','y'],ayuda:['tipo'],buscar:['tipo','celdas'],letra:['tipo','letra'],siguiente:['tipo'],par:['tipo','x','y'],borrar:['tipo'],comprobar:['tipo']}[a.tipo];
+    const campos={cambiar:['tipo','x','y'],ayuda:['tipo'],'ver-guia':['tipo'],buscar:['tipo','celdas'],letra:['tipo','letra'],siguiente:['tipo'],par:['tipo','x','y'],borrar:['tipo'],comprobar:['tipo']}[a.tipo];
     requerir(campos && Object.keys(a).every(k=>campos.includes(k)));
     s.mensaje = '';
     if (g.tipo === 'rompecabezas') {
+      if (a.tipo === 'ver-guia') {
+        requerir(s.guias < (g.rompecabezasImagen.maxVistasGuia ?? Infinity));
+        s.guias++; s.ayudas++; continue;
+      }
       let x = a.x, y = a.y;
-      if (a.tipo === 'ayuda') { x = s.orden.findIndex((id, i) => id !== i); y = s.orden.indexOf(x); s.ayudas++; }
+      if (a.tipo === 'ayuda') {
+        requerir(s.acomodadas < (g.rompecabezasImagen.maxAyudas ?? Infinity));
+        x = s.orden.findIndex((id, i) => id !== i); y = s.orden.indexOf(x); s.ayudas++; s.acomodadas++;
+      }
       else requerir(a.tipo === 'cambiar');
-      requerir(Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < 16 && y < 16 && x !== y);
+      requerir(Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < s.orden.length && y < s.orden.length && x !== y);
+      s.movimientos++;
       const antes = s.orden.filter((id,i)=>id===i).length;
       [s.orden[x],s.orden[y]] = [s.orden[y],s.orden[x]];
       const despues = s.orden.filter((id,i)=>id===i).length;
       if (a.tipo !== 'ayuda' && despues <= antes) s.errores++;
-      s.aciertos = despues; s.terminada = despues === 16;
+      s.aciertos = despues; s.terminada = despues === s.orden.length;
     } else if (g.tipo === 'sopa') {
       if (a.tipo === 'ayuda') { s.ayudas++; s.mensaje = 'Busca el inicio resaltado.'; }
       else {

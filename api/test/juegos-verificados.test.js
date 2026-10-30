@@ -30,7 +30,8 @@ test('no acepta movimientos imposibles ni registros de longitud excesiva',()=>{
 });
 test('las ayudas reducen el resultado aunque se termine el rompecabezas',()=>{
  const g=juegos.find(x=>x.g.tipo==='rompecabezas').g,ev=[];let s=reproducirPartida(g,ev);
- while(!s.terminada){ev.push({tipo:'ayuda'});s=reproducirPartida(g,ev);}
+ ev.push({tipo:'ayuda'},{tipo:'ayuda'},{tipo:'ver-guia'});s=reproducirPartida(g,ev);
+ while(!s.terminada){const x=s.orden.findIndex((id,i)=>id!==i);ev.push({tipo:'cambiar',x,y:s.orden.indexOf(x)});s=reproducirPartida(g,ev);}
  assert.ok(s.puntaje>0&&s.puntaje<100);assert.ok(s.ayudas>0);
 });
 test('servidor exige clase vista, conserva borrador y no lo recompensa',async()=>{
@@ -89,4 +90,41 @@ test('cierre requiere todas las clases y membresía, guarda selección y protege
  await post(e,ruta+'/iniciar',{},TOKENS.vip2).expect(403);
  const {body:repetir}=await post(e,ruta+'/iniciar',{reiniciar:true}).expect(200);assert.equal(repetir.intento,2);assert.notEqual(repetir.id,p.id);assert.equal(repetir.finalizado,false);
  const games=await request(e.app).get('/juegos-clase').set(bearer(TOKENS.vip)).expect(200);assert.deepEqual(games.body,[]);
+});
+
+
+test('los 18 tableros avanzados tienen 30 piezas fuera de lugar y requieren 29 intercambios',()=>{
+ const puzzles=juegos.filter(x=>x.g.tipo==='rompecabezas');assert.equal(puzzles.length,18);
+ for(const {g,c,k} of puzzles){
+  assert.equal(g.rompecabezasImagen.ordenInicial.length,30);
+  assert.equal(new Set(g.rompecabezasImagen.ordenInicial).size,30);
+  assert.ok(g.rompecabezasImagen.ordenInicial.every((id,i)=>id!==i));
+  assert.equal(resolverJuego(g).length,29);
+  const otro=crearJuegoClase(c.id,k.n,k.notas,c.titulo,k.titulo,c.portada,'otro-intento');
+  assert.notDeepEqual(otro.rompecabezasImagen.ordenInicial,g.rompecabezasImagen.ordenInicial);
+  assert.throws(()=>reproducirPartida(g,[{tipo:'cambiar',x:0,y:30}]));
+ }
+});
+test('reabrir no repone las dos ayudas ni las tres miradas',async()=>{
+ const {c,k}=juegos.find(x=>x.g.tipo==='rompecabezas'),e=entorno(c,[k.n]),ruta=`/juegos-clase/${c.id}/${k.n}`;
+ const {body:p}=await post(e,ruta+'/iniciar').expect(200);
+ const ev=[{tipo:'ayuda'},{tipo:'ayuda'},...Array.from({length:3},()=>({tipo:'ver-guia'}))];
+ await put(e,ruta+'/partida',{partidaId:p.id,revision:0,eventos:ev}).expect(200);
+ const {body:r}=await post(e,ruta+'/iniciar').expect(200);
+ assert.equal(r.id,p.id);assert.deepEqual(r.eventos,ev);assert.deepEqual(r.juego,p.juego);
+ const s=reproducirPartida(r.juego,r.eventos);assert.equal(s.acomodadas,2);assert.equal(s.guias,3);assert.equal(s.ayudas,5);
+ for(const tipo of ['ayuda','ver-guia']){
+  assert.throws(()=>reproducirPartida(r.juego,[...r.eventos,{tipo}]));
+  const rechazado=await put(e,ruta+'/partida',{partidaId:r.id,revision:r.revision,eventos:[...r.eventos,{tipo}]});assert.ok(rechazado.status>=400);
+ }
+ const {body:n}=await post(e,ruta+'/iniciar',{reiniciar:true}).expect(200);
+ assert.notEqual(n.id,p.id);assert.notDeepEqual(n.juego.rompecabezasImagen.ordenInicial,p.juego.rompecabezasImagen.ordenInicial);
+ assert.equal(reproducirPartida(n.juego,n.eventos).ayudas,0);
+});
+test('partidas anteriores de 16 piezas siguen siendo resolubles con sus ayudas originales',()=>{
+ const g=structuredClone(juegos.find(x=>x.g.tipo==='rompecabezas').g);
+ g.rompecabezasImagen={columnas:4,filas:4,piezas:g.rompecabezasImagen.piezas.slice(0,16),ordenInicial:[...Array.from({length:15},(_,i)=>i+1),0]};
+ const ev=[];let s=reproducirPartida(g,ev);
+ while(!s.terminada){ev.push({tipo:'ayuda'});s=reproducirPartida(g,ev);}
+ assert.equal(s.aciertos,16);assert.equal(s.acomodadas,15);assert.ok(s.terminada);
 });

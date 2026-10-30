@@ -1,6 +1,6 @@
 # Imágenes originales de los rompecabezas de clase
 
-Versión vigente: una ilustración clínica original y exclusiva para cada una de las 18 clases que reciben el juego. Las imágenes se generan para el tema de la clase, no se reutilizan portadas ni entre sí. El tablero es de 4 × 4 (16 piezas); cada imagen es vertical, sin texto ni marcas, y está optimizada como JPEG para mantener ligera la descarga.
+Versión vigente: una ilustración clínica original y exclusiva para cada una de las 18 clases que reciben el juego. Las imágenes se generan para el tema de la clase, no se reutilizan portadas ni entre sí. El tablero es de 5 × 6 (30 piezas); cada imagen es vertical, sin texto ni marcas, y está optimizada como JPEG para mantener ligera la descarga.
 
 ## Mapa de clase, tema visual y asset
 
@@ -27,6 +27,8 @@ Versión vigente: una ilustración clínica original y exclusiva para cada una d
 
 ## Dirección de generación
 
-Cada prompt describe el tema específico de esa clase y pide una escena editorial clínica, limpia y anatómicamente plausible, con objetos distinguibles a lo largo del encuadre para que las 16 piezas tengan referencias visuales. Se evita texto, etiquetas, marcas, pacientes identificables y sangre. En trauma infantil se excluyen flechas y cualquier representación que sugiera reimplantar un diente primario.
+Cada prompt describe el tema específico de esa clase y pide una escena editorial clínica, limpia y anatómicamente plausible, con objetos distinguibles a lo largo del encuadre para que las 30 piezas tengan referencias visuales. Se evita texto, etiquetas, marcas, pacientes identificables y sangre. En trauma infantil se excluyen flechas y cualquier representación que sugiera reimplantar un diente primario.
 
 La resolución de imágenes vive en `src/core/juego-clase.ts`; `npm run audit:class-games` comprueba que cada rompecabezas del catálogo tenga su asset y mapeo.
+
+El reto avanzado comienza con todas las piezas fuera de lugar. Cada nuevo intento mezcla de nuevo, permite tres vistas de la guía de seis segundos y dos ayudas para acomodar piezas. Las ayudas se guardan con la partida y reducen los puntos de práctica; los intentos anteriores conservan su tablero.

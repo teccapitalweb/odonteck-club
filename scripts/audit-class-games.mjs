@@ -83,7 +83,7 @@ for (const { curso, clase } of clases) {
   }
 }
 
-const tablero16Piezas = fuenteJuego.includes('const cols = 4;') && fuenteJuego.includes('const rows = 4;');
+const tablero30Piezas = fuenteJuego.includes('const cols = 5;') && fuenteJuego.includes('const rows = 6;');
 
 console.log(JSON.stringify({
   cursos: catalogo.cursos.length,
@@ -95,7 +95,7 @@ console.log(JSON.stringify({
   rompecabezasConImagen: rompecabezas.length - imagenesFaltantes.length,
   rompecabezasSinImagen: imagenesFaltantes,
   imagenesSinMapa,
-  piezasPorRompecabezas: tablero16Piezas ? 16 : null,
+  piezasPorRompecabezas: tablero30Piezas ? 30 : null,
 }, null, 2));
 
-if (sinNotas.length || conMenosDe3Terminos.length || clases.length === 0 || rompecabezas.length !== 18 || imagenesFaltantes.length || imagenesSinMapa.length || !tablero16Piezas) process.exitCode = 1;
+if (sinNotas.length || conMenosDe3Terminos.length || clases.length === 0 || rompecabezas.length !== 18 || imagenesFaltantes.length || imagenesSinMapa.length || !tablero30Piezas) process.exitCode = 1;

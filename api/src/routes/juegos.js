@@ -22,11 +22,12 @@ export function montarJuegos(r, ctx, auth, prepararClase) {
       if(!prog.data()?.vistas?.includes(n))throw conflicto('Termina la clase antes de empezar el repaso.','clase_no_vista');
       const anterior=snap.exists?snap.data():{};
       if(anterior.partida?.version===VERSION_JUEGOS && !reiniciar)return anterior.partida;
-      const juego=crearJuegoClase(curso.id,n,clase.notas,curso.titulo,clase.titulo,curso.portada);
+      const id=randomUUID();
+      const juego=crearJuegoClase(curso.id,n,clase.notas,curso.titulo,clase.titulo,curso.portada,id);
       if(!juego)throw conflicto('Este repaso necesita contenido adicional. Puedes continuar con tu curso.','repaso_no_disponible');
       // Firestore does not accept nested arrays (the soup board is a matrix).
       // Keep the immutable puzzle as JSON; the event log stays queryable.
-      const p={id:randomUUID(),version:VERSION_JUEGOS,juego:JSON.stringify(juego),eventos:[],revision:0,finalizada:false,actualizado:ctx.now().toISOString()};
+      const p={id,version:VERSION_JUEGOS,juego:JSON.stringify(juego),eventos:[],revision:0,finalizada:false,actualizado:ctx.now().toISOString()};
       tx.set(ref,{...anterior,uid:u.uid,cursoId:curso.id,n,partida:p});return p;
     });res.json({...partida,juego:JSON.parse(partida.juego)});
   }));

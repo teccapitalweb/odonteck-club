@@ -63,6 +63,9 @@ export type JuegoClase = {
   imagen: string;
   terminos: TerminoClinico[];
   rompecabezasImagen: {
+    nivel?: 'avanzado';
+    maxAyudas?: number;
+    maxVistasGuia?: number;
     columnas: number;
     filas: number;
     piezas: PiezaImagen[];
@@ -141,7 +144,7 @@ export const INFO_TIPO_JUEGO: Record<TipoJuegoClase, { etiqueta: string; titulo:
   rompecabezas: {
     etiqueta: 'Rompecabezas visual',
     titulo: 'Arma la imagen de la clase',
-    resumen: 'Reconstruye la imagen clínica en 16 piezas.',
+    resumen: 'Reconstruye la imagen clínica en 30 piezas. Reto avanzado con ayudas limitadas.',
     icono: 'puzzle',
   },
   sopa: {
@@ -529,6 +532,7 @@ export function crearJuegoClase(
   cursoTitulo = '',
   claseTitulo = '',
   portadaCurso?: string,
+  intento = '',
 ): JuegoClase | null {
   if (!notas?.conceptos?.length) return null;
   const clave = `${cursoId}:${n}`;
@@ -540,9 +544,9 @@ export function crearJuegoClase(
   if (tipo === 'rompecabezas' && !IMAGENES_ROMPECABEZAS[`${cursoId}:${n}`]) return null;
   const imagen = resolverImagenClase(cursoId, n, portadaCurso);
 
-  // 1. Rompecabezas visual (4 × 4 piezas)
-  const cols = 4;
-  const rows = 4;
+  // Sattolo: una sola cadena; ninguna pieza comienza en su posición correcta.
+  const cols = 5;
+  const rows = 6;
   const totalPiezas = cols * rows;
   const textosConceptos = notas.conceptos.map((c) => c.texto);
   const piezas: PiezaImagen[] = Array.from({ length: totalPiezas }, (_, idx) => ({
@@ -552,9 +556,11 @@ export function crearJuegoClase(
     concepto: textosConceptos[idx % textosConceptos.length] || notas.resumen || claseTitulo,
   }));
   const baseIndices = piezas.map((p) => p.indiceCorrecto);
-  let ordenInicial = barajar(baseIndices, semilla + 19);
-  if (ordenInicial.every((val, i) => val === i)) {
-    ordenInicial = [...baseIndices.slice(1), baseIndices[0]];
+  const ordenInicial = [...baseIndices];
+  const azarPiezas = aleatorio(hash(`${clave}:piezas:${intento}`));
+  for (let i = ordenInicial.length - 1; i > 0; i--) {
+    const j = Math.floor(azarPiezas() * i);
+    [ordenInicial[i], ordenInicial[j]] = [ordenInicial[j], ordenInicial[i]];
   }
 
   // 2. Sopa de letras
@@ -611,6 +617,9 @@ export function crearJuegoClase(
     imagen,
     terminos,
     rompecabezasImagen: {
+      nivel: 'avanzado',
+      maxAyudas: 2,
+      maxVistasGuia: 3,
       columnas: cols,
       filas: rows,
       piezas,

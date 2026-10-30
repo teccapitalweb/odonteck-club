@@ -15,15 +15,17 @@ export async function abrirJuegoClase(o:Opciones):Promise<boolean> {
   const focoAnterior=document.activeElement as HTMLElement|null;
   document.body.append(d);d.innerHTML='<div class="rp-loading"><p role="status">Recuperando tu partida…</p><button type="button" data-rp="cerrar">Cerrar</button></div>';d.showModal();
   let partida:any,g:JuegoClase,estado:any,eventos:any[]=[],seleccion:number|null=null,cartas:string[]=[],ancla:number[]|null=null,guia=false;
+  let guiaTimer:ReturnType<typeof setTimeout>|undefined;
   let timer:ReturnType<typeof setTimeout>|undefined,closed=false,continuar=false,reiniciando=false,cola=Promise.resolve(),error='',guardado='Preparando…';
   const vigente=()=>!closed && (Datos.modo!=='api'||Auth.usuario?.uid===uid);
   const boton=(texto:string,accion:string,extra='')=>`<button type="button" data-rp="${accion}" ${extra}>${texto}</button>`;
   function cache(){try{localStorage.setItem(key,JSON.stringify({id:partida.id,version:VERSION_JUEGOS,juego:g,eventos,revision:partida.revision,finalizada:partida.finalizada}));}catch{}}
   async function iniciar(reiniciar=false){
-    error='';guardado='Recuperando tu partida…';
+    clearTimeout(guiaTimer);guia=false;error='';guardado='Recuperando tu partida…';
     if(Datos.modo==='api')partida=await api(ruta+'/iniciar',{method:'POST',json:{reiniciar}});
-    else {const juego=crearJuegoClase(o.cursoId,o.n,o.notas,o.cursoTitulo,o.claseTitulo,o.portadaCurso);if(!juego)throw Error('Este repaso necesita contenido adicional. Puedes continuar con el curso.');partida={id:crypto.randomUUID(),juego,eventos:[],revision:0,finalizada:false};}
+    else {const juego=crearJuegoClase(o.cursoId,o.n,o.notas,o.cursoTitulo,o.claseTitulo,o.portadaCurso,crypto.randomUUID());if(!juego)throw Error('Este repaso necesita contenido adicional. Puedes continuar con el curso.');partida={id:crypto.randomUUID(),juego,eventos:[],revision:0,finalizada:false};}
     if(!vigente())return;
+    if(Datos.modo!=='api'&&!reiniciar){try{const local=JSON.parse(localStorage.getItem(key)||'null');if(local?.version===VERSION_JUEGOS&&local.juego&&Array.isArray(local.eventos)){reproducirPartida(local.juego,local.eventos);partida={...partida,...local};}}catch{}}
     g=partida.juego;eventos=[...partida.eventos];
     try{const local=JSON.parse(localStorage.getItem(key)||'null');if(!reiniciar && local?.version===VERSION_JUEGOS && (Datos.modo!=='api'||local.id===partida.id) && local.eventos.length>=eventos.length && JSON.stringify(local.eventos.slice(0,eventos.length))===JSON.stringify(eventos)){reproducirPartida(g,local.eventos);eventos=local.eventos;}}catch{}
     estado=reproducirPartida(g,eventos);seleccion=null;cartas=[];ancla=null;guardado=Datos.modo==='api'?'Partida recuperada de tu cuenta':'Demostración · guardado en este navegador';
@@ -46,20 +48,24 @@ export async function abrirJuegoClase(o:Opciones):Promise<boolean> {
       if(vigente())pintar();
     });return cola;
   }
-  function mover(a:any){try{const nuevo=[...eventos,a];estado=reproducirPartida(g,nuevo);eventos=nuevo;cache();guardado='Guardado pendiente';error='';pintar();programar();}catch(e:any){error=e.message;pintar();}}
+  function mover(a:any){try{const nuevo=[...eventos,a];estado=reproducirPartida(g,nuevo);eventos=nuevo;cache();guardado='Guardado pendiente';error='';pintar();programar();return true;}catch(e:any){error=e.message;pintar();return false;}}
   function actualizarEstado(){const x=d.querySelector('[data-rp-status]');if(x)x.textContent=guardado;}
   function pintar(){
     if(!vigente())return;
     const activo=document.activeElement as HTMLElement|null;
     const foco=activo&&d.contains(activo)?{...activo.dataset}:null;
     const tableroScroll=d.querySelector('.rp-board-scroll')?.scrollLeft||0;
+    d.classList.toggle('rp-puzzle-dialog',g.tipo==='rompecabezas'&&!estado.terminada);
     const meta=INFO_TIPO_JUEGO[g.tipo];
     let contenido='';
     if(estado.terminada){
       const score=estado.puntaje;
       contenido=`<section class="rp-result"><span class="rp-medal">${score>=70?'✦':'↻'}</span><h2>${score>=70?'Repaso completado':'Repaso terminado: sigamos practicando'}</h2><div class="rp-score"><strong>${score}</strong><span>puntos de práctica / 100</span></div><p>La puntuación considera aciertos, errores y ayudas. No es una calificación clínica ni modifica tu certificado.</p><div class="rp-stats"><span><b>${estado.aciertos}</b>Aciertos</span><span><b>${estado.errores}</b>Errores</span><span><b>${estado.ayudas}</b>Ayudas</span></div><h3>Para llevarte de esta clase</h3>${g.terminos.slice(0,2).map(t=>`<article><strong>${esc(t.etiqueta)}</strong><p>${esc(t.pista)}</p></article>`).join('')}<p>Los OdonCoins de participación se entregan una sola vez por clase, al confirmar el guardado.</p><div class="rp-actions">${boton('Practicar otra vez','reiniciar')}${boton(o.siguienteTitulo?'Siguiente clase':'Ver cierre del curso','continuar',partida.finalizada?'':'disabled')}</div></section>`;
     }else if(g.tipo==='rompecabezas'){
-      contenido=`<p>Toca una pieza y después otra para intercambiarlas.</p><div class="rp-actions">${boton(guia?'Ocultar guía':'Ver imagen guía','guia')}${boton('Acomodar una pieza','ayuda')}</div>${guia?`<img class="rp-reference" src="${esc(g.imagen)}" alt="Imagen completa para guiar el rompecabezas">`:''}<p class="rp-progress">${estado.aciertos} de 16 piezas en su lugar</p><div class="rp-puzzle">${estado.orden.map((id:number,pos:number)=>`<button type="button" data-rp="pieza" data-i="${pos}" class="${seleccion===pos?'selected':''}" aria-label="Pieza ${pos+1}${seleccion===pos?', seleccionada':''}" aria-pressed="${seleccion===pos}" style="background-image:url('${esc(g.imagen)}');background-position:${(id%4)*100/3}% ${Math.floor(id/4)*100/3}%"><span>${id===pos?'✓':pos+1}</span></button>`).join('')}</div>`;
+      const cfg=g.rompecabezasImagen,cols=cfg.columnas,rows=cfg.filas,avanzado=cfg.nivel==='avanzado';
+      const vistas=cfg.maxVistasGuia===undefined?'':` · ${Math.max(0,cfg.maxVistasGuia-estado.guias)}/${cfg.maxVistasGuia}`;
+      const ayudas=cfg.maxAyudas===undefined?'':` · ${Math.max(0,cfg.maxAyudas-estado.acomodadas)}/${cfg.maxAyudas}`;
+      contenido=`<div class="rp-puzzle-heading"><strong>${avanzado?'RETO AVANZADO':'PARTIDA ANTERIOR'} · ${estado.orden.length} PIEZAS</strong><span>${estado.movimientos} ${estado.movimientos===1?'movimiento':'movimientos'}</span></div><p>Toca dos piezas para intercambiarlas y reconstruir la imagen.</p><div class="rp-actions">${boton(guia?'Ocultar guía':`Mirar 6 segundos${vistas}`,'guia',!guia&&estado.guias>=(cfg.maxVistasGuia??Infinity)?'disabled':'')}${boton(`Acomodar pieza${ayudas}`,'ayuda',guia||estado.acomodadas>=(cfg.maxAyudas??Infinity)?'disabled':'')}</div><p class="rp-puzzle-note">${avanzado?'Tienes 3 miradas y 2 ayudas por intento. Usarlas reduce la puntuación.':'Tu progreso anterior se conserva.'}</p><div class="rp-puzzle-frame"><div class="rp-puzzle" style="--rp-cols:${cols};--rp-rows:${rows};--rp-piece-ratio:${avanzado?0.75*rows/cols:1}">${estado.orden.map((id:number,pos:number)=>`<button type="button" data-rp="pieza" data-i="${pos}" ${guia?'disabled':''} class="${seleccion===pos?'selected':''}" aria-label="Pieza en fila ${Math.floor(pos/cols)+1}, columna ${pos%cols+1}${seleccion===pos?', seleccionada':''}" aria-pressed="${seleccion===pos}" style="background-image:url('${esc(g.imagen)}');background-position:${(id%cols)*100/(cols-1)}% ${Math.floor(id/cols)*100/(rows-1)}%"></button>`).join('')}</div>${guia?`<div class="rp-puzzle-guide" role="status"><img src="${esc(g.imagen)}" alt="Imagen completa para memorizar"><span>Memoriza la imagen · se oculta en 6 segundos</span></div>`:''}</div>${!avanzado?`<p>${boton('Empezar el nuevo reto de 30 piezas','reiniciar')}</p>`:''}`;
     }else if(g.tipo==='sopa'){
       const pista=eventos.at(-1)?.tipo==='ayuda'?g.sopa.palabras.find(p=>!estado.encontradas.includes(p.id))?.celdas[0]:null;
       contenido=`<p>Toca la primera y la última letra. Puedes desplazar el tablero horizontalmente.</p><div class="rp-terms">${g.sopa.palabras.map(p=>`<span class="${estado.encontradas.includes(p.id)?'done':''}">${esc(p.etiqueta)}</span>`).join('')}</div>${boton('Señalar el inicio de una palabra','ayuda')}<div class="rp-board-scroll" tabindex="0" aria-label="Tablero desplazable"><div class="rp-soup" style="grid-template-columns:repeat(${g.sopa.columnas},36px)">${g.sopa.matriz.flatMap((fila,f)=>fila.map((letra,c)=>{const coord=`${f}:${c}`;const found=g.sopa.palabras.some(p=>estado.encontradas.includes(p.id)&&p.celdas.includes(coord));return `<button type="button" data-rp="celda" data-f="${f}" data-c="${c}" class="${found?'found':''} ${ancla?.[0]===f&&ancla?.[1]===c||pista===coord?'selected':''}" aria-label="Fila ${f+1}, columna ${c+1}: ${letra}">${letra}</button>`;})).join('')}</div></div><details><summary>Leer las pistas completas</summary>${g.sopa.palabras.map(p=>`<p><b>${esc(p.etiqueta)}:</b> ${esc(p.pista)}</p>`).join('')}</details>`;
@@ -84,14 +90,14 @@ export async function abrirJuegoClase(o:Opciones):Promise<boolean> {
     if(a==='guardar'){await guardar();return;}
     if(a==='continuar'){if(!partida.finalizada)return;continuar=true;d.close();o.onContinuar();return;}
     if(a==='reiniciar'||a==='recuperar'){reiniciando=true;guardado='Recuperando partida…';actualizarEstado();clearTimeout(timer);await cola;try{if(a==='recuperar')localStorage.removeItem(key);await iniciar(a==='reiniciar');}catch(e:any){error=e.message;pintar();}finally{reiniciando=false;}return;}
-    if(a==='guia'){guia=!guia;pintar();return;}
-    if(a==='pieza'){const i=Number(b.dataset.i);if(seleccion===null){seleccion=i;pintar();}else if(seleccion===i){seleccion=null;pintar();}else{const x=seleccion;seleccion=null;mover({tipo:'cambiar',x,y:i});}return;}
+    if(a==='guia'){if(guia){guia=false;clearTimeout(guiaTimer);pintar();}else if(mover({tipo:'ver-guia'})){seleccion=null;guia=true;pintar();guiaTimer=setTimeout(()=>{guia=false;pintar();},6000);}return;}
+    if(a==='pieza'){if(guia)return;const i=Number(b.dataset.i);if(seleccion===null){seleccion=i;pintar();}else if(seleccion===i){seleccion=null;pintar();}else{const x=seleccion;seleccion=null;mover({tipo:'cambiar',x,y:i});}return;}
     if(a==='celda'){const p=[Number(b.dataset.f),Number(b.dataset.c)];if(!ancla){ancla=p;pintar();}else{const start=ancla;ancla=null;const celdas=lineaEntreCeldas(start[0],start[1],p[0],p[1]);if(celdas.length>=2)mover({tipo:'buscar',celdas});else pintar();}return;}
     if(a==='carta'){if(cartas.length===2)return;const id=b.dataset.id!;if(cartas.includes(id))return;cartas.push(id);if(cartas.length===2){const [x,y]=cartas;const coinciden=g.memorama.find(c=>c.uid===x)?.parId===g.memorama.find(c=>c.uid===y)?.parId;if(coinciden)cartas=[];mover({tipo:'par',x,y});}else pintar();return;}
     if(a==='voltear'){cartas=[];pintar();return;}
     mover(a==='letra'?{tipo:a,letra:b.dataset.letra}:{tipo:a});
   });
-  d.addEventListener('close',()=>{closed=true;clearTimeout(timer);if(partida){cache();void guardar();}d.remove();if(!continuar){o.onCerrar?.();focoAnterior?.isConnected&&focoAnterior.focus({preventScroll:true});}},{once:true});
+  d.addEventListener('close',()=>{closed=true;clearTimeout(timer);clearTimeout(guiaTimer);if(partida){cache();void guardar();}d.remove();if(!continuar){o.onCerrar?.();focoAnterior?.isConnected&&focoAnterior.focus({preventScroll:true});}},{once:true});
   const cambio=()=>{if(Auth.usuario?.uid!==uid)d.close();};window.addEventListener('auth:cuenta-cambio',cambio);d.addEventListener('close',()=>window.removeEventListener('auth:cuenta-cambio',cambio),{once:true});
   try{await iniciar();}catch(e:any){if(vigente())d.innerHTML=`<div class="rp-body"><h2>No pudimos abrir el repaso</h2><p>${esc(e.message)}</p>${boton('Cerrar y volver a intentar','cerrar')}</div>`;}
   return true;
