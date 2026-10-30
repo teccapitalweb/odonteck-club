@@ -1,5 +1,6 @@
 // Rutas de miembro (requieren Firebase ID token).
 import express from 'express';
+import { createHash } from 'node:crypto';
 import { montarJuegos } from './juegos.js';
 import { montarCierres } from './cierres.js';
 import {
@@ -130,10 +131,6 @@ export function rutasMiembro(ctx) {
         contador: 'membresias',
         detalle: 'Membresía activa reconocida del club anterior',
       });
-    }
-    if (!estadoActual.contadores.retosMigrados && Number(retos?.xp) > 0) {
-      const xp = Math.min(5000, Math.max(0, Math.round(Number(retos.xp))));
-      eventos.push({ clave: 'retos:historico:v1', tipo: 'reto', puntos: xp, contador: 'puntosRetos', delta: xp, detalle: 'XP anterior de Retos migrado' });
     }
     if (!estadoActual.contadores.retosMigrados) {
       eventos.push({ clave: 'retos:migracion:v1', tipo: 'sistema', puntos: 0, contador: 'retosMigrados', detalle: 'Migración de Retos completada' });
@@ -895,6 +892,8 @@ export function rutasMiembro(ctx) {
 
   r.post('/retos/responder', auth, h(async (req, res) => {
     const b = cuerpo(req);
+    const intentoId = b.intentoId;
+    if (intentoId !== undefined && (typeof intentoId !== 'string' || !/^[a-zA-Z0-9-]{16,80}$/.test(intentoId))) throw invalido('Intento no válido.');
     const cursoId = idDocumento(b.cursoId, 'cursoId');
     const n = entero(b.n, { campo: 'n', min: 1, max: 999 });
     const indice = entero(b.indice, { campo: 'indice', min: 0, max: 999 });
@@ -912,13 +911,25 @@ export function rutasMiembro(ctx) {
     const hoy = ahoraISO.slice(0, 10);
     const ref = refPregunta(curso.id, n, indice);
     const estadoRef = db.collection(COL.retosEstado).doc(req.usuario.uid);
+    const reciboRef = intentoId ? estadoRef.collection('intentos').doc(intentoId) : null;
+    const huella = createHash('sha256').update(JSON.stringify({cursoId,n,indice,respuesta})).digest('hex');
 
     const resultado = await db.runTransaction(async (tx) => {
+      if (reciboRef) {
+        const recibo = await tx.get(reciboRef);
+        if (recibo.exists) {
+          if (recibo.data().huella !== huella) throw conflicto('Este intento ya corresponde a otra respuesta.');
+          const [actual, monedero] = await tx.getAll(estadoRef, db.collection(COL.recompensasEstado).doc(req.usuario.uid));
+          const original = recibo.data().resultado;
+          const saldoActual = normalizarEstadoRecompensas(monedero.data(), req.usuario.uid);
+          return {...original, estado:estadoRetosPublico(actual.data(),req.usuario.uid), recompensas:{...original.recompensas,saldo:saldoActual.saldo,ganados:saldoActual.ganados}};
+        }
+      }
       const snap = await tx.get(estadoRef);
       const estado = normalizarEstadoRetos(snap.exists ? snap.data() : null, req.usuario.uid);
       const previa = estado.preguntas[ref] && typeof estado.preguntas[ref] === 'object' ? estado.preguntas[ref] : {};
       const primerIntentoHoy = String(previa.ultima || '').slice(0, 10) !== hoy;
-      const xpGanado = primerIntentoHoy ? (acertada ? 10 : 2) : 0;
+      const xpGanado = primerIntentoHoy ? (acertada ? REGLAS_PUNTOS.retoCorrecto : REGLAS_PUNTOS.retoIntento) : 0;
       estado.preguntas[ref] = {
         intentos: Number(previa.intentos || 0) + 1,
         aciertos: Number(previa.aciertos || 0) + (acertada ? 1 : 0),
@@ -954,7 +965,9 @@ export function rutasMiembro(ctx) {
         }],
       }) : { puntosGanados: 0, saldo: null, logrosNuevos: [], notificaciones: [] };
       tx.set(estadoRef, estado);
-      return { estado: estadoRetosPublico(estado, req.usuario.uid), xpGanado, recompensas };
+      const resultado = { estado: estadoRetosPublico(estado, req.usuario.uid), xpGanado, recompensas };
+      if (reciboRef) tx.create(reciboRef, {huella, resultado, creado: ahoraISO});
+      return resultado;
     });
 
     res.json({

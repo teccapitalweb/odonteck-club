@@ -1,4 +1,4 @@
-import { api } from './auth';
+import { Auth, api } from './auth';
 import { Datos } from './datos';
 
 export type ModoReto = 'practica' | 'relampago';
@@ -96,11 +96,13 @@ export const RetosRemotos = {
   async crearSesion(modo: ModoReto, area = 'Todas', limite?: number): Promise<SesionReto> {
     return api<SesionReto>('/retos/sesion', { method: 'POST', json: { modo, area, ...(limite ? { limite } : {}) } });
   },
-  async responder(pregunta: PreguntaSesionReto, respuesta: unknown): Promise<RespuestaReto> {
+  async responder(pregunta: PreguntaSesionReto, respuesta: unknown, intentoId?: string): Promise<RespuestaReto> {
+    const gen = generacion, uid = Auth.usuario?.uid;
     const resultado = await api<RespuestaReto>('/retos/responder', {
       method: 'POST',
-      json: { cursoId: pregunta.cursoId, n: pregunta.n, indice: pregunta.indice, respuesta },
+      json: { cursoId: pregunta.cursoId, n: pregunta.n, indice: pregunta.indice, respuesta, ...(intentoId ? {intentoId} : {}) },
     });
+    if (gen !== generacion || Auth.usuario?.uid !== uid) throw Error('La cuenta cambió. Vuelve a abrir tu entrenamiento.');
     if (cache) cache = { ...cache, estado: resultado.estado };
     if (resultado.recompensas?.puntosGanados || resultado.recompensas?.logrosNuevos?.length) {
       window.dispatchEvent(new CustomEvent('recompensas:ganadas', { detail: resultado.recompensas }));

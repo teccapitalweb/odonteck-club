@@ -112,8 +112,17 @@ function evaluarLogros(estado, ahoraISO) {
  * Devuelve el resultado público y el estado completo que queda guardado.
  */
 async function registrarEventosTx({ tx, db, colecciones, uid, eventos, ahora }) {
-  const lista = eventos.filter((e) => e && typeof e.clave === 'string' && e.clave && Number.isFinite(Number(e.puntos)));
+  let lista = eventos.filter((e) => e && typeof e.clave === 'string' && e.clave && Number.isFinite(Number(e.puntos)));
   const estadoRef = db.collection(colecciones.recompensasEstado).doc(uid);
+  // Reconcile legacy XP against already credited challenges inside the same
+  // transaction: an answer can arrive while the wallet is first being loaded.
+  if (lista.some(e => e.clave === 'retos:migracion:v1')) {
+    const [actual, retos] = await tx.getAll(estadoRef, db.collection(colecciones.retosEstado).doc(uid));
+    const previo = normalizarEstadoRecompensas(actual.exists ? actual.data() : null, uid);
+    lista = lista.filter(e => e.clave !== 'retos:historico:v1');
+    const pendiente = Math.min(5000, Math.max(0, Math.round(numero(retos.data()?.xp) - numero(previo.contadores.puntosRetos))));
+    if (!previo.contadores.retosMigrados && pendiente > 0) lista.push({clave:'retos:historico:v1',tipo:'reto',puntos:pendiente,contador:'puntosRetos',delta:pendiente,detalle:'XP anterior de Retos migrado'});
+  }
   if (!lista.length) {
     const estadoSnap = await tx.get(estadoRef);
     const estado = normalizarEstadoRecompensas(estadoSnap.exists ? estadoSnap.data() : null, uid);
@@ -155,6 +164,7 @@ async function registrarEventosTx({ tx, db, colecciones, uid, eventos, ahora }) 
     resultado: {
       puntosGanados,
       saldo: estado.saldo,
+      ganados: estado.ganados,
       logrosNuevos,
       notificaciones: estado.notificaciones.filter((n) => n.leida !== true),
     },

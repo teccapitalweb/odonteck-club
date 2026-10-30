@@ -16,6 +16,7 @@ import { current } from '../core/router';
 
 type Vista = 'hub' | 'quiz' | 'caso' | 'flash' | 'diaria' | 'liga';
 let vista: Vista = 'hub';
+let secuenciaSesion=0;
 let timer: number | null = null;
 let globalesMontados = false;
 const parar = () => { if (timer) { clearInterval(timer); timer = null; } };
@@ -31,10 +32,14 @@ interface QuizState {
   mejorCombo: number;
   aciertos: number;
   contestada: boolean;
+  enviando: boolean;
   restante: number;
   modo: ModoQuiz;
   area: string;
   xpGanado: number;
+  monedasGanadas: number;
+  respondidas: number;
+  intentos: Record<string,string>;
 }
 let Q: QuizState | null = null;
 interface CasoState {
@@ -86,8 +91,9 @@ function onClick(e: Event) {
   const el = (e.target as HTMLElement).closest<HTMLElement>('[data-a]');
   if (!el) return;
   const a = el.dataset.a!;
+  if(a==='hub'||a.startsWith('ir-')||a==='quiz-jugar'||a==='caso-jugar'){secuenciaSesion++;Q=null;parar();}
   const acciones: Record<string, () => void> = {
-    hub: () => { parar(); vista = 'hub'; hub(); },
+    hub: () => { parar(); Q=null; vista = 'hub'; hub(); },
     'retos-retry': () => { void RetosRemotos.cargar(true); hub(); },
     'ir-liga': vistaLiga,
     'ir-quiz': bibliotecaQuiz, 'quiz-jugar': () => iniciarQuiz(el.dataset.area || 'Todas', (el.dataset.modo || 'relampago') as ModoQuiz), 'quiz-resp': () => responderQuiz(+el.dataset.i!), 'quiz-enviar': enviarQuiz, 'quiz-move': () => moverQuiz(el), 'quiz-sig': sigQuiz,
@@ -189,14 +195,15 @@ function hub() {
 
     <section class="ar-training">
     <header class="ar-section-intro"><div><span class="ar-kicker ar-kicker--light">Elige tu reto</span><h2>¿Qué quieres entrenar hoy?</h2></div><p>Sesiones cortas para avanzar a tu ritmo.</p></header>
+    ${esApi?'<p class="ar-reward-rules">Banco clínico: +10 OdonCoins por acierto o +2 por intento. Una recompensa por pregunta y día; repetir sirve para practicar.</p>':''}
     <div class="ar-grid">
-      ${tile('ir-quiz', '/brand/icon-quiz.jpg', 'Banco clínico', `${dato(banco)} preguntas · estudio o simulación`, '#4a7fc1')}
-      ${tile('ir-caso', '/brand/icon-detective.jpg', 'Detective Dental', `Diagnostica ${totalCasos} casos clínicos paso a paso`, '#4fa899')}
+      ${tile('ir-quiz' , '/brand/icon-quiz.jpg', 'Banco clínico', `${dato(banco)} preguntas · estudio o simulación`, '#4a7fc1')}
+      ${tile('ir-caso', '/brand/icon-detective.jpg', 'Detective Dental', `Diagnostica ${totalCasos} casos clínicos${esApi?" · práctica local sin OdonCoins":" paso a paso"}`, '#4fa899')}
       ${(() => { const pend = pendientesHoy(); const lim = Acceso.vip() ? 15 : 5; return tile('ir-flash', '/brand/icon-flashcards.jpg', 'Flashcards', pend ? `${Math.min(pend, lim)} para hoy · ${em.total} tarjetas` : `Todo repasado · ${em.dominadas} dominadas`, '#c98a5b'); })()}
     </div>
     </section>
 
-    ${esApi ? `<div class="ar-integrity"><span><i data-lucide="badge-check" class="i"></i></span><div><strong>Progreso clínico verificable</strong><p>Tus respuestas se califican en el servidor y construyen un mapa personal. Nunca mostramos soluciones antes de contestar ni participantes ficticios en producción.</p></div></div>` : (() => { const m = misiones(); return `
+    ${esApi ? `<div class="ar-integrity"><span><i data-lucide="badge-check" class="i"></i></span><div><strong>Progreso clínico verificable</strong><p>El Banco clínico califica tus respuestas y guarda XP y OdonCoins en tu cuenta. Detective Dental y Flashcards guardan su práctica en este dispositivo y no entregan monedas.</p></div></div>` : (() => { const m = misiones(); return `
     <div class="ar-misiones">
       <div class="ar-misiones__head"><span><i data-lucide="target" class="i"></i></span><div><small>Misión semanal</small><strong>${m.pct}% completada</strong></div></div>
       <div class="ar-misiones__bar"><span style="width:${m.pct}%"></span></div>
@@ -296,11 +303,13 @@ function bibliotecaQuiz() {
 }
 
 async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
+  const solicitud=++secuenciaSesion, espacio=root();
   let pool: (Pregunta & { remota?: PreguntaSesionReto })[];
   if (Datos.modo === 'api') {
     pinta(`${barra()}<div class="ar-loading"><i data-lucide="loader-circle" class="i spin"></i><strong>Preparando tu sesión</strong><span>Seleccionamos preguntas aprobadas según tu acceso y desempeño.</span></div>`);
     try {
       const sesion = await RetosRemotos.crearSesion(modo, area);
+      if(solicitud!==secuenciaSesion || !espacio?.isConnected)return;
       pool = sesion.preguntas.map((pregunta) => ({
         id: pregunta.ref,
         curso: pregunta.curso,
@@ -318,6 +327,7 @@ async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
         remota: pregunta,
       }));
     } catch (e) {
+      if(solicitud!==secuenciaSesion || !espacio?.isConnected)return;
       const mensaje = e instanceof Error ? e.message : 'No pudimos preparar el entrenamiento.';
       return pinta(`${barra()}<div class="ar-empty"><i data-lucide="cloud-off" class="i"></i><strong>No se pudo iniciar la sesión</strong><span class="faint">${esc(mensaje)}</span><button class="btn btn--secondary" data-a="ir-quiz">Volver a intentarlo</button></div>`);
     }
@@ -326,7 +336,7 @@ async function iniciarQuiz(area = 'Todas', modo: ModoQuiz = 'relampago') {
   }
   if (!pool.length) return pinta(`${barra()}<div class="ar-empty">Aún no hay preguntas${area !== 'Todas' ? ` de ${area}` : ''} en los cursos.</div>`);
   const lim = Acceso.vip() ? (modo === 'practica' ? 10 : 8) : 3;
-  Q = { preguntas: pool.slice(0, lim), idx: 0, score: 0, vidas: 3, combo: 0, mejorCombo: 0, aciertos: 0, contestada: false, restante: TIEMPO, modo, area, xpGanado: 0 };
+  Q = { preguntas: pool.slice(0, lim), idx: 0, score: 0, vidas: 3, combo: 0, mejorCombo: 0, aciertos: 0, contestada: false, enviando: false, restante: TIEMPO, modo, area, xpGanado: 0, monedasGanadas: 0, respondidas: 0, intentos: {} };
   vista = 'quiz';
   pintaQuiz();
 }
@@ -355,7 +365,7 @@ function pintaQuiz() {
   const bar = document.getElementById('ar-tbar')!;
   const t0 = Date.now();
   timer = window.setInterval(() => {
-    if (!Q) return;
+    if (!Q || !bar.isConnected) {parar();return;}
     const pasado = (Date.now() - t0) / 1000; Q.restante = Math.max(0, TIEMPO - pasado);
     bar.style.width = (Q.restante / TIEMPO * 100) + '%';
     if (Q.restante <= 0) { parar(); responderQuiz(null); }
@@ -412,8 +422,12 @@ function textoSolucion(p: Pregunta, respuesta: unknown) {
 }
 
 async function responderQuiz(respuesta: unknown) {
-  if (!Q || Q.contestada) return; Q.contestada = true; parar();
+  if (!Q || Q.contestada) return; Q.contestada = true; Q.enviando=true; parar();
+  const partida=Q, indicePregunta=Q.idx, espacio=root();
   const p = Q.preguntas[Q.idx];
+  const claveIntento=`${Q.idx}:${JSON.stringify(respuesta)}`;
+  const intentoId=Q.intentos[claveIntento] ||= crypto.randomUUID();
+  let monedasRespuesta=0, xpRespuesta=0;
   const controles = root()!.querySelectorAll<HTMLInputElement | HTMLButtonElement | HTMLSelectElement>('.ar-answer input, .ar-answer button, .ar-answer select, .ar-opt');
   controles.forEach((control) => { control.disabled = true; });
   let explicacion = p.explicacion;
@@ -423,16 +437,19 @@ async function responderQuiz(respuesta: unknown) {
     document.getElementById('ar-fb')!.innerHTML = '<div class="ar-exp" role="status"><strong class="row" style="gap:8px"><i data-lucide="loader-circle" class="i spin"></i>Calificando…</strong></div>';
     iconos();
     try {
-      const resultado = await RetosRemotos.responder(p.remota, respuesta);
+      const resultado = await RetosRemotos.responder(p.remota, respuesta, intentoId);
+      if(Q!==partida || Q.idx!==indicePregunta || vista!=='quiz' || !espacio?.isConnected || !document.getElementById('ar-fb'))return;
       puntos = resultado.puntos;
       respuestaCorrecta = resultado.respuestaCorrecta;
       explicacion = resultado.explicacion;
-      Q.xpGanado += resultado.xpGanado;
+      xpRespuesta=resultado.xpGanado;monedasRespuesta=Number(resultado.recompensas?.puntosGanados||0);
+      Q.xpGanado += xpRespuesta;Q.monedasGanadas += monedasRespuesta;
     } catch (e) {
-      Q.contestada = false;
+      if(Q!==partida || Q.idx!==indicePregunta || vista!=='quiz' || !espacio?.isConnected || !document.getElementById('ar-fb'))return;
+      Q.contestada = false;Q.enviando=false;
       controles.forEach((control) => { control.disabled = false; });
       const mensaje = e instanceof Error ? e.message : 'No pudimos calificar esta respuesta.';
-      document.getElementById('ar-fb')!.innerHTML = `<div class="ar-exp bad"><strong>No se guardó tu respuesta</strong><p>${esc(mensaje)}</p></div>`;
+      document.getElementById('ar-fb')!.innerHTML = `<div class="ar-exp bad"><strong>No pudimos confirmar tu respuesta</strong><p>${esc(mensaje)} Vuelve a comprobarla; el mismo intento no duplicará puntos.</p></div>`;
       iconos();
       return;
     }
@@ -441,6 +458,7 @@ async function responderQuiz(respuesta: unknown) {
     puntos = resultado.puntos;
     respuestaCorrecta = resultado.respuestaCorrecta;
   }
+  Q.enviando=false;Q.respondidas++;
   p.explicacion = explicacion;
   const ok = puntos === 1;
   const parcial = puntos > 0 && !ok;
@@ -450,10 +468,12 @@ async function responderQuiz(respuesta: unknown) {
     const suma = Math.round((100 + bonus) * (1 + Q.combo * 0.1));
     Q.score += suma; Q.combo++; Q.mejorCombo = Math.max(Q.mejorCombo, Q.combo); Q.aciertos++; celebrar('sutil');
   } else { Q.score += Math.round(100 * puntos); if (Q.modo === 'relampago') Q.vidas--; Q.combo = 0; }
+  const marcador=root()?.querySelector('.ar-score');if(marcador)marcador.innerHTML=`<i data-lucide="star" class="i"></i>${Q.score}`;
   const fin = (Q.modo === 'relampago' && Q.vidas <= 0) || Q.idx >= Q.preguntas.length - 1;
   document.getElementById('ar-fb')!.innerHTML = `
     <div class="ar-exp ${ok ? 'ok' : parcial ? 'partial' : 'bad'}">
       <strong>${ok ? '¡Dominado! ⚡' : parcial ? `Vas bien · ${Math.round(puntos * 100)}%` : 'Revisemos el criterio'}</strong><p>${esc(explicacion || 'Revisa la respuesta correcta antes de continuar.')}</p>
+      ${Datos.modo==='api'?`<p class="ar-reward-confirm" role="status">${monedasRespuesta>0?`+${monedasRespuesta} OdonCoins en tu monedero · +${xpRespuesta} XP`:'Respuesta guardada · esta pregunta ya recibió su recompensa de hoy.'}</p>`:''}
       <div class="ar-solution"><span>Solución revisada</span><strong>${esc(textoSolucion(p, respuestaCorrecta))}</strong></div>
       <button class="btn btn--brand" data-a="quiz-sig">${fin ? 'Ver resultado' : 'Siguiente'} <kbd>Enter</kbd> <i data-lucide="arrow-right" class="i"></i></button>
     </div>`;
@@ -461,7 +481,7 @@ async function responderQuiz(respuesta: unknown) {
   const r = root()!; r.querySelector('.ar-exp')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 function sigQuiz() {
-  if (!Q) return;
+  if (!Q || !Q.contestada || Q.enviando) return;
   if ((Q.modo === 'relampago' && Q.vidas <= 0) || Q.idx >= Q.preguntas.length - 1) return finQuiz();
   Q.idx++; pintaQuiz();
 }
@@ -471,17 +491,18 @@ function finQuiz() {
   const prevBest = mejorQuiz();
   if (Datos.modo === 'demo') registrarQuiz(Q.score, Q.aciertos, Q.preguntas.length, Q.mejorCombo);
   const xpGan = Datos.modo === 'api' ? Q.xpGanado : Math.round(Q.score / 10);
-  const precision = Math.round(Q.aciertos / Q.preguntas.length * 100);
+  const precision = Q.respondidas ? Math.round(Q.aciertos / Q.respondidas * 100) : 0;
   const sq = statsQuiz();
   pinta(`${barra()}
     <div class="ar-result">
       <div class="ar-result__ic"><i data-lucide="zap" class="i"></i></div>
-      <h2 class="display" style="font-size:var(--fs-2xl)">${Q.score} puntos</h2>
+      <h2 class="display" style="font-size:var(--fs-2xl)">${Q.score} puntos de juego</h2>
       <div class="ar-flash__resumen">
-        <div><strong>${Q.aciertos}/${Q.preguntas.length}</strong><span class="faint">Aciertos</span></div>
+        <div><strong>${Q.aciertos}/${Q.respondidas}</strong><span class="faint">Aciertos</span></div>
         <div><strong>${precision}%</strong><span class="faint">Precisión</span></div>
         <div><strong>x${Q.mejorCombo}</strong><span class="faint">Mejor combo</span></div>
       </div>
+      ${Datos.modo==='api'?`<section class="ar-earned" aria-label="Recompensa de la sesión"><span class="ar-earned__icon"><i data-lucide="coins" class="i"></i></span><div><small>GUARDADO EN TU CUENTA</small><strong>+${Q.monedasGanadas} OdonCoins</strong><p>${Q.monedasGanadas?'Ya están en tu monedero para canjear recompensas.':'Las preguntas repetidas hoy no vuelven a entregar monedas.'}</p></div><a class="btn btn--brand" href="#/recompensas">Ver mis recompensas</a></section><p class="faint">El marcador mide esta partida. Los OdonCoins son las monedas que puedes canjear.</p>`:''}
       <p class="muted">+${xpGan} XP${Datos.modo === 'api' ? ' · Tu mapa clínico ya se actualizó' : `${Q.score > prevBest ? ' · ¡nuevo récord!' : ''} · ${sq.jugados} partida${sq.jugados === 1 ? '' : 's'}`}</p>
       ${!Acceso.vip() ? '<p class="muted" style="max-width:40ch">Versión gratis: 3 preguntas. Hazte VIP para el quiz completo y todos los retos.</p><button class="btn btn--brand btn--lg" data-paywall="El quiz completo y todos los retos son para miembros VIP."><i data-lucide="crown" class="i"></i>Hazte VIP</button>' : ''}
       <div class="row" style="gap:10px;justify-content:center">
@@ -559,7 +580,8 @@ function sigCaso() {
     <div class="ar-result">
       <div class="ar-result__ic" style="background:${perfecto ? 'var(--accent)' : 'var(--surface-2)'}"><i data-lucide="${perfecto ? 'party-popper' : 'clipboard-check'}" class="i"></i></div>
       <h2 class="display" style="font-size:var(--fs-2xl)">${perfecto ? '¡Caso resuelto!' : 'Caso completado'}</h2>
-      <p class="muted">Diagnóstico ${C.dxOk ? '✅' : '❌'} · Plan ${C.planOk ? '✅' : '❌'}${perfecto ? ' · +50 XP' : ''}</p>
+      <p class="muted">Diagnóstico ${C.dxOk ? '✅' : '❌'} · Plan ${C.planOk ? '✅' : '❌'}${perfecto && Datos.modo==='demo' ? ' · +50 XP' : ''}</p>
+      ${Datos.modo==='api'?'<p class="muted">Práctica guardada en este dispositivo · sin OdonCoins. Entrena en el Banco clínico para ganar monedas.</p>':''}
       <div class="row" style="gap:10px;justify-content:center">
         <button class="btn btn--brand btn--lg" data-a="ir-caso"><i data-lucide="folder-heart" class="i"></i>Otro caso</button>
         <button class="btn btn--secondary btn--lg" data-a="hub">Volver</button>
@@ -634,7 +656,7 @@ function finFlash() {
         <div><strong>${hard}</strong><span class="faint">Difícil</span></div>
         <div><strong>${again}</strong><span class="faint">Otra vez</span></div>
       </div>
-      <p class="muted">+${xpGanado} XP · ${em.dominadas} tarjetas dominadas de ${em.total}</p>
+      <p class="muted">${Datos.modo==='api'?'Repaso guardado en este dispositivo · sin OdonCoins':`+${xpGanado} XP`} · ${em.dominadas} tarjetas dominadas de ${em.total}</p>
       ${F.historial.length ? `<button class="btn btn--ghost btn--sm" data-a="flash-undo"><i data-lucide="undo-2" class="i"></i>Deshacer última</button>` : ''}
       ${!Acceso.vip() ? '<button class="btn btn--brand btn--lg" data-paywall="El repaso completo (todas las tarjetas) es para miembros VIP."><i data-lucide="crown" class="i"></i>Hazte VIP</button>' : ''}
       <button class="btn btn--secondary btn--lg" data-a="hub">Volver a Retos</button>

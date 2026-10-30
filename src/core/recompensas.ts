@@ -79,6 +79,7 @@ export interface ResumenRecompensas {
 export interface PremioRecompensas {
   puntosGanados?: number;
   saldo?: number;
+  ganados?: number;
   logrosNuevos?: { id?: string; titulo?: string }[];
   notificaciones?: NotificacionRecompensa[];
 }
@@ -173,7 +174,7 @@ export const Recompensas = {
     publicar({
       ...cache,
       saldo: typeof premio.saldo === 'number' ? premio.saldo : cache.saldo + puntos,
-      ganados: cache.ganados + puntos,
+      ganados: typeof premio.ganados === 'number' ? premio.ganados : cache.ganados + puntos,
       logros: cache.logros.map((l) => nuevos.has(l.id) && !l.logrado ? { ...l, logrado: true, progreso: l.meta, fecha: ahora } : l),
       notificaciones: Array.isArray(premio.notificaciones) ? premio.notificaciones : cache.notificaciones,
     });

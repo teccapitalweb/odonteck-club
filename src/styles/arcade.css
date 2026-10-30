@@ -505,3 +505,6 @@
   .league-mini__soon { display: none; }
   .ar-integrity { align-items: start; padding: 17px; }
 }
+
+/* Show only server-confirmed currency alongside the game score. */
+.ar-earned{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;text-align:left;width:min(540px,100%);padding:20px;border:1px solid #b9dfd8;border-radius:22px;background:linear-gradient(130deg,#effaf4,#edf5ff);color:#172d43;box-sizing:border-box}.ar-earned__icon{display:grid;place-items:center;width:52px;height:52px;border-radius:17px;background:#d7eee3;color:#176d65}.ar-earned__icon .i{width:28px;height:28px}.ar-earned small{font-size:9px;letter-spacing:1.4px;font-weight:800;color:#287567}.ar-earned strong{display:block;font-size:27px;line-height:1.3;margin:4px 0}.ar-earned p{font-size:13px;line-height:1.5;margin:0}.ar-earned>a{grid-column:1/-1;justify-self:stretch;text-align:center;justify-content:center}.ar-reward-confirm{font-weight:700;font-size:13px}.ar-reward-rules{padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:13px;line-height:1.6}.ar-result>.faint{max-width:48ch;font-size:12px}@media(max-width:480px){.ar-earned{padding:16px;gap:10px}.ar-earned strong{font-size:24px}.ar-earned__icon{width:44px;height:44px}}
