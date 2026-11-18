@@ -497,7 +497,7 @@ export function adminAjustes() {
       <div class="field"><label>Precio anual (MXN)</label><input class="input" type="number" min="0" name="precioAnual" value="${c.precioAnual}"></div>
       <div class="field"><label>Descuento VIP en vivo (%)</label><input class="input" type="number" min="0" max="100" name="descuentoVIP" value="${c.descuentoVIP}"></div>
     </div>
-    <p class="faint" style="font-size:var(--fs-xs)">Los precios que se cobran los define Stripe. Cambiarlos aquí actualiza lo que se muestra; con el backend conectado se valida que coincidan con los precios de Stripe.</p>
+    <p class="faint" style="font-size:var(--fs-xs)">Estos valores sólo cambian lo que se <strong>muestra</strong> en la app. El cobro real lo define el precio configurado en Stripe desde el servidor; no se valida ni edita desde aquí, así que mantenlos iguales a Stripe a mano.</p>
     <h3 class="admin-card-title" style="margin-top:8px">Contacto</h3>
     <div class="form-grid">
       <div class="field"><label>WhatsApp de soporte (con lada, solo números)</label><input class="input mono" name="whatsappSoporte" value="${esc(c.whatsappSoporte)}" pattern="[0-9]{10,15}"></div>

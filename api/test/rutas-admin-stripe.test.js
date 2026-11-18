@@ -243,7 +243,12 @@ describe('admin: foro, quizzes, avisos y config', () => {
     const cfg = await admin('patch', '/admin/config').send({ precios: { mensual: 249 }, descuentoVIP: 25 }).expect(200);
     assert.deepEqual(cfg.body.precios, { mensual: 249, anual: 1899 });
     assert.equal(cfg.body.descuentoVIP, 25);
-    await admin('patch', '/admin/config').send({ stripePriceAnual: 'no-es-price' }).expect(400);
+
+    // Los IDs de precio de Stripe están bloqueados en el panel, incluso bien formados.
+    const bloqueo = await admin('patch', '/admin/config').send({ stripePriceAnual: 'price_1Nabcd' }).expect(400);
+    assert.equal(bloqueo.body.error, 'stripe_price_bloqueado');
+    await admin('patch', '/admin/config').send({ stripePriceMensual: 'no-es-price' }).expect(400);
+    assert.equal(env.db.docs.get('v2_config/general')?.stripePriceAnual, undefined);
   });
 });
 

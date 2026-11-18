@@ -240,20 +240,17 @@ export function validarConfig(body) {
       anual: numeroONulo(b.precios.anual, { campo: 'precios.anual', max: 1_000_000 }),
     });
   }
-  const PRICE = /^price_[A-Za-z0-9]+$/;
-  const priceId = (v, campo) => {
-    if (v === undefined) return undefined;
-    if (v === null || v === '') return '';
-    if (typeof v !== 'string' || !PRICE.test(v)) throw invalido(`"${campo}" debe ser un ID de precio de Stripe (price_...).`);
-    return v;
-  };
+  // Los IDs de precio de Stripe deciden qué se cobra en el checkout. NO se editan
+  // desde el panel para que un admin no pueda repuntar la facturación por error o
+  // abuso: viven en la variable de entorno del servidor (ctx.config.stripePrices).
+  if (b.stripePriceMensual !== undefined || b.stripePriceAnual !== undefined) {
+    throw invalido('Los IDs de precio de Stripe no se configuran desde el panel; se definen en el servidor.', 'stripe_price_bloqueado');
+  }
   return sinIndefinidos({
     precios,
     descuentoVIP: numeroONulo(b.descuentoVIP, { campo: 'descuentoVIP', max: 100 }),
     whatsappSoporte: texto(b.whatsappSoporte, { campo: 'whatsappSoporte', max: LIMITES.medio }),
     canalWhatsApp: url(b.canalWhatsApp, { campo: 'canalWhatsApp' }),
     praxiaUrl: url(b.praxiaUrl, { campo: 'praxiaUrl' }),
-    stripePriceMensual: priceId(b.stripePriceMensual, 'stripePriceMensual'),
-    stripePriceAnual: priceId(b.stripePriceAnual, 'stripePriceAnual'),
   });
 }
