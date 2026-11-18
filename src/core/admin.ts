@@ -8,6 +8,8 @@ export interface PanelRecompensasAdmin {
   catalogo: (Recompensa & {instrucciones?:string;revisionProfesional?:boolean;requiereRevision?:boolean})[];
   canjes: {id:string;uid:string;recompensaId:string;titulo:string;puntos:number;tipo:string;estatus:string;solicitado:string;nota?:string}[];
   limiteCanjes:number;
+  siguiente?:string|null;
+  estatus?:string|null;
 }
 
 export interface ResumenAdmin {
@@ -240,8 +242,19 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path === '/admin/cupones') {
       tareas.push(cargarCupones(forzar));
     } else if (path === '/admin/recompensas') {
-      estado.recompensas=null;
-      tareas.push(cargar('recompensas',async()=>{estado.recompensas=await api<PanelRecompensasAdmin>('/admin/recompensas');},true));
+      const estatusCanje = query.get('estatus') || '';
+      const cursorCanje = query.get('cursor') || '';
+      const qs = new URLSearchParams();
+      if (estatusCanje) qs.set('estatus', estatusCanje);
+      if (cursorCanje) qs.set('cursor', cursorCanje);
+      if (!cursorCanje) estado.recompensas = null;
+      tareas.push(cargar(`recompensas:${estatusCanje}:${cursorCanje}`, async () => {
+        const pagina = await api<PanelRecompensasAdmin>(`/admin/recompensas${qs.size ? `?${qs}` : ''}`);
+        // Con cursor se acumula la siguiente página de canjes; sin cursor, reemplaza.
+        estado.recompensas = cursorCanje && estado.recompensas
+          ? { ...pagina, canjes: [...estado.recompensas.canjes, ...pagina.canjes] }
+          : pagina;
+      }, true));
     } else if (path === '/admin/bitacora') {
       estado.bitacora = null;
       const cursor = query.get('cursor');

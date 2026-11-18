@@ -420,7 +420,17 @@ export function rutasAdmin(ctx) {
     if (filtro === 'no_vip') lista = lista.filter((x) => !x.esVip);
     if (filtro === 'cortesia') lista = lista.filter((x) => x.cortesiaHasta);
     lista.sort((a, b) => String(b.ultimaActividad ?? '').localeCompare(String(a.ultimaActividad ?? '')) || a.nombre.localeCompare(b.nombre, 'es'));
-    res.json(lista.slice(0, 1000));
+    // Sin corte silencioso: por defecto se devuelven todos. La paginación por offset
+    // es opt-in (?limite=&cursor=), y el total y la siguiente página viajan en
+    // cabeceras para no cambiar el formato de arreglo que consume el panel.
+    const total = lista.length;
+    const limite = req.query.limite !== undefined ? entero(req.query.limite, { campo: 'limite', min: 1, max: 5000 }) : total;
+    const offset = req.query.cursor !== undefined ? entero(req.query.cursor, { campo: 'cursor', min: 0, max: 10_000_000 }) : 0;
+    const pagina = lista.slice(offset, offset + limite);
+    const siguiente = offset + pagina.length < total ? offset + pagina.length : null;
+    res.set('X-Total-Count', String(total));
+    if (siguiente !== null) res.set('X-Next-Offset', String(siguiente));
+    res.json(pagina);
   }));
 
   async function usuarioAuth(uid) {
