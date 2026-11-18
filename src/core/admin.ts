@@ -242,7 +242,7 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path === '/admin/cupones') {
       tareas.push(cargarCupones(forzar));
     } else if (path === '/admin/recompensas') {
-      const estatusCanje = query.get('estatus') || '';
+      const estatusCanje = ['pendiente', 'entregado', 'cancelado'].includes(query.get('estatus') || '') ? query.get('estatus')! : '';
       const cursorCanje = query.get('cursor') || '';
       const qs = new URLSearchParams();
       if (estatusCanje) qs.set('estatus', estatusCanje);
