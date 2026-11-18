@@ -157,7 +157,17 @@ export function rutasAdmin(ctx) {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
       .map(([cursoId, vistas]) => ({ cursoId, titulo: titulos.get(cursoId) ?? cursoId, vistas }));
+    // Alerta: suscripciones marcadas "en disputa" por el webhook de Stripe (acceso aún vigente).
+    const disputas = [];
+    for (const [uid, sus] of suscripciones) {
+      if (sus?.enDisputa !== true) continue;
+      const perfil = perfiles.get(uid) ?? {};
+      const m = miembros.get(uid) ?? null;
+      disputas.push({ uid, nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '', desde: sus.disputa?.fecha ?? null });
+    }
     res.json({
+      disputasActivas: disputas.length,
+      disputas: disputas.slice(0, 50),
       miembrosActivos,
       registrados: uids.size, accesos, calculadoEn: ahora.toISOString(),
       altas30d,

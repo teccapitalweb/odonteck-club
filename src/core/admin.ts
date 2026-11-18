@@ -29,6 +29,8 @@ export interface ResumenAdmin {
   cortesiaActivos?: number;
   inactivos?: number;
   altasPorMes?: { mes: string; total: number }[];
+  disputasActivas?: number;
+  disputas?: { uid: string; nombre: string; whatsapp?: string; email?: string; desde?: string | null }[];
   porVencer?: { uid: string; nombre: string; plan: string; vence: string; whatsapp?: string; email?: string }[];
   inactivosLista?: { uid: string; nombre: string; plan: string; ultimaActividad: string | null; whatsapp?: string; email?: string }[];
 }
