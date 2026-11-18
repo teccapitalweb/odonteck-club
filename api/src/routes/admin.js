@@ -295,6 +295,65 @@ export function rutasAdmin(ctx) {
     },
   });
 
+  const idsDeCuerpo = (valor, max) => {
+    if (!Array.isArray(valor) || valor.length === 0) throw invalido('Envía una lista de ids.', 'ids_requeridos');
+    if (valor.length > max) throw invalido(`Demasiados ids (máximo ${max}).`, 'ids_exceso');
+    const ids = valor.map((v) => idDocumento(v, 'id'));
+    if (new Set(ids).size !== ids.length) throw invalido('Hay ids repetidos en la lista.', 'ids_duplicados');
+    return ids;
+  };
+
+  // Reordenamiento atómico de cursos: un solo lote, un solo evento en la bitácora.
+  r.post('/admin/cursos/reordenar', h(async (req, res) => {
+    const ids = idsDeCuerpo(cuerpo(req).ids, 500);
+    const resultado = await db.runTransaction(async (tx) => {
+      const refs = ids.map((id) => db.collection(COL.cursos).doc(id));
+      const snaps = await tx.getAll(...refs);
+      const faltan = ids.filter((_, i) => !snaps[i].exists);
+      if (faltan.length) throw noEncontrado(`No existen estos cursos: ${faltan.join(', ')}.`);
+      const antes = ids.map((id, i) => ({ id, orden: snaps[i].data().orden ?? null }));
+      ids.forEach((id, i) => tx.set(refs[i], { ...snaps[i].data(), orden: i + 1, actualizado: ahoraISO() }));
+      const despues = ids.map((id, i) => ({ id, orden: i + 1 }));
+      registrarAuditoria(ctx, tx, req, { ref: db.collection(COL.cursos).doc('__lote__'), accion: 'reordenar_cursos', antes: { orden: antes }, despues: { orden: despues } });
+      return { total: ids.length };
+    });
+    res.json({ ok: true, ...resultado });
+  }));
+
+  // Acciones masivas atómicas (publicar/ocultar/borrar) con un solo evento auditado.
+  r.post('/admin/cursos/lote', h(async (req, res) => {
+    const b = cuerpo(req);
+    const accion = unoDe(b.accion, ['publicar', 'ocultar', 'borrar'], { campo: 'accion', requerido: true });
+    const ids = idsDeCuerpo(b.ids, 200);
+    const resultado = await db.runTransaction(async (tx) => {
+      const refs = ids.map((id) => db.collection(COL.cursos).doc(id));
+      const snaps = await tx.getAll(...refs);
+      // Todas las lecturas antes de escribir: para borrar, se comprueba el progreso de cada curso.
+      const conProgreso = new Set();
+      if (accion === 'borrar') {
+        const checks = await Promise.all(ids.map((id, i) => snaps[i].exists
+          ? tx.get(db.collection(COL.progreso).where('cursoId', '==', id).limit(1))
+          : Promise.resolve(null)));
+        ids.forEach((id, i) => { if (checks[i] && !checks[i].empty) conProgreso.add(id); });
+      }
+      const afectados = [];
+      const omitidos = [];
+      ids.forEach((id, i) => {
+        if (!snaps[i].exists) { omitidos.push({ id, motivo: 'no_existe' }); return; }
+        if (accion === 'borrar') {
+          if (conProgreso.has(id)) { omitidos.push({ id, motivo: 'curso_con_progreso' }); return; }
+          tx.delete(refs[i]);
+        } else {
+          tx.set(refs[i], { ...snaps[i].data(), publicado: accion === 'publicar', actualizado: ahoraISO() });
+        }
+        afectados.push(id);
+      });
+      registrarAuditoria(ctx, tx, req, { ref: db.collection(COL.cursos).doc('__lote__'), accion: `lote_${accion}`, antes: { ids }, despues: { afectados, omitidos } });
+      return { accion, afectados, omitidos };
+    });
+    res.json({ ok: true, ...resultado });
+  }));
+
   crud({
     ruta: 'materiales',
     coleccion: COL.materiales,

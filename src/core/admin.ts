@@ -299,10 +299,11 @@ export async function borrarCursoAdmin(id: string) {
 
 export async function reordenarCursosAdmin(ids: string[]) {
   if (Datos.modo === 'demo') { Datos.reordenarCursos(ids); return; }
-  await Promise.all(ids.map((id, orden) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { orden: orden + 1 } })));
+  await api('/admin/cursos/reordenar', { method: 'POST', json: { ids } });
   const lista = Datos.cursos();
   ids.forEach((id, i) => { const c = lista.find((x) => x.id === id); if (c) c.orden = i + 1; });
   Datos.hidratarAdmin('cursos', lista);
+  cargados.add('cursos');
 }
 
 export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: boolean) {
@@ -310,7 +311,7 @@ export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: bool
     ids.forEach((id) => { const c = Datos.cursos().find((x) => x.id === id); if (c) { c.publicado = publicado; Datos.guardarCurso(c); } });
     return;
   }
-  await Promise.all(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { publicado } })));
+  await api('/admin/cursos/lote', { method: 'POST', json: { ids, accion: publicado ? 'publicar' : 'ocultar' } });
   const lista = Datos.cursos();
   ids.forEach((id) => { const c = lista.find((x) => x.id === id); if (c) c.publicado = publicado; });
   Datos.hidratarAdmin('cursos', lista);
@@ -319,11 +320,10 @@ export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: bool
 
 export async function borrarCursosAdmin(ids: string[]) {
   if (Datos.modo === 'demo') { ids.forEach((id) => Datos.borrarCurso(id)); return; }
-  const resultados = await Promise.allSettled(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'DELETE' })));
-  const ok = ids.filter((_, i) => resultados[i].status === 'fulfilled');
-  Datos.hidratarAdmin('cursos', Datos.cursos().filter((c) => !ok.includes(c.id)));
-  const fallido = resultados.find((r) => r.status === 'rejected');
-  if (fallido) throw (fallido as PromiseRejectedResult).reason;
+  const r = await api<{ afectados: string[]; omitidos: { id: string; motivo: string }[] }>('/admin/cursos/lote', { method: 'POST', json: { ids, accion: 'borrar' } });
+  Datos.hidratarAdmin('cursos', Datos.cursos().filter((c) => !r.afectados.includes(c.id)));
+  cargados.add('cursos');
+  if (r.omitidos?.length) throw new Error(`${r.omitidos.length} curso(s) no se borraron: tienen progreso o no existen.`);
 }
 
 const materialParaApi = (m: Material) => ({
