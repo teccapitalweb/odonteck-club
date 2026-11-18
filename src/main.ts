@@ -615,6 +615,7 @@ const rutaAdmin = (pick: (ui: AdminUI) => (params: Record<string, string>, query
   async (params: Record<string, string>, query: URLSearchParams) => paginaAdmin(pick(await cargarAdminUI()))(params, query);
 route('/admin/bitacora', rutaAdmin((ui) => ui.adminBitacora));
 route('/admin', rutaAdmin((ui) => ui.adminResumen));
+route('/admin/metricas', rutaAdmin((ui) => ui.adminMetricas));
 route('/admin/cursos', rutaAdmin((ui) => ui.adminCursos));
 route('/admin/cursos/:id', rutaAdmin((ui) => ui.adminCurso));
 route('/admin/quizzes', rutaAdmin((ui) => ui.adminQuizzes));

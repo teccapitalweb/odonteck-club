@@ -12,10 +12,28 @@ export interface PanelRecompensasAdmin {
   estatus?:string|null;
 }
 
+export interface MetricasAdmin {
+  calculadoEn?: string; cacheado?: boolean; aproximado?: boolean;
+  retencionCohortes: { cohorte: string; base: number; retenidos: number; tasa: number }[];
+  finalizacionClases: { cursoId: string; titulo: string; base: number; clases: { n: number; vieron: number; finalizacion: number; abandono: number | null }[] }[];
+  quizzes: { global: { intentos: number; aprobados: number; tasa: number }; porClase: { cursoId: string; n: number; titulo: string; intentos: number; aprobados: number; tasa: number }[] };
+  economiaOdonCoins: { emitidos: number; gastados: number; saldoPendiente: number; masCanjeadas: { recompensaId: string; titulo: string; canjes: number }[] };
+  cuponesApp: { codigo: string; redenciones: number; convertidos: number; tasa: number }[];
+  promosStripe: { promotionCode: string; suscripciones: number; activas: number; descuentoMensualMXN: number; netoMensualMXN: number }[];
+  registrosPorMes: { mes: string; total: number }[];
+}
+
 export interface ResumenAdmin {
+  calculadoEn?: string; cacheado?: boolean; aproximado?: boolean;
+  mrrEstimado?: boolean; moneda?: string; mrrPotencial?: number;
+  suscripcionesActivas?: number; suscripcionesTrial?: number;
+  enRiesgo?: { cuentas: number; monto: number; lista: { uid: string; nombre: string; plan: string }[] };
+  tasaBajas?: number;
+  bajasProgramadas?: { cuentas: number; lista: { uid: string; nombre: string; periodoFin: string | null; plan: string | null }[] };
+  conversionCursoGratis?: { base: number; convertidos: number; tasa: number };
+  canjesPendientes?: { cuentas: number; dias: number; lista: { id: string; uid: string; titulo: string; solicitado: string | null }[] };
   registrados?: number;
   accesos?: Record<string, number>;
-  calculadoEn?: string;
   miembrosActivos: number;
   altas30d: number;
   bajas30d: number;
@@ -93,6 +111,7 @@ const estado = {
   bitacora: null as PaginaBitacora | null,
   recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
+  metricas: null as MetricasAdmin | null,
   campanaPraxia: null as ReporteCampanaPraxia | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
@@ -167,6 +186,7 @@ export const Admin = {
   get bitacora() { return estado.bitacora; },
   get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
+  get metricas() { return estado.metricas; },
   get campanaPraxia() { return estado.campanaPraxia; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
@@ -235,6 +255,9 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
           cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [], cursoGratis: d.cursoGratis ?? null,
         };
       })());
+    } else if (path === '/admin/metricas') {
+      const actualizar = query.get('actualizar') === '1';
+      tareas.push(cargar('metricas', async () => { estado.metricas = await api<MetricasAdmin>(`/admin/metricas${actualizar ? '?actualizar=1' : ''}`); }, forzar || actualizar));
     } else if (path === '/admin/comunidad') {
       tareas.push(cargar('foro', async () => { Comunidad.hidratar(await api<any[]>('/admin/foro')); }, forzar));
       tareas.push(cargar('directorio-reportes', async () => { estado.reportesDirectorio = await api<ReporteDirectorioAdmin[]>('/admin/directorio/reportes'); }, forzar));

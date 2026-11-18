@@ -3,7 +3,7 @@ import { paginaAlumno, movimientosAlumno, recompensasAlumno, pagosAlumno } from 
 import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
 import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
 import { MAX_DIAS_CORTESIA, aplicarCortesiaAdmin, docCortesia, partesCortesia } from '../lib/cortesias.js';
-import { altasBajasV2, bajasProgramadas, calcularMRR, canjesPendientesViejos, conversionCursoGratis, mapaUltimaActividad, tasaBajas } from '../lib/metricas.js';
+import { altasBajasV2, aprobacionQuizzes, bajasProgramadas, calcularMRR, canjesPendientesViejos, conversionCursoGratis, economiaOdonCoins, efectoCuponesApp, efectoPromosStripe, finalizacionPorClase, mapaUltimaActividad, retencionPorCohorte, tasaBajas } from '../lib/metricas.js';
 import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
@@ -31,6 +31,7 @@ const TIPOS_SUBIDA = {
 const CAMPANA_PRAXIA_COMUNIDAD = 'praxia-comunidad-30-dias';
 const CUPO_PRAXIA_COMUNIDAD = 50;
 const TTL_RESUMEN_MS = 5 * 60 * 1000;
+const TTL_METRICAS_MS = 60 * 60 * 1000;
 
 const docs = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 const esIndiceFaltante = (error) => error?.code === 9 || error?.code === 'failed-precondition' || /index/i.test(String(error?.message ?? ''));
@@ -185,6 +186,67 @@ export function rutasAdmin(ctx) {
       }
     }
     const datos = await calcularResumen(ahora);
+    await cacheRef.set({ datos, calculadoEn: ahora.toISOString() });
+    res.json({ ...datos, calculadoEn: ahora.toISOString(), cacheado: false });
+  }));
+
+  // ---------- Métricas (pestaña aparte; precalculadas con TTL de 1 hora) ----------
+  async function calcularMetricas(ahora) {
+    const [susSnap, miembrosSnap, cursosSnap, progresoSnap, intentosSnap, estadoSnap, canjesSnap, cuponesCanjesSnap, auth] = await Promise.all([
+      db.collection(COL.suscripciones).get(),
+      db.collection(COL.miembros).get(),
+      db.collection(COL.cursos).get(),
+      db.collection(COL.progreso).get(),
+      db.collection(COL.intentos).get(),
+      db.collection(COL.recompensasEstado).get(),
+      db.collection(COL.recompensasCanjes).get(),
+      db.collection(COL.cuponesCanjes).get(),
+      listarUsuariosAuthAcotado(),
+    ]);
+    const suscripciones = new Map(susSnap.docs.map((d) => [d.id, d.data()]));
+    const miembros = new Map(miembrosSnap.docs.map((d) => [d.id, d.data()]));
+    const cursos = new Map(cursosSnap.docs.map((d) => [d.id, d.data()]));
+    const progreso = progresoSnap.docs.map((d) => d.data());
+    const intentos = intentosSnap.docs.map((d) => d.data());
+    const estados = estadoSnap.docs.map((d) => d.data());
+    const canjes = canjesSnap.docs.map((d) => d.data());
+    const cuponesCanjes = cuponesCanjesSnap.docs.map((d) => d.data());
+
+    // Registros de cuenta por mes (B2: creationTime de Firebase Auth), últimos 12 meses.
+    const registros = new Map();
+    for (const u of auth.usuarios.values()) {
+      const ms = u?.metadata?.creationTime ? new Date(u.metadata.creationTime).getTime() : NaN;
+      if (Number.isNaN(ms)) continue;
+      const k = new Date(ms).toISOString().slice(0, 7);
+      registros.set(k, (registros.get(k) ?? 0) + 1);
+    }
+    const registrosPorMes = [...registros.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-12).map(([mes, total]) => ({ mes, total }));
+
+    return {
+      aproximado: auth.truncado === true,
+      retencionCohortes: retencionPorCohorte(suscripciones, miembros, ahora),
+      finalizacionClases: finalizacionPorClase(progreso, cursos),
+      quizzes: aprobacionQuizzes(intentos, cursos),
+      economiaOdonCoins: economiaOdonCoins(estados, canjes),
+      cuponesApp: efectoCuponesApp(cuponesCanjes, suscripciones, miembros, ahora),
+      promosStripe: efectoPromosStripe(suscripciones),
+      registrosPorMes,
+    };
+  }
+
+  r.get('/admin/metricas', h(async (req, res) => {
+    const ahora = ctx.now();
+    const forzar = ['1', 'true'].includes(String(req.query.actualizar ?? ''));
+    const cacheRef = db.collection(COL.contadores).doc('metricas');
+    if (!forzar) {
+      const cache = await cacheRef.get();
+      if (cache.exists) {
+        const d = cache.data();
+        const edad = ahora.getTime() - (aMillis(d.calculadoEn) ?? 0);
+        if (edad >= 0 && edad < TTL_METRICAS_MS) { res.json({ ...d.datos, calculadoEn: d.calculadoEn, cacheado: true }); return; }
+      }
+    }
+    const datos = await calcularMetricas(ahora);
     await cacheRef.set({ datos, calculadoEn: ahora.toISOString() });
     res.json({ ...datos, calculadoEn: ahora.toISOString(), cacheado: false });
   }));
