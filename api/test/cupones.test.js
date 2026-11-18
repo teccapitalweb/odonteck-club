@@ -66,8 +66,8 @@ describe('cupones: canje por el miembro', () => {
     assert.ok(env.db.docs.get('v2_cupones_canjes/MES1__free1'));
   });
 
-  test('canjear extiende una cortesía vigente en vez de reemplazarla', async () => {
-    env.db.docs.set('v2_cortesias/free1', { uid: 'free1', hasta: '2026-12-31T00:00:00.000Z', motivo: 'previa' });
+  test('canjear extiende los días de cupón vigentes en vez de reemplazarlos', async () => {
+    env.db.docs.set('v2_cortesias/free1', { uid: 'free1', hasta: '2026-12-31T00:00:00.000Z', motivo: 'previa', otorgadaPor: 'cupon:PREV' });
     await crear({ codigo: 'EXTEN', dias: 30, usosMax: 5 });
     const r = await canjear(TOKENS.free, 'EXTEN').expect(201);
     assert.equal(r.body.hasta, '2027-01-30T00:00:00.000Z');

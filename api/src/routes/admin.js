@@ -2,6 +2,7 @@ import { paginaAlumno, movimientosAlumno, recompensasAlumno, pagosAlumno } from 
 // Rutas de administración (claim `admin: true`).
 import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
 import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
+import { MAX_DIAS_CORTESIA, aplicarCortesiaAdmin, docCortesia, partesCortesia } from '../lib/cortesias.js';
 import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
@@ -514,19 +515,18 @@ export function rutasAdmin(ctx) {
   r.post('/admin/miembros/:uid/cortesia', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
     const b = cuerpo(req);
-    const dias = entero(b.dias, { campo: 'dias', min: 1, max: 3650 });
+    const dias = entero(b.dias, { campo: 'dias', min: 1, max: MAX_DIAS_CORTESIA });
     const motivo = textoRequerido(b.motivo, { campo: 'motivo', min: 3, max: LIMITES.medio });
     const [usuario, miembro] = await Promise.all([usuarioAuth(uid), leerDoc(db, COL.miembros, uid)]);
     if (!usuario && !miembro) throw noEncontrado('No existe un usuario con ese uid.');
     const ahora = ctx.now();
-    const cortesia = {
-      uid,
-      hasta: new Date(ahora.getTime() + dias * DIA_MS).toISOString(),
-      motivo,
-      otorgadaPor: req.usuario.email || req.usuario.uid,
-      fecha: ahora.toISOString(),
-    };
-    await escribirAuditado(ctx, req, db.collection(COL.cortesias).doc(uid), cortesia, { accion: 'otorgar_cortesia', motivo });
+    const otorgadaPor = req.usuario.email || req.usuario.uid;
+    // Reemplaza SÓLO la parte del admin; conserva los días que el miembro tenga por cupón.
+    const cortesia = await escribirAuditado(
+      ctx, req, db.collection(COL.cortesias).doc(uid),
+      (previo) => docCortesia(aplicarCortesiaAdmin(partesCortesia(previo), { dias, motivo, otorgadaPor, ahora }), { uid, ahora }),
+      { accion: 'otorgar_cortesia', motivo },
+    );
     res.status(201).json(cortesia);
   }));
 
@@ -539,12 +539,30 @@ export function rutasAdmin(ctx) {
     res.json({ ok: true, uid });
   }));
 
+  // Revoca SÓLO la cortesía otorgada por el admin. Si al miembro le quedan días por
+  // cupón vigentes, se conservan; si no queda nada, se borra el documento.
   r.delete('/admin/miembros/:uid/cortesia', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
     const ref = db.collection(COL.cortesias).doc(uid);
-    if (!(await ref.get()).exists) throw noEncontrado('Ese miembro no tiene cortesía.');
-    await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'revocar_cortesia', requiereExistir: true });
-    res.json({ ok: true, uid });
+    const resultado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado('Ese miembro no tiene cortesía.');
+      const antes = snap.data();
+      const partes = partesCortesia(antes);
+      if (!partes.admin) throw conflicto('Este miembro no tiene cortesía otorgada por el panel; sus días provienen de un cupón.', 'sin_cortesia_admin');
+      const ahora = ctx.now();
+      const cuponVigente = partes.cupones && (aMillis(partes.cupones.hasta) ?? 0) > ahora.getTime();
+      let despues = null;
+      if (cuponVigente) {
+        despues = docCortesia({ admin: null, cupones: partes.cupones }, { uid, ahora });
+        tx.set(ref, despues);
+      } else {
+        tx.delete(ref);
+      }
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'revocar_cortesia', antes, despues });
+      return { conservaCupon: !!cuponVigente };
+    });
+    res.json({ ok: true, uid, ...resultado });
   }));
 
   // ---------- Cupones (días de acceso canjeables) ----------
