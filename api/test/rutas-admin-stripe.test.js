@@ -23,14 +23,20 @@ describe('admin: autorización', () => {
 
   test('resumen', async () => {
     env.db.docs.set('v2_progreso/vip1_curso-a', { uid: 'vip1', cursoId: 'curso-a', vistas: [1, 2], historial: ['2026-09-10T00:00:00Z', '2026-01-01T00:00:00Z'], actualizado: '2026-09-10T00:00:00Z' });
+    // Altas/bajas v2: por altaVip (sub.created) y canceladaEn, no por los campos heredados.
+    env.db.docs.set('v2_suscripciones/vip1', { uid: 'vip1', estado: 'active', altaVip: '2026-09-05T00:00:00.000Z', importeMensualNetoCents: 19900 });
+    env.db.docs.set('v2_suscripciones/free1', { uid: 'free1', estado: 'canceled', altaVip: '2026-01-01T00:00:00.000Z', canceladaEn: '2026-09-12T00:00:00.000Z' });
     const r = await admin('get', '/admin/resumen').expect(200);
     assert.equal(r.body.miembrosActivos, 3); // Incluye la cuenta administradora, separada por origen.
     assert.equal(r.body.accesos.administrador, 1);
-    assert.equal(r.body.altas30d, 1);
-    assert.equal(r.body.bajas30d, 1);
+    assert.equal(r.body.altas30d, 1); // vip1 altaVip en la ventana
+    assert.equal(r.body.bajas30d, 1); // free1 canceladaEn en la ventana
     assert.equal(r.body.clasesVistas30d, 1);
     assert.equal(r.body.temasForo30d, 2);
     assert.deepEqual(r.body.cursosTop, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', vistas: 1 }]);
+    assert.equal(r.body.mrr, 199); // MRR real de la suscripción active (19900 centavos)
+    assert.equal(r.body.mrrEstimado, false);
+    assert.ok(r.body.calculadoEn);
   });
 
   test('resumen · retención: inactivos y por-vencer traen contacto para recordatorios', async () => {

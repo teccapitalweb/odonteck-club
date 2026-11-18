@@ -184,7 +184,10 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
   const tareas: Promise<void>[] = [];
   try {
     if (/^\/admin\/?$/.test(path)) {
-      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, true));
+      // Sin recarga forzada: el servidor cachea el resumen (TTL 5 min). "Actualizar ahora"
+      // pasa ?actualizar=1 para recalcular en el servidor y refrescar el cliente.
+      const actualizar = query.get('actualizar') === '1';
+      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>(`/admin/resumen${actualizar ? '?actualizar=1' : ''}`); }, forzar || actualizar));
       tareas.push(cargar('campana-praxia-comunidad', async () => { estado.campanaPraxia = await api<ReporteCampanaPraxia>('/admin/recompensas/praxia/comunidad/reporte'); }, forzar));
       tareas.push(cargarCursos(forzar), cargarMateriales(forzar), cargarEventos(forzar), cargarQuizzes(forzar));
     } else if (path.startsWith('/admin/cursos')) {
