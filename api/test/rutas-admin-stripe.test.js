@@ -373,6 +373,23 @@ describe('stripe', () => {
     assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'canceled');
   });
 
+  test('el webhook guarda importe mensual, descuento, promo code y altaVip', async () => {
+    const base = eventoSuscripcion().data.object;
+    const evento = eventoSuscripcion({ id: 'evt_imp', data: { object: {
+      ...base, created: 1_780_000_000,
+      discount: { promotion_code: 'promo_x', coupon: { percent_off: 20, duration: 'forever' } },
+      items: { data: [{ price: { id: 'price_mensual_test', unit_amount: 19900, currency: 'mxn', recurring: { interval: 'month', interval_count: 1 } }, current_period_end: 1_792_000_000 }] },
+    } } });
+    const { payload, firma } = eventoFirmado(evento);
+    await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const sus = env.db.leer('v2_suscripciones/free1');
+    assert.equal(sus.importeMensualBrutoCents, 19900);
+    assert.equal(sus.descuentoMensualCents, 3980);
+    assert.equal(sus.importeMensualNetoCents, 15920);
+    assert.equal(sus.promotionCode, 'promo_x');
+    assert.equal(sus.altaVip, new Date(1_780_000_000 * 1000).toISOString());
+  });
+
   test('checkout.session.completed recupera la suscripción y usa client_reference_id', async () => {
     env = crearEntorno();
     env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;

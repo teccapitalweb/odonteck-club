@@ -6,6 +6,7 @@ import { COL, estadoMembresia, leerConfig, leerDoc, leerMiembroHeredado } from '
 import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { otorgarEventos, revertirMembresiaTx, REGLAS_PUNTOS } from '../lib/recompensas.js';
 import { registrarEventoSistema } from '../lib/auditoria.js';
+import { resumenImporteSuscripcion } from '../lib/suscripciones.js';
 import { cuerpo, unoDe } from '../lib/validacion.js';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
@@ -281,6 +282,8 @@ async function guardarSuscripcion(ctx, uid, sub, evento, extra) {
     const priceId = item.price?.id ?? null;
     // Desde la API 2025-03-31 el periodo vive en el item; antes, en la suscripción.
     const periodoFin = item.current_period_end ?? sub.current_period_end;
+    // Importe/descuento mensual real (para MRR neto de promociones) y código de promo.
+    const importe = resumenImporteSuscripcion(sub);
     const datos = {
       uid,
       ...Object.fromEntries(Object.entries(extra).filter(([, v]) => v !== null && v !== undefined)),
@@ -292,6 +295,17 @@ async function guardarSuscripcion(ctx, uid, sub, evento, extra) {
       periodoFin: segundosAISO(periodoFin),
       cancelaAlFinal: sub.cancel_at_period_end === true,
       canceladaEn: segundosAISO(sub.canceled_at),
+      // Alta VIP = creación de la suscripción en Stripe (constante). Para cohortes/altas v2.
+      altaVip: segundosAISO(sub.created) ?? actual?.altaVip ?? null,
+      ...(importe
+        ? {
+            moneda: importe.moneda,
+            importeMensualBrutoCents: importe.importeMensualBrutoCents,
+            descuentoMensualCents: importe.descuentoMensualCents,
+            importeMensualNetoCents: importe.importeMensualNetoCents,
+            promotionCode: importe.promotionCode,
+          }
+        : {}),
       eventoCreado: evento.created,
       ultimoEvento: evento.id,
       actualizado: ctx.now().toISOString(),
