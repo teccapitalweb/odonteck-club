@@ -8,6 +8,7 @@ import {
   cambiarEstadoCuponAdmin, cambiarEstadoMaterialesAdmin, cambiarPublicadoCursosAdmin, cargarAdmin, crearCuponAdmin,
   guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
+  borrarAvisoAdmin, editarAvisoAdmin,
   reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
@@ -243,8 +244,10 @@ export function instalarAccionesAdmin(toast: Toast) {
         await cargarAdmin(current().path, current().query, true); toast('Cortesía otorgada', 'gift'); render();
       }
       if (tipo === 'aviso') {
-        await publicarAvisoAdmin({ titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), enlace: String(d.get('enlace')).trim() || undefined });
-        toast('Aviso publicado', 'megaphone'); render();
+        const datosAviso = { titulo: String(d.get('titulo')).trim(), texto: String(d.get('texto')).trim(), enlace: String(d.get('enlace')).trim() || undefined };
+        if (f.dataset.id) { await editarAvisoAdmin(f.dataset.id, datosAviso); delete f.dataset.id; toast('Aviso actualizado', 'megaphone'); }
+        else { await publicarAvisoAdmin(datosAviso); toast('Aviso publicado', 'megaphone'); }
+        render();
       }
       if (tipo === 'cupon') {
         const venceStr = String(d.get('vence') || '').trim();
@@ -329,8 +332,25 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (bm && await confirmar({ titulo: 'Borrar material', mensaje: 'Si solo quieres esconderlo, cambia su estado a Oculto en vez de borrarlo.', confirmar: 'Borrar', peligro: true })) { try { await borrarMaterialAdmin(bm.dataset.borrarMaterial!); toast('Material borrado', 'trash-2'); navigate('/admin/materiales'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const be = el.closest<HTMLElement>('[data-borrar-evento]');
     if (be && await confirmar({ titulo: 'Borrar clase en vivo', mensaje: 'Se quitará del inicio y de En vivo para todos los miembros.', confirmar: 'Borrar', peligro: true })) { try { await borrarEventoAdmin(be.dataset.borrarEvento!); toast('Clase borrada', 'trash-2'); navigate('/admin/en-vivo'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    const ea = el.closest<HTMLElement>('[data-editar-aviso]');
+    if (ea) {
+      const aviso = Datos.avisos().find((a) => a.id === ea.dataset.editarAviso);
+      const form = document.querySelector<HTMLFormElement>('[data-form="aviso"]');
+      if (aviso && form) {
+        form.dataset.id = aviso.id;
+        form.querySelector<HTMLInputElement>('[name="titulo"]')!.value = aviso.titulo;
+        form.querySelector<HTMLTextAreaElement>('[name="texto"]')!.value = aviso.texto;
+        form.querySelector<HTMLInputElement>('[name="enlace"]')!.value = aviso.enlace ?? '';
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        form.querySelector<HTMLInputElement>('[name="titulo"]')!.focus();
+      }
+      return;
+    }
     const ba = el.closest<HTMLElement>('[data-borrar-aviso]');
-    if (ba && Datos.modo === 'demo' && await confirmar({ titulo: 'Borrar aviso', confirmar: 'Borrar', peligro: true })) { Datos.borrarAviso(ba.dataset.borrarAviso!); render(); }
+    if (ba && await confirmar({ titulo: 'Borrar aviso', mensaje: 'Dejará de aparecer en la campana de los miembros.', confirmar: 'Borrar', peligro: true })) {
+      try { await borrarAvisoAdmin(ba.dataset.borrarAviso!); toast('Aviso borrado', 'trash-2'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); }
+      return;
+    }
     const oh = el.closest<HTMLElement>('[data-ocultar-hilo]');
     if (oh) { const hilo = Comunidad.todos().find((h) => h.id === oh.dataset.ocultarHilo); try { await moderarHiloAdmin(oh.dataset.ocultarHilo!, !hilo?.oculto); await cargarAdmin(current().path, current().query, true); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
     const rd = el.closest<HTMLButtonElement>('[data-directorio-reporte]');

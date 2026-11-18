@@ -236,9 +236,23 @@ describe('admin: foro, quizzes, avisos y config', () => {
   });
 
   test('avisos y config', async () => {
-    await admin('post', '/admin/avisos').send({ titulo: 'Nuevo curso', texto: 'Ya está disponible', enlace: 'https://club.odonteckconsulting.com/#/cursos' }).expect(201);
+    const creado = await admin('post', '/admin/avisos').send({ titulo: 'Nuevo curso', texto: 'Ya está disponible', enlace: 'https://club.odonteckconsulting.com/#/cursos' }).expect(201);
     assert.equal((await admin('get', '/admin/avisos').expect(200)).body.length, 1);
     await admin('post', '/admin/avisos').send({ titulo: 'x', texto: '<a href=x>clic</a>' }).expect(400);
+
+    // Editar (PATCH) un aviso existente.
+    const editado = await admin('patch', `/admin/avisos/${creado.body.id}`).send({ titulo: 'Curso actualizado' }).expect(200);
+    assert.equal(editado.body.titulo, 'Curso actualizado');
+    assert.equal(editado.body.texto, 'Ya está disponible'); // merge: conserva lo demás
+    await admin('patch', `/admin/avisos/${creado.body.id}`).send({}).expect(400);
+    await admin('patch', '/admin/avisos/noexiste').send({ titulo: 'Hola mundo' }).expect(404);
+    // VIP no puede editar ni borrar.
+    await request(env.app).patch(`/admin/avisos/${creado.body.id}`).set(bearer(TOKENS.vip)).send({ titulo: 'hack' }).expect(403);
+
+    // Borrar (DELETE) un aviso existente.
+    await admin('delete', `/admin/avisos/${creado.body.id}`).expect(200);
+    assert.equal((await admin('get', '/admin/avisos').expect(200)).body.length, 0);
+    await admin('delete', '/admin/avisos/noexiste').expect(404);
 
     const cfg = await admin('patch', '/admin/config').send({ precios: { mensual: 249 }, descuentoVIP: 25 }).expect(200);
     assert.deepEqual(cfg.body.precios, { mensual: 249, anual: 1899 });

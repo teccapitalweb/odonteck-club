@@ -390,7 +390,10 @@ export function adminAvisos() {
   <div class="stack" style="gap:10px;max-width:820px">${l.map((a) => `
     <div class="card card--pad row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap">
       <div><strong>${esc(a.titulo)}</strong><p class="muted" style="font-size:var(--fs-sm)">${esc(a.texto)}</p><span class="faint" style="font-size:var(--fs-xs)">${hace(a.fecha)}${a.enlace ? ` · ${esc(a.enlace)}` : ''}</span></div>
-      ${Datos.modo === 'demo' ? `<button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>` : ''}
+      <div class="row" style="gap:4px;flex-shrink:0">
+        <button class="btn btn--ghost btn--icon btn--xs" data-editar-aviso="${a.id}" aria-label="Editar"><i data-lucide="pencil" class="i"></i></button>
+        <button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>
+      </div>
     </div>`).join('') || vacio('Sin avisos publicados', 'El primero aparecerá en la campana de todos los miembros.')}</div>`;
 }
 

@@ -438,6 +438,21 @@ export async function publicarAvisoAdmin(aviso: Omit<Aviso, 'id' | 'fecha'>) {
   cargados.add('avisos');
 }
 
+export async function editarAvisoAdmin(id: string, cambios: { titulo: string; texto: string; enlace?: string }) {
+  if (Datos.modo === 'demo') { Datos.editarAviso(id, { ...cambios, enlace: cambios.enlace ?? null }); return; }
+  const enlace = cambios.enlace?.startsWith('#/') ? `/${cambios.enlace}` : cambios.enlace;
+  const guardado = await api<Aviso>(`/admin/avisos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { ...cambios, enlace: enlace || null } });
+  Datos.hidratarAdmin('avisos', Datos.avisos().map((a) => (a.id === id ? guardado : a)));
+  cargados.add('avisos');
+}
+
+export async function borrarAvisoAdmin(id: string) {
+  if (Datos.modo === 'demo') { Datos.borrarAviso(id); return; }
+  await api(`/admin/avisos/${encodeURIComponent(id)}`, { method: 'DELETE' });
+  Datos.hidratarAdmin('avisos', Datos.avisos().filter((a) => a.id !== id));
+  cargados.add('avisos');
+}
+
 const generarCodigoCupon = () => { const a = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; return Array.from({ length: 8 }, () => a[Math.floor(Math.random() * a.length)]).join(''); };
 
 export async function crearCuponAdmin(datos: { codigo?: string; dias: number; usosMax: number; vence: string | null; etiqueta: string }): Promise<Cupon> {
