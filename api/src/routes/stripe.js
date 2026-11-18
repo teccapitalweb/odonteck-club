@@ -124,12 +124,28 @@ export function webhookStripe(ctx) {
       }
     }
 
-    // Idempotencia: Stripe reintenta; un evento ya procesado se confirma sin repetir.
+    // Idempotencia atómica: Stripe reintenta y puede entregar el mismo evento dos
+    // veces a la vez. En lugar de leer la marca y escribirla después (dos entregas
+    // simultáneas podrían pasar ambas), se RESERVA el id con create(): sólo una gana;
+    // la otra recibe ALREADY_EXISTS y se confirma como duplicada. Si el procesamiento
+    // falla, se libera la marca para que el reintento de Stripe lo vuelva a procesar.
     const marcaRef = ctx.db.collection(COL.stripeEventos).doc(evento.id);
-    if ((await marcaRef.get()).exists) return res.json({ recibido: true, duplicado: true });
-
-    const resultado = await procesarEvento(ctx, evento);
-    await marcaRef.set({ tipo: evento.type, resultado, procesado: ctx.now().toISOString() });
+    try {
+      await marcaRef.create({ tipo: evento.type, estado: 'procesando', recibido: ctx.now().toISOString() });
+    } catch (e) {
+      if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) {
+        return res.json({ recibido: true, duplicado: true });
+      }
+      throw e;
+    }
+    let resultado;
+    try {
+      resultado = await procesarEvento(ctx, evento);
+    } catch (e) {
+      await marcaRef.delete().catch(() => {});
+      throw e;
+    }
+    await marcaRef.set({ tipo: evento.type, estado: 'listo', resultado, procesado: ctx.now().toISOString() });
     res.json({ recibido: true, resultado });
   });
 }

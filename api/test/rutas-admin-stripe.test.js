@@ -393,6 +393,28 @@ describe('stripe', () => {
     assert.equal(recompensas.contadores.membresias, 1);
   });
 
+  test('dos entregas simultáneas del mismo evento se procesan una sola vez (idempotencia atómica)', async () => {
+    env = crearEntorno();
+    env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
+    const evento = {
+      id: 'evt_concurrente',
+      object: 'event',
+      type: 'checkout.session.completed',
+      created: 1_790_000_300,
+      data: { object: { id: 'cs_cc', object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'carla@example.com' } } },
+    };
+    const { payload, firma } = eventoFirmado(evento);
+    const enviar = () => request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const [a, b] = await Promise.all([enviar(), enviar()]);
+    const resultados = [a.body, b.body];
+    // Exactamente una procesa y la otra se reconoce como duplicada.
+    assert.equal(resultados.filter((x) => x.resultado === 'suscripcion_guardada').length, 1);
+    assert.equal(resultados.filter((x) => x.duplicado === true).length, 1);
+    // Los 300 OdonCoins de membresía se otorgan una sola vez.
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 300);
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').contadores.membresias, 1);
+  });
+
   test('checkout.session.async_payment_succeeded activa el plan al confirmarse el método diferido', async () => {
     env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
     const evento = {
