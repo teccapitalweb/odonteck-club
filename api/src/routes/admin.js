@@ -539,28 +539,39 @@ export function rutasAdmin(ctx) {
     res.json({ ok: true, uid });
   }));
 
-  // Revoca SÓLO la cortesía otorgada por el admin. Si al miembro le quedan días por
-  // cupón vigentes, se conservan; si no queda nada, se borra el documento.
+  // Revoca la cortesía del miembro. Por defecto (`origen=admin`) quita SÓLO lo que
+  // otorgó el panel y conserva los días por cupón; `origen=cupones` quita sólo el
+  // cupón; `origen=todo` revoca ambos (p. ej. fraude). Si no queda nada, borra el doc.
   r.delete('/admin/miembros/:uid/cortesia', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
+    const origen = unoDe(String(req.query.origen ?? 'admin'), ['admin', 'cupones', 'todo'], { campo: 'origen' });
     const ref = db.collection(COL.cortesias).doc(uid);
     const resultado = await db.runTransaction(async (tx) => {
       const snap = await tx.get(ref);
       if (!snap.exists) throw noEncontrado('Ese miembro no tiene cortesía.');
       const antes = snap.data();
       const partes = partesCortesia(antes);
-      if (!partes.admin) throw conflicto('Este miembro no tiene cortesía otorgada por el panel; sus días provienen de un cupón.', 'sin_cortesia_admin');
       const ahora = ctx.now();
-      const cuponVigente = partes.cupones && (aMillis(partes.cupones.hasta) ?? 0) > ahora.getTime();
+      let restante;
+      if (origen === 'todo') {
+        restante = { admin: null, cupones: null };
+      } else if (origen === 'cupones') {
+        if (!partes.cupones) throw conflicto('Este miembro no tiene días por cupón que revocar.', 'sin_cupon');
+        restante = { admin: partes.admin, cupones: null };
+      } else {
+        if (!partes.admin) throw conflicto('Este miembro no tiene cortesía otorgada por el panel; sus días provienen de un cupón. Usa origen=todo para revocar todo.', 'sin_cortesia_admin');
+        restante = { admin: null, cupones: partes.cupones };
+      }
+      const cuponVigente = restante.cupones && (aMillis(restante.cupones.hasta) ?? 0) > ahora.getTime();
       let despues = null;
-      if (cuponVigente) {
-        despues = docCortesia({ admin: null, cupones: partes.cupones }, { uid, ahora });
+      if (restante.admin || cuponVigente) {
+        despues = docCortesia(restante, { uid, ahora });
         tx.set(ref, despues);
       } else {
         tx.delete(ref);
       }
       registrarAuditoria(ctx, tx, req, { ref, accion: 'revocar_cortesia', antes, despues });
-      return { conservaCupon: !!cuponVigente };
+      return { origen, conservaCupon: !!cuponVigente };
     });
     res.json({ ok: true, uid, ...resultado });
   }));
@@ -772,6 +783,26 @@ export function rutasAdmin(ctx) {
     };
     await escribirAuditado(ctx, req, ref, aviso, { modo: 'create', accion: 'publicar_aviso' });
     res.status(201).json(aviso);
+  }));
+
+  r.patch('/admin/avisos/:id', h(async (req, res) => {
+    const id = idDocumento(req.params.id, 'id');
+    const b = cuerpo(req);
+    const cambios = {};
+    if (b.titulo !== undefined) cambios.titulo = textoRequerido(b.titulo, { campo: 'titulo', min: 3, max: LIMITES.tituloHilo });
+    if (b.texto !== undefined) cambios.texto = textoRequerido(b.texto, { campo: 'texto', min: 3, max: 2000, multilinea: true });
+    if (b.enlace !== undefined) cambios.enlace = url(b.enlace, { campo: 'enlace' }) ?? null;
+    if (Object.keys(cambios).length === 0) throw invalido('No enviaste ningún campo para actualizar.');
+    const ref = db.collection(COL.avisos).doc(id);
+    const actualizado = await escribirAuditado(ctx, req, ref, { ...cambios, actualizado: ahoraISO() }, { modo: 'merge', accion: 'editar_aviso', requiereExistir: true });
+    res.json(actualizado);
+  }));
+
+  r.delete('/admin/avisos/:id', h(async (req, res) => {
+    const id = idDocumento(req.params.id, 'id');
+    const ref = db.collection(COL.avisos).doc(id);
+    await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'borrar_aviso', requiereExistir: true });
+    res.json({ ok: true, id });
   }));
 
   // ---------- Config ----------

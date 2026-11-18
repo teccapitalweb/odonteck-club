@@ -73,6 +73,25 @@ describe('cortesías: orígenes separados (admin vs cupón)', () => {
     assert.ok(env.db.docs.get('v2_cortesias/free1'));
   });
 
+  test('origen=todo revoca cortesía de admin y días de cupón a la vez', async () => {
+    await darCortesia('free1', { dias: 60, motivo: 'Beca' }).expect(201);
+    await crearCupon({ codigo: 'FRAUDE', dias: 30, usosMax: 5 });
+    await canjear(TOKENS.free, 'FRAUDE').expect(201);
+    const r = await admin('delete', '/admin/miembros/free1/cortesia?origen=todo').send({ motivoAuditoria: 'fraude' }).expect(200);
+    assert.equal(r.body.conservaCupon, false);
+    assert.equal(env.db.docs.get('v2_cortesias/free1'), undefined);
+  });
+
+  test('origen=cupones quita sólo los días de cupón y conserva la cortesía del admin', async () => {
+    await darCortesia('free1', { dias: 60, motivo: 'Beca' }).expect(201);
+    await crearCupon({ codigo: 'QUITAR', dias: 30, usosMax: 5 });
+    await canjear(TOKENS.free, 'QUITAR').expect(201);
+    await admin('delete', '/admin/miembros/free1/cortesia?origen=cupones').send({ motivoAuditoria: 'ajuste' }).expect(200);
+    const doc = env.db.docs.get('v2_cortesias/free1');
+    assert.equal(doc.cupones, null);
+    assert.equal(doc.admin.hasta, '2026-11-16T12:00:00.000Z');
+  });
+
   test('el límite de días está alineado con el front (máximo 730)', async () => {
     await darCortesia('free1', { dias: 731, motivo: 'Demasiado' }).expect(400);
     await darCortesia('free1', { dias: 730, motivo: 'Tope' }).expect(201);
