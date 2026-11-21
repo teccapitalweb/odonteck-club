@@ -456,6 +456,13 @@ export async function revocarCortesiaAdmin(uid: string, motivoAuditoria: string)
   cargados.delete('resumen');
 }
 
+export async function desbloquearSuscripcionAdmin(uid: string) {
+  if (Datos.modo === 'demo') return;
+  await api(`/admin/miembros/${encodeURIComponent(uid)}/desbloquear`, { method: 'POST' });
+  cargados.delete(`miembro:${uid}`);
+  cargados.delete('resumen');
+}
+
 export async function moderarHiloAdmin(id: string, oculto: boolean) {
   if (Datos.modo === 'demo') Comunidad.alternarOculto(id);
   else { await api(`/admin/foro/${encodeURIComponent(id)}`, { method: 'PATCH', json: { oculto } }); cargados.delete('foro'); }

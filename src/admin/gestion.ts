@@ -327,9 +327,10 @@ function adminMiembroDemo(params: Record<string, string>) {
         <div class="row" style="justify-content:space-between"><span class="faint">Estado</span><span class="chip ${['active', 'trialing'].includes(String(sus.estado)) ? 'chip--accent' : 'chip--warn'}">${esc(estadosStripe[String(sus.estado)] || String(sus.estado || '—'))}</span></div>
         ${sus.plan ? `<div class="row" style="justify-content:space-between"><span class="faint">Plan</span><span>${esc(String(sus.plan))}</span></div>` : ''}
         ${sus.periodoFin ? `<div class="row" style="justify-content:space-between"><span class="faint">Próximo cobro / fin de periodo</span><span>${fecha(String(sus.periodoFin))}</span></div>` : ''}
+        ${(sus.accesoBloqueado === true || sus.enDisputa === true) ? `<div class="row" style="justify-content:space-between"><span class="faint">Acceso</span><span class="chip chip--warn">${sus.accesoBloqueado === true ? 'Bloqueado' : 'En disputa'}</span></div>` : ''}
       </div>
       <p class="faint" style="font-size:var(--fs-xs)">Cancelar, reembolsar o cambiar de plan se hace desde Stripe para no desincronizar cobros y membresía.</p>
-      <div class="row">${sus.customerId ? `<a class="btn btn--secondary btn--sm" href="https://dashboard.stripe.com/customers/${esc(String(sus.customerId))}" target="_blank" rel="noopener"><i data-lucide="credit-card" class="i"></i>Ver en Stripe</a>` : ''}</div>`
+      <div class="row" style="gap:6px;flex-wrap:wrap">${sus.customerId ? `<a class="btn btn--secondary btn--sm" href="https://dashboard.stripe.com/customers/${esc(String(sus.customerId))}" target="_blank" rel="noopener"><i data-lucide="credit-card" class="i"></i>Ver en Stripe</a>` : ''}${(sus.accesoBloqueado === true || sus.enDisputa === true) ? `<button type="button" class="btn btn--danger btn--sm" data-desbloquear-sus="${m.uid}"><i data-lucide="unlock" class="i"></i>Desbloquear acceso</button>` : ''}</div>`
       : `<p class="muted" style="font-size:var(--fs-sm)">Sin suscripción de Stripe registrada. Cuando el miembro contrate un plan de pago, aquí aparecerá su estado, próximo cobro y el enlace directo a su cliente en Stripe.</p>`}
     </div>
   </div>

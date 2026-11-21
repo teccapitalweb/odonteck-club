@@ -9,7 +9,7 @@ import {
   guardarConfigAdmin, guardarCortesiaAdmin,
   guardarCursoAdmin, guardarEventoAdmin, guardarMaterialAdmin, guardarQuizAdmin, moderarHiloAdmin, moderarReporteDirectorioAdmin, publicarAvisoAdmin,
   borrarAvisoAdmin, editarAvisoAdmin,
-  reordenarCursosAdmin, revocarCortesiaAdmin, reiniciarCursoGratisAdmin,
+  reordenarCursosAdmin, revocarCortesiaAdmin, desbloquearSuscripcionAdmin, reiniciarCursoGratisAdmin,
 } from '../core/admin';
 import { navigate, render, current } from '../core/router';
 import { estadoMiembro, filtrarMiembros, miembrosEnRiesgo, type MiembroRiesgo } from './gestion';
@@ -325,6 +325,8 @@ export function instalarAccionesAdmin(toast: Toast) {
     if (rcg && await confirmar({ titulo: 'Reiniciar curso gratis', recibirMotivo, mensaje: 'El miembro volverá a ver el anuncio para elegir. Su progreso no se borra.', confirmar: 'Reiniciar', icono: 'rotate-ccw' })) { try { await reiniciarCursoGratisAdmin(rcg.dataset.reiniciarCursoGratis!, motivoCambio); await cargarAdmin(current().path, current().query, true); toast('Elección reiniciada', 'rotate-ccw'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
     const rev = el.closest<HTMLElement>('[data-revocar-cortesia]');
     if (rev && await confirmar({ titulo: 'Revocar cortesía', recibirMotivo, mensaje: 'El acceso de cortesía terminará de inmediato.', confirmar: 'Revocar', peligro: true })) { try { await revocarCortesiaAdmin(rev.dataset.revocarCortesia!, motivoCambio); await cargarAdmin(current().path, current().query, true); toast('Cortesía revocada'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
+    const desb = el.closest<HTMLElement>('[data-desbloquear-sus]');
+    if (desb && await confirmar({ titulo: 'Desbloquear acceso', mensaje: 'Levanta el bloqueo por reembolso o disputa y devuelve el acceso VIP. Verifica antes el cobro en Stripe.', confirmar: 'Desbloquear', icono: 'unlock' })) { try { await desbloquearSuscripcionAdmin(desb.dataset.desbloquearSus!); await cargarAdmin(current().path, current().query, true); toast('Acceso desbloqueado', 'unlock'); render(); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } return; }
 
     const bc = el.closest<HTMLElement>('[data-borrar-curso]');
     if (bc && await confirmar({ titulo: 'Borrar curso', mensaje: 'No se puede deshacer. Si alguien ya lo empezó, el backend lo impedirá.', confirmar: 'Borrar', peligro: true })) { try { await borrarCursoAdmin(bc.dataset.borrarCurso!); toast('Curso borrado', 'trash-2'); navigate('/admin/cursos'); } catch (err) { toast(mensajeError(err), 'alert-triangle'); } }
