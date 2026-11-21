@@ -8,6 +8,8 @@ export interface PanelRecompensasAdmin {
   catalogo: (Recompensa & {instrucciones?:string;revisionProfesional?:boolean;requiereRevision?:boolean})[];
   canjes: {id:string;uid:string;recompensaId:string;titulo:string;puntos:number;tipo:string;estatus:string;solicitado:string;nota?:string}[];
   limiteCanjes:number;
+  siguiente?:string|null;
+  estatus?:string|null;
 }
 
 export interface ResumenAdmin {
@@ -27,6 +29,8 @@ export interface ResumenAdmin {
   cortesiaActivos?: number;
   inactivos?: number;
   altasPorMes?: { mes: string; total: number }[];
+  disputasActivas?: number;
+  disputas?: { uid: string; nombre: string; whatsapp?: string; email?: string; desde?: string | null }[];
   porVencer?: { uid: string; nombre: string; plan: string; vence: string; whatsapp?: string; email?: string }[];
   inactivosLista?: { uid: string; nombre: string; plan: string; ultimaActividad: string | null; whatsapp?: string; email?: string }[];
 }
@@ -240,8 +244,19 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
     } else if (path === '/admin/cupones') {
       tareas.push(cargarCupones(forzar));
     } else if (path === '/admin/recompensas') {
-      estado.recompensas=null;
-      tareas.push(cargar('recompensas',async()=>{estado.recompensas=await api<PanelRecompensasAdmin>('/admin/recompensas');},true));
+      const estatusCanje = ['pendiente', 'entregado', 'cancelado'].includes(query.get('estatus') || '') ? query.get('estatus')! : '';
+      const cursorCanje = query.get('cursor') || '';
+      const qs = new URLSearchParams();
+      if (estatusCanje) qs.set('estatus', estatusCanje);
+      if (cursorCanje) qs.set('cursor', cursorCanje);
+      if (!cursorCanje) estado.recompensas = null;
+      tareas.push(cargar(`recompensas:${estatusCanje}:${cursorCanje}`, async () => {
+        const pagina = await api<PanelRecompensasAdmin>(`/admin/recompensas${qs.size ? `?${qs}` : ''}`);
+        // Con cursor se acumula la siguiente página de canjes; sin cursor, reemplaza.
+        estado.recompensas = cursorCanje && estado.recompensas
+          ? { ...pagina, canjes: [...estado.recompensas.canjes, ...pagina.canjes] }
+          : pagina;
+      }, true));
     } else if (path === '/admin/bitacora') {
       estado.bitacora = null;
       const cursor = query.get('cursor');
@@ -415,6 +430,13 @@ export async function revocarCortesiaAdmin(uid: string, motivoAuditoria: string)
   cargados.delete('resumen');
 }
 
+export async function desbloquearSuscripcionAdmin(uid: string) {
+  if (Datos.modo === 'demo') return;
+  await api(`/admin/miembros/${encodeURIComponent(uid)}/desbloquear`, { method: 'POST' });
+  cargados.delete(`miembro:${uid}`);
+  cargados.delete('resumen');
+}
+
 export async function moderarHiloAdmin(id: string, oculto: boolean) {
   if (Datos.modo === 'demo') Comunidad.alternarOculto(id);
   else { await api(`/admin/foro/${encodeURIComponent(id)}`, { method: 'PATCH', json: { oculto } }); cargados.delete('foro'); }
@@ -435,6 +457,21 @@ export async function publicarAvisoAdmin(aviso: Omit<Aviso, 'id' | 'fecha'>) {
   const enlace = aviso.enlace?.startsWith('#/') ? `/${aviso.enlace}` : aviso.enlace;
   const guardado = await api<Aviso>('/admin/avisos', { method: 'POST', json: { ...aviso, enlace: enlace || null } });
   Datos.hidratarAdmin('avisos', [guardado, ...Datos.avisos()]);
+  cargados.add('avisos');
+}
+
+export async function editarAvisoAdmin(id: string, cambios: { titulo: string; texto: string; enlace?: string }) {
+  if (Datos.modo === 'demo') { Datos.editarAviso(id, { ...cambios, enlace: cambios.enlace ?? null }); return; }
+  const enlace = cambios.enlace?.startsWith('#/') ? `/${cambios.enlace}` : cambios.enlace;
+  const guardado = await api<Aviso>(`/admin/avisos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { ...cambios, enlace: enlace || null } });
+  Datos.hidratarAdmin('avisos', Datos.avisos().map((a) => (a.id === id ? guardado : a)));
+  cargados.add('avisos');
+}
+
+export async function borrarAvisoAdmin(id: string) {
+  if (Datos.modo === 'demo') { Datos.borrarAviso(id); return; }
+  await api(`/admin/avisos/${encodeURIComponent(id)}`, { method: 'DELETE' });
+  Datos.hidratarAdmin('avisos', Datos.avisos().filter((a) => a.id !== id));
   cargados.add('avisos');
 }
 

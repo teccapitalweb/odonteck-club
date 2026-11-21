@@ -1,5 +1,20 @@
 # Relevo operativo para Claude · OdonTeck Club
 
+## 2026-11-18 · Admin Fase 1 (PR #57, en borrador) · orden de despliegue
+
+Rama `admin-fase1`, PR #57 **en borrador contra `main`, sin fusionar ni desplegar**. Seis mejoras del panel admin, cada una verificada en código y con pruebas: (1) cortesías de admin y días de cupón separados en `v2_cortesias` con `?origen=admin|cupones|todo` al revocar; (2) `PATCH /admin/config` bloquea los IDs de precio de Stripe; (3) `PATCH`/`DELETE /admin/avisos/:id` conectados en producción; (4) reembolsos y disputas de Stripe (ver abajo); (5) `npm run build:prod` falla sin `VITE_API_URL` y `npm run verify:dist` impide publicar el modo demo; (6) paginación y filtro por estatus en miembros y canjes (sin los cortes silenciosos de 1000/100). Verificación local: `npm run check` (api) y 273 pruebas pasan (4 skip de emuladores), `tsc` limpio, `npm run build:prod` genera `dist/_build-info.json` con `modo:api`.
+
+**Punto 4 — comportamiento de Stripe (aprobado por el responsable):** reembolso **total** de un cobro de membresía v2 bloquea el acceso VIP de inmediato (`accesoBloqueado` en `v2_suscripciones/{uid}`, que `suscripcionVigente` respeta aunque lleguen eventos posteriores) y revierte los 300 OdonCoins de ese cobro, revirtiendo sólo lo que quede (sin saldo negativo) y registrando el faltante en la bitácora. Reembolso **parcial**: sólo bitácora. `charge.dispute.created`: no corta el acceso, marca «en disputa» y la muestra como alerta en el Resumen del admin. `charge.dispute.closed`: perdida = igual que reembolso total; ganada = quita la marca. Los cobros/disputas se resuelven por `customerId` (no traen `metadata.origen`); si no hay suscripción v2, se reenvían al receptor heredado. Idempotente por `event.id` y por charge (`membresia-reembolso:<chargeId>`), auditado; **nunca** cancela ni reembolsa en Stripe, sólo reacciona.
+
+**Orden de despliegue de este PR (al fusionarlo, con autorización explícita):**
+
+1. **Desplegar índices de Firestore.** El filtro por estatus de canjes usa el índice compuesto nuevo `v2_recompensas_canjes (estatus ASC, solicitado DESC)` de `api/firestore.indexes.json`. La vista de canjes por defecto no lo necesita, pero el filtro falla hasta que exista. Desplegar los índices **antes** de la API para que la nueva ruta tenga su índice listo.
+2. **Desplegar la API** (Railway). Incluye el webhook con idempotencia atómica y los manejadores de `charge.refunded`/`charge.dispute.*`, la separación de cortesías, el bloqueo de precios en config, el `PATCH`/`DELETE` de avisos y la paginación. Verificar `/health` 200 y, sin token, que las rutas nuevas respondan 401.
+3. **Agregar eventos al webhook en el Dashboard de Stripe.** En el destino v2 existente (`we_1Tf35hA7If2CqXs9HakeWqlt`, URL `https://api-production-db314.up.railway.app/stripe/webhook`) añadir `charge.refunded`, `charge.dispute.created` y `charge.dispute.closed` a los eventos escuchados. No cambiar el secreto, la versión de API ni la URL. Sin estos eventos, los reembolsos/disputas no llegan y no se procesan. Hacerlo **después** de la API para que el servidor ya sepa manejarlos.
+4. **Desplegar el frontend** (Cloudflare Pages) con `VITE_API_URL` definida (usar `npm run build:prod`; `npm run verify:dist` antes de `wrangler` manual). Trae el filtro por estatus y «cargar más» en canjes, los botones de avisos, la alerta de disputas en el Resumen y el texto corregido de precios.
+
+**Pendiente de decisión del responsable (no lo hace el código):** las tres suscripciones duplicadas y los dos cargos sin reembolsar de la cuenta afectada (ver corte del 2026-10-28) siguen abiertos. El manejo nuevo de reembolsos/disputas reacciona a lo que ocurra en Stripe, pero no cancela ni reembolsa por su cuenta.
+
 ## 2026-10-28 · Reparación Stripe publicada y verificada
 
 Auditoría autorizada: tres checkouts v2 pagados de una cuenta sin suscripción v2; un cargo ya reembolsado. El destino registrado seguía siendo el servidor antiguo. Stripe rechazó otro destino por límite de 16. Se verificó en memoria que ambos servidores tienen el mismo secreto de firma.

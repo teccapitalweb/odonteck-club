@@ -166,6 +166,7 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   const kpi = (icon: string, label: string, valor: number | string, nota: string) => `<div class="kpi"><span class="kpi__ic"><i data-lucide="${icon}" class="i"></i></span><span class="kpi__label">${label}</span><strong class="kpi__val">${valor}</strong><span class="kpi__nota">${nota}</span></div>`;
   return `
   ${adminHead('Resumen', new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}
+  ${(r.disputasActivas ?? 0) > 0 ? `<section class="card card--pad stack" role="alert" style="gap:8px;border-left:4px solid var(--danger,#c0392b)"><h3 class="admin-card-title"><i data-lucide="alert-octagon" class="i"></i> ${r.disputasActivas} ${r.disputasActivas === 1 ? 'suscripción en disputa' : 'suscripciones en disputa'}</h3><p class="muted" style="font-size:var(--fs-sm)">Contracargos abiertos en Stripe. El acceso sigue activo hasta que se resuelvan; si se pierden, el acceso y los OdonCoins de ese cobro se revierten automáticamente.</p><div class="stack" style="gap:6px">${(r.disputas ?? []).map((m) => `<a class="row" style="justify-content:space-between;gap:8px" href="#/admin/miembros/${encodeURIComponent(m.uid)}"><span>${esc(m.nombre || m.uid)}</span><span class="faint" style="font-size:var(--fs-xs)">${m.desde ? `en disputa desde ${fecha(m.desde)}` : 'en disputa'}</span></a>`).join('')}</div></section>` : ''}
   <div class="kpis">
     ${kpi('users', 'Cuentas con acceso', r.miembrosActivos, `${r.registrados ?? 0} cuentas identificadas · desglose debajo`)}
     ${kpi('trending-up', 'Ingreso mensual estimado', `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, 'Estimación por tarifa, no cobros confirmados')}
@@ -315,9 +316,10 @@ function adminMiembroDemo(params: Record<string, string>) {
         <div class="row" style="justify-content:space-between"><span class="faint">Estado</span><span class="chip ${['active', 'trialing'].includes(String(sus.estado)) ? 'chip--accent' : 'chip--warn'}">${esc(estadosStripe[String(sus.estado)] || String(sus.estado || '—'))}</span></div>
         ${sus.plan ? `<div class="row" style="justify-content:space-between"><span class="faint">Plan</span><span>${esc(String(sus.plan))}</span></div>` : ''}
         ${sus.periodoFin ? `<div class="row" style="justify-content:space-between"><span class="faint">Próximo cobro / fin de periodo</span><span>${fecha(String(sus.periodoFin))}</span></div>` : ''}
+        ${(sus.accesoBloqueado === true || sus.enDisputa === true) ? `<div class="row" style="justify-content:space-between"><span class="faint">Acceso</span><span class="chip chip--warn">${sus.accesoBloqueado === true ? 'Bloqueado' : 'En disputa'}</span></div>` : ''}
       </div>
       <p class="faint" style="font-size:var(--fs-xs)">Cancelar, reembolsar o cambiar de plan se hace desde Stripe para no desincronizar cobros y membresía.</p>
-      <div class="row">${sus.customerId ? `<a class="btn btn--secondary btn--sm" href="https://dashboard.stripe.com/customers/${esc(String(sus.customerId))}" target="_blank" rel="noopener"><i data-lucide="credit-card" class="i"></i>Ver en Stripe</a>` : ''}</div>`
+      <div class="row" style="gap:6px;flex-wrap:wrap">${sus.customerId ? `<a class="btn btn--secondary btn--sm" href="https://dashboard.stripe.com/customers/${esc(String(sus.customerId))}" target="_blank" rel="noopener"><i data-lucide="credit-card" class="i"></i>Ver en Stripe</a>` : ''}${(sus.accesoBloqueado === true || sus.enDisputa === true) ? `<button type="button" class="btn btn--danger btn--sm" data-desbloquear-sus="${m.uid}"><i data-lucide="unlock" class="i"></i>Desbloquear acceso</button>` : ''}</div>`
       : `<p class="muted" style="font-size:var(--fs-sm)">Sin suscripción de Stripe registrada. Cuando el miembro contrate un plan de pago, aquí aparecerá su estado, próximo cobro y el enlace directo a su cliente en Stripe.</p>`}
     </div>
   </div>
@@ -390,7 +392,10 @@ export function adminAvisos() {
   <div class="stack" style="gap:10px;max-width:820px">${l.map((a) => `
     <div class="card card--pad row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap">
       <div><strong>${esc(a.titulo)}</strong><p class="muted" style="font-size:var(--fs-sm)">${esc(a.texto)}</p><span class="faint" style="font-size:var(--fs-xs)">${hace(a.fecha)}${a.enlace ? ` · ${esc(a.enlace)}` : ''}</span></div>
-      ${Datos.modo === 'demo' ? `<button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>` : ''}
+      <div class="row" style="gap:4px;flex-shrink:0">
+        <button class="btn btn--ghost btn--icon btn--xs" data-editar-aviso="${a.id}" aria-label="Editar"><i data-lucide="pencil" class="i"></i></button>
+        <button class="btn btn--ghost btn--icon btn--xs" data-borrar-aviso="${a.id}" aria-label="Borrar"><i data-lucide="trash-2" class="i"></i></button>
+      </div>
     </div>`).join('') || vacio('Sin avisos publicados', 'El primero aparecerá en la campana de todos los miembros.')}</div>`;
 }
 
@@ -497,7 +502,7 @@ export function adminAjustes() {
       <div class="field"><label>Precio anual (MXN)</label><input class="input" type="number" min="0" name="precioAnual" value="${c.precioAnual}"></div>
       <div class="field"><label>Descuento VIP en vivo (%)</label><input class="input" type="number" min="0" max="100" name="descuentoVIP" value="${c.descuentoVIP}"></div>
     </div>
-    <p class="faint" style="font-size:var(--fs-xs)">Los precios que se cobran los define Stripe. Cambiarlos aquí actualiza lo que se muestra; con el backend conectado se valida que coincidan con los precios de Stripe.</p>
+    <p class="faint" style="font-size:var(--fs-xs)">Estos valores sólo cambian lo que se <strong>muestra</strong> en la app. El cobro real lo define el precio configurado en Stripe desde el servidor; no se valida ni edita desde aquí, así que mantenlos iguales a Stripe a mano.</p>
     <h3 class="admin-card-title" style="margin-top:8px">Contacto</h3>
     <div class="form-grid">
       <div class="field"><label>WhatsApp de soporte (con lada, solo números)</label><input class="input mono" name="whatsappSoporte" value="${esc(c.whatsappSoporte)}" pattern="[0-9]{10,15}"></div>

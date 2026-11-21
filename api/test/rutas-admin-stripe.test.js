@@ -236,14 +236,33 @@ describe('admin: foro, quizzes, avisos y config', () => {
   });
 
   test('avisos y config', async () => {
-    await admin('post', '/admin/avisos').send({ titulo: 'Nuevo curso', texto: 'Ya está disponible', enlace: 'https://club.odonteckconsulting.com/#/cursos' }).expect(201);
+    const creado = await admin('post', '/admin/avisos').send({ titulo: 'Nuevo curso', texto: 'Ya está disponible', enlace: 'https://club.odonteckconsulting.com/#/cursos' }).expect(201);
     assert.equal((await admin('get', '/admin/avisos').expect(200)).body.length, 1);
     await admin('post', '/admin/avisos').send({ titulo: 'x', texto: '<a href=x>clic</a>' }).expect(400);
+
+    // Editar (PATCH) un aviso existente.
+    const editado = await admin('patch', `/admin/avisos/${creado.body.id}`).send({ titulo: 'Curso actualizado' }).expect(200);
+    assert.equal(editado.body.titulo, 'Curso actualizado');
+    assert.equal(editado.body.texto, 'Ya está disponible'); // merge: conserva lo demás
+    await admin('patch', `/admin/avisos/${creado.body.id}`).send({}).expect(400);
+    await admin('patch', '/admin/avisos/noexiste').send({ titulo: 'Hola mundo' }).expect(404);
+    // VIP no puede editar ni borrar.
+    await request(env.app).patch(`/admin/avisos/${creado.body.id}`).set(bearer(TOKENS.vip)).send({ titulo: 'hack' }).expect(403);
+
+    // Borrar (DELETE) un aviso existente.
+    await admin('delete', `/admin/avisos/${creado.body.id}`).expect(200);
+    assert.equal((await admin('get', '/admin/avisos').expect(200)).body.length, 0);
+    await admin('delete', '/admin/avisos/noexiste').expect(404);
 
     const cfg = await admin('patch', '/admin/config').send({ precios: { mensual: 249 }, descuentoVIP: 25 }).expect(200);
     assert.deepEqual(cfg.body.precios, { mensual: 249, anual: 1899 });
     assert.equal(cfg.body.descuentoVIP, 25);
-    await admin('patch', '/admin/config').send({ stripePriceAnual: 'no-es-price' }).expect(400);
+
+    // Los IDs de precio de Stripe están bloqueados en el panel, incluso bien formados.
+    const bloqueo = await admin('patch', '/admin/config').send({ stripePriceAnual: 'price_1Nabcd' }).expect(400);
+    assert.equal(bloqueo.body.error, 'stripe_price_bloqueado');
+    await admin('patch', '/admin/config').send({ stripePriceMensual: 'no-es-price' }).expect(400);
+    assert.equal(env.db.docs.get('v2_config/general')?.stripePriceAnual, undefined);
   });
 });
 
@@ -372,6 +391,56 @@ describe('stripe', () => {
     const recompensas = env.db.leer('v2_recompensas_estado/free1');
     assert.equal(recompensas.saldo, 300);
     assert.equal(recompensas.contadores.membresias, 1);
+  });
+
+  test('dos entregas simultáneas del mismo evento se procesan una sola vez (idempotencia atómica)', async () => {
+    env = crearEntorno();
+    env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
+    const evento = {
+      id: 'evt_concurrente',
+      object: 'event',
+      type: 'checkout.session.completed',
+      created: 1_790_000_300,
+      data: { object: { id: 'cs_cc', object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1', customer_details: { email: 'carla@example.com' } } },
+    };
+    const { payload, firma } = eventoFirmado(evento);
+    const enviar = () => request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const [a, b] = await Promise.all([enviar(), enviar()]);
+    const resultados = [a.body, b.body];
+    // Exactamente una procesa y la otra se reconoce como duplicada.
+    assert.equal(resultados.filter((x) => x.resultado === 'suscripcion_guardada').length, 1);
+    assert.equal(resultados.filter((x) => x.duplicado === true).length, 1);
+    // Los 300 OdonCoins de membresía se otorgan una sola vez.
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').saldo, 300);
+    assert.equal(env.db.leer('v2_recompensas_estado/free1').contadores.membresias, 1);
+  });
+
+  test('una marca "procesando" vieja (entrega caída) se reclama y reprocesa', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_stale' }));
+    // Simula una entrega anterior que reservó la marca y se cayó antes de confirmarla.
+    env.db.docs.set('v2_stripe_eventos/evt_stale', { tipo: 'customer.subscription.updated', estado: 'procesando', recibido: '2026-09-17T11:00:00.000Z', intentos: 1 });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.resultado, 'suscripcion_guardada'); // se reprocesó, no se dio por duplicado
+    const marca = env.db.leer('v2_stripe_eventos/evt_stale');
+    assert.equal(marca.estado, 'listo');
+    assert.equal(marca.intentos, 2);
+  });
+
+  test('una marca "procesando" reciente (entrega simultánea) se reconoce en proceso, sin reprocesar', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_curso' }));
+    env.db.docs.set('v2_stripe_eventos/evt_curso', { tipo: 'customer.subscription.updated', estado: 'procesando', recibido: '2026-09-17T11:59:30.000Z', intentos: 1 });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.duplicado, true);
+    assert.equal(r.body.enProceso, true);
+    assert.equal(env.db.rutas('v2_suscripciones').length, 0); // no escribió nada
+  });
+
+  test('una marca "listo" cortocircuita como duplicado', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_listo' }));
+    env.db.docs.set('v2_stripe_eventos/evt_listo', { tipo: 'customer.subscription.updated', estado: 'listo', recibido: '2026-09-17T11:00:00.000Z', resultado: 'suscripcion_guardada' });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.duplicado, true);
+    assert.notEqual(r.body.enProceso, true);
   });
 
   test('checkout.session.async_payment_succeeded activa el plan al confirmarse el método diferido', async () => {

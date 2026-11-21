@@ -98,6 +98,7 @@ export const Datos = {
   avisos: () => leer<Aviso[]>('avisos', []).sort((a, b) => b.fecha.localeCompare(a.fecha)),
   publicarAviso(a: Omit<Aviso, 'id' | 'fecha'>) { const l = this.avisos(); l.unshift({ ...a, id: Math.random().toString(36).slice(2, 10), fecha: hoy() }); escribir('avisos', l); },
   borrarAviso(id: string) { escribir('avisos', this.avisos().filter((a) => a.id !== id)); },
+  editarAviso(id: string, cambios: Partial<Pick<Aviso, 'titulo' | 'texto' | 'enlace'>>) { escribir('avisos', this.avisos().map((a) => (a.id === id ? { ...a, ...cambios } : a))); },
 
   config: () => ({ ...CONFIG_DEF, ...leer<Partial<Config>>('config', {}) }),
   guardarConfig(c: Config) { escribir('config', c); },

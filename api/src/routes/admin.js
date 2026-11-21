@@ -2,6 +2,7 @@ import { paginaAlumno, movimientosAlumno, recompensasAlumno, pagosAlumno } from 
 // Rutas de administración (claim `admin: true`).
 import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
 import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
+import { MAX_DIAS_CORTESIA, aplicarCortesiaAdmin, docCortesia, partesCortesia } from '../lib/cortesias.js';
 import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
@@ -156,7 +157,17 @@ export function rutasAdmin(ctx) {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
       .map(([cursoId, vistas]) => ({ cursoId, titulo: titulos.get(cursoId) ?? cursoId, vistas }));
+    // Alerta: suscripciones marcadas "en disputa" por el webhook de Stripe (acceso aún vigente).
+    const disputas = [];
+    for (const [uid, sus] of suscripciones) {
+      if (sus?.enDisputa !== true) continue;
+      const perfil = perfiles.get(uid) ?? {};
+      const m = miembros.get(uid) ?? null;
+      disputas.push({ uid, nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '', desde: sus.disputa?.fecha ?? null });
+    }
     res.json({
+      disputasActivas: disputas.length,
+      disputas: disputas.slice(0, 50),
       miembrosActivos,
       registrados: uids.size, accesos, calculadoEn: ahora.toISOString(),
       altas30d,
@@ -419,7 +430,17 @@ export function rutasAdmin(ctx) {
     if (filtro === 'no_vip') lista = lista.filter((x) => !x.esVip);
     if (filtro === 'cortesia') lista = lista.filter((x) => x.cortesiaHasta);
     lista.sort((a, b) => String(b.ultimaActividad ?? '').localeCompare(String(a.ultimaActividad ?? '')) || a.nombre.localeCompare(b.nombre, 'es'));
-    res.json(lista.slice(0, 1000));
+    // Sin corte silencioso: por defecto se devuelven todos. La paginación por offset
+    // es opt-in (?limite=&cursor=), y el total y la siguiente página viajan en
+    // cabeceras para no cambiar el formato de arreglo que consume el panel.
+    const total = lista.length;
+    const limite = req.query.limite !== undefined ? entero(req.query.limite, { campo: 'limite', min: 1, max: 5000 }) : total;
+    const offset = req.query.cursor !== undefined ? entero(req.query.cursor, { campo: 'cursor', min: 0, max: 10_000_000 }) : 0;
+    const pagina = lista.slice(offset, offset + limite);
+    const siguiente = offset + pagina.length < total ? offset + pagina.length : null;
+    res.set('X-Total-Count', String(total));
+    if (siguiente !== null) res.set('X-Next-Offset', String(siguiente));
+    res.json(pagina);
   }));
 
   async function usuarioAuth(uid) {
@@ -514,19 +535,18 @@ export function rutasAdmin(ctx) {
   r.post('/admin/miembros/:uid/cortesia', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
     const b = cuerpo(req);
-    const dias = entero(b.dias, { campo: 'dias', min: 1, max: 3650 });
+    const dias = entero(b.dias, { campo: 'dias', min: 1, max: MAX_DIAS_CORTESIA });
     const motivo = textoRequerido(b.motivo, { campo: 'motivo', min: 3, max: LIMITES.medio });
     const [usuario, miembro] = await Promise.all([usuarioAuth(uid), leerDoc(db, COL.miembros, uid)]);
     if (!usuario && !miembro) throw noEncontrado('No existe un usuario con ese uid.');
     const ahora = ctx.now();
-    const cortesia = {
-      uid,
-      hasta: new Date(ahora.getTime() + dias * DIA_MS).toISOString(),
-      motivo,
-      otorgadaPor: req.usuario.email || req.usuario.uid,
-      fecha: ahora.toISOString(),
-    };
-    await escribirAuditado(ctx, req, db.collection(COL.cortesias).doc(uid), cortesia, { accion: 'otorgar_cortesia', motivo });
+    const otorgadaPor = req.usuario.email || req.usuario.uid;
+    // Reemplaza SÓLO la parte del admin; conserva los días que el miembro tenga por cupón.
+    const cortesia = await escribirAuditado(
+      ctx, req, db.collection(COL.cortesias).doc(uid),
+      (previo) => docCortesia(aplicarCortesiaAdmin(partesCortesia(previo), { dias, motivo, otorgadaPor, ahora }), { uid, ahora }),
+      { accion: 'otorgar_cortesia', motivo },
+    );
     res.status(201).json(cortesia);
   }));
 
@@ -539,11 +559,57 @@ export function rutasAdmin(ctx) {
     res.json({ ok: true, uid });
   }));
 
+  // Revoca la cortesía del miembro. Por defecto (`origen=admin`) quita SÓLO lo que
+  // otorgó el panel y conserva los días por cupón; `origen=cupones` quita sólo el
+  // cupón; `origen=todo` revoca ambos (p. ej. fraude). Si no queda nada, borra el doc.
   r.delete('/admin/miembros/:uid/cortesia', h(async (req, res) => {
     const uid = idDocumento(req.params.uid, 'uid');
+    const origen = unoDe(String(req.query.origen ?? 'admin'), ['admin', 'cupones', 'todo'], { campo: 'origen' });
     const ref = db.collection(COL.cortesias).doc(uid);
-    if (!(await ref.get()).exists) throw noEncontrado('Ese miembro no tiene cortesía.');
-    await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'revocar_cortesia', requiereExistir: true });
+    const resultado = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado('Ese miembro no tiene cortesía.');
+      const antes = snap.data();
+      const partes = partesCortesia(antes);
+      const ahora = ctx.now();
+      let restante;
+      if (origen === 'todo') {
+        restante = { admin: null, cupones: null };
+      } else if (origen === 'cupones') {
+        if (!partes.cupones) throw conflicto('Este miembro no tiene días por cupón que revocar.', 'sin_cupon');
+        restante = { admin: partes.admin, cupones: null };
+      } else {
+        if (!partes.admin) throw conflicto('Este miembro no tiene cortesía otorgada por el panel; sus días provienen de un cupón. Usa origen=todo para revocar todo.', 'sin_cortesia_admin');
+        restante = { admin: null, cupones: partes.cupones };
+      }
+      const cuponVigente = restante.cupones && (aMillis(restante.cupones.hasta) ?? 0) > ahora.getTime();
+      let despues = null;
+      if (restante.admin || cuponVigente) {
+        despues = docCortesia(restante, { uid, ahora });
+        tx.set(ref, despues);
+      } else {
+        tx.delete(ref);
+      }
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'revocar_cortesia', antes, despues });
+      return { origen, conservaCupon: !!cuponVigente };
+    });
+    res.json({ ok: true, uid, ...resultado });
+  }));
+
+  // Desbloqueo manual del acceso: levanta accesoBloqueado/bloqueo/enDisputa de una
+  // suscripción (p. ej. tras resolver un reembolso o disputa a favor del miembro).
+  r.post('/admin/miembros/:uid/desbloquear', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const ref = db.collection(COL.suscripciones).doc(uid);
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado('Ese miembro no tiene suscripción v2.');
+      const antes = snap.data();
+      if (antes.accesoBloqueado !== true && antes.enDisputa !== true) throw conflicto('La suscripción no está bloqueada ni en disputa.', 'no_bloqueada');
+      const cambio = { accesoBloqueado: false, bloqueo: null, enDisputa: false, desbloqueadoEn: ahoraISO(), desbloqueadoPor: req.usuario.email || req.usuario.uid };
+      tx.set(ref, cambio, { merge: true });
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'desbloquear_suscripcion', antes, despues: { ...antes, ...cambio } });
+    });
     res.json({ ok: true, uid });
   }));
 
@@ -754,6 +820,26 @@ export function rutasAdmin(ctx) {
     };
     await escribirAuditado(ctx, req, ref, aviso, { modo: 'create', accion: 'publicar_aviso' });
     res.status(201).json(aviso);
+  }));
+
+  r.patch('/admin/avisos/:id', h(async (req, res) => {
+    const id = idDocumento(req.params.id, 'id');
+    const b = cuerpo(req);
+    const cambios = {};
+    if (b.titulo !== undefined) cambios.titulo = textoRequerido(b.titulo, { campo: 'titulo', min: 3, max: LIMITES.tituloHilo });
+    if (b.texto !== undefined) cambios.texto = textoRequerido(b.texto, { campo: 'texto', min: 3, max: 2000, multilinea: true });
+    if (b.enlace !== undefined) cambios.enlace = url(b.enlace, { campo: 'enlace' }) ?? null;
+    if (Object.keys(cambios).length === 0) throw invalido('No enviaste ningún campo para actualizar.');
+    const ref = db.collection(COL.avisos).doc(id);
+    const actualizado = await escribirAuditado(ctx, req, ref, { ...cambios, actualizado: ahoraISO() }, { modo: 'merge', accion: 'editar_aviso', requiereExistir: true });
+    res.json(actualizado);
+  }));
+
+  r.delete('/admin/avisos/:id', h(async (req, res) => {
+    const id = idDocumento(req.params.id, 'id');
+    const ref = db.collection(COL.avisos).doc(id);
+    await escribirAuditado(ctx, req, ref, null, { modo: 'delete', accion: 'borrar_aviso', requiereExistir: true });
+    res.json({ ok: true, id });
   }));
 
   // ---------- Config ----------

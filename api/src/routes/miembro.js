@@ -14,6 +14,7 @@ import { MAX_VISTAS_PARA_CAMBIAR, enVentanaDeCambio, estadoCursoGratis, leerCurs
 import { HttpError, conflicto, demasiadasSolicitudes, invalido, noConfigurado, noEncontrado } from '../lib/errores.js';
 import { calificarEvaluacion, calificarPregunta, preguntaPublica } from '../lib/evaluaciones.js';
 import { DIA_MS, aMillis } from '../lib/fechas.js';
+import { aplicarCupon, docCortesia, partesCortesia } from '../lib/cortesias.js';
 import { formatearFolio } from '../lib/folio.js';
 import { ENCUESTAS } from '../lib/encuestas.js';
 import { leerCatalogoRecompensas } from '../lib/recompensas-catalogo.js';
@@ -1177,13 +1178,13 @@ export function rutasMiembro(ctx) {
       if (cupon.usosMax > 0 && (cupon.usados ?? 0) >= cupon.usosMax) throw conflicto('Este cupón ya alcanzó su límite de usos.', 'cupon_agotado');
       if (canjeSnap.exists) throw conflicto('Ya habías canjeado este cupón.', 'cupon_ya_canjeado');
       const dias = cupon.dias;
-      const hastaPrevio = cortesiaSnap.exists ? (aMillis(cortesiaSnap.data().hasta) ?? 0) : 0;
-      const base = hastaPrevio > ahora.getTime() ? hastaPrevio : ahora.getTime();
-      const hasta = new Date(base + dias * DIA_MS).toISOString();
-      tx.set(cortesiaRef, { uid, hasta, motivo: `Cupón ${codigo}`, otorgadaPor: `cupon:${codigo}`, fecha: ahora.toISOString() });
+      // Suma días SÓLO sobre la parte de cupones; conserva cualquier cortesía del admin.
+      const partes = aplicarCupon(partesCortesia(cortesiaSnap.exists ? cortesiaSnap.data() : null), { dias, codigo, ahora });
+      const doc = docCortesia(partes, { uid, ahora });
+      tx.set(cortesiaRef, doc);
       tx.set(canjeRef, { codigo, uid, dias, fecha: ahora.toISOString() });
       tx.set(cuponRef, { ...cupon, usados: (cupon.usados ?? 0) + 1, actualizado: ahora.toISOString() });
-      return { dias, hasta };
+      return { dias, hasta: doc.hasta };
     });
     res.status(201).json({ ok: true, dias: resultado.dias, hasta: resultado.hasta });
   }));

@@ -47,7 +47,11 @@ export function esVip(miembro, ahora = new Date(), { cortesia = null, esAdmin = 
  * el periodo ya pagado. Si cancela al final del periodo, conserva acceso hasta esa fecha.
  */
 export function suscripcionVigente(sus, ahora) {
-  if (!sus || !['active', 'trialing', 'past_due'].includes(sus.estado)) return false;
+  if (!sus) return false;
+  // Bloqueo inmediato por reembolso total o disputa perdida (lo pone el webhook de
+  // Stripe). Persiste aunque lleguen eventos posteriores de la suscripción.
+  if (sus.accesoBloqueado === true) return false;
+  if (!['active', 'trialing', 'past_due'].includes(sus.estado)) return false;
   const fin = aMillis(sus.periodoFin);
   if (fin === null) return sus.estado !== 'past_due';
   if (Number.isNaN(fin)) return false;
