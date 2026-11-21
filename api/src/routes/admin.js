@@ -3,6 +3,7 @@ import { paginaAlumno, movimientosAlumno, recompensasAlumno, pagosAlumno } from 
 import { estadoAdministrativo, normalizarMiembros } from '../lib/admin-membresias.js';
 import { registrarAuditoria, escribirAuditado } from '../lib/auditoria.js';
 import { MAX_DIAS_CORTESIA, aplicarCortesiaAdmin, docCortesia, partesCortesia } from '../lib/cortesias.js';
+import { altasBajasV2, aprobacionQuizzes, bajasProgramadas, calcularMRR, canjesPendientesViejos, conversionCursoGratis, economiaOdonCoins, efectoCuponesApp, efectoPromosStripe, finalizacionPorClase, mapaUltimaActividad, retencionPorCohorte, tasaBajas } from '../lib/metricas.js';
 import { randomInt } from 'node:crypto';
 import express from 'express';
 import {
@@ -27,19 +28,10 @@ const TIPOS_SUBIDA = {
   portada: { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png' },
 };
 
-// El club viejo no tiene un esquema fijo de fechas de alta/baja: se prueban los nombres conocidos.
-const CAMPOS_ALTA = ['fechaAlta', 'creadoEn', 'creado', 'fechaInicio', 'fechaRegistro', 'createdAt'];
-const CAMPOS_BAJA = ['canceladoEn', 'fechaBaja', 'fechaCancelacion'];
 const CAMPANA_PRAXIA_COMUNIDAD = 'praxia-comunidad-30-dias';
 const CUPO_PRAXIA_COMUNIDAD = 50;
-
-const primeraFecha = (obj, campos) => {
-  for (const c of campos) {
-    const ms = aMillis(obj?.[c]);
-    if (ms !== null && !Number.isNaN(ms)) return ms;
-  }
-  return null;
-};
+const TTL_RESUMEN_MS = 5 * 60 * 1000;
+const TTL_METRICAS_MS = 60 * 60 * 1000;
 
 const docs = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 const esIndiceFaltante = (error) => error?.code === 9 || error?.code === 'failed-precondition' || /index/i.test(String(error?.message ?? ''));
@@ -65,11 +57,10 @@ export function rutasAdmin(ctx) {
     res.json({ eventos: pagina.map((d) => ({ ...d.data(), id: d.id })), siguiente: snap.size > 50 ? pagina.at(-1).id : null, consultadoEn: ahoraISO() });
   }));
 
-  // ---------- Resumen ----------
-  r.get('/admin/resumen', h(async (req, res) => {
-    const ahora = ctx.now();
+  // ---------- Resumen (precalculado con TTL de 5 min; ?actualizar=1 recalcula) ----------
+  async function calcularResumen(ahora) {
     const desde = ahora.getTime() - 30 * DIA_MS;
-    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap, susSnap, perfilesSnap, config, authUsers] = await Promise.all([
+    const [miembrosSnap, cortesiasSnap, progresoSnap, certSnap, foroSnap, cursosSnap, susSnap, perfilesSnap, cursoGratisSnap, canjesSnap, config, auth] = await Promise.all([
       db.collection(COL.miembros).get(),
       db.collection(COL.cortesias).get(),
       db.collection(COL.progreso).get(),
@@ -78,34 +69,27 @@ export function rutasAdmin(ctx) {
       db.collection(COL.cursos).get(),
       db.collection(COL.suscripciones).get(),
       db.collection(COL.perfiles).get(),
+      db.collection(COL.cursoGratis).get(),
+      db.collection(COL.recompensasCanjes).get(),
       leerConfig(db),
-      listarUsuariosAuth(),
+      listarUsuariosAuthAcotado(),
     ]);
+    const authUsers = auth.usuarios;
     const miembros = normalizarMiembros(new Map(miembrosSnap.docs.map((d) => [d.id, d.data()])), authUsers, ahora);
     const cortesias = new Map(cortesiasSnap.docs.map((d) => [d.id, d.data()]));
     const suscripciones = new Map(susSnap.docs.map((d) => [d.id, d.data()]));
     const perfiles = new Map(perfilesSnap.docs.map((d) => [d.id, d.data()]));
+    const cursoGratis = new Map(cursoGratisSnap.docs.map((d) => [d.id, d.data()]));
+    const canjes = canjesSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const progreso = progresoSnap.docs.map((d) => d.data());
     const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...suscripciones.keys(), ...perfiles.keys(), ...authUsers.keys()]);
-    // Última actividad por uid (para detectar inactivos en riesgo de baja).
-    const ultimaActividadMs = new Map();
-    for (const d of progresoSnap.docs) {
-      const p = d.data();
-      if (!p.uid) continue;
-      const ult = Math.max(0, ...((p.historial ?? []).map((f) => aMillis(f) ?? 0)));
-      if (ult > (ultimaActividadMs.get(p.uid) ?? 0)) ultimaActividadMs.set(p.uid, ult);
-    }
-    const precioMensual = Number(config.precios?.mensual) || 0;
-    const precioAnual = Number(config.precios?.anual) || 0;
+    const ultima = mapaUltimaActividad(progreso); // definición ÚNICA, compartida con /admin/miembros
+
     const limite7 = ahora.getTime() + 7 * DIA_MS;
     const hace14 = ahora.getTime() - 14 * DIA_MS;
     const accesos = { suscripcion: 0, historica: 0, regalo: 0, prueba: 0, cortesia: 0, administrador: 0, sin_acceso: 0 };
-    let miembrosActivos = 0;
-    let mensualActivos = 0;
-    let anualActivos = 0;
-    let cortesiaActivos = 0;
-    let inactivos = 0;
-    const porVencer = [];
-    const inactivosLista = [];
+    let miembrosActivos = 0, mensualActivos = 0, anualActivos = 0, cortesiaActivos = 0, inactivos = 0;
+    const porVencer = [], inactivosLista = [];
     for (const uid of uids) {
       const m = miembros.get(uid) ?? null;
       const estado = estadoAdministrativo(m, cortesias.get(uid) ?? null, authUsers.get(uid)?.customClaims?.admin === true, ahora, suscripciones.get(uid) ?? null);
@@ -114,77 +98,157 @@ export function rutasAdmin(ctx) {
       miembrosActivos++;
       if (['cortesia', 'regalo'].includes(estado.origenAcceso)) cortesiaActivos++;
       else if (['suscripcion', 'historica'].includes(estado.origenAcceso)) {
-        if (estado.plan === 'anual') anualActivos++;
-        else if (estado.plan === 'mensual') mensualActivos++;
+        if (estado.plan === 'anual') anualActivos++; else if (estado.plan === 'mensual') mensualActivos++;
       }
-      // Contacto para los recordatorios de retención (el WhatsApp sale del perfil del miembro).
       const perfil = perfiles.get(uid) ?? {};
       const contacto = { nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '' };
       const venceMs = estado.vence ? (aMillis(estado.vence) ?? null) : null;
       if (['suscripcion', 'historica'].includes(estado.origenAcceso) && venceMs !== null && venceMs > ahora.getTime() && venceMs <= limite7) {
         porVencer.push({ uid, ...contacto, plan: estado.plan, vence: estado.vence });
       }
-      const actMs = ultimaActividadMs.get(uid) ?? 0;
+      const actMs = ultima.get(uid) ?? 0;
       if (estado.origenAcceso !== 'administrador' && actMs < hace14) {
         inactivos++;
         inactivosLista.push({ uid, ...contacto, plan: estado.plan, ultimaActividad: actMs ? new Date(actMs).toISOString() : null });
       }
     }
-    const mrr = mensualActivos * precioMensual + Math.round((anualActivos * precioAnual) / 12);
+
+    // Ingresos y retención, calculados sobre v2_suscripciones.
+    const mrrInfo = calcularMRR(suscripciones, config);
+    const bajas = tasaBajas(suscripciones, ahora);
+    const programadas = bajasProgramadas(suscripciones);
+    const conversion = conversionCursoGratis(cursoGratis, suscripciones, miembros, ahora);
+    const altasBajas = altasBajasV2(suscripciones, ahora);
+    const canjesViejos = canjesPendientesViejos(canjes, ahora, 3);
+    const nombreDe = (uid) => perfiles.get(uid)?.nombre ?? miembros.get(uid)?.nombre ?? '';
+
+    // Altas VIP por mes (v2: sub.created), últimos 6 meses.
     const meses = Array.from({ length: 6 }, (_, i) => { const d = new Date(ahora); d.setDate(1); d.setMonth(d.getMonth() - 5 + i); return d; });
-    const altasPorMes = meses.map((d) => ({
-      mes: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
-      total: [...miembros.values()].filter((mm) => { const a = primeraFecha(mm, CAMPOS_ALTA); if (a === null) return false; const f = new Date(a); return f.getFullYear() === d.getFullYear() && f.getMonth() === d.getMonth(); }).length,
-    }));
-    let altas30d = 0;
-    let bajas30d = 0;
-    for (const m of miembros.values()) {
-      const alta = primeraFecha(m, CAMPOS_ALTA);
-      const baja = primeraFecha(m, CAMPOS_BAJA);
-      if (alta !== null && alta >= desde) altas30d++;
-      if (baja !== null && baja >= desde) bajas30d++;
-    }
+    const altasPorMes = meses.map((d) => {
+      const clave = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      const total = [...suscripciones.values()].filter((s) => { const ms = aMillis(s?.altaVip); return ms !== null && !Number.isNaN(ms) && new Date(ms).toISOString().slice(0, 7) === clave; }).length;
+      return { mes: clave, total };
+    });
+
     let clasesVistas30d = 0;
     const vistasPorCurso = new Map();
-    for (const d of progresoSnap.docs) {
-      const p = d.data();
+    for (const p of progreso) {
       const recientes = (p.historial ?? []).filter((f) => (aMillis(f) ?? 0) >= desde).length;
       clasesVistas30d += recientes;
       if (recientes) vistasPorCurso.set(p.cursoId, (vistasPorCurso.get(p.cursoId) ?? 0) + recientes);
     }
     const titulos = new Map(cursosSnap.docs.map((d) => [d.id, d.data().titulo ?? d.id]));
-    const cursosTop = [...vistasPorCurso.entries()]
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
+    const cursosTop = [...vistasPorCurso.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5)
       .map(([cursoId, vistas]) => ({ cursoId, titulo: titulos.get(cursoId) ?? cursoId, vistas }));
-    // Alerta: suscripciones marcadas "en disputa" por el webhook de Stripe (acceso aún vigente).
+
     const disputas = [];
     for (const [uid, sus] of suscripciones) {
       if (sus?.enDisputa !== true) continue;
-      const perfil = perfiles.get(uid) ?? {};
-      const m = miembros.get(uid) ?? null;
-      disputas.push({ uid, nombre: perfil.nombre ?? m?.nombre ?? '', whatsapp: perfil.whatsapp ?? '', email: perfil.email ?? m?.email ?? '', desde: sus.disputa?.fecha ?? null });
+      disputas.push({ uid, nombre: nombreDe(uid), whatsapp: perfiles.get(uid)?.whatsapp ?? '', email: perfiles.get(uid)?.email ?? miembros.get(uid)?.email ?? '', desde: sus.disputa?.fecha ?? null });
     }
-    res.json({
-      disputasActivas: disputas.length,
-      disputas: disputas.slice(0, 50),
+
+    return {
+      aproximado: auth.truncado === true,
       miembrosActivos,
-      registrados: uids.size, accesos, calculadoEn: ahora.toISOString(),
-      altas30d,
-      bajas30d,
+      registrados: uids.size, accesos,
+      // Ingresos (MRR real: sólo active, sin bloqueo; trialing y en riesgo aparte).
+      mrr: mrrInfo.mrr, mrrEstimado: mrrInfo.estimado, moneda: mrrInfo.moneda,
+      mrrPotencial: mrrInfo.mrrPotencial, suscripcionesActivas: mrrInfo.activos, suscripcionesTrial: mrrInfo.trialing,
+      enRiesgo: { cuentas: mrrInfo.enRiesgo.cuentas, monto: mrrInfo.enRiesgo.monto, lista: mrrInfo.enRiesgo.lista.map((x) => ({ ...x, nombre: nombreDe(x.uid) })) },
+      // Retención (v2).
+      tasaBajas: bajas.tasa, altas30d: altasBajas.altas, bajas30d: altasBajas.bajas,
+      bajasProgramadas: { cuentas: programadas.cuentas, lista: programadas.lista.map((x) => ({ ...x, nombre: nombreDe(x.uid) })) },
+      conversionCursoGratis: conversion,
+      // Actividad.
       clasesVistas30d,
       certificados30d: certSnap.docs.filter((d) => (aMillis(d.data().emitido) ?? 0) >= desde).length,
       temasForo30d: foroSnap.docs.filter((d) => (aMillis(d.data().fecha) ?? 0) >= desde).length,
-      cursosTop,
-      mrr,
-      mensualActivos,
-      anualActivos,
-      cortesiaActivos,
-      inactivos,
-      altasPorMes,
+      cursosTop, altasPorMes,
+      mensualActivos, anualActivos, cortesiaActivos, inactivos,
       porVencer: porVencer.sort((a, b) => String(a.vence).localeCompare(String(b.vence))).slice(0, 20),
       inactivosLista: inactivosLista.sort((a, b) => String(a.ultimaActividad ?? '').localeCompare(String(b.ultimaActividad ?? ''))).slice(0, 20),
-    });
+      // Alertas.
+      disputasActivas: disputas.length, disputas: disputas.slice(0, 50),
+      canjesPendientes: canjesViejos,
+    };
+  }
+
+  r.get('/admin/resumen', h(async (req, res) => {
+    const ahora = ctx.now();
+    const forzar = ['1', 'true'].includes(String(req.query.actualizar ?? ''));
+    const cacheRef = db.collection(COL.contadores).doc('resumen');
+    if (!forzar) {
+      const cache = await cacheRef.get();
+      if (cache.exists) {
+        const d = cache.data();
+        const edad = ahora.getTime() - (aMillis(d.calculadoEn) ?? 0);
+        if (edad >= 0 && edad < TTL_RESUMEN_MS) { res.json({ ...d.datos, calculadoEn: d.calculadoEn, cacheado: true }); return; }
+      }
+    }
+    const datos = await calcularResumen(ahora);
+    await cacheRef.set({ datos, calculadoEn: ahora.toISOString() });
+    res.json({ ...datos, calculadoEn: ahora.toISOString(), cacheado: false });
+  }));
+
+  // ---------- Métricas (pestaña aparte; precalculadas con TTL de 1 hora) ----------
+  async function calcularMetricas(ahora) {
+    const [susSnap, miembrosSnap, cursosSnap, progresoSnap, intentosSnap, estadoSnap, canjesSnap, cuponesCanjesSnap, auth] = await Promise.all([
+      db.collection(COL.suscripciones).get(),
+      db.collection(COL.miembros).get(),
+      db.collection(COL.cursos).get(),
+      db.collection(COL.progreso).get(),
+      db.collection(COL.intentos).get(),
+      db.collection(COL.recompensasEstado).get(),
+      db.collection(COL.recompensasCanjes).get(),
+      db.collection(COL.cuponesCanjes).get(),
+      listarUsuariosAuthAcotado(),
+    ]);
+    const suscripciones = new Map(susSnap.docs.map((d) => [d.id, d.data()]));
+    const miembros = new Map(miembrosSnap.docs.map((d) => [d.id, d.data()]));
+    const cursos = new Map(cursosSnap.docs.map((d) => [d.id, d.data()]));
+    const progreso = progresoSnap.docs.map((d) => d.data());
+    const intentos = intentosSnap.docs.map((d) => d.data());
+    const estados = estadoSnap.docs.map((d) => d.data());
+    const canjes = canjesSnap.docs.map((d) => d.data());
+    const cuponesCanjes = cuponesCanjesSnap.docs.map((d) => d.data());
+
+    // Registros de cuenta por mes (B2: creationTime de Firebase Auth), últimos 12 meses.
+    const registros = new Map();
+    for (const u of auth.usuarios.values()) {
+      const ms = u?.metadata?.creationTime ? new Date(u.metadata.creationTime).getTime() : NaN;
+      if (Number.isNaN(ms)) continue;
+      const k = new Date(ms).toISOString().slice(0, 7);
+      registros.set(k, (registros.get(k) ?? 0) + 1);
+    }
+    const registrosPorMes = [...registros.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-12).map(([mes, total]) => ({ mes, total }));
+
+    return {
+      aproximado: auth.truncado === true,
+      retencionCohortes: retencionPorCohorte(suscripciones, miembros, ahora),
+      finalizacionClases: finalizacionPorClase(progreso, cursos),
+      quizzes: aprobacionQuizzes(intentos, cursos),
+      economiaOdonCoins: economiaOdonCoins(estados, canjes),
+      cuponesApp: efectoCuponesApp(cuponesCanjes, suscripciones, miembros, ahora),
+      promosStripe: efectoPromosStripe(suscripciones),
+      registrosPorMes,
+    };
+  }
+
+  r.get('/admin/metricas', h(async (req, res) => {
+    const ahora = ctx.now();
+    const forzar = ['1', 'true'].includes(String(req.query.actualizar ?? ''));
+    const cacheRef = db.collection(COL.contadores).doc('metricas');
+    if (!forzar) {
+      const cache = await cacheRef.get();
+      if (cache.exists) {
+        const d = cache.data();
+        const edad = ahora.getTime() - (aMillis(d.calculadoEn) ?? 0);
+        if (edad >= 0 && edad < TTL_METRICAS_MS) { res.json({ ...d.datos, calculadoEn: d.calculadoEn, cacheado: true }); return; }
+      }
+    }
+    const datos = await calcularMetricas(ahora);
+    await cacheRef.set({ datos, calculadoEn: ahora.toISOString() });
+    res.json({ ...datos, calculadoEn: ahora.toISOString(), cacheado: false });
   }));
 
   // La visualización de campaña usa sólo cifras agregadas. Nunca retorna
@@ -295,6 +359,66 @@ export function rutasAdmin(ctx) {
     },
   });
 
+  const idsDeCuerpo = (valor, max) => {
+    if (!Array.isArray(valor) || valor.length === 0) throw invalido('Envía una lista de ids.', 'ids_requeridos');
+    if (valor.length > max) throw invalido(`Demasiados ids (máximo ${max}).`, 'ids_exceso');
+    const ids = valor.map((v) => idDocumento(v, 'id'));
+    if (new Set(ids).size !== ids.length) throw invalido('Hay ids repetidos en la lista.', 'ids_duplicados');
+    return ids;
+  };
+
+  // Reordenamiento atómico de cursos: un solo lote, un solo evento en la bitácora.
+  // Máximo 499: 499 cursos + 1 escritura de auditoría = 500, el tope de una transacción.
+  r.post('/admin/cursos/reordenar', h(async (req, res) => {
+    const ids = idsDeCuerpo(cuerpo(req).ids, 499);
+    const resultado = await db.runTransaction(async (tx) => {
+      const refs = ids.map((id) => db.collection(COL.cursos).doc(id));
+      const snaps = await tx.getAll(...refs);
+      const faltan = ids.filter((_, i) => !snaps[i].exists);
+      if (faltan.length) throw noEncontrado(`No existen estos cursos: ${faltan.join(', ')}.`);
+      const antes = ids.map((id, i) => ({ id, orden: snaps[i].data().orden ?? null }));
+      ids.forEach((id, i) => tx.set(refs[i], { ...snaps[i].data(), orden: i + 1, actualizado: ahoraISO() }));
+      const despues = ids.map((id, i) => ({ id, orden: i + 1 }));
+      registrarAuditoria(ctx, tx, req, { ref: db.collection(COL.cursos).doc('__lote__'), accion: 'reordenar_cursos', antes: { orden: antes }, despues: { orden: despues } });
+      return { total: ids.length };
+    });
+    res.json({ ok: true, ...resultado });
+  }));
+
+  // Acciones masivas atómicas (publicar/ocultar/borrar) con un solo evento auditado.
+  r.post('/admin/cursos/lote', h(async (req, res) => {
+    const b = cuerpo(req);
+    const accion = unoDe(b.accion, ['publicar', 'ocultar', 'borrar'], { campo: 'accion', requerido: true });
+    const ids = idsDeCuerpo(b.ids, 200);
+    const resultado = await db.runTransaction(async (tx) => {
+      const refs = ids.map((id) => db.collection(COL.cursos).doc(id));
+      const snaps = await tx.getAll(...refs);
+      // Todas las lecturas antes de escribir: para borrar, se comprueba el progreso de cada curso.
+      const conProgreso = new Set();
+      if (accion === 'borrar') {
+        const checks = await Promise.all(ids.map((id, i) => snaps[i].exists
+          ? tx.get(db.collection(COL.progreso).where('cursoId', '==', id).limit(1))
+          : Promise.resolve(null)));
+        ids.forEach((id, i) => { if (checks[i] && !checks[i].empty) conProgreso.add(id); });
+      }
+      const afectados = [];
+      const omitidos = [];
+      ids.forEach((id, i) => {
+        if (!snaps[i].exists) { omitidos.push({ id, motivo: 'no_existe' }); return; }
+        if (accion === 'borrar') {
+          if (conProgreso.has(id)) { omitidos.push({ id, motivo: 'curso_con_progreso' }); return; }
+          tx.delete(refs[i]);
+        } else {
+          tx.set(refs[i], { ...snaps[i].data(), publicado: accion === 'publicar', actualizado: ahoraISO() });
+        }
+        afectados.push(id);
+      });
+      registrarAuditoria(ctx, tx, req, { ref: db.collection(COL.cursos).doc('__lote__'), accion: `lote_${accion}`, antes: { ids }, despues: { afectados, omitidos } });
+      return { accion, afectados, omitidos };
+    });
+    res.json({ ok: true, ...resultado });
+  }));
+
   crud({
     ruta: 'materiales',
     coleccion: COL.materiales,
@@ -378,6 +502,21 @@ export function rutasAdmin(ctx) {
     return mapa;
   }
 
+  // Variante acotada que NO lanza si hay demasiadas cuentas: devuelve lo leído y marca
+  // truncado. El Resumen (cacheado) la usa para no caerse con más de ~25.000 usuarios.
+  async function listarUsuariosAuthAcotado(maxPaginas = 25) {
+    const mapa = new Map();
+    if (typeof ctx.auth?.listUsers !== 'function') return { usuarios: mapa, truncado: false };
+    let pageToken;
+    let paginas = 0;
+    do {
+      const r = await ctx.auth.listUsers(1000, pageToken);
+      for (const u of r.users ?? []) mapa.set(u.uid, u);
+      pageToken = r.pageToken;
+    } while (pageToken && ++paginas < maxPaginas);
+    return { usuarios: mapa, truncado: !!pageToken };
+  }
+
   r.get('/admin/miembros', h(async (req, res) => {
     const q = String(req.query.q ?? '').trim().toLowerCase().slice(0, 100);
     const filtro = req.query.estado === undefined || req.query.estado === '' ? 'todos' : String(req.query.estado);
@@ -386,13 +525,12 @@ export function rutasAdmin(ctx) {
     const [{ miembros: miembrosRaw, cortesias, perfiles, progreso, suscripciones }, authUsers] = await Promise.all([cargarMapas(), listarUsuariosAuth()]);
 
     const miembros = normalizarMiembros(miembrosRaw, authUsers, ahora);
-    const actividad = new Map();
+    // Última actividad con la MISMA definición que el Resumen (máximo de historial + actualizado).
+    const ultima = mapaUltimaActividad(progreso);
+    const clasesPorUid = new Map();
     for (const p of progreso) {
       if (!p.uid) continue;
-      const a = actividad.get(p.uid) ?? { clasesVistas: 0, ultimaActividad: null };
-      a.clasesVistas += Array.isArray(p.vistas) ? p.vistas.length : 0;
-      if (p.actualizado && (!a.ultimaActividad || p.actualizado > a.ultimaActividad)) a.ultimaActividad = p.actualizado;
-      actividad.set(p.uid, a);
+      clasesPorUid.set(p.uid, (clasesPorUid.get(p.uid) ?? 0) + (Array.isArray(p.vistas) ? p.vistas.length : 0));
     }
 
     const uids = new Set([...miembros.keys(), ...cortesias.keys(), ...perfiles.keys(), ...authUsers.keys(), ...suscripciones.keys()]);
@@ -403,7 +541,7 @@ export function rutasAdmin(ctx) {
       const au = authUsers.get(uid) ?? null;
       const esAdmin = au?.customClaims?.admin === true;
       const estado = estadoAdministrativo(m, c, esAdmin, ahora, suscripciones.get(uid) ?? null);
-      const a = actividad.get(uid) ?? { clasesVistas: 0, ultimaActividad: null };
+      const uaMs = ultima.get(uid) ?? 0;
       return {
         uid,
         nombre: perfiles.get(uid)?.nombre ?? m?.nombre ?? au?.displayName ?? '',
@@ -414,9 +552,9 @@ export function rutasAdmin(ctx) {
         plan: estado.plan,
         vence: estado.vence,
         cortesiaHasta: estado.cortesiaVigente ? aISO(c.hasta) : null,
-        clasesVistas: a.clasesVistas,
+        clasesVistas: clasesPorUid.get(uid) ?? 0,
         // Sin actividad de clases, se usa el último inicio de sesión de Firebase Auth.
-        ultimaActividad: a.ultimaActividad ?? aISODesde(au?.metadata?.lastSignInTime),
+        ultimaActividad: uaMs ? new Date(uaMs).toISOString() : aISODesde(au?.metadata?.lastSignInTime),
         alta: aISODesde(au?.metadata?.creationTime),
       };
     });

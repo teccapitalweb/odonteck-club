@@ -23,14 +23,20 @@ describe('admin: autorización', () => {
 
   test('resumen', async () => {
     env.db.docs.set('v2_progreso/vip1_curso-a', { uid: 'vip1', cursoId: 'curso-a', vistas: [1, 2], historial: ['2026-09-10T00:00:00Z', '2026-01-01T00:00:00Z'], actualizado: '2026-09-10T00:00:00Z' });
+    // Altas/bajas v2: por altaVip (sub.created) y canceladaEn, no por los campos heredados.
+    env.db.docs.set('v2_suscripciones/vip1', { uid: 'vip1', estado: 'active', altaVip: '2026-09-05T00:00:00.000Z', importeMensualNetoCents: 19900 });
+    env.db.docs.set('v2_suscripciones/free1', { uid: 'free1', estado: 'canceled', altaVip: '2026-01-01T00:00:00.000Z', canceladaEn: '2026-09-12T00:00:00.000Z' });
     const r = await admin('get', '/admin/resumen').expect(200);
     assert.equal(r.body.miembrosActivos, 3); // Incluye la cuenta administradora, separada por origen.
     assert.equal(r.body.accesos.administrador, 1);
-    assert.equal(r.body.altas30d, 1);
-    assert.equal(r.body.bajas30d, 1);
+    assert.equal(r.body.altas30d, 1); // vip1 altaVip en la ventana
+    assert.equal(r.body.bajas30d, 1); // free1 canceladaEn en la ventana
     assert.equal(r.body.clasesVistas30d, 1);
     assert.equal(r.body.temasForo30d, 2);
     assert.deepEqual(r.body.cursosTop, [{ cursoId: 'curso-a', titulo: 'Endodoncia práctica', vistas: 1 }]);
+    assert.equal(r.body.mrr, 199); // MRR real de la suscripción active (19900 centavos)
+    assert.equal(r.body.mrrEstimado, false);
+    assert.ok(r.body.calculadoEn);
   });
 
   test('resumen · retención: inactivos y por-vencer traen contacto para recordatorios', async () => {
@@ -373,6 +379,23 @@ describe('stripe', () => {
     assert.equal(env.db.leer('v2_suscripciones/free1').estado, 'canceled');
   });
 
+  test('el webhook guarda importe mensual, descuento, promo code y altaVip', async () => {
+    const base = eventoSuscripcion().data.object;
+    const evento = eventoSuscripcion({ id: 'evt_imp', data: { object: {
+      ...base, created: 1_780_000_000,
+      discount: { promotion_code: 'promo_x', coupon: { percent_off: 20, duration: 'forever' } },
+      items: { data: [{ price: { id: 'price_mensual_test', unit_amount: 19900, currency: 'mxn', recurring: { interval: 'month', interval_count: 1 } }, current_period_end: 1_792_000_000 }] },
+    } } });
+    const { payload, firma } = eventoFirmado(evento);
+    await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const sus = env.db.leer('v2_suscripciones/free1');
+    assert.equal(sus.importeMensualBrutoCents, 19900);
+    assert.equal(sus.descuentoMensualCents, 3980);
+    assert.equal(sus.importeMensualNetoCents, 15920);
+    assert.equal(sus.promotionCode, 'promo_x');
+    assert.equal(sus.altaVip, new Date(1_780_000_000 * 1000).toISOString());
+  });
+
   test('checkout.session.completed recupera la suscripción y usa client_reference_id', async () => {
     env = crearEntorno();
     env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
@@ -391,6 +414,27 @@ describe('stripe', () => {
     const recompensas = env.db.leer('v2_recompensas_estado/free1');
     assert.equal(recompensas.saldo, 300);
     assert.equal(recompensas.contadores.membresias, 1);
+  });
+
+  test('en el checkout, el descuento del promotion code recurrente se captura (discounts expandidos)', async () => {
+    env = crearEntorno();
+    // La suscripción recuperada trae un promotion code recurrente (como con expand:['discounts']).
+    env.stripe.subscriptions.retrieve = async () => ({
+      id: 'sub_1', status: 'active', customer: 'cus_1', created: 1_780_000_000,
+      discount: { promotion_code: 'promo_rec', coupon: { percent_off: 30, duration: 'forever' } },
+      items: { data: [{ price: { id: 'price_mensual_test', unit_amount: 20000, currency: 'mxn', recurring: { interval: 'month', interval_count: 1 } }, current_period_end: 1_792_000_000 }] },
+    });
+    const evento = {
+      id: 'evt_cs_promo', object: 'event', type: 'checkout.session.completed', created: 1_790_000_150,
+      data: { object: { id: 'cs_p', object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1' } },
+    };
+    const { payload, firma } = eventoFirmado(evento);
+    await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const sus = env.db.leer('v2_suscripciones/free1');
+    assert.equal(sus.importeMensualBrutoCents, 20000);
+    assert.equal(sus.descuentoMensualCents, 6000); // 30% de 20000
+    assert.equal(sus.importeMensualNetoCents, 14000);
+    assert.equal(sus.promotionCode, 'promo_rec');
   });
 
   test('dos entregas simultáneas del mismo evento se procesan una sola vez (idempotencia atómica)', async () => {
