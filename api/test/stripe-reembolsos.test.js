@@ -121,14 +121,24 @@ describe('stripe: disputas', () => {
     assert.equal(wallet().saldo, 300);
   });
 
-  test('disputa perdida y luego ganada de OTRA disputa levanta el bloqueo por disputa', async () => {
-    // Bloqueo originado por una disputa perdida (motivo disputa_perdida).
-    await enviar(disputa('evt_dl', 'charge.dispute.closed', { status: 'lost' })).expect(200);
+  test('ganar una disputa del MISMO cargo levanta el bloqueo por disputa de ese cargo', async () => {
+    await enviar(disputa('evt_dl', 'charge.dispute.closed', { status: 'lost' })).expect(200); // charge ch_1
     assert.equal(sub().accesoBloqueado, true);
     assert.equal(sub().bloqueo.motivo, 'disputa_perdida');
-    // Ganar una disputa (otra) sí levanta un bloqueo que vino de disputa.
+    assert.equal(sub().bloqueo.chargeId, 'ch_1');
+    // Disputa ganada del mismo cargo ch_1 → levanta su propio bloqueo.
     await enviar(disputa('evt_dw', 'charge.dispute.closed', { status: 'won', disputaId: 'dp_2' })).expect(200);
     assert.equal(sub().accesoBloqueado, false);
+  });
+
+  test('disputa perdida del cargo A + disputa ganada del cargo B: SIGUE bloqueado (otro cargo)', async () => {
+    await enviar(disputa('evt_dlA', 'charge.dispute.closed', { status: 'lost', charge: 'ch_A' })).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    assert.equal(sub().bloqueo.chargeId, 'ch_A');
+    // Ganar una disputa del cargo B no debe tocar el bloqueo por la disputa perdida de A.
+    await enviar(disputa('evt_dwB', 'charge.dispute.closed', { status: 'won', disputaId: 'dp_B', charge: 'ch_B' })).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    assert.equal(sub().bloqueo.chargeId, 'ch_A');
   });
 
   test('reembolso total del cargo A + disputa ganada del cargo B: SIGUE bloqueado', async () => {
