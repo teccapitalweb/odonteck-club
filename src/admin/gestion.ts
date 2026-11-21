@@ -176,7 +176,7 @@ function adminResumenReal(r: NonNullable<typeof Admin.resumen>) {
   ${canjes && canjes.cuentas > 0 ? alerta('clock', `${canjes.cuentas} ${canjes.cuentas === 1 ? 'canje manual' : 'canjes manuales'} sin resolver (+${canjes.dias} días)`, 'Entregas pendientes que llevan esperando. Resuélvelas en OdonCoins y recompensas.', canjes.lista.slice(0, 8).map((c) => `<a class="row" style="justify-content:space-between;gap:8px" href="#/admin/miembros/${encodeURIComponent(c.uid)}"><span>${esc(c.titulo || c.id)}</span><span class="faint" style="font-size:var(--fs-xs)">${c.solicitado ? `desde ${fecha(c.solicitado)}` : ''}</span></a>`).join('')) : ''}
   <div class="kpis">
     ${kpi('users', 'Cuentas con acceso', r.miembrosActivos, `${r.registrados ?? 0} cuentas identificadas · desglose debajo`)}
-    ${kpi('trending-up', `MRR${r.mrrEstimado ? ' (estimado)' : ''}`, `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, `${r.suscripcionesActivas ?? 0} activas${r.mrrEstimado ? ' · falta importe real en algunas' : ''} · potencial $${(r.mrrPotencial ?? 0).toLocaleString('es-MX')}`)}
+    ${kpi('trending-up', `MRR${r.mrrEstimado ? ' (estimado)' : ''}`, `$${(r.mrr ?? 0).toLocaleString('es-MX')}`, `${r.suscripcionesActivas ?? 0} activas${r.mrrEstimado ? ' · falta importe real en algunas' : ''} · potencial $${(r.mrrPotencial ?? 0).toLocaleString('es-MX')}${(r.otraMoneda ?? 0) > 0 ? ` · ${r.otraMoneda} en otra moneda (excluidas)` : ''}`)}
     ${kpi('user-plus', 'Altas VIP · 30 días', r.altas30d ?? 0, `${r.bajas30d ?? 0} bajas · tasa ${Math.round((r.tasaBajas ?? 0) * 100)}%`)}
     ${kpi('alert-triangle', 'En riesgo de pago', r.enRiesgo?.cuentas ?? 0, `$${(r.enRiesgo?.monto ?? 0).toLocaleString('es-MX')}/mes past_due o unpaid`)}
   </div>

@@ -227,7 +227,11 @@ async function procesarEvento(ctx, evento) {
       if (!uid) return 'ignorado_sin_uid';
       let sub = null;
       if (obj.subscription) {
-        sub = typeof obj.subscription === 'string' ? await ctx.stripe.subscriptions.retrieve(obj.subscription) : obj.subscription;
+        // Se expanden los descuentos (igual que el backfill) para no guardar el MRR
+        // sin el descuento del promotion code.
+        sub = typeof obj.subscription === 'string'
+          ? await ctx.stripe.subscriptions.retrieve(obj.subscription, { expand: ['discounts', 'items.data.price'] })
+          : obj.subscription;
       }
       const datos = {
         uid,

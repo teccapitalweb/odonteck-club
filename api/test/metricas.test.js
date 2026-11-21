@@ -30,16 +30,42 @@ describe('calcularMRR', () => {
   });
 });
 
-test('tasaBajas por canceladaEn en ventana de 30 días', () => {
+test('tasaBajas usa el fin efectivo, no canceladaEn; una cancelación programada NO es baja', () => {
   const subs = mapa({
-    a: { estado: 'active' },
-    b: { estado: 'active', canceladaEn: '2026-09-10T00:00:00.000Z' }, // dentro
-    c: { estado: 'canceled', canceladaEn: '2026-01-01T00:00:00.000Z' }, // fuera
+    activa: { estado: 'active' },
+    // Programada: canceladaEn YA puesto por Stripe, pero sigue activa (periodoFin futuro).
+    programada: { estado: 'active', cancelaAlFinal: true, periodoFin: '2026-12-31T00:00:00.000Z', canceladaEn: '2026-09-10T00:00:00.000Z' },
+    // Terminó al final del periodo dentro de la ventana.
+    terminada: { estado: 'canceled', cancelaAlFinal: true, periodoFin: '2026-09-12T00:00:00.000Z', canceladaEn: '2026-08-01T00:00:00.000Z' },
+    // Cancelación inmediata dentro de la ventana.
+    inmediata: { estado: 'canceled', canceladaEn: '2026-09-14T00:00:00.000Z' },
+    // Terminó hace meses (fuera de la ventana).
+    vieja: { estado: 'canceled', canceladaEn: '2026-01-01T00:00:00.000Z' },
   });
   const r = tasaBajas(subs, AHORA, 30);
-  assert.equal(r.bajas, 1);
+  assert.equal(r.bajas, 2); // terminada + inmediata; la programada NO cuenta
+  assert.equal(r.activos, 2); // activa + programada (siguen con acceso)
+});
+
+test('altasBajasV2 cuenta la baja por fin efectivo, no por canceladaEn', () => {
+  const subs = mapa({
+    programada: { estado: 'active', cancelaAlFinal: true, periodoFin: '2026-12-31T00:00:00.000Z', canceladaEn: '2026-09-10T00:00:00.000Z' },
+    terminada: { estado: 'canceled', cancelaAlFinal: true, periodoFin: '2026-09-12T00:00:00.000Z', canceladaEn: '2026-08-01T00:00:00.000Z' },
+  });
+  const r = altasBajasV2(subs, AHORA, 30);
+  assert.equal(r.bajas, 1); // sólo la terminada
+});
+
+test('calcularMRR excluye suscripciones en otra moneda y las cuenta aparte', () => {
+  const subs = mapa({
+    mx: { estado: 'active', moneda: 'mxn', importeMensualNetoCents: 19900 },
+    usd: { estado: 'active', moneda: 'usd', importeMensualNetoCents: 999900 },
+    sinMoneda: { estado: 'active', importeMensualNetoCents: 10000 }, // sin moneda → se asume MXN
+  });
+  const r = calcularMRR(subs, config);
+  assert.equal(r.mrr, 299); // 199 + 100; la USD no entra
+  assert.equal(r.otraMoneda, 1);
   assert.equal(r.activos, 2);
-  assert.equal(Math.round(r.tasa * 1000) / 1000, Math.round((1 / 3) * 1000) / 1000);
 });
 
 test('bajasProgramadas: cancelaAlFinal con acceso vigente', () => {
@@ -62,10 +88,10 @@ test('conversionCursoGratis cuenta sólo VIP pagado', () => {
   assert.equal(r.convertidos, 2); // u1 (sub) + u2 (miembro); u3 no
 });
 
-test('altasBajasV2 usa altaVip y canceladaEn', () => {
+test('altasBajasV2 usa altaVip para altas y el fin efectivo para bajas', () => {
   const subs = mapa({
-    a: { altaVip: '2026-09-05T00:00:00.000Z' },
-    b: { altaVip: '2026-01-01T00:00:00.000Z', canceladaEn: '2026-09-12T00:00:00.000Z' },
+    a: { altaVip: '2026-09-05T00:00:00.000Z', estado: 'active' },
+    b: { altaVip: '2026-01-01T00:00:00.000Z', estado: 'canceled', canceladaEn: '2026-09-12T00:00:00.000Z' },
   });
   const r = altasBajasV2(subs, AHORA, 30);
   assert.equal(r.altas, 1);
@@ -99,6 +125,20 @@ test('finalizacionPorClase y abandono', () => {
   assert.equal(c1.clases[1].vieron, 2); // clase 2
   assert.equal(c1.clases[0].abandono, 0.5); // de 4 que vieron 1, 2 vieron 2 -> 50% abandono
   assert.equal(c1.clases[2].finalizacion, 0.25); // 1/4
+});
+
+test('finalizacionPorClase acota finalización y abandono a [0,1] con datos inconsistentes', () => {
+  const cursos = mapa({ c1: { titulo: 'Curso 1', clases: [{ n: 1 }, { n: 2 }] } });
+  // Más vieron la clase 2 que la 1 (dato inconsistente): finalización >100% y abandono negativo sin acotar.
+  const progreso = [
+    { uid: 'u1', cursoId: 'c1', vistas: [2] },
+    { uid: 'u2', cursoId: 'c1', vistas: [1, 2] },
+  ];
+  const r = finalizacionPorClase(progreso, cursos);
+  const c1 = r[0];
+  assert.equal(c1.base, 1); // sólo u2 vio la clase 1
+  assert.equal(c1.clases[1].finalizacion, 1); // 2/1 acotado a 1
+  assert.equal(c1.clases[0].abandono, 0); // 1 - 2/1 = -1 acotado a 0
 });
 
 test('aprobacionQuizzes global y por clase', () => {

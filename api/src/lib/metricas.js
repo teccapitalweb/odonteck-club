@@ -28,32 +28,64 @@ export function netoMensualMXN(sub, config) {
 
 /** MRR real (sólo active, sin bloqueo), MRR potencial (trialing) y en riesgo (past_due/unpaid). */
 export function calcularMRR(suscripciones, config) {
-  let mrr = 0, mrrPotencial = 0, riesgoMonto = 0, estimado = false;
+  let mrr = 0, mrrPotencial = 0, riesgoMonto = 0, estimado = false, otraMoneda = 0;
   const enRiesgo = [];
   let activos = 0, trialing = 0;
   for (const [uid, s] of suscripciones) {
     if (!s || s.accesoBloqueado === true) continue;
+    // El catálogo es MXN (landing valida currency==='mxn'). Una suscripción con moneda
+    // capturada distinta de mxn no se suma al MRR en MXN; se cuenta aparte para no inflarlo.
+    if (s.moneda && String(s.moneda).toLowerCase() !== 'mxn') {
+      if (['active', 'trialing', 'past_due'].includes(s.estado)) otraMoneda++;
+      continue;
+    }
     const { mxn, estimado: est } = netoMensualMXN(s, config);
     if (s.estado === 'active') { mrr += mxn; activos++; estimado = estimado || est; }
     else if (s.estado === 'trialing') { mrrPotencial += mxn; trialing++; }
     else if (s.estado === 'past_due' || s.estado === 'unpaid') { riesgoMonto += mxn; enRiesgo.push({ uid, plan: s.estado }); }
   }
   return {
-    mrr: Math.round(mrr), estimado, moneda: 'MXN', activos,
+    mrr: Math.round(mrr), estimado, moneda: 'MXN', activos, otraMoneda,
     mrrPotencial: Math.round(mrrPotencial), trialing,
     enRiesgo: { cuentas: enRiesgo.length, monto: Math.round(riesgoMonto), lista: enRiesgo.slice(0, 50) },
   };
 }
 
-/** Tasa de bajas real por `canceladaEn` en la ventana (30 días por defecto). */
+const ESTADOS_PERDIDOS = ['canceled', 'incomplete_expired'];
+
+/**
+ * true si la suscripción YA perdió el acceso por cancelación. Stripe pone
+ * `canceled_at` cuando se SOLICITA la cancelación (incluso con cancel_at_period_end,
+ * mientras sigue activa), así que NO sirve para contar bajas. La baja es por fin
+ * efectivo: estado canceled/incomplete_expired, o cancelación al final con el periodo ya vencido.
+ */
+export function esBaja(sub, ahora) {
+  if (!sub) return false;
+  if (ESTADOS_PERDIDOS.includes(sub.estado)) return true;
+  if (sub.cancelaAlFinal === true) {
+    const fin = aMillis(sub.periodoFin);
+    return fin !== null && !Number.isNaN(fin) && fin <= ahora.getTime();
+  }
+  return false;
+}
+
+/** Fecha efectiva de la baja: fin de periodo si canceló al final; si no, canceladaEn. */
+export function fechaBajaEfectiva(sub) {
+  if (sub?.cancelaAlFinal === true && sub.periodoFin) return sub.periodoFin;
+  return sub?.canceladaEn ?? sub?.periodoFin ?? null;
+}
+
+/** Tasa de bajas real por FIN EFECTIVO de la cancelación en la ventana (30 días por defecto). */
 export function tasaBajas(suscripciones, ahora, ventanaDias = 30) {
   const desde = ahora.getTime() - ventanaDias * DIA_MS;
   let bajas = 0, activos = 0;
   for (const [, s] of suscripciones) {
     if (!s) continue;
     if (['active', 'trialing', 'past_due'].includes(s.estado) && s.accesoBloqueado !== true) activos++;
-    const cancel = aMillis(s.canceladaEn);
-    if (cancel !== null && !Number.isNaN(cancel) && cancel >= desde && cancel <= ahora.getTime()) bajas++;
+    if (esBaja(s, ahora)) {
+      const fin = aMillis(fechaBajaEfectiva(s));
+      if (fin !== null && !Number.isNaN(fin) && fin >= desde && fin <= ahora.getTime()) bajas++;
+    }
   }
   const base = activos + bajas;
   return { bajas, activos, ventanaDias, tasa: base > 0 ? bajas / base : 0 };
@@ -87,15 +119,17 @@ export function conversionCursoGratis(cursoGratis, suscripciones, miembros, ahor
   return { base, convertidos, tasa: base > 0 ? convertidos / base : 0 };
 }
 
-/** Altas (altaVip = sub.created) y bajas (canceladaEn) v2 en la ventana. */
+/** Altas (altaVip = sub.created) y bajas (por fin efectivo) v2 en la ventana. */
 export function altasBajasV2(suscripciones, ahora, ventanaDias = 30) {
   const desde = ahora.getTime() - ventanaDias * DIA_MS;
   let altas = 0, bajas = 0;
   for (const [, s] of suscripciones) {
     const alta = aMillis(s?.altaVip);
     if (alta !== null && !Number.isNaN(alta) && alta >= desde) altas++;
-    const baja = aMillis(s?.canceladaEn);
-    if (baja !== null && !Number.isNaN(baja) && baja >= desde) bajas++;
+    if (esBaja(s, ahora)) {
+      const fin = aMillis(fechaBajaEfectiva(s));
+      if (fin !== null && !Number.isNaN(fin) && fin >= desde && fin <= ahora.getTime()) bajas++;
+    }
   }
   return { altas, bajas, ventanaDias };
 }
@@ -133,10 +167,13 @@ export function finalizacionPorClase(progresoDocs, cursos) {
     if (!numeros.length) continue;
     const m = vistasPorCurso.get(cursoId) ?? new Map();
     const base = m.get(numeros[0]) ?? 0;
+    // Acota a [0,1]: datos inconsistentes (ver una clase posterior sin la primera)
+    // podrían dar finalización >100% o abandono negativo.
+    const acotar = (x) => (x === null ? null : Math.max(0, Math.min(1, x)));
     const clases = numeros.map((n, i) => {
       const vieron = m.get(n) ?? 0;
       const sig = i + 1 < numeros.length ? (m.get(numeros[i + 1]) ?? 0) : null;
-      return { n, vieron, finalizacion: base > 0 ? vieron / base : 0, abandono: sig === null || vieron === 0 ? null : 1 - sig / vieron };
+      return { n, vieron, finalizacion: acotar(base > 0 ? vieron / base : 0), abandono: acotar(sig === null || vieron === 0 ? null : 1 - sig / vieron) };
     });
     salida.push({ cursoId, titulo: curso?.titulo ?? cursoId, base, clases });
   }

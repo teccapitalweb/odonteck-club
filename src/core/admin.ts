@@ -25,7 +25,7 @@ export interface MetricasAdmin {
 
 export interface ResumenAdmin {
   calculadoEn?: string; cacheado?: boolean; aproximado?: boolean;
-  mrrEstimado?: boolean; moneda?: string; mrrPotencial?: number;
+  mrrEstimado?: boolean; moneda?: string; mrrPotencial?: number; otraMoneda?: number;
   suscripcionesActivas?: number; suscripcionesTrial?: number;
   enRiesgo?: { cuentas: number; monto: number; lista: { uid: string; nombre: string; plan: string }[] };
   tasaBajas?: number;

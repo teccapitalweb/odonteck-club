@@ -35,6 +35,9 @@ describe('cursos: reordenamiento atómico', () => {
   test('rechaza lista vacía, ids repetidos o exceso', async () => {
     await admin('post', '/admin/cursos/reordenar').send({ ids: [] }).expect(400);
     await admin('post', '/admin/cursos/reordenar').send({ ids: ['c1', 'c1'] }).expect(400);
+    // 500 ids = 500 sets + 1 auditoría > tope de 500 escrituras por transacción.
+    const r = await admin('post', '/admin/cursos/reordenar').send({ ids: Array.from({ length: 500 }, (_, i) => `curso-${i}`) }).expect(400);
+    assert.equal(r.body.error, 'ids_exceso');
   });
 });
 

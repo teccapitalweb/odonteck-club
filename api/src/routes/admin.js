@@ -368,8 +368,9 @@ export function rutasAdmin(ctx) {
   };
 
   // Reordenamiento atómico de cursos: un solo lote, un solo evento en la bitácora.
+  // Máximo 499: 499 cursos + 1 escritura de auditoría = 500, el tope de una transacción.
   r.post('/admin/cursos/reordenar', h(async (req, res) => {
-    const ids = idsDeCuerpo(cuerpo(req).ids, 500);
+    const ids = idsDeCuerpo(cuerpo(req).ids, 499);
     const resultado = await db.runTransaction(async (tx) => {
       const refs = ids.map((id) => db.collection(COL.cursos).doc(id));
       const snaps = await tx.getAll(...refs);

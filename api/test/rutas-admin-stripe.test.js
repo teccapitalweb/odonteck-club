@@ -416,6 +416,27 @@ describe('stripe', () => {
     assert.equal(recompensas.contadores.membresias, 1);
   });
 
+  test('en el checkout, el descuento del promotion code recurrente se captura (discounts expandidos)', async () => {
+    env = crearEntorno();
+    // La suscripción recuperada trae un promotion code recurrente (como con expand:['discounts']).
+    env.stripe.subscriptions.retrieve = async () => ({
+      id: 'sub_1', status: 'active', customer: 'cus_1', created: 1_780_000_000,
+      discount: { promotion_code: 'promo_rec', coupon: { percent_off: 30, duration: 'forever' } },
+      items: { data: [{ price: { id: 'price_mensual_test', unit_amount: 20000, currency: 'mxn', recurring: { interval: 'month', interval_count: 1 } }, current_period_end: 1_792_000_000 }] },
+    });
+    const evento = {
+      id: 'evt_cs_promo', object: 'event', type: 'checkout.session.completed', created: 1_790_000_150,
+      data: { object: { id: 'cs_p', object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1' } },
+    };
+    const { payload, firma } = eventoFirmado(evento);
+    await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    const sus = env.db.leer('v2_suscripciones/free1');
+    assert.equal(sus.importeMensualBrutoCents, 20000);
+    assert.equal(sus.descuentoMensualCents, 6000); // 30% de 20000
+    assert.equal(sus.importeMensualNetoCents, 14000);
+    assert.equal(sus.promotionCode, 'promo_rec');
+  });
+
   test('dos entregas simultáneas del mismo evento se procesan una sola vez (idempotencia atómica)', async () => {
     env = crearEntorno();
     env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
