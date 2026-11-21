@@ -1,5 +1,28 @@
 # Relevo operativo para Claude · OdonTeck Club
 
+## 2026-11-18 · Admin Fase 2 (PR #58, en borrador) · orden de despliegue
+
+Rama `admin-fase2`, PR #58 **en borrador apilado sobre #57** (base `admin-fase1`), **sin fusionar ni desplegar**. Velocidad y métricas reales del panel: (1) resumen precalculado en `v2_contadores/resumen` (TTL 5 min, `?actualizar=1`, `calculadoEn`), el front deja de forzar recarga y `listarUsuariosAuthAcotado` no se cae con más de ~25.000 usuarios (marca `aproximado`); (2) última actividad con una definición única compartida por Resumen y Miembros; (3) altas/bajas v2 por `altaVip` (= `sub.created`) y `canceladaEn`, retirando el cálculo heredado; (4) reordenamiento y acciones masivas de cursos atómicas (`POST /admin/cursos/reordenar` y `/admin/cursos/lote`, un solo evento en la bitácora). El webhook captura `importeMensual*`, `descuento`, `promotionCode` y `altaVip` para MRR real; nueva pestaña **Métricas** (cohortes, finalización/abandono por clase, quizzes, economía de OdonCoins, promotion codes de Stripe, cupones de app, registros por mes) cacheada con TTL de 1 hora. Índice nuevo pendiente: ninguno adicional al de #57. Verificación local: `npm run check` (api) y 308 pruebas pasan (4 skip de emuladores), `tsc` limpio, `npm run build:prod` genera `modo:api`.
+
+**Decisiones del responsable (aprobadas):** MRR = sólo `active` sin `accesoBloqueado`; `trialing` es «MRR potencial» y `past_due`/`unpaid` «en riesgo» (no suman al MRR); cuando falta el importe real de una suscripción se usa el precio de config y el MRR se marca «estimado». «Cupones de promoción» = promotion codes de Stripe (métrica aparte de los cupones de la app, que dan días de cortesía). Alta VIP = `sub.created`; registro de cuenta = `creationTime` de Firebase Auth (métrica aparte).
+
+**Orden de despliegue (al fusionar, con autorización explícita):**
+
+1. **Fusionar #57** (Admin Fase 1) a `main`.
+2. **Desplegar índices de Firestore** (incluye `v2_recompensas_canjes (estatus, solicitado)` de #57).
+3. **Desplegar la API** de #57 (Railway). Verificar `/health` 200 y rutas nuevas 401 sin token.
+4. **Agregar eventos al webhook de Stripe** (destino v2 existente): `charge.refunded`, `charge.dispute.created` y `charge.dispute.closed`. No cambiar secreto, versión ni URL.
+5. **Desplegar el frontend** de #57 (Cloudflare, `npm run build:prod`; `npm run verify:dist` antes de `wrangler` manual).
+6. **Fusionar #58** (Admin Fase 2) a `main`.
+7. **Desplegar la API y el frontend** de #58. La API empieza a capturar `importeMensual*`/`promotionCode`/`altaVip` en las suscripciones nuevas; el Resumen y la pestaña Métricas quedan activos (con caché).
+8. **Correr el backfill de suscripciones** para rellenar las suscripciones existentes (importe, descuento, promo, `altaVip`) leyendo de Stripe en SOLO LECTURA. Lo ejecuta el responsable:
+   - Exportar `GOOGLE_APPLICATION_CREDENTIALS` (service account de OdonTeck), `STRIPE_SECRET_KEY` (ideal: restricted key de solo lectura) y `EXPECTED_PROJECT_ID=club-odonteck`.
+   - Primero **dry-run** (no escribe): `node api/scripts/backfill-suscripciones.mjs`. El script imprime el `project_id` de Firebase y el modo de Stripe (LIVE/TEST/restricted) y **aborta si el proyecto no es el de OdonTeck**.
+   - Revisar la salida y luego **aplicar**: `node api/scripts/backfill-suscripciones.mjs --apply`. Es idempotente.
+   - Mientras falte el dato en una suscripción, su MRR se muestra como «estimado» y no aparece en cohortes por `altaVip`.
+
+No fusionar ni desplegar nada de esto sin autorización explícita y verificando Git, Cloudflare, Railway y Stripe por separado.
+
 ## 2026-11-18 · Admin Fase 1 (PR #57, en borrador) · orden de despliegue
 
 Rama `admin-fase1`, PR #57 **en borrador contra `main`, sin fusionar ni desplegar**. Seis mejoras del panel admin, cada una verificada en código y con pruebas: (1) cortesías de admin y días de cupón separados en `v2_cortesias` con `?origen=admin|cupones|todo` al revocar; (2) `PATCH /admin/config` bloquea los IDs de precio de Stripe; (3) `PATCH`/`DELETE /admin/avisos/:id` conectados en producción; (4) reembolsos y disputas de Stripe (ver abajo); (5) `npm run build:prod` falla sin `VITE_API_URL` y `npm run verify:dist` impide publicar el modo demo; (6) paginación y filtro por estatus en miembros y canjes (sin los cortes silenciosos de 1000/100). Verificación local: `npm run check` (api) y 273 pruebas pasan (4 skip de emuladores), `tsc` limpio, `npm run build:prod` genera `dist/_build-info.json` con `modo:api`.

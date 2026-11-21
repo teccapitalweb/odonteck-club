@@ -4,6 +4,7 @@ import { installButtonHTML } from '../ui/install-app';
 
 export const ADMIN_NAV = [
   { href: '#/admin', icon: 'layout-dashboard', label: 'Resumen', match: /^\/admin\/?$/ },
+  { href: '#/admin/metricas', icon: 'bar-chart-3', label: 'Métricas', match: /^\/admin\/metricas/ },
   { group: 'Contenido' },
   { href: '#/admin/cursos', icon: 'graduation-cap', label: 'Cursos', match: /^\/admin\/cursos/ },
   { href: '#/admin/materiales', icon: 'library', label: 'Materiales', match: /^\/admin\/materiales/ },

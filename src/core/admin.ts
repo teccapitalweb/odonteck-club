@@ -12,10 +12,28 @@ export interface PanelRecompensasAdmin {
   estatus?:string|null;
 }
 
+export interface MetricasAdmin {
+  calculadoEn?: string; cacheado?: boolean; aproximado?: boolean;
+  retencionCohortes: { cohorte: string; base: number; retenidos: number; tasa: number }[];
+  finalizacionClases: { cursoId: string; titulo: string; base: number; clases: { n: number; vieron: number; finalizacion: number; abandono: number | null }[] }[];
+  quizzes: { global: { intentos: number; aprobados: number; tasa: number }; porClase: { cursoId: string; n: number; titulo: string; intentos: number; aprobados: number; tasa: number }[] };
+  economiaOdonCoins: { emitidos: number; gastados: number; saldoPendiente: number; masCanjeadas: { recompensaId: string; titulo: string; canjes: number }[] };
+  cuponesApp: { codigo: string; redenciones: number; convertidos: number; tasa: number }[];
+  promosStripe: { promotionCode: string; suscripciones: number; activas: number; descuentoMensualMXN: number; netoMensualMXN: number }[];
+  registrosPorMes: { mes: string; total: number }[];
+}
+
 export interface ResumenAdmin {
+  calculadoEn?: string; cacheado?: boolean; aproximado?: boolean;
+  mrrEstimado?: boolean; moneda?: string; mrrPotencial?: number; otraMoneda?: number;
+  suscripcionesActivas?: number; suscripcionesTrial?: number;
+  enRiesgo?: { cuentas: number; monto: number; lista: { uid: string; nombre: string; plan: string }[] };
+  tasaBajas?: number;
+  bajasProgramadas?: { cuentas: number; lista: { uid: string; nombre: string; periodoFin: string | null; plan: string | null }[] };
+  conversionCursoGratis?: { base: number; convertidos: number; tasa: number };
+  canjesPendientes?: { cuentas: number; dias: number; lista: { id: string; uid: string; titulo: string; solicitado: string | null }[] };
   registrados?: number;
   accesos?: Record<string, number>;
-  calculadoEn?: string;
   miembrosActivos: number;
   altas30d: number;
   bajas30d: number;
@@ -93,6 +111,7 @@ const estado = {
   bitacora: null as PaginaBitacora | null,
   recompensas: null as PanelRecompensasAdmin|null,
   resumen: null as ResumenAdmin | null,
+  metricas: null as MetricasAdmin | null,
   campanaPraxia: null as ReporteCampanaPraxia | null,
   encuestas: null as ResumenEncuestas | null,
   contactosEncuestas: [] as ContactoEncuesta[],
@@ -167,6 +186,7 @@ export const Admin = {
   get bitacora() { return estado.bitacora; },
   get recompensas() { return estado.recompensas; },
   get resumen() { return estado.resumen; },
+  get metricas() { return estado.metricas; },
   get campanaPraxia() { return estado.campanaPraxia; },
   get encuestas() { return estado.encuestas; },
   get contactosEncuestas() { return estado.contactosEncuestas; },
@@ -184,7 +204,10 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
   const tareas: Promise<void>[] = [];
   try {
     if (/^\/admin\/?$/.test(path)) {
-      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>('/admin/resumen'); }, true));
+      // Sin recarga forzada: el servidor cachea el resumen (TTL 5 min). "Actualizar ahora"
+      // pasa ?actualizar=1 para recalcular en el servidor y refrescar el cliente.
+      const actualizar = query.get('actualizar') === '1';
+      tareas.push(cargar('resumen', async () => { estado.resumen = await api<ResumenAdmin>(`/admin/resumen${actualizar ? '?actualizar=1' : ''}`); }, forzar || actualizar));
       tareas.push(cargar('campana-praxia-comunidad', async () => { estado.campanaPraxia = await api<ReporteCampanaPraxia>('/admin/recompensas/praxia/comunidad/reporte'); }, forzar));
       tareas.push(cargarCursos(forzar), cargarMateriales(forzar), cargarEventos(forzar), cargarQuizzes(forzar));
     } else if (path.startsWith('/admin/cursos')) {
@@ -232,6 +255,9 @@ export async function cargarAdmin(path: string, query = new URLSearchParams(), f
           cortesiaMotivo: d.cortesia?.motivo || '', progreso, certificados: d.certificados || [], cursoGratis: d.cursoGratis ?? null,
         };
       })());
+    } else if (path === '/admin/metricas') {
+      const actualizar = query.get('actualizar') === '1';
+      tareas.push(cargar('metricas', async () => { estado.metricas = await api<MetricasAdmin>(`/admin/metricas${actualizar ? '?actualizar=1' : ''}`); }, forzar || actualizar));
     } else if (path === '/admin/comunidad') {
       tareas.push(cargar('foro', async () => { Comunidad.hidratar(await api<any[]>('/admin/foro')); }, forzar));
       tareas.push(cargar('directorio-reportes', async () => { estado.reportesDirectorio = await api<ReporteDirectorioAdmin[]>('/admin/directorio/reportes'); }, forzar));
@@ -299,10 +325,11 @@ export async function borrarCursoAdmin(id: string) {
 
 export async function reordenarCursosAdmin(ids: string[]) {
   if (Datos.modo === 'demo') { Datos.reordenarCursos(ids); return; }
-  await Promise.all(ids.map((id, orden) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { orden: orden + 1 } })));
+  await api('/admin/cursos/reordenar', { method: 'POST', json: { ids } });
   const lista = Datos.cursos();
   ids.forEach((id, i) => { const c = lista.find((x) => x.id === id); if (c) c.orden = i + 1; });
   Datos.hidratarAdmin('cursos', lista);
+  cargados.add('cursos');
 }
 
 export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: boolean) {
@@ -310,7 +337,7 @@ export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: bool
     ids.forEach((id) => { const c = Datos.cursos().find((x) => x.id === id); if (c) { c.publicado = publicado; Datos.guardarCurso(c); } });
     return;
   }
-  await Promise.all(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'PATCH', json: { publicado } })));
+  await api('/admin/cursos/lote', { method: 'POST', json: { ids, accion: publicado ? 'publicar' : 'ocultar' } });
   const lista = Datos.cursos();
   ids.forEach((id) => { const c = lista.find((x) => x.id === id); if (c) c.publicado = publicado; });
   Datos.hidratarAdmin('cursos', lista);
@@ -319,11 +346,10 @@ export async function cambiarPublicadoCursosAdmin(ids: string[], publicado: bool
 
 export async function borrarCursosAdmin(ids: string[]) {
   if (Datos.modo === 'demo') { ids.forEach((id) => Datos.borrarCurso(id)); return; }
-  const resultados = await Promise.allSettled(ids.map((id) => api(`/admin/cursos/${encodeURIComponent(id)}`, { method: 'DELETE' })));
-  const ok = ids.filter((_, i) => resultados[i].status === 'fulfilled');
-  Datos.hidratarAdmin('cursos', Datos.cursos().filter((c) => !ok.includes(c.id)));
-  const fallido = resultados.find((r) => r.status === 'rejected');
-  if (fallido) throw (fallido as PromiseRejectedResult).reason;
+  const r = await api<{ afectados: string[]; omitidos: { id: string; motivo: string }[] }>('/admin/cursos/lote', { method: 'POST', json: { ids, accion: 'borrar' } });
+  Datos.hidratarAdmin('cursos', Datos.cursos().filter((c) => !r.afectados.includes(c.id)));
+  cargados.add('cursos');
+  if (r.omitidos?.length) throw new Error(`${r.omitidos.length} curso(s) no se borraron: tienen progreso o no existen.`);
 }
 
 const materialParaApi = (m: Material) => ({
