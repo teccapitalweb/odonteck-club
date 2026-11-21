@@ -412,12 +412,20 @@ async function manejarDisputaCerrada(ctx, evento, dispute, uid) {
   return ctx.db.runTransaction(async (tx) => {
     const subSnap = await tx.get(subRef);
     const antes = subSnap.exists ? subSnap.data() : null;
-    // Al ganar, se retira la marca de disputa y cualquier bloqueo de acceso asociado.
-    const cambio = { enDisputa: false, accesoBloqueado: false, bloqueo: null, disputa: { id: idDe(dispute), chargeId, estado: 'ganada', cerrada: ctx.now().toISOString() } };
+    // Al ganar, se retira la marca de disputa. El bloqueo de acceso se levanta SÓLO si
+    // provino de una disputa; un bloqueo por reembolso_total de OTRO cargo sigue vigente.
+    const bloqueoEsDisputa = ['disputa_perdida', 'disputa'].includes(antes?.bloqueo?.motivo);
+    const cambio = {
+      enDisputa: false,
+      disputa: { id: idDe(dispute), chargeId, estado: 'ganada', cerrada: ctx.now().toISOString() },
+      ...(bloqueoEsDisputa ? { accesoBloqueado: false, bloqueo: null } : {}),
+    };
     tx.set(subRef, cambio, { merge: true });
     registrarEventoSistema(ctx, tx, {
       ref: subRef, objetivoUid: uid, accion: 'disputa_ganada',
-      motivo: 'Disputa ganada: se retira la marca de disputa y el bloqueo de acceso.',
+      motivo: bloqueoEsDisputa
+        ? 'Disputa ganada: se retira la marca de disputa y el bloqueo por disputa.'
+        : 'Disputa ganada: se retira la marca de disputa. Un bloqueo por reembolso se conserva.',
       antes, despues: { ...(antes ?? {}), ...cambio },
     });
     return 'disputa_ganada_registrada';

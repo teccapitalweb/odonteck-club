@@ -116,9 +116,33 @@ describe('stripe: disputas', () => {
     const r = await enviar(disputa('evt_d3b', 'charge.dispute.closed', { status: 'won' })).expect(200);
     assert.equal(r.body.resultado, 'disputa_ganada_registrada');
     assert.equal(sub().enDisputa, false);
-    assert.equal(sub().accesoBloqueado, false); // ganar la disputa también retira cualquier bloqueo
+    assert.equal(sub().accesoBloqueado, undefined); // no había bloqueo: no se toca el acceso
     assert.equal(sub().disputa.estado, 'ganada');
     assert.equal(wallet().saldo, 300);
+  });
+
+  test('disputa perdida y luego ganada de OTRA disputa levanta el bloqueo por disputa', async () => {
+    // Bloqueo originado por una disputa perdida (motivo disputa_perdida).
+    await enviar(disputa('evt_dl', 'charge.dispute.closed', { status: 'lost' })).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    assert.equal(sub().bloqueo.motivo, 'disputa_perdida');
+    // Ganar una disputa (otra) sí levanta un bloqueo que vino de disputa.
+    await enviar(disputa('evt_dw', 'charge.dispute.closed', { status: 'won', disputaId: 'dp_2' })).expect(200);
+    assert.equal(sub().accesoBloqueado, false);
+  });
+
+  test('reembolso total del cargo A + disputa ganada del cargo B: SIGUE bloqueado', async () => {
+    // Bloqueo por reembolso total del cargo A.
+    await enviar(reembolso('evt_rA', { chargeId: 'ch_A' })).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    assert.equal(sub().bloqueo.motivo, 'reembolso_total');
+    // Se gana una disputa de OTRO cargo B: no debe tocar el bloqueo por reembolso.
+    env.stripe.charges = { retrieve: async () => ({ id: 'ch_B', customer: 'cus_1' }) };
+    const r = await enviar(disputa('evt_dB', 'charge.dispute.closed', { status: 'won', disputaId: 'dp_B', charge: 'ch_B' })).expect(200);
+    assert.equal(r.body.resultado, 'disputa_ganada_registrada');
+    assert.equal(sub().enDisputa, false);
+    assert.equal(sub().accesoBloqueado, true); // sigue bloqueado por el reembolso vigente
+    assert.equal(sub().bloqueo.motivo, 'reembolso_total');
   });
 
   test('reembolso y luego disputa perdida del MISMO cobro no revierten dos veces', async () => {
