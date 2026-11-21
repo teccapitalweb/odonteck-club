@@ -39,6 +39,31 @@ export function registrarAuditoria(ctx, tx, req, { ref, accion, antes = null, de
   return evento;
 }
 
+/**
+ * Registra en la bitácora de administración un evento automático del sistema (p. ej.
+ * el webhook de Stripe), que no tiene un admin como actor. Misma forma que
+ * `registrarAuditoria` para que aparezca en `/admin/bitacora` y, con `objetivoUid`,
+ * en el historial del expediente del miembro.
+ */
+export function registrarEventoSistema(ctx, tx, { ref = null, accion, antes = null, despues = null, motivo, extra, objetivoUid = null, actor = 'sistema:stripe-webhook' }) {
+  const id = randomUUID();
+  const tipo = ref ? ref.path.split('/')[0] : 'sistema';
+  const recurso = ref ? (tipo === COL.suscripciones ? `suscripcion-${ref.id}` : ref.path) : 'sistema';
+  const campos = [...new Set([...Object.keys(antes ?? {}), ...Object.keys(despues ?? {})])]
+    .filter((k) => !['actualizado', 'actualizadoPor'].includes(k) && JSON.stringify(antes?.[k]) !== JSON.stringify(despues?.[k]));
+  const evento = {
+    id, fecha: ctx.now().toISOString(), actorUid: 'sistema',
+    actor, tipo, recurso, accion,
+    motivo: String(motivo ?? 'Evento automático de Stripe').slice(0, 500),
+    motivoManual: false, campos,
+    antes: resumenAuditable(antes), despues: resumenAuditable(despues),
+    ...(extra ? { efectos: resumenAuditable(extra) } : {}),
+  };
+  tx.create(ctx.db.collection(COL.adminAuditoria).doc(id), evento);
+  if (objetivoUid) tx.create(ctx.db.collection(COL.adminAuditoriaMiembros).doc(objetivoUid).collection('eventos').doc(id), evento);
+  return evento;
+}
+
 export async function escribirAuditado(ctx, req, ref, datos, { modo = 'set', accion = 'actualizar', motivo, requiereExistir = false } = {}) {
   return ctx.db.runTransaction(async (tx) => {
     const snap = await tx.get(ref);

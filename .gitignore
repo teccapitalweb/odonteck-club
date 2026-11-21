@@ -11,3 +11,10 @@ Thumbs.db
 # PDFs de materiales: viven en la nube (Bunny/Firebase), no en el repo.
 # Se colocan en public/materiales/ solo para el demo local.
 public/materiales/*.pdf
+
+# Logs de depuración de los emuladores de Firebase.
+firestore-debug.log
+*-debug.log
+
+# Scratchpad local, no versionado.
+tmp/

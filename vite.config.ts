@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { readdirSync, rmSync, unlinkSync } from 'node:fs';
+import { readdirSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // Dos sitios en el mismo repo: el club (index.html) y la landing pública (landing/index.html).
@@ -23,8 +23,24 @@ export default defineConfig({
       return null;
     },
     writeBundle(opciones) {
-      if (!process.env.VITE_API_URL) return;
       const salida = resolve(import.meta.dirname, opciones.dir || 'dist');
+      const modoApi = !!process.env.VITE_API_URL;
+
+      // Marcador de modo del build. Lo lee scripts/verificar-dist-publicable.mjs
+      // para impedir que un `wrangler pages deploy dist` manual suba el modo DEMO.
+      writeFileSync(resolve(salida, '_build-info.json'), JSON.stringify({
+        modo: modoApi ? 'api' : 'demo',
+        apiUrl: modoApi,
+        generado: new Date().toISOString(),
+      }, null, 2));
+
+      if (!modoApi) {
+        // Aviso visible y fail-safe para el verificador: este dist no debe publicarse.
+        writeFileSync(resolve(salida, '_MODO-DEMO-NO-PUBLICAR.txt'),
+          'Este build se generó SIN VITE_API_URL: es el modo DEMO (semillas + localStorage).\n' +
+          'No lo publiques en el dominio. Reconstruye con `npm run build:prod`.\n');
+        return;
+      }
 
       // Los libros completos no se publican sin una auditoría de licencias.
       rmSync(resolve(salida, 'libros'), { recursive: true, force: true });

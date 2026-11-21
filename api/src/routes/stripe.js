@@ -4,13 +4,18 @@
 import express from 'express';
 import { COL, estadoMembresia, leerConfig, leerDoc, leerMiembroHeredado } from '../datos.js';
 import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errores.js';
-import { otorgarEventos, REGLAS_PUNTOS } from '../lib/recompensas.js';
+import { otorgarEventos, revertirMembresiaTx, REGLAS_PUNTOS } from '../lib/recompensas.js';
+import { registrarEventoSistema } from '../lib/auditoria.js';
 import { cuerpo, unoDe } from '../lib/validacion.js';
+import { aMillis } from '../lib/fechas.js';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
 
 const ESTADOS_ACTIVOS = ['active', 'trialing'];
 const ESTADOS_POBRES = ['incomplete', 'incomplete_expired', 'canceled'];
+// Una marca 'procesando' más vieja que esto se considera abandonada (una entrega
+// anterior se cayó entre reservar y confirmar) y se puede reclamar y reprocesar.
+const RECLAMO_EVENTO_MS = 10 * 60 * 1000;
 
 const segundosAISO = (s) => (Number.isFinite(s) ? new Date(s * 1000).toISOString() : null);
 
@@ -111,7 +116,9 @@ export function webhookStripe(ctx) {
 
     // Se reutiliza el destino Stripe existente. Conserva el receptor heredado
     // para renovaciones antiguas: mismos bytes y firma, sólo tras validarla aquí.
-    if (evento.data?.object?.metadata?.origen !== 'odonteck-club-v2' && ctx.config.stripeLegacyForward) {
+    // Los eventos de cobro/disputa no traen metadata.origen, así que se resuelven por
+    // el cliente: si el cliente tiene suscripción v2, son nuestros y no se reenvían.
+    if (ctx.config.stripeLegacyForward && !(await eventoParaV2(ctx, evento))) {
       try {
         const respuesta = await fetch('https://odonteck-production.up.railway.app/stripe/webhook', {
           method: 'POST', headers: { 'content-type': 'application/json', 'stripe-signature': firma },
@@ -124,18 +131,91 @@ export function webhookStripe(ctx) {
       }
     }
 
-    // Idempotencia: Stripe reintenta; un evento ya procesado se confirma sin repetir.
+    // Idempotencia atómica: Stripe reintenta y puede entregar el mismo evento dos
+    // veces a la vez. En lugar de leer la marca y escribirla después (dos entregas
+    // simultáneas podrían pasar ambas), se RESERVA el id con create(): sólo una gana;
+    // la otra recibe ALREADY_EXISTS y se confirma como duplicada. Si el procesamiento
+    // falla, se libera la marca para que el reintento de Stripe lo vuelva a procesar.
     const marcaRef = ctx.db.collection(COL.stripeEventos).doc(evento.id);
-    if ((await marcaRef.get()).exists) return res.json({ recibido: true, duplicado: true });
+    const recibidoISO = ctx.now().toISOString();
+    // Reserva transaccional: sólo se cortocircuita cuando el evento ya está 'listo'.
+    // Una marca 'procesando' reciente es una entrega simultánea (se deja seguir);
+    // una vieja quedó abandonada por una caída y se reclama para reprocesar.
+    const decision = await ctx.db.runTransaction(async (tx) => {
+      const snap = await tx.get(marcaRef);
+      if (!snap.exists) {
+        tx.create(marcaRef, { tipo: evento.type, estado: 'procesando', recibido: recibidoISO, intentos: 1 });
+        return 'procesar';
+      }
+      const d = snap.data() || {};
+      if (d.estado === 'listo') return 'duplicado';
+      const edad = ctx.now().getTime() - (aMillis(d.recibido) ?? 0);
+      if (edad < RECLAMO_EVENTO_MS) return 'en_proceso';
+      tx.set(marcaRef, { tipo: evento.type, estado: 'procesando', recibido: recibidoISO, intentos: (Number(d.intentos) || 1) + 1 }, { merge: true });
+      return 'reprocesar';
+    });
+    if (decision === 'duplicado') return res.json({ recibido: true, duplicado: true });
+    if (decision === 'en_proceso') return res.json({ recibido: true, duplicado: true, enProceso: true });
 
-    const resultado = await procesarEvento(ctx, evento);
-    await marcaRef.set({ tipo: evento.type, resultado, procesado: ctx.now().toISOString() });
+    let resultado;
+    try {
+      resultado = await procesarEvento(ctx, evento);
+    } catch (e) {
+      // Se libera la marca para que el reintento de Stripe lo vuelva a procesar.
+      await marcaRef.delete().catch(() => {});
+      throw e;
+    }
+    await marcaRef.set({ tipo: evento.type, estado: 'listo', resultado, procesado: ctx.now().toISOString() }, { merge: true });
     res.json({ recibido: true, resultado });
   });
 }
 
+const EVENTOS_CARGO = ['charge.refunded', 'charge.dispute.created', 'charge.dispute.closed'];
+
+const idDe = (v) => (typeof v === 'string' ? v : v?.id ?? null);
+
+/** Cliente de Stripe asociado a un evento de cobro o disputa (la disputa no lo trae: se lee del cobro). */
+async function customerDeEventoCargo(ctx, evento) {
+  const obj = evento.data?.object ?? {};
+  if (evento.type === 'charge.refunded') return idDe(obj.customer);
+  // Disputa: resolver el cliente a partir del cobro.
+  const chargeId = idDe(obj.charge);
+  if (idDe(obj.customer)) return idDe(obj.customer);
+  if (!chargeId || !ctx.stripe?.charges?.retrieve) return null;
+  try {
+    const cobro = await ctx.stripe.charges.retrieve(chargeId);
+    return idDe(cobro?.customer);
+  } catch {
+    return null;
+  }
+}
+
+/** uid con suscripción v2 para un customerId de Stripe, o null. */
+async function uidDeCustomer(ctx, customer) {
+  if (!customer) return null;
+  const snap = await ctx.db.collection(COL.suscripciones).where('customerId', '==', customer).limit(1).get();
+  return snap.empty ? null : snap.docs[0].id;
+}
+
+/** true si el evento le corresponde a este servidor v2 (no al receptor heredado). */
+async function eventoParaV2(ctx, evento) {
+  if (evento.data?.object?.metadata?.origen === 'odonteck-club-v2') return true;
+  if (EVENTOS_CARGO.includes(evento.type)) {
+    return (await uidDeCustomer(ctx, await customerDeEventoCargo(ctx, evento))) !== null;
+  }
+  return false;
+}
+
 async function procesarEvento(ctx, evento) {
   const obj = evento.data?.object ?? {};
+  // Cobros/disputas: se resuelven por el cliente (no traen metadata.origen).
+  if (EVENTOS_CARGO.includes(evento.type)) {
+    const uid = await uidDeCustomer(ctx, await customerDeEventoCargo(ctx, evento));
+    if (!uid) return 'ignorado_sin_uid';
+    if (evento.type === 'charge.refunded') return manejarReembolso(ctx, evento, obj, uid);
+    if (evento.type === 'charge.dispute.created') return manejarDisputaAbierta(ctx, evento, obj, uid);
+    return manejarDisputaCerrada(ctx, evento, obj, uid);
+  }
   if (obj.metadata?.origen !== 'odonteck-club-v2') return 'ignorado_otro_origen';
   switch (evento.type) {
     case 'checkout.session.completed':
@@ -159,6 +239,9 @@ async function procesarEvento(ctx, evento) {
       }
       const resultado = await guardarSuscripcion(ctx, uid, sub, evento, datos);
       if (ESTADOS_ACTIVOS.includes(sub.status) && (obj.payment_status !== 'unpaid' || evento.type === 'checkout.session.async_payment_succeeded')) {
+        // Un pago nuevo que reactiva la membresía levanta cualquier bloqueo previo
+        // (reembolso total / disputa perdida) para no dejar al miembro sin acceso.
+        await desbloquearSiActivo(ctx, uid, 'pago-nuevo');
         await otorgarEventos(ctx, COL, uid, [{
           clave: `membresia:${obj.id || sub.id}`,
           tipo: 'membresia',
@@ -235,5 +318,117 @@ async function guardarSuscripcion(ctx, uid, sub, evento, extra) {
     };
     tx.set(ref, datos, { merge: true });
     return 'suscripcion_guardada';
+  });
+}
+
+// charge.refunded: reembolso total bloquea el acceso y revierte los 300 OdonCoins
+// (lo que quede, sin negativo); el parcial sólo se registra en la bitácora.
+async function manejarReembolso(ctx, evento, charge, uid) {
+  const total = Number(charge.amount);
+  const reembolsado = Number(charge.amount_refunded);
+  const esTotal = charge.refunded === true || (Number.isFinite(total) && total > 0 && reembolsado >= total);
+  const chargeId = idDe(charge) ?? evento.id;
+  const subRef = ctx.db.collection(COL.suscripciones).doc(uid);
+  if (!esTotal) {
+    await ctx.db.runTransaction((tx) => {
+      registrarEventoSistema(ctx, tx, {
+        ref: subRef, objetivoUid: uid, accion: 'reembolso_parcial',
+        motivo: `Reembolso parcial de membresía (${reembolsado} de ${total}). No se tocó el acceso ni los OdonCoins.`,
+        extra: { reembolsado, total },
+      });
+    });
+    return 'reembolso_parcial_registrado';
+  }
+  return ctx.db.runTransaction(async (tx) => {
+    const subSnap = await tx.get(subRef);
+    const antes = subSnap.exists ? subSnap.data() : null;
+    const reversion = await revertirMembresiaTx({ tx, db: ctx.db, colecciones: COL, uid, chargeId, ahora: ctx.now(), detalle: 'Reembolso total de membresía' });
+    const bloqueo = { accesoBloqueado: true, bloqueo: { motivo: 'reembolso_total', chargeId, fecha: ctx.now().toISOString() } };
+    tx.set(subRef, bloqueo, { merge: true });
+    registrarEventoSistema(ctx, tx, {
+      ref: subRef, objetivoUid: uid, accion: 'reembolso_total',
+      motivo: `Reembolso total: acceso VIP bloqueado y ${reversion.revertido} OdonCoins revertidos${reversion.faltante ? `; ${reversion.faltante} ya gastados sin revertir` : ''}.`,
+      antes, despues: { ...(antes ?? {}), ...bloqueo }, extra: { revertido: reversion.revertido, faltante: reversion.faltante },
+    });
+    return 'reembolso_total_aplicado';
+  });
+}
+
+// charge.dispute.created: NO corta el acceso; marca "en disputa" y alerta al admin.
+async function manejarDisputaAbierta(ctx, evento, dispute, uid) {
+  const chargeId = idDe(dispute.charge);
+  const subRef = ctx.db.collection(COL.suscripciones).doc(uid);
+  return ctx.db.runTransaction(async (tx) => {
+    const subSnap = await tx.get(subRef);
+    const antes = subSnap.exists ? subSnap.data() : null;
+    const marca = { enDisputa: true, disputa: { id: idDe(dispute), chargeId, estado: 'abierta', fecha: ctx.now().toISOString() } };
+    tx.set(subRef, marca, { merge: true });
+    registrarEventoSistema(ctx, tx, {
+      ref: subRef, objetivoUid: uid, accion: 'disputa_abierta',
+      motivo: 'Disputa de cobro abierta. El acceso se mantiene; requiere revisión del admin.',
+      antes, despues: { ...(antes ?? {}), ...marca },
+    });
+    return 'disputa_registrada';
+  });
+}
+
+// charge.dispute.closed: perdida = igual que reembolso total; ganada = sólo quita la marca.
+async function manejarDisputaCerrada(ctx, evento, dispute, uid) {
+  const chargeId = idDe(dispute.charge);
+  const subRef = ctx.db.collection(COL.suscripciones).doc(uid);
+  if (dispute.status === 'lost') {
+    return ctx.db.runTransaction(async (tx) => {
+      const subSnap = await tx.get(subRef);
+      const antes = subSnap.exists ? subSnap.data() : null;
+      const reversion = await revertirMembresiaTx({ tx, db: ctx.db, colecciones: COL, uid, chargeId, ahora: ctx.now(), detalle: 'Disputa perdida de membresía' });
+      const cambio = { enDisputa: false, accesoBloqueado: true, bloqueo: { motivo: 'disputa_perdida', chargeId, fecha: ctx.now().toISOString() }, disputa: { id: idDe(dispute), chargeId, estado: 'perdida', cerrada: ctx.now().toISOString() } };
+      tx.set(subRef, cambio, { merge: true });
+      registrarEventoSistema(ctx, tx, {
+        ref: subRef, objetivoUid: uid, accion: 'disputa_perdida',
+        motivo: `Disputa perdida: acceso VIP bloqueado y ${reversion.revertido} OdonCoins revertidos${reversion.faltante ? `; ${reversion.faltante} ya gastados sin revertir` : ''}.`,
+        antes, despues: { ...(antes ?? {}), ...cambio }, extra: { revertido: reversion.revertido, faltante: reversion.faltante },
+      });
+      return 'disputa_perdida_aplicada';
+    });
+  }
+  return ctx.db.runTransaction(async (tx) => {
+    const subSnap = await tx.get(subRef);
+    const antes = subSnap.exists ? subSnap.data() : null;
+    // Al ganar, se retira la marca de disputa. El bloqueo de acceso se levanta SÓLO si
+    // provino de una disputa Y del MISMO cargo: un bloqueo por reembolso_total, o por la
+    // disputa perdida de OTRO cargo sin resolver, sigue vigente.
+    const bloqueoEsDisputa = ['disputa_perdida', 'disputa'].includes(antes?.bloqueo?.motivo)
+      && antes?.bloqueo?.chargeId === chargeId;
+    const cambio = {
+      enDisputa: false,
+      disputa: { id: idDe(dispute), chargeId, estado: 'ganada', cerrada: ctx.now().toISOString() },
+      ...(bloqueoEsDisputa ? { accesoBloqueado: false, bloqueo: null } : {}),
+    };
+    tx.set(subRef, cambio, { merge: true });
+    registrarEventoSistema(ctx, tx, {
+      ref: subRef, objetivoUid: uid, accion: 'disputa_ganada',
+      motivo: bloqueoEsDisputa
+        ? 'Disputa ganada: se retira la marca de disputa y el bloqueo por disputa de este cargo.'
+        : antes?.accesoBloqueado === true
+          ? 'Disputa ganada: se retira la marca de disputa; se conserva un bloqueo de acceso vigente de otro origen (revisar).'
+          : 'Disputa ganada: se retira la marca de disputa. El acceso no cambia.',
+      antes, despues: { ...(antes ?? {}), ...cambio },
+    });
+    return 'disputa_ganada_registrada';
+  });
+}
+
+// Levanta un bloqueo (reembolso/disputa) sólo si existía; registra el desbloqueo.
+async function desbloquearSiActivo(ctx, uid, motivo) {
+  const ref = ctx.db.collection(COL.suscripciones).doc(uid);
+  return ctx.db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    if (!snap.exists) return false;
+    const antes = snap.data();
+    if (antes.accesoBloqueado !== true && antes.enDisputa !== true) return false;
+    const cambio = { accesoBloqueado: false, bloqueo: null, enDisputa: false, desbloqueadoEn: ctx.now().toISOString(), desbloqueadoMotivo: motivo };
+    tx.set(ref, cambio, { merge: true });
+    registrarEventoSistema(ctx, tx, { ref, objetivoUid: uid, accion: 'desbloqueo_acceso', motivo: `Acceso desbloqueado (${motivo}).`, antes, despues: { ...antes, ...cambio } });
+    return true;
   });
 }

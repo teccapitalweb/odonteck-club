@@ -79,6 +79,14 @@
         { "fieldPath": "uid", "order": "ASCENDING" },
         { "fieldPath": "solicitado", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "v2_recompensas_canjes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "estatus", "order": "ASCENDING" },
+        { "fieldPath": "solicitado", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

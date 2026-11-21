@@ -10,7 +10,7 @@ import {
   noEncontrado,
   prohibido,
 } from '../lib/errores.js';
-import { cuerpo, slug, idDocumento } from '../lib/validacion.js';
+import { cuerpo, entero, slug, idDocumento, unoDe } from '../lib/validacion.js';
 import { normalizarEstadoRecompensas } from '../lib/recompensas.js';
 import {
   RECOMPENSAS,
@@ -102,18 +102,36 @@ export function rutasRecompensas(ctx) {
   r.get(
     '/admin/recompensas',
     h(async (req, res) => {
-      const [catalogo, canjes] = await Promise.all([
+      // Sin corte silencioso de 100: paginación por cursor y filtro por estatus en el
+      // servidor, para que ninguna entrega pendiente quede oculta tras las más recientes.
+      const estatus = req.query.estatus !== undefined
+        ? unoDe(String(req.query.estatus), ['pendiente', 'entregado', 'cancelado'], { campo: 'estatus' })
+        : null;
+      const limite = req.query.limite !== undefined ? entero(req.query.limite, { campo: 'limite', min: 1, max: 300 }) : 100;
+      const col = db.collection(COL.recompensasCanjes);
+      let q = estatus ? col.where('estatus', '==', estatus) : col;
+      q = q.orderBy('solicitado', 'desc');
+      if (req.query.cursor !== undefined) {
+        const cursorId = idDocumento(String(req.query.cursor), 'cursor');
+        const cursorSnap = await col.doc(cursorId).get();
+        if (!cursorSnap.exists || (estatus && cursorSnap.data().estatus !== estatus)) {
+          throw invalido('La página de canjes no es válida para este filtro.', 'cursor_invalido');
+        }
+        q = q.startAfter(cursorSnap);
+      }
+      const [catalogo, snap] = await Promise.all([
         leerCatalogoRecompensas(db),
-        db
-          .collection(COL.recompensasCanjes)
-          .orderBy('solicitado', 'desc')
-          .limit(100)
-          .get(),
+        q.limit(limite + 1).get(),
       ]);
+      const docs = snap.docs.slice(0, limite);
+      const siguiente = snap.size > limite ? docs.at(-1).id : null;
       res.json({
         catalogo,
-        canjes: canjes.docs.map((d) => ({ id: d.id, ...d.data() })),
-        limiteCanjes: 100,
+        canjes: docs.map((d) => ({ id: d.id, ...d.data() })),
+        siguiente,
+        estatus,
+        limite,
+        limiteCanjes: limite,
       });
     }),
   );

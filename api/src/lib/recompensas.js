@@ -191,6 +191,33 @@ export async function otorgarEventos(ctx, colecciones, uid, eventos) {
   return (await registrarEventos(ctx, colecciones, uid, eventos)).resultado;
 }
 
+/**
+ * Revierte, dentro de una transacción abierta, los OdonCoins de membresía por un
+ * reembolso total o una disputa perdida. Idempotente por `membresia-reembolso:<chargeId>`
+ * (un mismo cobro reembolsado y luego disputado no se revierte dos veces). Nunca deja
+ * el saldo negativo: si ya se gastó parte, revierte sólo lo que quede y reporta el faltante.
+ */
+export async function revertirMembresiaTx({ tx, db, colecciones, uid, chargeId, monto = REGLAS_PUNTOS.membresia, ahora, detalle }) {
+  const clave = `membresia-reembolso:${chargeId}`;
+  const estadoRef = db.collection(colecciones.recompensasEstado).doc(uid);
+  const movRef = db.collection(colecciones.recompensasMovimientos).doc(idMovimiento(uid, clave));
+  const [estadoSnap, movSnap] = await tx.getAll(estadoRef, movRef);
+  if (movSnap.exists) {
+    const revertido = Math.abs(numero(movSnap.data().puntos));
+    return { yaAplicado: true, revertido, faltante: Math.max(0, monto - revertido) };
+  }
+  const estado = normalizarEstadoRecompensas(estadoSnap.exists ? estadoSnap.data() : null, uid);
+  const revertido = Math.max(0, Math.min(monto, estado.saldo));
+  const faltante = monto - revertido;
+  const ahoraISO = ahora.toISOString();
+  estado.saldo -= revertido;
+  estado.ganados = Math.max(0, estado.ganados - revertido);
+  estado.actualizado = ahoraISO;
+  tx.create(movRef, { uid, clave, tipo: 'reembolso', puntos: -revertido, detalle: String(detalle ?? 'Reversión de OdonCoins por reembolso de membresía').slice(0, 180), fecha: ahoraISO });
+  tx.set(estadoRef, estado);
+  return { yaAplicado: false, revertido, faltante };
+}
+
 export function logrosPublicos(estado) {
   const e = normalizarEstadoRecompensas(estado);
   return LOGROS_RECOMPENSA.map((logro) => ({

@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/generate-game-engine.mjs --check && tsc && vite build",
+    "build:prod": "node scripts/exigir-api-url.mjs && npm run build",
+    "verify:dist": "node scripts/verificar-dist-publicable.mjs",
+    "predeploy": "npm run verify:dist",
+    "deploy": "wrangler pages deploy dist --project-name=odonteck-club --branch=main",
     "preview": "vite preview",
     "test:guia": "node scripts/test-guia-datos.mjs && node scripts/test-guia-inteligencia.mjs && node scripts/test-guia-capas.mjs && node scripts/test-movimiento-guia.mjs",
     "audit:learning-packs": "node scripts/audit-learning-packs.mjs",
