@@ -596,6 +596,23 @@ export function rutasAdmin(ctx) {
     res.json({ ok: true, uid, ...resultado });
   }));
 
+  // Desbloqueo manual del acceso: levanta accesoBloqueado/bloqueo/enDisputa de una
+  // suscripción (p. ej. tras resolver un reembolso o disputa a favor del miembro).
+  r.post('/admin/miembros/:uid/desbloquear', h(async (req, res) => {
+    const uid = idDocumento(req.params.uid, 'uid');
+    const ref = db.collection(COL.suscripciones).doc(uid);
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw noEncontrado('Ese miembro no tiene suscripción v2.');
+      const antes = snap.data();
+      if (antes.accesoBloqueado !== true && antes.enDisputa !== true) throw conflicto('La suscripción no está bloqueada ni en disputa.', 'no_bloqueada');
+      const cambio = { accesoBloqueado: false, bloqueo: null, enDisputa: false, desbloqueadoEn: ahoraISO(), desbloqueadoPor: req.usuario.email || req.usuario.uid };
+      tx.set(ref, cambio, { merge: true });
+      registrarAuditoria(ctx, tx, req, { ref, accion: 'desbloquear_suscripcion', antes, despues: { ...antes, ...cambio } });
+    });
+    res.json({ ok: true, uid });
+  }));
+
   // ---------- Cupones (días de acceso canjeables) ----------
   const ALFABETO_CUPON = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sin O/0/I/1 para evitar confusiones
   // Los códigos funcionan como un secreto (dan acceso): aleatoriedad criptográfica y 12 caracteres (~32^12) para que no se puedan adivinar por fuerza bruta.

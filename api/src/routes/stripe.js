@@ -7,11 +7,15 @@ import { HttpError, conflicto, noConfigurado, noEncontrado } from '../lib/errore
 import { otorgarEventos, revertirMembresiaTx, REGLAS_PUNTOS } from '../lib/recompensas.js';
 import { registrarEventoSistema } from '../lib/auditoria.js';
 import { cuerpo, unoDe } from '../lib/validacion.js';
+import { aMillis } from '../lib/fechas.js';
 import { requireAuth } from '../middleware/auth.js';
 import { h } from '../middleware/errores.js';
 
 const ESTADOS_ACTIVOS = ['active', 'trialing'];
 const ESTADOS_POBRES = ['incomplete', 'incomplete_expired', 'canceled'];
+// Una marca 'procesando' más vieja que esto se considera abandonada (una entrega
+// anterior se cayó entre reservar y confirmar) y se puede reclamar y reprocesar.
+const RECLAMO_EVENTO_MS = 10 * 60 * 1000;
 
 const segundosAISO = (s) => (Number.isFinite(s) ? new Date(s * 1000).toISOString() : null);
 
@@ -133,22 +137,35 @@ export function webhookStripe(ctx) {
     // la otra recibe ALREADY_EXISTS y se confirma como duplicada. Si el procesamiento
     // falla, se libera la marca para que el reintento de Stripe lo vuelva a procesar.
     const marcaRef = ctx.db.collection(COL.stripeEventos).doc(evento.id);
-    try {
-      await marcaRef.create({ tipo: evento.type, estado: 'procesando', recibido: ctx.now().toISOString() });
-    } catch (e) {
-      if (e?.code === 6 || /ALREADY_EXISTS/.test(e?.message ?? '')) {
-        return res.json({ recibido: true, duplicado: true });
+    const recibidoISO = ctx.now().toISOString();
+    // Reserva transaccional: sólo se cortocircuita cuando el evento ya está 'listo'.
+    // Una marca 'procesando' reciente es una entrega simultánea (se deja seguir);
+    // una vieja quedó abandonada por una caída y se reclama para reprocesar.
+    const decision = await ctx.db.runTransaction(async (tx) => {
+      const snap = await tx.get(marcaRef);
+      if (!snap.exists) {
+        tx.create(marcaRef, { tipo: evento.type, estado: 'procesando', recibido: recibidoISO, intentos: 1 });
+        return 'procesar';
       }
-      throw e;
-    }
+      const d = snap.data() || {};
+      if (d.estado === 'listo') return 'duplicado';
+      const edad = ctx.now().getTime() - (aMillis(d.recibido) ?? 0);
+      if (edad < RECLAMO_EVENTO_MS) return 'en_proceso';
+      tx.set(marcaRef, { tipo: evento.type, estado: 'procesando', recibido: recibidoISO, intentos: (Number(d.intentos) || 1) + 1 }, { merge: true });
+      return 'reprocesar';
+    });
+    if (decision === 'duplicado') return res.json({ recibido: true, duplicado: true });
+    if (decision === 'en_proceso') return res.json({ recibido: true, duplicado: true, enProceso: true });
+
     let resultado;
     try {
       resultado = await procesarEvento(ctx, evento);
     } catch (e) {
+      // Se libera la marca para que el reintento de Stripe lo vuelva a procesar.
       await marcaRef.delete().catch(() => {});
       throw e;
     }
-    await marcaRef.set({ tipo: evento.type, estado: 'listo', resultado, procesado: ctx.now().toISOString() });
+    await marcaRef.set({ tipo: evento.type, estado: 'listo', resultado, procesado: ctx.now().toISOString() }, { merge: true });
     res.json({ recibido: true, resultado });
   });
 }
@@ -222,6 +239,9 @@ async function procesarEvento(ctx, evento) {
       }
       const resultado = await guardarSuscripcion(ctx, uid, sub, evento, datos);
       if (ESTADOS_ACTIVOS.includes(sub.status) && (obj.payment_status !== 'unpaid' || evento.type === 'checkout.session.async_payment_succeeded')) {
+        // Un pago nuevo que reactiva la membresía levanta cualquier bloqueo previo
+        // (reembolso total / disputa perdida) para no dejar al miembro sin acceso.
+        await desbloquearSiActivo(ctx, uid, 'pago-nuevo');
         await otorgarEventos(ctx, COL, uid, [{
           clave: `membresia:${obj.id || sub.id}`,
           tipo: 'membresia',
@@ -374,13 +394,29 @@ async function manejarDisputaCerrada(ctx, evento, dispute, uid) {
   return ctx.db.runTransaction(async (tx) => {
     const subSnap = await tx.get(subRef);
     const antes = subSnap.exists ? subSnap.data() : null;
-    const cambio = { enDisputa: false, disputa: { id: idDe(dispute), chargeId, estado: 'ganada', cerrada: ctx.now().toISOString() } };
+    // Al ganar, se retira la marca de disputa y cualquier bloqueo de acceso asociado.
+    const cambio = { enDisputa: false, accesoBloqueado: false, bloqueo: null, disputa: { id: idDe(dispute), chargeId, estado: 'ganada', cerrada: ctx.now().toISOString() } };
     tx.set(subRef, cambio, { merge: true });
     registrarEventoSistema(ctx, tx, {
       ref: subRef, objetivoUid: uid, accion: 'disputa_ganada',
-      motivo: 'Disputa ganada: se retira la marca de disputa. El acceso no cambia.',
+      motivo: 'Disputa ganada: se retira la marca de disputa y el bloqueo de acceso.',
       antes, despues: { ...(antes ?? {}), ...cambio },
     });
     return 'disputa_ganada_registrada';
+  });
+}
+
+// Levanta un bloqueo (reembolso/disputa) sólo si existía; registra el desbloqueo.
+async function desbloquearSiActivo(ctx, uid, motivo) {
+  const ref = ctx.db.collection(COL.suscripciones).doc(uid);
+  return ctx.db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    if (!snap.exists) return false;
+    const antes = snap.data();
+    if (antes.accesoBloqueado !== true && antes.enDisputa !== true) return false;
+    const cambio = { accesoBloqueado: false, bloqueo: null, enDisputa: false, desbloqueadoEn: ctx.now().toISOString(), desbloqueadoMotivo: motivo };
+    tx.set(ref, cambio, { merge: true });
+    registrarEventoSistema(ctx, tx, { ref, objetivoUid: uid, accion: 'desbloqueo_acceso', motivo: `Acceso desbloqueado (${motivo}).`, antes, despues: { ...antes, ...cambio } });
+    return true;
   });
 }

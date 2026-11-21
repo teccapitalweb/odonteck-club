@@ -116,7 +116,7 @@ describe('stripe: disputas', () => {
     const r = await enviar(disputa('evt_d3b', 'charge.dispute.closed', { status: 'won' })).expect(200);
     assert.equal(r.body.resultado, 'disputa_ganada_registrada');
     assert.equal(sub().enDisputa, false);
-    assert.equal(sub().accesoBloqueado, undefined);
+    assert.equal(sub().accesoBloqueado, false); // ganar la disputa también retira cualquier bloqueo
     assert.equal(sub().disputa.estado, 'ganada');
     assert.equal(wallet().saldo, 300);
   });
@@ -130,5 +130,41 @@ describe('stripe: disputas', () => {
     assert.equal(wallet().saldo, 0);
     assert.equal(movimientos(), 1); // misma clave membresia-reembolso:ch_1
     assert.equal(sub().accesoBloqueado, true);
+  });
+});
+
+describe('stripe: desbloqueo de acceso tras reembolso/disputa', () => {
+  const checkout = (id) => ({
+    id, type: 'checkout.session.completed', created: 1_790_000_300,
+    data: { object: { id: `cs_${id}`, object: 'checkout.session', mode: 'subscription', payment_status: 'paid', metadata: { origen: 'odonteck-club-v2' }, client_reference_id: 'free1', customer: 'cus_1', subscription: 'sub_1' } },
+  });
+
+  test('un pago nuevo tras un reembolso total levanta el bloqueo (esVip vuelve a true)', async () => {
+    await enviar(reembolso('evt_block')).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    assert.equal((await request(env.app).get('/me').set(bearer(TOKENS.free)).expect(200)).body.esVip, false);
+
+    // El pago nuevo recupera una suscripción activa de Stripe.
+    env.stripe.subscriptions = { retrieve: async () => ({ id: 'sub_1', status: 'active', customer: 'cus_1', created: 1_790_000_000, items: { data: [{ price: { id: 'price_mensual_test' } }] } }) };
+    await enviar(checkout('nuevo')).expect(200);
+    assert.equal(sub().accesoBloqueado, false);
+    assert.equal(sub().enDisputa, false);
+    assert.equal((await request(env.app).get('/me').set(bearer(TOKENS.free)).expect(200)).body.esVip, true);
+    assert.ok(auditorias().some((e) => e.accion === 'desbloqueo_acceso'));
+  });
+
+  test('el admin puede desbloquear manualmente; sin bloqueo responde 409', async () => {
+    await enviar(reembolso('evt_block2')).expect(200);
+    assert.equal(sub().accesoBloqueado, true);
+    await request(env.app).post('/admin/miembros/free1/desbloquear').set(bearer(TOKENS.admin)).expect(200);
+    assert.equal(sub().accesoBloqueado, false);
+    assert.equal((await request(env.app).get('/me').set(bearer(TOKENS.free)).expect(200)).body.esVip, true);
+    const r = await request(env.app).post('/admin/miembros/free1/desbloquear').set(bearer(TOKENS.admin)).expect(409);
+    assert.equal(r.body.error, 'no_bloqueada');
+  });
+
+  test('desbloqueo manual exige admin', async () => {
+    await request(env.app).post('/admin/miembros/free1/desbloquear').expect(401);
+    await request(env.app).post('/admin/miembros/free1/desbloquear').set(bearer(TOKENS.vip)).expect(403);
   });
 });

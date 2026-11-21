@@ -415,6 +415,34 @@ describe('stripe', () => {
     assert.equal(env.db.leer('v2_recompensas_estado/free1').contadores.membresias, 1);
   });
 
+  test('una marca "procesando" vieja (entrega caída) se reclama y reprocesa', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_stale' }));
+    // Simula una entrega anterior que reservó la marca y se cayó antes de confirmarla.
+    env.db.docs.set('v2_stripe_eventos/evt_stale', { tipo: 'customer.subscription.updated', estado: 'procesando', recibido: '2026-09-17T11:00:00.000Z', intentos: 1 });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.resultado, 'suscripcion_guardada'); // se reprocesó, no se dio por duplicado
+    const marca = env.db.leer('v2_stripe_eventos/evt_stale');
+    assert.equal(marca.estado, 'listo');
+    assert.equal(marca.intentos, 2);
+  });
+
+  test('una marca "procesando" reciente (entrega simultánea) se reconoce en proceso, sin reprocesar', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_curso' }));
+    env.db.docs.set('v2_stripe_eventos/evt_curso', { tipo: 'customer.subscription.updated', estado: 'procesando', recibido: '2026-09-17T11:59:30.000Z', intentos: 1 });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.duplicado, true);
+    assert.equal(r.body.enProceso, true);
+    assert.equal(env.db.rutas('v2_suscripciones').length, 0); // no escribió nada
+  });
+
+  test('una marca "listo" cortocircuita como duplicado', async () => {
+    const { payload, firma } = eventoFirmado(eventoSuscripcion({ id: 'evt_listo' }));
+    env.db.docs.set('v2_stripe_eventos/evt_listo', { tipo: 'customer.subscription.updated', estado: 'listo', recibido: '2026-09-17T11:00:00.000Z', resultado: 'suscripcion_guardada' });
+    const r = await request(env.app).post('/stripe/webhook').set('Stripe-Signature', firma).set('Content-Type', 'application/json').send(payload).expect(200);
+    assert.equal(r.body.duplicado, true);
+    assert.notEqual(r.body.enProceso, true);
+  });
+
   test('checkout.session.async_payment_succeeded activa el plan al confirmarse el método diferido', async () => {
     env.stripe.subscriptions.retrieve = async () => eventoSuscripcion().data.object;
     const evento = {
